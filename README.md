@@ -16,6 +16,8 @@ PlasmaLLM is designed for quick questions and system tasks right from your panel
 - Chat history auto-save
 - Configurable provider presets, temperature, max tokens, and custom system prompts
 
+<img width="511" height="586" alt="chat" src="https://github.com/user-attachments/assets/bfda1430-18be-44b1-8751-9960e176b672" />
+
 ## Requirements
 
 - KDE Plasma 6.0+
