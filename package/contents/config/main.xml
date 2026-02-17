@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    SPDX-FileCopyrightText: 2024 Joshua Roman
+    SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+    <entry name="apiEndpoint" type="String">
+      <label>API Endpoint URL</label>
+      <default>http://localhost:11434/v1</default>
+    </entry>
+    <entry name="providerName" type="String">
+      <label>Provider Name</label>
+      <default></default>
+    </entry>
+    <entry name="modelName" type="String">
+      <label>Model Name</label>
+      <default></default>
+    </entry>
+    <entry name="apiKey" type="String">
+      <label>API Key</label>
+      <default></default>
+    </entry>
+    <entry name="temperature" type="Int">
+      <label>Temperature (0-100)</label>
+      <default>70</default>
+      <min>0</min>
+      <max>100</max>
+    </entry>
+    <entry name="maxTokens" type="Int">
+      <label>Max Tokens</label>
+      <default>2048</default>
+      <min>64</min>
+      <max>32768</max>
+    </entry>
+    <entry name="chatSpacing" type="Int">
+      <label>Chat Spacing (px)</label>
+      <default>10</default>
+      <min>2</min>
+      <max>24</max>
+    </entry>
+    <entry name="customSystemPrompt" type="String">
+      <label>Custom System Prompt Additions</label>
+      <default></default>
+    </entry>
+    <entry name="saveChatHistory" type="Bool">
+      <label>Auto-save chat history</label>
+      <default>false</default>
+    </entry>
+    <entry name="autoShareCommandOutput" type="Bool">
+      <label>Auto-share command output with LLM</label>
+      <default>false</default>
+    </entry>
+    <entry name="autoRunCommands" type="Bool">
+      <label>Auto-run commands from LLM (dangerous when combined with Auto-share)</label>
+      <default>false</default>
+    </entry>
+    <entry name="showProviderInTitle" type="Bool">
+      <label>Show provider and model in title bar</label>
+      <default>true</default>
+    </entry>
+    <entry name="sysInfoOS" type="Bool">
+      <label>Include OS in system prompt</label>
+      <default>true</default>
+    </entry>
+    <entry name="sysInfoShell" type="Bool">
+      <label>Include shell in system prompt</label>
+      <default>true</default>
+    </entry>
+    <entry name="sysInfoHostname" type="Bool">
+      <label>Include hostname in system prompt</label>
+      <default>false</default>
+    </entry>
+    <entry name="sysInfoKernel" type="Bool">
+      <label>Include kernel in system prompt</label>
+      <default>false</default>
+    </entry>
+    <entry name="sysInfoDesktop" type="Bool">
+      <label>Include desktop environment in system prompt</label>
+      <default>false</default>
+    </entry>
+    <entry name="sysInfoUser" type="Bool">
+      <label>Include username in system prompt</label>
+      <default>false</default>
+    </entry>
+    <entry name="sysInfoCPU" type="Bool">
+      <label>Include CPU info in system prompt</label>
+      <default>false</default>
+    </entry>
+    <entry name="sysInfoMemory" type="Bool">
+      <label>Include memory info in system prompt</label>
+      <default>false</default>
+    </entry>
+    <entry name="sysInfoGPU" type="Bool">
+      <label>Include GPU info in system prompt</label>
+      <default>false</default>
+    </entry>
+    <entry name="sysInfoDisk" type="Bool">
+      <label>Include block devices in system prompt</label>
+      <default>false</default>
+    </entry>
+    <entry name="sysInfoNetwork" type="Bool">
+      <label>Include network interfaces in system prompt</label>
+      <default>false</default>
+    </entry>
+    <entry name="sysInfoLocale" type="Bool">
+      <label>Include locale in system prompt</label>
+      <default>true</default>
+    </entry>
+    <entry name="gatheredSysInfo" type="String">
+      <label>Gathered system information (JSON, written at runtime)</label>
+      <default></default>
+    </entry>
+    <entry name="apiKeyVersion" type="Int">
+      <label>Internal: incremented when API key is saved to KDE Wallet</label>
+      <default>0</default>
+    </entry>
+  </group>
+
+</kcfg>

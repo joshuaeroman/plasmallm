@@ -1,0 +1,8 @@
+reference/
+.claude/
+*.txt
+*.swp
+*.swo
+*~
+*.kate-swp
+*.plasmoid
