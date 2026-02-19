@@ -29,6 +29,9 @@ PlasmoidItem {
     property alias chatMessages: chatMessages
     property int maxApiMessages: 100
     property bool autoShareSuppressed: false
+    property bool sessionAutoMode: false
+    readonly property bool isAutoMode: sessionAutoMode ||
+        (Plasmoid.configuration.autoRunCommands && Plasmoid.configuration.autoShareCommandOutput)
     property string apiKey: Plasmoid.configuration.apiKey
     property bool walletAvailable: false
 
@@ -172,7 +175,7 @@ PlasmoidItem {
     }
 
     function initSystemPrompt() {
-        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands });
+        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode });
         Plasmoid.configuration.gatheredSysInfo = JSON.stringify(sysInfo);
         if (systemPromptReady) {
             chatMessages.setProperty(0, "content", prompt);
@@ -222,9 +225,10 @@ PlasmoidItem {
         chatMessages.clear();
         displayMessages.clear();
         currentChatFile = "";
+        sessionAutoMode = false;
         // Re-seed with system prompt
         if (systemPromptReady) {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands });
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: false });
             chatMessages.append({ role: "system", content: prompt });
         }
     }
@@ -428,6 +432,20 @@ PlasmoidItem {
             if (termCmd) runInTerminal(termCmd);
             return;
         }
+        if (lower === "/auto") {
+            var configAutoMode = Plasmoid.configuration.autoRunCommands && Plasmoid.configuration.autoShareCommandOutput;
+            if (configAutoMode) {
+                displayMessages.append({ role: "assistant", content: "Auto mode is permanently enabled via settings (both Auto-run and Auto-share are on).", commandsStr: "", shared: false, timestamp: currentTimestamp() });
+            } else {
+                sessionAutoMode = !sessionAutoMode;
+                displayMessages.append({ role: "assistant", content: sessionAutoMode ? "Auto mode enabled for this session. Commands will run and share output automatically." : "Auto mode disabled.", commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                if (systemPromptReady) {
+                    var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode });
+                    chatMessages.setProperty(0, "content", autoPrompt);
+                }
+            }
+            return;
+        }
 
         // Add user message to both models
         chatMessages.append({ role: "user", content: text });
@@ -515,7 +533,7 @@ PlasmoidItem {
                     saveChat();
 
                     // Auto-run commands if enabled
-                    if (Plasmoid.configuration.autoRunCommands && commands.length > 0) {
+                    if ((sessionAutoMode || Plasmoid.configuration.autoRunCommands) && commands.length > 0) {
                         for (var ci = 0; ci < commands.length; ci++) {
                             executeCommand(commands[ci]);
                         }
@@ -612,7 +630,7 @@ PlasmoidItem {
         });
 
         // Auto-share with LLM if enabled (suppressed after user hits stop)
-        if (Plasmoid.configuration.autoShareCommandOutput && !autoShareSuppressed) {
+        if ((sessionAutoMode || Plasmoid.configuration.autoShareCommandOutput) && !autoShareSuppressed) {
             shareOutput(displayMessages.count - 1);
         }
     }
@@ -638,12 +656,17 @@ PlasmoidItem {
         function onCustomSystemPromptChanged() {
             if (!systemPromptReady) return;
             // Update the system message (always at index 0) with new prompt
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands });
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode });
             chatMessages.setProperty(0, "content", prompt);
         }
         function onAutoRunCommandsChanged() {
             if (!systemPromptReady) return;
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands });
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode });
+            chatMessages.setProperty(0, "content", prompt);
+        }
+        function onAutoShareCommandOutputChanged() {
+            if (!systemPromptReady) return;
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode });
             chatMessages.setProperty(0, "content", prompt);
         }
         function onApiKeyChanged() {

@@ -15,6 +15,7 @@ PlasmaExtras.Representation {
     id: fullRep
 
     readonly property var slashCommands: [
+        { cmd: "/auto",     desc: "Toggle auto mode (auto-run + auto-share) for this session" },
         { cmd: "/clear",    desc: "Clear the chat" },
         { cmd: "/copy",     desc: "Copy conversation to clipboard" },
         { cmd: "/history",  desc: "Open chat history folder" },
@@ -64,6 +65,16 @@ PlasmaExtras.Representation {
                 }
                 font.bold: true
                 elide: Text.ElideRight
+            }
+
+            PlasmaComponents.Label {
+                text: "AUTO"
+                visible: root.isAutoMode
+                font.bold: true
+                color: Kirigami.Theme.negativeTextColor
+                PlasmaComponents.ToolTip.text: "Auto mode active — commands run and share output automatically"
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered
             }
 
             PlasmaComponents.ToolButton {

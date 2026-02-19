@@ -73,3 +73,9 @@ There is no build step, test suite, or linter. QML is interpreted at runtime. Af
 
 - When intending to run multiple commands, create a script file and execute that instead of one at a time
 - After making changes, run the install script and restart Plasma
+
+## Git Workflow
+
+- **Never push directly to `master`**. Always create a feature branch and open a PR.
+- **Never commit or push unless explicitly asked.** Make changes, then wait for the user to review and say when to commit and when to push.
+- Branch naming: `feature/<short-description>` or `fix/<short-description>`

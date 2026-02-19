@@ -69,6 +69,12 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
             "Inline code (`` ` ``) does not auto-run.\n";
     }
 
+    if (options && options.autoMode) {
+        prompt += "\n## Full Auto mode is ACTIVE\n" +
+            "Commands run AND their output is automatically shared back to you. " +
+            "You are in an agentic loop. Prefer read-only commands unless the user explicitly requests a write operation.\n";
+    }
+
     if (customAdditions && customAdditions.trim().length > 0) {
         prompt += "The below instructions are given by the user and take the utmost precedence over the instructions above.\n";
         prompt += "\n" + customAdditions.trim() + "\n";
