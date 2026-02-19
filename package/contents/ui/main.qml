@@ -519,6 +519,12 @@ PlasmoidItem {
         executable.connectSource(termCmd);
     }
 
+    function openChatsFolder() {
+        var cmd = "xdg-open $HOME/PlasmaLLM/chats/";
+        saveCommands.push(cmd);
+        executable.connectSource(cmd);
+    }
+
     function saveScript(filePath, content) {
         var escaped = content.replace(/'/g, "'\\''");
         var cmd = "printf '%s' '" + escaped + "' > '" + filePath.replace(/'/g, "'\\''") + "' && chmod +x '" + filePath.replace(/'/g, "'\\''") + "'";
