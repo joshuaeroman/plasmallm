@@ -548,9 +548,10 @@ PlasmoidItem {
     }
 
     function runInTerminal(cmd) {
-        // Escape single quotes in the command for safe shell embedding
+        // Pass the command via env var to avoid quoting issues with arbitrary content.
+        // read -e -i pre-fills the readline buffer so the user can edit before running.
         var escaped = cmd.replace(/'/g, "'\\''");
-        var termCmd = "konsole -e bash -c '" + escaped + "; echo; echo \"[Command finished - press Enter to close]\"; read'";
+        var termCmd = "PLASMA_LLM_CMD='" + escaped + "' konsole -e bash -c 'read -e -i \"$PLASMA_LLM_CMD\" -p \"$ \" cmd && eval \"$cmd\"; exec bash -i'";
         terminalCommands.push(termCmd);
         executable.connectSource(termCmd);
     }
