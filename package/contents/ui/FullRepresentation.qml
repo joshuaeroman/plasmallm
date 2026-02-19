@@ -167,7 +167,7 @@ PlasmaExtras.Representation {
             ListView {
                 id: messageList
                 clip: true
-                spacing: Plasmoid.configuration.chatSpacing
+                spacing: 0
                 headerPositioning: ListView.OverlayHeader
                 header: Item { height: Plasmoid.configuration.chatSpacing }
                 model: root.displayMessages

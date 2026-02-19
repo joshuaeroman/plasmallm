@@ -38,7 +38,7 @@ Item {
     readonly property bool hasBubbleContent: isThinking || !isAssistant || strippedContent.length > 0
     readonly property int spacing: Plasmoid.configuration.chatSpacing
 
-    implicitHeight: messageColumn.implicitHeight + spacing * 2
+    implicitHeight: messageColumn.implicitHeight + Math.round(spacing / 4) * 2
     implicitWidth: parent ? parent.width : 300
 
     // Hidden helper for clipboard access
@@ -57,8 +57,11 @@ Item {
         id: messageColumn
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: messageItem.spacing
-        spacing: messageItem.spacing
+        anchors.leftMargin: messageItem.spacing
+        anchors.rightMargin: messageItem.spacing
+        anchors.topMargin: Math.round(messageItem.spacing / 4)
+        anchors.bottomMargin: Math.round(messageItem.spacing / 4)
+        spacing: Math.round(messageItem.spacing / 4)
 
         Rectangle {
             visible: hasBubbleContent
