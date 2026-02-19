@@ -33,6 +33,7 @@ PlasmoidItem {
     property bool walletAvailable: false
 
     signal responseReady(int messageIndex)
+    signal copyConversationRequested()
 
     function currentTimestamp() {
         return new Date().toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
@@ -228,8 +229,21 @@ PlasmoidItem {
         }
     }
 
-    function saveChat() {
-        if (!Plasmoid.configuration.saveChatHistory) return;
+    function getLastCommand() {
+        for (var i = displayMessages.count - 1; i >= 0; i--) {
+            var msg = displayMessages.get(i);
+            if (msg.commandsStr && msg.commandsStr.length > 0) {
+                var cmds = msg.commandsStr.split("\n\x1F").filter(function(c) {
+                    return c.trim().length > 0;
+                });
+                if (cmds.length > 0) return cmds[cmds.length - 1].trim();
+            }
+        }
+        return null;
+    }
+
+    function saveChat(force) {
+        if (!force && !Plasmoid.configuration.saveChatHistory) return;
         if (displayMessages.count === 0) return;
 
         if (currentChatFile === "") {
@@ -390,6 +404,28 @@ PlasmoidItem {
         }
         if (lower === "/settings") {
             Plasmoid.internalAction("configure").trigger();
+            return;
+        }
+        if (lower === "/history") {
+            openChatsFolder();
+            return;
+        }
+        if (lower === "/save") {
+            saveChat(true);
+            return;
+        }
+        if (lower === "/copy") {
+            copyConversationRequested();
+            return;
+        }
+        if (lower === "/run") {
+            var runCmd = getLastCommand();
+            if (runCmd) executeCommand(runCmd);
+            return;
+        }
+        if (lower === "/term" || lower === "/terminal") {
+            var termCmd = getLastCommand();
+            if (termCmd) runInTerminal(termCmd);
             return;
         }
 

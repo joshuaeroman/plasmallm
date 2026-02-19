@@ -14,6 +14,16 @@ import org.kde.kirigami as Kirigami
 PlasmaExtras.Representation {
     id: fullRep
 
+    readonly property var slashCommands: [
+        { cmd: "/clear",    desc: "Clear the chat" },
+        { cmd: "/copy",     desc: "Copy conversation to clipboard" },
+        { cmd: "/history",  desc: "Open chat history folder" },
+        { cmd: "/run",      desc: "Run last command" },
+        { cmd: "/save",     desc: "Save chat to file" },
+        { cmd: "/settings", desc: "Open settings" },
+        { cmd: "/term",     desc: "Run last command in terminal" },
+    ]
+
     Layout.minimumWidth: Kirigami.Units.gridUnit * 20
     Layout.minimumHeight: Kirigami.Units.gridUnit * 24
     Layout.preferredWidth: Kirigami.Units.gridUnit * 28
@@ -117,6 +127,24 @@ PlasmaExtras.Representation {
         visible: false
     }
 
+    Connections {
+        target: root
+        function onCopyConversationRequested() {
+            var text = "";
+            for (var i = 0; i < root.displayMessages.count; i++) {
+                var msg = root.displayMessages.get(i);
+                var prefix = msg.role === "user" ? "You" :
+                             msg.role === "assistant" ? "Assistant" :
+                             msg.role === "command_output" ? "Command" :
+                             msg.role === "error" ? "Error" : "";
+                if (prefix) text += prefix + ": " + msg.content + "\n\n";
+            }
+            clipboardHelper.text = text.trim();
+            clipboardHelper.selectAll();
+            clipboardHelper.copy();
+        }
+    }
+
     contentItem: ColumnLayout {
         spacing: Plasmoid.configuration.chatSpacing
 
@@ -184,6 +212,57 @@ PlasmaExtras.Representation {
 
             QQC2.ScrollView {
                 id: inputScrollView
+
+                // Slash command autocomplete popup
+                QQC2.Popup {
+                    id: slashPopup
+                    parent: inputScrollView
+                    x: 0
+                    y: -height - Kirigami.Units.smallSpacing
+                    width: inputScrollView.width
+                    padding: Kirigami.Units.smallSpacing
+                    closePolicy: QQC2.Popup.NoAutoClose
+                    visible: {
+                        var t = inputField.text;
+                        return inputField.activeFocus &&
+                               t.startsWith("/") &&
+                               t.indexOf(" ") === -1 &&
+                               filteredSlashCommands.length > 0;
+                    }
+
+                    property var filteredSlashCommands: {
+                        var t = inputField.text.toLowerCase();
+                        if (!t.startsWith("/") || t.indexOf(" ") !== -1) return [];
+                        return fullRep.slashCommands.filter(function(c) { return c.cmd.startsWith(t); });
+                    }
+
+                    contentItem: ListView {
+                        id: slashList
+                        implicitHeight: Math.min(contentHeight, Kirigami.Units.gridUnit * 10)
+                        model: slashPopup.filteredSlashCommands
+                        delegate: PlasmaComponents.ItemDelegate {
+                            width: slashList.width
+                            contentItem: RowLayout {
+                                spacing: Kirigami.Units.smallSpacing
+                                PlasmaComponents.Label {
+                                    text: modelData.cmd
+                                    font.bold: true
+                                    color: Kirigami.Theme.highlightColor
+                                }
+                                PlasmaComponents.Label {
+                                    Layout.fillWidth: true
+                                    text: modelData.desc
+                                    color: Kirigami.Theme.disabledTextColor
+                                    elide: Text.ElideRight
+                                }
+                            }
+                            onClicked: {
+                                inputField.text = modelData.cmd;
+                                inputField.forceActiveFocus();
+                            }
+                        }
+                    }
+                }
                 Layout.fillWidth: true
                 Layout.minimumHeight: Kirigami.Units.gridUnit * 2
                 Layout.maximumHeight: Kirigami.Units.gridUnit * 8
@@ -197,13 +276,27 @@ PlasmaExtras.Representation {
                     focus: true
                     wrapMode: Text.Wrap
 
+                    Keys.onTabPressed: function(event) {
+                        if (slashPopup.filteredSlashCommands.length === 1) {
+                            inputField.text = slashPopup.filteredSlashCommands[0].cmd;
+                            event.accepted = true;
+                        } else {
+                            event.accepted = false;
+                        }
+                    }
+
                     Keys.onReturnPressed: function(event) {
                         if (event.modifiers & Qt.ShiftModifier) {
                             event.accepted = false;
                         } else {
                             event.accepted = true;
-                            if (text.trim().length > 0) {
-                                root.sendMessage(text.trim());
+                            var sendText = text.trim();
+                            if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
+                                    slashPopup.filteredSlashCommands.length === 1) {
+                                sendText = slashPopup.filteredSlashCommands[0].cmd;
+                            }
+                            if (sendText.length > 0) {
+                                root.sendMessage(sendText);
                                 text = "";
                             }
                         }
@@ -217,8 +310,13 @@ PlasmaExtras.Representation {
                 visible: !root.isLoading
                 enabled: root.systemPromptReady && inputField.text.trim().length > 0
                 onClicked: {
-                    if (inputField.text.trim().length > 0) {
-                        root.sendMessage(inputField.text.trim());
+                    var sendText = inputField.text.trim();
+                    if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
+                            slashPopup.filteredSlashCommands.length === 1) {
+                        sendText = slashPopup.filteredSlashCommands[0].cmd;
+                    }
+                    if (sendText.length > 0) {
+                        root.sendMessage(sendText);
                         inputField.text = "";
                     }
                 }
