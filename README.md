@@ -16,7 +16,7 @@ PlasmaLLM is designed for quick questions and system tasks right from your panel
 - Chat history auto-save
 - Configurable provider presets, temperature, max tokens, and custom system prompts
 
-<img width="511" height="586" alt="chat" src="https://github.com/user-attachments/assets/bfda1430-18be-44b1-8751-9960e176b672" />
+<img width="514" height="582" alt="image" src="https://github.com/user-attachments/assets/0ab720f7-786c-4975-b88c-f54ab5716efd" />
 
 ## Requirements
 
