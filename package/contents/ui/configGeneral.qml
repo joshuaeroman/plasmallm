@@ -387,6 +387,11 @@ SimpleKCM {
             color: walletAvailable ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.neutralTextColor
         }
 
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Layout.fillWidth: true
+        }
+
         ColumnLayout {
             Kirigami.FormData.label: "Temperature: " + Math.round(temperatureSlider.value) + "%"
             Layout.fillWidth: true
@@ -427,6 +432,11 @@ SimpleKCM {
             onValueModified: cfg_maxTokens = value
         }
 
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Layout.fillWidth: true
+        }
+
         ColumnLayout {
             Kirigami.FormData.label: "Chat Spacing: " + Math.round(chatSpacingSlider.value) + "px"
             Layout.fillWidth: true
@@ -461,6 +471,11 @@ SimpleKCM {
             text: "Show provider and model in title"
             checked: cfg_showProviderInTitle
             onCheckedChanged: cfg_showProviderInTitle = checked
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Layout.fillWidth: true
         }
 
         QQC2.CheckBox {
@@ -502,33 +517,37 @@ SimpleKCM {
             RowLayout {
                 spacing: Kirigami.Units.smallSpacing
                 QQC2.RadioButton {
+                    id: timedRadio
+                    text: "After"
                     QQC2.ButtonGroup.group: autoClearGroup
-                    checked: cfg_autoClearMode === 2
-                    onClicked: cfg_autoClearMode = 2
+                    checked: cfg_autoClearMode === 2 || cfg_autoClearMode === 3
+                    onClicked: cfg_autoClearMode = (unitCombo.currentIndex === 0 ? 2 : 3)
                 }
                 QQC2.SpinBox {
-                    from: 1; to: 3600
-                    value: cfg_autoClearSeconds
-                    onValueModified: cfg_autoClearSeconds = value
-                    enabled: cfg_autoClearMode === 2
+                    from: 1
+                    to: unitCombo.currentIndex === 0 ? 3600 : 1440
+                    value: unitCombo.currentIndex === 0 ? cfg_autoClearSeconds : cfg_autoClearMinutes
+                    enabled: timedRadio.checked
+                    onValueModified: {
+                        if (unitCombo.currentIndex === 0)
+                            cfg_autoClearSeconds = value
+                        else
+                            cfg_autoClearMinutes = value
+                    }
                 }
-                QQC2.Label { text: "seconds" }
+                QQC2.ComboBox {
+                    id: unitCombo
+                    model: ["seconds", "minutes"]
+                    currentIndex: cfg_autoClearMode === 3 ? 1 : 0
+                    enabled: timedRadio.checked
+                    onActivated: cfg_autoClearMode = (currentIndex === 0 ? 2 : 3)
+                }
             }
-            RowLayout {
-                spacing: Kirigami.Units.smallSpacing
-                QQC2.RadioButton {
-                    QQC2.ButtonGroup.group: autoClearGroup
-                    checked: cfg_autoClearMode === 3
-                    onClicked: cfg_autoClearMode = 3
-                }
-                QQC2.SpinBox {
-                    from: 1; to: 1440
-                    value: cfg_autoClearMinutes
-                    onValueModified: cfg_autoClearMinutes = value
-                    enabled: cfg_autoClearMode === 3
-                }
-                QQC2.Label { text: "minutes" }
-            }
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Layout.fillWidth: true
         }
 
         QQC2.CheckBox {
