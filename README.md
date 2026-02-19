@@ -72,7 +72,7 @@ To uninstall:
 
 ```bash
 ./package.sh
-# Creates e.g. PlasmaLLM-0.9.plasmoid
+# Creates e.g. PlasmaLLM-x.y.z.plasmoid
 ```
 
 Requires `python3` (to read the version from `metadata.json`) and `zip`.
