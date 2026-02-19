@@ -34,6 +34,8 @@ Item {
     readonly property bool isCommandOutput: role === "command_output"
     readonly property bool isCommandRunning: role === "command_running"
     readonly property bool isThinking: isAssistant && content.length === 0
+    readonly property string strippedContent: isAssistant ? Api.stripCodeBlocks(content).trim() : content
+    readonly property bool hasBubbleContent: isThinking || !isAssistant || strippedContent.length > 0
     readonly property int spacing: Plasmoid.configuration.chatSpacing
 
     implicitHeight: messageColumn.implicitHeight + spacing * 2
@@ -59,6 +61,7 @@ Item {
         spacing: messageItem.spacing
 
         Rectangle {
+            visible: hasBubbleContent
             Layout.fillWidth: true
             Layout.maximumWidth: parent.width * 0.85
             Layout.alignment: isUser ? Qt.AlignRight : Qt.AlignLeft
@@ -89,7 +92,7 @@ Item {
                 PlasmaComponents.Label {
                     id: messageText
                     Layout.fillWidth: true
-                    text: isThinking ? "Thinking..." : (isAssistant ? Api.stripCodeBlocks(messageItem.content) : messageItem.content)
+                    text: isThinking ? "Thinking..." : messageItem.strippedContent
                     textFormat: (isAssistant && !isThinking) ? Text.MarkdownText : Text.PlainText
                     wrapMode: Text.Wrap
                     font.family: (isCommandOutput || isCommandRunning) ? "monospace" : messageText.font.family
@@ -104,7 +107,7 @@ Item {
             Layout.fillWidth: true
             Layout.alignment: isUser ? Qt.AlignRight : Qt.AlignLeft
             spacing: Kirigami.Units.smallSpacing
-            visible: !isCommandRunning
+            visible: !isCommandRunning && hasBubbleContent
 
             PlasmaComponents.Label {
                 visible: messageItem.timestamp.length > 0
