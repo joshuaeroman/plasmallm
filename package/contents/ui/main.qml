@@ -639,4 +639,24 @@ PlasmoidItem {
         regatherSysInfo();
         loadApiKeyFromWallet();
     }
+
+    onExpandedChanged: function(expanded) {
+        if (!expanded) {
+            Plasmoid.configuration.lastClosedTimestamp = String(Date.now())
+        } else {
+            var mode = Plasmoid.configuration.autoClearMode
+            if (mode === 1) {
+                clearChat()
+            } else if (mode === 2 || mode === 3) {
+                var lastClosed = parseInt(Plasmoid.configuration.lastClosedTimestamp) || 0
+                if (lastClosed > 0) {
+                    var elapsed = Date.now() - lastClosed
+                    var threshold = mode === 2
+                        ? Plasmoid.configuration.autoClearSeconds * 1000
+                        : Plasmoid.configuration.autoClearMinutes * 60 * 1000
+                    if (elapsed >= threshold) clearChat()
+                }
+            }
+        }
+    }
 }

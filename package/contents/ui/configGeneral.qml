@@ -68,6 +68,14 @@ SimpleKCM {
     property bool cfg_sysInfoLocaleDefault
     property int cfg_apiKeyVersion
     property int cfg_apiKeyVersionDefault
+    property int cfg_autoClearMode
+    property int cfg_autoClearModeDefault
+    property int cfg_autoClearSeconds
+    property int cfg_autoClearSecondsDefault
+    property int cfg_autoClearMinutes
+    property int cfg_autoClearMinutesDefault
+    property string cfg_lastClosedTimestamp
+    property string cfg_lastClosedTimestampDefault
 
     property var availableModels: []
     property string walletApiKey: ""
@@ -465,6 +473,56 @@ SimpleKCM {
             text: "Saves to ~/PlasmaLLM/chats/"
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
+        }
+
+        QQC2.ButtonGroup { id: autoClearGroup }
+
+        ColumnLayout {
+            Kirigami.FormData.label: "Auto-clear:"
+            spacing: Kirigami.Units.smallSpacing
+
+            QQC2.RadioButton {
+                text: "Disabled"
+                QQC2.ButtonGroup.group: autoClearGroup
+                checked: cfg_autoClearMode === 0
+                onClicked: cfg_autoClearMode = 0
+            }
+            QQC2.RadioButton {
+                text: "Instant (always clear when panel opens)"
+                QQC2.ButtonGroup.group: autoClearGroup
+                checked: cfg_autoClearMode === 1
+                onClicked: cfg_autoClearMode = 1
+            }
+            RowLayout {
+                spacing: Kirigami.Units.smallSpacing
+                QQC2.RadioButton {
+                    QQC2.ButtonGroup.group: autoClearGroup
+                    checked: cfg_autoClearMode === 2
+                    onClicked: cfg_autoClearMode = 2
+                }
+                QQC2.SpinBox {
+                    from: 1; to: 3600
+                    value: cfg_autoClearSeconds
+                    onValueModified: cfg_autoClearSeconds = value
+                    enabled: cfg_autoClearMode === 2
+                }
+                QQC2.Label { text: "seconds" }
+            }
+            RowLayout {
+                spacing: Kirigami.Units.smallSpacing
+                QQC2.RadioButton {
+                    QQC2.ButtonGroup.group: autoClearGroup
+                    checked: cfg_autoClearMode === 3
+                    onClicked: cfg_autoClearMode = 3
+                }
+                QQC2.SpinBox {
+                    from: 1; to: 1440
+                    value: cfg_autoClearMinutes
+                    onValueModified: cfg_autoClearMinutes = value
+                    enabled: cfg_autoClearMode === 3
+                }
+                QQC2.Label { text: "minutes" }
+            }
         }
 
         QQC2.CheckBox {
