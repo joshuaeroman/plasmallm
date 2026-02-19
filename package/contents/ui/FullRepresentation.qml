@@ -73,9 +73,7 @@ PlasmaExtras.Representation {
                 visible: root.isAutoMode
                 font.bold: true
                 color: Kirigami.Theme.negativeTextColor
-                PlasmaComponents.ToolTip.text: "Auto mode active — commands run and share output automatically"
-                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents.ToolTip.visible: hovered
+
             }
 
             PlasmaComponents.ToolButton {
