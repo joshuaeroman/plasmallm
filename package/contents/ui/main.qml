@@ -32,6 +32,7 @@ PlasmoidItem {
     property bool sessionAutoMode: false
     readonly property bool isAutoMode: sessionAutoMode ||
         (Plasmoid.configuration.autoRunCommands && Plasmoid.configuration.autoShareCommandOutput)
+    property var fetchedModels: []
     property string apiKey: Plasmoid.configuration.apiKey
     property bool walletAvailable: false
 
@@ -446,6 +447,28 @@ PlasmoidItem {
             }
             return;
         }
+        if (lower === "/model") {
+            var currentModel = Plasmoid.configuration.modelName;
+            var models = root.fetchedModels;
+            var msg = "Current model: **" + (currentModel || "none") + "**";
+            if (models.length > 0) {
+                msg += "\n\nAvailable models:\n" +
+                       models.map(function(m) { return "- " + m; }).join("\n") +
+                       "\n\nType `/model <name>` to switch.";
+            } else {
+                msg += "\n\nNo models cached. Use **Fetch Models** in settings.";
+            }
+            displayMessages.append({ role: "assistant", content: msg, commandsStr: "", shared: false, timestamp: currentTimestamp() });
+            return;
+        }
+        if (lower.startsWith("/model ")) {
+            var newModel = text.trim().substring(7).trim();
+            if (newModel.length > 0) {
+                Plasmoid.configuration.modelName = newModel;
+                displayMessages.append({ role: "assistant", content: "Switched to model: **" + newModel + "**", commandsStr: "", shared: false, timestamp: currentTimestamp() });
+            }
+            return;
+        }
 
         // Add user message to both models
         chatMessages.append({ role: "user", content: text });
@@ -677,6 +700,17 @@ PlasmoidItem {
             // Wallet-available path: key was just written to KWallet by config page
             loadApiKeyFromWallet();
         }
+        function onAvailableModelsChanged() {
+            var stored = Plasmoid.configuration.availableModels;
+            if (stored && stored.length > 0) {
+                try { root.fetchedModels = JSON.parse(stored); } catch(e) { root.fetchedModels = []; }
+            } else {
+                root.fetchedModels = [];
+            }
+        }
+        function onApiEndpointChanged() {
+            Plasmoid.configuration.availableModels = "";
+        }
         function onSysInfoOSChanged()       { if (systemPromptReady) regatherSysInfo(); }
         function onSysInfoShellChanged()    { if (systemPromptReady) regatherSysInfo(); }
         function onSysInfoHostnameChanged() { if (systemPromptReady) regatherSysInfo(); }
@@ -709,6 +743,10 @@ PlasmoidItem {
     Component.onCompleted: {
         regatherSysInfo();
         loadApiKeyFromWallet();
+        var stored = Plasmoid.configuration.availableModels;
+        if (stored && stored.length > 0) {
+            try { fetchedModels = JSON.parse(stored); } catch(e) {}
+        }
     }
 
     onExpandedChanged: function(expanded) {
