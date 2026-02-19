@@ -19,6 +19,7 @@ PlasmaExtras.Representation {
         { cmd: "/clear",    desc: "Clear the chat" },
         { cmd: "/copy",     desc: "Copy conversation to clipboard" },
         { cmd: "/history",  desc: "Open chat history folder" },
+        { cmd: "/model",    desc: "Show or switch model (/model <name>)" },
         { cmd: "/run",      desc: "Run last command" },
         { cmd: "/save",     desc: "Save chat to file" },
         { cmd: "/settings", desc: "Open settings" },
@@ -268,12 +269,61 @@ PlasmaExtras.Representation {
                                 }
                             }
                             onClicked: {
-                                inputField.text = modelData.cmd;
+                                inputField.text = modelData.cmd === "/model" ? "/model " : modelData.cmd;
+                                inputField.cursorPosition = inputField.text.length;
                                 inputField.forceActiveFocus();
                             }
                         }
                     }
                 }
+
+                // Model name autocomplete popup
+                QQC2.Popup {
+                    id: modelPopup
+                    parent: inputScrollView
+                    x: 0
+                    y: -height - Kirigami.Units.smallSpacing
+                    width: inputScrollView.width
+                    padding: Kirigami.Units.smallSpacing
+                    closePolicy: QQC2.Popup.NoAutoClose
+
+                    property var filteredModels: {
+                        var t = inputField.text;
+                        if (!t.toLowerCase().startsWith("/model ")) return [];
+                        var query = t.substring(7).toLowerCase();
+                        var models = root.fetchedModels;
+                        if (!models || models.length === 0) return [];
+                        return query.length === 0 ? models :
+                               models.filter(function(m) { return m.toLowerCase().indexOf(query) !== -1; });
+                    }
+
+                    visible: inputField.activeFocus &&
+                             inputField.text.toLowerCase().startsWith("/model ") &&
+                             filteredModels.length > 0
+
+                    function applyModel(name) {
+                        inputField.text = "/model " + name;
+                        inputField.cursorPosition = inputField.text.length;
+                        inputField.forceActiveFocus();
+                    }
+
+                    contentItem: ListView {
+                        id: modelList
+                        implicitHeight: Math.min(contentHeight, Kirigami.Units.gridUnit * 10)
+                        model: modelPopup.filteredModels
+                        delegate: PlasmaComponents.ItemDelegate {
+                            width: modelList.width
+                            contentItem: PlasmaComponents.Label {
+                                text: modelData
+                                font.bold: Plasmoid.configuration.modelName === modelData
+                                color: Plasmoid.configuration.modelName === modelData
+                                       ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                            }
+                            onClicked: modelPopup.applyModel(modelData)
+                        }
+                    }
+                }
+
                 Layout.fillWidth: true
                 Layout.minimumHeight: Kirigami.Units.gridUnit * 2
                 Layout.maximumHeight: Kirigami.Units.gridUnit * 8
@@ -288,8 +338,14 @@ PlasmaExtras.Representation {
                     wrapMode: Text.Wrap
 
                     Keys.onTabPressed: function(event) {
-                        if (slashPopup.filteredSlashCommands.length === 1) {
-                            inputField.text = slashPopup.filteredSlashCommands[0].cmd;
+                        if (inputField.text.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
+                            inputField.text = "/model " + modelPopup.filteredModels[0];
+                            inputField.cursorPosition = inputField.text.length;
+                            event.accepted = true;
+                        } else if (slashPopup.filteredSlashCommands.length === 1) {
+                            var cmd = slashPopup.filteredSlashCommands[0].cmd;
+                            inputField.text = cmd === "/model" ? "/model " : cmd;
+                            inputField.cursorPosition = inputField.text.length;
                             event.accepted = true;
                         } else {
                             event.accepted = false;
@@ -302,7 +358,9 @@ PlasmaExtras.Representation {
                         } else {
                             event.accepted = true;
                             var sendText = text.trim();
-                            if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
+                            if (sendText.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
+                                sendText = "/model " + modelPopup.filteredModels[0];
+                            } else if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
                                     slashPopup.filteredSlashCommands.length === 1) {
                                 sendText = slashPopup.filteredSlashCommands[0].cmd;
                             }
@@ -322,7 +380,9 @@ PlasmaExtras.Representation {
                 enabled: root.systemPromptReady && inputField.text.trim().length > 0
                 onClicked: {
                     var sendText = inputField.text.trim();
-                    if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
+                    if (sendText.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
+                        sendText = "/model " + modelPopup.filteredModels[0];
+                    } else if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
                             slashPopup.filteredSlashCommands.length === 1) {
                         sendText = slashPopup.filteredSlashCommands[0].cmd;
                     }

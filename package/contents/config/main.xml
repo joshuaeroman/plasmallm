@@ -140,6 +140,10 @@
       <label>Unix ms timestamp when panel was last closed (runtime)</label>
       <default></default>
     </entry>
+    <entry name="availableModels" type="String">
+      <label>Fetched model list (JSON array, written at runtime)</label>
+      <default></default>
+    </entry>
   </group>
 
 </kcfg>

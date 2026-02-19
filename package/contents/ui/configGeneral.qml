@@ -76,6 +76,8 @@ SimpleKCM {
     property int cfg_autoClearMinutesDefault
     property string cfg_lastClosedTimestamp
     property string cfg_lastClosedTimestampDefault
+    property string cfg_availableModels
+    property string cfg_availableModelsDefault
 
     property var availableModels: []
     property string walletApiKey: ""
@@ -268,6 +270,9 @@ SimpleKCM {
             Layout.fillWidth: true
             text: cfg_apiEndpoint
             onTextChanged: {
+                cfg_availableModels = "";
+                availableModels = [];
+                modelCombo.visible = false;
                 cfg_apiEndpoint = text;
                 // Update preset selector if it no longer matches
                 var matched = false;
@@ -315,6 +320,7 @@ SimpleKCM {
                             fetchStatusLabel.visible = true;
                         } else {
                             availableModels = models;
+                            cfg_availableModels = JSON.stringify(models);
                             modelCombo.visible = true;
                             fetchStatusLabel.visible = false;
                         }
