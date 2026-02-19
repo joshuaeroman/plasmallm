@@ -88,7 +88,8 @@ Rectangle {
                 PlasmaComponents.ToolTip.text: "Execute command inline"
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: {
-                    confirmDialog.open();
+                    commandBlock.hasRun = true;
+                    commandBlock.runRequested(commandBlock.commandText);
                 }
             }
 
@@ -99,46 +100,6 @@ Rectangle {
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: commandBlock.terminalRequested(commandBlock.commandText)
             }
-        }
-    }
-
-    QQC2.Dialog {
-        id: confirmDialog
-        title: "Run Command?"
-        anchors.centerIn: QQC2.Overlay.overlay
-        modal: true
-        standardButtons: QQC2.Dialog.Ok | QQC2.Dialog.Cancel
-
-        contentItem: ColumnLayout {
-            spacing: Kirigami.Units.smallSpacing
-
-            PlasmaComponents.Label {
-                text: "Execute the following command?"
-                wrapMode: Text.Wrap
-                Layout.fillWidth: true
-            }
-
-            Rectangle {
-                Layout.fillWidth: true
-                implicitHeight: confirmCmdLabel.implicitHeight + Kirigami.Units.smallSpacing * 2
-                color: Kirigami.Theme.alternateBackgroundColor
-                radius: 4
-
-                PlasmaComponents.Label {
-                    id: confirmCmdLabel
-                    anchors.fill: parent
-                    anchors.margins: Kirigami.Units.smallSpacing
-                    text: commandBlock.commandText
-                    font.family: "monospace"
-                    font.pointSize: Kirigami.Theme.smallFont.pointSize
-                    wrapMode: Text.Wrap
-                }
-            }
-        }
-
-        onAccepted: {
-            commandBlock.hasRun = true;
-            commandBlock.runRequested(commandBlock.commandText);
         }
     }
 

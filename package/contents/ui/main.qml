@@ -548,9 +548,15 @@ PlasmoidItem {
     }
 
     function runInTerminal(cmd) {
-        // Escape single quotes in the command for safe shell embedding
+        // Pass the command via env var to avoid quoting issues with arbitrary content.
+        // Detect terminal: $TERMINAL > KDE config > konsole fallback.
+        // read -e -i pre-fills the readline buffer; user edits then presses Enter.
         var escaped = cmd.replace(/'/g, "'\\''");
-        var termCmd = "konsole -e bash -c '" + escaped + "; echo; echo \"[Command finished - press Enter to close]\"; read'";
+        var innerScript =
+            "term=${TERMINAL:-$(kreadconfig6 --file kdeglobals --group General --key TerminalApplication 2>/dev/null)}; " +
+            "term=${term:-konsole}; " +
+            "\"$term\" -e bash -c \"read -e -i \\\"$PLASMA_LLM_CMD\\\" -p \\\"$ \\\" cmd && eval \\\"\\$cmd\\\"; exec bash -i\"";
+        var termCmd = "PLASMA_LLM_CMD='" + escaped + "' bash -c '" + innerScript + "'";
         terminalCommands.push(termCmd);
         executable.connectSource(termCmd);
     }
