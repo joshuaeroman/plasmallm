@@ -57,6 +57,16 @@ PlasmaExtras.Representation {
             }
 
             PlasmaComponents.ToolButton {
+                icon.name: "clock"
+                Accessible.name: "Open chat history folder"
+                PlasmaComponents.ToolTip.text: "Open chat history folder"
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered
+                visible: Plasmoid.configuration.saveChatHistory
+                onClicked: root.openChatsFolder()
+            }
+
+            PlasmaComponents.ToolButton {
                 icon.name: "edit-copy"
                 Accessible.name: "Copy conversation"
                 PlasmaComponents.ToolTip.text: "Copy conversation"
