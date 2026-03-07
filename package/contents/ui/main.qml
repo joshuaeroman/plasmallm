@@ -232,9 +232,12 @@ PlasmoidItem {
 
     function clearChat() {
         if (activeRequest) {
-            activeRequest.abort();
+            if (activeRequest.xhr) activeRequest.xhr.abort();
+            else activeRequest.abort();
             activeRequest = null;
         }
+        if (streamPollTimer.running) streamPollTimer.stop();
+        streamPollTimer.streamHandle = null;
         isLoading = false;
         streamingMessageIndex = -1;
         chatMessages.clear();
@@ -534,17 +537,23 @@ PlasmoidItem {
             messages = [systemMsg].concat(messages.slice(messages.length - maxApiMessages));
         }
 
-        activeRequest = Api.sendChatRequest(
+        var streamHandle = Api.sendStreamingChatRequest(
             Plasmoid.configuration.apiEndpoint,
             root.apiKey,
             Plasmoid.configuration.modelName,
             messages,
             Plasmoid.configuration.temperature,
             Plasmoid.configuration.maxTokens,
-            function(error, responseText) {
+            function onChunk(delta, accumulated) {
+                if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
+                    displayMessages.setProperty(streamingMessageIndex, "content", accumulated);
+                }
+            },
+            function onComplete(fullText, error) {
                 isLoading = false;
                 activeRequest = null;
-                if (error) {
+                if (streamPollTimer.running) streamPollTimer.stop();
+                if (error && fullText.length === 0) {
                     // Remove the placeholder
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                         displayMessages.remove(streamingMessageIndex);
@@ -558,11 +567,10 @@ PlasmoidItem {
                         timestamp: currentTimestamp()
                     });
                 } else {
-                    chatMessages.append({ role: "assistant", content: responseText });
-                    var commands = Api.parseCommandBlocks(responseText);
-                    // Update the placeholder with final content and commands
+                    chatMessages.append({ role: "assistant", content: fullText });
+                    var commands = Api.parseCommandBlocks(fullText);
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
-                        displayMessages.setProperty(streamingMessageIndex, "content", responseText);
+                        displayMessages.setProperty(streamingMessageIndex, "content", fullText);
                         displayMessages.setProperty(streamingMessageIndex, "commandsStr", commands.join("\n\x1F"));
                         responseReady(streamingMessageIndex);
                     }
@@ -574,7 +582,6 @@ PlasmoidItem {
                         Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
                     }
 
-                    // Auto-run commands if enabled
                     if ((sessionAutoMode || Plasmoid.configuration.autoRunCommands) && commands.length > 0) {
                         for (var ci = 0; ci < commands.length; ci++) {
                             executeCommand(commands[ci]);
@@ -583,13 +590,21 @@ PlasmoidItem {
                 }
             }
         );
+
+        streamHandle.setPollTimer(streamPollTimer);
+        streamPollTimer.streamHandle = streamHandle;
+        streamPollTimer.start();
+        activeRequest = streamHandle;
     }
 
     function cancelRequest() {
         if (activeRequest) {
-            activeRequest.abort();
+            if (activeRequest.xhr) activeRequest.xhr.abort();
+            else activeRequest.abort();
             activeRequest = null;
         }
+        if (streamPollTimer.running) streamPollTimer.stop();
+        streamPollTimer.streamHandle = null;
         isLoading = false;
         autoShareSuppressed = true;
         // Remove the streaming placeholder if it's still empty
@@ -747,6 +762,19 @@ PlasmoidItem {
             if (!systemPromptReady) return;
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode, dateTime: Plasmoid.configuration.sysInfoDateTime ? Api.localISODateTime() : "" });
             chatMessages.setProperty(0, "content", prompt);
+        }
+    }
+
+    Timer {
+        id: streamPollTimer
+        interval: 50
+        repeat: true
+        running: false
+        property var streamHandle: null
+        onTriggered: {
+            if (streamHandle && streamHandle.processBuffer) {
+                streamHandle.processBuffer();
+            }
         }
     }
 
