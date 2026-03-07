@@ -719,6 +719,9 @@ PlasmoidItem {
             // Wallet-available path: key was just written to KWallet by config page
             loadApiKeyFromWallet();
         }
+        function onApiEndpointChanged() {
+            Plasmoid.configuration.availableModels = "";
+        }
         function onAvailableModelsChanged() {
             var stored = Plasmoid.configuration.availableModels;
             if (stored && stored.length > 0) {
@@ -727,9 +730,7 @@ PlasmoidItem {
                 root.fetchedModels = [];
             }
         }
-        function onApiEndpointChanged() {
-            Plasmoid.configuration.availableModels = "";
-        }
+
         function onSysInfoOSChanged()       { if (systemPromptReady) regatherSysInfo(); }
         function onSysInfoShellChanged()    { if (systemPromptReady) regatherSysInfo(); }
         function onSysInfoHostnameChanged() { if (systemPromptReady) regatherSysInfo(); }

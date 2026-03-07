@@ -206,6 +206,14 @@ SimpleKCM {
         );
     }
 
+    onCfg_availableModelsChanged: {
+        if (cfg_availableModels && cfg_availableModels.length > 0) {
+            try { availableModels = JSON.parse(cfg_availableModels); } catch(e) {}
+        } else {
+            availableModels = [];
+        }
+    }
+
     Component.onCompleted: loadWalletKey()
 
     readonly property var presetEndpoints: [
@@ -259,6 +267,12 @@ SimpleKCM {
                 if (index > 0) {
                     apiEndpointField.text = presetEndpoints[index].url;
                     cfg_providerName = presetEndpoints[index].name;
+                    Api.fetchModels(presetEndpoints[index].url, apiKeyField.text, function(error, models) {
+                        if (!error && models.length > 0) {
+                            availableModels = models;
+                            cfg_availableModels = JSON.stringify(models);
+                        }
+                    });
                 }
             }
         }
@@ -271,8 +285,6 @@ SimpleKCM {
             text: cfg_apiEndpoint
             onTextChanged: {
                 cfg_availableModels = "";
-                availableModels = [];
-                modelCombo.visible = false;
                 cfg_apiEndpoint = text;
                 // Update preset selector if it no longer matches
                 var matched = false;
@@ -308,7 +320,6 @@ SimpleKCM {
                 icon.name: "view-refresh"
                 onClicked: {
                     enabled = false;
-                    modelCombo.visible = false;
                     fetchStatusLabel.visible = false;
                     Api.fetchModels(apiEndpointField.text, apiKeyField.text, function(error, models) {
                         enabled = true;
@@ -321,7 +332,6 @@ SimpleKCM {
                         } else {
                             availableModels = models;
                             cfg_availableModels = JSON.stringify(models);
-                            modelCombo.visible = true;
                             fetchStatusLabel.visible = false;
                         }
                     });
@@ -340,7 +350,7 @@ SimpleKCM {
         QQC2.ComboBox {
             id: modelCombo
             Kirigami.FormData.label: "Available Models:"
-            visible: false
+            visible: availableModels.length > 0
             model: availableModels
             Layout.fillWidth: true
             onActivated: {
