@@ -6,6 +6,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.plasma5support as P5Support
 import org.kde.kirigami as Kirigami
@@ -17,6 +18,7 @@ PlasmoidItem {
     id: root
 
     property bool isLoading: false
+    property bool hasUnreadResponse: false
     property var activeRequest: null
     property int streamingMessageIndex: -1
     property var sysInfo: ({})
@@ -69,6 +71,18 @@ PlasmoidItem {
         Kirigami.Icon {
             anchors.fill: parent
             source: "dialog-messages"
+        }
+
+        Rectangle {
+            visible: root.hasUnreadResponse
+            width: Math.round(parent.width * 0.35)
+            height: width
+            radius: width / 2
+            color: Kirigami.Theme.positiveTextColor
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.topMargin: Math.round(parent.height * 0.1)
+            anchors.rightMargin: Math.round(parent.width * 0.1)
         }
     }
 
@@ -555,6 +569,11 @@ PlasmoidItem {
                     streamingMessageIndex = -1;
                     saveChat();
 
+                    if (!root.expanded) {
+                        root.hasUnreadResponse = true;
+                        Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
+                    }
+
                     // Auto-run commands if enabled
                     if ((sessionAutoMode || Plasmoid.configuration.autoRunCommands) && commands.length > 0) {
                         for (var ci = 0; ci < commands.length; ci++) {
@@ -758,6 +777,10 @@ PlasmoidItem {
         if (!expanded) {
             Plasmoid.configuration.lastClosedTimestamp = String(Date.now())
         } else {
+            if (root.hasUnreadResponse) {
+                root.hasUnreadResponse = false;
+                Plasmoid.status = PlasmaCore.Types.ActiveStatus;
+            }
             var mode = Plasmoid.configuration.autoClearMode
             if (mode === 1) {
                 clearChat()
