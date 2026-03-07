@@ -64,7 +64,7 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
         prompt += "- Network Interfaces:\n" + sysInfo.network + "\n";
     }
 
-    prompt += "\nGeneral-purpose assistant. Be concise and conversational. " +
+    prompt += "\nGeneral-purpose assistant. Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational." +
         "Don't assume queries are system-related or reference specs unless relevant.\n\n" +
         "## Code blocks\n" +
         "```bash blocks are STRIPPED from your message and rendered as separate interactive widgets below it. " +
