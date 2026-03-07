@@ -61,6 +61,8 @@ SimpleKCM {
     property bool cfg_sysInfoNetworkDefault
     property bool cfg_sysInfoLocale
     property bool cfg_sysInfoLocaleDefault
+    property bool cfg_sysInfoDateTime
+    property bool cfg_sysInfoDateTimeDefault
     property string cfg_customSystemPrompt
     property string cfg_customSystemPromptDefault
     property string cfg_gatheredSysInfo
@@ -88,7 +90,7 @@ SimpleKCM {
         if (cfg_sysInfoDisk)     info.disk    = real.disk    || "<lsblk output>";
         if (cfg_sysInfoNetwork)  info.network = real.network || "<network>";
         if (cfg_sysInfoLocale)   info.locale  = real.locale  || "<locale>";
-        return Api.buildSystemPrompt(info, cfg_customSystemPrompt, { autoRunCommands: cfg_autoRunCommands });
+        return Api.buildSystemPrompt(info, cfg_customSystemPrompt, { autoRunCommands: cfg_autoRunCommands, dateTime: cfg_sysInfoDateTime ? Api.localISODateTime() : "" });
     }
 
     property string promptPreview: buildPreview()
@@ -161,6 +163,11 @@ SimpleKCM {
                 text: "Locale"
                 checked: cfg_sysInfoLocale
                 onCheckedChanged: cfg_sysInfoLocale = checked
+            }
+            QQC2.CheckBox {
+                text: "Date/Time"
+                checked: cfg_sysInfoDateTime
+                onCheckedChanged: cfg_sysInfoDateTime = checked
             }
         }
 

@@ -37,7 +37,7 @@ There is no build step, test suite, or linter. QML is interpreted at runtime. Af
 
 ### Data Flow
 
-1. **Startup**: `systemCommands` array fires 12 shell commands in parallel. 10s timeout fallback if any hang (`sysInfoTimeout` Timer).
+1. **Startup**: `regatherSysInfo()` fires up to 12 config-gated shell commands in parallel. 3s timeout fallback if any hang (`sysInfoTimeout` Timer).
 2. **System prompt**: Built from gathered `sysInfo` + custom prompt + auto-run warnings when all info collected.
 3. **User message** → `sendMessage()` → appends to both ListModels → `sendToLLM()` (caps messages to system prompt + last `maxApiMessages`).
 4. **LLM response** → `parseCommandBlocks()` extracts bash/sh/shell/zsh fenced blocks → updates placeholder → auto-runs if enabled.
