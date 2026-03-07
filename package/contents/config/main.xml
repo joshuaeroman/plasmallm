@@ -112,6 +112,10 @@
       <label>Include locale in system prompt</label>
       <default>true</default>
     </entry>
+    <entry name="sysInfoDateTime" type="Bool">
+      <label>Include current date/time in system prompt</label>
+      <default>true</default>
+    </entry>
     <entry name="gatheredSysInfo" type="String">
       <label>Gathered system information (JSON, written at runtime)</label>
       <default></default>

@@ -3,6 +3,17 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+function localISODateTime() {
+    var d = new Date();
+    var pad = function(n) { return n < 10 ? "0" + n : "" + n; };
+    var off = -d.getTimezoneOffset();
+    var sign = off >= 0 ? "+" : "-";
+    var absOff = Math.abs(off);
+    return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) +
+           "T" + pad(d.getHours()) + ":" + pad(d.getMinutes()) +
+           sign + pad(Math.floor(absOff / 60)) + ":" + pad(absOff % 60);
+}
+
 function buildSystemPrompt(sysInfo, customAdditions, options) {
     var prompt = "You are a helpful assistant embedded in the user's Linux desktop.\n\n" +
         "## System\n";
@@ -24,6 +35,9 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
     }
     if (sysInfo.locale) {
         prompt += "- Locale: " + sysInfo.locale + "\n";
+    }
+    if (options && options.dateTime) {
+        prompt += "- Current date/time: " + options.dateTime + "\n";
     }
     if (sysInfo.user) {
         prompt += "- User: " + sysInfo.user + "\n";
