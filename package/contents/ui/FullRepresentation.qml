@@ -191,6 +191,14 @@ PlasmaExtras.Representation {
                     });
                 }
 
+                onContentHeightChanged: {
+                    if (root.isLoading && root.streamingMessageIndex >= 0) {
+                        Qt.callLater(function() {
+                            messageList.positionViewAtEnd();
+                        });
+                    }
+                }
+
                 Connections {
                     target: root
                     function onExpandedChanged() {
