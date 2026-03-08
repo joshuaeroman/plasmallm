@@ -72,6 +72,7 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
         "Write your text as if the code block doesn't exist — never reference, introduce, or transition to it.\n\n" +
         "## Commands\n" +
         "One script per ```bash block. Chain steps with &&. Use `pkexec` instead of `sudo`.\n" +
+        "Scripts run non-interactively with no stdin — never use read, select, or any command that waits for user input. Use `kdialog` for user prompts (e.g., `kdialog --inputbox \"prompt\"`).\n" +
         "NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission. " +
         "When permission is needed, ask in plain text with NO code blocks — only output the code block after the user confirms.\n";
 
@@ -238,7 +239,61 @@ function parseSSEChunks(buffer, lastIndex) {
     return { tokens: tokens, newIndex: searchFrom };
 }
 
-function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature, maxTokens, onChunk, onComplete) {
+function buildTools(ollamaApiKey) {
+    if (!ollamaApiKey || ollamaApiKey.length === 0) return [];
+    return [{
+        type: "function",
+        "function": {
+            name: "web_search",
+            description: "Search the web for current information. Use when you need up-to-date facts, recent events, or information you're not confident about.",
+            parameters: {
+                type: "object",
+                properties: {
+                    query: { type: "string", description: "Search query" },
+                    max_results: { type: "integer", description: "Max results (1-10, default 5)" }
+                },
+                required: ["query"]
+            }
+        }
+    }];
+}
+
+function performWebSearch(ollamaApiKey, query, maxResults, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://ollama.com/api/web_search");
+    xhr.timeout = 30000;
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", "Bearer " + ollamaApiKey);
+
+    xhr.ontimeout = function() {
+        callback("Web search timed out", null);
+    };
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    callback(null, response);
+                } catch (e) {
+                    callback("Failed to parse web search response: " + e.message, null);
+                }
+            } else {
+                var errMsg = "Web search failed (HTTP " + xhr.status + ")";
+                if (xhr.responseText) {
+                    errMsg += ": " + xhr.responseText.substring(0, 200);
+                }
+                callback(errMsg, null);
+            }
+        }
+    };
+
+    var body = { query: query };
+    if (maxResults && maxResults > 0) body.max_results = Math.min(maxResults, 10);
+    xhr.send(JSON.stringify(body));
+}
+
+function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature, maxTokens, onChunk, onComplete, tools) {
     var xhr = new XMLHttpRequest();
     var url = endpoint.replace(/\/+$/, "") + "/chat/completions";
 
@@ -277,16 +332,22 @@ function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature
         if (pollTimer && pollTimer.running) pollTimer.stop();
 
         if (error) {
-            onComplete(accumulatedText, error);
+            onComplete(accumulatedText, error, null, null);
         } else if (accumulatedText.length > 0) {
-            onComplete(accumulatedText, null);
+            onComplete(accumulatedText, null, null, null);
         } else {
             // Non-streaming fallback: server returned a regular JSON response
             try {
                 var response = JSON.parse(xhr.responseText);
-                if (response.choices && response.choices[0] && response.choices[0].message &&
-                    typeof response.choices[0].message.content === "string") {
-                    onComplete(response.choices[0].message.content, null);
+                if (response.choices && response.choices[0] && response.choices[0].message) {
+                    var msg = response.choices[0].message;
+                    if (msg.tool_calls && msg.tool_calls.length > 0) {
+                        onComplete("", null, msg.tool_calls, msg);
+                    } else if (typeof msg.content === "string") {
+                        onComplete(msg.content, null);
+                    } else {
+                        onComplete("", "Invalid response format");
+                    }
                 } else {
                     onComplete("", "Invalid response format");
                 }
@@ -346,6 +407,11 @@ function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature
         max_tokens: maxTokens,
         stream: true
     };
+    if (tools && tools.length > 0) {
+        body.tools = tools;
+        // Many providers don't support streaming with tools; disable streaming
+        body.stream = false;
+    }
 
     var payload = JSON.stringify(body, null, 2);
     xhr.send(payload);

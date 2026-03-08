@@ -36,7 +36,10 @@ PlasmoidItem {
         (Plasmoid.configuration.autoRunCommands && Plasmoid.configuration.autoShareCommandOutput)
     property var fetchedModels: []
     property string apiKey: Plasmoid.configuration.apiKey
+    property string ollamaApiKey: ""
     property bool walletAvailable: false
+    property int toolCallDepth: 0
+    readonly property int maxToolCallDepth: 3
 
     signal responseReady(int messageIndex)
     signal copyConversationRequested()
@@ -286,6 +289,7 @@ PlasmoidItem {
                 case "user": prefix = "You"; break;
                 case "assistant": prefix = "Assistant"; break;
                 case "command_output": prefix = "Command"; break;
+                case "web_search_results": prefix = "Web Search"; break;
                 case "error": prefix = "Error"; break;
                 default: prefix = msg.role; break;
             }
@@ -415,6 +419,59 @@ PlasmoidItem {
         );
     }
 
+    function loadOllamaKeyFromWallet() {
+        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
+            function(handle) {
+                if (handle < 0) {
+                    root.ollamaApiKey = Plasmoid.configuration.ollamaApiKey;
+                    return;
+                }
+                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaApiKey", "PlasmaLLM"],
+                    function(password) {
+                        if (password && password.length > 0) {
+                            root.ollamaApiKey = password;
+                        } else {
+                            root.ollamaApiKey = Plasmoid.configuration.ollamaApiKey;
+                        }
+                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                    },
+                    function(err) {
+                        root.ollamaApiKey = Plasmoid.configuration.ollamaApiKey;
+                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                    }
+                );
+            },
+            function(err) {
+                root.ollamaApiKey = Plasmoid.configuration.ollamaApiKey;
+            }
+        );
+    }
+
+    function formatWebSearchResults(query, results) {
+        var text = "🔍 **Web search:** " + query + "\n\n";
+        var items = results.results || results;
+        if (Array.isArray(items)) {
+            for (var i = 0; i < items.length; i++) {
+                var r = items[i];
+                var title = r.title || r.name || "Result " + (i + 1);
+                var snippet = r.snippet || r.description || "";
+                // Fall back to content but truncate heavily
+                if (!snippet && r.content) {
+                    snippet = r.content.substring(0, 200).replace(/\n/g, " ").trim();
+                    if (r.content.length > 200) snippet += "…";
+                }
+                var url = r.url || r.link || "";
+                text += "**" + title + "**\n";
+                if (snippet) text += snippet + "\n";
+                if (url) text += url + "\n";
+                text += "\n";
+            }
+        } else {
+            text += JSON.stringify(results, null, 2);
+        }
+        return text.trim();
+    }
+
     function sendMessage(text) {
         if (!systemPromptReady) return;
 
@@ -498,6 +555,7 @@ PlasmoidItem {
         });
 
         autoShareSuppressed = false;
+        toolCallDepth = 0;
         sendToLLM();
     }
 
@@ -529,13 +587,26 @@ PlasmoidItem {
         var messages = [];
         for (var i = 0; i < chatMessages.count; i++) {
             var msg = chatMessages.get(i);
-            messages.push({ role: msg.role, content: msg.content });
+            var entry = { role: msg.role, content: msg.content };
+            // Reconstruct tool_calls on assistant messages
+            if (msg.tool_calls_json && msg.tool_calls_json.length > 0) {
+                try {
+                    entry.tool_calls = JSON.parse(msg.tool_calls_json);
+                } catch(e) {}
+            }
+            // Add tool_call_id on tool messages
+            if (msg.role === "tool" && msg.tool_call_id) {
+                entry.tool_call_id = msg.tool_call_id;
+            }
+            messages.push(entry);
         }
         // Keep system prompt (index 0) + last N messages
         if (messages.length > maxApiMessages + 1) {
             var systemMsg = messages[0];
             messages = [systemMsg].concat(messages.slice(messages.length - maxApiMessages));
         }
+
+        var tools = Api.buildTools(root.ollamaApiKey);
 
         var streamHandle = Api.sendStreamingChatRequest(
             Plasmoid.configuration.apiEndpoint,
@@ -549,10 +620,62 @@ PlasmoidItem {
                     displayMessages.setProperty(streamingMessageIndex, "content", accumulated);
                 }
             },
-            function onComplete(fullText, error) {
+            function onComplete(fullText, error, toolCalls, assistantMsg) {
                 isLoading = false;
                 activeRequest = null;
                 if (streamPollTimer.running) streamPollTimer.stop();
+
+                // Handle tool calls
+                if (toolCalls && toolCalls.length > 0 && toolCallDepth < maxToolCallDepth) {
+                    toolCallDepth++;
+                    // Append the assistant's tool_call message to chat history
+                    chatMessages.append({ role: "assistant", content: assistantMsg.content || "", tool_calls_json: JSON.stringify(toolCalls) });
+
+                    // Process each tool call (typically just one)
+                    var tc = toolCalls[0];
+                    if (tc["function"] && tc["function"].name === "web_search") {
+                        var args;
+                        try {
+                            args = typeof tc["function"].arguments === "string" ? JSON.parse(tc["function"].arguments) : tc["function"].arguments;
+                        } catch(e) {
+                            args = { query: "" };
+                        }
+                        var searchQuery = args.query || "";
+                        var searchMax = args.max_results || 5;
+
+                        // Show searching indicator
+                        if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
+                            displayMessages.setProperty(streamingMessageIndex, "content", "Searching the web...");
+                        }
+
+                        Api.performWebSearch(root.ollamaApiKey, searchQuery, searchMax, function(searchError, searchResults) {
+                            var resultContent;
+                            var displayContent;
+                            if (searchError) {
+                                resultContent = "Web search failed: " + searchError;
+                                displayContent = resultContent;
+                            } else {
+                                resultContent = JSON.stringify(searchResults);
+                                displayContent = formatWebSearchResults(searchQuery, searchResults);
+                            }
+
+                            // Show search results in the UI
+                            if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
+                                displayMessages.setProperty(streamingMessageIndex, "content", displayContent);
+                                displayMessages.setProperty(streamingMessageIndex, "role", "web_search_results");
+                            }
+                            streamingMessageIndex = -1;
+
+                            // Append tool result to chat history
+                            chatMessages.append({ role: "tool", content: resultContent, tool_call_id: tc.id || "" });
+
+                            // Re-send to LLM
+                            sendToLLM();
+                        });
+                        return;
+                    }
+                }
+
                 if (error && fullText.length === 0) {
                     // Remove the placeholder
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
@@ -588,7 +711,8 @@ PlasmoidItem {
                         }
                     }
                 }
-            }
+            },
+            tools
         );
 
         streamHandle.setPollTimer(streamPollTimer);
@@ -680,7 +804,7 @@ PlasmoidItem {
 
         displayMessages.append({
             role: "command_output",
-            content: "$ " + command + "\n" + output,
+            content: output,
             commandsStr: "",
             shared: false,
             timestamp: currentTimestamp()
@@ -733,6 +857,12 @@ PlasmoidItem {
         function onApiKeyVersionChanged() {
             // Wallet-available path: key was just written to KWallet by config page
             loadApiKeyFromWallet();
+        }
+        function onOllamaApiKeyChanged() {
+            if (Plasmoid.configuration.ollamaApiKey) root.ollamaApiKey = Plasmoid.configuration.ollamaApiKey;
+        }
+        function onOllamaApiKeyVersionChanged() {
+            loadOllamaKeyFromWallet();
         }
         function onApiEndpointChanged() {
             Plasmoid.configuration.availableModels = "";
@@ -796,6 +926,7 @@ PlasmoidItem {
     Component.onCompleted: {
         regatherSysInfo();
         loadApiKeyFromWallet();
+        loadOllamaKeyFromWallet();
         var stored = Plasmoid.configuration.availableModels;
         if (stored && stored.length > 0) {
             try { fetchedModels = JSON.parse(stored); } catch(e) {}
