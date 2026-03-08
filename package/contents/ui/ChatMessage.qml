@@ -34,6 +34,7 @@ Item {
     readonly property bool isError: role === "error"
     readonly property bool isCommandOutput: role === "command_output"
     readonly property bool isCommandRunning: role === "command_running"
+    readonly property bool isWebSearchResults: role === "web_search_results"
     readonly property bool isThinking: isAssistant && content.length === 0
     readonly property string strippedContent: isAssistant ? Api.stripCodeBlocks(content).trim() : content
     readonly property bool hasBubbleContent: isThinking || !isAssistant || strippedContent.length > 0
@@ -75,10 +76,11 @@ Item {
                 if (isError) return Qt.rgba(Kirigami.Theme.negativeTextColor.r, Kirigami.Theme.negativeTextColor.g, Kirigami.Theme.negativeTextColor.b, 0.15);
                 if (isUser) return Kirigami.Theme.highlightColor;
                 if (isCommandOutput || isCommandRunning) return Kirigami.Theme.alternateBackgroundColor;
+                if (isWebSearchResults) return Qt.rgba(Kirigami.Theme.positiveTextColor.r, Kirigami.Theme.positiveTextColor.g, Kirigami.Theme.positiveTextColor.b, 0.1);
                 return Kirigami.Theme.backgroundColor;
             }
             border.color: Qt.rgba(Kirigami.Theme.disabledTextColor.r, Kirigami.Theme.disabledTextColor.g, Kirigami.Theme.disabledTextColor.b, 0.3)
-            border.width: isAssistant ? 1 : 0
+            border.width: (isAssistant || isWebSearchResults) ? 1 : 0
 
             RowLayout {
                 id: messageContentRow
@@ -95,12 +97,12 @@ Item {
 
                 Loader {
                     Layout.fillWidth: true
-                    Layout.maximumHeight: isCommandOutput ? scrollMaxHeight : -1
-                    Layout.preferredHeight: isCommandOutput ? Math.min(item ? item.implicitHeight : 0, scrollMaxHeight) : (item ? item.implicitHeight : 0)
+                    Layout.maximumHeight: (isCommandOutput || isWebSearchResults) ? scrollMaxHeight : -1
+                    Layout.preferredHeight: (isCommandOutput || isWebSearchResults) ? Math.min(item ? item.implicitHeight : 0, scrollMaxHeight) : (item ? item.implicitHeight : 0)
 
                     readonly property real scrollMaxHeight: Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20
 
-                    sourceComponent: isCommandOutput ? scrollableContent : plainContent
+                    sourceComponent: isCommandOutput ? scrollableContent : isWebSearchResults ? scrollableMarkdownContent : plainContent
                 }
 
                 Component {
@@ -116,6 +118,23 @@ Item {
                             textFormat: Text.PlainText
                             wrapMode: Text.Wrap
                             font.family: "monospace"
+                            color: Kirigami.Theme.textColor
+                        }
+                    }
+                }
+
+                Component {
+                    id: scrollableMarkdownContent
+                    QQC2.ScrollView {
+                        contentWidth: availableWidth
+                        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+                        QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
+
+                        PlasmaComponents.Label {
+                            width: parent.width
+                            text: messageItem.content
+                            textFormat: Text.MarkdownText
+                            wrapMode: Text.Wrap
                             color: Kirigami.Theme.textColor
                         }
                     }

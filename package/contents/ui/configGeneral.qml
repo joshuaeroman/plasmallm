@@ -78,6 +78,10 @@ SimpleKCM {
     property string cfg_lastClosedTimestampDefault
     property string cfg_availableModels
     property string cfg_availableModelsDefault
+    property string cfg_ollamaApiKey
+    property string cfg_ollamaApiKeyDefault
+    property int cfg_ollamaApiKeyVersion
+    property int cfg_ollamaApiKeyVersionDefault
 
     property var availableModels: []
     property string walletApiKey: ""
@@ -85,6 +89,10 @@ SimpleKCM {
     property bool walletAvailable: false
     property bool walletKeyDirty: false
     property bool walletSaveInProgress: false
+    property string walletOllamaKey: ""
+    property bool walletOllamaKeyLoaded: false
+    property bool walletOllamaKeyDirty: false
+    property bool walletOllamaSaveInProgress: false
 
     function walletCall(member, args, resolve, reject) {
         var reply = DBus.SessionBus.asyncCall({
@@ -214,7 +222,94 @@ SimpleKCM {
         }
     }
 
-    Component.onCompleted: loadWalletKey()
+    function walletWriteOllamaKey(handle, key, onDone) {
+        ensureWalletFolder(handle, function(ok) {
+            if (!ok) {
+                onDone(false);
+                return;
+            }
+            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaApiKey", key, "PlasmaLLM"],
+                function(result) { onDone(result === 0); },
+                function(err) {
+                    console.warn("PlasmaLLM: wallet writePassword (ollama) error: " + err);
+                    onDone(false);
+                }
+            );
+        });
+    }
+
+    function loadWalletOllamaKey() {
+        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
+            function(handle) {
+                if (handle < 0) {
+                    walletOllamaKey = cfg_ollamaApiKey;
+                    walletOllamaKeyLoaded = true;
+                    return;
+                }
+                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaApiKey", "PlasmaLLM"],
+                    function(password) {
+                        if (password && password.length > 0) {
+                            walletOllamaKey = password;
+                        } else {
+                            walletOllamaKey = cfg_ollamaApiKey;
+                        }
+                        walletOllamaKeyLoaded = true;
+                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                    },
+                    function(err) {
+                        walletOllamaKey = cfg_ollamaApiKey;
+                        walletOllamaKeyLoaded = true;
+                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                    }
+                );
+            },
+            function(err) {
+                walletOllamaKey = cfg_ollamaApiKey;
+                walletOllamaKeyLoaded = true;
+            }
+        );
+    }
+
+    function saveWalletOllamaKey() {
+        var key = ollamaApiKeyField.text;
+        walletOllamaSaveInProgress = true;
+        if (!walletAvailable) {
+            cfg_ollamaApiKey = key;
+            walletOllamaKeyDirty = false;
+            walletOllamaSaveInProgress = false;
+            return;
+        }
+        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
+            function(handle) {
+                if (handle < 0) {
+                    cfg_ollamaApiKey = key;
+                    walletOllamaKeyDirty = false;
+                    walletOllamaSaveInProgress = false;
+                    return;
+                }
+                walletWriteOllamaKey(handle, key, function(success) {
+                    if (success) {
+                        walletOllamaKey = key;
+                        cfg_ollamaApiKey = "";
+                        walletOllamaKeyDirty = false;
+                        cfg_ollamaApiKeyVersion++;
+                    }
+                    walletOllamaSaveInProgress = false;
+                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                });
+            },
+            function(err) {
+                cfg_ollamaApiKey = key;
+                walletOllamaKeyDirty = false;
+                walletOllamaSaveInProgress = false;
+            }
+        );
+    }
+
+    Component.onCompleted: {
+        loadWalletKey();
+        loadWalletOllamaKey();
+    }
 
     readonly property var presetEndpoints: [
         { name: "Custom",                   url: "" },
@@ -590,6 +685,50 @@ SimpleKCM {
             Layout.preferredWidth: 300
             color: Kirigami.Theme.negativeTextColor
             font: Kirigami.Theme.smallFont
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Layout.fillWidth: true
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: "Web Search:"
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+
+            QQC2.TextField {
+                id: ollamaApiKeyField
+                Layout.fillWidth: true
+                placeholderText: "Ollama API key for web search"
+                echoMode: TextInput.Password
+                text: walletOllamaKeyLoaded ? walletOllamaKey : cfg_ollamaApiKey
+                onTextChanged: {
+                    if (walletOllamaKeyLoaded) {
+                        walletOllamaKeyDirty = (text !== walletOllamaKey);
+                    }
+                }
+                onEditingFinished: {
+                    if (walletOllamaKeyDirty) saveWalletOllamaKey();
+                }
+            }
+
+            QQC2.Button {
+                text: walletOllamaSaveInProgress ? "Saving..." :
+                      !walletOllamaKeyDirty ? "Saved" :
+                      !walletAvailable ? "Save to Config (Insecure)" : "Save Key"
+                icon.name: !walletOllamaKeyDirty ? "dialog-ok-apply" : "document-save"
+                enabled: walletOllamaKeyDirty && !walletOllamaSaveInProgress
+                onClicked: saveWalletOllamaKey()
+            }
+        }
+
+        QQC2.Label {
+            text: "Enables LLM-triggered web searches via Ollama's search API"
+            font: Kirigami.Theme.smallFont
+            color: Kirigami.Theme.disabledTextColor
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
         }
 
     }
