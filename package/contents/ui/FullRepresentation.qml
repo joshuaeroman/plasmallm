@@ -170,6 +170,9 @@ PlasmaExtras.Representation {
                 header: Item { height: Plasmoid.configuration.chatSpacing }
                 model: root.displayMessages
 
+                // Track whether user is near the bottom to avoid fighting manual scrolling
+                readonly property bool atBottom: contentHeight - contentY - height < Kirigami.Units.gridUnit * 2
+
                 delegate: ChatMessage {
                     width: messageList.width
                     role: model.role
@@ -186,13 +189,15 @@ PlasmaExtras.Representation {
                 }
 
                 onCountChanged: {
-                    Qt.callLater(function() {
-                        messageList.positionViewAtEnd();
-                    });
+                    if (messageList.atBottom) {
+                        Qt.callLater(function() {
+                            messageList.positionViewAtEnd();
+                        });
+                    }
                 }
 
                 onContentHeightChanged: {
-                    if (root.isLoading && root.streamingMessageIndex >= 0) {
+                    if (messageList.atBottom && root.isLoading && root.streamingMessageIndex >= 0) {
                         Qt.callLater(function() {
                             messageList.positionViewAtEnd();
                         });
