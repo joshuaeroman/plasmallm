@@ -72,6 +72,7 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
         "Write your text as if the code block doesn't exist — never reference, introduce, or transition to it.\n\n" +
         "## Commands\n" +
         "One script per ```bash block. Chain steps with &&. Use `pkexec` instead of `sudo`.\n" +
+        "Scripts run non-interactively with no stdin — never use read, select, or any command that waits for user input. Use `kdialog` for user prompts (e.g., `kdialog --inputbox \"prompt\"`).\n" +
         "NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission. " +
         "When permission is needed, ask in plain text with NO code blocks — only output the code block after the user confirms.\n";
 
