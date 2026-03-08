@@ -23,8 +23,15 @@ PlasmaExtras.Representation {
         { cmd: "/run",      desc: "Run last command" },
         { cmd: "/save",     desc: "Save chat to file" },
         { cmd: "/settings", desc: "Open settings" },
+        { cmd: "/task",     desc: "Run a saved task (/task <name>)" },
         { cmd: "/term",     desc: "Run last command in terminal" },
     ]
+
+    property var configuredTasks: {
+        var json = Plasmoid.configuration.tasks;
+        if (!json || json.length === 0) return [];
+        try { return JSON.parse(json); } catch(e) { return []; }
+    }
 
     Layout.minimumWidth: Kirigami.Units.gridUnit * 20
     Layout.minimumHeight: Kirigami.Units.gridUnit * 24
@@ -74,6 +81,32 @@ PlasmaExtras.Representation {
                 font.bold: true
                 color: Kirigami.Theme.negativeTextColor
 
+            }
+
+            PlasmaComponents.ToolButton {
+                id: taskToolButton
+                icon.name: "view-task"
+                Accessible.name: "Run a task"
+                PlasmaComponents.ToolTip.text: "Run a task"
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered
+                visible: fullRep.configuredTasks.length > 0
+                onClicked: taskMenu.open()
+
+                QQC2.Menu {
+                    id: taskMenu
+                    y: taskToolButton.height
+
+                    Instantiator {
+                        model: fullRep.configuredTasks
+                        delegate: QQC2.MenuItem {
+                            text: modelData.name + (modelData.auto ? " (auto)" : "")
+                            onTriggered: root.sendMessage("/task " + modelData.name)
+                        }
+                        onObjectAdded: function(index, object) { taskMenu.insertItem(index, object); }
+                        onObjectRemoved: function(index, object) { taskMenu.removeItem(object); }
+                    }
+                }
             }
 
             PlasmaComponents.ToolButton {
@@ -280,7 +313,7 @@ PlasmaExtras.Representation {
                                 }
                             }
                             onClicked: {
-                                inputField.text = modelData.cmd === "/model" ? "/model " : modelData.cmd;
+                                inputField.text = (modelData.cmd === "/model" || modelData.cmd === "/task") ? modelData.cmd + " " : modelData.cmd;
                                 inputField.cursorPosition = inputField.text.length;
                                 inputField.forceActiveFocus();
                             }
@@ -335,6 +368,64 @@ PlasmaExtras.Representation {
                     }
                 }
 
+                // Task name autocomplete popup
+                QQC2.Popup {
+                    id: taskPopup
+                    parent: inputScrollView
+                    x: 0
+                    y: -height - Kirigami.Units.smallSpacing
+                    width: inputScrollView.width
+                    padding: Kirigami.Units.smallSpacing
+                    closePolicy: QQC2.Popup.NoAutoClose
+
+                    property var filteredTasks: {
+                        var t = inputField.text;
+                        if (!t.toLowerCase().startsWith("/task ")) return [];
+                        var query = t.substring(6).toLowerCase();
+                        var tasks = fullRep.configuredTasks;
+                        if (!tasks || tasks.length === 0) return [];
+                        return query.length === 0 ? tasks :
+                               tasks.filter(function(tk) { return tk.name.toLowerCase().indexOf(query) !== -1; });
+                    }
+
+                    visible: inputField.activeFocus &&
+                             inputField.text.toLowerCase().startsWith("/task ") &&
+                             filteredTasks.length > 0
+
+                    contentItem: ListView {
+                        id: taskList
+                        implicitHeight: Math.min(contentHeight, Kirigami.Units.gridUnit * 10)
+                        model: taskPopup.filteredTasks
+                        delegate: PlasmaComponents.ItemDelegate {
+                            width: taskList.width
+                            contentItem: RowLayout {
+                                spacing: Kirigami.Units.smallSpacing
+                                PlasmaComponents.Label {
+                                    text: modelData.name
+                                    font.bold: true
+                                }
+                                PlasmaComponents.Label {
+                                    visible: modelData.auto
+                                    text: "AUTO"
+                                    font: Kirigami.Theme.smallFont
+                                    color: Kirigami.Theme.negativeTextColor
+                                }
+                                PlasmaComponents.Label {
+                                    Layout.fillWidth: true
+                                    text: modelData.prompt.length > 30 ? modelData.prompt.substring(0, 30) + "…" : modelData.prompt
+                                    color: Kirigami.Theme.disabledTextColor
+                                    elide: Text.ElideRight
+                                }
+                            }
+                            onClicked: {
+                                inputField.text = "/task " + modelData.name;
+                                inputField.cursorPosition = inputField.text.length;
+                                inputField.forceActiveFocus();
+                            }
+                        }
+                    }
+                }
+
                 Layout.fillWidth: true
                 Layout.minimumHeight: Kirigami.Units.gridUnit * 2
                 Layout.maximumHeight: Kirigami.Units.gridUnit * 8
@@ -349,13 +440,17 @@ PlasmaExtras.Representation {
                     wrapMode: Text.Wrap
 
                     Keys.onTabPressed: function(event) {
-                        if (inputField.text.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
+                        if (inputField.text.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
+                            inputField.text = "/task " + taskPopup.filteredTasks[0].name;
+                            inputField.cursorPosition = inputField.text.length;
+                            event.accepted = true;
+                        } else if (inputField.text.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
                             inputField.text = "/model " + modelPopup.filteredModels[0];
                             inputField.cursorPosition = inputField.text.length;
                             event.accepted = true;
                         } else if (slashPopup.filteredSlashCommands.length === 1) {
                             var cmd = slashPopup.filteredSlashCommands[0].cmd;
-                            inputField.text = cmd === "/model" ? "/model " : cmd;
+                            inputField.text = (cmd === "/model" || cmd === "/task") ? cmd + " " : cmd;
                             inputField.cursorPosition = inputField.text.length;
                             event.accepted = true;
                         } else {
@@ -369,7 +464,9 @@ PlasmaExtras.Representation {
                         } else {
                             event.accepted = true;
                             var sendText = text.trim();
-                            if (sendText.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
+                            if (sendText.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
+                                sendText = "/task " + taskPopup.filteredTasks[0].name;
+                            } else if (sendText.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
                                 sendText = "/model " + modelPopup.filteredModels[0];
                             } else if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
                                     slashPopup.filteredSlashCommands.length === 1) {
@@ -391,7 +488,9 @@ PlasmaExtras.Representation {
                 enabled: root.systemPromptReady && inputField.text.trim().length > 0
                 onClicked: {
                     var sendText = inputField.text.trim();
-                    if (sendText.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
+                    if (sendText.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
+                        sendText = "/task " + taskPopup.filteredTasks[0].name;
+                    } else if (sendText.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
                         sendText = "/model " + modelPopup.filteredModels[0];
                     } else if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
                             slashPopup.filteredSlashCommands.length === 1) {

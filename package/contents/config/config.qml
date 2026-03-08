@@ -17,4 +17,9 @@ ConfigModel {
         icon: "dialog-scripts"
         source: "configSystemPrompt.qml"
     }
+    ConfigCategory {
+        name: "Tasks"
+        icon: "view-task"
+        source: "configTasks.qml"
+    }
 }
