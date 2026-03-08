@@ -6,6 +6,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.plasmoid
+import QtQuick.Controls as QQC2
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
 
@@ -92,16 +93,46 @@ Item {
                     Layout.preferredHeight: Kirigami.Units.iconSizes.small
                 }
 
-                PlasmaComponents.Label {
-                    id: messageText
+                Loader {
                     Layout.fillWidth: true
-                    text: isThinking ? "Thinking..." : messageItem.strippedContent
-                    textFormat: (isAssistant && !isThinking) ? Text.MarkdownText : Text.PlainText
-                    wrapMode: Text.Wrap
-                    font.family: (isCommandOutput || isCommandRunning) ? "monospace" : messageText.font.family
-                    font.italic: isThinking
-                    color: isThinking ? Kirigami.Theme.disabledTextColor :
-                           isUser ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+                    Layout.maximumHeight: isCommandOutput ? scrollMaxHeight : -1
+                    Layout.preferredHeight: isCommandOutput ? Math.min(item ? item.implicitHeight : 0, scrollMaxHeight) : (item ? item.implicitHeight : 0)
+
+                    readonly property real scrollMaxHeight: Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20
+
+                    sourceComponent: isCommandOutput ? scrollableContent : plainContent
+                }
+
+                Component {
+                    id: scrollableContent
+                    QQC2.ScrollView {
+                        contentWidth: availableWidth
+                        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+                        QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
+
+                        PlasmaComponents.Label {
+                            width: parent.width
+                            text: messageItem.strippedContent
+                            textFormat: Text.PlainText
+                            wrapMode: Text.Wrap
+                            font.family: "monospace"
+                            color: Kirigami.Theme.textColor
+                        }
+                    }
+                }
+
+                Component {
+                    id: plainContent
+                    PlasmaComponents.Label {
+                        width: parent ? parent.width : implicitWidth
+                        text: isThinking ? "Thinking..." : messageItem.strippedContent
+                        textFormat: (isAssistant && !isThinking) ? Text.MarkdownText : Text.PlainText
+                        wrapMode: Text.Wrap
+                        font.family: isCommandRunning ? "monospace" : font.family
+                        font.italic: isThinking
+                        color: isThinking ? Kirigami.Theme.disabledTextColor :
+                               isUser ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+                    }
                 }
             }
         }

@@ -680,7 +680,7 @@ PlasmoidItem {
 
         displayMessages.append({
             role: "command_output",
-            content: "$ " + command + "\n" + output,
+            content: output,
             commandsStr: "",
             shared: false,
             timestamp: currentTimestamp()
