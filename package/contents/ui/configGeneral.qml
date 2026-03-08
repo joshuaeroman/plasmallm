@@ -82,6 +82,8 @@ SimpleKCM {
     property string cfg_ollamaApiKeyDefault
     property int cfg_ollamaApiKeyVersion
     property int cfg_ollamaApiKeyVersionDefault
+    property string cfg_tasks
+    property string cfg_tasksDefault
 
     property var availableModels: []
     property string walletApiKey: ""

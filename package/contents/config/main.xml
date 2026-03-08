@@ -156,6 +156,10 @@
       <label>Internal: incremented when Ollama API key is saved to KDE Wallet</label>
       <default>0</default>
     </entry>
+    <entry name="tasks" type="String">
+      <label>User-defined tasks (JSON array)</label>
+      <default></default>
+    </entry>
   </group>
 
 </kcfg>

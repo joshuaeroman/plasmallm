@@ -32,6 +32,7 @@ PlasmoidItem {
     property int maxApiMessages: 100
     property bool autoShareSuppressed: false
     property bool sessionAutoMode: false
+    property bool taskAutoMode: false
     readonly property bool isAutoMode: sessionAutoMode ||
         (Plasmoid.configuration.autoRunCommands && Plasmoid.configuration.autoShareCommandOutput)
     property var fetchedModels: []
@@ -543,6 +544,46 @@ PlasmoidItem {
             }
             return;
         }
+        if (lower === "/task") {
+            var tasksJson = Plasmoid.configuration.tasks;
+            var tasks = [];
+            if (tasksJson) try { tasks = JSON.parse(tasksJson); } catch(e) {}
+            if (tasks.length === 0) {
+                displayMessages.append({ role: "assistant", content: "No tasks configured. Add tasks in Settings.", commandsStr: "", shared: false, timestamp: currentTimestamp() });
+            } else {
+                var taskList = tasks.map(function(t) { return "- **" + t.name + "**" + (t.auto ? " (auto)" : "") + " — " + t.prompt; }).join("\n");
+                displayMessages.append({ role: "assistant", content: "Available tasks:\n" + taskList + "\n\nType `/task <name>` to run.", commandsStr: "", shared: false, timestamp: currentTimestamp() });
+            }
+            return;
+        }
+        if (lower.startsWith("/task ")) {
+            var taskName = text.trim().substring(6).trim();
+            var tasksJson2 = Plasmoid.configuration.tasks;
+            var tasks2 = [];
+            if (tasksJson2) try { tasks2 = JSON.parse(tasksJson2); } catch(e) {}
+            var foundTask = null;
+            for (var ti = 0; ti < tasks2.length; ti++) {
+                if (tasks2[ti].name.toLowerCase() === taskName.toLowerCase()) {
+                    foundTask = tasks2[ti];
+                    break;
+                }
+            }
+            if (foundTask) {
+                if (foundTask.auto && !sessionAutoMode) {
+                    sessionAutoMode = true;
+                    taskAutoMode = true;
+                    if (systemPromptReady) {
+                        var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode, dateTime: Plasmoid.configuration.sysInfoDateTime ? Api.localISODateTime() : "" });
+                        chatMessages.setProperty(0, "content", autoPrompt);
+                    }
+                }
+                sendMessage(foundTask.prompt);
+            } else {
+                var availNames = tasks2.map(function(t) { return t.name; }).join(", ");
+                displayMessages.append({ role: "error", content: "Unknown task: **" + taskName + "**. Available: " + (availNames || "none"), commandsStr: "", shared: false, timestamp: currentTimestamp() });
+            }
+            return;
+        }
 
         // Add user message to both models
         chatMessages.append({ role: "user", content: text });
@@ -709,6 +750,9 @@ PlasmoidItem {
                         for (var ci = 0; ci < commands.length; ci++) {
                             executeCommand(commands[ci]);
                         }
+                    } else if (taskAutoMode) {
+                        sessionAutoMode = false;
+                        taskAutoMode = false;
                     }
                 }
             },
