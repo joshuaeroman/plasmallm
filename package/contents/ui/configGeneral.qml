@@ -31,6 +31,8 @@ SimpleKCM {
     property int cfg_chatSpacingDefault
     property bool cfg_saveChatHistory
     property bool cfg_saveChatHistoryDefault
+    property string cfg_chatSaveFormat
+    property string cfg_chatSaveFormatDefault
     property bool cfg_autoShareCommandOutput
     property bool cfg_autoShareCommandOutputDefault
     property bool cfg_autoRunCommands
@@ -595,6 +597,15 @@ SimpleKCM {
             QQC2.ToolTip.text: "Saves to ~/PlasmaLLM/chats/"
             QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
+        }
+
+        QQC2.ComboBox {
+            id: chatSaveFormatCombo
+            Kirigami.FormData.label: "Save format:"
+            model: ["Plain text (.txt)", "Structured (.jsonl)"]
+            enabled: cfg_saveChatHistory
+            currentIndex: cfg_chatSaveFormat === "jsonl" ? 1 : 0
+            onCurrentIndexChanged: cfg_chatSaveFormat = currentIndex === 1 ? "jsonl" : "txt"
         }
 
         QQC2.Label {

@@ -52,6 +52,10 @@
       <label>Auto-save chat history</label>
       <default>false</default>
     </entry>
+    <entry name="chatSaveFormat" type="String">
+      <label>Chat save format</label>
+      <default>txt</default>
+    </entry>
     <entry name="autoShareCommandOutput" type="Bool">
       <label>Auto-share command output with LLM</label>
       <default>false</default>

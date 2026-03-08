@@ -272,38 +272,89 @@ PlasmoidItem {
         if (!force && !Plasmoid.configuration.saveChatHistory) return;
         if (displayMessages.count === 0) return;
 
+        var fmt = Plasmoid.configuration.chatSaveFormat || "txt";
+        var ext = fmt === "jsonl" ? ".jsonl" : ".txt";
+
         if (currentChatFile === "") {
             var now = new Date();
             var pad = function(n) { return n < 10 ? "0" + n : "" + n; };
             var filename = now.getFullYear() + "-" + pad(now.getMonth() + 1) + "-" + pad(now.getDate()) +
-                "_" + pad(now.getHours()) + "-" + pad(now.getMinutes()) + ".txt";
+                "_" + pad(now.getHours()) + "-" + pad(now.getMinutes()) + ext;
             currentChatFile = filename;
         }
 
-        var lines = [];
-        for (var i = 0; i < displayMessages.count; i++) {
-            var msg = displayMessages.get(i);
-            if (msg.role === "system" || msg.role === "command_running") continue;
+        var text;
+        if (fmt === "jsonl") {
+            text = saveChatJsonl();
+        } else {
+            var lines = [];
+            for (var i = 0; i < displayMessages.count; i++) {
+                var msg = displayMessages.get(i);
+                if (msg.role === "system" || msg.role === "command_running") continue;
 
-            var prefix;
-            switch (msg.role) {
-                case "user": prefix = "You"; break;
-                case "assistant": prefix = "Assistant"; break;
-                case "command_output": prefix = "Command"; break;
-                case "web_search_results": prefix = "Web Search"; break;
-                case "error": prefix = "Error"; break;
-                default: prefix = msg.role; break;
+                var prefix;
+                switch (msg.role) {
+                    case "user": prefix = "You"; break;
+                    case "assistant": prefix = "Assistant"; break;
+                    case "command_output": prefix = "Command"; break;
+                    case "web_search_results": prefix = "Web Search"; break;
+                    case "error": prefix = "Error"; break;
+                    default: prefix = msg.role; break;
+                }
+                lines.push("[" + msg.timestamp + "] " + prefix + ": " + msg.content);
             }
-            lines.push("[" + msg.timestamp + "] " + prefix + ": " + msg.content);
+            text = lines.join("\n\n");
         }
 
-        var text = lines.join("\n\n");
         // Escape single quotes for shell
         var escaped = text.replace(/'/g, "'\\''");
         var filePath = "$HOME/PlasmaLLM/chats/" + currentChatFile;
         var cmd = "mkdir -p $HOME/PlasmaLLM/chats && printf '%s' '" + escaped + "' > \"" + filePath + "\"";
         saveCommands.push(cmd);
         executable.connectSource(cmd);
+    }
+
+    function saveChatJsonl() {
+        var lines = [];
+
+        // Meta line
+        lines.push(JSON.stringify({
+            _type: "meta",
+            version: 1,
+            created: new Date().toISOString(),
+            provider: Plasmoid.configuration.providerName || "",
+            model: Plasmoid.configuration.modelName || ""
+        }));
+
+        // API messages
+        for (var i = 0; i < chatMessages.count; i++) {
+            var m = chatMessages.get(i);
+            lines.push(JSON.stringify({
+                _type: "api",
+                index: i,
+                role: m.role,
+                content: m.content,
+                tool_calls_json: m.tool_calls_json || "",
+                tool_call_id: m.tool_call_id || ""
+            }));
+        }
+
+        // Display messages
+        for (var j = 0; j < displayMessages.count; j++) {
+            var d = displayMessages.get(j);
+            if (d.role === "command_running") continue;
+            lines.push(JSON.stringify({
+                _type: "display",
+                index: j,
+                role: d.role,
+                content: d.content,
+                commandsStr: d.commandsStr || "",
+                shared: d.shared || false,
+                timestamp: d.timestamp || ""
+            }));
+        }
+
+        return lines.join("\n");
     }
 
     function walletCall(member, args, resolve, reject) {
