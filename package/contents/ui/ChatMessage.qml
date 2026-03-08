@@ -22,6 +22,7 @@ Item {
     property bool shared: false
     property int messageIndex: -1
     property string timestamp: ""
+    property bool webSearchExpanded: false
 
     signal shareRequested(int index)
     signal retryRequested()
@@ -70,7 +71,7 @@ Item {
             Layout.fillWidth: true
             Layout.maximumWidth: parent.width * 0.85
             Layout.alignment: isUser ? Qt.AlignRight : Qt.AlignLeft
-            implicitHeight: messageContentRow.implicitHeight + messageItem.spacing * 3
+            implicitHeight: isWebSearchResults ? webSearchColumn.implicitHeight + messageItem.spacing * 3 : messageContentRow.implicitHeight + messageItem.spacing * 3
             radius: 6
             color: {
                 if (isError) return Qt.rgba(Kirigami.Theme.negativeTextColor.r, Kirigami.Theme.negativeTextColor.g, Kirigami.Theme.negativeTextColor.b, 0.15);
@@ -82,8 +83,61 @@ Item {
             border.color: Qt.rgba(Kirigami.Theme.disabledTextColor.r, Kirigami.Theme.disabledTextColor.g, Kirigami.Theme.disabledTextColor.b, 0.3)
             border.width: (isAssistant || isWebSearchResults) ? 1 : 0
 
+            // Collapsible web search results
+            ColumnLayout {
+                id: webSearchColumn
+                visible: isWebSearchResults
+                anchors.fill: parent
+                anchors.margins: messageItem.spacing * 1.5
+                spacing: Kirigami.Units.smallSpacing
+
+                Item {
+                    Layout.fillWidth: true
+                    implicitHeight: webSearchHeaderRow.implicitHeight
+
+                    RowLayout {
+                        id: webSearchHeaderRow
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        spacing: Kirigami.Units.smallSpacing
+
+                        Kirigami.Icon {
+                            source: webSearchExpanded ? "arrow-down" : "arrow-right"
+                            Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                            Layout.preferredHeight: Kirigami.Units.iconSizes.small
+                        }
+
+                        PlasmaComponents.Label {
+                            Layout.fillWidth: true
+                            text: "Web Search Results"
+                            font.bold: true
+                            color: Kirigami.Theme.textColor
+                        }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: webSearchExpanded = !webSearchExpanded
+                        cursorShape: Qt.PointingHandCursor
+                    }
+                }
+
+                Loader {
+                    visible: webSearchExpanded
+                    Layout.fillWidth: true
+                    Layout.maximumHeight: scrollMaxHeight
+                    Layout.preferredHeight: visible ? Math.min(item ? item.implicitHeight : 0, scrollMaxHeight) : 0
+
+                    readonly property real scrollMaxHeight: Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20
+
+                    sourceComponent: scrollableMarkdownContent
+                }
+            }
+
+            // Standard message content
             RowLayout {
                 id: messageContentRow
+                visible: !isWebSearchResults
                 anchors.fill: parent
                 anchors.margins: messageItem.spacing * 1.5
                 spacing: Kirigami.Units.smallSpacing
@@ -97,12 +151,12 @@ Item {
 
                 Loader {
                     Layout.fillWidth: true
-                    Layout.maximumHeight: (isCommandOutput || isWebSearchResults) ? scrollMaxHeight : -1
-                    Layout.preferredHeight: (isCommandOutput || isWebSearchResults) ? Math.min(item ? item.implicitHeight : 0, scrollMaxHeight) : (item ? item.implicitHeight : 0)
+                    Layout.maximumHeight: isCommandOutput ? scrollMaxHeight : -1
+                    Layout.preferredHeight: isCommandOutput ? Math.min(item ? item.implicitHeight : 0, scrollMaxHeight) : (item ? item.implicitHeight : 0)
 
                     readonly property real scrollMaxHeight: Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20
 
-                    sourceComponent: isCommandOutput ? scrollableContent : isWebSearchResults ? scrollableMarkdownContent : plainContent
+                    sourceComponent: isCommandOutput ? scrollableContent : plainContent
                 }
 
                 Component {
@@ -124,23 +178,6 @@ Item {
                 }
 
                 Component {
-                    id: scrollableMarkdownContent
-                    QQC2.ScrollView {
-                        contentWidth: availableWidth
-                        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
-                        QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
-
-                        PlasmaComponents.Label {
-                            width: parent.width
-                            text: messageItem.content
-                            textFormat: Text.MarkdownText
-                            wrapMode: Text.Wrap
-                            color: Kirigami.Theme.textColor
-                        }
-                    }
-                }
-
-                Component {
                     id: plainContent
                     PlasmaComponents.Label {
                         width: parent ? parent.width : implicitWidth
@@ -151,6 +188,23 @@ Item {
                         font.italic: isThinking
                         color: isThinking ? Kirigami.Theme.disabledTextColor :
                                isUser ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+                    }
+                }
+            }
+
+            Component {
+                id: scrollableMarkdownContent
+                QQC2.ScrollView {
+                    contentWidth: availableWidth
+                    QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+                    QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
+
+                    PlasmaComponents.Label {
+                        width: parent.width
+                        text: messageItem.content
+                        textFormat: Text.MarkdownText
+                        wrapMode: Text.Wrap
+                        color: Kirigami.Theme.textColor
                     }
                 }
             }
