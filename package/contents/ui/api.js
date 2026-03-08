@@ -227,10 +227,14 @@ function parseSSEChunks(buffer, lastIndex) {
         }
         try {
             var obj = JSON.parse(payload);
-            if (obj.choices && obj.choices[0] && obj.choices[0].delta &&
-                typeof obj.choices[0].delta.content === "string" &&
-                obj.choices[0].delta.content.length > 0) {
-                tokens.push({ content: obj.choices[0].delta.content });
+            if (obj.choices && obj.choices[0] && obj.choices[0].delta) {
+                var delta = obj.choices[0].delta;
+                if (typeof delta.content === "string" && delta.content.length > 0) {
+                    tokens.push({ content: delta.content });
+                }
+                if (delta.tool_calls) {
+                    tokens.push({ tool_calls_delta: delta.tool_calls });
+                }
             }
         } catch (e) {
             // skip unparseable chunks
@@ -304,11 +308,12 @@ function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature
         xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
     }
 
+    var pollTimer = null; // set externally via returned object
     var lastParseIndex = 0;
     var accumulatedText = "";
+    var accumulatedToolCalls = []; // [{id, type, function: {name, arguments}}]
     var streamDone = false;
     var completeCalled = false;
-
     function processBuffer() {
         if (streamDone) return;
         var result = parseSSEChunks(xhr.responseText, lastParseIndex);
@@ -323,6 +328,25 @@ function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature
                 accumulatedText += tok.content;
                 onChunk(tok.content, accumulatedText);
             }
+            if (tok.tool_calls_delta) {
+                for (var t = 0; t < tok.tool_calls_delta.length; t++) {
+                    var tcd = tok.tool_calls_delta[t];
+                    var idx = tcd.index !== undefined ? tcd.index : 0;
+                    // Initialize tool call entry on first appearance
+                    if (!accumulatedToolCalls[idx]) {
+                        accumulatedToolCalls[idx] = {
+                            id: tcd.id || "",
+                            type: tcd.type || "function",
+                            "function": { name: "", arguments: "" }
+                        };
+                    }
+                    if (tcd.id) accumulatedToolCalls[idx].id = tcd.id;
+                    if (tcd["function"]) {
+                        if (tcd["function"].name) accumulatedToolCalls[idx]["function"].name += tcd["function"].name;
+                        if (tcd["function"].arguments) accumulatedToolCalls[idx]["function"]["arguments"] += tcd["function"]["arguments"];
+                    }
+                }
+            }
         }
     }
 
@@ -333,6 +357,10 @@ function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature
 
         if (error) {
             onComplete(accumulatedText, error, null, null);
+        } else if (accumulatedToolCalls.length > 0) {
+            // Build an assistant message with tool_calls for the caller
+            var assistantMsg = { role: "assistant", content: accumulatedText || null, tool_calls: accumulatedToolCalls };
+            onComplete(accumulatedText, null, accumulatedToolCalls, assistantMsg);
         } else if (accumulatedText.length > 0) {
             onComplete(accumulatedText, null, null, null);
         } else {
@@ -356,8 +384,6 @@ function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature
             }
         }
     }
-
-    var pollTimer = null; // set externally via returned object
 
     xhr.ontimeout = function() {
         finish("Request timed out");
@@ -409,8 +435,6 @@ function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature
     };
     if (tools && tools.length > 0) {
         body.tools = tools;
-        // Many providers don't support streaming with tools; disable streaming
-        body.stream = false;
     }
 
     var payload = JSON.stringify(body, null, 2);

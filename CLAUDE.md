@@ -21,6 +21,8 @@ journalctl -u plasmashell --follow  # View logs
 
 There is no build step, test suite, or linter. QML is interpreted at runtime. After editing files, restart Plasma to test.
 
+**Logging**: Use `console.warn()` in QML/JS — `console.log()` is filtered by default. Output appears in the terminal where `plasmashell --replace` was launched.
+
 ## Architecture
 
 ### File Responsibilities
@@ -49,7 +51,7 @@ There is no build step, test suite, or linter. QML is interpreted at runtime. Af
 - **Dual ListModels**: `chatMessages` = API history (sent to LLM); `displayMessages` = UI state (includes command output, errors, extracted commands). Never conflate them.
 - **Code block stripping**: Assistant messages have code blocks removed via `stripCodeBlocks()` and rendered as CommandBlock widgets. The system prompt tells the LLM about this so it doesn't write "run this command:" transitions.
 - **Command storage**: Commands stored as `\x1F`-delimited strings in `commandsStr` because QML ListModel doesn't support nested arrays.
-- **No streaming**: Qt QML XHR doesn't support SSE. Responses arrive complete with "Thinking..." placeholder.
+- **Streaming**: SSE streaming is enabled (`stream: true`) for all requests including those with tools. Since QML XHR lacks proper `onprogress` events, a 50ms poll timer reads the growing `responseText` buffer and parses new SSE chunks. Tool call deltas are accumulated across chunks and passed to `onComplete`.
 - **Signal decoupling**: ChatMessage and CommandBlock communicate upward via signals, not direct `root.` references.
 
 ### Message Roles
