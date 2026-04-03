@@ -84,6 +84,8 @@ SimpleKCM {
     property string cfg_ollamaApiKeyDefault
     property int cfg_ollamaApiKeyVersion
     property int cfg_ollamaApiKeyVersionDefault
+    property bool cfg_useCommandTool
+    property bool cfg_useCommandToolDefault
     property string cfg_tasks
     property string cfg_tasksDefault
 
@@ -687,6 +689,17 @@ SimpleKCM {
             onCheckedChanged: cfg_autoRunCommands = checked
 
             QQC2.ToolTip.text: "WARNING: When combined with Auto-share, enables agentic workflow. Only use with very trustworthy LLMs."
+            QQC2.ToolTip.visible: hovered
+            QQC2.ToolTip.delay: 500
+        }
+
+        QQC2.CheckBox {
+            id: useCommandToolCheckBox
+            text: "Use tool calling for commands"
+            checked: cfg_useCommandTool
+            onCheckedChanged: cfg_useCommandTool = checked
+
+            QQC2.ToolTip.text: "Use the run_command tool for command execution. Disable for models that don't support tool calling (falls back to code block parsing)."
             QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
         }
