@@ -665,6 +665,12 @@ PlasmoidItem {
 
         isLoading = true;
 
+        // Refresh system prompt with current timestamp
+        if (systemPromptReady && Plasmoid.configuration.sysInfoDateTime) {
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode, dateTime: Api.localISODateTime() });
+            chatMessages.setProperty(0, "content", prompt);
+        }
+
         // Add a placeholder assistant message for streaming
         displayMessages.append({
             role: "assistant",
