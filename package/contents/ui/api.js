@@ -65,23 +65,41 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
     }
 
     prompt += "\nGeneral-purpose assistant. Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational." +
-        "Don't assume queries are system-related or reference specs unless relevant.\n\n" +
-        "## Code blocks\n" +
-        "```bash blocks are STRIPPED from your message and rendered as separate interactive widgets below it. " +
-        "The user sees your text and the code block as disconnected elements. " +
-        "Write your text as if the code block doesn't exist — never reference, introduce, or transition to it.\n\n" +
-        "## Commands\n" +
-        "One script per ```bash block. Chain steps with &&. Use `pkexec` instead of `sudo`.\n" +
-        "Scripts run non-interactively with no stdin — never use read, select, or any command that waits for user input. Use `kdialog` for user prompts (e.g., `kdialog --inputbox \"prompt\"`).\n" +
-        "NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission. " +
-        "When permission is needed, ask in plain text with NO code blocks — only output the code block after the user confirms.\n";
+        "Don't assume queries are system-related or reference specs unless relevant.\n\n";
+
+    if (options && options.commandToolEnabled) {
+        prompt += "## Commands\n" +
+            "You have a `run_command` tool available. Use it to execute shell commands when the user asks you to perform system tasks. " +
+            "You can still use fenced code blocks to show code snippets that shouldn't be executed.\n" +
+            "Chain steps with &&. Use `pkexec` instead of `sudo`.\n" +
+            "Commands run non-interactively with no stdin — never use read, select, or any command that waits for user input. Use `kdialog` for user prompts (e.g., `kdialog --inputbox \"prompt\"`).\n" +
+            "NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission. " +
+            "When permission is needed, ask in plain text first — only use the tool after the user confirms.\n";
+    } else {
+        prompt += "## Code blocks\n" +
+            "```bash blocks are STRIPPED from your message and rendered as separate interactive widgets below it. " +
+            "The user sees your text and the code block as disconnected elements. " +
+            "Write your text as if the code block doesn't exist — never reference, introduce, or transition to it.\n\n" +
+            "## Commands\n" +
+            "One script per ```bash block. Chain steps with &&. Use `pkexec` instead of `sudo`.\n" +
+            "Scripts run non-interactively with no stdin — never use read, select, or any command that waits for user input. Use `kdialog` for user prompts (e.g., `kdialog --inputbox \"prompt\"`).\n" +
+            "NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission. " +
+            "When permission is needed, ask in plain text with NO code blocks — only output the code block after the user confirms.\n";
+    }
 
     if (options && options.autoRunCommands) {
-        prompt += "\n## Auto-run is ENABLED\n" +
-            "```bash blocks execute AUTOMATICALLY. Be conservative — prefer read-only commands.\n" +
-            "NEVER output code blocks that install packages, modify system configuration, reboot, or disrupt the user. " +
-            "Describe what you would do in plain text and wait for the user to explicitly approve before outputting any code block.\n" +
-            "Inline code (`` ` ``) does not auto-run.\n";
+        if (options.commandToolEnabled) {
+            prompt += "\n## Auto-run is ENABLED\n" +
+                "Commands from the `run_command` tool execute AUTOMATICALLY. Be conservative — prefer read-only commands.\n" +
+                "NEVER run commands that install packages, modify system configuration, reboot, or disrupt the user. " +
+                "Describe what you would do in plain text and wait for the user to explicitly approve before using the tool.\n";
+        } else {
+            prompt += "\n## Auto-run is ENABLED\n" +
+                "```bash blocks execute AUTOMATICALLY. Be conservative — prefer read-only commands.\n" +
+                "NEVER output code blocks that install packages, modify system configuration, reboot, or disrupt the user. " +
+                "Describe what you would do in plain text and wait for the user to explicitly approve before outputting any code block.\n" +
+                "Inline code (`` ` ``) does not auto-run.\n";
+        }
     }
 
     if (options && options.autoMode) {
@@ -243,23 +261,47 @@ function parseSSEChunks(buffer, lastIndex) {
     return { tokens: tokens, newIndex: searchFrom };
 }
 
-function buildTools(ollamaApiKey) {
-    if (!ollamaApiKey || ollamaApiKey.length === 0) return [];
-    return [{
-        type: "function",
-        "function": {
-            name: "web_search",
-            description: "Search the web for current information. Use when you need up-to-date facts, recent events, or information you're not confident about.",
-            parameters: {
-                type: "object",
-                properties: {
-                    query: { type: "string", description: "Search query" },
-                    max_results: { type: "integer", description: "Max results (1-10, default 5)" }
-                },
-                required: ["query"]
+function buildTools(options) {
+    var tools = [];
+    var ollamaApiKey = options && options.ollamaApiKey;
+    var commandToolEnabled = options && options.commandToolEnabled;
+
+    if (ollamaApiKey && ollamaApiKey.length > 0) {
+        tools.push({
+            type: "function",
+            "function": {
+                name: "web_search",
+                description: "Search the web for current information. Use when you need up-to-date facts, recent events, or information you're not confident about.",
+                parameters: {
+                    type: "object",
+                    properties: {
+                        query: { type: "string", description: "Search query" },
+                        max_results: { type: "integer", description: "Max results (1-10, default 5)" }
+                    },
+                    required: ["query"]
+                }
             }
-        }
-    }];
+        });
+    }
+
+    if (commandToolEnabled) {
+        tools.push({
+            type: "function",
+            "function": {
+                name: "run_command",
+                description: "Execute a shell command on the user's system and return its output. Use this to run commands when the user asks you to perform system tasks.",
+                parameters: {
+                    type: "object",
+                    properties: {
+                        command: { type: "string", description: "The shell command to execute" }
+                    },
+                    required: ["command"]
+                }
+            }
+        });
+    }
+
+    return tools;
 }
 
 function performWebSearch(ollamaApiKey, query, maxResults, callback) {

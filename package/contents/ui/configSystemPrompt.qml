@@ -69,6 +69,8 @@ SimpleKCM {
     property string cfg_gatheredSysInfoDefault
     property int cfg_apiKeyVersion
     property int cfg_apiKeyVersionDefault
+    property bool cfg_useCommandTool
+    property bool cfg_useCommandToolDefault
 
     function buildPreview() {
         var real = {};
@@ -90,7 +92,7 @@ SimpleKCM {
         if (cfg_sysInfoDisk)     info.disk    = real.disk    || "<lsblk output>";
         if (cfg_sysInfoNetwork)  info.network = real.network || "<network>";
         if (cfg_sysInfoLocale)   info.locale  = real.locale  || "<locale>";
-        return Api.buildSystemPrompt(info, cfg_customSystemPrompt, { autoRunCommands: cfg_autoRunCommands, dateTime: cfg_sysInfoDateTime ? Api.localISODateTime() : "" });
+        return Api.buildSystemPrompt(info, cfg_customSystemPrompt, { autoRunCommands: cfg_autoRunCommands, commandToolEnabled: cfg_useCommandTool, dateTime: cfg_sysInfoDateTime ? Api.localISODateTime() : "" });
     }
 
     property string promptPreview: buildPreview()
