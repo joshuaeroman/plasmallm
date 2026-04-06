@@ -1226,10 +1226,12 @@ PlasmoidItem {
         if (!expanded) {
             Plasmoid.configuration.lastClosedTimestamp = String(Date.now())
         } else {
+            var hadUnread = root.hasUnreadResponse
             if (root.hasUnreadResponse) {
                 root.hasUnreadResponse = false;
                 Plasmoid.status = PlasmaCore.Types.ActiveStatus;
             }
+            if (hadUnread) return
             var mode = Plasmoid.configuration.autoClearMode
             if (mode === 1) {
                 clearChat()
