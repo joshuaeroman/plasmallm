@@ -232,13 +232,9 @@ PlasmaExtras.Representation {
                 }
 
                 onContentHeightChanged: {
-                    if (root.isLoading && root.streamingMessageIndex >= 0) {
+                    if (root.isAutoMode || (root.isLoading && root.streamingMessageIndex >= 0 && messageList.atBottom)) {
                         Qt.callLater(function() {
-                            if (root.isAutoMode) {
-                                messageList.positionViewAtEnd();
-                            } else if (messageList.atBottom) {
-                                messageList.positionViewAtEnd();
-                            }
+                            messageList.positionViewAtEnd();
                         });
                     }
                 }

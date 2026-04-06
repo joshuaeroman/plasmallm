@@ -825,13 +825,18 @@ PlasmoidItem {
                     // No web searches — clear streaming placeholder and start command queue
                     if (commandQueue.length > 0) {
                         if (sessionAutoMode || Plasmoid.configuration.autoRunCommands) {
+                            // Auto mode: show assistant text (if any), then start executing
                             if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
-                                displayMessages.setProperty(streamingMessageIndex, "content", "Running command: `" + commandQueue[0].command + "`");
+                                if (fullText) {
+                                    displayMessages.setProperty(streamingMessageIndex, "content", fullText);
+                                } else {
+                                    displayMessages.remove(streamingMessageIndex);
+                                }
                             }
                             streamingMessageIndex = -1;
                             processNextToolCall();
                         } else {
-                            // Show all commands for user approval
+                            // Manual mode: show all commands for user approval
                             var allCmds = [];
                             for (var qi = 0; qi < commandQueue.length; qi++) {
                                 allCmds.push(commandQueue[qi].command);
