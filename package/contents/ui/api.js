@@ -494,6 +494,39 @@ function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature
     return handle;
 }
 
+function mimeForImage(filePath) {
+    var ext = filePath.split(".").pop().toLowerCase();
+    var mimeMap = {
+        "png": "image/png", "jpg": "image/jpeg", "jpeg": "image/jpeg",
+        "gif": "image/gif", "webp": "image/webp", "bmp": "image/bmp",
+        "svg": "image/svg+xml"
+    };
+    return mimeMap[ext] || "application/octet-stream";
+}
+
+function isImageFile(filePath) {
+    var ext = filePath.split(".").pop().toLowerCase();
+    return ["png", "jpg", "jpeg", "gif", "webp", "bmp", "svg"].indexOf(ext) !== -1;
+}
+
+function buildContentArray(text, attachments) {
+    if (!attachments || attachments.length === 0) return text;
+    var parts = [];
+    if (text && text.length > 0) {
+        parts.push({ type: "text", text: text });
+    }
+    for (var i = 0; i < attachments.length; i++) {
+        var att = attachments[i];
+        if (att.dataUrl) {
+            parts.push({ type: "image_url", image_url: { url: att.dataUrl } });
+        } else if (att.textContent) {
+            var label = att.fileName || "file";
+            parts.push({ type: "text", text: "--- " + label + " ---\n" + att.textContent });
+        }
+    }
+    return parts;
+}
+
 function stripCodeBlocks(text) {
     return text.replace(/\n?```\w*\n[\s\S]*?```\n?/g, "\n");
 }

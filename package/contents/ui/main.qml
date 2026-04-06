@@ -526,8 +526,48 @@ PlasmoidItem {
         return text.trim();
     }
 
-    function sendMessage(text) {
+    property var pendingAttachments: []
+    property var pendingFileReads: ({}) // command -> {filePath, fileName, isImage}
+
+    P5Support.DataSource {
+        id: fileReader
+        engine: "executable"
+        connectedSources: []
+
+        onNewData: function(source, data) {
+            var stdout = data["stdout"] ? data["stdout"] : "";
+            var info = root.pendingFileReads[source];
+            if (info) {
+                delete root.pendingFileReads[source];
+                var list = root.pendingAttachments.slice();
+                if (info.isImage) {
+                    var mime = Api.mimeForImage(info.filePath);
+                    list.push({ filePath: info.filePath, fileName: info.fileName, dataUrl: "data:" + mime + ";base64," + stdout.trim() });
+                } else {
+                    list.push({ filePath: info.filePath, fileName: info.fileName, textContent: stdout });
+                }
+                root.pendingAttachments = list;
+            }
+            disconnectSource(source);
+        }
+    }
+
+    function attachFile(filePath) {
+        var fileName = filePath.split("/").pop();
+        var isImage = Api.isImageFile(filePath);
+        var cmd;
+        if (isImage) {
+            cmd = "base64 -w0 '" + filePath.replace(/'/g, "'\\''") + "'";
+        } else {
+            cmd = "cat '" + filePath.replace(/'/g, "'\\''") + "'";
+        }
+        pendingFileReads[cmd] = { filePath: filePath, fileName: fileName, isImage: isImage };
+        fileReader.connectSource(cmd);
+    }
+
+    function sendMessage(text, attachments) {
         if (!systemPromptReady) return;
+        if (!attachments) attachments = [];
 
         // Slash commands
         var lower = text.toLowerCase().trim();
@@ -639,13 +679,16 @@ PlasmoidItem {
         }
 
         // Add user message to both models
-        chatMessages.append({ role: "user", content: text });
+        var attachJson = attachments.length > 0 ? JSON.stringify(attachments) : "";
+        var imagePaths = attachments.filter(function(a) { return !!a.dataUrl; }).map(function(a) { return a.filePath; });
+        chatMessages.append({ role: "user", content: text, attachments_json: attachJson });
         displayMessages.append({
             role: "user",
             content: text,
             commandsStr: "",
             shared: false,
-            timestamp: currentTimestamp()
+            timestamp: currentTimestamp(),
+            attachmentsStr: imagePaths.join("\n")
         });
 
         autoShareSuppressed = false;
@@ -687,7 +730,14 @@ PlasmoidItem {
         var messages = [];
         for (var i = 0; i < chatMessages.count; i++) {
             var msg = chatMessages.get(i);
-            var entry = { role: msg.role, content: msg.content };
+            var msgContent = msg.content;
+            if (msg.attachments_json && msg.attachments_json.length > 0) {
+                try {
+                    var atts = JSON.parse(msg.attachments_json);
+                    msgContent = Api.buildContentArray(msg.content, atts);
+                } catch(e) {}
+            }
+            var entry = { role: msg.role, content: msgContent };
             // Reconstruct tool_calls on assistant messages
             if (msg.tool_calls_json && msg.tool_calls_json.length > 0) {
                 try {
