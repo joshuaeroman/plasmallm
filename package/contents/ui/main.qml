@@ -41,8 +41,7 @@ PlasmoidItem {
     property bool walletAvailable: false
     property int toolCallDepth: 0
     readonly property int maxToolCallDepth: 10
-    property string pendingToolCallId: ""
-    property string pendingToolCommand: ""
+    property var pendingToolCalls: []  // array of {id, command}
 
     signal responseReady(int messageIndex)
     signal copyConversationRequested()
@@ -250,8 +249,7 @@ PlasmoidItem {
         displayMessages.clear();
         currentChatFile = "";
         sessionAutoMode = false;
-        root.pendingToolCallId = "";
-        root.pendingToolCommand = "";
+        root.pendingToolCalls = [];
         // Re-seed with system prompt
         if (systemPromptReady) {
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: false, commandToolEnabled: Plasmoid.configuration.useCommandTool, dateTime: Plasmoid.configuration.sysInfoDateTime ? Api.localISODateTime() : "" });
@@ -733,81 +731,119 @@ PlasmoidItem {
                     // Append the assistant's tool_call message to chat history
                     chatMessages.append({ role: "assistant", content: assistantMsg.content || "", tool_calls_json: JSON.stringify(toolCalls) });
 
-                    // Process each tool call (typically just one)
-                    var tc = toolCalls[0];
-                    if (tc["function"] && tc["function"].name === "web_search") {
-                        var args;
-                        try {
-                            args = typeof tc["function"].arguments === "string" ? JSON.parse(tc["function"].arguments) : tc["function"].arguments;
-                        } catch(e) {
-                            args = { query: "" };
-                        }
-                        var searchQuery = args.query || "";
-                        var searchMax = args.max_results || 5;
+                    // Categorize all tool calls
+                    var commandQueue = [];
+                    var webSearchQueue = [];
+                    var pendingWebSearches = 0;
 
-                        // Show searching indicator
+                    for (var tci = 0; tci < toolCalls.length; tci++) {
+                        var tc = toolCalls[tci];
+                        var tcName = tc["function"] && tc["function"].name;
+
+                        if (tcName === "web_search") {
+                            webSearchQueue.push(tc);
+                        } else if (tcName === "run_command") {
+                            var cmdArgs;
+                            try {
+                                cmdArgs = typeof tc["function"].arguments === "string" ? JSON.parse(tc["function"].arguments) : tc["function"].arguments;
+                            } catch(e) {
+                                cmdArgs = { command: "" };
+                            }
+                            commandQueue.push({ id: tc.id || "", command: cmdArgs.command || "" });
+                        } else {
+                            // Unknown tool — send error result immediately
+                            chatMessages.append({ role: "tool", content: "Unknown tool: " + tcName, tool_call_id: tc.id || "" });
+                        }
+                    }
+
+                    // Store command queue
+                    root.pendingToolCalls = commandQueue;
+
+                    // Process web searches first, then start command queue
+                    if (webSearchQueue.length > 0) {
+                        // Show searching indicator in streaming placeholder
                         if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                             displayMessages.setProperty(streamingMessageIndex, "content", "Searching the web...");
                         }
 
-                        Api.performWebSearch(root.ollamaApiKey, searchQuery, searchMax, function(searchError, searchResults) {
-                            var resultContent;
-                            var displayContent;
-                            if (searchError) {
-                                resultContent = "Web search failed: " + searchError;
-                                displayContent = resultContent;
-                            } else {
-                                resultContent = JSON.stringify(searchResults);
-                                displayContent = formatWebSearchResults(searchQuery, searchResults);
-                            }
+                        pendingWebSearches = webSearchQueue.length;
+                        // Track whether first search result has claimed the streaming placeholder
+                        var placeholderClaimed = false;
 
-                            // Show search results in the UI
-                            if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
-                                displayMessages.setProperty(streamingMessageIndex, "content", displayContent);
-                                displayMessages.setProperty(streamingMessageIndex, "role", "web_search_results");
-                            }
-                            streamingMessageIndex = -1;
+                        for (var wsi = 0; wsi < webSearchQueue.length; wsi++) {
+                            (function(wsTc) {
+                                var wsArgs;
+                                try {
+                                    wsArgs = typeof wsTc["function"].arguments === "string" ? JSON.parse(wsTc["function"].arguments) : wsTc["function"].arguments;
+                                } catch(e) {
+                                    wsArgs = { query: "" };
+                                }
+                                var searchQuery = wsArgs.query || "";
+                                var searchMax = wsArgs.max_results || 5;
 
-                            // Append tool result to chat history
-                            chatMessages.append({ role: "tool", content: resultContent, tool_call_id: tc.id || "" });
+                                Api.performWebSearch(root.ollamaApiKey, searchQuery, searchMax, function(searchError, searchResults) {
+                                    var resultContent;
+                                    var displayContent;
+                                    if (searchError) {
+                                        resultContent = "Web search failed: " + searchError;
+                                        displayContent = resultContent;
+                                    } else {
+                                        resultContent = JSON.stringify(searchResults);
+                                        displayContent = formatWebSearchResults(searchQuery, searchResults);
+                                    }
 
-                            // Re-send to LLM
-                            sendToLLM();
-                        });
+                                    // Show search results in UI
+                                    if (!placeholderClaimed && streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
+                                        placeholderClaimed = true;
+                                        displayMessages.setProperty(streamingMessageIndex, "content", displayContent);
+                                        displayMessages.setProperty(streamingMessageIndex, "role", "web_search_results");
+                                        streamingMessageIndex = -1;
+                                    } else {
+                                        displayMessages.append({
+                                            role: "web_search_results",
+                                            content: displayContent,
+                                            commandsStr: "",
+                                            shared: false,
+                                            timestamp: currentTimestamp()
+                                        });
+                                    }
+
+                                    // Append tool result to chat history
+                                    chatMessages.append({ role: "tool", content: resultContent, tool_call_id: wsTc.id || "" });
+
+                                    pendingWebSearches--;
+                                    if (pendingWebSearches === 0) {
+                                        // All web searches done, process command queue
+                                        processNextToolCall();
+                                    }
+                                });
+                            })(webSearchQueue[wsi]);
+                        }
                         return;
                     }
 
-                    if (tc["function"] && tc["function"].name === "run_command") {
-                        var cmdArgs;
-                        try {
-                            cmdArgs = typeof tc["function"].arguments === "string" ? JSON.parse(tc["function"].arguments) : tc["function"].arguments;
-                        } catch(e) {
-                            cmdArgs = { command: "" };
-                        }
-                        var command = cmdArgs.command || "";
-
-                        // Store pending tool call info
-                        root.pendingToolCallId = tc.id || "";
-                        root.pendingToolCommand = command;
-
+                    // No web searches — clear streaming placeholder and start command queue
+                    if (commandQueue.length > 0) {
                         if (sessionAutoMode || Plasmoid.configuration.autoRunCommands) {
-                            // Show "Running command..." in the streaming placeholder
                             if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
-                                displayMessages.setProperty(streamingMessageIndex, "content", "Running command: `" + command + "`");
+                                displayMessages.setProperty(streamingMessageIndex, "content", "Running command: `" + commandQueue[0].command + "`");
                             }
                             streamingMessageIndex = -1;
-                            // Execute immediately
-                            executeCommand(command);
+                            processNextToolCall();
                         } else {
-                            // Replace streaming placeholder with the command for user approval
+                            // Show all commands for user approval
+                            var allCmds = [];
+                            for (var qi = 0; qi < commandQueue.length; qi++) {
+                                allCmds.push(commandQueue[qi].command);
+                            }
                             if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                                 displayMessages.setProperty(streamingMessageIndex, "content", fullText || "");
-                                displayMessages.setProperty(streamingMessageIndex, "commandsStr", command);
+                                displayMessages.setProperty(streamingMessageIndex, "commandsStr", allCmds.join("\n\x1F"));
                             } else {
                                 displayMessages.append({
                                     role: "assistant",
                                     content: fullText || "",
-                                    commandsStr: command,
+                                    commandsStr: allCmds.join("\n\x1F"),
                                     shared: false,
                                     timestamp: currentTimestamp()
                                 });
@@ -816,6 +852,14 @@ PlasmoidItem {
                         }
                         return;
                     }
+
+                    // Only unknown tools or empty — clear placeholder and continue
+                    if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
+                        displayMessages.remove(streamingMessageIndex);
+                    }
+                    streamingMessageIndex = -1;
+                    sendToLLM();
+                    return;
                 }
 
                 if (error && fullText.length === 0) {
@@ -876,8 +920,7 @@ PlasmoidItem {
         streamPollTimer.streamHandle = null;
         isLoading = false;
         autoShareSuppressed = true;
-        root.pendingToolCallId = "";
-        root.pendingToolCommand = "";
+        root.pendingToolCalls = [];
         // Remove the streaming placeholder if it's still empty
         if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
             var msg = displayMessages.get(streamingMessageIndex);
@@ -891,6 +934,27 @@ PlasmoidItem {
             }
         }
         streamingMessageIndex = -1;
+    }
+
+    function processNextToolCall() {
+        if (pendingToolCalls.length === 0) {
+            sendToLLM();
+            return;
+        }
+
+        var next = pendingToolCalls[0];
+        if (sessionAutoMode || Plasmoid.configuration.autoRunCommands) {
+            executeCommand(next.command);
+        } else {
+            // Show command for user approval
+            displayMessages.append({
+                role: "assistant",
+                content: "",
+                commandsStr: next.command,
+                shared: false,
+                timestamp: currentTimestamp()
+            });
+        }
     }
 
     function runInTerminal(cmd) {
@@ -958,14 +1022,21 @@ PlasmoidItem {
         });
 
         // If there's a pending run_command tool call, send the result as a tool message
-        if (root.pendingToolCallId.length > 0 && command === root.pendingToolCommand) {
-            var toolCallId = root.pendingToolCallId;
-            root.pendingToolCallId = "";
-            root.pendingToolCommand = "";
-            displayMessages.setProperty(displayMessages.count - 1, "shared", true);
-            chatMessages.append({ role: "tool", content: output, tool_call_id: toolCallId });
-            sendToLLM();
-            return;
+        if (root.pendingToolCalls.length > 0) {
+            for (var ptci = 0; ptci < root.pendingToolCalls.length; ptci++) {
+                if (command === root.pendingToolCalls[ptci].command) {
+                    var completed = root.pendingToolCalls.splice(ptci, 1)[0];
+                    root.pendingToolCalls = root.pendingToolCalls; // trigger property change
+                    displayMessages.setProperty(displayMessages.count - 1, "shared", true);
+                    chatMessages.append({ role: "tool", content: output, tool_call_id: completed.id });
+                    if (root.pendingToolCalls.length === 0) {
+                        sendToLLM();
+                    } else if (sessionAutoMode || Plasmoid.configuration.autoRunCommands) {
+                        processNextToolCall();
+                    }
+                    return;
+                }
+            }
         }
 
         // Auto-share with LLM if enabled (suppressed after user hits stop)
