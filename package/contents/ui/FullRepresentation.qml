@@ -222,15 +222,17 @@ PlasmaExtras.Representation {
                 }
 
                 onCountChanged: {
-                    if (messageList.atBottom) {
-                        Qt.callLater(function() {
+                    Qt.callLater(function() {
+                        if (root.isAutoMode) {
                             messageList.positionViewAtEnd();
-                        });
-                    }
+                        } else if (messageList.atBottom) {
+                            messageList.positionViewAtEnd();
+                        }
+                    });
                 }
 
                 onContentHeightChanged: {
-                    if (messageList.atBottom && root.isLoading && root.streamingMessageIndex >= 0) {
+                    if (root.isAutoMode || (root.isLoading && root.streamingMessageIndex >= 0 && messageList.atBottom)) {
                         Qt.callLater(function() {
                             messageList.positionViewAtEnd();
                         });
@@ -246,7 +248,16 @@ PlasmaExtras.Representation {
                     }
                     function onResponseReady(messageIndex) {
                         Qt.callLater(function() {
-                            messageList.positionViewAtIndex(messageIndex, ListView.Beginning);
+                            if (root.isAutoMode) {
+                                messageList.positionViewAtEnd();
+                                return;
+                            }
+                            var item = messageList.itemAtIndex(messageIndex);
+                            if (item && item.height <= messageList.height) {
+                                messageList.positionViewAtEnd();
+                            } else {
+                                messageList.positionViewAtIndex(messageIndex, ListView.Beginning);
+                            }
                         });
                     }
                 }
