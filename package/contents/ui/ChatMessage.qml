@@ -22,6 +22,8 @@ Item {
     property bool shared: false
     property int messageIndex: -1
     property string timestamp: ""
+    property string attachmentsStr: ""
+    readonly property var attachmentPaths: attachmentsStr.length > 0 ? attachmentsStr.split("\n") : []
     property bool webSearchExpanded: false
 
     signal shareRequested(int index)
@@ -71,7 +73,7 @@ Item {
             Layout.fillWidth: true
             Layout.maximumWidth: parent.width * 0.85
             Layout.alignment: isUser ? Qt.AlignRight : Qt.AlignLeft
-            implicitHeight: isWebSearchResults ? webSearchColumn.implicitHeight + messageItem.spacing * 3 : messageContentRow.implicitHeight + messageItem.spacing * 3
+            implicitHeight: isWebSearchResults ? webSearchColumn.implicitHeight + messageItem.spacing * 3 : messageContentRow.implicitHeight + messageItem.spacing * 3 + (attachmentFlow.visible ? attachmentFlow.height + Kirigami.Units.smallSpacing : 0)
             radius: 6
             color: {
                 if (isError) return Qt.rgba(Kirigami.Theme.negativeTextColor.r, Kirigami.Theme.negativeTextColor.g, Kirigami.Theme.negativeTextColor.b, 0.15);
@@ -134,12 +136,38 @@ Item {
                 }
             }
 
+            // Attached image thumbnails
+            Flow {
+                id: attachmentFlow
+                visible: !isWebSearchResults && messageItem.attachmentPaths.length > 0
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.margins: messageItem.spacing * 1.5
+                spacing: Kirigami.Units.smallSpacing
+
+                Repeater {
+                    model: messageItem.attachmentPaths
+                    Image {
+                        source: "file://" + modelData
+                        fillMode: Image.PreserveAspectFit
+                        width: Math.min(sourceSize.width, attachmentFlow.width)
+                        height: Math.min(sourceSize.height, Kirigami.Units.gridUnit * 10)
+                        smooth: true
+                        horizontalAlignment: Image.AlignLeft
+                    }
+                }
+            }
+
             // Standard message content
             RowLayout {
                 id: messageContentRow
                 visible: !isWebSearchResults
                 anchors.fill: parent
-                anchors.margins: messageItem.spacing * 1.5
+                anchors.topMargin: attachmentFlow.visible ? attachmentFlow.height + attachmentFlow.anchors.margins + Kirigami.Units.smallSpacing : messageItem.spacing * 1.5
+                anchors.leftMargin: messageItem.spacing * 1.5
+                anchors.rightMargin: messageItem.spacing * 1.5
+                anchors.bottomMargin: messageItem.spacing * 1.5
                 spacing: Kirigami.Units.smallSpacing
 
                 PlasmaComponents.BusyIndicator {

@@ -7,6 +7,8 @@ import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import QtQuick.Controls as QQC2
+import QtQuick.Dialogs
+import QtCore
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kirigami as Kirigami
@@ -214,6 +216,7 @@ PlasmaExtras.Representation {
                     shared: model.shared ? model.shared : false
                     messageIndex: model.index
                     timestamp: model.timestamp ? model.timestamp : ""
+                    attachmentsStr: model.attachmentsStr ? model.attachmentsStr : ""
                     onShareRequested: function(index) { root.shareOutput(index); }
                     onRetryRequested: root.sendToLLM()
                     onExecuteRequested: function(command) { root.executeCommand(command); }
@@ -268,6 +271,80 @@ PlasmaExtras.Representation {
                     visible: messageList.count === 0
                     text: "Send a message to start chatting"
                     iconName: "im-user"
+                }
+            }
+        }
+
+        FileDialog {
+            id: attachDialog
+            title: "Attach File"
+            fileMode: FileDialog.OpenFile
+            currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
+            nameFilters: ["Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)", "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf *.sh *.py *.js *.ts *.qml)", "All files (*)"]
+            onAccepted: {
+                var path = decodeURIComponent(selectedFile.toString().replace(/^file:\/\//, ""));
+                root.attachFile(path);
+            }
+        }
+
+        // Attachment preview strip
+        Flow {
+            Layout.fillWidth: true
+            Layout.leftMargin: Kirigami.Units.smallSpacing
+            Layout.rightMargin: Kirigami.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
+            visible: root.pendingAttachments.length > 0
+
+            Repeater {
+                model: root.pendingAttachments
+
+                Rectangle {
+                    width: isImg ? thumbImg.width + Kirigami.Units.smallSpacing * 2 + removeBtn.width : fileLabel.implicitWidth + Kirigami.Units.smallSpacing * 3 + removeBtn.width
+                    height: isImg ? Math.min(thumbImg.implicitHeight, Kirigami.Units.gridUnit * 4) + Kirigami.Units.smallSpacing * 2 : Kirigami.Units.gridUnit * 1.5
+                    radius: 4
+                    color: Kirigami.Theme.alternateBackgroundColor
+                    border.color: Kirigami.Theme.disabledTextColor
+                    border.width: 1
+
+                    readonly property bool isImg: !!modelData.dataUrl
+
+                    Image {
+                        id: thumbImg
+                        visible: parent.isImg
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                        anchors.margins: Kirigami.Units.smallSpacing
+                        source: parent.isImg ? "file://" + modelData.filePath : ""
+                        fillMode: Image.PreserveAspectFit
+                        height: Math.min(sourceSize.height, Kirigami.Units.gridUnit * 4)
+                        width: Math.min(sourceSize.width, Kirigami.Units.gridUnit * 6)
+                    }
+
+                    PlasmaComponents.Label {
+                        id: fileLabel
+                        visible: !parent.isImg
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: Kirigami.Units.smallSpacing
+                        text: modelData.fileName || "file"
+                        font: Kirigami.Theme.smallFont
+                        elide: Text.ElideMiddle
+                        width: Math.min(implicitWidth, Kirigami.Units.gridUnit * 8)
+                    }
+
+                    PlasmaComponents.ToolButton {
+                        id: removeBtn
+                        anchors.right: parent.right
+                        anchors.top: parent.top
+                        icon.name: "edit-delete-remove"
+                        width: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing
+                        height: width
+                        onClicked: {
+                            var list = root.pendingAttachments.slice();
+                            list.splice(index, 1);
+                            root.pendingAttachments = list;
+                        }
+                    }
                 }
             }
         }
@@ -483,20 +560,30 @@ PlasmaExtras.Representation {
                                     slashPopup.filteredSlashCommands.length === 1) {
                                 sendText = slashPopup.filteredSlashCommands[0].cmd;
                             }
-                            if (sendText.length > 0) {
-                                root.sendMessage(sendText);
+                            if (sendText.length > 0 || root.pendingAttachments.length > 0) {
+                                root.sendMessage(sendText, root.pendingAttachments);
                                 text = "";
+                                root.pendingAttachments = [];
                             }
                         }
                     }
                 }
             }
 
+            PlasmaComponents.ToolButton {
+                icon.name: "mail-attachment"
+                visible: !root.isLoading
+                enabled: root.systemPromptReady
+                PlasmaComponents.ToolTip.text: "Attach file or image"
+                PlasmaComponents.ToolTip.visible: hovered
+                onClicked: attachDialog.open()
+            }
+
             PlasmaComponents.Button {
                 text: "Send"
                 icon.name: "document-send"
                 visible: !root.isLoading
-                enabled: root.systemPromptReady && inputField.text.trim().length > 0
+                enabled: root.systemPromptReady && (inputField.text.trim().length > 0 || root.pendingAttachments.length > 0)
                 onClicked: {
                     var sendText = inputField.text.trim();
                     if (sendText.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
@@ -507,9 +594,10 @@ PlasmaExtras.Representation {
                             slashPopup.filteredSlashCommands.length === 1) {
                         sendText = slashPopup.filteredSlashCommands[0].cmd;
                     }
-                    if (sendText.length > 0) {
-                        root.sendMessage(sendText);
+                    if (sendText.length > 0 || root.pendingAttachments.length > 0) {
+                        root.sendMessage(sendText, root.pendingAttachments);
                         inputField.text = "";
+                        root.pendingAttachments = [];
                     }
                 }
             }
