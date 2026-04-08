@@ -62,17 +62,17 @@ Rectangle {
             spacing: Kirigami.Units.smallSpacing
 
             PlasmaComponents.Button {
-                text: "Save"
+                text: i18n("Save")
                 icon.name: "document-save"
-                PlasmaComponents.ToolTip.text: "Save as script file"
+                PlasmaComponents.ToolTip.text: i18n("Save as script file")
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: saveDialog.open()
             }
 
             PlasmaComponents.Button {
-                text: "Copy"
+                text: i18n("Copy")
                 icon.name: "edit-copy"
-                PlasmaComponents.ToolTip.text: "Copy to clipboard"
+                PlasmaComponents.ToolTip.text: i18n("Copy to clipboard")
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: {
                     clipboardHelper.text = commandBlock.commandText;
@@ -82,10 +82,10 @@ Rectangle {
             }
 
             PlasmaComponents.Button {
-                text: commandBlock.hasRun ? "Ran" : "Run"
+                text: commandBlock.hasRun ? i18n("Ran") : i18n("Run")
                 icon.name: commandBlock.hasRun ? "dialog-ok-apply" : "media-playback-start"
                 enabled: !commandBlock.hasRun
-                PlasmaComponents.ToolTip.text: "Execute command inline"
+                PlasmaComponents.ToolTip.text: i18n("Execute command inline")
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: {
                     commandBlock.hasRun = true;
@@ -94,9 +94,9 @@ Rectangle {
             }
 
             PlasmaComponents.Button {
-                text: "Terminal"
+                text: i18n("Terminal")
                 icon.name: "utilities-terminal"
-                PlasmaComponents.ToolTip.text: "Open in terminal emulator"
+                PlasmaComponents.ToolTip.text: i18n("Open in terminal emulator")
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: commandBlock.terminalRequested(commandBlock.commandText)
             }
@@ -105,11 +105,11 @@ Rectangle {
 
     FileDialog {
         id: saveDialog
-        title: "Save Script"
+        title: i18n("Save Script")
         fileMode: FileDialog.SaveFile
         currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
         selectedFile: currentFolder + "/script.sh"
-        nameFilters: ["Shell scripts (*.sh)", "All files (*)"]
+        nameFilters: [i18n("Shell scripts (*.sh)"), i18n("All files (*)")]
         onAccepted: {
             var path = decodeURIComponent(selectedFile.toString().replace(/^file:\/\//, ""));
             commandBlock.saveRequested(path, commandBlock.commandText);

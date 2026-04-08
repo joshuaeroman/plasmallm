@@ -130,7 +130,7 @@ function sendChatRequest(endpoint, apiKey, model, messages, temperature, maxToke
     }
 
     xhr.ontimeout = function() {
-        callback("Request timed out after 60 seconds", null);
+        callback(i18n("Request timed out after 60 seconds"), null);
     };
 
     xhr.onreadystatechange = function() {
@@ -141,26 +141,26 @@ function sendChatRequest(endpoint, apiKey, model, messages, temperature, maxToke
                     if (!response.choices || !response.choices.length ||
                         !response.choices[0].message ||
                         typeof response.choices[0].message.content !== "string") {
-                        callback("Invalid response format: missing choices[0].message.content", null);
+                        callback(i18n("Invalid response format: missing choices[0].message.content"), null);
                         return;
                     }
                     var text = response.choices[0].message.content;
                     callback(null, text);
                 } catch (e) {
-                    callback("Failed to parse response: " + e.message, null);
+                    callback(i18n("Failed to parse response: %1", e.message), null);
                 }
             } else {
                 var errMsg;
                 if (xhr.status === 401 || xhr.status === 403) {
-                    errMsg = "Authentication failed (HTTP " + xhr.status + ") — check your API key";
+                    errMsg = i18n("Authentication failed (HTTP %1) — check your API key", xhr.status);
                 } else if (xhr.status === 429) {
-                    errMsg = "Rate limited (HTTP 429) — too many requests, try again shortly";
+                    errMsg = i18n("Rate limited (HTTP 429) — too many requests, try again shortly");
                 } else if (xhr.status === 404) {
-                    errMsg = "Not found (HTTP 404) — check your API endpoint and model name";
+                    errMsg = i18n("Not found (HTTP 404) — check your API endpoint and model name");
                 } else if (xhr.status > 0) {
-                    errMsg = "API error " + xhr.status;
+                    errMsg = i18n("API error %1", xhr.status);
                 } else {
-                    errMsg = "Request failed (no response) — check your endpoint URL";
+                    errMsg = i18n("Request failed (no response) — check your endpoint URL");
                 }
                 try {
                     var errBody = JSON.parse(xhr.responseText);
@@ -201,7 +201,7 @@ function fetchModels(endpoint, apiKey, callback) {
     }
 
     xhr.ontimeout = function() {
-        callback("Request timed out after 30 seconds", null);
+        callback(i18n("Request timed out after 30 seconds"), null);
     };
 
     xhr.onreadystatechange = function() {
@@ -217,10 +217,10 @@ function fetchModels(endpoint, apiKey, callback) {
                     }
                     callback(null, models);
                 } catch (e) {
-                    callback("Failed to parse models: " + e.message, null);
+                    callback(i18n("Failed to parse models: %1", e.message), null);
                 }
             } else {
-                callback("Failed to fetch models: HTTP " + xhr.status, null);
+                callback(i18n("Failed to fetch models: HTTP %1", xhr.status), null);
             }
         }
     };
@@ -312,7 +312,7 @@ function performWebSearch(ollamaApiKey, query, maxResults, callback) {
     xhr.setRequestHeader("Authorization", "Bearer " + ollamaApiKey);
 
     xhr.ontimeout = function() {
-        callback("Web search timed out", null);
+        callback(i18n("Web search timed out"), null);
     };
 
     xhr.onreadystatechange = function() {
@@ -322,10 +322,10 @@ function performWebSearch(ollamaApiKey, query, maxResults, callback) {
                     var response = JSON.parse(xhr.responseText);
                     callback(null, response);
                 } catch (e) {
-                    callback("Failed to parse web search response: " + e.message, null);
+                    callback(i18n("Failed to parse web search response: %1", e.message), null);
                 }
             } else {
-                var errMsg = "Web search failed (HTTP " + xhr.status + ")";
+                var errMsg = i18n("Web search failed (HTTP %1)", xhr.status);
                 if (xhr.responseText) {
                     errMsg += ": " + xhr.responseText.substring(0, 200);
                 }
@@ -416,19 +416,19 @@ function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature
                     } else if (typeof msg.content === "string") {
                         onComplete(msg.content, null);
                     } else {
-                        onComplete("", "Invalid response format");
+                        onComplete("", i18n("Invalid response format"));
                     }
                 } else {
-                    onComplete("", "Invalid response format");
+                    onComplete("", i18n("Invalid response format"));
                 }
             } catch (e) {
-                onComplete("", "Failed to parse response: " + e.message);
+                onComplete("", i18n("Failed to parse response: %1", e.message));
             }
         }
     }
 
     xhr.ontimeout = function() {
-        finish("Request timed out");
+        finish(i18n("Request timed out"));
     };
 
     xhr.onreadystatechange = function() {
@@ -443,15 +443,15 @@ function sendStreamingChatRequest(endpoint, apiKey, model, messages, temperature
             } else {
                 var errMsg;
                 if (xhr.status === 401 || xhr.status === 403) {
-                    errMsg = "Authentication failed (HTTP " + xhr.status + ") — check your API key";
+                    errMsg = i18n("Authentication failed (HTTP %1) — check your API key", xhr.status);
                 } else if (xhr.status === 429) {
-                    errMsg = "Rate limited (HTTP 429) — too many requests, try again shortly";
+                    errMsg = i18n("Rate limited (HTTP 429) — too many requests, try again shortly");
                 } else if (xhr.status === 404) {
-                    errMsg = "Not found (HTTP 404) — check your API endpoint and model name";
+                    errMsg = i18n("Not found (HTTP 404) — check your API endpoint and model name");
                 } else if (xhr.status > 0) {
-                    errMsg = "API error " + xhr.status;
+                    errMsg = i18n("API error %1", xhr.status);
                 } else {
-                    errMsg = "Request failed (no response) — check your endpoint URL";
+                    errMsg = i18n("Request failed (no response) — check your endpoint URL");
                 }
                 try {
                     var errBody = JSON.parse(xhr.responseText);

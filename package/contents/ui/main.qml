@@ -603,10 +603,10 @@ PlasmoidItem {
         if (lower === "/auto") {
             var configAutoMode = Plasmoid.configuration.autoRunCommands && Plasmoid.configuration.autoShareCommandOutput;
             if (configAutoMode) {
-                displayMessages.append({ role: "assistant", content: "Auto mode is permanently enabled via settings (both Auto-run and Auto-share are on).", commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                displayMessages.append({ role: "assistant", content: i18n("Auto mode is permanently enabled via settings (both Auto-run and Auto-share are on)."), commandsStr: "", shared: false, timestamp: currentTimestamp() });
             } else {
                 sessionAutoMode = !sessionAutoMode;
-                displayMessages.append({ role: "assistant", content: sessionAutoMode ? "Auto mode enabled for this session. Commands will run and share output automatically." : "Auto mode disabled.", commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                displayMessages.append({ role: "assistant", content: sessionAutoMode ? i18n("Auto mode enabled for this session. Commands will run and share output automatically.") : i18n("Auto mode disabled."), commandsStr: "", shared: false, timestamp: currentTimestamp() });
                 if (systemPromptReady) {
                     var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode, commandToolEnabled: Plasmoid.configuration.useCommandTool, dateTime: Plasmoid.configuration.sysInfoDateTime ? Api.localISODateTime() : "" });
                     chatMessages.setProperty(0, "content", autoPrompt);
@@ -617,13 +617,13 @@ PlasmoidItem {
         if (lower === "/model") {
             var currentModel = Plasmoid.configuration.modelName;
             var models = root.fetchedModels;
-            var msg = "Current model: **" + (currentModel || "none") + "**";
+            var msg = i18n("Current model: **%1**", currentModel || i18n("none"));
             if (models.length > 0) {
-                msg += "\n\nAvailable models:\n" +
+                msg += "\n\n" + i18n("Available models:") + "\n" +
                        models.map(function(m) { return "- " + m; }).join("\n") +
-                       "\n\nType `/model <name>` to switch.";
+                       "\n\n" + i18n("Type `/model <name>` to switch.");
             } else {
-                msg += "\n\nNo models cached. Use **Fetch Models** in settings.";
+                msg += "\n\n" + i18n("No models cached. Use **Fetch Models** in settings.");
             }
             displayMessages.append({ role: "assistant", content: msg, commandsStr: "", shared: false, timestamp: currentTimestamp() });
             return;
@@ -632,7 +632,7 @@ PlasmoidItem {
             var newModel = text.trim().substring(7).trim();
             if (newModel.length > 0) {
                 Plasmoid.configuration.modelName = newModel;
-                displayMessages.append({ role: "assistant", content: "Switched to model: **" + newModel + "**", commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                displayMessages.append({ role: "assistant", content: i18n("Switched to model: **%1**", newModel), commandsStr: "", shared: false, timestamp: currentTimestamp() });
             }
             return;
         }
@@ -641,10 +641,10 @@ PlasmoidItem {
             var tasks = [];
             if (tasksJson) try { tasks = JSON.parse(tasksJson); } catch(e) {}
             if (tasks.length === 0) {
-                displayMessages.append({ role: "assistant", content: "No tasks configured. Add tasks in Settings.", commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                displayMessages.append({ role: "assistant", content: i18n("No tasks configured. Add tasks in Settings."), commandsStr: "", shared: false, timestamp: currentTimestamp() });
             } else {
-                var taskList = tasks.map(function(t) { return "- **" + t.name + "**" + (t.auto ? " (auto)" : "") + " — " + t.prompt; }).join("\n");
-                displayMessages.append({ role: "assistant", content: "Available tasks:\n" + taskList + "\n\nType `/task <name>` to run.", commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                var taskList = tasks.map(function(t) { return "- **" + t.name + "**" + (t.auto ? " " + i18n("(auto)") : "") + " — " + t.prompt; }).join("\n");
+                displayMessages.append({ role: "assistant", content: i18n("Available tasks:") + "\n" + taskList + "\n\n" + i18n("Type `/task <name>` to run."), commandsStr: "", shared: false, timestamp: currentTimestamp() });
             }
             return;
         }
@@ -672,7 +672,7 @@ PlasmoidItem {
                 sendMessage(foundTask.prompt);
             } else {
                 var availNames = tasks2.map(function(t) { return t.name; }).join(", ");
-                displayMessages.append({ role: "error", content: "Unknown task: **" + taskName + "**. Available: " + (availNames || "none"), commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                displayMessages.append({ role: "error", content: i18n("Unknown task: **%1**. Available: %2", taskName, availNames || i18n("none")), commandsStr: "", shared: false, timestamp: currentTimestamp() });
             }
             return;
         }
@@ -812,7 +812,7 @@ PlasmoidItem {
                     if (webSearchQueue.length > 0) {
                         // Show searching indicator in streaming placeholder
                         if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
-                            displayMessages.setProperty(streamingMessageIndex, "content", "Searching the web...");
+                            displayMessages.setProperty(streamingMessageIndex, "content", i18n("Searching the web…"));
                         }
 
                         pendingWebSearches = webSearchQueue.length;
@@ -834,7 +834,7 @@ PlasmoidItem {
                                     var resultContent;
                                     var displayContent;
                                     if (searchError) {
-                                        resultContent = "Web search failed: " + searchError;
+                                        resultContent = i18n("Web search failed: %1", searchError);
                                         displayContent = resultContent;
                                     } else {
                                         resultContent = JSON.stringify(searchResults);
@@ -1040,7 +1040,7 @@ PlasmoidItem {
     function executeCommand(cmd) {
         displayMessages.append({
             role: "command_running",
-            content: "Running: " + cmd,
+            content: i18n("Running: %1", cmd),
             commandsStr: "",
             shared: false,
             timestamp: currentTimestamp()
@@ -1052,7 +1052,7 @@ PlasmoidItem {
         // Find and replace the command_running message
         for (var i = displayMessages.count - 1; i >= 0; i--) {
             if (displayMessages.get(i).role === "command_running" &&
-                displayMessages.get(i).content === "Running: " + command) {
+                displayMessages.get(i).content === i18n("Running: %1", command)) {
                 displayMessages.remove(i);
                 break;
             }
@@ -1061,11 +1061,11 @@ PlasmoidItem {
         var maxOutputSize = 50000; // 50KB limit
         var output = "";
         if (stdout) output += stdout;
-        if (stderr) output += (output ? "\n" : "") + "stderr: " + stderr;
+        if (stderr) output += (output ? "\n" : "") + i18n("stderr: %1", stderr);
         if (output.length > maxOutputSize) {
-            output = output.substring(0, maxOutputSize) + "\n[truncated — output exceeded " + Math.round(maxOutputSize / 1024) + "KB]";
+            output = output.substring(0, maxOutputSize) + "\n" + i18n("[truncated — output exceeded %1KB]", Math.round(maxOutputSize / 1024));
         }
-        output += "\n[exit code: " + exitCode + "]";
+        output += "\n" + i18n("[exit code: %1]", exitCode);
 
         displayMessages.append({
             role: "command_output",
