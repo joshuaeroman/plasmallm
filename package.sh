@@ -48,6 +48,6 @@ fi
 
 # Build the plasmoid package
 rm -f "$OUTPUT"
-(cd "$PACKAGE_DIR" && zip -r "../$OUTPUT" .)
+(cd "$PACKAGE_DIR" && zip -r "../$OUTPUT" . --exclude "contents/locale/*.po" --exclude "contents/locale/*.pot")
 echo "Created $OUTPUT"
 
