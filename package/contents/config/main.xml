@@ -164,7 +164,7 @@
       <label>Use tool calling for command execution</label>
       <default>true</default>
     </entry>
-    <entry name="tasks" type="String">
+<entry name="tasks" type="String">
       <label>User-defined tasks (JSON array)</label>
       <default></default>
     </entry>

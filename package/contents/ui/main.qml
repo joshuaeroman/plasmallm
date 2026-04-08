@@ -61,14 +61,13 @@ PlasmoidItem {
         id: displayMessages
     }
 
+    preferredRepresentation: Plasmoid.formFactor === PlasmaCore.Types.Planar ? fullRepresentation : null
+
     switchWidth: Kirigami.Units.gridUnit * 5
     switchHeight: Kirigami.Units.gridUnit * 5
 
     compactRepresentation: MouseArea {
         property bool wasExpanded
-
-        Layout.minimumWidth: Kirigami.Units.gridUnit * 2
-        Layout.minimumHeight: Kirigami.Units.gridUnit * 2
 
         onPressed: wasExpanded = root.expanded
         onClicked: root.expanded = !wasExpanded
@@ -1219,6 +1218,25 @@ PlasmoidItem {
         var stored = Plasmoid.configuration.availableModels;
         if (stored && stored.length > 0) {
             try { fetchedModels = JSON.parse(stored); } catch(e) {}
+        }
+        if (Plasmoid.formFactor === PlasmaCore.Types.Planar) {
+            if (root.hasUnreadResponse) {
+                root.hasUnreadResponse = false;
+                Plasmoid.status = PlasmaCore.Types.ActiveStatus;
+            }
+            var mode = Plasmoid.configuration.autoClearMode;
+            if (mode === 1) {
+                clearChat();
+            } else if (mode === 2 || mode === 3) {
+                var lastClosed = parseInt(Plasmoid.configuration.lastClosedTimestamp) || 0;
+                if (lastClosed > 0) {
+                    var elapsed = Date.now() - lastClosed;
+                    var threshold = mode === 2
+                        ? Plasmoid.configuration.autoClearSeconds * 1000
+                        : Plasmoid.configuration.autoClearMinutes * 60 * 1000;
+                    if (elapsed >= threshold) clearChat();
+                }
+            }
         }
     }
 
