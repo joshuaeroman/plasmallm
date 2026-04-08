@@ -1,0 +1,715 @@
+# Turkish translation for PlasmaLLM
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PlasmaLLM package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PlasmaLLM\n"
+"Report-Msgid-Bugs-To: https://github.com/joshuaroman/plasmallm/issues\n"
+"POT-Creation-Date: 2026-04-07 20:49-0400\n"
+"PO-Revision-Date: 2026-04-07 00:00+0000\n"
+"Last-Translator: Claude <noreply@anthropic.com>\n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:114
+msgid "Web Search Results"
+msgstr "Web Arama Sonuçları"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:212
+msgid "Thinking…"
+msgstr "Düşünülüyor…"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:256
+msgid "Copy message"
+msgstr "Mesajı kopyala"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:264
+msgid "Retry"
+msgstr "Yeniden dene"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:272
+msgid "Share with LLM"
+msgstr "LLM ile paylaş"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:274
+msgid "Include this output in the conversation"
+msgstr "Bu çıktıyı konuşmaya dahil et"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:65
+msgid "Save"
+msgstr "Kaydet"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:67
+msgid "Save as script file"
+msgstr "Betik dosyası olarak kaydet"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:73
+msgid "Copy"
+msgstr "Kopyala"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:75
+msgid "Copy to clipboard"
+msgstr "Panoya kopyala"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:85
+msgid "Ran"
+msgstr "Çalıştırıldı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:85
+msgid "Run"
+msgstr "Çalıştır"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:88
+msgid "Execute command inline"
+msgstr "Komutu satır içinde çalıştır"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:97
+msgid "Terminal"
+msgstr "Terminal"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:99
+msgid "Open in terminal emulator"
+msgstr "Terminal öykünücüsünde aç"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:108
+msgid "Save Script"
+msgstr "Betiği Kaydet"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:112
+msgid "Shell scripts (*.sh)"
+msgstr "Kabuk betikleri (*.sh)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:112
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:281
+msgid "All files (*)"
+msgstr "Tüm dosyalar (*)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:354
+msgid "Provider:"
+msgstr "Sağlayıcı:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:383
+msgid "API Endpoint:"
+msgstr "API Uç Noktası:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:407
+msgid "Model:"
+msgstr "Model:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:414
+msgid "e.g. llama3, gpt-4, etc."
+msgstr "örn. llama3, gpt-4, vb."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:420
+msgid "Fetch Models"
+msgstr "Modelleri Getir"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:431
+msgid "No models found."
+msgstr "Model bulunamadı."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:453
+msgid "Available Models:"
+msgstr "Mevcut Modeller:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:463
+msgid "API Key:"
+msgstr "API Anahtarı:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:470
+msgid "Optional - for OpenAI, etc."
+msgstr "İsteğe bağlı - OpenAI vb. için."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:485
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:743
+msgid "Saving…"
+msgstr "Kaydediliyor…"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:486
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:744
+msgid "Saved"
+msgstr "Kaydedildi"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:487
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:745
+msgid "Save to Config (Insecure)"
+msgstr "Yapılandırmaya Kaydet (Güvensiz)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:487
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:745
+msgid "Save Key"
+msgstr "Anahtarı Kaydet"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:496
+msgid "Stored in KDE Wallet"
+msgstr "KDE Cüzdanında Saklandı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:496
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr "KDE Cüzdanı kullanılamıyor — anahtar yapılandırma dosyasında saklandı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:507
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "Sıcaklık: %1%"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:524
+msgid "Precise"
+msgstr "Kesin"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:529
+msgid "Creative"
+msgstr "Yaratıcı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:537
+msgid "Max Tokens:"
+msgstr "Maks. Token:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:552
+msgid "Chat Spacing: %1px"
+msgstr "Sohbet Aralığı: %1px"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:569
+msgid "Compact"
+msgstr "Kompakt"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:574
+msgid "Spacious"
+msgstr "Geniş"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:581
+msgid "Appearance:"
+msgstr "Görünüm:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:582
+msgid "Show provider and model in title"
+msgstr "Başlıkta sağlayıcı ve modeli göster"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:594
+msgid "Chat History:"
+msgstr "Sohbet Geçmişi:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:595
+msgid "Auto-save chat history"
+msgstr "Sohbet geçmişini otomatik kaydet"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:599
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:614
+msgid "Saves to ~/PlasmaLLM/chats/"
+msgstr "~/PlasmaLLM/chats/ konumuna kaydeder"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:606
+msgid "Save format:"
+msgstr "Kaydetme biçimi:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:607
+msgid "Plain text (.txt)"
+msgstr "Düz metin (.txt)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:607
+msgid "Structured (.jsonl)"
+msgstr "Yapılandırılmış (.jsonl)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:622
+msgid "Auto-clear:"
+msgstr "Otomatik temizle:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:626
+msgid "Disabled"
+msgstr "Devre dışı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:632
+msgid "Instant (always clear when panel opens)"
+msgstr "Anında (panel açıldığında her zaman temizle)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:641
+msgid "After"
+msgstr "Sonra"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:660
+msgid "seconds"
+msgstr "saniye"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:660
+msgid "minutes"
+msgstr "dakika"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:675
+msgid "Commands:"
+msgstr "Komutlar:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:676
+msgid "Auto-share command output with LLM"
+msgstr "Komut çıktısını LLM ile otomatik paylaş"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:680
+msgid "Automatically send Run command results back to the LLM"
+msgstr "Çalıştır komutunun sonuçlarını otomatik olarak LLM'e gönder"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:687
+msgid "Auto-run commands from LLM"
+msgstr "LLM'den gelen komutları otomatik çalıştır"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:691
+msgid ""
+"WARNING: When combined with Auto-share, enables agentic workflow. Only use "
+"with very trustworthy LLMs."
+msgstr ""
+"UYARI: Otomatik paylaşım ile birleştirildiğinde ajan tabanlı iş akışını etkinleştirir. "
+"Yalnızca çok güvenilir LLM'lerle kullanın."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:698
+msgid "Use tool calling for commands"
+msgstr "Komutlar için araç çağrısı kullan"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:702
+msgid ""
+"Use the run_command tool for command execution. Disable for models that "
+"don't support tool calling (falls back to code block parsing)."
+msgstr ""
+"Komut yürütme için run_command aracını kullanın. Araç çağrısını desteklemeyen "
+"modeller için devre dışı bırakın (kod bloğu ayrıştırmasına geri döner)."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:709
+msgid ""
+"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
+"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
+msgstr ""
+"⚠️ TEHLİKE: Her iki seçenek de etkin - LLM artık komutları çalıştırabilir ve "
+"çıktılarını görebilir, bu da ajan tabanlı iş akışını etkinleştirir. Yalnızca güvenilir LLM'lerle kullanın."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:722
+msgid "Web Search:"
+msgstr "Web Araması:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:729
+msgid "Ollama API key for web search"
+msgstr "Web araması için Ollama API anahtarı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:753
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Ollama'nın arama API'si aracılığıyla LLM tarafından tetiklenen web aramalarını etkinleştirir"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:104
+msgid "System Info:"
+msgstr "Sistem Bilgisi:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:110
+msgid "OS"
+msgstr "İşletim Sistemi"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:115
+msgid "Shell"
+msgstr "Kabuk"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:120
+msgid "Hostname"
+msgstr "Ana Bilgisayar Adı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:125
+msgid "Kernel"
+msgstr "Çekirdek"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:130
+msgid "Desktop"
+msgstr "Masaüstü"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:135
+msgid "User"
+msgstr "Kullanıcı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:140
+msgid "CPU"
+msgstr "İşlemci"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:145
+msgid "Memory"
+msgstr "Bellek"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:150
+msgid "GPU"
+msgstr "Grafik İşlemci"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:155
+msgid "Block Devices"
+msgstr "Blok Aygıtlar"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:160
+msgid "Network"
+msgstr "Ağ"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:165
+msgid "Locale"
+msgstr "Yerel Ayar"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:170
+msgid "Date/Time"
+msgstr "Tarih/Saat"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:178
+msgid "Custom Instructions:"
+msgstr "Özel Talimatlar:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:181
+msgid "Additional instructions for the LLM…"
+msgstr "LLM için ek talimatlar…"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:188
+msgid "Preview:"
+msgstr "Önizleme:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:104
+msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
+msgstr "Görev yapılandırılmadı. Yeniden kullanılabilir istem kısayolları oluşturmak için bir görev ekleyin."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:128
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:81
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:495
+msgid "AUTO"
+msgstr "OTOMATİK"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:155
+msgid "Cancel"
+msgstr "İptal"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:155
+msgid "Add Task"
+msgstr "Görev Ekle"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:179
+msgid "Task name"
+msgstr "Görev adı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:186
+msgid "Prompt to send"
+msgstr "Gönderilecek istem"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:192
+msgid "Enable auto mode (auto-run + auto-share)"
+msgstr "Otomatik modu etkinleştir (otomatik çalıştır + otomatik paylaş)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:204
+msgid "Update Task"
+msgstr "Görevi Güncelle"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:204
+msgid "Save Task"
+msgstr "Görevi Kaydet"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:212
+msgid "A task named \"%1\" already exists."
+msgstr "\"%1\" adlı bir görev zaten mevcut."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:234
+msgid ""
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with auto mode will temporarily enable auto-run "
+"and auto-share."
+msgstr ""
+"Görevler yeniden kullanılabilir istem kısayollarıdır. Onları çalıştırmak için "
+"sohbette /task <ad> veya araç çubuğu düğmesini kullanın. Otomatik modlu görevler "
+"otomatik çalıştırma ve otomatik paylaşımı geçici olarak etkinleştirir."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:20
+msgid "Toggle auto mode (auto-run + auto-share) for this session"
+msgstr "Bu oturum için otomatik modu (otomatik çalıştır + otomatik paylaş) değiştir"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:21
+msgid "Clear the chat"
+msgstr "Sohbeti temizle"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:22
+msgid "Copy conversation to clipboard"
+msgstr "Konuşmayı panoya kopyala"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:23
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:116
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:117
+msgid "Open chat history folder"
+msgstr "Sohbet geçmişi klasörünü aç"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:24
+msgid "Show or switch model (/model <name>)"
+msgstr "Modeli göster veya değiştir (/model <ad>)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:25
+msgid "Run last command"
+msgstr "Son komutu çalıştır"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:26
+msgid "Save chat to file"
+msgstr "Sohbeti dosyaya kaydet"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:27
+msgid "Open settings"
+msgstr "Ayarları aç"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:28
+msgid "Run a saved task (/task <name>)"
+msgstr "Kaydedilmiş bir görevi çalıştır (/task <ad>)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:29
+msgid "Run last command in terminal"
+msgstr "Son komutu terminalde çalıştır"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:91
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:92
+msgid "Run a task"
+msgstr "Bir görev çalıştır"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:126
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:127
+msgid "Copy conversation"
+msgstr "Konuşmayı kopyala"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:135
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:181
+msgid "You"
+msgstr "Siz"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:136
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:182
+msgid "Assistant"
+msgstr "Asistan"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:137
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:183
+msgid "Command"
+msgstr "Komut"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:138
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:184
+msgid "Error"
+msgstr "Hata"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:151
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:152
+msgid "Clear chat"
+msgstr "Sohbeti temizle"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:160
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:161
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:270
+msgid "Send a message to start chatting"
+msgstr "Sohbet başlatmak için bir mesaj gönderin"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:278
+msgid "Attach File"
+msgstr "Dosya Ekle"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:281
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Görseller (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:281
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Metin dosyaları (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:522
+msgid "Message input"
+msgstr "Mesaj girişi"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:523
+msgid "Type a message…"
+msgstr "Bir mesaj yazın…"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:523
+msgid "Initializing…"
+msgstr "Başlatılıyor…"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:575
+msgid "Attach file or image"
+msgstr "Dosya veya görsel ekle"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:581
+msgid "Send"
+msgstr "Gönder"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:604
+msgid "Stop"
+msgstr "Durdur"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:606
+msgid ""
+"Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
+"are on)."
+msgstr ""
+"Otomatik mod ayarlar aracılığıyla kalıcı olarak etkinleştirildi (hem Otomatik çalıştır "
+"hem de Otomatik paylaş açık)."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:609
+msgid ""
+"Auto mode enabled for this session. Commands will run and share output "
+"automatically."
+msgstr ""
+"Bu oturum için otomatik mod etkinleştirildi. Komutlar çalışacak ve çıktıyı "
+"otomatik olarak paylaşacak."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:609
+msgid "Auto mode disabled."
+msgstr "Otomatik mod devre dışı bırakıldı."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:620
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:675
+msgid "none"
+msgstr "yok"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:620
+msgid "Current model: **%1**"
+msgstr "Mevcut model: **%1**"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:622
+msgid "Available models:"
+msgstr "Mevcut modeller:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:624
+msgid "Type `/model <name>` to switch."
+msgstr "Geçiş yapmak için `/model <ad>` yazın."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:626
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr "Önbellekte model yok. Ayarlarda **Modelleri Getir** seçeneğini kullanın."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:635
+msgid "Switched to model: **%1**"
+msgstr "Modele geçildi: **%1**"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:644
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "Görev yapılandırılmadı. Ayarlar'da görev ekleyin."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:646
+msgid "(auto)"
+msgstr "(otomatik)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:647
+msgid "Available tasks:"
+msgstr "Mevcut görevler:"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:647
+msgid "Type `/task <name>` to run."
+msgstr "Çalıştırmak için `/task <ad>` yazın."
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:675
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Bilinmeyen görev: **%1**. Mevcut: %2"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:815
+msgid "Searching the web…"
+msgstr "Web'de aranıyor…"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:837
+msgid "Web search failed: %1"
+msgstr "Web araması başarısız: %1"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:1043
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:1055
+msgid "Running: %1"
+msgstr "Çalışıyor: %1"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:1064
+msgid "stderr: %1"
+msgstr "stderr: %1"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:1066
+msgid "[truncated — output exceeded %1KB]"
+msgstr "[kesildi — çıktı %1KB'ı aştı]"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:1068
+msgid "[exit code: %1]"
+msgstr "[çıkış kodu: %1]"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:133
+msgid "Request timed out after 60 seconds"
+msgstr "İstek 60 saniye sonra zaman aşımına uğradı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:144
+msgid "Invalid response format: missing choices[0].message.content"
+msgstr "Geçersiz yanıt biçimi: choices[0].message.content eksik"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:150
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:425
+msgid "Failed to parse response: %1"
+msgstr "Yanıt ayrıştırılamadı: %1"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:155
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:446
+msgid "Authentication failed (HTTP %1) — check your API key"
+msgstr "Kimlik doğrulama başarısız (HTTP %1) — API anahtarınızı kontrol edin"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:157
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:448
+msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
+msgstr "Hız sınırı aşıldı (HTTP 429) — çok fazla istek, kısa süre sonra tekrar deneyin"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:159
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:450
+msgid "Not found (HTTP 404) — check your API endpoint and model name"
+msgstr "Bulunamadı (HTTP 404) — API uç noktanızı ve model adınızı kontrol edin"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:161
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:452
+msgid "API error %1"
+msgstr "API hatası %1"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:163
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:454
+msgid "Request failed (no response) — check your endpoint URL"
+msgstr "İstek başarısız oldu (yanıt yok) — uç nokta URL'nizi kontrol edin"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:204
+msgid "Request timed out after 30 seconds"
+msgstr "İstek 30 saniye sonra zaman aşımına uğradı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:220
+msgid "Failed to parse models: %1"
+msgstr "Modeller ayrıştırılamadı: %1"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:223
+msgid "Failed to fetch models: HTTP %1"
+msgstr "Modeller getirilemedi: HTTP %1"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:315
+msgid "Web search timed out"
+msgstr "Web araması zaman aşımına uğradı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:325
+msgid "Failed to parse web search response: %1"
+msgstr "Web arama yanıtı ayrıştırılamadı: %1"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:328
+msgid "Web search failed (HTTP %1)"
+msgstr "Web araması başarısız (HTTP %1)"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:419
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:422
+msgid "Invalid response format"
+msgstr "Geçersiz yanıt biçimi"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:431
+msgid "Request timed out"
+msgstr "İstek zaman aşımına uğradı"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/config/config.qml:11
+msgid "General"
+msgstr "Genel"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/config/config.qml:16
+msgid "System Prompt"
+msgstr "Sistem İstemi"
+
+#: /var/home/joshuaroman/plasmallm/package/contents/ui/config/config.qml:21
+msgid "Tasks"
+msgstr "Görevler"

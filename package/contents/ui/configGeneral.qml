@@ -351,7 +351,7 @@ SimpleKCM {
 
         QQC2.ComboBox {
             id: endpointPreset
-            Kirigami.FormData.label: "Provider:"
+            Kirigami.FormData.label: i18n("Provider:")
             Layout.fillWidth: true
             model: presetEndpoints.map(function(p) { return p.name; })
             Component.onCompleted: {
@@ -380,7 +380,7 @@ SimpleKCM {
 
         QQC2.TextField {
             id: apiEndpointField
-            Kirigami.FormData.label: "API Endpoint:"
+            Kirigami.FormData.label: i18n("API Endpoint:")
             placeholderText: "http://localhost:11434/v1"
             Layout.fillWidth: true
             text: cfg_apiEndpoint
@@ -404,20 +404,20 @@ SimpleKCM {
         }
 
         RowLayout {
-            Kirigami.FormData.label: "Model:"
+            Kirigami.FormData.label: i18n("Model:")
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
             QQC2.TextField {
                 id: modelNameField
                 Layout.fillWidth: true
-                placeholderText: "e.g. llama3, gpt-4, etc."
+                placeholderText: i18n("e.g. llama3, gpt-4, etc.")
                 text: cfg_modelName
                 onTextChanged: cfg_modelName = text
             }
 
             QQC2.Button {
-                text: "Fetch Models"
+                text: i18n("Fetch Models")
                 icon.name: "view-refresh"
                 onClicked: {
                     enabled = false;
@@ -428,7 +428,7 @@ SimpleKCM {
                             fetchStatusLabel.text = error;
                             fetchStatusLabel.visible = true;
                         } else if (models.length === 0) {
-                            fetchStatusLabel.text = "No models found.";
+                            fetchStatusLabel.text = i18n("No models found.");
                             fetchStatusLabel.visible = true;
                         } else {
                             availableModels = models;
@@ -450,7 +450,7 @@ SimpleKCM {
 
         QQC2.ComboBox {
             id: modelCombo
-            Kirigami.FormData.label: "Available Models:"
+            Kirigami.FormData.label: i18n("Available Models:")
             visible: availableModels.length > 0
             model: availableModels
             Layout.fillWidth: true
@@ -460,14 +460,14 @@ SimpleKCM {
         }
 
         RowLayout {
-            Kirigami.FormData.label: "API Key:"
+            Kirigami.FormData.label: i18n("API Key:")
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
             QQC2.TextField {
                 id: apiKeyField
                 Layout.fillWidth: true
-                placeholderText: "Optional - for OpenAI, etc."
+                placeholderText: i18n("Optional - for OpenAI, etc.")
                 echoMode: TextInput.Password
                 text: walletKeyLoaded ? walletApiKey : cfg_apiKey
                 onTextChanged: {
@@ -482,9 +482,9 @@ SimpleKCM {
 
             QQC2.Button {
                 id: saveKeyButton
-                text: walletSaveInProgress ? "Saving..." :
-                      !walletKeyDirty ? "Saved" :
-                      !walletAvailable ? "Save to Config (Insecure)" : "Save Key"
+                text: walletSaveInProgress ? i18n("Saving…") :
+                      !walletKeyDirty ? i18n("Saved") :
+                      !walletAvailable ? i18n("Save to Config (Insecure)") : i18n("Save Key")
                 icon.name: !walletKeyDirty ? "dialog-ok-apply" : "document-save"
                 enabled: walletKeyDirty && !walletSaveInProgress
                 onClicked: saveWalletKey()
@@ -493,7 +493,7 @@ SimpleKCM {
 
         QQC2.Label {
             visible: walletKeyLoaded
-            text: walletAvailable ? "Stored in KDE Wallet" : "KDE Wallet unavailable — key stored in config file"
+            text: walletAvailable ? i18n("Stored in KDE Wallet") : i18n("KDE Wallet unavailable — key stored in config file")
             font: Kirigami.Theme.smallFont
             color: walletAvailable ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.neutralTextColor
         }
@@ -504,7 +504,7 @@ SimpleKCM {
         }
 
         ColumnLayout {
-            Kirigami.FormData.label: "Temperature: " + Math.round(temperatureSlider.value) + "%"
+            Kirigami.FormData.label: i18n("Temperature: %1%", Math.round(temperatureSlider.value))
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
@@ -521,12 +521,12 @@ SimpleKCM {
             RowLayout {
                 Layout.fillWidth: true
                 QQC2.Label {
-                    text: "Precise"
+                    text: i18n("Precise")
                     font: Kirigami.Theme.smallFont
                 }
                 Item { Layout.fillWidth: true }
                 QQC2.Label {
-                    text: "Creative"
+                    text: i18n("Creative")
                     font: Kirigami.Theme.smallFont
                 }
             }
@@ -534,7 +534,7 @@ SimpleKCM {
 
         QQC2.SpinBox {
             id: maxTokensSpinBox
-            Kirigami.FormData.label: "Max Tokens:"
+            Kirigami.FormData.label: i18n("Max Tokens:")
             from: 64
             to: 32768
             stepSize: 64
@@ -549,7 +549,7 @@ SimpleKCM {
         }
 
         ColumnLayout {
-            Kirigami.FormData.label: "Chat Spacing: " + Math.round(chatSpacingSlider.value) + "px"
+            Kirigami.FormData.label: i18n("Chat Spacing: %1px", Math.round(chatSpacingSlider.value))
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
@@ -566,20 +566,20 @@ SimpleKCM {
             RowLayout {
                 Layout.fillWidth: true
                 QQC2.Label {
-                    text: "Compact"
+                    text: i18n("Compact")
                     font: Kirigami.Theme.smallFont
                 }
                 Item { Layout.fillWidth: true }
                 QQC2.Label {
-                    text: "Spacious"
+                    text: i18n("Spacious")
                     font: Kirigami.Theme.smallFont
                 }
             }
         }
 
         QQC2.CheckBox {
-            Kirigami.FormData.label: "Appearance:"
-            text: "Show provider and model in title"
+            Kirigami.FormData.label: i18n("Appearance:")
+            text: i18n("Show provider and model in title")
             checked: cfg_showProviderInTitle
             onCheckedChanged: cfg_showProviderInTitle = checked
         }
@@ -591,27 +591,27 @@ SimpleKCM {
 
         QQC2.CheckBox {
             id: saveChatHistoryCheckBox
-            Kirigami.FormData.label: "Chat History:"
-            text: "Auto-save chat history"
+            Kirigami.FormData.label: i18n("Chat History:")
+            text: i18n("Auto-save chat history")
             checked: cfg_saveChatHistory
             onCheckedChanged: cfg_saveChatHistory = checked
 
-            QQC2.ToolTip.text: "Saves to ~/PlasmaLLM/chats/"
+            QQC2.ToolTip.text: i18n("Saves to ~/PlasmaLLM/chats/")
             QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
         }
 
         QQC2.ComboBox {
             id: chatSaveFormatCombo
-            Kirigami.FormData.label: "Save format:"
-            model: ["Plain text (.txt)", "Structured (.jsonl)"]
+            Kirigami.FormData.label: i18n("Save format:")
+            model: [i18n("Plain text (.txt)"), i18n("Structured (.jsonl)")]
             enabled: cfg_saveChatHistory
             currentIndex: cfg_chatSaveFormat === "jsonl" ? 1 : 0
             onCurrentIndexChanged: cfg_chatSaveFormat = currentIndex === 1 ? "jsonl" : "txt"
         }
 
         QQC2.Label {
-            text: "Saves to ~/PlasmaLLM/chats/"
+            text: i18n("Saves to ~/PlasmaLLM/chats/")
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
         }
@@ -619,17 +619,17 @@ SimpleKCM {
         QQC2.ButtonGroup { id: autoClearGroup }
 
         ColumnLayout {
-            Kirigami.FormData.label: "Auto-clear:"
+            Kirigami.FormData.label: i18n("Auto-clear:")
             spacing: Kirigami.Units.smallSpacing
 
             QQC2.RadioButton {
-                text: "Disabled"
+                text: i18n("Disabled")
                 QQC2.ButtonGroup.group: autoClearGroup
                 checked: cfg_autoClearMode === 0
                 onClicked: cfg_autoClearMode = 0
             }
             QQC2.RadioButton {
-                text: "Instant (always clear when panel opens)"
+                text: i18n("Instant (always clear when panel opens)")
                 QQC2.ButtonGroup.group: autoClearGroup
                 checked: cfg_autoClearMode === 1
                 onClicked: cfg_autoClearMode = 1
@@ -638,7 +638,7 @@ SimpleKCM {
                 spacing: Kirigami.Units.smallSpacing
                 QQC2.RadioButton {
                     id: timedRadio
-                    text: "After"
+                    text: i18n("After")
                     QQC2.ButtonGroup.group: autoClearGroup
                     checked: cfg_autoClearMode === 2 || cfg_autoClearMode === 3
                     onClicked: cfg_autoClearMode = (unitCombo.currentIndex === 0 ? 2 : 3)
@@ -657,7 +657,7 @@ SimpleKCM {
                 }
                 QQC2.ComboBox {
                     id: unitCombo
-                    model: ["seconds", "minutes"]
+                    model: [i18n("seconds"), i18n("minutes")]
                     currentIndex: cfg_autoClearMode === 3 ? 1 : 0
                     enabled: timedRadio.checked
                     onActivated: cfg_autoClearMode = (currentIndex === 0 ? 2 : 3)
@@ -672,41 +672,41 @@ SimpleKCM {
 
         QQC2.CheckBox {
             id: autoShareCheckBox
-            Kirigami.FormData.label: "Commands:"
-            text: "Auto-share command output with LLM"
+            Kirigami.FormData.label: i18n("Commands:")
+            text: i18n("Auto-share command output with LLM")
             checked: cfg_autoShareCommandOutput
             onCheckedChanged: cfg_autoShareCommandOutput = checked
 
-            QQC2.ToolTip.text: "Automatically send Run command results back to the LLM"
+            QQC2.ToolTip.text: i18n("Automatically send Run command results back to the LLM")
             QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
         }
 
         QQC2.CheckBox {
             id: autoRunCheckBox
-            text: "Auto-run commands from LLM"
+            text: i18n("Auto-run commands from LLM")
             checked: cfg_autoRunCommands
             onCheckedChanged: cfg_autoRunCommands = checked
 
-            QQC2.ToolTip.text: "WARNING: When combined with Auto-share, enables agentic workflow. Only use with very trustworthy LLMs."
+            QQC2.ToolTip.text: i18n("WARNING: When combined with Auto-share, enables agentic workflow. Only use with very trustworthy LLMs.")
             QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
         }
 
         QQC2.CheckBox {
             id: useCommandToolCheckBox
-            text: "Use tool calling for commands"
+            text: i18n("Use tool calling for commands")
             checked: cfg_useCommandTool
             onCheckedChanged: cfg_useCommandTool = checked
 
-            QQC2.ToolTip.text: "Use the run_command tool for command execution. Disable for models that don't support tool calling (falls back to code block parsing)."
+            QQC2.ToolTip.text: i18n("Use the run_command tool for command execution. Disable for models that don't support tool calling (falls back to code block parsing).")
             QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
         }
 
         QQC2.Label {
             visible: autoShareCheckBox.checked && autoRunCheckBox.checked
-            text: "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see their output, enabling an agentic workflow. Only use with trustworthy LLMs."
+            text: i18n("⚠️ DANGER: Both options enabled - the LLM can now execute commands and see their output, enabling an agentic workflow. Only use with trustworthy LLMs.")
             wrapMode: Text.Wrap
             Layout.preferredWidth: 300
             color: Kirigami.Theme.negativeTextColor
@@ -719,14 +719,14 @@ SimpleKCM {
         }
 
         RowLayout {
-            Kirigami.FormData.label: "Web Search:"
+            Kirigami.FormData.label: i18n("Web Search:")
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
             QQC2.TextField {
                 id: ollamaApiKeyField
                 Layout.fillWidth: true
-                placeholderText: "Ollama API key for web search"
+                placeholderText: i18n("Ollama API key for web search")
                 echoMode: TextInput.Password
                 text: walletOllamaKeyLoaded ? walletOllamaKey : cfg_ollamaApiKey
                 onTextChanged: {
@@ -740,9 +740,9 @@ SimpleKCM {
             }
 
             QQC2.Button {
-                text: walletOllamaSaveInProgress ? "Saving..." :
-                      !walletOllamaKeyDirty ? "Saved" :
-                      !walletAvailable ? "Save to Config (Insecure)" : "Save Key"
+                text: walletOllamaSaveInProgress ? i18n("Saving…") :
+                      !walletOllamaKeyDirty ? i18n("Saved") :
+                      !walletAvailable ? i18n("Save to Config (Insecure)") : i18n("Save Key")
                 icon.name: !walletOllamaKeyDirty ? "dialog-ok-apply" : "document-save"
                 enabled: walletOllamaKeyDirty && !walletOllamaSaveInProgress
                 onClicked: saveWalletOllamaKey()
@@ -750,7 +750,7 @@ SimpleKCM {
         }
 
         QQC2.Label {
-            text: "Enables LLM-triggered web searches via Ollama's search API"
+            text: i18n("Enables LLM-triggered web searches via Ollama's search API")
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
             wrapMode: Text.Wrap

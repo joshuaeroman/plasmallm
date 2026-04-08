@@ -8,17 +8,17 @@ import org.kde.plasma.configuration
 
 ConfigModel {
     ConfigCategory {
-        name: "General"
+        name: i18n("General")
         icon: "im-user"
         source: "configGeneral.qml"
     }
     ConfigCategory {
-        name: "System Prompt"
+        name: i18n("System Prompt")
         icon: "dialog-scripts"
         source: "configSystemPrompt.qml"
     }
     ConfigCategory {
-        name: "Tasks"
+        name: i18n("Tasks")
         icon: "view-task"
         source: "configTasks.qml"
     }

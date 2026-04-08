@@ -101,7 +101,7 @@ SimpleKCM {
             spacing: Kirigami.Units.smallSpacing
 
             QQC2.Label {
-                text: "No tasks configured. Add a task to create reusable prompt shortcuts."
+                text: i18n("No tasks configured. Add a task to create reusable prompt shortcuts.")
                 visible: tasksList.length === 0
                 color: Kirigami.Theme.disabledTextColor
                 wrapMode: Text.Wrap
@@ -125,7 +125,7 @@ SimpleKCM {
                     }
                     QQC2.Label {
                         visible: tasksList[index].auto
-                        text: "AUTO"
+                        text: i18n("AUTO")
                         color: Kirigami.Theme.negativeTextColor
                         font: Kirigami.Theme.smallFont
                     }
@@ -152,7 +152,7 @@ SimpleKCM {
             }
 
             QQC2.Button {
-                text: taskEditorVisible ? "Cancel" : "Add Task"
+                text: taskEditorVisible ? i18n("Cancel") : i18n("Add Task")
                 icon.name: taskEditorVisible ? "dialog-cancel" : "list-add"
                 onClicked: {
                     if (taskEditorVisible) {
@@ -176,20 +176,20 @@ SimpleKCM {
                 QQC2.TextField {
                     id: taskNameField
                     Layout.fillWidth: true
-                    placeholderText: "Task name"
+                    placeholderText: i18n("Task name")
                 }
 
                 QQC2.TextArea {
                     id: taskPromptField
                     Layout.fillWidth: true
                     Layout.minimumHeight: Kirigami.Units.gridUnit * 3
-                    placeholderText: "Prompt to send"
+                    placeholderText: i18n("Prompt to send")
                     wrapMode: Text.Wrap
                 }
 
                 QQC2.CheckBox {
                     id: taskAutoCheck
-                    text: "Enable auto mode (auto-run + auto-share)"
+                    text: i18n("Enable auto mode (auto-run + auto-share)")
                 }
 
                 QQC2.Label {
@@ -201,7 +201,7 @@ SimpleKCM {
                 }
 
                 QQC2.Button {
-                    text: taskEditIndex >= 0 ? "Update Task" : "Save Task"
+                    text: taskEditIndex >= 0 ? i18n("Update Task") : i18n("Save Task")
                     icon.name: "dialog-ok-apply"
                     enabled: taskNameField.text.trim().length > 0 && taskPromptField.text.trim().length > 0
                     onClicked: {
@@ -209,7 +209,7 @@ SimpleKCM {
                         var arr = tasksList.slice();
                         for (var i = 0; i < arr.length; i++) {
                             if (i !== taskEditIndex && arr[i].name.toLowerCase() === name.toLowerCase()) {
-                                taskErrorLabel.text = "A task named \"" + arr[i].name + "\" already exists.";
+                                taskErrorLabel.text = i18n("A task named \"%1\" already exists.", arr[i].name);
                                 taskErrorLabel.visible = true;
                                 return;
                             }
@@ -231,7 +231,7 @@ SimpleKCM {
         }
 
         QQC2.Label {
-            text: "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar button to run them. Tasks with auto mode will temporarily enable auto-run and auto-share."
+            text: i18n("Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar button to run them. Tasks with auto mode will temporarily enable auto-run and auto-share.")
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
             wrapMode: Text.Wrap

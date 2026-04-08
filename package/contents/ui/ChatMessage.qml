@@ -111,7 +111,7 @@ Item {
 
                         PlasmaComponents.Label {
                             Layout.fillWidth: true
-                            text: "Web Search Results"
+                            text: i18n("Web Search Results")
                             font.bold: true
                             color: Kirigami.Theme.textColor
                         }
@@ -209,7 +209,7 @@ Item {
                     id: plainContent
                     PlasmaComponents.Label {
                         width: parent ? parent.width : implicitWidth
-                        text: isThinking ? "Thinking..." : messageItem.strippedContent
+                        text: isThinking ? i18n("Thinking…") : messageItem.strippedContent
                         textFormat: (isAssistant && !isThinking) ? Text.MarkdownText : Text.PlainText
                         wrapMode: Text.Wrap
                         font.family: isCommandRunning ? "monospace" : font.family
@@ -253,7 +253,7 @@ Item {
 
             PlasmaComponents.ToolButton {
                 icon.name: "edit-copy"
-                PlasmaComponents.ToolTip.text: "Copy message"
+                PlasmaComponents.ToolTip.text: i18n("Copy message")
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: messageItem.copyToClipboard(messageItem.content)
             }
@@ -261,7 +261,7 @@ Item {
             // Retry button for error messages
             PlasmaComponents.Button {
                 visible: isError
-                text: "Retry"
+                text: i18n("Retry")
                 icon.name: "view-refresh"
                 onClicked: messageItem.retryRequested()
             }
@@ -269,9 +269,9 @@ Item {
             // Share with LLM button for command output
             PlasmaComponents.Button {
                 visible: isCommandOutput && !messageItem.shared
-                text: "Share with LLM"
+                text: i18n("Share with LLM")
                 icon.name: "document-share"
-                PlasmaComponents.ToolTip.text: "Include this output in the conversation"
+                PlasmaComponents.ToolTip.text: i18n("Include this output in the conversation")
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: messageItem.shareRequested(messageItem.messageIndex)
             }

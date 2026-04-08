@@ -17,16 +17,16 @@ PlasmaExtras.Representation {
     id: fullRep
 
     readonly property var slashCommands: [
-        { cmd: "/auto",     desc: "Toggle auto mode (auto-run + auto-share) for this session" },
-        { cmd: "/clear",    desc: "Clear the chat" },
-        { cmd: "/copy",     desc: "Copy conversation to clipboard" },
-        { cmd: "/history",  desc: "Open chat history folder" },
-        { cmd: "/model",    desc: "Show or switch model (/model <name>)" },
-        { cmd: "/run",      desc: "Run last command" },
-        { cmd: "/save",     desc: "Save chat to file" },
-        { cmd: "/settings", desc: "Open settings" },
-        { cmd: "/task",     desc: "Run a saved task (/task <name>)" },
-        { cmd: "/term",     desc: "Run last command in terminal" },
+        { cmd: "/auto",     desc: i18n("Toggle auto mode (auto-run + auto-share) for this session") },
+        { cmd: "/clear",    desc: i18n("Clear the chat") },
+        { cmd: "/copy",     desc: i18n("Copy conversation to clipboard") },
+        { cmd: "/history",  desc: i18n("Open chat history folder") },
+        { cmd: "/model",    desc: i18n("Show or switch model (/model <name>)") },
+        { cmd: "/run",      desc: i18n("Run last command") },
+        { cmd: "/save",     desc: i18n("Save chat to file") },
+        { cmd: "/settings", desc: i18n("Open settings") },
+        { cmd: "/task",     desc: i18n("Run a saved task (/task <name>)") },
+        { cmd: "/term",     desc: i18n("Run last command in terminal") },
     ]
 
     property var configuredTasks: {
@@ -78,7 +78,7 @@ PlasmaExtras.Representation {
             }
 
             PlasmaComponents.Label {
-                text: "AUTO"
+                text: i18n("AUTO")
                 visible: root.isAutoMode
                 font.bold: true
                 color: Kirigami.Theme.negativeTextColor
@@ -88,8 +88,8 @@ PlasmaExtras.Representation {
             PlasmaComponents.ToolButton {
                 id: taskToolButton
                 icon.name: "view-task"
-                Accessible.name: "Run a task"
-                PlasmaComponents.ToolTip.text: "Run a task"
+                Accessible.name: i18n("Run a task")
+                PlasmaComponents.ToolTip.text: i18n("Run a task")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered
                 visible: fullRep.configuredTasks.length > 0
@@ -113,8 +113,8 @@ PlasmaExtras.Representation {
 
             PlasmaComponents.ToolButton {
                 icon.name: "clock"
-                Accessible.name: "Open chat history folder"
-                PlasmaComponents.ToolTip.text: "Open chat history folder"
+                Accessible.name: i18n("Open chat history folder")
+                PlasmaComponents.ToolTip.text: i18n("Open chat history folder")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered
                 visible: Plasmoid.configuration.saveChatHistory
@@ -123,8 +123,8 @@ PlasmaExtras.Representation {
 
             PlasmaComponents.ToolButton {
                 icon.name: "edit-copy"
-                Accessible.name: "Copy conversation"
-                PlasmaComponents.ToolTip.text: "Copy conversation"
+                Accessible.name: i18n("Copy conversation")
+                PlasmaComponents.ToolTip.text: i18n("Copy conversation")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered
                 enabled: root.displayMessages.count > 0
@@ -132,10 +132,10 @@ PlasmaExtras.Representation {
                     var text = "";
                     for (var i = 0; i < root.displayMessages.count; i++) {
                         var msg = root.displayMessages.get(i);
-                        var prefix = msg.role === "user" ? "You" :
-                                     msg.role === "assistant" ? "Assistant" :
-                                     msg.role === "command_output" ? "Command" :
-                                     msg.role === "error" ? "Error" : "";
+                        var prefix = msg.role === "user" ? i18n("You") :
+                                     msg.role === "assistant" ? i18n("Assistant") :
+                                     msg.role === "command_output" ? i18n("Command") :
+                                     msg.role === "error" ? i18n("Error") : "";
                         if (prefix) {
                             text += prefix + ": " + msg.content + "\n\n";
                         }
@@ -148,8 +148,8 @@ PlasmaExtras.Representation {
 
             PlasmaComponents.ToolButton {
                 icon.name: "edit-clear-history"
-                Accessible.name: "Clear chat"
-                PlasmaComponents.ToolTip.text: "Clear chat"
+                Accessible.name: i18n("Clear chat")
+                PlasmaComponents.ToolTip.text: i18n("Clear chat")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: { root.clearChat(); inputField.forceActiveFocus(); }
@@ -157,8 +157,8 @@ PlasmaExtras.Representation {
 
             PlasmaComponents.ToolButton {
                 icon.name: "configure"
-                Accessible.name: "Settings"
-                PlasmaComponents.ToolTip.text: "Settings"
+                Accessible.name: i18n("Settings")
+                PlasmaComponents.ToolTip.text: i18n("Settings")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: Plasmoid.internalAction("configure").trigger()
@@ -178,10 +178,10 @@ PlasmaExtras.Representation {
             var text = "";
             for (var i = 0; i < root.displayMessages.count; i++) {
                 var msg = root.displayMessages.get(i);
-                var prefix = msg.role === "user" ? "You" :
-                             msg.role === "assistant" ? "Assistant" :
-                             msg.role === "command_output" ? "Command" :
-                             msg.role === "error" ? "Error" : "";
+                var prefix = msg.role === "user" ? i18n("You") :
+                             msg.role === "assistant" ? i18n("Assistant") :
+                             msg.role === "command_output" ? i18n("Command") :
+                             msg.role === "error" ? i18n("Error") : "";
                 if (prefix) text += prefix + ": " + msg.content + "\n\n";
             }
             clipboardHelper.text = text.trim();
@@ -267,7 +267,7 @@ PlasmaExtras.Representation {
                     anchors.centerIn: parent
                     width: parent.width - (Kirigami.Units.gridUnit * 4)
                     visible: messageList.count === 0
-                    text: "Send a message to start chatting"
+                    text: i18n("Send a message to start chatting")
                     iconName: "im-user"
                 }
             }
@@ -275,10 +275,10 @@ PlasmaExtras.Representation {
 
         FileDialog {
             id: attachDialog
-            title: "Attach File"
+            title: i18n("Attach File")
             fileMode: FileDialog.OpenFile
             currentFolder: StandardPaths.writableLocation(StandardPaths.HomeLocation)
-            nameFilters: ["Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)", "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf *.sh *.py *.js *.ts *.qml)", "All files (*)"]
+            nameFilters: [i18n("Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"), i18n("Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf *.sh *.py *.js *.ts *.qml)"), i18n("All files (*)")]
             onAccepted: {
                 var path = decodeURIComponent(selectedFile.toString().replace(/^file:\/\//, ""));
                 root.attachFile(path);
@@ -492,7 +492,7 @@ PlasmaExtras.Representation {
                                 }
                                 PlasmaComponents.Label {
                                     visible: modelData.auto
-                                    text: "AUTO"
+                                    text: i18n("AUTO")
                                     font: Kirigami.Theme.smallFont
                                     color: Kirigami.Theme.negativeTextColor
                                 }
@@ -519,8 +519,8 @@ PlasmaExtras.Representation {
 
                 QQC2.TextArea {
                     id: inputField
-                    Accessible.name: "Message input"
-                    placeholderText: root.systemPromptReady ? "Type a message..." : "Initializing..."
+                    Accessible.name: i18n("Message input")
+                    placeholderText: root.systemPromptReady ? i18n("Type a message…") : i18n("Initializing…")
                     enabled: !root.isLoading && root.systemPromptReady
                     focus: true
                     wrapMode: Text.Wrap
@@ -572,13 +572,13 @@ PlasmaExtras.Representation {
                 icon.name: "mail-attachment"
                 visible: !root.isLoading
                 enabled: root.systemPromptReady
-                PlasmaComponents.ToolTip.text: "Attach file or image"
+                PlasmaComponents.ToolTip.text: i18n("Attach file or image")
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: attachDialog.open()
             }
 
             PlasmaComponents.Button {
-                text: "Send"
+                text: i18n("Send")
                 icon.name: "document-send"
                 visible: !root.isLoading
                 enabled: root.systemPromptReady && (inputField.text.trim().length > 0 || root.pendingAttachments.length > 0)
@@ -601,7 +601,7 @@ PlasmaExtras.Representation {
             }
 
             PlasmaComponents.Button {
-                text: "Stop"
+                text: i18n("Stop")
                 icon.name: "media-playback-stop"
                 visible: root.isLoading
                 onClicked: root.cancelRequest()

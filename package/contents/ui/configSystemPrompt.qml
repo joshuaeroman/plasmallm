@@ -101,73 +101,73 @@ SimpleKCM {
         anchors.fill: parent
 
         GridLayout {
-            Kirigami.FormData.label: "System Info:"
+            Kirigami.FormData.label: i18n("System Info:")
             columns: 2
             columnSpacing: Kirigami.Units.largeSpacing
             rowSpacing: 0
 
             QQC2.CheckBox {
-                text: "OS"
+                text: i18n("OS")
                 checked: cfg_sysInfoOS
                 onCheckedChanged: cfg_sysInfoOS = checked
             }
             QQC2.CheckBox {
-                text: "Shell"
+                text: i18n("Shell")
                 checked: cfg_sysInfoShell
                 onCheckedChanged: cfg_sysInfoShell = checked
             }
             QQC2.CheckBox {
-                text: "Hostname"
+                text: i18n("Hostname")
                 checked: cfg_sysInfoHostname
                 onCheckedChanged: cfg_sysInfoHostname = checked
             }
             QQC2.CheckBox {
-                text: "Kernel"
+                text: i18n("Kernel")
                 checked: cfg_sysInfoKernel
                 onCheckedChanged: cfg_sysInfoKernel = checked
             }
             QQC2.CheckBox {
-                text: "Desktop"
+                text: i18n("Desktop")
                 checked: cfg_sysInfoDesktop
                 onCheckedChanged: cfg_sysInfoDesktop = checked
             }
             QQC2.CheckBox {
-                text: "User"
+                text: i18n("User")
                 checked: cfg_sysInfoUser
                 onCheckedChanged: cfg_sysInfoUser = checked
             }
             QQC2.CheckBox {
-                text: "CPU"
+                text: i18n("CPU")
                 checked: cfg_sysInfoCPU
                 onCheckedChanged: cfg_sysInfoCPU = checked
             }
             QQC2.CheckBox {
-                text: "Memory"
+                text: i18n("Memory")
                 checked: cfg_sysInfoMemory
                 onCheckedChanged: cfg_sysInfoMemory = checked
             }
             QQC2.CheckBox {
-                text: "GPU"
+                text: i18n("GPU")
                 checked: cfg_sysInfoGPU
                 onCheckedChanged: cfg_sysInfoGPU = checked
             }
             QQC2.CheckBox {
-                text: "Block Devices"
+                text: i18n("Block Devices")
                 checked: cfg_sysInfoDisk
                 onCheckedChanged: cfg_sysInfoDisk = checked
             }
             QQC2.CheckBox {
-                text: "Network"
+                text: i18n("Network")
                 checked: cfg_sysInfoNetwork
                 onCheckedChanged: cfg_sysInfoNetwork = checked
             }
             QQC2.CheckBox {
-                text: "Locale"
+                text: i18n("Locale")
                 checked: cfg_sysInfoLocale
                 onCheckedChanged: cfg_sysInfoLocale = checked
             }
             QQC2.CheckBox {
-                text: "Date/Time"
+                text: i18n("Date/Time")
                 checked: cfg_sysInfoDateTime
                 onCheckedChanged: cfg_sysInfoDateTime = checked
             }
@@ -175,17 +175,17 @@ SimpleKCM {
 
         QQC2.TextArea {
             id: customPromptArea
-            Kirigami.FormData.label: "Custom Instructions:"
+            Kirigami.FormData.label: i18n("Custom Instructions:")
             Layout.fillWidth: true
             Layout.minimumHeight: Kirigami.Units.gridUnit * 6
-            placeholderText: "Additional instructions for the LLM..."
+            placeholderText: i18n("Additional instructions for the LLM…")
             wrapMode: Text.Wrap
             text: cfg_customSystemPrompt
             onTextChanged: cfg_customSystemPrompt = text
         }
 
         QQC2.TextArea {
-            Kirigami.FormData.label: "Preview:"
+            Kirigami.FormData.label: i18n("Preview:")
             Layout.fillWidth: true
             Layout.minimumHeight: Kirigami.Units.gridUnit * 14
             readOnly: true
