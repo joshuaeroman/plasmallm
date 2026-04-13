@@ -205,9 +205,12 @@ PlasmaExtras.Representation {
     contentItem: ColumnLayout {
         spacing: Plasmoid.configuration.chatSpacing
 
-        PlasmaComponents.ScrollView {
+        Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
+
+            PlasmaComponents.ScrollView {
+                anchors.fill: parent
 
             ListView {
                 id: messageList
@@ -218,7 +221,13 @@ PlasmaExtras.Representation {
                 model: root.displayMessages
 
                 // Track whether user is near the bottom to avoid fighting manual scrolling
-                readonly property bool atBottom: contentHeight - contentY - height < Kirigami.Units.gridUnit * 2
+                readonly property bool atBottom: atYEnd || contentHeight <= height
+                // Latched true when streaming begins at bottom; cleared when streaming ends or user scrolls away
+                property bool trackingStream: false
+
+                function scrollToEnd() {
+                    positionViewAtEnd();
+                }
 
                 delegate: ChatMessage {
                     width: messageList.width
@@ -236,18 +245,35 @@ PlasmaExtras.Representation {
                     onSaveRequested: function(filePath, content) { root.saveScript(filePath, content); }
                 }
 
+                onFlickStarted: {
+                    trackingStream = false;
+                }
+
                 onCountChanged: {
+                    var wasAtBottom = messageList.atBottom || root.isAutoMode || messageList.trackingStream;
+                    if (wasAtBottom && root.isLoading && root.streamingMessageIndex >= 0) {
+                        trackingStream = true;
+                    }
                     Qt.callLater(function() {
-                        if (messageList.atBottom) {
-                            messageList.positionViewAtEnd();
+                        if (wasAtBottom) {
+                            messageList.scrollToEnd();
                         }
                     });
                 }
 
                 onContentHeightChanged: {
-                    if ((root.isAutoMode || (root.isLoading && root.streamingMessageIndex >= 0)) && messageList.atBottom) {
+                    if (root.isAutoMode && messageList.atBottom) {
                         Qt.callLater(function() {
-                            messageList.positionViewAtEnd();
+                            messageList.scrollToEnd();
+                        });
+                    } else if (root.isLoading && root.streamingMessageIndex >= 0 && (messageList.atBottom || messageList.trackingStream)) {
+                        Qt.callLater(function() {
+                            var item = messageList.itemAtIndex(root.streamingMessageIndex);
+                            if (item && item.height > messageList.height) {
+                                messageList.positionViewAtIndex(root.streamingMessageIndex, ListView.Beginning);
+                            } else {
+                                messageList.scrollToEnd();
+                            }
                         });
                     }
                 }
@@ -260,14 +286,15 @@ PlasmaExtras.Representation {
                         }
                     }
                     function onResponseReady(messageIndex) {
+                        messageList.trackingStream = false;
                         Qt.callLater(function() {
                             if (root.isAutoMode && messageList.atBottom) {
-                                messageList.positionViewAtEnd();
+                                messageList.scrollToEnd();
                                 return;
                             }
                             var item = messageList.itemAtIndex(messageIndex);
                             if (item && item.height <= messageList.height) {
-                                messageList.positionViewAtEnd();
+                                messageList.scrollToEnd();
                             } else {
                                 messageList.positionViewAtIndex(messageIndex, ListView.Beginning);
                             }
@@ -281,6 +308,27 @@ PlasmaExtras.Representation {
                     visible: messageList.count === 0
                     text: i18n("Send a message to start chatting")
                     iconName: "im-user"
+                }
+            }
+        }
+
+            PlasmaComponents.RoundButton {
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: Kirigami.Units.smallSpacing
+                visible: !messageList.atBottom && messageList.count > 0 && !root.isLoading
+                icon.name: "go-down"
+                icon.width: Kirigami.Units.iconSizes.small
+                icon.height: Kirigami.Units.iconSizes.small
+                z: 1
+                onClicked: messageList.scrollToEnd()
+
+                background: Rectangle {
+                    radius: width / 2
+                    color: Kirigami.Theme.backgroundColor
+                    opacity: 0.85
+                    border.color: Kirigami.Theme.disabledTextColor
+                    border.width: 1
                 }
             }
         }
