@@ -17,6 +17,8 @@ import "api.js" as Api
 PlasmoidItem {
     id: root
 
+    hideOnWindowDeactivate: !Plasmoid.configuration.pin
+
     property bool isLoading: false
     property bool hasUnreadResponse: false
     property var activeRequest: null
@@ -570,6 +572,10 @@ PlasmoidItem {
 
         // Slash commands
         var lower = text.toLowerCase().trim();
+        if (lower === "/close") {
+            root.expanded = false;
+            return;
+        }
         if (lower === "/clear") {
             clearChat();
             return;

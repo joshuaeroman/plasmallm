@@ -19,6 +19,7 @@ PlasmaExtras.Representation {
     readonly property var slashCommands: [
         { cmd: "/auto",     desc: i18n("Toggle auto mode (auto-run + auto-share) for this session") },
         { cmd: "/clear",    desc: i18n("Clear the chat") },
+        { cmd: "/close",    desc: i18n("Close the panel") },
         { cmd: "/copy",     desc: i18n("Copy conversation to clipboard") },
         { cmd: "/history",  desc: i18n("Open chat history folder") },
         { cmd: "/model",    desc: i18n("Show or switch model (/model <name>)") },
@@ -162,6 +163,17 @@ PlasmaExtras.Representation {
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: Plasmoid.internalAction("configure").trigger()
+            }
+
+            PlasmaComponents.ToolButton {
+                icon.name: "window-pin"
+                checkable: true
+                checked: Plasmoid.configuration.pin
+                Accessible.name: Plasmoid.configuration.pin ? i18n("Don't keep open") : i18n("Keep open")
+                PlasmaComponents.ToolTip.text: Plasmoid.configuration.pin ? i18n("Don't keep open") : i18n("Keep open")
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered
+                onClicked: Plasmoid.configuration.pin = !Plasmoid.configuration.pin
             }
         }
     }
