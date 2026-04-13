@@ -75,7 +75,7 @@ To uninstall:
 # Creates e.g. PlasmaLLM-x.y.z.plasmoid
 ```
 
-Requires `python3` (to read the version from `metadata.json`) and `zip`.
+Requires `python3` (to read the version from `metadata.json`), `zip`, and GNU `gettext` for I18N.
 
 ## Configuration
 
