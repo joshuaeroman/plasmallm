@@ -739,7 +739,7 @@ PlasmoidItem {
             if (msg.attachments_json && msg.attachments_json.length > 0) {
                 try {
                     var atts = JSON.parse(msg.attachments_json);
-                    msgContent = Api.buildContentArray(msg.content, atts);
+                    msgContent = Api.buildContentArray(Plasmoid.configuration.apiType, msg.content, atts);
                 } catch(e) {}
             }
             var entry = { role: msg.role, content: msgContent };
@@ -761,21 +761,22 @@ PlasmoidItem {
             messages = [systemMsg].concat(messages.slice(messages.length - maxApiMessages));
         }
 
-        var tools = Api.buildTools({ ollamaApiKey: root.ollamaApiKey, commandToolEnabled: Plasmoid.configuration.useCommandTool });
+        var tools = Api.buildTools(Plasmoid.configuration.apiType, { ollamaApiKey: root.ollamaApiKey, commandToolEnabled: Plasmoid.configuration.useCommandTool });
 
-        var streamHandle = Api.sendStreamingChatRequest(
-            Plasmoid.configuration.apiEndpoint,
-            root.apiKey,
-            Plasmoid.configuration.modelName,
-            messages,
-            Plasmoid.configuration.temperature,
-            Plasmoid.configuration.maxTokens,
-            function onChunk(delta, accumulated) {
+        var streamHandle = Api.sendStreaming(Plasmoid.configuration.apiType, {
+            endpoint: Plasmoid.configuration.apiEndpoint,
+            apiKey: root.apiKey,
+            model: Plasmoid.configuration.modelName,
+            messages: messages,
+            temperature: Plasmoid.configuration.temperature,
+            maxTokens: Plasmoid.configuration.maxTokens,
+            tools: tools,
+            onChunk: function(delta, accumulated) {
                 if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                     displayMessages.setProperty(streamingMessageIndex, "content", accumulated);
                 }
             },
-            function onComplete(fullText, error, toolCalls, assistantMsg) {
+            onComplete: function(fullText, error, toolCalls, assistantMsg) {
                 isLoading = false;
                 activeRequest = null;
                 if (streamPollTimer.running) streamPollTimer.stop();
@@ -960,9 +961,8 @@ PlasmoidItem {
                         taskAutoMode = false;
                     }
                 }
-            },
-            tools
-        );
+            }
+        });
 
         streamHandle.setPollTimer(streamPollTimer);
         streamPollTimer.streamHandle = streamHandle;

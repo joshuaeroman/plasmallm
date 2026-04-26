@@ -17,6 +17,8 @@ SimpleKCM {
 
     property string cfg_apiEndpoint
     property string cfg_apiEndpointDefault
+    property string cfg_apiType
+    property string cfg_apiTypeDefault
     property string cfg_providerName
     property string cfg_providerNameDefault
     property string cfg_modelName
@@ -317,34 +319,7 @@ SimpleKCM {
         loadWalletOllamaKey();
     }
 
-    readonly property var presetEndpoints: [
-        { name: "Custom",                   url: "" },
-        // Local / self-hosted
-        { name: "Ollama (local)",            url: "http://localhost:11434/v1" },
-        { name: "LM Studio (local)",         url: "http://localhost:1234/v1" },
-        { name: "LocalAI (local)",           url: "http://localhost:8080/v1" },
-        { name: "vLLM (local)",              url: "http://localhost:8000/v1" },
-        { name: "KoboldCpp (local)",         url: "http://localhost:5001/v1" },
-        { name: "text-generation-webui (local)", url: "http://localhost:5000/v1" },
-        // Cloud providers
-        { name: "Poe",                       url: "https://api.poe.com/v1" },
-        { name: "OpenAI",                    url: "https://api.openai.com/v1" },
-        { name: "Anthropic (OpenAI-compat)", url: "https://api.anthropic.com/v1" },
-        { name: "Google Gemini",             url: "https://generativelanguage.googleapis.com/v1beta/openai" },
-        { name: "Groq",                      url: "https://api.groq.com/openai/v1" },
-        { name: "Together AI",               url: "https://api.together.xyz/v1" },
-        { name: "Mistral",                   url: "https://api.mistral.ai/v1" },
-        { name: "OpenRouter",                url: "https://openrouter.ai/api/v1" },
-        { name: "Perplexity",                url: "https://api.perplexity.ai" },
-        { name: "DeepSeek",                  url: "https://api.deepseek.com/v1" },
-        { name: "xAI (Grok)",               url: "https://api.x.ai/v1" },
-        { name: "Fireworks AI",              url: "https://api.fireworks.ai/inference/v1" },
-        { name: "Cerebras",                  url: "https://api.cerebras.ai/v1" },
-        { name: "DeepInfra",                 url: "https://api.deepinfra.com/v1/openai" },
-        { name: "Cohere",                    url: "https://api.cohere.ai/compatibility/v1" },
-        { name: "SambaNova",                 url: "https://api.sambanova.ai/v1" },
-        { name: "Novita AI",                 url: "https://api.novita.ai/v3/openai" }
-    ]
+    readonly property var presetEndpoints: Api.getPresets(cfg_apiType)
 
     Kirigami.FormLayout {
         anchors.fill: parent
@@ -368,7 +343,7 @@ SimpleKCM {
                 if (index > 0) {
                     apiEndpointField.text = presetEndpoints[index].url;
                     cfg_providerName = presetEndpoints[index].name;
-                    Api.fetchModels(presetEndpoints[index].url, apiKeyField.text, function(error, models) {
+                    Api.fetchModels(cfg_apiType, presetEndpoints[index].url, apiKeyField.text, function(error, models) {
                         if (!error && models.length > 0) {
                             availableModels = models;
                             cfg_availableModels = JSON.stringify(models);
@@ -422,7 +397,7 @@ SimpleKCM {
                 onClicked: {
                     enabled = false;
                     fetchStatusLabel.visible = false;
-                    Api.fetchModels(apiEndpointField.text, apiKeyField.text, function(error, models) {
+                    Api.fetchModels(cfg_apiType, apiEndpointField.text, apiKeyField.text, function(error, models) {
                         enabled = true;
                         if (error) {
                             fetchStatusLabel.text = error;

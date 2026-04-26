@@ -14,6 +14,10 @@
       <label>API Endpoint URL</label>
       <default>http://localhost:11434/v1</default>
     </entry>
+    <entry name="apiType" type="String">
+      <label>API adapter id (openai, future: gemini, anthropic)</label>
+      <default>openai</default>
+    </entry>
     <entry name="providerName" type="String">
       <label>Provider Name</label>
       <default></default>
