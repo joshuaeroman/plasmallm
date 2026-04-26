@@ -113,15 +113,18 @@ Item {
             }
 
             QQC2.ScrollView {
+                id: thinkingScroll
                 visible: messageItem.thinkingExpanded
                 Layout.fillWidth: true
                 Layout.maximumHeight: Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20
+                Layout.preferredHeight: Math.min(thinkingLabel.implicitHeight, Layout.maximumHeight)
                 contentWidth: availableWidth
                 QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
                 QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
 
                 PlasmaComponents.Label {
-                    width: parent.width
+                    id: thinkingLabel
+                    width: thinkingScroll.availableWidth
                     text: messageItem.thinking
                     textFormat: Text.PlainText
                     wrapMode: Text.Wrap

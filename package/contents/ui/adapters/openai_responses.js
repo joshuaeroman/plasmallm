@@ -309,6 +309,10 @@ function sendStreaming(opts) {
     // Reasoning blocks captured from item_done events keyed by reasoning id.
     // Order preserved via thinkingBlockOrder.
     var thinkingBlocks = [];
+    // Tracks the id of an in-progress reasoning item between output_item.added
+    // and output_item.done so finish() can synthesize a block if the stream
+    // ends before item_done fires.
+    var currentReasoningId = "";
     var streamDone = false;
     var completeCalled = false;
     var streamError = null;
@@ -319,8 +323,8 @@ function sendStreaming(opts) {
         lastParseIndex = result.newIndex;
         for (var i = 0; i < result.tokens.length; i++) {
             var tok = result.tokens[i];
-            if (tok.done) { streamDone = true; return; }
-            if (tok.error) { streamError = tok.error; streamDone = true; return; }
+            if (tok.done) { streamDone = true; continue; }
+            if (tok.error) { streamError = tok.error; streamDone = true; continue; }
             if (tok.content) {
                 accumulatedText += tok.content;
                 onChunk(tok.content, accumulatedText);
@@ -345,7 +349,9 @@ function sendStreaming(opts) {
             }
             if (tok.item_added) {
                 var ia = tok.item_added;
-                if (ia.type === "function_call") {
+                if (ia.type === "reasoning") {
+                    currentReasoningId = ia.id || "";
+                } else if (ia.type === "function_call") {
                     var entry = {
                         id: ia.call_id || ia.id || "",
                         type: "function",
@@ -375,6 +381,7 @@ function sendStreaming(opts) {
                         summary: Array.isArray(idn.summary) ? idn.summary : [],
                         encrypted_content: idn.encrypted_content || ""
                     });
+                    if (currentReasoningId === (idn.id || "")) currentReasoningId = "";
                     // If the streaming summary deltas didn't fire (some
                     // providers only send the full summary on item_done),
                     // synthesize text for the UI from the summary array.
@@ -400,10 +407,37 @@ function sendStreaming(opts) {
         }
     }
 
+    // Synthesize a thinking block from accumulated reasoning deltas when the
+    // stream ends without a corresponding output_item.done (or with deltas
+    // arriving past the last item_done). Mirrors the Anthropic and Gemini
+    // adapters which always derive thinking blocks from streamed content.
+    function flushPendingThinking() {
+        if (accumulatedThinkingText.length === 0) return;
+        var alreadyCaptured = "";
+        for (var i = 0; i < thinkingBlocks.length; i++) {
+            var summary = thinkingBlocks[i].summary;
+            if (Array.isArray(summary)) {
+                for (var s = 0; s < summary.length; s++) {
+                    alreadyCaptured += (summary[s] && summary[s].text) || "";
+                }
+            }
+        }
+        if (alreadyCaptured.length >= accumulatedThinkingText.length) return;
+        var tail = accumulatedThinkingText.substring(alreadyCaptured.length);
+        thinkingBlocks.push({
+            type: "reasoning",
+            id: currentReasoningId || "",
+            summary: [{ type: "summary_text", text: tail }],
+            encrypted_content: ""
+        });
+        currentReasoningId = "";
+    }
+
     function finish(error) {
         if (completeCalled) return;
         completeCalled = true;
         if (pollTimer && pollTimer.running) pollTimer.stop();
+        flushPendingThinking();
 
         if (error) {
             onComplete(accumulatedText, error, null, null);
