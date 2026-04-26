@@ -52,6 +52,14 @@
       <min>0</min>
       <max>32768</max>
     </entry>
+    <entry name="showThoughts" type="Bool">
+      <label>Show model thoughts (collapsible) when reasoning is enabled</label>
+      <default>true</default>
+    </entry>
+    <entry name="usesResponsesAPI" type="Bool">
+      <label>Route OpenAI-compatible requests through /v1/responses instead of /v1/chat/completions</label>
+      <default>false</default>
+    </entry>
     <entry name="chatSpacing" type="Int">
       <label>Chat Spacing (px)</label>
       <default>10</default>

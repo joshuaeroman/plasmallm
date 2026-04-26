@@ -338,7 +338,8 @@ PlasmoidItem {
                 role: m.role,
                 content: m.content,
                 tool_calls_json: m.tool_calls_json || "",
-                tool_call_id: m.tool_call_id || ""
+                tool_call_id: m.tool_call_id || "",
+                thinking_blocks_json: m.thinking_blocks_json || ""
             }));
         }
 
@@ -351,6 +352,7 @@ PlasmoidItem {
                 index: j,
                 role: d.role,
                 content: d.content,
+                thinking: d.thinking || "",
                 commandsStr: d.commandsStr || "",
                 shared: d.shared || false,
                 timestamp: d.timestamp || ""
@@ -708,6 +710,22 @@ PlasmoidItem {
             return;
         }
 
+        // If a previous turn requested tool calls that the user never ran
+        // (manual mode, then chose to send a different message instead), the
+        // API will reject the next request for missing tool_result pairs.
+        // Synthesize denial outputs and clear the queue.
+        if (root.pendingToolCalls.length > 0) {
+            for (var pi = 0; pi < root.pendingToolCalls.length; pi++) {
+                var pcall = root.pendingToolCalls[pi];
+                chatMessages.append({
+                    role: "tool",
+                    content: i18n("The user declined to run this command."),
+                    tool_call_id: pcall.id || ""
+                });
+            }
+            root.pendingToolCalls = [];
+        }
+
         // Add user message to both models
         var attachJson = attachments.length > 0 ? JSON.stringify(attachments) : "";
         var imagePaths = attachments.filter(function(a) { return !!a.dataUrl; }).map(function(a) { return a.filePath; });
@@ -715,6 +733,7 @@ PlasmoidItem {
         displayMessages.append({
             role: "user",
             content: text,
+            thinking: "",
             commandsStr: "",
             shared: false,
             timestamp: currentTimestamp(),
@@ -750,6 +769,7 @@ PlasmoidItem {
         displayMessages.append({
             role: "assistant",
             content: "",
+            thinking: "",
             commandsStr: "",
             shared: false,
             timestamp: currentTimestamp()
@@ -764,7 +784,7 @@ PlasmoidItem {
             if (msg.attachments_json && msg.attachments_json.length > 0) {
                 try {
                     var atts = JSON.parse(msg.attachments_json);
-                    msgContent = Api.buildContentArray(Plasmoid.configuration.apiType, msg.content, atts);
+                    msgContent = Api.buildContentArray(Plasmoid.configuration.apiType, msg.content, atts, Plasmoid.configuration.usesResponsesAPI);
                 } catch(e) {}
             }
             var entry = { role: msg.role, content: msgContent };
@@ -772,6 +792,15 @@ PlasmoidItem {
             if (msg.tool_calls_json && msg.tool_calls_json.length > 0) {
                 try {
                     entry.tool_calls = JSON.parse(msg.tool_calls_json);
+                } catch(e) {}
+            }
+            // Reconstruct thinking blocks (with provider-specific signatures)
+            // so the adapter can prepend them in the next request — required
+            // for Anthropic extended-thinking-with-tool-use and Gemini
+            // multi-turn function calling with thoughts.
+            if (msg.thinking_blocks_json && msg.thinking_blocks_json.length > 0) {
+                try {
+                    entry.thinkingBlocks = JSON.parse(msg.thinking_blocks_json);
                 } catch(e) {}
             }
             // Add tool_call_id on tool messages
@@ -786,7 +815,7 @@ PlasmoidItem {
             messages = [systemMsg].concat(messages.slice(messages.length - maxApiMessages));
         }
 
-        var tools = Api.buildTools(Plasmoid.configuration.apiType, { ollamaApiKey: root.ollamaApiKey, commandToolEnabled: Plasmoid.configuration.useCommandTool });
+        var tools = Api.buildTools(Plasmoid.configuration.apiType, { ollamaApiKey: root.ollamaApiKey, commandToolEnabled: Plasmoid.configuration.useCommandTool, usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI });
 
         var streamHandle = Api.sendStreaming(Plasmoid.configuration.apiType, {
             endpoint: Plasmoid.configuration.apiEndpoint,
@@ -797,10 +826,16 @@ PlasmoidItem {
             maxTokens: Plasmoid.configuration.maxTokens,
             reasoningEffort: Plasmoid.configuration.reasoningEffort,
             thinkingBudget: Plasmoid.configuration.thinkingBudget,
+            usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
             tools: tools,
             onChunk: function(delta, accumulated) {
                 if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                     displayMessages.setProperty(streamingMessageIndex, "content", accumulated);
+                }
+            },
+            onThinkingChunk: function(delta, accumulated) {
+                if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
+                    displayMessages.setProperty(streamingMessageIndex, "thinking", accumulated);
                 }
             },
             onComplete: function(fullText, error, toolCalls, assistantMsg) {
@@ -812,7 +847,9 @@ PlasmoidItem {
                 if (toolCalls && toolCalls.length > 0 && toolCallDepth < maxToolCallDepth) {
                     toolCallDepth++;
                     // Append the assistant's tool_call message to chat history
-                    chatMessages.append({ role: "assistant", content: assistantMsg.content || "", tool_calls_json: JSON.stringify(toolCalls) });
+                    var thinkingJson = (assistantMsg && assistantMsg.thinkingBlocks && assistantMsg.thinkingBlocks.length > 0)
+                        ? JSON.stringify(assistantMsg.thinkingBlocks) : "";
+                    chatMessages.append({ role: "assistant", content: assistantMsg.content || "", tool_calls_json: JSON.stringify(toolCalls), thinking_blocks_json: thinkingJson });
 
                     // Categorize all tool calls
                     var commandQueue = [];
@@ -964,7 +1001,9 @@ PlasmoidItem {
                         timestamp: currentTimestamp()
                     });
                 } else {
-                    chatMessages.append({ role: "assistant", content: fullText });
+                    var regularThinkingJson = (assistantMsg && assistantMsg.thinkingBlocks && assistantMsg.thinkingBlocks.length > 0)
+                        ? JSON.stringify(assistantMsg.thinkingBlocks) : "";
+                    chatMessages.append({ role: "assistant", content: fullText, thinking_blocks_json: regularThinkingJson });
                     var commands = Api.parseCommandBlocks(fullText);
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                         displayMessages.setProperty(streamingMessageIndex, "content", fullText);

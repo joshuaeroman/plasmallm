@@ -189,28 +189,45 @@ function translateMessages(neutralMessages) {
         }
 
         if (m.role === "assistant") {
-            // If the assistant message carries tool_calls, convert to a
-            // content array with tool_use blocks.
-            if (m.tool_calls && m.tool_calls.length > 0) {
+            var hasThinking = m.thinkingBlocks && m.thinkingBlocks.length > 0;
+            var hasToolCalls = m.tool_calls && m.tool_calls.length > 0;
+            // Extended-thinking-with-tool-use requires re-sending the original
+            // signed thinking blocks before the tool_use block in the same turn.
+            // Switch to the array-content shape whenever thinking blocks exist.
+            if (hasToolCalls || hasThinking) {
                 var blocks = [];
+                if (hasThinking) {
+                    for (var th = 0; th < m.thinkingBlocks.length; th++) {
+                        var tb = m.thinkingBlocks[th];
+                        if (tb && typeof tb.thinking === "string") {
+                            blocks.push({
+                                type: "thinking",
+                                thinking: tb.thinking,
+                                signature: tb.signature || ""
+                            });
+                        }
+                    }
+                }
                 if (m.content && typeof m.content === "string" && m.content.length > 0) {
                     blocks.push({ type: "text", text: m.content });
                 }
-                for (var t = 0; t < m.tool_calls.length; t++) {
-                    var tc = m.tool_calls[t];
-                    var rawArgs = tc["function"] && tc["function"]["arguments"];
-                    var input = {};
-                    if (typeof rawArgs === "string" && rawArgs.length > 0) {
-                        try { input = JSON.parse(rawArgs); } catch (e) { input = {}; }
-                    } else if (rawArgs && typeof rawArgs === "object") {
-                        input = rawArgs;
+                if (hasToolCalls) {
+                    for (var t = 0; t < m.tool_calls.length; t++) {
+                        var tc = m.tool_calls[t];
+                        var rawArgs = tc["function"] && tc["function"]["arguments"];
+                        var input = {};
+                        if (typeof rawArgs === "string" && rawArgs.length > 0) {
+                            try { input = JSON.parse(rawArgs); } catch (e) { input = {}; }
+                        } else if (rawArgs && typeof rawArgs === "object") {
+                            input = rawArgs;
+                        }
+                        blocks.push({
+                            type: "tool_use",
+                            id: tc.id || "",
+                            name: (tc["function"] && tc["function"].name) || "",
+                            input: input
+                        });
                     }
-                    blocks.push({
-                        type: "tool_use",
-                        id: tc.id || "",
-                        name: (tc["function"] && tc["function"].name) || "",
-                        input: input
-                    });
                 }
                 out.push({ role: "assistant", content: blocks });
             } else {
@@ -258,6 +275,8 @@ function parseSSEChunks(buffer, lastIndex) {
                             name: obj.content_block.name || ""
                         }
                     });
+                } else if (obj.content_block && obj.content_block.type === "thinking") {
+                    tokens.push({ thinking_start: { index: obj.index } });
                 }
                 break;
             case "content_block_delta":
@@ -267,6 +286,14 @@ function parseSSEChunks(buffer, lastIndex) {
                     } else if (obj.delta.type === "input_json_delta" && typeof obj.delta.partial_json === "string") {
                         tokens.push({
                             tool_input_delta: { index: obj.index, partial_json: obj.delta.partial_json }
+                        });
+                    } else if (obj.delta.type === "thinking_delta" && typeof obj.delta.thinking === "string") {
+                        tokens.push({
+                            thinking_delta: { index: obj.index, text: obj.delta.thinking }
+                        });
+                    } else if (obj.delta.type === "signature_delta" && typeof obj.delta.signature === "string") {
+                        tokens.push({
+                            thinking_signature: { index: obj.index, signature: obj.delta.signature }
                         });
                     }
                 }
@@ -295,6 +322,7 @@ function sendStreaming(opts) {
     var maxTokens = opts.maxTokens;
     var tools = opts.tools;
     var onChunk = opts.onChunk;
+    var onThinkingChunk = opts.onThinkingChunk;
     var onComplete = opts.onComplete;
 
     var translated = translateMessages(opts.messages);
@@ -312,6 +340,10 @@ function sendStreaming(opts) {
     // Map of content-block index -> entry in accumulatedToolCalls (OpenAI shape)
     var toolCallsByIndex = {};
     var accumulatedToolCalls = [];
+    // Per-index thinking blocks; ordered list preserves block order within turn.
+    var thinkingBlocksByIndex = {};
+    var thinkingBlockOrder = [];
+    var accumulatedThinkingText = "";
     var streamDone = false;
     var completeCalled = false;
     var streamError = null;
@@ -345,7 +377,41 @@ function sendStreaming(opts) {
                     target["function"]["arguments"] += d.partial_json;
                 }
             }
+            if (tok.thinking_start) {
+                var ts = tok.thinking_start;
+                if (!thinkingBlocksByIndex[ts.index]) {
+                    var block = { type: "thinking", thinking: "", signature: "" };
+                    thinkingBlocksByIndex[ts.index] = block;
+                    thinkingBlockOrder.push(ts.index);
+                }
+            }
+            if (tok.thinking_delta) {
+                var td = tok.thinking_delta;
+                var tBlock = thinkingBlocksByIndex[td.index];
+                if (!tBlock) {
+                    tBlock = { type: "thinking", thinking: "", signature: "" };
+                    thinkingBlocksByIndex[td.index] = tBlock;
+                    thinkingBlockOrder.push(td.index);
+                }
+                tBlock.thinking += td.text;
+                accumulatedThinkingText += td.text;
+                if (onThinkingChunk) onThinkingChunk(td.text, accumulatedThinkingText);
+            }
+            if (tok.thinking_signature) {
+                var tss = tok.thinking_signature;
+                var sBlock = thinkingBlocksByIndex[tss.index];
+                if (sBlock) sBlock.signature = tss.signature;
+            }
         }
+    }
+
+    function collectThinkingBlocks() {
+        var out = [];
+        for (var i = 0; i < thinkingBlockOrder.length; i++) {
+            var b = thinkingBlocksByIndex[thinkingBlockOrder[i]];
+            if (b && b.thinking && b.thinking.length > 0) out.push(b);
+        }
+        return out;
     }
 
     function finish(error) {
@@ -353,13 +419,15 @@ function sendStreaming(opts) {
         completeCalled = true;
         if (pollTimer && pollTimer.running) pollTimer.stop();
 
+        var thinkingBlocks = collectThinkingBlocks();
+
         if (error) {
             onComplete(accumulatedText, error, null, null);
         } else if (accumulatedToolCalls.length > 0) {
-            var assistantMsg = { role: "assistant", content: accumulatedText || null, tool_calls: accumulatedToolCalls };
+            var assistantMsg = { role: "assistant", content: accumulatedText || null, tool_calls: accumulatedToolCalls, thinkingBlocks: thinkingBlocks };
             onComplete(accumulatedText, null, accumulatedToolCalls, assistantMsg);
-        } else if (accumulatedText.length > 0) {
-            onComplete(accumulatedText, null, null, null);
+        } else if (accumulatedText.length > 0 || thinkingBlocks.length > 0) {
+            onComplete(accumulatedText, null, null, { role: "assistant", content: accumulatedText, thinkingBlocks: thinkingBlocks });
         } else {
             // Non-streaming fallback
             try {
@@ -367,9 +435,13 @@ function sendStreaming(opts) {
                 if (response.content && response.content.length) {
                     var text = "";
                     var calls = [];
+                    var thinks = [];
                     for (var i = 0; i < response.content.length; i++) {
                         var b = response.content[i];
                         if (b.type === "text") text += b.text;
+                        else if (b.type === "thinking") {
+                            thinks.push({ type: "thinking", thinking: b.thinking || "", signature: b.signature || "" });
+                        }
                         else if (b.type === "tool_use") {
                             calls.push({
                                 id: b.id,
@@ -379,9 +451,9 @@ function sendStreaming(opts) {
                         }
                     }
                     if (calls.length > 0) {
-                        onComplete(text, null, calls, { role: "assistant", content: text || null, tool_calls: calls });
-                    } else if (text.length > 0) {
-                        onComplete(text, null);
+                        onComplete(text, null, calls, { role: "assistant", content: text || null, tool_calls: calls, thinkingBlocks: thinks });
+                    } else if (text.length > 0 || thinks.length > 0) {
+                        onComplete(text, null, null, { role: "assistant", content: text, thinkingBlocks: thinks });
                     } else {
                         onComplete("", i18n("Invalid response format"));
                     }

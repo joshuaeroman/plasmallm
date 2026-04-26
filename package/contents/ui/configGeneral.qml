@@ -33,6 +33,10 @@ SimpleKCM {
     property string cfg_reasoningEffortDefault
     property int cfg_thinkingBudget
     property int cfg_thinkingBudgetDefault
+    property bool cfg_showThoughts
+    property bool cfg_showThoughtsDefault
+    property bool cfg_usesResponsesAPI
+    property bool cfg_usesResponsesAPIDefault
     property int cfg_chatSpacing
     property int cfg_chatSpacingDefault
     property bool cfg_saveChatHistory
@@ -304,7 +308,7 @@ SimpleKCM {
         fetchInProgress = true;
         fetchStatusLabel.visible = false;
         var key = walletApiKey;
-        Api.fetchModels(cfg_apiType, apiEndpointField.text, key, function(error, models) {
+        Api.fetchModels(cfg_apiType, apiEndpointField.text, key, cfg_usesResponsesAPI, function(error, models) {
             fetchInProgress = false;
             if (error) {
                 fetchStatusLabel.text = error;
@@ -428,9 +432,9 @@ SimpleKCM {
         var hasCustom = false;
         for (var i = 0; i < raw.length; i++) {
             if (raw[i].url === "") { hasCustom = true; }
-            list.push({ name: raw[i].name, url: raw[i].url });
+            list.push({ name: raw[i].name, url: raw[i].url, usesResponsesAPI: !!raw[i].usesResponsesAPI });
         }
-        if (!hasCustom) list.unshift({ name: "Custom", url: "" });
+        if (!hasCustom) list.unshift({ name: "Custom", url: "", usesResponsesAPI: false });
         return list;
     }
 
@@ -482,6 +486,7 @@ SimpleKCM {
         if (pick) {
             apiEndpointField.text = pick.url;
             cfg_providerName = pick.name;
+            cfg_usesResponsesAPI = !!pick.usesResponsesAPI;
         }
         cfg_modelName = "";
         refreshAvailableModels();
@@ -539,6 +544,7 @@ SimpleKCM {
                     var preset = presetEndpoints[index];
                     apiEndpointField.text = preset.url;
                     cfg_providerName = preset.name;
+                    cfg_usesResponsesAPI = !!preset.usesResponsesAPI;
                     rememberOpenAIChoice(preset.name, preset.url);
                 }
             }
@@ -558,6 +564,7 @@ SimpleKCM {
                 for (var i = 1; i < presetEndpoints.length; i++) {
                     if (text === presetEndpoints[i].url) {
                         endpointPreset.currentIndex = i;
+                        cfg_usesResponsesAPI = !!presetEndpoints[i].usesResponsesAPI;
                         matched = true;
                         break;
                     }
@@ -739,6 +746,30 @@ SimpleKCM {
             font: Kirigami.Theme.smallFont
             visible: (caps.reasoningEffort === true || caps.thinkingBudget === true)
                      && (caps.reasoningHelp || "").length > 0
+        }
+
+        QQC2.CheckBox {
+            id: showThoughtsCheckBox
+            text: i18n("Show thoughts in chat (collapsible)")
+            visible: caps.reasoningEffort === true || caps.thinkingBudget === true
+            checked: cfg_showThoughts
+            onCheckedChanged: cfg_showThoughts = checked
+
+            QQC2.ToolTip.text: i18n("When enabled, the model's reasoning is shown above each reply with a collapsible header. Round-trip of signed thoughts to the API still happens regardless of this setting.")
+            QQC2.ToolTip.visible: hovered
+            QQC2.ToolTip.delay: 500
+        }
+
+        QQC2.CheckBox {
+            id: usesResponsesAPICheckBox
+            text: i18n("Use Responses API")
+            visible: cfg_apiType === "openai"
+            checked: cfg_usesResponsesAPI
+            onCheckedChanged: cfg_usesResponsesAPI = checked
+
+            QQC2.ToolTip.text: i18n("Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure (POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when picking a preset.")
+            QQC2.ToolTip.visible: hovered
+            QQC2.ToolTip.delay: 500
         }
 
         Kirigami.Separator {

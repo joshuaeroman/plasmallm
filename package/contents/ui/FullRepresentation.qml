@@ -233,6 +233,7 @@ PlasmaExtras.Representation {
                     width: messageList.width
                     role: model.role
                     content: model.content
+                    thinking: model.thinking ? model.thinking : ""
                     commandsStr: model.commandsStr ? model.commandsStr : ""
                     shared: model.shared ? model.shared : false
                     messageIndex: model.index

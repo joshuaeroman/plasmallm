@@ -17,6 +17,7 @@ Item {
 
     property string role
     property string content
+    property string thinking: ""
     property string commandsStr: ""
     readonly property var commands: commandsStr.length > 0 ? commandsStr.split("\n\x1F") : []
     property bool shared: false
@@ -25,6 +26,7 @@ Item {
     property string attachmentsStr: ""
     readonly property var attachmentPaths: attachmentsStr.length > 0 ? attachmentsStr.split("\n") : []
     property bool webSearchExpanded: false
+    property bool thinkingExpanded: false
 
     signal shareRequested(int index)
     signal retryRequested()
@@ -67,6 +69,67 @@ Item {
         anchors.topMargin: Math.round(messageItem.spacing / 4)
         anchors.bottomMargin: Math.round(messageItem.spacing / 4)
         spacing: Math.round(messageItem.spacing / 4)
+
+        // Collapsible "Thoughts" disclosure for assistant reasoning content.
+        // Visible only when reasoning is enabled in settings and the model
+        // actually produced thinking text. Sits above the bubble so it reads
+        // as preceding the response.
+        ColumnLayout {
+            visible: isAssistant && messageItem.thinking.length > 0 && Plasmoid.configuration.showThoughts
+            Layout.fillWidth: true
+            Layout.maximumWidth: parent.width * 0.85
+            Layout.alignment: Qt.AlignLeft
+            spacing: Math.round(messageItem.spacing / 4)
+
+            Item {
+                Layout.fillWidth: true
+                implicitHeight: thinkingHeaderRow.implicitHeight
+
+                RowLayout {
+                    id: thinkingHeaderRow
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    spacing: Kirigami.Units.smallSpacing
+
+                    Kirigami.Icon {
+                        source: messageItem.thinkingExpanded ? "arrow-down" : "arrow-right"
+                        Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                        Layout.preferredHeight: Kirigami.Units.iconSizes.small
+                    }
+
+                    PlasmaComponents.Label {
+                        Layout.fillWidth: true
+                        text: i18n("Thoughts")
+                        font: Kirigami.Theme.smallFont
+                        color: Kirigami.Theme.disabledTextColor
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: messageItem.thinkingExpanded = !messageItem.thinkingExpanded
+                }
+            }
+
+            QQC2.ScrollView {
+                visible: messageItem.thinkingExpanded
+                Layout.fillWidth: true
+                Layout.maximumHeight: Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20
+                contentWidth: availableWidth
+                QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
+                QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
+
+                PlasmaComponents.Label {
+                    width: parent.width
+                    text: messageItem.thinking
+                    textFormat: Text.PlainText
+                    wrapMode: Text.Wrap
+                    font: Kirigami.Theme.smallFont
+                    color: Kirigami.Theme.disabledTextColor
+                }
+            }
+        }
 
         Rectangle {
             visible: hasBubbleContent

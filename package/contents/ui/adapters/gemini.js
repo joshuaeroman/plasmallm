@@ -233,6 +233,17 @@ function translateMessages(neutralMessages) {
 
         if (m.role === "assistant") {
             var parts = [];
+            // Prepend captured thinking parts (with thoughtSignatures) so the
+            // model can continue its chain of thought across turns.
+            if (m.thinkingBlocks && m.thinkingBlocks.length > 0) {
+                for (var th = 0; th < m.thinkingBlocks.length; th++) {
+                    var tb = m.thinkingBlocks[th];
+                    if (!tb || typeof tb.thinking !== "string") continue;
+                    var thoughtPart = { text: tb.thinking, thought: true };
+                    if (tb.thoughtSignature) thoughtPart.thoughtSignature = tb.thoughtSignature;
+                    parts.push(thoughtPart);
+                }
+            }
             if (m.content && typeof m.content === "string" && m.content.length > 0) {
                 parts.push({ text: m.content });
             }
@@ -288,16 +299,42 @@ function parseSSEChunks(buffer, lastIndex) {
                 var partsArr = obj.candidates[0].content.parts || [];
                 for (var p = 0; p < partsArr.length; p++) {
                     var part = partsArr[p];
-                    if (typeof part.text === "string" && part.text.length > 0) {
-                        tokens.push({ content: part.text });
-                    }
-                    if (part.functionCall) {
+                    if (part.thought === true) {
+                        // Thought parts may stream incrementally with partial
+                        // text across multiple events. The thoughtSignature
+                        // typically appears on the final part in the thought
+                        // span; capture it whenever present.
+                        var tt = typeof part.text === "string" ? part.text : "";
                         tokens.push({
-                            function_call: {
-                                name: part.functionCall.name || "",
-                                args: part.functionCall.args || {}
+                            thinking_delta: {
+                                text: tt,
+                                signature: part.thoughtSignature || ""
                             }
                         });
+                    } else {
+                        if (typeof part.text === "string" && part.text.length > 0) {
+                            tokens.push({ content: part.text });
+                        }
+                        if (part.functionCall) {
+                            tokens.push({
+                                function_call: {
+                                    name: part.functionCall.name || "",
+                                    args: part.functionCall.args || {}
+                                }
+                            });
+                        }
+                        // A non-thought part may carry a thoughtSignature for
+                        // the preceding thought span; surface it so the
+                        // accumulator can attach it to the open block.
+                        if (part.thoughtSignature) {
+                            tokens.push({
+                                thinking_signature: { signature: part.thoughtSignature }
+                            });
+                        }
+                        // Closing the thought span when a non-thought part
+                        // arrives lets multiple thought→action sequences in
+                        // one turn become separate blocks.
+                        tokens.push({ thinking_close: true });
                     }
                 }
             }
@@ -319,6 +356,7 @@ function sendStreaming(opts) {
     var maxTokens = opts.maxTokens;
     var tools = opts.tools;
     var onChunk = opts.onChunk;
+    var onThinkingChunk = opts.onThinkingChunk;
     var onComplete = opts.onComplete;
 
     var translated = translateMessages(opts.messages);
@@ -336,6 +374,9 @@ function sendStreaming(opts) {
     var lastParseIndex = 0;
     var accumulatedText = "";
     var accumulatedToolCalls = [];
+    var thinkingBlocks = [];
+    var currentThinkingBlock = null;
+    var accumulatedThinkingText = "";
     var streamError = null;
     var completeCalled = false;
 
@@ -362,7 +403,36 @@ function sendStreaming(opts) {
                     }
                 });
             }
+            if (tok.thinking_delta) {
+                if (!currentThinkingBlock) {
+                    currentThinkingBlock = { type: "thinking", thinking: "", thoughtSignature: "" };
+                    thinkingBlocks.push(currentThinkingBlock);
+                }
+                if (tok.thinking_delta.text) {
+                    currentThinkingBlock.thinking += tok.thinking_delta.text;
+                    accumulatedThinkingText += tok.thinking_delta.text;
+                    if (onThinkingChunk) onThinkingChunk(tok.thinking_delta.text, accumulatedThinkingText);
+                }
+                if (tok.thinking_delta.signature) {
+                    currentThinkingBlock.thoughtSignature = tok.thinking_delta.signature;
+                }
+            }
+            if (tok.thinking_signature && currentThinkingBlock) {
+                currentThinkingBlock.thoughtSignature = tok.thinking_signature.signature;
+            }
+            if (tok.thinking_close) {
+                currentThinkingBlock = null;
+            }
         }
+    }
+
+    function collectThinkingBlocks() {
+        var out = [];
+        for (var i = 0; i < thinkingBlocks.length; i++) {
+            var b = thinkingBlocks[i];
+            if (b && b.thinking && b.thinking.length > 0) out.push(b);
+        }
+        return out;
     }
 
     function finish(error) {
@@ -370,40 +440,55 @@ function sendStreaming(opts) {
         completeCalled = true;
         if (pollTimer && pollTimer.running) pollTimer.stop();
 
+        var collectedThinking = collectThinkingBlocks();
+
         if (error) {
             onComplete(accumulatedText, error, null, null);
         } else if (accumulatedToolCalls.length > 0) {
-            var assistantMsg = { role: "assistant", content: accumulatedText || null, tool_calls: accumulatedToolCalls };
+            var assistantMsg = { role: "assistant", content: accumulatedText || null, tool_calls: accumulatedToolCalls, thinkingBlocks: collectedThinking };
             onComplete(accumulatedText, null, accumulatedToolCalls, assistantMsg);
-        } else if (accumulatedText.length > 0) {
-            onComplete(accumulatedText, null, null, null);
+        } else if (accumulatedText.length > 0 || collectedThinking.length > 0) {
+            onComplete(accumulatedText, null, null, { role: "assistant", content: accumulatedText, thinkingBlocks: collectedThinking });
         } else {
             // Non-streaming fallback: parse a single GenerateContentResponse
             try {
                 var response = JSON.parse(xhr.responseText);
                 var text = "";
                 var calls = [];
+                var thinks = [];
+                var openThink = null;
                 if (response.candidates && response.candidates[0] && response.candidates[0].content) {
                     var partsArr = response.candidates[0].content.parts || [];
                     for (var i = 0; i < partsArr.length; i++) {
                         var part = partsArr[i];
-                        if (typeof part.text === "string") text += part.text;
-                        else if (part.functionCall) {
-                            calls.push({
-                                id: "call_" + calls.length,
-                                type: "function",
-                                "function": {
-                                    name: part.functionCall.name || "",
-                                    arguments: JSON.stringify(part.functionCall.args || {})
-                                }
-                            });
+                        if (part.thought === true) {
+                            if (!openThink) {
+                                openThink = { type: "thinking", thinking: "", thoughtSignature: "" };
+                                thinks.push(openThink);
+                            }
+                            if (typeof part.text === "string") openThink.thinking += part.text;
+                            if (part.thoughtSignature) openThink.thoughtSignature = part.thoughtSignature;
+                        } else {
+                            if (typeof part.text === "string") text += part.text;
+                            else if (part.functionCall) {
+                                calls.push({
+                                    id: "call_" + calls.length,
+                                    type: "function",
+                                    "function": {
+                                        name: part.functionCall.name || "",
+                                        arguments: JSON.stringify(part.functionCall.args || {})
+                                    }
+                                });
+                            }
+                            if (openThink && part.thoughtSignature) openThink.thoughtSignature = part.thoughtSignature;
+                            openThink = null;
                         }
                     }
                 }
                 if (calls.length > 0) {
-                    onComplete(text, null, calls, { role: "assistant", content: text || null, tool_calls: calls });
-                } else if (text.length > 0) {
-                    onComplete(text, null);
+                    onComplete(text, null, calls, { role: "assistant", content: text || null, tool_calls: calls, thinkingBlocks: thinks });
+                } else if (text.length > 0 || thinks.length > 0) {
+                    onComplete(text, null, null, { role: "assistant", content: text, thinkingBlocks: thinks });
                 } else {
                     onComplete("", i18n("Invalid response format"));
                 }

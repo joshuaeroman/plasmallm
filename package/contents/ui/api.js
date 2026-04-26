@@ -228,16 +228,25 @@ function getAllPresets() {
     return Adapters.getAllPresets();
 }
 
-function fetchModels(apiType, endpoint, apiKey, callback) {
-    return Adapters.getAdapter(apiType).fetchModels(endpoint, apiKey, callback);
+function fetchModels(apiType, endpoint, apiKey, usesResponsesAPI, callback) {
+    var ad = Adapters.getAdapter(apiType);
+    // openai's fetchModels takes the extra flag; other adapters ignore it.
+    if (apiType === "openai") {
+        return ad.fetchModels(endpoint, apiKey, !!usesResponsesAPI, callback);
+    }
+    return ad.fetchModels(endpoint, apiKey, callback);
 }
 
 function buildTools(apiType, options) {
     return Adapters.getAdapter(apiType).buildTools(options);
 }
 
-function buildContentArray(apiType, text, attachments) {
-    return Adapters.getAdapter(apiType).buildContentArray(text, attachments);
+function buildContentArray(apiType, text, attachments, usesResponsesAPI) {
+    var ad = Adapters.getAdapter(apiType);
+    if (apiType === "openai") {
+        return ad.buildContentArray(text, attachments, !!usesResponsesAPI);
+    }
+    return ad.buildContentArray(text, attachments);
 }
 
 function sendStreaming(apiType, opts) {
