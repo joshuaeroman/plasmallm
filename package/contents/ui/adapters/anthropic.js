@@ -23,6 +23,19 @@ var presets = [
     { name: "Anthropic", url: "https://api.anthropic.com" }
 ];
 
+// Anthropic has a single endpoint, so the provider preset dropdown is hidden;
+// the endpoint field stays visible for proxies. Both reasoning effort and
+// thinking budget are meaningful: the effort gates whether thinking is on,
+// the budget controls the token allowance.
+var capabilities = {
+    providerPresets: false,
+    customEndpoint: true,
+    reasoningEffort: true,
+    thinkingBudget: true,
+    fetchModels: true,
+    reasoningHelp: i18n("Anthropic enables extended thinking when effort is not Off, using the token budget below. Temperature is forced to max while thinking.")
+};
+
 function setHeaders(xhr, apiKey) {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("anthropic-version", ANTHROPIC_VERSION);
@@ -429,6 +442,15 @@ function sendStreaming(opts) {
         temperature: temperature / 100.0,
         stream: true
     };
+    // Extended thinking. Requires temperature=1 and max_tokens > budget_tokens,
+    // so override both. The user's configured maxTokens still bounds the
+    // visible reply (we add the budget on top).
+    if (opts.reasoningEffort && opts.reasoningEffort !== "off"
+            && opts.thinkingBudget && opts.thinkingBudget > 0) {
+        body.thinking = { type: "enabled", budget_tokens: opts.thinkingBudget };
+        body.temperature = 1;
+        body.max_tokens = maxTokens + opts.thinkingBudget;
+    }
     if (translated.system && translated.system.length > 0) {
         body.system = translated.system;
     }

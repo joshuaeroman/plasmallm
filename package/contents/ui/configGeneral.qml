@@ -29,6 +29,10 @@ SimpleKCM {
     property int cfg_temperatureDefault
     property int cfg_maxTokens
     property int cfg_maxTokensDefault
+    property string cfg_reasoningEffort
+    property string cfg_reasoningEffortDefault
+    property int cfg_thinkingBudget
+    property int cfg_thinkingBudgetDefault
     property int cfg_chatSpacing
     property int cfg_chatSpacingDefault
     property bool cfg_saveChatHistory
@@ -72,6 +76,10 @@ SimpleKCM {
     property bool cfg_sysInfoLocaleDefault
     property int cfg_apiKeyVersion
     property int cfg_apiKeyVersionDefault
+    property string cfg_apiKeysFallback
+    property string cfg_apiKeysFallbackDefault
+    property bool cfg_apiKeyMigrated
+    property bool cfg_apiKeyMigratedDefault
     property int cfg_autoClearMode
     property int cfg_autoClearModeDefault
     property int cfg_autoClearSeconds
@@ -90,8 +98,14 @@ SimpleKCM {
     property bool cfg_useCommandToolDefault
     property string cfg_tasks
     property string cfg_tasksDefault
+    property string cfg_openaiLastProvider
+    property string cfg_openaiLastProviderDefault
+    property string cfg_openaiLastEndpoint
+    property string cfg_openaiLastEndpointDefault
 
+    property var modelCache: ({})
     property var availableModels: []
+    property bool fetchInProgress: false
     property string walletApiKey: ""
     property bool walletKeyLoaded: false
     property bool walletAvailable: false
@@ -137,13 +151,35 @@ SimpleKCM {
         );
     }
 
-    function walletWriteKey(handle, key, onDone) {
+    function currentSlot() {
+        return Api.apiKeySlot(cfg_apiType, cfg_providerName);
+    }
+
+    function readFallbackMap() {
+        if (!cfg_apiKeysFallback || cfg_apiKeysFallback.length === 0) return {};
+        try { return JSON.parse(cfg_apiKeysFallback) || {}; } catch(e) { return {}; }
+    }
+
+    function fallbackKeyFor(slot) {
+        var m = readFallbackMap();
+        if (m.hasOwnProperty(slot)) return m[slot];
+        // Legacy single-slot fallback for the very first migration case.
+        return cfg_apiKey || "";
+    }
+
+    function writeFallbackKey(slot, key) {
+        var m = readFallbackMap();
+        m[slot] = key;
+        cfg_apiKeysFallback = JSON.stringify(m);
+    }
+
+    function walletWriteKey(handle, slot, key, onDone) {
         ensureWalletFolder(handle, function(ok) {
             if (!ok) {
                 onDone(false);
                 return;
             }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "apiKey", key, "PlasmaLLM"],
+            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", slot, key, "PlasmaLLM"],
                 function(result) { onDone(result === 0); },
                 function(err) {
                     console.warn("PlasmaLLM: wallet writePassword error: " + err);
@@ -154,43 +190,51 @@ SimpleKCM {
     }
 
     function loadWalletKey() {
+        var slot = currentSlot();
+        walletKeyLoaded = false;
+        // Slot may change again before this async chain completes (e.g. adapter
+        // switch fires loadWalletKey twice in quick succession). Stale results
+        // would clobber the correct key, so each callback verifies its slot is
+        // still the active one before applying state.
+        function isCurrent() { return slot === currentSlot(); }
+        function applyKey(key) {
+            if (!isCurrent()) return;
+            walletApiKey = key;
+            walletKeyLoaded = true;
+            if (apiKeyField) apiKeyField.text = walletApiKey;
+            walletKeyDirty = false;
+        }
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
                 if (handle < 0) {
-                    walletApiKey = cfg_apiKey;
-                    walletKeyLoaded = true;
+                    applyKey(fallbackKeyFor(slot));
                     return;
                 }
                 walletAvailable = true;
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "apiKey", "PlasmaLLM"],
+                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", slot, "PlasmaLLM"],
                     function(password) {
-                        if (password && password.length > 0) {
-                            walletApiKey = password;
-                        } else {
-                            walletApiKey = cfg_apiKey;
-                        }
-                        walletKeyLoaded = true;
+                        applyKey(password && password.length > 0 ? password : fallbackKeyFor(slot));
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     },
                     function(err) {
-                        walletApiKey = cfg_apiKey;
-                        walletKeyLoaded = true;
+                        applyKey(fallbackKeyFor(slot));
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     }
                 );
             },
             function(err) {
-                walletApiKey = cfg_apiKey;
-                walletKeyLoaded = true;
+                applyKey(fallbackKeyFor(slot));
             }
         );
     }
 
     function saveWalletKey() {
-        var key = apiKeyField.text;
+        var key = apiKeyField.text.replace(/^\s+|\s+$/g, "");
+        var slot = currentSlot();
         walletSaveInProgress = true;
         if (!walletAvailable) {
-            cfg_apiKey = key;
+            writeFallbackKey(slot, key);
+            walletApiKey = key;
             walletKeyDirty = false;
             walletSaveInProgress = false;
             return;
@@ -198,15 +242,15 @@ SimpleKCM {
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
                 if (handle < 0) {
-                    cfg_apiKey = key;
+                    writeFallbackKey(slot, key);
+                    walletApiKey = key;
                     walletKeyDirty = false;
                     walletSaveInProgress = false;
                     return;
                 }
-                walletWriteKey(handle, key, function(success) {
+                walletWriteKey(handle, slot, key, function(success) {
                     if (success) {
                         walletApiKey = key;
-                        cfg_apiKey = "";
                         walletKeyDirty = false;
                         cfg_apiKeyVersion++;
                     }
@@ -215,19 +259,74 @@ SimpleKCM {
                 });
             },
             function(err) {
-                cfg_apiKey = key;
+                writeFallbackKey(slot, key);
+                walletApiKey = key;
                 walletKeyDirty = false;
                 walletSaveInProgress = false;
             }
         );
     }
 
-    onCfg_availableModelsChanged: {
+    function currentModelSlot() {
+        var t = cfg_apiType || "openai";
+        var p = (cfg_providerName && cfg_providerName.length > 0) ? cfg_providerName : t;
+        return t + ":" + p;
+    }
+
+    function refreshAvailableModels() {
+        var slot = currentModelSlot();
+        var list = modelCache[slot];
+        availableModels = Array.isArray(list) ? list : [];
+    }
+
+    function loadModelCache() {
+        var parsed = {};
         if (cfg_availableModels && cfg_availableModels.length > 0) {
-            try { availableModels = JSON.parse(cfg_availableModels); } catch(e) {}
-        } else {
-            availableModels = [];
+            try {
+                var v = JSON.parse(cfg_availableModels);
+                // Discard the legacy flat-array shape; keep only the new map shape.
+                if (v && typeof v === "object" && !Array.isArray(v)) parsed = v;
+            } catch(e) {}
         }
+        modelCache = parsed;
+        refreshAvailableModels();
+    }
+
+    function ensureModelsLoaded(force) {
+        var slot = currentModelSlot();
+        var have = Array.isArray(modelCache[slot]) && modelCache[slot].length > 0;
+        if (!force && have) return;
+        if (fetchInProgress) return;
+        // Wallet load is async; if we fetch before it returns we'd send the
+        // previous slot's key. onWalletKeyLoadedChanged retries once the key
+        // for the current slot has actually arrived.
+        if (!walletKeyLoaded) return;
+        fetchInProgress = true;
+        fetchStatusLabel.visible = false;
+        var key = walletApiKey;
+        Api.fetchModels(cfg_apiType, apiEndpointField.text, key, function(error, models) {
+            fetchInProgress = false;
+            if (error) {
+                fetchStatusLabel.text = error;
+                fetchStatusLabel.visible = true;
+            } else if (!models || models.length === 0) {
+                fetchStatusLabel.text = i18n("No models found.");
+                fetchStatusLabel.visible = true;
+            } else {
+                var next = {};
+                for (var k in modelCache) if (modelCache.hasOwnProperty(k)) next[k] = modelCache[k];
+                next[slot] = models;
+                modelCache = next;
+                cfg_availableModels = JSON.stringify(next);
+                refreshAvailableModels();
+            }
+        });
+    }
+
+    onCfg_availableModelsChanged: loadModelCache()
+
+    onWalletKeyLoadedChanged: {
+        if (walletKeyLoaded) ensureModelsLoaded(false);
     }
 
     function walletWriteOllamaKey(handle, key, onDone) {
@@ -315,30 +414,120 @@ SimpleKCM {
     }
 
     Component.onCompleted: {
+        loadModelCache();
         loadWalletKey();
         loadWalletOllamaKey();
     }
 
-    // All adapter presets, with a "Custom" sentinel prepended at index 0.
-    // Each entry carries its own apiType so picking a preset switches adapter.
+    // OpenAI-compatible presets only (Anthropic/Gemini each have a single fixed
+    // endpoint, so they don't need a preset dropdown). The "Custom" sentinel at
+    // index 0 lets users pick a non-preset endpoint without a separate toggle.
     readonly property var presetEndpoints: {
-        var list = [{ name: "Custom", url: "", apiType: cfg_apiType }];
-        return list.concat(Api.getAllPresets());
+        var raw = Api.getPresets("openai") || [];
+        var list = [];
+        var hasCustom = false;
+        for (var i = 0; i < raw.length; i++) {
+            if (raw[i].url === "") { hasCustom = true; }
+            list.push({ name: raw[i].name, url: raw[i].url });
+        }
+        if (!hasCustom) list.unshift({ name: "Custom", url: "" });
+        return list;
+    }
+
+    readonly property var adapterChoices: Api.getAdapterChoices()
+    property var caps: Api.getCapabilities(cfg_apiType) || {}
+    onCfg_apiTypeChanged: {
+        caps = Api.getCapabilities(cfg_apiType) || {};
+        loadWalletKey();
+        refreshAvailableModels();
+        // Don't auto-fetch here: when the adapter combo changes cfg_apiType,
+        // the endpoint hasn't been swapped yet — applyAdapterDefaults() runs
+        // immediately after and triggers the fetch with the correct endpoint.
+    }
+    onCfg_providerNameChanged: {
+        loadWalletKey();
+        refreshAvailableModels();
+        ensureModelsLoaded(false);
+    }
+
+    function applyAdapterDefaults(apiType) {
+        var presets = Api.getPresets(apiType) || [];
+        var pick = null;
+        // For OpenAI-compatible, restore the last selected provider if we have one.
+        if (apiType === "openai" && cfg_openaiLastProvider && cfg_openaiLastProvider.length > 0) {
+            for (var j = 0; j < presets.length; j++) {
+                if (presets[j].name === cfg_openaiLastProvider) {
+                    pick = presets[j];
+                    break;
+                }
+            }
+            if (pick && (!pick.url || pick.url.length === 0) && cfg_openaiLastEndpoint && cfg_openaiLastEndpoint.length > 0) {
+                // Custom preset — use the remembered endpoint URL.
+                apiEndpointField.text = cfg_openaiLastEndpoint;
+                cfg_providerName = pick.name;
+                cfg_modelName = "";
+                refreshAvailableModels();
+                ensureModelsLoaded(false);
+                return;
+            }
+        }
+        if (!pick) {
+            for (var i = 0; i < presets.length; i++) {
+                if (presets[i].url && presets[i].url.length > 0) {
+                    pick = presets[i];
+                    break;
+                }
+            }
+        }
+        if (pick) {
+            apiEndpointField.text = pick.url;
+            cfg_providerName = pick.name;
+        }
+        cfg_modelName = "";
+        refreshAvailableModels();
+        ensureModelsLoaded(false);
+    }
+
+    function rememberOpenAIChoice(providerName, endpointUrl) {
+        if (cfg_apiType !== "openai") return;
+        if (providerName && providerName.length > 0) cfg_openaiLastProvider = providerName;
+        if (endpointUrl && endpointUrl.length > 0) cfg_openaiLastEndpoint = endpointUrl;
     }
 
     Kirigami.FormLayout {
         anchors.fill: parent
 
         QQC2.ComboBox {
+            id: adapterCombo
+            Kirigami.FormData.label: i18n("Adapter:")
+            Layout.fillWidth: true
+            model: adapterChoices.map(function(a) { return a.name; })
+            Component.onCompleted: {
+                for (var i = 0; i < adapterChoices.length; i++) {
+                    if (adapterChoices[i].id === cfg_apiType) {
+                        currentIndex = i;
+                        return;
+                    }
+                }
+                currentIndex = 0;
+            }
+            onActivated: function(index) {
+                var picked = adapterChoices[index].id;
+                if (picked === cfg_apiType) return;
+                cfg_apiType = picked;
+                applyAdapterDefaults(picked);
+            }
+        }
+
+        QQC2.ComboBox {
             id: endpointPreset
             Kirigami.FormData.label: i18n("Provider:")
             Layout.fillWidth: true
+            visible: caps.providerPresets === true
             model: presetEndpoints.map(function(p) { return p.name; })
             Component.onCompleted: {
-                // Select the matching preset (by url + apiType), or "Custom"
                 for (var i = 1; i < presetEndpoints.length; i++) {
-                    if (cfg_apiEndpoint === presetEndpoints[i].url
-                            && cfg_apiType === presetEndpoints[i].apiType) {
+                    if (cfg_apiEndpoint === presetEndpoints[i].url) {
                         currentIndex = i;
                         return;
                     }
@@ -348,15 +537,9 @@ SimpleKCM {
             onActivated: function(index) {
                 if (index > 0) {
                     var preset = presetEndpoints[index];
-                    cfg_apiType = preset.apiType;
                     apiEndpointField.text = preset.url;
                     cfg_providerName = preset.name;
-                    Api.fetchModels(preset.apiType, preset.url, apiKeyField.text, function(error, models) {
-                        if (!error && models.length > 0) {
-                            availableModels = models;
-                            cfg_availableModels = JSON.stringify(models);
-                        }
-                    });
+                    rememberOpenAIChoice(preset.name, preset.url);
                 }
             }
         }
@@ -368,13 +551,12 @@ SimpleKCM {
             Layout.fillWidth: true
             text: cfg_apiEndpoint
             onTextChanged: {
-                cfg_availableModels = "";
                 cfg_apiEndpoint = text;
-                // Update preset selector if it no longer matches
+                if (!caps.providerPresets) return;
+                // Sync preset selector when active adapter uses presets.
                 var matched = false;
                 for (var i = 1; i < presetEndpoints.length; i++) {
-                    if (text === presetEndpoints[i].url
-                            && cfg_apiType === presetEndpoints[i].apiType) {
+                    if (text === presetEndpoints[i].url) {
                         endpointPreset.currentIndex = i;
                         matched = true;
                         break;
@@ -384,7 +566,9 @@ SimpleKCM {
                     endpointPreset.currentIndex = 0;
                     cfg_providerName = "Custom";
                 }
+                rememberOpenAIChoice(cfg_providerName, text);
             }
+            onEditingFinished: ensureModelsLoaded(false)
         }
 
         RowLayout {
@@ -392,35 +576,38 @@ SimpleKCM {
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
-            QQC2.TextField {
-                id: modelNameField
+            QQC2.ComboBox {
+                id: modelCombo
                 Layout.fillWidth: true
-                placeholderText: i18n("e.g. llama3, gpt-4, etc.")
-                text: cfg_modelName
-                onTextChanged: cfg_modelName = text
+                // Prepend the persisted model name when it isn't in the fetched
+                // list so it stays selectable (initial load, stale value, etc.).
+                readonly property var displayModels: {
+                    var list = availableModels.slice();
+                    if (cfg_modelName && cfg_modelName.length > 0 && list.indexOf(cfg_modelName) === -1) {
+                        list.unshift(cfg_modelName);
+                    }
+                    return list;
+                }
+                model: displayModels
+                enabled: displayModels.length > 0 && !fetchInProgress
+                onDisplayModelsChanged: {
+                    var idx = displayModels.indexOf(cfg_modelName);
+                    currentIndex = idx >= 0 ? idx : 0;
+                }
+                onActivated: {
+                    cfg_modelName = currentText;
+                }
             }
 
             QQC2.Button {
-                text: i18n("Fetch Models")
                 icon.name: "view-refresh"
-                onClicked: {
-                    enabled = false;
-                    fetchStatusLabel.visible = false;
-                    Api.fetchModels(cfg_apiType, apiEndpointField.text, apiKeyField.text, function(error, models) {
-                        enabled = true;
-                        if (error) {
-                            fetchStatusLabel.text = error;
-                            fetchStatusLabel.visible = true;
-                        } else if (models.length === 0) {
-                            fetchStatusLabel.text = i18n("No models found.");
-                            fetchStatusLabel.visible = true;
-                        } else {
-                            availableModels = models;
-                            cfg_availableModels = JSON.stringify(models);
-                            fetchStatusLabel.visible = false;
-                        }
-                    });
-                }
+                visible: caps.fetchModels === true
+                enabled: !fetchInProgress
+                display: QQC2.AbstractButton.IconOnly
+                QQC2.ToolTip.text: fetchInProgress ? i18n("Refreshing…") : i18n("Refresh model list")
+                QQC2.ToolTip.visible: hovered
+                QQC2.ToolTip.delay: 300
+                onClicked: ensureModelsLoaded(true)
             }
         }
 
@@ -430,17 +617,6 @@ SimpleKCM {
             color: Kirigami.Theme.negativeTextColor
             wrapMode: Text.Wrap
             Layout.fillWidth: true
-        }
-
-        QQC2.ComboBox {
-            id: modelCombo
-            Kirigami.FormData.label: i18n("Available Models:")
-            visible: availableModels.length > 0
-            model: availableModels
-            Layout.fillWidth: true
-            onActivated: {
-                modelNameField.text = currentText;
-            }
         }
 
         RowLayout {
@@ -525,6 +701,44 @@ SimpleKCM {
             editable: true
             value: cfg_maxTokens
             onValueModified: cfg_maxTokens = value
+        }
+
+        QQC2.ComboBox {
+            id: reasoningEffortCombo
+            Kirigami.FormData.label: i18n("Thinking:")
+            Layout.fillWidth: true
+            visible: caps.reasoningEffort === true
+            readonly property var efforts: ["off", "low", "medium", "high"]
+            model: [i18n("Off"), i18n("Low"), i18n("Medium"), i18n("High")]
+            currentIndex: Math.max(0, efforts.indexOf(cfg_reasoningEffort))
+            onActivated: function(index) {
+                cfg_reasoningEffort = efforts[index];
+            }
+        }
+
+        QQC2.SpinBox {
+            id: thinkingBudgetSpinBox
+            Kirigami.FormData.label: i18n("Thinking budget:")
+            visible: caps.thinkingBudget === true
+            from: 0
+            to: 32768
+            stepSize: 256
+            editable: true
+            value: cfg_thinkingBudget
+            onValueModified: cfg_thinkingBudget = value
+            // Anthropic gates thinking on reasoningEffort != "off"; Gemini uses
+            // the budget directly so the spinbox is always enabled there.
+            enabled: !caps.reasoningEffort || cfg_reasoningEffort !== "off"
+        }
+
+        QQC2.Label {
+            Layout.fillWidth: true
+            text: caps.reasoningHelp || ""
+            wrapMode: Text.WordWrap
+            opacity: 0.7
+            font: Kirigami.Theme.smallFont
+            visible: (caps.reasoningEffort === true || caps.thinkingBudget === true)
+                     && (caps.reasoningHelp || "").length > 0
         }
 
         Kirigami.Separator {

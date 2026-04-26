@@ -395,13 +395,28 @@ PlasmoidItem {
         );
     }
 
-    function walletWriteKey(handle, key, onDone) {
+    function currentApiKeySlot() {
+        return Api.apiKeySlot(Plasmoid.configuration.apiType, Plasmoid.configuration.providerName);
+    }
+
+    function fallbackKeyForSlot(slot) {
+        var raw = Plasmoid.configuration.apiKeysFallback;
+        if (raw && raw.length > 0) {
+            try {
+                var m = JSON.parse(raw);
+                if (m && m.hasOwnProperty(slot)) return m[slot];
+            } catch(e) {}
+        }
+        return Plasmoid.configuration.apiKey || "";
+    }
+
+    function walletWriteKey(handle, slot, key, onDone) {
         ensureWalletFolder(handle, function(ok) {
             if (!ok) {
                 onDone(false);
                 return;
             }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "apiKey", key, "PlasmaLLM"],
+            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", slot, key, "PlasmaLLM"],
                 function(result) { onDone(result === 0); },
                 function(err) {
                     console.warn("PlasmaLLM: wallet writePassword error: " + err);
@@ -412,64 +427,74 @@ PlasmoidItem {
     }
 
     function loadApiKeyFromWallet() {
+        var slot = currentApiKeySlot();
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
                 if (handle < 0) {
                     console.warn("PlasmaLLM: KWallet open failed, falling back to config");
-                    root.apiKey = Plasmoid.configuration.apiKey;
+                    root.apiKey = fallbackKeyForSlot(slot);
                     return;
                 }
                 root.walletAvailable = true;
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "apiKey", "PlasmaLLM"],
+                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", slot, "PlasmaLLM"],
                     function(password) {
                         if (password && password.length > 0) {
-                            root.apiKey = password;
-                        } else if (Plasmoid.configuration.apiKey) {
-                            // Migrate from config to wallet
-                            var configKey = Plasmoid.configuration.apiKey;
-                            root.apiKey = configKey;
-                            walletWriteKey(handle, configKey, function(success) {
-                                if (success) {
-                                    console.log("PlasmaLLM: copied API key to KDE Wallet");
-                                }
-                                walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                            });
+                            root.apiKey = password.replace(/^\s+|\s+$/g, "");
+                            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                             return;
                         }
+                        // One-shot migration: copy legacy single-slot wallet key
+                        // into the current slot the first time this version runs.
+                        if (!Plasmoid.configuration.apiKeyMigrated) {
+                            walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "apiKey", "PlasmaLLM"],
+                                function(legacy) {
+                                    if (legacy && legacy.length > 0) {
+                                        walletWriteKey(handle, slot, legacy, function(success) {
+                                            if (success) {
+                                                root.apiKey = legacy;
+                                                console.log("PlasmaLLM: migrated legacy API key to slot " + slot);
+                                            } else {
+                                                root.apiKey = legacy;
+                                            }
+                                            Plasmoid.configuration.apiKeyMigrated = true;
+                                            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                        });
+                                        return;
+                                    }
+                                    // No legacy wallet entry; try config fallback.
+                                    var fb = fallbackKeyForSlot(slot);
+                                    if (fb && fb.length > 0) {
+                                        walletWriteKey(handle, slot, fb, function(success) {
+                                            if (success) console.log("PlasmaLLM: migrated config API key to slot " + slot);
+                                            root.apiKey = fb;
+                                            Plasmoid.configuration.apiKeyMigrated = true;
+                                            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                        });
+                                        return;
+                                    }
+                                    Plasmoid.configuration.apiKeyMigrated = true;
+                                    root.apiKey = "";
+                                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                },
+                                function(err) {
+                                    root.apiKey = fallbackKeyForSlot(slot);
+                                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                }
+                            );
+                            return;
+                        }
+                        root.apiKey = "";
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     },
                     function(err) {
-                        root.apiKey = Plasmoid.configuration.apiKey;
+                        root.apiKey = fallbackKeyForSlot(slot);
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     }
                 );
             },
             function(err) {
                 console.warn("PlasmaLLM: KWallet unavailable: " + err);
-                root.apiKey = Plasmoid.configuration.apiKey;
-            }
-        );
-    }
-
-    function saveApiKeyToWallet(key, callback) {
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    if (callback) callback(false);
-                    return;
-                }
-                walletWriteKey(handle, key, function(success) {
-                    if (success) {
-                        root.apiKey = key;
-                        Plasmoid.configuration.apiKey = "";
-                    }
-                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    if (callback) callback(success);
-                });
-            },
-            function(err) {
-                console.warn("PlasmaLLM: KWallet unavailable for save: " + err);
-                if (callback) callback(false);
+                root.apiKey = fallbackKeyForSlot(slot);
             }
         );
     }
@@ -770,6 +795,8 @@ PlasmoidItem {
             messages: messages,
             temperature: Plasmoid.configuration.temperature,
             maxTokens: Plasmoid.configuration.maxTokens,
+            reasoningEffort: Plasmoid.configuration.reasoningEffort,
+            thinkingBudget: Plasmoid.configuration.thinkingBudget,
             tools: tools,
             onChunk: function(delta, accumulated) {
                 if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
@@ -1145,11 +1172,21 @@ PlasmoidItem {
             chatMessages.setProperty(0, "content", prompt);
         }
         function onApiKeyChanged() {
-            // Wallet-unavailable path: key saved directly to config
+            // Legacy single-slot config field; only meaningful before migration.
             if (Plasmoid.configuration.apiKey) root.apiKey = Plasmoid.configuration.apiKey;
+        }
+        function onApiKeysFallbackChanged() {
+            // Wallet-unavailable path: key saved into the per-slot fallback map.
+            if (!root.walletAvailable) root.apiKey = fallbackKeyForSlot(currentApiKeySlot());
         }
         function onApiKeyVersionChanged() {
             // Wallet-available path: key was just written to KWallet by config page
+            loadApiKeyFromWallet();
+        }
+        function onApiTypeChanged() {
+            loadApiKeyFromWallet();
+        }
+        function onProviderNameChanged() {
             loadApiKeyFromWallet();
         }
         function onOllamaApiKeyChanged() {

@@ -11,6 +11,18 @@
 var id = "openai";
 var displayName = "OpenAI-compatible";
 
+// Which optional settings the configGeneral UI should expose for this adapter.
+// Universal fields (endpoint, model, key, temperature, max tokens) are always
+// shown and not listed here.
+var capabilities = {
+    providerPresets: true,
+    customEndpoint: true,
+    reasoningEffort: true,
+    thinkingBudget: false,
+    fetchModels: true,
+    reasoningHelp: i18n("OpenAI uses the effort level (low / medium / high) to control reasoning. Token budget is ignored.")
+};
+
 // Provider presets shown in the settings UI. Adapter-specific because each
 // API shape has its own ecosystem of endpoints. Index 0 is the "Custom"
 // sentinel (empty url) so the UI can show it as a no-op selection.
@@ -336,6 +348,9 @@ function sendStreaming(opts) {
         max_tokens: maxTokens,
         stream: true
     };
+    if (opts.reasoningEffort && opts.reasoningEffort !== "off") {
+        body.reasoning_effort = opts.reasoningEffort;
+    }
     if (tools && tools.length > 0) {
         body.tools = tools;
     }

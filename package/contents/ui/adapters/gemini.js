@@ -23,6 +23,18 @@ var presets = [
     { name: "Google Gemini (native)", url: "https://generativelanguage.googleapis.com" }
 ];
 
+// Gemini uses thinkingBudget directly and ignores the effort dropdown, so the
+// effort field is hidden. Provider preset dropdown is hidden — only one
+// endpoint exists — but the endpoint field is kept editable for proxies.
+var capabilities = {
+    providerPresets: false,
+    customEndpoint: true,
+    reasoningEffort: false,
+    thinkingBudget: true,
+    fetchModels: true,
+    reasoningHelp: i18n("Gemini uses the thinking token budget directly. Set to 0 to disable thinking on supported models.")
+};
+
 function setHeaders(xhr, apiKey) {
     xhr.setRequestHeader("Content-Type", "application/json");
     if (apiKey && apiKey.length > 0) {
@@ -63,12 +75,36 @@ function fetchModels(endpoint, apiKey, callback) {
                     callback(i18n("Failed to parse models: %1", e.message), null);
                 }
             } else {
-                callback(i18n("Failed to fetch models: HTTP %1", xhr.status), null);
+                callback(formatGeminiError(xhr, i18n("Failed to fetch models")), null);
             }
         }
     };
 
     xhr.send();
+}
+
+// Google returns 400 INVALID_ARGUMENT for invalid API keys (not 401/403), so
+// surface the real error message from the body instead of just the HTTP code.
+function formatGeminiError(xhr, prefix) {
+    var detail = "";
+    try {
+        var body = JSON.parse(xhr.responseText);
+        if (body && body.error && body.error.message) {
+            detail = body.error.message;
+        }
+    } catch (e) {
+        if (xhr.responseText) detail = xhr.responseText.substring(0, 200);
+    }
+    if (xhr.status === 400 && detail.toLowerCase().indexOf("api key") !== -1) {
+        return i18n("Authentication failed — check your API key (HTTP 400): %1", detail);
+    }
+    if (xhr.status === 401 || xhr.status === 403) {
+        return i18n("Authentication failed (HTTP %1) — check your API key: %2", xhr.status, detail);
+    }
+    if (xhr.status > 0) {
+        return prefix + " (HTTP " + xhr.status + ")" + (detail ? ": " + detail : "");
+    }
+    return prefix + ": " + i18n("no response — check your endpoint URL");
 }
 
 function buildTools(options) {
@@ -391,29 +427,7 @@ function sendStreaming(opts) {
                 processBuffer();
                 finish(streamError);
             } else {
-                var errMsg;
-                if (xhr.status === 401 || xhr.status === 403) {
-                    errMsg = i18n("Authentication failed (HTTP %1) — check your API key", xhr.status);
-                } else if (xhr.status === 429) {
-                    errMsg = i18n("Rate limited (HTTP 429) — too many requests, try again shortly");
-                } else if (xhr.status === 404) {
-                    errMsg = i18n("Not found (HTTP 404) — check your API endpoint and model name");
-                } else if (xhr.status > 0) {
-                    errMsg = i18n("API error %1", xhr.status);
-                } else {
-                    errMsg = i18n("Request failed (no response) — check your endpoint URL");
-                }
-                try {
-                    var errBody = JSON.parse(xhr.responseText);
-                    if (errBody.error && errBody.error.message) {
-                        errMsg += ": " + errBody.error.message;
-                    }
-                } catch (e) {
-                    if (xhr.responseText) {
-                        errMsg += ": " + xhr.responseText.substring(0, 200);
-                    }
-                }
-                finish(errMsg);
+                finish(formatGeminiError(xhr, i18n("Request failed")));
             }
         }
     };
@@ -425,6 +439,9 @@ function sendStreaming(opts) {
             maxOutputTokens: maxTokens
         }
     };
+    // Gemini uses the thinking budget directly; setting it to 0 explicitly
+    // disables auto-thinking on 2.5-class models.
+    body.generationConfig.thinkingConfig = { thinkingBudget: opts.thinkingBudget || 0 };
     if (translated.systemText && translated.systemText.length > 0) {
         body.systemInstruction = { parts: [{ text: translated.systemText }] };
     }

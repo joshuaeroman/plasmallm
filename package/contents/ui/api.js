@@ -203,6 +203,27 @@ function getPresets(apiType) {
     return Adapters.getAdapter(apiType).presets;
 }
 
+function getCapabilities(apiType) {
+    return Adapters.getAdapter(apiType).capabilities;
+}
+
+// Wallet entry name for an (adapter, provider) slot. Falls back to the adapter
+// id when providerName is blank so adapters without presets still get a stable
+// slot.
+function apiKeySlot(apiType, providerName) {
+    var t = apiType || "openai";
+    var p = (providerName && providerName.length > 0) ? providerName : t;
+    return "apiKey:" + t + ":" + p;
+}
+
+function getAdapterChoices() {
+    return [
+        { id: "openai",    name: i18n("OpenAI-compatible") },
+        { id: "anthropic", name: i18n("Anthropic") },
+        { id: "gemini",    name: i18n("Google Gemini") }
+    ];
+}
+
 function getAllPresets() {
     return Adapters.getAllPresets();
 }
