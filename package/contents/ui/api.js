@@ -203,6 +203,10 @@ function getPresets(apiType) {
     return Adapters.getAdapter(apiType).presets;
 }
 
+function getAllPresets() {
+    return Adapters.getAllPresets();
+}
+
 function fetchModels(apiType, endpoint, apiKey, callback) {
     return Adapters.getAdapter(apiType).fetchModels(endpoint, apiKey, callback);
 }

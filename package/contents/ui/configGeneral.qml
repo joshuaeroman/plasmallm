@@ -319,7 +319,12 @@ SimpleKCM {
         loadWalletOllamaKey();
     }
 
-    readonly property var presetEndpoints: Api.getPresets(cfg_apiType)
+    // All adapter presets, with a "Custom" sentinel prepended at index 0.
+    // Each entry carries its own apiType so picking a preset switches adapter.
+    readonly property var presetEndpoints: {
+        var list = [{ name: "Custom", url: "", apiType: cfg_apiType }];
+        return list.concat(Api.getAllPresets());
+    }
 
     Kirigami.FormLayout {
         anchors.fill: parent
@@ -330,9 +335,10 @@ SimpleKCM {
             Layout.fillWidth: true
             model: presetEndpoints.map(function(p) { return p.name; })
             Component.onCompleted: {
-                // Select the matching preset, or "Custom" if no match
+                // Select the matching preset (by url + apiType), or "Custom"
                 for (var i = 1; i < presetEndpoints.length; i++) {
-                    if (cfg_apiEndpoint === presetEndpoints[i].url) {
+                    if (cfg_apiEndpoint === presetEndpoints[i].url
+                            && cfg_apiType === presetEndpoints[i].apiType) {
                         currentIndex = i;
                         return;
                     }
@@ -341,9 +347,11 @@ SimpleKCM {
             }
             onActivated: function(index) {
                 if (index > 0) {
-                    apiEndpointField.text = presetEndpoints[index].url;
-                    cfg_providerName = presetEndpoints[index].name;
-                    Api.fetchModels(cfg_apiType, presetEndpoints[index].url, apiKeyField.text, function(error, models) {
+                    var preset = presetEndpoints[index];
+                    cfg_apiType = preset.apiType;
+                    apiEndpointField.text = preset.url;
+                    cfg_providerName = preset.name;
+                    Api.fetchModels(preset.apiType, preset.url, apiKeyField.text, function(error, models) {
                         if (!error && models.length > 0) {
                             availableModels = models;
                             cfg_availableModels = JSON.stringify(models);
@@ -365,7 +373,8 @@ SimpleKCM {
                 // Update preset selector if it no longer matches
                 var matched = false;
                 for (var i = 1; i < presetEndpoints.length; i++) {
-                    if (text === presetEndpoints[i].url) {
+                    if (text === presetEndpoints[i].url
+                            && cfg_apiType === presetEndpoints[i].apiType) {
                         endpointPreset.currentIndex = i;
                         matched = true;
                         break;
