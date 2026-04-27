@@ -66,7 +66,7 @@ There is no build step, test suite, or linter. QML is interpreted at runtime. Af
 
 ## Code Style
 
-- SPDX headers on all files: `SPDX-FileCopyrightText: 2024 Joshua Roman`
+- SPDX headers on all files: `SPDX-FileCopyrightText: 2026 Joshua Roman`
 - Import order: Qt → KDE Plasma → P5Support → Kirigami → local JS
 - Use `var` for declarations, `function` keyword (not arrows) — QML JS standard
 - Use theme colors from `Kirigami.Theme`, not hardcoded values

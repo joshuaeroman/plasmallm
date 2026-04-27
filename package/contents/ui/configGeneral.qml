@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2024 Joshua Roman
+    SPDX-FileCopyrightText: 2026 Joshua Roman
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -636,6 +636,8 @@ SimpleKCM {
             color: Kirigami.Theme.negativeTextColor
             wrapMode: Text.Wrap
             Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
         }
 
         RowLayout {
@@ -675,6 +677,10 @@ SimpleKCM {
             text: walletAvailable ? i18n("Stored in KDE Wallet") : i18n("KDE Wallet unavailable — key stored in config file")
             font: Kirigami.Theme.smallFont
             color: walletAvailable ? Kirigami.Theme.positiveTextColor : Kirigami.Theme.neutralTextColor
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
         }
 
         Kirigami.Separator {
@@ -857,6 +863,10 @@ SimpleKCM {
             text: i18n("Saves to ~/PlasmaLLM/chats/")
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
         }
 
         QQC2.ButtonGroup { id: autoClearGroup }
@@ -951,7 +961,9 @@ SimpleKCM {
             visible: autoShareCheckBox.checked && autoRunCheckBox.checked
             text: i18n("⚠️ DANGER: Both options enabled - the LLM can now execute commands and see their output, enabling an agentic workflow. Only use with trustworthy LLMs.")
             wrapMode: Text.Wrap
-            Layout.preferredWidth: 300
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
             color: Kirigami.Theme.negativeTextColor
             font: Kirigami.Theme.smallFont
         }
@@ -998,6 +1010,8 @@ SimpleKCM {
             color: Kirigami.Theme.disabledTextColor
             wrapMode: Text.Wrap
             Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
         }
 
     }
