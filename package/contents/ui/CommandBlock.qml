@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2024 Joshua Roman
+    SPDX-FileCopyrightText: 2026 Joshua Roman
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -42,10 +42,23 @@ Rectangle {
         spacing: Kirigami.Units.smallSpacing
 
         QQC2.ScrollView {
+            id: cmdScroll
             Layout.fillWidth: true
             Layout.maximumHeight: commandLabel.font.pixelSize * 1.4 * 10 + Kirigami.Units.smallSpacing
             Layout.preferredHeight: Math.min(commandLabel.implicitHeight, commandLabel.font.pixelSize * 1.4 * 10 + Kirigami.Units.smallSpacing)
             contentWidth: availableWidth
+
+            // Keep the inner Flickable from eating wheel events when there's
+            // nothing to scroll — otherwise the outer chat list can't scroll
+            // while the cursor is over a command block, which fights the
+            // autoscroll-tracking logic in FullRepresentation.qml.
+            Component.onCompleted: {
+                if (contentItem && contentItem.hasOwnProperty("interactive")) {
+                    contentItem.interactive = Qt.binding(function() {
+                        return cmdScroll.contentHeight > cmdScroll.height + 1;
+                    });
+                }
+            }
 
             PlasmaComponents.Label {
                 id: commandLabel

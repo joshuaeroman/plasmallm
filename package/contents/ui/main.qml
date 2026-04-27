@@ -1,5 +1,5 @@
 /*
-    SPDX-FileCopyrightText: 2024 Joshua Roman
+    SPDX-FileCopyrightText: 2026 Joshua Roman
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
@@ -338,7 +338,8 @@ PlasmoidItem {
                 role: m.role,
                 content: m.content,
                 tool_calls_json: m.tool_calls_json || "",
-                tool_call_id: m.tool_call_id || ""
+                tool_call_id: m.tool_call_id || "",
+                thinking_blocks_json: m.thinking_blocks_json || ""
             }));
         }
 
@@ -351,6 +352,7 @@ PlasmoidItem {
                 index: j,
                 role: d.role,
                 content: d.content,
+                thinking: d.thinking || "",
                 commandsStr: d.commandsStr || "",
                 shared: d.shared || false,
                 timestamp: d.timestamp || ""
@@ -395,13 +397,28 @@ PlasmoidItem {
         );
     }
 
-    function walletWriteKey(handle, key, onDone) {
+    function currentApiKeySlot() {
+        return Api.apiKeySlot(Plasmoid.configuration.apiType, Plasmoid.configuration.providerName);
+    }
+
+    function fallbackKeyForSlot(slot) {
+        var raw = Plasmoid.configuration.apiKeysFallback;
+        if (raw && raw.length > 0) {
+            try {
+                var m = JSON.parse(raw);
+                if (m && m.hasOwnProperty(slot)) return m[slot];
+            } catch(e) {}
+        }
+        return Plasmoid.configuration.apiKey || "";
+    }
+
+    function walletWriteKey(handle, slot, key, onDone) {
         ensureWalletFolder(handle, function(ok) {
             if (!ok) {
                 onDone(false);
                 return;
             }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "apiKey", key, "PlasmaLLM"],
+            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", slot, key, "PlasmaLLM"],
                 function(result) { onDone(result === 0); },
                 function(err) {
                     console.warn("PlasmaLLM: wallet writePassword error: " + err);
@@ -412,64 +429,74 @@ PlasmoidItem {
     }
 
     function loadApiKeyFromWallet() {
+        var slot = currentApiKeySlot();
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
                 if (handle < 0) {
                     console.warn("PlasmaLLM: KWallet open failed, falling back to config");
-                    root.apiKey = Plasmoid.configuration.apiKey;
+                    root.apiKey = fallbackKeyForSlot(slot);
                     return;
                 }
                 root.walletAvailable = true;
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "apiKey", "PlasmaLLM"],
+                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", slot, "PlasmaLLM"],
                     function(password) {
                         if (password && password.length > 0) {
-                            root.apiKey = password;
-                        } else if (Plasmoid.configuration.apiKey) {
-                            // Migrate from config to wallet
-                            var configKey = Plasmoid.configuration.apiKey;
-                            root.apiKey = configKey;
-                            walletWriteKey(handle, configKey, function(success) {
-                                if (success) {
-                                    console.log("PlasmaLLM: copied API key to KDE Wallet");
-                                }
-                                walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                            });
+                            root.apiKey = password.replace(/^\s+|\s+$/g, "");
+                            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                             return;
                         }
+                        // One-shot migration: copy legacy single-slot wallet key
+                        // into the current slot the first time this version runs.
+                        if (!Plasmoid.configuration.apiKeyMigrated) {
+                            walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "apiKey", "PlasmaLLM"],
+                                function(legacy) {
+                                    if (legacy && legacy.length > 0) {
+                                        walletWriteKey(handle, slot, legacy, function(success) {
+                                            if (success) {
+                                                root.apiKey = legacy;
+                                                console.log("PlasmaLLM: migrated legacy API key to slot " + slot);
+                                            } else {
+                                                root.apiKey = legacy;
+                                            }
+                                            Plasmoid.configuration.apiKeyMigrated = true;
+                                            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                        });
+                                        return;
+                                    }
+                                    // No legacy wallet entry; try config fallback.
+                                    var fb = fallbackKeyForSlot(slot);
+                                    if (fb && fb.length > 0) {
+                                        walletWriteKey(handle, slot, fb, function(success) {
+                                            if (success) console.log("PlasmaLLM: migrated config API key to slot " + slot);
+                                            root.apiKey = fb;
+                                            Plasmoid.configuration.apiKeyMigrated = true;
+                                            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                        });
+                                        return;
+                                    }
+                                    Plasmoid.configuration.apiKeyMigrated = true;
+                                    root.apiKey = "";
+                                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                },
+                                function(err) {
+                                    root.apiKey = fallbackKeyForSlot(slot);
+                                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                }
+                            );
+                            return;
+                        }
+                        root.apiKey = "";
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     },
                     function(err) {
-                        root.apiKey = Plasmoid.configuration.apiKey;
+                        root.apiKey = fallbackKeyForSlot(slot);
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     }
                 );
             },
             function(err) {
                 console.warn("PlasmaLLM: KWallet unavailable: " + err);
-                root.apiKey = Plasmoid.configuration.apiKey;
-            }
-        );
-    }
-
-    function saveApiKeyToWallet(key, callback) {
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    if (callback) callback(false);
-                    return;
-                }
-                walletWriteKey(handle, key, function(success) {
-                    if (success) {
-                        root.apiKey = key;
-                        Plasmoid.configuration.apiKey = "";
-                    }
-                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    if (callback) callback(success);
-                });
-            },
-            function(err) {
-                console.warn("PlasmaLLM: KWallet unavailable for save: " + err);
-                if (callback) callback(false);
+                root.apiKey = fallbackKeyForSlot(slot);
             }
         );
     }
@@ -683,6 +710,22 @@ PlasmoidItem {
             return;
         }
 
+        // If a previous turn requested tool calls that the user never ran
+        // (manual mode, then chose to send a different message instead), the
+        // API will reject the next request for missing tool_result pairs.
+        // Synthesize denial outputs and clear the queue.
+        if (root.pendingToolCalls.length > 0) {
+            for (var pi = 0; pi < root.pendingToolCalls.length; pi++) {
+                var pcall = root.pendingToolCalls[pi];
+                chatMessages.append({
+                    role: "tool",
+                    content: i18n("The user declined to run this command."),
+                    tool_call_id: pcall.id || ""
+                });
+            }
+            root.pendingToolCalls = [];
+        }
+
         // Add user message to both models
         var attachJson = attachments.length > 0 ? JSON.stringify(attachments) : "";
         var imagePaths = attachments.filter(function(a) { return !!a.dataUrl; }).map(function(a) { return a.filePath; });
@@ -690,6 +733,7 @@ PlasmoidItem {
         displayMessages.append({
             role: "user",
             content: text,
+            thinking: "",
             commandsStr: "",
             shared: false,
             timestamp: currentTimestamp(),
@@ -725,6 +769,7 @@ PlasmoidItem {
         displayMessages.append({
             role: "assistant",
             content: "",
+            thinking: "",
             commandsStr: "",
             shared: false,
             timestamp: currentTimestamp()
@@ -739,7 +784,7 @@ PlasmoidItem {
             if (msg.attachments_json && msg.attachments_json.length > 0) {
                 try {
                     var atts = JSON.parse(msg.attachments_json);
-                    msgContent = Api.buildContentArray(msg.content, atts);
+                    msgContent = Api.buildContentArray(Plasmoid.configuration.apiType, msg.content, atts, Plasmoid.configuration.usesResponsesAPI);
                 } catch(e) {}
             }
             var entry = { role: msg.role, content: msgContent };
@@ -747,6 +792,15 @@ PlasmoidItem {
             if (msg.tool_calls_json && msg.tool_calls_json.length > 0) {
                 try {
                     entry.tool_calls = JSON.parse(msg.tool_calls_json);
+                } catch(e) {}
+            }
+            // Reconstruct thinking blocks (with provider-specific signatures)
+            // so the adapter can prepend them in the next request — required
+            // for Anthropic extended-thinking-with-tool-use and Gemini
+            // multi-turn function calling with thoughts.
+            if (msg.thinking_blocks_json && msg.thinking_blocks_json.length > 0) {
+                try {
+                    entry.thinkingBlocks = JSON.parse(msg.thinking_blocks_json);
                 } catch(e) {}
             }
             // Add tool_call_id on tool messages
@@ -761,21 +815,30 @@ PlasmoidItem {
             messages = [systemMsg].concat(messages.slice(messages.length - maxApiMessages));
         }
 
-        var tools = Api.buildTools({ ollamaApiKey: root.ollamaApiKey, commandToolEnabled: Plasmoid.configuration.useCommandTool });
+        var tools = Api.buildTools(Plasmoid.configuration.apiType, { ollamaApiKey: root.ollamaApiKey, commandToolEnabled: Plasmoid.configuration.useCommandTool, usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI });
 
-        var streamHandle = Api.sendStreamingChatRequest(
-            Plasmoid.configuration.apiEndpoint,
-            root.apiKey,
-            Plasmoid.configuration.modelName,
-            messages,
-            Plasmoid.configuration.temperature,
-            Plasmoid.configuration.maxTokens,
-            function onChunk(delta, accumulated) {
+        var streamHandle = Api.sendStreaming(Plasmoid.configuration.apiType, {
+            endpoint: Plasmoid.configuration.apiEndpoint,
+            apiKey: root.apiKey,
+            model: Plasmoid.configuration.modelName,
+            messages: messages,
+            temperature: Plasmoid.configuration.temperature,
+            maxTokens: Plasmoid.configuration.maxTokens,
+            reasoningEffort: Plasmoid.configuration.reasoningEffort,
+            thinkingBudget: Plasmoid.configuration.thinkingBudget,
+            usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
+            tools: tools,
+            onChunk: function(delta, accumulated) {
                 if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                     displayMessages.setProperty(streamingMessageIndex, "content", accumulated);
                 }
             },
-            function onComplete(fullText, error, toolCalls, assistantMsg) {
+            onThinkingChunk: function(delta, accumulated) {
+                if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
+                    displayMessages.setProperty(streamingMessageIndex, "thinking", accumulated);
+                }
+            },
+            onComplete: function(fullText, error, toolCalls, assistantMsg) {
                 isLoading = false;
                 activeRequest = null;
                 if (streamPollTimer.running) streamPollTimer.stop();
@@ -784,7 +847,9 @@ PlasmoidItem {
                 if (toolCalls && toolCalls.length > 0 && toolCallDepth < maxToolCallDepth) {
                     toolCallDepth++;
                     // Append the assistant's tool_call message to chat history
-                    chatMessages.append({ role: "assistant", content: assistantMsg.content || "", tool_calls_json: JSON.stringify(toolCalls) });
+                    var thinkingJson = (assistantMsg && assistantMsg.thinkingBlocks && assistantMsg.thinkingBlocks.length > 0)
+                        ? JSON.stringify(assistantMsg.thinkingBlocks) : "";
+                    chatMessages.append({ role: "assistant", content: assistantMsg.content || "", tool_calls_json: JSON.stringify(toolCalls), thinking_blocks_json: thinkingJson });
 
                     // Categorize all tool calls
                     var commandQueue = [];
@@ -936,7 +1001,9 @@ PlasmoidItem {
                         timestamp: currentTimestamp()
                     });
                 } else {
-                    chatMessages.append({ role: "assistant", content: fullText });
+                    var regularThinkingJson = (assistantMsg && assistantMsg.thinkingBlocks && assistantMsg.thinkingBlocks.length > 0)
+                        ? JSON.stringify(assistantMsg.thinkingBlocks) : "";
+                    chatMessages.append({ role: "assistant", content: fullText, thinking_blocks_json: regularThinkingJson });
                     var commands = Api.parseCommandBlocks(fullText);
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                         displayMessages.setProperty(streamingMessageIndex, "content", fullText);
@@ -960,9 +1027,8 @@ PlasmoidItem {
                         taskAutoMode = false;
                     }
                 }
-            },
-            tools
-        );
+            }
+        });
 
         streamHandle.setPollTimer(streamPollTimer);
         streamPollTimer.streamHandle = streamHandle;
@@ -1145,11 +1211,21 @@ PlasmoidItem {
             chatMessages.setProperty(0, "content", prompt);
         }
         function onApiKeyChanged() {
-            // Wallet-unavailable path: key saved directly to config
+            // Legacy single-slot config field; only meaningful before migration.
             if (Plasmoid.configuration.apiKey) root.apiKey = Plasmoid.configuration.apiKey;
+        }
+        function onApiKeysFallbackChanged() {
+            // Wallet-unavailable path: key saved into the per-slot fallback map.
+            if (!root.walletAvailable) root.apiKey = fallbackKeyForSlot(currentApiKeySlot());
         }
         function onApiKeyVersionChanged() {
             // Wallet-available path: key was just written to KWallet by config page
+            loadApiKeyFromWallet();
+        }
+        function onApiTypeChanged() {
+            loadApiKeyFromWallet();
+        }
+        function onProviderNameChanged() {
             loadApiKeyFromWallet();
         }
         function onOllamaApiKeyChanged() {

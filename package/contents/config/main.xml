@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    SPDX-FileCopyrightText: 2024 Joshua Roman
+    SPDX-FileCopyrightText: 2026 Joshua Roman
     SPDX-License-Identifier: GPL-2.0-or-later
 -->
 <kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
@@ -13,6 +13,10 @@
     <entry name="apiEndpoint" type="String">
       <label>API Endpoint URL</label>
       <default>http://localhost:11434/v1</default>
+    </entry>
+    <entry name="apiType" type="String">
+      <label>API adapter id (openai, future: gemini, anthropic)</label>
+      <default>openai</default>
     </entry>
     <entry name="providerName" type="String">
       <label>Provider Name</label>
@@ -37,6 +41,24 @@
       <default>2048</default>
       <min>64</min>
       <max>32768</max>
+    </entry>
+    <entry name="reasoningEffort" type="String">
+      <label>Reasoning effort: off, low, medium, high</label>
+      <default>off</default>
+    </entry>
+    <entry name="thinkingBudget" type="Int">
+      <label>Thinking token budget (Anthropic/Gemini)</label>
+      <default>4096</default>
+      <min>0</min>
+      <max>32768</max>
+    </entry>
+    <entry name="showThoughts" type="Bool">
+      <label>Show model thoughts (collapsible) when reasoning is enabled</label>
+      <default>true</default>
+    </entry>
+    <entry name="usesResponsesAPI" type="Bool">
+      <label>Route OpenAI-compatible requests through /v1/responses instead of /v1/chat/completions</label>
+      <default>false</default>
     </entry>
     <entry name="chatSpacing" type="Int">
       <label>Chat Spacing (px)</label>
@@ -128,6 +150,14 @@
       <label>Internal: incremented when API key is saved to KDE Wallet</label>
       <default>0</default>
     </entry>
+    <entry name="apiKeysFallback" type="String">
+      <label>Per-slot API keys (JSON object) used when KDE Wallet is unavailable</label>
+      <default></default>
+    </entry>
+    <entry name="apiKeyMigrated" type="Bool">
+      <label>Internal: legacy single-slot API key has been migrated to per-slot</label>
+      <default>false</default>
+    </entry>
     <entry name="autoClearMode" type="Int">
       <label>Auto-clear mode: 0=disabled, 1=instant, 2=seconds, 3=minutes</label>
       <default>0</default>
@@ -149,7 +179,7 @@
       <default></default>
     </entry>
     <entry name="availableModels" type="String">
-      <label>Fetched model list (JSON array, written at runtime)</label>
+      <label>Cached model lists per slot (JSON object: { "apiType:providerName": ["model-a", ...] }, written at runtime)</label>
       <default></default>
     </entry>
     <entry name="ollamaApiKey" type="String">
@@ -159,6 +189,14 @@
     <entry name="ollamaApiKeyVersion" type="Int">
       <label>Internal: incremented when Ollama API key is saved to KDE Wallet</label>
       <default>0</default>
+    </entry>
+    <entry name="openaiLastProvider" type="String">
+      <label>Last selected provider preset name for the OpenAI-compatible adapter</label>
+      <default></default>
+    </entry>
+    <entry name="openaiLastEndpoint" type="String">
+      <label>Last endpoint URL used for the OpenAI-compatible adapter</label>
+      <default></default>
     </entry>
     <entry name="useCommandTool" type="Bool">
       <label>Use tool calling for command execution</label>

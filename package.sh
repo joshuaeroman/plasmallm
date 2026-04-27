@@ -1,5 +1,5 @@
 #!/bin/bash
-# SPDX-FileCopyrightText: 2024 Joshua Roman
+# SPDX-FileCopyrightText: 2026 Joshua Roman
 # SPDX-License-Identifier: GPL-2.0-or-later
 set -e
 
