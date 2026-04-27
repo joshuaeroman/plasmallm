@@ -1,6 +1,6 @@
 # PlasmaLLM
 
-A KDE Plasma 6 widget that provides a chat interface to OpenAI-compatible LLM endpoints. Integrates system information gathering, markdown rendering, and shell command execution directly from the desktop.
+A KDE Plasma 6 widget that provides a chat interface to various LLM endpoints. Integrates system information gathering, markdown rendering, and shell command execution directly from the desktop.
 
 ![License: GPL-2.0-or-later](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)
 
@@ -8,7 +8,7 @@ PlasmaLLM is designed for quick questions and system tasks right from your panel
 
 ## Features
 
-- Chat with any OpenAI-compatible API (Ollama, LM Studio, OpenAI, Anthropic, Groq, and more)
+- Chat with any OpenAI-compatible API (Ollama, LM Studio, OpenAI, Anthropic, Groq, and more), Anthropic Claude, or Google Gemini (bring your own API key) 
 - System-aware: automatically gathers hardware and OS info for contextual responses
 - Interactive command blocks: run, copy, save, or open suggested shell commands in a terminal
 - Markdown rendering for assistant responses
