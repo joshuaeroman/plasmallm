@@ -219,14 +219,34 @@ PlasmaExtras.Representation {
                 headerPositioning: ListView.OverlayHeader
                 header: Item { height: Plasmoid.configuration.chatSpacing }
                 model: root.displayMessages
+                // Keep delegates alive well beyond the viewport so their
+                // measured heights don't churn as the user scrolls — that
+                // churn was making contentHeight oscillate (e.g. 1648→4240
+                // in one tick) which yanks the visible scroll position.
+                cacheBuffer: Math.max(2000, height * 4)
+                reuseItems: false
 
-                // Track whether user is near the bottom to avoid fighting manual scrolling
-                readonly property bool atBottom: atYEnd || contentHeight <= height
+                // Track whether user is near the bottom to avoid fighting manual scrolling.
+                // nearBottomThreshold gives some slack so small upward scrolls still
+                // count as "sticky" — atYEnd alone has effectively zero tolerance.
+                readonly property real nearBottomThreshold: Kirigami.Units.gridUnit * 8
+                readonly property bool atBottom: atYEnd || contentHeight <= height ||
+                                                 (contentHeight - contentY - height) <= nearBottomThreshold
                 // Latched true when streaming begins at bottom; cleared when streaming ends or user scrolls away
                 property bool trackingStream: false
+                // Latched true while user is pinned to the bottom; cleared on manual scroll-away, re-latched on returning to end
+                property bool stickToBottom: true
+                // Set while we're issuing a programmatic scroll so the resulting
+                // movementStarted/contentY updates don't get mistaken for user input
+                property bool programmaticScroll: false
 
                 function scrollToEnd() {
+                    programmaticScroll = true;
                     positionViewAtEnd();
+                    // Hold the guard across the next event-loop tick so the
+                    // contentYChanged signals that arrive after the layout
+                    // settles aren't misread as user input.
+                    Qt.callLater(function() { messageList.programmaticScroll = false; });
                 }
 
                 delegate: ChatMessage {
@@ -246,37 +266,44 @@ PlasmaExtras.Representation {
                     onSaveRequested: function(filePath, content) { root.saveScript(filePath, content); }
                 }
 
-                onFlickStarted: {
+                // movementStarted fires for wheel, scrollbar drag, and touch flicks —
+                // unlike onFlickStarted which only fires for touch/drag flicks. Guard
+                // against the programmatic scrolls we issue ourselves.
+                // Mouse-wheel scrolling on this Flickable does NOT emit
+                // movementStarted, but it DOES emit contentYChanged. Use that
+                // as the user-input signal: any non-programmatic contentY
+                // change re-derives stickToBottom from the new position.
+                onContentYChanged: {
+                    if (programmaticScroll) return;
                     trackingStream = false;
+                    stickToBottom = atBottom;
                 }
 
                 onCountChanged: {
-                    var wasAtBottom = messageList.atBottom || root.isAutoMode || messageList.trackingStream;
+                    var wasAtBottom = messageList.atBottom || root.isAutoMode || messageList.trackingStream || messageList.stickToBottom;
                     if (wasAtBottom && root.isLoading && root.streamingMessageIndex >= 0) {
                         trackingStream = true;
                     }
-                    Qt.callLater(function() {
-                        if (wasAtBottom) {
-                            messageList.scrollToEnd();
-                        }
-                    });
+                    if (wasAtBottom) {
+                        stickToBottom = true;
+                        Qt.callLater(messageList.scrollToEnd);
+                    }
                 }
 
                 onContentHeightChanged: {
-                    if (root.isAutoMode && messageList.atBottom) {
-                        Qt.callLater(function() {
-                            messageList.scrollToEnd();
-                        });
-                    } else if (root.isLoading && root.streamingMessageIndex >= 0 && (messageList.atBottom || messageList.trackingStream)) {
-                        Qt.callLater(function() {
-                            var item = messageList.itemAtIndex(root.streamingMessageIndex);
-                            if (item && item.height > messageList.height) {
-                                messageList.positionViewAtIndex(root.streamingMessageIndex, ListView.Beginning);
-                            } else {
-                                messageList.scrollToEnd();
-                            }
-                        });
+                    if (programmaticScroll) return;
+                    if (atBottom) return;
+                    if (!stickToBottom && !(root.isLoading && trackingStream)) return;
+                    if (root.isLoading && root.streamingMessageIndex >= 0) {
+                        var item = messageList.itemAtIndex(root.streamingMessageIndex);
+                        if (item && item.height > messageList.height) {
+                            programmaticScroll = true;
+                            messageList.positionViewAtIndex(root.streamingMessageIndex, ListView.Beginning);
+                            Qt.callLater(function() { messageList.programmaticScroll = false; });
+                            return;
+                        }
                     }
+                    scrollToEnd();
                 }
 
                 Connections {
@@ -291,13 +318,18 @@ PlasmaExtras.Representation {
                         Qt.callLater(function() {
                             if (root.isAutoMode && messageList.atBottom) {
                                 messageList.scrollToEnd();
+                                messageList.stickToBottom = true;
                                 return;
                             }
                             var item = messageList.itemAtIndex(messageIndex);
                             if (item && item.height <= messageList.height) {
                                 messageList.scrollToEnd();
+                                messageList.stickToBottom = true;
                             } else {
+                                messageList.programmaticScroll = true;
                                 messageList.positionViewAtIndex(messageIndex, ListView.Beginning);
+                                messageList.programmaticScroll = false;
+                                messageList.stickToBottom = false;
                             }
                         });
                     }

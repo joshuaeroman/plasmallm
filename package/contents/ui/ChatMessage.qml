@@ -40,7 +40,7 @@ Item {
     readonly property bool isCommandOutput: role === "command_output"
     readonly property bool isCommandRunning: role === "command_running"
     readonly property bool isWebSearchResults: role === "web_search_results"
-    readonly property bool isThinking: isAssistant && content.length === 0
+    readonly property bool isThinking: isAssistant && content.length === 0 && commandsStr.length === 0
     readonly property string strippedContent: isAssistant ? Api.stripCodeBlocks(content).trim() : content
     readonly property bool hasBubbleContent: isThinking || !isAssistant || strippedContent.length > 0
     readonly property int spacing: Plasmoid.configuration.chatSpacing
@@ -121,6 +121,14 @@ Item {
                 contentWidth: availableWidth
                 QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
                 QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
+
+                Component.onCompleted: {
+                    if (contentItem && contentItem.hasOwnProperty("interactive")) {
+                        contentItem.interactive = Qt.binding(function() {
+                            return thinkingScroll.contentHeight > thinkingScroll.height + 1;
+                        });
+                    }
+                }
 
                 PlasmaComponents.Label {
                     id: thinkingLabel
@@ -256,9 +264,18 @@ Item {
                 Component {
                     id: scrollableContent
                     QQC2.ScrollView {
+                        id: outScroll
                         contentWidth: availableWidth
                         QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
                         QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
+
+                        Component.onCompleted: {
+                            if (contentItem && contentItem.hasOwnProperty("interactive")) {
+                                contentItem.interactive = Qt.binding(function() {
+                                    return outScroll.contentHeight > outScroll.height + 1;
+                                });
+                            }
+                        }
 
                         PlasmaComponents.Label {
                             width: parent.width
@@ -289,9 +306,18 @@ Item {
             Component {
                 id: scrollableMarkdownContent
                 QQC2.ScrollView {
+                    id: mdScroll
                     contentWidth: availableWidth
                     QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
                     QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
+
+                    Component.onCompleted: {
+                        if (contentItem && contentItem.hasOwnProperty("interactive")) {
+                            contentItem.interactive = Qt.binding(function() {
+                                return mdScroll.contentHeight > mdScroll.height + 1;
+                            });
+                        }
+                    }
 
                     PlasmaComponents.Label {
                         width: parent.width

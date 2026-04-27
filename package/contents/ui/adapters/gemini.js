@@ -20,7 +20,7 @@ var id = "gemini";
 var displayName = "Google Gemini";
 
 var presets = [
-    { name: "Google Gemini (native)", url: "https://generativelanguage.googleapis.com" }
+    { name: "Google Gemini", url: "https://generativelanguage.googleapis.com" }
 ];
 
 // Gemini uses thinkingBudget directly and ignores the effort dropdown, so the

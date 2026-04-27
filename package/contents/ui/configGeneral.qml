@@ -241,6 +241,7 @@ SimpleKCM {
             walletApiKey = key;
             walletKeyDirty = false;
             walletSaveInProgress = false;
+            ensureModelsLoaded(false);
             return;
         }
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
@@ -250,6 +251,7 @@ SimpleKCM {
                     walletApiKey = key;
                     walletKeyDirty = false;
                     walletSaveInProgress = false;
+                    ensureModelsLoaded(false);
                     return;
                 }
                 walletWriteKey(handle, slot, key, function(success) {
@@ -257,6 +259,7 @@ SimpleKCM {
                         walletApiKey = key;
                         walletKeyDirty = false;
                         cfg_apiKeyVersion++;
+                        ensureModelsLoaded(false);
                     }
                     walletSaveInProgress = false;
                     walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
@@ -305,9 +308,13 @@ SimpleKCM {
         // previous slot's key. onWalletKeyLoadedChanged retries once the key
         // for the current slot has actually arrived.
         if (!walletKeyLoaded) return;
+        var key = walletApiKey;
+        // Skip automatic fetches when no key is set — some endpoints (e.g. local
+        // LM Studio) don't need one, but we shouldn't hammer remote providers
+        // with guaranteed-401 requests. The manual refresh button bypasses this.
+        if (!force && (!key || key.length === 0)) return;
         fetchInProgress = true;
         fetchStatusLabel.visible = false;
-        var key = walletApiKey;
         Api.fetchModels(cfg_apiType, apiEndpointField.text, key, cfg_usesResponsesAPI, function(error, models) {
             fetchInProgress = false;
             if (error) {
@@ -600,6 +607,11 @@ SimpleKCM {
                 onDisplayModelsChanged: {
                     var idx = displayModels.indexOf(cfg_modelName);
                     currentIndex = idx >= 0 ? idx : 0;
+                    // Persist the visible selection so applying without
+                    // touching the combo doesn't leave cfg_modelName empty.
+                    if ((!cfg_modelName || cfg_modelName.length === 0) && displayModels.length > 0) {
+                        cfg_modelName = displayModels[0];
+                    }
                 }
                 onActivated: {
                     cfg_modelName = currentText;
@@ -740,6 +752,8 @@ SimpleKCM {
 
         QQC2.Label {
             Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
             text: caps.reasoningHelp || ""
             wrapMode: Text.WordWrap
             opacity: 0.7
