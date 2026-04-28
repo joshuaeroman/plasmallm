@@ -27,7 +27,11 @@ No external dependencies — uses only Qt and KDE Plasma APIs.
 
 ## Installation
 
-### From GitHub Releases (recommended)
+### From the KDE Store
+
+PlasmaLLM is available on the [KDE Store](https://store.kde.org/p/2348409/). You can install it directly from **Add Widgets** → **Get New Widgets** → **Download New Widgets** in Plasma.
+
+### From GitHub Releases
 
 Download the latest `.plasmoid` file from the [Releases](https://github.com/joshuaeroman/plasmallm/releases) page, then install it:
 
@@ -65,6 +69,8 @@ To uninstall:
 ```bash
 ./install.sh --remove
 ```
+
+> **Note:** If you previously used `./install.sh --dev`, run `./install.sh --remove` before switching to a release version from GitHub or the [KDE Store](https://store.kde.org/p/2348409/) to remove the development symlink.
 
 ### Building a `.plasmoid` from Source
 
