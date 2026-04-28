@@ -1,207 +1,205 @@
-# Brazilian Portuguese translations for PlasmaLLM
-# Traduções em português brasileiro do pacote PlasmaLLM.
+# Japanese translations for PlasmaLLM
 # Copyright (C) 2026 Joshua Roman
 # This file is distributed under the same license as the PlasmaLLM package.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-26 23:28-0400\n"
-"PO-Revision-Date: 2026-04-07 21:00-0400\n"
+"PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
-"Language-Team: Portuguese (Brazil)\n"
-"Language: pt_BR\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: package/contents/ui/ChatMessage.qml:102
 msgid "Thoughts"
-msgstr "Pensamentos"
+msgstr "思考"
 
 #: package/contents/ui/ChatMessage.qml:188
 msgid "Web Search Results"
-msgstr "Resultados da busca na web"
+msgstr "ウェブ検索結果"
 
 #: package/contents/ui/ChatMessage.qml:295
 msgid "Thinking…"
-msgstr "Pensando…"
+msgstr "考え中…"
 
 #: package/contents/ui/ChatMessage.qml:348
 msgid "Copy message"
-msgstr "Copiar mensagem"
+msgstr "メッセージをコピー"
 
 #: package/contents/ui/ChatMessage.qml:356
 msgid "Retry"
-msgstr "Tentar novamente"
+msgstr "再試行"
 
 #: package/contents/ui/ChatMessage.qml:364
 msgid "Share with LLM"
-msgstr "Compartilhar com LLM"
+msgstr "LLMと共有"
 
 #: package/contents/ui/ChatMessage.qml:366
 msgid "Include this output in the conversation"
-msgstr "Incluir esta saída na conversa"
+msgstr "この出力を会話に含める"
 
 #: package/contents/ui/CommandBlock.qml:78
 msgid "Save"
-msgstr "Salvar"
+msgstr "保存"
 
 #: package/contents/ui/CommandBlock.qml:80
 msgid "Save as script file"
-msgstr "Salvar como arquivo de script"
+msgstr "スクリプトファイルとして保存"
 
 #: package/contents/ui/CommandBlock.qml:86
 msgid "Copy"
-msgstr "Copiar"
+msgstr "コピー"
 
 #: package/contents/ui/CommandBlock.qml:88
 msgid "Copy to clipboard"
-msgstr "Copiar para a área de transferência"
+msgstr "クリップボードにコピー"
 
 #: package/contents/ui/CommandBlock.qml:98
 msgid "Ran"
-msgstr "Executado"
+msgstr "実行済み"
 
 #: package/contents/ui/CommandBlock.qml:98
 msgid "Run"
-msgstr "Executar"
+msgstr "実行"
 
 #: package/contents/ui/CommandBlock.qml:101
 msgid "Execute command inline"
-msgstr "Executar comando inline"
+msgstr "コマンドをインラインで実行"
 
 #: package/contents/ui/CommandBlock.qml:110
 msgid "Terminal"
-msgstr "Terminal"
+msgstr "ターミナル"
 
 #: package/contents/ui/CommandBlock.qml:112
 msgid "Open in terminal emulator"
-msgstr "Abrir no emulador de terminal"
+msgstr "ターミナルエミュレーターで開く"
 
 #: package/contents/ui/CommandBlock.qml:121
 msgid "Save Script"
-msgstr "Salvar script"
+msgstr "スクリプトを保存"
 
 #: package/contents/ui/CommandBlock.qml:125
 msgid "Shell scripts (*.sh)"
-msgstr "Scripts de shell (*.sh)"
+msgstr "シェルスクリプト (*.sh)"
 
 #: package/contents/ui/CommandBlock.qml:125
 #: package/contents/ui/FullRepresentation.qml:374
 msgid "All files (*)"
-msgstr "Todos os arquivos (*)"
+msgstr "すべてのファイル (*)"
 
 #: package/contents/ui/configGeneral.qml:324
 msgid "No models found."
-msgstr "Nenhum modelo encontrado."
+msgstr "モデルが見つかりません。"
 
 #: package/contents/ui/configGeneral.qml:514
 msgid "Adapter:"
-msgstr "Adaptador:"
+msgstr "アダプター:"
 
 #: package/contents/ui/configGeneral.qml:536
 msgid "Provider:"
-msgstr "Provedor:"
+msgstr "プロバイダー:"
 
 #: package/contents/ui/configGeneral.qml:562
 msgid "API Endpoint:"
-msgstr "Endpoint de API:"
+msgstr "APIエンドポイント:"
 
 #: package/contents/ui/configGeneral.qml:589
 msgid "Model:"
-msgstr "Modelo:"
+msgstr "モデル:"
 
 #: package/contents/ui/configGeneral.qml:626
 msgid "Refreshing…"
-msgstr "Atualizando…"
+msgstr "更新中…"
 
 #: package/contents/ui/configGeneral.qml:626
 msgid "Refresh model list"
-msgstr "Atualizar lista de modelos"
+msgstr "モデルリストを更新"
 
 #: package/contents/ui/configGeneral.qml:644
 msgid "API Key:"
-msgstr "Chave de API:"
+msgstr "APIキー:"
 
 #: package/contents/ui/configGeneral.qml:651
 msgid "Optional - for OpenAI, etc."
-msgstr "Opcional – para OpenAI, etc."
+msgstr "オプション – OpenAIなど用"
 
 #: package/contents/ui/configGeneral.qml:666
 #: package/contents/ui/configGeneral.qml:998
 msgid "Saving…"
-msgstr "Salvando…"
+msgstr "保存中…"
 
 #: package/contents/ui/configGeneral.qml:667
 #: package/contents/ui/configGeneral.qml:999
 msgid "Saved"
-msgstr "Salvo"
+msgstr "保存済み"
 
 #: package/contents/ui/configGeneral.qml:668
 #: package/contents/ui/configGeneral.qml:1000
 msgid "Save to Config (Insecure)"
-msgstr "Salvar na configuração (inseguro)"
+msgstr "設定に保存（安全でない）"
 
 #: package/contents/ui/configGeneral.qml:668
 #: package/contents/ui/configGeneral.qml:1000
 msgid "Save Key"
-msgstr "Salvar chave"
+msgstr "キーを保存"
 
 #: package/contents/ui/configGeneral.qml:677
 msgid "Stored in KDE Wallet"
-msgstr "Armazenado no KDE Wallet"
+msgstr "KDE Walletに保存済み"
 
 #: package/contents/ui/configGeneral.qml:677
 msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Wallet indisponível — chave armazenada no arquivo de configuração"
+msgstr "KDE Walletが利用不可 — キーは設定ファイルに保存されました"
 
 #: package/contents/ui/configGeneral.qml:692
 #, javascript-format
 msgid "Temperature: %1%"
-msgstr "Temperatura: %1%"
+msgstr "温度: %1%"
 
 #: package/contents/ui/configGeneral.qml:709
 msgid "Precise"
-msgstr "Preciso"
+msgstr "正確"
 
 #: package/contents/ui/configGeneral.qml:714
 msgid "Creative"
-msgstr "Criativo"
+msgstr "創造的"
 
 #: package/contents/ui/configGeneral.qml:722
 msgid "Max Tokens:"
-msgstr "Tokens máximos:"
+msgstr "最大トークン数:"
 
 #: package/contents/ui/configGeneral.qml:733
 msgid "Thinking:"
-msgstr "Raciocínio:"
+msgstr "思考:"
 
 #: package/contents/ui/configGeneral.qml:737
 msgid "Off"
-msgstr "Desligado"
+msgstr "オフ"
 
 #: package/contents/ui/configGeneral.qml:737
 msgid "Low"
-msgstr "Baixo"
+msgstr "低"
 
 #: package/contents/ui/configGeneral.qml:737
 msgid "Medium"
-msgstr "Médio"
+msgstr "中"
 
 #: package/contents/ui/configGeneral.qml:737
 msgid "High"
-msgstr "Alto"
+msgstr "高"
 
 #: package/contents/ui/configGeneral.qml:746
 msgid "Thinking budget:"
-msgstr "Orçamento de raciocínio:"
+msgstr "思考バジェット:"
 
 #: package/contents/ui/configGeneral.qml:773
 msgid "Show thoughts in chat (collapsible)"
-msgstr "Mostrar raciocínio no chat (recolhível)"
+msgstr "チャットに思考を表示（折りたたみ可能）"
 
 #: package/contents/ui/configGeneral.qml:778
 msgid ""
@@ -209,13 +207,11 @@ msgid ""
 "collapsible header. Round-trip of signed thoughts to the API still happens "
 "regardless of this setting."
 msgstr ""
-"Quando ativado, o raciocínio do modelo é exibido acima de cada resposta com "
-"um cabeçalho recolhível. A troca de pensamentos assinados com a API acontece"
-" independentemente desta configuração."
+"有効にすると、モデルの推論が各返答の上に折りたたみ可能なヘッダーで表示されます。署名された思考のAPIへの往復は、この設定に関係なく行われます。"
 
 #: package/contents/ui/configGeneral.qml:785
 msgid "Use Responses API"
-msgstr "Usar API Responses"
+msgstr "Responses APIを使用"
 
 #: package/contents/ui/configGeneral.qml:790
 msgid ""
@@ -223,165 +219,158 @@ msgid ""
 "(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
 "picking a preset."
 msgstr ""
-"Necessário para exibir conteúdo de raciocínio no OpenAI / Poe / OpenRouter /"
-" Azure (POST para /v1/responses em vez de /v1/chat/completions). Definido "
-"automaticamente ao escolher um preset."
+"OpenAI / Poe / OpenRouter / "
+"Azureで推論コンテンツを表示するために必要です（/v1/chat/completionsの代わりに/v1/responsesにPOSTします）。プリセット選択時に自動設定されます。"
 
 #: package/contents/ui/configGeneral.qml:801
 msgid "Chat Spacing: %1px"
-msgstr "Espaçamento do chat: %1px"
+msgstr "チャット間隔: %1px"
 
 #: package/contents/ui/configGeneral.qml:818
 msgid "Compact"
-msgstr "Compacto"
+msgstr "コンパクト"
 
 #: package/contents/ui/configGeneral.qml:823
 msgid "Spacious"
-msgstr "Espaçoso"
+msgstr "ゆったり"
 
 #: package/contents/ui/configGeneral.qml:830
 msgid "Appearance:"
-msgstr "Aparência:"
+msgstr "外観:"
 
 #: package/contents/ui/configGeneral.qml:831
 msgid "Show provider and model in title"
-msgstr "Mostrar provedor e modelo no título"
+msgstr "タイトルにプロバイダーとモデルを表示"
 
 #: package/contents/ui/configGeneral.qml:843
 msgid "Chat History:"
-msgstr "Histórico de chat:"
+msgstr "チャット履歴:"
 
 #: package/contents/ui/configGeneral.qml:844
 msgid "Auto-save chat history"
-msgstr "Salvar histórico de chat automaticamente"
+msgstr "チャット履歴を自動保存"
 
 #: package/contents/ui/configGeneral.qml:848
 #: package/contents/ui/configGeneral.qml:863
 msgid "Saves to ~/PlasmaLLM/chats/"
-msgstr "Salva em ~/PlasmaLLM/chats/"
+msgstr "~/PlasmaLLM/chats/ に保存"
 
 #: package/contents/ui/configGeneral.qml:855
 msgid "Save format:"
-msgstr "Formato de salvamento:"
+msgstr "保存形式:"
 
 #: package/contents/ui/configGeneral.qml:856
 msgid "Plain text (.txt)"
-msgstr "Texto simples (.txt)"
+msgstr "プレーンテキスト (.txt)"
 
 #: package/contents/ui/configGeneral.qml:856
 msgid "Structured (.jsonl)"
-msgstr "Estruturado (.jsonl)"
+msgstr "構造化 (.jsonl)"
 
 #: package/contents/ui/configGeneral.qml:875
 msgid "Auto-clear:"
-msgstr "Limpeza automática:"
+msgstr "自動クリア:"
 
 #: package/contents/ui/configGeneral.qml:879
 msgid "Disabled"
-msgstr "Desativado"
+msgstr "無効"
 
 #: package/contents/ui/configGeneral.qml:885
 msgid "Instant (always clear when panel opens)"
-msgstr "Instantâneo (sempre limpar ao abrir o painel)"
+msgstr "即時（パネルを開くたびにクリア）"
 
 #: package/contents/ui/configGeneral.qml:894
 msgid "After"
-msgstr "Após"
+msgstr "後"
 
 #: package/contents/ui/configGeneral.qml:913
 msgid "seconds"
-msgstr "segundos"
+msgstr "秒"
 
 #: package/contents/ui/configGeneral.qml:913
 msgid "minutes"
-msgstr "minutos"
+msgstr "分"
 
 #: package/contents/ui/configGeneral.qml:928
 msgid "Commands:"
-msgstr "Comandos:"
+msgstr "コマンド:"
 
 #: package/contents/ui/configGeneral.qml:929
 msgid "Auto-share command output with LLM"
-msgstr "Compartilhar automaticamente a saída do comando com o LLM"
+msgstr "コマンド出力をLLMと自動共有"
 
 #: package/contents/ui/configGeneral.qml:933
 msgid "Automatically send Run command results back to the LLM"
-msgstr ""
-"Enviar automaticamente os resultados do comando Executar de volta ao LLM"
+msgstr "実行コマンドの結果をLLMに自動送信"
 
 #: package/contents/ui/configGeneral.qml:940
 msgid "Auto-run commands from LLM"
-msgstr "Executar comandos do LLM automaticamente"
+msgstr "LLMからのコマンドを自動実行"
 
 #: package/contents/ui/configGeneral.qml:944
 msgid ""
 "WARNING: When combined with Auto-share, enables agentic workflow. Only use "
 "with very trustworthy LLMs."
-msgstr ""
-"AVISO: Combinado com Auto-compartilhar, habilita fluxo de trabalho agêntico."
-" Usar somente com LLMs muito confiáveis."
+msgstr "警告: 自動共有と組み合わせると、エージェント型ワークフローが有効になります。非常に信頼できるLLMでのみ使用してください。"
 
 #: package/contents/ui/configGeneral.qml:951
 msgid "Use tool calling for commands"
-msgstr "Usar chamada de ferramenta para comandos"
+msgstr "コマンドにツール呼び出しを使用"
 
 #: package/contents/ui/configGeneral.qml:955
 msgid ""
 "Use the run_command tool for command execution. Disable for models that "
 "don't support tool calling (falls back to code block parsing)."
 msgstr ""
-"Usar a ferramenta run_command para execução de comandos. Desativar para "
-"modelos que não suportam chamada de ferramentas (retorna à análise de blocos"
-" de código)."
+"コマンド実行にrun_commandツールを使用します。ツール呼び出しをサポートしないモデルでは無効にしてください（コードブロック解析にフォールバックします）。"
 
 #: package/contents/ui/configGeneral.qml:962
 msgid ""
 "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
 "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
 msgstr ""
-"⚠️ PERIGO: Ambas as opções habilitadas — o LLM agora pode executar comandos "
-"e ver sua saída, habilitando um fluxo de trabalho agêntico. Usar somente com"
-" LLMs confiáveis."
+"⚠️ 危険: 両方のオプションが有効です - "
+"LLMはコマンドを実行し、その出力を確認できるようになり、エージェント型ワークフローが可能になります。信頼できるLLMでのみ使用してください。"
 
 #: package/contents/ui/configGeneral.qml:977
 msgid "Web Search:"
-msgstr "Busca na web:"
+msgstr "ウェブ検索:"
 
 #: package/contents/ui/configGeneral.qml:984
 msgid "Ollama API key for web search"
-msgstr "Chave de API do Ollama para busca na web"
+msgstr "ウェブ検索用Ollama APIキー"
 
 #: package/contents/ui/configGeneral.qml:1008
 msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Habilita buscas na web acionadas pelo LLM via API de busca do Ollama"
+msgstr "OllamaのSearch APIを介したLLMトリガーのウェブ検索を有効にする"
 
 #: package/contents/ui/configSystemPrompt.qml:104
 msgid "System Info:"
-msgstr "Info do sistema:"
+msgstr "システム情報:"
 
 #: package/contents/ui/configSystemPrompt.qml:110
 msgid "OS"
-msgstr "SO"
+msgstr "OS"
 
 #: package/contents/ui/configSystemPrompt.qml:115
 msgid "Shell"
-msgstr "Shell"
+msgstr "シェル"
 
 #: package/contents/ui/configSystemPrompt.qml:120
 msgid "Hostname"
-msgstr "Nome do host"
+msgstr "ホスト名"
 
 #: package/contents/ui/configSystemPrompt.qml:125
 msgid "Kernel"
-msgstr "Kernel"
+msgstr "カーネル"
 
 #: package/contents/ui/configSystemPrompt.qml:130
 msgid "Desktop"
-msgstr "Desktop"
+msgstr "デスクトップ"
 
 #: package/contents/ui/configSystemPrompt.qml:135
 msgid "User"
-msgstr "Usuário"
+msgstr "ユーザー"
 
 #: package/contents/ui/configSystemPrompt.qml:140
 msgid "CPU"
@@ -389,7 +378,7 @@ msgstr "CPU"
 
 #: package/contents/ui/configSystemPrompt.qml:145
 msgid "Memory"
-msgstr "Memória"
+msgstr "メモリ"
 
 #: package/contents/ui/configSystemPrompt.qml:150
 msgid "GPU"
@@ -397,37 +386,35 @@ msgstr "GPU"
 
 #: package/contents/ui/configSystemPrompt.qml:155
 msgid "Block Devices"
-msgstr "Dispositivos de bloco"
+msgstr "ブロックデバイス"
 
 #: package/contents/ui/configSystemPrompt.qml:160
 msgid "Network"
-msgstr "Rede"
+msgstr "ネットワーク"
 
 #: package/contents/ui/configSystemPrompt.qml:165
 msgid "Locale"
-msgstr "Localidade"
+msgstr "ロケール"
 
 #: package/contents/ui/configSystemPrompt.qml:170
 msgid "Date/Time"
-msgstr "Data/Hora"
+msgstr "日付/時刻"
 
 #: package/contents/ui/configSystemPrompt.qml:178
 msgid "Custom Instructions:"
-msgstr "Instruções personalizadas:"
+msgstr "カスタム指示:"
 
 #: package/contents/ui/configSystemPrompt.qml:181
 msgid "Additional instructions for the LLM…"
-msgstr "Instruções adicionais para o LLM…"
+msgstr "LLMへの追加指示…"
 
 #: package/contents/ui/configSystemPrompt.qml:188
 msgid "Preview:"
-msgstr "Pré-visualização:"
+msgstr "プレビュー:"
 
 #: package/contents/ui/configTasks.qml:104
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr ""
-"Nenhuma tarefa configurada. Adicione uma tarefa para criar atalhos de prompt"
-" reutilizáveis."
+msgstr "タスクが設定されていません。再利用可能なプロンプトショートカットを作成するにはタスクを追加してください。"
 
 #: package/contents/ui/configTasks.qml:128
 #: package/contents/ui/FullRepresentation.qml:82
@@ -437,35 +424,35 @@ msgstr "AUTO"
 
 #: package/contents/ui/configTasks.qml:155
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "キャンセル"
 
 #: package/contents/ui/configTasks.qml:155
 msgid "Add Task"
-msgstr "Adicionar tarefa"
+msgstr "タスクを追加"
 
 #: package/contents/ui/configTasks.qml:179
 msgid "Task name"
-msgstr "Nome da tarefa"
+msgstr "タスク名"
 
 #: package/contents/ui/configTasks.qml:186
 msgid "Prompt to send"
-msgstr "Prompt a enviar"
+msgstr "送信するプロンプト"
 
 #: package/contents/ui/configTasks.qml:192
 msgid "Enable auto mode (auto-run + auto-share)"
-msgstr "Habilitar modo automático (auto-executar + auto-compartilhar)"
+msgstr "オートモードを有効にする（自動実行 + 自動共有）"
 
 #: package/contents/ui/configTasks.qml:204
 msgid "Update Task"
-msgstr "Atualizar tarefa"
+msgstr "タスクを更新"
 
 #: package/contents/ui/configTasks.qml:204
 msgid "Save Task"
-msgstr "Salvar tarefa"
+msgstr "タスクを保存"
 
 #: package/contents/ui/configTasks.qml:212
 msgid "A task named \"%1\" already exists."
-msgstr "Já existe uma tarefa chamada \"%1\"."
+msgstr "\"%1\"という名前のタスクは既に存在します。"
 
 #: package/contents/ui/configTasks.qml:234
 msgid ""
@@ -473,231 +460,224 @@ msgid ""
 " button to run them. Tasks with auto mode will temporarily enable auto-run "
 "and auto-share."
 msgstr ""
-"As tarefas são atalhos de prompt reutilizáveis. Use /task <name> no chat ou "
-"o botão da barra de ferramentas para executá-las. Tarefas no modo automático"
-" habilitarão temporariamente auto-executar e auto-compartilhar."
+"タスクは再利用可能なプロンプトショートカットです。チャットで /task <name> "
+"またはツールバーボタンで実行できます。オートモードのタスクは一時的に自動実行と自動共有を有効にします。"
 
 #: package/contents/ui/FullRepresentation.qml:20
 msgid "Toggle auto mode (auto-run + auto-share) for this session"
-msgstr ""
-"Alternar modo automático (auto-executar + auto-compartilhar) para esta "
-"sessão"
+msgstr "このセッションのオートモード（自動実行 + 自動共有）を切り替え"
 
 #: package/contents/ui/FullRepresentation.qml:21
 msgid "Clear the chat"
-msgstr "Limpar o chat"
+msgstr "チャットをクリア"
 
 #: package/contents/ui/FullRepresentation.qml:22
 msgid "Close the panel"
-msgstr "Fechar o painel"
+msgstr "パネルを閉じる"
 
 #: package/contents/ui/FullRepresentation.qml:23
 msgid "Copy conversation to clipboard"
-msgstr "Copiar conversa para a área de transferência"
+msgstr "会話をクリップボードにコピー"
 
 #: package/contents/ui/FullRepresentation.qml:24
 #: package/contents/ui/FullRepresentation.qml:117
 #: package/contents/ui/FullRepresentation.qml:118
 msgid "Open chat history folder"
-msgstr "Abrir pasta de histórico de chat"
+msgstr "チャット履歴フォルダーを開く"
 
 #: package/contents/ui/FullRepresentation.qml:25
 msgid "Show or switch model (/model <name>)"
-msgstr "Mostrar ou trocar modelo (/model <name>)"
+msgstr "モデルを表示または切り替え (/model <name>)"
 
 #: package/contents/ui/FullRepresentation.qml:26
 msgid "Run last command"
-msgstr "Executar último comando"
+msgstr "最後のコマンドを実行"
 
 #: package/contents/ui/FullRepresentation.qml:27
 msgid "Save chat to file"
-msgstr "Salvar chat em arquivo"
+msgstr "チャットをファイルに保存"
 
 #: package/contents/ui/FullRepresentation.qml:28
 msgid "Open settings"
-msgstr "Abrir configurações"
+msgstr "設定を開く"
 
 #: package/contents/ui/FullRepresentation.qml:29
 msgid "Run a saved task (/task <name>)"
-msgstr "Executar uma tarefa salva (/task <name>)"
+msgstr "保存したタスクを実行 (/task <name>)"
 
 #: package/contents/ui/FullRepresentation.qml:30
 msgid "Run last command in terminal"
-msgstr "Executar último comando no terminal"
+msgstr "最後のコマンドをターミナルで実行"
 
 #: package/contents/ui/FullRepresentation.qml:92
 #: package/contents/ui/FullRepresentation.qml:93
 msgid "Run a task"
-msgstr "Executar uma tarefa"
+msgstr "タスクを実行"
 
 #: package/contents/ui/FullRepresentation.qml:127
 #: package/contents/ui/FullRepresentation.qml:128
 msgid "Copy conversation"
-msgstr "Copiar conversa"
+msgstr "会話をコピー"
 
 #: package/contents/ui/FullRepresentation.qml:136
 #: package/contents/ui/FullRepresentation.qml:193
 msgid "You"
-msgstr "Você"
+msgstr "あなた"
 
 #: package/contents/ui/FullRepresentation.qml:137
 #: package/contents/ui/FullRepresentation.qml:194
 msgid "Assistant"
-msgstr "Assistente"
+msgstr "アシスタント"
 
 #: package/contents/ui/FullRepresentation.qml:138
 #: package/contents/ui/FullRepresentation.qml:195
 msgid "Command"
-msgstr "Comando"
+msgstr "コマンド"
 
 #: package/contents/ui/FullRepresentation.qml:139
 #: package/contents/ui/FullRepresentation.qml:196
 msgid "Error"
-msgstr "Erro"
+msgstr "エラー"
 
 #: package/contents/ui/FullRepresentation.qml:152
 #: package/contents/ui/FullRepresentation.qml:153
 msgid "Clear chat"
-msgstr "Limpar chat"
+msgstr "チャットをクリア"
 
 #: package/contents/ui/FullRepresentation.qml:161
 #: package/contents/ui/FullRepresentation.qml:162
 msgid "Settings"
-msgstr "Configurações"
+msgstr "設定"
 
 #: package/contents/ui/FullRepresentation.qml:172
 #: package/contents/ui/FullRepresentation.qml:173
 msgid "Don't keep open"
-msgstr "Não manter aberto"
+msgstr "開いたままにしない"
 
 #: package/contents/ui/FullRepresentation.qml:172
 #: package/contents/ui/FullRepresentation.qml:173
 msgid "Keep open"
-msgstr "Manter aberto"
+msgstr "開いたままにする"
 
 #: package/contents/ui/FullRepresentation.qml:342
 msgid "Send a message to start chatting"
-msgstr "Envie uma mensagem para começar a conversar"
+msgstr "メッセージを送信してチャットを開始"
 
 #: package/contents/ui/FullRepresentation.qml:371
 msgid "Attach File"
-msgstr "Anexar arquivo"
+msgstr "ファイルを添付"
 
 #: package/contents/ui/FullRepresentation.qml:374
 msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Imagens (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "画像 (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 
 #: package/contents/ui/FullRepresentation.qml:374
 msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 msgstr ""
-"Arquivos de texto (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
-"*.conf *.sh *.py *.js *.ts *.qml)"
+"テキストファイル (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf *.sh"
+" *.py *.js *.ts *.qml)"
 
 #: package/contents/ui/FullRepresentation.qml:615
 msgid "Message input"
-msgstr "Entrada de mensagem"
+msgstr "メッセージ入力"
 
 #: package/contents/ui/FullRepresentation.qml:616
 msgid "Type a message…"
-msgstr "Digite uma mensagem…"
+msgstr "メッセージを入力…"
 
 #: package/contents/ui/FullRepresentation.qml:616
 msgid "Initializing…"
-msgstr "Inicializando…"
+msgstr "初期化中…"
 
 #: package/contents/ui/FullRepresentation.qml:668
 msgid "Attach file or image"
-msgstr "Anexar arquivo ou imagem"
+msgstr "ファイルまたは画像を添付"
 
 #: package/contents/ui/FullRepresentation.qml:674
 msgid "Send"
-msgstr "Enviar"
+msgstr "送信"
 
 #: package/contents/ui/FullRepresentation.qml:697
 msgid "Stop"
-msgstr "Parar"
+msgstr "停止"
 
 #: package/contents/ui/main.qml:639
 msgid ""
 "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
 "are on)."
-msgstr ""
-"O modo automático está permanentemente habilitado pelas configurações (tanto"
-" Auto-executar quanto Auto-compartilhar estão ativados)."
+msgstr "オートモードは設定で恒久的に有効になっています（自動実行と自動共有の両方がオンです）。"
 
 #: package/contents/ui/main.qml:642
 msgid ""
 "Auto mode enabled for this session. Commands will run and share output "
 "automatically."
-msgstr ""
-"Modo automático habilitado para esta sessão. Os comandos serão executados e "
-"a saída compartilhada automaticamente."
+msgstr "このセッションでオートモードが有効になりました。コマンドは自動的に実行され、出力が共有されます。"
 
 #: package/contents/ui/main.qml:642
 msgid "Auto mode disabled."
-msgstr "Modo automático desativado."
+msgstr "オートモードが無効になりました。"
 
 #: package/contents/ui/main.qml:653 package/contents/ui/main.qml:708
 msgid "none"
-msgstr "nenhum"
+msgstr "なし"
 
 #: package/contents/ui/main.qml:653
 msgid "Current model: **%1**"
-msgstr "Modelo atual: **%1**"
+msgstr "現在のモデル: **%1**"
 
 #: package/contents/ui/main.qml:655
 msgid "Available models:"
-msgstr "Modelos disponíveis:"
+msgstr "利用可能なモデル:"
 
 #: package/contents/ui/main.qml:657
 msgid "Type `/model <name>` to switch."
-msgstr "Digite `/model <name>` para trocar."
+msgstr "`/model <name>` と入力して切り替え。"
 
 #: package/contents/ui/main.qml:659
 msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "Nenhum modelo em cache. Use **Buscar modelos** nas configurações."
+msgstr "キャッシュされたモデルがありません。設定の**モデルを取得**を使用してください。"
 
 #: package/contents/ui/main.qml:668
 msgid "Switched to model: **%1**"
-msgstr "Trocado para o modelo: **%1**"
+msgstr "モデルを切り替えました: **%1**"
 
 #: package/contents/ui/main.qml:677
 msgid "No tasks configured. Add tasks in Settings."
-msgstr "Nenhuma tarefa configurada. Adicione tarefas em Configurações."
+msgstr "タスクが設定されていません。設定でタスクを追加してください。"
 
 #: package/contents/ui/main.qml:679
 msgid "(auto)"
-msgstr "(auto)"
+msgstr "（自動）"
 
 #: package/contents/ui/main.qml:680
 msgid "Available tasks:"
-msgstr "Tarefas disponíveis:"
+msgstr "利用可能なタスク:"
 
 #: package/contents/ui/main.qml:680
 msgid "Type `/task <name>` to run."
-msgstr "Digite `/task <name>` para executar."
+msgstr "`/task <name>` と入力して実行。"
 
 #: package/contents/ui/main.qml:708
 msgid "Unknown task: **%1**. Available: %2"
-msgstr "Tarefa desconhecida: **%1**. Disponíveis: %2"
+msgstr "不明なタスク: **%1**。利用可能: %2"
 
 #: package/contents/ui/main.qml:722
 msgid "The user declined to run this command."
-msgstr "O usuário recusou executar este comando."
+msgstr "ユーザーはこのコマンドの実行を拒否しました。"
 
 #: package/contents/ui/main.qml:886
 msgid "Searching the web…"
-msgstr "Buscando na web…"
+msgstr "ウェブを検索中…"
 
 #: package/contents/ui/main.qml:908
 msgid "Web search failed: %1"
-msgstr "Busca na web falhou: %1"
+msgstr "ウェブ検索に失敗しました: %1"
 
 #: package/contents/ui/main.qml:1115 package/contents/ui/main.qml:1127
 msgid "Running: %1"
-msgstr "Executando: %1"
+msgstr "実行中: %1"
 
 #: package/contents/ui/main.qml:1136
 msgid "stderr: %1"
@@ -705,27 +685,27 @@ msgstr "stderr: %1"
 
 #: package/contents/ui/main.qml:1138
 msgid "[truncated — output exceeded %1KB]"
-msgstr "[truncado — saída excedeu %1KB]"
+msgstr "[切り捨て — 出力が%1KBを超えました]"
 
 #: package/contents/ui/main.qml:1140
 msgid "[exit code: %1]"
-msgstr "[código de saída: %1]"
+msgstr "[終了コード: %1]"
 
 #: package/contents/ui/api.js:169
 msgid "Web search timed out"
-msgstr "Busca na web expirou"
+msgstr "ウェブ検索がタイムアウトしました"
 
 #: package/contents/ui/api.js:179
 msgid "Failed to parse web search response: %1"
-msgstr "Falha ao analisar resposta da busca na web: %1"
+msgstr "ウェブ検索レスポンスの解析に失敗しました: %1"
 
 #: package/contents/ui/api.js:182
 msgid "Web search failed (HTTP %1)"
-msgstr "Busca na web falhou (HTTP %1)"
+msgstr "ウェブ検索に失敗しました (HTTP %1)"
 
 #: package/contents/ui/api.js:221
 msgid "OpenAI-compatible"
-msgstr "Compatível com OpenAI"
+msgstr "OpenAI互換"
 
 #: package/contents/ui/api.js:222
 msgid "Anthropic"
@@ -737,63 +717,12 @@ msgstr "Google Gemini"
 
 #: package/contents/config/config.qml:11
 msgid "General"
-msgstr "Geral"
+msgstr "一般"
 
 #: package/contents/config/config.qml:16
 msgid "System Prompt"
-msgstr "Prompt do sistema"
+msgstr "システムプロンプト"
 
 #: package/contents/config/config.qml:21
 msgid "Tasks"
-msgstr "Tarefas"
-
-#~ msgid "e.g. llama3, gpt-4, etc."
-#~ msgstr "ex.: llama3, gpt-4, etc."
-
-#~ msgid "Fetch Models"
-#~ msgstr "Buscar modelos"
-
-#~ msgid "Available Models:"
-#~ msgstr "Modelos disponíveis:"
-
-#~ msgid "Request timed out after 60 seconds"
-#~ msgstr "Solicitação expirou após 60 segundos"
-
-#~ msgid "Invalid response format: missing choices[0].message.content"
-#~ msgstr "Formato de resposta inválido: choices[0].message.content ausente"
-
-#~ msgid "Failed to parse response: %1"
-#~ msgstr "Falha ao analisar resposta: %1"
-
-#~ msgid "Authentication failed (HTTP %1) — check your API key"
-#~ msgstr "Autenticação falhou (HTTP %1) — verifique sua chave de API"
-
-#~ msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
-#~ msgstr ""
-#~ "Limite de taxa atingido (HTTP 429) — muitas solicitações, tente novamente em"
-#~ " breve"
-
-#~ msgid "Not found (HTTP 404) — check your API endpoint and model name"
-#~ msgstr ""
-#~ "Não encontrado (HTTP 404) — verifique seu endpoint de API e nome do modelo"
-
-#~ msgid "API error %1"
-#~ msgstr "Erro de API %1"
-
-#~ msgid "Request failed (no response) — check your endpoint URL"
-#~ msgstr "Solicitação falhou (sem resposta) — verifique a URL do seu endpoint"
-
-#~ msgid "Request timed out after 30 seconds"
-#~ msgstr "Solicitação expirou após 30 segundos"
-
-#~ msgid "Failed to parse models: %1"
-#~ msgstr "Falha ao analisar modelos: %1"
-
-#~ msgid "Failed to fetch models: HTTP %1"
-#~ msgstr "Falha ao buscar modelos: HTTP %1"
-
-#~ msgid "Invalid response format"
-#~ msgstr "Formato de resposta inválido"
-
-#~ msgid "Request timed out"
-#~ msgstr "Solicitação expirou"
+msgstr "タスク"

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
-"Report-Msgid-Bugs-To: https://github.com/joshuaroman/plasmallm/issues\n"
-"POT-Creation-Date: 2026-04-07 20:49-0400\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-26 23:28-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -17,246 +17,302 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:114
+#: package/contents/ui/ChatMessage.qml:102
+msgid "Thoughts"
+msgstr "Tanker"
+
+#: package/contents/ui/ChatMessage.qml:188
 msgid "Web Search Results"
 msgstr "Søkeresultater fra nettet"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:212
+#: package/contents/ui/ChatMessage.qml:295
 msgid "Thinking…"
 msgstr "Tenker…"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:256
+#: package/contents/ui/ChatMessage.qml:348
 msgid "Copy message"
 msgstr "Kopier melding"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:264
+#: package/contents/ui/ChatMessage.qml:356
 msgid "Retry"
 msgstr "Prøv igjen"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:272
+#: package/contents/ui/ChatMessage.qml:364
 msgid "Share with LLM"
 msgstr "Del med LLM"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/ChatMessage.qml:274
+#: package/contents/ui/ChatMessage.qml:366
 msgid "Include this output in the conversation"
 msgstr "Inkluder dette utdata i samtalen"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:65
+#: package/contents/ui/CommandBlock.qml:78
 msgid "Save"
 msgstr "Lagre"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:67
+#: package/contents/ui/CommandBlock.qml:80
 msgid "Save as script file"
 msgstr "Lagre som skriptfil"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:73
+#: package/contents/ui/CommandBlock.qml:86
 msgid "Copy"
 msgstr "Kopier"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:75
+#: package/contents/ui/CommandBlock.qml:88
 msgid "Copy to clipboard"
 msgstr "Kopier til utklippstavle"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:85
+#: package/contents/ui/CommandBlock.qml:98
 msgid "Ran"
 msgstr "Kjørte"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:85
+#: package/contents/ui/CommandBlock.qml:98
 msgid "Run"
 msgstr "Kjør"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:88
+#: package/contents/ui/CommandBlock.qml:101
 msgid "Execute command inline"
 msgstr "Kjør kommando på plass"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:97
+#: package/contents/ui/CommandBlock.qml:110
 msgid "Terminal"
 msgstr "Terminal"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:99
+#: package/contents/ui/CommandBlock.qml:112
 msgid "Open in terminal emulator"
 msgstr "Åpne i terminalemulator"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:108
+#: package/contents/ui/CommandBlock.qml:121
 msgid "Save Script"
 msgstr "Lagre skript"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:112
+#: package/contents/ui/CommandBlock.qml:125
 msgid "Shell scripts (*.sh)"
 msgstr "Skallskript (*.sh)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/CommandBlock.qml:112
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:281
+#: package/contents/ui/CommandBlock.qml:125
+#: package/contents/ui/FullRepresentation.qml:374
 msgid "All files (*)"
 msgstr "Alle filer (*)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:354
-msgid "Provider:"
-msgstr "Leverandør:"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:383
-msgid "API Endpoint:"
-msgstr "API-endepunkt:"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:407
-msgid "Model:"
-msgstr "Modell:"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:414
-msgid "e.g. llama3, gpt-4, etc."
-msgstr "f.eks. llama3, gpt-4, osv."
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:420
-msgid "Fetch Models"
-msgstr "Hent modeller"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:431
+#: package/contents/ui/configGeneral.qml:324
 msgid "No models found."
 msgstr "Ingen modeller funnet."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:453
-msgid "Available Models:"
-msgstr "Tilgjengelige modeller:"
+#: package/contents/ui/configGeneral.qml:514
+msgid "Adapter:"
+msgstr "Adapter:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:463
+#: package/contents/ui/configGeneral.qml:536
+msgid "Provider:"
+msgstr "Leverandør:"
+
+#: package/contents/ui/configGeneral.qml:562
+msgid "API Endpoint:"
+msgstr "API-endepunkt:"
+
+#: package/contents/ui/configGeneral.qml:589
+msgid "Model:"
+msgstr "Modell:"
+
+#: package/contents/ui/configGeneral.qml:626
+msgid "Refreshing…"
+msgstr "Oppdaterer…"
+
+#: package/contents/ui/configGeneral.qml:626
+msgid "Refresh model list"
+msgstr "Oppdater modellliste"
+
+#: package/contents/ui/configGeneral.qml:644
 msgid "API Key:"
 msgstr "API-nøkkel:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:470
+#: package/contents/ui/configGeneral.qml:651
 msgid "Optional - for OpenAI, etc."
 msgstr "Valgfritt - for OpenAI, osv."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:485
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:743
+#: package/contents/ui/configGeneral.qml:666
+#: package/contents/ui/configGeneral.qml:998
 msgid "Saving…"
 msgstr "Lagrer…"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:486
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:744
+#: package/contents/ui/configGeneral.qml:667
+#: package/contents/ui/configGeneral.qml:999
 msgid "Saved"
 msgstr "Lagret"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:487
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:745
+#: package/contents/ui/configGeneral.qml:668
+#: package/contents/ui/configGeneral.qml:1000
 msgid "Save to Config (Insecure)"
 msgstr "Lagre til konfigurasjon (usikker)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:487
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:745
+#: package/contents/ui/configGeneral.qml:668
+#: package/contents/ui/configGeneral.qml:1000
 msgid "Save Key"
 msgstr "Lagre nøkkel"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:496
+#: package/contents/ui/configGeneral.qml:677
 msgid "Stored in KDE Wallet"
 msgstr "Lagret i KDE Wallet"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:496
+#: package/contents/ui/configGeneral.qml:677
 msgid "KDE Wallet unavailable — key stored in config file"
 msgstr "KDE Wallet utilgjengelig — nøkkel lagret i konfigurasjonsfil"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:507
+#: package/contents/ui/configGeneral.qml:692
 #, javascript-format
 msgid "Temperature: %1%"
 msgstr "Temperatur: %1%"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:524
+#: package/contents/ui/configGeneral.qml:709
 msgid "Precise"
 msgstr "Presist"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:529
+#: package/contents/ui/configGeneral.qml:714
 msgid "Creative"
 msgstr "Kreativt"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:537
+#: package/contents/ui/configGeneral.qml:722
 msgid "Max Tokens:"
 msgstr "Maksimale tokens:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:552
+#: package/contents/ui/configGeneral.qml:733
+msgid "Thinking:"
+msgstr "Tenking:"
+
+#: package/contents/ui/configGeneral.qml:737
+msgid "Off"
+msgstr "Av"
+
+#: package/contents/ui/configGeneral.qml:737
+msgid "Low"
+msgstr "Lav"
+
+#: package/contents/ui/configGeneral.qml:737
+msgid "Medium"
+msgstr "Middels"
+
+#: package/contents/ui/configGeneral.qml:737
+msgid "High"
+msgstr "Høy"
+
+#: package/contents/ui/configGeneral.qml:746
+msgid "Thinking budget:"
+msgstr "Tenkebudsjett:"
+
+#: package/contents/ui/configGeneral.qml:773
+msgid "Show thoughts in chat (collapsible)"
+msgstr "Vis tanker i chatten (sammenleggbar)"
+
+#: package/contents/ui/configGeneral.qml:778
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"Når aktivert, vises modellens resonnering over hvert svar med en "
+"sammenleggbar overskrift. Utveksling av signerte tanker til API-et skjer "
+"uavhengig av denne innstillingen."
+
+#: package/contents/ui/configGeneral.qml:785
+msgid "Use Responses API"
+msgstr "Bruk Responses API"
+
+#: package/contents/ui/configGeneral.qml:790
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"Nødvendig for å vise resonnerende innhold på OpenAI / Poe / OpenRouter / "
+"Azure (POST til /v1/responses i stedet for /v1/chat/completions). Settes "
+"automatisk ved valg av forhåndsinnstilling."
+
+#: package/contents/ui/configGeneral.qml:801
 msgid "Chat Spacing: %1px"
 msgstr "Chatavstand: %1px"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:569
+#: package/contents/ui/configGeneral.qml:818
 msgid "Compact"
 msgstr "Kompakt"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:574
+#: package/contents/ui/configGeneral.qml:823
 msgid "Spacious"
 msgstr "Romslig"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:581
+#: package/contents/ui/configGeneral.qml:830
 msgid "Appearance:"
 msgstr "Utseende:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:582
+#: package/contents/ui/configGeneral.qml:831
 msgid "Show provider and model in title"
 msgstr "Vis leverandør og modell i tittel"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:594
+#: package/contents/ui/configGeneral.qml:843
 msgid "Chat History:"
 msgstr "Chathistorikk:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:595
+#: package/contents/ui/configGeneral.qml:844
 msgid "Auto-save chat history"
 msgstr "Lagre chathistorikk automatisk"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:599
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:614
+#: package/contents/ui/configGeneral.qml:848
+#: package/contents/ui/configGeneral.qml:863
 msgid "Saves to ~/PlasmaLLM/chats/"
 msgstr "Lagres til ~/PlasmaLLM/chats/"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:606
+#: package/contents/ui/configGeneral.qml:855
 msgid "Save format:"
 msgstr "Lagresformat:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:607
+#: package/contents/ui/configGeneral.qml:856
 msgid "Plain text (.txt)"
 msgstr "Ren tekst (.txt)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:607
+#: package/contents/ui/configGeneral.qml:856
 msgid "Structured (.jsonl)"
 msgstr "Strukturert (.jsonl)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:622
+#: package/contents/ui/configGeneral.qml:875
 msgid "Auto-clear:"
 msgstr "Automatisk sletting:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:626
+#: package/contents/ui/configGeneral.qml:879
 msgid "Disabled"
 msgstr "Deaktivert"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:632
+#: package/contents/ui/configGeneral.qml:885
 msgid "Instant (always clear when panel opens)"
 msgstr "Øyeblikkelig (alltid slett når panel åpnes)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:641
+#: package/contents/ui/configGeneral.qml:894
 msgid "After"
 msgstr "Etter"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:660
+#: package/contents/ui/configGeneral.qml:913
 msgid "seconds"
 msgstr "sekunder"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:660
+#: package/contents/ui/configGeneral.qml:913
 msgid "minutes"
 msgstr "minutter"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:675
+#: package/contents/ui/configGeneral.qml:928
 msgid "Commands:"
 msgstr "Kommandoer:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:676
+#: package/contents/ui/configGeneral.qml:929
 msgid "Auto-share command output with LLM"
 msgstr "Del kommandoutdata automatisk med LLM"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:680
+#: package/contents/ui/configGeneral.qml:933
 msgid "Automatically send Run command results back to the LLM"
 msgstr "Send automatisk resultater fra Kjør-kommando tilbake til LLM"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:687
+#: package/contents/ui/configGeneral.qml:940
 msgid "Auto-run commands from LLM"
 msgstr "Kjør kommandoer automatisk fra LLM"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:691
+#: package/contents/ui/configGeneral.qml:944
 msgid ""
 "WARNING: When combined with Auto-share, enables agentic workflow. Only use "
 "with very trustworthy LLMs."
@@ -264,19 +320,19 @@ msgstr ""
 "ADVARSEL: Når kombinert med Auto-share aktiveres agentbasert arbeidsflyt. "
 "Bruk kun med svært pålitelige LLM-er."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:698
+#: package/contents/ui/configGeneral.qml:951
 msgid "Use tool calling for commands"
 msgstr "Bruk verktøykalling for kommandoer"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:702
+#: package/contents/ui/configGeneral.qml:955
 msgid ""
 "Use the run_command tool for command execution. Disable for models that "
 "don't support tool calling (falls back to code block parsing)."
 msgstr ""
-"Bruk run_command-verktøyet for kommandoutførelse. Deaktiver for modeller "
-"som ikke støtter verktøykalling (faller tilbake til kodeblokk-parsing)."
+"Bruk run_command-verktøyet for kommandoutførelse. Deaktiver for modeller som"
+" ikke støtter verktøykalling (faller tilbake til kodeblokk-parsing)."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:709
+#: package/contents/ui/configGeneral.qml:962
 msgid ""
 "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
 "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
@@ -285,233 +341,251 @@ msgstr ""
 "deres utdata, noe som aktiverer agentbasert arbeidsflyt. Bruk kun med "
 "pålitelige LLM-er."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:722
+#: package/contents/ui/configGeneral.qml:977
 msgid "Web Search:"
 msgstr "Søk på nettet:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:729
+#: package/contents/ui/configGeneral.qml:984
 msgid "Ollama API key for web search"
 msgstr "Ollama API-nøkkel for nettsøk"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configGeneral.qml:753
+#: package/contents/ui/configGeneral.qml:1008
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:104
+#: package/contents/ui/configSystemPrompt.qml:104
 msgid "System Info:"
 msgstr "Systeminformasjon:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:110
+#: package/contents/ui/configSystemPrompt.qml:110
 msgid "OS"
 msgstr "OS"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:115
+#: package/contents/ui/configSystemPrompt.qml:115
 msgid "Shell"
 msgstr "Shell"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:120
+#: package/contents/ui/configSystemPrompt.qml:120
 msgid "Hostname"
 msgstr "Vertsnavn"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:125
+#: package/contents/ui/configSystemPrompt.qml:125
 msgid "Kernel"
 msgstr "Kjerne"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:130
+#: package/contents/ui/configSystemPrompt.qml:130
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:135
+#: package/contents/ui/configSystemPrompt.qml:135
 msgid "User"
 msgstr "Bruker"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:140
+#: package/contents/ui/configSystemPrompt.qml:140
 msgid "CPU"
 msgstr "CPU"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:145
+#: package/contents/ui/configSystemPrompt.qml:145
 msgid "Memory"
 msgstr "Minne"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:150
+#: package/contents/ui/configSystemPrompt.qml:150
 msgid "GPU"
 msgstr "GPU"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:155
+#: package/contents/ui/configSystemPrompt.qml:155
 msgid "Block Devices"
 msgstr "Blokkenheter"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:160
+#: package/contents/ui/configSystemPrompt.qml:160
 msgid "Network"
 msgstr "Nettverk"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:165
+#: package/contents/ui/configSystemPrompt.qml:165
 msgid "Locale"
 msgstr "Språk og område"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:170
+#: package/contents/ui/configSystemPrompt.qml:170
 msgid "Date/Time"
 msgstr "Dato/tid"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:178
+#: package/contents/ui/configSystemPrompt.qml:178
 msgid "Custom Instructions:"
 msgstr "Egendefinerte instruksjoner:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:181
+#: package/contents/ui/configSystemPrompt.qml:181
 msgid "Additional instructions for the LLM…"
 msgstr "Tilleggsinstruksjoner for LLM-en…"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configSystemPrompt.qml:188
+#: package/contents/ui/configSystemPrompt.qml:188
 msgid "Preview:"
 msgstr "Forhåndsvisning:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:104
+#: package/contents/ui/configTasks.qml:104
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr "Ingen oppgaver konfigurert. Legg til en oppgave for å opprette gjenbrukbare hurtigtaster for ledetekst."
+msgstr ""
+"Ingen oppgaver konfigurert. Legg til en oppgave for å opprette gjenbrukbare "
+"hurtigtaster for ledetekst."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:128
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:81
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:495
+#: package/contents/ui/configTasks.qml:128
+#: package/contents/ui/FullRepresentation.qml:82
+#: package/contents/ui/FullRepresentation.qml:588
 msgid "AUTO"
 msgstr "AUTO"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:155
+#: package/contents/ui/configTasks.qml:155
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:155
+#: package/contents/ui/configTasks.qml:155
 msgid "Add Task"
 msgstr "Legg til oppgave"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:179
+#: package/contents/ui/configTasks.qml:179
 msgid "Task name"
 msgstr "Oppgavenavn"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:186
+#: package/contents/ui/configTasks.qml:186
 msgid "Prompt to send"
 msgstr "Ledetekst som skal sendes"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:192
+#: package/contents/ui/configTasks.qml:192
 msgid "Enable auto mode (auto-run + auto-share)"
 msgstr "Aktivér automatisk modus (automatisk kjøring + automatisk deling)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:204
+#: package/contents/ui/configTasks.qml:204
 msgid "Update Task"
 msgstr "Oppdater oppgave"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:204
+#: package/contents/ui/configTasks.qml:204
 msgid "Save Task"
 msgstr "Lagre oppgave"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:212
+#: package/contents/ui/configTasks.qml:212
 msgid "A task named \"%1\" already exists."
 msgstr "En oppgave kalt \"%1\" finnes allerede."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/configTasks.qml:234
+#: package/contents/ui/configTasks.qml:234
 msgid ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
-"button to run them. Tasks with auto mode will temporarily enable auto-run "
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
+" button to run them. Tasks with auto mode will temporarily enable auto-run "
 "and auto-share."
 msgstr ""
 "Oppgaver er gjenbrukbare hurtigtaster for ledetekst. Bruk /task <name> i "
 "chat eller verktøylinjeknappen for å kjøre dem. Oppgaver med automatisk "
 "modus vil midlertidig aktivere automatisk kjøring og automatisk deling."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:20
+#: package/contents/ui/FullRepresentation.qml:20
 msgid "Toggle auto mode (auto-run + auto-share) for this session"
-msgstr "Veksle automatisk modus (automatisk kjøring + automatisk deling) for denne økten"
+msgstr ""
+"Veksle automatisk modus (automatisk kjøring + automatisk deling) for denne "
+"økten"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:21
+#: package/contents/ui/FullRepresentation.qml:21
 msgid "Clear the chat"
 msgstr "Tøm chatten"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:22
+#: package/contents/ui/FullRepresentation.qml:22
+msgid "Close the panel"
+msgstr "Lukk panelet"
+
+#: package/contents/ui/FullRepresentation.qml:23
 msgid "Copy conversation to clipboard"
 msgstr "Kopier samtale til utklippstavle"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:23
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:116
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:117
+#: package/contents/ui/FullRepresentation.qml:24
+#: package/contents/ui/FullRepresentation.qml:117
+#: package/contents/ui/FullRepresentation.qml:118
 msgid "Open chat history folder"
 msgstr "Åpne chathistorikk-mappe"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:24
+#: package/contents/ui/FullRepresentation.qml:25
 msgid "Show or switch model (/model <name>)"
 msgstr "Vis eller bytt modell (/model <name>)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:25
+#: package/contents/ui/FullRepresentation.qml:26
 msgid "Run last command"
 msgstr "Kjør siste kommando"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:26
+#: package/contents/ui/FullRepresentation.qml:27
 msgid "Save chat to file"
 msgstr "Lagre chat til fil"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:27
+#: package/contents/ui/FullRepresentation.qml:28
 msgid "Open settings"
 msgstr "Åpne innstillinger"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:28
+#: package/contents/ui/FullRepresentation.qml:29
 msgid "Run a saved task (/task <name>)"
 msgstr "Kjør en lagret oppgave (/task <name>)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:29
+#: package/contents/ui/FullRepresentation.qml:30
 msgid "Run last command in terminal"
 msgstr "Kjør siste kommando i terminal"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:91
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:92
+#: package/contents/ui/FullRepresentation.qml:92
+#: package/contents/ui/FullRepresentation.qml:93
 msgid "Run a task"
 msgstr "Kjør en oppgave"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:126
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:127
+#: package/contents/ui/FullRepresentation.qml:127
+#: package/contents/ui/FullRepresentation.qml:128
 msgid "Copy conversation"
 msgstr "Kopier samtale"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:135
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:181
+#: package/contents/ui/FullRepresentation.qml:136
+#: package/contents/ui/FullRepresentation.qml:193
 msgid "You"
 msgstr "Du"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:136
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:182
+#: package/contents/ui/FullRepresentation.qml:137
+#: package/contents/ui/FullRepresentation.qml:194
 msgid "Assistant"
 msgstr "Assistent"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:137
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:183
+#: package/contents/ui/FullRepresentation.qml:138
+#: package/contents/ui/FullRepresentation.qml:195
 msgid "Command"
 msgstr "Kommando"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:138
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:184
+#: package/contents/ui/FullRepresentation.qml:139
+#: package/contents/ui/FullRepresentation.qml:196
 msgid "Error"
 msgstr "Feil"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:151
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:152
+#: package/contents/ui/FullRepresentation.qml:152
+#: package/contents/ui/FullRepresentation.qml:153
 msgid "Clear chat"
 msgstr "Tøm chat"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:160
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:161
+#: package/contents/ui/FullRepresentation.qml:161
+#: package/contents/ui/FullRepresentation.qml:162
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:270
+#: package/contents/ui/FullRepresentation.qml:172
+#: package/contents/ui/FullRepresentation.qml:173
+msgid "Don't keep open"
+msgstr "Ikke hold åpent"
+
+#: package/contents/ui/FullRepresentation.qml:172
+#: package/contents/ui/FullRepresentation.qml:173
+msgid "Keep open"
+msgstr "Hold åpent"
+
+#: package/contents/ui/FullRepresentation.qml:342
 msgid "Send a message to start chatting"
 msgstr "Send en melding for å begynne å chatte"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:278
+#: package/contents/ui/FullRepresentation.qml:371
 msgid "Attach File"
 msgstr "Legg til fil"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:281
+#: package/contents/ui/FullRepresentation.qml:374
 msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 msgstr "Bilder (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:281
+#: package/contents/ui/FullRepresentation.qml:374
 msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
@@ -519,31 +593,31 @@ msgstr ""
 "Tekstfiler (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:522
+#: package/contents/ui/FullRepresentation.qml:615
 msgid "Message input"
 msgstr "Meldingsinput"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:523
+#: package/contents/ui/FullRepresentation.qml:616
 msgid "Type a message…"
 msgstr "Skriv en melding…"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:523
+#: package/contents/ui/FullRepresentation.qml:616
 msgid "Initializing…"
 msgstr "Initialiserer…"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:575
+#: package/contents/ui/FullRepresentation.qml:668
 msgid "Attach file or image"
 msgstr "Legg til fil eller bilde"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:581
+#: package/contents/ui/FullRepresentation.qml:674
 msgid "Send"
 msgstr "Send"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/FullRepresentation.qml:604
+#: package/contents/ui/FullRepresentation.qml:697
 msgid "Stop"
 msgstr "Stopp"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:606
+#: package/contents/ui/main.qml:639
 msgid ""
 "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
 "are on)."
@@ -551,7 +625,7 @@ msgstr ""
 "Automatisk modus er permanent aktivert via innstillinger (både automatisk "
 "kjøring og automatisk deling er på)."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:609
+#: package/contents/ui/main.qml:642
 msgid ""
 "Auto mode enabled for this session. Commands will run and share output "
 "automatically."
@@ -559,159 +633,162 @@ msgstr ""
 "Automatisk modus aktivert for denne økten. Kommandoer vil kjøre og dele "
 "utdata automatisk."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:609
+#: package/contents/ui/main.qml:642
 msgid "Auto mode disabled."
 msgstr "Automatisk modus deaktivert."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:620
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:675
+#: package/contents/ui/main.qml:653 package/contents/ui/main.qml:708
 msgid "none"
 msgstr "ingen"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:620
+#: package/contents/ui/main.qml:653
 msgid "Current model: **%1**"
 msgstr "Gjeldende modell: **%1**"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:622
+#: package/contents/ui/main.qml:655
 msgid "Available models:"
 msgstr "Tilgjengelige modeller:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:624
+#: package/contents/ui/main.qml:657
 msgid "Type `/model <name>` to switch."
 msgstr "Skriv `/model <name>` for å bytte."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:626
+#: package/contents/ui/main.qml:659
 msgid "No models cached. Use **Fetch Models** in settings."
 msgstr "Ingen modeller bufret. Bruk **Hent modeller** i innstillinger."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:635
+#: package/contents/ui/main.qml:668
 msgid "Switched to model: **%1**"
 msgstr "Byttet til modell: **%1**"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:644
+#: package/contents/ui/main.qml:677
 msgid "No tasks configured. Add tasks in Settings."
 msgstr "Ingen oppgaver konfigurert. Legg til oppgaver i Innstillinger."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:646
+#: package/contents/ui/main.qml:679
 msgid "(auto)"
 msgstr "(auto)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:647
+#: package/contents/ui/main.qml:680
 msgid "Available tasks:"
 msgstr "Tilgjengelige oppgaver:"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:647
+#: package/contents/ui/main.qml:680
 msgid "Type `/task <name>` to run."
 msgstr "Skriv `/task <name>` for å kjøre."
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:675
+#: package/contents/ui/main.qml:708
 msgid "Unknown task: **%1**. Available: %2"
 msgstr "Ukjent oppgave: **%1**. Tilgjengelig: %2"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:815
+#: package/contents/ui/main.qml:722
+msgid "The user declined to run this command."
+msgstr "Brukeren avslo å kjøre denne kommandoen."
+
+#: package/contents/ui/main.qml:886
 msgid "Searching the web…"
 msgstr "Søker på nettet…"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:837
+#: package/contents/ui/main.qml:908
 msgid "Web search failed: %1"
 msgstr "Nettsøk mislyktes: %1"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:1043
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:1055
+#: package/contents/ui/main.qml:1115 package/contents/ui/main.qml:1127
 msgid "Running: %1"
 msgstr "Kjører: %1"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:1064
+#: package/contents/ui/main.qml:1136
 msgid "stderr: %1"
 msgstr "stderr: %1"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:1066
+#: package/contents/ui/main.qml:1138
 msgid "[truncated — output exceeded %1KB]"
 msgstr "[avkortet — utdata oversteg %1KB]"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/main.qml:1068
+#: package/contents/ui/main.qml:1140
 msgid "[exit code: %1]"
 msgstr "[avslutningskode: %1]"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:133
-msgid "Request timed out after 60 seconds"
-msgstr "Forespørsel tidsavbrutt etter 60 sekunder"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:144
-msgid "Invalid response format: missing choices[0].message.content"
-msgstr "Ugyldig responsformat: manglende choices[0].message.content"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:150
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:425
-msgid "Failed to parse response: %1"
-msgstr "Klarte ikke å analysere respons: %1"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:155
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:446
-msgid "Authentication failed (HTTP %1) — check your API key"
-msgstr "Autentisering mislyktes (HTTP %1) — kontroller din API-nøkkel"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:157
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:448
-msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
-msgstr "Takstbegrenset (HTTP 429) — for mange forespørsler, prøv igjen snart"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:159
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:450
-msgid "Not found (HTTP 404) — check your API endpoint and model name"
-msgstr "Ikke funnet (HTTP 404) — kontroller API-endepunktet og modellnavnet"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:161
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:452
-msgid "API error %1"
-msgstr "API-feil %1"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:163
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:454
-msgid "Request failed (no response) — check your endpoint URL"
-msgstr "Forespørsel mislyktes (ingen respons) — kontroller endepunkts-URL-en"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:204
-msgid "Request timed out after 30 seconds"
-msgstr "Forespørsel tidsavbrutt etter 30 sekunder"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:220
-msgid "Failed to parse models: %1"
-msgstr "Klarte ikke å analysere modeller: %1"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:223
-msgid "Failed to fetch models: HTTP %1"
-msgstr "Klarte ikke å hente modeller: HTTP %1"
-
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:315
+#: package/contents/ui/api.js:169
 msgid "Web search timed out"
 msgstr "Nettsøk tidsavbrutt"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:325
+#: package/contents/ui/api.js:179
 msgid "Failed to parse web search response: %1"
 msgstr "Klarte ikke å analysere nettsøkrespons: %1"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:328
+#: package/contents/ui/api.js:182
 msgid "Web search failed (HTTP %1)"
 msgstr "Nettsøk mislyktes (HTTP %1)"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:419
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:422
-msgid "Invalid response format"
-msgstr "Ugyldig responsformat"
+#: package/contents/ui/api.js:221
+msgid "OpenAI-compatible"
+msgstr "OpenAI-kompatibel"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/api.js:431
-msgid "Request timed out"
-msgstr "Forespørsel tidsavbrutt"
+#: package/contents/ui/api.js:222
+msgid "Anthropic"
+msgstr "Anthropic"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/ui/config/config.qml:11
+#: package/contents/ui/api.js:223
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+#: package/contents/config/config.qml:11
 msgid "General"
 msgstr "Generelt"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/config/config.qml:16
+#: package/contents/config/config.qml:16
 msgid "System Prompt"
 msgstr "Systeminstruksjon"
 
-#: /var/home/joshuaroman/plasmallm/package/contents/config/config.qml:21
+#: package/contents/config/config.qml:21
 msgid "Tasks"
 msgstr "Oppgaver"
+
+#~ msgid "e.g. llama3, gpt-4, etc."
+#~ msgstr "f.eks. llama3, gpt-4, osv."
+
+#~ msgid "Fetch Models"
+#~ msgstr "Hent modeller"
+
+#~ msgid "Available Models:"
+#~ msgstr "Tilgjengelige modeller:"
+
+#~ msgid "Request timed out after 60 seconds"
+#~ msgstr "Forespørsel tidsavbrutt etter 60 sekunder"
+
+#~ msgid "Invalid response format: missing choices[0].message.content"
+#~ msgstr "Ugyldig responsformat: manglende choices[0].message.content"
+
+#~ msgid "Failed to parse response: %1"
+#~ msgstr "Klarte ikke å analysere respons: %1"
+
+#~ msgid "Authentication failed (HTTP %1) — check your API key"
+#~ msgstr "Autentisering mislyktes (HTTP %1) — kontroller din API-nøkkel"
+
+#~ msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
+#~ msgstr "Takstbegrenset (HTTP 429) — for mange forespørsler, prøv igjen snart"
+
+#~ msgid "Not found (HTTP 404) — check your API endpoint and model name"
+#~ msgstr "Ikke funnet (HTTP 404) — kontroller API-endepunktet og modellnavnet"
+
+#~ msgid "API error %1"
+#~ msgstr "API-feil %1"
+
+#~ msgid "Request failed (no response) — check your endpoint URL"
+#~ msgstr "Forespørsel mislyktes (ingen respons) — kontroller endepunkts-URL-en"
+
+#~ msgid "Request timed out after 30 seconds"
+#~ msgstr "Forespørsel tidsavbrutt etter 30 sekunder"
+
+#~ msgid "Failed to parse models: %1"
+#~ msgstr "Klarte ikke å analysere modeller: %1"
+
+#~ msgid "Failed to fetch models: HTTP %1"
+#~ msgstr "Klarte ikke å hente modeller: HTTP %1"
+
+#~ msgid "Invalid response format"
+#~ msgstr "Ugyldig responsformat"
+
+#~ msgid "Request timed out"
+#~ msgstr "Forespørsel tidsavbrutt"
