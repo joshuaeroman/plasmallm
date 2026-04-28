@@ -1,221 +1,216 @@
-# Brazilian Portuguese translations for PlasmaLLM
-# Traduções em português brasileiro do pacote PlasmaLLM.
+# Chinese (Simplified) translations for PlasmaLLM
 # Copyright (C) 2026 Joshua Roman
 # This file is distributed under the same license as the PlasmaLLM package.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-26 23:28-0400\n"
-"PO-Revision-Date: 2026-04-07 21:00-0400\n"
+"PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
-"Language-Team: Portuguese (Brazil)\n"
-"Language: pt_BR\n"
+"Language-Team: Chinese (Simplified)\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: package/contents/ui/ChatMessage.qml:102
 msgid "Thoughts"
-msgstr "Pensamentos"
+msgstr "思考"
 
 #: package/contents/ui/ChatMessage.qml:188
 msgid "Web Search Results"
-msgstr "Resultados da busca na web"
+msgstr "网络搜索结果"
 
 #: package/contents/ui/ChatMessage.qml:295
 msgid "Thinking…"
-msgstr "Pensando…"
+msgstr "思考中…"
 
 #: package/contents/ui/ChatMessage.qml:348
 msgid "Copy message"
-msgstr "Copiar mensagem"
+msgstr "复制消息"
 
 #: package/contents/ui/ChatMessage.qml:356
 msgid "Retry"
-msgstr "Tentar novamente"
+msgstr "重试"
 
 #: package/contents/ui/ChatMessage.qml:364
 msgid "Share with LLM"
-msgstr "Compartilhar com LLM"
+msgstr "与LLM共享"
 
 #: package/contents/ui/ChatMessage.qml:366
 msgid "Include this output in the conversation"
-msgstr "Incluir esta saída na conversa"
+msgstr "将此输出包含在对话中"
 
 #: package/contents/ui/CommandBlock.qml:78
 msgid "Save"
-msgstr "Salvar"
+msgstr "保存"
 
 #: package/contents/ui/CommandBlock.qml:80
 msgid "Save as script file"
-msgstr "Salvar como arquivo de script"
+msgstr "另存为脚本文件"
 
 #: package/contents/ui/CommandBlock.qml:86
 msgid "Copy"
-msgstr "Copiar"
+msgstr "复制"
 
 #: package/contents/ui/CommandBlock.qml:88
 msgid "Copy to clipboard"
-msgstr "Copiar para a área de transferência"
+msgstr "复制到剪贴板"
 
 #: package/contents/ui/CommandBlock.qml:98
 msgid "Ran"
-msgstr "Executado"
+msgstr "已运行"
 
 #: package/contents/ui/CommandBlock.qml:98
 msgid "Run"
-msgstr "Executar"
+msgstr "运行"
 
 #: package/contents/ui/CommandBlock.qml:101
 msgid "Execute command inline"
-msgstr "Executar comando inline"
+msgstr "内联执行命令"
 
 #: package/contents/ui/CommandBlock.qml:110
 msgid "Terminal"
-msgstr "Terminal"
+msgstr "终端"
 
 #: package/contents/ui/CommandBlock.qml:112
 msgid "Open in terminal emulator"
-msgstr "Abrir no emulador de terminal"
+msgstr "在终端模拟器中打开"
 
 #: package/contents/ui/CommandBlock.qml:121
 msgid "Save Script"
-msgstr "Salvar script"
+msgstr "保存脚本"
 
 #: package/contents/ui/CommandBlock.qml:125
 msgid "Shell scripts (*.sh)"
-msgstr "Scripts de shell (*.sh)"
+msgstr "Shell脚本 (*.sh)"
 
 #: package/contents/ui/CommandBlock.qml:125
 #: package/contents/ui/FullRepresentation.qml:374
 msgid "All files (*)"
-msgstr "Todos os arquivos (*)"
+msgstr "所有文件 (*)"
 
 #: package/contents/ui/configGeneral.qml:324
 msgid "No models found."
-msgstr "Nenhum modelo encontrado."
+msgstr "未找到模型。"
 
 #: package/contents/ui/configGeneral.qml:514
 msgid "Adapter:"
-msgstr "Adaptador:"
+msgstr "适配器："
 
 #: package/contents/ui/configGeneral.qml:536
 msgid "Provider:"
-msgstr "Provedor:"
+msgstr "提供商："
 
 #: package/contents/ui/configGeneral.qml:562
 msgid "API Endpoint:"
-msgstr "Endpoint de API:"
+msgstr "API端点："
 
 #: package/contents/ui/configGeneral.qml:589
 msgid "Model:"
-msgstr "Modelo:"
+msgstr "模型："
 
 #: package/contents/ui/configGeneral.qml:626
 msgid "Refreshing…"
-msgstr "Atualizando…"
+msgstr "刷新中…"
 
 #: package/contents/ui/configGeneral.qml:626
 msgid "Refresh model list"
-msgstr "Atualizar lista de modelos"
+msgstr "刷新模型列表"
 
 #: package/contents/ui/configGeneral.qml:644
 msgid "API Key:"
-msgstr "Chave de API:"
+msgstr "API密钥："
 
 #: package/contents/ui/configGeneral.qml:651
 msgid "Optional - for OpenAI, etc."
-msgstr "Opcional – para OpenAI, etc."
+msgstr "可选 - 用于OpenAI等"
 
 #: package/contents/ui/configGeneral.qml:666
 #: package/contents/ui/configGeneral.qml:998
 msgid "Saving…"
-msgstr "Salvando…"
+msgstr "保存中…"
 
 #: package/contents/ui/configGeneral.qml:667
 #: package/contents/ui/configGeneral.qml:999
 msgid "Saved"
-msgstr "Salvo"
+msgstr "已保存"
 
 #: package/contents/ui/configGeneral.qml:668
 #: package/contents/ui/configGeneral.qml:1000
 msgid "Save to Config (Insecure)"
-msgstr "Salvar na configuração (inseguro)"
+msgstr "保存到配置（不安全）"
 
 #: package/contents/ui/configGeneral.qml:668
 #: package/contents/ui/configGeneral.qml:1000
 msgid "Save Key"
-msgstr "Salvar chave"
+msgstr "保存密钥"
 
 #: package/contents/ui/configGeneral.qml:677
 msgid "Stored in KDE Wallet"
-msgstr "Armazenado no KDE Wallet"
+msgstr "已存储在KDE钱包中"
 
 #: package/contents/ui/configGeneral.qml:677
 msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Wallet indisponível — chave armazenada no arquivo de configuração"
+msgstr "KDE钱包不可用——密钥已存储在配置文件中"
 
 #: package/contents/ui/configGeneral.qml:692
 #, javascript-format
 msgid "Temperature: %1%"
-msgstr "Temperatura: %1%"
+msgstr "温度：%1%"
 
 #: package/contents/ui/configGeneral.qml:709
 msgid "Precise"
-msgstr "Preciso"
+msgstr "精确"
 
 #: package/contents/ui/configGeneral.qml:714
 msgid "Creative"
-msgstr "Criativo"
+msgstr "创意"
 
 #: package/contents/ui/configGeneral.qml:722
 msgid "Max Tokens:"
-msgstr "Tokens máximos:"
+msgstr "最大令牌数："
 
 #: package/contents/ui/configGeneral.qml:733
 msgid "Thinking:"
-msgstr "Raciocínio:"
+msgstr "思考："
 
 #: package/contents/ui/configGeneral.qml:737
 msgid "Off"
-msgstr "Desligado"
+msgstr "关闭"
 
 #: package/contents/ui/configGeneral.qml:737
 msgid "Low"
-msgstr "Baixo"
+msgstr "低"
 
 #: package/contents/ui/configGeneral.qml:737
 msgid "Medium"
-msgstr "Médio"
+msgstr "中"
 
 #: package/contents/ui/configGeneral.qml:737
 msgid "High"
-msgstr "Alto"
+msgstr "高"
 
 #: package/contents/ui/configGeneral.qml:746
 msgid "Thinking budget:"
-msgstr "Orçamento de raciocínio:"
+msgstr "思考预算："
 
 #: package/contents/ui/configGeneral.qml:773
 msgid "Show thoughts in chat (collapsible)"
-msgstr "Mostrar raciocínio no chat (recolhível)"
+msgstr "在聊天中显示思考（可折叠）"
 
 #: package/contents/ui/configGeneral.qml:778
 msgid ""
 "When enabled, the model's reasoning is shown above each reply with a "
 "collapsible header. Round-trip of signed thoughts to the API still happens "
 "regardless of this setting."
-msgstr ""
-"Quando ativado, o raciocínio do modelo é exibido acima de cada resposta com "
-"um cabeçalho recolhível. A troca de pensamentos assinados com a API acontece"
-" independentemente desta configuração."
+msgstr "启用后，模型的推理会以可折叠标题的形式显示在每条回复上方。无论此设置如何，签名思考的API往返仍会进行。"
 
 #: package/contents/ui/configGeneral.qml:785
 msgid "Use Responses API"
-msgstr "Usar API Responses"
+msgstr "使用Responses API"
 
 #: package/contents/ui/configGeneral.qml:790
 msgid ""
@@ -223,145 +218,135 @@ msgid ""
 "(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
 "picking a preset."
 msgstr ""
-"Necessário para exibir conteúdo de raciocínio no OpenAI / Poe / OpenRouter /"
-" Azure (POST para /v1/responses em vez de /v1/chat/completions). Definido "
-"automaticamente ao escolher um preset."
+"在OpenAI / Poe / OpenRouter / "
+"Azure上显示推理内容所必需（POST到/v1/responses而非/v1/chat/completions）。选择预设时自动设置。"
 
 #: package/contents/ui/configGeneral.qml:801
 msgid "Chat Spacing: %1px"
-msgstr "Espaçamento do chat: %1px"
+msgstr "聊天间距：%1px"
 
 #: package/contents/ui/configGeneral.qml:818
 msgid "Compact"
-msgstr "Compacto"
+msgstr "紧凑"
 
 #: package/contents/ui/configGeneral.qml:823
 msgid "Spacious"
-msgstr "Espaçoso"
+msgstr "宽敞"
 
 #: package/contents/ui/configGeneral.qml:830
 msgid "Appearance:"
-msgstr "Aparência:"
+msgstr "外观："
 
 #: package/contents/ui/configGeneral.qml:831
 msgid "Show provider and model in title"
-msgstr "Mostrar provedor e modelo no título"
+msgstr "在标题中显示提供商和模型"
 
 #: package/contents/ui/configGeneral.qml:843
 msgid "Chat History:"
-msgstr "Histórico de chat:"
+msgstr "聊天记录："
 
 #: package/contents/ui/configGeneral.qml:844
 msgid "Auto-save chat history"
-msgstr "Salvar histórico de chat automaticamente"
+msgstr "自动保存聊天记录"
 
 #: package/contents/ui/configGeneral.qml:848
 #: package/contents/ui/configGeneral.qml:863
 msgid "Saves to ~/PlasmaLLM/chats/"
-msgstr "Salva em ~/PlasmaLLM/chats/"
+msgstr "保存到 ~/PlasmaLLM/chats/"
 
 #: package/contents/ui/configGeneral.qml:855
 msgid "Save format:"
-msgstr "Formato de salvamento:"
+msgstr "保存格式："
 
 #: package/contents/ui/configGeneral.qml:856
 msgid "Plain text (.txt)"
-msgstr "Texto simples (.txt)"
+msgstr "纯文本 (.txt)"
 
 #: package/contents/ui/configGeneral.qml:856
 msgid "Structured (.jsonl)"
-msgstr "Estruturado (.jsonl)"
+msgstr "结构化 (.jsonl)"
 
 #: package/contents/ui/configGeneral.qml:875
 msgid "Auto-clear:"
-msgstr "Limpeza automática:"
+msgstr "自动清除："
 
 #: package/contents/ui/configGeneral.qml:879
 msgid "Disabled"
-msgstr "Desativado"
+msgstr "已禁用"
 
 #: package/contents/ui/configGeneral.qml:885
 msgid "Instant (always clear when panel opens)"
-msgstr "Instantâneo (sempre limpar ao abrir o painel)"
+msgstr "即时（每次打开面板时清除）"
 
 #: package/contents/ui/configGeneral.qml:894
 msgid "After"
-msgstr "Após"
+msgstr "之后"
 
 #: package/contents/ui/configGeneral.qml:913
 msgid "seconds"
-msgstr "segundos"
+msgstr "秒"
 
 #: package/contents/ui/configGeneral.qml:913
 msgid "minutes"
-msgstr "minutos"
+msgstr "分钟"
 
 #: package/contents/ui/configGeneral.qml:928
 msgid "Commands:"
-msgstr "Comandos:"
+msgstr "命令："
 
 #: package/contents/ui/configGeneral.qml:929
 msgid "Auto-share command output with LLM"
-msgstr "Compartilhar automaticamente a saída do comando com o LLM"
+msgstr "自动与LLM共享命令输出"
 
 #: package/contents/ui/configGeneral.qml:933
 msgid "Automatically send Run command results back to the LLM"
-msgstr ""
-"Enviar automaticamente os resultados do comando Executar de volta ao LLM"
+msgstr "自动将运行命令结果发送回LLM"
 
 #: package/contents/ui/configGeneral.qml:940
 msgid "Auto-run commands from LLM"
-msgstr "Executar comandos do LLM automaticamente"
+msgstr "自动运行来自LLM的命令"
 
 #: package/contents/ui/configGeneral.qml:944
 msgid ""
 "WARNING: When combined with Auto-share, enables agentic workflow. Only use "
 "with very trustworthy LLMs."
-msgstr ""
-"AVISO: Combinado com Auto-compartilhar, habilita fluxo de trabalho agêntico."
-" Usar somente com LLMs muito confiáveis."
+msgstr "警告：与自动共享结合使用时，将启用代理工作流。请仅与非常可信的LLM一起使用。"
 
 #: package/contents/ui/configGeneral.qml:951
 msgid "Use tool calling for commands"
-msgstr "Usar chamada de ferramenta para comandos"
+msgstr "使用工具调用执行命令"
 
 #: package/contents/ui/configGeneral.qml:955
 msgid ""
 "Use the run_command tool for command execution. Disable for models that "
 "don't support tool calling (falls back to code block parsing)."
-msgstr ""
-"Usar a ferramenta run_command para execução de comandos. Desativar para "
-"modelos que não suportam chamada de ferramentas (retorna à análise de blocos"
-" de código)."
+msgstr "使用run_command工具执行命令。对于不支持工具调用的模型请禁用（将回退到代码块解析）。"
 
 #: package/contents/ui/configGeneral.qml:962
 msgid ""
 "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
 "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-msgstr ""
-"⚠️ PERIGO: Ambas as opções habilitadas — o LLM agora pode executar comandos "
-"e ver sua saída, habilitando um fluxo de trabalho agêntico. Usar somente com"
-" LLMs confiáveis."
+msgstr "⚠️ 危险：两个选项均已启用——LLM现在可以执行命令并查看其输出，从而启用代理工作流。请仅与可信的LLM一起使用。"
 
 #: package/contents/ui/configGeneral.qml:977
 msgid "Web Search:"
-msgstr "Busca na web:"
+msgstr "网络搜索："
 
 #: package/contents/ui/configGeneral.qml:984
 msgid "Ollama API key for web search"
-msgstr "Chave de API do Ollama para busca na web"
+msgstr "用于网络搜索的Ollama API密钥"
 
 #: package/contents/ui/configGeneral.qml:1008
 msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Habilita buscas na web acionadas pelo LLM via API de busca do Ollama"
+msgstr "通过Ollama的搜索API启用LLM触发的网络搜索"
 
 #: package/contents/ui/configSystemPrompt.qml:104
 msgid "System Info:"
-msgstr "Info do sistema:"
+msgstr "系统信息："
 
 #: package/contents/ui/configSystemPrompt.qml:110
 msgid "OS"
-msgstr "SO"
+msgstr "操作系统"
 
 #: package/contents/ui/configSystemPrompt.qml:115
 msgid "Shell"
@@ -369,19 +354,19 @@ msgstr "Shell"
 
 #: package/contents/ui/configSystemPrompt.qml:120
 msgid "Hostname"
-msgstr "Nome do host"
+msgstr "主机名"
 
 #: package/contents/ui/configSystemPrompt.qml:125
 msgid "Kernel"
-msgstr "Kernel"
+msgstr "内核"
 
 #: package/contents/ui/configSystemPrompt.qml:130
 msgid "Desktop"
-msgstr "Desktop"
+msgstr "桌面"
 
 #: package/contents/ui/configSystemPrompt.qml:135
 msgid "User"
-msgstr "Usuário"
+msgstr "用户"
 
 #: package/contents/ui/configSystemPrompt.qml:140
 msgid "CPU"
@@ -389,7 +374,7 @@ msgstr "CPU"
 
 #: package/contents/ui/configSystemPrompt.qml:145
 msgid "Memory"
-msgstr "Memória"
+msgstr "内存"
 
 #: package/contents/ui/configSystemPrompt.qml:150
 msgid "GPU"
@@ -397,37 +382,35 @@ msgstr "GPU"
 
 #: package/contents/ui/configSystemPrompt.qml:155
 msgid "Block Devices"
-msgstr "Dispositivos de bloco"
+msgstr "块设备"
 
 #: package/contents/ui/configSystemPrompt.qml:160
 msgid "Network"
-msgstr "Rede"
+msgstr "网络"
 
 #: package/contents/ui/configSystemPrompt.qml:165
 msgid "Locale"
-msgstr "Localidade"
+msgstr "区域设置"
 
 #: package/contents/ui/configSystemPrompt.qml:170
 msgid "Date/Time"
-msgstr "Data/Hora"
+msgstr "日期/时间"
 
 #: package/contents/ui/configSystemPrompt.qml:178
 msgid "Custom Instructions:"
-msgstr "Instruções personalizadas:"
+msgstr "自定义指令："
 
 #: package/contents/ui/configSystemPrompt.qml:181
 msgid "Additional instructions for the LLM…"
-msgstr "Instruções adicionais para o LLM…"
+msgstr "给LLM的附加指令…"
 
 #: package/contents/ui/configSystemPrompt.qml:188
 msgid "Preview:"
-msgstr "Pré-visualização:"
+msgstr "预览："
 
 #: package/contents/ui/configTasks.qml:104
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr ""
-"Nenhuma tarefa configurada. Adicione uma tarefa para criar atalhos de prompt"
-" reutilizáveis."
+msgstr "未配置任务。添加任务以创建可重用的提示快捷方式。"
 
 #: package/contents/ui/configTasks.qml:128
 #: package/contents/ui/FullRepresentation.qml:82
@@ -437,295 +420,286 @@ msgstr "AUTO"
 
 #: package/contents/ui/configTasks.qml:155
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "取消"
 
 #: package/contents/ui/configTasks.qml:155
 msgid "Add Task"
-msgstr "Adicionar tarefa"
+msgstr "添加任务"
 
 #: package/contents/ui/configTasks.qml:179
 msgid "Task name"
-msgstr "Nome da tarefa"
+msgstr "任务名称"
 
 #: package/contents/ui/configTasks.qml:186
 msgid "Prompt to send"
-msgstr "Prompt a enviar"
+msgstr "要发送的提示"
 
 #: package/contents/ui/configTasks.qml:192
 msgid "Enable auto mode (auto-run + auto-share)"
-msgstr "Habilitar modo automático (auto-executar + auto-compartilhar)"
+msgstr "启用自动模式（自动运行 + 自动共享）"
 
 #: package/contents/ui/configTasks.qml:204
 msgid "Update Task"
-msgstr "Atualizar tarefa"
+msgstr "更新任务"
 
 #: package/contents/ui/configTasks.qml:204
 msgid "Save Task"
-msgstr "Salvar tarefa"
+msgstr "保存任务"
 
 #: package/contents/ui/configTasks.qml:212
 msgid "A task named \"%1\" already exists."
-msgstr "Já existe uma tarefa chamada \"%1\"."
+msgstr "名为\"%1\"的任务已存在。"
 
 #: package/contents/ui/configTasks.qml:234
 msgid ""
 "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
 " button to run them. Tasks with auto mode will temporarily enable auto-run "
 "and auto-share."
-msgstr ""
-"As tarefas são atalhos de prompt reutilizáveis. Use /task <name> no chat ou "
-"o botão da barra de ferramentas para executá-las. Tarefas no modo automático"
-" habilitarão temporariamente auto-executar e auto-compartilhar."
+msgstr "任务是可重用的提示快捷方式。在聊天中使用 /task <name> 或工具栏按钮运行它们。自动模式的任务将临时启用自动运行和自动共享。"
 
 #: package/contents/ui/FullRepresentation.qml:20
 msgid "Toggle auto mode (auto-run + auto-share) for this session"
-msgstr ""
-"Alternar modo automático (auto-executar + auto-compartilhar) para esta "
-"sessão"
+msgstr "切换此会话的自动模式（自动运行 + 自动共享）"
 
 #: package/contents/ui/FullRepresentation.qml:21
 msgid "Clear the chat"
-msgstr "Limpar o chat"
+msgstr "清除聊天"
 
 #: package/contents/ui/FullRepresentation.qml:22
 msgid "Close the panel"
-msgstr "Fechar o painel"
+msgstr "关闭面板"
 
 #: package/contents/ui/FullRepresentation.qml:23
 msgid "Copy conversation to clipboard"
-msgstr "Copiar conversa para a área de transferência"
+msgstr "将对话复制到剪贴板"
 
 #: package/contents/ui/FullRepresentation.qml:24
 #: package/contents/ui/FullRepresentation.qml:117
 #: package/contents/ui/FullRepresentation.qml:118
 msgid "Open chat history folder"
-msgstr "Abrir pasta de histórico de chat"
+msgstr "打开聊天记录文件夹"
 
 #: package/contents/ui/FullRepresentation.qml:25
 msgid "Show or switch model (/model <name>)"
-msgstr "Mostrar ou trocar modelo (/model <name>)"
+msgstr "显示或切换模型 (/model <name>)"
 
 #: package/contents/ui/FullRepresentation.qml:26
 msgid "Run last command"
-msgstr "Executar último comando"
+msgstr "运行上一条命令"
 
 #: package/contents/ui/FullRepresentation.qml:27
 msgid "Save chat to file"
-msgstr "Salvar chat em arquivo"
+msgstr "将聊天保存到文件"
 
 #: package/contents/ui/FullRepresentation.qml:28
 msgid "Open settings"
-msgstr "Abrir configurações"
+msgstr "打开设置"
 
 #: package/contents/ui/FullRepresentation.qml:29
 msgid "Run a saved task (/task <name>)"
-msgstr "Executar uma tarefa salva (/task <name>)"
+msgstr "运行已保存的任务 (/task <name>)"
 
 #: package/contents/ui/FullRepresentation.qml:30
 msgid "Run last command in terminal"
-msgstr "Executar último comando no terminal"
+msgstr "在终端中运行上一条命令"
 
 #: package/contents/ui/FullRepresentation.qml:92
 #: package/contents/ui/FullRepresentation.qml:93
 msgid "Run a task"
-msgstr "Executar uma tarefa"
+msgstr "运行任务"
 
 #: package/contents/ui/FullRepresentation.qml:127
 #: package/contents/ui/FullRepresentation.qml:128
 msgid "Copy conversation"
-msgstr "Copiar conversa"
+msgstr "复制对话"
 
 #: package/contents/ui/FullRepresentation.qml:136
 #: package/contents/ui/FullRepresentation.qml:193
 msgid "You"
-msgstr "Você"
+msgstr "你"
 
 #: package/contents/ui/FullRepresentation.qml:137
 #: package/contents/ui/FullRepresentation.qml:194
 msgid "Assistant"
-msgstr "Assistente"
+msgstr "助手"
 
 #: package/contents/ui/FullRepresentation.qml:138
 #: package/contents/ui/FullRepresentation.qml:195
 msgid "Command"
-msgstr "Comando"
+msgstr "命令"
 
 #: package/contents/ui/FullRepresentation.qml:139
 #: package/contents/ui/FullRepresentation.qml:196
 msgid "Error"
-msgstr "Erro"
+msgstr "错误"
 
 #: package/contents/ui/FullRepresentation.qml:152
 #: package/contents/ui/FullRepresentation.qml:153
 msgid "Clear chat"
-msgstr "Limpar chat"
+msgstr "清除聊天"
 
 #: package/contents/ui/FullRepresentation.qml:161
 #: package/contents/ui/FullRepresentation.qml:162
 msgid "Settings"
-msgstr "Configurações"
+msgstr "设置"
 
 #: package/contents/ui/FullRepresentation.qml:172
 #: package/contents/ui/FullRepresentation.qml:173
 msgid "Don't keep open"
-msgstr "Não manter aberto"
+msgstr "不保持打开"
 
 #: package/contents/ui/FullRepresentation.qml:172
 #: package/contents/ui/FullRepresentation.qml:173
 msgid "Keep open"
-msgstr "Manter aberto"
+msgstr "保持打开"
 
 #: package/contents/ui/FullRepresentation.qml:342
 msgid "Send a message to start chatting"
-msgstr "Envie uma mensagem para começar a conversar"
+msgstr "发送消息开始聊天"
 
 #: package/contents/ui/FullRepresentation.qml:371
 msgid "Attach File"
-msgstr "Anexar arquivo"
+msgstr "附加文件"
 
 #: package/contents/ui/FullRepresentation.qml:374
 msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Imagens (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "图片 (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 
 #: package/contents/ui/FullRepresentation.qml:374
 msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 msgstr ""
-"Arquivos de texto (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
-"*.conf *.sh *.py *.js *.ts *.qml)"
+"文本文件 (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf *.sh "
+"*.py *.js *.ts *.qml)"
 
 #: package/contents/ui/FullRepresentation.qml:615
 msgid "Message input"
-msgstr "Entrada de mensagem"
+msgstr "消息输入"
 
 #: package/contents/ui/FullRepresentation.qml:616
 msgid "Type a message…"
-msgstr "Digite uma mensagem…"
+msgstr "输入消息…"
 
 #: package/contents/ui/FullRepresentation.qml:616
 msgid "Initializing…"
-msgstr "Inicializando…"
+msgstr "初始化中…"
 
 #: package/contents/ui/FullRepresentation.qml:668
 msgid "Attach file or image"
-msgstr "Anexar arquivo ou imagem"
+msgstr "附加文件或图片"
 
 #: package/contents/ui/FullRepresentation.qml:674
 msgid "Send"
-msgstr "Enviar"
+msgstr "发送"
 
 #: package/contents/ui/FullRepresentation.qml:697
 msgid "Stop"
-msgstr "Parar"
+msgstr "停止"
 
 #: package/contents/ui/main.qml:639
 msgid ""
 "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
 "are on)."
-msgstr ""
-"O modo automático está permanentemente habilitado pelas configurações (tanto"
-" Auto-executar quanto Auto-compartilhar estão ativados)."
+msgstr "自动模式已通过设置永久启用（自动运行和自动共享均已开启）。"
 
 #: package/contents/ui/main.qml:642
 msgid ""
 "Auto mode enabled for this session. Commands will run and share output "
 "automatically."
-msgstr ""
-"Modo automático habilitado para esta sessão. Os comandos serão executados e "
-"a saída compartilhada automaticamente."
+msgstr "此会话已启用自动模式。命令将自动运行并共享输出。"
 
 #: package/contents/ui/main.qml:642
 msgid "Auto mode disabled."
-msgstr "Modo automático desativado."
+msgstr "自动模式已禁用。"
 
 #: package/contents/ui/main.qml:653 package/contents/ui/main.qml:708
 msgid "none"
-msgstr "nenhum"
+msgstr "无"
 
 #: package/contents/ui/main.qml:653
 msgid "Current model: **%1**"
-msgstr "Modelo atual: **%1**"
+msgstr "当前模型：**%1**"
 
 #: package/contents/ui/main.qml:655
 msgid "Available models:"
-msgstr "Modelos disponíveis:"
+msgstr "可用模型："
 
 #: package/contents/ui/main.qml:657
 msgid "Type `/model <name>` to switch."
-msgstr "Digite `/model <name>` para trocar."
+msgstr "输入 `/model <name>` 进行切换。"
 
 #: package/contents/ui/main.qml:659
 msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "Nenhum modelo em cache. Use **Buscar modelos** nas configurações."
+msgstr "没有缓存的模型。请在设置中使用**获取模型**。"
 
 #: package/contents/ui/main.qml:668
 msgid "Switched to model: **%1**"
-msgstr "Trocado para o modelo: **%1**"
+msgstr "已切换到模型：**%1**"
 
 #: package/contents/ui/main.qml:677
 msgid "No tasks configured. Add tasks in Settings."
-msgstr "Nenhuma tarefa configurada. Adicione tarefas em Configurações."
+msgstr "未配置任务。请在设置中添加任务。"
 
 #: package/contents/ui/main.qml:679
 msgid "(auto)"
-msgstr "(auto)"
+msgstr "（自动）"
 
 #: package/contents/ui/main.qml:680
 msgid "Available tasks:"
-msgstr "Tarefas disponíveis:"
+msgstr "可用任务："
 
 #: package/contents/ui/main.qml:680
 msgid "Type `/task <name>` to run."
-msgstr "Digite `/task <name>` para executar."
+msgstr "输入 `/task <name>` 运行。"
 
 #: package/contents/ui/main.qml:708
 msgid "Unknown task: **%1**. Available: %2"
-msgstr "Tarefa desconhecida: **%1**. Disponíveis: %2"
+msgstr "未知任务：**%1**。可用：%2"
 
 #: package/contents/ui/main.qml:722
 msgid "The user declined to run this command."
-msgstr "O usuário recusou executar este comando."
+msgstr "用户拒绝运行此命令。"
 
 #: package/contents/ui/main.qml:886
 msgid "Searching the web…"
-msgstr "Buscando na web…"
+msgstr "正在搜索网络…"
 
 #: package/contents/ui/main.qml:908
 msgid "Web search failed: %1"
-msgstr "Busca na web falhou: %1"
+msgstr "网络搜索失败：%1"
 
 #: package/contents/ui/main.qml:1115 package/contents/ui/main.qml:1127
 msgid "Running: %1"
-msgstr "Executando: %1"
+msgstr "运行中：%1"
 
 #: package/contents/ui/main.qml:1136
 msgid "stderr: %1"
-msgstr "stderr: %1"
+msgstr "stderr：%1"
 
 #: package/contents/ui/main.qml:1138
 msgid "[truncated — output exceeded %1KB]"
-msgstr "[truncado — saída excedeu %1KB]"
+msgstr "[已截断——输出超过%1KB]"
 
 #: package/contents/ui/main.qml:1140
 msgid "[exit code: %1]"
-msgstr "[código de saída: %1]"
+msgstr "[退出代码：%1]"
 
 #: package/contents/ui/api.js:169
 msgid "Web search timed out"
-msgstr "Busca na web expirou"
+msgstr "网络搜索超时"
 
 #: package/contents/ui/api.js:179
 msgid "Failed to parse web search response: %1"
-msgstr "Falha ao analisar resposta da busca na web: %1"
+msgstr "解析网络搜索响应失败：%1"
 
 #: package/contents/ui/api.js:182
 msgid "Web search failed (HTTP %1)"
-msgstr "Busca na web falhou (HTTP %1)"
+msgstr "网络搜索失败 (HTTP %1)"
 
 #: package/contents/ui/api.js:221
 msgid "OpenAI-compatible"
-msgstr "Compatível com OpenAI"
+msgstr "OpenAI兼容"
 
 #: package/contents/ui/api.js:222
 msgid "Anthropic"
@@ -737,63 +711,12 @@ msgstr "Google Gemini"
 
 #: package/contents/config/config.qml:11
 msgid "General"
-msgstr "Geral"
+msgstr "常规"
 
 #: package/contents/config/config.qml:16
 msgid "System Prompt"
-msgstr "Prompt do sistema"
+msgstr "系统提示"
 
 #: package/contents/config/config.qml:21
 msgid "Tasks"
-msgstr "Tarefas"
-
-#~ msgid "e.g. llama3, gpt-4, etc."
-#~ msgstr "ex.: llama3, gpt-4, etc."
-
-#~ msgid "Fetch Models"
-#~ msgstr "Buscar modelos"
-
-#~ msgid "Available Models:"
-#~ msgstr "Modelos disponíveis:"
-
-#~ msgid "Request timed out after 60 seconds"
-#~ msgstr "Solicitação expirou após 60 segundos"
-
-#~ msgid "Invalid response format: missing choices[0].message.content"
-#~ msgstr "Formato de resposta inválido: choices[0].message.content ausente"
-
-#~ msgid "Failed to parse response: %1"
-#~ msgstr "Falha ao analisar resposta: %1"
-
-#~ msgid "Authentication failed (HTTP %1) — check your API key"
-#~ msgstr "Autenticação falhou (HTTP %1) — verifique sua chave de API"
-
-#~ msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
-#~ msgstr ""
-#~ "Limite de taxa atingido (HTTP 429) — muitas solicitações, tente novamente em"
-#~ " breve"
-
-#~ msgid "Not found (HTTP 404) — check your API endpoint and model name"
-#~ msgstr ""
-#~ "Não encontrado (HTTP 404) — verifique seu endpoint de API e nome do modelo"
-
-#~ msgid "API error %1"
-#~ msgstr "Erro de API %1"
-
-#~ msgid "Request failed (no response) — check your endpoint URL"
-#~ msgstr "Solicitação falhou (sem resposta) — verifique a URL do seu endpoint"
-
-#~ msgid "Request timed out after 30 seconds"
-#~ msgstr "Solicitação expirou após 30 segundos"
-
-#~ msgid "Failed to parse models: %1"
-#~ msgstr "Falha ao analisar modelos: %1"
-
-#~ msgid "Failed to fetch models: HTTP %1"
-#~ msgstr "Falha ao buscar modelos: HTTP %1"
-
-#~ msgid "Invalid response format"
-#~ msgstr "Formato de resposta inválido"
-
-#~ msgid "Request timed out"
-#~ msgstr "Solicitação expirou"
+msgstr "任务"

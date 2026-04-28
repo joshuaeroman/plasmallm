@@ -64,6 +64,20 @@ There is no build step, test suite, or linter. QML is interpreted at runtime. Af
 
 **Adding a config option**: Add entry to `main.xml` → add `cfg_` property + control in `configGeneral.qml` → access via `Plasmoid.configuration.<name>`.
 
+## Translations
+
+All user-facing strings use KDE's `i18n()` function. Translation files live in `package/contents/locale/`.
+
+```bash
+bash translations.sh          # Extract strings, merge into .po files, validate, and compile
+```
+
+The script will report any untranslated or fuzzy strings with their line numbers. All strings must be translated before the script will compile `.mo` files.
+
+**Adding a new translatable string**: Wrap the string with `i18n("...")` in QML/JS, then run `translations.sh` — it extracts strings automatically. Fill in translations for all 11 languages (de, es, fr, fr_CA, it, ja, nb, nl, pt_BR, tr, zh_CN) in the corresponding `.po` files.
+
+**Installing packages for translation work**: Use `distrobox enter my-distrobox` — pip and Python packages (e.g. `polib`) must be installed inside the distrobox, not on the host.
+
 ## Code Style
 
 - SPDX headers on all files: `SPDX-FileCopyrightText: 2026 Joshua Roman`
