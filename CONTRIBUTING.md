@@ -5,13 +5,13 @@ Thanks for your interest in contributing to PlasmaLLM! This document covers guid
 ## Getting Started
 
 1. Fork the repository and clone your fork
-2. Install for development: `./install.sh --dev`
+2. Install for development: `make install-dev`
 3. Restart Plasma to see changes: `plasmashell --replace &`
 4. View logs: `journalctl -u plasmashell --follow`
 
 There is no build step, test suite, or linter for dev mode. QML is interpreted at runtime.
 
-> **Note:** Run `./install.sh --remove` before switching back to a release version from [GitHub](https://github.com/joshuaeroman/plasmallm/releases) or the [KDE Store](https://store.kde.org/p/2348409/) to remove the development symlink.
+> **Note:** Run `make remove` before switching back to a release version from [GitHub](https://github.com/joshuaeroman/plasmallm/releases) or the [KDE Store](https://store.kde.org/p/2348409/) to remove the development symlink.
 
 ## Submitting Changes
 
