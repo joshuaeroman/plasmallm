@@ -13,10 +13,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Workflow
 
 ```bash
-./install.sh --dev          # Symlink install (changes apply on Plasma restart)
+make install-dev          # Symlink install (changes apply on Plasma restart)
 plasmashell --replace &     # Restart Plasma to reload
 journalctl -u plasmashell --follow  # View logs
-./install.sh --remove       # Uninstall
+make remove               # Uninstall
 ```
 
 There is no build step, test suite, or linter. QML is interpreted at runtime. After editing files, restart Plasma to test.
@@ -69,12 +69,12 @@ There is no build step, test suite, or linter. QML is interpreted at runtime. Af
 All user-facing strings use KDE's `i18n()` function. Translation files live in `package/contents/locale/`.
 
 ```bash
-bash translations.sh          # Extract strings, merge into .po files, validate, and compile
+make translations          # Extract strings, merge into .po files, validate, and compile
 ```
 
-The script will report any untranslated or fuzzy strings with their line numbers. All strings must be translated before the script will compile `.mo` files.
+The make target will report any untranslated or fuzzy strings with their line numbers. All strings must be translated before the target will compile `.mo` files.
 
-**Adding a new translatable string**: Wrap the string with `i18n("...")` in QML/JS, then run `translations.sh` — it extracts strings automatically. Fill in translations for all 11 languages (de, es, fr, fr_CA, it, ja, nb, nl, pt_BR, tr, zh_CN) in the corresponding `.po` files.
+**Adding a new translatable string**: Wrap the string with `i18n("...")` in QML/JS, then run `make translations` — it extracts strings automatically. Fill in translations for all 11 languages (de, es, fr, fr_CA, it, ja, nb, nl, pt_BR, tr, zh_CN) in the corresponding `.po` files.
 
 **Installing packages for translation work**: Use `distrobox enter my-distrobox` — pip and Python packages (e.g. `polib`) must be installed inside the distrobox, not on the host.
 
@@ -88,7 +88,7 @@ The script will report any untranslated or fuzzy strings with their line numbers
 ## Environment
 
 - When intending to run multiple commands, create a script file and execute that instead of one at a time
-- After making changes, run the install script and restart Plasma
+- After making changes, run `make install` and restart Plasma
 
 ## Git Workflow
 

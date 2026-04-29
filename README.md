@@ -54,34 +54,34 @@ Clone the repository and run the install script:
 ```bash
 git clone https://github.com/joshuaeroman/plasmallm.git
 cd plasmallm
-./install.sh
+make install
 plasmashell --replace &
 ```
 
 For development (symlinks the package directory so changes apply on Plasma restart instead of requiring a reinstall):
 
 ```bash
-./install.sh --dev
+make install-dev
 ```
 
 To uninstall:
 
 ```bash
-./install.sh --remove
+make remove
 ```
 
-> **Note:** If you previously used `./install.sh --dev`, run `./install.sh --remove` before switching to a release version from GitHub or the [KDE Store](https://store.kde.org/p/2348409/) to remove the development symlink.
+> **Note:** If you previously used `make install-dev`, run `make remove` before switching to a release version from GitHub or the [KDE Store](https://store.kde.org/p/2348409/) to remove the development symlink.
 
 ### Building a `.plasmoid` from Source
 
-`package.sh` zips the `package/` directory into a versioned `.plasmoid` file (a standard KDE widget archive):
+`make package` automatically runs translations and zips the `package/` directory into a versioned `.plasmoid` file (a standard KDE widget archive):
 
 ```bash
-./package.sh
+make package
 # Creates e.g. PlasmaLLM-x.y.z.plasmoid
 ```
 
-Requires `python3` (to read the version from `metadata.json`), `zip`, and GNU `gettext` for I18N.
+Requires `make`, `zip`, and GNU `gettext` for I18N.
 
 ## Configuration
 
