@@ -583,14 +583,42 @@ PlasmoidItem {
     function attachFile(filePath) {
         var fileName = filePath.split("/").pop();
         var isImage = Api.isImageFile(filePath);
-        var cmd;
+
         if (isImage) {
-            cmd = "base64 -w0 '" + filePath.replace(/'/g, "'\\''") + "'";
+            var tempId = Math.random().toString(36).substring(2, 10);
+            var tempPath = "/tmp/plasmallm_" + tempId + ".png";
+            
+            // Dynamically create an image object to handle rotation safely for this specific file
+            var rotator = Qt.createQmlObject('import QtQuick; Image { visible: false; autoTransform: true; fillMode: Image.PreserveAspectFit; smooth: true; mipmap: true }', root, "dynamicImageRotator");
+            
+            var handler = function() {
+                if (rotator.status === Image.Ready) {
+                    rotator.statusChanged.disconnect(handler);
+                    rotator.grabToImage(function(result) {
+                        result.saveToFile(tempPath);
+                        rotator.destroy(); // Cleanup dynamic object
+                        
+                        var cmd = "base64 -w0 '" + tempPath + "' && rm -f '" + tempPath + "'";
+                        pendingFileReads[cmd] = { filePath: filePath, fileName: fileName, isImage: true };
+                        fileReader.connectSource(cmd);
+                    });
+                } else if (rotator.status === Image.Error) {
+                    rotator.statusChanged.disconnect(handler);
+                    rotator.destroy();
+                    
+                    var cmd = "base64 -w0 '" + filePath.replace(/'/g, "'\\''") + "'";
+                    pendingFileReads[cmd] = { filePath: filePath, fileName: fileName, isImage: true };
+                    fileReader.connectSource(cmd);
+                }
+            };
+            
+            rotator.statusChanged.connect(handler);
+            rotator.source = "file://" + filePath;
         } else {
-            cmd = "cat '" + filePath.replace(/'/g, "'\\''") + "'";
+            var cmd = "cat '" + filePath.replace(/'/g, "'\\''") + "'";
+            pendingFileReads[cmd] = { filePath: filePath, fileName: fileName, isImage: isImage };
+            fileReader.connectSource(cmd);
         }
-        pendingFileReads[cmd] = { filePath: filePath, fileName: fileName, isImage: isImage };
-        fileReader.connectSource(cmd);
     }
 
     function sendMessage(text, attachments) {

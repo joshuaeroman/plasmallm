@@ -224,6 +224,7 @@ Item {
                     model: messageItem.attachmentPaths
                     Image {
                         source: "file://" + modelData
+                        autoTransform: true
                         fillMode: Image.PreserveAspectFit
                         width: Math.min(sourceSize.width, attachmentFlow.width)
                         height: Math.min(sourceSize.height, Kirigami.Units.gridUnit * 10)

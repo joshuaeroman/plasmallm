@@ -406,6 +406,7 @@ PlasmaExtras.Representation {
                         anchors.top: parent.top
                         anchors.margins: Kirigami.Units.smallSpacing
                         source: parent.isImg ? "file://" + modelData.filePath : ""
+                        autoTransform: true
                         fillMode: Image.PreserveAspectFit
                         height: Math.min(sourceSize.height, Kirigami.Units.gridUnit * 4)
                         width: Math.min(sourceSize.width, Kirigami.Units.gridUnit * 6)
