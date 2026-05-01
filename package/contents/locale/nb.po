@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-26 23:28-0400\n"
+"POT-Creation-Date: 2026-05-01 00:15-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -16,34 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: package/contents/ui/ChatMessage.qml:102
-msgid "Thoughts"
-msgstr "Tanker"
-
-#: package/contents/ui/ChatMessage.qml:188
-msgid "Web Search Results"
-msgstr "Søkeresultater fra nettet"
-
-#: package/contents/ui/ChatMessage.qml:295
-msgid "Thinking…"
-msgstr "Tenker…"
-
-#: package/contents/ui/ChatMessage.qml:348
-msgid "Copy message"
-msgstr "Kopier melding"
-
-#: package/contents/ui/ChatMessage.qml:356
-msgid "Retry"
-msgstr "Prøv igjen"
-
-#: package/contents/ui/ChatMessage.qml:364
-msgid "Share with LLM"
-msgstr "Del med LLM"
-
-#: package/contents/ui/ChatMessage.qml:366
-msgid "Include this output in the conversation"
-msgstr "Inkluder dette utdata i samtalen"
 
 #: package/contents/ui/CommandBlock.qml:78
 msgid "Save"
@@ -90,268 +62,152 @@ msgid "Shell scripts (*.sh)"
 msgstr "Skallskript (*.sh)"
 
 #: package/contents/ui/CommandBlock.qml:125
-#: package/contents/ui/FullRepresentation.qml:374
+#: package/contents/ui/FullRepresentation.qml:503
 msgid "All files (*)"
 msgstr "Alle filer (*)"
 
-#: package/contents/ui/configGeneral.qml:324
-msgid "No models found."
-msgstr "Ingen modeller funnet."
-
-#: package/contents/ui/configGeneral.qml:514
-msgid "Adapter:"
-msgstr "Adapter:"
-
-#: package/contents/ui/configGeneral.qml:536
-msgid "Provider:"
-msgstr "Leverandør:"
-
-#: package/contents/ui/configGeneral.qml:562
-msgid "API Endpoint:"
-msgstr "API-endepunkt:"
-
-#: package/contents/ui/configGeneral.qml:589
-msgid "Model:"
-msgstr "Modell:"
-
-#: package/contents/ui/configGeneral.qml:626
-msgid "Refreshing…"
-msgstr "Oppdaterer…"
-
-#: package/contents/ui/configGeneral.qml:626
-msgid "Refresh model list"
-msgstr "Oppdater modellliste"
-
-#: package/contents/ui/configGeneral.qml:644
-msgid "API Key:"
-msgstr "API-nøkkel:"
-
-#: package/contents/ui/configGeneral.qml:651
-msgid "Optional - for OpenAI, etc."
-msgstr "Valgfritt - for OpenAI, osv."
-
-#: package/contents/ui/configGeneral.qml:666
-#: package/contents/ui/configGeneral.qml:998
-msgid "Saving…"
-msgstr "Lagrer…"
-
-#: package/contents/ui/configGeneral.qml:667
-#: package/contents/ui/configGeneral.qml:999
-msgid "Saved"
-msgstr "Lagret"
-
-#: package/contents/ui/configGeneral.qml:668
-#: package/contents/ui/configGeneral.qml:1000
-msgid "Save to Config (Insecure)"
-msgstr "Lagre til konfigurasjon (usikker)"
-
-#: package/contents/ui/configGeneral.qml:668
-#: package/contents/ui/configGeneral.qml:1000
-msgid "Save Key"
-msgstr "Lagre nøkkel"
-
-#: package/contents/ui/configGeneral.qml:677
-msgid "Stored in KDE Wallet"
-msgstr "Lagret i KDE Wallet"
-
-#: package/contents/ui/configGeneral.qml:677
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Wallet utilgjengelig — nøkkel lagret i konfigurasjonsfil"
-
-#: package/contents/ui/configGeneral.qml:692
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "Temperatur: %1%"
-
-#: package/contents/ui/configGeneral.qml:709
-msgid "Precise"
-msgstr "Presist"
-
-#: package/contents/ui/configGeneral.qml:714
-msgid "Creative"
-msgstr "Kreativt"
-
-#: package/contents/ui/configGeneral.qml:722
-msgid "Max Tokens:"
-msgstr "Maksimale tokens:"
-
-#: package/contents/ui/configGeneral.qml:733
-msgid "Thinking:"
-msgstr "Tenking:"
-
-#: package/contents/ui/configGeneral.qml:737
-msgid "Off"
-msgstr "Av"
-
-#: package/contents/ui/configGeneral.qml:737
-msgid "Low"
-msgstr "Lav"
-
-#: package/contents/ui/configGeneral.qml:737
-msgid "Medium"
-msgstr "Middels"
-
-#: package/contents/ui/configGeneral.qml:737
-msgid "High"
-msgstr "Høy"
-
-#: package/contents/ui/configGeneral.qml:746
-msgid "Thinking budget:"
-msgstr "Tenkebudsjett:"
-
-#: package/contents/ui/configGeneral.qml:773
-msgid "Show thoughts in chat (collapsible)"
-msgstr "Vis tanker i chatten (sammenleggbar)"
-
-#: package/contents/ui/configGeneral.qml:778
+#: package/contents/ui/adapters/openai.js:33
 msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
 msgstr ""
-"Når aktivert, vises modellens resonnering over hvert svar med en "
-"sammenleggbar overskrift. Utveksling av signerte tanker til API-et skjer "
-"uavhengig av denne innstillingen."
+"Resonneringsinnsats (lav / middels / høy) styrer utvidet tenkning. For å se "
+"tanker, sørg for at du har aktivert 'Vis tanker' i Generelt-fanen."
 
-#: package/contents/ui/configGeneral.qml:785
-msgid "Use Responses API"
-msgstr "Bruk Responses API"
-
-#: package/contents/ui/configGeneral.qml:790
+#: package/contents/ui/adapters/anthropic.js:36
 msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
+"Anthropic enables extended thinking when effort is not Off, using the token "
+"budget below. Temperature is forced to max while thinking."
 msgstr ""
-"Nødvendig for å vise resonnerende innhold på OpenAI / Poe / OpenRouter / "
-"Azure (POST til /v1/responses i stedet for /v1/chat/completions). Settes "
-"automatisk ved valg av forhåndsinnstilling."
+"Anthropic muliggjør utvidet tenkning når innsats ikke er Av, og bruker token-"
+"budsjettet nedenfor for maksimal utgang."
 
-#: package/contents/ui/configGeneral.qml:801
-msgid "Chat Spacing: %1px"
-msgstr "Chatavstand: %1px"
+#: package/contents/ui/adapters/anthropic.js:59
+#: package/contents/ui/adapters/openai_chat.js:24
+#: package/contents/ui/adapters/openai_responses.js:26
+#: package/contents/ui/adapters/gemini.js:54
+msgid "Request timed out after 30 seconds"
+msgstr "Forespørsel tidsavbrutt etter 30 sekunder"
 
-#: package/contents/ui/configGeneral.qml:818
-msgid "Compact"
-msgstr "Kompakt"
+#: package/contents/ui/adapters/anthropic.js:75
+#: package/contents/ui/adapters/openai_chat.js:40
+#: package/contents/ui/adapters/openai_responses.js:42
+#: package/contents/ui/adapters/gemini.js:75
+msgid "Failed to parse models: %1"
+msgstr "Klarte ikke å analysere modeller: %1"
 
-#: package/contents/ui/configGeneral.qml:823
-msgid "Spacious"
-msgstr "Romslig"
+#: package/contents/ui/adapters/anthropic.js:78
+#: package/contents/ui/adapters/openai_chat.js:43
+#: package/contents/ui/adapters/openai_responses.js:45
+msgid "Failed to fetch models: HTTP %1"
+msgstr "Klarte ikke å hente modeller: HTTP %1"
 
-#: package/contents/ui/configGeneral.qml:830
-msgid "Appearance:"
-msgstr "Utseende:"
+#: package/contents/ui/adapters/anthropic.js:459
+#: package/contents/ui/adapters/anthropic.js:462
+#: package/contents/ui/adapters/openai_chat.js:247
+#: package/contents/ui/adapters/openai_chat.js:250
+#: package/contents/ui/adapters/openai_responses.js:502
+#: package/contents/ui/adapters/gemini.js:501
+msgid "Invalid response format"
+msgstr "Ugyldig responsformat"
 
-#: package/contents/ui/configGeneral.qml:831
-msgid "Show provider and model in title"
-msgstr "Vis leverandør og modell i tittel"
+#: package/contents/ui/adapters/anthropic.js:465
+#: package/contents/ui/adapters/openai_chat.js:253
+#: package/contents/ui/adapters/openai_responses.js:505
+#: package/contents/ui/adapters/gemini.js:504
+msgid "Failed to parse response: %1"
+msgstr "Klarte ikke å analysere respons: %1"
 
-#: package/contents/ui/configGeneral.qml:843
-msgid "Chat History:"
-msgstr "Chathistorikk:"
+#: package/contents/ui/adapters/anthropic.js:471
+#: package/contents/ui/adapters/openai_chat.js:259
+#: package/contents/ui/adapters/openai_responses.js:511
+#: package/contents/ui/adapters/gemini.js:510
+msgid "Request timed out"
+msgstr "Forespørsel tidsavbrutt"
 
-#: package/contents/ui/configGeneral.qml:844
-msgid "Auto-save chat history"
-msgstr "Lagre chathistorikk automatisk"
+#: package/contents/ui/adapters/anthropic.js:486
+#: package/contents/ui/adapters/openai_chat.js:274
+#: package/contents/ui/adapters/openai_responses.js:526
+msgid "Authentication failed (HTTP %1) — check your API key"
+msgstr "Autentisering mislyktes (HTTP %1) — kontroller din API-nøkkel"
 
-#: package/contents/ui/configGeneral.qml:848
-#: package/contents/ui/configGeneral.qml:863
-msgid "Saves to ~/PlasmaLLM/chats/"
-msgstr "Lagres til ~/PlasmaLLM/chats/"
+#: package/contents/ui/adapters/anthropic.js:488
+#: package/contents/ui/adapters/openai_chat.js:276
+#: package/contents/ui/adapters/openai_responses.js:528
+msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
+msgstr "Takstbegrenset (HTTP 429) — for mange forespørsler, prøv igjen snart"
 
-#: package/contents/ui/configGeneral.qml:855
-msgid "Save format:"
-msgstr "Lagresformat:"
+#: package/contents/ui/adapters/anthropic.js:490
+#: package/contents/ui/adapters/openai_chat.js:278
+#: package/contents/ui/adapters/openai_responses.js:530
+msgid "Not found (HTTP 404) — check your API endpoint and model name"
+msgstr "Ikke funnet (HTTP 404) — kontroller API-endepunktet og modellnavnet"
 
-#: package/contents/ui/configGeneral.qml:856
-msgid "Plain text (.txt)"
-msgstr "Ren tekst (.txt)"
+#: package/contents/ui/adapters/anthropic.js:492
+#: package/contents/ui/adapters/openai_chat.js:280
+#: package/contents/ui/adapters/openai_responses.js:532
+msgid "API error %1"
+msgstr "API-feil %1"
 
-#: package/contents/ui/configGeneral.qml:856
-msgid "Structured (.jsonl)"
-msgstr "Strukturert (.jsonl)"
+#: package/contents/ui/adapters/anthropic.js:494
+#: package/contents/ui/adapters/openai_chat.js:282
+#: package/contents/ui/adapters/openai_responses.js:534
+msgid "Request failed (no response) — check your endpoint URL"
+msgstr "Forespørsel mislyktes (ingen respons) — kontroller endepunkts-URL-en..."
 
-#: package/contents/ui/configGeneral.qml:875
-msgid "Auto-clear:"
-msgstr "Automatisk sletting:"
-
-#: package/contents/ui/configGeneral.qml:879
-msgid "Disabled"
-msgstr "Deaktivert"
-
-#: package/contents/ui/configGeneral.qml:885
-msgid "Instant (always clear when panel opens)"
-msgstr "Øyeblikkelig (alltid slett når panel åpnes)"
-
-#: package/contents/ui/configGeneral.qml:894
-msgid "After"
-msgstr "Etter"
-
-#: package/contents/ui/configGeneral.qml:913
-msgid "seconds"
-msgstr "sekunder"
-
-#: package/contents/ui/configGeneral.qml:913
-msgid "minutes"
-msgstr "minutter"
-
-#: package/contents/ui/configGeneral.qml:928
-msgid "Commands:"
-msgstr "Kommandoer:"
-
-#: package/contents/ui/configGeneral.qml:929
-msgid "Auto-share command output with LLM"
-msgstr "Del kommandoutdata automatisk med LLM"
-
-#: package/contents/ui/configGeneral.qml:933
-msgid "Automatically send Run command results back to the LLM"
-msgstr "Send automatisk resultater fra Kjør-kommando tilbake til LLM"
-
-#: package/contents/ui/configGeneral.qml:940
-msgid "Auto-run commands from LLM"
-msgstr "Kjør kommandoer automatisk fra LLM"
-
-#: package/contents/ui/configGeneral.qml:944
+#: package/contents/ui/adapters/gemini.js:35
 msgid ""
-"WARNING: When combined with Auto-share, enables agentic workflow. Only use "
-"with very trustworthy LLMs."
+"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
+"on supported models."
 msgstr ""
-"ADVARSEL: Når kombinert med Auto-share aktiveres agentbasert arbeidsflyt. "
-"Bruk kun med svært pålitelige LLM-er."
+"Gemini bruker tenke-token-budsjettet direkte. Sett til 0 for å deaktivere "
+"tenking (noen modeller krever det)."
 
-#: package/contents/ui/configGeneral.qml:951
-msgid "Use tool calling for commands"
-msgstr "Bruk verktøykalling for kommandoer"
+#: package/contents/ui/adapters/gemini.js:78
+msgid "Failed to fetch models"
+msgstr "Kunne ikke hente modeller..."
 
-#: package/contents/ui/configGeneral.qml:955
-msgid ""
-"Use the run_command tool for command execution. Disable for models that "
-"don't support tool calling (falls back to code block parsing)."
-msgstr ""
-"Bruk run_command-verktøyet for kommandoutførelse. Deaktiver for modeller som"
-" ikke støtter verktøykalling (faller tilbake til kodeblokk-parsing)."
+#: package/contents/ui/adapters/gemini.js:99
+msgid "Authentication failed — check your API key (HTTP 400): %1"
+msgstr "Autentisering feilet — sjekk API-nøkkelen din (HTTP 400): %1"
 
-#: package/contents/ui/configGeneral.qml:962
-msgid ""
-"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-msgstr ""
-"⚠️ FARE: Begge alternativer aktivert - LLM kan nå kjøre kommandoer og se "
-"deres utdata, noe som aktiverer agentbasert arbeidsflyt. Bruk kun med "
-"pålitelige LLM-er."
+#: package/contents/ui/adapters/gemini.js:102
+msgid "Authentication failed (HTTP %1) — check your API key: %2"
+msgstr "Autentisering feilet (HTTP %1) — sjekk API-nøkkelen din: %2"
 
-#: package/contents/ui/configGeneral.qml:977
-msgid "Web Search:"
-msgstr "Søk på nettet:"
+#: package/contents/ui/adapters/gemini.js:107
+msgid "no response — check your endpoint URL"
+msgstr "ingen respons — sjekk endepunkt-URL-en din..."
 
-#: package/contents/ui/configGeneral.qml:984
-msgid "Ollama API key for web search"
-msgstr "Ollama API-nøkkel for nettsøk"
+#: package/contents/ui/adapters/gemini.js:523
+msgid "Request failed"
+msgstr "Forespørsel feilet..."
 
-#: package/contents/ui/configGeneral.qml:1008
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
+#: package/contents/ui/api.js:169
+msgid "Web search timed out"
+msgstr "Nettsøk tidsavbrutt"
+
+#: package/contents/ui/api.js:179
+msgid "Failed to parse web search response: %1"
+msgstr "Klarte ikke å analysere nettsøkrespons: %1"
+
+#: package/contents/ui/api.js:182
+msgid "Web search failed (HTTP %1)"
+msgstr "Nettsøk mislyktes (HTTP %1)"
+
+#: package/contents/ui/api.js:221
+msgid "OpenAI-compatible"
+msgstr "OpenAI-kompatibel"
+
+#: package/contents/ui/api.js:222
+msgid "Anthropic"
+msgstr "Anthropic"
+
+#: package/contents/ui/api.js:223
+msgid "Google Gemini"
+msgstr "Google Gemini"
 
 #: package/contents/ui/configSystemPrompt.qml:104
 msgid "System Info:"
@@ -429,11 +285,12 @@ msgstr ""
 
 #: package/contents/ui/configTasks.qml:128
 #: package/contents/ui/FullRepresentation.qml:82
-#: package/contents/ui/FullRepresentation.qml:588
+#: package/contents/ui/FullRepresentation.qml:718
 msgid "AUTO"
 msgstr "AUTO"
 
 #: package/contents/ui/configTasks.qml:155
+#: package/contents/ui/FullRepresentation.qml:247
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -467,13 +324,308 @@ msgstr "En oppgave kalt \"%1\" finnes allerede."
 
 #: package/contents/ui/configTasks.qml:234
 msgid ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
-" button to run them. Tasks with auto mode will temporarily enable auto-run "
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with auto mode will temporarily enable auto-run "
 "and auto-share."
 msgstr ""
 "Oppgaver er gjenbrukbare hurtigtaster for ledetekst. Bruk /task <name> i "
 "chat eller verktøylinjeknappen for å kjøre dem. Oppgaver med automatisk "
 "modus vil midlertidig aktivere automatisk kjøring og automatisk deling."
+
+#: package/contents/ui/ChatMessage.qml:102
+msgid "Thoughts"
+msgstr "Tanker"
+
+#: package/contents/ui/ChatMessage.qml:188
+msgid "Web Search Results"
+msgstr "Søkeresultater fra nettet"
+
+#: package/contents/ui/ChatMessage.qml:296
+msgid "Thinking…"
+msgstr "Tenker…"
+
+#: package/contents/ui/ChatMessage.qml:349
+msgid "Copy message"
+msgstr "Kopier melding"
+
+#: package/contents/ui/ChatMessage.qml:357
+msgid "Retry"
+msgstr "Prøv igjen"
+
+#: package/contents/ui/ChatMessage.qml:365
+msgid "Share with LLM"
+msgstr "Del med LLM"
+
+#: package/contents/ui/ChatMessage.qml:367
+msgid "Include this output in the conversation"
+msgstr "Inkluder dette utdata i samtalen"
+
+#: package/contents/ui/configGeneral.qml:310
+msgid "No models found."
+msgstr "Ingen modeller funnet."
+
+#: package/contents/ui/configGeneral.qml:415
+msgid "Adapter:"
+msgstr "Adapter:"
+
+#: package/contents/ui/configGeneral.qml:437
+msgid "Provider:"
+msgstr "Leverandør:"
+
+#: package/contents/ui/configGeneral.qml:463
+msgid "API Endpoint:"
+msgstr "API-endepunkt:"
+
+#: package/contents/ui/configGeneral.qml:490
+msgid "Model:"
+msgstr "Modell:"
+
+#: package/contents/ui/configGeneral.qml:527
+msgid "Refreshing…"
+msgstr "Oppdaterer…"
+
+#: package/contents/ui/configGeneral.qml:527
+msgid "Refresh model list"
+msgstr "Oppdater modellliste"
+
+#: package/contents/ui/configGeneral.qml:545
+msgid "API Key:"
+msgstr "API-nøkkel:"
+
+#: package/contents/ui/configGeneral.qml:552
+msgid "Optional - for OpenAI, etc."
+msgstr "Valgfritt - for OpenAI, osv."
+
+#: package/contents/ui/configGeneral.qml:567
+#: package/contents/ui/configTools.qml:253
+msgid "Saving…"
+msgstr "Lagrer…"
+
+#: package/contents/ui/configGeneral.qml:568
+#: package/contents/ui/configTools.qml:254
+msgid "Saved"
+msgstr "Lagret"
+
+#: package/contents/ui/configGeneral.qml:569
+#: package/contents/ui/configTools.qml:255
+msgid "Save to Config (Insecure)"
+msgstr "Lagre til konfigurasjon (usikker)"
+
+#: package/contents/ui/configGeneral.qml:569
+#: package/contents/ui/configTools.qml:255
+msgid "Save Key"
+msgstr "Lagre nøkkel"
+
+#: package/contents/ui/configGeneral.qml:578
+msgid "Stored in KDE Wallet"
+msgstr "Lagret i KDE Wallet"
+
+#: package/contents/ui/configGeneral.qml:578
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr "KDE Wallet utilgjengelig — nøkkel lagret i konfigurasjonsfil"
+
+#: package/contents/ui/configGeneral.qml:593
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "Temperatur: %1%"
+
+#: package/contents/ui/configGeneral.qml:610
+msgid "Precise"
+msgstr "Presist"
+
+#: package/contents/ui/configGeneral.qml:615
+msgid "Creative"
+msgstr "Kreativt"
+
+#: package/contents/ui/configGeneral.qml:623
+msgid "Max Tokens:"
+msgstr "Maksimale tokens:"
+
+#: package/contents/ui/configGeneral.qml:634
+msgid "Thinking:"
+msgstr "Tenkning:"
+
+#: package/contents/ui/configGeneral.qml:638
+msgid "Off"
+msgstr "Av"
+
+#: package/contents/ui/configGeneral.qml:638
+msgid "Low"
+msgstr "Lav"
+
+#: package/contents/ui/configGeneral.qml:638
+msgid "Medium"
+msgstr "Middels"
+
+#: package/contents/ui/configGeneral.qml:638
+msgid "High"
+msgstr "Høy"
+
+#: package/contents/ui/configGeneral.qml:647
+msgid "Thinking budget:"
+msgstr "Tenkningsbudsjett:"
+
+#: package/contents/ui/configGeneral.qml:674
+msgid "Show thoughts in chat (collapsible)"
+msgstr "Vis tanker i chatten (sammenleggbar)"
+
+#: package/contents/ui/configGeneral.qml:679
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"Når aktivert, vises modellens resonnering over hvert svar med en "
+"sammenleggbar overskrift. Utveksling av signerte tanker til API-et skjer "
+"uavhengig av denne innstillingen."
+
+#: package/contents/ui/configGeneral.qml:686
+msgid "Use Responses API"
+msgstr "Bruk Responses API"
+
+#: package/contents/ui/configGeneral.qml:691
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"Nødvendig for å vise resonnerende innhold på OpenAI / Poe / OpenRouter / "
+"Azure (POST til /v1/responses i stedet for /v1/chat/completions). Settes "
+"automatisk ved valg av forhåndsinnstilling."
+
+#: package/contents/ui/configGeneral.qml:702
+msgid "Chat Spacing: %1px"
+msgstr "Chatavstand: %1px"
+
+#: package/contents/ui/configGeneral.qml:719
+msgid "Compact"
+msgstr "Kompakt"
+
+#: package/contents/ui/configGeneral.qml:724
+msgid "Spacious"
+msgstr "Romslig"
+
+#: package/contents/ui/configGeneral.qml:731
+msgid "Appearance:"
+msgstr "Utseende:"
+
+#: package/contents/ui/configGeneral.qml:732
+msgid "Show provider and model in title"
+msgstr "Vis leverandør og modell i tittel"
+
+#: package/contents/ui/configGeneral.qml:744
+msgid "Chat History:"
+msgstr "Chathistorikk:"
+
+#: package/contents/ui/configGeneral.qml:745
+msgid "Auto-save chat history"
+msgstr "Lagre chathistorikk automatisk"
+
+#: package/contents/ui/configGeneral.qml:749
+#: package/contents/ui/configGeneral.qml:764
+msgid "Saves to ~/PlasmaLLM/chats/"
+msgstr "Lagres til ~/PlasmaLLM/chats/"
+
+#: package/contents/ui/configGeneral.qml:756
+msgid "Save format:"
+msgstr "Lagresformat:"
+
+#: package/contents/ui/configGeneral.qml:757
+msgid "Plain text (.txt)"
+msgstr "Ren tekst (.txt)"
+
+#: package/contents/ui/configGeneral.qml:757
+msgid "Structured (.jsonl)"
+msgstr "Strukturert (.jsonl)"
+
+#: package/contents/ui/configGeneral.qml:776
+msgid "Auto-clear:"
+msgstr "Automatisk sletting:"
+
+#: package/contents/ui/configGeneral.qml:780
+msgid "Disabled"
+msgstr "Deaktivert"
+
+#: package/contents/ui/configGeneral.qml:786
+msgid "Instant (always clear when panel opens)"
+msgstr "Øyeblikkelig (alltid slett når panel åpnes)"
+
+#: package/contents/ui/configGeneral.qml:795
+msgid "After"
+msgstr "Etter"
+
+#: package/contents/ui/configGeneral.qml:814
+msgid "seconds"
+msgstr "sekunder"
+
+#: package/contents/ui/configGeneral.qml:814
+msgid "minutes"
+msgstr "minutter"
+
+#: package/contents/ui/configTools.qml:164
+msgid "Commands"
+msgstr "Kommandoer"
+
+#: package/contents/ui/configTools.qml:169
+msgid "Auto-run commands from LLM"
+msgstr "Kjør kommandoer automatisk fra LLM"
+
+#: package/contents/ui/configTools.qml:173
+msgid ""
+"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
+"share."
+msgstr ""
+"Tillat LLM å utføre skall-kommandoer. Farlig hvis kombinert med Automatisk "
+"deling."
+
+#: package/contents/ui/configTools.qml:180
+msgid "Run as tool"
+msgstr "Kjør som verktøy"
+
+#: package/contents/ui/configTools.qml:184
+msgid ""
+"Use the run_command tool for command execution. If disabled, falls back to "
+"parsing code blocks."
+msgstr ""
+"Bruk run_command-verktøyet for kommandoutførelse. Hvis deaktivert, faller "
+"den tilbake til å tolke kodeblokker."
+
+#: package/contents/ui/configTools.qml:191
+msgid "Auto-share command output with LLM"
+msgstr "Del kommandoutdata automatisk med LLM"
+
+#: package/contents/ui/configTools.qml:195
+msgid "Automatically send command execution results back to the LLM"
+msgstr "Send kommandoutførelsesresultater automatisk tilbake til LLM-en"
+
+#: package/contents/ui/configTools.qml:202
+msgid ""
+"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
+"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
+msgstr ""
+"⚠️ FARE: Begge alternativer aktivert - LLM kan nå kjøre kommandoer og se "
+"deres utdata, noe som aktiverer agentbasert arbeidsflyt. Bruk kun med "
+"pålitelige LLM-er."
+
+#: package/contents/ui/configTools.qml:213
+msgid "Web Search"
+msgstr "Nettsøk"
+
+#: package/contents/ui/configTools.qml:218
+msgid "Enable web search tool"
+msgstr "Aktiver nettsøk-verktøy"
+
+#: package/contents/ui/configTools.qml:222
+msgid "Allows the LLM to perform web searches using Ollama's search API."
+msgstr "Lar LLM utføre nettsøk ved hjelp av Ollamas søke-API."
+
+#: package/contents/ui/configTools.qml:239
+msgid "Ollama API key"
+msgstr "Ollama API-nøkkel"
+
+#: package/contents/ui/configTools.qml:263
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
 
 #: package/contents/ui/FullRepresentation.qml:20
 msgid "Toggle auto mode (auto-run + auto-share) for this session"
@@ -494,8 +646,6 @@ msgid "Copy conversation to clipboard"
 msgstr "Kopier samtale til utklippstavle"
 
 #: package/contents/ui/FullRepresentation.qml:24
-#: package/contents/ui/FullRepresentation.qml:117
-#: package/contents/ui/FullRepresentation.qml:118
 msgid "Open chat history folder"
 msgstr "Åpne chathistorikk-mappe"
 
@@ -528,64 +678,102 @@ msgstr "Kjør siste kommando i terminal"
 msgid "Run a task"
 msgstr "Kjør en oppgave"
 
-#: package/contents/ui/FullRepresentation.qml:127
-#: package/contents/ui/FullRepresentation.qml:128
+#: package/contents/ui/FullRepresentation.qml:129
+#: package/contents/ui/FullRepresentation.qml:130
+msgid "Chat History"
+msgstr "Chat-historikk"
+
+#: package/contents/ui/FullRepresentation.qml:155
+msgid "Loading..."
+msgstr "Laster..."
+
+#: package/contents/ui/FullRepresentation.qml:161
+msgid "No recent chats"
+msgstr "Ingen nylige chatter"
+
+#: package/contents/ui/FullRepresentation.qml:170
+msgid "Open history folder..."
+msgstr "Åpne historikkmappe..."
+
+#: package/contents/ui/FullRepresentation.qml:182
+msgid "Clear all history..."
+msgstr "Tøm all historikk..."
+
+#: package/contents/ui/FullRepresentation.qml:224
+msgid "Clear All History"
+msgstr "Tøm all historikk"
+
+#: package/contents/ui/FullRepresentation.qml:230
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Er du sikker på at du vil slette alle chat-historikkfiler? Denne handlingen "
+"kan ikke angres."
+
+#: package/contents/ui/FullRepresentation.qml:239
+msgid "Clear All"
+msgstr "Tøm alle"
+
+#: package/contents/ui/FullRepresentation.qml:256
+#: package/contents/ui/FullRepresentation.qml:257
 msgid "Copy conversation"
 msgstr "Kopier samtale"
 
-#: package/contents/ui/FullRepresentation.qml:136
-#: package/contents/ui/FullRepresentation.qml:193
+
+#: package/contents/ui/FullRepresentation.qml:265
+#: package/contents/ui/FullRepresentation.qml:322
 msgid "You"
 msgstr "Du"
 
-#: package/contents/ui/FullRepresentation.qml:137
-#: package/contents/ui/FullRepresentation.qml:194
+#: package/contents/ui/FullRepresentation.qml:266
+#: package/contents/ui/FullRepresentation.qml:323
 msgid "Assistant"
 msgstr "Assistent"
 
-#: package/contents/ui/FullRepresentation.qml:138
-#: package/contents/ui/FullRepresentation.qml:195
+#: package/contents/ui/FullRepresentation.qml:267
+#: package/contents/ui/FullRepresentation.qml:324
 msgid "Command"
 msgstr "Kommando"
 
-#: package/contents/ui/FullRepresentation.qml:139
-#: package/contents/ui/FullRepresentation.qml:196
+#: package/contents/ui/FullRepresentation.qml:268
+#: package/contents/ui/FullRepresentation.qml:325
 msgid "Error"
 msgstr "Feil"
 
-#: package/contents/ui/FullRepresentation.qml:152
-#: package/contents/ui/FullRepresentation.qml:153
+#: package/contents/ui/FullRepresentation.qml:281
+#: package/contents/ui/FullRepresentation.qml:282
 msgid "Clear chat"
 msgstr "Tøm chat"
 
-#: package/contents/ui/FullRepresentation.qml:161
-#: package/contents/ui/FullRepresentation.qml:162
+#: package/contents/ui/FullRepresentation.qml:290
+#: package/contents/ui/FullRepresentation.qml:291
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: package/contents/ui/FullRepresentation.qml:172
-#: package/contents/ui/FullRepresentation.qml:173
+#: package/contents/ui/FullRepresentation.qml:301
+#: package/contents/ui/FullRepresentation.qml:302
 msgid "Don't keep open"
 msgstr "Ikke hold åpent"
 
-#: package/contents/ui/FullRepresentation.qml:172
-#: package/contents/ui/FullRepresentation.qml:173
+#: package/contents/ui/FullRepresentation.qml:301
+#: package/contents/ui/FullRepresentation.qml:302
 msgid "Keep open"
 msgstr "Hold åpent"
 
-#: package/contents/ui/FullRepresentation.qml:342
+#: package/contents/ui/FullRepresentation.qml:471
 msgid "Send a message to start chatting"
 msgstr "Send en melding for å begynne å chatte"
 
-#: package/contents/ui/FullRepresentation.qml:371
+#: package/contents/ui/FullRepresentation.qml:500
 msgid "Attach File"
 msgstr "Legg til fil"
 
-#: package/contents/ui/FullRepresentation.qml:374
+#: package/contents/ui/FullRepresentation.qml:503
 msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 msgstr "Bilder (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 
-#: package/contents/ui/FullRepresentation.qml:374
+#: package/contents/ui/FullRepresentation.qml:503
 msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
@@ -593,31 +781,31 @@ msgstr ""
 "Tekstfiler (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 
-#: package/contents/ui/FullRepresentation.qml:615
+#: package/contents/ui/FullRepresentation.qml:745
 msgid "Message input"
 msgstr "Meldingsinput"
 
-#: package/contents/ui/FullRepresentation.qml:616
+#: package/contents/ui/FullRepresentation.qml:746
 msgid "Type a message…"
 msgstr "Skriv en melding…"
 
-#: package/contents/ui/FullRepresentation.qml:616
+#: package/contents/ui/FullRepresentation.qml:746
 msgid "Initializing…"
 msgstr "Initialiserer…"
 
-#: package/contents/ui/FullRepresentation.qml:668
+#: package/contents/ui/FullRepresentation.qml:798
 msgid "Attach file or image"
 msgstr "Legg til fil eller bilde"
 
-#: package/contents/ui/FullRepresentation.qml:674
+#: package/contents/ui/FullRepresentation.qml:804
 msgid "Send"
 msgstr "Send"
 
-#: package/contents/ui/FullRepresentation.qml:697
+#: package/contents/ui/FullRepresentation.qml:827
 msgid "Stop"
 msgstr "Stopp"
 
-#: package/contents/ui/main.qml:639
+#: package/contents/ui/main.qml:900
 msgid ""
 "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
 "are on)."
@@ -625,7 +813,7 @@ msgstr ""
 "Automatisk modus er permanent aktivert via innstillinger (både automatisk "
 "kjøring og automatisk deling er på)."
 
-#: package/contents/ui/main.qml:642
+#: package/contents/ui/main.qml:903
 msgid ""
 "Auto mode enabled for this session. Commands will run and share output "
 "automatically."
@@ -633,105 +821,81 @@ msgstr ""
 "Automatisk modus aktivert for denne økten. Kommandoer vil kjøre og dele "
 "utdata automatisk."
 
-#: package/contents/ui/main.qml:642
+#: package/contents/ui/main.qml:903
 msgid "Auto mode disabled."
 msgstr "Automatisk modus deaktivert."
 
-#: package/contents/ui/main.qml:653 package/contents/ui/main.qml:708
+#: package/contents/ui/main.qml:914 package/contents/ui/main.qml:969
 msgid "none"
 msgstr "ingen"
 
-#: package/contents/ui/main.qml:653
+#: package/contents/ui/main.qml:914
 msgid "Current model: **%1**"
 msgstr "Gjeldende modell: **%1**"
 
-#: package/contents/ui/main.qml:655
+#: package/contents/ui/main.qml:916
 msgid "Available models:"
 msgstr "Tilgjengelige modeller:"
 
-#: package/contents/ui/main.qml:657
+#: package/contents/ui/main.qml:918
 msgid "Type `/model <name>` to switch."
 msgstr "Skriv `/model <name>` for å bytte."
 
-#: package/contents/ui/main.qml:659
+#: package/contents/ui/main.qml:920
 msgid "No models cached. Use **Fetch Models** in settings."
 msgstr "Ingen modeller bufret. Bruk **Hent modeller** i innstillinger."
 
-#: package/contents/ui/main.qml:668
+#: package/contents/ui/main.qml:929
 msgid "Switched to model: **%1**"
 msgstr "Byttet til modell: **%1**"
 
-#: package/contents/ui/main.qml:677
+#: package/contents/ui/main.qml:938
 msgid "No tasks configured. Add tasks in Settings."
 msgstr "Ingen oppgaver konfigurert. Legg til oppgaver i Innstillinger."
 
-#: package/contents/ui/main.qml:679
+#: package/contents/ui/main.qml:940
 msgid "(auto)"
-msgstr "(auto)"
+msgstr "(automatisk)"
 
-#: package/contents/ui/main.qml:680
+#: package/contents/ui/main.qml:941
 msgid "Available tasks:"
 msgstr "Tilgjengelige oppgaver:"
 
-#: package/contents/ui/main.qml:680
+#: package/contents/ui/main.qml:941
 msgid "Type `/task <name>` to run."
 msgstr "Skriv `/task <name>` for å kjøre."
 
-#: package/contents/ui/main.qml:708
+#: package/contents/ui/main.qml:969
 msgid "Unknown task: **%1**. Available: %2"
 msgstr "Ukjent oppgave: **%1**. Tilgjengelig: %2"
 
-#: package/contents/ui/main.qml:722
+#: package/contents/ui/main.qml:983
 msgid "The user declined to run this command."
 msgstr "Brukeren avslo å kjøre denne kommandoen."
 
-#: package/contents/ui/main.qml:886
+#: package/contents/ui/main.qml:1152
 msgid "Searching the web…"
 msgstr "Søker på nettet…"
 
-#: package/contents/ui/main.qml:908
+#: package/contents/ui/main.qml:1174
 msgid "Web search failed: %1"
 msgstr "Nettsøk mislyktes: %1"
 
-#: package/contents/ui/main.qml:1115 package/contents/ui/main.qml:1127
+#: package/contents/ui/main.qml:1389 package/contents/ui/main.qml:1401
 msgid "Running: %1"
 msgstr "Kjører: %1"
 
-#: package/contents/ui/main.qml:1136
+#: package/contents/ui/main.qml:1410
 msgid "stderr: %1"
 msgstr "stderr: %1"
 
-#: package/contents/ui/main.qml:1138
+#: package/contents/ui/main.qml:1412
 msgid "[truncated — output exceeded %1KB]"
 msgstr "[avkortet — utdata oversteg %1KB]"
 
-#: package/contents/ui/main.qml:1140
+#: package/contents/ui/main.qml:1414
 msgid "[exit code: %1]"
 msgstr "[avslutningskode: %1]"
-
-#: package/contents/ui/api.js:169
-msgid "Web search timed out"
-msgstr "Nettsøk tidsavbrutt"
-
-#: package/contents/ui/api.js:179
-msgid "Failed to parse web search response: %1"
-msgstr "Klarte ikke å analysere nettsøkrespons: %1"
-
-#: package/contents/ui/api.js:182
-msgid "Web search failed (HTTP %1)"
-msgstr "Nettsøk mislyktes (HTTP %1)"
-
-#: package/contents/ui/api.js:221
-msgid "OpenAI-compatible"
-msgstr "OpenAI-kompatibel"
-
-#: package/contents/ui/api.js:222
-msgid "Anthropic"
-msgstr "Anthropic"
-
-#: package/contents/ui/api.js:223
-msgid "Google Gemini"
-msgstr "Google Gemini"
 
 #: package/contents/config/config.qml:11
 msgid "General"
@@ -744,6 +908,39 @@ msgstr "Systeminstruksjon"
 #: package/contents/config/config.qml:21
 msgid "Tasks"
 msgstr "Oppgaver"
+
+#: package/contents/config/config.qml:26
+msgid "Tools"
+msgstr "Verktøy"
+
+#~ msgid "Commands:"
+#~ msgstr "Kommandoer:"
+
+#~ msgid "Automatically send Run command results back to the LLM"
+#~ msgstr "Send automatisk resultater fra Kjør-kommando tilbake til LLM"
+
+#~ msgid ""
+#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only "
+#~ "use with very trustworthy LLMs."
+#~ msgstr ""
+#~ "ADVARSEL: Når kombinert med Auto-share aktiveres agentbasert arbeidsflyt. "
+#~ "Bruk kun med svært pålitelige LLM-er."
+
+#~ msgid "Use tool calling for commands"
+#~ msgstr "Bruk verktøykalling for kommandoer"
+
+#~ msgid ""
+#~ "Use the run_command tool for command execution. Disable for models that "
+#~ "don't support tool calling (falls back to code block parsing)."
+#~ msgstr ""
+#~ "Bruk run_command-verktøyet for kommandoutførelse. Deaktiver for modeller "
+#~ "som ikke støtter verktøykalling (faller tilbake til kodeblokk-parsing)."
+
+#~ msgid "Web Search:"
+#~ msgstr "Søk på nettet:"
+
+#~ msgid "Ollama API key for web search"
+#~ msgstr "Ollama API-nøkkel for nettsøk"
 
 #~ msgid "e.g. llama3, gpt-4, etc."
 #~ msgstr "f.eks. llama3, gpt-4, osv."
@@ -759,36 +956,3 @@ msgstr "Oppgaver"
 
 #~ msgid "Invalid response format: missing choices[0].message.content"
 #~ msgstr "Ugyldig responsformat: manglende choices[0].message.content"
-
-#~ msgid "Failed to parse response: %1"
-#~ msgstr "Klarte ikke å analysere respons: %1"
-
-#~ msgid "Authentication failed (HTTP %1) — check your API key"
-#~ msgstr "Autentisering mislyktes (HTTP %1) — kontroller din API-nøkkel"
-
-#~ msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
-#~ msgstr "Takstbegrenset (HTTP 429) — for mange forespørsler, prøv igjen snart"
-
-#~ msgid "Not found (HTTP 404) — check your API endpoint and model name"
-#~ msgstr "Ikke funnet (HTTP 404) — kontroller API-endepunktet og modellnavnet"
-
-#~ msgid "API error %1"
-#~ msgstr "API-feil %1"
-
-#~ msgid "Request failed (no response) — check your endpoint URL"
-#~ msgstr "Forespørsel mislyktes (ingen respons) — kontroller endepunkts-URL-en"
-
-#~ msgid "Request timed out after 30 seconds"
-#~ msgstr "Forespørsel tidsavbrutt etter 30 sekunder"
-
-#~ msgid "Failed to parse models: %1"
-#~ msgstr "Klarte ikke å analysere modeller: %1"
-
-#~ msgid "Failed to fetch models: HTTP %1"
-#~ msgstr "Klarte ikke å hente modeller: HTTP %1"
-
-#~ msgid "Invalid response format"
-#~ msgstr "Ugyldig responsformat"
-
-#~ msgid "Request timed out"
-#~ msgstr "Forespørsel tidsavbrutt"
