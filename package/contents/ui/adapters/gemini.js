@@ -258,12 +258,16 @@ function translateMessages(neutralMessages) {
                     } else if (rawArgs && typeof rawArgs === "object") {
                         args = rawArgs;
                     }
-                    parts.push({
+                    var fcPart = {
                         functionCall: {
                             name: (tc["function"] && tc["function"].name) || "",
                             args: args
                         }
-                    });
+                    };
+                    if (tc.thought_signature) {
+                        fcPart.thoughtSignature = tc.thought_signature;
+                    }
+                    parts.push(fcPart);
                 }
             }
             if (parts.length === 0) parts.push({ text: "" });
@@ -320,7 +324,8 @@ function parseSSEChunks(buffer, lastIndex) {
                             tokens.push({
                                 function_call: {
                                     name: part.functionCall.name || "",
-                                    args: part.functionCall.args || {}
+                                    args: part.functionCall.args || {},
+                                    thought_signature: part.thoughtSignature || ""
                                 }
                             });
                         }
@@ -401,7 +406,8 @@ function sendStreaming(opts) {
                     "function": {
                         name: fc.name,
                         arguments: JSON.stringify(fc.args)
-                    }
+                    },
+                    thought_signature: fc.thought_signature || ""
                 });
             }
             if (tok.thinking_delta) {
@@ -478,7 +484,8 @@ function sendStreaming(opts) {
                                     "function": {
                                         name: part.functionCall.name || "",
                                         arguments: JSON.stringify(part.functionCall.args || {})
-                                    }
+                                    },
+                                    thought_signature: part.thoughtSignature || ""
                                 });
                             }
                             if (openThink && part.thoughtSignature) openThink.thoughtSignature = part.thoughtSignature;
