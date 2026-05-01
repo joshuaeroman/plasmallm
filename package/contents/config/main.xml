@@ -76,7 +76,7 @@
     </entry>
     <entry name="chatSaveFormat" type="String">
       <label>Chat save format</label>
-      <default>txt</default>
+      <default>jsonl</default>
     </entry>
     <entry name="autoShareCommandOutput" type="Bool">
       <label>Auto-share command output with LLM</label>

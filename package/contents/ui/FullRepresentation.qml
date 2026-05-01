@@ -94,32 +94,161 @@ PlasmaExtras.Representation {
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered
                 visible: fullRep.configuredTasks.length > 0
-                onClicked: taskMenu.open()
+                checkable: true
+                checked: taskMenu.opened
+
+                onClicked: {
+                    if (taskMenu.opened) {
+                        taskMenu.close()
+                    } else {
+                        taskMenu.popup(taskToolButton, 0, taskToolButton.height)
+                    }
+                }
 
                 QQC2.Menu {
                     id: taskMenu
-                    y: taskToolButton.height
+                    closePolicy: QQC2.Menu.CloseOnEscape | QQC2.Menu.CloseOnPressOutsideParent
+                }
 
-                    Instantiator {
-                        model: fullRep.configuredTasks
-                        delegate: QQC2.MenuItem {
-                            text: modelData.name + (modelData.auto ? " (auto)" : "")
-                            onTriggered: root.sendMessage("/task " + modelData.name)
+                Instantiator {
+                    model: fullRep.configuredTasks
+                    onObjectAdded: function(index, object) { taskMenu.insertItem(index, object); }
+                    onObjectRemoved: function(index, object) { taskMenu.removeItem(object); }
+                    delegate: QQC2.MenuItem {
+                        text: modelData.name + (modelData.auto ? " (auto)" : "")
+                        onTriggered: {
+                            root.sendMessage("/task " + modelData.name);
                         }
-                        onObjectAdded: function(index, object) { taskMenu.insertItem(index, object); }
-                        onObjectRemoved: function(index, object) { taskMenu.removeItem(object); }
                     }
                 }
             }
 
             PlasmaComponents.ToolButton {
+                id: historyToolButton
                 icon.name: "clock"
-                Accessible.name: i18n("Open chat history folder")
-                PlasmaComponents.ToolTip.text: i18n("Open chat history folder")
+                Accessible.name: i18n("Chat History")
+                PlasmaComponents.ToolTip.text: i18n("Chat History")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.visible: hovered && !historyMenu.opened
                 visible: Plasmoid.configuration.saveChatHistory
-                onClicked: root.openChatsFolder()
+                checkable: true
+                checked: historyMenu.opened
+
+                onClicked: {
+                    if (Plasmoid.configuration.chatSaveFormat === "jsonl") {
+                        if (historyMenu.opened) {
+                            historyMenu.close()
+                        } else {
+                            historyMenu.popup(historyToolButton, 0, historyToolButton.height)
+                        }
+                    } else {
+                        root.openChatsFolder();
+                    }
+                }
+
+                QQC2.Menu {
+                    id: historyMenu
+                    closePolicy: QQC2.Menu.CloseOnEscape | QQC2.Menu.CloseOnPressOutsideParent
+
+                    QQC2.MenuItem {
+                        visible: root.isFetchingHistory
+                        text: i18n("Loading...")
+                        enabled: false
+                    }
+
+                    QQC2.MenuItem {
+                        visible: !root.isFetchingHistory && (!root.historyFilesModel || root.historyFilesModel.count === 0)
+                        text: i18n("No recent chats")
+                        enabled: false
+                    }
+
+                    QQC2.MenuSeparator {
+                        visible: root.historyFilesModel && root.historyFilesModel.count > 0
+                    }
+
+                    QQC2.MenuItem {
+                        text: i18n("Open history folder...")
+                        onTriggered: {
+                            root.openChatsFolder();
+                        }
+                    }
+
+                    QQC2.MenuSeparator {
+                        visible: root.historyFilesModel && root.historyFilesModel.count > 0
+                    }
+
+                    QQC2.MenuItem {
+                        visible: root.historyFilesModel && root.historyFilesModel.count > 0
+                        text: i18n("Clear all history...")
+                        icon.name: "edit-clear-history"
+                        onTriggered: {
+                            clearHistorySheet.open();
+                        }
+                    }
+                }
+
+                Instantiator {
+                    model: root.historyFilesModel || null
+                    onObjectAdded: function(index, object) { historyMenu.insertItem(index + 2, object); }
+                    onObjectRemoved: function(index, object) { historyMenu.removeItem(object); }
+                    delegate: QQC2.MenuItem {
+                        text: (model.dateTime || model.name || "") + (model.preview ? ": " + model.preview : "")
+                        onTriggered: {
+                            root.loadChatJsonl(model.file);
+                        }
+                    }
+                }
+            }
+
+            QQC2.Popup {
+                id: clearHistorySheet
+                parent: QQC2.Overlay.overlay
+                x: Math.round((parent.width - width) / 2)
+                y: Math.round((parent.height - height) / 2)
+                modal: true
+                focus: true
+                closePolicy: QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnPressOutside
+                padding: Kirigami.Units.largeSpacing
+
+                background: Rectangle {
+                    color: Kirigami.Theme.backgroundColor
+                    border.color: Kirigami.Theme.focusColor
+                    border.width: 1
+                    radius: Kirigami.Units.smallSpacing
+                }
+
+                contentItem: ColumnLayout {
+                    spacing: Kirigami.Units.largeSpacing
+
+                    PlasmaComponents.Label {
+                        text: i18n("Clear All History")
+                        font.bold: true
+                    }
+
+                    PlasmaComponents.Label {
+                        Layout.preferredWidth: Kirigami.Units.gridUnit * 16
+                        text: i18n("Are you sure you want to delete all chat history files? This action cannot be undone.")
+                        wrapMode: Text.WordWrap
+                        opacity: 0.7
+                    }
+
+                    RowLayout {
+                        Layout.alignment: Qt.AlignRight
+                        spacing: Kirigami.Units.smallSpacing
+                        PlasmaComponents.Button {
+                            text: i18n("Clear All")
+                            icon.name: "edit-clear-history"
+                            onClicked: {
+                                root.clearAllHistory();
+                                clearHistorySheet.close();
+                            }
+                        }
+                        PlasmaComponents.Button {
+                            text: i18n("Cancel")
+                            onClicked: clearHistorySheet.close()
+                        }
+                    }
+                }
             }
 
             PlasmaComponents.ToolButton {
