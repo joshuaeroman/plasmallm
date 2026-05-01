@@ -43,10 +43,6 @@ SimpleKCM {
     property bool cfg_saveChatHistoryDefault
     property string cfg_chatSaveFormat
     property string cfg_chatSaveFormatDefault
-    property bool cfg_autoShareCommandOutput
-    property bool cfg_autoShareCommandOutputDefault
-    property bool cfg_autoRunCommands
-    property bool cfg_autoRunCommandsDefault
     property bool cfg_showProviderInTitle
     property bool cfg_showProviderInTitleDefault
     // Declared here because Plasma injects all cfg_ properties onto every config page
@@ -94,12 +90,6 @@ SimpleKCM {
     property string cfg_lastClosedTimestampDefault
     property string cfg_availableModels
     property string cfg_availableModelsDefault
-    property string cfg_ollamaApiKey
-    property string cfg_ollamaApiKeyDefault
-    property int cfg_ollamaApiKeyVersion
-    property int cfg_ollamaApiKeyVersionDefault
-    property bool cfg_useCommandTool
-    property bool cfg_useCommandToolDefault
     property string cfg_tasks
     property string cfg_tasksDefault
     property string cfg_openaiLastProvider
@@ -115,10 +105,6 @@ SimpleKCM {
     property bool walletAvailable: false
     property bool walletKeyDirty: false
     property bool walletSaveInProgress: false
-    property string walletOllamaKey: ""
-    property bool walletOllamaKeyLoaded: false
-    property bool walletOllamaKeyDirty: false
-    property bool walletOllamaSaveInProgress: false
 
     function walletCall(member, args, resolve, reject) {
         var reply = DBus.SessionBus.asyncCall({
@@ -340,94 +326,9 @@ SimpleKCM {
         if (walletKeyLoaded) ensureModelsLoaded(false);
     }
 
-    function walletWriteOllamaKey(handle, key, onDone) {
-        ensureWalletFolder(handle, function(ok) {
-            if (!ok) {
-                onDone(false);
-                return;
-            }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaApiKey", key, "PlasmaLLM"],
-                function(result) { onDone(result === 0); },
-                function(err) {
-                    console.warn("PlasmaLLM: wallet writePassword (ollama) error: " + err);
-                    onDone(false);
-                }
-            );
-        });
-    }
-
-    function loadWalletOllamaKey() {
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    walletOllamaKey = cfg_ollamaApiKey;
-                    walletOllamaKeyLoaded = true;
-                    return;
-                }
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaApiKey", "PlasmaLLM"],
-                    function(password) {
-                        if (password && password.length > 0) {
-                            walletOllamaKey = password;
-                        } else {
-                            walletOllamaKey = cfg_ollamaApiKey;
-                        }
-                        walletOllamaKeyLoaded = true;
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    },
-                    function(err) {
-                        walletOllamaKey = cfg_ollamaApiKey;
-                        walletOllamaKeyLoaded = true;
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    }
-                );
-            },
-            function(err) {
-                walletOllamaKey = cfg_ollamaApiKey;
-                walletOllamaKeyLoaded = true;
-            }
-        );
-    }
-
-    function saveWalletOllamaKey() {
-        var key = ollamaApiKeyField.text;
-        walletOllamaSaveInProgress = true;
-        if (!walletAvailable) {
-            cfg_ollamaApiKey = key;
-            walletOllamaKeyDirty = false;
-            walletOllamaSaveInProgress = false;
-            return;
-        }
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    cfg_ollamaApiKey = key;
-                    walletOllamaKeyDirty = false;
-                    walletOllamaSaveInProgress = false;
-                    return;
-                }
-                walletWriteOllamaKey(handle, key, function(success) {
-                    if (success) {
-                        walletOllamaKey = key;
-                        cfg_ollamaApiKey = "";
-                        walletOllamaKeyDirty = false;
-                        cfg_ollamaApiKeyVersion++;
-                    }
-                    walletOllamaSaveInProgress = false;
-                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                });
-            },
-            function(err) {
-                cfg_ollamaApiKey = key;
-                walletOllamaKeyDirty = false;
-                walletOllamaSaveInProgress = false;
-            }
-        );
-    }
-
     Component.onCompleted: {
         loadModelCache();
         loadWalletKey();
-        loadWalletOllamaKey();
     }
 
     // OpenAI-compatible presets only (Anthropic/Gemini each have a single fixed
@@ -921,97 +822,6 @@ SimpleKCM {
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
             Layout.fillWidth: true
-        }
-
-        QQC2.CheckBox {
-            id: autoShareCheckBox
-            Kirigami.FormData.label: i18n("Commands:")
-            text: i18n("Auto-share command output with LLM")
-            checked: cfg_autoShareCommandOutput
-            onCheckedChanged: cfg_autoShareCommandOutput = checked
-
-            QQC2.ToolTip.text: i18n("Automatically send Run command results back to the LLM")
-            QQC2.ToolTip.visible: hovered
-            QQC2.ToolTip.delay: 500
-        }
-
-        QQC2.CheckBox {
-            id: autoRunCheckBox
-            text: i18n("Auto-run commands from LLM")
-            checked: cfg_autoRunCommands
-            onCheckedChanged: cfg_autoRunCommands = checked
-
-            QQC2.ToolTip.text: i18n("WARNING: When combined with Auto-share, enables agentic workflow. Only use with very trustworthy LLMs.")
-            QQC2.ToolTip.visible: hovered
-            QQC2.ToolTip.delay: 500
-        }
-
-        QQC2.CheckBox {
-            id: useCommandToolCheckBox
-            text: i18n("Use tool calling for commands")
-            checked: cfg_useCommandTool
-            onCheckedChanged: cfg_useCommandTool = checked
-
-            QQC2.ToolTip.text: i18n("Use the run_command tool for command execution. Disable for models that don't support tool calling (falls back to code block parsing).")
-            QQC2.ToolTip.visible: hovered
-            QQC2.ToolTip.delay: 500
-        }
-
-        QQC2.Label {
-            visible: autoShareCheckBox.checked && autoRunCheckBox.checked
-            text: i18n("⚠️ DANGER: Both options enabled - the LLM can now execute commands and see their output, enabling an agentic workflow. Only use with trustworthy LLMs.")
-            wrapMode: Text.Wrap
-            Layout.fillWidth: true
-            Layout.preferredWidth: 1
-            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
-            color: Kirigami.Theme.negativeTextColor
-            font: Kirigami.Theme.smallFont
-        }
-
-        Kirigami.Separator {
-            Kirigami.FormData.isSection: true
-            Layout.fillWidth: true
-        }
-
-        RowLayout {
-            Kirigami.FormData.label: i18n("Web Search:")
-            Layout.fillWidth: true
-            spacing: Kirigami.Units.smallSpacing
-
-            QQC2.TextField {
-                id: ollamaApiKeyField
-                Layout.fillWidth: true
-                placeholderText: i18n("Ollama API key for web search")
-                echoMode: TextInput.Password
-                text: walletOllamaKeyLoaded ? walletOllamaKey : cfg_ollamaApiKey
-                onTextChanged: {
-                    if (walletOllamaKeyLoaded) {
-                        walletOllamaKeyDirty = (text !== walletOllamaKey);
-                    }
-                }
-                onEditingFinished: {
-                    if (walletOllamaKeyDirty) saveWalletOllamaKey();
-                }
-            }
-
-            QQC2.Button {
-                text: walletOllamaSaveInProgress ? i18n("Saving…") :
-                      !walletOllamaKeyDirty ? i18n("Saved") :
-                      !walletAvailable ? i18n("Save to Config (Insecure)") : i18n("Save Key")
-                icon.name: !walletOllamaKeyDirty ? "dialog-ok-apply" : "document-save"
-                enabled: walletOllamaKeyDirty && !walletOllamaSaveInProgress
-                onClicked: saveWalletOllamaKey()
-            }
-        }
-
-        QQC2.Label {
-            text: i18n("Enables LLM-triggered web searches via Ollama's search API")
-            font: Kirigami.Theme.smallFont
-            color: Kirigami.Theme.disabledTextColor
-            wrapMode: Text.Wrap
-            Layout.fillWidth: true
-            Layout.preferredWidth: 1
-            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
         }
 
     }

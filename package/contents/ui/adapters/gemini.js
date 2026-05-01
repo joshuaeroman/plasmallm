@@ -111,8 +111,9 @@ function buildTools(options) {
     var fns = [];
     var ollamaApiKey = options && options.ollamaApiKey;
     var commandToolEnabled = options && options.commandToolEnabled;
+    var webSearchEnabled = options && options.webSearchEnabled;
 
-    if (ollamaApiKey && ollamaApiKey.length > 0) {
+    if (webSearchEnabled && ollamaApiKey && ollamaApiKey.length > 0) {
         fns.push({
             name: "web_search",
             description: "Search the web for current information. Use when you need up-to-date facts, recent events, or information you're not confident about.",
