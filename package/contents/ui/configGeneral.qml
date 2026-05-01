@@ -437,7 +437,9 @@ SimpleKCM {
             Kirigami.FormData.label: i18n("Provider:")
             Layout.fillWidth: true
             visible: caps.providerPresets === true
+            editable: false
             model: presetEndpoints.map(function(p) { return p.name; })
+
             Component.onCompleted: {
                 for (var i = 1; i < presetEndpoints.length; i++) {
                     if (cfg_apiEndpoint === presetEndpoints[i].url) {
@@ -447,13 +449,82 @@ SimpleKCM {
                 }
                 currentIndex = 0;
             }
-            onActivated: function(index) {
-                if (index > 0) {
-                    var preset = presetEndpoints[index];
-                    apiEndpointField.text = preset.url;
-                    cfg_providerName = preset.name;
-                    cfg_usesResponsesAPI = !!preset.usesResponsesAPI;
-                    rememberOpenAIChoice(preset.name, preset.url);
+
+            popup: QQC2.Popup {
+                width: endpointPreset.width
+                implicitHeight: Math.min(providerContentColumn.implicitHeight + (padding * 2),
+                                         Kirigami.Units.gridUnit * 20)
+                padding: Kirigami.Units.smallSpacing
+
+                onOpened: {
+                    providerSearchField.text = "";
+                    providerListView.currentIndex = endpointPreset.currentIndex;
+                    providerSearchField.forceActiveFocus();
+                }
+
+                ColumnLayout {
+                    id: providerContentColumn
+                    anchors.fill: parent
+                    spacing: Kirigami.Units.smallSpacing
+
+                    Kirigami.SearchField {
+                        id: providerSearchField
+                        Layout.fillWidth: true
+                        Keys.onDownPressed: providerListView.forceActiveFocus()
+                        Keys.onReturnPressed: {
+                            if (providerListView.count > 0) {
+                                var pick = providerListView.model[0];
+                                endpointPreset.selectPreset(pick);
+                                endpointPreset.popup.close();
+                            }
+                        }
+                    }
+
+                    QQC2.ScrollView {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        background: null
+
+                        ListView {
+                            id: providerListView
+                            clip: true
+                            model: presetEndpoints.filter(function(p) {
+                                return providerSearchField.text.length === 0
+                                    || p.name.toLowerCase().indexOf(providerSearchField.text.toLowerCase()) !== -1;
+                            })
+                            delegate: QQC2.ItemDelegate {
+                                width: ListView.view.width
+                                text: modelData.name
+                                highlighted: ListView.isCurrentItem || modelData.name === endpointPreset.currentText
+                                onClicked: {
+                                    endpointPreset.selectPreset(modelData);
+                                    endpointPreset.popup.close();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            function selectPreset(preset) {
+                var idx = -1;
+                for (var i = 0; i < presetEndpoints.length; i++) {
+                    if (presetEndpoints[i].name === preset.name) {
+                        idx = i;
+                        break;
+                    }
+                }
+                if (idx === -1) return;
+
+                endpointPreset.currentIndex = idx;
+                if (idx > 0) {
+                    var p = presetEndpoints[idx];
+                    apiEndpointField.text = p.url;
+                    cfg_providerName = p.name;
+                    cfg_usesResponsesAPI = !!p.usesResponsesAPI;
+                    rememberOpenAIChoice(p.name, p.url);
+                } else {
+                    cfg_providerName = "Custom";
                 }
             }
         }
@@ -494,6 +565,8 @@ SimpleKCM {
             QQC2.ComboBox {
                 id: modelCombo
                 Layout.fillWidth: true
+                editable: false
+
                 // Prepend the persisted model name when it isn't in the fetched
                 // list so it stays selectable (initial load, stale value, etc.).
                 readonly property var displayModels: {
@@ -505,6 +578,7 @@ SimpleKCM {
                 }
                 model: displayModels
                 enabled: displayModels.length > 0 && !fetchInProgress
+
                 onDisplayModelsChanged: {
                     var idx = displayModels.indexOf(cfg_modelName);
                     currentIndex = idx >= 0 ? idx : 0;
@@ -514,8 +588,64 @@ SimpleKCM {
                         cfg_modelName = displayModels[0];
                     }
                 }
-                onActivated: {
-                    cfg_modelName = currentText;
+
+                popup: QQC2.Popup {
+                    width: modelCombo.width
+                    implicitHeight: Math.min(modelContentColumn.implicitHeight + (padding * 2),
+                                             Kirigami.Units.gridUnit * 20)
+                    padding: Kirigami.Units.smallSpacing
+
+                    onOpened: {
+                        modelSearchField.text = "";
+                        modelListView.currentIndex = modelCombo.currentIndex;
+                        modelSearchField.forceActiveFocus();
+                    }
+
+                    ColumnLayout {
+                        id: modelContentColumn
+                        anchors.fill: parent
+                        spacing: Kirigami.Units.smallSpacing
+
+                        Kirigami.SearchField {
+                            id: modelSearchField
+                            Layout.fillWidth: true
+                            Keys.onDownPressed: modelListView.forceActiveFocus()
+                            Keys.onReturnPressed: {
+                                if (modelListView.count > 0) {
+                                    var pick = modelListView.model[0];
+                                    cfg_modelName = pick;
+                                    modelCombo.currentIndex = modelCombo.displayModels.indexOf(pick);
+                                    modelCombo.popup.close();
+                                }
+                            }
+                        }
+
+                        QQC2.ScrollView {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            // Use ScrollView's background or it might be transparent
+                            background: null
+
+                            ListView {
+                                id: modelListView
+                                clip: true
+                                model: modelCombo.displayModels.filter(function(m) {
+                                    return modelSearchField.text.length === 0
+                                        || m.toLowerCase().indexOf(modelSearchField.text.toLowerCase()) !== -1;
+                                })
+                                delegate: QQC2.ItemDelegate {
+                                    width: ListView.view.width
+                                    text: modelData
+                                    highlighted: ListView.isCurrentItem || modelData === cfg_modelName
+                                    onClicked: {
+                                        cfg_modelName = modelData;
+                                        modelCombo.currentIndex = modelCombo.displayModels.indexOf(modelData);
+                                        modelCombo.popup.close();
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
