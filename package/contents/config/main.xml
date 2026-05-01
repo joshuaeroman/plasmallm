@@ -182,6 +182,10 @@
       <label>Cached model lists per slot (JSON object: { "apiType:providerName": ["model-a", ...] }, written at runtime)</label>
       <default></default>
     </entry>
+    <entry name="enableWebSearch" type="Bool">
+      <label>Enable web search tool</label>
+      <default>false</default>
+    </entry>
     <entry name="ollamaApiKey" type="String">
       <label>Ollama API Key (for web search)</label>
       <default></default>
@@ -189,6 +193,10 @@
     <entry name="ollamaApiKeyVersion" type="Int">
       <label>Internal: incremented when Ollama API key is saved to KDE Wallet</label>
       <default>0</default>
+    </entry>
+    <entry name="webSearchMigrated" type="Bool">
+      <label>Internal: web search enabled state has been migrated based on API key presence</label>
+      <default>false</default>
     </entry>
     <entry name="openaiLastProvider" type="String">
       <label>Last selected provider preset name for the OpenAI-compatible adapter</label>

@@ -52,8 +52,9 @@ function buildTools(options) {
     var tools = [];
     var ollamaApiKey = options && options.ollamaApiKey;
     var commandToolEnabled = options && options.commandToolEnabled;
+    var webSearchEnabled = options && options.webSearchEnabled;
 
-    if (ollamaApiKey && ollamaApiKey.length > 0) {
+    if (webSearchEnabled && ollamaApiKey && ollamaApiKey.length > 0) {
         tools.push({
             type: "function",
             "function": {

@@ -501,11 +501,22 @@ PlasmoidItem {
         );
     }
 
+    function checkWebSearchMigration() {
+        if (!Plasmoid.configuration.webSearchMigrated) {
+            if (root.ollamaApiKey && root.ollamaApiKey.length > 0) {
+                Plasmoid.configuration.enableWebSearch = true;
+                console.log("PlasmaLLM: Migrated web search tool to enabled because API key is present");
+            }
+            Plasmoid.configuration.webSearchMigrated = true;
+        }
+    }
+
     function loadOllamaKeyFromWallet() {
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
                 if (handle < 0) {
                     root.ollamaApiKey = Plasmoid.configuration.ollamaApiKey;
+                    checkWebSearchMigration();
                     return;
                 }
                 walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaApiKey", "PlasmaLLM"],
@@ -515,16 +526,19 @@ PlasmoidItem {
                         } else {
                             root.ollamaApiKey = Plasmoid.configuration.ollamaApiKey;
                         }
+                        checkWebSearchMigration();
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     },
                     function(err) {
                         root.ollamaApiKey = Plasmoid.configuration.ollamaApiKey;
+                        checkWebSearchMigration();
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     }
                 );
             },
             function(err) {
                 root.ollamaApiKey = Plasmoid.configuration.ollamaApiKey;
+                checkWebSearchMigration();
             }
         );
     }
@@ -843,7 +857,12 @@ PlasmoidItem {
             messages = [systemMsg].concat(messages.slice(messages.length - maxApiMessages));
         }
 
-        var tools = Api.buildTools(Plasmoid.configuration.apiType, { ollamaApiKey: root.ollamaApiKey, commandToolEnabled: Plasmoid.configuration.useCommandTool, usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI });
+        var tools = Api.buildTools(Plasmoid.configuration.apiType, {
+            ollamaApiKey: root.ollamaApiKey,
+            commandToolEnabled: Plasmoid.configuration.useCommandTool,
+            webSearchEnabled: Plasmoid.configuration.enableWebSearch,
+            usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI
+        });
 
         var streamHandle = Api.sendStreaming(Plasmoid.configuration.apiType, {
             endpoint: Plasmoid.configuration.apiEndpoint,

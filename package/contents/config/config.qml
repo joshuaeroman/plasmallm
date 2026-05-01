@@ -22,4 +22,9 @@ ConfigModel {
         icon: "view-task"
         source: "configTasks.qml"
     }
+    ConfigCategory {
+        name: i18n("Tools")
+        icon: "configure"
+        source: "configTools.qml"
+    }
 }
