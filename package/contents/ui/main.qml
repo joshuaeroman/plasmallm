@@ -29,8 +29,21 @@ PlasmoidItem {
     property var terminalCommands: ([])
     property var saveCommands: ([])
     property string currentChatFile: ""
+    ListModel {
+        id: chatMessages
+    }
+
+    ListModel {
+        id: displayMessages
+    }
+
+    ListModel {
+        id: historyFilesModel
+    }
+
     property alias displayMessages: displayMessages
     property alias chatMessages: chatMessages
+    property alias historyFilesModel: historyFilesModel
     property int maxApiMessages: 100
     property bool autoShareSuppressed: false
     property bool sessionAutoMode: false
@@ -55,13 +68,10 @@ PlasmoidItem {
     // Commands currently in-flight as system info gather (populated by regatherSysInfo)
     property var pendingSysInfoCommands: ({})
 
-    ListModel {
-        id: chatMessages
-    }
-
-    ListModel {
-        id: displayMessages
-    }
+    property var historyFetchCommands: ([])
+    property var pendingHistoryLoads: ({})
+    property string lastHistoryFetchSource: ""
+    property bool isFetchingHistory: false
 
     preferredRepresentation: Plasmoid.formFactor === PlasmaCore.Types.Planar ? fullRepresentation : null
 
@@ -115,6 +125,53 @@ PlasmoidItem {
             } else if (saveCommands.indexOf(source) !== -1) {
                 // Chat save commands — suppress output bubble
                 saveCommands.splice(saveCommands.indexOf(source), 1);
+                disconnectSource(source);
+            } else if (historyFetchCommands.indexOf(source) !== -1) {
+                historyFetchCommands.splice(historyFetchCommands.indexOf(source), 1);
+                if (source === lastHistoryFetchSource) {
+                    console.log("PlasmaLLM: Received history list, length: " + stdout.length);
+                    isFetchingHistory = false;
+                    historyFilesModel.clear();
+                    if (stdout.length > 0) {
+                        if (stdout.startsWith("[")) {
+                            try {
+                                var files = JSON.parse(stdout);
+                                for (var i = 0; i < files.length; i++) {
+                                    var f = files[i];
+                                    if (f.mtime) {
+                                        var d = new Date(f.mtime * 1000);
+                                        f.dateTime = d.toLocaleString(Qt.locale(), Locale.ShortFormat);
+                                    }
+                                    historyFilesModel.append(f);
+                                }
+                            } catch(e) {
+                                console.warn("PlasmaLLM: Failed to parse history JSON: " + e);
+                            }
+                        } else {
+                            // Fallback: list of paths
+                            var lines = stdout.split("\n");
+                            for (var j = 0; j < lines.length; j++) {
+                                if (!lines[j].trim()) continue;
+                                var path = lines[j].trim();
+                                var name = path.split("/").pop();
+                                var dtMatch = name.match(/^(\d{4})-(\d{2})-(\d{2})_(\d{2})-(\d{2})/);
+                                var dtStr = name;
+                                if (dtMatch) {
+                                    var dateObj = new Date(dtMatch[1], dtMatch[2] - 1, dtMatch[3], dtMatch[4], dtMatch[5]);
+                                    dtStr = dateObj.toLocaleString(Qt.locale(), Locale.ShortFormat);
+                                }
+                                historyFilesModel.append({file: path, name: name, dateTime: dtStr, preview: ""});
+                            }
+                        }
+                    } else {
+                        console.log("PlasmaLLM: History fetch returned empty stdout");
+                    }
+                }
+                disconnectSource(source);
+            } else if (pendingHistoryLoads[source] !== undefined) {
+                var path = pendingHistoryLoads[source];
+                delete pendingHistoryLoads[source];
+                handleHistoryLoad(stdout, path);
                 disconnectSource(source);
             } else {
                 handleCommandOutput(source, stdout, stderr, exitCode);
@@ -315,6 +372,7 @@ PlasmoidItem {
         var cmd = "mkdir -p $HOME/PlasmaLLM/chats && printf '%s' '" + escaped + "' > \"" + filePath + "\"";
         saveCommands.push(cmd);
         executable.connectSource(cmd);
+        if (fmt === "jsonl") updateHistoryModelLocally(currentChatFile);
     }
 
     function saveChatJsonl() {
@@ -332,6 +390,17 @@ PlasmoidItem {
         // API messages
         for (var i = 0; i < chatMessages.count; i++) {
             var m = chatMessages.get(i);
+            var attachJson = "";
+            if (m.attachments_json && m.attachments_json.length > 0) {
+                try {
+                    var atts = JSON.parse(m.attachments_json);
+                    var slim = atts.map(function(a) {
+                        return { filePath: a.filePath, fileName: a.fileName };
+                    });
+                    attachJson = JSON.stringify(slim);
+                } catch(e) { attachJson = m.attachments_json; }
+            }
+
             lines.push(JSON.stringify({
                 _type: "api",
                 index: i,
@@ -339,7 +408,8 @@ PlasmoidItem {
                 content: m.content,
                 tool_calls_json: m.tool_calls_json || "",
                 tool_call_id: m.tool_call_id || "",
-                thinking_blocks_json: m.thinking_blocks_json || ""
+                thinking_blocks_json: m.thinking_blocks_json || "",
+                attachments_json: attachJson
             }));
         }
 
@@ -355,11 +425,143 @@ PlasmoidItem {
                 thinking: d.thinking || "",
                 commandsStr: d.commandsStr || "",
                 shared: d.shared || false,
-                timestamp: d.timestamp || ""
+                timestamp: d.timestamp || "",
+                attachmentsStr: d.attachmentsStr || ""
             }));
         }
 
         return lines.join("\n");
+    }
+
+    function fetchHistoryList() {
+        console.log("PlasmaLLM: Fetching history list...");
+        isFetchingHistory = true;
+        var pythonSnippet = "import os, json, sys, datetime\n" +
+            "chats_dir = os.path.expanduser('~/PlasmaLLM/chats')\n" +
+            "if not os.path.exists(chats_dir):\n" +
+            "    print('[]')\n" +
+            "    sys.exit(0)\n" +
+            "try:\n" +
+            "    files = sorted([f for f in os.listdir(chats_dir) if f.endswith('.jsonl')], key=lambda x: os.path.getmtime(os.path.join(chats_dir, x)), reverse=True)[:10]\n" +
+            "    res = []\n" +
+            "    for f in files:\n" +
+            "        try:\n" +
+            "            path = os.path.join(chats_dir, f)\n" +
+            "            mtime = os.path.getmtime(path)\n" +
+            "            with open(path, 'r') as j:\n" +
+            "                first_user = ''\n" +
+            "                for line in j:\n" +
+            "                    data = json.loads(line)\n" +
+            "                    if data.get('_type') == 'display' and data.get('role') == 'user':\n" +
+            "                        first_user = data.get('content', '')[:100]\n" +
+            "                        break\n" +
+            "                res.append({'file': path, 'name': f, 'mtime': mtime, 'preview': first_user})\n" +
+            "        except: pass\n" +
+            "    print(json.dumps(res))\n" +
+            "except: print('[]')";
+
+        var b64 = Qt.btoa(pythonSnippet);
+        var cmd = "echo '" + b64 + "' | base64 -d | python3 2>/dev/null || " +
+                  "(ls -1t $HOME/PlasmaLLM/chats/*.jsonl 2>/dev/null | head -n 10) # " + Date.now();
+        
+        lastHistoryFetchSource = cmd;
+        historyFetchCommands.push(cmd);
+        executable.connectSource(cmd);
+    }
+
+    function updateHistoryModelLocally(fileName) {
+        if (!Plasmoid.configuration.saveChatHistory) return;
+        var filePath = "$HOME/PlasmaLLM/chats/" + fileName;
+        var found = false;
+        for (var i = 0; i < historyFilesModel.count; i++) {
+            if (historyFilesModel.get(i).name === fileName) {
+                if (i !== 0) historyFilesModel.move(i, 0, 1);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            var preview = "";
+            for (var j = 0; j < displayMessages.count; j++) {
+                if (displayMessages.get(j).role === "user") {
+                    preview = displayMessages.get(j).content.substring(0, 100);
+                    break;
+                }
+            }
+            var d = new Date();
+            historyFilesModel.insert(0, {
+                file: filePath,
+                name: fileName,
+                dateTime: d.toLocaleString(Qt.locale(), Locale.ShortFormat),
+                preview: preview
+            });
+            if (historyFilesModel.count > 10) {
+                historyFilesModel.remove(10, historyFilesModel.count - 10);
+            }
+        }
+    }
+
+    function handleHistoryLoad(content, filePath) {
+        var lines = content.split("\n");
+        clearChat();
+        chatMessages.clear();
+        displayMessages.clear();
+        currentChatFile = filePath.split("/").pop();
+
+        for (var i = 0; i < lines.length; i++) {
+            if (!lines[i].trim()) continue;
+            try {
+                var data = JSON.parse(lines[i]);
+                if (data._type === "api") {
+                    chatMessages.append({
+                        role: data.role,
+                        content: data.content,
+                        tool_calls_json: data.tool_calls_json || "",
+                        tool_call_id: data.tool_call_id || "",
+                        thinking_blocks_json: data.thinking_blocks_json || "",
+                        attachments_json: data.attachments_json || ""
+                    });
+
+                    // Trigger background re-read of images for the API model
+                    if (data.attachments_json && data.attachments_json.length > 0) {
+                        try {
+                            var atts = JSON.parse(data.attachments_json);
+                            var msgIdx = chatMessages.count - 1;
+                            for (var k = 0; k < atts.length; k++) {
+                                if (Api.isImageFile(atts[k].filePath)) {
+                                    var cmd = "cat '" + atts[k].filePath.replace(/'/g, "'\\''") + "' | base64 -w0";
+                                    pendingFileReads[cmd] = { 
+                                        filePath: atts[k].filePath, 
+                                        fileName: atts[k].fileName, 
+                                        isImage: true,
+                                        chatMessageIndex: msgIdx
+                                    };
+                                    fileReader.connectSource(cmd);
+                                }
+                            }
+                        } catch(e) {}
+                    }
+                } else if (data._type === "display") {
+                    displayMessages.append({
+                        role: data.role,
+                        content: data.content,
+                        thinking: data.thinking || "",
+                        commandsStr: data.commandsStr || "",
+                        shared: data.shared || false,
+                        timestamp: data.timestamp || "",
+                        attachmentsStr: data.attachmentsStr || ""
+                    });
+                }
+            } catch(e) {
+                console.error("Error parsing JSONL line: " + e);
+            }
+        }
+    }
+
+    function loadChatJsonl(filePath) {
+        var cmd = "cat '" + filePath.replace(/'/g, "'\\''") + "'";
+        pendingHistoryLoads[cmd] = filePath;
+        executable.connectSource(cmd);
     }
 
     function walletCall(member, args, resolve, reject) {
@@ -581,14 +783,31 @@ PlasmoidItem {
             var info = root.pendingFileReads[source];
             if (info) {
                 delete root.pendingFileReads[source];
-                var list = root.pendingAttachments.slice();
-                if (info.isImage) {
-                    var mime = Api.mimeForImage(info.filePath);
-                    list.push({ filePath: info.filePath, fileName: info.fileName, dataUrl: "data:" + mime + ";base64," + stdout.trim() });
+                if (info.hasOwnProperty("chatMessageIndex")) {
+                    // Updating a message from history restore
+                    try {
+                        var msg = chatMessages.get(info.chatMessageIndex);
+                        var atts = JSON.parse(msg.attachments_json);
+                        for (var k = 0; k < atts.length; k++) {
+                            if (atts[k].filePath === info.filePath) {
+                                var mime = Api.mimeForImage(info.filePath);
+                                atts[k].dataUrl = "data:" + mime + ";base64," + stdout.trim();
+                                break;
+                            }
+                        }
+                        chatMessages.setProperty(info.chatMessageIndex, "attachments_json", JSON.stringify(atts));
+                    } catch(e) {}
                 } else {
-                    list.push({ filePath: info.filePath, fileName: info.fileName, textContent: stdout });
+                    // Standard attachment loading
+                    var list = root.pendingAttachments.slice();
+                    if (info.isImage) {
+                        var mime = Api.mimeForImage(info.filePath);
+                        list.push({ filePath: info.filePath, fileName: info.fileName, dataUrl: "data:" + mime + ";base64," + stdout.trim() });
+                    } else {
+                        list.push({ filePath: info.filePath, fileName: info.fileName, textContent: stdout });
+                    }
+                    root.pendingAttachments = list;
                 }
-                root.pendingAttachments = list;
             }
             disconnectSource(source);
         }
@@ -1150,6 +1369,14 @@ PlasmoidItem {
         executable.connectSource(cmd);
     }
 
+    function clearAllHistory() {
+        var cmd = "rm -f $HOME/PlasmaLLM/chats/*.jsonl $HOME/PlasmaLLM/chats/*.txt";
+        saveCommands.push(cmd);
+        executable.connectSource(cmd);
+        historyFilesModel.clear();
+        currentChatFile = "";
+    }
+
     function saveScript(filePath, content) {
         var escaped = content.replace(/'/g, "'\\''");
         var cmd = "printf '%s' '" + escaped + "' > '" + filePath.replace(/'/g, "'\\''") + "' && chmod +x '" + filePath.replace(/'/g, "'\\''") + "'";
@@ -1284,6 +1511,16 @@ PlasmoidItem {
         function onApiEndpointChanged() {
             Plasmoid.configuration.availableModels = "";
         }
+        function onChatSaveFormatChanged() {
+            if (Plasmoid.configuration.chatSaveFormat === "jsonl" && historyFilesModel.count === 0) {
+                fetchHistoryList();
+            }
+        }
+        function onSaveChatHistoryChanged() {
+            if (Plasmoid.configuration.saveChatHistory && Plasmoid.configuration.chatSaveFormat === "jsonl" && historyFilesModel.count === 0) {
+                fetchHistoryList();
+            }
+        }
         function onAvailableModelsChanged() {
             var stored = Plasmoid.configuration.availableModels;
             if (stored && stored.length > 0) {
@@ -1347,6 +1584,9 @@ PlasmoidItem {
         var stored = Plasmoid.configuration.availableModels;
         if (stored && stored.length > 0) {
             try { fetchedModels = JSON.parse(stored); } catch(e) {}
+        }
+        if (Plasmoid.configuration.chatSaveFormat === "jsonl" && Plasmoid.configuration.saveChatHistory) {
+            fetchHistoryList();
         }
         if (Plasmoid.formFactor === PlasmaCore.Types.Planar) {
             if (root.hasUnreadResponse) {
