@@ -109,11 +109,11 @@ function formatGeminiError(xhr, prefix) {
 
 function buildTools(options) {
     var fns = [];
-    var ollamaApiKey = options && options.ollamaApiKey;
     var commandToolEnabled = options && options.commandToolEnabled;
     var webSearchEnabled = options && options.webSearchEnabled;
+    var searchConfigured = options && options.searchConfigured;
 
-    if (webSearchEnabled && ollamaApiKey && ollamaApiKey.length > 0) {
+    if (webSearchEnabled && searchConfigured) {
         fns.push({
             name: "web_search",
             description: "Search the web for current information. Use when you need up-to-date facts, recent events, or information you're not confident about.",
@@ -542,7 +542,8 @@ function sendStreaming(opts) {
         body.tools = tools;
     }
 
-    xhr.send(JSON.stringify(body, null, 2));
+    var payload = JSON.stringify(body, null, 2);
+    xhr.send(payload);
 
     var handle = {
         xhr: xhr,

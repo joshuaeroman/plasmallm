@@ -92,7 +92,10 @@ SimpleKCM {
         if (cfg_sysInfoDisk)     info.disk    = real.disk    || "<lsblk output>";
         if (cfg_sysInfoNetwork)  info.network = real.network || "<network>";
         if (cfg_sysInfoLocale)   info.locale  = real.locale  || "<locale>";
-        return Api.buildSystemPrompt(info, cfg_customSystemPrompt, { autoRunCommands: cfg_autoRunCommands, commandToolEnabled: cfg_useCommandTool, dateTime: cfg_sysInfoDateTime ? Api.localISODateTime() : "" });
+        return Api.buildSystemPrompt(info, cfg_customSystemPrompt, { 
+            autoRunCommands: cfg_autoRunCommands, 
+            commandToolEnabled: cfg_useCommandTool 
+        });
     }
 
     property string promptPreview: buildPreview()

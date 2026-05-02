@@ -53,11 +53,11 @@ function fetchModels(endpoint, apiKey, callback) {
 function buildTools(options) {
     // Responses API uses a flat tool definition (no {type:"function", function:{...}} wrapper).
     var tools = [];
-    var ollamaApiKey = options && options.ollamaApiKey;
     var commandToolEnabled = options && options.commandToolEnabled;
     var webSearchEnabled = options && options.webSearchEnabled;
+    var searchConfigured = options && options.searchConfigured;
 
-    if (webSearchEnabled && ollamaApiKey && ollamaApiKey.length > 0) {
+    if (webSearchEnabled && searchConfigured) {
         tools.push({
             type: "function",
             name: "web_search",
@@ -576,7 +576,8 @@ function sendStreaming(opts) {
         body.tools = tools;
     }
 
-    xhr.send(JSON.stringify(body, null, 2));
+    var payload = JSON.stringify(body, null, 2);
+    xhr.send(payload);
 
     var handle = {
         xhr: xhr,

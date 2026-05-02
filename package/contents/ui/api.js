@@ -8,6 +8,7 @@
 // adapters/<id>.js and is selected via Plasmoid.configuration.apiType.
 
 .import "adapters/index.js" as Adapters
+.import "search_adapters/index.js" as SearchAdapters
 
 function localISODateTime() {
     var d = new Date();
@@ -41,9 +42,6 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
     }
     if (sysInfo.locale) {
         prompt += "- Locale: " + sysInfo.locale + "\n";
-    }
-    if (options && options.dateTime) {
-        prompt += "- Current date/time: " + options.dateTime + "\n";
     }
     if (sysInfo.user) {
         prompt += "- User: " + sysInfo.user + "\n";
@@ -156,41 +154,46 @@ function parseCommandBlocks(text) {
     return commands;
 }
 
-// performWebSearch is host-side (calls ollama.com regardless of LLM provider),
-// so it stays here rather than living inside an adapter.
-function performWebSearch(ollamaApiKey, query, maxResults, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://ollama.com/api/web_search");
-    xhr.timeout = 30000;
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Authorization", "Bearer " + ollamaApiKey);
+function decodeHtmlEntities(text) {
+    if (!text) return "";
+    return text.replace(/&amp;/g, "&")
+               .replace(/&quot;/g, '"')
+               .replace(/&#39;/g, "'")
+               .replace(/&#x27;/g, "'")
+               .replace(/&lt;/g, "<")
+               .replace(/&gt;/g, ">")
+               .replace(/&nbsp;/g, " ")
+               .replace(/&#(\d+);/g, function(match, dec) {
+                   return String.fromCharCode(dec);
+               })
+               .replace(/&#x([0-9a-f]+);/gi, function(match, hex) {
+                   return String.fromCharCode(parseInt(hex, 16));
+               });
+}
 
-    xhr.ontimeout = function() {
-        callback(i18n("Web search timed out"), null);
-    };
+function isSearchConfigured(options) {
+    if (!options) return false;
+    var provider = options.webSearchProvider || "ollama";
+    
+    if (provider === "duckduckgo") {
+        return true;
+    } else if (provider === "searxng") {
+        return !!(options.searxngUrl && options.searxngUrl.length > 0);
+    } else if (provider === "ollama") {
+        return !!(options.ollamaSearchApiKey && options.ollamaSearchApiKey.length > 0);
+    }
+    return false;
+}
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                try {
-                    var response = JSON.parse(xhr.responseText);
-                    callback(null, response);
-                } catch (e) {
-                    callback(i18n("Failed to parse web search response: %1", e.message), null);
-                }
-            } else {
-                var errMsg = i18n("Web search failed (HTTP %1)", xhr.status);
-                if (xhr.responseText) {
-                    errMsg += ": " + xhr.responseText.substring(0, 200);
-                }
-                callback(errMsg, null);
-            }
-        }
-    };
-
-    var body = { query: query };
-    if (maxResults && maxResults > 0) body.max_results = Math.min(maxResults, 10);
-    xhr.send(JSON.stringify(body));
+// performWebSearch orchestrates search via the selected provider adapter
+function performWebSearch(options, query, maxResults, callback) {
+    var provider = options.webSearchProvider || "ollama";
+    var adapter = SearchAdapters.getSearchAdapter(provider);
+    if (adapter && typeof adapter.performWebSearch === "function") {
+        adapter.performWebSearch(options, query, maxResults, callback);
+    } else {
+        callback(i18n("Search provider %1 not supported", provider), null);
+    }
 }
 
 // --- Adapter pass-throughs ---
@@ -238,6 +241,9 @@ function fetchModels(apiType, endpoint, apiKey, usesResponsesAPI, callback) {
 }
 
 function buildTools(apiType, options) {
+    if (options) {
+        options.searchConfigured = isSearchConfigured(options);
+    }
     return Adapters.getAdapter(apiType).buildTools(options);
 }
 

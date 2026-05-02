@@ -186,12 +186,36 @@
       <label>Enable web search tool</label>
       <default>false</default>
     </entry>
+    <entry name="webSearchProvider" type="String">
+      <label>Selected web search provider (ollama, searxng, duckduckgo)</label>
+      <default>ollama</default>
+    </entry>
+    <entry name="searxngUrl" type="String">
+      <label>SearXNG Instance URL</label>
+      <default></default>
+    </entry>
+    <entry name="searxngApiKey" type="String">
+      <label>SearXNG API Key/Token (optional, for bypassing limiter)</label>
+      <default></default>
+    </entry>
+    <entry name="searxngApiKeyVersion" type="Int">
+      <label>Internal: incremented when SearXNG API key is saved to KDE Wallet</label>
+      <default>0</default>
+    </entry>
     <entry name="ollamaApiKey" type="String">
-      <label>Ollama API Key (for web search)</label>
+      <label>Ollama API Key (for web search) - Deprecated, kept for migration</label>
+      <default></default>
+    </entry>
+    <entry name="ollamaSearchApiKey" type="String">
+      <label>Ollama API Key specifically for Web Search</label>
       <default></default>
     </entry>
     <entry name="ollamaApiKeyVersion" type="Int">
       <label>Internal: incremented when Ollama API key is saved to KDE Wallet</label>
+      <default>0</default>
+    </entry>
+    <entry name="ollamaSearchApiKeyVersion" type="Int">
+      <label>Internal: incremented when Ollama Search API key is saved to KDE Wallet</label>
       <default>0</default>
     </entry>
     <entry name="webSearchMigrated" type="Bool">
