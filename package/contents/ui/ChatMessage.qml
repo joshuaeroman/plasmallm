@@ -130,7 +130,7 @@ Item {
                     }
                 }
 
-                PlasmaComponents.Label {
+                Kirigami.SelectableLabel {
                     id: thinkingLabel
                     width: thinkingScroll.availableWidth
                     text: messageItem.thinking
@@ -278,7 +278,7 @@ Item {
                             }
                         }
 
-                        PlasmaComponents.Label {
+                        Kirigami.SelectableLabel {
                             width: parent.width
                             text: messageItem.strippedContent
                             textFormat: Text.PlainText
@@ -291,7 +291,7 @@ Item {
 
                 Component {
                     id: plainContent
-                    PlasmaComponents.Label {
+                    Kirigami.SelectableLabel {
                         width: parent ? parent.width : implicitWidth
                         text: isThinking ? i18n("Thinking…") : messageItem.strippedContent
                         textFormat: (isAssistant && !isThinking) ? Text.MarkdownText : Text.PlainText
@@ -300,6 +300,8 @@ Item {
                         font.italic: isThinking
                         color: isThinking ? Kirigami.Theme.disabledTextColor :
                                isUser ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+                        selectionColor: isUser ? Kirigami.Theme.backgroundColor : Kirigami.Theme.highlightColor
+                        selectedTextColor: isUser ? Kirigami.Theme.textColor : Kirigami.Theme.highlightedTextColor
                     }
                 }
             }
@@ -320,7 +322,7 @@ Item {
                         }
                     }
 
-                    PlasmaComponents.Label {
+                    Kirigami.SelectableLabel {
                         width: parent.width
                         text: messageItem.content
                         textFormat: Text.MarkdownText
