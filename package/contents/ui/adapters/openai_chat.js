@@ -50,11 +50,11 @@ function fetchModels(endpoint, apiKey, callback) {
 
 function buildTools(options) {
     var tools = [];
-    var ollamaApiKey = options && options.ollamaApiKey;
     var commandToolEnabled = options && options.commandToolEnabled;
     var webSearchEnabled = options && options.webSearchEnabled;
+    var searchConfigured = options && options.searchConfigured;
 
-    if (webSearchEnabled && ollamaApiKey && ollamaApiKey.length > 0) {
+    if (webSearchEnabled && searchConfigured) {
         tools.push({
             type: "function",
             "function": {

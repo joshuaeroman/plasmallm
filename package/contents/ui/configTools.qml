@@ -23,15 +23,27 @@ SimpleKCM {
     property bool cfg_useCommandToolDefault
     property bool cfg_enableWebSearch
     property bool cfg_enableWebSearchDefault
-    property string cfg_ollamaApiKey
-    property string cfg_ollamaApiKeyDefault
-    property int cfg_ollamaApiKeyVersion
-    property int cfg_ollamaApiKeyVersionDefault
+    property string cfg_webSearchProvider
+    property string cfg_webSearchProviderDefault
+    property string cfg_searxngUrl
+    property string cfg_searxngUrlDefault
+    property string cfg_searxngApiKey
+    property string cfg_searxngApiKeyDefault
+    property string cfg_ollamaSearchApiKey
+    property string cfg_ollamaSearchApiKeyDefault
+    property int cfg_ollamaSearchApiKeyVersion
+    property int cfg_ollamaSearchApiKeyVersionDefault
 
     property string walletOllamaKey: ""
     property bool walletOllamaKeyLoaded: false
     property bool walletOllamaKeyDirty: false
     property bool walletOllamaSaveInProgress: false
+
+    property string walletSearxngKey: ""
+    property bool walletSearxngKeyLoaded: false
+    property bool walletSearxngKeyDirty: false
+    property bool walletSearxngSaveInProgress: false
+
     property bool walletAvailable: false
 
     function walletCall(member, args, resolve, reject) {
@@ -75,10 +87,26 @@ SimpleKCM {
                 onDone(false);
                 return;
             }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaApiKey", key, "PlasmaLLM"],
+            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaSearchApiKey", key, "PlasmaLLM"],
                 function(result) { onDone(result === 0); },
                 function(err) {
                     console.warn("PlasmaLLM: wallet writePassword (ollama) error: " + err);
+                    onDone(false);
+                }
+            );
+        });
+    }
+
+    function walletWriteSearxngKey(handle, key, onDone) {
+        ensureWalletFolder(handle, function(ok) {
+            if (!ok) {
+                onDone(false);
+                return;
+            }
+            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "searxngApiKey", key, "PlasmaLLM"],
+                function(result) { onDone(result === 0); },
+                function(err) {
+                    console.warn("PlasmaLLM: wallet writePassword (searxng) error: " + err);
                     onDone(false);
                 }
             );
@@ -89,30 +117,30 @@ SimpleKCM {
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
                 if (handle < 0) {
-                    walletOllamaKey = cfg_ollamaApiKey;
+                    walletOllamaKey = cfg_ollamaSearchApiKey;
                     walletOllamaKeyLoaded = true;
                     return;
                 }
                 walletAvailable = true;
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaApiKey", "PlasmaLLM"],
+                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaSearchApiKey", "PlasmaLLM"],
                     function(password) {
                         if (password && password.length > 0) {
                             walletOllamaKey = password;
                         } else {
-                            walletOllamaKey = cfg_ollamaApiKey;
+                            walletOllamaKey = cfg_ollamaSearchApiKey;
                         }
                         walletOllamaKeyLoaded = true;
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     },
                     function(err) {
-                        walletOllamaKey = cfg_ollamaApiKey;
+                        walletOllamaKey = cfg_ollamaSearchApiKey;
                         walletOllamaKeyLoaded = true;
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     }
                 );
             },
             function(err) {
-                walletOllamaKey = cfg_ollamaApiKey;
+                walletOllamaKey = cfg_ollamaSearchApiKey;
                 walletOllamaKeyLoaded = true;
             }
         );
@@ -122,7 +150,7 @@ SimpleKCM {
         var key = ollamaApiKeyField.text;
         walletOllamaSaveInProgress = true;
         if (!walletAvailable) {
-            cfg_ollamaApiKey = key;
+            cfg_ollamaSearchApiKey = key;
             walletOllamaKeyDirty = false;
             walletOllamaSaveInProgress = false;
             return;
@@ -130,7 +158,7 @@ SimpleKCM {
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
                 if (handle < 0) {
-                    cfg_ollamaApiKey = key;
+                    cfg_ollamaSearchApiKey = key;
                     walletOllamaKeyDirty = false;
                     walletOllamaSaveInProgress = false;
                     return;
@@ -138,25 +166,98 @@ SimpleKCM {
                 walletWriteOllamaKey(handle, key, function(success) {
                     if (success) {
                         walletOllamaKey = key;
-                        cfg_ollamaApiKey = "";
+                        cfg_ollamaSearchApiKey = "";
                         walletOllamaKeyDirty = false;
-                        cfg_ollamaApiKeyVersion++;
+                        cfg_ollamaSearchApiKeyVersion++;
                     }
                     walletOllamaSaveInProgress = false;
                     walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                 });
             },
             function(err) {
-                cfg_ollamaApiKey = key;
+                cfg_ollamaSearchApiKey = key;
                 walletOllamaKeyDirty = false;
                 walletOllamaSaveInProgress = false;
             }
         );
     }
 
+    function loadWalletSearxngKey() {
+        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
+            function(handle) {
+                if (handle < 0) {
+                    walletSearxngKey = cfg_searxngApiKey;
+                    walletSearxngKeyLoaded = true;
+                    return;
+                }
+                walletAvailable = true;
+                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "searxngApiKey", "PlasmaLLM"],
+                    function(password) {
+                        if (password && password.length > 0) {
+                            walletSearxngKey = password;
+                        } else {
+                            walletSearxngKey = cfg_searxngApiKey;
+                        }
+                        walletSearxngKeyLoaded = true;
+                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                    },
+                    function(err) {
+                        walletSearxngKey = cfg_searxngApiKey;
+                        walletSearxngKeyLoaded = true;
+                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                    }
+                );
+            },
+            function(err) {
+                walletSearxngKey = cfg_searxngApiKey;
+                walletSearxngKeyLoaded = true;
+            }
+        );
+    }
+
+    function saveWalletSearxngKey() {
+        var key = searxngApiKeyField.text;
+        walletSearxngSaveInProgress = true;
+        if (!walletAvailable) {
+            cfg_searxngApiKey = key;
+            walletSearxngKeyDirty = false;
+            walletSearxngSaveInProgress = false;
+            return;
+        }
+        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
+            function(handle) {
+                if (handle < 0) {
+                    cfg_searxngApiKey = key;
+                    walletSearxngKeyDirty = false;
+                    walletSearxngSaveInProgress = false;
+                    return;
+                }
+                walletWriteSearxngKey(handle, key, function(success) {
+                    if (success) {
+                        walletSearxngKey = key;
+                        cfg_searxngApiKey = "";
+                        walletSearxngKeyDirty = false;
+                        cfg_searxngApiKeyVersion++;
+                    }
+                    walletSearxngSaveInProgress = false;
+                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                });
+            },
+            function(err) {
+                cfg_searxngApiKey = key;
+                walletSearxngKeyDirty = false;
+                walletSearxngSaveInProgress = false;
+            }
+        );
+    }
+
     Component.onCompleted: {
         loadWalletOllamaKey();
+        loadWalletSearxngKey();
     }
+
+    onCfg_ollamaSearchApiKeyVersionChanged: loadWalletOllamaKey()
+    onCfg_searxngApiKeyVersionChanged: loadWalletSearxngKey()
 
     Kirigami.FormLayout {
         Kirigami.Separator {
@@ -219,7 +320,7 @@ SimpleKCM {
             checked: cfg_enableWebSearch
             onCheckedChanged: cfg_enableWebSearch = checked
 
-            QQC2.ToolTip.text: i18n("Allows the LLM to perform web searches using Ollama's search API.")
+            QQC2.ToolTip.text: i18n("Allows the LLM to perform web searches.")
             QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
         }
@@ -229,16 +330,42 @@ SimpleKCM {
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
+            QQC2.ComboBox {
+                id: webSearchProviderComboBox
+                Layout.fillWidth: true
+                Layout.maximumWidth: Kirigami.Units.gridUnit * 15
+                model: [
+                    { text: i18n("Ollama API"), value: "ollama" },
+                    { text: i18n("SearXNG"), value: "searxng" },
+                    { text: i18n("DuckDuckGo"), value: "duckduckgo" }
+                ]
+                textRole: "text"
+                valueRole: "value"
+                Component.onCompleted: {
+                    for (var i = 0; i < count; i++) {
+                        if (model[i].value === cfg_webSearchProvider) {
+                            currentIndex = i;
+                            break;
+                        }
+                    }
+                }
+                onActivated: {
+                    cfg_webSearchProvider = currentValue;
+                }
+            }
+
+            // Ollama options
             RowLayout {
                 Layout.fillWidth: true
                 spacing: Kirigami.Units.smallSpacing
+                visible: cfg_webSearchProvider === "ollama"
 
                 QQC2.TextField {
                     id: ollamaApiKeyField
                     Layout.fillWidth: true
                     placeholderText: i18n("Ollama API key")
                     echoMode: TextInput.Password
-                    text: walletOllamaKeyLoaded ? walletOllamaKey : cfg_ollamaApiKey
+                    text: walletOllamaKeyLoaded ? walletOllamaKey : cfg_ollamaSearchApiKey
                     onTextChanged: {
                         if (walletOllamaKeyLoaded) {
                             walletOllamaKeyDirty = (text !== walletOllamaKey);
@@ -259,8 +386,53 @@ SimpleKCM {
                 }
             }
 
+            // SearXNG options
+            QQC2.TextField {
+                id: searxngUrlField
+                Layout.fillWidth: true
+                visible: cfg_webSearchProvider === "searxng"
+                placeholderText: i18n("SearXNG Instance URL (e.g. https://searx.be)")
+                text: cfg_searxngUrl
+                onTextChanged: cfg_searxngUrl = text
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: Kirigami.Units.smallSpacing
+                visible: cfg_webSearchProvider === "searxng"
+
+                QQC2.TextField {
+                    id: searxngApiKeyField
+                    Layout.fillWidth: true
+                    placeholderText: i18n("SearXNG API Key/Token (optional)")
+                    echoMode: TextInput.Password
+                    text: walletSearxngKeyLoaded ? walletSearxngKey : cfg_searxngApiKey
+                    onTextChanged: {
+                        if (walletSearxngKeyLoaded) {
+                            walletSearxngKeyDirty = (text !== walletSearxngKey);
+                        }
+                    }
+                    onEditingFinished: {
+                        if (walletSearxngKeyDirty) saveWalletSearxngKey();
+                    }
+                }
+
+                QQC2.Button {
+                    text: walletSearxngSaveInProgress ? i18n("Saving…") :
+                          !walletSearxngKeyDirty ? i18n("Saved") :
+                          !walletAvailable ? i18n("Save to Config (Insecure)") : i18n("Save Key")
+                    icon.name: !walletSearxngKeyDirty ? "dialog-ok-apply" : "document-save"
+                    enabled: walletSearxngKeyDirty && !walletSearxngSaveInProgress
+                    onClicked: saveWalletSearxngKey()
+                }
+            }
+
             QQC2.Label {
-                text: i18n("Enables LLM-triggered web searches via Ollama's search API")
+                text: cfg_webSearchProvider === "duckduckgo" 
+                      ? i18n("DuckDuckGo requires no configuration.") 
+                      : cfg_webSearchProvider === "searxng" 
+                        ? i18n("Ensure the SearXNG instance has the JSON format enabled.") 
+                        : i18n("Enables LLM-triggered web searches via Ollama's search API")
                 font: Kirigami.Theme.smallFont
                 color: Kirigami.Theme.disabledTextColor
                 wrapMode: Text.Wrap

@@ -74,10 +74,10 @@ SimpleKCM {
     property string cfg_lastClosedTimestampDefault
     property string cfg_availableModels
     property string cfg_availableModelsDefault
-    property string cfg_ollamaApiKey
-    property string cfg_ollamaApiKeyDefault
-    property int cfg_ollamaApiKeyVersion
-    property int cfg_ollamaApiKeyVersionDefault
+    property string cfg_ollamaSearchApiKey
+    property string cfg_ollamaSearchApiKeyDefault
+    property int cfg_ollamaSearchApiKeyVersion
+    property int cfg_ollamaSearchApiKeyVersionDefault
     property string cfg_tasks
     property string cfg_tasksDefault
     property bool cfg_sysInfoDateTime
