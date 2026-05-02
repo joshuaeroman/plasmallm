@@ -33,6 +33,8 @@ SimpleKCM {
     property string cfg_ollamaSearchApiKeyDefault
     property int cfg_ollamaSearchApiKeyVersion
     property int cfg_ollamaSearchApiKeyVersionDefault
+    property int cfg_searxngApiKeyVersion
+    property int cfg_searxngApiKeyVersionDefault
 
     property string walletOllamaKey: ""
     property bool walletOllamaKeyLoaded: false
