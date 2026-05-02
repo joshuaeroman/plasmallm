@@ -69,6 +69,20 @@ SimpleKCM {
     property string cfg_gatheredSysInfoDefault
     property int cfg_apiKeyVersion
     property int cfg_apiKeyVersionDefault
+    property bool cfg_enableWebSearch
+    property bool cfg_enableWebSearchDefault
+    property string cfg_webSearchProvider
+    property string cfg_webSearchProviderDefault
+    property string cfg_searxngUrl
+    property string cfg_searxngUrlDefault
+    property string cfg_searxngApiKey
+    property string cfg_searxngApiKeyDefault
+    property int cfg_searxngApiKeyVersion
+    property int cfg_searxngApiKeyVersionDefault
+    property string cfg_ollamaSearchApiKey
+    property string cfg_ollamaSearchApiKeyDefault
+    property int cfg_ollamaSearchApiKeyVersion
+    property int cfg_ollamaSearchApiKeyVersionDefault
     property bool cfg_useCommandTool
     property bool cfg_useCommandToolDefault
 

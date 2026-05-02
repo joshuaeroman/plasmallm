@@ -74,6 +74,16 @@ SimpleKCM {
     property string cfg_lastClosedTimestampDefault
     property string cfg_availableModels
     property string cfg_availableModelsDefault
+    property bool cfg_enableWebSearch
+    property bool cfg_enableWebSearchDefault
+    property string cfg_webSearchProvider
+    property string cfg_webSearchProviderDefault
+    property string cfg_searxngUrl
+    property string cfg_searxngUrlDefault
+    property string cfg_searxngApiKey
+    property string cfg_searxngApiKeyDefault
+    property int cfg_searxngApiKeyVersion
+    property int cfg_searxngApiKeyVersionDefault
     property string cfg_ollamaSearchApiKey
     property string cfg_ollamaSearchApiKeyDefault
     property int cfg_ollamaSearchApiKeyVersion
