@@ -60,7 +60,7 @@ Rectangle {
                 }
             }
 
-            PlasmaComponents.Label {
+            Kirigami.SelectableLabel {
                 id: commandLabel
                 width: parent.width
                 text: commandBlock.commandText
