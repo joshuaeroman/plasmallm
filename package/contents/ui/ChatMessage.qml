@@ -41,7 +41,7 @@ Item {
     readonly property bool isCommandRunning: role === "command_running"
     readonly property bool isWebSearchResults: role === "web_search_results"
     readonly property bool isThinking: isAssistant && content.length === 0 && commandsStr.length === 0
-    readonly property string strippedContent: isAssistant ? Api.stripCodeBlocks(content).trim() : content
+    readonly property string strippedContent: isAssistant ? (Plasmoid.configuration.useCommandTool ? content.trim() : Api.stripCodeBlocks(content).trim()) : content
     readonly property bool hasBubbleContent: isThinking || !isAssistant || strippedContent.length > 0
     readonly property int spacing: Plasmoid.configuration.chatSpacing
 
