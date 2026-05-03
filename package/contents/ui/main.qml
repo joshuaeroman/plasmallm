@@ -13,6 +13,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.workspace.dbus as DBus
 
 import "api.js" as Api
+import "sessionRunner.js" as SessionRunner
 
 PlasmoidItem {
     id: root
@@ -20,6 +21,17 @@ PlasmoidItem {
     hideOnWindowDeactivate: !Plasmoid.configuration.pin
 
     property bool isLoading: false
+    property bool sessionActive: false
+
+    Timer {
+        id: sessionStatusTimer
+        interval: 5000
+        running: root.expanded && SessionRunner.isEnabled(Plasmoid.configuration)
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: updateSessionStatus()
+    }
+
     property bool hasUnreadResponse: false
     property var activeRequest: null
     property int streamingMessageIndex: -1
@@ -68,6 +80,23 @@ PlasmoidItem {
 
     // Commands currently in-flight as system info gather (populated by regatherSysInfo)
     property var pendingSysInfoCommands: ({})
+    property var runningCommands: ({})
+    property var stopCommands: ([])
+    property var statusCheckCommands: ([])
+    property int commandRunStateTick: 0
+
+    function sessionChipText() {
+        if (!Plasmoid.configuration.useSessionMultiplexer) return "";
+        return SessionRunner.backend(Plasmoid.configuration) + ": " + SessionRunner.sessionName(Plasmoid.configuration);
+    }
+
+    function isCommandRunning(rawCmd, sourceId) {
+        for (var k in runningCommands) {
+            var info = runningCommands[k];
+            if (info.rawCmd === rawCmd && (!sourceId || info.sourceId === sourceId)) return true;
+        }
+        return false;
+    }
 
     property var historyFetchCommands: ([])
     property var pendingHistoryLoads: ({})
@@ -174,6 +203,14 @@ PlasmoidItem {
                 delete pendingHistoryLoads[source];
                 handleHistoryLoad(stdout, path);
                 disconnectSource(source);
+            } else if (stopCommands.indexOf(source) !== -1) {
+                // Stop commands from the multiplexer
+                stopCommands.splice(stopCommands.indexOf(source), 1);
+                disconnectSource(source);
+            } else if (statusCheckCommands.indexOf(source) !== -1) {
+                statusCheckCommands.splice(statusCheckCommands.indexOf(source), 1);
+                root.sessionActive = (exitCode === 0);
+                disconnectSource(source);
             } else {
                 handleCommandOutput(source, stdout, stderr, exitCode);
                 disconnectSource(source);
@@ -254,7 +291,7 @@ PlasmoidItem {
     }
 
     function initSystemPrompt() {
-        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode, commandToolEnabled: Plasmoid.configuration.useCommandTool, dateTime: Plasmoid.configuration.sysInfoDateTime ? Api.localISODateTime() : "" });
+        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode, commandToolEnabled: Plasmoid.configuration.useCommandTool, sessionMultiplexer: root.sessionChipText() });
         Plasmoid.configuration.gatheredSysInfo = JSON.stringify(sysInfo);
         if (systemPromptReady) {
             chatMessages.setProperty(0, "content", prompt);
@@ -311,7 +348,7 @@ PlasmoidItem {
         root.pendingToolCalls = [];
         // Re-seed with system prompt
         if (systemPromptReady) {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: false, commandToolEnabled: Plasmoid.configuration.useCommandTool, dateTime: Plasmoid.configuration.sysInfoDateTime ? Api.localISODateTime() : "" });
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: false, commandToolEnabled: Plasmoid.configuration.useCommandTool });
             chatMessages.append({ role: "system", content: prompt });
         }
     }
@@ -967,7 +1004,11 @@ PlasmoidItem {
                 sessionAutoMode = !sessionAutoMode;
                 displayMessages.append({ role: "assistant", content: sessionAutoMode ? i18n("Auto mode enabled for this session. Commands will run and share output automatically.") : i18n("Auto mode disabled."), commandsStr: "", shared: false, timestamp: currentTimestamp() });
                 if (systemPromptReady) {
-                    var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode, commandToolEnabled: Plasmoid.configuration.useCommandTool, dateTime: Plasmoid.configuration.sysInfoDateTime ? Api.localISODateTime() : "" });
+                    var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
+                        autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                        autoMode: root.isAutoMode, 
+                        commandToolEnabled: Plasmoid.configuration.useCommandTool 
+                    });
                     chatMessages.setProperty(0, "content", autoPrompt);
                 }
             }
@@ -1024,7 +1065,11 @@ PlasmoidItem {
                     sessionAutoMode = true;
                     taskAutoMode = true;
                     if (systemPromptReady) {
-                        var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode, commandToolEnabled: Plasmoid.configuration.useCommandTool, dateTime: Plasmoid.configuration.sysInfoDateTime ? Api.localISODateTime() : "" });
+                        var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
+                            autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                            autoMode: root.isAutoMode, 
+                            commandToolEnabled: Plasmoid.configuration.useCommandTool 
+                        });
                         chatMessages.setProperty(0, "content", autoPrompt);
                     }
                 }
@@ -1096,11 +1141,11 @@ PlasmoidItem {
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
                 autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                 autoMode: root.isAutoMode, 
-                commandToolEnabled: Plasmoid.configuration.useCommandTool 
+                commandToolEnabled: Plasmoid.configuration.useCommandTool,
+                sessionMultiplexer: root.sessionChipText()
             });
             chatMessages.setProperty(0, "content", prompt);
         }
-
         // Add a placeholder assistant message for streaming
         displayMessages.append({
             role: "assistant",
@@ -1120,7 +1165,7 @@ PlasmoidItem {
 
             // Prepend timestamp if enabled and available
             if (msg.role !== "tool" && Plasmoid.configuration.sysInfoDateTime && msg.timestamp_api && msg.timestamp_api.length > 0) {
-                msgContent = "[" + msg.timestamp_api + "] " + msgContent;
+                msgContent = "[" + msg.timestamp_api + "]: " + msgContent;
             }
 
             if (msg.attachments_json && msg.attachments_json.length > 0) {
@@ -1373,6 +1418,7 @@ PlasmoidItem {
                         timestamp: currentTimestamp()
                     });
                 } else {
+                    fullText = Api.stripLeadingTimestamp(fullText);
                     var regularThinkingJson = (assistantMsg && assistantMsg.thinkingBlocks && assistantMsg.thinkingBlocks.length > 0)
                         ? JSON.stringify(assistantMsg.thinkingBlocks) : "";
                     chatMessages.append({ 
@@ -1465,6 +1511,24 @@ PlasmoidItem {
     }
 
     function runInTerminal(cmd) {
+        if (SessionRunner.isEnabled(Plasmoid.configuration)) {
+            var be = SessionRunner.backend(Plasmoid.configuration);
+            var sess = SessionRunner.sessionName(Plasmoid.configuration);
+            var attachCmd = "";
+            var termScript =
+                "term=${TERMINAL:-$(kreadconfig6 --file kdeglobals --group General --key TerminalApplication 2>/dev/null)}; " +
+                "term=${term:-konsole}; ";
+            if (be === "tmux") {
+                attachCmd = termScript + "\"$term\" -e tmux attach -t '" + sess + "'";
+            } else {
+                attachCmd = termScript + "\"$term\" -e screen -r '" + sess + "'";
+            }
+            var termCmdEnabled = "bash -c '" + attachCmd + "'";
+            terminalCommands.push(termCmdEnabled);
+            executable.connectSource(termCmdEnabled);
+            return;
+        }
+
         // Pass the command via env var to avoid quoting issues with arbitrary content.
         // Detect terminal: $TERMINAL > KDE config > konsole fallback.
         // read -e -i pre-fills the readline buffer; user edits then presses Enter.
@@ -1498,25 +1562,88 @@ PlasmoidItem {
         executable.connectSource(cmd);
     }
 
-    function executeCommand(cmd) {
+    function generateMarker() {
+        return Math.random().toString(36).substring(2, 15);
+    }
+
+    function stopCommandByText(rawCmd, sourceId) {
+        for (var k in runningCommands) {
+            var info = runningCommands[k];
+            if (info.rawCmd === rawCmd && (!sourceId || info.sourceId === sourceId)) {
+                var stopCmd = SessionRunner.stopCommand(Plasmoid.configuration, info.marker);
+                stopCommands.push(stopCmd);
+                executable.connectSource(stopCmd);
+                return;
+            }
+        }
+    }
+
+    function updateSessionStatus() {
+        if (!SessionRunner.isEnabled(Plasmoid.configuration)) {
+            sessionActive = false;
+            return;
+        }
+        var be = SessionRunner.backend(Plasmoid.configuration);
+        var sess = SessionRunner.sessionName(Plasmoid.configuration);
+        var cmd = be === "tmux" ? "tmux has-session -t '" + sess + "' 2>/dev/null" : "screen -ls '" + sess + "' | grep -q '\\." + sess + "\\b'";
+        statusCheckCommands.push(cmd);
+        executable.connectSource(cmd);
+    }
+
+    function resetSession() {
+        if (SessionRunner.isEnabled(Plasmoid.configuration)) {
+            var killCmd = SessionRunner.killSession(Plasmoid.configuration);
+            saveCommands.push(killCmd); // Use saveCommands to avoid output bubble
+            executable.connectSource(killCmd);
+            sessionActive = false;
+            displayMessages.append({
+                role: "assistant",
+                content: i18n("Session reset requested."),
+                commandsStr: "",
+                shared: false,
+                timestamp: currentTimestamp()
+            });
+            Qt.callLater(updateSessionStatus);
+        }
+    }
+
+    function executeCommand(cmd, sourceId) {
+        var marker = generateMarker();
+        var wrapped = SessionRunner.isEnabled(Plasmoid.configuration)
+                    ? SessionRunner.wrapCommand(cmd, Plasmoid.configuration, marker)
+                    : cmd;
+
+        runningCommands[wrapped] = { rawCmd: cmd, marker: marker, sourceId: sourceId };
+        commandRunStateTick++;
+        
         displayMessages.append({
             role: "command_running",
             content: i18n("Running: %1", cmd),
+            commandKey: wrapped,
+            marker: marker,
             commandsStr: "",
             shared: false,
             timestamp: currentTimestamp()
         });
-        executable.connectSource(cmd);
+        sessionActive = true;
+        executable.connectSource(wrapped);
     }
 
     function handleCommandOutput(command, stdout, stderr, exitCode) {
+        var cmdInfo = runningCommands[command];
+        var rawCmd = cmdInfo ? cmdInfo.rawCmd : command;
+
         // Find and replace the command_running message
         for (var i = displayMessages.count - 1; i >= 0; i--) {
-            if (displayMessages.get(i).role === "command_running" &&
-                displayMessages.get(i).content === i18n("Running: %1", command)) {
+            var m = displayMessages.get(i);
+            if (m.role === "command_running" && (m.commandKey === command || m.content === i18n("Running: %1", rawCmd))) {
                 displayMessages.remove(i);
                 break;
             }
+        }
+        if (cmdInfo) {
+            delete runningCommands[command];
+            commandRunStateTick++;
         }
 
         var maxOutputSize = 50000; // 50KB limit
@@ -1539,13 +1666,13 @@ PlasmoidItem {
         // If there's a pending run_command tool call, send the result as a tool message
         if (root.pendingToolCalls.length > 0) {
             for (var ptci = 0; ptci < root.pendingToolCalls.length; ptci++) {
-                if (command === root.pendingToolCalls[ptci].command) {
+                if (rawCmd === root.pendingToolCalls[ptci].command) {
                     var completed = root.pendingToolCalls.splice(ptci, 1)[0];
                     root.pendingToolCalls = root.pendingToolCalls; // trigger property change
                     displayMessages.setProperty(displayMessages.count - 1, "shared", true);
-                    chatMessages.append({ 
-                        role: "tool", 
-                        content: output, 
+                    chatMessages.append({
+                        role: "tool",
+                        content: output,
                         tool_call_id: completed.id,
                         timestamp_api: Api.localISODateTime()
                     });
@@ -1554,15 +1681,16 @@ PlasmoidItem {
                     } else if (sessionAutoMode || Plasmoid.configuration.autoRunCommands) {
                         processNextToolCall();
                     }
+                    Qt.callLater(updateSessionStatus);
                     return;
                 }
             }
         }
-
         // Auto-share with LLM if enabled (suppressed after user hits stop)
         if ((sessionAutoMode || Plasmoid.configuration.autoShareCommandOutput) && !autoShareSuppressed) {
             shareOutput(displayMessages.count - 1);
         }
+        Qt.callLater(updateSessionStatus);
     }
 
     function shareOutput(index) {

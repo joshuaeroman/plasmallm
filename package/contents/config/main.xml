@@ -242,6 +242,18 @@
       <label>User-defined tasks (JSON array)</label>
       <default></default>
     </entry>
+    <entry name="useSessionMultiplexer" type="Bool">
+      <label>Run commands inside a persistent session</label>
+      <default>false</default>
+    </entry>
+    <entry name="sessionMultiplexer" type="String">
+      <label>Session multiplexer backend (tmux, screen)</label>
+      <default>tmux</default>
+    </entry>
+    <entry name="sessionName" type="String">
+      <label>Session name</label>
+      <default>plasmallm</default>
+    </entry>
   </group>
 
 </kcfg>

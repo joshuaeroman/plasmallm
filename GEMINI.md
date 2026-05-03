@@ -15,7 +15,7 @@ A KDE Plasma 6 widget providing a chat interface to various LLM endpoints (OpenA
 
 ## Building and Running
 
-The project uses a `Makefile` for common development tasks.
+The project uses a `Makefile` for common development tasks. Do *not* run these unless explicitly asked to by the user.
 
 - **Install for development (Symlink):**
   ```bash

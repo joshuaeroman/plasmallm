@@ -63,6 +63,14 @@ SimpleKCM {
     property bool cfg_sysInfoLocaleDefault
     property bool cfg_sysInfoDateTime
     property bool cfg_sysInfoDateTimeDefault
+
+    property bool cfg_useSessionMultiplexer
+    property bool cfg_useSessionMultiplexerDefault
+    property string cfg_sessionMultiplexer
+    property string cfg_sessionMultiplexerDefault
+    property string cfg_sessionName
+    property string cfg_sessionNameDefault
+
     property string cfg_customSystemPrompt
     property string cfg_customSystemPromptDefault
     property string cfg_gatheredSysInfo
@@ -109,8 +117,7 @@ SimpleKCM {
         return Api.buildSystemPrompt(info, cfg_customSystemPrompt, { 
             autoRunCommands: cfg_autoRunCommands, 
             commandToolEnabled: cfg_useCommandTool 
-        });
-    }
+        });    }
 
     property string promptPreview: buildPreview()
 

@@ -90,6 +90,14 @@ SimpleKCM {
     property int cfg_ollamaSearchApiKeyVersionDefault
     property string cfg_tasks
     property string cfg_tasksDefault
+
+    property bool cfg_useSessionMultiplexer
+    property bool cfg_useSessionMultiplexerDefault
+    property string cfg_sessionMultiplexer
+    property string cfg_sessionMultiplexerDefault
+    property string cfg_sessionName
+    property string cfg_sessionNameDefault
+
     property bool cfg_sysInfoDateTime
     property bool cfg_sysInfoDateTimeDefault
 
