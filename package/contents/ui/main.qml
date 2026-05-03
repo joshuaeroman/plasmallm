@@ -1427,7 +1427,7 @@ PlasmoidItem {
                         thinking_blocks_json: regularThinkingJson,
                         timestamp_api: Api.localISODateTime()
                     });
-                    var commands = Api.parseCommandBlocks(fullText);
+                    var commands = Plasmoid.configuration.useCommandTool ? [] : Api.parseCommandBlocks(fullText);
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                         displayMessages.setProperty(streamingMessageIndex, "content", fullText);
                         displayMessages.setProperty(streamingMessageIndex, "commandsStr", commands.join("\n\x1F"));
@@ -1482,7 +1482,7 @@ PlasmoidItem {
                     content: msg.content,
                     timestamp_api: Api.localISODateTime()
                 });
-                var commands = Api.parseCommandBlocks(msg.content);
+                var commands = Plasmoid.configuration.useCommandTool ? [] : Api.parseCommandBlocks(msg.content);
                 displayMessages.setProperty(streamingMessageIndex, "commandsStr", commands.join("\n\x1F"));
             }
         }
