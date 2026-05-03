@@ -9,6 +9,7 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils
 import org.kde.plasma.workspace.dbus as DBus
+import org.kde.plasma.plasma5support as P5Support
 
 import "api.js" as Api
 
@@ -35,6 +36,42 @@ SimpleKCM {
     property int cfg_ollamaSearchApiKeyVersionDefault
     property int cfg_searxngApiKeyVersion
     property int cfg_searxngApiKeyVersionDefault
+
+    property bool cfg_useSessionMultiplexer
+    property bool cfg_useSessionMultiplexerDefault
+    property string cfg_sessionMultiplexer
+    property string cfg_sessionMultiplexerDefault
+    property string cfg_sessionName
+    property string cfg_sessionNameDefault
+
+    property bool hasTmux: false
+    property bool hasScreen: false
+
+    onHasTmuxChanged: checkBackendAvailability()
+    onHasScreenChanged: checkBackendAvailability()
+
+    function checkBackendAvailability() {
+        if (!hasTmux && !hasScreen) {
+            cfg_useSessionMultiplexer = false;
+        } else if (cfg_sessionMultiplexer === "tmux" && !hasTmux && hasScreen) {
+            cfg_sessionMultiplexer = "screen";
+        } else if (cfg_sessionMultiplexer === "screen" && !hasScreen && hasTmux) {
+            cfg_sessionMultiplexer = "tmux";
+        }
+    }
+
+    P5Support.DataSource {
+        id: execSource
+        engine: "executable"
+        connectedSources: []
+        onNewData: function(sourceName, data) {
+            var isAvail = data["exit code"] === 0;
+            if (sourceName === "command -v tmux") hasTmux = isAvail;
+            else if (sourceName === "command -v screen") hasScreen = isAvail;
+            disconnectSource(sourceName);
+        }
+    }
+
 
     property string walletOllamaKey: ""
     property bool walletOllamaKeyLoaded: false
@@ -254,6 +291,8 @@ SimpleKCM {
     }
 
     Component.onCompleted: {
+        execSource.connectSource("command -v tmux");
+        execSource.connectSource("command -v screen");
         loadWalletOllamaKey();
         loadWalletSearxngKey();
     }
@@ -307,6 +346,83 @@ SimpleKCM {
             Layout.fillWidth: true
             Layout.preferredWidth: 1
             Layout.maximumWidth: Kirigami.Units.gridUnit * 24
+            color: Kirigami.Theme.negativeTextColor
+            font: Kirigami.Theme.smallFont
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: i18n("Session Multiplexer")
+        }
+
+        QQC2.CheckBox {
+            id: useSessionMultiplexerCheckBox
+            text: i18n("Run commands inside a persistent session")
+            checked: cfg_useSessionMultiplexer
+            onCheckedChanged: cfg_useSessionMultiplexer = checked
+            enabled: hasTmux || hasScreen
+
+            QQC2.ToolTip.text: i18n("Execute LLM commands inside a long-lived tmux or screen session so state persists across turns.")
+            QQC2.ToolTip.visible: hovered
+            QQC2.ToolTip.delay: 500
+        }
+
+        QQC2.Button {
+            text: i18n("Reset Session")
+            icon.name: "edit-clear-all"
+            visible: useSessionMultiplexerCheckBox.checked
+            onClicked: {
+                var be = cfg_sessionMultiplexer === "screen" ? "screen" : "tmux";
+                var sess = (cfg_sessionName || "").replace(/[^A-Za-z0-9_-]/g, "") || "plasmallm";
+                var cmd = be === "tmux" ? "tmux kill-session -t '" + sess + "'" : "screen -S '" + sess + "' -X quit";
+                execSource.connectSource(cmd);
+            }
+        }
+
+        QQC2.ComboBox {
+            id: sessionMultiplexerComboBox
+            Kirigami.FormData.label: i18n("Backend:")
+            model: {
+                var opts = [];
+                if (hasTmux) opts.push({ text: "tmux", value: "tmux" });
+                if (hasScreen) opts.push({ text: "screen", value: "screen" });
+                return opts;
+            }
+            textRole: "text"
+            valueRole: "value"
+            enabled: useSessionMultiplexerCheckBox.checked && (hasTmux || hasScreen)
+
+            onModelChanged: syncIndex()
+            Component.onCompleted: syncIndex()
+
+            function syncIndex() {
+                for (var i = 0; i < count; i++) {
+                    if (model[i].value === cfg_sessionMultiplexer) {
+                        currentIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            onActivated: {
+                if (currentValue) cfg_sessionMultiplexer = currentValue;
+            }
+        }
+
+        QQC2.TextField {
+            Kirigami.FormData.label: i18n("Session name:")
+            placeholderText: "plasmallm"
+            text: cfg_sessionName
+            onTextChanged: cfg_sessionName = text
+            enabled: useSessionMultiplexerCheckBox.checked && (hasTmux || hasScreen)
+            Layout.fillWidth: true
+        }
+
+        QQC2.Label {
+            visible: !(hasTmux || hasScreen)
+            text: i18n("Neither 'tmux' nor 'screen' was found on your system. Session multiplexing is unavailable.")
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
             color: Kirigami.Theme.negativeTextColor
             font: Kirigami.Theme.smallFont
         }

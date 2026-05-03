@@ -17,9 +17,16 @@ Rectangle {
     property string commandText
     property bool hasRun: false
 
-    signal runRequested(string command)
+    signal runRequested(string command, string sourceId)
     signal terminalRequested(string command)
     signal saveRequested(string filePath, string content)
+    signal stopRequested(string command, string sourceId)
+
+    readonly property string blockId: Math.random().toString(36).substring(2, 15)
+
+    property bool sessionMode: false
+    property string sessionLabel: ""
+    property bool isRunning: false
 
     // Hidden helper for clipboard access
     TextEdit {
@@ -40,6 +47,17 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: Kirigami.Units.smallSpacing
         spacing: Kirigami.Units.smallSpacing
+
+        Kirigami.Chip {
+            Layout.fillWidth: true
+            visible: sessionMode && sessionLabel !== ""
+            text: sessionLabel
+            icon.name: "utilities-terminal"
+            closable: false
+            checkable: false
+            hoverEnabled: false
+            activeFocusOnTab: false
+        }
 
         QQC2.ScrollView {
             id: cmdScroll
@@ -95,20 +113,31 @@ Rectangle {
             }
 
             PlasmaComponents.Button {
-                text: commandBlock.hasRun ? i18n("Ran") : i18n("Run")
-                icon.name: commandBlock.hasRun ? "dialog-ok-apply" : "media-playback-start"
-                enabled: !commandBlock.hasRun
-                PlasmaComponents.ToolTip.text: i18n("Execute command inline")
+                text: {
+                    if (sessionMode && hasRun && isRunning) return i18n("Stop");
+                    return hasRun ? i18n("Ran") : i18n("Run");
+                }
+                icon.name: {
+                    if (sessionMode && hasRun && isRunning) return "process-stop";
+                    return hasRun ? "dialog-ok-apply" : "media-playback-start";
+                }
+                enabled: !hasRun || (sessionMode && isRunning)
+                PlasmaComponents.ToolTip.text: (sessionMode && hasRun && isRunning) ? i18n("Stop running command") : i18n("Execute command inline")
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: {
-                    commandBlock.hasRun = true;
-                    commandBlock.runRequested(commandBlock.commandText);
+                    if (sessionMode && hasRun && isRunning) {
+                        commandBlock.stopRequested(commandBlock.commandText, commandBlock.blockId);
+                    } else {
+                        commandBlock.hasRun = true;
+                        commandBlock.runRequested(commandBlock.commandText, commandBlock.blockId);
+                    }
                 }
             }
 
             PlasmaComponents.Button {
                 text: i18n("Terminal")
                 icon.name: "utilities-terminal"
+                visible: !sessionMode
                 PlasmaComponents.ToolTip.text: i18n("Open in terminal emulator")
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: commandBlock.terminalRequested(commandBlock.commandText)

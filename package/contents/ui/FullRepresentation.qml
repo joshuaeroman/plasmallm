@@ -388,11 +388,15 @@ PlasmaExtras.Representation {
                     messageIndex: model.index
                     timestamp: model.timestamp ? model.timestamp : ""
                     attachmentsStr: model.attachmentsStr ? model.attachmentsStr : ""
+                    sessionMode: Plasmoid.configuration.useSessionMultiplexer
+                    sessionLabel: root.sessionChipText()
+                    commandRunStateTick: root.commandRunStateTick
                     onShareRequested: function(index) { root.shareOutput(index); }
                     onRetryRequested: root.sendToLLM()
-                    onExecuteRequested: function(command) { root.executeCommand(command); }
+                    onExecuteRequested: function(command, sourceId) { root.executeCommand(command, sourceId); }
                     onTerminalRequested: function(command) { root.runInTerminal(command); }
                     onSaveRequested: function(filePath, content) { root.saveScript(filePath, content); }
+                    onStopRequested: function(command, sourceId) { root.stopCommandByText(command, sourceId); }
                 }
 
                 // movementStarted fires for wheel, scrollbar drag, and touch flicks —
@@ -793,18 +797,42 @@ PlasmaExtras.Representation {
 
             PlasmaComponents.ToolButton {
                 icon.name: "mail-attachment"
-                visible: !root.isLoading
-                enabled: root.systemPromptReady
+                visible: true
+                enabled: !root.isLoading && root.systemPromptReady
                 PlasmaComponents.ToolTip.text: i18n("Attach file or image")
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: attachDialog.open()
             }
 
             PlasmaComponents.Button {
+                id: killButton
+                text: i18n("Kill")
+                visible: Plasmoid.configuration.useSessionMultiplexer
+                enabled: root.systemPromptReady && root.sessionActive
+                onClicked: root.resetSession()
+                PlasmaComponents.ToolTip.text: i18n("Kill persistent session (stops all processes and resets shell state)")
+                PlasmaComponents.ToolTip.visible: hovered
+
+                contentItem: RowLayout {
+                    spacing: Kirigami.Units.smallSpacing
+                    Kirigami.Icon {
+                        source: "media-playback-stop"
+                        implicitWidth: Kirigami.Units.iconSizes.small
+                        implicitHeight: Kirigami.Units.iconSizes.small
+                        color: killButton.enabled ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.disabledTextColor
+                    }
+                    PlasmaComponents.Label {
+                        text: killButton.text
+                        color: killButton.enabled ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.disabledTextColor
+                    }
+                }
+            }
+
+            PlasmaComponents.Button {
                 text: i18n("Send")
                 icon.name: "document-send"
-                visible: !root.isLoading
-                enabled: root.systemPromptReady && (inputField.text.trim().length > 0 || root.pendingAttachments.length > 0)
+                visible: true
+                enabled: !root.isLoading && root.systemPromptReady && (inputField.text.trim().length > 0 || root.pendingAttachments.length > 0)
                 onClicked: {
                     var sendText = inputField.text.trim();
                     if (sendText.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
@@ -827,7 +855,10 @@ PlasmaExtras.Representation {
                 text: i18n("Stop")
                 icon.name: "media-playback-stop"
                 visible: root.isLoading
+                enabled: root.isLoading
                 onClicked: root.cancelRequest()
+                PlasmaComponents.ToolTip.text: i18n("Cancel LLM request")
+                PlasmaComponents.ToolTip.visible: hovered
             }
         }
     }

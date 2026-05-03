@@ -30,9 +30,14 @@ Item {
 
     signal shareRequested(int index)
     signal retryRequested()
-    signal executeRequested(string command)
+    signal executeRequested(string command, string sourceId)
     signal terminalRequested(string command)
     signal saveRequested(string filePath, string content)
+    signal stopRequested(string command, string sourceId)
+
+    property bool sessionMode: false
+    property string sessionLabel: ""
+    property int commandRunStateTick: 0
 
     readonly property bool isUser: role === "user"
     readonly property bool isAssistant: role === "assistant"
@@ -148,6 +153,9 @@ Item {
             Layout.maximumWidth: parent.width * 0.85
             Layout.alignment: isUser ? Qt.AlignRight : Qt.AlignLeft
             implicitHeight: isWebSearchResults ? webSearchColumn.implicitHeight + messageItem.spacing * 3 : messageContentRow.implicitHeight + messageItem.spacing * 3 + (attachmentFlow.visible ? attachmentFlow.height + Kirigami.Units.smallSpacing : 0)
+            Layout.maximumHeight: isCommandOutput ? (Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20 + messageItem.spacing * 3) : Number.POSITIVE_INFINITY
+
+
             radius: 6
             color: {
                 if (isError) return Qt.rgba(Kirigami.Theme.negativeTextColor.r, Kirigami.Theme.negativeTextColor.g, Kirigami.Theme.negativeTextColor.b, 0.15);
@@ -267,6 +275,11 @@ Item {
                     QQC2.ScrollView {
                         id: outScroll
                         contentWidth: availableWidth
+                        padding: 0
+                        implicitHeight: Math.min(Math.ceil(outLabel.implicitHeight), Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20)
+                        clip: true
+
+
                         QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
                         QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
 
@@ -279,7 +292,8 @@ Item {
                         }
 
                         Kirigami.SelectableLabel {
-                            width: parent.width
+                            id: outLabel
+                            width: outScroll.availableWidth > 0 ? outScroll.availableWidth : outScroll.width > 0 ? outScroll.width : 300
                             text: messageItem.strippedContent
                             textFormat: Text.PlainText
                             wrapMode: Text.Wrap
@@ -311,6 +325,9 @@ Item {
                 QQC2.ScrollView {
                     id: mdScroll
                     contentWidth: availableWidth
+                    padding: 0
+                    implicitHeight: Math.min(Math.ceil(mdLabel.implicitHeight), Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20)
+                    clip: true
                     QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
                     QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
 
@@ -323,6 +340,7 @@ Item {
                     }
 
                     Kirigami.SelectableLabel {
+                        id: mdLabel
                         width: parent.width
                         text: messageItem.content
                         textFormat: Text.MarkdownText
@@ -377,13 +395,18 @@ Item {
             model: isAssistant ? messageItem.commands : []
 
             CommandBlock {
+                id: cblock
                 Layout.fillWidth: true
                 Layout.leftMargin: -messageItem.spacing
                 Layout.rightMargin: -messageItem.spacing
                 commandText: modelData
-                onRunRequested: function(command) { messageItem.executeRequested(command); }
+                sessionMode: messageItem.sessionMode
+                sessionLabel: messageItem.sessionLabel
+                isRunning: { var t = messageItem.commandRunStateTick; return root.isCommandRunning(modelData, cblock.blockId); }
+                onRunRequested: function(command, sourceId) { messageItem.executeRequested(command, sourceId); }
                 onTerminalRequested: function(command) { messageItem.terminalRequested(command); }
                 onSaveRequested: function(filePath, content) { messageItem.saveRequested(filePath, content); }
+                onStopRequested: function(command, sourceId) { messageItem.stopRequested(command, sourceId); }
             }
         }
     }

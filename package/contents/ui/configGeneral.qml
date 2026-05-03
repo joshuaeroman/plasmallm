@@ -45,6 +45,14 @@ SimpleKCM {
     property string cfg_chatSaveFormatDefault
     property bool cfg_showProviderInTitle
     property bool cfg_showProviderInTitleDefault
+    
+    property bool cfg_useSessionMultiplexer
+    property bool cfg_useSessionMultiplexerDefault
+    property string cfg_sessionMultiplexer
+    property string cfg_sessionMultiplexerDefault
+    property string cfg_sessionName
+    property string cfg_sessionNameDefault
+
     // Declared here because Plasma injects all cfg_ properties onto every config page
     property string cfg_customSystemPrompt
     property string cfg_customSystemPromptDefault

@@ -91,6 +91,18 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
             "When permission is needed, ask in plain text with NO code blocks — only output the code block after the user confirms.\n";
     }
 
+    if (options && options.sessionMultiplexer) {
+        var parts = options.sessionMultiplexer.split(": ");
+        var be = parts[0] || "tmux";
+        var sess = parts[1] || "plasmallm";
+        var attachCmd = be === "tmux" ? ("tmux attach -t " + sess) : ("screen -r " + sess);
+        prompt += "\n## Session Multiplexer\n" +
+            "Commands run inside a persistent **" + be + "** session named `" + sess + "`. " +
+            "Working directory, exported variables, and background jobs persist across calls. " +
+            "Avoid `clear`, `reset`, `exit`, and full-screen TUIs (`htop`, `vim`); they would damage the shared shell. " +
+            "The user can attach with `" + attachCmd + "`.\n";
+    }
+
     if (options && options.autoRunCommands) {
         if (options.commandToolEnabled) {
             prompt += "\n## Auto-run is ENABLED\n" +
@@ -139,6 +151,12 @@ function isImageFile(filePath) {
 
 function stripCodeBlocks(text) {
     return text.replace(/\n?```\w*\n[\s\S]*?```\n?/g, "\n");
+}
+
+function stripLeadingTimestamp(text) {
+    if (!text) return "";
+    // Matches [YYYY-MM-DDTHH:MM:SS-HH:MM]: or similar variations
+    return text.replace(/^\[\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?[+-]\d{2}:\d{2}\]:\s*/, "");
 }
 
 function parseCommandBlocks(text) {
