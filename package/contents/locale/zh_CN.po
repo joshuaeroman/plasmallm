@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:15-0400\n"
+"POT-Creation-Date: 2026-05-03 20:39-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Chinese (Simplified)\n"
@@ -15,80 +15,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: package/contents/ui/CommandBlock.qml:78
-msgid "Save"
-msgstr "保存"
-
-#: package/contents/ui/CommandBlock.qml:80
-msgid "Save as script file"
-msgstr "另存为脚本文件"
-
-#: package/contents/ui/CommandBlock.qml:86
-msgid "Copy"
-msgstr "复制"
-
-#: package/contents/ui/CommandBlock.qml:88
-msgid "Copy to clipboard"
-msgstr "复制到剪贴板"
-
-#: package/contents/ui/CommandBlock.qml:98
-msgid "Ran"
-msgstr "已运行"
-
-#: package/contents/ui/CommandBlock.qml:98
-msgid "Run"
-msgstr "运行"
-
-#: package/contents/ui/CommandBlock.qml:101
-msgid "Execute command inline"
-msgstr "内联执行命令"
-
-#: package/contents/ui/CommandBlock.qml:110
-msgid "Terminal"
-msgstr "终端"
-
-#: package/contents/ui/CommandBlock.qml:112
-msgid "Open in terminal emulator"
-msgstr "在终端模拟器中打开"
-
-#: package/contents/ui/CommandBlock.qml:121
-msgid "Save Script"
-msgstr "保存脚本"
-
-#: package/contents/ui/CommandBlock.qml:125
-msgid "Shell scripts (*.sh)"
-msgstr "Shell脚本 (*.sh)"
-
-#: package/contents/ui/CommandBlock.qml:125
-#: package/contents/ui/FullRepresentation.qml:503
-msgid "All files (*)"
-msgstr "所有文件 (*)"
-
 #: package/contents/ui/adapters/openai.js:33
 msgid ""
 "Reasoning effort (low / medium / high) gates extended thinking. To see "
 "thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
 "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
 "reasoning_content."
-msgstr "推理力度（低 / 中 / 高）控制扩展思考。要查看思考内容，请确保您已在“常规”选项卡中启用“显示思考”。"
+msgstr ""
+"推理力度（低 / 中 / 高）控制扩展思考。要查看思考内容，请确保您已在“常规”选项"
+"卡中启用“显示思考”。"
 
 #: package/contents/ui/adapters/anthropic.js:36
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
 "budget below. Temperature is forced to max while thinking."
-msgstr "当力度不为“关闭”时，Anthropic 启用扩展思考，并使用下方的令牌预算作为最大输出。"
+msgstr ""
+"当力度不为“关闭”时，Anthropic 启用扩展思考，并使用下方的令牌预算作为最大输"
+"出。"
 
 #: package/contents/ui/adapters/anthropic.js:59
+#: package/contents/ui/adapters/gemini.js:54
 #: package/contents/ui/adapters/openai_chat.js:24
 #: package/contents/ui/adapters/openai_responses.js:26
-#: package/contents/ui/adapters/gemini.js:54
 msgid "Request timed out after 30 seconds"
 msgstr "请求在 30 秒后超时"
 
 #: package/contents/ui/adapters/anthropic.js:75
+#: package/contents/ui/adapters/gemini.js:75
 #: package/contents/ui/adapters/openai_chat.js:40
 #: package/contents/ui/adapters/openai_responses.js:42
-#: package/contents/ui/adapters/gemini.js:75
 msgid "Failed to parse models: %1"
 msgstr "解析模型失败: %1"
 
@@ -100,24 +55,24 @@ msgstr "获取模型失败: HTTP %1"
 
 #: package/contents/ui/adapters/anthropic.js:459
 #: package/contents/ui/adapters/anthropic.js:462
+#: package/contents/ui/adapters/gemini.js:501
 #: package/contents/ui/adapters/openai_chat.js:247
 #: package/contents/ui/adapters/openai_chat.js:250
 #: package/contents/ui/adapters/openai_responses.js:502
-#: package/contents/ui/adapters/gemini.js:501
 msgid "Invalid response format"
 msgstr "无效的响应格式"
 
 #: package/contents/ui/adapters/anthropic.js:465
+#: package/contents/ui/adapters/gemini.js:504
 #: package/contents/ui/adapters/openai_chat.js:253
 #: package/contents/ui/adapters/openai_responses.js:505
-#: package/contents/ui/adapters/gemini.js:504
 msgid "Failed to parse response: %1"
 msgstr "解析响应失败: %1"
 
 #: package/contents/ui/adapters/anthropic.js:471
+#: package/contents/ui/adapters/gemini.js:510
 #: package/contents/ui/adapters/openai_chat.js:259
 #: package/contents/ui/adapters/openai_responses.js:511
-#: package/contents/ui/adapters/gemini.js:510
 msgid "Request timed out"
 msgstr "请求超时"
 
@@ -155,7 +110,8 @@ msgstr "请求失败（无响应） — 请检查您的端点 URL..."
 msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
 "on supported models."
-msgstr "Gemini 直接使用思考令牌预算。设置为 0 以禁用思考（某些模型需要此设置）。"
+msgstr ""
+"Gemini 直接使用思考令牌预算。设置为 0 以禁用思考（某些模型需要此设置）。"
 
 #: package/contents/ui/adapters/gemini.js:78
 msgid "Failed to fetch models"
@@ -177,426 +133,91 @@ msgstr "无响应 — 请检查您的端点 URL..."
 msgid "Request failed"
 msgstr "请求失败..."
 
-#: package/contents/ui/api.js:169
-msgid "Web search timed out"
-msgstr "网络搜索超时"
-
-#: package/contents/ui/api.js:179
-msgid "Failed to parse web search response: %1"
-msgstr "解析网络搜索响应失败：%1"
-
-#: package/contents/ui/api.js:182
-msgid "Web search failed (HTTP %1)"
-msgstr "网络搜索失败 (HTTP %1)"
-
-#: package/contents/ui/api.js:221
-msgid "OpenAI-compatible"
-msgstr "OpenAI兼容"
-
-#: package/contents/ui/api.js:222
-msgid "Anthropic"
-msgstr "Anthropic"
-
-#: package/contents/ui/api.js:223
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-#: package/contents/ui/configSystemPrompt.qml:104
-msgid "System Info:"
-msgstr "系统信息："
-
-#: package/contents/ui/configSystemPrompt.qml:110
-msgid "OS"
-msgstr "操作系统"
-
-#: package/contents/ui/configSystemPrompt.qml:115
-msgid "Shell"
-msgstr "Shell"
-
-#: package/contents/ui/configSystemPrompt.qml:120
-msgid "Hostname"
-msgstr "主机名"
-
-#: package/contents/ui/configSystemPrompt.qml:125
-msgid "Kernel"
-msgstr "内核"
-
-#: package/contents/ui/configSystemPrompt.qml:130
-msgid "Desktop"
-msgstr "桌面"
-
-#: package/contents/ui/configSystemPrompt.qml:135
-msgid "User"
-msgstr "用户"
-
-#: package/contents/ui/configSystemPrompt.qml:140
-msgid "CPU"
-msgstr "CPU"
-
-#: package/contents/ui/configSystemPrompt.qml:145
-msgid "Memory"
-msgstr "内存"
-
-#: package/contents/ui/configSystemPrompt.qml:150
-msgid "GPU"
-msgstr "GPU"
-
-#: package/contents/ui/configSystemPrompt.qml:155
-msgid "Block Devices"
-msgstr "块设备"
-
-#: package/contents/ui/configSystemPrompt.qml:160
-msgid "Network"
-msgstr "网络"
-
-#: package/contents/ui/configSystemPrompt.qml:165
-msgid "Locale"
-msgstr "区域设置"
-
-#: package/contents/ui/configSystemPrompt.qml:170
-msgid "Date/Time"
-msgstr "日期/时间"
-
-#: package/contents/ui/configSystemPrompt.qml:178
-msgid "Custom Instructions:"
-msgstr "自定义指令："
-
-#: package/contents/ui/configSystemPrompt.qml:181
-msgid "Additional instructions for the LLM…"
-msgstr "给LLM的附加指令…"
-
-#: package/contents/ui/configSystemPrompt.qml:188
-msgid "Preview:"
-msgstr "预览："
-
-#: package/contents/ui/configTasks.qml:104
-msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr "未配置任务。添加任务以创建可重用的提示快捷方式。"
-
-#: package/contents/ui/configTasks.qml:128
-#: package/contents/ui/FullRepresentation.qml:82
-#: package/contents/ui/FullRepresentation.qml:718
-msgid "AUTO"
-msgstr "AUTO"
-
-#: package/contents/ui/configTasks.qml:155
-#: package/contents/ui/FullRepresentation.qml:247
-msgid "Cancel"
-msgstr "取消"
-
-#: package/contents/ui/configTasks.qml:155
-msgid "Add Task"
-msgstr "添加任务"
-
-#: package/contents/ui/configTasks.qml:179
-msgid "Task name"
-msgstr "任务名称"
-
-#: package/contents/ui/configTasks.qml:186
-msgid "Prompt to send"
-msgstr "要发送的提示"
-
-#: package/contents/ui/configTasks.qml:192
-msgid "Enable auto mode (auto-run + auto-share)"
-msgstr "启用自动模式（自动运行 + 自动共享）"
-
-#: package/contents/ui/configTasks.qml:204
-msgid "Update Task"
-msgstr "更新任务"
-
-#: package/contents/ui/configTasks.qml:204
-msgid "Save Task"
-msgstr "保存任务"
-
-#: package/contents/ui/configTasks.qml:212
-msgid "A task named \"%1\" already exists."
-msgstr "名为\"%1\"的任务已存在。"
-
-#: package/contents/ui/configTasks.qml:234
-msgid "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar button to run them. Tasks with auto mode will temporarily enable auto-run and auto-share."
-msgstr ""
-"任务是可重用的提示快捷方式。在聊天中使用 /task <name> 或工具栏按钮运行它们。"
-"自动模式的任务将临时启用自动运行和自动共享。"
-
-#: package/contents/ui/ChatMessage.qml:102
+#: package/contents/ui/ChatMessage.qml:107
 msgid "Thoughts"
 msgstr "思考"
 
-#: package/contents/ui/ChatMessage.qml:188
+#: package/contents/ui/ChatMessage.qml:196
 msgid "Web Search Results"
 msgstr "网络搜索结果"
 
-#: package/contents/ui/ChatMessage.qml:296
+#: package/contents/ui/ChatMessage.qml:310
 msgid "Thinking…"
 msgstr "思考中…"
 
-#: package/contents/ui/ChatMessage.qml:349
+#: package/contents/ui/ChatMessage.qml:369
 msgid "Copy message"
 msgstr "复制消息"
 
-#: package/contents/ui/ChatMessage.qml:357
+#: package/contents/ui/ChatMessage.qml:377
 msgid "Retry"
 msgstr "重试"
 
-#: package/contents/ui/ChatMessage.qml:365
+#: package/contents/ui/ChatMessage.qml:385
 msgid "Share with LLM"
 msgstr "与LLM共享"
 
-#: package/contents/ui/ChatMessage.qml:367
+#: package/contents/ui/ChatMessage.qml:387
 msgid "Include this output in the conversation"
 msgstr "将此输出包含在对话中"
 
-#: package/contents/ui/configGeneral.qml:310
-msgid "No models found."
-msgstr "未找到模型。"
+#: package/contents/ui/CommandBlock.qml:96
+msgid "Save"
+msgstr "保存"
 
-#: package/contents/ui/configGeneral.qml:415
-msgid "Adapter:"
-msgstr "适配器："
+#: package/contents/ui/CommandBlock.qml:98
+msgid "Save as script file"
+msgstr "另存为脚本文件"
 
-#: package/contents/ui/configGeneral.qml:437
-msgid "Provider:"
-msgstr "提供商："
+#: package/contents/ui/CommandBlock.qml:104
+msgid "Copy"
+msgstr "复制"
 
-#: package/contents/ui/configGeneral.qml:463
-msgid "API Endpoint:"
-msgstr "API端点："
+#: package/contents/ui/CommandBlock.qml:106
+msgid "Copy to clipboard"
+msgstr "复制到剪贴板"
 
-#: package/contents/ui/configGeneral.qml:490
-msgid "Model:"
-msgstr "模型："
+#: package/contents/ui/CommandBlock.qml:117
+#: package/contents/ui/FullRepresentation.qml:855
+msgid "Stop"
+msgstr "停止"
 
-#: package/contents/ui/configGeneral.qml:527
-msgid "Refreshing…"
-msgstr "刷新中…"
+#: package/contents/ui/CommandBlock.qml:118
+msgid "Ran"
+msgstr "已运行"
 
-#: package/contents/ui/configGeneral.qml:527
-msgid "Refresh model list"
-msgstr "刷新模型列表"
+#: package/contents/ui/CommandBlock.qml:118
+msgid "Run"
+msgstr "运行"
 
-#: package/contents/ui/configGeneral.qml:545
-msgid "API Key:"
-msgstr "API密钥："
+#: package/contents/ui/CommandBlock.qml:125
+msgid "Stop running command"
+msgstr "停止运行命令"
 
-#: package/contents/ui/configGeneral.qml:552
-msgid "Optional - for OpenAI, etc."
-msgstr "可选 - 用于OpenAI等"
+#: package/contents/ui/CommandBlock.qml:125
+msgid "Execute command inline"
+msgstr "内联执行命令"
 
-#: package/contents/ui/configGeneral.qml:567
-#: package/contents/ui/configTools.qml:253
-msgid "Saving…"
-msgstr "保存中…"
+#: package/contents/ui/CommandBlock.qml:138
+msgid "Terminal"
+msgstr "终端"
 
-#: package/contents/ui/configGeneral.qml:568
-#: package/contents/ui/configTools.qml:254
-msgid "Saved"
-msgstr "已保存"
+#: package/contents/ui/CommandBlock.qml:141
+msgid "Open in terminal emulator"
+msgstr "在终端模拟器中打开"
 
-#: package/contents/ui/configGeneral.qml:569
-#: package/contents/ui/configTools.qml:255
-msgid "Save to Config (Insecure)"
-msgstr "保存到配置（不安全）"
+#: package/contents/ui/CommandBlock.qml:150
+msgid "Save Script"
+msgstr "保存脚本"
 
-#: package/contents/ui/configGeneral.qml:569
-#: package/contents/ui/configTools.qml:255
-msgid "Save Key"
-msgstr "保存密钥"
+#: package/contents/ui/CommandBlock.qml:154
+msgid "Shell scripts (*.sh)"
+msgstr "Shell脚本 (*.sh)"
 
-#: package/contents/ui/configGeneral.qml:578
-msgid "Stored in KDE Wallet"
-msgstr "已存储在KDE钱包中"
-
-#: package/contents/ui/configGeneral.qml:578
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE钱包不可用——密钥已存储在配置文件中"
-
-#: package/contents/ui/configGeneral.qml:593
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "温度：%1%"
-
-#: package/contents/ui/configGeneral.qml:610
-msgid "Precise"
-msgstr "精确"
-
-#: package/contents/ui/configGeneral.qml:615
-msgid "Creative"
-msgstr "创意"
-
-#: package/contents/ui/configGeneral.qml:623
-msgid "Max Tokens:"
-msgstr "最大令牌数："
-
-#: package/contents/ui/configGeneral.qml:634
-msgid "Thinking:"
-msgstr "思考："
-
-#: package/contents/ui/configGeneral.qml:638
-msgid "Off"
-msgstr "关闭"
-
-#: package/contents/ui/configGeneral.qml:638
-msgid "Low"
-msgstr "低"
-
-#: package/contents/ui/configGeneral.qml:638
-msgid "Medium"
-msgstr "中"
-
-#: package/contents/ui/configGeneral.qml:638
-msgid "High"
-msgstr "高"
-
-#: package/contents/ui/configGeneral.qml:647
-msgid "Thinking budget:"
-msgstr "思考预算："
-
-#: package/contents/ui/configGeneral.qml:674
-msgid "Show thoughts in chat (collapsible)"
-msgstr "在聊天中显示思考（可折叠）"
-
-#: package/contents/ui/configGeneral.qml:679
-msgid "When enabled, the model's reasoning is shown above each reply with a collapsible header. Round-trip of signed thoughts to the API still happens regardless of this setting."
-msgstr ""
-"启用后，模型的推理会以可折叠标题的形式显示在每条回复上方。无论此设置如何，签"
-"名思考的API往返仍会进行。"
-
-#: package/contents/ui/configGeneral.qml:686
-msgid "Use Responses API"
-msgstr "使用Responses API"
-
-#: package/contents/ui/configGeneral.qml:691
-msgid "Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure (POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when picking a preset."
-msgstr ""
-"在OpenAI / Poe / OpenRouter / Azure上显示推理内容所必需（POST到/v1/responses"
-"而非/v1/chat/completions）。选择预设时自动设置。"
-
-#: package/contents/ui/configGeneral.qml:702
-msgid "Chat Spacing: %1px"
-msgstr "聊天间距：%1px"
-
-#: package/contents/ui/configGeneral.qml:719
-msgid "Compact"
-msgstr "紧凑"
-
-#: package/contents/ui/configGeneral.qml:724
-msgid "Spacious"
-msgstr "宽敞"
-
-#: package/contents/ui/configGeneral.qml:731
-msgid "Appearance:"
-msgstr "外观："
-
-#: package/contents/ui/configGeneral.qml:732
-msgid "Show provider and model in title"
-msgstr "在标题中显示提供商和模型"
-
-#: package/contents/ui/configGeneral.qml:744
-msgid "Chat History:"
-msgstr "聊天记录："
-
-#: package/contents/ui/configGeneral.qml:745
-msgid "Auto-save chat history"
-msgstr "自动保存聊天记录"
-
-#: package/contents/ui/configGeneral.qml:749
-#: package/contents/ui/configGeneral.qml:764
-msgid "Saves to ~/PlasmaLLM/chats/"
-msgstr "保存到 ~/PlasmaLLM/chats/"
-
-#: package/contents/ui/configGeneral.qml:756
-msgid "Save format:"
-msgstr "保存格式："
-
-#: package/contents/ui/configGeneral.qml:757
-msgid "Plain text (.txt)"
-msgstr "纯文本 (.txt)"
-
-#: package/contents/ui/configGeneral.qml:757
-msgid "Structured (.jsonl)"
-msgstr "结构化 (.jsonl)"
-
-#: package/contents/ui/configGeneral.qml:776
-msgid "Auto-clear:"
-msgstr "自动清除："
-
-#: package/contents/ui/configGeneral.qml:780
-msgid "Disabled"
-msgstr "已禁用"
-
-#: package/contents/ui/configGeneral.qml:786
-msgid "Instant (always clear when panel opens)"
-msgstr "即时（每次打开面板时清除）"
-
-#: package/contents/ui/configGeneral.qml:795
-msgid "After"
-msgstr "之后"
-
-#: package/contents/ui/configGeneral.qml:814
-msgid "seconds"
-msgstr "秒"
-
-#: package/contents/ui/configGeneral.qml:814
-msgid "minutes"
-msgstr "分钟"
-
-#: package/contents/ui/configTools.qml:164
-msgid "Commands"
-msgstr "命令..."
-
-#: package/contents/ui/configTools.qml:169
-msgid "Auto-run commands from LLM"
-msgstr "自动运行来自LLM的命令"
-
-#: package/contents/ui/configTools.qml:173
-msgid ""
-"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
-"share."
-msgstr "允许 LLM 执行 shell 命令。如果与“自动共享”结合使用则非常危险。请自担风险。"
-
-#: package/contents/ui/configTools.qml:180
-msgid "Run as tool"
-msgstr "作为工具运行..."
-
-#: package/contents/ui/configTools.qml:184
-msgid ""
-"Use the run_command tool for command execution. If disabled, falls back to "
-"parsing code blocks."
-msgstr "使用 run_command 工具执行命令。如果禁用，将回退到从响应中解析代码块。"
-
-#: package/contents/ui/configTools.qml:191
-msgid "Auto-share command output with LLM"
-msgstr "自动与LLM共享命令输出"
-
-#: package/contents/ui/configTools.qml:195
-msgid "Automatically send command execution results back to the LLM"
-msgstr "自动将命令执行结果发送回 LLM..."
-
-#: package/contents/ui/configTools.qml:202
-msgid "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-msgstr ""
-"⚠️ 危险：两个选项均已启用——LLM现在可以执行命令并查看其输出，从而启用代理工作"
-"流。请仅与可信的LLM一起使用。"
-
-#: package/contents/ui/configTools.qml:213
-msgid "Web Search"
-msgstr "网络搜索..."
-
-#: package/contents/ui/configTools.qml:218
-msgid "Enable web search tool"
-msgstr "启用网络搜索工具..."
-
-#: package/contents/ui/configTools.qml:222
-msgid "Allows the LLM to perform web searches using Ollama's search API."
-msgstr "允许 LLM 使用 Ollama 的搜索 API 执行网络搜索...."
-
-#: package/contents/ui/configTools.qml:239
-msgid "Ollama API key"
-msgstr "Ollama API 密钥..."
-
-#: package/contents/ui/configTools.qml:263
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "通过Ollama的搜索API启用LLM触发的网络搜索"
+#: package/contents/ui/CommandBlock.qml:154
+#: package/contents/ui/FullRepresentation.qml:507
+msgid "All files (*)"
+msgstr "所有文件 (*)"
 
 #: package/contents/ui/FullRepresentation.qml:20
 msgid "Toggle auto mode (auto-run + auto-share) for this session"
@@ -642,6 +263,12 @@ msgstr "运行已保存的任务 (/task <name>)"
 msgid "Run last command in terminal"
 msgstr "在终端中运行上一条命令"
 
+#: package/contents/ui/FullRepresentation.qml:82
+#: package/contents/ui/FullRepresentation.qml:722
+#: package/contents/ui/configTasks.qml:57
+msgid "AUTO"
+msgstr "AUTO"
+
 #: package/contents/ui/FullRepresentation.qml:92
 #: package/contents/ui/FullRepresentation.qml:93
 msgid "Run a task"
@@ -650,35 +277,42 @@ msgstr "运行任务"
 #: package/contents/ui/FullRepresentation.qml:129
 #: package/contents/ui/FullRepresentation.qml:130
 msgid "Chat History"
-msgstr "聊天记录..."
+msgstr "聊天记录"
 
 #: package/contents/ui/FullRepresentation.qml:155
 msgid "Loading..."
-msgstr "加载中......"
+msgstr "加载中..."
 
 #: package/contents/ui/FullRepresentation.qml:161
 msgid "No recent chats"
-msgstr "最近没有聊天..."
+msgstr "最近没有聊天"
 
 #: package/contents/ui/FullRepresentation.qml:170
 msgid "Open history folder..."
-msgstr "打开历史记录文件夹......"
+msgstr "打开历史记录文件夹..."
 
 #: package/contents/ui/FullRepresentation.qml:182
 msgid "Clear all history..."
-msgstr "清除所有历史记录......"
+msgstr "清除所有历史记录..."
 
 #: package/contents/ui/FullRepresentation.qml:224
 msgid "Clear All History"
-msgstr "清除所有历史记录..."
+msgstr "清除所有历史记录"
 
 #: package/contents/ui/FullRepresentation.qml:230
-msgid "Are you sure you want to delete all chat history files? This action cannot be undone."
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
 msgstr "您确定要删除所有聊天历史记录文件吗？此操作无法撤销。"
 
 #: package/contents/ui/FullRepresentation.qml:239
 msgid "Clear All"
-msgstr "全部清除..."
+msgstr "全部清除"
+
+#: package/contents/ui/FullRepresentation.qml:247
+#: package/contents/ui/configTasks.qml:84
+msgid "Cancel"
+msgstr "取消"
 
 #: package/contents/ui/FullRepresentation.qml:256
 #: package/contents/ui/FullRepresentation.qml:257
@@ -725,131 +359,601 @@ msgstr "不保持打开"
 msgid "Keep open"
 msgstr "保持打开"
 
-#: package/contents/ui/FullRepresentation.qml:471
+#: package/contents/ui/FullRepresentation.qml:475
 msgid "Send a message to start chatting"
 msgstr "发送消息开始聊天"
 
-#: package/contents/ui/FullRepresentation.qml:500
+#: package/contents/ui/FullRepresentation.qml:504
 msgid "Attach File"
 msgstr "附加文件"
 
-#: package/contents/ui/FullRepresentation.qml:503
+#: package/contents/ui/FullRepresentation.qml:507
 msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 msgstr "图片 (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 
-#: package/contents/ui/FullRepresentation.qml:503
-msgid "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf *.sh *.py *.js *.ts *.qml)"
+#: package/contents/ui/FullRepresentation.qml:507
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
 msgstr ""
 "文本文件 (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf *.sh "
 "*.py *.js *.ts *.qml)"
 
-#: package/contents/ui/FullRepresentation.qml:745
+#: package/contents/ui/FullRepresentation.qml:749
 msgid "Message input"
 msgstr "消息输入"
 
-#: package/contents/ui/FullRepresentation.qml:746
+#: package/contents/ui/FullRepresentation.qml:750
 msgid "Type a message…"
 msgstr "输入消息…"
 
-#: package/contents/ui/FullRepresentation.qml:746
+#: package/contents/ui/FullRepresentation.qml:750
 msgid "Initializing…"
 msgstr "初始化中…"
 
-#: package/contents/ui/FullRepresentation.qml:798
+#: package/contents/ui/FullRepresentation.qml:802
 msgid "Attach file or image"
 msgstr "附加文件或图片"
 
-#: package/contents/ui/FullRepresentation.qml:804
+#: package/contents/ui/FullRepresentation.qml:809
+msgid "Kill"
+msgstr "终止"
+
+#: package/contents/ui/FullRepresentation.qml:813
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr "终止持久会话（停止所有进程并重置 shell 状态）"
+
+#: package/contents/ui/FullRepresentation.qml:832
 msgid "Send"
 msgstr "发送"
 
-#: package/contents/ui/FullRepresentation.qml:827
-msgid "Stop"
-msgstr "停止"
+#: package/contents/ui/FullRepresentation.qml:860
+msgid "Cancel LLM request"
+msgstr "取消 LLM 请求"
 
-#: package/contents/ui/main.qml:900
-msgid "Auto mode is permanently enabled via settings (both Auto-run and Auto-share are on)."
+#: package/contents/ui/api.js:213
+msgid "Search provider %1 not supported"
+msgstr "不支持的搜索提供商 %1"
+
+#: package/contents/ui/api.js:242
+msgid "OpenAI-compatible"
+msgstr "OpenAI兼容"
+
+#: package/contents/ui/api.js:243
+msgid "Anthropic"
+msgstr "Anthropic"
+
+#: package/contents/ui/api.js:244
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+#: package/contents/ui/main.qml:1002
+msgid ""
+"Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
+"are on)."
 msgstr "自动模式已通过设置永久启用（自动运行和自动共享均已开启）。"
 
-#: package/contents/ui/main.qml:903
-msgid "Auto mode enabled for this session. Commands will run and share output automatically."
+#: package/contents/ui/main.qml:1005
+msgid ""
+"Auto mode enabled for this session. Commands will run and share output "
+"automatically."
 msgstr "此会话已启用自动模式。命令将自动运行并共享输出。"
 
-#: package/contents/ui/main.qml:903
+#: package/contents/ui/main.qml:1005
 msgid "Auto mode disabled."
 msgstr "自动模式已禁用。"
 
-#: package/contents/ui/main.qml:914 package/contents/ui/main.qml:969
+#: package/contents/ui/main.qml:1020 package/contents/ui/main.qml:1079
 msgid "none"
 msgstr "无"
 
-#: package/contents/ui/main.qml:914
+#: package/contents/ui/main.qml:1020
 msgid "Current model: **%1**"
 msgstr "当前模型：**%1**"
 
-#: package/contents/ui/main.qml:916
+#: package/contents/ui/main.qml:1022
 msgid "Available models:"
 msgstr "可用模型："
 
-#: package/contents/ui/main.qml:918
+#: package/contents/ui/main.qml:1024
 msgid "Type `/model <name>` to switch."
 msgstr "输入 `/model <name>` 进行切换。"
 
-#: package/contents/ui/main.qml:920
+#: package/contents/ui/main.qml:1026
 msgid "No models cached. Use **Fetch Models** in settings."
 msgstr "没有缓存的模型。请在设置中使用**获取模型**。"
 
-#: package/contents/ui/main.qml:929
+#: package/contents/ui/main.qml:1035
 msgid "Switched to model: **%1**"
 msgstr "已切换到模型：**%1**"
 
-#: package/contents/ui/main.qml:938
+#: package/contents/ui/main.qml:1044
 msgid "No tasks configured. Add tasks in Settings."
 msgstr "未配置任务。请在设置中添加任务。"
 
-#: package/contents/ui/main.qml:940
+#: package/contents/ui/main.qml:1046
 msgid "(auto)"
 msgstr "（自动）"
 
-#: package/contents/ui/main.qml:941
+#: package/contents/ui/main.qml:1047
 msgid "Available tasks:"
 msgstr "可用任务："
 
-#: package/contents/ui/main.qml:941
+#: package/contents/ui/main.qml:1047
 msgid "Type `/task <name>` to run."
 msgstr "输入 `/task <name>` 运行。"
 
-#: package/contents/ui/main.qml:969
+#: package/contents/ui/main.qml:1079
 msgid "Unknown task: **%1**. Available: %2"
 msgstr "未知任务：**%1**。可用：%2"
 
-#: package/contents/ui/main.qml:983
+#: package/contents/ui/main.qml:1093
 msgid "The user declined to run this command."
 msgstr "用户拒绝运行此命令。"
 
-#: package/contents/ui/main.qml:1152
+#: package/contents/ui/main.qml:1292
 msgid "Searching the web…"
 msgstr "正在搜索网络…"
 
-#: package/contents/ui/main.qml:1174
+#: package/contents/ui/main.qml:1320
 msgid "Web search failed: %1"
 msgstr "网络搜索失败：%1"
 
-#: package/contents/ui/main.qml:1389 package/contents/ui/main.qml:1401
+#: package/contents/ui/main.qml:1601
+msgid "Session reset requested."
+msgstr "已请求重置会话。"
+
+#: package/contents/ui/main.qml:1621 package/contents/ui/main.qml:1639
 msgid "Running: %1"
 msgstr "运行中：%1"
 
-#: package/contents/ui/main.qml:1410
+#: package/contents/ui/main.qml:1652
 msgid "stderr: %1"
 msgstr "stderr：%1"
 
-#: package/contents/ui/main.qml:1412
+#: package/contents/ui/main.qml:1654
 msgid "[truncated — output exceeded %1KB]"
 msgstr "[已截断——输出超过%1KB]"
 
-#: package/contents/ui/main.qml:1414
+#: package/contents/ui/main.qml:1656
 msgid "[exit code: %1]"
 msgstr "[退出代码：%1]"
+
+#: package/contents/ui/configGeneral.qml:228
+msgid "No models found."
+msgstr "未找到模型。"
+
+#: package/contents/ui/configGeneral.qml:333
+msgid "Adapter:"
+msgstr "适配器："
+
+#: package/contents/ui/configGeneral.qml:355
+msgid "Provider:"
+msgstr "提供商："
+
+#: package/contents/ui/configGeneral.qml:452
+msgid "API Endpoint:"
+msgstr "API端点："
+
+#: package/contents/ui/configGeneral.qml:479
+msgid "Model:"
+msgstr "模型："
+
+#: package/contents/ui/configGeneral.qml:575
+msgid "Refreshing…"
+msgstr "刷新中…"
+
+#: package/contents/ui/configGeneral.qml:575
+msgid "Refresh model list"
+msgstr "刷新模型列表"
+
+#: package/contents/ui/configGeneral.qml:593
+msgid "API Key:"
+msgstr "API密钥："
+
+#: package/contents/ui/configGeneral.qml:600
+msgid "Optional - for OpenAI, etc."
+msgstr "可选 - 用于OpenAI等"
+
+#: package/contents/ui/configGeneral.qml:615
+#: package/contents/ui/configTools.qml:470
+#: package/contents/ui/configTools.qml:511
+msgid "Saving…"
+msgstr "保存中…"
+
+#: package/contents/ui/configGeneral.qml:616
+#: package/contents/ui/configTools.qml:471
+#: package/contents/ui/configTools.qml:512
+msgid "Saved"
+msgstr "已保存"
+
+#: package/contents/ui/configGeneral.qml:617
+#: package/contents/ui/configTools.qml:472
+#: package/contents/ui/configTools.qml:513
+msgid "Save to Config (Insecure)"
+msgstr "保存到配置（不安全）"
+
+#: package/contents/ui/configGeneral.qml:617
+#: package/contents/ui/configTools.qml:472
+#: package/contents/ui/configTools.qml:513
+msgid "Save Key"
+msgstr "保存密钥"
+
+#: package/contents/ui/configGeneral.qml:626
+msgid "Stored in KDE Wallet"
+msgstr "已存储在KDE钱包中"
+
+#: package/contents/ui/configGeneral.qml:626
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr "KDE钱包不可用——密钥已存储在配置文件中"
+
+#: package/contents/ui/configGeneral.qml:641
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "温度：%1%"
+
+#: package/contents/ui/configGeneral.qml:658
+msgid "Precise"
+msgstr "精确"
+
+#: package/contents/ui/configGeneral.qml:663
+msgid "Creative"
+msgstr "创意"
+
+#: package/contents/ui/configGeneral.qml:671
+msgid "Max Tokens:"
+msgstr "最大令牌数："
+
+#: package/contents/ui/configGeneral.qml:682
+msgid "Thinking:"
+msgstr "思考："
+
+#: package/contents/ui/configGeneral.qml:686
+msgid "Off"
+msgstr "关闭"
+
+#: package/contents/ui/configGeneral.qml:686
+msgid "Low"
+msgstr "低"
+
+#: package/contents/ui/configGeneral.qml:686
+msgid "Medium"
+msgstr "中"
+
+#: package/contents/ui/configGeneral.qml:686
+msgid "High"
+msgstr "高"
+
+#: package/contents/ui/configGeneral.qml:695
+msgid "Thinking budget:"
+msgstr "思考预算："
+
+#: package/contents/ui/configGeneral.qml:722
+msgid "Show thoughts in chat (collapsible)"
+msgstr "在聊天中显示思考（可折叠）"
+
+#: package/contents/ui/configGeneral.qml:727
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"启用后，模型的推理会以可折叠标题的形式显示在每条回复上方。无论此设置如何，签"
+"名思考的API往返仍会进行。"
+
+#: package/contents/ui/configGeneral.qml:734
+msgid "Use Responses API"
+msgstr "使用Responses API"
+
+#: package/contents/ui/configGeneral.qml:739
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"在OpenAI / Poe / OpenRouter / Azure上显示推理内容所必需（POST到/v1/responses"
+"而非/v1/chat/completions）。选择预设时自动设置。"
+
+#: package/contents/ui/configGeneral.qml:750
+msgid "Chat Spacing: %1px"
+msgstr "聊天间距：%1px"
+
+#: package/contents/ui/configGeneral.qml:767
+msgid "Compact"
+msgstr "紧凑"
+
+#: package/contents/ui/configGeneral.qml:772
+msgid "Spacious"
+msgstr "宽敞"
+
+#: package/contents/ui/configGeneral.qml:779
+msgid "Appearance:"
+msgstr "外观："
+
+#: package/contents/ui/configGeneral.qml:780
+msgid "Show provider and model in title"
+msgstr "在标题中显示提供商和模型"
+
+#: package/contents/ui/configGeneral.qml:792
+msgid "Chat History:"
+msgstr "聊天记录："
+
+#: package/contents/ui/configGeneral.qml:793
+msgid "Auto-save chat history"
+msgstr "自动保存聊天记录"
+
+#: package/contents/ui/configGeneral.qml:797
+#: package/contents/ui/configGeneral.qml:812
+msgid "Saves to ~/PlasmaLLM/chats/"
+msgstr "保存到 ~/PlasmaLLM/chats/"
+
+#: package/contents/ui/configGeneral.qml:804
+msgid "Save format:"
+msgstr "保存格式："
+
+#: package/contents/ui/configGeneral.qml:805
+msgid "Plain text (.txt)"
+msgstr "纯文本 (.txt)"
+
+#: package/contents/ui/configGeneral.qml:805
+msgid "Structured (.jsonl)"
+msgstr "结构化 (.jsonl)"
+
+#: package/contents/ui/configGeneral.qml:824
+msgid "Auto-clear:"
+msgstr "自动清除："
+
+#: package/contents/ui/configGeneral.qml:828
+msgid "Disabled"
+msgstr "已禁用"
+
+#: package/contents/ui/configGeneral.qml:834
+msgid "Instant (always clear when panel opens)"
+msgstr "即时（每次打开面板时清除）"
+
+#: package/contents/ui/configGeneral.qml:843
+msgid "After"
+msgstr "之后"
+
+#: package/contents/ui/configGeneral.qml:862
+msgid "seconds"
+msgstr "秒"
+
+#: package/contents/ui/configGeneral.qml:862
+msgid "minutes"
+msgstr "分钟"
+
+#: package/contents/ui/configSystemPrompt.qml:48
+msgid "System Info:"
+msgstr "系统信息："
+
+#: package/contents/ui/configSystemPrompt.qml:54
+msgid "OS"
+msgstr "操作系统"
+
+#: package/contents/ui/configSystemPrompt.qml:59
+msgid "Shell"
+msgstr "Shell"
+
+#: package/contents/ui/configSystemPrompt.qml:64
+msgid "Hostname"
+msgstr "主机名"
+
+#: package/contents/ui/configSystemPrompt.qml:69
+msgid "Kernel"
+msgstr "内核"
+
+#: package/contents/ui/configSystemPrompt.qml:74
+msgid "Desktop"
+msgstr "桌面"
+
+#: package/contents/ui/configSystemPrompt.qml:79
+msgid "User"
+msgstr "用户"
+
+#: package/contents/ui/configSystemPrompt.qml:84
+msgid "CPU"
+msgstr "CPU"
+
+#: package/contents/ui/configSystemPrompt.qml:89
+msgid "Memory"
+msgstr "内存"
+
+#: package/contents/ui/configSystemPrompt.qml:94
+msgid "GPU"
+msgstr "GPU"
+
+#: package/contents/ui/configSystemPrompt.qml:99
+msgid "Block Devices"
+msgstr "块设备"
+
+#: package/contents/ui/configSystemPrompt.qml:104
+msgid "Network"
+msgstr "网络"
+
+#: package/contents/ui/configSystemPrompt.qml:109
+msgid "Locale"
+msgstr "区域设置"
+
+#: package/contents/ui/configSystemPrompt.qml:114
+msgid "Date/Time"
+msgstr "日期/时间"
+
+#: package/contents/ui/configSystemPrompt.qml:122
+msgid "Custom Instructions:"
+msgstr "自定义指令："
+
+#: package/contents/ui/configSystemPrompt.qml:125
+msgid "Additional instructions for the LLM…"
+msgstr "给LLM的附加指令…"
+
+#: package/contents/ui/configSystemPrompt.qml:132
+msgid "Preview:"
+msgstr "预览："
+
+#: package/contents/ui/configTasks.qml:33
+msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
+msgstr "未配置任务。添加任务以创建可重用的提示快捷方式。"
+
+#: package/contents/ui/configTasks.qml:84
+msgid "Add Task"
+msgstr "添加任务"
+
+#: package/contents/ui/configTasks.qml:108
+msgid "Task name"
+msgstr "任务名称"
+
+#: package/contents/ui/configTasks.qml:115
+msgid "Prompt to send"
+msgstr "要发送的提示"
+
+#: package/contents/ui/configTasks.qml:121
+msgid "Enable auto mode (auto-run + auto-share)"
+msgstr "启用自动模式（自动运行 + 自动共享）"
+
+#: package/contents/ui/configTasks.qml:133
+msgid "Update Task"
+msgstr "更新任务"
+
+#: package/contents/ui/configTasks.qml:133
+msgid "Save Task"
+msgstr "保存任务"
+
+#: package/contents/ui/configTasks.qml:141
+msgid "A task named \"%1\" already exists."
+msgstr "名为\"%1\"的任务已存在。"
+
+#: package/contents/ui/configTasks.qml:163
+msgid ""
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with auto mode will temporarily enable auto-run "
+"and auto-share."
+msgstr ""
+"任务是可重用的提示快捷方式。在聊天中使用 /task <name> 或工具栏按钮运行它们。"
+"自动模式的任务将临时启用自动运行和自动共享。"
+
+#: package/contents/ui/configTools.qml:278
+msgid "Commands"
+msgstr "命令"
+
+#: package/contents/ui/configTools.qml:283
+msgid "Auto-run commands from LLM"
+msgstr "自动运行来自LLM的命令"
+
+#: package/contents/ui/configTools.qml:287
+msgid ""
+"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
+"share."
+msgstr ""
+"允许 LLM 执行 shell 命令。如果与“自动共享”结合使用则非常危险。请自担风险。"
+
+#: package/contents/ui/configTools.qml:294
+msgid "Run as tool"
+msgstr "作为工具运行"
+
+#: package/contents/ui/configTools.qml:298
+msgid ""
+"Use the run_command tool for command execution. If disabled, falls back to "
+"parsing code blocks."
+msgstr "使用 run_command 工具执行命令。如果禁用，将回退到从响应中解析代码块。"
+
+#: package/contents/ui/configTools.qml:305
+msgid "Auto-share command output with LLM"
+msgstr "自动与LLM共享命令输出"
+
+#: package/contents/ui/configTools.qml:309
+msgid "Automatically send command execution results back to the LLM"
+msgstr "自动将命令执行结果发送回 LLM"
+
+#: package/contents/ui/configTools.qml:316
+msgid ""
+"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
+"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
+msgstr ""
+"⚠️ 危险：两个选项均已启用——LLM现在可以执行命令并查看其输出，从而启用代理工作"
+"流。请仅与可信的LLM一起使用。"
+
+#: package/contents/ui/configTools.qml:327
+msgid "Session Multiplexer"
+msgstr "会话多路复用器"
+
+#: package/contents/ui/configTools.qml:332
+msgid "Run commands inside a persistent session"
+msgstr "在持久会话中运行命令"
+
+#: package/contents/ui/configTools.qml:337
+msgid ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
+msgstr ""
+"在一个长期的 tmux 或 screen 会话中执行 LLM 命令，以便状态在对话轮次间保持不"
+"变。"
+
+#: package/contents/ui/configTools.qml:343
+msgid "Reset Session"
+msgstr "重置会话"
+
+#: package/contents/ui/configTools.qml:356
+msgid "Backend:"
+msgstr "后端："
+
+#: package/contents/ui/configTools.qml:385
+msgid "Session name:"
+msgstr "会话名称："
+
+#: package/contents/ui/configTools.qml:395
+msgid ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
+msgstr "系统中未找到 'tmux' 或 'screen'。会话多路复用不可用。"
+
+#: package/contents/ui/configTools.qml:404
+msgid "Web Search"
+msgstr "网络搜索"
+
+#: package/contents/ui/configTools.qml:409
+msgid "Enable web search tool"
+msgstr "启用网络搜索工具"
+
+#: package/contents/ui/configTools.qml:413
+msgid "Allows the LLM to perform web searches."
+msgstr "允许 LLM 执行网络搜索。"
+
+#: package/contents/ui/configTools.qml:428
+msgid "Ollama API"
+msgstr "Ollama API"
+
+#: package/contents/ui/configTools.qml:429
+msgid "SearXNG"
+msgstr "SearXNG"
+
+#: package/contents/ui/configTools.qml:430
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#: package/contents/ui/configTools.qml:456
+msgid "Ollama API key"
+msgstr "Ollama API 密钥"
+
+#: package/contents/ui/configTools.qml:484
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG 实例 URL (例如 https://searx.be)"
+
+#: package/contents/ui/configTools.qml:497
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API 密钥/令牌 (可选)"
+
+#: package/contents/ui/configTools.qml:522
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo 无需配置。"
+
+#: package/contents/ui/configTools.qml:524
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "确保 SearXNG 实例已启用 JSON 格式。"
+
+#: package/contents/ui/configTools.qml:525
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "通过Ollama的搜索API启用LLM触发的网络搜索"
 
 #: package/contents/config/config.qml:11
 msgid "General"
@@ -865,7 +969,19 @@ msgstr "任务"
 
 #: package/contents/config/config.qml:26
 msgid "Tools"
-msgstr "工具..."
+msgstr "工具"
+
+#~ msgid "Web search timed out"
+#~ msgstr "网络搜索超时"
+
+#~ msgid "Failed to parse web search response: %1"
+#~ msgstr "解析网络搜索响应失败：%1"
+
+#~ msgid "Web search failed (HTTP %1)"
+#~ msgstr "网络搜索失败 (HTTP %1)"
+
+#~ msgid "Allows the LLM to perform web searches using Ollama's search API."
+#~ msgstr "允许 LLM 使用 Ollama 的搜索 API 执行网络搜索...."
 
 #~ msgid "Commands:"
 #~ msgstr "命令："

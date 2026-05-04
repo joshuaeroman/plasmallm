@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:15-0400\n"
+"POT-Creation-Date: 2026-05-03 20:39-0400\n"
 "PO-Revision-Date: 2026-04-07 22:00-0400\n"
 "Last-Translator: Gemini CLI (machine translation)\n"
 "Language-Team: Italian\n"
@@ -16,55 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: package/contents/ui/CommandBlock.qml:78
-msgid "Save"
-msgstr "Salva"
-
-#: package/contents/ui/CommandBlock.qml:80
-msgid "Save as script file"
-msgstr "Salva come file script"
-
-#: package/contents/ui/CommandBlock.qml:86
-msgid "Copy"
-msgstr "Copia"
-
-#: package/contents/ui/CommandBlock.qml:88
-msgid "Copy to clipboard"
-msgstr "Copia negli appunti"
-
-#: package/contents/ui/CommandBlock.qml:98
-msgid "Ran"
-msgstr "Eseguito"
-
-#: package/contents/ui/CommandBlock.qml:98
-msgid "Run"
-msgstr "Esegui"
-
-#: package/contents/ui/CommandBlock.qml:101
-msgid "Execute command inline"
-msgstr "Esegui comando in linea"
-
-#: package/contents/ui/CommandBlock.qml:110
-msgid "Terminal"
-msgstr "Terminale"
-
-#: package/contents/ui/CommandBlock.qml:112
-msgid "Open in terminal emulator"
-msgstr "Apri in emulatore di terminale"
-
-#: package/contents/ui/CommandBlock.qml:121
-msgid "Save Script"
-msgstr "Salva Script"
-
-#: package/contents/ui/CommandBlock.qml:125
-msgid "Shell scripts (*.sh)"
-msgstr "Script shell (*.sh)"
-
-#: package/contents/ui/CommandBlock.qml:125
-#: package/contents/ui/FullRepresentation.qml:503
-msgid "All files (*)"
-msgstr "Tutti i file (*)"
 
 #: package/contents/ui/adapters/openai.js:33
 msgid ""
@@ -88,16 +39,16 @@ msgstr ""
 "durante il pensiero."
 
 #: package/contents/ui/adapters/anthropic.js:59
+#: package/contents/ui/adapters/gemini.js:54
 #: package/contents/ui/adapters/openai_chat.js:24
 #: package/contents/ui/adapters/openai_responses.js:26
-#: package/contents/ui/adapters/gemini.js:54
 msgid "Request timed out after 30 seconds"
 msgstr "Timeout della richiesta dopo 30 secondi"
 
 #: package/contents/ui/adapters/anthropic.js:75
+#: package/contents/ui/adapters/gemini.js:75
 #: package/contents/ui/adapters/openai_chat.js:40
 #: package/contents/ui/adapters/openai_responses.js:42
-#: package/contents/ui/adapters/gemini.js:75
 msgid "Failed to parse models: %1"
 msgstr "Errore nell'analisi dei modelli: %1"
 
@@ -109,24 +60,24 @@ msgstr "Errore nel download dei modelli: HTTP %1"
 
 #: package/contents/ui/adapters/anthropic.js:459
 #: package/contents/ui/adapters/anthropic.js:462
+#: package/contents/ui/adapters/gemini.js:501
 #: package/contents/ui/adapters/openai_chat.js:247
 #: package/contents/ui/adapters/openai_chat.js:250
 #: package/contents/ui/adapters/openai_responses.js:502
-#: package/contents/ui/adapters/gemini.js:501
 msgid "Invalid response format"
 msgstr "Formato risposta non valido"
 
 #: package/contents/ui/adapters/anthropic.js:465
+#: package/contents/ui/adapters/gemini.js:504
 #: package/contents/ui/adapters/openai_chat.js:253
 #: package/contents/ui/adapters/openai_responses.js:505
-#: package/contents/ui/adapters/gemini.js:504
 msgid "Failed to parse response: %1"
 msgstr "Errore nell'analisi della risposta: %1"
 
 #: package/contents/ui/adapters/anthropic.js:471
+#: package/contents/ui/adapters/gemini.js:510
 #: package/contents/ui/adapters/openai_chat.js:259
 #: package/contents/ui/adapters/openai_responses.js:511
-#: package/contents/ui/adapters/gemini.js:510
 msgid "Request timed out"
 msgstr "Timeout della richiesta"
 
@@ -190,452 +141,91 @@ msgstr "nessuna risposta — controlla l'URL del tuo endpoint"
 msgid "Request failed"
 msgstr "Richiesta fallita"
 
-#: package/contents/ui/api.js:169
-msgid "Web search timed out"
-msgstr "Timeout della ricerca web"
-
-#: package/contents/ui/api.js:179
-msgid "Failed to parse web search response: %1"
-msgstr "Errore nell'analisi della risposta di ricerca web: %1"
-
-#: package/contents/ui/api.js:182
-msgid "Web search failed (HTTP %1)"
-msgstr "Ricerca web non riuscita (HTTP %1)"
-
-#: package/contents/ui/api.js:221
-msgid "OpenAI-compatible"
-msgstr "Compatibile con OpenAI"
-
-#: package/contents/ui/api.js:222
-msgid "Anthropic"
-msgstr "Anthropic"
-
-#: package/contents/ui/api.js:223
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-#: package/contents/ui/configSystemPrompt.qml:104
-msgid "System Info:"
-msgstr "Informazioni di sistema:"
-
-#: package/contents/ui/configSystemPrompt.qml:110
-msgid "OS"
-msgstr "OS"
-
-#: package/contents/ui/configSystemPrompt.qml:115
-msgid "Shell"
-msgstr "Shell"
-
-#: package/contents/ui/configSystemPrompt.qml:120
-msgid "Hostname"
-msgstr "Nome host"
-
-#: package/contents/ui/configSystemPrompt.qml:125
-msgid "Kernel"
-msgstr "Kernel"
-
-#: package/contents/ui/configSystemPrompt.qml:130
-msgid "Desktop"
-msgstr "Desktop"
-
-#: package/contents/ui/configSystemPrompt.qml:135
-msgid "User"
-msgstr "Utente"
-
-#: package/contents/ui/configSystemPrompt.qml:140
-msgid "CPU"
-msgstr "CPU"
-
-#: package/contents/ui/configSystemPrompt.qml:145
-msgid "Memory"
-msgstr "Memoria"
-
-#: package/contents/ui/configSystemPrompt.qml:150
-msgid "GPU"
-msgstr "GPU"
-
-#: package/contents/ui/configSystemPrompt.qml:155
-msgid "Block Devices"
-msgstr "Dispositivi a blocchi"
-
-#: package/contents/ui/configSystemPrompt.qml:160
-msgid "Network"
-msgstr "Rete"
-
-#: package/contents/ui/configSystemPrompt.qml:165
-msgid "Locale"
-msgstr "Locale"
-
-#: package/contents/ui/configSystemPrompt.qml:170
-msgid "Date/Time"
-msgstr "Data/Ora"
-
-#: package/contents/ui/configSystemPrompt.qml:178
-msgid "Custom Instructions:"
-msgstr "Istruzioni personalizzate:"
-
-#: package/contents/ui/configSystemPrompt.qml:181
-msgid "Additional instructions for the LLM…"
-msgstr "Istruzioni aggiuntive per l'LLM…"
-
-#: package/contents/ui/configSystemPrompt.qml:188
-msgid "Preview:"
-msgstr "Anteprima:"
-
-#: package/contents/ui/configTasks.qml:104
-msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr ""
-"Nessuna attività configurata. Aggiungi un'attività per creare scorciatoie di "
-"prompt riutilizzabili."
-
-#: package/contents/ui/configTasks.qml:128
-#: package/contents/ui/FullRepresentation.qml:82
-#: package/contents/ui/FullRepresentation.qml:718
-msgid "AUTO"
-msgstr "AUTO"
-
-#: package/contents/ui/configTasks.qml:155
-#: package/contents/ui/FullRepresentation.qml:247
-msgid "Cancel"
-msgstr "Annulla"
-
-#: package/contents/ui/configTasks.qml:155
-msgid "Add Task"
-msgstr "Aggiungi attività"
-
-#: package/contents/ui/configTasks.qml:179
-msgid "Task name"
-msgstr "Nome attività"
-
-#: package/contents/ui/configTasks.qml:186
-msgid "Prompt to send"
-msgstr "Prompt da inviare"
-
-#: package/contents/ui/configTasks.qml:192
-msgid "Enable auto mode (auto-run + auto-share)"
-msgstr "Abilita modalità automatica (auto-run + auto-share)"
-
-#: package/contents/ui/configTasks.qml:204
-msgid "Update Task"
-msgstr "Aggiorna attività"
-
-#: package/contents/ui/configTasks.qml:204
-msgid "Save Task"
-msgstr "Salva attività"
-
-#: package/contents/ui/configTasks.qml:212
-msgid "A task named \"%1\" already exists."
-msgstr "Un'attività denominata \"%1\" esiste già."
-
-#: package/contents/ui/configTasks.qml:234
-msgid ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
-"button to run them. Tasks with auto mode will temporarily enable auto-run "
-"and auto-share."
-msgstr ""
-"Le attività sono scorciatoie di prompt riutilizzabili. Usa /task <name> "
-"nella chat o il pulsante della barra degli strumenti per eseguirle. Le "
-"attività in modalità automatica abiliteranno temporaneamente auto-run e auto-"
-"share."
-
-#: package/contents/ui/ChatMessage.qml:102
+#: package/contents/ui/ChatMessage.qml:107
 msgid "Thoughts"
 msgstr "Pensieri"
 
-#: package/contents/ui/ChatMessage.qml:188
+#: package/contents/ui/ChatMessage.qml:196
 msgid "Web Search Results"
 msgstr "Risultati della ricerca web"
 
-#: package/contents/ui/ChatMessage.qml:296
+#: package/contents/ui/ChatMessage.qml:310
 msgid "Thinking…"
 msgstr "Ragionando…"
 
-#: package/contents/ui/ChatMessage.qml:349
+#: package/contents/ui/ChatMessage.qml:369
 msgid "Copy message"
 msgstr "Copia messaggio"
 
-#: package/contents/ui/ChatMessage.qml:357
+#: package/contents/ui/ChatMessage.qml:377
 msgid "Retry"
 msgstr "Riprova"
 
-#: package/contents/ui/ChatMessage.qml:365
+#: package/contents/ui/ChatMessage.qml:385
 msgid "Share with LLM"
 msgstr "Condividi con LLM"
 
-#: package/contents/ui/ChatMessage.qml:367
+#: package/contents/ui/ChatMessage.qml:387
 msgid "Include this output in the conversation"
 msgstr "Includi questo output nella conversazione"
 
-#: package/contents/ui/configGeneral.qml:310
-msgid "No models found."
-msgstr "Nessun modello trovato."
+#: package/contents/ui/CommandBlock.qml:96
+msgid "Save"
+msgstr "Salva"
 
-#: package/contents/ui/configGeneral.qml:415
-msgid "Adapter:"
-msgstr "Adattatore:"
+#: package/contents/ui/CommandBlock.qml:98
+msgid "Save as script file"
+msgstr "Salva come file script"
 
-#: package/contents/ui/configGeneral.qml:437
-msgid "Provider:"
-msgstr "Provider:"
+#: package/contents/ui/CommandBlock.qml:104
+msgid "Copy"
+msgstr "Copia"
 
-#: package/contents/ui/configGeneral.qml:463
-msgid "API Endpoint:"
-msgstr "Endpoint API:"
+#: package/contents/ui/CommandBlock.qml:106
+msgid "Copy to clipboard"
+msgstr "Copia negli appunti"
 
-#: package/contents/ui/configGeneral.qml:490
-msgid "Model:"
-msgstr "Modello:"
+#: package/contents/ui/CommandBlock.qml:117
+#: package/contents/ui/FullRepresentation.qml:855
+msgid "Stop"
+msgstr "Ferma"
 
-#: package/contents/ui/configGeneral.qml:527
-msgid "Refreshing…"
-msgstr "Aggiornamento…"
+#: package/contents/ui/CommandBlock.qml:118
+msgid "Ran"
+msgstr "Eseguito"
 
-#: package/contents/ui/configGeneral.qml:527
-msgid "Refresh model list"
-msgstr "Aggiorna elenco modelli"
+#: package/contents/ui/CommandBlock.qml:118
+msgid "Run"
+msgstr "Esegui"
 
-#: package/contents/ui/configGeneral.qml:545
-msgid "API Key:"
-msgstr "Chiave API:"
+#: package/contents/ui/CommandBlock.qml:125
+msgid "Stop running command"
+msgstr "Interrompi esecuzione comando"
 
-#: package/contents/ui/configGeneral.qml:552
-msgid "Optional - for OpenAI, etc."
-msgstr "Facoltativo - per OpenAI, ecc."
+#: package/contents/ui/CommandBlock.qml:125
+msgid "Execute command inline"
+msgstr "Esegui comando in linea"
 
-#: package/contents/ui/configGeneral.qml:567
-#: package/contents/ui/configTools.qml:253
-msgid "Saving…"
-msgstr "Salvataggio in corso…"
+#: package/contents/ui/CommandBlock.qml:138
+msgid "Terminal"
+msgstr "Terminale"
 
-#: package/contents/ui/configGeneral.qml:568
-#: package/contents/ui/configTools.qml:254
-msgid "Saved"
-msgstr "Salvato"
+#: package/contents/ui/CommandBlock.qml:141
+msgid "Open in terminal emulator"
+msgstr "Apri in emulatore di terminale"
 
-#: package/contents/ui/configGeneral.qml:569
-#: package/contents/ui/configTools.qml:255
-msgid "Save to Config (Insecure)"
-msgstr "Salva nella configurazione (Non sicuro)"
+#: package/contents/ui/CommandBlock.qml:150
+msgid "Save Script"
+msgstr "Salva Script"
 
-#: package/contents/ui/configGeneral.qml:569
-#: package/contents/ui/configTools.qml:255
-msgid "Save Key"
-msgstr "Salva chiave"
+#: package/contents/ui/CommandBlock.qml:154
+msgid "Shell scripts (*.sh)"
+msgstr "Script shell (*.sh)"
 
-#: package/contents/ui/configGeneral.qml:578
-msgid "Stored in KDE Wallet"
-msgstr "Memorizzato in KDE Wallet"
-
-#: package/contents/ui/configGeneral.qml:578
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr ""
-"KDE Wallet non disponibile — chiave memorizzata nel file di configurazione"
-
-#: package/contents/ui/configGeneral.qml:593
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "Temperatura: %1%"
-
-#: package/contents/ui/configGeneral.qml:610
-msgid "Precise"
-msgstr "Preciso"
-
-#: package/contents/ui/configGeneral.qml:615
-msgid "Creative"
-msgstr "Creativo"
-
-#: package/contents/ui/configGeneral.qml:623
-msgid "Max Tokens:"
-msgstr "Token massimi:"
-
-#: package/contents/ui/configGeneral.qml:634
-msgid "Thinking:"
-msgstr "Ragionamento:"
-
-#: package/contents/ui/configGeneral.qml:638
-msgid "Off"
-msgstr "Disattivato"
-
-#: package/contents/ui/configGeneral.qml:638
-msgid "Low"
-msgstr "Basso"
-
-#: package/contents/ui/configGeneral.qml:638
-msgid "Medium"
-msgstr "Medio"
-
-#: package/contents/ui/configGeneral.qml:638
-msgid "High"
-msgstr "Alto"
-
-#: package/contents/ui/configGeneral.qml:647
-msgid "Thinking budget:"
-msgstr "Budget di ragionamento:"
-
-#: package/contents/ui/configGeneral.qml:674
-msgid "Show thoughts in chat (collapsible)"
-msgstr "Mostra i ragionamenti nella chat (comprimibile)"
-
-#: package/contents/ui/configGeneral.qml:679
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-"Quando attivato, il ragionamento del modello viene mostrato sopra ogni "
-"risposta con un'intestazione comprimibile. Lo scambio dei pensieri firmati "
-"con l'API avviene indipendentemente da questa impostazione."
-
-#: package/contents/ui/configGeneral.qml:686
-msgid "Use Responses API"
-msgstr "Usa l'API Responses"
-
-#: package/contents/ui/configGeneral.qml:691
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-"Necessario per mostrare il contenuto di ragionamento su OpenAI / Poe / "
-"OpenRouter / Azure (POST a /v1/responses invece di /v1/chat/completions). "
-"Impostato automaticamente quando si sceglie un preset."
-
-#: package/contents/ui/configGeneral.qml:702
-msgid "Chat Spacing: %1px"
-msgstr "Spaziatura chat: %1px"
-
-#: package/contents/ui/configGeneral.qml:719
-msgid "Compact"
-msgstr "Compatto"
-
-#: package/contents/ui/configGeneral.qml:724
-msgid "Spacious"
-msgstr "Spazioso"
-
-#: package/contents/ui/configGeneral.qml:731
-msgid "Appearance:"
-msgstr "Aspetto:"
-
-#: package/contents/ui/configGeneral.qml:732
-msgid "Show provider and model in title"
-msgstr "Mostra provider e modello nel titolo"
-
-#: package/contents/ui/configGeneral.qml:744
-msgid "Chat History:"
-msgstr "Cronologia chat:"
-
-#: package/contents/ui/configGeneral.qml:745
-msgid "Auto-save chat history"
-msgstr "Salva automaticamente la cronologia chat"
-
-#: package/contents/ui/configGeneral.qml:749
-#: package/contents/ui/configGeneral.qml:764
-msgid "Saves to ~/PlasmaLLM/chats/"
-msgstr "Salva in ~/PlasmaLLM/chats/"
-
-#: package/contents/ui/configGeneral.qml:756
-msgid "Save format:"
-msgstr "Formato di salvataggio:"
-
-#: package/contents/ui/configGeneral.qml:757
-msgid "Plain text (.txt)"
-msgstr "Testo semplice (.txt)"
-
-#: package/contents/ui/configGeneral.qml:757
-msgid "Structured (.jsonl)"
-msgstr "Strutturato (.jsonl)"
-
-#: package/contents/ui/configGeneral.qml:776
-msgid "Auto-clear:"
-msgstr "Cancellazione automatica:"
-
-#: package/contents/ui/configGeneral.qml:780
-msgid "Disabled"
-msgstr "Disabilitato"
-
-#: package/contents/ui/configGeneral.qml:786
-msgid "Instant (always clear when panel opens)"
-msgstr "Istantaneo (cancella sempre quando il pannello si apre)"
-
-#: package/contents/ui/configGeneral.qml:795
-msgid "After"
-msgstr "Dopo"
-
-#: package/contents/ui/configGeneral.qml:814
-msgid "seconds"
-msgstr "secondi"
-
-#: package/contents/ui/configGeneral.qml:814
-msgid "minutes"
-msgstr "minuti"
-
-#: package/contents/ui/configTools.qml:164
-msgid "Commands"
-msgstr "Comandi"
-
-#: package/contents/ui/configTools.qml:169
-msgid "Auto-run commands from LLM"
-msgstr "Esegui automaticamente i comandi dall'LLM"
-
-#: package/contents/ui/configTools.qml:173
-msgid ""
-"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
-"share."
-msgstr ""
-"Consenti all'LLM di eseguire comandi shell. Pericoloso se combinato con Auto-"
-"share."
-
-#: package/contents/ui/configTools.qml:180
-msgid "Run as tool"
-msgstr "Esegui come strumento"
-
-#: package/contents/ui/configTools.qml:184
-msgid ""
-"Use the run_command tool for command execution. If disabled, falls back to "
-"parsing code blocks."
-msgstr ""
-"Usa lo strumento run_command per l'esecuzione dei comandi. Se disabilitato, "
-"ricorre all'analisi dei blocchi di codice."
-
-#: package/contents/ui/configTools.qml:191
-msgid "Auto-share command output with LLM"
-msgstr "Condividi automaticamente l'output dei comandi con LLM"
-
-#: package/contents/ui/configTools.qml:195
-msgid "Automatically send command execution results back to the LLM"
-msgstr "Invia automaticamente i risultati dell'esecuzione dei comandi all'LLM"
-
-#: package/contents/ui/configTools.qml:202
-msgid ""
-"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-msgstr ""
-"⚠️ PERICOLO: Entrambe le opzioni abilitate - l'LLM può ora eseguire comandi e "
-"vedere l'output abilitando un flusso di lavoro agentivo. Utilizzare solo con "
-"LLM affidabili."
-
-#: package/contents/ui/configTools.qml:213
-msgid "Web Search"
-msgstr "Ricerca Web"
-
-#: package/contents/ui/configTools.qml:218
-msgid "Enable web search tool"
-msgstr "Abilita lo strumento di ricerca web"
-
-#: package/contents/ui/configTools.qml:222
-msgid "Allows the LLM to perform web searches using Ollama's search API."
-msgstr ""
-"Consente all'LLM di eseguire ricerche web utilizzando l'API di ricerca di "
-"Ollama."
-
-#: package/contents/ui/configTools.qml:239
-msgid "Ollama API key"
-msgstr "Chiave API Ollama"
-
-#: package/contents/ui/configTools.qml:263
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr ""
-"Abilita ricerche web attivate da LLM tramite l'API di ricerca di Ollama"
+#: package/contents/ui/CommandBlock.qml:154
+#: package/contents/ui/FullRepresentation.qml:507
+msgid "All files (*)"
+msgstr "Tutti i file (*)"
 
 #: package/contents/ui/FullRepresentation.qml:20
 msgid "Toggle auto mode (auto-run + auto-share) for this session"
@@ -683,6 +273,12 @@ msgstr "Esegui un'attività salvata (/task <name>)"
 msgid "Run last command in terminal"
 msgstr "Esegui ultimo comando nel terminale"
 
+#: package/contents/ui/FullRepresentation.qml:82
+#: package/contents/ui/FullRepresentation.qml:722
+#: package/contents/ui/configTasks.qml:57
+msgid "AUTO"
+msgstr "AUTO"
+
 #: package/contents/ui/FullRepresentation.qml:92
 #: package/contents/ui/FullRepresentation.qml:93
 msgid "Run a task"
@@ -724,6 +320,11 @@ msgstr ""
 #: package/contents/ui/FullRepresentation.qml:239
 msgid "Clear All"
 msgstr "Cancella tutto"
+
+#: package/contents/ui/FullRepresentation.qml:247
+#: package/contents/ui/configTasks.qml:84
+msgid "Cancel"
+msgstr "Annulla"
 
 #: package/contents/ui/FullRepresentation.qml:256
 #: package/contents/ui/FullRepresentation.qml:257
@@ -770,19 +371,19 @@ msgstr "Non tenere aperto"
 msgid "Keep open"
 msgstr "Tieni aperto"
 
-#: package/contents/ui/FullRepresentation.qml:471
+#: package/contents/ui/FullRepresentation.qml:475
 msgid "Send a message to start chatting"
 msgstr "Invia un messaggio per iniziare a chattare"
 
-#: package/contents/ui/FullRepresentation.qml:500
+#: package/contents/ui/FullRepresentation.qml:504
 msgid "Attach File"
 msgstr "Allega file"
 
-#: package/contents/ui/FullRepresentation.qml:503
+#: package/contents/ui/FullRepresentation.qml:507
 msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 msgstr "Immagini (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 
-#: package/contents/ui/FullRepresentation.qml:503
+#: package/contents/ui/FullRepresentation.qml:507
 msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
@@ -790,31 +391,57 @@ msgstr ""
 "File di testo (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 
-#: package/contents/ui/FullRepresentation.qml:745
+#: package/contents/ui/FullRepresentation.qml:749
 msgid "Message input"
 msgstr "Input messaggio"
 
-#: package/contents/ui/FullRepresentation.qml:746
+#: package/contents/ui/FullRepresentation.qml:750
 msgid "Type a message…"
 msgstr "Digita un messaggio…"
 
-#: package/contents/ui/FullRepresentation.qml:746
+#: package/contents/ui/FullRepresentation.qml:750
 msgid "Initializing…"
 msgstr "Inizializzazione in corso…"
 
-#: package/contents/ui/FullRepresentation.qml:798
+#: package/contents/ui/FullRepresentation.qml:802
 msgid "Attach file or image"
 msgstr "Allega file o immagine"
 
-#: package/contents/ui/FullRepresentation.qml:804
+#: package/contents/ui/FullRepresentation.qml:809
+msgid "Kill"
+msgstr "Termina"
+
+#: package/contents/ui/FullRepresentation.qml:813
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+"Termina sessione persistente (interrompe tutti i processi e ripristina lo "
+"stato della shell)"
+
+#: package/contents/ui/FullRepresentation.qml:832
 msgid "Send"
 msgstr "Invia"
 
-#: package/contents/ui/FullRepresentation.qml:827
-msgid "Stop"
-msgstr "Ferma"
+#: package/contents/ui/FullRepresentation.qml:860
+msgid "Cancel LLM request"
+msgstr "Annulla richiesta LLM"
 
-#: package/contents/ui/main.qml:900
+#: package/contents/ui/api.js:213
+msgid "Search provider %1 not supported"
+msgstr "Provider di ricerca %1 non supportato"
+
+#: package/contents/ui/api.js:242
+msgid "OpenAI-compatible"
+msgstr "Compatibile con OpenAI"
+
+#: package/contents/ui/api.js:243
+msgid "Anthropic"
+msgstr "Anthropic"
+
+#: package/contents/ui/api.js:244
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+#: package/contents/ui/main.qml:1002
 msgid ""
 "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
 "are on)."
@@ -822,7 +449,7 @@ msgstr ""
 "La modalità automatica è abilitata in modo permanente tramite le "
 "impostazioni (sia Auto-run che Auto-share sono attivati)."
 
-#: package/contents/ui/main.qml:903
+#: package/contents/ui/main.qml:1005
 msgid ""
 "Auto mode enabled for this session. Commands will run and share output "
 "automatically."
@@ -830,82 +457,536 @@ msgstr ""
 "Modalità automatica abilitata per questa sessione. I comandi verranno "
 "eseguiti e l'output condiviso automaticamente."
 
-#: package/contents/ui/main.qml:903
+#: package/contents/ui/main.qml:1005
 msgid "Auto mode disabled."
 msgstr "Modalità automatica disabilitata."
 
-#: package/contents/ui/main.qml:914 package/contents/ui/main.qml:969
+#: package/contents/ui/main.qml:1020 package/contents/ui/main.qml:1079
 msgid "none"
 msgstr "nessuno"
 
-#: package/contents/ui/main.qml:914
+#: package/contents/ui/main.qml:1020
 msgid "Current model: **%1**"
 msgstr "Modello attuale: **%1**"
 
-#: package/contents/ui/main.qml:916
+#: package/contents/ui/main.qml:1022
 msgid "Available models:"
 msgstr "Modelli disponibili:"
 
-#: package/contents/ui/main.qml:918
+#: package/contents/ui/main.qml:1024
 msgid "Type `/model <name>` to switch."
 msgstr "Digita `/model <name>` per cambiare."
 
-#: package/contents/ui/main.qml:920
+#: package/contents/ui/main.qml:1026
 msgid "No models cached. Use **Fetch Models** in settings."
 msgstr ""
 "Nessun modello nella cache. Usa **Scarica modelli** nelle impostazioni."
 
-#: package/contents/ui/main.qml:929
+#: package/contents/ui/main.qml:1035
 msgid "Switched to model: **%1**"
 msgstr "Passato al modello: **%1**"
 
-#: package/contents/ui/main.qml:938
+#: package/contents/ui/main.qml:1044
 msgid "No tasks configured. Add tasks in Settings."
 msgstr "Nessuna attività configurata. Aggiungi attività nelle impostazioni."
 
-#: package/contents/ui/main.qml:940
+#: package/contents/ui/main.qml:1046
 msgid "(auto)"
 msgstr "(automatico)"
 
-#: package/contents/ui/main.qml:941
+#: package/contents/ui/main.qml:1047
 msgid "Available tasks:"
 msgstr "Attività disponibili:"
 
-#: package/contents/ui/main.qml:941
+#: package/contents/ui/main.qml:1047
 msgid "Type `/task <name>` to run."
 msgstr "Digita `/task <name>` per eseguire."
 
-#: package/contents/ui/main.qml:969
+#: package/contents/ui/main.qml:1079
 msgid "Unknown task: **%1**. Available: %2"
 msgstr "Attività sconosciuta: **%1**. Disponibili: %2"
 
-#: package/contents/ui/main.qml:983
+#: package/contents/ui/main.qml:1093
 msgid "The user declined to run this command."
 msgstr "L'utente ha rifiutato di eseguire questo comando."
 
-#: package/contents/ui/main.qml:1152
+#: package/contents/ui/main.qml:1292
 msgid "Searching the web…"
 msgstr "Ricerca in corso…"
 
-#: package/contents/ui/main.qml:1174
+#: package/contents/ui/main.qml:1320
 msgid "Web search failed: %1"
 msgstr "Ricerca web non riuscita: %1"
 
-#: package/contents/ui/main.qml:1389 package/contents/ui/main.qml:1401
+#: package/contents/ui/main.qml:1601
+msgid "Session reset requested."
+msgstr "Ripristino sessione richiesto."
+
+#: package/contents/ui/main.qml:1621 package/contents/ui/main.qml:1639
 msgid "Running: %1"
 msgstr "In esecuzione: %1"
 
-#: package/contents/ui/main.qml:1410
+#: package/contents/ui/main.qml:1652
 msgid "stderr: %1"
 msgstr "stderr: %1"
 
-#: package/contents/ui/main.qml:1412
+#: package/contents/ui/main.qml:1654
 msgid "[truncated — output exceeded %1KB]"
 msgstr "[troncato — output ha superato %1KB]"
 
-#: package/contents/ui/main.qml:1414
+#: package/contents/ui/main.qml:1656
 msgid "[exit code: %1]"
 msgstr "[codice di uscita: %1]"
+
+#: package/contents/ui/configGeneral.qml:228
+msgid "No models found."
+msgstr "Nessun modello trovato."
+
+#: package/contents/ui/configGeneral.qml:333
+msgid "Adapter:"
+msgstr "Adattatore:"
+
+#: package/contents/ui/configGeneral.qml:355
+msgid "Provider:"
+msgstr "Provider:"
+
+#: package/contents/ui/configGeneral.qml:452
+msgid "API Endpoint:"
+msgstr "Endpoint API:"
+
+#: package/contents/ui/configGeneral.qml:479
+msgid "Model:"
+msgstr "Modello:"
+
+#: package/contents/ui/configGeneral.qml:575
+msgid "Refreshing…"
+msgstr "Aggiornamento…"
+
+#: package/contents/ui/configGeneral.qml:575
+msgid "Refresh model list"
+msgstr "Aggiorna elenco modelli"
+
+#: package/contents/ui/configGeneral.qml:593
+msgid "API Key:"
+msgstr "Chiave API:"
+
+#: package/contents/ui/configGeneral.qml:600
+msgid "Optional - for OpenAI, etc."
+msgstr "Facoltativo - per OpenAI, ecc."
+
+#: package/contents/ui/configGeneral.qml:615
+#: package/contents/ui/configTools.qml:470
+#: package/contents/ui/configTools.qml:511
+msgid "Saving…"
+msgstr "Salvataggio in corso…"
+
+#: package/contents/ui/configGeneral.qml:616
+#: package/contents/ui/configTools.qml:471
+#: package/contents/ui/configTools.qml:512
+msgid "Saved"
+msgstr "Salvato"
+
+#: package/contents/ui/configGeneral.qml:617
+#: package/contents/ui/configTools.qml:472
+#: package/contents/ui/configTools.qml:513
+msgid "Save to Config (Insecure)"
+msgstr "Salva nella configurazione (Non sicuro)"
+
+#: package/contents/ui/configGeneral.qml:617
+#: package/contents/ui/configTools.qml:472
+#: package/contents/ui/configTools.qml:513
+msgid "Save Key"
+msgstr "Salva chiave"
+
+#: package/contents/ui/configGeneral.qml:626
+msgid "Stored in KDE Wallet"
+msgstr "Memorizzato in KDE Wallet"
+
+#: package/contents/ui/configGeneral.qml:626
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr ""
+"KDE Wallet non disponibile — chiave memorizzata nel file di configurazione"
+
+#: package/contents/ui/configGeneral.qml:641
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "Temperatura: %1%"
+
+#: package/contents/ui/configGeneral.qml:658
+msgid "Precise"
+msgstr "Preciso"
+
+#: package/contents/ui/configGeneral.qml:663
+msgid "Creative"
+msgstr "Creativo"
+
+#: package/contents/ui/configGeneral.qml:671
+msgid "Max Tokens:"
+msgstr "Token massimi:"
+
+#: package/contents/ui/configGeneral.qml:682
+msgid "Thinking:"
+msgstr "Ragionamento:"
+
+#: package/contents/ui/configGeneral.qml:686
+msgid "Off"
+msgstr "Disattivato"
+
+#: package/contents/ui/configGeneral.qml:686
+msgid "Low"
+msgstr "Basso"
+
+#: package/contents/ui/configGeneral.qml:686
+msgid "Medium"
+msgstr "Medio"
+
+#: package/contents/ui/configGeneral.qml:686
+msgid "High"
+msgstr "Alto"
+
+#: package/contents/ui/configGeneral.qml:695
+msgid "Thinking budget:"
+msgstr "Budget di ragionamento:"
+
+#: package/contents/ui/configGeneral.qml:722
+msgid "Show thoughts in chat (collapsible)"
+msgstr "Mostra i ragionamenti nella chat (comprimibile)"
+
+#: package/contents/ui/configGeneral.qml:727
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"Quando attivato, il ragionamento del modello viene mostrato sopra ogni "
+"risposta con un'intestazione comprimibile. Lo scambio dei pensieri firmati "
+"con l'API avviene indipendentemente da questa impostazione."
+
+#: package/contents/ui/configGeneral.qml:734
+msgid "Use Responses API"
+msgstr "Usa l'API Responses"
+
+#: package/contents/ui/configGeneral.qml:739
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"Necessario per mostrare il contenuto di ragionamento su OpenAI / Poe / "
+"OpenRouter / Azure (POST a /v1/responses invece di /v1/chat/completions). "
+"Impostato automaticamente quando si sceglie un preset."
+
+#: package/contents/ui/configGeneral.qml:750
+msgid "Chat Spacing: %1px"
+msgstr "Spaziatura chat: %1px"
+
+#: package/contents/ui/configGeneral.qml:767
+msgid "Compact"
+msgstr "Compatto"
+
+#: package/contents/ui/configGeneral.qml:772
+msgid "Spacious"
+msgstr "Spazioso"
+
+#: package/contents/ui/configGeneral.qml:779
+msgid "Appearance:"
+msgstr "Aspetto:"
+
+#: package/contents/ui/configGeneral.qml:780
+msgid "Show provider and model in title"
+msgstr "Mostra provider e modello nel titolo"
+
+#: package/contents/ui/configGeneral.qml:792
+msgid "Chat History:"
+msgstr "Cronologia chat:"
+
+#: package/contents/ui/configGeneral.qml:793
+msgid "Auto-save chat history"
+msgstr "Salva automaticamente la cronologia chat"
+
+#: package/contents/ui/configGeneral.qml:797
+#: package/contents/ui/configGeneral.qml:812
+msgid "Saves to ~/PlasmaLLM/chats/"
+msgstr "Salva in ~/PlasmaLLM/chats/"
+
+#: package/contents/ui/configGeneral.qml:804
+msgid "Save format:"
+msgstr "Formato di salvataggio:"
+
+#: package/contents/ui/configGeneral.qml:805
+msgid "Plain text (.txt)"
+msgstr "Testo semplice (.txt)"
+
+#: package/contents/ui/configGeneral.qml:805
+msgid "Structured (.jsonl)"
+msgstr "Strutturato (.jsonl)"
+
+#: package/contents/ui/configGeneral.qml:824
+msgid "Auto-clear:"
+msgstr "Cancellazione automatica:"
+
+#: package/contents/ui/configGeneral.qml:828
+msgid "Disabled"
+msgstr "Disabilitato"
+
+#: package/contents/ui/configGeneral.qml:834
+msgid "Instant (always clear when panel opens)"
+msgstr "Istantaneo (cancella sempre quando il pannello si apre)"
+
+#: package/contents/ui/configGeneral.qml:843
+msgid "After"
+msgstr "Dopo"
+
+#: package/contents/ui/configGeneral.qml:862
+msgid "seconds"
+msgstr "secondi"
+
+#: package/contents/ui/configGeneral.qml:862
+msgid "minutes"
+msgstr "minuti"
+
+#: package/contents/ui/configSystemPrompt.qml:48
+msgid "System Info:"
+msgstr "Informazioni di sistema:"
+
+#: package/contents/ui/configSystemPrompt.qml:54
+msgid "OS"
+msgstr "OS"
+
+#: package/contents/ui/configSystemPrompt.qml:59
+msgid "Shell"
+msgstr "Shell"
+
+#: package/contents/ui/configSystemPrompt.qml:64
+msgid "Hostname"
+msgstr "Nome host"
+
+#: package/contents/ui/configSystemPrompt.qml:69
+msgid "Kernel"
+msgstr "Kernel"
+
+#: package/contents/ui/configSystemPrompt.qml:74
+msgid "Desktop"
+msgstr "Desktop"
+
+#: package/contents/ui/configSystemPrompt.qml:79
+msgid "User"
+msgstr "Utente"
+
+#: package/contents/ui/configSystemPrompt.qml:84
+msgid "CPU"
+msgstr "CPU"
+
+#: package/contents/ui/configSystemPrompt.qml:89
+msgid "Memory"
+msgstr "Memoria"
+
+#: package/contents/ui/configSystemPrompt.qml:94
+msgid "GPU"
+msgstr "GPU"
+
+#: package/contents/ui/configSystemPrompt.qml:99
+msgid "Block Devices"
+msgstr "Dispositivi a blocchi"
+
+#: package/contents/ui/configSystemPrompt.qml:104
+msgid "Network"
+msgstr "Rete"
+
+#: package/contents/ui/configSystemPrompt.qml:109
+msgid "Locale"
+msgstr "Locale"
+
+#: package/contents/ui/configSystemPrompt.qml:114
+msgid "Date/Time"
+msgstr "Data/Ora"
+
+#: package/contents/ui/configSystemPrompt.qml:122
+msgid "Custom Instructions:"
+msgstr "Istruzioni personalizzate:"
+
+#: package/contents/ui/configSystemPrompt.qml:125
+msgid "Additional instructions for the LLM…"
+msgstr "Istruzioni aggiuntive per l'LLM…"
+
+#: package/contents/ui/configSystemPrompt.qml:132
+msgid "Preview:"
+msgstr "Anteprima:"
+
+#: package/contents/ui/configTasks.qml:33
+msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
+msgstr ""
+"Nessuna attività configurata. Aggiungi un'attività per creare scorciatoie di "
+"prompt riutilizzabili."
+
+#: package/contents/ui/configTasks.qml:84
+msgid "Add Task"
+msgstr "Aggiungi attività"
+
+#: package/contents/ui/configTasks.qml:108
+msgid "Task name"
+msgstr "Nome attività"
+
+#: package/contents/ui/configTasks.qml:115
+msgid "Prompt to send"
+msgstr "Prompt da inviare"
+
+#: package/contents/ui/configTasks.qml:121
+msgid "Enable auto mode (auto-run + auto-share)"
+msgstr "Abilita modalità automatica (auto-run + auto-share)"
+
+#: package/contents/ui/configTasks.qml:133
+msgid "Update Task"
+msgstr "Aggiorna attività"
+
+#: package/contents/ui/configTasks.qml:133
+msgid "Save Task"
+msgstr "Salva attività"
+
+#: package/contents/ui/configTasks.qml:141
+msgid "A task named \"%1\" already exists."
+msgstr "Un'attività denominata \"%1\" esiste già."
+
+#: package/contents/ui/configTasks.qml:163
+msgid ""
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with auto mode will temporarily enable auto-run "
+"and auto-share."
+msgstr ""
+"Le attività sono scorciatoie di prompt riutilizzabili. Usa /task <name> "
+"nella chat o il pulsante della barra degli strumenti per eseguirle. Le "
+"attività in modalità automatica abiliteranno temporaneamente auto-run e auto-"
+"share."
+
+#: package/contents/ui/configTools.qml:278
+msgid "Commands"
+msgstr "Comandi"
+
+#: package/contents/ui/configTools.qml:283
+msgid "Auto-run commands from LLM"
+msgstr "Esegui automaticamente i comandi dall'LLM"
+
+#: package/contents/ui/configTools.qml:287
+msgid ""
+"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
+"share."
+msgstr ""
+"Consenti all'LLM di eseguire comandi shell. Pericoloso se combinato con Auto-"
+"share."
+
+#: package/contents/ui/configTools.qml:294
+msgid "Run as tool"
+msgstr "Esegui come strumento"
+
+#: package/contents/ui/configTools.qml:298
+msgid ""
+"Use the run_command tool for command execution. If disabled, falls back to "
+"parsing code blocks."
+msgstr ""
+"Usa lo strumento run_command per l'esecuzione dei comandi. Se disabilitato, "
+"ricorre all'analisi dei blocchi di codice."
+
+#: package/contents/ui/configTools.qml:305
+msgid "Auto-share command output with LLM"
+msgstr "Condividi automaticamente l'output dei comandi con LLM"
+
+#: package/contents/ui/configTools.qml:309
+msgid "Automatically send command execution results back to the LLM"
+msgstr "Invia automaticamente i risultati dell'esecuzione dei comandi all'LLM"
+
+#: package/contents/ui/configTools.qml:316
+msgid ""
+"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
+"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
+msgstr ""
+"⚠️ PERICOLO: Entrambe le opzioni abilitate - l'LLM può ora eseguire comandi e "
+"vedere l'output abilitando un flusso di lavoro agentivo. Utilizzare solo con "
+"LLM affidabili."
+
+#: package/contents/ui/configTools.qml:327
+msgid "Session Multiplexer"
+msgstr "Multiplexer di sessione"
+
+#: package/contents/ui/configTools.qml:332
+msgid "Run commands inside a persistent session"
+msgstr "Esegui i comandi all'interno di una sessione persistente"
+
+#: package/contents/ui/configTools.qml:337
+msgid ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
+msgstr ""
+"Esegui i comandi dell'LLM all'interno di una sessione tmux o screen di lunga "
+"durata in modo che lo stato persista tra i turni."
+
+#: package/contents/ui/configTools.qml:343
+msgid "Reset Session"
+msgstr "Ripristina sessione"
+
+#: package/contents/ui/configTools.qml:356
+msgid "Backend:"
+msgstr "Backend:"
+
+#: package/contents/ui/configTools.qml:385
+msgid "Session name:"
+msgstr "Nome sessione:"
+
+#: package/contents/ui/configTools.qml:395
+msgid ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
+msgstr ""
+"Né 'tmux' né 'screen' sono stati trovati nel sistema. Il multiplexing di "
+"sessione non è disponibile."
+
+#: package/contents/ui/configTools.qml:404
+msgid "Web Search"
+msgstr "Ricerca Web"
+
+#: package/contents/ui/configTools.qml:409
+msgid "Enable web search tool"
+msgstr "Abilita lo strumento di ricerca web"
+
+#: package/contents/ui/configTools.qml:413
+msgid "Allows the LLM to perform web searches."
+msgstr "Consente all'LLM di eseguire ricerche web."
+
+#: package/contents/ui/configTools.qml:428
+msgid "Ollama API"
+msgstr "API Ollama"
+
+#: package/contents/ui/configTools.qml:429
+msgid "SearXNG"
+msgstr "SearXNG"
+
+#: package/contents/ui/configTools.qml:430
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#: package/contents/ui/configTools.qml:456
+msgid "Ollama API key"
+msgstr "Chiave API Ollama"
+
+#: package/contents/ui/configTools.qml:484
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "URL istanza SearXNG (es. https://searx.be)"
+
+#: package/contents/ui/configTools.qml:497
+msgid "SearXNG API Key/Token (optional)"
+msgstr "Chiave/Token API SearXNG (opzionale)"
+
+#: package/contents/ui/configTools.qml:522
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo non richiede alcuna configurazione."
+
+#: package/contents/ui/configTools.qml:524
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Assicurati che l'istanza SearXNG abbia il formato JSON abilitato."
+
+#: package/contents/ui/configTools.qml:525
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr ""
+"Abilita ricerche web attivate da LLM tramite l'API di ricerca di Ollama"
 
 #: package/contents/config/config.qml:11
 msgid "General"
@@ -922,6 +1003,20 @@ msgstr "Attività"
 #: package/contents/config/config.qml:26
 msgid "Tools"
 msgstr "Strumenti"
+
+#~ msgid "Web search timed out"
+#~ msgstr "Timeout della ricerca web"
+
+#~ msgid "Failed to parse web search response: %1"
+#~ msgstr "Errore nell'analisi della risposta di ricerca web: %1"
+
+#~ msgid "Web search failed (HTTP %1)"
+#~ msgstr "Ricerca web non riuscita (HTTP %1)"
+
+#~ msgid "Allows the LLM to perform web searches using Ollama's search API."
+#~ msgstr ""
+#~ "Consente all'LLM di eseguire ricerche web utilizzando l'API di ricerca di "
+#~ "Ollama."
 
 #~ msgid "Commands:"
 #~ msgstr "Comandi:"
