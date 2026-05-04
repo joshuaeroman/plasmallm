@@ -11,88 +11,8 @@ import org.kde.kcmutils
 
 import "api.js" as Api
 
-SimpleKCM {
+BaseConfigPage {
     id: configPage
-
-    // Declared here because Plasma injects all cfg_ properties onto every config page
-    property string cfg_apiEndpoint
-    property string cfg_apiEndpointDefault
-    property string cfg_providerName
-    property string cfg_providerNameDefault
-    property string cfg_modelName
-    property string cfg_modelNameDefault
-    property string cfg_apiKey
-    property string cfg_apiKeyDefault
-    property int cfg_temperature
-    property int cfg_temperatureDefault
-    property int cfg_maxTokens
-    property int cfg_maxTokensDefault
-    property int cfg_chatSpacing
-    property int cfg_chatSpacingDefault
-    property bool cfg_saveChatHistory
-    property bool cfg_saveChatHistoryDefault
-    property bool cfg_autoShareCommandOutput
-    property bool cfg_autoShareCommandOutputDefault
-    property bool cfg_autoRunCommands
-    property bool cfg_autoRunCommandsDefault
-    property bool cfg_showProviderInTitle
-    property bool cfg_showProviderInTitleDefault
-    property bool cfg_sysInfoOS
-    property bool cfg_sysInfoOSDefault
-    property bool cfg_sysInfoShell
-    property bool cfg_sysInfoShellDefault
-    property bool cfg_sysInfoHostname
-    property bool cfg_sysInfoHostnameDefault
-    property bool cfg_sysInfoKernel
-    property bool cfg_sysInfoKernelDefault
-    property bool cfg_sysInfoDesktop
-    property bool cfg_sysInfoDesktopDefault
-    property bool cfg_sysInfoUser
-    property bool cfg_sysInfoUserDefault
-    property bool cfg_sysInfoCPU
-    property bool cfg_sysInfoCPUDefault
-    property bool cfg_sysInfoMemory
-    property bool cfg_sysInfoMemoryDefault
-    property bool cfg_sysInfoGPU
-    property bool cfg_sysInfoGPUDefault
-    property bool cfg_sysInfoDisk
-    property bool cfg_sysInfoDiskDefault
-    property bool cfg_sysInfoNetwork
-    property bool cfg_sysInfoNetworkDefault
-    property bool cfg_sysInfoLocale
-    property bool cfg_sysInfoLocaleDefault
-    property bool cfg_sysInfoDateTime
-    property bool cfg_sysInfoDateTimeDefault
-
-    property bool cfg_useSessionMultiplexer
-    property bool cfg_useSessionMultiplexerDefault
-    property string cfg_sessionMultiplexer
-    property string cfg_sessionMultiplexerDefault
-    property string cfg_sessionName
-    property string cfg_sessionNameDefault
-
-    property string cfg_customSystemPrompt
-    property string cfg_customSystemPromptDefault
-    property string cfg_gatheredSysInfo
-    property string cfg_gatheredSysInfoDefault
-    property int cfg_apiKeyVersion
-    property int cfg_apiKeyVersionDefault
-    property bool cfg_enableWebSearch
-    property bool cfg_enableWebSearchDefault
-    property string cfg_webSearchProvider
-    property string cfg_webSearchProviderDefault
-    property string cfg_searxngUrl
-    property string cfg_searxngUrlDefault
-    property string cfg_searxngApiKey
-    property string cfg_searxngApiKeyDefault
-    property int cfg_searxngApiKeyVersion
-    property int cfg_searxngApiKeyVersionDefault
-    property string cfg_ollamaSearchApiKey
-    property string cfg_ollamaSearchApiKeyDefault
-    property int cfg_ollamaSearchApiKeyVersion
-    property int cfg_ollamaSearchApiKeyVersionDefault
-    property bool cfg_useCommandTool
-    property bool cfg_useCommandToolDefault
 
     function buildPreview() {
         var real = {};
