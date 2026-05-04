@@ -42,14 +42,14 @@ check-translations: $(PO_FILES)
 				msgattrib --untranslated --no-fuzzy --no-wrap $$po | grep '^msgid ' | grep -v '^msgid ""$$' | sed 's/^msgid "//;s/"$$//' | while read -r msg; do \
 					escaped=$$(printf '%s' "$$msg" | sed 's/[[\.*^$$()+?{|\\]/\\&/g'); \
 					line=$$(grep -n "^msgid \"$$escaped" "$$po" | head -1 | cut -d: -f1); \
-					echo "    Line $$line: \"$${msg:0:77}...\""; \
+					echo "    Line $$line: \"$${msg}\""; \
 				done; \
 			fi; \
 			if [ "$$fuzzy" -gt 0 ]; then \
 				msgattrib --only-fuzzy --no-wrap $$po | grep '^msgid ' | grep -v '^msgid ""$$' | sed 's/^msgid "//;s/"$$//' | while read -r msg; do \
 					escaped=$$(printf '%s' "$$msg" | sed 's/[[\.*^$$()+?{|\\]/\\&/g'); \
 					line=$$(grep -n "^msgid \"$$escaped" "$$po" | head -1 | cut -d: -f1); \
-					echo "    Line $$line (fuzzy): \"$${msg:0:77}...\""; \
+					echo "    Line $$line (fuzzy): \"$${msg}\""; \
 				done; \
 			fi; \
 			errors=$$((errors + 1)); \
