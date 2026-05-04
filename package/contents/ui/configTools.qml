@@ -13,36 +13,8 @@ import org.kde.plasma.plasma5support as P5Support
 
 import "api.js" as Api
 
-SimpleKCM {
+BaseConfigPage {
     id: configPage
-
-    property bool cfg_autoShareCommandOutput
-    property bool cfg_autoShareCommandOutputDefault
-    property bool cfg_autoRunCommands
-    property bool cfg_autoRunCommandsDefault
-    property bool cfg_useCommandTool
-    property bool cfg_useCommandToolDefault
-    property bool cfg_enableWebSearch
-    property bool cfg_enableWebSearchDefault
-    property string cfg_webSearchProvider
-    property string cfg_webSearchProviderDefault
-    property string cfg_searxngUrl
-    property string cfg_searxngUrlDefault
-    property string cfg_searxngApiKey
-    property string cfg_searxngApiKeyDefault
-    property string cfg_ollamaSearchApiKey
-    property string cfg_ollamaSearchApiKeyDefault
-    property int cfg_ollamaSearchApiKeyVersion
-    property int cfg_ollamaSearchApiKeyVersionDefault
-    property int cfg_searxngApiKeyVersion
-    property int cfg_searxngApiKeyVersionDefault
-
-    property bool cfg_useSessionMultiplexer
-    property bool cfg_useSessionMultiplexerDefault
-    property string cfg_sessionMultiplexer
-    property string cfg_sessionMultiplexerDefault
-    property string cfg_sessionName
-    property string cfg_sessionNameDefault
 
     property bool hasTmux: false
     property bool hasScreen: false
