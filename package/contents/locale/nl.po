@@ -17,18 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: package/contents/ui/adapters/openai.js:33
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Redeneerinspanning (laag / gemiddeld / hoog) bepaalt uitgebreid denken. Om "
-"gedachten te zien op OpenAI / Poe / OpenRouter / Azure, schakelt u de Use "
-"Responses API in; chat-completions providers (DeepSeek, Qwen) tonen "
-"redeneringen via reasoning_content."
-
 #: package/contents/ui/adapters/anthropic.js:36
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -140,6 +128,18 @@ msgstr "geen reactie — controleer de URL van uw eindpunt"
 #: package/contents/ui/adapters/gemini.js:523
 msgid "Request failed"
 msgstr "Verzoek mislukt"
+
+#: package/contents/ui/adapters/openai.js:33
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"Redeneerinspanning (laag / gemiddeld / hoog) bepaalt uitgebreid denken. Om "
+"gedachten te zien op OpenAI / Poe / OpenRouter / Azure, schakelt u de Use "
+"Responses API in; chat-completions providers (DeepSeek, Qwen) tonen "
+"redeneringen via reasoning_content."
 
 #: package/contents/ui/configSystemPrompt.qml:48
 msgid "System Info:"

@@ -17,18 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: package/contents/ui/adapters/openai.js:33
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Der Denkaufwand (niedrig / mittel / hoch) steuert das erweiterte Denken. Um "
-"Gedanken bei OpenAI / Poe / OpenRouter / Azure zu sehen, aktivieren Sie "
-"'Responses-API verwenden'; Chat-Completions-Anbieter (DeepSeek, Qwen) zeigen "
-"das Denken über reasoning_content an."
-
 #: package/contents/ui/adapters/anthropic.js:36
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -148,6 +136,18 @@ msgstr "keine Antwort — überprüfen Sie Ihre Endpunkt-URL"
 #: package/contents/ui/adapters/gemini.js:523
 msgid "Request failed"
 msgstr "Anfrage fehlgeschlagen"
+
+#: package/contents/ui/adapters/openai.js:33
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"Der Denkaufwand (niedrig / mittel / hoch) steuert das erweiterte Denken. Um "
+"Gedanken bei OpenAI / Poe / OpenRouter / Azure zu sehen, aktivieren Sie "
+"'Responses-API verwenden'; Chat-Completions-Anbieter (DeepSeek, Qwen) zeigen "
+"das Denken über reasoning_content an."
 
 #: package/contents/ui/configSystemPrompt.qml:48
 msgid "System Info:"

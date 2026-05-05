@@ -15,16 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: package/contents/ui/adapters/openai.js:33
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"推論の強度（低 / 中 / 高）は拡張思考を制御します。思考を表示するには、[全般]"
-"タブで「チャットに思考を表示」が有効になっていることを確認してください。"
-
 #: package/contents/ui/adapters/anthropic.js:36
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -137,6 +127,16 @@ msgstr "応答なし — エンドポイントURLを確認してください..."
 #: package/contents/ui/adapters/gemini.js:523
 msgid "Request failed"
 msgstr "リクエストに失敗しました..."
+
+#: package/contents/ui/adapters/openai.js:33
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"推論の強度（低 / 中 / 高）は拡張思考を制御します。思考を表示するには、[全般]"
+"タブで「チャットに思考を表示」が有効になっていることを確認してください。"
 
 #: package/contents/ui/configSystemPrompt.qml:48
 msgid "System Info:"
