@@ -85,8 +85,8 @@ Rectangle {
                 id: commandLabel
                 width: parent.width
                 text: commandBlock.commandText
-                font.family: "monospace"
-                font.pointSize: Kirigami.Theme.smallFont.pointSize
+                font.family: root.codeFontFamily
+                font.pointSize: root.codeFontPointSize
                 wrapMode: Text.Wrap
             }
         }

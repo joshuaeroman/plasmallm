@@ -121,7 +121,7 @@ Item {
                 id: thinkingScroll
                 visible: messageItem.thinkingExpanded
                 Layout.fillWidth: true
-                Layout.maximumHeight: Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20
+                Layout.maximumHeight: root.uiFontPointSize * 1.4 * 20
                 Layout.preferredHeight: Math.min(thinkingLabel.implicitHeight, Layout.maximumHeight)
                 contentWidth: availableWidth
                 QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
@@ -141,7 +141,8 @@ Item {
                     text: messageItem.thinking
                     textFormat: Text.PlainText
                     wrapMode: Text.Wrap
-                    font: Kirigami.Theme.smallFont
+                    font.family: root.thoughtsFontFamily
+                    font.pointSize: root.thoughtsFontPointSize
                     color: Kirigami.Theme.disabledTextColor
                 }
             }
@@ -153,7 +154,7 @@ Item {
             Layout.maximumWidth: parent.width * 0.85
             Layout.alignment: isUser ? Qt.AlignRight : Qt.AlignLeft
             implicitHeight: isWebSearchResults ? webSearchColumn.implicitHeight + messageItem.spacing * 3 : messageContentRow.implicitHeight + messageItem.spacing * 3 + (attachmentFlow.visible ? attachmentFlow.height + Kirigami.Units.smallSpacing : 0)
-            Layout.maximumHeight: isCommandOutput ? (Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20 + messageItem.spacing * 3) : Number.POSITIVE_INFINITY
+            Layout.maximumHeight: isCommandOutput ? (root.uiFontPointSize * 1.4 * 20 + messageItem.spacing * 3) : Number.POSITIVE_INFINITY
 
 
             radius: 6
@@ -212,7 +213,7 @@ Item {
                     Layout.maximumHeight: scrollMaxHeight
                     Layout.preferredHeight: visible ? Math.min(item ? item.implicitHeight : 0, scrollMaxHeight) : 0
 
-                    readonly property real scrollMaxHeight: Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20
+                    readonly property real scrollMaxHeight: root.uiFontPointSize * 1.4 * 20
 
                     sourceComponent: scrollableMarkdownContent
                 }
@@ -265,7 +266,7 @@ Item {
                     Layout.maximumHeight: isCommandOutput ? scrollMaxHeight : -1
                     Layout.preferredHeight: isCommandOutput ? Math.min(item ? item.implicitHeight : 0, scrollMaxHeight) : (item ? item.implicitHeight : 0)
 
-                    readonly property real scrollMaxHeight: Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20
+                    readonly property real scrollMaxHeight: root.uiFontPointSize * 1.4 * 20
 
                     sourceComponent: isCommandOutput ? scrollableContent : plainContent
                 }
@@ -276,7 +277,7 @@ Item {
                         id: outScroll
                         contentWidth: availableWidth
                         padding: 0
-                        implicitHeight: Math.min(Math.ceil(outLabel.implicitHeight), Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20)
+                        implicitHeight: Math.min(Math.ceil(outLabel.implicitHeight), root.uiFontPointSize * 1.4 * 20)
                         clip: true
 
 
@@ -297,7 +298,8 @@ Item {
                             text: messageItem.strippedContent
                             textFormat: Text.PlainText
                             wrapMode: Text.Wrap
-                            font.family: "monospace"
+                            font.family: root.codeFontFamily
+                            font.pointSize: root.codeFontPointSize
                             color: Kirigami.Theme.textColor
                         }
                     }
@@ -310,7 +312,8 @@ Item {
                         text: isThinking ? i18n("Thinking…") : messageItem.strippedContent
                         textFormat: (isAssistant && !isThinking) ? Text.MarkdownText : Text.PlainText
                         wrapMode: Text.Wrap
-                        font.family: isCommandRunning ? "monospace" : font.family
+                        font.family: isCommandRunning ? root.codeFontFamily : root.uiFontFamily
+                        font.pointSize: isCommandRunning ? root.codeFontPointSize : root.uiFontPointSize
                         font.italic: isThinking
                         color: isThinking ? Kirigami.Theme.disabledTextColor :
                                isUser ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
@@ -326,7 +329,7 @@ Item {
                     id: mdScroll
                     contentWidth: availableWidth
                     padding: 0
-                    implicitHeight: Math.min(Math.ceil(mdLabel.implicitHeight), Kirigami.Theme.defaultFont.pixelSize * 1.4 * 20)
+                    implicitHeight: Math.min(Math.ceil(mdLabel.implicitHeight), root.uiFontPointSize * 1.4 * 20)
                     clip: true
                     QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
                     QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
@@ -345,6 +348,8 @@ Item {
                         text: messageItem.content
                         textFormat: Text.MarkdownText
                         wrapMode: Text.Wrap
+                        font.family: root.uiFontFamily
+                        font.pointSize: root.uiFontPointSize
                         color: Kirigami.Theme.textColor
                     }
                 }

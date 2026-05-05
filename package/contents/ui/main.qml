@@ -23,6 +23,15 @@ PlasmoidItem {
     property bool isLoading: false
     property bool sessionActive: false
 
+    readonly property string uiFontFamily: Plasmoid.configuration.useCustomFont ? Plasmoid.configuration.customFontFamily : Kirigami.Theme.defaultFont.family
+    readonly property int uiFontPointSize: Plasmoid.configuration.useCustomFont ? Plasmoid.configuration.customFontSize : Kirigami.Theme.defaultFont.pointSize
+
+    readonly property string codeFontFamily: Plasmoid.configuration.useCustomCodeFont ? Plasmoid.configuration.customCodeFontFamily : "monospace"
+    readonly property int codeFontPointSize: Plasmoid.configuration.useCustomCodeFont ? Plasmoid.configuration.customCodeFontSize : Kirigami.Theme.smallFont.pointSize
+
+    readonly property string thoughtsFontFamily: Plasmoid.configuration.useCustomThoughtsFont ? Plasmoid.configuration.customThoughtsFontFamily : Kirigami.Theme.smallFont.family
+    readonly property int thoughtsFontPointSize: Plasmoid.configuration.useCustomThoughtsFont ? Plasmoid.configuration.customThoughtsFontSize : Kirigami.Theme.smallFont.pointSize
+
     Timer {
         id: sessionStatusTimer
         interval: 5000

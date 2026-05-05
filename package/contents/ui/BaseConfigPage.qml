@@ -34,6 +34,24 @@ SimpleKCM {
     property bool cfg_usesResponsesAPIDefault
     property int cfg_chatSpacing
     property int cfg_chatSpacingDefault
+    property bool cfg_useCustomFont
+    property bool cfg_useCustomFontDefault
+    property string cfg_customFontFamily
+    property string cfg_customFontFamilyDefault
+    property int cfg_customFontSize
+    property int cfg_customFontSizeDefault
+    property bool cfg_useCustomCodeFont
+    property bool cfg_useCustomCodeFontDefault
+    property string cfg_customCodeFontFamily
+    property string cfg_customCodeFontFamilyDefault
+    property int cfg_customCodeFontSize
+    property int cfg_customCodeFontSizeDefault
+    property bool cfg_useCustomThoughtsFont
+    property bool cfg_useCustomThoughtsFontDefault
+    property string cfg_customThoughtsFontFamily
+    property string cfg_customThoughtsFontFamilyDefault
+    property int cfg_customThoughtsFontSize
+    property int cfg_customThoughtsFontSizeDefault
     property string cfg_customSystemPrompt
     property string cfg_customSystemPromptDefault
     property bool cfg_saveChatHistory
