@@ -65,6 +65,7 @@ BaseConfigPage {
                             taskNameField.text = tasksList[index].name;
                             taskPromptField.text = tasksList[index].prompt;
                             taskAutoCheck.checked = tasksList[index].auto;
+                            taskAutoSubmitCheck.checked = tasksList[index].hasOwnProperty("autoSubmit") ? tasksList[index].autoSubmit : true;
                             taskEditorVisible = true;
                         }
                     }
@@ -92,6 +93,7 @@ BaseConfigPage {
                         taskNameField.text = "";
                         taskPromptField.text = "";
                         taskAutoCheck.checked = false;
+                        taskAutoSubmitCheck.checked = true;
                         taskEditorVisible = true;
                     }
                 }
@@ -121,6 +123,11 @@ BaseConfigPage {
                     text: i18n("Enable auto mode (auto-run + auto-share)")
                 }
 
+                QQC2.CheckBox {
+                    id: taskAutoSubmitCheck
+                    text: i18n("Auto-submit task prompt to chat")
+                }
+
                 QQC2.Label {
                     id: taskErrorLabel
                     visible: false
@@ -144,7 +151,7 @@ BaseConfigPage {
                             }
                         }
                         taskErrorLabel.visible = false;
-                        var entry = { name: name, prompt: taskPromptField.text.trim(), auto: taskAutoCheck.checked };
+                        var entry = { name: name, prompt: taskPromptField.text.trim(), auto: taskAutoCheck.checked, autoSubmit: taskAutoSubmitCheck.checked };
                         if (taskEditIndex >= 0) {
                             arr[taskEditIndex] = entry;
                         } else {

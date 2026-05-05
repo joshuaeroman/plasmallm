@@ -73,6 +73,7 @@ PlasmoidItem {
 
     signal responseReady(int messageIndex)
     signal copyConversationRequested()
+    signal populateInputRequested(string text)
 
     function currentTimestamp() {
         return new Date().toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
@@ -957,44 +958,44 @@ PlasmoidItem {
     }
 
     function sendMessage(text, attachments) {
-        if (!systemPromptReady) return;
+        if (!systemPromptReady) return false;
         if (!attachments) attachments = [];
 
         // Slash commands
         var lower = text.toLowerCase().trim();
         if (lower === "/close") {
             root.expanded = false;
-            return;
+            return true;
         }
         if (lower === "/clear") {
             clearChat();
-            return;
+            return true;
         }
         if (lower === "/settings") {
             Plasmoid.internalAction("configure").trigger();
-            return;
+            return true;
         }
         if (lower === "/history") {
             openChatsFolder();
-            return;
+            return true;
         }
         if (lower === "/save") {
             saveChat(true);
-            return;
+            return true;
         }
         if (lower === "/copy") {
             copyConversationRequested();
-            return;
+            return true;
         }
         if (lower === "/run") {
             var runCmd = getLastCommand();
             if (runCmd) executeCommand(runCmd);
-            return;
+            return true;
         }
         if (lower === "/term" || lower === "/terminal") {
             var termCmd = getLastCommand();
             if (termCmd) runInTerminal(termCmd);
-            return;
+            return true;
         }
         if (lower === "/auto") {
             var configAutoMode = Plasmoid.configuration.autoRunCommands && Plasmoid.configuration.autoShareCommandOutput;
@@ -1012,7 +1013,7 @@ PlasmoidItem {
                     chatMessages.setProperty(0, "content", autoPrompt);
                 }
             }
-            return;
+            return true;
         }
         if (lower === "/model") {
             var currentModel = Plasmoid.configuration.modelName;
@@ -1026,7 +1027,7 @@ PlasmoidItem {
                 msg += "\n\n" + i18n("No models cached. Use **Fetch Models** in settings.");
             }
             displayMessages.append({ role: "assistant", content: msg, commandsStr: "", shared: false, timestamp: currentTimestamp() });
-            return;
+            return true;
         }
         if (lower.startsWith("/model ")) {
             var newModel = text.trim().substring(7).trim();
@@ -1034,7 +1035,7 @@ PlasmoidItem {
                 Plasmoid.configuration.modelName = newModel;
                 displayMessages.append({ role: "assistant", content: i18n("Switched to model: **%1**", newModel), commandsStr: "", shared: false, timestamp: currentTimestamp() });
             }
-            return;
+            return true;
         }
         if (lower === "/task") {
             var tasksJson = Plasmoid.configuration.tasks;
@@ -1046,7 +1047,7 @@ PlasmoidItem {
                 var taskList = tasks.map(function(t) { return "- **" + t.name + "**" + (t.auto ? " " + i18n("(auto)") : "") + " — " + t.prompt; }).join("\n");
                 displayMessages.append({ role: "assistant", content: i18n("Available tasks:") + "\n" + taskList + "\n\n" + i18n("Type `/task <name>` to run."), commandsStr: "", shared: false, timestamp: currentTimestamp() });
             }
-            return;
+            return true;
         }
         if (lower.startsWith("/task ")) {
             var taskName = text.trim().substring(6).trim();
@@ -1061,6 +1062,11 @@ PlasmoidItem {
                 }
             }
             if (foundTask) {
+                var autoSubmit = foundTask.hasOwnProperty("autoSubmit") ? foundTask.autoSubmit : true;
+                if (!autoSubmit) {
+                    populateInputRequested(foundTask.prompt);
+                    return false;
+                }
                 if (foundTask.auto && !sessionAutoMode) {
                     sessionAutoMode = true;
                     taskAutoMode = true;
@@ -1074,11 +1080,12 @@ PlasmoidItem {
                     }
                 }
                 sendMessage(foundTask.prompt);
+                return true;
             } else {
                 var availNames = tasks2.map(function(t) { return t.name; }).join(", ");
                 displayMessages.append({ role: "error", content: i18n("Unknown task: **%1**. Available: %2", taskName, availNames || i18n("none")), commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                return true;
             }
-            return;
         }
 
         // If a previous turn requested tool calls that the user never ran
@@ -1120,6 +1127,7 @@ PlasmoidItem {
         autoShareSuppressed = false;
         toolCallDepth = 0;
         sendToLLM();
+        return true;
     }
 
     function sendToLLM() {
