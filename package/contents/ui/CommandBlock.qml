@@ -55,8 +55,11 @@ Rectangle {
             icon.name: "utilities-terminal"
             closable: false
             checkable: false
-            hoverEnabled: false
-            activeFocusOnTab: false
+            hoverEnabled: true
+            activeFocusOnTab: true
+            PlasmaComponents.ToolTip.text: i18n("Open terminal attached to this session")
+            PlasmaComponents.ToolTip.visible: hovered
+            onClicked: commandBlock.terminalRequested(commandBlock.commandText)
         }
 
         QQC2.ScrollView {
