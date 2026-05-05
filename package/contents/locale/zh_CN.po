@@ -15,16 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: package/contents/ui/adapters/openai.js:33
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"推理力度（低 / 中 / 高）控制扩展思考。要查看思考内容，请确保您已在“常规”选项"
-"卡中启用“显示思考”。"
-
 #: package/contents/ui/adapters/anthropic.js:36
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -132,6 +122,16 @@ msgstr "无响应 — 请检查您的端点 URL..."
 #: package/contents/ui/adapters/gemini.js:523
 msgid "Request failed"
 msgstr "请求失败..."
+
+#: package/contents/ui/adapters/openai.js:33
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"推理力度（低 / 中 / 高）控制扩展思考。要查看思考内容，请确保您已在“常规”选项"
+"卡中启用“显示思考”。"
 
 #: package/contents/ui/configSystemPrompt.qml:48
 msgid "System Info:"

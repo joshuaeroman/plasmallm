@@ -16,18 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: package/contents/ui/adapters/openai.js:33
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Akıl yürütme çabası (düşük / orta / yüksek) genişletilmiş düşünmeyi kontrol "
-"eder. OpenAI / Poe / OpenRouter / Azure'da düşünceleri görmek için Use "
-"Responses API'yi etkinleştirin; sohbet tamamlama sağlayıcıları (DeepSeek, "
-"Qwen) akıl yürütmeyi reasoning_content aracılığıyla sunar."
-
 #: package/contents/ui/adapters/anthropic.js:36
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -142,6 +130,18 @@ msgstr "yanıt yok — uç nokta URL'nizi kontrol edin"
 #: package/contents/ui/adapters/gemini.js:523
 msgid "Request failed"
 msgstr "İstek başarısız oldu"
+
+#: package/contents/ui/adapters/openai.js:33
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"Akıl yürütme çabası (düşük / orta / yüksek) genişletilmiş düşünmeyi kontrol "
+"eder. OpenAI / Poe / OpenRouter / Azure'da düşünceleri görmek için Use "
+"Responses API'yi etkinleştirin; sohbet tamamlama sağlayıcıları (DeepSeek, "
+"Qwen) akıl yürütmeyi reasoning_content aracılığıyla sunar."
 
 #: package/contents/ui/configSystemPrompt.qml:48
 msgid "System Info:"

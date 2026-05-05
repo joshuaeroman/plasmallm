@@ -17,16 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: package/contents/ui/adapters/openai.js:33
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Resonneringsinnsats (lav / middels / høy) styrer utvidet tenkning. For å se "
-"tanker, sørg for at du har aktivert 'Vis tanker' i Generelt-fanen."
-
 #: package/contents/ui/adapters/anthropic.js:36
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -136,6 +126,16 @@ msgstr "ingen respons — sjekk endepunkt-URL-en din..."
 #: package/contents/ui/adapters/gemini.js:523
 msgid "Request failed"
 msgstr "Forespørsel feilet..."
+
+#: package/contents/ui/adapters/openai.js:33
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"Resonneringsinnsats (lav / middels / høy) styrer utvidet tenkning. For å se "
+"tanker, sørg for at du har aktivert 'Vis tanker' i Generelt-fanen."
 
 #: package/contents/ui/configSystemPrompt.qml:48
 msgid "System Info:"
