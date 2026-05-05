@@ -81,6 +81,12 @@ make package
 # Creates e.g. PlasmaLLM-x.y.z.plasmoid
 ```
 
+If you want to build a package without compiling translations (e.g. for development builds or untranslated commits):
+
+```bash
+make package-no-i18n
+```
+
 Requires `make`, `zip`, and GNU `gettext` for I18N.
 
 ## Configuration

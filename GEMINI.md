@@ -31,6 +31,10 @@ The project uses a `Makefile` for common development tasks. Do *not* run these u
   ```bash
   make package
   ```
+- **Build `.plasmoid` package (skip translations):**
+  ```bash
+  make package-no-i18n
+  ```
 - **Update and compile translations:**
   ```bash
   make translations
