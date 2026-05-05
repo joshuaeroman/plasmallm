@@ -123,8 +123,12 @@ function translateMessages(neutralMessages) {
         var m = neutralMessages[i];
 
         if (m.role === "system") {
-            if (typeof m.content === "string") {
-                instructions += (instructions.length > 0 ? "\n\n" : "") + m.content;
+            if (typeof m.content === "string" && m.content.length > 0) {
+                input.push({
+                    type: "message",
+                    role: "system",
+                    content: [{ type: "input_text", text: m.content }]
+                });
             }
             continue;
         }
@@ -159,6 +163,7 @@ function translateMessages(neutralMessages) {
             // Assistant text as an output_text message.
             if (m.content && typeof m.content === "string" && m.content.length > 0) {
                 input.push({
+                    type: "message",
                     role: "assistant",
                     content: [{ type: "output_text", text: m.content }]
                 });
@@ -191,7 +196,7 @@ function translateMessages(neutralMessages) {
             } else {
                 userContent = [{ type: "input_text", text: "" }];
             }
-            input.push({ role: "user", content: userContent });
+            input.push({ type: "message", role: "user", content: userContent });
             continue;
         }
     }

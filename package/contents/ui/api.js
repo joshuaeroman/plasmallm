@@ -25,6 +25,10 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
     var prompt = "You are a helpful assistant embedded in the user's Linux desktop.\n\n" +
         "## System\n";
 
+    if (options && options.sysInfoDateTime) {
+        prompt += "- Current Date & Time: " + localISODateTime() + "\n";
+    }
+
     if (sysInfo.hostname) {
         prompt += "- Hostname: " + sysInfo.hostname + "\n";
     }
@@ -68,7 +72,7 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
         prompt += "- Network Interfaces:\n" + sysInfo.network + "\n";
     }
 
-    prompt += "\nGeneral-purpose assistant. Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational." +
+    prompt += "\nGeneral-purpose assistant. Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational. " +
         "Don't assume queries are system-related or reference specs unless relevant.\n\n";
 
     if (options && options.commandToolEnabled) {
@@ -151,12 +155,6 @@ function isImageFile(filePath) {
 
 function stripCodeBlocks(text) {
     return text.replace(/\n?```\w*\n[\s\S]*?```\n?/g, "\n");
-}
-
-function stripLeadingTimestamp(text) {
-    if (!text) return "";
-    // Matches [YYYY-MM-DDTHH:MM:SS-HH:MM]: or similar variations
-    return text.replace(/^\[\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?[+-]\d{2}:\d{2}\]:\s*/, "");
 }
 
 function parseCommandBlocks(text) {

@@ -291,7 +291,7 @@ PlasmoidItem {
     }
 
     function initSystemPrompt() {
-        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode, commandToolEnabled: Plasmoid.configuration.useCommandTool, sessionMultiplexer: root.sessionChipText() });
+        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode, commandToolEnabled: Plasmoid.configuration.useCommandTool, sessionMultiplexer: root.sessionChipText() });
         Plasmoid.configuration.gatheredSysInfo = JSON.stringify(sysInfo);
         if (systemPromptReady) {
             chatMessages.setProperty(0, "content", prompt);
@@ -348,7 +348,7 @@ PlasmoidItem {
         root.pendingToolCalls = [];
         // Re-seed with system prompt
         if (systemPromptReady) {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: false, commandToolEnabled: Plasmoid.configuration.useCommandTool });
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: false, commandToolEnabled: Plasmoid.configuration.useCommandTool });
             chatMessages.append({ role: "system", content: prompt });
         }
     }
@@ -1005,7 +1005,7 @@ PlasmoidItem {
                 displayMessages.append({ role: "assistant", content: sessionAutoMode ? i18n("Auto mode enabled for this session. Commands will run and share output automatically.") : i18n("Auto mode disabled."), commandsStr: "", shared: false, timestamp: currentTimestamp() });
                 if (systemPromptReady) {
                     var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                        autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                        sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                         autoMode: root.isAutoMode, 
                         commandToolEnabled: Plasmoid.configuration.useCommandTool 
                     });
@@ -1066,7 +1066,7 @@ PlasmoidItem {
                     taskAutoMode = true;
                     if (systemPromptReady) {
                         var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                            autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                            sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                             autoMode: root.isAutoMode, 
                             commandToolEnabled: Plasmoid.configuration.useCommandTool 
                         });
@@ -1139,7 +1139,7 @@ PlasmoidItem {
         // Refresh system prompt
         if (systemPromptReady) {
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                 autoMode: root.isAutoMode, 
                 commandToolEnabled: Plasmoid.configuration.useCommandTool,
                 sessionMultiplexer: root.sessionChipText()
@@ -1164,10 +1164,8 @@ PlasmoidItem {
             var msgContent = msg.content;
 
             // Prepend timestamp if enabled and available
-            if (msg.role !== "tool" && Plasmoid.configuration.sysInfoDateTime && msg.timestamp_api && msg.timestamp_api.length > 0) {
-                msgContent = "[" + msg.timestamp_api + "]: " + msgContent;
-            }
-
+            // (Removed per user request: timestamp is now in the system prompt)
+            
             if (msg.attachments_json && msg.attachments_json.length > 0) {
                 try {
                     var atts = JSON.parse(msg.attachments_json);
@@ -1418,7 +1416,6 @@ PlasmoidItem {
                         timestamp: currentTimestamp()
                     });
                 } else {
-                    fullText = Api.stripLeadingTimestamp(fullText);
                     var regularThinkingJson = (assistantMsg && assistantMsg.thinkingBlocks && assistantMsg.thinkingBlocks.length > 0)
                         ? JSON.stringify(assistantMsg.thinkingBlocks) : "";
                     chatMessages.append({ 
@@ -1719,7 +1716,7 @@ PlasmoidItem {
             if (!systemPromptReady) return;
             // Update the system message (always at index 0) with new prompt
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                 autoMode: root.isAutoMode, 
                 commandToolEnabled: Plasmoid.configuration.useCommandTool 
             });
@@ -1728,7 +1725,7 @@ PlasmoidItem {
         function onAutoRunCommandsChanged() {
             if (!systemPromptReady) return;
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                 autoMode: root.isAutoMode, 
                 commandToolEnabled: Plasmoid.configuration.useCommandTool 
             });
@@ -1737,7 +1734,7 @@ PlasmoidItem {
         function onAutoShareCommandOutputChanged() {
             if (!systemPromptReady) return;
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                 autoMode: root.isAutoMode, 
                 commandToolEnabled: Plasmoid.configuration.useCommandTool 
             });
@@ -1746,7 +1743,7 @@ PlasmoidItem {
         function onUseCommandToolChanged() {
             if (!systemPromptReady) return;
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                 autoMode: root.isAutoMode, 
                 commandToolEnabled: Plasmoid.configuration.useCommandTool 
             });
@@ -1819,7 +1816,7 @@ PlasmoidItem {
         function onSysInfoDateTimeChanged() {
             if (!systemPromptReady) return;
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                 autoMode: root.isAutoMode, 
                 commandToolEnabled: Plasmoid.configuration.useCommandTool 
             });
