@@ -99,7 +99,7 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
         var parts = options.sessionMultiplexer.split(": ");
         var be = parts[0] || "tmux";
         var sess = parts[1] || "plasmallm";
-        var attachCmd = be === "tmux" ? ("tmux attach -t " + sess) : ("screen -r " + sess);
+        var attachCmd = be === "tmux" ? ("tmux new-session -A -s " + sess) : ("screen -xRR " + sess);
         prompt += "\n## Session Multiplexer\n" +
             "Commands run inside a persistent **" + be + "** session named `" + sess + "`. " +
             "Working directory, exported variables, and background jobs persist across calls. " +

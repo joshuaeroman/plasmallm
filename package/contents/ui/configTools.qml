@@ -18,11 +18,11 @@ BaseConfigPage {
 
     property bool hasTmux: false
     property bool hasScreen: false
-
-    onHasTmuxChanged: checkBackendAvailability()
-    onHasScreenChanged: checkBackendAvailability()
+    property bool _tmuxChecked: false
+    property bool _screenChecked: false
 
     function checkBackendAvailability() {
+        if (!_tmuxChecked || !_screenChecked) return;
         if (!hasTmux && !hasScreen) {
             cfg_useSessionMultiplexer = false;
         } else if (cfg_sessionMultiplexer === "tmux" && !hasTmux && hasScreen) {
@@ -38,8 +38,14 @@ BaseConfigPage {
         connectedSources: []
         onNewData: function(sourceName, data) {
             var isAvail = data["exit code"] === 0;
-            if (sourceName === "command -v tmux") hasTmux = isAvail;
-            else if (sourceName === "command -v screen") hasScreen = isAvail;
+            if (sourceName === "command -v tmux") {
+                hasTmux = isAvail;
+                _tmuxChecked = true;
+            } else if (sourceName === "command -v screen") {
+                hasScreen = isAvail;
+                _screenChecked = true;
+            }
+            checkBackendAvailability();
             disconnectSource(sourceName);
         }
     }

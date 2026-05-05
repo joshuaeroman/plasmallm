@@ -26,14 +26,28 @@ OUT=$(mktemp)
 CMD_FILE=$(mktemp)
 cat << '${heredocDelim}' > "$CMD_FILE"
 OUT_FILE="$1"
-{
-${rawCmd}
-} >"$OUT_FILE" 2>&1
-EXIT_CODE=$?
+printf '\\033[1;36m▶ Running command:\\033[0m\\n'
 cat << 'EOF_RAW_${marker}'
 ${rawCmd}
 EOF_RAW_${marker}
-cat "$OUT_FILE"
+printf '\\033[1;36m────────────────────────────────────────\\033[0m\\n'
+FIFO_DIR=$(mktemp -d)
+FIFO="$FIFO_DIR/fifo"
+mkfifo "$FIFO"
+tee "$OUT_FILE" < "$FIFO" &
+TEE_PID=$!
+{
+${rawCmd}
+} >"$FIFO" 2>&1
+EXIT_CODE=$?
+for i in 1 2 3 4 5; do
+    if ! kill -0 $TEE_PID 2>/dev/null; then break; fi
+    sleep 0.1
+done
+kill $TEE_PID 2>/dev/null
+wait $TEE_PID 2>/dev/null
+rm -rf "$FIFO_DIR"
+printf '\\033[1;36m────────────────────────────────────────\\033[0m\\n'
 printf '__PLM_DONE_${marker}_%d\\n' "$EXIT_CODE"
 ${heredocDelim}
 tmux has-session -t "\${SESSION}" 2>/dev/null || tmux new-session -d -s "\${SESSION}" -x 200 -y 50
@@ -50,14 +64,28 @@ OUT=$(mktemp)
 CMD_FILE=$(mktemp)
 cat << '${heredocDelim}' > "$CMD_FILE"
 OUT_FILE="$1"
-{
-${rawCmd}
-} >"$OUT_FILE" 2>&1
-EXIT_CODE=$?
+printf '\\033[1;36m▶ Running command:\\033[0m\\n'
 cat << 'EOF_RAW_${marker}'
 ${rawCmd}
 EOF_RAW_${marker}
-cat "$OUT_FILE"
+printf '\\033[1;36m────────────────────────────────────────\\033[0m\\n'
+FIFO_DIR=$(mktemp -d)
+FIFO="$FIFO_DIR/fifo"
+mkfifo "$FIFO"
+tee "$OUT_FILE" < "$FIFO" &
+TEE_PID=$!
+{
+${rawCmd}
+} >"$FIFO" 2>&1
+EXIT_CODE=$?
+for i in 1 2 3 4 5; do
+    if ! kill -0 $TEE_PID 2>/dev/null; then break; fi
+    sleep 0.1
+done
+kill $TEE_PID 2>/dev/null
+wait $TEE_PID 2>/dev/null
+rm -rf "$FIFO_DIR"
+printf '\\033[1;36m────────────────────────────────────────\\033[0m\\n'
 printf '__PLM_DONE_${marker}_%d\\n' "$EXIT_CODE"
 ${heredocDelim}
 screen -ls "\${SESSION}" | grep -q "\\.\${SESSION}\\b" || { screen -dmS "\${SESSION}"; sleep 0.7; }

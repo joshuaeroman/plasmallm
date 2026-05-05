@@ -1524,9 +1524,9 @@ PlasmoidItem {
                 "term=${TERMINAL:-$(kreadconfig6 --file kdeglobals --group General --key TerminalApplication 2>/dev/null)}; " +
                 "term=${term:-konsole}; ";
             if (be === "tmux") {
-                attachCmd = termScript + "\"$term\" -e tmux attach -t '" + sess + "'";
+                attachCmd = termScript + "\"$term\" -e tmux new-session -A -s '" + sess + "'";
             } else {
-                attachCmd = termScript + "\"$term\" -e screen -r '" + sess + "'";
+                attachCmd = termScript + "\"$term\" -e screen -xRR '" + sess + "'";
             }
             var termCmdEnabled = "bash -c '" + attachCmd + "'";
             terminalCommands.push(termCmdEnabled);
