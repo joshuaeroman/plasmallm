@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 20:39-0400\n"
+"POT-Creation-Date: 2026-05-04 22:18-0400\n"
 "PO-Revision-Date: 2026-04-07 00:00+0000\n"
 "Last-Translator: Claude <noreply@anthropic.com>\n"
 "Language-Team: Turkish\n"
@@ -62,33 +62,33 @@ msgstr "Modeller getirilemedi: HTTP %1"
 #: package/contents/ui/adapters/gemini.js:501
 #: package/contents/ui/adapters/openai_chat.js:247
 #: package/contents/ui/adapters/openai_chat.js:250
-#: package/contents/ui/adapters/openai_responses.js:502
+#: package/contents/ui/adapters/openai_responses.js:507
 msgid "Invalid response format"
 msgstr "Geçersiz yanıt biçimi"
 
 #: package/contents/ui/adapters/anthropic.js:465
 #: package/contents/ui/adapters/gemini.js:504
 #: package/contents/ui/adapters/openai_chat.js:253
-#: package/contents/ui/adapters/openai_responses.js:505
+#: package/contents/ui/adapters/openai_responses.js:510
 msgid "Failed to parse response: %1"
 msgstr "Yanıt ayrıştırılamadı: %1"
 
 #: package/contents/ui/adapters/anthropic.js:471
 #: package/contents/ui/adapters/gemini.js:510
 #: package/contents/ui/adapters/openai_chat.js:259
-#: package/contents/ui/adapters/openai_responses.js:511
+#: package/contents/ui/adapters/openai_responses.js:516
 msgid "Request timed out"
 msgstr "İstek zaman aşımına uğradı"
 
 #: package/contents/ui/adapters/anthropic.js:486
 #: package/contents/ui/adapters/openai_chat.js:274
-#: package/contents/ui/adapters/openai_responses.js:526
+#: package/contents/ui/adapters/openai_responses.js:531
 msgid "Authentication failed (HTTP %1) — check your API key"
 msgstr "Kimlik doğrulama başarısız (HTTP %1) — API anahtarınızı kontrol edin"
 
 #: package/contents/ui/adapters/anthropic.js:488
 #: package/contents/ui/adapters/openai_chat.js:276
-#: package/contents/ui/adapters/openai_responses.js:528
+#: package/contents/ui/adapters/openai_responses.js:533
 msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
 msgstr ""
 "Hız sınırı aşıldı (HTTP 429) — çok fazla istek, kısa süre sonra tekrar "
@@ -96,19 +96,19 @@ msgstr ""
 
 #: package/contents/ui/adapters/anthropic.js:490
 #: package/contents/ui/adapters/openai_chat.js:278
-#: package/contents/ui/adapters/openai_responses.js:530
+#: package/contents/ui/adapters/openai_responses.js:535
 msgid "Not found (HTTP 404) — check your API endpoint and model name"
 msgstr "Bulunamadı (HTTP 404) — API uç noktanızı ve model adınızı kontrol edin"
 
 #: package/contents/ui/adapters/anthropic.js:492
 #: package/contents/ui/adapters/openai_chat.js:280
-#: package/contents/ui/adapters/openai_responses.js:532
+#: package/contents/ui/adapters/openai_responses.js:537
 msgid "API error %1"
 msgstr "API hatası %1"
 
 #: package/contents/ui/adapters/anthropic.js:494
 #: package/contents/ui/adapters/openai_chat.js:282
-#: package/contents/ui/adapters/openai_responses.js:534
+#: package/contents/ui/adapters/openai_responses.js:539
 msgid "Request failed (no response) — check your endpoint URL"
 msgstr "İstek başarısız oldu (yanıt yok) — uç nokta URL'nizi kontrol edin"
 
@@ -143,91 +143,73 @@ msgstr "yanıt yok — uç nokta URL'nizi kontrol edin"
 msgid "Request failed"
 msgstr "İstek başarısız oldu"
 
-#: package/contents/ui/ChatMessage.qml:107
-msgid "Thoughts"
-msgstr "Düşünceler"
+#: package/contents/ui/configSystemPrompt.qml:48
+msgid "System Info:"
+msgstr "Sistem Bilgisi:"
 
-#: package/contents/ui/ChatMessage.qml:196
-msgid "Web Search Results"
-msgstr "Web Arama Sonuçları"
+#: package/contents/ui/configSystemPrompt.qml:54
+msgid "OS"
+msgstr "İşletim Sistemi"
 
-#: package/contents/ui/ChatMessage.qml:310
-msgid "Thinking…"
-msgstr "Düşünülüyor…"
+#: package/contents/ui/configSystemPrompt.qml:59
+msgid "Shell"
+msgstr "Kabuk"
 
-#: package/contents/ui/ChatMessage.qml:369
-msgid "Copy message"
-msgstr "Mesajı kopyala"
+#: package/contents/ui/configSystemPrompt.qml:64
+msgid "Hostname"
+msgstr "Ana Bilgisayar Adı"
 
-#: package/contents/ui/ChatMessage.qml:377
-msgid "Retry"
-msgstr "Yeniden dene"
+#: package/contents/ui/configSystemPrompt.qml:69
+msgid "Kernel"
+msgstr "Çekirdek"
 
-#: package/contents/ui/ChatMessage.qml:385
-msgid "Share with LLM"
-msgstr "LLM ile paylaş"
+#: package/contents/ui/configSystemPrompt.qml:74
+msgid "Desktop"
+msgstr "Masaüstü"
 
-#: package/contents/ui/ChatMessage.qml:387
-msgid "Include this output in the conversation"
-msgstr "Bu çıktıyı konuşmaya dahil et"
+#: package/contents/ui/configSystemPrompt.qml:79
+msgid "User"
+msgstr "Kullanıcı"
 
-#: package/contents/ui/CommandBlock.qml:96
-msgid "Save"
-msgstr "Kaydet"
+#: package/contents/ui/configSystemPrompt.qml:84
+msgid "CPU"
+msgstr "İşlemci"
 
-#: package/contents/ui/CommandBlock.qml:98
-msgid "Save as script file"
-msgstr "Betik dosyası olarak kaydet"
+#: package/contents/ui/configSystemPrompt.qml:89
+msgid "Memory"
+msgstr "Bellek"
 
-#: package/contents/ui/CommandBlock.qml:104
-msgid "Copy"
-msgstr "Kopyala"
+#: package/contents/ui/configSystemPrompt.qml:94
+msgid "GPU"
+msgstr "Grafik İşlemci"
 
-#: package/contents/ui/CommandBlock.qml:106
-msgid "Copy to clipboard"
-msgstr "Panoya kopyala"
+#: package/contents/ui/configSystemPrompt.qml:99
+msgid "Block Devices"
+msgstr "Blok Aygıtlar"
 
-#: package/contents/ui/CommandBlock.qml:117
-#: package/contents/ui/FullRepresentation.qml:855
-msgid "Stop"
-msgstr "Durdur"
+#: package/contents/ui/configSystemPrompt.qml:104
+msgid "Network"
+msgstr "Ağ"
 
-#: package/contents/ui/CommandBlock.qml:118
-msgid "Ran"
-msgstr "Çalıştırıldı"
+#: package/contents/ui/configSystemPrompt.qml:109
+msgid "Locale"
+msgstr "Yerel Ayar"
 
-#: package/contents/ui/CommandBlock.qml:118
-msgid "Run"
-msgstr "Çalıştır"
+#: package/contents/ui/configSystemPrompt.qml:114
+msgid "Date/Time"
+msgstr "Tarih/Saat"
 
-#: package/contents/ui/CommandBlock.qml:125
-msgid "Stop running command"
-msgstr "Çalışan komutu durdur"
+#: package/contents/ui/configSystemPrompt.qml:122
+msgid "Custom Instructions:"
+msgstr "Özel Talimatlar:"
 
-#: package/contents/ui/CommandBlock.qml:125
-msgid "Execute command inline"
-msgstr "Komutu satır içinde çalıştır"
+#: package/contents/ui/configSystemPrompt.qml:125
+msgid "Additional instructions for the LLM…"
+msgstr "LLM için ek talimatlar…"
 
-#: package/contents/ui/CommandBlock.qml:138
-msgid "Terminal"
-msgstr "Terminal"
-
-#: package/contents/ui/CommandBlock.qml:141
-msgid "Open in terminal emulator"
-msgstr "Terminal öykünücüsünde aç"
-
-#: package/contents/ui/CommandBlock.qml:150
-msgid "Save Script"
-msgstr "Betiği Kaydet"
-
-#: package/contents/ui/CommandBlock.qml:154
-msgid "Shell scripts (*.sh)"
-msgstr "Kabuk betikleri (*.sh)"
-
-#: package/contents/ui/CommandBlock.qml:154
-#: package/contents/ui/FullRepresentation.qml:507
-msgid "All files (*)"
-msgstr "Tüm dosyalar (*)"
+#: package/contents/ui/configSystemPrompt.qml:132
+msgid "Preview:"
+msgstr "Önizleme:"
 
 #: package/contents/ui/FullRepresentation.qml:20
 msgid "Toggle auto mode (auto-run + auto-share) for this session"
@@ -275,7 +257,7 @@ msgid "Run last command in terminal"
 msgstr "Son komutu terminalde çalıştır"
 
 #: package/contents/ui/FullRepresentation.qml:82
-#: package/contents/ui/FullRepresentation.qml:722
+#: package/contents/ui/FullRepresentation.qml:727
 #: package/contents/ui/configTasks.qml:57
 msgid "AUTO"
 msgstr "OTOMATİK"
@@ -323,7 +305,7 @@ msgid "Clear All"
 msgstr "Tümünü Temizle"
 
 #: package/contents/ui/FullRepresentation.qml:247
-#: package/contents/ui/configTasks.qml:84
+#: package/contents/ui/configTasks.qml:85
 msgid "Cancel"
 msgstr "İptal"
 
@@ -372,19 +354,19 @@ msgstr "Açık tutma"
 msgid "Keep open"
 msgstr "Açık tut"
 
-#: package/contents/ui/FullRepresentation.qml:475
+#: package/contents/ui/FullRepresentation.qml:480
 msgid "Send a message to start chatting"
 msgstr "Sohbet başlatmak için bir mesaj gönderin"
 
-#: package/contents/ui/FullRepresentation.qml:504
+#: package/contents/ui/FullRepresentation.qml:509
 msgid "Attach File"
 msgstr "Dosya Ekle"
 
-#: package/contents/ui/FullRepresentation.qml:507
+#: package/contents/ui/FullRepresentation.qml:512
 msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 msgstr "Görseller (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 
-#: package/contents/ui/FullRepresentation.qml:507
+#: package/contents/ui/FullRepresentation.qml:512
 msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
@@ -392,151 +374,392 @@ msgstr ""
 "Metin dosyaları (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
 "*.conf *.sh *.py *.js *.ts *.qml)"
 
-#: package/contents/ui/FullRepresentation.qml:749
+#: package/contents/ui/FullRepresentation.qml:512
+#: package/contents/ui/CommandBlock.qml:157
+msgid "All files (*)"
+msgstr "Tüm dosyalar (*)"
+
+#: package/contents/ui/FullRepresentation.qml:754
 msgid "Message input"
 msgstr "Mesaj girişi"
 
-#: package/contents/ui/FullRepresentation.qml:750
+#: package/contents/ui/FullRepresentation.qml:755
 msgid "Type a message…"
 msgstr "Bir mesaj yazın…"
 
-#: package/contents/ui/FullRepresentation.qml:750
+#: package/contents/ui/FullRepresentation.qml:755
 msgid "Initializing…"
 msgstr "Başlatılıyor…"
 
-#: package/contents/ui/FullRepresentation.qml:802
+#: package/contents/ui/FullRepresentation.qml:808
 msgid "Attach file or image"
 msgstr "Dosya veya görsel ekle"
 
-#: package/contents/ui/FullRepresentation.qml:809
+#: package/contents/ui/FullRepresentation.qml:815
 msgid "Kill"
 msgstr "Sonlandır"
 
-#: package/contents/ui/FullRepresentation.qml:813
+#: package/contents/ui/FullRepresentation.qml:819
 msgid "Kill persistent session (stops all processes and resets shell state)"
 msgstr ""
 "Kalıcı oturumu sonlandır (tüm işlemleri durdurur ve kabuk durumunu sıfırlar)"
 
-#: package/contents/ui/FullRepresentation.qml:832
+#: package/contents/ui/FullRepresentation.qml:838
 msgid "Send"
 msgstr "Gönder"
 
-#: package/contents/ui/FullRepresentation.qml:860
+#: package/contents/ui/FullRepresentation.qml:862
+#: package/contents/ui/CommandBlock.qml:120
+msgid "Stop"
+msgstr "Durdur"
+
+#: package/contents/ui/FullRepresentation.qml:867
 msgid "Cancel LLM request"
 msgstr "LLM isteğini iptal et"
 
-#: package/contents/ui/api.js:213
+#: package/contents/ui/configTasks.qml:33
+msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
+msgstr ""
+"Görev yapılandırılmadı. Yeniden kullanılabilir istem kısayolları oluşturmak "
+"için bir görev ekleyin."
+
+#: package/contents/ui/configTasks.qml:85
+msgid "Add Task"
+msgstr "Görev Ekle"
+
+#: package/contents/ui/configTasks.qml:110
+msgid "Task name"
+msgstr "Görev adı"
+
+#: package/contents/ui/configTasks.qml:117
+msgid "Prompt to send"
+msgstr "Gönderilecek istem"
+
+#: package/contents/ui/configTasks.qml:123
+msgid "Enable auto mode (auto-run + auto-share)"
+msgstr "Otomatik modu etkinleştir (otomatik çalıştır + otomatik paylaş)"
+
+#: package/contents/ui/configTasks.qml:128
+msgid "Auto-submit task prompt to chat"
+msgstr "Görev istemini sohbete otomatik gönder"
+
+#: package/contents/ui/configTasks.qml:140
+msgid "Update Task"
+msgstr "Görevi Güncelle"
+
+#: package/contents/ui/configTasks.qml:140
+msgid "Save Task"
+msgstr "Görevi Kaydet"
+
+#: package/contents/ui/configTasks.qml:148
+msgid "A task named \"%1\" already exists."
+msgstr "\"%1\" adlı bir görev zaten mevcut."
+
+#: package/contents/ui/configTasks.qml:170
+msgid ""
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with auto mode will temporarily enable auto-run "
+"and auto-share."
+msgstr ""
+"Görevler yeniden kullanılabilir istem kısayollarıdır. Onları çalıştırmak "
+"için sohbette /task <ad> veya araç çubuğu düğmesini kullanın. Otomatik modlu "
+"görevler otomatik çalıştırma ve otomatik paylaşımı geçici olarak "
+"etkinleştirir."
+
+#: package/contents/ui/api.js:211
 msgid "Search provider %1 not supported"
 msgstr "Arama sağlayıcısı %1 desteklenmiyor"
 
-#: package/contents/ui/api.js:242
+#: package/contents/ui/api.js:240
 msgid "OpenAI-compatible"
 msgstr "OpenAI uyumlu"
 
-#: package/contents/ui/api.js:243
+#: package/contents/ui/api.js:241
 msgid "Anthropic"
 msgstr "Anthropic"
 
-#: package/contents/ui/api.js:244
+#: package/contents/ui/api.js:242
 msgid "Google Gemini"
 msgstr "Google Gemini"
 
-#: package/contents/ui/main.qml:1002
+#: package/contents/ui/configTools.qml:284
+msgid "Commands"
+msgstr "Komutlar"
+
+#: package/contents/ui/configTools.qml:289
+msgid "Auto-run commands from LLM"
+msgstr "LLM'den gelen komutları otomatik çalıştır"
+
+#: package/contents/ui/configTools.qml:293
 msgid ""
-"Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
-"are on)."
+"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
+"share."
 msgstr ""
-"Otomatik mod ayarlar aracılığıyla kalıcı olarak etkinleştirildi (hem "
-"Otomatik çalıştır hem de Otomatik paylaş açık)."
+"LLM'nin kabuk komutlarını yürütmesine izin verin. Otomatik paylaşım ile "
+"birleştirilirse tehlikelidir."
 
-#: package/contents/ui/main.qml:1005
+#: package/contents/ui/configTools.qml:300
+msgid "Run as tool"
+msgstr "Araç olarak çalıştır"
+
+#: package/contents/ui/configTools.qml:304
 msgid ""
-"Auto mode enabled for this session. Commands will run and share output "
-"automatically."
+"Use the run_command tool for command execution. If disabled, falls back to "
+"parsing code blocks."
 msgstr ""
-"Bu oturum için otomatik mod etkinleştirildi. Komutlar çalışacak ve çıktıyı "
-"otomatik olarak paylaşacak."
+"Komut yürütme için run_command aracını kullanın. Devre dışı bırakılırsa, kod "
+"bloklarını ayrıştırmaya geri döner."
 
-#: package/contents/ui/main.qml:1005
-msgid "Auto mode disabled."
-msgstr "Otomatik mod devre dışı bırakıldı."
+#: package/contents/ui/configTools.qml:311
+msgid "Auto-share command output with LLM"
+msgstr "Komut çıktısını LLM ile otomatik paylaş"
 
-#: package/contents/ui/main.qml:1020 package/contents/ui/main.qml:1079
-msgid "none"
-msgstr "yok"
+#: package/contents/ui/configTools.qml:315
+msgid "Automatically send command execution results back to the LLM"
+msgstr "Komut yürütme sonuçlarını otomatik olarak LLM'ye geri gönder"
 
-#: package/contents/ui/main.qml:1020
-msgid "Current model: **%1**"
-msgstr "Mevcut model: **%1**"
-
-#: package/contents/ui/main.qml:1022
-msgid "Available models:"
-msgstr "Mevcut modeller:"
-
-#: package/contents/ui/main.qml:1024
-msgid "Type `/model <name>` to switch."
-msgstr "Geçiş yapmak için `/model <ad>` yazın."
-
-#: package/contents/ui/main.qml:1026
-msgid "No models cached. Use **Fetch Models** in settings."
+#: package/contents/ui/configTools.qml:322
+msgid ""
+"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
+"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
 msgstr ""
-"Önbellekte model yok. Ayarlarda **Modelleri Getir** seçeneğini kullanın."
+"⚠️ TEHLİKE: Her iki seçenek de etkin - LLM artık komutları çalıştırabilir ve "
+"çıktılarını görebilir, bu da ajan tabanlı iş akışını etkinleştirir. Yalnızca "
+"güvenilir LLM'lerle kullanın."
 
-#: package/contents/ui/main.qml:1035
-msgid "Switched to model: **%1**"
-msgstr "Modele geçildi: **%1**"
+#: package/contents/ui/configTools.qml:333
+msgid "Session Multiplexer"
+msgstr "Oturum Çoğullayıcı"
 
-#: package/contents/ui/main.qml:1044
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "Görev yapılandırılmadı. Ayarlar'da görev ekleyin."
+#: package/contents/ui/configTools.qml:338
+msgid "Run commands inside a persistent session"
+msgstr "Komutları kalıcı bir oturum içinde çalıştır"
 
-#: package/contents/ui/main.qml:1046
-msgid "(auto)"
-msgstr "(otomatik)"
+#: package/contents/ui/configTools.qml:343
+msgid ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
+msgstr ""
+"Durumun turlar arasında kalıcı olması için LLM komutlarını uzun ömürlü bir "
+"tmux veya screen oturumu içinde yürütün."
 
-#: package/contents/ui/main.qml:1047
-msgid "Available tasks:"
-msgstr "Mevcut görevler:"
+#: package/contents/ui/configTools.qml:349
+msgid "Reset Session"
+msgstr "Oturumu Sıfırla"
 
-#: package/contents/ui/main.qml:1047
-msgid "Type `/task <name>` to run."
-msgstr "Çalıştırmak için `/task <ad>` yazın."
+#: package/contents/ui/configTools.qml:362
+msgid "Backend:"
+msgstr "Arka Uç:"
 
-#: package/contents/ui/main.qml:1079
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "Bilinmeyen görev: **%1**. Mevcut: %2"
+#: package/contents/ui/configTools.qml:391
+msgid "Session name:"
+msgstr "Oturum adı:"
 
-#: package/contents/ui/main.qml:1093
-msgid "The user declined to run this command."
-msgstr "Kullanıcı bu komutu çalıştırmayı reddetti."
+#: package/contents/ui/configTools.qml:401
+msgid ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
+msgstr ""
+"Sisteminizde 'tmux' veya 'screen' bulunamadı. Oturum çoğullama "
+"kullanılamıyor."
 
-#: package/contents/ui/main.qml:1292
-msgid "Searching the web…"
-msgstr "Web'de aranıyor…"
+#: package/contents/ui/configTools.qml:410
+msgid "Web Search"
+msgstr "Web Araması"
 
-#: package/contents/ui/main.qml:1320
-msgid "Web search failed: %1"
-msgstr "Web araması başarısız: %1"
+#: package/contents/ui/configTools.qml:415
+msgid "Enable web search tool"
+msgstr "Web arama aracını etkinleştir"
 
-#: package/contents/ui/main.qml:1601
-msgid "Session reset requested."
-msgstr "Oturum sıfırlama istendi."
+#: package/contents/ui/configTools.qml:419
+msgid "Allows the LLM to perform web searches."
+msgstr "LLM'nin web aramaları yapmasına olanak tanır."
 
-#: package/contents/ui/main.qml:1621 package/contents/ui/main.qml:1639
-msgid "Running: %1"
-msgstr "Çalışıyor: %1"
+#: package/contents/ui/configTools.qml:434
+msgid "Ollama API"
+msgstr "Ollama API"
 
-#: package/contents/ui/main.qml:1652
-msgid "stderr: %1"
-msgstr "stderr: %1"
+#: package/contents/ui/configTools.qml:435
+msgid "SearXNG"
+msgstr "SearXNG"
 
-#: package/contents/ui/main.qml:1654
-msgid "[truncated — output exceeded %1KB]"
-msgstr "[kesildi — çıktı %1KB'ı aştı]"
+#: package/contents/ui/configTools.qml:436
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
 
-#: package/contents/ui/main.qml:1656
-msgid "[exit code: %1]"
-msgstr "[çıkış kodu: %1]"
+#: package/contents/ui/configTools.qml:462
+msgid "Ollama API key"
+msgstr "Ollama API anahtarı"
+
+#: package/contents/ui/configTools.qml:476
+#: package/contents/ui/configTools.qml:517
+#: package/contents/ui/configGeneral.qml:615
+msgid "Saving…"
+msgstr "Kaydediliyor…"
+
+#: package/contents/ui/configTools.qml:477
+#: package/contents/ui/configTools.qml:518
+#: package/contents/ui/configGeneral.qml:616
+msgid "Saved"
+msgstr "Kaydedildi"
+
+#: package/contents/ui/configTools.qml:478
+#: package/contents/ui/configTools.qml:519
+#: package/contents/ui/configGeneral.qml:617
+msgid "Save to Config (Insecure)"
+msgstr "Yapılandırmaya Kaydet (Güvensiz)"
+
+#: package/contents/ui/configTools.qml:478
+#: package/contents/ui/configTools.qml:519
+#: package/contents/ui/configGeneral.qml:617
+msgid "Save Key"
+msgstr "Anahtarı Kaydet"
+
+#: package/contents/ui/configTools.qml:490
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG Örnek URL'si (örn. https://searx.be)"
+
+#: package/contents/ui/configTools.qml:503
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API Anahtarı/Token'i (isteğe bağlı)"
+
+#: package/contents/ui/configTools.qml:528
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo yapılandırma gerektirmez."
+
+#: package/contents/ui/configTools.qml:530
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "SearXNG örneğinde JSON biçiminin etkinleştirildiğinden emin olun."
+
+#: package/contents/ui/configTools.qml:531
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr ""
+"Ollama'nın arama API'si aracılığıyla LLM tarafından tetiklenen web "
+"aramalarını etkinleştirir"
+
+#: package/contents/ui/ChatMessage.qml:107
+msgid "Thoughts"
+msgstr "Düşünceler"
+
+#: package/contents/ui/ChatMessage.qml:197
+msgid "Web Search Results"
+msgstr "Web Arama Sonuçları"
+
+#: package/contents/ui/ChatMessage.qml:312
+msgid "Thinking…"
+msgstr "Düşünülüyor…"
+
+#: package/contents/ui/ChatMessage.qml:374
+msgid "Copy message"
+msgstr "Mesajı kopyala"
+
+#: package/contents/ui/ChatMessage.qml:382
+msgid "Retry"
+msgstr "Yeniden dene"
+
+#: package/contents/ui/ChatMessage.qml:390
+msgid "Share with LLM"
+msgstr "LLM ile paylaş"
+
+#: package/contents/ui/ChatMessage.qml:392
+msgid "Include this output in the conversation"
+msgstr "Bu çıktıyı konuşmaya dahil et"
+
+#: package/contents/ui/CommandBlock.qml:60
+msgid "Open terminal attached to this session"
+msgstr "Bu oturuma bağlı terminali aç"
+
+#: package/contents/ui/CommandBlock.qml:99
+msgid "Save"
+msgstr "Kaydet"
+
+#: package/contents/ui/CommandBlock.qml:101
+msgid "Save as script file"
+msgstr "Betik dosyası olarak kaydet"
+
+#: package/contents/ui/CommandBlock.qml:107
+msgid "Copy"
+msgstr "Kopyala"
+
+#: package/contents/ui/CommandBlock.qml:109
+msgid "Copy to clipboard"
+msgstr "Panoya kopyala"
+
+#: package/contents/ui/CommandBlock.qml:121
+msgid "Ran"
+msgstr "Çalıştırıldı"
+
+#: package/contents/ui/CommandBlock.qml:121
+msgid "Run"
+msgstr "Çalıştır"
+
+#: package/contents/ui/CommandBlock.qml:128
+msgid "Stop running command"
+msgstr "Çalışan komutu durdur"
+
+#: package/contents/ui/CommandBlock.qml:128
+msgid "Execute command inline"
+msgstr "Komutu satır içinde çalıştır"
+
+#: package/contents/ui/CommandBlock.qml:141
+msgid "Terminal"
+msgstr "Terminal"
+
+#: package/contents/ui/CommandBlock.qml:144
+msgid "Open in terminal emulator"
+msgstr "Terminal öykünücüsünde aç"
+
+#: package/contents/ui/CommandBlock.qml:153
+msgid "Save Script"
+msgstr "Betiği Kaydet"
+
+#: package/contents/ui/CommandBlock.qml:157
+msgid "Shell scripts (*.sh)"
+msgstr "Kabuk betikleri (*.sh)"
+
+#: package/contents/ui/configAppearance.qml:20
+msgid "Panel Title:"
+msgstr "Panel Başlığı:"
+
+#: package/contents/ui/configAppearance.qml:21
+msgid "Show provider and model in title"
+msgstr "Başlıkta sağlayıcı ve modeli göster"
+
+#: package/contents/ui/configAppearance.qml:32
+msgid "Chat Spacing: %1px"
+msgstr "Sohbet Aralığı: %1px"
+
+#: package/contents/ui/configAppearance.qml:49
+msgid "Compact"
+msgstr "Kompakt"
+
+#: package/contents/ui/configAppearance.qml:54
+msgid "Spacious"
+msgstr "Geniş"
+
+#: package/contents/ui/configAppearance.qml:66
+msgid "UI Font:"
+msgstr "Arayüz Yazı Tipi:"
+
+#: package/contents/ui/configAppearance.qml:67
+msgid "Use custom UI font"
+msgstr "Özel arayüz yazı tipi kullan"
+
+#: package/contents/ui/configAppearance.qml:104
+msgid "Code Font:"
+msgstr "Kod Yazı Tipi:"
+
+#: package/contents/ui/configAppearance.qml:105
+msgid "Use custom code font"
+msgstr "Özel kod yazı tipi kullan"
+
+#: package/contents/ui/configAppearance.qml:137
+msgid "Thoughts Font:"
+msgstr "Düşünce Yazı Tipi:"
+
+#: package/contents/ui/configAppearance.qml:138
+msgid "Use custom thoughts font"
+msgstr "Özel düşünce yazı tipi kullan"
 
 #: package/contents/ui/configGeneral.qml:228
 msgid "No models found."
@@ -573,30 +796,6 @@ msgstr "API Anahtarı:"
 #: package/contents/ui/configGeneral.qml:600
 msgid "Optional - for OpenAI, etc."
 msgstr "İsteğe bağlı - OpenAI vb. için."
-
-#: package/contents/ui/configGeneral.qml:615
-#: package/contents/ui/configTools.qml:470
-#: package/contents/ui/configTools.qml:511
-msgid "Saving…"
-msgstr "Kaydediliyor…"
-
-#: package/contents/ui/configGeneral.qml:616
-#: package/contents/ui/configTools.qml:471
-#: package/contents/ui/configTools.qml:512
-msgid "Saved"
-msgstr "Kaydedildi"
-
-#: package/contents/ui/configGeneral.qml:617
-#: package/contents/ui/configTools.qml:472
-#: package/contents/ui/configTools.qml:513
-msgid "Save to Config (Insecure)"
-msgstr "Yapılandırmaya Kaydet (Güvensiz)"
-
-#: package/contents/ui/configGeneral.qml:617
-#: package/contents/ui/configTools.qml:472
-#: package/contents/ui/configTools.qml:513
-msgid "Save Key"
-msgstr "Anahtarı Kaydet"
 
 #: package/contents/ui/configGeneral.qml:626
 msgid "Stored in KDE Wallet"
@@ -675,334 +874,174 @@ msgstr ""
 "gereklidir (/v1/chat/completions yerine /v1/responses'a POST gönderir). "
 "Hazır ayar seçildiğinde otomatik olarak ayarlanır."
 
-#: package/contents/ui/configGeneral.qml:750
-msgid "Chat Spacing: %1px"
-msgstr "Sohbet Aralığı: %1px"
-
-#: package/contents/ui/configGeneral.qml:767
-msgid "Compact"
-msgstr "Kompakt"
-
-#: package/contents/ui/configGeneral.qml:772
-msgid "Spacious"
-msgstr "Geniş"
-
-#: package/contents/ui/configGeneral.qml:779
-msgid "Appearance:"
-msgstr "Görünüm:"
-
-#: package/contents/ui/configGeneral.qml:780
-msgid "Show provider and model in title"
-msgstr "Başlıkta sağlayıcı ve modeli göster"
-
-#: package/contents/ui/configGeneral.qml:792
+#: package/contents/ui/configGeneral.qml:753
 msgid "Chat History:"
 msgstr "Sohbet Geçmişi:"
 
-#: package/contents/ui/configGeneral.qml:793
+#: package/contents/ui/configGeneral.qml:754
 msgid "Auto-save chat history"
 msgstr "Sohbet geçmişini otomatik kaydet"
 
-#: package/contents/ui/configGeneral.qml:797
-#: package/contents/ui/configGeneral.qml:812
+#: package/contents/ui/configGeneral.qml:758
+#: package/contents/ui/configGeneral.qml:773
 msgid "Saves to ~/PlasmaLLM/chats/"
 msgstr "~/PlasmaLLM/chats/ konumuna kaydeder"
 
-#: package/contents/ui/configGeneral.qml:804
+#: package/contents/ui/configGeneral.qml:765
 msgid "Save format:"
 msgstr "Kaydetme biçimi:"
 
-#: package/contents/ui/configGeneral.qml:805
+#: package/contents/ui/configGeneral.qml:766
 msgid "Plain text (.txt)"
 msgstr "Düz metin (.txt)"
 
-#: package/contents/ui/configGeneral.qml:805
+#: package/contents/ui/configGeneral.qml:766
 msgid "Structured (.jsonl)"
 msgstr "Yapılandırılmış (.jsonl)"
 
-#: package/contents/ui/configGeneral.qml:824
+#: package/contents/ui/configGeneral.qml:785
 msgid "Auto-clear:"
 msgstr "Otomatik temizle:"
 
-#: package/contents/ui/configGeneral.qml:828
+#: package/contents/ui/configGeneral.qml:789
 msgid "Disabled"
 msgstr "Devre dışı"
 
-#: package/contents/ui/configGeneral.qml:834
+#: package/contents/ui/configGeneral.qml:795
 msgid "Instant (always clear when panel opens)"
 msgstr "Anında (panel açıldığında her zaman temizle)"
 
-#: package/contents/ui/configGeneral.qml:843
+#: package/contents/ui/configGeneral.qml:804
 msgid "After"
 msgstr "Sonra"
 
-#: package/contents/ui/configGeneral.qml:862
+#: package/contents/ui/configGeneral.qml:823
 msgid "seconds"
 msgstr "saniye"
 
-#: package/contents/ui/configGeneral.qml:862
+#: package/contents/ui/configGeneral.qml:823
 msgid "minutes"
 msgstr "dakika"
 
-#: package/contents/ui/configSystemPrompt.qml:48
-msgid "System Info:"
-msgstr "Sistem Bilgisi:"
-
-#: package/contents/ui/configSystemPrompt.qml:54
-msgid "OS"
-msgstr "İşletim Sistemi"
-
-#: package/contents/ui/configSystemPrompt.qml:59
-msgid "Shell"
-msgstr "Kabuk"
-
-#: package/contents/ui/configSystemPrompt.qml:64
-msgid "Hostname"
-msgstr "Ana Bilgisayar Adı"
-
-#: package/contents/ui/configSystemPrompt.qml:69
-msgid "Kernel"
-msgstr "Çekirdek"
-
-#: package/contents/ui/configSystemPrompt.qml:74
-msgid "Desktop"
-msgstr "Masaüstü"
-
-#: package/contents/ui/configSystemPrompt.qml:79
-msgid "User"
-msgstr "Kullanıcı"
-
-#: package/contents/ui/configSystemPrompt.qml:84
-msgid "CPU"
-msgstr "İşlemci"
-
-#: package/contents/ui/configSystemPrompt.qml:89
-msgid "Memory"
-msgstr "Bellek"
-
-#: package/contents/ui/configSystemPrompt.qml:94
-msgid "GPU"
-msgstr "Grafik İşlemci"
-
-#: package/contents/ui/configSystemPrompt.qml:99
-msgid "Block Devices"
-msgstr "Blok Aygıtlar"
-
-#: package/contents/ui/configSystemPrompt.qml:104
-msgid "Network"
-msgstr "Ağ"
-
-#: package/contents/ui/configSystemPrompt.qml:109
-msgid "Locale"
-msgstr "Yerel Ayar"
-
-#: package/contents/ui/configSystemPrompt.qml:114
-msgid "Date/Time"
-msgstr "Tarih/Saat"
-
-#: package/contents/ui/configSystemPrompt.qml:122
-msgid "Custom Instructions:"
-msgstr "Özel Talimatlar:"
-
-#: package/contents/ui/configSystemPrompt.qml:125
-msgid "Additional instructions for the LLM…"
-msgstr "LLM için ek talimatlar…"
-
-#: package/contents/ui/configSystemPrompt.qml:132
-msgid "Preview:"
-msgstr "Önizleme:"
-
-#: package/contents/ui/configTasks.qml:33
-msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr ""
-"Görev yapılandırılmadı. Yeniden kullanılabilir istem kısayolları oluşturmak "
-"için bir görev ekleyin."
-
-#: package/contents/ui/configTasks.qml:84
-msgid "Add Task"
-msgstr "Görev Ekle"
-
-#: package/contents/ui/configTasks.qml:108
-msgid "Task name"
-msgstr "Görev adı"
-
-#: package/contents/ui/configTasks.qml:115
-msgid "Prompt to send"
-msgstr "Gönderilecek istem"
-
-#: package/contents/ui/configTasks.qml:121
-msgid "Enable auto mode (auto-run + auto-share)"
-msgstr "Otomatik modu etkinleştir (otomatik çalıştır + otomatik paylaş)"
-
-#: package/contents/ui/configTasks.qml:133
-msgid "Update Task"
-msgstr "Görevi Güncelle"
-
-#: package/contents/ui/configTasks.qml:133
-msgid "Save Task"
-msgstr "Görevi Kaydet"
-
-#: package/contents/ui/configTasks.qml:141
-msgid "A task named \"%1\" already exists."
-msgstr "\"%1\" adlı bir görev zaten mevcut."
-
-#: package/contents/ui/configTasks.qml:163
+#: package/contents/ui/main.qml:1012
 msgid ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
-"button to run them. Tasks with auto mode will temporarily enable auto-run "
-"and auto-share."
+"Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
+"are on)."
 msgstr ""
-"Görevler yeniden kullanılabilir istem kısayollarıdır. Onları çalıştırmak "
-"için sohbette /task <ad> veya araç çubuğu düğmesini kullanın. Otomatik modlu "
-"görevler otomatik çalıştırma ve otomatik paylaşımı geçici olarak "
-"etkinleştirir."
+"Otomatik mod ayarlar aracılığıyla kalıcı olarak etkinleştirildi (hem "
+"Otomatik çalıştır hem de Otomatik paylaş açık)."
 
-#: package/contents/ui/configTools.qml:278
-msgid "Commands"
-msgstr "Komutlar"
-
-#: package/contents/ui/configTools.qml:283
-msgid "Auto-run commands from LLM"
-msgstr "LLM'den gelen komutları otomatik çalıştır"
-
-#: package/contents/ui/configTools.qml:287
+#: package/contents/ui/main.qml:1015
 msgid ""
-"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
-"share."
+"Auto mode enabled for this session. Commands will run and share output "
+"automatically."
 msgstr ""
-"LLM'nin kabuk komutlarını yürütmesine izin verin. Otomatik paylaşım ile "
-"birleştirilirse tehlikelidir."
+"Bu oturum için otomatik mod etkinleştirildi. Komutlar çalışacak ve çıktıyı "
+"otomatik olarak paylaşacak."
 
-#: package/contents/ui/configTools.qml:294
-msgid "Run as tool"
-msgstr "Araç olarak çalıştır"
+#: package/contents/ui/main.qml:1015
+msgid "Auto mode disabled."
+msgstr "Otomatik mod devre dışı bırakıldı."
 
-#: package/contents/ui/configTools.qml:298
-msgid ""
-"Use the run_command tool for command execution. If disabled, falls back to "
-"parsing code blocks."
+#: package/contents/ui/main.qml:1030 package/contents/ui/main.qml:1095
+msgid "none"
+msgstr "yok"
+
+#: package/contents/ui/main.qml:1030
+msgid "Current model: **%1**"
+msgstr "Mevcut model: **%1**"
+
+#: package/contents/ui/main.qml:1032
+msgid "Available models:"
+msgstr "Mevcut modeller:"
+
+#: package/contents/ui/main.qml:1034
+msgid "Type `/model <name>` to switch."
+msgstr "Geçiş yapmak için `/model <ad>` yazın."
+
+#: package/contents/ui/main.qml:1036
+msgid "No models cached. Use **Fetch Models** in settings."
 msgstr ""
-"Komut yürütme için run_command aracını kullanın. Devre dışı bırakılırsa, kod "
-"bloklarını ayrıştırmaya geri döner."
+"Önbellekte model yok. Ayarlarda **Modelleri Getir** seçeneğini kullanın."
 
-#: package/contents/ui/configTools.qml:305
-msgid "Auto-share command output with LLM"
-msgstr "Komut çıktısını LLM ile otomatik paylaş"
+#: package/contents/ui/main.qml:1045
+msgid "Switched to model: **%1**"
+msgstr "Modele geçildi: **%1**"
 
-#: package/contents/ui/configTools.qml:309
-msgid "Automatically send command execution results back to the LLM"
-msgstr "Komut yürütme sonuçlarını otomatik olarak LLM'ye geri gönder"
+#: package/contents/ui/main.qml:1054
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "Görev yapılandırılmadı. Ayarlar'da görev ekleyin."
 
-#: package/contents/ui/configTools.qml:316
-msgid ""
-"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-msgstr ""
-"⚠️ TEHLİKE: Her iki seçenek de etkin - LLM artık komutları çalıştırabilir ve "
-"çıktılarını görebilir, bu da ajan tabanlı iş akışını etkinleştirir. Yalnızca "
-"güvenilir LLM'lerle kullanın."
+#: package/contents/ui/main.qml:1056
+msgid "(auto)"
+msgstr "(otomatik)"
 
-#: package/contents/ui/configTools.qml:327
-msgid "Session Multiplexer"
-msgstr "Oturum Çoğullayıcı"
+#: package/contents/ui/main.qml:1057
+msgid "Available tasks:"
+msgstr "Mevcut görevler:"
 
-#: package/contents/ui/configTools.qml:332
-msgid "Run commands inside a persistent session"
-msgstr "Komutları kalıcı bir oturum içinde çalıştır"
+#: package/contents/ui/main.qml:1057
+msgid "Type `/task <name>` to run."
+msgstr "Çalıştırmak için `/task <ad>` yazın."
 
-#: package/contents/ui/configTools.qml:337
-msgid ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-msgstr ""
-"Durumun turlar arasında kalıcı olması için LLM komutlarını uzun ömürlü bir "
-"tmux veya screen oturumu içinde yürütün."
+#: package/contents/ui/main.qml:1095
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Bilinmeyen görev: **%1**. Mevcut: %2"
 
-#: package/contents/ui/configTools.qml:343
-msgid "Reset Session"
-msgstr "Oturumu Sıfırla"
+#: package/contents/ui/main.qml:1109
+msgid "The user declined to run this command."
+msgstr "Kullanıcı bu komutu çalıştırmayı reddetti."
 
-#: package/contents/ui/configTools.qml:356
-msgid "Backend:"
-msgstr "Arka Uç:"
+#: package/contents/ui/main.qml:1307
+msgid "Searching the web…"
+msgstr "Web'de aranıyor…"
 
-#: package/contents/ui/configTools.qml:385
-msgid "Session name:"
-msgstr "Oturum adı:"
+#: package/contents/ui/main.qml:1335
+msgid "Web search failed: %1"
+msgstr "Web araması başarısız: %1"
 
-#: package/contents/ui/configTools.qml:395
-msgid ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
-msgstr ""
-"Sisteminizde 'tmux' veya 'screen' bulunamadı. Oturum çoğullama "
-"kullanılamıyor."
+#: package/contents/ui/main.qml:1615
+msgid "Session reset requested."
+msgstr "Oturum sıfırlama istendi."
 
-#: package/contents/ui/configTools.qml:404
-msgid "Web Search"
-msgstr "Web Araması"
+#: package/contents/ui/main.qml:1635 package/contents/ui/main.qml:1653
+msgid "Running: %1"
+msgstr "Çalışıyor: %1"
 
-#: package/contents/ui/configTools.qml:409
-msgid "Enable web search tool"
-msgstr "Web arama aracını etkinleştir"
+#: package/contents/ui/main.qml:1666
+msgid "stderr: %1"
+msgstr "stderr: %1"
 
-#: package/contents/ui/configTools.qml:413
-msgid "Allows the LLM to perform web searches."
-msgstr "LLM'nin web aramaları yapmasına olanak tanır."
+#: package/contents/ui/main.qml:1668
+msgid "[truncated — output exceeded %1KB]"
+msgstr "[kesildi — çıktı %1KB'ı aştı]"
 
-#: package/contents/ui/configTools.qml:428
-msgid "Ollama API"
-msgstr "Ollama API"
-
-#: package/contents/ui/configTools.qml:429
-msgid "SearXNG"
-msgstr "SearXNG"
-
-#: package/contents/ui/configTools.qml:430
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-#: package/contents/ui/configTools.qml:456
-msgid "Ollama API key"
-msgstr "Ollama API anahtarı"
-
-#: package/contents/ui/configTools.qml:484
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG Örnek URL'si (örn. https://searx.be)"
-
-#: package/contents/ui/configTools.qml:497
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API Anahtarı/Token'i (isteğe bağlı)"
-
-#: package/contents/ui/configTools.qml:522
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo yapılandırma gerektirmez."
-
-#: package/contents/ui/configTools.qml:524
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "SearXNG örneğinde JSON biçiminin etkinleştirildiğinden emin olun."
-
-#: package/contents/ui/configTools.qml:525
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr ""
-"Ollama'nın arama API'si aracılığıyla LLM tarafından tetiklenen web "
-"aramalarını etkinleştirir"
+#: package/contents/ui/main.qml:1670
+msgid "[exit code: %1]"
+msgstr "[çıkış kodu: %1]"
 
 #: package/contents/config/config.qml:11
 msgid "General"
 msgstr "Genel"
 
 #: package/contents/config/config.qml:16
+msgid "Appearance"
+msgstr "Görünüm"
+
+#: package/contents/config/config.qml:21
 msgid "System Prompt"
 msgstr "Sistem İstemi"
 
-#: package/contents/config/config.qml:21
+#: package/contents/config/config.qml:26
 msgid "Tasks"
 msgstr "Görevler"
 
-#: package/contents/config/config.qml:26
+#: package/contents/config/config.qml:31
 msgid "Tools"
 msgstr "Araçlar"
+
+#~ msgid "Appearance:"
+#~ msgstr "Görünüm:"
 
 #~ msgid "Web search timed out"
 #~ msgstr "Web araması zaman aşımına uğradı"
