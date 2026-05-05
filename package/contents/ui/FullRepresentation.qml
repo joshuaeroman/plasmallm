@@ -329,6 +329,11 @@ PlasmaExtras.Representation {
             clipboardHelper.selectAll();
             clipboardHelper.copy();
         }
+        function onPopulateInputRequested(text) {
+            inputField.text = text;
+            inputField.cursorPosition = text.length;
+            inputField.forceActiveFocus();
+        }
     }
 
     contentItem: ColumnLayout {
@@ -786,9 +791,10 @@ PlasmaExtras.Representation {
                                 sendText = slashPopup.filteredSlashCommands[0].cmd;
                             }
                             if (sendText.length > 0 || root.pendingAttachments.length > 0) {
-                                root.sendMessage(sendText, root.pendingAttachments);
-                                text = "";
-                                root.pendingAttachments = [];
+                                if (root.sendMessage(sendText, root.pendingAttachments)) {
+                                    text = "";
+                                    root.pendingAttachments = [];
+                                }
                             }
                         }
                     }
@@ -844,9 +850,10 @@ PlasmaExtras.Representation {
                         sendText = slashPopup.filteredSlashCommands[0].cmd;
                     }
                     if (sendText.length > 0 || root.pendingAttachments.length > 0) {
-                        root.sendMessage(sendText, root.pendingAttachments);
-                        inputField.text = "";
-                        root.pendingAttachments = [];
+                        if (root.sendMessage(sendText, root.pendingAttachments)) {
+                            inputField.text = "";
+                            root.pendingAttachments = [];
+                        }
                     }
                 }
             }
