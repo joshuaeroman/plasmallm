@@ -11,7 +11,7 @@ PO_FILES := $(wildcard $(LOCALE_DIR)/*.po)
 MO_FILES := $(patsubst $(LOCALE_DIR)/%.po,$(LOCALE_DIR)/%/LC_MESSAGES/$(DOMAIN).mo,$(PO_FILES))
 SRC_FILES := $(shell find $(PACKAGE_DIR)/contents/ui $(PACKAGE_DIR)/contents/config -type f -name '*.qml' -o -name '*.js')
 
-.PHONY: all package translations install install-dev remove clean check-translations
+.PHONY: all package package-no-i18n do-package translations install install-dev remove clean check-translations
 
 all: package
 
@@ -66,7 +66,11 @@ $(LOCALE_DIR)/%/LC_MESSAGES/$(DOMAIN).mo: $(LOCALE_DIR)/%.po | check-translation
 	msgfmt -o $@ $<
 
 # Package
-package: translations
+package: translations do-package
+
+package-no-i18n: do-package
+
+do-package:
 	@CURRENT_VERSION=$$($(GET_VERSION)); \
 	read -p "Enter new version number (current: $$CURRENT_VERSION) [Press Enter to keep current]: " NEW_VERSION; \
 	if [ -n "$$NEW_VERSION" ] && [ "$$NEW_VERSION" != "$$CURRENT_VERSION" ]; then \
