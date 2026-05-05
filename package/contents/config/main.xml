@@ -66,6 +66,48 @@
       <min>2</min>
       <max>24</max>
     </entry>
+    <entry name="useCustomFont" type="Bool">
+      <label>Use custom UI font</label>
+      <default>false</default>
+    </entry>
+    <entry name="customFontFamily" type="String">
+      <label>Custom UI font family</label>
+      <default></default>
+    </entry>
+    <entry name="customFontSize" type="Int">
+      <label>Custom UI font size</label>
+      <default>10</default>
+      <min>6</min>
+      <max>72</max>
+    </entry>
+    <entry name="useCustomCodeFont" type="Bool">
+      <label>Use custom code font</label>
+      <default>false</default>
+    </entry>
+    <entry name="customCodeFontFamily" type="String">
+      <label>Custom code font family</label>
+      <default>monospace</default>
+    </entry>
+    <entry name="customCodeFontSize" type="Int">
+      <label>Custom code font size</label>
+      <default>10</default>
+      <min>6</min>
+      <max>72</max>
+    </entry>
+    <entry name="useCustomThoughtsFont" type="Bool">
+      <label>Use custom thoughts font</label>
+      <default>false</default>
+    </entry>
+    <entry name="customThoughtsFontFamily" type="String">
+      <label>Custom thoughts font family</label>
+      <default></default>
+    </entry>
+    <entry name="customThoughtsFontSize" type="Int">
+      <label>Custom thoughts font size</label>
+      <default>8</default>
+      <min>6</min>
+      <max>72</max>
+    </entry>
     <entry name="customSystemPrompt" type="String">
       <label>Custom System Prompt Additions</label>
       <default></default>

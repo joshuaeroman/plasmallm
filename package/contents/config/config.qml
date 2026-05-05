@@ -13,6 +13,11 @@ ConfigModel {
         source: "configGeneral.qml"
     }
     ConfigCategory {
+        name: i18n("Appearance")
+        icon: "preferences-desktop-font"
+        source: "configAppearance.qml"
+    }
+    ConfigCategory {
         name: i18n("System Prompt")
         icon: "dialog-scripts"
         source: "configSystemPrompt.qml"

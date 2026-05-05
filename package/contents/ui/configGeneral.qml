@@ -741,46 +741,7 @@ BaseConfigPage {
             QQC2.ToolTip.delay: 500
         }
 
-        Kirigami.Separator {
-            Kirigami.FormData.isSection: true
-            Layout.fillWidth: true
-        }
 
-        ColumnLayout {
-            Kirigami.FormData.label: i18n("Chat Spacing: %1px", Math.round(chatSpacingSlider.value))
-            Layout.fillWidth: true
-            spacing: Kirigami.Units.smallSpacing
-
-            QQC2.Slider {
-                id: chatSpacingSlider
-                Layout.fillWidth: true
-                from: 2
-                to: 24
-                stepSize: 1
-                value: cfg_chatSpacing
-                onValueChanged: cfg_chatSpacing = value
-            }
-
-            RowLayout {
-                Layout.fillWidth: true
-                QQC2.Label {
-                    text: i18n("Compact")
-                    font: Kirigami.Theme.smallFont
-                }
-                Item { Layout.fillWidth: true }
-                QQC2.Label {
-                    text: i18n("Spacious")
-                    font: Kirigami.Theme.smallFont
-                }
-            }
-        }
-
-        QQC2.CheckBox {
-            Kirigami.FormData.label: i18n("Appearance:")
-            text: i18n("Show provider and model in title")
-            checked: cfg_showProviderInTitle
-            onCheckedChanged: cfg_showProviderInTitle = checked
-        }
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
