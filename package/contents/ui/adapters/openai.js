@@ -64,7 +64,10 @@ var presets = [
     { name: "DeepInfra",                     url: "https://api.deepinfra.com/v1/openai" },
     { name: "Cohere",                        url: "https://api.cohere.ai/compatibility/v1" },
     { name: "SambaNova",                     url: "https://api.sambanova.ai/v1" },
-    { name: "Novita AI",                     url: "https://api.novita.ai/v3/openai" }
+    { name: "Novita AI",                     url: "https://api.novita.ai/v3/openai" },
+    // Russian providers
+    { name: "RouterAI (RU)",                 url: "https://routerai.ru/api/v1" },
+    { name: "AITunnel (RU)",                 url: "https://api.aitunnel.ru/v1" }
 ];
 
 function fetchModels(endpoint, apiKey, usesResponsesAPI, callback) {

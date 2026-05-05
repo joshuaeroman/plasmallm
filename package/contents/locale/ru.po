@@ -1,18 +1,17 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Russian translation for PlasmaLLM.
+# Copyright (C) 2026 Joshua Roman
 # This file is distributed under the same license as the PlasmaLLM package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Matvel007, 2026.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-05 22:04+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2026-05-04 00:00+0300\n"
+"Last-Translator: Matvel007\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,26 +21,29 @@ msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
 "budget below. Temperature is forced to max while thinking."
 msgstr ""
+"Anthropic включает расширенное мышление, когда уровень не равен «Выкл», "
+"используя указанный бюджет токенов. Температура принудительно "
+"устанавливается на максимум во время размышления."
 
 #: package/contents/ui/adapters/anthropic.js:59
 #: package/contents/ui/adapters/gemini.js:54
 #: package/contents/ui/adapters/openai_chat.js:24
 #: package/contents/ui/adapters/openai_responses.js:26
 msgid "Request timed out after 30 seconds"
-msgstr ""
+msgstr "Тайм-аут запроса через 30 секунд"
 
 #: package/contents/ui/adapters/anthropic.js:75
 #: package/contents/ui/adapters/gemini.js:75
 #: package/contents/ui/adapters/openai_chat.js:40
 #: package/contents/ui/adapters/openai_responses.js:42
 msgid "Failed to parse models: %1"
-msgstr ""
+msgstr "Не удалось разобрать модели: %1"
 
 #: package/contents/ui/adapters/anthropic.js:78
 #: package/contents/ui/adapters/openai_chat.js:43
 #: package/contents/ui/adapters/openai_responses.js:45
 msgid "Failed to fetch models: HTTP %1"
-msgstr ""
+msgstr "Не удалось получить модели: HTTP %1"
 
 #: package/contents/ui/adapters/anthropic.js:459
 #: package/contents/ui/adapters/anthropic.js:462
@@ -50,77 +52,80 @@ msgstr ""
 #: package/contents/ui/adapters/openai_chat.js:250
 #: package/contents/ui/adapters/openai_responses.js:502
 msgid "Invalid response format"
-msgstr ""
+msgstr "Неверный формат ответа"
 
 #: package/contents/ui/adapters/anthropic.js:465
 #: package/contents/ui/adapters/gemini.js:504
 #: package/contents/ui/adapters/openai_chat.js:253
 #: package/contents/ui/adapters/openai_responses.js:505
 msgid "Failed to parse response: %1"
-msgstr ""
+msgstr "Не удалось разобрать ответ: %1"
 
 #: package/contents/ui/adapters/anthropic.js:471
 #: package/contents/ui/adapters/gemini.js:510
 #: package/contents/ui/adapters/openai_chat.js:259
 #: package/contents/ui/adapters/openai_responses.js:511
 msgid "Request timed out"
-msgstr ""
+msgstr "Тайм-аут запроса"
 
 #: package/contents/ui/adapters/anthropic.js:486
 #: package/contents/ui/adapters/openai_chat.js:274
 #: package/contents/ui/adapters/openai_responses.js:526
 msgid "Authentication failed (HTTP %1) — check your API key"
-msgstr ""
+msgstr "Ошибка аутентификации (HTTP %1) — проверьте ваш API-ключ"
 
 #: package/contents/ui/adapters/anthropic.js:488
 #: package/contents/ui/adapters/openai_chat.js:276
 #: package/contents/ui/adapters/openai_responses.js:528
 msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
 msgstr ""
+"Превышен лимит запросов (HTTP 429) — слишком много запросов, повторите позже"
 
 #: package/contents/ui/adapters/anthropic.js:490
 #: package/contents/ui/adapters/openai_chat.js:278
 #: package/contents/ui/adapters/openai_responses.js:530
 msgid "Not found (HTTP 404) — check your API endpoint and model name"
-msgstr ""
+msgstr "Не найдено (HTTP 404) — проверьте ваш API-эндпоинт и название модели"
 
 #: package/contents/ui/adapters/anthropic.js:492
 #: package/contents/ui/adapters/openai_chat.js:280
 #: package/contents/ui/adapters/openai_responses.js:532
 msgid "API error %1"
-msgstr ""
+msgstr "Ошибка API %1"
 
 #: package/contents/ui/adapters/anthropic.js:494
 #: package/contents/ui/adapters/openai_chat.js:282
 #: package/contents/ui/adapters/openai_responses.js:534
 msgid "Request failed (no response) — check your endpoint URL"
-msgstr ""
+msgstr "Запрос не удался (нет ответа) — проверьте URL эндпоинта"
 
 #: package/contents/ui/adapters/gemini.js:35
 msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
 "on supported models."
 msgstr ""
+"Gemini использует бюджет токенов размышления напрямую. Установите 0, чтобы "
+"отключить размышление на поддерживаемых моделях."
 
 #: package/contents/ui/adapters/gemini.js:78
 msgid "Failed to fetch models"
-msgstr ""
+msgstr "Не удалось получить модели"
 
 #: package/contents/ui/adapters/gemini.js:99
 msgid "Authentication failed — check your API key (HTTP 400): %1"
-msgstr ""
+msgstr "Ошибка аутентификации — проверьте API-ключ (HTTP 400): %1"
 
 #: package/contents/ui/adapters/gemini.js:102
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
-msgstr ""
+msgstr "Ошибка аутентификации (HTTP %1) — проверьте API-ключ: %2"
 
 #: package/contents/ui/adapters/gemini.js:107
 msgid "no response — check your endpoint URL"
-msgstr ""
+msgstr "нет ответа — проверьте URL эндпоинта"
 
 #: package/contents/ui/adapters/gemini.js:523
 msgid "Request failed"
-msgstr ""
+msgstr "Запрос не удался"
 
 #: package/contents/ui/adapters/openai.js:33
 msgid ""
@@ -129,203 +134,209 @@ msgid ""
 "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
 "reasoning_content."
 msgstr ""
+"Уровень рассуждений (низкий / средний / высокий) управляет расширенным "
+"мышлением. Чтобы видеть размышления на OpenAI / Poe / OpenRouter / Azure, "
+"включите Use Responses API; провайдеры chat-completions (DeepSeek, Qwen) "
+"показывают рассуждения через reasoning_content."
 
 #: package/contents/ui/CommandBlock.qml:96
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 #: package/contents/ui/CommandBlock.qml:98
 msgid "Save as script file"
-msgstr ""
+msgstr "Сохранить как скрипт"
 
 #: package/contents/ui/CommandBlock.qml:104
 msgid "Copy"
-msgstr ""
+msgstr "Копировать"
 
 #: package/contents/ui/CommandBlock.qml:106
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Копировать в буфер обмена"
 
 #: package/contents/ui/CommandBlock.qml:117
 #: package/contents/ui/FullRepresentation.qml:855
 msgid "Stop"
-msgstr ""
+msgstr "Стоп"
 
 #: package/contents/ui/CommandBlock.qml:118
 msgid "Ran"
-msgstr ""
+msgstr "Запущено"
 
 #: package/contents/ui/CommandBlock.qml:118
 msgid "Run"
-msgstr ""
+msgstr "Запустить"
 
 #: package/contents/ui/CommandBlock.qml:125
 msgid "Stop running command"
-msgstr ""
+msgstr "Остановить выполнение команды"
 
 #: package/contents/ui/CommandBlock.qml:125
 msgid "Execute command inline"
-msgstr ""
+msgstr "Выполнить команду"
 
 #: package/contents/ui/CommandBlock.qml:138
 msgid "Terminal"
-msgstr ""
+msgstr "Терминал"
 
 #: package/contents/ui/CommandBlock.qml:141
 msgid "Open in terminal emulator"
-msgstr ""
+msgstr "Открыть в терминале"
 
 #: package/contents/ui/CommandBlock.qml:150
 msgid "Save Script"
-msgstr ""
+msgstr "Сохранить скрипт"
 
 #: package/contents/ui/CommandBlock.qml:154
 msgid "Shell scripts (*.sh)"
-msgstr ""
+msgstr "Shell-скрипты (*.sh)"
 
 #: package/contents/ui/CommandBlock.qml:154
 #: package/contents/ui/FullRepresentation.qml:507
 msgid "All files (*)"
-msgstr ""
+msgstr "Все файлы (*)"
 
 #: package/contents/ui/ChatMessage.qml:107
 msgid "Thoughts"
-msgstr ""
+msgstr "Размышления"
 
 #: package/contents/ui/ChatMessage.qml:196
 msgid "Web Search Results"
-msgstr ""
+msgstr "Результаты поиска в интернете"
 
 #: package/contents/ui/ChatMessage.qml:310
 msgid "Thinking…"
-msgstr ""
+msgstr "Думает…"
 
 #: package/contents/ui/ChatMessage.qml:369
 msgid "Copy message"
-msgstr ""
+msgstr "Копировать сообщение"
 
 #: package/contents/ui/ChatMessage.qml:377
 msgid "Retry"
-msgstr ""
+msgstr "Повторить"
 
 #: package/contents/ui/ChatMessage.qml:385
 msgid "Share with LLM"
-msgstr ""
+msgstr "Отправить LLM"
 
 #: package/contents/ui/ChatMessage.qml:387
 msgid "Include this output in the conversation"
-msgstr ""
+msgstr "Включить этот вывод в разговор"
 
 #: package/contents/ui/configSystemPrompt.qml:48
 msgid "System Info:"
-msgstr ""
+msgstr "Информация о системе:"
 
 #: package/contents/ui/configSystemPrompt.qml:54
 msgid "OS"
-msgstr ""
+msgstr "ОС"
 
 #: package/contents/ui/configSystemPrompt.qml:59
 msgid "Shell"
-msgstr ""
+msgstr "Оболочка"
 
 #: package/contents/ui/configSystemPrompt.qml:64
 msgid "Hostname"
-msgstr ""
+msgstr "Имя хоста"
 
 #: package/contents/ui/configSystemPrompt.qml:69
 msgid "Kernel"
-msgstr ""
+msgstr "Ядро"
 
 #: package/contents/ui/configSystemPrompt.qml:74
 msgid "Desktop"
-msgstr ""
+msgstr "Окружение"
 
 #: package/contents/ui/configSystemPrompt.qml:79
 msgid "User"
-msgstr ""
+msgstr "Пользователь"
 
 #: package/contents/ui/configSystemPrompt.qml:84
 msgid "CPU"
-msgstr ""
+msgstr "Процессор"
 
 #: package/contents/ui/configSystemPrompt.qml:89
 msgid "Memory"
-msgstr ""
+msgstr "Память"
 
 #: package/contents/ui/configSystemPrompt.qml:94
 msgid "GPU"
-msgstr ""
+msgstr "Видеокарта"
 
 #: package/contents/ui/configSystemPrompt.qml:99
 msgid "Block Devices"
-msgstr ""
+msgstr "Блочные устройства"
 
 #: package/contents/ui/configSystemPrompt.qml:104
 msgid "Network"
-msgstr ""
+msgstr "Сеть"
 
 #: package/contents/ui/configSystemPrompt.qml:109
 msgid "Locale"
-msgstr ""
+msgstr "Локаль"
 
 #: package/contents/ui/configSystemPrompt.qml:114
 msgid "Date/Time"
-msgstr ""
+msgstr "Дата/Время"
 
 #: package/contents/ui/configSystemPrompt.qml:122
 msgid "Custom Instructions:"
-msgstr ""
+msgstr "Пользовательские инструкции:"
 
 #: package/contents/ui/configSystemPrompt.qml:125
 msgid "Additional instructions for the LLM…"
-msgstr ""
+msgstr "Дополнительные инструкции для LLM…"
 
 #: package/contents/ui/configSystemPrompt.qml:132
 msgid "Preview:"
-msgstr ""
+msgstr "Предпросмотр:"
 
 #: package/contents/ui/configTasks.qml:33
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
+"Нет настроенных задач. Добавьте задачу, чтобы создать многоразовые ярлыки "
+"промптов."
 
 #: package/contents/ui/configTasks.qml:57
 #: package/contents/ui/FullRepresentation.qml:82
 #: package/contents/ui/FullRepresentation.qml:722
 msgid "AUTO"
-msgstr ""
+msgstr "АВТО"
 
 #: package/contents/ui/configTasks.qml:84
 #: package/contents/ui/FullRepresentation.qml:247
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #: package/contents/ui/configTasks.qml:84
 msgid "Add Task"
-msgstr ""
+msgstr "Добавить задачу"
 
 #: package/contents/ui/configTasks.qml:108
 msgid "Task name"
-msgstr ""
+msgstr "Название задачи"
 
 #: package/contents/ui/configTasks.qml:115
 msgid "Prompt to send"
-msgstr ""
+msgstr "Промпт для отправки"
 
 #: package/contents/ui/configTasks.qml:121
 msgid "Enable auto mode (auto-run + auto-share)"
-msgstr ""
+msgstr "Включить авторежим (автозапуск + автоотправка)"
 
 #: package/contents/ui/configTasks.qml:133
 msgid "Update Task"
-msgstr ""
+msgstr "Обновить задачу"
 
 #: package/contents/ui/configTasks.qml:133
 msgid "Save Task"
-msgstr ""
+msgstr "Сохранить задачу"
 
 #: package/contents/ui/configTasks.qml:141
 msgid "A task named \"%1\" already exists."
-msgstr ""
+msgstr "Задача с именем \"%1\" уже существует."
 
 #: package/contents/ui/configTasks.qml:163
 msgid ""
@@ -333,314 +344,323 @@ msgid ""
 "button to run them. Tasks with auto mode will temporarily enable auto-run "
 "and auto-share."
 msgstr ""
+"Задачи — это многоразовые ярлыки промптов. Используйте /task <name> в чате "
+"или кнопку на панели инструментов для их запуска. Задачи с авторежимом "
+"временно включают автозапуск и автоотправку."
 
 #: package/contents/ui/FullRepresentation.qml:20
 msgid "Toggle auto mode (auto-run + auto-share) for this session"
-msgstr ""
+msgstr "Вкл/выкл авторежим (автозапуск + автоотправка) для этой сессии"
 
 #: package/contents/ui/FullRepresentation.qml:21
 msgid "Clear the chat"
-msgstr ""
+msgstr "Очистить чат"
 
 #: package/contents/ui/FullRepresentation.qml:22
 msgid "Close the panel"
-msgstr ""
+msgstr "Закрыть панель"
 
 #: package/contents/ui/FullRepresentation.qml:23
 msgid "Copy conversation to clipboard"
-msgstr ""
+msgstr "Скопировать разговор в буфер обмена"
 
 #: package/contents/ui/FullRepresentation.qml:24
 msgid "Open chat history folder"
-msgstr ""
+msgstr "Открыть папку истории чатов"
 
 #: package/contents/ui/FullRepresentation.qml:25
 msgid "Show or switch model (/model <name>)"
-msgstr ""
+msgstr "Показать или сменить модель (/model <name>)"
 
 #: package/contents/ui/FullRepresentation.qml:26
 msgid "Run last command"
-msgstr ""
+msgstr "Запустить последнюю команду"
 
 #: package/contents/ui/FullRepresentation.qml:27
 msgid "Save chat to file"
-msgstr ""
+msgstr "Сохранить чат в файл"
 
 #: package/contents/ui/FullRepresentation.qml:28
 msgid "Open settings"
-msgstr ""
+msgstr "Открыть настройки"
 
 #: package/contents/ui/FullRepresentation.qml:29
 msgid "Run a saved task (/task <name>)"
-msgstr ""
+msgstr "Выполнить сохранённую задачу (/task <name>)"
 
 #: package/contents/ui/FullRepresentation.qml:30
 msgid "Run last command in terminal"
-msgstr ""
+msgstr "Запустить последнюю команду в терминале"
 
 #: package/contents/ui/FullRepresentation.qml:92
 #: package/contents/ui/FullRepresentation.qml:93
 msgid "Run a task"
-msgstr ""
+msgstr "Выполнить задачу"
 
 #: package/contents/ui/FullRepresentation.qml:129
 #: package/contents/ui/FullRepresentation.qml:130
 msgid "Chat History"
-msgstr ""
+msgstr "История чатов"
 
 #: package/contents/ui/FullRepresentation.qml:155
 msgid "Loading..."
-msgstr ""
+msgstr "Загрузка…"
 
 #: package/contents/ui/FullRepresentation.qml:161
 msgid "No recent chats"
-msgstr ""
+msgstr "Нет недавних чатов"
 
 #: package/contents/ui/FullRepresentation.qml:170
 msgid "Open history folder..."
-msgstr ""
+msgstr "Открыть папку истории…"
 
 #: package/contents/ui/FullRepresentation.qml:182
 msgid "Clear all history..."
-msgstr ""
+msgstr "Очистить всю историю…"
 
 #: package/contents/ui/FullRepresentation.qml:224
 msgid "Clear All History"
-msgstr ""
+msgstr "Очистить всю историю"
 
 #: package/contents/ui/FullRepresentation.qml:230
 msgid ""
 "Are you sure you want to delete all chat history files? This action cannot "
 "be undone."
 msgstr ""
+"Вы уверены, что хотите удалить все файлы истории чатов? Это действие нельзя "
+"отменить."
 
 #: package/contents/ui/FullRepresentation.qml:239
 msgid "Clear All"
-msgstr ""
+msgstr "Очистить всё"
 
 #: package/contents/ui/FullRepresentation.qml:256
 #: package/contents/ui/FullRepresentation.qml:257
 msgid "Copy conversation"
-msgstr ""
+msgstr "Копировать разговор"
 
 #: package/contents/ui/FullRepresentation.qml:265
 #: package/contents/ui/FullRepresentation.qml:322
 msgid "You"
-msgstr ""
+msgstr "Вы"
 
 #: package/contents/ui/FullRepresentation.qml:266
 #: package/contents/ui/FullRepresentation.qml:323
 msgid "Assistant"
-msgstr ""
+msgstr "Ассистент"
 
 #: package/contents/ui/FullRepresentation.qml:267
 #: package/contents/ui/FullRepresentation.qml:324
 msgid "Command"
-msgstr ""
+msgstr "Команда"
 
 #: package/contents/ui/FullRepresentation.qml:268
 #: package/contents/ui/FullRepresentation.qml:325
 msgid "Error"
-msgstr ""
+msgstr "Ошибка"
 
 #: package/contents/ui/FullRepresentation.qml:281
 #: package/contents/ui/FullRepresentation.qml:282
 msgid "Clear chat"
-msgstr ""
+msgstr "Очистить чат"
 
 #: package/contents/ui/FullRepresentation.qml:290
 #: package/contents/ui/FullRepresentation.qml:291
 msgid "Settings"
-msgstr ""
+msgstr "Настройки"
 
 #: package/contents/ui/FullRepresentation.qml:301
 #: package/contents/ui/FullRepresentation.qml:302
 msgid "Don't keep open"
-msgstr ""
+msgstr "Не держать открытым"
 
 #: package/contents/ui/FullRepresentation.qml:301
 #: package/contents/ui/FullRepresentation.qml:302
 msgid "Keep open"
-msgstr ""
+msgstr "Держать открытым"
 
 #: package/contents/ui/FullRepresentation.qml:475
 msgid "Send a message to start chatting"
-msgstr ""
+msgstr "Отправьте сообщение, чтобы начать чат"
 
 #: package/contents/ui/FullRepresentation.qml:504
 msgid "Attach File"
-msgstr ""
+msgstr "Прикрепить файл"
 
 #: package/contents/ui/FullRepresentation.qml:507
 msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr ""
+msgstr "Изображения (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
 
 #: package/contents/ui/FullRepresentation.qml:507
 msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 msgstr ""
+"Текстовые файлы (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
+"*.conf *.sh *.py *.js *.ts *.qml)"
 
 #: package/contents/ui/FullRepresentation.qml:749
 msgid "Message input"
-msgstr ""
+msgstr "Ввод сообщения"
 
 #: package/contents/ui/FullRepresentation.qml:750
 msgid "Type a message…"
-msgstr ""
+msgstr "Напишите сообщение…"
 
 #: package/contents/ui/FullRepresentation.qml:750
 msgid "Initializing…"
-msgstr ""
+msgstr "Инициализация…"
 
 #: package/contents/ui/FullRepresentation.qml:802
 msgid "Attach file or image"
-msgstr ""
+msgstr "Прикрепить файл или изображение"
 
 #: package/contents/ui/FullRepresentation.qml:809
 msgid "Kill"
-msgstr ""
+msgstr "Завершить"
 
 #: package/contents/ui/FullRepresentation.qml:813
 msgid "Kill persistent session (stops all processes and resets shell state)"
 msgstr ""
+"Завершить постоянную сессию (останавливает все процессы и сбрасывает "
+"состояние оболочки)"
 
 #: package/contents/ui/FullRepresentation.qml:832
 msgid "Send"
-msgstr ""
+msgstr "Отправить"
 
 #: package/contents/ui/FullRepresentation.qml:860
 msgid "Cancel LLM request"
-msgstr ""
+msgstr "Отменить запрос LLM"
 
 #: package/contents/ui/api.js:213
 msgid "Search provider %1 not supported"
-msgstr ""
+msgstr "Поисковый провайдер %1 не поддерживается"
 
 #: package/contents/ui/api.js:242
 msgid "OpenAI-compatible"
-msgstr ""
+msgstr "OpenAI-совместимый"
 
 #: package/contents/ui/api.js:243
 msgid "Anthropic"
-msgstr ""
+msgstr "Anthropic"
 
 #: package/contents/ui/api.js:244
 msgid "Google Gemini"
-msgstr ""
+msgstr "Google Gemini"
 
 #: package/contents/ui/configGeneral.qml:228
 msgid "No models found."
-msgstr ""
+msgstr "Модели не найдены."
 
 #: package/contents/ui/configGeneral.qml:333
 msgid "Adapter:"
-msgstr ""
+msgstr "Адаптер:"
 
 #: package/contents/ui/configGeneral.qml:355
 msgid "Provider:"
-msgstr ""
+msgstr "Провайдер:"
 
 #: package/contents/ui/configGeneral.qml:452
 msgid "API Endpoint:"
-msgstr ""
+msgstr "API-эндпоинт:"
 
 #: package/contents/ui/configGeneral.qml:479
 msgid "Model:"
-msgstr ""
+msgstr "Модель:"
 
 #: package/contents/ui/configGeneral.qml:575
 msgid "Refreshing…"
-msgstr ""
+msgstr "Обновление…"
 
 #: package/contents/ui/configGeneral.qml:575
 msgid "Refresh model list"
-msgstr ""
+msgstr "Обновить список моделей"
 
 #: package/contents/ui/configGeneral.qml:593
 msgid "API Key:"
-msgstr ""
+msgstr "API-ключ:"
 
 #: package/contents/ui/configGeneral.qml:600
 msgid "Optional - for OpenAI, etc."
-msgstr ""
+msgstr "Опционально — для OpenAI и др."
 
 #: package/contents/ui/configGeneral.qml:615
 #: package/contents/ui/configTools.qml:470
 #: package/contents/ui/configTools.qml:511
 msgid "Saving…"
-msgstr ""
+msgstr "Сохранение…"
 
 #: package/contents/ui/configGeneral.qml:616
 #: package/contents/ui/configTools.qml:471
 #: package/contents/ui/configTools.qml:512
 msgid "Saved"
-msgstr ""
+msgstr "Сохранено"
 
 #: package/contents/ui/configGeneral.qml:617
 #: package/contents/ui/configTools.qml:472
 #: package/contents/ui/configTools.qml:513
 msgid "Save to Config (Insecure)"
-msgstr ""
+msgstr "Сохранить в конфиг (небезопасно)"
 
 #: package/contents/ui/configGeneral.qml:617
 #: package/contents/ui/configTools.qml:472
 #: package/contents/ui/configTools.qml:513
 msgid "Save Key"
-msgstr ""
+msgstr "Сохранить ключ"
 
 #: package/contents/ui/configGeneral.qml:626
 msgid "Stored in KDE Wallet"
-msgstr ""
+msgstr "Хранится в KDE Wallet"
 
 #: package/contents/ui/configGeneral.qml:626
 msgid "KDE Wallet unavailable — key stored in config file"
-msgstr ""
+msgstr "KDE Wallet недоступен — ключ сохранён в файле конфигурации"
 
 #: package/contents/ui/configGeneral.qml:641
 #, javascript-format
 msgid "Temperature: %1%"
-msgstr ""
+msgstr "Температура: %1%"
 
 #: package/contents/ui/configGeneral.qml:658
 msgid "Precise"
-msgstr ""
+msgstr "Точный"
 
 #: package/contents/ui/configGeneral.qml:663
 msgid "Creative"
-msgstr ""
+msgstr "Креативный"
 
 #: package/contents/ui/configGeneral.qml:671
 msgid "Max Tokens:"
-msgstr ""
+msgstr "Макс. токенов:"
 
 #: package/contents/ui/configGeneral.qml:682
 msgid "Thinking:"
-msgstr ""
+msgstr "Размышление:"
 
 #: package/contents/ui/configGeneral.qml:686
 msgid "Off"
-msgstr ""
+msgstr "Выкл"
 
 #: package/contents/ui/configGeneral.qml:686
 msgid "Low"
-msgstr ""
+msgstr "Низкий"
 
 #: package/contents/ui/configGeneral.qml:686
 msgid "Medium"
-msgstr ""
+msgstr "Средний"
 
 #: package/contents/ui/configGeneral.qml:686
 msgid "High"
-msgstr ""
+msgstr "Высокий"
 
 #: package/contents/ui/configGeneral.qml:695
 msgid "Thinking budget:"
-msgstr ""
+msgstr "Бюджет размышления:"
 
 #: package/contents/ui/configGeneral.qml:722
 msgid "Show thoughts in chat (collapsible)"
-msgstr ""
+msgstr "Показывать размышления в чате (сворачиваемые)"
 
 #: package/contents/ui/configGeneral.qml:727
 msgid ""
@@ -648,10 +668,13 @@ msgid ""
 "collapsible header. Round-trip of signed thoughts to the API still happens "
 "regardless of this setting."
 msgstr ""
+"При включении рассуждения модели показываются над каждым ответом в "
+"сворачиваемом заголовке. Отправка подписанных размышлений в API всё равно "
+"происходит независимо от этой настройки."
 
 #: package/contents/ui/configGeneral.qml:734
 msgid "Use Responses API"
-msgstr ""
+msgstr "Использовать Responses API"
 
 #: package/contents/ui/configGeneral.qml:739
 msgid ""
@@ -659,139 +682,149 @@ msgid ""
 "(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
 "picking a preset."
 msgstr ""
+"Необходимо для отображения рассуждений на OpenAI / Poe / OpenRouter / Azure "
+"(отправляет POST на /v1/responses вместо /v1/chat/completions). "
+"Устанавливается автоматически при выборе пресета."
 
 #: package/contents/ui/configGeneral.qml:750
 msgid "Chat Spacing: %1px"
-msgstr ""
+msgstr "Отступы чата: %1px"
 
 #: package/contents/ui/configGeneral.qml:767
 msgid "Compact"
-msgstr ""
+msgstr "Компактный"
 
 #: package/contents/ui/configGeneral.qml:772
 msgid "Spacious"
-msgstr ""
+msgstr "Просторный"
 
 #: package/contents/ui/configGeneral.qml:779
 msgid "Appearance:"
-msgstr ""
+msgstr "Внешний вид:"
 
 #: package/contents/ui/configGeneral.qml:780
 msgid "Show provider and model in title"
-msgstr ""
+msgstr "Показывать провайдера и модель в заголовке"
 
 #: package/contents/ui/configGeneral.qml:792
 msgid "Chat History:"
-msgstr ""
+msgstr "История чата:"
 
 #: package/contents/ui/configGeneral.qml:793
 msgid "Auto-save chat history"
-msgstr ""
+msgstr "Автосохранение истории чата"
 
 #: package/contents/ui/configGeneral.qml:797
 #: package/contents/ui/configGeneral.qml:812
 msgid "Saves to ~/PlasmaLLM/chats/"
-msgstr ""
+msgstr "Сохраняется в ~/PlasmaLLM/chats/"
 
 #: package/contents/ui/configGeneral.qml:804
 msgid "Save format:"
-msgstr ""
+msgstr "Формат сохранения:"
 
 #: package/contents/ui/configGeneral.qml:805
 msgid "Plain text (.txt)"
-msgstr ""
+msgstr "Обычный текст (.txt)"
 
 #: package/contents/ui/configGeneral.qml:805
 msgid "Structured (.jsonl)"
-msgstr ""
+msgstr "Структурированный (.jsonl)"
 
 #: package/contents/ui/configGeneral.qml:824
 msgid "Auto-clear:"
-msgstr ""
+msgstr "Автоочистка:"
 
 #: package/contents/ui/configGeneral.qml:828
 msgid "Disabled"
-msgstr ""
+msgstr "Отключено"
 
 #: package/contents/ui/configGeneral.qml:834
 msgid "Instant (always clear when panel opens)"
-msgstr ""
+msgstr "Мгновенно (всегда очищать при открытии панели)"
 
 #: package/contents/ui/configGeneral.qml:843
 msgid "After"
-msgstr ""
+msgstr "Через"
 
 #: package/contents/ui/configGeneral.qml:862
 msgid "seconds"
-msgstr ""
+msgstr "секунд"
 
 #: package/contents/ui/configGeneral.qml:862
 msgid "minutes"
-msgstr ""
+msgstr "минут"
 
 #: package/contents/ui/configTools.qml:278
 msgid "Commands"
-msgstr ""
+msgstr "Команды"
 
 #: package/contents/ui/configTools.qml:283
 msgid "Auto-run commands from LLM"
-msgstr ""
+msgstr "Автозапуск команд от LLM"
 
 #: package/contents/ui/configTools.qml:287
 msgid ""
 "Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
 "share."
 msgstr ""
+"Разрешить LLM выполнять shell-команды. Опасно в сочетании с автоотправкой."
 
 #: package/contents/ui/configTools.qml:294
 msgid "Run as tool"
-msgstr ""
+msgstr "Запускать как инструмент"
 
 #: package/contents/ui/configTools.qml:298
 msgid ""
 "Use the run_command tool for command execution. If disabled, falls back to "
 "parsing code blocks."
 msgstr ""
+"Использовать инструмент run_command для выполнения команд. Если отключено, "
+"используется парсинг блоков кода."
 
 #: package/contents/ui/configTools.qml:305
 msgid "Auto-share command output with LLM"
-msgstr ""
+msgstr "Автоотправка вывода команд LLM"
 
 #: package/contents/ui/configTools.qml:309
 msgid "Automatically send command execution results back to the LLM"
-msgstr ""
+msgstr "Автоматически отправлять результаты выполнения команд обратно LLM"
 
 #: package/contents/ui/configTools.qml:316
 msgid ""
 "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
 "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
 msgstr ""
+"⚠️ ОПАСНО: Оба параметра включены — LLM может выполнять команды и видеть их "
+"вывод, включая агентный режим. Используйте только с надёжными LLM."
 
 #: package/contents/ui/configTools.qml:327
 msgid "Session Multiplexer"
-msgstr ""
+msgstr "Мультиплексор сессий"
 
 #: package/contents/ui/configTools.qml:332
 msgid "Run commands inside a persistent session"
-msgstr ""
+msgstr "Запускать команды внутри постоянной сессии"
 
 #: package/contents/ui/configTools.qml:337
 msgid ""
 "Execute LLM commands inside a long-lived tmux or screen session so state "
 "persists across turns."
 msgstr ""
+"Выполнять команды LLM внутри долгоживущей tmux или screen сессии, чтобы "
+"состояние сохранялось между витками."
 
 #: package/contents/ui/configTools.qml:343
 msgid "Reset Session"
-msgstr ""
+msgstr "Сбросить сессию"
 
 #: package/contents/ui/configTools.qml:356
 msgid "Backend:"
-msgstr ""
+msgstr "Бэкенд:"
 
 #: package/contents/ui/configTools.qml:385
 msgid "Session name:"
-msgstr ""
+msgstr "Имя сессии:"
 
 #: package/contents/ui/configTools.qml:395
 msgid ""
@@ -801,156 +834,197 @@ msgstr ""
 
 #: package/contents/ui/configTools.qml:404
 msgid "Web Search"
-msgstr ""
+msgstr "Поиск в интернете"
 
 #: package/contents/ui/configTools.qml:409
 msgid "Enable web search tool"
-msgstr ""
+msgstr "Включить инструмент поиска в интернете"
 
 #: package/contents/ui/configTools.qml:413
 msgid "Allows the LLM to perform web searches."
-msgstr ""
+msgstr "Позволяет LLM выполнять поиск в интернете."
 
 #: package/contents/ui/configTools.qml:428
 msgid "Ollama API"
-msgstr ""
+msgstr "Ollama API"
 
 #: package/contents/ui/configTools.qml:429
 msgid "SearXNG"
-msgstr ""
+msgstr "SearXNG"
 
 #: package/contents/ui/configTools.qml:430
 msgid "DuckDuckGo"
-msgstr ""
+msgstr "DuckDuckGo"
 
 #: package/contents/ui/configTools.qml:456
 msgid "Ollama API key"
-msgstr ""
+msgstr "API-ключ Ollama"
 
 #: package/contents/ui/configTools.qml:484
 msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr ""
+msgstr "URL экземпляра SearXNG (напр. https://searx.be)"
 
 #: package/contents/ui/configTools.qml:497
 msgid "SearXNG API Key/Token (optional)"
-msgstr ""
+msgstr "API-ключ/токен SearXNG (опционально)"
 
 #: package/contents/ui/configTools.qml:522
 msgid "DuckDuckGo requires no configuration."
-msgstr ""
+msgstr "DuckDuckGo не требует настройки."
 
 #: package/contents/ui/configTools.qml:524
 msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr ""
+msgstr "Убедитесь, что на экземпляре SearXNG включён формат JSON."
 
 #: package/contents/ui/configTools.qml:525
 msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr ""
+msgstr "Включает веб-поиск от LLM через поисковый API Ollama"
 
 #: package/contents/ui/main.qml:1002
 msgid ""
 "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
 "are on)."
 msgstr ""
+"Авторежим постоянно включён через настройки (автозапуск и автоотправка "
+"включены)."
 
 #: package/contents/ui/main.qml:1005
 msgid ""
 "Auto mode enabled for this session. Commands will run and share output "
 "automatically."
 msgstr ""
+"Авторежим включён для этой сессии. Команды будут запускаться и отправляться "
+"автоматически."
 
 #: package/contents/ui/main.qml:1005
 msgid "Auto mode disabled."
-msgstr ""
+msgstr "Авторежим отключён."
 
 #: package/contents/ui/main.qml:1020 package/contents/ui/main.qml:1079
 msgid "none"
-msgstr ""
+msgstr "нет"
 
 #: package/contents/ui/main.qml:1020
 msgid "Current model: **%1**"
-msgstr ""
+msgstr "Текущая модель: **%1**"
 
 #: package/contents/ui/main.qml:1022
 msgid "Available models:"
-msgstr ""
+msgstr "Доступные модели:"
 
 #: package/contents/ui/main.qml:1024
 msgid "Type `/model <name>` to switch."
-msgstr ""
+msgstr "Введите `/model <name>` для переключения."
 
 #: package/contents/ui/main.qml:1026
 msgid "No models cached. Use **Fetch Models** in settings."
-msgstr ""
+msgstr "Нет кэшированных моделей. Используйте **Fetch Models** в настройках."
 
 #: package/contents/ui/main.qml:1035
 msgid "Switched to model: **%1**"
-msgstr ""
+msgstr "Переключено на модель: **%1**"
 
 #: package/contents/ui/main.qml:1044
 msgid "No tasks configured. Add tasks in Settings."
-msgstr ""
+msgstr "Нет настроенных задач. Добавьте задачи в настройках."
 
 #: package/contents/ui/main.qml:1046
 msgid "(auto)"
-msgstr ""
+msgstr "(авто)"
 
 #: package/contents/ui/main.qml:1047
 msgid "Available tasks:"
-msgstr ""
+msgstr "Доступные задачи:"
 
 #: package/contents/ui/main.qml:1047
 msgid "Type `/task <name>` to run."
-msgstr ""
+msgstr "Введите `/task <name>` для запуска."
 
 #: package/contents/ui/main.qml:1079
 msgid "Unknown task: **%1**. Available: %2"
-msgstr ""
+msgstr "Неизвестная задача: **%1**. Доступны: %2"
 
 #: package/contents/ui/main.qml:1093
 msgid "The user declined to run this command."
-msgstr ""
+msgstr "Пользователь отказался от выполнения этой команды."
 
 #: package/contents/ui/main.qml:1292
 msgid "Searching the web…"
-msgstr ""
+msgstr "Поиск в интернете…"
 
 #: package/contents/ui/main.qml:1320
 msgid "Web search failed: %1"
-msgstr ""
+msgstr "Поиск в интернете не удался: %1"
 
 #: package/contents/ui/main.qml:1601
 msgid "Session reset requested."
-msgstr ""
+msgstr "Запрошен сброс сессии."
 
 #: package/contents/ui/main.qml:1621 package/contents/ui/main.qml:1639
 msgid "Running: %1"
-msgstr ""
+msgstr "Выполняется: %1"
 
 #: package/contents/ui/main.qml:1652
 msgid "stderr: %1"
-msgstr ""
+msgstr "stderr: %1"
 
 #: package/contents/ui/main.qml:1654
 msgid "[truncated — output exceeded %1KB]"
-msgstr ""
+msgstr "[обрезано — вывод превысил %1 КБ]"
 
 #: package/contents/ui/main.qml:1656
 msgid "[exit code: %1]"
-msgstr ""
+msgstr "[код выхода: %1]"
 
 #: package/contents/config/config.qml:11
 msgid "General"
-msgstr ""
+msgstr "Основные"
 
 #: package/contents/config/config.qml:16
 msgid "System Prompt"
-msgstr ""
+msgstr "Системный промпт"
 
 #: package/contents/config/config.qml:21
 msgid "Tasks"
-msgstr ""
+msgstr "Задачи"
 
 #: package/contents/config/config.qml:26
 msgid "Tools"
-msgstr ""
+msgstr "Инструменты"
+
+#~ msgid "Auto mode: ON (click to disable)"
+#~ msgstr "Авторежим: ВКЛ (нажмите, чтобы выключить)"
+
+#~ msgid "Auto mode: OFF (click to enable)"
+#~ msgstr "Авторежим: ВЫКЛ (нажмите, чтобы включить)"
+
+#~ msgid "Max context tokens:"
+#~ msgstr "Макс. токенов контекста:"
+
+#~ msgid "Sets the context limit for the circular indicator in the header"
+#~ msgstr "Устанавливает лимит контекста для кругового индикатора в заголовке"
+
+#~ msgid ""
+#~ "Context: %1 / %2 tokens (%3%)\n"
+#~ "Messages: %4"
+#~ msgstr ""
+#~ "Контекст: %1 / %2 токенов (%3%)\n"
+#~ "Сообщений: %4"
+
+#~ msgid "Tokens: %1 / %2 (%3%)"
+#~ msgstr "Токены: %1 / %2 (%3%)"
+
+#~ msgid "Messages in context: %1"
+#~ msgstr "Сообщений в контексте: %1"
+
+#~ msgid "Context limit: %1 tokens"
+#~ msgstr "Лимит контекста: %1 токенов"
+
+#~ msgid "Context usage"
+#~ msgstr "Использование контекста"
+
+#~ msgid "Requires an API key from tavily.com"
+#~ msgstr "Требуется API-ключ с tavily.com"
+
+#~ msgid "Tavily API key"
+#~ msgstr "API-ключ Tavily"
