@@ -279,6 +279,9 @@ BaseConfigPage {
     onCfg_searxngApiKeyVersionChanged: loadWalletSearxngKey()
 
     Kirigami.FormLayout {
+        property var activeAdapter: Api.getAdapter(cfg_apiType)
+        property var adapterCapabilities: activeAdapter ? activeAdapter.capabilities : {}
+
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("Commands")
@@ -407,7 +410,46 @@ BaseConfigPage {
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
-            Kirigami.FormData.label: i18n("Web Search")
+            Kirigami.FormData.label: i18n("Native Adapter Features")
+            visible: adapterCapabilities.nativeGoogleSearch || adapterCapabilities.nativeCodeExecution
+        }
+
+        QQC2.CheckBox {
+            id: nativeGoogleSearchCheckBox
+            text: i18n("Enable Native Google Search Grounding")
+            checked: cfg_enableNativeGoogleSearch
+            onCheckedChanged: cfg_enableNativeGoogleSearch = checked
+            visible: !!adapterCapabilities.nativeGoogleSearch
+
+            QQC2.ToolTip.text: i18n("Use Gemini's built-in Google Search for grounding. This overrides the standard web search tool.")
+            QQC2.ToolTip.visible: hovered
+            QQC2.ToolTip.delay: 500
+        }
+
+        QQC2.CheckBox {
+            id: nativeCodeExecutionCheckBox
+            text: i18n("Enable Native Python Code Execution")
+            checked: cfg_enableNativeCodeExecution
+            onCheckedChanged: cfg_enableNativeCodeExecution = checked
+            visible: !!adapterCapabilities.nativeCodeExecution
+
+            QQC2.ToolTip.text: i18n("Allow Gemini to write and execute Python code in a secure server-side sandbox.")
+            QQC2.ToolTip.visible: hovered
+            QQC2.ToolTip.delay: 500
+        }
+
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            type: Kirigami.MessageType.Warning
+            text: i18n("Combining Native tools with commands requires a newer model. Your currently selected model (%1) may encounter errors.", cfg_modelName)
+            visible: (cfg_enableNativeGoogleSearch || cfg_enableNativeCodeExecution) && 
+                     cfg_useCommandTool &&
+                     cfg_modelName && (cfg_modelName.indexOf("gemini-1") !== -1 || cfg_modelName.indexOf("gemini-2") !== -1)
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: i18n("Standard Web Search")
         }
 
         QQC2.CheckBox {

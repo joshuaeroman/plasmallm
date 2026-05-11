@@ -247,13 +247,19 @@ function getAllPresets() {
     return Adapters.getAllPresets();
 }
 
-function fetchModels(apiType, endpoint, apiKey, usesResponsesAPI, callback) {
+function fetchModels(apiType, endpoint, apiKey, usesResponsesAPI, opts, callback) {
+    // If the caller didn't pass opts (it was introduced later)
+    if (typeof opts === "function") {
+        callback = opts;
+        opts = null;
+    }
+
     var ad = Adapters.getAdapter(apiType);
     // openai's fetchModels takes the extra flag; other adapters ignore it.
     if (apiType === "openai") {
         return ad.fetchModels(endpoint, apiKey, !!usesResponsesAPI, callback);
     }
-    return ad.fetchModels(endpoint, apiKey, callback);
+    return ad.fetchModels(endpoint, apiKey, opts, callback);
 }
 
 function buildTools(apiType, options) {

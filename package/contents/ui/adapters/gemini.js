@@ -35,20 +35,51 @@ var capabilities = {
     reasoningHelp: i18n("Gemini uses the thinking token budget directly. Set to 0 to disable thinking on supported models.")
 };
 
-function setHeaders(xhr, apiKey) {
+function setHeaders(xhr, apiKey, opts) {
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Api-Revision", "2026-05-07");
     if (apiKey && apiKey.length > 0) {
-        xhr.setRequestHeader("x-goog-api-key", apiKey);
+        if (opts && opts.geminiAuthMethod === "agentplatform") {
+            // OAuth2 tokens usually start with 'ya29.' and are much longer than API keys.
+            // API keys from Agent Platform/Vertex AI Express Mode should use x-goog-api-key.
+            if (apiKey.indexOf("ya29.") === 0 || apiKey.length > 128) {
+                xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
+            } else {
+                xhr.setRequestHeader("x-goog-api-key", apiKey);
+            }
+        } else {
+            xhr.setRequestHeader("x-goog-api-key", apiKey);
+        }
     }
 }
 
-function fetchModels(endpoint, apiKey, callback) {
+function fetchModels(endpoint, apiKey, opts, callback) {
+    // Some callers might still use the old signature (endpoint, apiKey, callback)
+    if (typeof opts === "function") {
+        callback = opts;
+        opts = null;
+    }
+
     var xhr = new XMLHttpRequest();
-    var url = endpoint.replace(/\/+$/, "") + "/v1beta/models?pageSize=1000";
+    var url;
+    var location = (opts && opts.geminiLocation) || "global";
+    var baseUrl = endpoint.replace(/\/+$/, "");
+
+    // Automatically prefix location if it's not global and not already prefixed.
+    if (location !== "global" && baseUrl.indexOf("://aiplatform.googleapis.com") !== -1) {
+        baseUrl = baseUrl.replace("://", "://" + location + "-");
+    }
+
+    if (opts && opts.geminiAuthMethod === "agentplatform") {
+        var projectId = opts.geminiProjectId || "";
+        url = baseUrl + "/v1beta1/projects/" + encodeURIComponent(projectId) + "/locations/" + encodeURIComponent(location) + "/publishers/google/models";
+    } else {
+        url = baseUrl + "/v1beta/models?pageSize=1000";
+    }
 
     xhr.open("GET", url);
     xhr.timeout = 30000;
-    setHeaders(xhr, apiKey);
+    setHeaders(xhr, apiKey, opts);
 
     xhr.ontimeout = function() {
         callback(i18n("Request timed out after 30 seconds"), null);
@@ -60,14 +91,26 @@ function fetchModels(endpoint, apiKey, callback) {
                 try {
                     var response = JSON.parse(xhr.responseText);
                     var models = [];
-                    if (response.models) {
-                        for (var i = 0; i < response.models.length; i++) {
-                            var m = response.models[i];
+                    // Model Garden returns 'publisherModels', project models return 'models'
+                    var rawModels = response.publisherModels || response.models || [];
+                    for (var i = 0; i < rawModels.length; i++) {
+                        var m = rawModels[i];
+                        var name = m.name || "";
+                        if (name.indexOf("models/") === 0) name = name.substring(7);
+                        else if (name.indexOf("publishers/google/models/") !== -1) {
+                            name = name.split("/").pop();
+                        }
+                        
+                        if (opts && opts.geminiAuthMethod === "agentplatform") {
+                            // Filter for Gemini models if listing from Model Garden
+                            if (name.toLowerCase().indexOf("gemini") !== -1) {
+                                models.push(name);
+                            }
+                        } else {
                             var methods = m.supportedGenerationMethods || [];
-                            if (methods.indexOf("generateContent") === -1) continue;
-                            var name = m.name || "";
-                            if (name.indexOf("models/") === 0) name = name.substring(7);
-                            models.push(name);
+                            if (methods.indexOf("generateContent") !== -1) {
+                                models.push(name);
+                            }
                         }
                     }
                     callback(null, models);
@@ -368,13 +411,32 @@ function sendStreaming(opts) {
     var translated = translateMessages(opts.messages);
 
     var xhr = new XMLHttpRequest();
-    var url = endpoint.replace(/\/+$/, "") +
+    var url;
+    var baseUrl = endpoint.replace(/\/+$/, "");
+
+    if (opts && opts.geminiAuthMethod === "agentplatform") {
+        var projectId = opts.geminiProjectId || "";
+        var location = opts.geminiLocation || "global";
+        
+        // Automatically prefix location if it's not global and not already prefixed.
+        if (location !== "global" && baseUrl.indexOf("://aiplatform.googleapis.com") !== -1) {
+            baseUrl = baseUrl.replace("://", "://" + location + "-");
+        }
+
+        url = baseUrl +
+              "/v1/projects/" + encodeURIComponent(projectId) +
+              "/locations/" + encodeURIComponent(location) +
+              "/publishers/google/models/" + encodeURIComponent(model) +
+              ":streamGenerateContent?alt=sse";
+    } else {
+        url = baseUrl +
               "/v1beta/models/" + encodeURIComponent(model) +
               ":streamGenerateContent?alt=sse";
+    }
 
     xhr.open("POST", url);
     xhr.timeout = 120000;
-    setHeaders(xhr, apiKey);
+    setHeaders(xhr, apiKey, opts);
 
     var pollTimer = null;
     var lastParseIndex = 0;
@@ -552,6 +614,10 @@ function sendStreaming(opts) {
         setPollTimer: function(timer) {
             pollTimer = timer;
             handle.pollTimer = timer;
+        }
+    };
+    return handle;
+}
         }
     };
     return handle;

@@ -60,6 +60,26 @@
       <label>Route OpenAI-compatible requests through /v1/responses instead of /v1/chat/completions</label>
       <default>false</default>
     </entry>
+    <entry name="geminiApiVariant" type="String">
+      <label>Gemini API variant: legacy, interactions</label>
+      <default>legacy</default>
+    </entry>
+    <entry name="geminiAuthMethod" type="String">
+      <label>Gemini auth method: aistudio, agentplatform</label>
+      <default>aistudio</default>
+    </entry>
+    <entry name="geminiVertexAuthType" type="String">
+      <label>Agent Platform Auth Type: apikey, gcloud</label>
+      <default>apikey</default>
+    </entry>
+    <entry name="geminiProjectId" type="String">
+      <label>Google Cloud Project ID (Agent Platform only)</label>
+      <default></default>
+    </entry>
+    <entry name="geminiLocation" type="String">
+      <label>Google Cloud Location (Agent Platform only)</label>
+      <default>global</default>
+    </entry>
     <entry name="chatSpacing" type="Int">
       <label>Chat Spacing (px)</label>
       <default>10</default>
@@ -226,6 +246,14 @@
     </entry>
     <entry name="enableWebSearch" type="Bool">
       <label>Enable web search tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="enableNativeGoogleSearch" type="Bool">
+      <label>Enable Native Google Search Grounding</label>
+      <default>false</default>
+    </entry>
+    <entry name="enableNativeCodeExecution" type="Bool">
+      <label>Enable Native Python Code Execution</label>
       <default>false</default>
     </entry>
     <entry name="webSearchProvider" type="String">

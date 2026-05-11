@@ -32,6 +32,16 @@ SimpleKCM {
     property bool cfg_showThoughtsDefault
     property bool cfg_usesResponsesAPI
     property bool cfg_usesResponsesAPIDefault
+    property string cfg_geminiApiVariant
+    property string cfg_geminiApiVariantDefault
+    property string cfg_geminiAuthMethod
+    property string cfg_geminiAuthMethodDefault
+    property string cfg_geminiVertexAuthType
+    property string cfg_geminiVertexAuthTypeDefault
+    property string cfg_geminiProjectId
+    property string cfg_geminiProjectIdDefault
+    property string cfg_geminiLocation
+    property string cfg_geminiLocationDefault
     property int cfg_chatSpacing
     property int cfg_chatSpacingDefault
     property bool cfg_useCustomFont
@@ -110,6 +120,12 @@ SimpleKCM {
     property string cfg_availableModelsDefault
     property bool cfg_enableWebSearch
     property bool cfg_enableWebSearchDefault
+
+    property bool cfg_enableNativeGoogleSearch
+    property bool cfg_enableNativeGoogleSearchDefault
+
+    property bool cfg_enableNativeCodeExecution
+    property bool cfg_enableNativeCodeExecutionDefault
     property string cfg_webSearchProvider
     property string cfg_webSearchProviderDefault
     property string cfg_searxngUrl

@@ -9,11 +9,52 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils
 import org.kde.plasma.workspace.dbus as DBus
+import org.kde.plasma.plasma5support as P5Support
 
 import "api.js" as Api
 
 BaseConfigPage {
     id: configPage
+
+        property bool hasGcloud: false
+    property string gcloudToken: ""
+    property bool tokenFetchInProgress: false
+    property var pendingModelsFetch: null
+
+    P5Support.DataSource {
+        id: gcloudChecker
+        engine: "executable"
+        connectedSources: ["command -v gcloud"]
+        onNewData: function(source, data) {
+            hasGcloud = (data["exit code"] === 0);
+            disconnectSource(source);
+        }
+    }
+
+    P5Support.DataSource {
+        id: gcloudTokenSource
+        engine: "executable"
+        connectedSources: []
+        onNewData: function(source, data) {
+            var token = data["stdout"] ? data["stdout"].trim() : "";
+            var exitCode = data["exit code"];
+            tokenFetchInProgress = false;
+            disconnectSource(source);
+            if (exitCode === 0 && token.length > 0) {
+                gcloudToken = token;
+                if (pendingModelsFetch) {
+                    var cb = pendingModelsFetch;
+                    pendingModelsFetch = null;
+                    cb(token);
+                }
+            } else {
+                fetchInProgress = false;
+                fetchStatusLabel.text = i18n("Failed to fetch gcloud token (exit %1): %2", exitCode, data["stderr"] || "");
+                fetchStatusLabel.visible = true;
+                pendingModelsFetch = null;
+            }
+        }
+    }
 
     property var modelCache: ({})
     property var availableModels: []
@@ -60,7 +101,9 @@ BaseConfigPage {
     }
 
     function currentSlot() {
-        return Api.apiKeySlot(cfg_apiType, cfg_providerName);
+        var t = cfg_apiType;
+        if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
+        return Api.apiKeySlot(t, cfg_providerName);
     }
 
     function readFallbackMap() {
@@ -180,6 +223,7 @@ BaseConfigPage {
 
     function currentModelSlot() {
         var t = cfg_apiType || "openai";
+        if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
         var p = (cfg_providerName && cfg_providerName.length > 0) ? cfg_providerName : t;
         return t + ":" + p;
     }
@@ -204,6 +248,7 @@ BaseConfigPage {
     }
 
     function ensureModelsLoaded(force) {
+        if (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform") return;
         var slot = currentModelSlot();
         var have = Array.isArray(modelCache[slot]) && modelCache[slot].length > 0;
         if (!force && have) return;
@@ -219,7 +264,16 @@ BaseConfigPage {
         if (!force && (!key || key.length === 0)) return;
         fetchInProgress = true;
         fetchStatusLabel.visible = false;
-        Api.fetchModels(cfg_apiType, apiEndpointField.text, key, cfg_usesResponsesAPI, function(error, models) {
+
+        var opts = {
+            geminiApiVariant: cfg_geminiApiVariant,
+            geminiAuthMethod: cfg_geminiAuthMethod,
+            geminiProjectId: cfg_geminiProjectId,
+            geminiLocation: cfg_geminiLocation
+        };
+
+        var fetchAction = function(effectiveKey) {
+            Api.fetchModels(effectiveApiType, apiEndpointField.text, effectiveKey, cfg_usesResponsesAPI, opts, function(error, models) {
             fetchInProgress = false;
             if (error) {
                 fetchStatusLabel.text = error;
@@ -236,7 +290,15 @@ BaseConfigPage {
                 refreshAvailableModels();
             }
         });
+    };
+
+    if (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform" && cfg_geminiVertexAuthType === "gcloud") {
+        pendingModelsFetch = fetchAction;
+        gcloudTokenSource.connectSource("gcloud auth print-access-token");
+    } else {
+        fetchAction(key);
     }
+}
 
     onCfg_availableModelsChanged: loadModelCache()
 
@@ -253,7 +315,7 @@ BaseConfigPage {
     // endpoint, so they don't need a preset dropdown). The "Custom" sentinel at
     // index 0 lets users pick a non-preset endpoint without a separate toggle.
     readonly property var presetEndpoints: {
-        var raw = Api.getPresets("openai") || [];
+        var raw = Api.getPresets(effectiveApiType) || [];
         var list = [];
         var hasCustom = false;
         for (var i = 0; i < raw.length; i++) {
@@ -265,15 +327,31 @@ BaseConfigPage {
     }
 
     readonly property var adapterChoices: Api.getAdapterChoices()
-    property var caps: Api.getCapabilities(cfg_apiType) || {}
+    readonly property string effectiveApiType: (cfg_apiType === "gemini" && cfg_geminiApiVariant === "interactions") ? "gemini_interactions" : cfg_apiType
+    property var caps: Api.getCapabilities(effectiveApiType) || {}
+
     onCfg_apiTypeChanged: {
-        caps = Api.getCapabilities(cfg_apiType) || {};
+        caps = Api.getCapabilities(effectiveApiType) || {};
         loadWalletKey();
         refreshAvailableModels();
         // Don't auto-fetch here: when the adapter combo changes cfg_apiType,
         // the endpoint hasn't been swapped yet — applyAdapterDefaults() runs
         // immediately after and triggers the fetch with the correct endpoint.
     }
+
+    onCfg_geminiApiVariantChanged: {
+        caps = Api.getCapabilities(effectiveApiType) || {};
+        loadWalletKey();
+        refreshAvailableModels();
+        ensureModelsLoaded(false);
+    }
+
+    onCfg_geminiAuthMethodChanged: {
+        loadWalletKey();
+        refreshAvailableModels();
+        ensureModelsLoaded(false);
+    }
+
     onCfg_providerNameChanged: {
         loadWalletKey();
         refreshAvailableModels();
@@ -283,8 +361,12 @@ BaseConfigPage {
     function applyAdapterDefaults(apiType) {
         var presets = Api.getPresets(apiType) || [];
         var pick = null;
+        // For Gemini, we might have switched to "gemini" from "gemini_interactions" or vice versa
+        // through the apiVariant dropdown.
+        var baseApiType = (apiType === "gemini" || apiType === "gemini_interactions") ? "gemini" : apiType;
+        
         // For OpenAI-compatible, restore the last selected provider if we have one.
-        if (apiType === "openai" && cfg_openaiLastProvider && cfg_openaiLastProvider.length > 0) {
+        if (baseApiType === "openai" && cfg_openaiLastProvider && cfg_openaiLastProvider.length > 0) {
             for (var j = 0; j < presets.length; j++) {
                 if (presets[j].name === cfg_openaiLastProvider) {
                     pick = presets[j];
@@ -349,6 +431,90 @@ BaseConfigPage {
                 applyAdapterDefaults(picked);
             }
         }
+
+        // --- Gemini Specific Settings ---
+        QQC2.ComboBox {
+            id: geminiVertexAuthCombo
+            Kirigami.FormData.label: i18n("Authentication:")
+            Layout.fillWidth: true
+            visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
+            model: [i18n("API Key (Express Mode)"), i18n("Google Cloud CLI (gcloud)")]
+            currentIndex: cfg_geminiVertexAuthType === "gcloud" ? 1 : 0
+            onActivated: function(index) {
+                cfg_geminiVertexAuthType = (index === 1 ? "gcloud" : "apikey");
+            }
+        }
+
+        QQC2.Label {
+            Layout.fillWidth: true
+            visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform" && cfg_geminiVertexAuthType === "gcloud" && !hasGcloud
+            text: i18n("gcloud CLI not found. Please install it to use this authentication method.")
+            color: Kirigami.Theme.negativeTextColor
+            font: Kirigami.Theme.smallFont
+        }
+
+        QQC2.ComboBox {
+            id: geminiVariantCombo
+            Kirigami.FormData.label: i18n("API Variant:")
+            Layout.fillWidth: true
+            visible: cfg_apiType === "gemini"
+            readonly property var variants: (cfg_geminiAuthMethod === "agentplatform" && cfg_geminiVertexAuthType === "apikey")
+                ? [{text: i18n("Legacy (generateContent)"), value: "legacy"}]
+                : [{text: i18n("Legacy (generateContent)"), value: "legacy"}, {text: i18n("Interactions API (Stateful)"), value: "interactions"}]
+            model: variants.map(function(v) { return v.text; })
+            currentIndex: {
+                for (var i = 0; i < variants.length; i++) {
+                    if (variants[i].value === cfg_geminiApiVariant) return i;
+                }
+                return 0;
+            }
+            onActivated: function(index) {
+                cfg_geminiApiVariant = variants[index].value;
+            }
+            onVariantsChanged: {
+                if (cfg_geminiApiVariant === "interactions" && variants.length === 1) {
+                    cfg_geminiApiVariant = "legacy";
+                }
+            }
+        }
+
+        QQC2.ComboBox {
+            id: geminiAuthCombo
+            Kirigami.FormData.label: i18n("Platform:")
+            Layout.fillWidth: true
+            visible: cfg_apiType === "gemini"
+            model: [i18n("Google AI Studio"), i18n("Google Cloud Agent Platform (Vertex AI)")]
+            currentIndex: cfg_geminiAuthMethod === "agentplatform" ? 1 : 0
+            onActivated: function(index) {
+                cfg_geminiAuthMethod = (index === 1 ? "agentplatform" : "aistudio");
+                if (index === 1 && apiEndpointField.text.indexOf("generativelanguage.googleapis.com") !== -1) {
+                    apiEndpointField.text = "https://aiplatform.googleapis.com";
+                } else if (index === 0 && apiEndpointField.text.indexOf("aiplatform.googleapis.com") !== -1) {
+                    apiEndpointField.text = "https://generativelanguage.googleapis.com";
+                }
+            }
+        }
+
+        QQC2.TextField {
+            id: geminiProjectIdField
+            Kirigami.FormData.label: i18n("Project ID:")
+            Layout.fillWidth: true
+            visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
+            text: cfg_geminiProjectId
+            onTextChanged: cfg_geminiProjectId = text
+            onEditingFinished: ensureModelsLoaded(false)
+        }
+
+        QQC2.TextField {
+            id: geminiLocationField
+            Kirigami.FormData.label: i18n("Location:")
+            Layout.fillWidth: true
+            visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
+            text: cfg_geminiLocation
+            onTextChanged: cfg_geminiLocation = text
+            onEditingFinished: ensureModelsLoaded(false)
+        }
+        // --- End Gemini Specific Settings ---
 
         QQC2.ComboBox {
             id: endpointPreset
@@ -475,8 +641,18 @@ BaseConfigPage {
             onEditingFinished: ensureModelsLoaded(false)
         }
 
+        QQC2.TextField {
+            id: modelEntryField
+            Kirigami.FormData.label: i18n("Model:")
+            Layout.fillWidth: true
+            visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
+            text: cfg_modelName
+            onTextChanged: cfg_modelName = text
+        }
+
         RowLayout {
             Kirigami.FormData.label: i18n("Model:")
+            visible: !modelEntryField.visible
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
@@ -569,7 +745,7 @@ BaseConfigPage {
 
             QQC2.Button {
                 icon.name: "view-refresh"
-                visible: caps.fetchModels === true
+                visible: caps.fetchModels === true && !modelEntryField.visible
                 enabled: !fetchInProgress
                 display: QQC2.AbstractButton.IconOnly
                 QQC2.ToolTip.text: fetchInProgress ? i18n("Refreshing…") : i18n("Refresh model list")
@@ -591,13 +767,14 @@ BaseConfigPage {
 
         RowLayout {
             Kirigami.FormData.label: i18n("API Key:")
+            visible: !(cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform" && cfg_geminiVertexAuthType === "gcloud")
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
             QQC2.TextField {
                 id: apiKeyField
                 Layout.fillWidth: true
-                placeholderText: i18n("Optional - for OpenAI, etc.")
+                placeholderText: (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform") ? i18n("Paste short-lived access token") : i18n("Optional - for OpenAI, etc.")
                 echoMode: TextInput.Password
                 text: walletKeyLoaded ? walletApiKey : cfg_apiKey
                 onTextChanged: {
