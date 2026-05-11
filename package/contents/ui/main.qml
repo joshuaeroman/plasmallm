@@ -84,6 +84,8 @@ PlasmoidItem {
     signal copyConversationRequested()
     signal populateInputRequested(string text)
 
+    readonly property string effectiveApiType: (Plasmoid.configuration.apiType === "gemini" && Plasmoid.configuration.geminiApiVariant === "interactions") ? "gemini_interactions" : Plasmoid.configuration.apiType
+
     function currentTimestamp() {
         return new Date().toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
     }
@@ -144,6 +146,37 @@ PlasmoidItem {
 
     fullRepresentation: FullRepresentation {}
 
+        P5Support.DataSource {
+        id: gcloudTokenSource
+        engine: "executable"
+        connectedSources: []
+        property var pendingRequest: null
+        onNewData: function(source, data) {
+            var token = data["stdout"] ? data["stdout"].trim() : "";
+            var exitCode = data["exit code"];
+            disconnectSource(source);
+            if (exitCode === 0 && token.length > 0) {
+                if (pendingRequest) {
+                    var r = pendingRequest;
+                    pendingRequest = null;
+                    r(token);
+                }
+            } else {
+                isLoading = false;
+                if (streamingMessageIndex >= 0) displayMessages.remove(streamingMessageIndex);
+                streamingMessageIndex = -1;
+                displayMessages.append({
+                    role: "error",
+                    content: i18n("Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is installed and authenticated.", exitCode, data["stderr"] || ""),
+                    commandsStr: "",
+                    shared: false,
+                    timestamp: currentTimestamp()
+                });
+                pendingRequest = null;
+            }
+        }
+    }
+
     P5Support.DataSource {
         id: executable
         engine: "executable"
@@ -169,7 +202,6 @@ PlasmoidItem {
             } else if (historyFetchCommands.indexOf(source) !== -1) {
                 historyFetchCommands.splice(historyFetchCommands.indexOf(source), 1);
                 if (source === lastHistoryFetchSource) {
-                    console.log("PlasmaLLM: Received history list, length: " + stdout.length);
                     isFetchingHistory = false;
                     historyFilesModel.clear();
                     if (stdout.length > 0) {
@@ -203,8 +235,6 @@ PlasmoidItem {
                                 historyFilesModel.append({file: path, name: name, dateTime: dtStr, preview: ""});
                             }
                         }
-                    } else {
-                        console.log("PlasmaLLM: History fetch returned empty stdout");
                     }
                 }
                 disconnectSource(source);
@@ -482,7 +512,6 @@ PlasmoidItem {
     }
 
     function fetchHistoryList() {
-        console.log("PlasmaLLM: Fetching history list...");
         isFetchingHistory = true;
         var pythonSnippet = "import os, json, sys, datetime\n" +
             "chats_dir = os.path.expanduser('~/PlasmaLLM/chats')\n" +
@@ -602,7 +631,7 @@ PlasmoidItem {
                     });
                 }
             } catch(e) {
-                console.error("Error parsing JSONL line: " + e);
+                console.warn("Error parsing JSONL line: " + e);
             }
         }
     }
@@ -649,7 +678,9 @@ PlasmoidItem {
     }
 
     function currentApiKeySlot() {
-        return Api.apiKeySlot(Plasmoid.configuration.apiType, Plasmoid.configuration.providerName);
+        var t = Plasmoid.configuration.apiType;
+        if (t === "gemini" && Plasmoid.configuration.geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
+        return Api.apiKeySlot(t, Plasmoid.configuration.providerName);
     }
 
     function fallbackKeyForSlot(slot) {
@@ -705,7 +736,6 @@ PlasmoidItem {
                                         walletWriteKey(handle, slot, legacy, function(success) {
                                             if (success) {
                                                 root.apiKey = legacy;
-                                                console.log("PlasmaLLM: migrated legacy API key to slot " + slot);
                                             } else {
                                                 root.apiKey = legacy;
                                             }
@@ -718,7 +748,6 @@ PlasmoidItem {
                                     var fb = fallbackKeyForSlot(slot);
                                     if (fb && fb.length > 0) {
                                         walletWriteKey(handle, slot, fb, function(success) {
-                                            if (success) console.log("PlasmaLLM: migrated config API key to slot " + slot);
                                             root.apiKey = fb;
                                             Plasmoid.configuration.apiKeyMigrated = true;
                                             walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
@@ -756,7 +785,6 @@ PlasmoidItem {
         if (!Plasmoid.configuration.webSearchMigrated) {
             if (root.ollamaSearchApiKey && root.ollamaSearchApiKey.length > 0) {
                 Plasmoid.configuration.enableWebSearch = true;
-                console.log("PlasmaLLM: Migrated web search tool to enabled because API key is present");
             }
             Plasmoid.configuration.webSearchMigrated = true;
         }
@@ -1140,6 +1168,7 @@ PlasmoidItem {
     }
 
     function sendToLLM() {
+        
         if (!Plasmoid.configuration.apiEndpoint || !Plasmoid.configuration.modelName) {
             displayMessages.append({
                 role: "error",
@@ -1186,7 +1215,7 @@ PlasmoidItem {
             if (msg.attachments_json && msg.attachments_json.length > 0) {
                 try {
                     var atts = JSON.parse(msg.attachments_json);
-                    msgContent = Api.buildContentArray(Plasmoid.configuration.apiType, msgContent, atts, Plasmoid.configuration.usesResponsesAPI);
+                    msgContent = Api.buildContentArray(root.effectiveApiType, msgContent, atts, Plasmoid.configuration.usesResponsesAPI);
                 } catch(e) {}
             }
             var entry = { role: msg.role, content: msgContent };
@@ -1217,19 +1246,22 @@ PlasmoidItem {
             messages = [systemMsg].concat(messages.slice(messages.length - maxApiMessages));
         }
 
-        var tools = Api.buildTools(Plasmoid.configuration.apiType, {
+        var tools = Api.buildTools(root.effectiveApiType, {
             webSearchProvider: Plasmoid.configuration.webSearchProvider,
             searxngUrl: Plasmoid.configuration.searxngUrl,
             searxngApiKey: root.searxngApiKey,
             ollamaSearchApiKey: root.ollamaSearchApiKey,
             commandToolEnabled: Plasmoid.configuration.useCommandTool,
             webSearchEnabled: Plasmoid.configuration.enableWebSearch,
-            usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI
+            usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
+            nativeGoogleSearchEnabled: Plasmoid.configuration.enableNativeGoogleSearch,
+            nativeCodeExecutionEnabled: Plasmoid.configuration.enableNativeCodeExecution
         });
 
-        var streamHandle = Api.sendStreaming(Plasmoid.configuration.apiType, {
-            endpoint: Plasmoid.configuration.apiEndpoint,
-            apiKey: root.apiKey,
+        var initiateStreaming = function(effectiveKey) {
+            var streamHandle = Api.sendStreaming(root.effectiveApiType, {
+                endpoint: Plasmoid.configuration.apiEndpoint,
+                apiKey: effectiveKey,
             model: Plasmoid.configuration.modelName,
             messages: messages,
             temperature: Plasmoid.configuration.temperature,
@@ -1237,6 +1269,10 @@ PlasmoidItem {
             reasoningEffort: Plasmoid.configuration.reasoningEffort,
             thinkingBudget: Plasmoid.configuration.thinkingBudget,
             usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
+            geminiApiVariant: Plasmoid.configuration.geminiApiVariant,
+            geminiAuthMethod: Plasmoid.configuration.geminiAuthMethod,
+            geminiProjectId: Plasmoid.configuration.geminiProjectId,
+            geminiLocation: Plasmoid.configuration.geminiLocation,
             tools: tools,
             onChunk: function(delta, accumulated) {
                 if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
@@ -1249,6 +1285,7 @@ PlasmoidItem {
                 }
             },
             onComplete: function(fullText, error, toolCalls, assistantMsg) {
+                
                 isLoading = false;
                 activeRequest = null;
                 if (streamPollTimer.running) streamPollTimer.stop();
@@ -1286,6 +1323,9 @@ PlasmoidItem {
                                 cmdArgs = { command: "" };
                             }
                             commandQueue.push({ id: tc.id || "", command: cmdArgs.command || "" });
+                        } else if (tcName === "native_google_search" || tcName === "native_code_execution") {
+                            // These are native server-side tools; we just log them in history
+                            // without attempting local execution.
                         } else {
                             // Unknown tool — send error result immediately
                             chatMessages.append({ 
@@ -1365,6 +1405,7 @@ PlasmoidItem {
 
                                     pendingWebSearches--;
                                     if (pendingWebSearches === 0) {
+                                        
                                         // All web searches done, process command queue
                                         processNextToolCall();
                                     }
@@ -1441,11 +1482,17 @@ PlasmoidItem {
                         thinking_blocks_json: regularThinkingJson,
                         timestamp_api: Api.localISODateTime()
                     });
-                    var commands = Plasmoid.configuration.useCommandTool ? [] : Api.parseCommandBlocks(fullText);
+                    
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
-                        displayMessages.setProperty(streamingMessageIndex, "content", fullText);
-                        displayMessages.setProperty(streamingMessageIndex, "commandsStr", commands.join("\n\x1F"));
-                        responseReady(streamingMessageIndex);
+                        if (fullText.length === 0 && (!assistantMsg || !assistantMsg.thinkingBlocks || assistantMsg.thinkingBlocks.length === 0)) {
+                            // If the response is completely empty (no text, no thinking), remove the placeholder
+                            displayMessages.remove(streamingMessageIndex);
+                        } else {
+                            var commands = Plasmoid.configuration.useCommandTool ? [] : Api.parseCommandBlocks(fullText);
+                            displayMessages.setProperty(streamingMessageIndex, "content", fullText);
+                            displayMessages.setProperty(streamingMessageIndex, "commandsStr", commands.join("\n\x1F"));
+                            responseReady(streamingMessageIndex);
+                        }
                     }
                     streamingMessageIndex = -1;
                     saveChat();
@@ -1455,9 +1502,10 @@ PlasmoidItem {
                         Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
                     }
 
-                    if ((sessionAutoMode || Plasmoid.configuration.autoRunCommands) && commands.length > 0) {
-                        for (var ci = 0; ci < commands.length; ci++) {
-                            executeCommand(commands[ci]);
+                    if ((sessionAutoMode || Plasmoid.configuration.autoRunCommands) && fullText.length > 0) {
+                        var parsedCmds = Plasmoid.configuration.useCommandTool ? [] : Api.parseCommandBlocks(fullText);
+                        for (var ci = 0; ci < parsedCmds.length; ci++) {
+                            executeCommand(parsedCmds[ci]);
                         }
                     } else if (taskAutoMode) {
                         sessionAutoMode = false;
@@ -1467,10 +1515,20 @@ PlasmoidItem {
             }
         });
 
-        streamHandle.setPollTimer(streamPollTimer);
-        streamPollTimer.streamHandle = streamHandle;
-        streamPollTimer.start();
-        activeRequest = streamHandle;
+            streamHandle.setPollTimer(streamPollTimer);
+            streamPollTimer.streamHandle = streamHandle;
+            streamPollTimer.start();
+            activeRequest = streamHandle;
+        };
+
+        if (Plasmoid.configuration.apiType === "gemini" && 
+            Plasmoid.configuration.geminiAuthMethod === "agentplatform" && 
+            Plasmoid.configuration.geminiVertexAuthType === "gcloud") {
+            gcloudTokenSource.pendingRequest = initiateStreaming;
+            gcloudTokenSource.connectSource("gcloud auth print-access-token");
+        } else {
+            initiateStreaming(root.apiKey);
+        }
     }
 
     function cancelRequest() {
@@ -1504,6 +1562,7 @@ PlasmoidItem {
     }
 
     function processNextToolCall() {
+        
         if (pendingToolCalls.length === 0) {
             sendToLLM();
             return;
@@ -1784,6 +1843,9 @@ PlasmoidItem {
         function onProviderNameChanged() {
             loadApiKeyFromWallet();
         }
+        function onGeminiAuthMethodChanged() {
+            loadApiKeyFromWallet();
+        }
         function onOllamaSearchApiKeyChanged() {
             if (Plasmoid.configuration.ollamaSearchApiKey) root.ollamaSearchApiKey = Plasmoid.configuration.ollamaSearchApiKey;
         }
@@ -1924,6 +1986,11 @@ PlasmoidItem {
                         : Plasmoid.configuration.autoClearMinutes * 60 * 1000
                     if (elapsed >= threshold) clearChat()
                 }
+            }
+        }
+    }
+}
+            }
             }
         }
     }
