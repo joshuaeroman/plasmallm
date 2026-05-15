@@ -235,6 +235,10 @@ function apiKeySlot(apiType, providerName) {
     return "apiKey:" + t + ":" + p;
 }
 
+function profileKeySlot(profileId) {
+    return "apiKey:profile:" + profileId;
+}
+
 function getAdapterChoices() {
     return [
         { id: "openai",    name: i18n("OpenAI-compatible") },

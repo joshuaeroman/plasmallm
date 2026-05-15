@@ -13,6 +13,8 @@ import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kirigami as Kirigami
 
+import "profiles.js" as Profiles
+
 PlasmaExtras.Representation {
     id: fullRep
 
@@ -23,6 +25,7 @@ PlasmaExtras.Representation {
         { cmd: "/copy",     desc: i18n("Copy conversation to clipboard") },
         { cmd: "/history",  desc: i18n("Open chat history folder") },
         { cmd: "/model",    desc: i18n("Show or switch model (/model <name>)") },
+        { cmd: "/profile",  desc: i18n("Switch profile (/profile <name>)") },
         { cmd: "/run",      desc: i18n("Run last command") },
         { cmd: "/save",     desc: i18n("Save chat to file") },
         { cmd: "/settings", desc: i18n("Open settings") },
@@ -45,10 +48,17 @@ PlasmaExtras.Representation {
         contentItem: RowLayout {
             spacing: Kirigami.Units.smallSpacing
 
-            PlasmaComponents.Label {
-                Layout.fillWidth: true
+            PlasmaComponents.ToolButton {
+                id: profileToolButton
                 text: {
-                    if (!Plasmoid.configuration.showProviderInTitle) return "";
+                    var profiles = Profiles.loadProfiles(Plasmoid.configuration);
+                    var active = Profiles.getActive(profiles, Plasmoid.configuration.activeProfileId);
+                    var name = active ? active.name : "Default";
+                    
+                    if (name !== "Default" || !Plasmoid.configuration.showProviderInTitle) {
+                        return name;
+                    }
+                    
                     var provider = Plasmoid.configuration.providerName;
                     var model = Plasmoid.configuration.modelName;
                     var endpoint = Plasmoid.configuration.apiEndpoint;
@@ -71,11 +81,45 @@ PlasmaExtras.Representation {
                     } else if (model) {
                         return model;
                     } else {
-                        return "PlasmaLLM";
+                        return name;
                     }
                 }
                 font.bold: true
-                elide: Text.ElideRight
+                Layout.fillWidth: true
+                checkable: true
+                checked: profileMenu.opened
+                onClicked: {
+                    if (profileMenu.opened) {
+                        profileMenu.close()
+                    } else {
+                        profileMenu.popup(profileToolButton, 0, profileToolButton.height)
+                    }
+                }
+
+                QQC2.Menu {
+                    id: profileMenu
+                    closePolicy: QQC2.Menu.CloseOnEscape | QQC2.Menu.CloseOnPressOutsideParent
+                }
+
+                Instantiator {
+                    model: Profiles.loadProfiles(Plasmoid.configuration)
+                    onObjectAdded: function(index, object) { profileMenu.insertItem(index, object); }
+                    onObjectRemoved: function(index, object) { profileMenu.removeItem(object); }
+                    delegate: QQC2.MenuItem {
+                        text: modelData.name + (modelData.modelName ? " (" + modelData.modelName + ")" : "")
+                        onTriggered: {
+                            root.switchProfile(modelData.id);
+                        }
+                        QQC2.CheckBox {
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.right: parent.right
+                            anchors.rightMargin: Kirigami.Units.smallSpacing
+                            checked: modelData.id === Plasmoid.configuration.activeProfileId
+                            enabled: false
+                            opacity: checked ? 1 : 0
+                        }
+                    }
+                }
             }
 
             PlasmaComponents.Label {
@@ -584,18 +628,87 @@ PlasmaExtras.Representation {
             Layout.margins: Kirigami.Units.smallSpacing
             spacing: Kirigami.Units.smallSpacing
 
-            QQC2.ScrollView {
-                id: inputScrollView
+            Item {
+                id: inputAreaWrapper
+                Layout.fillWidth: true
+                Layout.minimumHeight: Kirigami.Units.gridUnit * 2
+                Layout.maximumHeight: Kirigami.Units.gridUnit * 8
+                Layout.preferredHeight: Math.min(inputField.contentHeight + Kirigami.Units.smallSpacing * 2, Kirigami.Units.gridUnit * 8)
+
+                QQC2.ScrollView {
+                    id: inputScrollView
+                    anchors.fill: parent
+
+                    QQC2.TextArea {
+                        id: inputField
+                        Accessible.name: i18n("Message input")
+                        placeholderText: root.systemPromptReady ? i18n("Type a message…") : i18n("Initializing…")
+                        enabled: !root.isLoading && root.systemPromptReady
+                        focus: true
+                        wrapMode: Text.Wrap
+
+                        Keys.onTabPressed: function(event) {
+                            if (inputField.text.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
+                                inputField.text = "/task " + taskPopup.filteredTasks[0].name;
+                                inputField.cursorPosition = inputField.text.length;
+                                event.accepted = true;
+                            } else if (inputField.text.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
+                                inputField.text = "/model " + modelPopup.filteredModels[0];
+                                inputField.cursorPosition = inputField.text.length;
+                                event.accepted = true;
+                            } else if (inputField.text.toLowerCase().startsWith("/profile ") && profilePopup.filteredProfiles.length === 1) {
+                                inputField.text = "/profile " + profilePopup.filteredProfiles[0].name;
+                                inputField.cursorPosition = inputField.text.length;
+                                event.accepted = true;
+                            } else if (slashPopup.filteredSlashCommands.length === 1) {
+                                var cmd = slashPopup.filteredSlashCommands[0].cmd;
+                                inputField.text = (cmd === "/model" || cmd === "/task" || cmd === "/profile") ? cmd + " " : cmd;
+                                inputField.cursorPosition = inputField.text.length;
+                                event.accepted = true;
+                            } else {
+                                event.accepted = false;
+                            }
+                        }
+
+                        Keys.onReturnPressed: function(event) {
+                            if (event.modifiers & Qt.ShiftModifier) {
+                                event.accepted = false;
+                            } else {
+                                event.accepted = true;
+                                var sendText = text.trim();
+                                if (sendText.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
+                                    sendText = "/task " + taskPopup.filteredTasks[0].name;
+                                } else if (sendText.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
+                                    sendText = "/model " + modelPopup.filteredModels[0];
+                                } else if (sendText.toLowerCase().startsWith("/profile ") && profilePopup.filteredProfiles.length === 1) {
+                                    sendText = "/profile " + profilePopup.filteredProfiles[0].name;
+                                } else if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
+                                        slashPopup.filteredSlashCommands.length === 1) {
+                                    sendText = slashPopup.filteredSlashCommands[0].cmd;
+                                }
+                                if (sendText.length > 0 || root.pendingAttachments.length > 0) {
+                                    if (root.sendMessage(sendText, root.pendingAttachments)) {
+                                        text = "";
+                                        root.pendingAttachments = [];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
                 // Slash command autocomplete popup
-                QQC2.Popup {
+                Rectangle {
                     id: slashPopup
-                    parent: inputScrollView
+                    z: 99
                     x: 0
                     y: -height - Kirigami.Units.smallSpacing
-                    width: inputScrollView.width
-                    padding: Kirigami.Units.smallSpacing
-                    closePolicy: QQC2.Popup.NoAutoClose
+                    width: inputAreaWrapper.width
+                    height: slashList.implicitHeight + Kirigami.Units.smallSpacing * 2
+                    color: Kirigami.Theme.backgroundColor
+                    border.color: Kirigami.Theme.focusColor
+                    border.width: 1
+                    radius: Kirigami.Units.smallSpacing
                     visible: {
                         var t = inputField.text;
                         return inputField.activeFocus &&
@@ -610,8 +723,11 @@ PlasmaExtras.Representation {
                         return fullRep.slashCommands.filter(function(c) { return c.cmd.startsWith(t); });
                     }
 
-                    contentItem: ListView {
+                    ListView {
                         id: slashList
+                        anchors.fill: parent
+                        anchors.margins: Kirigami.Units.smallSpacing
+                        clip: true
                         implicitHeight: Math.min(contentHeight, Kirigami.Units.gridUnit * 10)
                         model: slashPopup.filteredSlashCommands
                         delegate: PlasmaComponents.ItemDelegate {
@@ -631,7 +747,7 @@ PlasmaExtras.Representation {
                                 }
                             }
                             onClicked: {
-                                inputField.text = (modelData.cmd === "/model" || modelData.cmd === "/task") ? modelData.cmd + " " : modelData.cmd;
+                                inputField.text = (modelData.cmd === "/model" || modelData.cmd === "/task" || modelData.cmd === "/profile") ? modelData.cmd + " " : modelData.cmd;
                                 inputField.cursorPosition = inputField.text.length;
                                 inputField.forceActiveFocus();
                             }
@@ -640,14 +756,17 @@ PlasmaExtras.Representation {
                 }
 
                 // Model name autocomplete popup
-                QQC2.Popup {
+                Rectangle {
                     id: modelPopup
-                    parent: inputScrollView
+                    z: 99
                     x: 0
                     y: -height - Kirigami.Units.smallSpacing
-                    width: inputScrollView.width
-                    padding: Kirigami.Units.smallSpacing
-                    closePolicy: QQC2.Popup.NoAutoClose
+                    width: inputAreaWrapper.width
+                    height: modelList.implicitHeight + Kirigami.Units.smallSpacing * 2
+                    color: Kirigami.Theme.backgroundColor
+                    border.color: Kirigami.Theme.focusColor
+                    border.width: 1
+                    radius: Kirigami.Units.smallSpacing
 
                     property var filteredModels: {
                         var t = inputField.text;
@@ -669,8 +788,11 @@ PlasmaExtras.Representation {
                         inputField.forceActiveFocus();
                     }
 
-                    contentItem: ListView {
+                    ListView {
                         id: modelList
+                        anchors.fill: parent
+                        anchors.margins: Kirigami.Units.smallSpacing
+                        clip: true
                         implicitHeight: Math.min(contentHeight, Kirigami.Units.gridUnit * 10)
                         model: modelPopup.filteredModels
                         delegate: PlasmaComponents.ItemDelegate {
@@ -686,15 +808,69 @@ PlasmaExtras.Representation {
                     }
                 }
 
-                // Task name autocomplete popup
-                QQC2.Popup {
-                    id: taskPopup
-                    parent: inputScrollView
+                // Profile name autocomplete popup
+                Rectangle {
+                    id: profilePopup
+                    z: 99
                     x: 0
                     y: -height - Kirigami.Units.smallSpacing
-                    width: inputScrollView.width
-                    padding: Kirigami.Units.smallSpacing
-                    closePolicy: QQC2.Popup.NoAutoClose
+                    width: inputAreaWrapper.width
+                    height: profileList.implicitHeight + Kirigami.Units.smallSpacing * 2
+                    color: Kirigami.Theme.backgroundColor
+                    border.color: Kirigami.Theme.focusColor
+                    border.width: 1
+                    radius: Kirigami.Units.smallSpacing
+
+                    property var filteredProfiles: {
+                        var t = inputField.text;
+                        if (!t.toLowerCase().startsWith("/profile ")) return [];
+                        var query = t.substring(9).toLowerCase();
+                        var profiles = Profiles.loadProfiles(Plasmoid.configuration);
+                        if (!profiles || profiles.length === 0) return [];
+                        return query.length === 0 ? profiles :
+                               profiles.filter(function(p) { return p.name.toLowerCase().indexOf(query) !== -1; });
+                    }
+
+                    visible: inputField.activeFocus &&
+                             inputField.text.toLowerCase().startsWith("/profile ") &&
+                             filteredProfiles.length > 0
+
+                    ListView {
+                        id: profileList
+                        anchors.fill: parent
+                        anchors.margins: Kirigami.Units.smallSpacing
+                        clip: true
+                        implicitHeight: Math.min(contentHeight, Math.max(Kirigami.Units.gridUnit * 5, messageList.height - Kirigami.Units.smallSpacing * 2))
+                        model: profilePopup.filteredProfiles
+                        delegate: PlasmaComponents.ItemDelegate {
+                            width: profileList.width
+                            contentItem: PlasmaComponents.Label {
+                                text: modelData.name
+                                font.bold: Plasmoid.configuration.activeProfileId === modelData.id
+                                color: Plasmoid.configuration.activeProfileId === modelData.id
+                                       ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                            }
+                            onClicked: {
+                                inputField.text = "/profile " + modelData.name;
+                                inputField.cursorPosition = inputField.text.length;
+                                inputField.forceActiveFocus();
+                            }
+                        }
+                    }
+                }
+
+                // Task name autocomplete popup
+                Rectangle {
+                    id: taskPopup
+                    z: 99
+                    x: 0
+                    y: -height - Kirigami.Units.smallSpacing
+                    width: inputAreaWrapper.width
+                    height: taskList.implicitHeight + Kirigami.Units.smallSpacing * 2
+                    color: Kirigami.Theme.backgroundColor
+                    border.color: Kirigami.Theme.focusColor
+                    border.width: 1
+                    radius: Kirigami.Units.smallSpacing
 
                     property var filteredTasks: {
                         var t = inputField.text;
@@ -710,8 +886,11 @@ PlasmaExtras.Representation {
                              inputField.text.toLowerCase().startsWith("/task ") &&
                              filteredTasks.length > 0
 
-                    contentItem: ListView {
+                    ListView {
                         id: taskList
+                        anchors.fill: parent
+                        anchors.margins: Kirigami.Units.smallSpacing
+                        clip: true
                         implicitHeight: Math.min(contentHeight, Kirigami.Units.gridUnit * 10)
                         model: taskPopup.filteredTasks
                         delegate: PlasmaComponents.ItemDelegate {
@@ -739,62 +918,6 @@ PlasmaExtras.Representation {
                                 inputField.text = "/task " + modelData.name;
                                 inputField.cursorPosition = inputField.text.length;
                                 inputField.forceActiveFocus();
-                            }
-                        }
-                    }
-                }
-
-                Layout.fillWidth: true
-                Layout.minimumHeight: Kirigami.Units.gridUnit * 2
-                Layout.maximumHeight: Kirigami.Units.gridUnit * 8
-                Layout.preferredHeight: Math.min(inputField.contentHeight + Kirigami.Units.smallSpacing * 2, Kirigami.Units.gridUnit * 8)
-
-                QQC2.TextArea {
-                    id: inputField
-                    Accessible.name: i18n("Message input")
-                    placeholderText: root.systemPromptReady ? i18n("Type a message…") : i18n("Initializing…")
-                    enabled: !root.isLoading && root.systemPromptReady
-                    focus: true
-                    wrapMode: Text.Wrap
-
-                    Keys.onTabPressed: function(event) {
-                        if (inputField.text.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
-                            inputField.text = "/task " + taskPopup.filteredTasks[0].name;
-                            inputField.cursorPosition = inputField.text.length;
-                            event.accepted = true;
-                        } else if (inputField.text.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
-                            inputField.text = "/model " + modelPopup.filteredModels[0];
-                            inputField.cursorPosition = inputField.text.length;
-                            event.accepted = true;
-                        } else if (slashPopup.filteredSlashCommands.length === 1) {
-                            var cmd = slashPopup.filteredSlashCommands[0].cmd;
-                            inputField.text = (cmd === "/model" || cmd === "/task") ? cmd + " " : cmd;
-                            inputField.cursorPosition = inputField.text.length;
-                            event.accepted = true;
-                        } else {
-                            event.accepted = false;
-                        }
-                    }
-
-                    Keys.onReturnPressed: function(event) {
-                        if (event.modifiers & Qt.ShiftModifier) {
-                            event.accepted = false;
-                        } else {
-                            event.accepted = true;
-                            var sendText = text.trim();
-                            if (sendText.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
-                                sendText = "/task " + taskPopup.filteredTasks[0].name;
-                            } else if (sendText.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
-                                sendText = "/model " + modelPopup.filteredModels[0];
-                            } else if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
-                                    slashPopup.filteredSlashCommands.length === 1) {
-                                sendText = slashPopup.filteredSlashCommands[0].cmd;
-                            }
-                            if (sendText.length > 0 || root.pendingAttachments.length > 0) {
-                                if (root.sendMessage(sendText, root.pendingAttachments)) {
-                                    text = "";
-                                    root.pendingAttachments = [];
-                                }
                             }
                         }
                     }

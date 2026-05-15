@@ -5,10 +5,40 @@
 
 import QtQuick
 import org.kde.kcmutils
+import "profiles.js" as Profiles
 
 SimpleKCM {
+    id: basePage
+
     // Declared here because Plasma injects all cfg_ properties onto every config page.
     // By centralizing them in this base component, we avoid duplication and console warnings.
+
+    property bool _switchingProfile: false
+
+    Timer {
+        id: captureDebounce
+        interval: 250
+        repeat: false
+        onTriggered: {
+            if (_switchingProfile) return;
+            var profiles = Profiles.loadProfilesRaw(cfg_profiles);
+            var active = Profiles.getActive(profiles, cfg_activeProfileId);
+            if (!active) return;
+            var updated = Profiles.captureFromKCM(active, basePage);
+            for (var i = 0; i < profiles.length; i++) {
+                if (profiles[i].id === updated.id) {
+                    profiles[i] = updated;
+                    break;
+                }
+            }
+            cfg_profiles = JSON.stringify(profiles);
+        }
+    }
+
+    function triggerCapture() {
+        if (_switchingProfile) return;
+        captureDebounce.restart();
+    }
 
     property string cfg_apiEndpoint
     property string cfg_apiEndpointDefault
@@ -148,6 +178,12 @@ SimpleKCM {
     property string cfg_openaiLastProviderDefault
     property string cfg_openaiLastEndpoint
     property string cfg_openaiLastEndpointDefault
+    property string cfg_profiles
+    property string cfg_profilesDefault
+    property string cfg_activeProfileId
+    property string cfg_activeProfileIdDefault
+    property int cfg_profilesSchemaVersion
+    property int cfg_profilesSchemaVersionDefault
     property bool cfg_useCommandTool
     property bool cfg_useCommandToolDefault
     property bool cfg_pin

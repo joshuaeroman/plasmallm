@@ -12,11 +12,18 @@ import org.kde.plasma.workspace.dbus as DBus
 import org.kde.plasma.plasma5support as P5Support
 
 import "api.js" as Api
+import "profiles.js" as Profiles
 
 BaseConfigPage {
     id: configPage
 
-        property bool hasGcloud: false
+    property var profilesList: []
+
+    onCfg_profilesChanged: {
+        profilesList = Profiles.loadProfilesRaw(cfg_profiles);
+    }
+
+    property bool hasGcloud: false
     property string gcloudToken: ""
     property bool tokenFetchInProgress: false
     property var pendingModelsFetch: null
@@ -101,6 +108,8 @@ BaseConfigPage {
     }
 
     function currentSlot() {
+        if (cfg_activeProfileId) return Api.profileKeySlot(cfg_activeProfileId);
+        
         var t = cfg_apiType;
         if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
         return Api.apiKeySlot(t, cfg_providerName);
@@ -114,7 +123,15 @@ BaseConfigPage {
     function fallbackKeyFor(slot) {
         var m = readFallbackMap();
         if (m.hasOwnProperty(slot)) return m[slot];
-        // Legacy single-slot fallback for the very first migration case.
+        
+        // If searching by profile ID and not found, fall back to the legacy slot
+        if (slot.indexOf("apiKey:profile:") === 0) {
+            var t = cfg_apiType;
+            if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
+            var legacySlot = Api.apiKeySlot(t, cfg_providerName);
+            return fallbackKeyFor(legacySlot);
+        }
+
         return cfg_apiKey || "";
     }
 
@@ -140,7 +157,7 @@ BaseConfigPage {
         });
     }
 
-    function loadWalletKey() {
+    function loadWalletKey(copyKey) {
         var slot = currentSlot();
         walletKeyLoaded = false;
         // Slot may change again before this async chain completes (e.g. adapter
@@ -155,6 +172,14 @@ BaseConfigPage {
             if (apiKeyField) apiKeyField.text = walletApiKey;
             walletKeyDirty = false;
         }
+
+        if (copyKey !== undefined && copyKey !== null && copyKey !== "") {
+            if (apiKeyField) apiKeyField.text = copyKey;
+            walletKeyDirty = true;
+            saveWalletKey(); // This writes it to the new slot and sets walletApiKey
+            return;
+        }
+
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
                 if (handle < 0) {
@@ -164,7 +189,27 @@ BaseConfigPage {
                 walletAvailable = true;
                 walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", slot, "PlasmaLLM"],
                     function(password) {
-                        applyKey(password && password.length > 0 ? password : fallbackKeyFor(slot));
+                        if (password && password.length > 0) {
+                            applyKey(password);
+                        } else if (slot.indexOf("apiKey:profile:") === 0) {
+                            // Try legacy slot fallback
+                            var t = cfg_apiType;
+                            if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
+                            var legacySlot = Api.apiKeySlot(t, cfg_providerName);
+                            walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", legacySlot, "PlasmaLLM"],
+                                function(legacyPassword) {
+                                    applyKey(legacyPassword && legacyPassword.length > 0 ? legacyPassword : fallbackKeyFor(slot));
+                                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                },
+                                function(err) {
+                                    applyKey(fallbackKeyFor(slot));
+                                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                }
+                            );
+                            return;
+                        } else {
+                            applyKey(fallbackKeyFor(slot));
+                        }
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     },
                     function(err) {
@@ -221,15 +266,8 @@ BaseConfigPage {
         );
     }
 
-    function currentModelSlot() {
-        var t = cfg_apiType || "openai";
-        if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
-        var p = (cfg_providerName && cfg_providerName.length > 0) ? cfg_providerName : t;
-        return t + ":" + p;
-    }
-
     function refreshAvailableModels() {
-        var slot = currentModelSlot();
+        var slot = currentSlot();
         var list = modelCache[slot];
         availableModels = Array.isArray(list) ? list : [];
     }
@@ -249,7 +287,7 @@ BaseConfigPage {
 
     function ensureModelsLoaded(force) {
         if (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform") return;
-        var slot = currentModelSlot();
+        var slot = currentSlot();
         var have = Array.isArray(modelCache[slot]) && modelCache[slot].length > 0;
         if (!force && have) return;
         if (fetchInProgress) return;
@@ -307,6 +345,7 @@ BaseConfigPage {
     }
 
     Component.onCompleted: {
+        profilesList = Profiles.loadProfilesRaw(cfg_profiles);
         loadModelCache();
         loadWalletKey();
     }
@@ -334,6 +373,7 @@ BaseConfigPage {
         caps = Api.getCapabilities(effectiveApiType) || {};
         loadWalletKey();
         refreshAvailableModels();
+        triggerCapture();
         // Don't auto-fetch here: when the adapter combo changes cfg_apiType,
         // the endpoint hasn't been swapped yet — applyAdapterDefaults() runs
         // immediately after and triggers the fetch with the correct endpoint.
@@ -344,18 +384,21 @@ BaseConfigPage {
         loadWalletKey();
         refreshAvailableModels();
         ensureModelsLoaded(false);
+        triggerCapture();
     }
 
     onCfg_geminiAuthMethodChanged: {
         loadWalletKey();
         refreshAvailableModels();
         ensureModelsLoaded(false);
+        triggerCapture();
     }
 
     onCfg_providerNameChanged: {
         loadWalletKey();
         refreshAvailableModels();
         ensureModelsLoaded(false);
+        triggerCapture();
     }
 
     function applyAdapterDefaults(apiType) {
@@ -405,10 +448,165 @@ BaseConfigPage {
         if (cfg_apiType !== "openai") return;
         if (providerName && providerName.length > 0) cfg_openaiLastProvider = providerName;
         if (endpointUrl && endpointUrl.length > 0) cfg_openaiLastEndpoint = endpointUrl;
+        triggerCapture();
     }
 
+    function createNewProfile() {
+        var name = i18n("New Profile");
+        var p = Profiles.createProfile(name, configPage);
+        var list = Profiles.loadProfilesRaw(cfg_profiles);
+        list.push(p);
+        cfg_profiles = JSON.stringify(list);
+        profilesList = list;
+        switchToProfile(p.id);
+    }
+
+    function duplicateActiveProfile() {
+        var profiles = Profiles.loadProfilesRaw(cfg_profiles);
+        var active = Profiles.getActive(profiles, cfg_activeProfileId);
+        if (!active) return;
+        
+        var currentKey = walletApiKey;
+        
+        var p = Profiles.duplicateProfile(active, i18n("%1 (Copy)", active.name));
+        profiles.push(p);
+        cfg_profiles = JSON.stringify(profiles);
+        profilesList = profiles;
+        switchToProfile(p.id, currentKey);
+    }
+
+    function deleteActiveProfile() {
+        var profiles = Profiles.loadProfilesRaw(cfg_profiles);
+        if (profiles.length <= 1) return;
+        
+        var toDelete = cfg_activeProfileId;
+        profiles = Profiles.deleteProfile(profiles, toDelete);
+        cfg_profiles = JSON.stringify(profiles);
+        profilesList = profiles;
+        
+        // Pick a new active profile
+        var nextId = profiles[0].id;
+        switchToProfile(nextId);
+    }
+
+    function switchToProfile(id, copyKey) {
+        var profiles = Profiles.loadProfilesRaw(cfg_profiles);
+        var p = Profiles.getActive(profiles, id);
+        if (!p) return;
+
+        _switchingProfile = true;
+        cfg_activeProfileId = id;
+        Profiles.applyToKCM(p, configPage);
+        _switchingProfile = false;
+
+        loadWalletKey(copyKey);
+        refreshAvailableModels();
+        ensureModelsLoaded(false);
+    }
     Kirigami.FormLayout {
         anchors.fill: parent
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Profile:")
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+
+            QQC2.ComboBox {
+                id: profileCombo
+                Layout.fillWidth: true
+                model: profilesList ? profilesList.map(function(p) { return p.name; }) : []
+                currentIndex: {
+                    if (!profilesList) return 0;
+                    for (var i = 0; i < profilesList.length; i++) {
+                        if (profilesList[i].id === cfg_activeProfileId) return i;
+                    }
+                    return 0;
+                }
+                onActivated: function(index) {
+                    switchToProfile(profilesList[index].id);
+                }
+            }
+
+            QQC2.Button {
+                icon.name: "list-add"
+                QQC2.ToolTip.text: i18n("New Profile")
+                QQC2.ToolTip.visible: hovered
+                display: QQC2.AbstractButton.IconOnly
+                onClicked: createNewProfile()
+            }
+
+            QQC2.Button {
+                icon.name: "edit-rename"
+                QQC2.ToolTip.text: i18n("Rename Profile")
+                QQC2.ToolTip.visible: hovered
+                display: QQC2.AbstractButton.IconOnly
+                onClicked: renamePopup.open()
+            }
+
+            QQC2.Button {
+                icon.name: "edit-copy"
+                QQC2.ToolTip.text: i18n("Duplicate Profile")
+                QQC2.ToolTip.visible: hovered
+                display: QQC2.AbstractButton.IconOnly
+                onClicked: duplicateActiveProfile()
+            }
+
+            QQC2.Button {
+                icon.name: "edit-delete"
+                QQC2.ToolTip.text: i18n("Delete Profile")
+                QQC2.ToolTip.visible: hovered
+                display: QQC2.AbstractButton.IconOnly
+                enabled: profilesList ? profilesList.length > 1 : false
+                onClicked: deleteActiveProfile()
+            }
+        }
+
+        QQC2.Popup {
+            id: renamePopup
+            x: Math.round((parent.width - width) / 2)
+            y: Math.round((parent.height - height) / 2)
+            modal: true
+            focus: true
+            closePolicy: QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnPressOutside
+            
+            ColumnLayout {
+                spacing: Kirigami.Units.gridUnit
+                QQC2.Label { text: i18n("Rename Profile") }
+                QQC2.TextField {
+                    id: renameField
+                    Layout.fillWidth: true
+                    placeholderText: i18n("Profile Name")
+                    text: {
+                        var p = Profiles.getActive(profilesList, cfg_activeProfileId);
+                        return p ? p.name : "";
+                    }
+                    onAccepted: renameSubmitBtn.clicked()
+                }
+                RowLayout {
+                    Layout.alignment: Qt.AlignRight
+                    QQC2.Button {
+                        text: i18n("Cancel")
+                        onClicked: renamePopup.close()
+                    }
+                    QQC2.Button {
+                        id: renameSubmitBtn
+                        text: i18n("Rename")
+                        highlighted: true
+                        onClicked: {
+                            var profiles = Profiles.loadProfilesRaw(cfg_profiles);
+                            Profiles.renameProfile(profiles, cfg_activeProfileId, renameField.text.trim());
+                            cfg_profiles = JSON.stringify(profiles);
+                            profilesList = profiles;
+                            renamePopup.close();
+                        }
+                    }
+                }
+            }
+        }
+
+        Kirigami.Separator {
+            Layout.fillWidth: true
+        }
 
         QQC2.ComboBox {
             id: adapterCombo
@@ -501,7 +699,10 @@ BaseConfigPage {
             Layout.fillWidth: true
             visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
             text: cfg_geminiProjectId
-            onTextChanged: cfg_geminiProjectId = text
+            onTextChanged: {
+                cfg_geminiProjectId = text;
+                triggerCapture();
+            }
             onEditingFinished: ensureModelsLoaded(false)
         }
 
@@ -511,7 +712,10 @@ BaseConfigPage {
             Layout.fillWidth: true
             visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
             text: cfg_geminiLocation
-            onTextChanged: cfg_geminiLocation = text
+            onTextChanged: {
+                cfg_geminiLocation = text;
+                triggerCapture();
+            }
             onEditingFinished: ensureModelsLoaded(false)
         }
         // --- End Gemini Specific Settings ---
@@ -735,6 +939,7 @@ BaseConfigPage {
                                         cfg_modelName = modelData;
                                         modelCombo.currentIndex = modelCombo.displayModels.indexOf(modelData);
                                         modelCombo.popup.close();
+                                        triggerCapture();
                                     }
                                 }
                             }
