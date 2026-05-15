@@ -16,6 +16,9 @@ import "api.js" as Api
 BaseConfigPage {
     id: configPage
 
+    property var activeAdapter: Api.getAdapter(cfg_apiType)
+    property var adapterCapabilities: activeAdapter ? activeAdapter.capabilities : {}
+
     property bool hasTmux: false
     property bool hasScreen: false
     property bool _tmuxChecked: false
@@ -279,9 +282,6 @@ BaseConfigPage {
     onCfg_searxngApiKeyVersionChanged: loadWalletSearxngKey()
 
     Kirigami.FormLayout {
-        property var activeAdapter: Api.getAdapter(cfg_apiType)
-        property var adapterCapabilities: activeAdapter ? activeAdapter.capabilities : {}
-
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("Commands")

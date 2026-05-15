@@ -55,8 +55,8 @@ PlasmaExtras.Representation {
                     var active = Profiles.getActive(profiles, Plasmoid.configuration.activeProfileId);
                     var name = active ? active.name : "Default";
                     
-                    if (name !== "Default" || !Plasmoid.configuration.showProviderInTitle) {
-                        return name;
+                    if (!Plasmoid.configuration.showProviderInTitle) {
+                        return name === "Default" ? "PlasmaLLM" : name;
                     }
                     
                     var provider = Plasmoid.configuration.providerName;
@@ -76,16 +76,26 @@ PlasmaExtras.Representation {
                         }
                     }
 
+                    var details = "";
                     if (provider && model) {
-                        return provider + " | " + model;
+                        details = provider + " | " + model;
                     } else if (model) {
-                        return model;
-                    } else {
-                        return name;
+                        details = model;
                     }
+
+                    if (details) {
+                        if (name === "Default") {
+                            return details;
+                        } else {
+                            return name + " (" + details + ")";
+                        }
+                    }
+                    
+                    return name === "Default" ? "PlasmaLLM" : name;
                 }
                 font.bold: true
                 Layout.fillWidth: true
+                visible: Plasmoid.configuration.showIconProfile
                 checkable: true
                 checked: profileMenu.opened
                 onClicked: {
@@ -122,12 +132,23 @@ PlasmaExtras.Representation {
                 }
             }
 
-            PlasmaComponents.Label {
-                text: i18n("AUTO")
-                visible: root.isAutoMode
-                font.bold: true
-                color: Kirigami.Theme.negativeTextColor
+            Item {
+                Layout.fillWidth: true
+                visible: !Plasmoid.configuration.showIconProfile
+            }
 
+            PlasmaComponents.ToolButton {
+                id: autoToolButton
+                icon.name: "media-playback-start"
+                visible: Plasmoid.configuration.showIconAuto || root.isAutoMode
+                checkable: true
+                checked: root.isAutoMode
+                enabled: !(Plasmoid.configuration.autoRunCommands && Plasmoid.configuration.autoShareCommandOutput)
+                Accessible.name: i18n("Toggle Auto Mode")
+                PlasmaComponents.ToolTip.text: i18n("Toggle Auto Mode")
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered
+                onClicked: root.sendMessage("/auto")
             }
 
             PlasmaComponents.ToolButton {
@@ -137,7 +158,7 @@ PlasmaExtras.Representation {
                 PlasmaComponents.ToolTip.text: i18n("Run a task")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered
-                visible: fullRep.configuredTasks.length > 0
+                visible: Plasmoid.configuration.showIconTasks || fullRep.configuredTasks.length > 0
                 checkable: true
                 checked: taskMenu.opened
 
@@ -174,7 +195,7 @@ PlasmaExtras.Representation {
                 PlasmaComponents.ToolTip.text: i18n("Chat History")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered && !historyMenu.opened
-                visible: Plasmoid.configuration.saveChatHistory
+                visible: Plasmoid.configuration.showIconHistory && Plasmoid.configuration.saveChatHistory
                 checkable: true
                 checked: historyMenu.opened
 
@@ -301,6 +322,7 @@ PlasmaExtras.Representation {
                 PlasmaComponents.ToolTip.text: i18n("Copy conversation")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered
+                visible: Plasmoid.configuration.showIconCopy && root.displayMessages.count > 0
                 enabled: root.displayMessages.count > 0
                 onClicked: {
                     var text = "";
@@ -322,6 +344,7 @@ PlasmaExtras.Representation {
 
             PlasmaComponents.ToolButton {
                 icon.name: "edit-clear-history"
+                visible: Plasmoid.configuration.showIconClear
                 Accessible.name: i18n("Clear chat")
                 PlasmaComponents.ToolTip.text: i18n("Clear chat")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
@@ -331,6 +354,7 @@ PlasmaExtras.Representation {
 
             PlasmaComponents.ToolButton {
                 icon.name: "configure"
+                visible: Plasmoid.configuration.showIconSettings
                 Accessible.name: i18n("Settings")
                 PlasmaComponents.ToolTip.text: i18n("Settings")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
@@ -340,6 +364,7 @@ PlasmaExtras.Representation {
 
             PlasmaComponents.ToolButton {
                 icon.name: "window-pin"
+                visible: Plasmoid.configuration.showIconPin
                 checkable: true
                 checked: Plasmoid.configuration.pin
                 Accessible.name: Plasmoid.configuration.pin ? i18n("Don't keep open") : i18n("Keep open")

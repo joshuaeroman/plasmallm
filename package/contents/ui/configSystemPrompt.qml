@@ -42,8 +42,6 @@ BaseConfigPage {
     property string promptPreview: buildPreview()
 
     Kirigami.FormLayout {
-        anchors.fill: parent
-
         GridLayout {
             Kirigami.FormData.label: i18n("System Info:")
             columns: 2

@@ -196,4 +196,21 @@ SimpleKCM {
     property string cfg_sessionMultiplexerDefault
     property string cfg_sessionName
     property string cfg_sessionNameDefault
+
+    property bool cfg_showIconProfile
+    property bool cfg_showIconProfileDefault
+    property bool cfg_showIconTasks
+    property bool cfg_showIconTasksDefault
+    property bool cfg_showIconAuto
+    property bool cfg_showIconAutoDefault
+    property bool cfg_showIconHistory
+    property bool cfg_showIconHistoryDefault
+    property bool cfg_showIconCopy
+    property bool cfg_showIconCopyDefault
+    property bool cfg_showIconClear
+    property bool cfg_showIconClearDefault
+    property bool cfg_showIconSettings
+    property bool cfg_showIconSettingsDefault
+    property bool cfg_showIconPin
+    property bool cfg_showIconPinDefault
 }
