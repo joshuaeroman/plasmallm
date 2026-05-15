@@ -300,6 +300,18 @@
       <label>Last endpoint URL used for the OpenAI-compatible adapter</label>
       <default></default>
     </entry>
+    <entry name="profiles" type="String">
+      <label>Saved LLM configuration profiles (JSON array)</label>
+      <default></default>
+    </entry>
+    <entry name="activeProfileId" type="String">
+      <label>ID of the currently active profile</label>
+      <default></default>
+    </entry>
+    <entry name="profilesSchemaVersion" type="Int">
+      <label>Internal schema version for profiles migration</label>
+      <default>0</default>
+    </entry>
     <entry name="useCommandTool" type="Bool">
       <label>Use tool calling for command execution</label>
       <default>true</default>

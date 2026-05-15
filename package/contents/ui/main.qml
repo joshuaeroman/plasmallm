@@ -14,6 +14,7 @@ import org.kde.plasma.workspace.dbus as DBus
 
 import "api.js" as Api
 import "sessionRunner.js" as SessionRunner
+import "profiles.js" as Profiles
 
 PlasmoidItem {
     id: root
@@ -22,6 +23,7 @@ PlasmoidItem {
 
     property bool isLoading: false
     property bool sessionActive: false
+    property bool _switchingProfile: false
 
     readonly property string uiFontFamily: Plasmoid.configuration.useCustomFont ? Plasmoid.configuration.customFontFamily : Kirigami.Theme.defaultFont.family
     readonly property int uiFontPointSize: Plasmoid.configuration.useCustomFont ? Plasmoid.configuration.customFontSize : Kirigami.Theme.defaultFont.pointSize
@@ -678,6 +680,9 @@ PlasmoidItem {
     }
 
     function currentApiKeySlot() {
+        var profileId = Plasmoid.configuration.activeProfileId;
+        if (profileId) return Api.profileKeySlot(profileId);
+
         var t = Plasmoid.configuration.apiType;
         if (t === "gemini" && Plasmoid.configuration.geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
         return Api.apiKeySlot(t, Plasmoid.configuration.providerName);
@@ -691,6 +696,15 @@ PlasmoidItem {
                 if (m && m.hasOwnProperty(slot)) return m[slot];
             } catch(e) {}
         }
+        
+        // If searching by profile ID and not found, fall back to the legacy slot
+        if (slot.indexOf("apiKey:profile:") === 0) {
+            var t = Plasmoid.configuration.apiType;
+            if (t === "gemini" && Plasmoid.configuration.geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
+            var legacySlot = Api.apiKeySlot(t, Plasmoid.configuration.providerName);
+            return fallbackKeyForSlot(legacySlot);
+        }
+
         return Plasmoid.configuration.apiKey || "";
     }
 
@@ -712,11 +726,13 @@ PlasmoidItem {
 
     function loadApiKeyFromWallet() {
         var slot = currentApiKeySlot();
+        console.warn("PlasmaLLM: Loading API key for slot:", slot);
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
                 if (handle < 0) {
                     console.warn("PlasmaLLM: KWallet open failed, falling back to config");
                     root.apiKey = fallbackKeyForSlot(slot);
+                    console.warn("PlasmaLLM: Loaded fallback key, length:", root.apiKey ? root.apiKey.length : 0);
                     return;
                 }
                 root.walletAvailable = true;
@@ -724,9 +740,39 @@ PlasmoidItem {
                     function(password) {
                         if (password && password.length > 0) {
                             root.apiKey = password.replace(/^\s+|\s+$/g, "");
+                            console.warn("PlasmaLLM: Loaded key from wallet slot", slot, "length:", root.apiKey.length);
                             walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                             return;
                         }
+
+                        // If profile-specific key not found, try legacy slot fallback
+                        if (slot.indexOf("apiKey:profile:") === 0) {
+                            var t = Plasmoid.configuration.apiType;
+                            if (t === "gemini" && Plasmoid.configuration.geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
+                            var legacySlot = Api.apiKeySlot(t, Plasmoid.configuration.providerName);
+                            console.warn("PlasmaLLM: Profile key not found, trying legacy slot:", legacySlot);
+                            walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", legacySlot, "PlasmaLLM"],
+                                function(legacyPassword) {
+                                    if (legacyPassword && legacyPassword.length > 0) {
+                                        root.apiKey = legacyPassword.replace(/^\s+|\s+$/g, "");
+                                        console.warn("PlasmaLLM: Loaded key from legacy slot", legacySlot, "length:", root.apiKey.length);
+                                        // Do not auto-promote to the profile-id slot on read; 
+                                        // only promote on the next write (as per plan).
+                                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                    } else {
+                                        root.apiKey = fallbackKeyForSlot(slot);
+                                        console.warn("PlasmaLLM: Legacy key not found, loaded fallback key, length:", root.apiKey ? root.apiKey.length : 0);
+                                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                    }
+                                },
+                                function(err) {
+                                    root.apiKey = fallbackKeyForSlot(slot);
+                                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                }
+                            );
+                            return;
+                        }
+
                         // One-shot migration: copy legacy single-slot wallet key
                         // into the current slot the first time this version runs.
                         if (!Plasmoid.configuration.apiKeyMigrated) {
@@ -734,11 +780,7 @@ PlasmoidItem {
                                 function(legacy) {
                                     if (legacy && legacy.length > 0) {
                                         walletWriteKey(handle, slot, legacy, function(success) {
-                                            if (success) {
-                                                root.apiKey = legacy;
-                                            } else {
-                                                root.apiKey = legacy;
-                                            }
+                                            root.apiKey = legacy;
                                             Plasmoid.configuration.apiKeyMigrated = true;
                                             walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                                         });
@@ -779,6 +821,42 @@ PlasmoidItem {
                 root.apiKey = fallbackKeyForSlot(slot);
             }
         );
+    }
+
+    function switchProfile(profileId) {
+        var profiles = Profiles.loadProfiles(Plasmoid.configuration);
+        var p = Profiles.getActive(profiles, profileId);
+        if (!p) return;
+
+        root._switchingProfile = true;
+        Plasmoid.configuration.activeProfileId = profileId;
+        Profiles.applyToConfig(p, Plasmoid.configuration);
+        root._switchingProfile = false;
+
+        // Force reload after switch
+        loadApiKeyFromWallet();
+        // Force model list update for the new slot
+        var stored = Plasmoid.configuration.availableModels;
+        if (stored && stored.length > 0) {
+            try {
+                var m = JSON.parse(stored);
+                var slot = currentApiKeySlot();
+                root.fetchedModels = m[slot] || [];
+            } catch(e) { root.fetchedModels = []; }
+        } else {
+            root.fetchedModels = [];
+        }
+        
+        // Rebuild system prompt
+        if (systemPromptReady) {
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
+                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                autoMode: root.isAutoMode, 
+                commandToolEnabled: Plasmoid.configuration.useCommandTool,
+                sessionMultiplexer: root.sessionChipText()
+            });
+            chatMessages.setProperty(0, "content", prompt);
+        }
     }
 
     function checkWebSearchMigration() {
@@ -1052,6 +1130,40 @@ PlasmoidItem {
             }
             return true;
         }
+        if (lower === "/profile") {
+            var profiles = Profiles.loadProfiles(Plasmoid.configuration);
+            var activeId = Plasmoid.configuration.activeProfileId;
+            var active = Profiles.getActive(profiles, activeId);
+            var msg = i18n("Current profile: **%1**", active ? active.name : i18n("Default"));
+            if (profiles.length > 0) {
+                msg += "\n\n" + i18n("Available profiles:") + "\n" +
+                       profiles.map(function(p) { 
+                           var mark = (p.id === activeId) ? " (**" + i18n("active") + "**)" : "";
+                           return "- " + p.name + mark; 
+                       }).join("\n") +
+                       "\n\n" + i18n("Type `/profile <name>` to switch.");
+            }
+            displayMessages.append({ role: "assistant", content: msg, commandsStr: "", shared: false, timestamp: currentTimestamp() });
+            return true;
+        }
+        if (lower.startsWith("/profile ")) {
+            var targetName = text.trim().substring(9).trim().toLowerCase();
+            var profiles = Profiles.loadProfiles(Plasmoid.configuration);
+            var found = null;
+            for (var i = 0; i < profiles.length; i++) {
+                if (profiles[i].name.toLowerCase() === targetName) {
+                    found = profiles[i];
+                    break;
+                }
+            }
+            if (found) {
+                switchProfile(found.id);
+                displayMessages.append({ role: "assistant", content: i18n("Switched to profile: **%1**", found.name), commandsStr: "", shared: false, timestamp: currentTimestamp() });
+            } else {
+                displayMessages.append({ role: "error", content: i18n("Unknown profile: **%1**", targetName), commandsStr: "", shared: false, timestamp: currentTimestamp() });
+            }
+            return true;
+        }
         if (lower === "/model") {
             var currentModel = Plasmoid.configuration.modelName;
             var models = root.fetchedModels;
@@ -1070,6 +1182,22 @@ PlasmoidItem {
             var newModel = text.trim().substring(7).trim();
             if (newModel.length > 0) {
                 Plasmoid.configuration.modelName = newModel;
+                
+                // Sync back to active profile
+                var profiles = Profiles.loadProfiles(Plasmoid.configuration);
+                var activeId = Plasmoid.configuration.activeProfileId;
+                var active = Profiles.getActive(profiles, activeId);
+                if (active) {
+                    var updated = Profiles.captureFromConfig(active, Plasmoid.configuration);
+                    for (var i = 0; i < profiles.length; i++) {
+                        if (profiles[i].id === updated.id) {
+                            profiles[i] = updated;
+                            break;
+                        }
+                    }
+                    Profiles.saveProfiles(Plasmoid.configuration, profiles);
+                }
+
                 displayMessages.append({ role: "assistant", content: i18n("Switched to model: **%1**", newModel), commandsStr: "", shared: false, timestamp: currentTimestamp() });
             }
             return true;
@@ -1838,13 +1966,16 @@ PlasmoidItem {
             loadApiKeyFromWallet();
         }
         function onApiTypeChanged() {
-            loadApiKeyFromWallet();
+            if (!root._switchingProfile) loadApiKeyFromWallet();
         }
         function onProviderNameChanged() {
-            loadApiKeyFromWallet();
+            if (!root._switchingProfile) loadApiKeyFromWallet();
         }
         function onGeminiAuthMethodChanged() {
-            loadApiKeyFromWallet();
+            if (!root._switchingProfile) loadApiKeyFromWallet();
+        }
+        function onActiveProfileIdChanged() {
+            if (!root._switchingProfile) loadApiKeyFromWallet();
         }
         function onOllamaSearchApiKeyChanged() {
             if (Plasmoid.configuration.ollamaSearchApiKey) root.ollamaSearchApiKey = Plasmoid.configuration.ollamaSearchApiKey;
@@ -1859,7 +1990,25 @@ PlasmoidItem {
             loadSearxngKeyFromWallet();
         }
         function onApiEndpointChanged() {
-            Plasmoid.configuration.availableModels = "";
+            if (root._switchingProfile) return;
+            // Only clear the current slot's cache, not the whole map
+            var stored = Plasmoid.configuration.availableModels;
+            if (stored && stored.length > 0) {
+                try {
+                    var m = JSON.parse(stored);
+                    if (m && typeof m === "object" && !Array.isArray(m)) {
+                        var slot = currentApiKeySlot();
+                        delete m[slot];
+                        Plasmoid.configuration.availableModels = JSON.stringify(m);
+                    } else {
+                        Plasmoid.configuration.availableModels = "";
+                    }
+                } catch(e) {
+                    Plasmoid.configuration.availableModels = "";
+                }
+            } else {
+                Plasmoid.configuration.availableModels = "";
+            }
         }
         function onChatSaveFormatChanged() {
             if (Plasmoid.configuration.chatSaveFormat === "jsonl" && historyFilesModel.count === 0) {
@@ -1874,7 +2023,18 @@ PlasmoidItem {
         function onAvailableModelsChanged() {
             var stored = Plasmoid.configuration.availableModels;
             if (stored && stored.length > 0) {
-                try { root.fetchedModels = JSON.parse(stored); } catch(e) { root.fetchedModels = []; }
+                try {
+                    var m = JSON.parse(stored);
+                    var slot = currentApiKeySlot();
+                    // Handle both the new map shape and the legacy flat-array shape
+                    if (m && typeof m === "object" && !Array.isArray(m)) {
+                        root.fetchedModels = m[slot] || [];
+                    } else if (Array.isArray(m)) {
+                        root.fetchedModels = m;
+                    } else {
+                        root.fetchedModels = [];
+                    }
+                } catch(e) { root.fetchedModels = []; }
             } else {
                 root.fetchedModels = [];
             }
@@ -1932,13 +2092,39 @@ PlasmoidItem {
     }
 
     Component.onCompleted: {
+        // First-run profile migration
+        if (Plasmoid.configuration.profilesSchemaVersion === 0) {
+            var profiles = Profiles.loadProfiles(Plasmoid.configuration);
+            if (profiles.length === 0) {
+                var defaultProfile = Profiles.createProfile(i18n("Default"), Plasmoid.configuration);
+                defaultProfile.id = "p_default";
+                profiles = [defaultProfile];
+                Profiles.saveProfiles(Plasmoid.configuration, profiles);
+                Plasmoid.configuration.activeProfileId = "p_default";
+            }
+            Plasmoid.configuration.profilesSchemaVersion = 1;
+        }
+
         regatherSysInfo();
         loadApiKeyFromWallet();
         loadOllamaSearchKeyFromWallet();
         loadSearxngKeyFromWallet();
         var stored = Plasmoid.configuration.availableModels;
         if (stored && stored.length > 0) {
-            try { fetchedModels = JSON.parse(stored); } catch(e) {}
+            try {
+                var m = JSON.parse(stored);
+                var slot = currentApiKeySlot();
+                // Handle both the new map shape and the legacy flat-array shape
+                if (m && typeof m === "object" && !Array.isArray(m)) {
+                    root.fetchedModels = m[slot] || [];
+                } else if (Array.isArray(m)) {
+                    root.fetchedModels = m;
+                } else {
+                    root.fetchedModels = [];
+                }
+            } catch(e) { root.fetchedModels = []; }
+        } else {
+            root.fetchedModels = [];
         }
         if (Plasmoid.configuration.chatSaveFormat === "jsonl" && Plasmoid.configuration.saveChatHistory) {
             fetchHistoryList();

@@ -418,7 +418,10 @@ BaseConfigPage {
             id: nativeGoogleSearchCheckBox
             text: i18n("Enable Native Google Search Grounding")
             checked: cfg_enableNativeGoogleSearch
-            onCheckedChanged: cfg_enableNativeGoogleSearch = checked
+            onCheckedChanged: {
+                cfg_enableNativeGoogleSearch = checked;
+                triggerCapture();
+            }
             visible: !!adapterCapabilities.nativeGoogleSearch
 
             QQC2.ToolTip.text: i18n("Use Gemini's built-in Google Search for grounding. This overrides the standard web search tool.")
@@ -430,7 +433,10 @@ BaseConfigPage {
             id: nativeCodeExecutionCheckBox
             text: i18n("Enable Native Python Code Execution")
             checked: cfg_enableNativeCodeExecution
-            onCheckedChanged: cfg_enableNativeCodeExecution = checked
+            onCheckedChanged: {
+                cfg_enableNativeCodeExecution = checked;
+                triggerCapture();
+            }
             visible: !!adapterCapabilities.nativeCodeExecution
 
             QQC2.ToolTip.text: i18n("Allow Gemini to write and execute Python code in a secure server-side sandbox.")
