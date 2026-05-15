@@ -212,7 +212,7 @@ function buildToolCallIdMap(neutralMessages) {
 
 function translateMessages(neutralMessages, startIndex) {
     var systemInstruction = "";
-    var input = [];
+    var turns = [];
     var idToName = buildToolCallIdMap(neutralMessages);
     var start = startIndex || 0;
 
@@ -226,54 +226,131 @@ function translateMessages(neutralMessages, startIndex) {
         if (i < start) continue;
 
         if (m.role === "tool") {
-            input.push({
-                type: "function_result",
-                name: idToName[m.tool_call_id] || "unknown",
-                call_id: m.tool_call_id,
-                result: [{ type: "text", text: typeof m.content === "string" ? m.content : JSON.stringify(m.content) }]
-            });
+            var fnName = idToName[m.tool_call_id] || "unknown";
+            var toolTurn = {
+                role: "user",
+                content: []
+            };
+            
+            if (fnName === "native_google_search") {
+                toolTurn.content.push({
+                    type: "google_search_result",
+                    id: m.tool_call_id,
+                    result: typeof m.content === "string" ? m.content : JSON.stringify(m.content)
+                });
+            } else if (fnName === "native_code_execution") {
+                toolTurn.content.push({
+                    type: "code_execution_result",
+                    id: m.tool_call_id,
+                    output: typeof m.content === "string" ? m.content : JSON.stringify(m.content)
+                });
+            } else {
+                toolTurn.content.push({
+                    type: "function_result",
+                    name: fnName,
+                    call_id: m.tool_call_id,
+                    result: { result: m.content }
+                });
+            }
+            turns.push(toolTurn);
             continue;
         }
 
-        if (m.thinkingBlocks) {
-            for (var th = 0; th < m.thinkingBlocks.length; th++) {
-                var tb = m.thinkingBlocks[th];
-                input.push({
-                    type: "thought",
-                    signature: tb.thoughtSignature || "legacy",
-                    summary: [{ type: "text", text: tb.thinking }]
-                });
+        if (m.role === "assistant") {
+            var assistantTurn = {
+                role: "model",
+                content: []
+            };
+
+            if (m.thinkingBlocks) {
+                for (var th = 0; th < m.thinkingBlocks.length; th++) {
+                    var tb = m.thinkingBlocks[th];
+                    if (tb.thinking || tb.thoughtSignature) {
+                        assistantTurn.content.push({
+                            type: "thought",
+                            signature: tb.thoughtSignature || "",
+                            summary: tb.thinking || ""
+                        });
+                    }
+                }
             }
-        }
 
-        if (m.role === "assistant" && m.tool_calls) {
-            for (var t = 0; t < m.tool_calls.length; t++) {
-                var tc = m.tool_calls[t];
-                input.push({
-                    type: "function_call",
-                    id: tc.id,
-                    name: tc["function"].name,
-                    arguments: typeof tc["function"].arguments === "string" ? JSON.parse(tc["function"].arguments) : tc["function"].arguments
-                });
+            if (m.tool_calls) {
+                for (var t = 0; t < m.tool_calls.length; t++) {
+                    var tc = m.tool_calls[t];
+                    var tcName = tc["function"].name;
+                    if (tcName === "native_google_search") {
+                        var queries = [];
+                        try {
+                            var args = typeof tc["function"].arguments === "string" ? JSON.parse(tc["function"].arguments) : tc["function"].arguments;
+                            queries = args.queries || [];
+                        } catch(e) {}
+                        assistantTurn.content.push({
+                            type: "google_search_call",
+                            id: tc.id,
+                            google_search_call: { queries: queries }
+                        });
+                    } else if (tcName === "native_code_execution") {
+                        var code = "";
+                        try {
+                            var args = typeof tc["function"].arguments === "string" ? JSON.parse(tc["function"].arguments) : tc["function"].arguments;
+                            code = args.code || "";
+                        } catch(e) {}
+                        assistantTurn.content.push({
+                            type: "code_execution_call",
+                            id: tc.id,
+                            code_execution_call: { code: code, language: "python" }
+                        });
+                    } else {
+                        assistantTurn.content.push({
+                            type: "function_call",
+                            id: tc.id,
+                            name: tcName,
+                            arguments: typeof tc["function"].arguments === "string" ? JSON.parse(tc["function"].arguments) : tc["function"].arguments
+                        });
+                    }
+                }
             }
+
+            if (typeof m.content === "string" && m.content.length > 0) {
+                assistantTurn.content.push({ type: "text", text: m.content });
+            }
+
+            if (assistantTurn.content.length > 0) {
+                turns.push(assistantTurn);
+            }
+            continue;
         }
 
-        var turn = {
-            type: (m.role === "assistant" ? "model_output" : "user_input"),
-            content: []
-        };
+        if (m.role === "user") {
+            var userTurn = {
+                role: "user",
+                content: []
+            };
 
-        if (typeof m.content === "string" && m.content.length > 0) {
-            turn.content.push({ type: "text", text: m.content });
-        } else if (Array.isArray(m.content)) {
-            turn.content = m.content;
-        }
+            if (typeof m.content === "string" && m.content.length > 0) {
+                userTurn.content.push({ type: "text", text: m.content });
+            } else if (Array.isArray(m.content)) {
+                for (var p = 0; p < m.content.length; p++) {
+                    var pt = m.content[p];
+                    if (pt.type === "text") userTurn.content.push(pt);
+                    else if (pt.type === "image") userTurn.content.push(pt);
+                    else if (pt.text) userTurn.content.push({ type: "text", text: pt.text });
+                    else if (pt.inlineData) {
+                        userTurn.content.push({
+                            type: "image",
+                            image: { mime_type: pt.inlineData.mimeType, data: pt.inlineData.data }
+                        });
+                    }
+                }
+            }
 
-        if (turn.content.length > 0) {
-            input.push(turn);
+            if (userTurn.content.length > 0) {
+                turns.push(userTurn);
+            }
         }
     }
-    return { systemInstruction: systemInstruction, input: input };
+    return { systemInstruction: systemInstruction, turns: turns };
 }
 
 function parseSSEChunks(buffer, lastIndex) {
@@ -305,19 +382,21 @@ function parseSSEChunks(buffer, lastIndex) {
                         }
                     });
                 } else if (step.type === "google_search_call") {
+                    var gcall = step.google_search_call || {};
                     tokens.push({
                         function_call_start: {
                             id: step.id,
                             name: "native_google_search",
-                            args: step.arguments ? JSON.stringify(step.arguments) : ""
+                            args: JSON.stringify({ queries: gcall.queries || [] })
                         }
                     });
                 } else if (step.type === "code_execution_call") {
+                    var ccall = step.code_execution_call || {};
                     tokens.push({
                         function_call_start: {
                             id: step.id,
                             name: "native_code_execution",
-                            args: step.arguments ? JSON.stringify(step.arguments) : ""
+                            args: JSON.stringify({ code: ccall.code || "", language: ccall.language || "python" })
                         }
                     });
                 } else if (step.type === "thought" && step.signature) {
@@ -348,6 +427,11 @@ function parseSSEChunks(buffer, lastIndex) {
                     tokens.push({ thinking_delta: { signature: delta.signature || delta.text } });
                 } else if (delta.arguments_delta) {
                     tokens.push({ function_call_delta: delta.arguments_delta });
+                } else if (delta.google_search_call && delta.google_search_call.queries) {
+                    // Treat queries as a block of text for simplicity in the UI
+                    tokens.push({ function_call_delta: JSON.stringify({ queries: delta.google_search_call.queries }) });
+                } else if (delta.code_execution_call && delta.code_execution_call.code) {
+                    tokens.push({ function_call_delta: delta.code_execution_call.code });
                 }
             } else if (evType === "step.stop") {
                 tokens.push({ thinking_close: true });
@@ -394,8 +478,9 @@ function sendStreaming(opts) {
     var xhr = new XMLHttpRequest();
     var url;
     var baseUrl = endpoint.replace(/\/+$/, "");
+    var isAgentPlatform = opts && opts.geminiAuthMethod === "agentplatform";
 
-    if (opts && opts.geminiAuthMethod === "agentplatform") {
+    if (isAgentPlatform) {
         var projectId = opts.geminiProjectId || "";
         var location = opts.geminiLocation || "global";
         
@@ -489,9 +574,12 @@ function sendStreaming(opts) {
 
     var translated = translateMessages(messages);
     var body = {
+        // For Interactions API, the models/ prefix is usually not required and 
+        // causes issues on Vertex AI (Agent Platform).
         model: model,
         stream: true,
-        store: true,
+        // Interaction storage is often not supported in the 'global' location on Vertex AI.
+        store: (isAgentPlatform && opts.geminiLocation === "global") ? false : true,
         generation_config: {
             temperature: opts.temperature / 100.0,
             max_output_tokens: opts.maxTokens
@@ -509,21 +597,29 @@ function sendStreaming(opts) {
     }
 
     // Stateful continuity check
-    if (previousInteractionId && messages.length > lastMessageCount) {
+    if (previousInteractionId && messages.length > lastMessageCount && body.store) {
         body.previous_interaction_id = previousInteractionId;
-        // In a continuation, we only send the steps derived from the NEW messages.
         var newOnly = translateMessages(messages, lastMessageCount);
-        body.input = newOnly.input;
+        // For continuations, input can be a string (if single text part) or an array of parts/turns.
+        if (newOnly.turns.length === 1 && newOnly.turns[0].role === "user") {
+            body.input = newOnly.turns[0].content;
+        } else {
+            body.input = newOnly.turns;
+        }
     } else {
-        body.input = translated.input;
+        // For a new session or reset history, send everything as a role-tagged turns array.
+        body.input = translated.turns;
         previousInteractionId = "";
     }
+
+    console.error("Gemini Interactions Request URL:", url);
+    console.error("Gemini Interactions Request Body:", JSON.stringify(body, null, 2));
 
     xhr.send(JSON.stringify(body));
 
     return {
         xhr: xhr,
-        setPollTimer: function(t) {},
+        setPollTimer: function(timer) {},
         processBuffer: processBuffer
     };
 }
