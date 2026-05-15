@@ -14,11 +14,9 @@ BaseConfigPage {
     property var availableFonts: Qt.fontFamilies()
 
     Kirigami.FormLayout {
-        anchors.fill: parent
-
         QQC2.CheckBox {
-            Kirigami.FormData.label: i18n("Panel Title:")
-            text: i18n("Show provider and model in title")
+            Kirigami.FormData.label: i18n("Profile Header:")
+            text: i18n("Show provider and model in profile header")
             checked: cfg_showProviderInTitle
             onCheckedChanged: cfg_showProviderInTitle = checked
         }
@@ -164,6 +162,64 @@ BaseConfigPage {
                 value: cfg_customThoughtsFontSize
                 onValueModified: cfg_customThoughtsFontSize = value
             }
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Layout.fillWidth: true
+        }
+
+        Item {
+            Kirigami.FormData.label: i18n("Header Icons:")
+            Layout.fillWidth: true
+        }
+
+        QQC2.CheckBox {
+            text: i18n("Profile Header")
+            checked: cfg_showIconProfile
+            onCheckedChanged: cfg_showIconProfile = checked
+        }
+
+        QQC2.CheckBox {
+            text: i18n("Always show Tasks")
+            checked: cfg_showIconTasks
+            onCheckedChanged: cfg_showIconTasks = checked
+        }
+
+        QQC2.CheckBox {
+            text: i18n("Always show Auto Toggle")
+            checked: cfg_showIconAuto
+            onCheckedChanged: cfg_showIconAuto = checked
+        }
+
+        QQC2.CheckBox {
+            text: i18n("Show History")
+            checked: cfg_showIconHistory
+            onCheckedChanged: cfg_showIconHistory = checked
+        }
+
+        QQC2.CheckBox {
+            text: i18n("Show Copy conversation")
+            checked: cfg_showIconCopy
+            onCheckedChanged: cfg_showIconCopy = checked
+        }
+
+        QQC2.CheckBox {
+            text: i18n("Show Clear chat")
+            checked: cfg_showIconClear
+            onCheckedChanged: cfg_showIconClear = checked
+        }
+
+        QQC2.CheckBox {
+            text: i18n("Show Settings")
+            checked: cfg_showIconSettings
+            onCheckedChanged: cfg_showIconSettings = checked
+        }
+
+        QQC2.CheckBox {
+            text: i18n("Show Pin")
+            checked: cfg_showIconPin
+            onCheckedChanged: cfg_showIconPin = checked
         }
     }
 }

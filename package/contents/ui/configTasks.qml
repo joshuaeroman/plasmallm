@@ -23,8 +23,6 @@ BaseConfigPage {
     }
 
     Kirigami.FormLayout {
-        anchors.fill: parent
-
         ColumnLayout {
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing

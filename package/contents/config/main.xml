@@ -149,7 +149,7 @@
       <default>false</default>
     </entry>
     <entry name="showProviderInTitle" type="Bool">
-      <label>Show provider and model in title bar</label>
+      <label>Show provider and model in profile header</label>
       <default>true</default>
     </entry>
     <entry name="sysInfoOS" type="Bool">
@@ -335,6 +335,38 @@
     <entry name="sessionName" type="String">
       <label>Session name</label>
       <default>plasmallm</default>
+    </entry>
+    <entry name="showIconProfile" type="Bool">
+      <label>Show Profile Header in header</label>
+      <default>true</default>
+    </entry>
+    <entry name="showIconTasks" type="Bool">
+      <label>Always show Tasks icon in header</label>
+      <default>false</default>
+    </entry>
+    <entry name="showIconAuto" type="Bool">
+      <label>Always show Auto Toggle icon in header</label>
+      <default>false</default>
+    </entry>
+    <entry name="showIconHistory" type="Bool">
+      <label>Show History icon in header</label>
+      <default>true</default>
+    </entry>
+    <entry name="showIconCopy" type="Bool">
+      <label>Show Copy icon in header</label>
+      <default>false</default>
+    </entry>
+    <entry name="showIconClear" type="Bool">
+      <label>Show Clear icon in header</label>
+      <default>true</default>
+    </entry>
+    <entry name="showIconSettings" type="Bool">
+      <label>Show Settings icon in header</label>
+      <default>true</default>
+    </entry>
+    <entry name="showIconPin" type="Bool">
+      <label>Show Pin icon in header</label>
+      <default>true</default>
     </entry>
   </group>
 

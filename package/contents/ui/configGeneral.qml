@@ -503,9 +503,8 @@ BaseConfigPage {
         refreshAvailableModels();
         ensureModelsLoaded(false);
     }
-    Kirigami.FormLayout {
-        anchors.fill: parent
 
+    Kirigami.FormLayout {
         RowLayout {
             Kirigami.FormData.label: i18n("Profile:")
             Layout.fillWidth: true
