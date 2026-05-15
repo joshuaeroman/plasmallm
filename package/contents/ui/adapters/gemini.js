@@ -618,7 +618,3 @@ function sendStreaming(opts) {
     };
     return handle;
 }
-        }
-    };
-    return handle;
-}
