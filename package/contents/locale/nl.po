@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-04 22:18-0400\n"
+"POT-Creation-Date: 2026-05-15 19:49-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Dutch\n"
@@ -22,21 +22,25 @@ msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
 "budget below. Temperature is forced to max while thinking."
 msgstr ""
+"Anthropic enables extended thinking when effort is not Off, using the token "
+"budget below. Temperature is forced to max while thinking."
+
 "Anthropic schakelt uitgebreid denken in wanneer de inspanning niet Uit "
 "staat, waarbij het onderstaande tokenbudget wordt gebruikt. De temperatuur "
 "wordt geforceerd op het maximum tijdens het denken."
 
 #: package/contents/ui/adapters/anthropic.js:59
-#: package/contents/ui/adapters/gemini.js:54
 #: package/contents/ui/adapters/openai_chat.js:24
 #: package/contents/ui/adapters/openai_responses.js:26
+#: package/contents/ui/adapters/gemini.js:85
 msgid "Request timed out after 30 seconds"
 msgstr "Verzoek verlopen na 30 seconden"
 
 #: package/contents/ui/adapters/anthropic.js:75
-#: package/contents/ui/adapters/gemini.js:75
 #: package/contents/ui/adapters/openai_chat.js:40
 #: package/contents/ui/adapters/openai_responses.js:42
+#: package/contents/ui/adapters/gemini_interactions.js:110
+#: package/contents/ui/adapters/gemini.js:118
 msgid "Failed to parse models: %1"
 msgstr "Modellen konden niet worden geparseerd: %1"
 
@@ -48,24 +52,24 @@ msgstr "Modellen konden niet worden opgehaald: HTTP %1"
 
 #: package/contents/ui/adapters/anthropic.js:459
 #: package/contents/ui/adapters/anthropic.js:462
-#: package/contents/ui/adapters/gemini.js:501
 #: package/contents/ui/adapters/openai_chat.js:247
 #: package/contents/ui/adapters/openai_chat.js:250
 #: package/contents/ui/adapters/openai_responses.js:507
+#: package/contents/ui/adapters/gemini.js:563
 msgid "Invalid response format"
 msgstr "Ongeldig antwoordformaat"
 
 #: package/contents/ui/adapters/anthropic.js:465
-#: package/contents/ui/adapters/gemini.js:504
 #: package/contents/ui/adapters/openai_chat.js:253
 #: package/contents/ui/adapters/openai_responses.js:510
+#: package/contents/ui/adapters/gemini.js:566
 msgid "Failed to parse response: %1"
 msgstr "Antwoord kon niet worden geparseerd: %1"
 
 #: package/contents/ui/adapters/anthropic.js:471
-#: package/contents/ui/adapters/gemini.js:510
 #: package/contents/ui/adapters/openai_chat.js:259
 #: package/contents/ui/adapters/openai_responses.js:516
+#: package/contents/ui/adapters/gemini.js:572
 msgid "Request timed out"
 msgstr "Verzoek verlopen"
 
@@ -79,7 +83,7 @@ msgstr "Authenticatie mislukt (HTTP %1) — controleer uw API-sleutel"
 #: package/contents/ui/adapters/openai_chat.js:276
 #: package/contents/ui/adapters/openai_responses.js:533
 msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
-msgstr ""
+msgstr "Rate limited (HTTP 429) — too many requests, try again shortly"
 "Snelheidsbeperking (HTTP 429) — te veel verzoeken, probeer het binnenkort "
 "opnieuw"
 
@@ -101,34 +105,6 @@ msgstr "API-fout %1"
 msgid "Request failed (no response) — check your endpoint URL"
 msgstr "Verzoek mislukt (geen antwoord) — controleer uw eindpunt-URL"
 
-#: package/contents/ui/adapters/gemini.js:35
-msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
-msgstr ""
-"Gemini gebruikt het denk-tokenbudget rechtstreeks. Stel in op 0 om denken "
-"uit te schakelen op ondersteunde modellen."
-
-#: package/contents/ui/adapters/gemini.js:78
-msgid "Failed to fetch models"
-msgstr "Modellen ophalen mislukt"
-
-#: package/contents/ui/adapters/gemini.js:99
-msgid "Authentication failed — check your API key (HTTP 400): %1"
-msgstr "Authenticatie mislukt — controleer uw API-sleutel (HTTP 400): %1"
-
-#: package/contents/ui/adapters/gemini.js:102
-msgid "Authentication failed (HTTP %1) — check your API key: %2"
-msgstr "Authenticatie mislukt (HTTP %1) — controleer uw API-sleutel: %2"
-
-#: package/contents/ui/adapters/gemini.js:107
-msgid "no response — check your endpoint URL"
-msgstr "geen reactie — controleer de URL van uw eindpunt"
-
-#: package/contents/ui/adapters/gemini.js:523
-msgid "Request failed"
-msgstr "Verzoek mislukt"
-
 #: package/contents/ui/adapters/openai.js:33
 msgid ""
 "Reasoning effort (low / medium / high) gates extended thinking. To see "
@@ -136,503 +112,65 @@ msgid ""
 "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
 "reasoning_content."
 msgstr ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+
 "Redeneerinspanning (laag / gemiddeld / hoog) bepaalt uitgebreid denken. Om "
 "gedachten te zien op OpenAI / Poe / OpenRouter / Azure, schakelt u de Use "
 "Responses API in; chat-completions providers (DeepSeek, Qwen) tonen "
 "redeneringen via reasoning_content."
 
-#: package/contents/ui/configSystemPrompt.qml:48
-msgid "System Info:"
-msgstr "Systeeminfo:"
+#: package/contents/ui/adapters/gemini_interactions.js:27
+msgid "Gemini uses the thinking level dropdown directly."
+msgstr "Gemini uses the thinking level dropdown directly."
 
-#: package/contents/ui/configSystemPrompt.qml:54
-msgid "OS"
-msgstr "OS"
+#: package/contents/ui/adapters/gemini_interactions.js:113
+#: package/contents/ui/adapters/gemini.js:121
+msgid "Failed to fetch models"
+msgstr "Modellen ophalen mislukt"
 
-#: package/contents/ui/configSystemPrompt.qml:59
-msgid "Shell"
-msgstr "Shell"
+#: package/contents/ui/adapters/gemini_interactions.js:131
+#: package/contents/ui/adapters/gemini.js:142
+msgid "Authentication failed — check your API key (HTTP 400): %1"
+msgstr "Authenticatie mislukt — controleer uw API-sleutel (HTTP 400): %1"
 
-#: package/contents/ui/configSystemPrompt.qml:64
-msgid "Hostname"
-msgstr "Hostnaam"
+#: package/contents/ui/adapters/gemini_interactions.js:134
+#: package/contents/ui/adapters/gemini.js:145
+msgid "Authentication failed (HTTP %1) — check your API key: %2"
+msgstr "Authenticatie mislukt (HTTP %1) — controleer uw API-sleutel: %2"
 
-#: package/contents/ui/configSystemPrompt.qml:69
-msgid "Kernel"
-msgstr "Kernel"
-
-#: package/contents/ui/configSystemPrompt.qml:74
-msgid "Desktop"
-msgstr "Bureaublad"
-
-#: package/contents/ui/configSystemPrompt.qml:79
-msgid "User"
-msgstr "Gebruiker"
-
-#: package/contents/ui/configSystemPrompt.qml:84
-msgid "CPU"
-msgstr "CPU"
-
-#: package/contents/ui/configSystemPrompt.qml:89
-msgid "Memory"
-msgstr "Geheugen"
-
-#: package/contents/ui/configSystemPrompt.qml:94
-msgid "GPU"
-msgstr "GPU"
-
-#: package/contents/ui/configSystemPrompt.qml:99
-msgid "Block Devices"
-msgstr "Blokapparaten"
-
-#: package/contents/ui/configSystemPrompt.qml:104
-msgid "Network"
-msgstr "Netwerk"
-
-#: package/contents/ui/configSystemPrompt.qml:109
-msgid "Locale"
-msgstr "Landinstelling"
-
-#: package/contents/ui/configSystemPrompt.qml:114
-msgid "Date/Time"
-msgstr "Datum/Tijd"
-
-#: package/contents/ui/configSystemPrompt.qml:122
-msgid "Custom Instructions:"
-msgstr "Aangepaste instructies:"
-
-#: package/contents/ui/configSystemPrompt.qml:125
-msgid "Additional instructions for the LLM…"
-msgstr "Aanvullende instructies voor het LLM…"
-
-#: package/contents/ui/configSystemPrompt.qml:132
-msgid "Preview:"
-msgstr "Voorvertoning:"
-
-#: package/contents/ui/FullRepresentation.qml:20
-msgid "Toggle auto mode (auto-run + auto-share) for this session"
-msgstr ""
-"Automodus (auto-uitvoeren + auto-delen) in-/uitschakelen voor deze sessie"
-
-#: package/contents/ui/FullRepresentation.qml:21
-msgid "Clear the chat"
-msgstr "Chat wissen"
-
-#: package/contents/ui/FullRepresentation.qml:22
-msgid "Close the panel"
-msgstr "Paneel sluiten"
-
-#: package/contents/ui/FullRepresentation.qml:23
-msgid "Copy conversation to clipboard"
-msgstr "Gesprek naar klembord kopiëren"
-
-#: package/contents/ui/FullRepresentation.qml:24
-msgid "Open chat history folder"
-msgstr "Chatgeschiedenismap openen"
-
-#: package/contents/ui/FullRepresentation.qml:25
-msgid "Show or switch model (/model <name>)"
-msgstr "Model weergeven of wisselen (/model <name>)"
-
-#: package/contents/ui/FullRepresentation.qml:26
-msgid "Run last command"
-msgstr "Laatste opdracht uitvoeren"
-
-#: package/contents/ui/FullRepresentation.qml:27
-msgid "Save chat to file"
-msgstr "Chat opslaan in bestand"
-
-#: package/contents/ui/FullRepresentation.qml:28
-msgid "Open settings"
-msgstr "Instellingen openen"
-
-#: package/contents/ui/FullRepresentation.qml:29
-msgid "Run a saved task (/task <name>)"
-msgstr "Een opgeslagen taak uitvoeren (/task <name>)"
-
-#: package/contents/ui/FullRepresentation.qml:30
-msgid "Run last command in terminal"
-msgstr "Laatste opdracht uitvoeren in terminal"
-
-#: package/contents/ui/FullRepresentation.qml:82
-#: package/contents/ui/FullRepresentation.qml:727
-#: package/contents/ui/configTasks.qml:57
-msgid "AUTO"
-msgstr "AUTO"
-
-#: package/contents/ui/FullRepresentation.qml:92
-#: package/contents/ui/FullRepresentation.qml:93
-msgid "Run a task"
-msgstr "Een taak uitvoeren"
-
-#: package/contents/ui/FullRepresentation.qml:129
-#: package/contents/ui/FullRepresentation.qml:130
-msgid "Chat History"
-msgstr "Chatgeschiedenis"
-
-#: package/contents/ui/FullRepresentation.qml:155
-msgid "Loading..."
-msgstr "Laden..."
-
-#: package/contents/ui/FullRepresentation.qml:161
-msgid "No recent chats"
-msgstr "Geen recente chats"
-
-#: package/contents/ui/FullRepresentation.qml:170
-msgid "Open history folder..."
-msgstr "Geschiedenismap openen..."
-
-#: package/contents/ui/FullRepresentation.qml:182
-msgid "Clear all history..."
-msgstr "Alle geschiedenis wissen..."
-
-#: package/contents/ui/FullRepresentation.qml:224
-msgid "Clear All History"
-msgstr "Alle geschiedenis wissen"
-
-#: package/contents/ui/FullRepresentation.qml:230
+#: package/contents/ui/adapters/gemini_interactions.js:379
 msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
+"This model version does not support combining Native tools (Search/Code) "
+"with custom commands. Please select a newer model (e.g., Gemini 3+) or "
+"disable Native features in Settings."
 msgstr ""
-"Weet u zeker dat u alle chatgeschiedenisbestanden wilt verwijderen? Deze "
-"actie kan niet ongedaan worden gemaakt."
+"This model version does not support combining Native tools (Search/Code) "
+"with custom commands. Please select a newer model (e.g., Gemini 3+) or "
+"disable Native features in Settings."
 
-#: package/contents/ui/FullRepresentation.qml:239
-msgid "Clear All"
-msgstr "Alles wissen"
 
-#: package/contents/ui/FullRepresentation.qml:247
-#: package/contents/ui/configTasks.qml:85
-msgid "Cancel"
-msgstr "Annuleren"
+#: package/contents/ui/adapters/gemini_interactions.js:484
+#: package/contents/ui/adapters/gemini.js:585
+msgid "Request failed"
+msgstr "Verzoek mislukt"
 
-#: package/contents/ui/FullRepresentation.qml:256
-#: package/contents/ui/FullRepresentation.qml:257
-msgid "Copy conversation"
-msgstr "Gesprek kopiëren"
-
-#: package/contents/ui/FullRepresentation.qml:265
-#: package/contents/ui/FullRepresentation.qml:322
-msgid "You"
-msgstr "U"
-
-#: package/contents/ui/FullRepresentation.qml:266
-#: package/contents/ui/FullRepresentation.qml:323
-msgid "Assistant"
-msgstr "Assistent"
-
-#: package/contents/ui/FullRepresentation.qml:267
-#: package/contents/ui/FullRepresentation.qml:324
-msgid "Command"
-msgstr "Opdracht"
-
-#: package/contents/ui/FullRepresentation.qml:268
-#: package/contents/ui/FullRepresentation.qml:325
-msgid "Error"
-msgstr "Fout"
-
-#: package/contents/ui/FullRepresentation.qml:281
-#: package/contents/ui/FullRepresentation.qml:282
-msgid "Clear chat"
-msgstr "Chat wissen"
-
-#: package/contents/ui/FullRepresentation.qml:290
-#: package/contents/ui/FullRepresentation.qml:291
-msgid "Settings"
-msgstr "Instellingen"
-
-#: package/contents/ui/FullRepresentation.qml:301
-#: package/contents/ui/FullRepresentation.qml:302
-msgid "Don't keep open"
-msgstr "Niet open houden"
-
-#: package/contents/ui/FullRepresentation.qml:301
-#: package/contents/ui/FullRepresentation.qml:302
-msgid "Keep open"
-msgstr "Open houden"
-
-#: package/contents/ui/FullRepresentation.qml:480
-msgid "Send a message to start chatting"
-msgstr "Stuur een bericht om te beginnen met chatten"
-
-#: package/contents/ui/FullRepresentation.qml:509
-msgid "Attach File"
-msgstr "Bestand bijvoegen"
-
-#: package/contents/ui/FullRepresentation.qml:512
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Afbeeldingen (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-#: package/contents/ui/FullRepresentation.qml:512
+#: package/contents/ui/adapters/gemini.js:35
 msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
+"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
+"on supported models."
 msgstr ""
-"Tekstbestanden (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
-"*.conf *.sh *.py *.js *.ts *.qml)"
+"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
+"on supported models."
 
-#: package/contents/ui/FullRepresentation.qml:512
-#: package/contents/ui/CommandBlock.qml:157
-msgid "All files (*)"
-msgstr "Alle bestanden (*)"
+"Gemini gebruikt het denk-tokenbudget rechtstreeks. Stel in op 0 om denken "
+"uit te schakelen op ondersteunde modellen."
 
-#: package/contents/ui/FullRepresentation.qml:754
-msgid "Message input"
-msgstr "Berichtinvoer"
-
-#: package/contents/ui/FullRepresentation.qml:755
-msgid "Type a message…"
-msgstr "Typ een bericht…"
-
-#: package/contents/ui/FullRepresentation.qml:755
-msgid "Initializing…"
-msgstr "Initialiseren…"
-
-#: package/contents/ui/FullRepresentation.qml:808
-msgid "Attach file or image"
-msgstr "Bestand of afbeelding bijvoegen"
-
-#: package/contents/ui/FullRepresentation.qml:815
-msgid "Kill"
-msgstr "Beëindigen"
-
-#: package/contents/ui/FullRepresentation.qml:819
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-"Persistente sessie beëindigen (stopt alle processen en reset shellstatus)"
-
-#: package/contents/ui/FullRepresentation.qml:838
-msgid "Send"
-msgstr "Verzenden"
-
-#: package/contents/ui/FullRepresentation.qml:862
-#: package/contents/ui/CommandBlock.qml:120
-msgid "Stop"
-msgstr "Stoppen"
-
-#: package/contents/ui/FullRepresentation.qml:867
-msgid "Cancel LLM request"
-msgstr "LLM-verzoek annuleren"
-
-#: package/contents/ui/configTasks.qml:33
-msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr ""
-"Geen taken geconfigureerd. Voeg een taak toe om herbruikbare "
-"promptsnelkoppelingen te maken."
-
-#: package/contents/ui/configTasks.qml:85
-msgid "Add Task"
-msgstr "Taak toevoegen"
-
-#: package/contents/ui/configTasks.qml:110
-msgid "Task name"
-msgstr "Taaknaam"
-
-#: package/contents/ui/configTasks.qml:117
-msgid "Prompt to send"
-msgstr "Te verzenden prompt"
-
-#: package/contents/ui/configTasks.qml:123
-msgid "Enable auto mode (auto-run + auto-share)"
-msgstr "Automodus inschakelen (auto-uitvoeren + auto-delen)"
-
-#: package/contents/ui/configTasks.qml:128
-msgid "Auto-submit task prompt to chat"
-msgstr "Taakvraag automatisch naar chat sturen"
-
-#: package/contents/ui/configTasks.qml:140
-msgid "Update Task"
-msgstr "Taak bijwerken"
-
-#: package/contents/ui/configTasks.qml:140
-msgid "Save Task"
-msgstr "Taak opslaan"
-
-#: package/contents/ui/configTasks.qml:148
-msgid "A task named \"%1\" already exists."
-msgstr "Er bestaat al een taak met de naam \"%1\"."
-
-#: package/contents/ui/configTasks.qml:170
-msgid ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
-"button to run them. Tasks with auto mode will temporarily enable auto-run "
-"and auto-share."
-msgstr ""
-"Taken zijn herbruikbare promptsnelkoppelingen. Gebruik /task <name> in de "
-"chat of de werkbalkknop om ze uit te voeren. Taken met automodus schakelen "
-"tijdelijk auto-uitvoeren en auto-delen in."
-
-#: package/contents/ui/api.js:211
-msgid "Search provider %1 not supported"
-msgstr "Zoekaanbieder %1 niet ondersteund"
-
-#: package/contents/ui/api.js:240
-msgid "OpenAI-compatible"
-msgstr "OpenAI-compatibel"
-
-#: package/contents/ui/api.js:241
-msgid "Anthropic"
-msgstr "Anthropic"
-
-#: package/contents/ui/api.js:242
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-#: package/contents/ui/configTools.qml:284
-msgid "Commands"
-msgstr "Opdrachten"
-
-#: package/contents/ui/configTools.qml:289
-msgid "Auto-run commands from LLM"
-msgstr "Opdrachten van LLM automatisch uitvoeren"
-
-#: package/contents/ui/configTools.qml:293
-msgid ""
-"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
-"share."
-msgstr ""
-"Sta de LLM toe om shell-opdrachten uit te voeren. Gevaarlijk in combinatie "
-"met Automatisch delen."
-
-#: package/contents/ui/configTools.qml:300
-msgid "Run as tool"
-msgstr "Uitvoeren als tool"
-
-#: package/contents/ui/configTools.qml:304
-msgid ""
-"Use the run_command tool for command execution. If disabled, falls back to "
-"parsing code blocks."
-msgstr ""
-"Gebruik de run_command-tool voor het uitvoeren van opdrachten. Indien "
-"uitgeschakeld, valt het terug op het parseren van codeblokken."
-
-#: package/contents/ui/configTools.qml:311
-msgid "Auto-share command output with LLM"
-msgstr "Opdrachtuitvoer automatisch delen met LLM"
-
-#: package/contents/ui/configTools.qml:315
-msgid "Automatically send command execution results back to the LLM"
-msgstr "Resultaten van opdrachtuitvoering automatisch terugsturen naar de LLM"
-
-#: package/contents/ui/configTools.qml:322
-msgid ""
-"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-msgstr ""
-"⚠️ GEVAAR: Beide opties ingeschakeld — het LLM kan nu opdrachten uitvoeren en "
-"hun uitvoer zien, wat een agentische workflow mogelijk maakt. Alleen "
-"gebruiken met betrouwbare LLM's."
-
-#: package/contents/ui/configTools.qml:333
-msgid "Session Multiplexer"
-msgstr "Sessie-multiplexer"
-
-#: package/contents/ui/configTools.qml:338
-msgid "Run commands inside a persistent session"
-msgstr "Opdrachten uitvoeren binnen een persistente sessie"
-
-#: package/contents/ui/configTools.qml:343
-msgid ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-msgstr ""
-"Voer LLM-opdrachten uit binnen een langlopende tmux- of screen-sessie zodat "
-"de status behouden blijft over meerdere beurten."
-
-#: package/contents/ui/configTools.qml:349
-msgid "Reset Session"
-msgstr "Sessie resetten"
-
-#: package/contents/ui/configTools.qml:362
-msgid "Backend:"
-msgstr "Backend:"
-
-#: package/contents/ui/configTools.qml:391
-msgid "Session name:"
-msgstr "Sessienaam:"
-
-#: package/contents/ui/configTools.qml:401
-msgid ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
-msgstr ""
-"Noch 'tmux' noch 'screen' is op uw systeem gevonden. Sessie-multiplexing is "
-"niet beschikbaar."
-
-#: package/contents/ui/configTools.qml:410
-msgid "Web Search"
-msgstr "Webzoekopdracht"
-
-#: package/contents/ui/configTools.qml:415
-msgid "Enable web search tool"
-msgstr "Webzoektool inschakelen"
-
-#: package/contents/ui/configTools.qml:419
-msgid "Allows the LLM to perform web searches."
-msgstr "Staat de LLM toe om webzoekopdrachten uit te voeren."
-
-#: package/contents/ui/configTools.qml:434
-msgid "Ollama API"
-msgstr "Ollama API"
-
-#: package/contents/ui/configTools.qml:435
-msgid "SearXNG"
-msgstr "SearXNG"
-
-#: package/contents/ui/configTools.qml:436
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-#: package/contents/ui/configTools.qml:462
-msgid "Ollama API key"
-msgstr "Ollama API-sleutel"
-
-#: package/contents/ui/configTools.qml:476
-#: package/contents/ui/configTools.qml:517
-#: package/contents/ui/configGeneral.qml:615
-msgid "Saving…"
-msgstr "Opslaan…"
-
-#: package/contents/ui/configTools.qml:477
-#: package/contents/ui/configTools.qml:518
-#: package/contents/ui/configGeneral.qml:616
-msgid "Saved"
-msgstr "Opgeslagen"
-
-#: package/contents/ui/configTools.qml:478
-#: package/contents/ui/configTools.qml:519
-#: package/contents/ui/configGeneral.qml:617
-msgid "Save to Config (Insecure)"
-msgstr "Opslaan in configuratie (onveilig)"
-
-#: package/contents/ui/configTools.qml:478
-#: package/contents/ui/configTools.qml:519
-#: package/contents/ui/configGeneral.qml:617
-msgid "Save Key"
-msgstr "Sleutel opslaan"
-
-#: package/contents/ui/configTools.qml:490
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG-instantie-URL (bijv. https://searx.be)"
-
-#: package/contents/ui/configTools.qml:503
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API-sleutel/Token (optioneel)"
-
-#: package/contents/ui/configTools.qml:528
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo vereist geen configuratie."
-
-#: package/contents/ui/configTools.qml:530
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr ""
-"Zorg ervoor dat op de SearXNG-instantie het JSON-formaat is ingeschakeld."
-
-#: package/contents/ui/configTools.qml:531
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr ""
-"Maakt LLM-geactiveerde webzoekopdrachten mogelijk via de zoek-API van Ollama"
+#: package/contents/ui/adapters/gemini.js:150
+msgid "no response — check your endpoint URL"
+msgstr "geen reactie — controleer de URL van uw eindpunt"
 
 #: package/contents/ui/ChatMessage.qml:107
 msgid "Thoughts"
@@ -682,6 +220,11 @@ msgstr "Kopiëren"
 msgid "Copy to clipboard"
 msgstr "Naar klembord kopiëren"
 
+#: package/contents/ui/CommandBlock.qml:120
+#: package/contents/ui/FullRepresentation.qml:1010
+msgid "Stop"
+msgstr "Stoppen"
+
 #: package/contents/ui/CommandBlock.qml:121
 msgid "Ran"
 msgstr "Uitgevoerd"
@@ -714,308 +257,1051 @@ msgstr "Script opslaan"
 msgid "Shell scripts (*.sh)"
 msgstr "Shell-scripts (*.sh)"
 
-#: package/contents/ui/configAppearance.qml:20
-msgid "Panel Title:"
-msgstr "Paneeltitel:"
+#: package/contents/ui/CommandBlock.qml:157
+#: package/contents/ui/FullRepresentation.qml:581
+msgid "All files (*)"
+msgstr "Alle bestanden (*)"
 
-#: package/contents/ui/configAppearance.qml:21
-msgid "Show provider and model in title"
-msgstr "Aanbieder en model in de titel weergeven"
+#: package/contents/ui/FullRepresentation.qml:22
+msgid "Toggle auto mode (auto-run + auto-share) for this session"
+msgstr "Toggle auto mode (auto-run + auto-share) for this session"
+"Automodus (auto-uitvoeren + auto-delen) in-/uitschakelen voor deze sessie"
 
-#: package/contents/ui/configAppearance.qml:32
+#: package/contents/ui/FullRepresentation.qml:23
+msgid "Clear the chat"
+msgstr "Chat wissen"
+
+#: package/contents/ui/FullRepresentation.qml:24
+msgid "Close the panel"
+msgstr "Paneel sluiten"
+
+#: package/contents/ui/FullRepresentation.qml:25
+msgid "Copy conversation to clipboard"
+msgstr "Gesprek naar klembord kopiëren"
+
+#: package/contents/ui/FullRepresentation.qml:26
+msgid "Open chat history folder"
+msgstr "Chatgeschiedenismap openen"
+
+#: package/contents/ui/FullRepresentation.qml:27
+msgid "Show or switch model (/model <name>)"
+msgstr "Model weergeven of wisselen (/model <name>)"
+
+#: package/contents/ui/FullRepresentation.qml:28
+msgid "Switch profile (/profile <name>)"
+msgstr "Switch profile (/profile <name>)"
+
+#: package/contents/ui/FullRepresentation.qml:29
+msgid "Run last command"
+msgstr "Laatste opdracht uitvoeren"
+
+#: package/contents/ui/FullRepresentation.qml:30
+msgid "Save chat to file"
+msgstr "Chat opslaan in bestand"
+
+#: package/contents/ui/FullRepresentation.qml:31
+msgid "Open settings"
+msgstr "Instellingen openen"
+
+#: package/contents/ui/FullRepresentation.qml:32
+msgid "Run a saved task (/task <name>)"
+msgstr "Een opgeslagen taak uitvoeren (/task <name>)"
+
+#: package/contents/ui/FullRepresentation.qml:33
+msgid "Run last command in terminal"
+msgstr "Laatste opdracht uitvoeren in terminal"
+
+#: package/contents/ui/FullRepresentation.qml:147
+#: package/contents/ui/FullRepresentation.qml:148
+msgid "Toggle Auto Mode"
+msgstr "Toggle Auto Mode"
+
+#: package/contents/ui/FullRepresentation.qml:157
+#: package/contents/ui/FullRepresentation.qml:158
+msgid "Run a task"
+msgstr "Een taak uitvoeren"
+
+#: package/contents/ui/FullRepresentation.qml:194
+#: package/contents/ui/FullRepresentation.qml:195
+msgid "Chat History"
+msgstr "Chatgeschiedenis"
+
+#: package/contents/ui/FullRepresentation.qml:220
+msgid "Loading..."
+msgstr "Laden..."
+
+#: package/contents/ui/FullRepresentation.qml:226
+msgid "No recent chats"
+msgstr "Geen recente chats"
+
+#: package/contents/ui/FullRepresentation.qml:235
+msgid "Open history folder..."
+msgstr "Geschiedenismap openen..."
+
+#: package/contents/ui/FullRepresentation.qml:247
+msgid "Clear all history..."
+msgstr "Alle geschiedenis wissen..."
+
+#: package/contents/ui/FullRepresentation.qml:289
+msgid "Clear All History"
+msgstr "Alle geschiedenis wissen"
+
+#: package/contents/ui/FullRepresentation.qml:295
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+
+"Weet u zeker dat u alle chatgeschiedenisbestanden wilt verwijderen? Deze "
+"actie kan niet ongedaan worden gemaakt."
+
+#: package/contents/ui/FullRepresentation.qml:304
+msgid "Clear All"
+msgstr "Alles wissen"
+
+#: package/contents/ui/FullRepresentation.qml:312
+#: package/contents/ui/configTasks.qml:83
+#: package/contents/ui/configGeneral.qml:587
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: package/contents/ui/FullRepresentation.qml:321
+#: package/contents/ui/FullRepresentation.qml:322
+msgid "Copy conversation"
+msgstr "Gesprek kopiëren"
+
+#: package/contents/ui/FullRepresentation.qml:331
+#: package/contents/ui/FullRepresentation.qml:391
+msgid "You"
+msgstr "U"
+
+#: package/contents/ui/FullRepresentation.qml:332
+#: package/contents/ui/FullRepresentation.qml:392
+msgid "Assistant"
+msgstr "Assistent"
+
+#: package/contents/ui/FullRepresentation.qml:333
+#: package/contents/ui/FullRepresentation.qml:393
+msgid "Command"
+msgstr "Opdracht"
+
+#: package/contents/ui/FullRepresentation.qml:334
+#: package/contents/ui/FullRepresentation.qml:394
+msgid "Error"
+msgstr "Fout"
+
+#: package/contents/ui/FullRepresentation.qml:348
+#: package/contents/ui/FullRepresentation.qml:349
+msgid "Clear chat"
+msgstr "Chat wissen"
+
+#: package/contents/ui/FullRepresentation.qml:358
+#: package/contents/ui/FullRepresentation.qml:359
+msgid "Settings"
+msgstr "Instellingen"
+
+#: package/contents/ui/FullRepresentation.qml:370
+#: package/contents/ui/FullRepresentation.qml:371
+msgid "Don't keep open"
+msgstr "Niet open houden"
+
+#: package/contents/ui/FullRepresentation.qml:370
+#: package/contents/ui/FullRepresentation.qml:371
+msgid "Keep open"
+msgstr "Open houden"
+
+#: package/contents/ui/FullRepresentation.qml:549
+msgid "Send a message to start chatting"
+msgstr "Stuur een bericht om te beginnen met chatten"
+
+#: package/contents/ui/FullRepresentation.qml:578
+msgid "Attach File"
+msgstr "Bestand bijvoegen"
+
+#: package/contents/ui/FullRepresentation.qml:581
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Afbeeldingen (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+#: package/contents/ui/FullRepresentation.qml:581
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+
+"Tekstbestanden (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
+"*.conf *.sh *.py *.js *.ts *.qml)"
+
+#: package/contents/ui/FullRepresentation.qml:669
+msgid "Message input"
+msgstr "Berichtinvoer"
+
+#: package/contents/ui/FullRepresentation.qml:670
+msgid "Type a message…"
+msgstr "Typ een bericht…"
+
+#: package/contents/ui/FullRepresentation.qml:670
+msgid "Initializing…"
+msgstr "Initialiseren…"
+
+#: package/contents/ui/FullRepresentation.qml:931
+#: package/contents/ui/configTasks.qml:55
+msgid "AUTO"
+msgstr "AUTO"
+
+#: package/contents/ui/FullRepresentation.qml:956
+msgid "Attach file or image"
+msgstr "Bestand of afbeelding bijvoegen"
+
+#: package/contents/ui/FullRepresentation.qml:963
+msgid "Kill"
+msgstr "Beëindigen"
+
+#: package/contents/ui/FullRepresentation.qml:967
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr "Kill persistent session (stops all processes and resets shell state)"
+"Persistente sessie beëindigen (stopt alle processen en reset shellstatus)"
+
+#: package/contents/ui/FullRepresentation.qml:986
+msgid "Send"
+msgstr "Verzenden"
+
+#: package/contents/ui/FullRepresentation.qml:1015
+msgid "Cancel LLM request"
+msgstr "LLM-verzoek annuleren"
+
+#: package/contents/ui/main.qml:172
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+
+
+#: package/contents/ui/main.qml:1118
+msgid ""
+"Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
+"are on)."
+msgstr ""
+"Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
+"are on)."
+
+"De automodus is permanent ingeschakeld via instellingen (zowel auto-"
+"uitvoeren als auto-delen zijn aan)."
+
+#: package/contents/ui/main.qml:1121
+msgid ""
+"Auto mode enabled for this session. Commands will run and share output "
+"automatically."
+msgstr ""
+"Auto mode enabled for this session. Commands will run and share output "
+"automatically."
+
+"Automodus ingeschakeld voor deze sessie. Opdrachten worden automatisch "
+"uitgevoerd en de uitvoer gedeeld."
+
+#: package/contents/ui/main.qml:1121
+msgid "Auto mode disabled."
+msgstr "Automodus uitgeschakeld."
+
+#: package/contents/ui/main.qml:1137 package/contents/ui/main.qml:2099
+msgid "Default"
+msgstr "Default"
+
+#: package/contents/ui/main.qml:1137
+msgid "Current profile: **%1**"
+msgstr "Current profile: **%1**"
+
+#: package/contents/ui/main.qml:1139
+msgid "Available profiles:"
+msgstr "Available profiles:"
+
+#: package/contents/ui/main.qml:1141
+msgid "active"
+msgstr "active"
+
+#: package/contents/ui/main.qml:1144
+msgid "Type `/profile <name>` to switch."
+msgstr "Type `/profile <name>` to switch."
+
+#: package/contents/ui/main.qml:1161
+msgid "Switched to profile: **%1**"
+msgstr "Switched to profile: **%1**"
+
+#: package/contents/ui/main.qml:1163
+msgid "Unknown profile: **%1**"
+msgstr "Unknown profile: **%1**"
+
+#: package/contents/ui/main.qml:1170 package/contents/ui/main.qml:1251
+msgid "none"
+msgstr "geen"
+
+#: package/contents/ui/main.qml:1170
+msgid "Current model: **%1**"
+msgstr "Huidig model: **%1**"
+
+#: package/contents/ui/main.qml:1172
+msgid "Available models:"
+msgstr "Beschikbare modellen:"
+
+#: package/contents/ui/main.qml:1174
+msgid "Type `/model <name>` to switch."
+msgstr "Typ `/model <name>` om te wisselen."
+
+#: package/contents/ui/main.qml:1176
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr "Geen modellen gecached. Gebruik **Modellen ophalen** in instellingen."
+
+#: package/contents/ui/main.qml:1201
+msgid "Switched to model: **%1**"
+msgstr "Overgeschakeld naar model: **%1**"
+
+#: package/contents/ui/main.qml:1210
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "Geen taken geconfigureerd. Voeg taken toe in Instellingen."
+
+#: package/contents/ui/main.qml:1212
+msgid "(auto)"
+msgstr "(auto)"
+
+#: package/contents/ui/main.qml:1213
+msgid "Available tasks:"
+msgstr "Beschikbare taken:"
+
+#: package/contents/ui/main.qml:1213
+msgid "Type `/task <name>` to run."
+msgstr "Typ `/task <name>` om uit te voeren."
+
+#: package/contents/ui/main.qml:1251
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Onbekende taak: **%1**. Beschikbaar: %2"
+
+#: package/contents/ui/main.qml:1265
+msgid "The user declined to run this command."
+msgstr "De gebruiker heeft geweigerd deze opdracht uit te voeren."
+
+#: package/contents/ui/main.qml:1475
+msgid "Searching the web…"
+msgstr "Webzoekopdracht uitvoeren…"
+
+#: package/contents/ui/main.qml:1503
+msgid "Web search failed: %1"
+msgstr "Webzoekopdracht mislukt: %1"
+
+#: package/contents/ui/main.qml:1802
+msgid "Session reset requested."
+msgstr "Sessie-reset aangevraagd."
+
+#: package/contents/ui/main.qml:1822 package/contents/ui/main.qml:1840
+msgid "Running: %1"
+msgstr "Uitvoeren: %1"
+
+#: package/contents/ui/main.qml:1853
+msgid "stderr: %1"
+msgstr "stderr: %1"
+
+#: package/contents/ui/main.qml:1855
+msgid "[truncated — output exceeded %1KB]"
+msgstr "[afgekapt — uitvoer overschreed %1KB]"
+
+#: package/contents/ui/main.qml:1857
+msgid "[exit code: %1]"
+msgstr "[afsluitcode: %1]"
+
+#: package/contents/ui/api.js:211
+msgid "Search provider %1 not supported"
+msgstr "Zoekaanbieder %1 niet ondersteund"
+
+#: package/contents/ui/api.js:244
+msgid "OpenAI-compatible"
+msgstr "OpenAI-compatibel"
+
+#: package/contents/ui/api.js:245
+msgid "Anthropic"
+msgstr "Anthropic"
+
+#: package/contents/ui/api.js:246
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+#: package/contents/ui/configAppearance.qml:18
+msgid "Profile Header:"
+msgstr "Profile Header:"
+
+#: package/contents/ui/configAppearance.qml:19
+msgid "Show provider and model in profile header"
+msgstr "Show provider and model in profile header"
+
+#: package/contents/ui/configAppearance.qml:30
 msgid "Chat Spacing: %1px"
 msgstr "Chatafstand: %1px"
 
-#: package/contents/ui/configAppearance.qml:49
+#: package/contents/ui/configAppearance.qml:47
 msgid "Compact"
 msgstr "Compact"
 
-#: package/contents/ui/configAppearance.qml:54
+#: package/contents/ui/configAppearance.qml:52
 msgid "Spacious"
 msgstr "Ruim"
 
-#: package/contents/ui/configAppearance.qml:66
+#: package/contents/ui/configAppearance.qml:64
 msgid "UI Font:"
 msgstr "UI-lettertype:"
 
-#: package/contents/ui/configAppearance.qml:67
+#: package/contents/ui/configAppearance.qml:65
 msgid "Use custom UI font"
 msgstr "Aangepast UI-lettertype gebruiken"
 
-#: package/contents/ui/configAppearance.qml:104
+#: package/contents/ui/configAppearance.qml:102
 msgid "Code Font:"
 msgstr "Code-lettertype:"
 
-#: package/contents/ui/configAppearance.qml:105
+#: package/contents/ui/configAppearance.qml:103
 msgid "Use custom code font"
 msgstr "Aangepast code-lettertype gebruiken"
 
-#: package/contents/ui/configAppearance.qml:137
+#: package/contents/ui/configAppearance.qml:135
 msgid "Thoughts Font:"
 msgstr "Gedachten-lettertype:"
 
-#: package/contents/ui/configAppearance.qml:138
+#: package/contents/ui/configAppearance.qml:136
 msgid "Use custom thoughts font"
 msgstr "Aangepast gedachten-lettertype gebruiken"
 
-#: package/contents/ui/configGeneral.qml:228
+#: package/contents/ui/configAppearance.qml:173
+msgid "Header Icons:"
+msgstr "Header Icons:"
+
+#: package/contents/ui/configAppearance.qml:178
+msgid "Profile Header"
+msgstr "Profile Header"
+
+#: package/contents/ui/configAppearance.qml:184
+msgid "Always show Tasks"
+msgstr "Always show Tasks"
+
+#: package/contents/ui/configAppearance.qml:190
+msgid "Always show Auto Toggle"
+msgstr "Always show Auto Toggle"
+
+#: package/contents/ui/configAppearance.qml:196
+msgid "Show History"
+msgstr "Show History"
+
+#: package/contents/ui/configAppearance.qml:202
+msgid "Show Copy conversation"
+msgstr "Show Copy conversation"
+
+#: package/contents/ui/configAppearance.qml:208
+msgid "Show Clear chat"
+msgstr "Show Clear chat"
+
+#: package/contents/ui/configAppearance.qml:214
+msgid "Show Settings"
+msgstr "Show Settings"
+
+#: package/contents/ui/configAppearance.qml:220
+msgid "Show Pin"
+msgstr "Show Pin"
+
+#: package/contents/ui/configSystemPrompt.qml:46
+msgid "System Info:"
+msgstr "Systeeminfo:"
+
+#: package/contents/ui/configSystemPrompt.qml:52
+msgid "OS"
+msgstr "OS"
+
+#: package/contents/ui/configSystemPrompt.qml:57
+msgid "Shell"
+msgstr "Shell"
+
+#: package/contents/ui/configSystemPrompt.qml:62
+msgid "Hostname"
+msgstr "Hostnaam"
+
+#: package/contents/ui/configSystemPrompt.qml:67
+msgid "Kernel"
+msgstr "Kernel"
+
+#: package/contents/ui/configSystemPrompt.qml:72
+msgid "Desktop"
+msgstr "Bureaublad"
+
+#: package/contents/ui/configSystemPrompt.qml:77
+msgid "User"
+msgstr "Gebruiker"
+
+#: package/contents/ui/configSystemPrompt.qml:82
+msgid "CPU"
+msgstr "CPU"
+
+#: package/contents/ui/configSystemPrompt.qml:87
+msgid "Memory"
+msgstr "Geheugen"
+
+#: package/contents/ui/configSystemPrompt.qml:92
+msgid "GPU"
+msgstr "GPU"
+
+#: package/contents/ui/configSystemPrompt.qml:97
+msgid "Block Devices"
+msgstr "Blokapparaten"
+
+#: package/contents/ui/configSystemPrompt.qml:102
+msgid "Network"
+msgstr "Netwerk"
+
+#: package/contents/ui/configSystemPrompt.qml:107
+msgid "Locale"
+msgstr "Landinstelling"
+
+#: package/contents/ui/configSystemPrompt.qml:112
+msgid "Date/Time"
+msgstr "Datum/Tijd"
+
+#: package/contents/ui/configSystemPrompt.qml:120
+msgid "Custom Instructions:"
+msgstr "Aangepaste instructies:"
+
+#: package/contents/ui/configSystemPrompt.qml:123
+msgid "Additional instructions for the LLM…"
+msgstr "Aanvullende instructies voor het LLM…"
+
+#: package/contents/ui/configSystemPrompt.qml:130
+msgid "Preview:"
+msgstr "Voorvertoning:"
+
+#: package/contents/ui/configTasks.qml:31
+msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
+msgstr "No tasks configured. Add a task to create reusable prompt shortcuts."
+"Geen taken geconfigureerd. Voeg een taak toe om herbruikbare "
+"promptsnelkoppelingen te maken."
+
+#: package/contents/ui/configTasks.qml:83
+msgid "Add Task"
+msgstr "Taak toevoegen"
+
+#: package/contents/ui/configTasks.qml:108
+msgid "Task name"
+msgstr "Taaknaam"
+
+#: package/contents/ui/configTasks.qml:115
+msgid "Prompt to send"
+msgstr "Te verzenden prompt"
+
+#: package/contents/ui/configTasks.qml:121
+msgid "Enable auto mode (auto-run + auto-share)"
+msgstr "Automodus inschakelen (auto-uitvoeren + auto-delen)"
+
+#: package/contents/ui/configTasks.qml:126
+msgid "Auto-submit task prompt to chat"
+msgstr "Taakvraag automatisch naar chat sturen"
+
+#: package/contents/ui/configTasks.qml:138
+msgid "Update Task"
+msgstr "Taak bijwerken"
+
+#: package/contents/ui/configTasks.qml:138
+msgid "Save Task"
+msgstr "Taak opslaan"
+
+#: package/contents/ui/configTasks.qml:146
+msgid "A task named \"%1\" already exists."
+msgstr "Er bestaat al een taak met de naam \"%1\"."
+
+#: package/contents/ui/configTasks.qml:168
+msgid ""
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with auto mode will temporarily enable auto-run "
+"and auto-share."
+msgstr ""
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with auto mode will temporarily enable auto-run "
+"and auto-share."
+
+"Taken zijn herbruikbare promptsnelkoppelingen. Gebruik /task <name> in de "
+"chat of de werkbalkknop om ze uit te voeren. Taken met automodus schakelen "
+"tijdelijk auto-uitvoeren en auto-delen in."
+
+#: package/contents/ui/configGeneral.qml:59
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr "Failed to fetch gcloud token (exit %1): %2"
+
+#: package/contents/ui/configGeneral.qml:320
 msgid "No models found."
 msgstr "Geen modellen gevonden."
 
-#: package/contents/ui/configGeneral.qml:333
+#: package/contents/ui/configGeneral.qml:455
+#: package/contents/ui/configGeneral.qml:531
+msgid "New Profile"
+msgstr "New Profile"
+
+#: package/contents/ui/configGeneral.qml:471
+msgid "%1 (Copy)"
+msgstr "%1 (Copy)"
+
+#: package/contents/ui/configGeneral.qml:509
+msgid "Profile:"
+msgstr "Profile:"
+
+#: package/contents/ui/configGeneral.qml:539
+#: package/contents/ui/configGeneral.qml:573
+msgid "Rename Profile"
+msgstr "Rename Profile"
+
+#: package/contents/ui/configGeneral.qml:547
+msgid "Duplicate Profile"
+msgstr "Duplicate Profile"
+
+#: package/contents/ui/configGeneral.qml:555
+msgid "Delete Profile"
+msgstr "Delete Profile"
+
+#: package/contents/ui/configGeneral.qml:577
+msgid "Profile Name"
+msgstr "Profile Name"
+
+#: package/contents/ui/configGeneral.qml:592
+msgid "Rename"
+msgstr "Rename"
+
+#: package/contents/ui/configGeneral.qml:612
 msgid "Adapter:"
 msgstr "Adapter:"
 
-#: package/contents/ui/configGeneral.qml:355
+#: package/contents/ui/configGeneral.qml:635
+msgid "Authentication:"
+msgstr "Authentication:"
+
+#: package/contents/ui/configGeneral.qml:638
+msgid "API Key (Express Mode)"
+msgstr "API Key (Express Mode)"
+
+#: package/contents/ui/configGeneral.qml:638
+msgid "Google Cloud CLI (gcloud)"
+msgstr "Google Cloud CLI (gcloud)"
+
+#: package/contents/ui/configGeneral.qml:648
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLI not found. Please install it to use this authentication method."
+
+
+#: package/contents/ui/configGeneral.qml:655
+msgid "API Variant:"
+msgstr "API Variant:"
+
+#: package/contents/ui/configGeneral.qml:659
+#: package/contents/ui/configGeneral.qml:660
+msgid "Legacy (generateContent)"
+msgstr "Legacy (generateContent)"
+
+#: package/contents/ui/configGeneral.qml:660
+msgid "Interactions API (Stateful)"
+msgstr "Interactions API (Stateful)"
+
+#: package/contents/ui/configGeneral.qml:680
+msgid "Platform:"
+msgstr "Platform:"
+
+#: package/contents/ui/configGeneral.qml:683
+msgid "Google AI Studio"
+msgstr "Google AI Studio"
+
+#: package/contents/ui/configGeneral.qml:683
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr "Google Cloud Agent Platform (Vertex AI)"
+
+#: package/contents/ui/configGeneral.qml:697
+msgid "Project ID:"
+msgstr "Project ID:"
+
+#: package/contents/ui/configGeneral.qml:710
+msgid "Location:"
+msgstr "Location:"
+
+#: package/contents/ui/configGeneral.qml:724
 msgid "Provider:"
 msgstr "Aanbieder:"
 
-#: package/contents/ui/configGeneral.qml:452
+#: package/contents/ui/configGeneral.qml:821
 msgid "API Endpoint:"
 msgstr "API-eindpunt:"
 
-#: package/contents/ui/configGeneral.qml:479
+#: package/contents/ui/configGeneral.qml:849
+#: package/contents/ui/configGeneral.qml:857
 msgid "Model:"
 msgstr "Model:"
 
-#: package/contents/ui/configGeneral.qml:575
+#: package/contents/ui/configGeneral.qml:955
 msgid "Refreshing…"
 msgstr "Vernieuwen…"
 
-#: package/contents/ui/configGeneral.qml:575
+#: package/contents/ui/configGeneral.qml:955
 msgid "Refresh model list"
 msgstr "Modellijst vernieuwen"
 
-#: package/contents/ui/configGeneral.qml:593
+#: package/contents/ui/configGeneral.qml:973
 msgid "API Key:"
 msgstr "API-sleutel:"
 
-#: package/contents/ui/configGeneral.qml:600
+#: package/contents/ui/configGeneral.qml:981
+msgid "Paste short-lived access token"
+msgstr "Paste short-lived access token"
+
+#: package/contents/ui/configGeneral.qml:981
 msgid "Optional - for OpenAI, etc."
 msgstr "Optioneel – voor OpenAI, enz."
 
-#: package/contents/ui/configGeneral.qml:626
+#: package/contents/ui/configGeneral.qml:996
+#: package/contents/ui/configTools.qml:524
+#: package/contents/ui/configTools.qml:565
+msgid "Saving…"
+msgstr "Opslaan…"
+
+#: package/contents/ui/configGeneral.qml:997
+#: package/contents/ui/configTools.qml:525
+#: package/contents/ui/configTools.qml:566
+msgid "Saved"
+msgstr "Opgeslagen"
+
+#: package/contents/ui/configGeneral.qml:998
+#: package/contents/ui/configTools.qml:526
+#: package/contents/ui/configTools.qml:567
+msgid "Save to Config (Insecure)"
+msgstr "Opslaan in configuratie (onveilig)"
+
+#: package/contents/ui/configGeneral.qml:998
+#: package/contents/ui/configTools.qml:526
+#: package/contents/ui/configTools.qml:567
+msgid "Save Key"
+msgstr "Sleutel opslaan"
+
+#: package/contents/ui/configGeneral.qml:1007
 msgid "Stored in KDE Wallet"
 msgstr "Opgeslagen in KDE Wallet"
 
-#: package/contents/ui/configGeneral.qml:626
+#: package/contents/ui/configGeneral.qml:1007
 msgid "KDE Wallet unavailable — key stored in config file"
-msgstr ""
+msgstr "KDE Wallet unavailable — key stored in config file"
 "KDE Wallet niet beschikbaar — sleutel opgeslagen in configuratiebestand"
 
-#: package/contents/ui/configGeneral.qml:641
+#: package/contents/ui/configGeneral.qml:1022
 #, javascript-format
 msgid "Temperature: %1%"
 msgstr "Temperatuur: %1%"
 
-#: package/contents/ui/configGeneral.qml:658
+#: package/contents/ui/configGeneral.qml:1039
 msgid "Precise"
 msgstr "Precies"
 
-#: package/contents/ui/configGeneral.qml:663
+#: package/contents/ui/configGeneral.qml:1044
 msgid "Creative"
 msgstr "Creatief"
 
-#: package/contents/ui/configGeneral.qml:671
+#: package/contents/ui/configGeneral.qml:1052
 msgid "Max Tokens:"
 msgstr "Max. tokens:"
 
-#: package/contents/ui/configGeneral.qml:682
+#: package/contents/ui/configGeneral.qml:1063
 msgid "Thinking:"
 msgstr "Nadenken:"
 
-#: package/contents/ui/configGeneral.qml:686
+#: package/contents/ui/configGeneral.qml:1067
 msgid "Off"
 msgstr "Uit"
 
-#: package/contents/ui/configGeneral.qml:686
+#: package/contents/ui/configGeneral.qml:1067
 msgid "Low"
 msgstr "Laag"
 
-#: package/contents/ui/configGeneral.qml:686
+#: package/contents/ui/configGeneral.qml:1067
 msgid "Medium"
 msgstr "Gemiddeld"
 
-#: package/contents/ui/configGeneral.qml:686
+#: package/contents/ui/configGeneral.qml:1067
 msgid "High"
 msgstr "Hoog"
 
-#: package/contents/ui/configGeneral.qml:695
+#: package/contents/ui/configGeneral.qml:1076
 msgid "Thinking budget:"
 msgstr "Denkbudget:"
 
-#: package/contents/ui/configGeneral.qml:722
+#: package/contents/ui/configGeneral.qml:1103
 msgid "Show thoughts in chat (collapsible)"
 msgstr "Gedachten in chat tonen (inklapbaar)"
 
-#: package/contents/ui/configGeneral.qml:727
+#: package/contents/ui/configGeneral.qml:1108
 msgid ""
 "When enabled, the model's reasoning is shown above each reply with a "
 "collapsible header. Round-trip of signed thoughts to the API still happens "
 "regardless of this setting."
 msgstr ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+
 "Wanneer ingeschakeld wordt het redeneerproces van het model boven elk "
 "antwoord getoond met een inklapbare kop. De uitwisseling van ondertekende "
 "gedachten met de API vindt plaats ongeacht deze instelling."
 
-#: package/contents/ui/configGeneral.qml:734
+#: package/contents/ui/configGeneral.qml:1115
 msgid "Use Responses API"
 msgstr "Responses API gebruiken"
 
-#: package/contents/ui/configGeneral.qml:739
+#: package/contents/ui/configGeneral.qml:1120
 msgid ""
 "Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
 "(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
 "picking a preset."
 msgstr ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+
 "Vereist om redeneercontent weer te geven op OpenAI / Poe / OpenRouter / "
 "Azure (POST naar /v1/responses in plaats van /v1/chat/completions). "
 "Automatisch ingesteld bij het kiezen van een preset."
 
-#: package/contents/ui/configGeneral.qml:753
+#: package/contents/ui/configGeneral.qml:1134
 msgid "Chat History:"
 msgstr "Chatgeschiedenis:"
 
-#: package/contents/ui/configGeneral.qml:754
+#: package/contents/ui/configGeneral.qml:1135
 msgid "Auto-save chat history"
 msgstr "Chatgeschiedenis automatisch opslaan"
 
-#: package/contents/ui/configGeneral.qml:758
-#: package/contents/ui/configGeneral.qml:773
+#: package/contents/ui/configGeneral.qml:1139
+#: package/contents/ui/configGeneral.qml:1154
 msgid "Saves to ~/PlasmaLLM/chats/"
 msgstr "Slaat op in ~/PlasmaLLM/chats/"
 
-#: package/contents/ui/configGeneral.qml:765
+#: package/contents/ui/configGeneral.qml:1146
 msgid "Save format:"
 msgstr "Opslagformaat:"
 
-#: package/contents/ui/configGeneral.qml:766
+#: package/contents/ui/configGeneral.qml:1147
 msgid "Plain text (.txt)"
 msgstr "Platte tekst (.txt)"
 
-#: package/contents/ui/configGeneral.qml:766
+#: package/contents/ui/configGeneral.qml:1147
 msgid "Structured (.jsonl)"
 msgstr "Gestructureerd (.jsonl)"
 
-#: package/contents/ui/configGeneral.qml:785
+#: package/contents/ui/configGeneral.qml:1166
 msgid "Auto-clear:"
 msgstr "Automatisch wissen:"
 
-#: package/contents/ui/configGeneral.qml:789
+#: package/contents/ui/configGeneral.qml:1170
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
-#: package/contents/ui/configGeneral.qml:795
+#: package/contents/ui/configGeneral.qml:1176
 msgid "Instant (always clear when panel opens)"
 msgstr "Onmiddellijk (altijd wissen bij openen paneel)"
 
-#: package/contents/ui/configGeneral.qml:804
+#: package/contents/ui/configGeneral.qml:1185
 msgid "After"
 msgstr "Na"
 
-#: package/contents/ui/configGeneral.qml:823
+#: package/contents/ui/configGeneral.qml:1204
 msgid "seconds"
 msgstr "seconden"
 
-#: package/contents/ui/configGeneral.qml:823
+#: package/contents/ui/configGeneral.qml:1204
 msgid "minutes"
 msgstr "minuten"
 
-#: package/contents/ui/main.qml:1012
+#: package/contents/ui/configTools.qml:287
+msgid "Commands"
+msgstr "Opdrachten"
+
+#: package/contents/ui/configTools.qml:292
+msgid "Auto-run commands from LLM"
+msgstr "Opdrachten van LLM automatisch uitvoeren"
+
+#: package/contents/ui/configTools.qml:296
 msgid ""
-"Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
-"are on)."
+"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
+"share."
 msgstr ""
-"De automodus is permanent ingeschakeld via instellingen (zowel auto-"
-"uitvoeren als auto-delen zijn aan)."
+"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
+"share."
 
-#: package/contents/ui/main.qml:1015
+"Sta de LLM toe om shell-opdrachten uit te voeren. Gevaarlijk in combinatie "
+"met Automatisch delen."
+
+#: package/contents/ui/configTools.qml:303
+msgid "Run as tool"
+msgstr "Uitvoeren als tool"
+
+#: package/contents/ui/configTools.qml:307
 msgid ""
-"Auto mode enabled for this session. Commands will run and share output "
-"automatically."
+"Use the run_command tool for command execution. If disabled, falls back to "
+"parsing code blocks."
 msgstr ""
-"Automodus ingeschakeld voor deze sessie. Opdrachten worden automatisch "
-"uitgevoerd en de uitvoer gedeeld."
+"Use the run_command tool for command execution. If disabled, falls back to "
+"parsing code blocks."
 
-#: package/contents/ui/main.qml:1015
-msgid "Auto mode disabled."
-msgstr "Automodus uitgeschakeld."
+"Gebruik de run_command-tool voor het uitvoeren van opdrachten. Indien "
+"uitgeschakeld, valt het terug op het parseren van codeblokken."
 
-#: package/contents/ui/main.qml:1030 package/contents/ui/main.qml:1095
-msgid "none"
-msgstr "geen"
+#: package/contents/ui/configTools.qml:314
+msgid "Auto-share command output with LLM"
+msgstr "Opdrachtuitvoer automatisch delen met LLM"
 
-#: package/contents/ui/main.qml:1030
-msgid "Current model: **%1**"
-msgstr "Huidig model: **%1**"
+#: package/contents/ui/configTools.qml:318
+msgid "Automatically send command execution results back to the LLM"
+msgstr "Resultaten van opdrachtuitvoering automatisch terugsturen naar de LLM"
 
-#: package/contents/ui/main.qml:1032
-msgid "Available models:"
-msgstr "Beschikbare modellen:"
+#: package/contents/ui/configTools.qml:325
+msgid ""
+"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
+"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
+msgstr ""
+"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
+"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
 
-#: package/contents/ui/main.qml:1034
-msgid "Type `/model <name>` to switch."
-msgstr "Typ `/model <name>` om te wisselen."
+"⚠️ GEVAAR: Beide opties ingeschakeld — het LLM kan nu opdrachten uitvoeren en "
+"hun uitvoer zien, wat een agentische workflow mogelijk maakt. Alleen "
+"gebruiken met betrouwbare LLM's."
 
-#: package/contents/ui/main.qml:1036
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "Geen modellen gecached. Gebruik **Modellen ophalen** in instellingen."
+#: package/contents/ui/configTools.qml:336
+msgid "Session Multiplexer"
+msgstr "Sessie-multiplexer"
 
-#: package/contents/ui/main.qml:1045
-msgid "Switched to model: **%1**"
-msgstr "Overgeschakeld naar model: **%1**"
+#: package/contents/ui/configTools.qml:341
+msgid "Run commands inside a persistent session"
+msgstr "Opdrachten uitvoeren binnen een persistente sessie"
 
-#: package/contents/ui/main.qml:1054
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "Geen taken geconfigureerd. Voeg taken toe in Instellingen."
+#: package/contents/ui/configTools.qml:346
+msgid ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
+msgstr ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
 
-#: package/contents/ui/main.qml:1056
-msgid "(auto)"
-msgstr "(auto)"
+"Voer LLM-opdrachten uit binnen een langlopende tmux- of screen-sessie zodat "
+"de status behouden blijft over meerdere beurten."
 
-#: package/contents/ui/main.qml:1057
-msgid "Available tasks:"
-msgstr "Beschikbare taken:"
+#: package/contents/ui/configTools.qml:352
+msgid "Reset Session"
+msgstr "Sessie resetten"
 
-#: package/contents/ui/main.qml:1057
-msgid "Type `/task <name>` to run."
-msgstr "Typ `/task <name>` om uit te voeren."
+#: package/contents/ui/configTools.qml:365
+msgid "Backend:"
+msgstr "Backend:"
 
-#: package/contents/ui/main.qml:1095
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "Onbekende taak: **%1**. Beschikbaar: %2"
+#: package/contents/ui/configTools.qml:394
+msgid "Session name:"
+msgstr "Sessienaam:"
 
-#: package/contents/ui/main.qml:1109
-msgid "The user declined to run this command."
-msgstr "De gebruiker heeft geweigerd deze opdracht uit te voeren."
+#: package/contents/ui/configTools.qml:404
+msgid ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
+msgstr ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
 
-#: package/contents/ui/main.qml:1307
-msgid "Searching the web…"
-msgstr "Webzoekopdracht uitvoeren…"
+"Noch 'tmux' noch 'screen' is op uw systeem gevonden. Sessie-multiplexing is "
+"niet beschikbaar."
 
-#: package/contents/ui/main.qml:1335
-msgid "Web search failed: %1"
-msgstr "Webzoekopdracht mislukt: %1"
+#: package/contents/ui/configTools.qml:413
+msgid "Native Adapter Features"
+msgstr "Native Adapter Features"
 
-#: package/contents/ui/main.qml:1615
-msgid "Session reset requested."
-msgstr "Sessie-reset aangevraagd."
+#: package/contents/ui/configTools.qml:419
+msgid "Enable Native Google Search Grounding"
+msgstr "Enable Native Google Search Grounding"
 
-#: package/contents/ui/main.qml:1635 package/contents/ui/main.qml:1653
-msgid "Running: %1"
-msgstr "Uitvoeren: %1"
+#: package/contents/ui/configTools.qml:427
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
 
-#: package/contents/ui/main.qml:1666
-msgid "stderr: %1"
-msgstr "stderr: %1"
 
-#: package/contents/ui/main.qml:1668
-msgid "[truncated — output exceeded %1KB]"
-msgstr "[afgekapt — uitvoer overschreed %1KB]"
+#: package/contents/ui/configTools.qml:434
+msgid "Enable Native Python Code Execution"
+msgstr "Enable Native Python Code Execution"
 
-#: package/contents/ui/main.qml:1670
-msgid "[exit code: %1]"
-msgstr "[afsluitcode: %1]"
+#: package/contents/ui/configTools.qml:442
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+
+
+#: package/contents/ui/configTools.qml:450
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+
+
+#: package/contents/ui/configTools.qml:458
+msgid "Standard Web Search"
+msgstr "Standard Web Search"
+
+#: package/contents/ui/configTools.qml:463
+msgid "Enable web search tool"
+msgstr "Webzoektool inschakelen"
+
+#: package/contents/ui/configTools.qml:467
+msgid "Allows the LLM to perform web searches."
+msgstr "Staat de LLM toe om webzoekopdrachten uit te voeren."
+
+#: package/contents/ui/configTools.qml:482
+msgid "Ollama API"
+msgstr "Ollama API"
+
+#: package/contents/ui/configTools.qml:483
+msgid "SearXNG"
+msgstr "SearXNG"
+
+#: package/contents/ui/configTools.qml:484
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#: package/contents/ui/configTools.qml:510
+msgid "Ollama API key"
+msgstr "Ollama API-sleutel"
+
+#: package/contents/ui/configTools.qml:538
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG-instantie-URL (bijv. https://searx.be)"
+
+#: package/contents/ui/configTools.qml:551
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API-sleutel/Token (optioneel)"
+
+#: package/contents/ui/configTools.qml:576
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo vereist geen configuratie."
+
+#: package/contents/ui/configTools.qml:578
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Ensure the SearXNG instance has the JSON format enabled."
+"Zorg ervoor dat op de SearXNG-instantie het JSON-formaat is ingeschakeld."
+
+#: package/contents/ui/configTools.qml:579
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Enables LLM-triggered web searches via Ollama's search API"
+"Maakt LLM-geactiveerde webzoekopdrachten mogelijk via de zoek-API van Ollama"
 
 #: package/contents/config/config.qml:11
 msgid "General"
@@ -1036,6 +1322,15 @@ msgstr "Taken"
 #: package/contents/config/config.qml:31
 msgid "Tools"
 msgstr "Hulpmiddelen"
+
+#~ msgid "Web Search"
+#~ msgstr "Webzoekopdracht"
+
+#~ msgid "Panel Title:"
+#~ msgstr "Paneeltitel:"
+
+#~ msgid "Show provider and model in title"
+#~ msgstr "Aanbieder en model in de titel weergeven"
 
 #~ msgid "Appearance:"
 #~ msgstr "Uiterlijk:"
