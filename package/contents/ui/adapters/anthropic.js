@@ -3,6 +3,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+.import "../toolManager.js" as ToolManager
+
 // Native Anthropic Messages API adapter (POST /v1/messages, GET /v1/models).
 // Translates the host's OpenAI-shaped neutral form to/from Anthropic wire
 // format:
@@ -85,37 +87,16 @@ function fetchModels(endpoint, apiKey, callback) {
 
 function buildTools(options) {
     var tools = [];
-    var commandToolEnabled = options && options.commandToolEnabled;
-    var webSearchEnabled = options && options.webSearchEnabled;
-    var searchConfigured = options && options.searchConfigured;
 
-    if (webSearchEnabled && searchConfigured) {
-        tools.push({
-            name: "web_search",
-            description: "Search the web for current information. Use when you need up-to-date facts, recent events, or information you're not confident about.",
-            input_schema: {
-                type: "object",
-                properties: {
-                    query: { type: "string", description: "Search query" },
-                    max_results: { type: "integer", description: "Max results (1-10, default 5)" }
-                },
-                required: ["query"]
-            }
-        });
-    }
-
-    if (commandToolEnabled) {
-        tools.push({
-            name: "run_command",
-            description: "Execute a shell command on the user's system and return its output. Use this to run commands when the user asks you to perform system tasks.",
-            input_schema: {
-                type: "object",
-                properties: {
-                    command: { type: "string", description: "The shell command to execute" }
-                },
-                required: ["command"]
-            }
-        });
+    if (options && options.toolsConfig) {
+        var metadata = ToolManager.getEnabledToolsMetadata(options.toolsConfig);
+        for (var i = 0; i < metadata.length; i++) {
+            tools.push({
+                name: metadata[i].name,
+                description: metadata[i].description,
+                input_schema: metadata[i].parameters
+            });
+        }
     }
 
     return tools;
@@ -532,6 +513,7 @@ function sendStreaming(opts) {
     }
 
     var payload = JSON.stringify(body, null, 2);
+    console.error("PlasmaLLM DEBUG Anthropic payload:", payload);
     xhr.send(payload);
 
     var handle = {

@@ -3,6 +3,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+.import "../toolManager.js" as ToolManager
+
 // Chat Completions strategy for the OpenAI-compatible adapter.
 // Dispatched by openai.js when the active provider does not use the
 // /v1/responses endpoint. The "neutral" wire shapes (messages array,
@@ -50,43 +52,19 @@ function fetchModels(endpoint, apiKey, callback) {
 
 function buildTools(options) {
     var tools = [];
-    var commandToolEnabled = options && options.commandToolEnabled;
-    var webSearchEnabled = options && options.webSearchEnabled;
-    var searchConfigured = options && options.searchConfigured;
 
-    if (webSearchEnabled && searchConfigured) {
-        tools.push({
-            type: "function",
-            "function": {
-                name: "web_search",
-                description: "Search the web for current information. Use when you need up-to-date facts, recent events, or information you're not confident about.",
-                parameters: {
-                    type: "object",
-                    properties: {
-                        query: { type: "string", description: "Search query" },
-                        max_results: { type: "integer", description: "Max results (1-10, default 5)" }
-                    },
-                    required: ["query"]
+    if (options && options.toolsConfig) {
+        var metadata = ToolManager.getEnabledToolsMetadata(options.toolsConfig);
+        for (var i = 0; i < metadata.length; i++) {
+            tools.push({
+                type: "function",
+                "function": {
+                    name: metadata[i].name,
+                    description: metadata[i].description,
+                    parameters: metadata[i].parameters
                 }
-            }
-        });
-    }
-
-    if (commandToolEnabled) {
-        tools.push({
-            type: "function",
-            "function": {
-                name: "run_command",
-                description: "Execute a shell command on the user's system and return its output. Use this to run commands when the user asks you to perform system tasks.",
-                parameters: {
-                    type: "object",
-                    properties: {
-                        command: { type: "string", description: "The shell command to execute" }
-                    },
-                    required: ["command"]
-                }
-            }
-        });
+            });
+        }
     }
 
     return tools;
@@ -206,7 +184,7 @@ function sendStreaming(opts) {
                     var idx = tcd.index !== undefined ? tcd.index : 0;
                     if (!accumulatedToolCalls[idx]) {
                         accumulatedToolCalls[idx] = {
-                            id: tcd.id || "",
+                            id: tcd.id || ("call_" + Math.random().toString(36).substring(2, 10)),
                             type: tcd.type || "function",
                             "function": { name: "", arguments: "" }
                         };
@@ -214,7 +192,13 @@ function sendStreaming(opts) {
                     if (tcd.id) accumulatedToolCalls[idx].id = tcd.id;
                     if (tcd["function"]) {
                         if (tcd["function"].name) accumulatedToolCalls[idx]["function"].name += tcd["function"].name;
-                        if (tcd["function"].arguments) accumulatedToolCalls[idx]["function"]["arguments"] += tcd["function"]["arguments"];
+                        if (tcd["function"].arguments) {
+                            var deltaArgs = tcd["function"].arguments;
+                            if (typeof deltaArgs === "object") {
+                                try { deltaArgs = JSON.stringify(deltaArgs); } catch(e) { deltaArgs = ""; }
+                            }
+                            accumulatedToolCalls[idx]["function"]["arguments"] += deltaArgs;
+                        }
                     }
                 }
             }
@@ -311,6 +295,7 @@ function sendStreaming(opts) {
     }
 
     var payload = JSON.stringify(body, null, 2);
+    console.error("PlasmaLLM DEBUG payload:", payload);
     xhr.send(payload);
 
     var handle = {

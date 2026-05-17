@@ -9,18 +9,27 @@ import "profiles.js" as Profiles
 
 SimpleKCM {
     id: basePage
+    
+    readonly property var rootItem: basePage
 
     // Declared here because Plasma injects all cfg_ properties onto every config page.
     // By centralizing them in this base component, we avoid duplication and console warnings.
 
     property bool _switchingProfile: false
+    property bool _initialized: false
+
+    Component.onCompleted: {
+        // Use a timer to ensure all child components have finished their own onCompleted
+        // and any initial bindings have settled.
+        Qt.callLater(() => { _initialized = true; });
+    }
 
     Timer {
         id: captureDebounce
         interval: 250
         repeat: false
         onTriggered: {
-            if (_switchingProfile) return;
+            if (!_initialized || _switchingProfile) return;
             var profiles = Profiles.loadProfilesRaw(cfg_profiles);
             var active = Profiles.getActive(profiles, cfg_activeProfileId);
             if (!active) return;
@@ -31,12 +40,15 @@ SimpleKCM {
                     break;
                 }
             }
-            cfg_profiles = JSON.stringify(profiles);
+            var newBlob = JSON.stringify(profiles);
+            if (cfg_profiles !== newBlob) {
+                cfg_profiles = newBlob;
+            }
         }
     }
 
     function triggerCapture() {
-        if (_switchingProfile) return;
+        if (!_initialized || _switchingProfile) return;
         captureDebounce.restart();
     }
 
@@ -213,4 +225,58 @@ SimpleKCM {
     property bool cfg_showIconSettingsDefault
     property bool cfg_showIconPin
     property bool cfg_showIconPinDefault
+
+    property bool cfg_enableTools
+    property bool cfg_enableToolsDefault
+
+    property bool cfg_toolsReadFileEnabled
+    property bool cfg_toolsReadFileEnabledDefault
+    property bool cfg_toolsReadFileAutoRun
+    property bool cfg_toolsReadFileAutoRunDefault
+    property bool cfg_toolsWriteFileEnabled
+    property bool cfg_toolsWriteFileEnabledDefault
+    property bool cfg_toolsWriteFileAutoRun
+    property bool cfg_toolsWriteFileAutoRunDefault
+    property bool cfg_toolsListDirEnabled
+    property bool cfg_toolsListDirEnabledDefault
+    property bool cfg_toolsListDirAutoRun
+    property bool cfg_toolsListDirAutoRunDefault
+    property bool cfg_toolsHttpGetEnabled
+    property bool cfg_toolsHttpGetEnabledDefault
+    property bool cfg_toolsHttpGetAutoRun
+    property bool cfg_toolsHttpGetAutoRunDefault
+    property bool cfg_toolsHttpRequestEnabled
+    property bool cfg_toolsHttpRequestEnabledDefault
+    property bool cfg_toolsHttpRequestAutoRun
+    property bool cfg_toolsHttpRequestAutoRunDefault
+    property bool cfg_toolsSearchFilesEnabled
+    property bool cfg_toolsSearchFilesEnabledDefault
+    property bool cfg_toolsSearchFilesAutoRun
+    property bool cfg_toolsSearchFilesAutoRunDefault
+    property bool cfg_toolsGetClipboardEnabled
+    property bool cfg_toolsGetClipboardEnabledDefault
+    property bool cfg_toolsGetClipboardAutoRun
+    property bool cfg_toolsGetClipboardAutoRunDefault
+    property bool cfg_toolsSetClipboardEnabled
+    property bool cfg_toolsSetClipboardEnabledDefault
+    property bool cfg_toolsSetClipboardAutoRun
+    property bool cfg_toolsSetClipboardAutoRunDefault
+    property bool cfg_toolsNotifyEnabled
+    property bool cfg_toolsNotifyEnabledDefault
+    property bool cfg_toolsNotifyAutoRun
+    property bool cfg_toolsNotifyAutoRunDefault
+    property bool cfg_toolsOpenUrlEnabled
+    property bool cfg_toolsOpenUrlEnabledDefault
+    property bool cfg_toolsOpenUrlAutoRun
+    property bool cfg_toolsOpenUrlAutoRunDefault
+    property string cfg_toolsPathWhitelist
+    property string cfg_toolsPathWhitelistDefault
+    property int cfg_toolsReadMaxBytes
+    property int cfg_toolsReadMaxBytesDefault
+    property int cfg_toolsWriteMaxBytes
+    property int cfg_toolsWriteMaxBytesDefault
+    property int cfg_toolsHttpMaxBytes
+    property int cfg_toolsHttpMaxBytesDefault
+    property string cfg_customTools
+    property string cfg_customToolsDefault
 }

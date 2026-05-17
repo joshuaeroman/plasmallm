@@ -12,7 +12,7 @@ PlasmaLLM is designed for quick questions and system tasks right from your panel
 - System-aware: automatically gathers hardware and OS info for contextual responses
 - Interactive command blocks: run, copy, save, or open suggested shell commands in a terminal
 - Markdown rendering for assistant responses
-- Auto-run and auto-share modes for agentic workflows
+- Skip approvals mode for agentic workflows
 - Chat history auto-save
 - Configurable provider presets, temperature, max tokens, and custom system prompts
 
@@ -98,8 +98,7 @@ Right-click the widget and open **Configure...**. Settings include:
 - **API Key**: required for cloud providers
 - **Temperature / Max Tokens**: control response behavior
 - **Auto-save chat history**: saves conversations to `~/PlasmaLLM/chats/`
-- **Auto-run commands**: automatically executes shell commands from LLM responses
-- **Auto-share command output**: sends command output back to the LLM (enables agentic loops when combined with auto-run)
+- **Skip approvals**: automatically executes tools and sends output back to the LLM (enables agentic loops)
 - **Custom system prompt**: appended to the built-in prompt with highest precedence
 
 ## Support

@@ -19,18 +19,18 @@ PlasmaExtras.Representation {
     id: fullRep
 
     readonly property var slashCommands: [
-        { cmd: "/auto",     desc: i18n("Toggle auto mode (auto-run + auto-share) for this session") },
+        { cmd: "/approve",  desc: i18n("Approve the pending tool request") },
+        { cmd: "/auto",     desc: i18n("Toggle skip approvals for this session") },
         { cmd: "/clear",    desc: i18n("Clear the chat") },
         { cmd: "/close",    desc: i18n("Close the panel") },
         { cmd: "/copy",     desc: i18n("Copy conversation to clipboard") },
+        { cmd: "/deny",     desc: i18n("Deny the pending tool request") },
         { cmd: "/history",  desc: i18n("Open chat history folder") },
         { cmd: "/model",    desc: i18n("Show or switch model (/model <name>)") },
         { cmd: "/profile",  desc: i18n("Switch profile (/profile <name>)") },
-        { cmd: "/run",      desc: i18n("Run last command") },
         { cmd: "/save",     desc: i18n("Save chat to file") },
         { cmd: "/settings", desc: i18n("Open settings") },
         { cmd: "/task",     desc: i18n("Run a saved task (/task <name>)") },
-        { cmd: "/term",     desc: i18n("Run last command in terminal") },
     ]
 
     property var configuredTasks: {
@@ -143,9 +143,8 @@ PlasmaExtras.Representation {
                 visible: Plasmoid.configuration.showIconAuto || root.isAutoMode
                 checkable: true
                 checked: root.isAutoMode
-                enabled: !(Plasmoid.configuration.autoRunCommands && Plasmoid.configuration.autoShareCommandOutput)
-                Accessible.name: i18n("Toggle Auto Mode")
-                PlasmaComponents.ToolTip.text: i18n("Toggle Auto Mode")
+                Accessible.name: i18n("Toggle Full Auto Mode")
+                PlasmaComponents.ToolTip.text: i18n("Toggle Full Auto Mode: When enabled, all tools run automatically for this session.")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered
                 onClicked: root.sendMessage("/auto")
@@ -411,6 +410,8 @@ PlasmaExtras.Representation {
         Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
+            Layout.leftMargin: Plasmoid.configuration.chatSpacing
+            Layout.rightMargin: Plasmoid.configuration.chatSpacing
 
             PlasmaComponents.ScrollView {
                 anchors.fill: parent
@@ -418,16 +419,14 @@ PlasmaExtras.Representation {
             ListView {
                 id: messageList
                 clip: true
-                spacing: 0
+                spacing: Plasmoid.configuration.chatSpacing
                 headerPositioning: ListView.OverlayHeader
                 header: Item { height: Plasmoid.configuration.chatSpacing }
                 model: root.displayMessages
-                // Keep delegates alive well beyond the viewport so their
-                // measured heights don't churn as the user scrolls — that
-                // churn was making contentHeight oscillate (e.g. 1648→4240
-                // in one tick) which yanks the visible scroll position.
-                cacheBuffer: Math.max(2000, height * 4)
-                reuseItems: false
+                // Use reuseItems: true to avoid the "destruction/recreation" loop
+                // observed with complex delegates and structural model changes.
+                cacheBuffer: height * 2
+                reuseItems: true
 
                 // Track whether user is near the bottom to avoid fighting manual scrolling.
                 // nearBottomThreshold gives some slack so small upward scrolls still
@@ -456,21 +455,50 @@ PlasmaExtras.Representation {
                     width: messageList.width
                     role: model.role
                     content: model.content
-                    thinking: model.thinking ? model.thinking : ""
-                    commandsStr: model.commandsStr ? model.commandsStr : ""
-                    shared: model.shared ? model.shared : false
-                    messageIndex: model.index
-                    timestamp: model.timestamp ? model.timestamp : ""
-                    attachmentsStr: model.attachmentsStr ? model.attachmentsStr : ""
+                    thinking: model.thinking !== undefined ? model.thinking : ""
+                    shared: model.shared !== undefined ? model.shared : false
+                    messageIndex: index
+                    timestamp: model.timestamp !== undefined ? model.timestamp : ""
+                    attachmentsStr: model.attachmentsStr !== undefined ? model.attachmentsStr : ""
+                    isAwaitingResponse: index === root.streamingMessageIndex && root.isLoading
+                    outputScheme: model.outputScheme !== undefined ? model.outputScheme : ""
+                    tool_call_id: model.tool_call_id !== undefined ? model.tool_call_id : ""
+                    toolArgs: model.toolArgs !== undefined ? model.toolArgs : ""
+                    toolName: model.toolName !== undefined ? model.toolName : ""
+                    stdout: model.stdout !== undefined ? model.stdout : ""
+                    stderr: model.stderr !== undefined ? model.stderr : ""
+                    exitCode: model.exitCode !== undefined ? model.exitCode : 0
+                    toolSummary: model.toolSummary !== undefined ? model.toolSummary : ""
+                    toolDataJson: model.toolDataJson !== undefined ? model.toolDataJson : ""
+                    toolView: model.toolView !== undefined ? model.toolView : ""
+                    toolIcon: model.toolIcon !== undefined ? model.toolIcon : ""
+                    toolTitle: model.toolTitle !== undefined ? model.toolTitle : ""
                     sessionMode: Plasmoid.configuration.useSessionMultiplexer
+                    appConfig: root.getToolsConfig()
+
                     sessionLabel: root.sessionChipText()
                     commandRunStateTick: root.commandRunStateTick
+                    onScrollRequested: {
+                        messageList.programmaticScroll = true;
+                        messageList.positionViewAtIndex(index, ListView.Beginning);
+                        Qt.callLater(function() { messageList.programmaticScroll = false; });
+                    }
                     onShareRequested: function(index) { root.shareOutput(index); }
                     onRetryRequested: root.sendToLLM()
-                    onExecuteRequested: function(command, sourceId) { root.executeCommand(command, sourceId); }
                     onTerminalRequested: function(command) { root.runInTerminal(command); }
-                    onSaveRequested: function(filePath, content) { root.saveScript(filePath, content); }
                     onStopRequested: function(command, sourceId) { root.stopCommandByText(command, sourceId); }
+                    onToolApproved: function(name, args, callId) {
+                        console.log("PlasmaLLM DEBUG: Tool approved: " + name + " with args: " + JSON.stringify(args));
+                        displayMessages.remove(index);
+                        root.executeTool(name, args, callId);
+                        inputField.forceActiveFocus();
+                    }
+                    onToolDenied: function(name, callId) {
+                        console.log("PlasmaLLM DEBUG: Tool denied: " + name);
+                        displayMessages.remove(index);
+                        root.handleToolOutput(null, "", i18n("The user denied this tool call."), 1, { name: name, callId: callId });
+                        inputField.forceActiveFocus();
+                    }
                 }
 
                 // movementStarted fires for wheel, scrollbar drag, and touch flicks —
@@ -498,6 +526,7 @@ PlasmaExtras.Representation {
                 }
 
                 onContentHeightChanged: {
+
                     if (programmaticScroll) return;
                     if (atBottom) return;
                     if (!stickToBottom && !(root.isLoading && trackingStream)) return;
@@ -588,8 +617,8 @@ PlasmaExtras.Representation {
         // Attachment preview strip
         Flow {
             Layout.fillWidth: true
-            Layout.leftMargin: Kirigami.Units.smallSpacing
-            Layout.rightMargin: Kirigami.Units.smallSpacing
+            Layout.leftMargin: Plasmoid.configuration.chatSpacing
+            Layout.rightMargin: Plasmoid.configuration.chatSpacing
             spacing: Kirigami.Units.smallSpacing
             visible: root.pendingAttachments.length > 0
 
@@ -650,7 +679,9 @@ PlasmaExtras.Representation {
 
         RowLayout {
             Layout.fillWidth: true
-            Layout.margins: Kirigami.Units.smallSpacing
+            Layout.leftMargin: Plasmoid.configuration.chatSpacing
+            Layout.rightMargin: Plasmoid.configuration.chatSpacing
+            Layout.bottomMargin: Plasmoid.configuration.chatSpacing
             spacing: Kirigami.Units.smallSpacing
 
             Item {

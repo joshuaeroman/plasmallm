@@ -18,7 +18,12 @@ BaseConfigPage {
             Kirigami.FormData.label: i18n("Profile Header:")
             text: i18n("Show provider and model in profile header")
             checked: cfg_showProviderInTitle
-            onCheckedChanged: cfg_showProviderInTitle = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_showProviderInTitle = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         Kirigami.Separator {
@@ -34,11 +39,16 @@ BaseConfigPage {
             QQC2.Slider {
                 id: chatSpacingSlider
                 Layout.fillWidth: true
-                from: 2
+                from: 0
                 to: 24
                 stepSize: 1
                 value: cfg_chatSpacing
-                onValueChanged: cfg_chatSpacing = value
+                onValueChanged: {
+                    if (_initialized) {
+                        cfg_chatSpacing = value;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
 
             RowLayout {
@@ -64,7 +74,12 @@ BaseConfigPage {
             Kirigami.FormData.label: i18n("UI Font:")
             text: i18n("Use custom UI font")
             checked: cfg_useCustomFont
-            onCheckedChanged: cfg_useCustomFont = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_useCustomFont = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         RowLayout {
@@ -76,7 +91,10 @@ BaseConfigPage {
                 model: availableFonts
                 currentIndex: availableFonts.indexOf(cfg_customFontFamily) >= 0 ? availableFonts.indexOf(cfg_customFontFamily) : availableFonts.indexOf(Kirigami.Theme.defaultFont.family)
                 onActivated: function(index) {
-                    cfg_customFontFamily = availableFonts[index]
+                    if (_initialized) {
+                        cfg_customFontFamily = availableFonts[index];
+                        rootItem.triggerCapture();
+                    }
                 }
                 Component.onCompleted: {
                     if (cfg_customFontFamily === "") {
@@ -89,7 +107,12 @@ BaseConfigPage {
                 from: 6
                 to: 72
                 value: cfg_customFontSize
-                onValueModified: cfg_customFontSize = value
+                onValueModified: {
+                    if (_initialized) {
+                        cfg_customFontSize = value;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
         }
 
@@ -102,7 +125,12 @@ BaseConfigPage {
             Kirigami.FormData.label: i18n("Code Font:")
             text: i18n("Use custom code font")
             checked: cfg_useCustomCodeFont
-            onCheckedChanged: cfg_useCustomCodeFont = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_useCustomCodeFont = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         RowLayout {
@@ -114,7 +142,10 @@ BaseConfigPage {
                 model: availableFonts
                 currentIndex: availableFonts.indexOf(cfg_customCodeFontFamily) >= 0 ? availableFonts.indexOf(cfg_customCodeFontFamily) : availableFonts.indexOf("monospace")
                 onActivated: function(index) {
-                    cfg_customCodeFontFamily = availableFonts[index]
+                    if (_initialized) {
+                        cfg_customCodeFontFamily = availableFonts[index];
+                        rootItem.triggerCapture();
+                    }
                 }
             }
 
@@ -122,7 +153,12 @@ BaseConfigPage {
                 from: 6
                 to: 72
                 value: cfg_customCodeFontSize
-                onValueModified: cfg_customCodeFontSize = value
+                onValueModified: {
+                    if (_initialized) {
+                        cfg_customCodeFontSize = value;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
         }
 
@@ -135,7 +171,12 @@ BaseConfigPage {
             Kirigami.FormData.label: i18n("Thoughts Font:")
             text: i18n("Use custom thoughts font")
             checked: cfg_useCustomThoughtsFont
-            onCheckedChanged: cfg_useCustomThoughtsFont = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_useCustomThoughtsFont = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         RowLayout {
@@ -147,7 +188,10 @@ BaseConfigPage {
                 model: availableFonts
                 currentIndex: availableFonts.indexOf(cfg_customThoughtsFontFamily) >= 0 ? availableFonts.indexOf(cfg_customThoughtsFontFamily) : availableFonts.indexOf(Kirigami.Theme.smallFont.family)
                 onActivated: function(index) {
-                    cfg_customThoughtsFontFamily = availableFonts[index]
+                    if (_initialized) {
+                        cfg_customThoughtsFontFamily = availableFonts[index];
+                        rootItem.triggerCapture();
+                    }
                 }
                 Component.onCompleted: {
                     if (cfg_customThoughtsFontFamily === "") {
@@ -160,7 +204,12 @@ BaseConfigPage {
                 from: 6
                 to: 72
                 value: cfg_customThoughtsFontSize
-                onValueModified: cfg_customThoughtsFontSize = value
+                onValueModified: {
+                    if (_initialized) {
+                        cfg_customThoughtsFontSize = value;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
         }
 
@@ -177,49 +226,89 @@ BaseConfigPage {
         QQC2.CheckBox {
             text: i18n("Profile Header")
             checked: cfg_showIconProfile
-            onCheckedChanged: cfg_showIconProfile = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_showIconProfile = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         QQC2.CheckBox {
             text: i18n("Always show Tasks")
             checked: cfg_showIconTasks
-            onCheckedChanged: cfg_showIconTasks = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_showIconTasks = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         QQC2.CheckBox {
             text: i18n("Always show Auto Toggle")
             checked: cfg_showIconAuto
-            onCheckedChanged: cfg_showIconAuto = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_showIconAuto = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         QQC2.CheckBox {
             text: i18n("Show History")
             checked: cfg_showIconHistory
-            onCheckedChanged: cfg_showIconHistory = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_showIconHistory = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         QQC2.CheckBox {
             text: i18n("Show Copy conversation")
             checked: cfg_showIconCopy
-            onCheckedChanged: cfg_showIconCopy = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_showIconCopy = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         QQC2.CheckBox {
             text: i18n("Show Clear chat")
             checked: cfg_showIconClear
-            onCheckedChanged: cfg_showIconClear = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_showIconClear = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         QQC2.CheckBox {
             text: i18n("Show Settings")
             checked: cfg_showIconSettings
-            onCheckedChanged: cfg_showIconSettings = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_showIconSettings = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         QQC2.CheckBox {
             text: i18n("Show Pin")
             checked: cfg_showIconPin
-            onCheckedChanged: cfg_showIconPin = checked
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_showIconPin = checked;
+                    rootItem.triggerCapture();
+                }
+            }
         }
     }
 }

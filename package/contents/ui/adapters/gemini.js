@@ -3,6 +3,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+.import "../toolManager.js" as ToolManager
+
 // Native Google Gemini adapter (POST /v1beta/models/{model}:streamGenerateContent
 // ?alt=sse, GET /v1beta/models). Translates the host's OpenAI-shaped neutral
 // form to/from Gemini wire format:
@@ -152,37 +154,16 @@ function formatGeminiError(xhr, prefix) {
 
 function buildTools(options) {
     var fns = [];
-    var commandToolEnabled = options && options.commandToolEnabled;
-    var webSearchEnabled = options && options.webSearchEnabled;
-    var searchConfigured = options && options.searchConfigured;
 
-    if (webSearchEnabled && searchConfigured) {
-        fns.push({
-            name: "web_search",
-            description: "Search the web for current information. Use when you need up-to-date facts, recent events, or information you're not confident about.",
-            parameters: {
-                type: "object",
-                properties: {
-                    query: { type: "string", description: "Search query" },
-                    max_results: { type: "integer", description: "Max results (1-10, default 5)" }
-                },
-                required: ["query"]
-            }
-        });
-    }
-
-    if (commandToolEnabled) {
-        fns.push({
-            name: "run_command",
-            description: "Execute a shell command on the user's system and return its output. Use this to run commands when the user asks you to perform system tasks.",
-            parameters: {
-                type: "object",
-                properties: {
-                    command: { type: "string", description: "The shell command to execute" }
-                },
-                required: ["command"]
-            }
-        });
+    if (options && options.toolsConfig) {
+        var metadata = ToolManager.getEnabledToolsMetadata(options.toolsConfig);
+        for (var i = 0; i < metadata.length; i++) {
+            fns.push({
+                name: metadata[i].name,
+                description: metadata[i].description,
+                parameters: metadata[i].parameters
+            });
+        }
     }
 
     if (fns.length === 0) return [];

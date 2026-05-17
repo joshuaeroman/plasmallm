@@ -3,6 +3,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+.import "../toolManager.js" as ToolManager
+
 // Google Gemini Interactions API adapter (POST /v1beta/interactions?alt=sse).
 // Stateful implementation using server-side interaction storage.
 //   - Transitions from generateContent schema to Interactions (steps) schema.
@@ -135,45 +137,29 @@ function formatGeminiError(xhr, prefix) {
     }
     return prefix + (xhr.status > 0 ? " (HTTP " + xhr.status + ")" : "") + (detail ? ": " + detail : "");
 }
-
 function buildTools(options) {
     var tools = [];
-    if (options && options.nativeGoogleSearchEnabled) {
+
+    if (options && options.googleSearchEnabled) {
         tools.push({ type: "google_search" });
-    } else if (options && options.webSearchEnabled && options.searchConfigured) {
-        tools.push({
-            type: "function",
-            name: "web_search",
-            description: "Search the web for current information. Use when you need up-to-date facts, recent events, or information you're not confident about.",
-            parameters: {
-                type: "object",
-                properties: {
-                    query: { type: "string", description: "Search query" },
-                    max_results: { type: "integer", description: "Max results (1-10, default 5)" }
-                },
-                required: ["query"]
-            }
-        });
     }
 
     if (options && options.nativeCodeExecutionEnabled) {
         tools.push({ type: "code_execution" });
     }
 
-    if (options && options.commandToolEnabled) {
-        tools.push({
-            type: "function",
-            name: "run_command",
-            description: "Execute a shell command on the user's system and return its output. Use this to run commands when the user asks you to perform system tasks.",
-            parameters: {
-                type: "object",
-                properties: {
-                    command: { type: "string", description: "The shell command to execute" }
-                },
-                required: ["command"]
-            }
-        });
+    if (options && options.toolsConfig) {
+        var metadata = ToolManager.getEnabledToolsMetadata(options.toolsConfig);
+        for (var i = 0; i < metadata.length; i++) {
+            tools.push({
+                type: "function",
+                name: metadata[i].name,
+                description: metadata[i].description,
+                parameters: metadata[i].parameters
+            });
+        }
     }
+
     return tools;
 }
 
@@ -432,17 +418,24 @@ function sendStreaming(opts) {
                 opts.onChunk(tok.content, accumulatedText);
             }
             if (tok.function_call_start) {
+                var startArgs = tok.function_call_start.args || "";
+                if (typeof startArgs === "object") {
+                    try { startArgs = JSON.stringify(startArgs); } catch(e) { startArgs = ""; }
+                }
                 currentToolCall = {
-                    id: tok.function_call_start.id,
+                    id: tok.function_call_start.id || ("call_" + accumulatedToolCalls.length),
                     type: "function",
                     "function": {
                         name: tok.function_call_start.name,
-                        arguments: tok.function_call_start.args || ""
+                        arguments: startArgs
                     }
                 };
                 accumulatedToolCalls.push(currentToolCall);
             }
             if (tok.function_call_delta && currentToolCall) {
+                if (typeof currentToolCall["function"].arguments !== "string") {
+                    currentToolCall["function"].arguments = "";
+                }
                 currentToolCall["function"].arguments += tok.function_call_delta;
             }
             if (tok.thinking_delta) {

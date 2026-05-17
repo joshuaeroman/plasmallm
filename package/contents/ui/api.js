@@ -8,7 +8,7 @@
 // adapters/<id>.js and is selected via Plasmoid.configuration.apiType.
 
 .import "adapters/index.js" as Adapters
-.import "search_adapters/index.js" as SearchAdapters
+.import "toolManager.js" as ToolManager
 
 function localISODateTime() {
     var d = new Date();
@@ -73,26 +73,13 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
     }
 
     prompt += "\nGeneral-purpose assistant. Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational. " +
-        "Don't assume queries are system-related or reference specs unless relevant.\n\n";
+        "Don't assume queries are system-related or reference specs unless relevant. " +
+        "Always use the `~` alias instead of absolute paths when referring to the user's home directory in tool calls or text.\n\n";
 
-    if (options && options.commandToolEnabled) {
-        prompt += "## Commands\n" +
-            "You have a `run_command` tool available. Use it to execute shell commands when the user asks you to perform system tasks. " +
-            "You can still use fenced code blocks to show code snippets that shouldn't be executed.\n" +
-            "Chain steps with &&. Use `pkexec` instead of `sudo`.\n" +
-            "Commands run non-interactively with no stdin — never use read, select, or any command that waits for user input. Use `kdialog` for user prompts (e.g., `kdialog --inputbox \"prompt\"`).\n" +
-            "NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission. " +
-            "When permission is needed, ask in plain text first — only use the tool after the user confirms.\n";
-    } else {
+    if (options && !options.commandToolEnabled) {
         prompt += "## Code blocks\n" +
-            "```bash blocks are STRIPPED from your message and rendered as separate interactive widgets below it. " +
-            "The user sees your text and the code block as disconnected elements. " +
-            "Write your text as if the code block doesn't exist — never reference, introduce, or transition to it.\n\n" +
-            "## Commands\n" +
-            "One script per ```bash block. Chain steps with &&. Use `pkexec` instead of `sudo`.\n" +
-            "Scripts run non-interactively with no stdin — never use read, select, or any command that waits for user input. Use `kdialog` for user prompts (e.g., `kdialog --inputbox \"prompt\"`).\n" +
-            "NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission. " +
-            "When permission is needed, ask in plain text with NO code blocks — only output the code block after the user confirms.\n";
+            "Standard markdown code blocks (e.g., ```bash) are for display only and are NOT interactive. " +
+            "Do NOT ask the user to click or run them. ";
     }
 
     if (options && options.sessionMultiplexer) {
@@ -107,25 +94,14 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
             "The user can attach with `" + attachCmd + "`.\n";
     }
 
-    if (options && options.autoRunCommands) {
-        if (options.commandToolEnabled) {
-            prompt += "\n## Auto-run is ENABLED\n" +
-                "Commands from the `run_command` tool execute AUTOMATICALLY. Be conservative — prefer read-only commands.\n" +
-                "NEVER run commands that install packages, modify system configuration, reboot, or disrupt the user. " +
-                "Describe what you would do in plain text and wait for the user to explicitly approve before using the tool.\n";
-        } else {
-            prompt += "\n## Auto-run is ENABLED\n" +
-                "```bash blocks execute AUTOMATICALLY. Be conservative — prefer read-only commands.\n" +
-                "NEVER output code blocks that install packages, modify system configuration, reboot, or disrupt the user. " +
-                "Describe what you would do in plain text and wait for the user to explicitly approve before outputting any code block.\n" +
-                "Inline code (`` ` ``) does not auto-run.\n";
-        }
-    }
-
     if (options && options.autoMode) {
-        prompt += "\n## Full Auto mode is ACTIVE\n" +
+        prompt += "\n## Skip approvals mode is ACTIVE\n" +
             "Commands run AND their output is automatically shared back to you. " +
             "You are in an agentic loop. Prefer read-only commands unless the user explicitly requests a write operation.\n";
+    }
+
+    if (options && options.toolsConfig) {
+        prompt += ToolManager.buildSystemPromptSection(options.toolsConfig);
     }
 
     if (customAdditions && customAdditions.trim().length > 0) {
@@ -199,17 +175,6 @@ function isSearchConfigured(options) {
         return !!(options.ollamaSearchApiKey && options.ollamaSearchApiKey.length > 0);
     }
     return false;
-}
-
-// performWebSearch orchestrates search via the selected provider adapter
-function performWebSearch(options, query, maxResults, callback) {
-    var provider = options.webSearchProvider || "ollama";
-    var adapter = SearchAdapters.getSearchAdapter(provider);
-    if (adapter && typeof adapter.performWebSearch === "function") {
-        adapter.performWebSearch(options, query, maxResults, callback);
-    } else {
-        callback(i18n("Search provider %1 not supported", provider), null);
-    }
 }
 
 // --- Adapter pass-throughs ---
