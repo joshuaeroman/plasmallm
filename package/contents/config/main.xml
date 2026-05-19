@@ -83,7 +83,7 @@
     <entry name="chatSpacing" type="Int">
       <label>Chat Spacing (px)</label>
       <default>10</default>
-      <min>2</min>
+      <min>0</min>
       <max>24</max>
     </entry>
     <entry name="useCustomFont" type="Bool">
@@ -324,6 +324,10 @@
       <label>User-defined tasks (JSON array)</label>
       <default></default>
     </entry>
+    <entry name="customTools" type="String">
+      <label>User-defined tools (JSON array)</label>
+      <default>[{"name":"echo","description":"Echoes back the message provided.","commandTemplate":"echo {message}","requireSuperuser":false,"autoRun":false}]</default>
+    </entry>
     <entry name="useSessionMultiplexer" type="Bool">
       <label>Run commands inside a persistent session</label>
       <default>false</default>
@@ -367,6 +371,107 @@
     <entry name="showIconPin" type="Bool">
       <label>Show Pin icon in header</label>
       <default>true</default>
+    </entry>
+
+    <entry name="enableTools" type="Bool">
+      <label>Enable tools system</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsReadFileEnabled" type="Bool">
+      <label>Enable read_file tool</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsReadFileAutoRun" type="Bool">
+      <label>Auto-run read_file tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="toolsWriteFileEnabled" type="Bool">
+      <label>Enable write_file tool</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsWriteFileAutoRun" type="Bool">
+      <label>Auto-run write_file tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="toolsListDirEnabled" type="Bool">
+      <label>Enable list_dir tool</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsListDirAutoRun" type="Bool">
+      <label>Auto-run list_dir tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="toolsHttpGetEnabled" type="Bool">
+      <label>Enable http_get tool</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsHttpGetAutoRun" type="Bool">
+      <label>Auto-run http_get tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="toolsHttpRequestEnabled" type="Bool">
+      <label>Enable http_request tool</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsHttpRequestAutoRun" type="Bool">
+      <label>Auto-run http_request tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="toolsSearchFilesEnabled" type="Bool">
+      <label>Enable search_files tool</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsSearchFilesAutoRun" type="Bool">
+      <label>Auto-run search_files tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="toolsGetClipboardEnabled" type="Bool">
+      <label>Enable get_clipboard tool</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsGetClipboardAutoRun" type="Bool">
+      <label>Auto-run get_clipboard tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="toolsSetClipboardEnabled" type="Bool">
+      <label>Enable set_clipboard tool</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsSetClipboardAutoRun" type="Bool">
+      <label>Auto-run set_clipboard tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="toolsNotifyEnabled" type="Bool">
+      <label>Enable notify tool</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsNotifyAutoRun" type="Bool">
+      <label>Auto-run notify tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="toolsOpenUrlEnabled" type="Bool">
+      <label>Enable open_url tool</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsOpenUrlAutoRun" type="Bool">
+      <label>Auto-run open_url tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="toolsPathWhitelist" type="String">
+      <label>Whitelisted paths for file tools (JSON array)</label>
+      <default>["$HOME"]</default>
+    </entry>
+    <entry name="toolsReadMaxBytes" type="Int">
+      <label>Max bytes for read_file</label>
+      <default>204800</default>
+    </entry>
+    <entry name="toolsWriteMaxBytes" type="Int">
+      <label>Max bytes for write_file</label>
+      <default>1048576</default>
+    </entry>
+    <entry name="toolsHttpMaxBytes" type="Int">
+      <label>Max bytes for HTTP responses</label>
+      <default>524288</default>
     </entry>
   </group>
 

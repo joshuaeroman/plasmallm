@@ -15,6 +15,7 @@ import org.kde.plasma.workspace.dbus as DBus
 import "api.js" as Api
 import "sessionRunner.js" as SessionRunner
 import "profiles.js" as Profiles
+import "toolManager.js" as ToolManager
 
 PlasmoidItem {
     id: root
@@ -67,12 +68,13 @@ PlasmoidItem {
     property alias displayMessages: displayMessages
     property alias chatMessages: chatMessages
     property alias historyFilesModel: historyFilesModel
+    property var profileFields: Profiles.PROFILE_FIELDS
+
     property int maxApiMessages: 100
     property bool autoShareSuppressed: false
     property bool sessionAutoMode: false
     property bool taskAutoMode: false
-    readonly property bool isAutoMode: sessionAutoMode ||
-        (Plasmoid.configuration.autoRunCommands && Plasmoid.configuration.autoShareCommandOutput)
+    readonly property bool isAutoMode: sessionAutoMode
     property var fetchedModels: []
     property string apiKey: Plasmoid.configuration.apiKey
     property string ollamaSearchApiKey: ""
@@ -80,7 +82,8 @@ PlasmoidItem {
     property bool walletAvailable: false
     property int toolCallDepth: 0
     readonly property int maxToolCallDepth: 10
-    property var pendingToolCalls: []  // array of {id, command}
+    property var pendingToolCalls: []  // array of {id, type, ...}
+    property var activeToolCalls: ({}) // sourceCmd -> { toolName, callId, displayIndex }
 
     signal responseReady(int messageIndex)
     signal copyConversationRequested()
@@ -92,9 +95,50 @@ PlasmoidItem {
         return new Date().toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
     }
 
+    function appendDisplayMessage(role, content, extraProps) {
+        var msg = {
+            role: role || "assistant",
+            content: content || "",
+            shared: false,
+            timestamp: currentTimestamp(),
+            thinking: "",
+            attachmentsStr: "",
+            toolSummary: "",
+            toolDataJson: "",
+            toolView: "",
+            toolIcon: "",
+            toolTitle: "",
+            outputScheme: "",
+            tool_call_id: "",
+            callId: "",
+            toolName: "",
+            toolArgs: "",
+            stdout: "",
+            stderr: "",
+            exitCode: 0
+        };
+        if (extraProps) {
+            for (var p in extraProps) {
+                msg[p] = extraProps[p];
+            }
+        }
+        displayMessages.append(msg);
+        return displayMessages.count - 1;
+    }
+
+    function updateDisplayMessage(index, role, content, extraProps) {
+        if (index < 0 || index >= displayMessages.count) return;
+        if (role) displayMessages.setProperty(index, "role", role);
+        if (content !== undefined) displayMessages.setProperty(index, "content", content);
+        if (extraProps) {
+            for (var p in extraProps) {
+                displayMessages.setProperty(index, p, extraProps[p]);
+            }
+        }
+    }
+
     // Commands currently in-flight as system info gather (populated by regatherSysInfo)
     property var pendingSysInfoCommands: ({})
-    property var runningCommands: ({})
     property var stopCommands: ([])
     property var statusCheckCommands: ([])
     property int commandRunStateTick: 0
@@ -105,9 +149,11 @@ PlasmoidItem {
     }
 
     function isCommandRunning(rawCmd, sourceId) {
-        for (var k in runningCommands) {
-            var info = runningCommands[k];
-            if (info.rawCmd === rawCmd && (!sourceId || info.sourceId === sourceId)) return true;
+        for (var k in activeToolCalls) {
+            var info = activeToolCalls[k];
+            if (info.name === "run_command" && info.args && info.args._rawCommand === rawCmd) {
+                return true;
+            }
         }
         return false;
     }
@@ -170,9 +216,9 @@ PlasmoidItem {
                 displayMessages.append({
                     role: "error",
                     content: i18n("Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is installed and authenticated.", exitCode, data["stderr"] || ""),
-                    commandsStr: "",
+
                     shared: false,
-                    timestamp: currentTimestamp()
+                    timestamp: currentTimestamp(),
                 });
                 pendingRequest = null;
             }
@@ -254,9 +300,22 @@ PlasmoidItem {
                 root.sessionActive = (exitCode === 0);
                 disconnectSource(source);
             } else {
-                handleCommandOutput(source, stdout, stderr, exitCode);
+                if (stdout.length > 0 || stderr.length > 0) {
+                    console.warn("PlasmaLLM: Unexpected output from source [" + source + "]: " + stdout + (stderr ? " stderr: " + stderr : ""));
+                }
                 disconnectSource(source);
             }
+        }
+    }
+
+    P5Support.DataSource {
+        id: toolsExec
+        engine: "executable"
+        connectedSources: []
+        onNewData: function(source, data) {
+
+            handleToolOutput(source, data["stdout"] || "", data["stderr"] || "", data["exit code"]);
+            disconnectSource(source);
         }
     }
 
@@ -270,6 +329,9 @@ PlasmoidItem {
                 break;
             case "whoami":
                 sysInfo.user = output;
+                break;
+            case "echo $HOME":
+                sysInfo.userHome = output;
                 break;
             case "echo $SHELL":
                 sysInfo.shell = output;
@@ -332,8 +394,56 @@ PlasmoidItem {
         }
     }
 
+    function getToolsConfig() {
+        return {
+            sessionAutoMode: root.sessionAutoMode,
+            enableTools: Plasmoid.configuration.enableTools,
+            enableWebSearch: Plasmoid.configuration.enableWebSearch,
+            searchConfigured: Api.isSearchConfigured({
+                webSearchProvider: Plasmoid.configuration.webSearchProvider,
+                searxngUrl: Plasmoid.configuration.searxngUrl,
+                searxngApiKey: root.searxngApiKey,
+                ollamaSearchApiKey: root.ollamaSearchApiKey
+            }),
+            useCommandTool: Plasmoid.configuration.useCommandTool,
+            autoRunCommands: Plasmoid.configuration.autoRunCommands,
+            toolsReadFileEnabled: Plasmoid.configuration.toolsReadFileEnabled,
+            toolsReadFileAutoRun: Plasmoid.configuration.toolsReadFileAutoRun,
+            toolsWriteFileEnabled: Plasmoid.configuration.toolsWriteFileEnabled,
+            toolsWriteFileAutoRun: Plasmoid.configuration.toolsWriteFileAutoRun,
+            toolsListDirEnabled: Plasmoid.configuration.toolsListDirEnabled,
+            toolsListDirAutoRun: Plasmoid.configuration.toolsListDirAutoRun,
+            toolsHttpGetEnabled: Plasmoid.configuration.toolsHttpGetEnabled,
+            toolsHttpGetAutoRun: Plasmoid.configuration.toolsHttpGetAutoRun,
+            toolsHttpRequestEnabled: Plasmoid.configuration.toolsHttpRequestEnabled,
+            toolsHttpRequestAutoRun: Plasmoid.configuration.toolsHttpRequestAutoRun,
+            toolsSearchFilesEnabled: Plasmoid.configuration.toolsSearchFilesEnabled,
+            toolsSearchFilesAutoRun: Plasmoid.configuration.toolsSearchFilesAutoRun,
+            toolsGetClipboardEnabled: Plasmoid.configuration.toolsGetClipboardEnabled,
+            toolsGetClipboardAutoRun: Plasmoid.configuration.toolsGetClipboardAutoRun,
+            toolsSetClipboardEnabled: Plasmoid.configuration.toolsSetClipboardEnabled,
+            toolsSetClipboardAutoRun: Plasmoid.configuration.toolsSetClipboardAutoRun,
+            toolsNotifyEnabled: Plasmoid.configuration.toolsNotifyEnabled,
+            toolsNotifyAutoRun: Plasmoid.configuration.toolsNotifyAutoRun,
+            toolsOpenUrlEnabled: Plasmoid.configuration.toolsOpenUrlEnabled,
+            toolsOpenUrlAutoRun: Plasmoid.configuration.toolsOpenUrlAutoRun,
+            toolsPathWhitelist: Plasmoid.configuration.toolsPathWhitelist,
+            toolsReadMaxBytes: Plasmoid.configuration.toolsReadMaxBytes,
+            toolsWriteMaxBytes: Plasmoid.configuration.toolsWriteMaxBytes,
+            toolsHttpMaxBytes: Plasmoid.configuration.toolsHttpMaxBytes,
+            customTools: Plasmoid.configuration.customTools
+        };
+    }
+
     function initSystemPrompt() {
-        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: root.isAutoMode, commandToolEnabled: Plasmoid.configuration.useCommandTool, sessionMultiplexer: root.sessionChipText() });
+        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
+            sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
+            autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+            autoMode: root.isAutoMode, 
+            commandToolEnabled: Plasmoid.configuration.useCommandTool, 
+            sessionMultiplexer: root.sessionChipText(),
+            toolsConfig: getToolsConfig()
+        });
         Plasmoid.configuration.gatheredSysInfo = JSON.stringify(sysInfo);
         if (systemPromptReady) {
             chatMessages.setProperty(0, "content", prompt);
@@ -352,6 +462,7 @@ PlasmoidItem {
         if (Plasmoid.configuration.sysInfoKernel)   cmds.push("uname -a");
         if (Plasmoid.configuration.sysInfoDesktop)  cmds.push("echo $XDG_CURRENT_DESKTOP");
         if (Plasmoid.configuration.sysInfoUser)     cmds.push("whoami");
+        cmds.push("echo $HOME");
         if (Plasmoid.configuration.sysInfoCPU)      cmds.push("lscpu");
         if (Plasmoid.configuration.sysInfoMemory)   cmds.push("free -h");
         if (Plasmoid.configuration.sysInfoGPU)      cmds.push("bash -c \"lspci -nn | grep -iE 'vga|3d|display'\"");
@@ -388,24 +499,16 @@ PlasmoidItem {
         currentChatFile = "";
         sessionAutoMode = false;
         root.pendingToolCalls = [];
-        // Re-seed with system prompt
         if (systemPromptReady) {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, autoMode: false, commandToolEnabled: Plasmoid.configuration.useCommandTool });
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
+                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
+                autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                autoMode: false, 
+                commandToolEnabled: Plasmoid.configuration.useCommandTool, 
+                toolsConfig: getToolsConfig() 
+            });
             chatMessages.append({ role: "system", content: prompt });
         }
-    }
-
-    function getLastCommand() {
-        for (var i = displayMessages.count - 1; i >= 0; i--) {
-            var msg = displayMessages.get(i);
-            if (msg.commandsStr && msg.commandsStr.length > 0) {
-                var cmds = msg.commandsStr.split("\n\x1F").filter(function(c) {
-                    return c.trim().length > 0;
-                });
-                if (cmds.length > 0) return cmds[cmds.length - 1].trim();
-            }
-        }
-        return null;
     }
 
     function saveChat(force) {
@@ -457,15 +560,15 @@ PlasmoidItem {
 
     function saveChatJsonl() {
         var lines = [];
+// Meta line
+lines.push(JSON.stringify({
+    _type: "meta",
+    version: 1,
+    created: new Date().toISOString(),
+    provider: Plasmoid.configuration.providerName || "",
+    model: Plasmoid.configuration.modelName || ""
+}));
 
-        // Meta line
-        lines.push(JSON.stringify({
-            _type: "meta",
-            version: 1,
-            created: new Date().toISOString(),
-            provider: Plasmoid.configuration.providerName || "",
-            model: Plasmoid.configuration.modelName || ""
-        }));
 
         // API messages
         for (var i = 0; i < chatMessages.count; i++) {
@@ -503,7 +606,6 @@ PlasmoidItem {
                 role: d.role,
                 content: d.content,
                 thinking: d.thinking || "",
-                commandsStr: d.commandsStr || "",
                 shared: d.shared || false,
                 timestamp: d.timestamp || "",
                 attachmentsStr: d.attachmentsStr || ""
@@ -626,7 +728,6 @@ PlasmoidItem {
                         role: data.role,
                         content: data.content,
                         thinking: data.thinking || "",
-                        commandsStr: data.commandsStr || "",
                         shared: data.shared || false,
                         timestamp: data.timestamp || "",
                         attachmentsStr: data.attachmentsStr || ""
@@ -726,13 +827,11 @@ PlasmoidItem {
 
     function loadApiKeyFromWallet() {
         var slot = currentApiKeySlot();
-        console.warn("PlasmaLLM: Loading API key for slot:", slot);
+
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
                 if (handle < 0) {
-                    console.warn("PlasmaLLM: KWallet open failed, falling back to config");
                     root.apiKey = fallbackKeyForSlot(slot);
-                    console.warn("PlasmaLLM: Loaded fallback key, length:", root.apiKey ? root.apiKey.length : 0);
                     return;
                 }
                 root.walletAvailable = true;
@@ -740,7 +839,6 @@ PlasmoidItem {
                     function(password) {
                         if (password && password.length > 0) {
                             root.apiKey = password.replace(/^\s+|\s+$/g, "");
-                            console.warn("PlasmaLLM: Loaded key from wallet slot", slot, "length:", root.apiKey.length);
                             walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                             return;
                         }
@@ -750,22 +848,18 @@ PlasmoidItem {
                             var t = Plasmoid.configuration.apiType;
                             if (t === "gemini" && Plasmoid.configuration.geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
                             var legacySlot = Api.apiKeySlot(t, Plasmoid.configuration.providerName);
-                            console.warn("PlasmaLLM: Profile key not found, trying legacy slot:", legacySlot);
                             walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", legacySlot, "PlasmaLLM"],
                                 function(legacyPassword) {
                                     if (legacyPassword && legacyPassword.length > 0) {
                                         root.apiKey = legacyPassword.replace(/^\s+|\s+$/g, "");
-                                        console.warn("PlasmaLLM: Loaded key from legacy slot", legacySlot, "length:", root.apiKey.length);
-                                        // Do not auto-promote to the profile-id slot on read; 
-                                        // only promote on the next write (as per plan).
                                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                                     } else {
                                         root.apiKey = fallbackKeyForSlot(slot);
-                                        console.warn("PlasmaLLM: Legacy key not found, loaded fallback key, length:", root.apiKey ? root.apiKey.length : 0);
                                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                                     }
                                 },
                                 function(err) {
+                                    console.warn("PlasmaLLM: KWallet readPassword error (legacy):", err);
                                     root.apiKey = fallbackKeyForSlot(slot);
                                     walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                                 }
@@ -773,51 +867,18 @@ PlasmoidItem {
                             return;
                         }
 
-                        // One-shot migration: copy legacy single-slot wallet key
-                        // into the current slot the first time this version runs.
-                        if (!Plasmoid.configuration.apiKeyMigrated) {
-                            walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "apiKey", "PlasmaLLM"],
-                                function(legacy) {
-                                    if (legacy && legacy.length > 0) {
-                                        walletWriteKey(handle, slot, legacy, function(success) {
-                                            root.apiKey = legacy;
-                                            Plasmoid.configuration.apiKeyMigrated = true;
-                                            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                                        });
-                                        return;
-                                    }
-                                    // No legacy wallet entry; try config fallback.
-                                    var fb = fallbackKeyForSlot(slot);
-                                    if (fb && fb.length > 0) {
-                                        walletWriteKey(handle, slot, fb, function(success) {
-                                            root.apiKey = fb;
-                                            Plasmoid.configuration.apiKeyMigrated = true;
-                                            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                                        });
-                                        return;
-                                    }
-                                    Plasmoid.configuration.apiKeyMigrated = true;
-                                    root.apiKey = "";
-                                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                                },
-                                function(err) {
-                                    root.apiKey = fallbackKeyForSlot(slot);
-                                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                                }
-                            );
-                            return;
-                        }
-                        root.apiKey = "";
+                        root.apiKey = fallbackKeyForSlot(slot);
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     },
                     function(err) {
+                        console.warn("PlasmaLLM: KWallet readPassword error:", err);
                         root.apiKey = fallbackKeyForSlot(slot);
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
                     }
                 );
             },
             function(err) {
-                console.warn("PlasmaLLM: KWallet unavailable: " + err);
+                console.warn("PlasmaLLM: KWallet open error:", err);
                 root.apiKey = fallbackKeyForSlot(slot);
             }
         );
@@ -850,10 +911,12 @@ PlasmoidItem {
         // Rebuild system prompt
         if (systemPromptReady) {
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
+                autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                 autoMode: root.isAutoMode, 
                 commandToolEnabled: Plasmoid.configuration.useCommandTool,
-                sessionMultiplexer: root.sessionChipText()
+                sessionMultiplexer: root.sessionChipText(),
+                toolsConfig: getToolsConfig()
             });
             chatMessages.setProperty(0, "content", prompt);
         }
@@ -962,32 +1025,6 @@ PlasmoidItem {
             }
         );
     }
-
-    function formatWebSearchResults(query, results) {
-        var text = "🔍 **Web search:** " + query + "\n\n";
-        var items = results.results || results;
-        if (Array.isArray(items)) {
-            for (var i = 0; i < items.length; i++) {
-                var r = items[i];
-                var title = r.title || r.name || "Result " + (i + 1);
-                var snippet = r.snippet || r.description || "";
-                // Fall back to content but truncate heavily
-                if (!snippet && r.content) {
-                    snippet = r.content.substring(0, 200).replace(/\n/g, " ").trim();
-                    if (r.content.length > 200) snippet += "…";
-                }
-                var url = r.url || r.link || "";
-                text += "**" + title + "**\n";
-                if (snippet) text += snippet + "\n";
-                if (url) text += url + "\n";
-                text += "\n";
-            }
-        } else {
-            text += JSON.stringify(results, null, 2);
-        }
-        return text.trim();
-    }
-
     property var pendingAttachments: []
     property var pendingFileReads: ({}) // command -> {filePath, fileName, isImage}
 
@@ -1082,6 +1119,41 @@ PlasmoidItem {
             root.expanded = false;
             return true;
         }
+        if (lower === "/approve") {
+            if (root.pendingToolCalls.length > 0 && root.pendingToolCalls[0].type === "tool") {
+                var toolToApprove = root.pendingToolCalls[0];
+                // Find and remove the tool_pending card from displayMessages
+                for (var i = displayMessages.count - 1; i >= 0; i--) {
+                    var msg = displayMessages.get(i);
+                    if (msg.role === "tool_pending" && msg.tool_call_id === toolToApprove.id) {
+                        console.log("PlasmaLLM DEBUG: Tool approved: " + toolToApprove.name + " with args: " + JSON.stringify(toolToApprove.args));
+                        displayMessages.remove(i);
+                        break;
+                    }
+                }
+                executeTool(toolToApprove.name, toolToApprove.args, toolToApprove.id);
+            } else {
+                displayMessages.append({ role: "assistant", content: i18n("No tool request pending to approve."), shared: false, timestamp: currentTimestamp() });
+            }
+            return true;
+        }
+        if (lower === "/deny") {
+            if (root.pendingToolCalls.length > 0 && root.pendingToolCalls[0].type === "tool") {
+                var toolToDeny = root.pendingToolCalls[0];
+                // Find and remove the tool_pending card from displayMessages
+                for (var j = displayMessages.count - 1; j >= 0; j--) {
+                    var msgJ = displayMessages.get(j);
+                    if (msgJ.role === "tool_pending" && msgJ.tool_call_id === toolToDeny.id) {
+                        displayMessages.remove(j);
+                        break;
+                    }
+                }
+                handleToolOutput(null, "", i18n("The user denied this tool call."), 1, { name: toolToDeny.name, callId: toolToDeny.id });
+            } else {
+                displayMessages.append({ role: "assistant", content: i18n("No tool request pending to deny."), shared: false, timestamp: currentTimestamp() });
+            }
+            return true;
+        }
         if (lower === "/clear") {
             clearChat();
             return true;
@@ -1102,31 +1174,22 @@ PlasmoidItem {
             copyConversationRequested();
             return true;
         }
-        if (lower === "/run") {
-            var runCmd = getLastCommand();
-            if (runCmd) executeCommand(runCmd);
-            return true;
-        }
-        if (lower === "/term" || lower === "/terminal") {
-            var termCmd = getLastCommand();
-            if (termCmd) runInTerminal(termCmd);
-            return true;
-        }
         if (lower === "/auto") {
-            var configAutoMode = Plasmoid.configuration.autoRunCommands && Plasmoid.configuration.autoShareCommandOutput;
-            if (configAutoMode) {
-                displayMessages.append({ role: "assistant", content: i18n("Auto mode is permanently enabled via settings (both Auto-run and Auto-share are on)."), commandsStr: "", shared: false, timestamp: currentTimestamp() });
-            } else {
-                sessionAutoMode = !sessionAutoMode;
-                displayMessages.append({ role: "assistant", content: sessionAutoMode ? i18n("Auto mode enabled for this session. Commands will run and share output automatically.") : i18n("Auto mode disabled."), commandsStr: "", shared: false, timestamp: currentTimestamp() });
-                if (systemPromptReady) {
-                    var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                        sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-                        autoMode: root.isAutoMode, 
-                        commandToolEnabled: Plasmoid.configuration.useCommandTool 
-                    });
-                    chatMessages.setProperty(0, "content", autoPrompt);
-                }
+            sessionAutoMode = !sessionAutoMode;
+            var msg = sessionAutoMode 
+                ? i18n("Skip approvals mode enabled for this session. All enabled tools will run automatically, bypassing 'Ask before running' settings.") 
+                : i18n("Skip approvals mode disabled. Tools will revert to your configured 'Ask before running' settings.");
+            displayMessages.append({ role: "assistant", content: msg, shared: false, timestamp: currentTimestamp() });
+            
+            if (systemPromptReady) {
+                var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
+                    sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
+                    autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                    autoMode: root.isAutoMode, 
+                    commandToolEnabled: Plasmoid.configuration.useCommandTool,
+                    toolsConfig: getToolsConfig()
+                });
+                chatMessages.setProperty(0, "content", autoPrompt);
             }
             return true;
         }
@@ -1143,7 +1206,7 @@ PlasmoidItem {
                        }).join("\n") +
                        "\n\n" + i18n("Type `/profile <name>` to switch.");
             }
-            displayMessages.append({ role: "assistant", content: msg, commandsStr: "", shared: false, timestamp: currentTimestamp() });
+            displayMessages.append({ role: "assistant", content: msg, shared: false, timestamp: currentTimestamp() });
             return true;
         }
         if (lower.startsWith("/profile ")) {
@@ -1158,9 +1221,9 @@ PlasmoidItem {
             }
             if (found) {
                 switchProfile(found.id);
-                displayMessages.append({ role: "assistant", content: i18n("Switched to profile: **%1**", found.name), commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                displayMessages.append({ role: "assistant", content: i18n("Switched to profile: **%1**", found.name), shared: false, timestamp: currentTimestamp() });
             } else {
-                displayMessages.append({ role: "error", content: i18n("Unknown profile: **%1**", targetName), commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                displayMessages.append({ role: "error", content: i18n("Unknown profile: **%1**", targetName), shared: false, timestamp: currentTimestamp() });
             }
             return true;
         }
@@ -1175,7 +1238,7 @@ PlasmoidItem {
             } else {
                 msg += "\n\n" + i18n("No models cached. Use **Fetch Models** in settings.");
             }
-            displayMessages.append({ role: "assistant", content: msg, commandsStr: "", shared: false, timestamp: currentTimestamp() });
+            displayMessages.append({ role: "assistant", content: msg, shared: false, timestamp: currentTimestamp() });
             return true;
         }
         if (lower.startsWith("/model ")) {
@@ -1198,7 +1261,7 @@ PlasmoidItem {
                     Profiles.saveProfiles(Plasmoid.configuration, profiles);
                 }
 
-                displayMessages.append({ role: "assistant", content: i18n("Switched to model: **%1**", newModel), commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                displayMessages.append({ role: "assistant", content: i18n("Switched to model: **%1**", newModel), shared: false, timestamp: currentTimestamp() });
             }
             return true;
         }
@@ -1207,10 +1270,10 @@ PlasmoidItem {
             var tasks = [];
             if (tasksJson) try { tasks = JSON.parse(tasksJson); } catch(e) {}
             if (tasks.length === 0) {
-                displayMessages.append({ role: "assistant", content: i18n("No tasks configured. Add tasks in Settings."), commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                displayMessages.append({ role: "assistant", content: i18n("No tasks configured. Add tasks in Settings."), shared: false, timestamp: currentTimestamp() });
             } else {
                 var taskList = tasks.map(function(t) { return "- **" + t.name + "**" + (t.auto ? " " + i18n("(auto)") : "") + " — " + t.prompt; }).join("\n");
-                displayMessages.append({ role: "assistant", content: i18n("Available tasks:") + "\n" + taskList + "\n\n" + i18n("Type `/task <name>` to run."), commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                displayMessages.append({ role: "assistant", content: i18n("Available tasks:") + "\n" + taskList + "\n\n" + i18n("Type `/task <name>` to run."), shared: false, timestamp: currentTimestamp() });
             }
             return true;
         }
@@ -1237,9 +1300,11 @@ PlasmoidItem {
                     taskAutoMode = true;
                     if (systemPromptReady) {
                         var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                            sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
+                            sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
+                            autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                             autoMode: root.isAutoMode, 
-                            commandToolEnabled: Plasmoid.configuration.useCommandTool 
+                            commandToolEnabled: Plasmoid.configuration.useCommandTool,
+                            toolsConfig: getToolsConfig()
                         });
                         chatMessages.setProperty(0, "content", autoPrompt);
                     }
@@ -1248,7 +1313,7 @@ PlasmoidItem {
                 return true;
             } else {
                 var availNames = tasks2.map(function(t) { return t.name; }).join(", ");
-                displayMessages.append({ role: "error", content: i18n("Unknown task: **%1**. Available: %2", taskName, availNames || i18n("none")), commandsStr: "", shared: false, timestamp: currentTimestamp() });
+                displayMessages.append({ role: "error", content: i18n("Unknown task: **%1**. Available: %2", taskName, availNames || i18n("none")), shared: false, timestamp: currentTimestamp() });
                 return true;
             }
         }
@@ -1264,7 +1329,7 @@ PlasmoidItem {
                     role: "tool",
                     content: i18n("The user declined to run this command."),
                     tool_call_id: pcall.id || "",
-                    timestamp_api: Api.localISODateTime()
+                    timestamp_api: Api.localISODateTime(),
                 });
             }
             root.pendingToolCalls = [];
@@ -1279,13 +1344,7 @@ PlasmoidItem {
             attachments_json: attachJson,
             timestamp_api: Api.localISODateTime()
         });
-        displayMessages.append({
-            role: "user",
-            content: text,
-            thinking: "",
-            commandsStr: "",
-            shared: false,
-            timestamp: currentTimestamp(),
+        root.appendDisplayMessage("user", text, {
             attachmentsStr: imagePaths.join("\n")
         });
 
@@ -1296,50 +1355,43 @@ PlasmoidItem {
     }
 
     function sendToLLM() {
-        
         if (!Plasmoid.configuration.apiEndpoint || !Plasmoid.configuration.modelName) {
             displayMessages.append({
                 role: "error",
                 content: "Please configure API endpoint and model name in widget settings.",
-                commandsStr: "",
                 shared: false,
-                timestamp: currentTimestamp()
+                timestamp: currentTimestamp(),
             });
+            isLoading = false;
             return;
         }
+
 
         isLoading = true;
 
         // Refresh system prompt
         if (systemPromptReady) {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-                autoMode: root.isAutoMode, 
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, {
+                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
+                autoRunCommands: Plasmoid.configuration.autoRunCommands,
+                autoMode: root.isAutoMode,
                 commandToolEnabled: Plasmoid.configuration.useCommandTool,
-                sessionMultiplexer: root.sessionChipText()
+                sessionMultiplexer: root.sessionChipText(),
+                toolsConfig: getToolsConfig()
             });
             chatMessages.setProperty(0, "content", prompt);
         }
         // Add a placeholder assistant message for streaming
-        displayMessages.append({
-            role: "assistant",
-            content: "",
-            thinking: "",
-            commandsStr: "",
-            shared: false,
-            timestamp: currentTimestamp()
-        });
-        streamingMessageIndex = displayMessages.count - 1;
+        streamingMessageIndex = root.appendDisplayMessage("assistant", "");
 
         // Build messages array from ListModel, capping to avoid unbounded growth
         var messages = [];
+        var totalLength = 0;
         for (var i = 0; i < chatMessages.count; i++) {
             var msg = chatMessages.get(i);
             var msgContent = msg.content;
+            totalLength += msgContent.length;
 
-            // Prepend timestamp if enabled and available
-            // (Removed per user request: timestamp is now in the system prompt)
-            
             if (msg.attachments_json && msg.attachments_json.length > 0) {
                 try {
                     var atts = JSON.parse(msg.attachments_json);
@@ -1368,6 +1420,7 @@ PlasmoidItem {
             }
             messages.push(entry);
         }
+
         // Keep system prompt (index 0) + last N messages
         if (messages.length > maxApiMessages + 1) {
             var systemMsg = messages[0];
@@ -1383,36 +1436,37 @@ PlasmoidItem {
             webSearchEnabled: Plasmoid.configuration.enableWebSearch,
             usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
             nativeGoogleSearchEnabled: Plasmoid.configuration.enableNativeGoogleSearch,
-            nativeCodeExecutionEnabled: Plasmoid.configuration.enableNativeCodeExecution
+            nativeCodeExecutionEnabled: Plasmoid.configuration.enableNativeCodeExecution,
+            toolsConfig: getToolsConfig()
         });
 
         var initiateStreaming = function(effectiveKey) {
             var streamHandle = Api.sendStreaming(root.effectiveApiType, {
                 endpoint: Plasmoid.configuration.apiEndpoint,
                 apiKey: effectiveKey,
-            model: Plasmoid.configuration.modelName,
-            messages: messages,
-            temperature: Plasmoid.configuration.temperature,
-            maxTokens: Plasmoid.configuration.maxTokens,
-            reasoningEffort: Plasmoid.configuration.reasoningEffort,
-            thinkingBudget: Plasmoid.configuration.thinkingBudget,
-            usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
-            geminiApiVariant: Plasmoid.configuration.geminiApiVariant,
-            geminiAuthMethod: Plasmoid.configuration.geminiAuthMethod,
-            geminiProjectId: Plasmoid.configuration.geminiProjectId,
-            geminiLocation: Plasmoid.configuration.geminiLocation,
-            tools: tools,
-            onChunk: function(delta, accumulated) {
-                if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
-                    displayMessages.setProperty(streamingMessageIndex, "content", accumulated);
-                }
-            },
-            onThinkingChunk: function(delta, accumulated) {
-                if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
-                    displayMessages.setProperty(streamingMessageIndex, "thinking", accumulated);
-                }
-            },
-            onComplete: function(fullText, error, toolCalls, assistantMsg) {
+                model: Plasmoid.configuration.modelName,
+                messages: messages,
+                temperature: Plasmoid.configuration.temperature,
+                maxTokens: Plasmoid.configuration.maxTokens,
+                reasoningEffort: Plasmoid.configuration.reasoningEffort,
+                thinkingBudget: Plasmoid.configuration.thinkingBudget,
+                usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
+                geminiApiVariant: Plasmoid.configuration.geminiApiVariant,
+                geminiAuthMethod: Plasmoid.configuration.geminiAuthMethod,
+                geminiProjectId: Plasmoid.configuration.geminiProjectId,
+                geminiLocation: Plasmoid.configuration.geminiLocation,
+                tools: tools,
+                onChunk: function(delta, accumulated) {
+                    if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
+                        displayMessages.setProperty(streamingMessageIndex, "content", accumulated);
+                    }
+                },
+                onThinkingChunk: function(delta, accumulated) {
+                    if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
+                        displayMessages.setProperty(streamingMessageIndex, "thinking", accumulated);
+                    }
+                },
+                onComplete: function(fullText, error, toolCalls, assistantMsg) {
                 
                 isLoading = false;
                 activeRequest = null;
@@ -1429,153 +1483,58 @@ PlasmoidItem {
                         content: assistantMsg.content || "", 
                         tool_calls_json: JSON.stringify(toolCalls), 
                         thinking_blocks_json: thinkingJson,
-                        timestamp_api: Api.localISODateTime()
+                        timestamp_api: Api.localISODateTime(),
                     });
 
                     // Categorize all tool calls
-                    var commandQueue = [];
-                    var webSearchQueue = [];
-                    var pendingWebSearches = 0;
+                    var toolsQueue = [];
 
                     for (var tci = 0; tci < toolCalls.length; tci++) {
                         var tc = toolCalls[tci];
                         var tcName = tc["function"] && tc["function"].name;
 
-                        if (tcName === "web_search") {
-                            webSearchQueue.push(tc);
-                        } else if (tcName === "run_command") {
-                            var cmdArgs;
+                        if (ToolManager.isTool(tcName, getToolsConfig())) {
+                            var semiArgs;
                             try {
-                                cmdArgs = typeof tc["function"].arguments === "string" ? JSON.parse(tc["function"].arguments) : tc["function"].arguments;
+                                semiArgs = typeof tc["function"].arguments === "string" ? JSON.parse(tc["function"].arguments) : tc["function"].arguments;
                             } catch(e) {
-                                cmdArgs = { command: "" };
+                                semiArgs = {};
                             }
-                            commandQueue.push({ id: tc.id || "", command: cmdArgs.command || "" });
+                            var tcId = tc.id || ("call_" + generateMarker());
+                            toolsQueue.push({ id: tcId, type: "tool", name: tcName, args: semiArgs });
                         } else if (tcName === "native_google_search" || tcName === "native_code_execution") {
                             // These are native server-side tools; we just log them in history
                             // without attempting local execution.
                         } else {
                             // Unknown tool — send error result immediately
+                            var tcIdErr = tc.id || ("call_" + generateMarker());
                             chatMessages.append({ 
-                        role: "tool", 
-                        content: "Unknown tool: " + tcName, 
-                        tool_call_id: tc.id || "",
-                        timestamp_api: Api.localISODateTime()
-                    });
+                                role: "tool", 
+                                content: "Unknown tool: " + tcName, 
+                                tool_call_id: tcIdErr,
+                                timestamp_api: Api.localISODateTime(),
+                            });
                         }
                     }
 
-                    // Store command queue
-                    root.pendingToolCalls = commandQueue;
+                    // Store combined queue
+                    root.pendingToolCalls = toolsQueue;
 
-                    // Process web searches first, then start command queue
-                    if (webSearchQueue.length > 0) {
-                        // Show searching indicator in streaming placeholder
+                    // Clear streaming placeholder and start tool queue
+                    if (root.pendingToolCalls.length > 0) {
+                        // Mixture or only tools: show assistant text first, then process queue
                         if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
-                            displayMessages.setProperty(streamingMessageIndex, "content", i18n("Searching the web…"));
-                        }
-
-                        pendingWebSearches = webSearchQueue.length;
-                        // Track whether first search result has claimed the streaming placeholder
-                        var placeholderClaimed = false;
-
-                        for (var wsi = 0; wsi < webSearchQueue.length; wsi++) {
-                            (function(wsTc) {
-                                var wsArgs;
-                                try {
-                                    wsArgs = typeof wsTc["function"].arguments === "string" ? JSON.parse(wsTc["function"].arguments) : wsTc["function"].arguments;
-                                } catch(e) {
-                                    wsArgs = { query: "" };
-                                }
-                                var searchQuery = wsArgs.query || "";
-                                var searchMax = wsArgs.max_results || 5;
-
-                                var searchOptions = {
-                                    webSearchProvider: Plasmoid.configuration.webSearchProvider,
-                                    searxngUrl: Plasmoid.configuration.searxngUrl,
-                                    searxngApiKey: root.searxngApiKey,
-                                    ollamaSearchApiKey: root.ollamaSearchApiKey
-                                };
-                                Api.performWebSearch(searchOptions, searchQuery, searchMax, function(searchError, searchResults) {
-                                    var resultContent;
-                                    var displayContent;
-                                    if (searchError) {
-                                        resultContent = i18n("Web search failed: %1", searchError);
-                                        displayContent = resultContent;
-                                    } else {
-                                        resultContent = JSON.stringify(searchResults);
-                                        displayContent = formatWebSearchResults(searchQuery, searchResults);
-                                    }
-
-                                    // Show search results in UI
-                                    if (!placeholderClaimed && streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
-                                        placeholderClaimed = true;
-                                        displayMessages.setProperty(streamingMessageIndex, "content", displayContent);
-                                        displayMessages.setProperty(streamingMessageIndex, "role", "web_search_results");
-                                        streamingMessageIndex = -1;
-                                    } else {
-                                        displayMessages.append({
-                                            role: "web_search_results",
-                                            content: displayContent,
-                                            commandsStr: "",
-                                            shared: false,
-                                            timestamp: currentTimestamp()
-                                        });
-                                    }
-
-                                    // Append tool result to chat history
-                                    chatMessages.append({ 
-                                        role: "tool", 
-                                        content: resultContent, 
-                                        tool_call_id: wsTc.id || "",
-                                        timestamp_api: Api.localISODateTime()
-                                    });
-
-                                    pendingWebSearches--;
-                                    if (pendingWebSearches === 0) {
-                                        
-                                        // All web searches done, process command queue
-                                        processNextToolCall();
-                                    }
-                                });
-                            })(webSearchQueue[wsi]);
-                        }
-                        return;
-                    }
-
-                    // No web searches — clear streaming placeholder and start command queue
-                    if (commandQueue.length > 0) {
-                        if (sessionAutoMode || Plasmoid.configuration.autoRunCommands) {
-                            // Auto mode: show assistant text (if any), then start executing
-                            if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
-                                if (fullText) {
-                                    displayMessages.setProperty(streamingMessageIndex, "content", fullText);
-                                } else {
-                                    displayMessages.remove(streamingMessageIndex);
-                                }
-                            }
-                            streamingMessageIndex = -1;
-                            processNextToolCall();
-                        } else {
-                            // Manual mode: show all commands for user approval
-                            var allCmds = [];
-                            for (var qi = 0; qi < commandQueue.length; qi++) {
-                                allCmds.push(commandQueue[qi].command);
-                            }
-                            if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
+                            var hasThinking = (assistantMsg && assistantMsg.thinkingBlocks && assistantMsg.thinkingBlocks.length > 0);
+                            if (fullText || hasThinking) {
                                 displayMessages.setProperty(streamingMessageIndex, "content", fullText || "");
-                                displayMessages.setProperty(streamingMessageIndex, "commandsStr", allCmds.join("\n\x1F"));
                             } else {
-                                displayMessages.append({
-                                    role: "assistant",
-                                    content: fullText || "",
-                                    commandsStr: allCmds.join("\n\x1F"),
-                                    shared: false,
-                                    timestamp: currentTimestamp()
-                                });
+                                displayMessages.remove(streamingMessageIndex);
                             }
-                            streamingMessageIndex = -1;
+                        } else if (fullText) {
+                            root.appendDisplayMessage("assistant", fullText);
                         }
+                        streamingMessageIndex = -1;
+                        processNextToolCall();
                         return;
                     }
 
@@ -1594,13 +1553,7 @@ PlasmoidItem {
                         displayMessages.remove(streamingMessageIndex);
                     }
                     streamingMessageIndex = -1;
-                    displayMessages.append({
-                        role: "error",
-                        content: "Error: " + error,
-                        commandsStr: "",
-                        shared: false,
-                        timestamp: currentTimestamp()
-                    });
+                    root.appendDisplayMessage("error", "Error: " + error);
                 } else {
                     var regularThinkingJson = (assistantMsg && assistantMsg.thinkingBlocks && assistantMsg.thinkingBlocks.length > 0)
                         ? JSON.stringify(assistantMsg.thinkingBlocks) : "";
@@ -1608,7 +1561,7 @@ PlasmoidItem {
                         role: "assistant", 
                         content: fullText, 
                         thinking_blocks_json: regularThinkingJson,
-                        timestamp_api: Api.localISODateTime()
+                        timestamp_api: Api.localISODateTime(),
                     });
                     
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
@@ -1616,9 +1569,7 @@ PlasmoidItem {
                             // If the response is completely empty (no text, no thinking), remove the placeholder
                             displayMessages.remove(streamingMessageIndex);
                         } else {
-                            var commands = Plasmoid.configuration.useCommandTool ? [] : Api.parseCommandBlocks(fullText);
-                            displayMessages.setProperty(streamingMessageIndex, "content", fullText);
-                            displayMessages.setProperty(streamingMessageIndex, "commandsStr", commands.join("\n\x1F"));
+                            root.updateDisplayMessage(streamingMessageIndex, null, fullText);
                             responseReady(streamingMessageIndex);
                         }
                     }
@@ -1680,34 +1631,227 @@ PlasmoidItem {
                 chatMessages.append({ 
                     role: "assistant", 
                     content: msg.content,
-                    timestamp_api: Api.localISODateTime()
+                    timestamp_api: Api.localISODateTime(),
                 });
-                var commands = Plasmoid.configuration.useCommandTool ? [] : Api.parseCommandBlocks(msg.content);
-                displayMessages.setProperty(streamingMessageIndex, "commandsStr", commands.join("\n\x1F"));
             }
         }
         streamingMessageIndex = -1;
     }
 
     function processNextToolCall() {
-        
+
         if (pendingToolCalls.length === 0) {
             sendToLLM();
             return;
         }
 
         var next = pendingToolCalls[0];
-        if (sessionAutoMode || Plasmoid.configuration.autoRunCommands) {
-            executeCommand(next.command);
+        var toolsConfig = getToolsConfig();
+        if (next.type === "tool") {
+            if (ToolManager.isAutoRun(next.name, toolsConfig)) {
+                executeTool(next.name, next.args, next.id);
+            } else {
+                // Show approval card
+                console.log("PlasmaLLM DEBUG: Appending tool_pending for " + next.name + " with args: " + JSON.stringify(next.args));
+                root.appendDisplayMessage("tool_pending", next.name, {
+                    tool_call_id: next.id,
+                    toolArgs: JSON.stringify(next.args),
+                    shared: false
+                });
+            }
         } else {
-            // Show command for user approval
-            displayMessages.append({
-                role: "assistant",
-                content: "",
-                commandsStr: next.command,
+            if (sessionAutoMode || Plasmoid.configuration.autoRunCommands) {
+                executeCommand(next.command, next.id);
+            } else {
+                // Show command for user approval
+                root.appendDisplayMessage("assistant", "", {
+                    shared: false
+                });
+            }
+        }
+    }
+
+    function executeTool(name, args, callId) {
+
+        var toolsConfig = getToolsConfig();
+        var tool = ToolManager.getTool(name, toolsConfig);
+        if (!tool) {
+            handleToolOutput(null, "", i18n("Unknown tool %1", name), 1, { name: name, callId: callId });
+            return;
+        }
+
+        // Sandbox check for file tools
+        if (tool.sandboxed) {
+            var path = args.path || "";
+            var home = sysInfo.userHome || "$HOME";
+            if (!ToolManager.isPathAllowed(path, Plasmoid.configuration.toolsPathWhitelist, home)) {
+                var displayPath = ToolManager.contractPath(path, home);
+                handleToolOutput(null, "", i18n("Error: path '%1' outside whitelist", displayPath), 1, { name: name, callId: callId });
+                return;
+            }
+            // Expand it for internal execution
+            args.path = ToolManager.expandPath(path, home);
+        }
+
+        // Create a visible indicator if it's not auto-run or if it's a side-effect tool
+        var displayIndex = -1;
+        var isAuto = ToolManager.isAutoRun(name, toolsConfig);
+        var metadata = ToolManager.getToolMetadata(name, toolsConfig);
+        var scheme = metadata && metadata.outputScheme ? metadata.outputScheme : "";
+        if (!tool.uiHidden && (tool.sideEffect || !isAuto)) {
+             displayIndex = root.appendDisplayMessage("tool_running", i18n("Executing %1…", name), {
+                toolName: name,
+                toolArgs: JSON.stringify(args),
+                tool_call_id: callId,
                 shared: false,
-                timestamp: currentTimestamp()
+                callId: callId,
+                outputScheme: scheme,
             });
+        }
+
+        var context = {
+            config: Plasmoid.configuration,
+            i18n: i18n,
+            getSecret: function(key) {
+                return root[key] !== undefined ? root[key] : "";
+            },
+            addDisplayMessage: function(content, role, extraProps) {
+                root.appendDisplayMessage(role, content, extraProps);
+            },
+            replaceDisplayMessage: function(oldRole, newContent, newRole, extraProps) {
+                for (var i = displayMessages.count - 1; i >= 0; i--) {
+                    if (displayMessages.get(i).role === oldRole) {
+                        root.updateDisplayMessage(i, newRole || oldRole, newContent, extraProps);
+                        return;
+                    }
+                }
+                // Fallback to append if not found
+                this.addDisplayMessage(newContent, newRole || oldRole, extraProps);
+            },
+            exec: function(cmd, toolName, toolArgs) {
+                activeToolCalls[cmd] = { name: toolName, callId: callId, displayIndex: displayIndex, args: toolArgs };
+                toolsExec.connectSource(cmd);
+            },
+            error: function(msg) {
+                console.error("PlasmaLLM: Tool error:", name, msg);
+                handleToolOutput(null, "", msg, 1, { name: name, callId: callId, displayIndex: displayIndex, args: args });
+            },
+            onDone: function(stdout, stderr, exitCode) {
+                handleToolOutput(null, stdout, stderr, exitCode, { name: name, callId: callId, displayIndex: displayIndex, args: args });
+            }
+        };
+
+        tool.execute(args, context);
+    }
+
+    function handleToolOutput(source, stdout, stderr, exitCode, manualMeta) {
+        var info = manualMeta || activeToolCalls[source];
+        if (!info) {
+            return;
+        }
+
+        if (source) delete activeToolCalls[source];
+
+        var name = info.name;
+        var callId = info.callId;
+        var displayIndex = info.displayIndex;
+        var args = info.args || {};
+        var metadata = ToolManager.getToolMetadata(name, Plasmoid.configuration);
+        var scheme = metadata && metadata.outputScheme ? metadata.outputScheme : "";
+
+        var home = sysInfo.userHome || "$HOME";
+        var status = exitCode === 0 ? "ok" : "error";
+        var header = "[" + name;
+        if (args.path) {
+            header += ": " + ToolManager.contractPath(args.path, home);
+        } else if (args.url) {
+            header += ": " + args.url;
+        } else if (status !== "ok") {
+            header += ": " + status;
+        }
+        header += "]";
+
+        // Before building result string, truncate stdout at 8KB
+        var MAX_TOOL_OUTPUT = 8192;
+        if (stdout && stdout.length > MAX_TOOL_OUTPUT) {
+            stdout = stdout.substring(0, MAX_TOOL_OUTPUT) + "\n;;; (output truncated at " + MAX_TOOL_OUTPUT + " bytes)";
+        }
+
+        var result = header;
+        if (stdout) result += "\n" + stdout;
+        if (stderr) result += (stdout ? "\n" : "") + "stderr: " + stderr;
+
+        // Privacy: contract absolute home paths back to ~
+        result = ToolManager.contractAllPaths(result, home);
+
+        var tool = ToolManager.getTool(name, Plasmoid.configuration);
+
+        // Update UI in-place if we have a valid index
+        var updatedInPlace = false;
+        if (displayIndex >= 0 && displayIndex < displayMessages.count) {
+            var msg = displayMessages.get(displayIndex);
+            if (msg.role === "tool_running" && msg.tool_call_id === callId) {
+                displayMessages.setProperty(displayIndex, "role", "tool_result");
+                displayMessages.setProperty(displayIndex, "content", result);
+                displayMessages.setProperty(displayIndex, "toolArgs", JSON.stringify(args));
+                displayMessages.setProperty(displayIndex, "tool_call_id", callId);
+                displayMessages.setProperty(displayIndex, "callId", callId);
+                displayMessages.setProperty(displayIndex, "stdout", stdout || "");
+                displayMessages.setProperty(displayIndex, "stderr", stderr || "");
+                displayMessages.setProperty(displayIndex, "exitCode", exitCode);
+                displayMessages.setProperty(displayIndex, "outputScheme", scheme);
+                displayMessages.setProperty(displayIndex, "shared", true);
+                updatedInPlace = true;
+            }
+        }
+
+        if (!updatedInPlace && (!tool || !tool.uiHidden)) {
+            // Remove indicator if it was there but we couldn't update in-place
+            for (var i = displayMessages.count - 1; i >= 0; i--) {
+                var m = displayMessages.get(i);
+                if (m.role === "tool_running" && (m.callId === callId || m.tool_call_id === callId)) {
+                    displayMessages.remove(i);
+                    break;
+                }
+            }
+
+            // Append to UI
+            root.appendDisplayMessage("tool_result", result, {
+                toolName: name,
+                toolArgs: JSON.stringify(args),
+                tool_call_id: callId,
+                stdout: stdout || "",
+                stderr: stderr || "",
+                exitCode: exitCode,
+                shared: true,
+                outputScheme: scheme,
+            });
+        }
+
+        // Append to chat history
+        chatMessages.append({
+            role: "tool",
+            content: result,
+            tool_call_id: callId,
+            timestamp_api: Api.localISODateTime()
+        });
+
+        // Remove from queue and continue
+        if (root.pendingToolCalls.length > 0 && root.pendingToolCalls[0].id === callId) {
+            root.pendingToolCalls.shift();
+            root.pendingToolCalls = root.pendingToolCalls; // trigger property change
+            processNextToolCall();
+        } else {
+            console.warn("PlasmaLLM: Tool tool result ID mismatch. Expected " + (root.pendingToolCalls.length > 0 ? root.pendingToolCalls[0].id : "nothing") + ", got " + callId);
+            // Fallback: if it didn't match the first one, still try to continue if it matched SOME one
+            for (var i = 0; i < root.pendingToolCalls.length; i++) {
+                if (root.pendingToolCalls[i].id === callId) {
+                    root.pendingToolCalls.splice(i, 1);
+                    root.pendingToolCalls = root.pendingToolCalls;
+                    processNextToolCall();
+                    break;
+                }
+            }
         }
     }
 
@@ -1760,6 +1904,7 @@ PlasmoidItem {
     function saveScript(filePath, content) {
         var escaped = content.replace(/'/g, "'\\''");
         var cmd = "printf '%s' '" + escaped + "' > '" + filePath.replace(/'/g, "'\\''") + "' && chmod +x '" + filePath.replace(/'/g, "'\\''") + "'";
+        saveCommands.push(cmd);
         executable.connectSource(cmd);
     }
 
@@ -1768,12 +1913,20 @@ PlasmoidItem {
     }
 
     function stopCommandByText(rawCmd, sourceId) {
-        for (var k in runningCommands) {
-            var info = runningCommands[k];
-            if (info.rawCmd === rawCmd && (!sourceId || info.sourceId === sourceId)) {
-                var stopCmd = SessionRunner.stopCommand(Plasmoid.configuration, info.marker);
-                stopCommands.push(stopCmd);
-                executable.connectSource(stopCmd);
+        for (var k in activeToolCalls) {
+            var info = activeToolCalls[k];
+            if (info.name === "run_command" && info.args && info.args._rawCommand === rawCmd) {
+                var marker = info.args._marker;
+                if (!marker) continue;
+                var be = Plasmoid.configuration.sessionMultiplexer === "screen" ? "screen" : "tmux";
+                var sess = (Plasmoid.configuration.sessionName || "").replace(/[^A-Za-z0-9_-]/g, "") || "plasmallm";
+                var stopCmd = "";
+                if (be === "tmux") {
+                    stopCmd = "tmux send-keys -t '" + sess + "':0 C-c \"printf '\\n__PLM_DONE_" + marker + "_130\\n'\" ENTER";
+                } else {
+                    stopCmd = "screen -S '" + sess + "' -p 0 -X eval \"stuff \\003\" \"stuff \\\"printf '\\\\n__PLM_DONE_" + marker + "_130\\\\n'\\\\015\\\"\"";
+                }
+                toolsExec.connectSource(stopCmd);
                 return;
             }
         }
@@ -1800,99 +1953,19 @@ PlasmoidItem {
             displayMessages.append({
                 role: "assistant",
                 content: i18n("Session reset requested."),
-                commandsStr: "",
+
                 shared: false,
-                timestamp: currentTimestamp()
+                timestamp: currentTimestamp(),
             });
             Qt.callLater(updateSessionStatus);
         }
     }
 
     function executeCommand(cmd, sourceId) {
-        var marker = generateMarker();
-        var wrapped = SessionRunner.isEnabled(Plasmoid.configuration)
-                    ? SessionRunner.wrapCommand(cmd, Plasmoid.configuration, marker)
-                    : cmd;
-
-        runningCommands[wrapped] = { rawCmd: cmd, marker: marker, sourceId: sourceId };
-        commandRunStateTick++;
-        
-        displayMessages.append({
-            role: "command_running",
-            content: i18n("Running: %1", cmd),
-            commandKey: wrapped,
-            marker: marker,
-            commandsStr: "",
-            shared: false,
-            timestamp: currentTimestamp()
-        });
-        sessionActive = true;
-        executable.connectSource(wrapped);
+        var callId = sourceId || ("manual_" + generateMarker());
+        executeTool("run_command", { command: cmd }, callId);
     }
 
-    function handleCommandOutput(command, stdout, stderr, exitCode) {
-        var cmdInfo = runningCommands[command];
-        var rawCmd = cmdInfo ? cmdInfo.rawCmd : command;
-
-        // Find and replace the command_running message
-        for (var i = displayMessages.count - 1; i >= 0; i--) {
-            var m = displayMessages.get(i);
-            if (m.role === "command_running" && (m.commandKey === command || m.content === i18n("Running: %1", rawCmd))) {
-                displayMessages.remove(i);
-                break;
-            }
-        }
-        if (cmdInfo) {
-            delete runningCommands[command];
-            commandRunStateTick++;
-        }
-
-        var maxOutputSize = 50000; // 50KB limit
-        var output = "";
-        if (stdout) output += stdout;
-        if (stderr) output += (output ? "\n" : "") + i18n("stderr: %1", stderr);
-        if (output.length > maxOutputSize) {
-            output = output.substring(0, maxOutputSize) + "\n" + i18n("[truncated — output exceeded %1KB]", Math.round(maxOutputSize / 1024));
-        }
-        output += "\n" + i18n("[exit code: %1]", exitCode);
-
-        displayMessages.append({
-            role: "command_output",
-            content: output,
-            commandsStr: "",
-            shared: false,
-            timestamp: currentTimestamp()
-        });
-
-        // If there's a pending run_command tool call, send the result as a tool message
-        if (root.pendingToolCalls.length > 0) {
-            for (var ptci = 0; ptci < root.pendingToolCalls.length; ptci++) {
-                if (rawCmd === root.pendingToolCalls[ptci].command) {
-                    var completed = root.pendingToolCalls.splice(ptci, 1)[0];
-                    root.pendingToolCalls = root.pendingToolCalls; // trigger property change
-                    displayMessages.setProperty(displayMessages.count - 1, "shared", true);
-                    chatMessages.append({
-                        role: "tool",
-                        content: output,
-                        tool_call_id: completed.id,
-                        timestamp_api: Api.localISODateTime()
-                    });
-                    if (root.pendingToolCalls.length === 0) {
-                        sendToLLM();
-                    } else if (sessionAutoMode || Plasmoid.configuration.autoRunCommands) {
-                        processNextToolCall();
-                    }
-                    Qt.callLater(updateSessionStatus);
-                    return;
-                }
-            }
-        }
-        // Auto-share with LLM if enabled (suppressed after user hits stop)
-        if ((sessionAutoMode || Plasmoid.configuration.autoShareCommandOutput) && !autoShareSuppressed) {
-            shareOutput(displayMessages.count - 1);
-        }
-        Qt.callLater(updateSessionStatus);
-    }
 
     function shareOutput(index) {
         if (index < 0 || index >= displayMessages.count) return;
@@ -1916,43 +1989,35 @@ PlasmoidItem {
 
     Connections {
         target: Plasmoid.configuration
-        function onCustomSystemPromptChanged() {
-            if (!systemPromptReady) return;
-            // Update the system message (always at index 0) with new prompt
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-                autoMode: root.isAutoMode, 
-                commandToolEnabled: Plasmoid.configuration.useCommandTool 
-            });
-            chatMessages.setProperty(0, "content", prompt);
-        }
-        function onAutoRunCommandsChanged() {
-            if (!systemPromptReady) return;
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-                autoMode: root.isAutoMode, 
-                commandToolEnabled: Plasmoid.configuration.useCommandTool 
-            });
-            chatMessages.setProperty(0, "content", prompt);
-        }
-        function onAutoShareCommandOutputChanged() {
-            if (!systemPromptReady) return;
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-                autoMode: root.isAutoMode, 
-                commandToolEnabled: Plasmoid.configuration.useCommandTool 
-            });
-            chatMessages.setProperty(0, "content", prompt);
-        }
-        function onUseCommandToolChanged() {
-            if (!systemPromptReady) return;
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-                autoMode: root.isAutoMode, 
-                commandToolEnabled: Plasmoid.configuration.useCommandTool 
-            });
-            chatMessages.setProperty(0, "content", prompt);
-        }
+        function onCustomSystemPromptChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onCustomToolsChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onEnableToolsChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onAutoRunCommandsChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onUseCommandToolChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsReadFileEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsReadFileAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsWriteFileEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsWriteFileAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsListDirEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsListDirAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsHttpGetEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsHttpGetAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsHttpRequestEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsHttpRequestAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsSearchFilesEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsSearchFilesAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsGetClipboardEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsGetClipboardAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsSetClipboardEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsSetClipboardAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsNotifyEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsNotifyAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsOpenUrlEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsOpenUrlAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsPathWhitelistChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsReadMaxBytesChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsWriteMaxBytesChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsHttpMaxBytesChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onApiKeyChanged() {
             // Legacy single-slot config field; only meaningful before migration.
             if (Plasmoid.configuration.apiKey) root.apiKey = Plasmoid.configuration.apiKey;
@@ -2052,15 +2117,7 @@ PlasmoidItem {
         function onSysInfoDiskChanged()     { if (systemPromptReady) regatherSysInfo(); }
         function onSysInfoNetworkChanged()  { if (systemPromptReady) regatherSysInfo(); }
         function onSysInfoLocaleChanged()   { if (systemPromptReady) regatherSysInfo(); }
-        function onSysInfoDateTimeChanged() {
-            if (!systemPromptReady) return;
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
-                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-                autoMode: root.isAutoMode, 
-                commandToolEnabled: Plasmoid.configuration.useCommandTool 
-            });
-            chatMessages.setProperty(0, "content", prompt);
-        }
+        function onSysInfoDateTimeChanged() { if (systemPromptReady) initSystemPrompt(); }
     }
 
     Timer {
@@ -2103,6 +2160,68 @@ PlasmoidItem {
                 Plasmoid.configuration.activeProfileId = "p_default";
             }
             Plasmoid.configuration.profilesSchemaVersion = 1;
+        }
+
+        // Migration: v1 -> v2 (add tool settings to profiles)
+        if (Plasmoid.configuration.profilesSchemaVersion === 1) {
+            var profiles = Profiles.loadProfiles(Plasmoid.configuration);
+            profiles.forEach(p => {
+                Profiles.PROFILE_FIELDS.forEach(f => {
+                    if (p[f] === undefined && Plasmoid.configuration[f] !== undefined) {
+                        p[f] = Plasmoid.configuration[f];
+                    }
+                });
+            });
+            Profiles.saveProfiles(Plasmoid.configuration, profiles);
+            Plasmoid.configuration.profilesSchemaVersion = 2;
+        }
+
+        // Migration: v2 -> v3 (Tools Overhaul)
+        // All tools enabled by default, "Ask before running" enabled (autoRun = false)
+        // Except Web Search: preserve its state.
+        if (Plasmoid.configuration.profilesSchemaVersion === 2) {
+            var profiles = Profiles.loadProfiles(Plasmoid.configuration);
+            var toolPrefixes = [
+                "ReadFile", "WriteFile", "ListDir", "HttpGet", "HttpRequest", 
+                "SearchFiles", "GetClipboard", "SetClipboard", "Notify", "OpenUrl"
+            ];
+            
+            profiles.forEach(p => {
+                p.enableTools = true;
+                p.useCommandTool = true;
+                p.autoRunCommands = false;
+                
+                toolPrefixes.forEach(prefix => {
+                    p["tools" + prefix + "Enabled"] = true;
+                    p["tools" + prefix + "AutoRun"] = false;
+                });
+                
+                if (p.customTools) {
+                    try {
+                        var ct = typeof p.customTools === "string" ? JSON.parse(p.customTools) : p.customTools;
+                        if (Array.isArray(ct)) {
+                            ct.forEach(tool => { tool.autoRun = false; });
+                            p.customTools = (typeof p.customTools === "string") ? JSON.stringify(ct) : ct;
+                        }
+                    } catch(e) {}
+                }
+            });
+            Profiles.saveProfiles(Plasmoid.configuration, profiles);
+            
+            // Also update global config
+            Plasmoid.configuration.enableTools = true;
+            Plasmoid.configuration.useCommandTool = true;
+            Plasmoid.configuration.autoRunCommands = false;
+            toolPrefixes.forEach(prefix => {
+                Plasmoid.configuration["tools" + prefix + "Enabled"] = true;
+                Plasmoid.configuration["tools" + prefix + "AutoRun"] = false;
+            });
+            
+            var ctGlobal = ToolManager.getCustomTools(Plasmoid.configuration);
+            ctGlobal.forEach(tool => { tool.autoRun = false; });
+            Plasmoid.configuration.customTools = JSON.stringify(ctGlobal);
+
+            Plasmoid.configuration.profilesSchemaVersion = 3;
         }
 
         regatherSysInfo();
@@ -2152,27 +2271,28 @@ PlasmoidItem {
 
     onExpandedChanged: function(expanded) {
         if (!expanded) {
-            Plasmoid.configuration.lastClosedTimestamp = String(Date.now())
+            Plasmoid.configuration.lastClosedTimestamp = String(Date.now());
         } else {
-            var hadUnread = root.hasUnreadResponse
+            var hadUnread = root.hasUnreadResponse;
             if (root.hasUnreadResponse) {
                 root.hasUnreadResponse = false;
                 Plasmoid.status = PlasmaCore.Types.ActiveStatus;
             }
-            if (hadUnread) return
-            var mode = Plasmoid.configuration.autoClearMode
+            if (hadUnread) return;
+            var mode = Plasmoid.configuration.autoClearMode;
             if (mode === 1) {
-                clearChat()
+                clearChat();
             } else if (mode === 2 || mode === 3) {
-                var lastClosed = parseInt(Plasmoid.configuration.lastClosedTimestamp) || 0
+                var lastClosed = parseInt(Plasmoid.configuration.lastClosedTimestamp) || 0;
                 if (lastClosed > 0) {
-                    var elapsed = Date.now() - lastClosed
+                    var elapsed = Date.now() - lastClosed;
                     var threshold = mode === 2
                         ? Plasmoid.configuration.autoClearSeconds * 1000
-                        : Plasmoid.configuration.autoClearMinutes * 60 * 1000
-                    if (elapsed >= threshold) clearChat()
+                        : Plasmoid.configuration.autoClearMinutes * 60 * 1000;
+                    if (elapsed >= threshold) clearChat();
                 }
             }
         }
     }
-}
+    }
+

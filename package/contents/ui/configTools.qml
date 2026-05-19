@@ -12,6 +12,7 @@ import org.kde.plasma.workspace.dbus as DBus
 import org.kde.plasma.plasma5support as P5Support
 
 import "api.js" as Api
+import "toolManager.js" as ToolManager
 
 BaseConfigPage {
     id: configPage
@@ -23,6 +24,34 @@ BaseConfigPage {
     property bool hasScreen: false
     property bool _tmuxChecked: false
     property bool _screenChecked: false
+
+    property alias execSource: execSource
+
+    property var whitelistPaths: []
+
+    function parseWhitelist() {
+        if (!cfg_toolsPathWhitelist) {
+            whitelistPaths = ["$HOME"];
+            return;
+        }
+        try {
+            var parsed = JSON.parse(cfg_toolsPathWhitelist);
+            if (Array.isArray(parsed)) {
+                whitelistPaths = parsed;
+            } else {
+                whitelistPaths = ["$HOME"];
+            }
+        } catch (e) {
+            console.error("Error parsing whitelist:", e);
+            whitelistPaths = ["$HOME"];
+        }
+    }
+
+    function saveWhitelist() {
+        if (!_initialized) return;
+        cfg_toolsPathWhitelist = JSON.stringify(whitelistPaths);
+        configPage.triggerCapture();
+    }
 
     function checkBackendAvailability() {
         if (!_tmuxChecked || !_screenChecked) return;
@@ -48,381 +77,162 @@ BaseConfigPage {
                 hasScreen = isAvail;
                 _screenChecked = true;
             }
-            checkBackendAvailability();
+            configPage.checkBackendAvailability();
             disconnectSource(sourceName);
         }
-    }
-
-
-    property string walletOllamaKey: ""
-    property bool walletOllamaKeyLoaded: false
-    property bool walletOllamaKeyDirty: false
-    property bool walletOllamaSaveInProgress: false
-
-    property string walletSearxngKey: ""
-    property bool walletSearxngKeyLoaded: false
-    property bool walletSearxngKeyDirty: false
-    property bool walletSearxngSaveInProgress: false
-
-    property bool walletAvailable: false
-
-    function walletCall(member, args, resolve, reject) {
-        var reply = DBus.SessionBus.asyncCall({
-            service: "org.kde.kwalletd6",
-            path: "/modules/kwalletd6",
-            iface: "org.kde.KWallet",
-            member: member,
-            arguments: args
-        });
-        reply.finished.connect(function() {
-            if (reply.isError) {
-                if (reject) reject(reply.error);
-            } else {
-                var val = reply.value;
-                if (val !== null && val !== undefined && val.hasOwnProperty("value")) val = val.value;
-                if (resolve) resolve(val);
-            }
-        });
-    }
-
-    function ensureWalletFolder(handle, callback) {
-        walletCall("hasFolder", [new DBus.int32(handle), "PlasmaLLM", "PlasmaLLM"],
-            function(exists) {
-                if (exists) {
-                    callback(true);
-                } else {
-                    walletCall("createFolder", [new DBus.int32(handle), "PlasmaLLM", "PlasmaLLM"],
-                        function(created) { callback(created); },
-                        function(err) { callback(false); }
-                    );
-                }
-            },
-            function(err) { callback(false); }
-        );
-    }
-
-    function walletWriteOllamaKey(handle, key, onDone) {
-        ensureWalletFolder(handle, function(ok) {
-            if (!ok) {
-                onDone(false);
-                return;
-            }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaSearchApiKey", key, "PlasmaLLM"],
-                function(result) { onDone(result === 0); },
-                function(err) {
-                    console.warn("PlasmaLLM: wallet writePassword (ollama) error: " + err);
-                    onDone(false);
-                }
-            );
-        });
-    }
-
-    function walletWriteSearxngKey(handle, key, onDone) {
-        ensureWalletFolder(handle, function(ok) {
-            if (!ok) {
-                onDone(false);
-                return;
-            }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "searxngApiKey", key, "PlasmaLLM"],
-                function(result) { onDone(result === 0); },
-                function(err) {
-                    console.warn("PlasmaLLM: wallet writePassword (searxng) error: " + err);
-                    onDone(false);
-                }
-            );
-        });
-    }
-
-    function loadWalletOllamaKey() {
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    walletOllamaKey = cfg_ollamaSearchApiKey;
-                    walletOllamaKeyLoaded = true;
-                    return;
-                }
-                walletAvailable = true;
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaSearchApiKey", "PlasmaLLM"],
-                    function(password) {
-                        if (password && password.length > 0) {
-                            walletOllamaKey = password;
-                        } else {
-                            walletOllamaKey = cfg_ollamaSearchApiKey;
-                        }
-                        walletOllamaKeyLoaded = true;
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    },
-                    function(err) {
-                        walletOllamaKey = cfg_ollamaSearchApiKey;
-                        walletOllamaKeyLoaded = true;
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    }
-                );
-            },
-            function(err) {
-                walletOllamaKey = cfg_ollamaSearchApiKey;
-                walletOllamaKeyLoaded = true;
-            }
-        );
-    }
-
-    function saveWalletOllamaKey() {
-        var key = ollamaApiKeyField.text;
-        walletOllamaSaveInProgress = true;
-        if (!walletAvailable) {
-            cfg_ollamaSearchApiKey = key;
-            walletOllamaKeyDirty = false;
-            walletOllamaSaveInProgress = false;
-            return;
-        }
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    cfg_ollamaSearchApiKey = key;
-                    walletOllamaKeyDirty = false;
-                    walletOllamaSaveInProgress = false;
-                    return;
-                }
-                walletWriteOllamaKey(handle, key, function(success) {
-                    if (success) {
-                        walletOllamaKey = key;
-                        cfg_ollamaSearchApiKey = "";
-                        walletOllamaKeyDirty = false;
-                        cfg_ollamaSearchApiKeyVersion++;
-                    }
-                    walletOllamaSaveInProgress = false;
-                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                });
-            },
-            function(err) {
-                cfg_ollamaSearchApiKey = key;
-                walletOllamaKeyDirty = false;
-                walletOllamaSaveInProgress = false;
-            }
-        );
-    }
-
-    function loadWalletSearxngKey() {
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    walletSearxngKey = cfg_searxngApiKey;
-                    walletSearxngKeyLoaded = true;
-                    return;
-                }
-                walletAvailable = true;
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "searxngApiKey", "PlasmaLLM"],
-                    function(password) {
-                        if (password && password.length > 0) {
-                            walletSearxngKey = password;
-                        } else {
-                            walletSearxngKey = cfg_searxngApiKey;
-                        }
-                        walletSearxngKeyLoaded = true;
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    },
-                    function(err) {
-                        walletSearxngKey = cfg_searxngApiKey;
-                        walletSearxngKeyLoaded = true;
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    }
-                );
-            },
-            function(err) {
-                walletSearxngKey = cfg_searxngApiKey;
-                walletSearxngKeyLoaded = true;
-            }
-        );
-    }
-
-    function saveWalletSearxngKey() {
-        var key = searxngApiKeyField.text;
-        walletSearxngSaveInProgress = true;
-        if (!walletAvailable) {
-            cfg_searxngApiKey = key;
-            walletSearxngKeyDirty = false;
-            walletSearxngSaveInProgress = false;
-            return;
-        }
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    cfg_searxngApiKey = key;
-                    walletSearxngKeyDirty = false;
-                    walletSearxngSaveInProgress = false;
-                    return;
-                }
-                walletWriteSearxngKey(handle, key, function(success) {
-                    if (success) {
-                        walletSearxngKey = key;
-                        cfg_searxngApiKey = "";
-                        walletSearxngKeyDirty = false;
-                        cfg_searxngApiKeyVersion++;
-                    }
-                    walletSearxngSaveInProgress = false;
-                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                });
-            },
-            function(err) {
-                cfg_searxngApiKey = key;
-                walletSearxngKeyDirty = false;
-                walletSearxngSaveInProgress = false;
-            }
-        );
     }
 
     Component.onCompleted: {
         execSource.connectSource("command -v tmux");
         execSource.connectSource("command -v screen");
-        loadWalletOllamaKey();
-        loadWalletSearxngKey();
+        configPage.parseWhitelist();
     }
-
-    onCfg_ollamaSearchApiKeyVersionChanged: loadWalletOllamaKey()
-    onCfg_searxngApiKeyVersionChanged: loadWalletSearxngKey()
 
     Kirigami.FormLayout {
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
-            Kirigami.FormData.label: i18n("Commands")
+            Kirigami.FormData.label: i18n("General Tool Settings")
         }
 
         QQC2.CheckBox {
-            id: autoRunCheckBox
-            text: i18n("Auto-run commands from LLM")
-            checked: cfg_autoRunCommands
-            onCheckedChanged: cfg_autoRunCommands = checked
-
-            QQC2.ToolTip.text: i18n("Allow the LLM to execute shell commands. Dangerous if combined with Auto-share.")
+            id: enableToolsMaster
+            Kirigami.FormData.label: i18n("System state:")
+            text: i18n("Enable Tools")
+            checked: cfg_enableTools
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_enableTools = checked;
+                    rootItem.triggerCapture();
+                }
+            }
+            
+            QQC2.ToolTip.text: i18n("Master switch for all tool-calling functionality.")
             QQC2.ToolTip.visible: hovered
-            QQC2.ToolTip.delay: 500
         }
 
-        QQC2.CheckBox {
-            id: useCommandToolCheckBox
-            text: i18n("Run as tool")
-            checked: cfg_useCommandTool
-            onCheckedChanged: cfg_useCommandTool = checked
-
-            QQC2.ToolTip.text: i18n("Use the run_command tool for command execution. If disabled, falls back to parsing code blocks.")
-            QQC2.ToolTip.visible: hovered
-            QQC2.ToolTip.delay: 500
-        }
-
-        QQC2.CheckBox {
-            id: autoShareCheckBox
-            text: i18n("Auto-share command output with LLM")
-            checked: cfg_autoShareCommandOutput
-            onCheckedChanged: cfg_autoShareCommandOutput = checked
-
-            QQC2.ToolTip.text: i18n("Automatically send command execution results back to the LLM")
-            QQC2.ToolTip.visible: hovered
-            QQC2.ToolTip.delay: 500
-        }
-
-        QQC2.Label {
-            visible: autoShareCheckBox.checked && autoRunCheckBox.checked
-            text: i18n("⚠️ DANGER: Both options enabled - the LLM can now execute commands and see their output, enabling an agentic workflow. Only use with trustworthy LLMs.")
-            wrapMode: Text.Wrap
+        ColumnLayout {
+            id: whitelistColumn
+            Kirigami.FormData.label: i18n("Path whitelist:")
+            enabled: cfg_enableTools
+            spacing: Kirigami.Units.smallSpacing
             Layout.fillWidth: true
-            Layout.preferredWidth: 1
-            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
-            color: Kirigami.Theme.negativeTextColor
-            font: Kirigami.Theme.smallFont
-        }
 
-        Kirigami.Separator {
-            Kirigami.FormData.isSection: true
-            Kirigami.FormData.label: i18n("Session Multiplexer")
-        }
-
-        QQC2.CheckBox {
-            id: useSessionMultiplexerCheckBox
-            text: i18n("Run commands inside a persistent session")
-            checked: cfg_useSessionMultiplexer
-            onCheckedChanged: cfg_useSessionMultiplexer = checked
-            enabled: hasTmux || hasScreen
-
-            QQC2.ToolTip.text: i18n("Execute LLM commands inside a long-lived tmux or screen session so state persists across turns.")
-            QQC2.ToolTip.visible: hovered
-            QQC2.ToolTip.delay: 500
-        }
-
-        QQC2.Button {
-            text: i18n("Reset Session")
-            icon.name: "edit-clear-all"
-            visible: useSessionMultiplexerCheckBox.checked
-            onClicked: {
-                var be = cfg_sessionMultiplexer === "screen" ? "screen" : "tmux";
-                var sess = (cfg_sessionName || "").replace(/[^A-Za-z0-9_-]/g, "") || "plasmallm";
-                var cmd = be === "tmux" ? "tmux kill-session -t '" + sess + "'" : "screen -S '" + sess + "' -X quit";
-                execSource.connectSource(cmd);
+            function removeAt(idx) {
+                var arr = whitelistPaths.slice();
+                arr.splice(idx, 1);
+                whitelistPaths = arr;
+                saveWhitelist();
             }
-        }
 
-        QQC2.ComboBox {
-            id: sessionMultiplexerComboBox
-            Kirigami.FormData.label: i18n("Backend:")
-            model: {
-                var opts = [];
-                if (hasTmux) opts.push({ text: "tmux", value: "tmux" });
-                if (hasScreen) opts.push({ text: "screen", value: "screen" });
-                return opts;
+            function addPath(path) {
+                if (whitelistPaths.indexOf(path) === -1) {
+                    var arr = whitelistPaths.slice();
+                    arr.push(path);
+                    whitelistPaths = arr;
+                    saveWhitelist();
+                }
             }
-            textRole: "text"
-            valueRole: "value"
-            enabled: useSessionMultiplexerCheckBox.checked && (hasTmux || hasScreen)
 
-            onModelChanged: syncIndex()
-            Component.onCompleted: syncIndex()
-
-            function syncIndex() {
-                for (var i = 0; i < count; i++) {
-                    if (model[i].value === cfg_sessionMultiplexer) {
-                        currentIndex = i;
-                        break;
+            Repeater {
+                model: whitelistPaths
+                delegate: RowLayout {
+                    Layout.fillWidth: true
+                    QQC2.TextField {
+                        text: modelData
+                        Layout.fillWidth: true
+                        readOnly: true
+                    }
+                    QQC2.ToolButton {
+                        icon.name: "edit-delete"
+                        onClicked: whitelistColumn.removeAt(index)
                     }
                 }
             }
 
-            onActivated: {
-                if (currentValue) cfg_sessionMultiplexer = currentValue;
+            RowLayout {
+                Layout.fillWidth: true
+                QQC2.TextField {
+                    id: newPathField
+                    Layout.fillWidth: true
+                    placeholderText: i18n("Add path, e.g. $HOME/projects")
+                    onAccepted: addPathButton.clicked()
+                }
+                QQC2.Button {
+                    id: addPathButton
+                    icon.name: "list-add"
+                    text: i18n("Add")
+                    enabled: newPathField.text.trim().length > 0
+                    onClicked: {
+                        var path = newPathField.text.trim();
+                        whitelistColumn.addPath(path);
+                        newPathField.text = "";
+                    }
+                }
+            }
+
+            QQC2.Label {
+                Layout.fillWidth: true
+                text: i18n("Whitelist applies to file-system tools (read, write, list, search). Note: 'run_command' is not restricted by this list.")
+                font: Kirigami.Theme.smallFont
+                color: Kirigami.Theme.disabledTextColor
+                wrapMode: Text.Wrap
             }
         }
 
-        QQC2.TextField {
-            Kirigami.FormData.label: i18n("Session name:")
-            placeholderText: "plasmallm"
-            text: cfg_sessionName
-            onTextChanged: cfg_sessionName = text
-            enabled: useSessionMultiplexerCheckBox.checked && (hasTmux || hasScreen)
-            Layout.fillWidth: true
+        RowLayout {
+            Kirigami.FormData.label: i18n("Max read size:")
+            enabled: cfg_enableTools
+            QQC2.SpinBox {
+                from: 1
+                to: 10240
+                value: cfg_toolsReadMaxBytes / 1024
+                onValueModified: if (_initialized) cfg_toolsReadMaxBytes = value * 1024
+            }
+            QQC2.Label { text: "KB" }
         }
 
-        QQC2.Label {
-            visible: !(hasTmux || hasScreen)
-            text: i18n("Neither 'tmux' nor 'screen' was found on your system. Session multiplexing is unavailable.")
-            wrapMode: Text.Wrap
-            Layout.fillWidth: true
-            color: Kirigami.Theme.negativeTextColor
-            font: Kirigami.Theme.smallFont
+        RowLayout {
+            Kirigami.FormData.label: i18n("Max write size:")
+            enabled: cfg_enableTools
+            QQC2.SpinBox {
+                from: 1
+                to: 10240
+                value: cfg_toolsWriteMaxBytes / 1024
+                onValueModified: if (_initialized) cfg_toolsWriteMaxBytes = value * 1024
+            }
+            QQC2.Label { text: "KB" }
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Max HTTP response:")
+            enabled: cfg_enableTools
+            QQC2.SpinBox {
+                from: 1
+                to: 10240
+                value: cfg_toolsHttpMaxBytes / 1024
+                onValueModified: if (_initialized) cfg_toolsHttpMaxBytes = value * 1024
+            }
+            QQC2.Label { text: "KB" }
         }
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
             Kirigami.FormData.label: i18n("Native Adapter Features")
-            visible: adapterCapabilities.nativeGoogleSearch || adapterCapabilities.nativeCodeExecution
+            visible: !!(adapterCapabilities && (adapterCapabilities.nativeGoogleSearch || adapterCapabilities.nativeCodeExecution))
         }
 
         QQC2.CheckBox {
             id: nativeGoogleSearchCheckBox
+            Kirigami.FormData.label: i18n("Google Search:")
             text: i18n("Enable Native Google Search Grounding")
             checked: cfg_enableNativeGoogleSearch
             onCheckedChanged: {
+                if (!_initialized) return;
                 cfg_enableNativeGoogleSearch = checked;
-                triggerCapture();
+                rootItem.triggerCapture();
             }
-            visible: !!adapterCapabilities.nativeGoogleSearch
+            visible: !!(adapterCapabilities && adapterCapabilities.nativeGoogleSearch)
+            enabled: cfg_enableTools
 
             QQC2.ToolTip.text: i18n("Use Gemini's built-in Google Search for grounding. This overrides the standard web search tool.")
             QQC2.ToolTip.visible: hovered
@@ -431,13 +241,16 @@ BaseConfigPage {
 
         QQC2.CheckBox {
             id: nativeCodeExecutionCheckBox
+            Kirigami.FormData.label: i18n("Code Execution:")
             text: i18n("Enable Native Python Code Execution")
             checked: cfg_enableNativeCodeExecution
             onCheckedChanged: {
+                if (!_initialized) return;
                 cfg_enableNativeCodeExecution = checked;
-                triggerCapture();
+                rootItem.triggerCapture();
             }
-            visible: !!adapterCapabilities.nativeCodeExecution
+            visible: !!(adapterCapabilities && adapterCapabilities.nativeCodeExecution)
+            enabled: cfg_enableTools
 
             QQC2.ToolTip.text: i18n("Allow Gemini to write and execute Python code in a secure server-side sandbox.")
             QQC2.ToolTip.visible: hovered
@@ -455,134 +268,184 @@ BaseConfigPage {
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true
-            Kirigami.FormData.label: i18n("Standard Web Search")
-        }
-
-        QQC2.CheckBox {
-            id: enableWebSearchCheckBox
-            text: i18n("Enable web search tool")
-            checked: cfg_enableWebSearch
-            onCheckedChanged: cfg_enableWebSearch = checked
-
-            QQC2.ToolTip.text: i18n("Allows the LLM to perform web searches.")
-            QQC2.ToolTip.visible: hovered
-            QQC2.ToolTip.delay: 500
+            Kirigami.FormData.label: i18n("Individual Tools")
         }
 
         ColumnLayout {
-            visible: enableWebSearchCheckBox.checked
             Layout.fillWidth: true
-            spacing: Kirigami.Units.smallSpacing
+            Layout.preferredWidth: Kirigami.Units.gridUnit * 30
+            spacing: Kirigami.Units.largeSpacing
+            enabled: cfg_enableTools
+            opacity: enabled ? 1.0 : 0.6
 
-            QQC2.ComboBox {
-                id: webSearchProviderComboBox
-                Layout.fillWidth: true
-                Layout.maximumWidth: Kirigami.Units.gridUnit * 15
-                model: [
-                    { text: i18n("Ollama API"), value: "ollama" },
-                    { text: i18n("SearXNG"), value: "searxng" },
-                    { text: i18n("DuckDuckGo"), value: "duckduckgo" }
-                ]
-                textRole: "text"
-                valueRole: "value"
-                Component.onCompleted: {
-                    for (var i = 0; i < count; i++) {
-                        if (model[i].value === cfg_webSearchProvider) {
-                            currentIndex = i;
-                            break;
+            // Helper component for tool cards
+            component ToolCard : Kirigami.AbstractCard {
+                id: card
+                property string toolName: ""
+                property string configSource: ""
+                property bool isToolEnabled: false
+                signal toggled(bool checked)
+
+                readonly property var toolMetadata: ToolManager.getToolMetadata(toolName, null)
+
+                contentItem: ColumnLayout {
+                    spacing: Kirigami.Units.smallSpacing
+
+                    RowLayout {
+                        Layout.fillWidth: true
+                        spacing: Kirigami.Units.smallSpacing
+
+                        QQC2.CheckBox {
+                            id: mainCheckBox
+                            checked: card.isToolEnabled
+                            onCheckedChanged: {
+                                if (card.isToolEnabled !== checked) {
+                                    card.toggled(checked);
+                                }
+                            }
+                        }
+
+                        ColumnLayout {
+                            spacing: 0
+                            Layout.fillWidth: true
+
+                            QQC2.Label {
+                                text: card.toolMetadata && card.toolMetadata.displayName ? card.toolMetadata.displayName : card.toolName
+                                font.bold: true
+                                Layout.fillWidth: true
+                                Layout.preferredWidth: 1
+                            }
+
+                            QQC2.Label {
+                                text: card.toolMetadata ? card.toolMetadata.description : ""
+                                font: Kirigami.Theme.smallFont
+                                color: Kirigami.Theme.disabledTextColor
+                                wrapMode: Text.Wrap
+                                Layout.fillWidth: true
+                                Layout.preferredWidth: 1
+                                visible: text.length > 0
+                            }
+                        }
+                    }
+
+                    // Options container with background differentiation
+                    QQC2.Control {
+                        Layout.fillWidth: true
+                        Layout.leftMargin: Kirigami.Units.gridUnit * 2
+                        visible: card.isToolEnabled
+                        padding: Kirigami.Units.largeSpacing
+                        
+                        background: Rectangle {
+                            color: Kirigami.Theme.alternateBackgroundColor
+                            opacity: 0.3
+                            radius: Kirigami.Units.smallSpacing
+                        }
+
+                        contentItem: Loader {
+                            source: card.configSource
+                            Layout.fillWidth: true
                         }
                     }
                 }
-                onActivated: {
-                    cfg_webSearchProvider = currentValue;
-                }
             }
 
-            // Ollama options
-            RowLayout {
-                Layout.fillWidth: true
-                spacing: Kirigami.Units.smallSpacing
-                visible: cfg_webSearchProvider === "ollama"
-
-                QQC2.TextField {
-                    id: ollamaApiKeyField
-                    Layout.fillWidth: true
-                    placeholderText: i18n("Ollama API key")
-                    echoMode: TextInput.Password
-                    text: walletOllamaKeyLoaded ? walletOllamaKey : cfg_ollamaSearchApiKey
-                    onTextChanged: {
-                        if (walletOllamaKeyLoaded) {
-                            walletOllamaKeyDirty = (text !== walletOllamaKey);
-                        }
-                    }
-                    onEditingFinished: {
-                        if (walletOllamaKeyDirty) saveWalletOllamaKey();
-                    }
-                }
-
-                QQC2.Button {
-                    text: walletOllamaSaveInProgress ? i18n("Saving…") :
-                          !walletOllamaKeyDirty ? i18n("Saved") :
-                          !walletAvailable ? i18n("Save to Config (Insecure)") : i18n("Save Key")
-                    icon.name: !walletOllamaKeyDirty ? "dialog-ok-apply" : "document-save"
-                    enabled: walletOllamaKeyDirty && !walletOllamaSaveInProgress
-                    onClicked: saveWalletOllamaKey()
-                }
+            ToolCard {
+                toolName: "run_command"
+                isToolEnabled: cfg_useCommandTool
+                onToggled: checked => { if (_initialized) { cfg_useCommandTool = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/RunCommandConfig.qml"
             }
 
-            // SearXNG options
-            QQC2.TextField {
-                id: searxngUrlField
-                Layout.fillWidth: true
-                visible: cfg_webSearchProvider === "searxng"
-                placeholderText: i18n("SearXNG Instance URL (e.g. https://searx.be)")
-                text: cfg_searxngUrl
-                onTextChanged: cfg_searxngUrl = text
+            ToolCard {
+                toolName: "web_search"
+                isToolEnabled: cfg_enableWebSearch
+                onToggled: checked => { if (_initialized) { cfg_enableWebSearch = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/WebSearchConfig.qml"
             }
 
-            RowLayout {
-                Layout.fillWidth: true
-                spacing: Kirigami.Units.smallSpacing
-                visible: cfg_webSearchProvider === "searxng"
-
-                QQC2.TextField {
-                    id: searxngApiKeyField
-                    Layout.fillWidth: true
-                    placeholderText: i18n("SearXNG API Key/Token (optional)")
-                    echoMode: TextInput.Password
-                    text: walletSearxngKeyLoaded ? walletSearxngKey : cfg_searxngApiKey
-                    onTextChanged: {
-                        if (walletSearxngKeyLoaded) {
-                            walletSearxngKeyDirty = (text !== walletSearxngKey);
-                        }
-                    }
-                    onEditingFinished: {
-                        if (walletSearxngKeyDirty) saveWalletSearxngKey();
+            ToolCard {
+                toolName: "read_file"
+                isToolEnabled: cfg_toolsReadFileEnabled
+                onToggled: checked => { 
+                    if (_initialized) {
+                        cfg_toolsReadFileEnabled = checked;
+                        rootItem.triggerCapture();
                     }
                 }
-
-                QQC2.Button {
-                    text: walletSearxngSaveInProgress ? i18n("Saving…") :
-                          !walletSearxngKeyDirty ? i18n("Saved") :
-                          !walletAvailable ? i18n("Save to Config (Insecure)") : i18n("Save Key")
-                    icon.name: !walletSearxngKeyDirty ? "dialog-ok-apply" : "document-save"
-                    enabled: walletSearxngKeyDirty && !walletSearxngSaveInProgress
-                    onClicked: saveWalletSearxngKey()
-                }
+                configSource: "tools/ReadFileConfig.qml"
             }
 
-            QQC2.Label {
-                text: cfg_webSearchProvider === "duckduckgo" 
-                      ? i18n("DuckDuckGo requires no configuration.") 
-                      : cfg_webSearchProvider === "searxng" 
-                        ? i18n("Ensure the SearXNG instance has the JSON format enabled.") 
-                        : i18n("Enables LLM-triggered web searches via Ollama's search API")
-                font: Kirigami.Theme.smallFont
-                color: Kirigami.Theme.disabledTextColor
-                wrapMode: Text.Wrap
-                Layout.fillWidth: true
-                Layout.preferredWidth: 1
-                Layout.maximumWidth: Kirigami.Units.gridUnit * 24
+            ToolCard {
+                toolName: "write_file"
+                isToolEnabled: cfg_toolsWriteFileEnabled
+                onToggled: checked => { if (_initialized) { cfg_toolsWriteFileEnabled = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/WriteFileConfig.qml"
+            }
+
+            ToolCard {
+                toolName: "list_dir"
+                isToolEnabled: cfg_toolsListDirEnabled
+                onToggled: checked => { if (_initialized) { cfg_toolsListDirEnabled = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/ListDirConfig.qml"
+            }
+
+            ToolCard {
+                toolName: "search_files"
+                isToolEnabled: cfg_toolsSearchFilesEnabled
+                onToggled: checked => { 
+                    if (_initialized) {
+                        cfg_toolsSearchFilesEnabled = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
+                configSource: "tools/SearchFilesConfig.qml"
+            }
+
+            ToolCard {
+                toolName: "http_get"
+                isToolEnabled: cfg_toolsHttpGetEnabled
+                onToggled: checked => { if (_initialized) { cfg_toolsHttpGetEnabled = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/HttpGetConfig.qml"
+            }
+
+            ToolCard {
+                toolName: "http_request"
+                isToolEnabled: cfg_toolsHttpRequestEnabled
+                onToggled: checked => { if (_initialized) { cfg_toolsHttpRequestEnabled = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/HttpRequestConfig.qml"
+            }
+
+            ToolCard {
+                toolName: "get_clipboard"
+                isToolEnabled: cfg_toolsGetClipboardEnabled
+                onToggled: checked => { if (_initialized) { cfg_toolsGetClipboardEnabled = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/GetClipboardConfig.qml"
+            }
+
+            ToolCard {
+                toolName: "set_clipboard"
+                isToolEnabled: cfg_toolsSetClipboardEnabled
+                onToggled: checked => { 
+                    if (_initialized) {
+                        cfg_toolsSetClipboardEnabled = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
+                configSource: "tools/SetClipboardConfig.qml"
+            }
+
+            ToolCard {
+                toolName: "notify"
+                isToolEnabled: cfg_toolsNotifyEnabled
+                onToggled: checked => { if (_initialized) { cfg_toolsNotifyEnabled = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/NotifyConfig.qml"
+            }
+
+            ToolCard {
+                toolName: "open_url"
+                isToolEnabled: cfg_toolsOpenUrlEnabled
+                onToggled: checked => { if (_initialized) { cfg_toolsOpenUrlEnabled = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/OpenUrlConfig.qml"
             }
         }
     }

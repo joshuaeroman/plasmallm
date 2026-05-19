@@ -3,6 +3,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+.import "../toolManager.js" as ToolManager
+
 // Responses API strategy for the OpenAI-compatible adapter.
 // Dispatched by openai.js when the active provider speaks /v1/responses
 // (OpenAI native, Poe, OpenRouter, Azure). Translates the host's neutral
@@ -53,39 +55,17 @@ function fetchModels(endpoint, apiKey, callback) {
 function buildTools(options) {
     // Responses API uses a flat tool definition (no {type:"function", function:{...}} wrapper).
     var tools = [];
-    var commandToolEnabled = options && options.commandToolEnabled;
-    var webSearchEnabled = options && options.webSearchEnabled;
-    var searchConfigured = options && options.searchConfigured;
 
-    if (webSearchEnabled && searchConfigured) {
-        tools.push({
-            type: "function",
-            name: "web_search",
-            description: "Search the web for current information. Use when you need up-to-date facts, recent events, or information you're not confident about.",
-            parameters: {
-                type: "object",
-                properties: {
-                    query: { type: "string", description: "Search query" },
-                    max_results: { type: "integer", description: "Max results (1-10, default 5)" }
-                },
-                required: ["query"]
-            }
-        });
-    }
-
-    if (commandToolEnabled) {
-        tools.push({
-            type: "function",
-            name: "run_command",
-            description: "Execute a shell command on the user's system and return its output. Use this to run commands when the user asks you to perform system tasks.",
-            parameters: {
-                type: "object",
-                properties: {
-                    command: { type: "string", description: "The shell command to execute" }
-                },
-                required: ["command"]
-            }
-        });
+    if (options && options.toolsConfig) {
+        var metadata = ToolManager.getEnabledToolsMetadata(options.toolsConfig);
+        for (var i = 0; i < metadata.length; i++) {
+            tools.push({
+                type: "function",
+                name: metadata[i].name,
+                description: metadata[i].description,
+                parameters: metadata[i].parameters
+            });
+        }
     }
 
     return tools;
@@ -358,16 +338,20 @@ function sendStreaming(opts) {
                 if (ia.type === "reasoning") {
                     currentReasoningId = ia.id || "";
                 } else if (ia.type === "function_call") {
+                    var startArgs = ia.arguments || "";
+                    if (typeof startArgs === "object") {
+                        try { startArgs = JSON.stringify(startArgs); } catch(e) { startArgs = ""; }
+                    }
                     var entry = {
-                        id: ia.call_id || ia.id || "",
+                        id: ia.call_id || ia.id || ("call_" + accumulatedToolCalls.length),
                         type: "function",
                         "function": {
                             name: ia.name || "",
-                            arguments: typeof ia.arguments === "string" ? ia.arguments : ""
+                            arguments: startArgs
                         }
                     };
                     accumulatedToolCalls.push(entry);
-                    toolCallsByItemId[ia.id] = entry;
+                    toolCallsByItemId[ia.id || entry.id] = entry;
                 }
             }
             if (tok.function_args_delta) {
@@ -404,9 +388,12 @@ function sendStreaming(opts) {
                     // Ensure the final arguments string is captured even if
                     // delta events were missed.
                     var t2 = toolCallsByItemId[idn.id];
-                    if (t2 && typeof idn.arguments === "string" && idn.arguments.length > 0
-                        && t2["function"]["arguments"].length === 0) {
-                        t2["function"]["arguments"] = idn.arguments;
+                    if (t2 && t2["function"]["arguments"].length === 0 && idn.arguments) {
+                        var finalArgs = idn.arguments;
+                        if (typeof finalArgs === "object") {
+                            try { finalArgs = JSON.stringify(finalArgs); } catch(e) { finalArgs = ""; }
+                        }
+                        t2["function"]["arguments"] = finalArgs;
                     }
                 }
             }

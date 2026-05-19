@@ -32,7 +32,23 @@ const PROFILE_FIELDS = [
     "temperature", "maxTokens", "reasoningEffort", "thinkingBudget", "showThoughts",
     "geminiApiVariant", "geminiAuthMethod", "geminiVertexAuthType", "geminiProjectId",
     "geminiLocation", "openaiLastProvider", "openaiLastEndpoint",
-    "enableNativeGoogleSearch", "enableNativeCodeExecution"
+    "enableNativeGoogleSearch", "enableNativeCodeExecution",
+    "useCommandTool", "autoRunCommands", "autoShareCommandOutput",
+    "enableWebSearch", "webSearchProvider", "searxngUrl",
+    "enableTools",
+    "toolsReadFileEnabled", "toolsReadFileAutoRun",
+    "toolsWriteFileEnabled", "toolsWriteFileAutoRun",
+    "toolsListDirEnabled", "toolsListDirAutoRun",
+    "toolsHttpGetEnabled", "toolsHttpGetAutoRun",
+    "toolsHttpRequestEnabled", "toolsHttpRequestAutoRun",
+    "toolsSearchFilesEnabled", "toolsSearchFilesAutoRun",
+    "toolsGetClipboardEnabled", "toolsGetClipboardAutoRun",
+    "toolsSetClipboardEnabled", "toolsSetClipboardAutoRun",
+    "toolsNotifyEnabled", "toolsNotifyAutoRun",
+    "toolsOpenUrlEnabled", "toolsOpenUrlAutoRun",
+    "toolsPathWhitelist",
+    "toolsReadMaxBytes", "toolsWriteMaxBytes", "toolsHttpMaxBytes",
+    "tasks", "customTools"
 ];
 
 function loadProfilesRaw(raw) {

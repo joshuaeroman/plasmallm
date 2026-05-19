@@ -12,406 +12,403 @@ import org.kde.kirigami as Kirigami
 
 import "api.js" as Api
 
-Item {
+/**
+ * Renders a single chat message (user, assistant, tool result, etc.)
+ */
+Kirigami.AbstractCard {
     id: messageItem
 
     property string role
     property string content
     property string thinking: ""
-    property string commandsStr: ""
-    readonly property var commands: commandsStr.length > 0 ? commandsStr.split("\n\x1F") : []
     property bool shared: false
     property int messageIndex: -1
     property string timestamp: ""
     property string attachmentsStr: ""
     readonly property var attachmentPaths: attachmentsStr.length > 0 ? attachmentsStr.split("\n") : []
-    property bool webSearchExpanded: false
+    property string tool_call_id: ""
+    property string toolArgs: ""
+    property string toolName: ""
+    property string stdout: ""
+    property string stderr: ""
+    property int exitCode: 0
+    property string outputScheme: ""
+    property string toolSummary: ""
+    property string toolDataJson: ""
+    property string toolView: ""
+    property string toolIcon: ""
+    property string toolTitle: ""
+    onToolDataJsonChanged: toolExpanded = false
+    property bool toolExpanded: false
     property bool thinkingExpanded: false
 
     signal shareRequested(int index)
     signal retryRequested()
-    signal executeRequested(string command, string sourceId)
     signal terminalRequested(string command)
-    signal saveRequested(string filePath, string content)
     signal stopRequested(string command, string sourceId)
+    signal toolApproved(string name, var args, string callId)
+    signal toolDenied(string name, string callId)
+    signal scrollRequested()
 
     property bool sessionMode: false
     property string sessionLabel: ""
     property int commandRunStateTick: 0
+    property var appConfig: ({})
+    property bool isAwaitingResponse: false
 
     readonly property bool isUser: role === "user"
     readonly property bool isAssistant: role === "assistant"
     readonly property bool isError: role === "error"
     readonly property bool isCommandOutput: role === "command_output"
     readonly property bool isCommandRunning: role === "command_running"
-    readonly property bool isWebSearchResults: role === "web_search_results"
-    readonly property bool isThinking: isAssistant && content.length === 0 && commandsStr.length === 0
-    readonly property string strippedContent: isAssistant ? (Plasmoid.configuration.useCommandTool ? content.trim() : Api.stripCodeBlocks(content).trim()) : content
-    readonly property bool hasBubbleContent: isThinking || !isAssistant || strippedContent.length > 0
-    readonly property int spacing: Plasmoid.configuration.chatSpacing
+    readonly property bool isWebSearchRunning: role === "web_search_running" || (role === "tool_running_rich" && toolView === "search")
+    readonly property bool isWebSearchResults: role === "web_search_results" || (role === "tool_result_rich" && toolView === "search")
+    readonly property bool isToolRunningRich: role === "tool_running_rich"
+    readonly property bool isToolResultRich: role === "tool_result_rich"
+    readonly property bool isToolPending: role === "tool_pending"
+    readonly property bool isToolRunning: role === "tool_running"
+    readonly property bool isToolResult: role === "tool_result"
+    readonly property string strippedContent: content.trim()
+    readonly property bool hasBubbleContent: !isToolPending && !isToolRunning && !isToolResult && (isAwaitingResponse || !isAssistant || strippedContent.length > 0)
 
-    implicitHeight: messageColumn.implicitHeight + Math.round(spacing / 4) * 2
-    implicitWidth: parent ? parent.width : 300
+    readonly property bool useConsoleStyle: outputScheme === "console style" || (outputScheme === "" && (isCommandOutput || isCommandRunning))
+    readonly property bool useScrollableContent: outputScheme === "console style" || (outputScheme === "" && isCommandOutput)
 
-    // Hidden helper for clipboard access
-    TextEdit {
-        id: clipboardHelper
-        visible: false
-    }
+    readonly property real itemSpacing: Math.min(Kirigami.Units.smallSpacing, Plasmoid.configuration.chatSpacing)
+    readonly property real bubblePadding: Math.max(Kirigami.Units.smallSpacing, Math.min(Kirigami.Units.gridUnit * 0.75, Plasmoid.configuration.chatSpacing + Kirigami.Units.smallSpacing))
+    readonly property int messageAlignment: isUser ? Qt.AlignRight : Qt.AlignLeft
+    readonly property real bubbleWidthMultiplier: 0.75
+    readonly property bool shouldLimitWidth: isUser || isAssistant || isError
 
-    function copyToClipboard(text) {
-        clipboardHelper.text = text;
-        clipboardHelper.selectAll();
-        clipboardHelper.copy();
-    }
+    Layout.fillWidth: true
+    Layout.topMargin: 0
+    Layout.bottomMargin: 0
 
-    ColumnLayout {
-        id: messageColumn
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: messageItem.spacing
-        anchors.rightMargin: messageItem.spacing
-        anchors.topMargin: Math.round(messageItem.spacing / 4)
-        anchors.bottomMargin: Math.round(messageItem.spacing / 4)
-        spacing: Math.round(messageItem.spacing / 4)
+    padding: 0
+    verticalPadding: 0
+    horizontalPadding: 0
 
-        // Collapsible "Thoughts" disclosure for assistant reasoning content.
-        // Visible only when reasoning is enabled in settings and the model
-        // actually produced thinking text. Sits above the bubble so it reads
-        // as preceding the response.
-        ColumnLayout {
-            visible: isAssistant && messageItem.thinking.length > 0 && Plasmoid.configuration.showThoughts
-            Layout.fillWidth: true
-            Layout.maximumWidth: parent.width * 0.85
-            Layout.alignment: Qt.AlignLeft
-            spacing: Math.round(messageItem.spacing / 4)
+    background: null
+    contentItem: ColumnLayout {
+        spacing: messageItem.itemSpacing
 
-            Item {
-                Layout.fillWidth: true
-                implicitHeight: thinkingHeaderRow.implicitHeight
+        // Timestamp and Role Header
+        RowLayout {
+            Layout.fillWidth: !messageItem.shouldLimitWidth
+            Layout.preferredWidth: messageItem.shouldLimitWidth ? messageItem.width * messageItem.bubbleWidthMultiplier : -1
+            Layout.alignment: messageItem.shouldLimitWidth ? messageItem.messageAlignment : Qt.AlignLeft
+            spacing: messageItem.itemSpacing
+            visible: !isToolPending && !isToolRunning && !isToolResult && (hasBubbleContent || thinking.length > 0)
 
-                RowLayout {
-                    id: thinkingHeaderRow
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    spacing: Kirigami.Units.smallSpacing
-
-                    Kirigami.Icon {
-                        source: messageItem.thinkingExpanded ? "arrow-down" : "arrow-right"
-                        Layout.preferredWidth: Kirigami.Units.iconSizes.small
-                        Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                    }
-
-                    PlasmaComponents.Label {
-                        Layout.fillWidth: true
-                        text: i18n("Thoughts")
-                        font: Kirigami.Theme.smallFont
-                        color: Kirigami.Theme.disabledTextColor
-                    }
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: messageItem.thinkingExpanded = !messageItem.thinkingExpanded
-                }
+            Kirigami.Icon {
+                source: isUser ? "user" : (isError ? "error" : (toolIcon !== "" ? toolIcon : (isWebSearchRunning || isWebSearchResults ? "browser-search" : "dialog-messages")))
+                implicitWidth: Kirigami.Units.iconSizes.small
+                implicitHeight: Kirigami.Units.iconSizes.small
+                Layout.alignment: Qt.AlignVCenter
             }
 
-            QQC2.ScrollView {
-                id: thinkingScroll
-                visible: messageItem.thinkingExpanded
+            PlasmaComponents.Label {
+                text: isUser ? i18n("You") : (isError ? i18n("Error") : (toolTitle !== "" ? toolTitle : (isWebSearchRunning || isWebSearchResults ? i18n("Web Search") : i18n("Assistant"))))
+                font.bold: true
+                font.pointSize: Math.max(8, Kirigami.Theme.defaultFont.pointSize - (Plasmoid.configuration.chatSpacing < 4 ? 1 : 0))
+                Layout.alignment: Qt.AlignVCenter
+            }
+
+            PlasmaComponents.Label {
+                text: timestamp
+                font: Kirigami.Theme.smallFont
+                opacity: 0.6
+                Layout.alignment: Qt.AlignVCenter
                 Layout.fillWidth: true
-                Layout.maximumHeight: root.uiFontPointSize * 1.4 * 20
-                Layout.preferredHeight: Math.min(thinkingLabel.implicitHeight, Layout.maximumHeight)
-                contentWidth: availableWidth
-                QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
-                QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
+            }
+        }
 
-                Component.onCompleted: {
-                    if (contentItem && contentItem.hasOwnProperty("interactive")) {
-                        contentItem.interactive = Qt.binding(function() {
-                            return thinkingScroll.contentHeight > thinkingScroll.height + 1;
-                        });
-                    }
+        // Thinking Block
+        ColumnLayout {
+            Layout.fillWidth: !messageItem.shouldLimitWidth
+            Layout.preferredWidth: messageItem.shouldLimitWidth ? messageItem.width * messageItem.bubbleWidthMultiplier : -1
+            Layout.alignment: messageItem.messageAlignment
+            visible: isAssistant && thinking.length > 0
+            spacing: 0
+
+            RowLayout {
+                Layout.fillWidth: true
+                QQC2.CheckBox {
+                    id: thinkingCheck
+                    text: i18n("Thinking")
+                    checked: messageItem.thinkingExpanded
+                    onToggled: messageItem.thinkingExpanded = checked
                 }
+                Item { Layout.fillWidth: true }
+            }
 
-                Kirigami.SelectableLabel {
-                    id: thinkingLabel
-                    width: thinkingScroll.availableWidth
-                    text: messageItem.thinking
-                    textFormat: Text.PlainText
-                    wrapMode: Text.Wrap
-                    font.family: root.thoughtsFontFamily
-                    font.pointSize: root.thoughtsFontPointSize
-                    color: Kirigami.Theme.disabledTextColor
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.preferredHeight: thinkingText.implicitHeight + Kirigami.Units.gridUnit
+                visible: thinkingCheck.checked
+                color: Kirigami.Theme.alternateBackgroundColor
+                radius: Kirigami.Units.smallSpacing
+
+                Flickable {
+                    anchors.fill: parent
+                    anchors.margins: messageItem.bubblePadding
+                    contentWidth: width
+                    contentHeight: thinkingText.implicitHeight
+                    clip: true
+
+                    PlasmaComponents.Label {
+                        id: thinkingText
+                        width: parent.width
+                        text: thinking
+                        wrapMode: Text.Wrap
+                        font.family: root.thoughtsFontFamily
+                        font.pointSize: root.thoughtsFontPointSize
+                        opacity: 0.8
+                    }
                 }
             }
         }
 
+        // Message Bubble
         Rectangle {
+            id: bubble
+            Layout.fillWidth: !messageItem.shouldLimitWidth
+            Layout.preferredWidth: messageItem.shouldLimitWidth ? messageItem.width * messageItem.bubbleWidthMultiplier : -1
+            Layout.alignment: messageItem.shouldLimitWidth ? messageItem.messageAlignment : Qt.AlignLeft
+            Layout.preferredHeight: contentLayout.implicitHeight + (messageItem.bubblePadding * 2)
             visible: hasBubbleContent
-            Layout.fillWidth: true
-            Layout.maximumWidth: parent.width * 0.85
-            Layout.alignment: isUser ? Qt.AlignRight : Qt.AlignLeft
-            implicitHeight: isWebSearchResults ? webSearchColumn.implicitHeight + messageItem.spacing * 3 : messageContentRow.implicitHeight + messageItem.spacing * 3 + (attachmentFlow.visible ? attachmentFlow.height + Kirigami.Units.smallSpacing : 0)
-            Layout.maximumHeight: isCommandOutput ? (root.uiFontPointSize * 1.4 * 20 + messageItem.spacing * 3) : Number.POSITIVE_INFINITY
+            color: isUser ? Kirigami.Theme.alternateBackgroundColor : Kirigami.Theme.backgroundColor
+            radius: Math.max(4, messageItem.bubblePadding / 2)
+            border.color: isError ? Kirigami.Theme.negativeTextColor : (isUser ? "transparent" : Kirigami.Theme.alternateBackgroundColor)
+            border.width: isError ? 2 : 1
 
-
-            radius: 6
-            color: {
-                if (isError) return Qt.rgba(Kirigami.Theme.negativeTextColor.r, Kirigami.Theme.negativeTextColor.g, Kirigami.Theme.negativeTextColor.b, 0.15);
-                if (isUser) return Kirigami.Theme.highlightColor;
-                if (isCommandOutput || isCommandRunning) return Kirigami.Theme.alternateBackgroundColor;
-                if (isWebSearchResults) return Qt.rgba(Kirigami.Theme.positiveTextColor.r, Kirigami.Theme.positiveTextColor.g, Kirigami.Theme.positiveTextColor.b, 0.1);
-                return Kirigami.Theme.backgroundColor;
-            }
-            border.color: Qt.rgba(Kirigami.Theme.disabledTextColor.r, Kirigami.Theme.disabledTextColor.g, Kirigami.Theme.disabledTextColor.b, 0.3)
-            border.width: (isAssistant || isWebSearchResults) ? 1 : 0
-
-            // Collapsible web search results
             ColumnLayout {
-                id: webSearchColumn
-                visible: isWebSearchResults
+                id: contentLayout
                 anchors.fill: parent
-                anchors.margins: messageItem.spacing * 1.5
-                spacing: Kirigami.Units.smallSpacing
+                anchors.margins: messageItem.bubblePadding
+                spacing: messageItem.itemSpacing
 
-                Item {
+                // Loading Indicator
+                PlasmaComponents.BusyIndicator {
+                    Layout.alignment: Qt.AlignLeft
+                    Layout.preferredWidth: Kirigami.Units.gridUnit * 1.5
+                    Layout.preferredHeight: Kirigami.Units.gridUnit * 1.5
+                    visible: (isAssistant && isAwaitingResponse && strippedContent.length === 0) || isWebSearchRunning
+                    running: visible
+                }
+
+                // Web Search Query (Always visible if running or has results)
+                PlasmaComponents.Label {
                     Layout.fillWidth: true
-                    implicitHeight: webSearchHeaderRow.implicitHeight
+                    visible: isWebSearchRunning || (isWebSearchResults && toolSummary !== "")
+                    text: isWebSearchRunning ? content : i18n("Searched for: %1", toolSummary)
+                    font.italic: true
+                    opacity: 0.8
+                }
 
-                    RowLayout {
-                        id: webSearchHeaderRow
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        spacing: Kirigami.Units.smallSpacing
-
-                        Kirigami.Icon {
-                            source: webSearchExpanded ? "arrow-down" : "arrow-right"
-                            Layout.preferredWidth: Kirigami.Units.iconSizes.small
-                            Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                        }
-
-                        PlasmaComponents.Label {
-                            Layout.fillWidth: true
-                            text: i18n("Web Search Results")
-                            font.bold: true
-                            color: Kirigami.Theme.textColor
-                        }
-                    }
+                // Web Search Results (Collapsible)
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    visible: isWebSearchResults && toolDataJson !== ""
+                    spacing: Kirigami.Units.smallSpacing
 
                     MouseArea {
-                        anchors.fill: parent
-                        onClicked: webSearchExpanded = !webSearchExpanded
+                        id: toolHeader
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: Kirigami.Units.gridUnit * 1.5
                         cursorShape: Qt.PointingHandCursor
-                    }
-                }
-
-                Loader {
-                    visible: webSearchExpanded
-                    Layout.fillWidth: true
-                    Layout.maximumHeight: scrollMaxHeight
-                    Layout.preferredHeight: visible ? Math.min(item ? item.implicitHeight : 0, scrollMaxHeight) : 0
-
-                    readonly property real scrollMaxHeight: root.uiFontPointSize * 1.4 * 20
-
-                    sourceComponent: scrollableMarkdownContent
-                }
-            }
-
-            // Attached image thumbnails
-            Flow {
-                id: attachmentFlow
-                visible: !isWebSearchResults && messageItem.attachmentPaths.length > 0
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.margins: messageItem.spacing * 1.5
-                spacing: Kirigami.Units.smallSpacing
-
-                Repeater {
-                    model: messageItem.attachmentPaths
-                    Image {
-                        source: "file://" + modelData
-                        autoTransform: true
-                        fillMode: Image.PreserveAspectFit
-                        width: Math.min(sourceSize.width, attachmentFlow.width)
-                        height: Math.min(sourceSize.height, Kirigami.Units.gridUnit * 10)
-                        smooth: true
-                        horizontalAlignment: Image.AlignLeft
-                    }
-                }
-            }
-
-            // Standard message content
-            RowLayout {
-                id: messageContentRow
-                visible: !isWebSearchResults
-                anchors.fill: parent
-                anchors.topMargin: attachmentFlow.visible ? attachmentFlow.height + attachmentFlow.anchors.margins + Kirigami.Units.smallSpacing : messageItem.spacing * 1.5
-                anchors.leftMargin: messageItem.spacing * 1.5
-                anchors.rightMargin: messageItem.spacing * 1.5
-                anchors.bottomMargin: messageItem.spacing * 1.5
-                spacing: Kirigami.Units.smallSpacing
-
-                PlasmaComponents.BusyIndicator {
-                    visible: isCommandRunning || isThinking
-                    running: visible
-                    Layout.preferredWidth: Kirigami.Units.iconSizes.small
-                    Layout.preferredHeight: Kirigami.Units.iconSizes.small
-                }
-
-                Loader {
-                    Layout.fillWidth: true
-                    Layout.maximumHeight: isCommandOutput ? scrollMaxHeight : -1
-                    Layout.preferredHeight: isCommandOutput ? Math.min(item ? item.implicitHeight : 0, scrollMaxHeight) : (item ? item.implicitHeight : 0)
-
-                    readonly property real scrollMaxHeight: root.uiFontPointSize * 1.4 * 20
-
-                    sourceComponent: isCommandOutput ? scrollableContent : plainContent
-                }
-
-                Component {
-                    id: scrollableContent
-                    QQC2.ScrollView {
-                        id: outScroll
-                        contentWidth: availableWidth
-                        padding: 0
-                        implicitHeight: Math.min(Math.ceil(outLabel.implicitHeight), root.uiFontPointSize * 1.4 * 20)
-                        clip: true
-
-
-                        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
-                        QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
-
-                        Component.onCompleted: {
-                            if (contentItem && contentItem.hasOwnProperty("interactive")) {
-                                contentItem.interactive = Qt.binding(function() {
-                                    return outScroll.contentHeight > outScroll.height + 1;
-                                });
+                        onClicked: {
+                            messageItem.toolExpanded = !messageItem.toolExpanded;
+                            if (messageItem.toolExpanded) {
+                                messageItem.scrollRequested();
                             }
                         }
 
-                        Kirigami.SelectableLabel {
-                            id: outLabel
-                            width: outScroll.availableWidth > 0 ? outScroll.availableWidth : outScroll.width > 0 ? outScroll.width : 300
-                            text: messageItem.strippedContent
-                            textFormat: Text.PlainText
-                            wrapMode: Text.Wrap
-                            font.family: root.codeFontFamily
-                            font.pointSize: root.codeFontPointSize
-                            color: Kirigami.Theme.textColor
+                        RowLayout {
+                            anchors.fill: parent
+                            spacing: Kirigami.Units.smallSpacing
+
+                            Kirigami.Icon {
+                                source: messageItem.toolExpanded ? "arrow-down" : "arrow-right"
+                                implicitWidth: Kirigami.Units.iconSizes.small
+                                implicitHeight: Kirigami.Units.iconSizes.small
+                                Layout.alignment: Qt.AlignVCenter
+                            }
+
+                            PlasmaComponents.Label {
+                                text: i18n("Show %1 results", (function() {
+                                    try {
+                                        var r = JSON.parse(toolDataJson);
+                                        var items = r.results || r;
+                                        return Array.isArray(items) ? items.length : 0;
+                                    } catch(e) { return 0; }
+                                })())
+                                font.bold: true
+                                Layout.alignment: Qt.AlignVCenter
+                            }
+
+                            Item { Layout.fillWidth: true }
+                        }
+                    }
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        visible: messageItem.toolExpanded
+                        spacing: Kirigami.Units.gridUnit
+
+                        Repeater {
+                            model: {
+                                try {
+                                    var r = JSON.parse(toolDataJson);
+                                    return r.results || r;
+                                } catch(e) { return []; }
+                            }
+                            delegate: ColumnLayout {
+                                Layout.fillWidth: true
+                                spacing: 2
+
+                                PlasmaComponents.Label {
+                                    Layout.fillWidth: true
+                                    text: modelData.title || modelData.name || "Result"
+                                    font.bold: true
+                                    wrapMode: Text.Wrap
+                                    color: Kirigami.Theme.linkColor
+                                    
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: Qt.openUrlExternally(modelData.url || modelData.link || "")
+                                    }
+                                }
+
+                                PlasmaComponents.Label {
+                                    Layout.fillWidth: true
+                                    text: (modelData.snippet || modelData.description || modelData.content || "").trim()
+                                    wrapMode: Text.Wrap
+                                    font: Kirigami.Theme.smallFont
+                                    maximumLineCount: 3
+                                    elide: Text.ElideRight
+                                    visible: text !== ""
+                                }
+
+                                PlasmaComponents.Label {
+                                    Layout.fillWidth: true
+                                    text: modelData.url || modelData.link || ""
+                                    font: Kirigami.Theme.smallFont
+                                    opacity: 0.5
+                                    elide: Text.ElideMiddle
+                                    visible: text !== ""
+                                }
+                            }
                         }
                     }
                 }
 
-                Component {
-                    id: plainContent
-                    Kirigami.SelectableLabel {
-                        width: parent ? parent.width : implicitWidth
-                        text: isThinking ? i18n("Thinking…") : messageItem.strippedContent
-                        textFormat: (isAssistant && !isThinking) ? Text.MarkdownText : Text.PlainText
-                        wrapMode: Text.Wrap
-                        font.family: isCommandRunning ? root.codeFontFamily : root.uiFontFamily
-                        font.pointSize: isCommandRunning ? root.codeFontPointSize : root.uiFontPointSize
-                        font.italic: isThinking
-                        color: isThinking ? Kirigami.Theme.disabledTextColor :
-                               isUser ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
-                        selectionColor: isUser ? Kirigami.Theme.backgroundColor : Kirigami.Theme.highlightColor
-                        selectedTextColor: isUser ? Kirigami.Theme.textColor : Kirigami.Theme.highlightedTextColor
+                // Text Content
+                Kirigami.SelectableLabel {
+                    Layout.fillWidth: true
+                    visible: strippedContent.length > 0 && !isWebSearchResults && !isWebSearchRunning
+                    text: strippedContent
+                    wrapMode: Text.Wrap
+                    font.family: useConsoleStyle ? root.codeFontFamily : root.uiFontFamily
+                    font.pointSize: useConsoleStyle ? root.codeFontPointSize : root.uiFontPointSize
+                    color: isError ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
+
+                    // We use the markdown capability of Kirigami.SelectableLabel if available,
+                    // or just plain text if it's a console-style output.
+                    textFormat: useConsoleStyle ? Text.PlainText : Text.MarkdownText
+                }
+
+                // Attachments
+                Flow {
+                    Layout.fillWidth: true
+                    spacing: Kirigami.Units.smallSpacing
+                    visible: attachmentPaths.length > 0
+
+                    Repeater {
+                        model: attachmentPaths
+                        delegate: Kirigami.Chip {
+                            text: modelData.split("/").pop()
+                            icon.name: Api.isImageFile(modelData) ? "image-x-generic" : "document-export"
+                            closable: false
+                            checkable: false
+                        }
                     }
                 }
             }
 
-            Component {
-                id: scrollableMarkdownContent
-                QQC2.ScrollView {
-                    id: mdScroll
-                    contentWidth: availableWidth
-                    padding: 0
-                    implicitHeight: Math.min(Math.ceil(mdLabel.implicitHeight), root.uiFontPointSize * 1.4 * 20)
-                    clip: true
-                    QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
-                    QQC2.ScrollBar.vertical.policy: QQC2.ScrollBar.AsNeeded
+            // Action Buttons for Bubble
+            RowLayout {
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+                anchors.margins: Kirigami.Units.smallSpacing
+                spacing: Kirigami.Units.smallSpacing
+                visible: isAssistant && strippedContent.length > 0
 
-                    Component.onCompleted: {
-                        if (contentItem && contentItem.hasOwnProperty("interactive")) {
-                            contentItem.interactive = Qt.binding(function() {
-                                return mdScroll.contentHeight > mdScroll.height + 1;
-                            });
-                        }
+                PlasmaComponents.ToolButton {
+                    icon.name: "edit-copy"
+                    PlasmaComponents.ToolTip.text: i18n("Copy to clipboard")
+                    PlasmaComponents.ToolTip.visible: hovered
+                    onClicked: {
+                        var temp = Qt.createQmlObject('import QtQuick 2.0; TextEdit { visible: false }', messageItem);
+                        temp.text = strippedContent;
+                        temp.selectAll();
+                        temp.copy();
+                        temp.destroy();
                     }
+                }
 
-                    Kirigami.SelectableLabel {
-                        id: mdLabel
-                        width: parent.width
-                        text: messageItem.content
-                        textFormat: Text.MarkdownText
-                        wrapMode: Text.Wrap
-                        font.family: root.uiFontFamily
-                        font.pointSize: root.uiFontPointSize
-                        color: Kirigami.Theme.textColor
-                    }
+                PlasmaComponents.ToolButton {
+                    icon.name: "share"
+                    visible: isCommandOutput && !shared
+                    PlasmaComponents.ToolTip.text: i18n("Share output with assistant")
+                    PlasmaComponents.ToolTip.visible: hovered
+                    onClicked: messageItem.shareRequested(messageItem.messageIndex)
                 }
             }
         }
 
-        RowLayout {
+        Loader {
+            visible: isToolPending
             Layout.fillWidth: true
-            Layout.alignment: isUser ? Qt.AlignRight : Qt.AlignLeft
-            spacing: Kirigami.Units.smallSpacing
-            visible: !isCommandRunning && hasBubbleContent
-
-            PlasmaComponents.Label {
-                visible: messageItem.timestamp.length > 0
-                text: messageItem.timestamp
-                font: Kirigami.Theme.smallFont
-                color: Kirigami.Theme.disabledTextColor
-            }
-
-            PlasmaComponents.ToolButton {
-                icon.name: "edit-copy"
-                PlasmaComponents.ToolTip.text: i18n("Copy message")
-                PlasmaComponents.ToolTip.visible: hovered
-                onClicked: messageItem.copyToClipboard(messageItem.content)
-            }
-
-            // Retry button for error messages
-            PlasmaComponents.Button {
-                visible: isError
-                text: i18n("Retry")
-                icon.name: "view-refresh"
-                onClicked: messageItem.retryRequested()
-            }
-
-            // Share with LLM button for command output
-            PlasmaComponents.Button {
-                visible: isCommandOutput && !messageItem.shared
-                text: i18n("Share with LLM")
-                icon.name: "document-share"
-                PlasmaComponents.ToolTip.text: i18n("Include this output in the conversation")
-                PlasmaComponents.ToolTip.visible: hovered
-                onClicked: messageItem.shareRequested(messageItem.messageIndex)
-            }
+            sourceComponent: toolApprovalCardComponent
         }
 
-        // Command blocks for assistant messages
-        Repeater {
-            model: isAssistant ? messageItem.commands : []
+        Loader {
+            visible: isToolRunning || isToolResult
+            Layout.fillWidth: true
+            sourceComponent: toolResultBlockComponent
+        }
 
-            CommandBlock {
-                id: cblock
-                Layout.fillWidth: true
-                Layout.leftMargin: -messageItem.spacing
-                Layout.rightMargin: -messageItem.spacing
-                commandText: modelData
+        Component {
+            id: toolResultBlockComponent
+            ToolResultBlock {
+                toolName: messageItem.toolName
+                toolArgs: messageItem.toolArgs
+                stdout: messageItem.stdout
+                stderr: messageItem.stderr
+                exitCode: messageItem.exitCode
+                isRunning: messageItem.isToolRunning
                 sessionMode: messageItem.sessionMode
                 sessionLabel: messageItem.sessionLabel
-                isRunning: { var t = messageItem.commandRunStateTick; return root.isCommandRunning(modelData, cblock.blockId); }
-                onRunRequested: function(command, sourceId) { messageItem.executeRequested(command, sourceId); }
-                onTerminalRequested: function(command) { messageItem.terminalRequested(command); }
-                onSaveRequested: function(filePath, content) { messageItem.saveRequested(filePath, content); }
-                onStopRequested: function(command, sourceId) { messageItem.stopRequested(command, sourceId); }
+                onTerminalRequested: cmd => messageItem.terminalRequested(cmd)
+                onStopRequested: cmd => messageItem.stopRequested(cmd, "")
+            }
+        }
+
+        Component {
+            id: toolApprovalCardComponent
+            ToolApprovalCard {
+                toolName: messageItem.content
+                tool_call_id: messageItem.tool_call_id
+                toolArgsJson: messageItem.toolArgs
+                appConfig: messageItem.appConfig
+                onApproved: function(name, args, callId) {
+                    messageItem.toolApproved(name, args, callId);
+                }
+                onDenied: function(name, callId) {
+                    messageItem.toolDenied(name, callId);
+                }
             }
         }
     }

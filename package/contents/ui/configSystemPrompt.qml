@@ -51,67 +51,132 @@ BaseConfigPage {
             QQC2.CheckBox {
                 text: i18n("OS")
                 checked: cfg_sysInfoOS
-                onCheckedChanged: cfg_sysInfoOS = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoOS = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("Shell")
                 checked: cfg_sysInfoShell
-                onCheckedChanged: cfg_sysInfoShell = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoShell = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("Hostname")
                 checked: cfg_sysInfoHostname
-                onCheckedChanged: cfg_sysInfoHostname = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoHostname = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("Kernel")
                 checked: cfg_sysInfoKernel
-                onCheckedChanged: cfg_sysInfoKernel = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoKernel = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("Desktop")
                 checked: cfg_sysInfoDesktop
-                onCheckedChanged: cfg_sysInfoDesktop = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoDesktop = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("User")
                 checked: cfg_sysInfoUser
-                onCheckedChanged: cfg_sysInfoUser = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoUser = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("CPU")
                 checked: cfg_sysInfoCPU
-                onCheckedChanged: cfg_sysInfoCPU = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoCPU = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("Memory")
                 checked: cfg_sysInfoMemory
-                onCheckedChanged: cfg_sysInfoMemory = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoMemory = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("GPU")
                 checked: cfg_sysInfoGPU
-                onCheckedChanged: cfg_sysInfoGPU = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoGPU = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("Block Devices")
                 checked: cfg_sysInfoDisk
-                onCheckedChanged: cfg_sysInfoDisk = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoDisk = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("Network")
                 checked: cfg_sysInfoNetwork
-                onCheckedChanged: cfg_sysInfoNetwork = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoNetwork = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("Locale")
                 checked: cfg_sysInfoLocale
-                onCheckedChanged: cfg_sysInfoLocale = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoLocale = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
             QQC2.CheckBox {
                 text: i18n("Date/Time")
                 checked: cfg_sysInfoDateTime
-                onCheckedChanged: cfg_sysInfoDateTime = checked
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_sysInfoDateTime = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
             }
         }
 
@@ -123,7 +188,12 @@ BaseConfigPage {
             placeholderText: i18n("Additional instructions for the LLM…")
             wrapMode: Text.Wrap
             text: cfg_customSystemPrompt
-            onTextChanged: cfg_customSystemPrompt = text
+            onTextChanged: {
+                if (_initialized) {
+                    cfg_customSystemPrompt = text;
+                    rootItem.triggerCapture();
+                }
+            }
         }
 
         QQC2.TextArea {

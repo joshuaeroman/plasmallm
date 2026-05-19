@@ -373,7 +373,7 @@ BaseConfigPage {
         caps = Api.getCapabilities(effectiveApiType) || {};
         loadWalletKey();
         refreshAvailableModels();
-        triggerCapture();
+        rootItem.triggerCapture();
         // Don't auto-fetch here: when the adapter combo changes cfg_apiType,
         // the endpoint hasn't been swapped yet — applyAdapterDefaults() runs
         // immediately after and triggers the fetch with the correct endpoint.
@@ -384,21 +384,21 @@ BaseConfigPage {
         loadWalletKey();
         refreshAvailableModels();
         ensureModelsLoaded(false);
-        triggerCapture();
+        rootItem.triggerCapture();
     }
 
     onCfg_geminiAuthMethodChanged: {
         loadWalletKey();
         refreshAvailableModels();
         ensureModelsLoaded(false);
-        triggerCapture();
+        rootItem.triggerCapture();
     }
 
     onCfg_providerNameChanged: {
         loadWalletKey();
         refreshAvailableModels();
         ensureModelsLoaded(false);
-        triggerCapture();
+        rootItem.triggerCapture();
     }
 
     function applyAdapterDefaults(apiType) {
@@ -448,7 +448,7 @@ BaseConfigPage {
         if (cfg_apiType !== "openai") return;
         if (providerName && providerName.length > 0) cfg_openaiLastProvider = providerName;
         if (endpointUrl && endpointUrl.length > 0) cfg_openaiLastEndpoint = endpointUrl;
-        triggerCapture();
+        rootItem.triggerCapture();
     }
 
     function createNewProfile() {
@@ -494,14 +494,18 @@ BaseConfigPage {
         var p = Profiles.getActive(profiles, id);
         if (!p) return;
 
+        _initialized = false;
         _switchingProfile = true;
         cfg_activeProfileId = id;
         Profiles.applyToKCM(p, configPage);
         _switchingProfile = false;
 
+        // Reset models to ensure we don't show stale models from previous profile
+        availableModels = [];
         loadWalletKey(copyKey);
         refreshAvailableModels();
         ensureModelsLoaded(false);
+        _initialized = true;
     }
 
     Kirigami.FormLayout {
@@ -638,7 +642,7 @@ BaseConfigPage {
             model: [i18n("API Key (Express Mode)"), i18n("Google Cloud CLI (gcloud)")]
             currentIndex: cfg_geminiVertexAuthType === "gcloud" ? 1 : 0
             onActivated: function(index) {
-                cfg_geminiVertexAuthType = (index === 1 ? "gcloud" : "apikey");
+                if (_initialized) cfg_geminiVertexAuthType = (index === 1 ? "gcloud" : "apikey");
             }
         }
 
@@ -666,10 +670,10 @@ BaseConfigPage {
                 return 0;
             }
             onActivated: function(index) {
-                cfg_geminiApiVariant = variants[index].value;
+                if (_initialized) cfg_geminiApiVariant = variants[index].value;
             }
             onVariantsChanged: {
-                if (cfg_geminiApiVariant === "interactions" && variants.length === 1) {
+                if (_initialized && cfg_geminiApiVariant === "interactions" && variants.length === 1) {
                     cfg_geminiApiVariant = "legacy";
                 }
             }
@@ -683,6 +687,7 @@ BaseConfigPage {
             model: [i18n("Google AI Studio"), i18n("Google Cloud Agent Platform (Vertex AI)")]
             currentIndex: cfg_geminiAuthMethod === "agentplatform" ? 1 : 0
             onActivated: function(index) {
+                if (!_initialized) return;
                 cfg_geminiAuthMethod = (index === 1 ? "agentplatform" : "aistudio");
                 if (index === 1 && apiEndpointField.text.indexOf("generativelanguage.googleapis.com") !== -1) {
                     apiEndpointField.text = "https://aiplatform.googleapis.com";
@@ -699,8 +704,9 @@ BaseConfigPage {
             visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
             text: cfg_geminiProjectId
             onTextChanged: {
+                if (!_initialized) return;
                 cfg_geminiProjectId = text;
-                triggerCapture();
+                rootItem.triggerCapture();
             }
             onEditingFinished: ensureModelsLoaded(false)
         }
@@ -712,8 +718,9 @@ BaseConfigPage {
             visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
             text: cfg_geminiLocation
             onTextChanged: {
+                if (!_initialized) return;
                 cfg_geminiLocation = text;
-                triggerCapture();
+                rootItem.triggerCapture();
             }
             onEditingFinished: ensureModelsLoaded(false)
         }
@@ -807,11 +814,11 @@ BaseConfigPage {
                 if (idx > 0) {
                     var p = presetEndpoints[idx];
                     apiEndpointField.text = p.url;
-                    cfg_providerName = p.name;
-                    cfg_usesResponsesAPI = !!p.usesResponsesAPI;
+                    if (_initialized) cfg_providerName = p.name;
+                    if (_initialized) cfg_usesResponsesAPI = !!p.usesResponsesAPI;
                     rememberOpenAIChoice(p.name, p.url);
                 } else {
-                    cfg_providerName = "Custom";
+                    if (_initialized) cfg_providerName = "Custom";
                 }
             }
         }
@@ -823,6 +830,7 @@ BaseConfigPage {
             Layout.fillWidth: true
             text: cfg_apiEndpoint
             onTextChanged: {
+                if (!_initialized) return;
                 cfg_apiEndpoint = text;
                 if (!caps.providerPresets) return;
                 // Sync preset selector when active adapter uses presets.
@@ -850,7 +858,7 @@ BaseConfigPage {
             Layout.fillWidth: true
             visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
             text: cfg_modelName
-            onTextChanged: cfg_modelName = text
+            onTextChanged: if (_initialized) cfg_modelName = text
         }
 
         RowLayout {
@@ -875,6 +883,22 @@ BaseConfigPage {
                 }
                 model: displayModels
                 enabled: displayModels.length > 0 && !fetchInProgress
+
+                Connections {
+                    target: configPage
+                    function onAvailableModelsChanged() {
+                        var idx = modelCombo.displayModels.indexOf(cfg_modelName);
+                        modelCombo.currentIndex = idx >= 0 ? idx : 0;
+                    }
+                }
+
+                Connections {
+                    target: configPage
+                    function onCfg_modelNameChanged() {
+                        var idx = modelCombo.displayModels.indexOf(cfg_modelName);
+                        modelCombo.currentIndex = idx >= 0 ? idx : 0;
+                    }
+                }
 
                 onDisplayModelsChanged: {
                     var idx = displayModels.indexOf(cfg_modelName);
@@ -938,7 +962,7 @@ BaseConfigPage {
                                         cfg_modelName = modelData;
                                         modelCombo.currentIndex = modelCombo.displayModels.indexOf(modelData);
                                         modelCombo.popup.close();
-                                        triggerCapture();
+                                        rootItem.triggerCapture();
                                     }
                                 }
                             }
@@ -1030,7 +1054,7 @@ BaseConfigPage {
                 to: 100
                 stepSize: 1
                 value: cfg_temperature
-                onValueChanged: cfg_temperature = value
+                onValueChanged: if (_initialized) cfg_temperature = value
             }
 
             RowLayout {
@@ -1055,7 +1079,7 @@ BaseConfigPage {
             stepSize: 64
             editable: true
             value: cfg_maxTokens
-            onValueModified: cfg_maxTokens = value
+            onValueModified: if (_initialized) cfg_maxTokens = value
         }
 
         QQC2.ComboBox {
@@ -1067,7 +1091,7 @@ BaseConfigPage {
             model: [i18n("Off"), i18n("Low"), i18n("Medium"), i18n("High")]
             currentIndex: Math.max(0, efforts.indexOf(cfg_reasoningEffort))
             onActivated: function(index) {
-                cfg_reasoningEffort = efforts[index];
+                if (_initialized) cfg_reasoningEffort = efforts[index];
             }
         }
 
@@ -1080,7 +1104,7 @@ BaseConfigPage {
             stepSize: 256
             editable: true
             value: cfg_thinkingBudget
-            onValueModified: cfg_thinkingBudget = value
+            onValueModified: if (_initialized) cfg_thinkingBudget = value
             // Anthropic gates thinking on reasoningEffort != "off"; Gemini uses
             // the budget directly so the spinbox is always enabled there.
             enabled: !caps.reasoningEffort || cfg_reasoningEffort !== "off"
@@ -1103,7 +1127,7 @@ BaseConfigPage {
             text: i18n("Show thoughts in chat (collapsible)")
             visible: caps.reasoningEffort === true || caps.thinkingBudget === true
             checked: cfg_showThoughts
-            onCheckedChanged: cfg_showThoughts = checked
+            onCheckedChanged: if (_initialized) cfg_showThoughts = checked
 
             QQC2.ToolTip.text: i18n("When enabled, the model's reasoning is shown above each reply with a collapsible header. Round-trip of signed thoughts to the API still happens regardless of this setting.")
             QQC2.ToolTip.visible: hovered
@@ -1115,7 +1139,7 @@ BaseConfigPage {
             text: i18n("Use Responses API")
             visible: cfg_apiType === "openai"
             checked: cfg_usesResponsesAPI
-            onCheckedChanged: cfg_usesResponsesAPI = checked
+            onCheckedChanged: if (_initialized) cfg_usesResponsesAPI = checked
 
             QQC2.ToolTip.text: i18n("Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure (POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when picking a preset.")
             QQC2.ToolTip.visible: hovered
@@ -1134,7 +1158,7 @@ BaseConfigPage {
             Kirigami.FormData.label: i18n("Chat History:")
             text: i18n("Auto-save chat history")
             checked: cfg_saveChatHistory
-            onCheckedChanged: cfg_saveChatHistory = checked
+            onCheckedChanged: if (_initialized) cfg_saveChatHistory = checked
 
             QQC2.ToolTip.text: i18n("Saves to ~/PlasmaLLM/chats/")
             QQC2.ToolTip.visible: hovered
@@ -1147,7 +1171,7 @@ BaseConfigPage {
             model: [i18n("Plain text (.txt)"), i18n("Structured (.jsonl)")]
             enabled: cfg_saveChatHistory
             currentIndex: cfg_chatSaveFormat === "jsonl" ? 1 : 0
-            onCurrentIndexChanged: cfg_chatSaveFormat = currentIndex === 1 ? "jsonl" : "txt"
+            onCurrentIndexChanged: if (_initialized) cfg_chatSaveFormat = currentIndex === 1 ? "jsonl" : "txt"
         }
 
         QQC2.Label {
@@ -1170,13 +1194,13 @@ BaseConfigPage {
                 text: i18n("Disabled")
                 QQC2.ButtonGroup.group: autoClearGroup
                 checked: cfg_autoClearMode === 0
-                onClicked: cfg_autoClearMode = 0
+                onClicked: if (_initialized) cfg_autoClearMode = 0
             }
             QQC2.RadioButton {
                 text: i18n("Instant (always clear when panel opens)")
                 QQC2.ButtonGroup.group: autoClearGroup
                 checked: cfg_autoClearMode === 1
-                onClicked: cfg_autoClearMode = 1
+                onClicked: if (_initialized) cfg_autoClearMode = 1
             }
             RowLayout {
                 spacing: Kirigami.Units.smallSpacing
@@ -1185,7 +1209,7 @@ BaseConfigPage {
                     text: i18n("After")
                     QQC2.ButtonGroup.group: autoClearGroup
                     checked: cfg_autoClearMode === 2 || cfg_autoClearMode === 3
-                    onClicked: cfg_autoClearMode = (unitCombo.currentIndex === 0 ? 2 : 3)
+                    onClicked: if (_initialized) cfg_autoClearMode = (unitCombo.currentIndex === 0 ? 2 : 3)
                 }
                 QQC2.SpinBox {
                     from: 1
@@ -1193,6 +1217,7 @@ BaseConfigPage {
                     value: unitCombo.currentIndex === 0 ? cfg_autoClearSeconds : cfg_autoClearMinutes
                     enabled: timedRadio.checked
                     onValueModified: {
+                        if (!_initialized) return;
                         if (unitCombo.currentIndex === 0)
                             cfg_autoClearSeconds = value
                         else
@@ -1204,7 +1229,7 @@ BaseConfigPage {
                     model: [i18n("seconds"), i18n("minutes")]
                     currentIndex: cfg_autoClearMode === 3 ? 1 : 0
                     enabled: timedRadio.checked
-                    onActivated: cfg_autoClearMode = (currentIndex === 0 ? 2 : 3)
+                    onActivated: if (_initialized) cfg_autoClearMode = (currentIndex === 0 ? 2 : 3)
                 }
             }
         }

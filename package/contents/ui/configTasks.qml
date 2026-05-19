@@ -74,6 +74,7 @@ BaseConfigPage {
                             arr.splice(index, 1);
                             tasksList = arr;
                             cfg_tasks = JSON.stringify(tasksList);
+                            rootItem.triggerCapture();
                         }
                     }
                 }
@@ -118,7 +119,7 @@ BaseConfigPage {
 
                 QQC2.CheckBox {
                     id: taskAutoCheck
-                    text: i18n("Enable auto mode (auto-run + auto-share)")
+                    text: i18n("Skip approvals")
                 }
 
                 QQC2.CheckBox {
@@ -157,6 +158,7 @@ BaseConfigPage {
                         }
                         tasksList = arr;
                         cfg_tasks = JSON.stringify(tasksList);
+                        rootItem.triggerCapture();
                         taskEditorVisible = false;
                         taskEditIndex = -1;
                     }
@@ -165,7 +167,7 @@ BaseConfigPage {
         }
 
         QQC2.Label {
-            text: i18n("Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar button to run them. Tasks with auto mode will temporarily enable auto-run and auto-share.")
+            text: i18n("Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar button to run them. Tasks with skip approvals enabled will run tools automatically.")
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
             wrapMode: Text.Wrap
@@ -174,3 +176,4 @@ BaseConfigPage {
         }
     }
 }
+

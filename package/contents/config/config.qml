@@ -29,7 +29,12 @@ ConfigModel {
     }
     ConfigCategory {
         name: i18n("Tools")
-        icon: "configure"
+        icon: "tools"
         source: "configTools.qml"
+    }
+    ConfigCategory {
+        name: i18n("Custom Tools")
+        icon: "dialog-scripts"
+        source: "configCustomTools.qml"
     }
 }
