@@ -697,7 +697,7 @@ msgid "Show Settings"
 msgstr "Mostra Impostazioni"
 
 msgid "Show Pin"
-msgstr "Mostra Pinna"
+msgstr "Mostra fissa"
 
 msgid "Web Search"
 msgstr "Ricerca Web"
