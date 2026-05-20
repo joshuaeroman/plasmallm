@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-19 20:02-0400\n"
+"POT-Creation-Date: 2026-05-19 23:01-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -156,260 +156,6 @@ msgstr ""
 "med tilpassede kommandoer. Velg en nyere modell (f.eks. Gemini 3+) eller "
 "deaktiver innebygde funksjoner i innstillinger."
 
-#: package/contents/ui/ChatMessage.qml:111
-#: package/contents/ui/FullRepresentation.qml:330
-#: package/contents/ui/FullRepresentation.qml:390
-msgid "You"
-msgstr "Du"
-
-#: package/contents/ui/ChatMessage.qml:111
-#: package/contents/ui/FullRepresentation.qml:333
-#: package/contents/ui/FullRepresentation.qml:393
-msgid "Error"
-msgstr "Feil"
-
-#: package/contents/ui/ChatMessage.qml:111
-msgid "Web Search"
-msgstr "Nettsøk"
-
-#: package/contents/ui/ChatMessage.qml:111
-#: package/contents/ui/FullRepresentation.qml:331
-#: package/contents/ui/FullRepresentation.qml:391
-msgid "Assistant"
-msgstr "Assistent"
-
-#: package/contents/ui/ChatMessage.qml:138
-msgid "Thinking"
-msgstr "Tenker…"
-
-#: package/contents/ui/ChatMessage.qml:204
-msgid "Searched for: %1"
-msgstr "Søkte etter: %1"
-
-#: package/contents/ui/ChatMessage.qml:239
-msgid "Show %1 results"
-msgstr "Vis %1 resultater"
-
-#: package/contents/ui/ChatMessage.qml:350
-msgid "Copy to clipboard"
-msgstr "Kopier til utklippstavle"
-
-#: package/contents/ui/ChatMessage.qml:364
-msgid "Share output with assistant"
-msgstr "Del utdata med assistenten"
-
-#: package/contents/ui/FullRepresentation.qml:22
-msgid "Approve the pending tool request"
-msgstr "Godkjenn ventende verktøyforespørsel"
-
-#: package/contents/ui/FullRepresentation.qml:23
-msgid "Toggle skip approvals for this session"
-msgstr "Slå av/på hopp over godkjenninger for denne økten"
-
-#: package/contents/ui/FullRepresentation.qml:24
-msgid "Clear the chat"
-msgstr "Tøm chatten"
-
-#: package/contents/ui/FullRepresentation.qml:25
-msgid "Close the panel"
-msgstr "Lukk panelet"
-
-#: package/contents/ui/FullRepresentation.qml:26
-msgid "Copy conversation to clipboard"
-msgstr "Kopier samtale til utklippstavle"
-
-#: package/contents/ui/FullRepresentation.qml:27
-msgid "Deny the pending tool request"
-msgstr "Avslå ventende verktøyforespørsel"
-
-#: package/contents/ui/FullRepresentation.qml:28
-msgid "Open chat history folder"
-msgstr "Åpne chathistorikk-mappe"
-
-#: package/contents/ui/FullRepresentation.qml:29
-msgid "Show or switch model (/model <name>)"
-msgstr "Vis eller bytt modell (/model <name>)"
-
-#: package/contents/ui/FullRepresentation.qml:30
-msgid "Switch profile (/profile <name>)"
-msgstr "Bytt profil (/profile <navn>)"
-
-#: package/contents/ui/FullRepresentation.qml:31
-msgid "Save chat to file"
-msgstr "Lagre chat til fil"
-
-#: package/contents/ui/FullRepresentation.qml:32
-msgid "Open settings"
-msgstr "Åpne innstillinger"
-
-#: package/contents/ui/FullRepresentation.qml:33
-msgid "Run a saved task (/task <name>)"
-msgstr "Kjør en lagret oppgave (/task <name>)"
-
-#: package/contents/ui/FullRepresentation.qml:146
-msgid "Toggle Full Auto Mode"
-msgstr "Slå av/på fullautomatisk modus"
-
-#: package/contents/ui/FullRepresentation.qml:147
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-"Slå av/på fullautomatisk modus: Når aktivert, kjøres alle verktøy "
-"automatisk for denne økten."
-
-#: package/contents/ui/FullRepresentation.qml:156
-#: package/contents/ui/FullRepresentation.qml:157
-msgid "Run a task"
-msgstr "Kjør en oppgave"
-
-#: package/contents/ui/FullRepresentation.qml:193
-#: package/contents/ui/FullRepresentation.qml:194
-msgid "Chat History"
-msgstr "Chat-historikk"
-
-#: package/contents/ui/FullRepresentation.qml:219
-msgid "Loading..."
-msgstr "Laster..."
-
-#: package/contents/ui/FullRepresentation.qml:225
-msgid "No recent chats"
-msgstr "Ingen nylige chatter"
-
-#: package/contents/ui/FullRepresentation.qml:234
-msgid "Open history folder..."
-msgstr "Åpne historikkmappe..."
-
-#: package/contents/ui/FullRepresentation.qml:246
-msgid "Clear all history..."
-msgstr "Tøm all historikk..."
-
-#: package/contents/ui/FullRepresentation.qml:288
-msgid "Clear All History"
-msgstr "Tøm all historikk"
-
-#: package/contents/ui/FullRepresentation.qml:294
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-"Er du sikker på at du vil slette alle chat-historikkfiler? Denne handlingen "
-"kan ikke angres."
-
-#: package/contents/ui/FullRepresentation.qml:303
-msgid "Clear All"
-msgstr "Tøm alle"
-
-#: package/contents/ui/FullRepresentation.qml:311
-#: package/contents/ui/configCustomTools.qml:85
-#: package/contents/ui/configTasks.qml:84
-#: package/contents/ui/configGeneral.qml:591
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: package/contents/ui/FullRepresentation.qml:320
-#: package/contents/ui/FullRepresentation.qml:321
-msgid "Copy conversation"
-msgstr "Kopier samtale"
-
-#: package/contents/ui/FullRepresentation.qml:332
-#: package/contents/ui/FullRepresentation.qml:392
-msgid "Command"
-msgstr "Kommando"
-
-#: package/contents/ui/FullRepresentation.qml:347
-#: package/contents/ui/FullRepresentation.qml:348
-msgid "Clear chat"
-msgstr "Tøm chat"
-
-#: package/contents/ui/FullRepresentation.qml:357
-#: package/contents/ui/FullRepresentation.qml:358
-msgid "Settings"
-msgstr "Innstillinger"
-
-#: package/contents/ui/FullRepresentation.qml:369
-#: package/contents/ui/FullRepresentation.qml:370
-msgid "Don't keep open"
-msgstr "Ikke hold åpent"
-
-#: package/contents/ui/FullRepresentation.qml:369
-#: package/contents/ui/FullRepresentation.qml:370
-msgid "Keep open"
-msgstr "Hold åpent"
-
-#: package/contents/ui/FullRepresentation.qml:499
-#: package/contents/ui/main.qml:1170
-msgid "The user denied this tool call."
-msgstr "Brukeren avslo dette verktøykallet."
-
-#: package/contents/ui/FullRepresentation.qml:578
-msgid "Send a message to start chatting"
-msgstr "Send en melding for å begynne å chatte"
-
-#: package/contents/ui/FullRepresentation.qml:607
-msgid "Attach File"
-msgstr "Legg til fil"
-
-#: package/contents/ui/FullRepresentation.qml:610
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Bilder (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-#: package/contents/ui/FullRepresentation.qml:610
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-"Tekstfiler (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-
-#: package/contents/ui/FullRepresentation.qml:610
-msgid "All files (*)"
-msgstr "Alle filer (*)"
-
-#: package/contents/ui/FullRepresentation.qml:700
-msgid "Message input"
-msgstr "Meldingsinput"
-
-#: package/contents/ui/FullRepresentation.qml:701
-msgid "Type a message…"
-msgstr "Skriv en melding…"
-
-#: package/contents/ui/FullRepresentation.qml:701
-msgid "Initializing…"
-msgstr "Initialiserer…"
-
-#: package/contents/ui/FullRepresentation.qml:962
-#: package/contents/ui/configCustomTools.qml:55
-#: package/contents/ui/configTasks.qml:55
-msgid "AUTO"
-msgstr "AUTO"
-
-#: package/contents/ui/FullRepresentation.qml:987
-msgid "Attach file or image"
-msgstr "Legg til fil eller bilde"
-
-#: package/contents/ui/FullRepresentation.qml:994
-msgid "Kill"
-msgstr "Avslutt"
-
-#: package/contents/ui/FullRepresentation.qml:998
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-"Avslutt vedvarende økt (stopper alle prosesser og nullstiller "
-"skalltilstanden)"
-
-#: package/contents/ui/FullRepresentation.qml:1017
-msgid "Send"
-msgstr "Send"
-
-#: package/contents/ui/FullRepresentation.qml:1041
-msgid "Stop"
-msgstr "Stopp"
-
-#: package/contents/ui/FullRepresentation.qml:1046
-msgid "Cancel LLM request"
-msgstr "Avbryt LLM-forespørsel"
-
 #: package/contents/ui/ToolApprovalCard.qml:46
 msgid "Tool Request: %1"
 msgstr "Verktøyforespørsel: %1"
@@ -426,110 +172,6 @@ msgstr "Avslå"
 msgid "Approve"
 msgstr "Godkjenn"
 
-#: package/contents/ui/ToolResultBlock.qml:117
-msgid "Stop command"
-msgstr "Stopp kommando"
-
-#: package/contents/ui/ToolResultBlock.qml:129
-msgid "Open terminal attached to this session"
-msgstr "Åpne terminal tilknyttet denne sesjonen"
-
-#: package/contents/ui/ToolResultBlock.qml:142
-msgid "Copy output"
-msgstr "Kopier utdata"
-
-#: package/contents/ui/api.js:209
-msgid "OpenAI-compatible"
-msgstr "OpenAI-kompatibel"
-
-#: package/contents/ui/api.js:210
-msgid "Anthropic"
-msgstr "Anthropic"
-
-#: package/contents/ui/api.js:211
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-#: package/contents/ui/configAppearance.qml:18
-msgid "Profile Header:"
-msgstr "Profiloverskrift:"
-
-#: package/contents/ui/configAppearance.qml:19
-msgid "Show provider and model in profile header"
-msgstr "Vis leverandør og modell i profiloverskrift"
-
-#: package/contents/ui/configAppearance.qml:35
-msgid "Chat Spacing: %1px"
-msgstr "Chatavstand: %1px"
-
-#: package/contents/ui/configAppearance.qml:57
-msgid "Compact"
-msgstr "Kompakt"
-
-#: package/contents/ui/configAppearance.qml:62
-msgid "Spacious"
-msgstr "Romslig"
-
-#: package/contents/ui/configAppearance.qml:74
-msgid "UI Font:"
-msgstr "Grensesnittskrift:"
-
-#: package/contents/ui/configAppearance.qml:75
-msgid "Use custom UI font"
-msgstr "Bruk egendefinert grensesnittskrift"
-
-#: package/contents/ui/configAppearance.qml:125
-msgid "Code Font:"
-msgstr "Kodeskrift:"
-
-#: package/contents/ui/configAppearance.qml:126
-msgid "Use custom code font"
-msgstr "Bruk egendefinert kodeskrift"
-
-#: package/contents/ui/configAppearance.qml:171
-msgid "Thoughts Font:"
-msgstr "Tankeskrift:"
-
-#: package/contents/ui/configAppearance.qml:172
-msgid "Use custom thoughts font"
-msgstr "Bruk egendefinert tankeskrift"
-
-#: package/contents/ui/configAppearance.qml:222
-msgid "Header Icons:"
-msgstr "Overskriftsikoner:"
-
-#: package/contents/ui/configAppearance.qml:227
-msgid "Profile Header"
-msgstr "Profiloverskrift"
-
-#: package/contents/ui/configAppearance.qml:238
-msgid "Always show Tasks"
-msgstr "Vis alltid Oppgaver"
-
-#: package/contents/ui/configAppearance.qml:249
-msgid "Always show Auto Toggle"
-msgstr "Vis alltid Auto-veksler"
-
-#: package/contents/ui/configAppearance.qml:260
-msgid "Show History"
-msgstr "Vis historikk"
-
-#: package/contents/ui/configAppearance.qml:271
-msgid "Show Copy conversation"
-msgstr "Vis Kopier samtale"
-
-#: package/contents/ui/configAppearance.qml:282
-msgid "Show Clear chat"
-msgstr "Vis Tøm chat"
-
-#: package/contents/ui/configAppearance.qml:293
-msgid "Show Settings"
-msgstr "Vis Innstillinger"
-
-#: package/contents/ui/configAppearance.qml:304
-msgid "Show Pin"
-msgstr "Vis festikonet"
-
 #: package/contents/ui/configCustomTools.qml:31
 msgid ""
 "No custom tools configured. Add a custom tool to expose your own commands to "
@@ -537,6 +179,19 @@ msgid ""
 msgstr ""
 "Ingen egendefinerte verktøy konfigurert. Legg til et egendefinert verktøy "
 "for å eksponere dine egne kommandoer til LLM."
+
+#: package/contents/ui/configCustomTools.qml:55
+#: package/contents/ui/configTasks.qml:55
+#: package/contents/ui/FullRepresentation.qml:962
+msgid "AUTO"
+msgstr "AUTO"
+
+#: package/contents/ui/configCustomTools.qml:85
+#: package/contents/ui/configTasks.qml:84
+#: package/contents/ui/FullRepresentation.qml:311
+#: package/contents/ui/configGeneral.qml:595
+msgid "Cancel"
+msgstr "Avbryt"
 
 #: package/contents/ui/configCustomTools.qml:85
 msgid "Add Custom Tool"
@@ -723,7 +378,79 @@ msgstr "Spør før kjøring"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Feil: URL må starte med http:// eller https://"
 
-#: package/contents/ui/tools/RunCommand.js:117
+#: package/contents/ui/tools/WebSearch.js:57
+msgid "Search provider %1 not supported"
+msgstr "Søkeleverandør %1 støttes ikke"
+
+#: package/contents/ui/tools/WebSearch.js:73
+msgid "Searching the web for: %1…"
+msgstr "Søker på nettet etter: %1…"
+
+#: package/contents/ui/tools/WebSearchConfig.qml:249
+msgid "Ollama API"
+msgstr "Ollama API"
+
+#: package/contents/ui/tools/WebSearchConfig.qml:250
+msgid "SearXNG"
+msgstr "SearXNG"
+
+#: package/contents/ui/tools/WebSearchConfig.qml:251
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#: package/contents/ui/tools/WebSearchConfig.qml:277
+msgid "Ollama API key"
+msgstr "Ollama API-nøkkel"
+
+#: package/contents/ui/tools/WebSearchConfig.qml:291
+#: package/contents/ui/tools/WebSearchConfig.qml:332
+#: package/contents/ui/configGeneral.qml:1022
+msgid "Saving…"
+msgstr "Lagrer…"
+
+#: package/contents/ui/tools/WebSearchConfig.qml:292
+#: package/contents/ui/tools/WebSearchConfig.qml:333
+#: package/contents/ui/configGeneral.qml:1023
+msgid "Saved"
+msgstr "Lagret"
+
+#: package/contents/ui/tools/WebSearchConfig.qml:293
+#: package/contents/ui/tools/WebSearchConfig.qml:334
+#: package/contents/ui/configGeneral.qml:1024
+msgid "Save to Config (Insecure)"
+msgstr "Lagre til konfigurasjon (usikker)"
+
+#: package/contents/ui/tools/WebSearchConfig.qml:293
+#: package/contents/ui/tools/WebSearchConfig.qml:334
+#: package/contents/ui/configGeneral.qml:1024
+msgid "Save Key"
+msgstr "Lagre nøkkel"
+
+#: package/contents/ui/tools/WebSearchConfig.qml:305
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG-instans-URL (f.eks. https://searx.be)"
+
+#: package/contents/ui/tools/WebSearchConfig.qml:318
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API-nøkkel/Token (valgfritt)"
+
+#: package/contents/ui/tools/WebSearchConfig.qml:343
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo krever ingen konfigurasjon."
+
+#: package/contents/ui/tools/WebSearchConfig.qml:345
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Sørg for at SearXNG-instansen har JSON-formatet aktivert."
+
+#: package/contents/ui/tools/WebSearchConfig.qml:346
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
+
+#: package/contents/ui/tools/WriteFile.js:26
+msgid "Error: content exceeds max write size (%1 bytes)"
+msgstr "Feil: innhold overskrider maksimal skrivingsstørrelse (%1 byte)"
+
+#: package/contents/ui/tools/RunCommand.js:126
 msgid "No command provided."
 msgstr "Ingen kommando oppgitt."
 
@@ -745,9 +472,9 @@ msgid ""
 "commands without permission and will see their output, enabling an agentic "
 "workflow. Only use with trustworthy LLMs."
 msgstr ""
-"⚠️ FARE: 'Spør før kjøring' er deaktivert — LLM kan nå kjøre kommandoer "
-"uten tillatelse og vil se utdataene, noe som muliggjør en agentisk "
-"arbeidsflyt. Bruk kun med pålitelige LLM-er."
+"⚠️ FARE: 'Spør før kjøring' er deaktivert — LLM kan nå kjøre kommandoer uten "
+"tillatelse og vil se utdataene, noe som muliggjør en agentisk arbeidsflyt. "
+"Bruk kun med pålitelige LLM-er."
 
 #: package/contents/ui/tools/RunCommandConfig.qml:38
 msgid "Note: This tool is not restricted by the path whitelist."
@@ -781,77 +508,246 @@ msgstr ""
 "Verken 'tmux' eller 'screen' ble funnet på systemet ditt. Øktmultipleksing "
 "er utilgjengelig."
 
-#: package/contents/ui/tools/WebSearch.js:57
-msgid "Search provider %1 not supported"
-msgstr "Søkeleverandør %1 støttes ikke"
+#: package/contents/ui/FullRepresentation.qml:22
+msgid "Approve the pending tool request"
+msgstr "Godkjenn ventende verktøyforespørsel"
 
-#: package/contents/ui/tools/WebSearch.js:73
-msgid "Searching the web for: %1…"
-msgstr "Søker på nettet etter: %1…"
+#: package/contents/ui/FullRepresentation.qml:23
+msgid "Toggle skip approvals for this session"
+msgstr "Slå av/på hopp over godkjenninger for denne økten"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:249
-msgid "Ollama API"
-msgstr "Ollama API"
+#: package/contents/ui/FullRepresentation.qml:24
+msgid "Clear the chat"
+msgstr "Tøm chatten"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:250
-msgid "SearXNG"
-msgstr "SearXNG"
+#: package/contents/ui/FullRepresentation.qml:25
+msgid "Close the panel"
+msgstr "Lukk panelet"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:251
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
+#: package/contents/ui/FullRepresentation.qml:26
+msgid "Copy conversation to clipboard"
+msgstr "Kopier samtale til utklippstavle"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:277
-msgid "Ollama API key"
-msgstr "Ollama API-nøkkel"
+#: package/contents/ui/FullRepresentation.qml:27
+msgid "Deny the pending tool request"
+msgstr "Avslå ventende verktøyforespørsel"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:291
-#: package/contents/ui/tools/WebSearchConfig.qml:332
-#: package/contents/ui/configGeneral.qml:1020
-msgid "Saving…"
-msgstr "Lagrer…"
+#: package/contents/ui/FullRepresentation.qml:28
+msgid "Open chat history folder"
+msgstr "Åpne chathistorikk-mappe"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:292
-#: package/contents/ui/tools/WebSearchConfig.qml:333
-#: package/contents/ui/configGeneral.qml:1021
-msgid "Saved"
-msgstr "Lagret"
+#: package/contents/ui/FullRepresentation.qml:29
+msgid "Show or switch model (/model <name>)"
+msgstr "Vis eller bytt modell (/model <name>)"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:293
-#: package/contents/ui/tools/WebSearchConfig.qml:334
-#: package/contents/ui/configGeneral.qml:1022
-msgid "Save to Config (Insecure)"
-msgstr "Lagre til konfigurasjon (usikker)"
+#: package/contents/ui/FullRepresentation.qml:30
+msgid "Switch profile (/profile <name>)"
+msgstr "Bytt profil (/profile <navn>)"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:293
-#: package/contents/ui/tools/WebSearchConfig.qml:334
-#: package/contents/ui/configGeneral.qml:1022
-msgid "Save Key"
-msgstr "Lagre nøkkel"
+#: package/contents/ui/FullRepresentation.qml:31
+msgid "Save chat to file"
+msgstr "Lagre chat til fil"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:305
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG-instans-URL (f.eks. https://searx.be)"
+#: package/contents/ui/FullRepresentation.qml:32
+msgid "Open settings"
+msgstr "Åpne innstillinger"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:318
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API-nøkkel/Token (valgfritt)"
+#: package/contents/ui/FullRepresentation.qml:33
+msgid "Run a saved task (/task <name>)"
+msgstr "Kjør en lagret oppgave (/task <name>)"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:343
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo krever ingen konfigurasjon."
+#: package/contents/ui/FullRepresentation.qml:146
+msgid "Toggle Full Auto Mode"
+msgstr "Slå av/på fullautomatisk modus"
 
-#: package/contents/ui/tools/WebSearchConfig.qml:345
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Sørg for at SearXNG-instansen har JSON-formatet aktivert."
+#: package/contents/ui/FullRepresentation.qml:147
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Slå av/på fullautomatisk modus: Når aktivert, kjøres alle verktøy automatisk "
+"for denne økten."
 
-#: package/contents/ui/tools/WebSearchConfig.qml:346
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
+#: package/contents/ui/FullRepresentation.qml:156
+#: package/contents/ui/FullRepresentation.qml:157
+msgid "Run a task"
+msgstr "Kjør en oppgave"
 
-#: package/contents/ui/tools/WriteFile.js:26
-msgid "Error: content exceeds max write size (%1 bytes)"
-msgstr "Feil: innhold overskrider maksimal skrivingsstørrelse (%1 byte)"
+#: package/contents/ui/FullRepresentation.qml:193
+#: package/contents/ui/FullRepresentation.qml:194
+msgid "Chat History"
+msgstr "Chat-historikk"
+
+#: package/contents/ui/FullRepresentation.qml:219
+msgid "Loading..."
+msgstr "Laster..."
+
+#: package/contents/ui/FullRepresentation.qml:225
+msgid "No recent chats"
+msgstr "Ingen nylige chatter"
+
+#: package/contents/ui/FullRepresentation.qml:234
+msgid "Open history folder..."
+msgstr "Åpne historikkmappe..."
+
+#: package/contents/ui/FullRepresentation.qml:246
+msgid "Clear all history..."
+msgstr "Tøm all historikk..."
+
+#: package/contents/ui/FullRepresentation.qml:288
+msgid "Clear All History"
+msgstr "Tøm all historikk"
+
+#: package/contents/ui/FullRepresentation.qml:294
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Er du sikker på at du vil slette alle chat-historikkfiler? Denne handlingen "
+"kan ikke angres."
+
+#: package/contents/ui/FullRepresentation.qml:303
+msgid "Clear All"
+msgstr "Tøm alle"
+
+#: package/contents/ui/FullRepresentation.qml:320
+#: package/contents/ui/FullRepresentation.qml:321
+msgid "Copy conversation"
+msgstr "Kopier samtale"
+
+#: package/contents/ui/FullRepresentation.qml:330
+#: package/contents/ui/FullRepresentation.qml:390
+#: package/contents/ui/ChatMessage.qml:117
+msgid "You"
+msgstr "Du"
+
+#: package/contents/ui/FullRepresentation.qml:331
+#: package/contents/ui/FullRepresentation.qml:391
+#: package/contents/ui/ChatMessage.qml:117
+msgid "Assistant"
+msgstr "Assistent"
+
+#: package/contents/ui/FullRepresentation.qml:332
+#: package/contents/ui/FullRepresentation.qml:392
+msgid "Command"
+msgstr "Kommando"
+
+#: package/contents/ui/FullRepresentation.qml:333
+#: package/contents/ui/FullRepresentation.qml:393
+#: package/contents/ui/ChatMessage.qml:117
+msgid "Error"
+msgstr "Feil"
+
+#: package/contents/ui/FullRepresentation.qml:347
+#: package/contents/ui/FullRepresentation.qml:348
+msgid "Clear chat"
+msgstr "Tøm chat"
+
+#: package/contents/ui/FullRepresentation.qml:357
+#: package/contents/ui/FullRepresentation.qml:358
+msgid "Settings"
+msgstr "Innstillinger"
+
+#: package/contents/ui/FullRepresentation.qml:369
+#: package/contents/ui/FullRepresentation.qml:370
+msgid "Don't keep open"
+msgstr "Ikke hold åpent"
+
+#: package/contents/ui/FullRepresentation.qml:369
+#: package/contents/ui/FullRepresentation.qml:370
+msgid "Keep open"
+msgstr "Hold åpent"
+
+#: package/contents/ui/FullRepresentation.qml:499
+#: package/contents/ui/main.qml:1173
+msgid "The user denied this tool call."
+msgstr "Brukeren avslo dette verktøykallet."
+
+#: package/contents/ui/FullRepresentation.qml:578
+msgid "Send a message to start chatting"
+msgstr "Send en melding for å begynne å chatte"
+
+#: package/contents/ui/FullRepresentation.qml:607
+msgid "Attach File"
+msgstr "Legg til fil"
+
+#: package/contents/ui/FullRepresentation.qml:610
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Bilder (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+#: package/contents/ui/FullRepresentation.qml:610
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Tekstfiler (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+
+#: package/contents/ui/FullRepresentation.qml:610
+msgid "All files (*)"
+msgstr "Alle filer (*)"
+
+#: package/contents/ui/FullRepresentation.qml:700
+msgid "Message input"
+msgstr "Meldingsinput"
+
+#: package/contents/ui/FullRepresentation.qml:701
+msgid "Type a message…"
+msgstr "Skriv en melding…"
+
+#: package/contents/ui/FullRepresentation.qml:701
+msgid "Initializing…"
+msgstr "Initialiserer…"
+
+#: package/contents/ui/FullRepresentation.qml:987
+msgid "Attach file or image"
+msgstr "Legg til fil eller bilde"
+
+#: package/contents/ui/FullRepresentation.qml:995
+msgid "Kill"
+msgstr "Avslutt"
+
+#: package/contents/ui/FullRepresentation.qml:999
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+"Avslutt vedvarende økt (stopper alle prosesser og nullstiller "
+"skalltilstanden)"
+
+#: package/contents/ui/FullRepresentation.qml:1019
+msgid "Send"
+msgstr "Send"
+
+#: package/contents/ui/FullRepresentation.qml:1043
+msgid "Stop"
+msgstr "Stopp"
+
+#: package/contents/ui/FullRepresentation.qml:1048
+msgid "Cancel LLM request"
+msgstr "Avbryt LLM-forespørsel"
+
+#: package/contents/ui/ToolResultBlock.qml:117
+msgid "Stop command"
+msgstr "Stopp kommando"
+
+#: package/contents/ui/ToolResultBlock.qml:130
+msgid "Open terminal attached to this session"
+msgstr "Åpne terminal tilknyttet denne sesjonen"
+
+#: package/contents/ui/ToolResultBlock.qml:144
+msgid "Copy output"
+msgstr "Kopier utdata"
+
+#: package/contents/ui/api.js:192
+msgid "OpenAI-compatible"
+msgstr "OpenAI-kompatibel"
+
+#: package/contents/ui/api.js:193
+msgid "Anthropic"
+msgstr "Anthropic"
+
+#: package/contents/ui/api.js:194
+msgid "Google Gemini"
+msgstr "Google Gemini"
 
 #: package/contents/ui/configGeneral.qml:59
 msgid "Failed to fetch gcloud token (exit %1): %2"
@@ -874,170 +770,170 @@ msgstr "%1 (Kopi)"
 msgid "Profile:"
 msgstr "Profil:"
 
-#: package/contents/ui/configGeneral.qml:543
-#: package/contents/ui/configGeneral.qml:577
+#: package/contents/ui/configGeneral.qml:544
+#: package/contents/ui/configGeneral.qml:581
 msgid "Rename Profile"
 msgstr "Gi nytt navn til profil"
 
-#: package/contents/ui/configGeneral.qml:551
+#: package/contents/ui/configGeneral.qml:553
 msgid "Duplicate Profile"
 msgstr "Dupliser profil"
 
-#: package/contents/ui/configGeneral.qml:559
+#: package/contents/ui/configGeneral.qml:562
 msgid "Delete Profile"
 msgstr "Slett profil"
 
-#: package/contents/ui/configGeneral.qml:581
+#: package/contents/ui/configGeneral.qml:585
 msgid "Profile Name"
 msgstr "Profilnavn"
 
-#: package/contents/ui/configGeneral.qml:596
+#: package/contents/ui/configGeneral.qml:600
 msgid "Rename"
 msgstr "Gi nytt navn"
 
-#: package/contents/ui/configGeneral.qml:616
+#: package/contents/ui/configGeneral.qml:620
 msgid "Adapter:"
 msgstr "Adapter:"
 
-#: package/contents/ui/configGeneral.qml:639
+#: package/contents/ui/configGeneral.qml:643
 msgid "Authentication:"
 msgstr "Autentisering:"
 
-#: package/contents/ui/configGeneral.qml:642
+#: package/contents/ui/configGeneral.qml:646
 msgid "API Key (Express Mode)"
 msgstr "API-nøkkel (ekspressmodus)"
 
-#: package/contents/ui/configGeneral.qml:642
+#: package/contents/ui/configGeneral.qml:646
 msgid "Google Cloud CLI (gcloud)"
 msgstr "Google Cloud CLI (gcloud)"
 
-#: package/contents/ui/configGeneral.qml:652
+#: package/contents/ui/configGeneral.qml:656
 msgid ""
 "gcloud CLI not found. Please install it to use this authentication method."
 msgstr ""
 "gcloud CLI ikke funnet. Installer det for å bruke denne "
 "autentiseringsmetoden."
 
-#: package/contents/ui/configGeneral.qml:659
+#: package/contents/ui/configGeneral.qml:663
 msgid "API Variant:"
 msgstr "API-variant:"
 
-#: package/contents/ui/configGeneral.qml:663
-#: package/contents/ui/configGeneral.qml:664
+#: package/contents/ui/configGeneral.qml:667
+#: package/contents/ui/configGeneral.qml:668
 msgid "Legacy (generateContent)"
 msgstr "Eldre (generateContent)"
 
-#: package/contents/ui/configGeneral.qml:664
+#: package/contents/ui/configGeneral.qml:668
 msgid "Interactions API (Stateful)"
 msgstr "Interactions-API (tilstandsbasert)"
 
-#: package/contents/ui/configGeneral.qml:684
+#: package/contents/ui/configGeneral.qml:688
 msgid "Platform:"
 msgstr "Plattform:"
 
-#: package/contents/ui/configGeneral.qml:687
+#: package/contents/ui/configGeneral.qml:691
 msgid "Google AI Studio"
 msgstr "Google AI Studio"
 
-#: package/contents/ui/configGeneral.qml:687
+#: package/contents/ui/configGeneral.qml:691
 msgid "Google Cloud Agent Platform (Vertex AI)"
 msgstr "Google Cloud Agent Platform (Vertex AI)"
 
-#: package/contents/ui/configGeneral.qml:702
+#: package/contents/ui/configGeneral.qml:706
 msgid "Project ID:"
 msgstr "Prosjekt-ID:"
 
-#: package/contents/ui/configGeneral.qml:716
+#: package/contents/ui/configGeneral.qml:720
 msgid "Location:"
 msgstr "Plassering:"
 
-#: package/contents/ui/configGeneral.qml:731
+#: package/contents/ui/configGeneral.qml:735
 msgid "Provider:"
 msgstr "Leverandør:"
 
-#: package/contents/ui/configGeneral.qml:828
+#: package/contents/ui/configGeneral.qml:832
 msgid "API Endpoint:"
 msgstr "API-endepunkt:"
 
-#: package/contents/ui/configGeneral.qml:857
-#: package/contents/ui/configGeneral.qml:865
+#: package/contents/ui/configGeneral.qml:861
+#: package/contents/ui/configGeneral.qml:869
 msgid "Model:"
 msgstr "Modell:"
 
-#: package/contents/ui/configGeneral.qml:979
+#: package/contents/ui/configGeneral.qml:981
 msgid "Refreshing…"
 msgstr "Oppdaterer…"
 
-#: package/contents/ui/configGeneral.qml:979
+#: package/contents/ui/configGeneral.qml:981
 msgid "Refresh model list"
 msgstr "Oppdater modellliste"
 
-#: package/contents/ui/configGeneral.qml:997
+#: package/contents/ui/configGeneral.qml:999
 msgid "API Key:"
 msgstr "API-nøkkel:"
 
-#: package/contents/ui/configGeneral.qml:1005
+#: package/contents/ui/configGeneral.qml:1007
 msgid "Paste short-lived access token"
 msgstr "Lim inn kortvarig tilgangstoken"
 
-#: package/contents/ui/configGeneral.qml:1005
+#: package/contents/ui/configGeneral.qml:1007
 msgid "Optional - for OpenAI, etc."
 msgstr "Valgfritt - for OpenAI, osv."
 
-#: package/contents/ui/configGeneral.qml:1031
+#: package/contents/ui/configGeneral.qml:1033
 msgid "Stored in KDE Wallet"
 msgstr "Lagret i KDE Wallet"
 
-#: package/contents/ui/configGeneral.qml:1031
+#: package/contents/ui/configGeneral.qml:1033
 msgid "KDE Wallet unavailable — key stored in config file"
 msgstr "KDE Wallet utilgjengelig — nøkkel lagret i konfigurasjonsfil"
 
-#: package/contents/ui/configGeneral.qml:1046
+#: package/contents/ui/configGeneral.qml:1048
 #, javascript-format
 msgid "Temperature: %1%"
 msgstr "Temperatur: %1%"
 
-#: package/contents/ui/configGeneral.qml:1063
+#: package/contents/ui/configGeneral.qml:1065
 msgid "Precise"
 msgstr "Presist"
 
-#: package/contents/ui/configGeneral.qml:1068
+#: package/contents/ui/configGeneral.qml:1070
 msgid "Creative"
 msgstr "Kreativt"
 
-#: package/contents/ui/configGeneral.qml:1076
+#: package/contents/ui/configGeneral.qml:1078
 msgid "Max Tokens:"
 msgstr "Maksimale tokens:"
 
-#: package/contents/ui/configGeneral.qml:1087
+#: package/contents/ui/configGeneral.qml:1089
 msgid "Thinking:"
 msgstr "Tenkning:"
 
-#: package/contents/ui/configGeneral.qml:1091
+#: package/contents/ui/configGeneral.qml:1093
 msgid "Off"
 msgstr "Av"
 
-#: package/contents/ui/configGeneral.qml:1091
+#: package/contents/ui/configGeneral.qml:1093
 msgid "Low"
 msgstr "Lav"
 
-#: package/contents/ui/configGeneral.qml:1091
+#: package/contents/ui/configGeneral.qml:1093
 msgid "Medium"
 msgstr "Middels"
 
-#: package/contents/ui/configGeneral.qml:1091
+#: package/contents/ui/configGeneral.qml:1093
 msgid "High"
 msgstr "Høy"
 
-#: package/contents/ui/configGeneral.qml:1100
+#: package/contents/ui/configGeneral.qml:1102
 msgid "Thinking budget:"
 msgstr "Tenkningsbudsjett:"
 
-#: package/contents/ui/configGeneral.qml:1127
+#: package/contents/ui/configGeneral.qml:1129
 msgid "Show thoughts in chat (collapsible)"
 msgstr "Vis tanker i chatten (sammenleggbar)"
 
-#: package/contents/ui/configGeneral.qml:1132
+#: package/contents/ui/configGeneral.qml:1134
 msgid ""
 "When enabled, the model's reasoning is shown above each reply with a "
 "collapsible header. Round-trip of signed thoughts to the API still happens "
@@ -1047,11 +943,11 @@ msgstr ""
 "sammenleggbar overskrift. Utveksling av signerte tanker til API-et skjer "
 "uavhengig av denne innstillingen."
 
-#: package/contents/ui/configGeneral.qml:1139
+#: package/contents/ui/configGeneral.qml:1141
 msgid "Use Responses API"
 msgstr "Bruk Responses API"
 
-#: package/contents/ui/configGeneral.qml:1144
+#: package/contents/ui/configGeneral.qml:1146
 msgid ""
 "Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
 "(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
@@ -1061,52 +957,52 @@ msgstr ""
 "Azure (POST til /v1/responses i stedet for /v1/chat/completions). Settes "
 "automatisk ved valg av forhåndsinnstilling."
 
-#: package/contents/ui/configGeneral.qml:1158
+#: package/contents/ui/configGeneral.qml:1160
 msgid "Chat History:"
 msgstr "Chathistorikk:"
 
-#: package/contents/ui/configGeneral.qml:1159
+#: package/contents/ui/configGeneral.qml:1161
 msgid "Auto-save chat history"
 msgstr "Lagre chathistorikk automatisk"
 
-#: package/contents/ui/configGeneral.qml:1163
-#: package/contents/ui/configGeneral.qml:1178
+#: package/contents/ui/configGeneral.qml:1165
+#: package/contents/ui/configGeneral.qml:1180
 msgid "Saves to ~/.local/share/plasmallm/chats/"
 msgstr "Lagrer til ~/.local/share/plasmallm/chats/"
 
-#: package/contents/ui/configGeneral.qml:1170
+#: package/contents/ui/configGeneral.qml:1172
 msgid "Save format:"
 msgstr "Lagringsformat:"
 
-#: package/contents/ui/configGeneral.qml:1171
+#: package/contents/ui/configGeneral.qml:1173
 msgid "Plain text (.txt)"
 msgstr "Ren tekst (.txt)"
 
-#: package/contents/ui/configGeneral.qml:1171
+#: package/contents/ui/configGeneral.qml:1173
 msgid "Structured (.jsonl)"
 msgstr "Strukturert (.jsonl)"
 
-#: package/contents/ui/configGeneral.qml:1190
+#: package/contents/ui/configGeneral.qml:1192
 msgid "Auto-clear:"
 msgstr "Automatisk sletting:"
 
-#: package/contents/ui/configGeneral.qml:1194
+#: package/contents/ui/configGeneral.qml:1196
 msgid "Disabled"
 msgstr "Deaktivert"
 
-#: package/contents/ui/configGeneral.qml:1200
+#: package/contents/ui/configGeneral.qml:1202
 msgid "Instant (always clear when panel opens)"
 msgstr "Øyeblikkelig (alltid slett når panel åpnes)"
 
-#: package/contents/ui/configGeneral.qml:1209
+#: package/contents/ui/configGeneral.qml:1211
 msgid "After"
 msgstr "Etter"
 
-#: package/contents/ui/configGeneral.qml:1229
+#: package/contents/ui/configGeneral.qml:1231
 msgid "seconds"
 msgstr "sekunder"
 
-#: package/contents/ui/configGeneral.qml:1229
+#: package/contents/ui/configGeneral.qml:1231
 msgid "minutes"
 msgstr "minutter"
 
@@ -1126,19 +1022,19 @@ msgstr "Aktiver verktøy"
 msgid "Master switch for all tool-calling functionality."
 msgstr "Hovedbryter for all verktøykallfunksjonalitet."
 
-#: package/contents/ui/configTools.qml:115
+#: package/contents/ui/configTools.qml:116
 msgid "Path whitelist:"
 msgstr "Sti-hviteliste:"
 
-#: package/contents/ui/configTools.qml:157
+#: package/contents/ui/configTools.qml:158
 msgid "Add path, e.g. $HOME/projects, /tmp"
 msgstr "Legg til sti, f.eks. $HOME/projects, /tmp"
 
-#: package/contents/ui/configTools.qml:163
+#: package/contents/ui/configTools.qml:164
 msgid "Add"
 msgstr "Legg til"
 
-#: package/contents/ui/configTools.qml:175
+#: package/contents/ui/configTools.qml:176
 msgid ""
 "Whitelist applies to file-system tools (read, write, list, search). Note: "
 "'run_command' is not restricted by this list."
@@ -1146,31 +1042,31 @@ msgstr ""
 "Hvitelisten gjelder for filsystemverktøy (les, skriv, list, søk). Merk: "
 "'run_command' er ikke begrenset av denne listen."
 
-#: package/contents/ui/configTools.qml:183
+#: package/contents/ui/configTools.qml:184
 msgid "Max read size:"
 msgstr "Maks lesestørrelse:"
 
-#: package/contents/ui/configTools.qml:195
+#: package/contents/ui/configTools.qml:196
 msgid "Max write size:"
 msgstr "Maks skrivingsstørrelse:"
 
-#: package/contents/ui/configTools.qml:207
+#: package/contents/ui/configTools.qml:208
 msgid "Max HTTP response:"
 msgstr "Maks HTTP-svar:"
 
-#: package/contents/ui/configTools.qml:220
+#: package/contents/ui/configTools.qml:221
 msgid "Native Adapter Features"
 msgstr "Innebygde adapterfunksjoner"
 
-#: package/contents/ui/configTools.qml:226
+#: package/contents/ui/configTools.qml:227
 msgid "Google Search:"
 msgstr "Google-søk:"
 
-#: package/contents/ui/configTools.qml:227
+#: package/contents/ui/configTools.qml:228
 msgid "Enable Native Google Search Grounding"
 msgstr "Aktiver innebygd Google-søkegrunnlag"
 
-#: package/contents/ui/configTools.qml:237
+#: package/contents/ui/configTools.qml:238
 msgid ""
 "Use Gemini's built-in Google Search for grounding. This overrides the "
 "standard web search tool."
@@ -1178,15 +1074,15 @@ msgstr ""
 "Bruk Geminis innebygde Google-søk for grunnlag. Dette overstyrer det "
 "standard nettsøkverktøyet."
 
-#: package/contents/ui/configTools.qml:244
+#: package/contents/ui/configTools.qml:245
 msgid "Code Execution:"
 msgstr "Kodekjøring:"
 
-#: package/contents/ui/configTools.qml:245
+#: package/contents/ui/configTools.qml:246
 msgid "Enable Native Python Code Execution"
 msgstr "Aktiver innebygd Python-kodekjøring"
 
-#: package/contents/ui/configTools.qml:255
+#: package/contents/ui/configTools.qml:256
 msgid ""
 "Allow Gemini to write and execute Python code in a secure server-side "
 "sandbox."
@@ -1194,7 +1090,7 @@ msgstr ""
 "Tillat Gemini å skrive og kjøre Python-kode i en sikker sandkasse på "
 "serversiden."
 
-#: package/contents/ui/configTools.qml:263
+#: package/contents/ui/configTools.qml:264
 msgid ""
 "Combining Native tools with commands requires a newer model. Your currently "
 "selected model (%1) may encounter errors."
@@ -1202,11 +1098,139 @@ msgstr ""
 "Å kombinere innebygde verktøy med kommandoer krever en nyere modell. Din "
 "valgte modell (%1) kan oppleve feil."
 
-#: package/contents/ui/configTools.qml:271
+#: package/contents/ui/configTools.qml:272
 msgid "Individual Tools"
 msgstr "Individuelle verktøy"
 
-#: package/contents/ui/main.qml:218
+#: package/contents/ui/ChatMessage.qml:117
+msgid "Web Search"
+msgstr "Nettsøk"
+
+#: package/contents/ui/ChatMessage.qml:144
+msgid "Thinking"
+msgstr "Tenker…"
+
+#: package/contents/ui/ChatMessage.qml:210
+msgid "Searched for: %1"
+msgstr "Søkte etter: %1"
+
+#: package/contents/ui/ChatMessage.qml:246
+msgid "Show %1 results"
+msgstr "Vis %1 resultater"
+
+#: package/contents/ui/ChatMessage.qml:360
+msgid "Copy to clipboard"
+msgstr "Kopier til utklippstavle"
+
+#: package/contents/ui/ChatMessage.qml:375
+msgid "Share output with assistant"
+msgstr "Del utdata med assistenten"
+
+#: package/contents/ui/ColorButton.qml:26
+msgid "Color button"
+msgstr "Fargeknapp"
+
+#: package/contents/ui/ColorButton.qml:28
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Gjeldende farge er %1. Denne knappen vil åpne en fargevelgerdialog."
+
+#: package/contents/ui/ColorButton.qml:29
+msgid "Current color is %1."
+msgstr "Gjeldende farge er %1."
+
+#: package/contents/ui/configAppearance.qml:19
+msgid "Profile Header:"
+msgstr "Profiloverskrift:"
+
+#: package/contents/ui/configAppearance.qml:20
+msgid "Show provider and model in profile header"
+msgstr "Vis leverandør og modell i profiloverskrift"
+
+#: package/contents/ui/configAppearance.qml:36
+msgid "Chat Spacing: %1px"
+msgstr "Chatavstand: %1px"
+
+#: package/contents/ui/configAppearance.qml:58
+msgid "Compact"
+msgstr "Kompakt"
+
+#: package/contents/ui/configAppearance.qml:63
+msgid "Spacious"
+msgstr "Romslig"
+
+#: package/contents/ui/configAppearance.qml:75
+msgid "Chat Colors:"
+msgstr "Chat-farger:"
+
+#: package/contents/ui/configAppearance.qml:82
+msgid "Use custom user color"
+msgstr "Bruk tilpasset brukerfarge"
+
+#: package/contents/ui/configAppearance.qml:106
+msgid "Use custom assistant color"
+msgstr "Bruk tilpasset assistentfarge"
+
+#: package/contents/ui/configAppearance.qml:133
+msgid "UI Font:"
+msgstr "Grensesnittskrift:"
+
+#: package/contents/ui/configAppearance.qml:134
+msgid "Use custom UI font"
+msgstr "Bruk egendefinert grensesnittskrift"
+
+#: package/contents/ui/configAppearance.qml:184
+msgid "Code Font:"
+msgstr "Kodeskrift:"
+
+#: package/contents/ui/configAppearance.qml:185
+msgid "Use custom code font"
+msgstr "Bruk egendefinert kodeskrift"
+
+#: package/contents/ui/configAppearance.qml:230
+msgid "Thoughts Font:"
+msgstr "Tankeskrift:"
+
+#: package/contents/ui/configAppearance.qml:231
+msgid "Use custom thoughts font"
+msgstr "Bruk egendefinert tankeskrift"
+
+#: package/contents/ui/configAppearance.qml:281
+msgid "Header Icons:"
+msgstr "Overskriftsikoner:"
+
+#: package/contents/ui/configAppearance.qml:286
+msgid "Profile Header"
+msgstr "Profiloverskrift"
+
+#: package/contents/ui/configAppearance.qml:297
+msgid "Always show Tasks"
+msgstr "Vis alltid Oppgaver"
+
+#: package/contents/ui/configAppearance.qml:308
+msgid "Always show Auto Toggle"
+msgstr "Vis alltid Auto-veksler"
+
+#: package/contents/ui/configAppearance.qml:319
+msgid "Show History"
+msgstr "Vis historikk"
+
+#: package/contents/ui/configAppearance.qml:330
+msgid "Show Copy conversation"
+msgstr "Vis Kopier samtale"
+
+#: package/contents/ui/configAppearance.qml:341
+msgid "Show Clear chat"
+msgstr "Vis Tøm chat"
+
+#: package/contents/ui/configAppearance.qml:352
+msgid "Show Settings"
+msgstr "Vis Innstillinger"
+
+#: package/contents/ui/configAppearance.qml:363
+msgid "Show Pin"
+msgstr "Vis festikonet"
+
+#: package/contents/ui/main.qml:221
 msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
 "installed and authenticated."
@@ -1214,15 +1238,15 @@ msgstr ""
 "Klarte ikke hente gcloud-token (avslutningskode %1): %2. Kontroller at "
 "gcloud er installert og autentisert."
 
-#: package/contents/ui/main.qml:1155
+#: package/contents/ui/main.qml:1158
 msgid "No tool request pending to approve."
 msgstr "Ingen verktøyforespørsel venter på godkjenning."
 
-#: package/contents/ui/main.qml:1172
+#: package/contents/ui/main.qml:1175
 msgid "No tool request pending to deny."
 msgstr "Ingen verktøyforespørsel venter på avslag."
 
-#: package/contents/ui/main.qml:1199
+#: package/contents/ui/main.qml:1202
 msgid ""
 "Skip approvals mode enabled for this session. All enabled tools will run "
 "automatically, bypassing 'Ask before running' settings."
@@ -1231,7 +1255,7 @@ msgstr ""
 "aktiverte verktøy vil kjøre automatisk og omgå innstillingene for 'Spør før "
 "kjøring'."
 
-#: package/contents/ui/main.qml:1200
+#: package/contents/ui/main.qml:1203
 msgid ""
 "Skip approvals mode disabled. Tools will revert to your configured 'Ask "
 "before running' settings."
@@ -1239,95 +1263,95 @@ msgstr ""
 "Modus for å hoppe over godkjenninger er deaktivert. Verktøy vil gå tilbake "
 "til dine konfigurerte innstillinger for 'Spør før kjøring'."
 
-#: package/contents/ui/main.qml:1219 package/contents/ui/main.qml:2181
+#: package/contents/ui/main.qml:1222 package/contents/ui/main.qml:2179
 msgid "Default"
 msgstr "Standard"
 
-#: package/contents/ui/main.qml:1219
+#: package/contents/ui/main.qml:1222
 msgid "Current profile: **%1**"
 msgstr "Gjeldende profil: **%1**"
 
-#: package/contents/ui/main.qml:1221
+#: package/contents/ui/main.qml:1224
 msgid "Available profiles:"
 msgstr "Tilgjengelige profiler:"
 
-#: package/contents/ui/main.qml:1223
+#: package/contents/ui/main.qml:1226
 msgid "active"
 msgstr "aktiv"
 
-#: package/contents/ui/main.qml:1226
+#: package/contents/ui/main.qml:1229
 msgid "Type `/profile <name>` to switch."
 msgstr "Skriv `/profile <navn>` for å bytte."
 
-#: package/contents/ui/main.qml:1243
+#: package/contents/ui/main.qml:1246
 msgid "Switched to profile: **%1**"
 msgstr "Byttet til profil: **%1**"
 
-#: package/contents/ui/main.qml:1245
+#: package/contents/ui/main.qml:1248
 msgid "Unknown profile: **%1**"
 msgstr "Ukjent profil: **%1**"
 
-#: package/contents/ui/main.qml:1252 package/contents/ui/main.qml:1335
+#: package/contents/ui/main.qml:1255 package/contents/ui/main.qml:1338
 msgid "none"
 msgstr "ingen"
 
-#: package/contents/ui/main.qml:1252
+#: package/contents/ui/main.qml:1255
 msgid "Current model: **%1**"
 msgstr "Gjeldende modell: **%1**"
 
-#: package/contents/ui/main.qml:1254
+#: package/contents/ui/main.qml:1257
 msgid "Available models:"
 msgstr "Tilgjengelige modeller:"
 
-#: package/contents/ui/main.qml:1256
+#: package/contents/ui/main.qml:1259
 msgid "Type `/model <name>` to switch."
 msgstr "Skriv `/model <name>` for å bytte."
 
-#: package/contents/ui/main.qml:1258
+#: package/contents/ui/main.qml:1261
 msgid "No models cached. Use **Fetch Models** in settings."
 msgstr "Ingen modeller bufret. Bruk **Hent modeller** i innstillinger."
 
-#: package/contents/ui/main.qml:1283
+#: package/contents/ui/main.qml:1286
 msgid "Switched to model: **%1**"
 msgstr "Byttet til modell: **%1**"
 
-#: package/contents/ui/main.qml:1292
+#: package/contents/ui/main.qml:1295
 msgid "No tasks configured. Add tasks in Settings."
 msgstr "Ingen oppgaver konfigurert. Legg til oppgaver i Innstillinger."
 
-#: package/contents/ui/main.qml:1294
+#: package/contents/ui/main.qml:1297
 msgid "(auto)"
 msgstr "(automatisk)"
 
-#: package/contents/ui/main.qml:1295
+#: package/contents/ui/main.qml:1298
 msgid "Available tasks:"
 msgstr "Tilgjengelige oppgaver:"
 
-#: package/contents/ui/main.qml:1295
+#: package/contents/ui/main.qml:1298
 msgid "Type `/task <name>` to run."
 msgstr "Skriv `/task <name>` for å kjøre."
 
-#: package/contents/ui/main.qml:1335
+#: package/contents/ui/main.qml:1338
 msgid "Unknown task: **%1**. Available: %2"
 msgstr "Ukjent oppgave: **%1**. Tilgjengelig: %2"
 
-#: package/contents/ui/main.qml:1349
+#: package/contents/ui/main.qml:1352
 msgid "The user declined to run this command."
 msgstr "Brukeren avslo å kjøre denne kommandoen."
 
-#: package/contents/ui/main.qml:1698
+#: package/contents/ui/main.qml:1696
 msgid "Unknown tool %1"
 msgstr "Ukjent verktøy %1"
 
-#: package/contents/ui/main.qml:1714
+#: package/contents/ui/main.qml:1712
 msgid "Error: path '%1' outside whitelist"
 msgstr "Feil: sti '%1' utenfor hviteliste"
 
-#: package/contents/ui/main.qml:1727
+#: package/contents/ui/main.qml:1725
 msgid "Executing %1…"
 msgstr "Kjører %1…"
 
-#: package/contents/ui/main.qml:1980
+#: package/contents/ui/main.qml:1978
 msgid "Session reset requested."
 msgstr "Øktnullstilling forespurt."
 
