@@ -533,6 +533,7 @@ BaseConfigPage {
             QQC2.Button {
                 icon.name: "list-add"
                 QQC2.ToolTip.text: i18n("New Profile")
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
                 display: QQC2.AbstractButton.IconOnly
                 onClicked: createNewProfile()
@@ -541,6 +542,7 @@ BaseConfigPage {
             QQC2.Button {
                 icon.name: "edit-rename"
                 QQC2.ToolTip.text: i18n("Rename Profile")
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
                 display: QQC2.AbstractButton.IconOnly
                 onClicked: renamePopup.open()
@@ -549,6 +551,7 @@ BaseConfigPage {
             QQC2.Button {
                 icon.name: "edit-copy"
                 QQC2.ToolTip.text: i18n("Duplicate Profile")
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
                 display: QQC2.AbstractButton.IconOnly
                 onClicked: duplicateActiveProfile()
@@ -557,6 +560,7 @@ BaseConfigPage {
             QQC2.Button {
                 icon.name: "edit-delete"
                 QQC2.ToolTip.text: i18n("Delete Profile")
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
                 display: QQC2.AbstractButton.IconOnly
                 enabled: profilesList ? profilesList.length > 1 : false
@@ -975,8 +979,8 @@ BaseConfigPage {
                 enabled: !fetchInProgress
                 display: QQC2.AbstractButton.IconOnly
                 QQC2.ToolTip.text: fetchInProgress ? i18n("Refreshing…") : i18n("Refresh model list")
-                QQC2.ToolTip.visible: hovered
                 QQC2.ToolTip.delay: 300
+                QQC2.ToolTip.visible: hovered
                 onClicked: ensureModelsLoaded(true)
             }
         }
@@ -1128,8 +1132,8 @@ BaseConfigPage {
             onCheckedChanged: if (_initialized) cfg_showThoughts = checked
 
             QQC2.ToolTip.text: i18n("When enabled, the model's reasoning is shown above each reply with a collapsible header. Round-trip of signed thoughts to the API still happens regardless of this setting.")
-            QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
         }
 
         QQC2.CheckBox {
@@ -1140,8 +1144,8 @@ BaseConfigPage {
             onCheckedChanged: if (_initialized) cfg_usesResponsesAPI = checked
 
             QQC2.ToolTip.text: i18n("Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure (POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when picking a preset.")
-            QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
         }
 
 
@@ -1159,8 +1163,8 @@ BaseConfigPage {
             onCheckedChanged: if (_initialized) cfg_saveChatHistory = checked
 
             QQC2.ToolTip.text: i18n("Saves to ~/.local/share/plasmallm/chats/")
-            QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
         }
 
         QQC2.ComboBox {

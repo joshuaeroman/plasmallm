@@ -146,7 +146,7 @@ PlasmaExtras.Representation {
                 Accessible.name: i18n("Toggle Full Auto Mode")
                 PlasmaComponents.ToolTip.text: i18n("Toggle Full Auto Mode: When enabled, all tools run automatically for this session.")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                 onClicked: root.sendMessage("/auto")
             }
 
@@ -156,7 +156,7 @@ PlasmaExtras.Representation {
                 Accessible.name: i18n("Run a task")
                 PlasmaComponents.ToolTip.text: i18n("Run a task")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                 visible: Plasmoid.configuration.showIconTasks || fullRep.configuredTasks.length > 0
                 checkable: true
                 checked: taskMenu.opened
@@ -193,7 +193,7 @@ PlasmaExtras.Representation {
                 Accessible.name: i18n("Chat History")
                 PlasmaComponents.ToolTip.text: i18n("Chat History")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents.ToolTip.visible: hovered && !historyMenu.opened
+                PlasmaComponents.ToolTip.visible: hovered && !historyMenu.opened && PlasmaComponents.ToolTip.text !== ""
                 visible: Plasmoid.configuration.showIconHistory && Plasmoid.configuration.saveChatHistory
                 checkable: true
                 checked: historyMenu.opened
@@ -320,7 +320,7 @@ PlasmaExtras.Representation {
                 Accessible.name: i18n("Copy conversation")
                 PlasmaComponents.ToolTip.text: i18n("Copy conversation")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                 visible: Plasmoid.configuration.showIconCopy && root.displayMessages.count > 0
                 enabled: root.displayMessages.count > 0
                 onClicked: {
@@ -347,7 +347,7 @@ PlasmaExtras.Representation {
                 Accessible.name: i18n("Clear chat")
                 PlasmaComponents.ToolTip.text: i18n("Clear chat")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                 onClicked: { root.clearChat(); inputField.forceActiveFocus(); }
             }
 
@@ -357,7 +357,7 @@ PlasmaExtras.Representation {
                 Accessible.name: i18n("Settings")
                 PlasmaComponents.ToolTip.text: i18n("Settings")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                 onClicked: Plasmoid.internalAction("configure").trigger()
             }
 
@@ -369,7 +369,7 @@ PlasmaExtras.Representation {
                 Accessible.name: Plasmoid.configuration.pin ? i18n("Don't keep open") : i18n("Keep open")
                 PlasmaComponents.ToolTip.text: Plasmoid.configuration.pin ? i18n("Don't keep open") : i18n("Keep open")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                 onClicked: Plasmoid.configuration.pin = !Plasmoid.configuration.pin
             }
         }
@@ -985,7 +985,8 @@ PlasmaExtras.Representation {
                 visible: true
                 enabled: !root.isLoading && root.systemPromptReady
                 PlasmaComponents.ToolTip.text: i18n("Attach file or image")
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                 onClicked: attachDialog.open()
             }
 
@@ -996,7 +997,8 @@ PlasmaExtras.Representation {
                 enabled: root.systemPromptReady && root.sessionActive
                 onClicked: root.resetSession()
                 PlasmaComponents.ToolTip.text: i18n("Kill persistent session (stops all processes and resets shell state)")
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
 
                 contentItem: RowLayout {
                     spacing: Kirigami.Units.smallSpacing
@@ -1044,7 +1046,8 @@ PlasmaExtras.Representation {
                 enabled: root.isLoading
                 onClicked: root.cancelRequest()
                 PlasmaComponents.ToolTip.text: i18n("Cancel LLM request")
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
             }
         }
     }
