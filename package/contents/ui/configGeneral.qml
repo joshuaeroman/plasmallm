@@ -1160,7 +1160,7 @@ BaseConfigPage {
             checked: cfg_saveChatHistory
             onCheckedChanged: if (_initialized) cfg_saveChatHistory = checked
 
-            QQC2.ToolTip.text: i18n("Saves to ~/PlasmaLLM/chats/")
+            QQC2.ToolTip.text: i18n("Saves to ~/.local/share/plasmallm/chats/")
             QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
         }
@@ -1175,7 +1175,7 @@ BaseConfigPage {
         }
 
         QQC2.Label {
-            text: i18n("Saves to ~/PlasmaLLM/chats/")
+            text: i18n("Saves to ~/.local/share/plasmallm/chats/")
             font: Kirigami.Theme.smallFont
             color: Kirigami.Theme.disabledTextColor
             wrapMode: Text.Wrap

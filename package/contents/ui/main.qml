@@ -386,6 +386,18 @@ PlasmoidItem {
             case "echo $LANG":
                 sysInfo.locale = output;
                 break;
+            case "echo $XDG_DATA_HOME":
+                sysInfo.xdgDataHome = output;
+                break;
+            case "echo $XDG_CONFIG_HOME":
+                sysInfo.xdgConfigHome = output;
+                break;
+            case "echo $XDG_CACHE_HOME":
+                sysInfo.xdgCacheHome = output;
+                break;
+            case "echo $XDG_RUNTIME_DIR":
+                sysInfo.xdgRuntimeDir = output;
+                break;
         }
 
         sysInfoPending--;
@@ -469,6 +481,10 @@ PlasmoidItem {
         if (Plasmoid.configuration.sysInfoDisk)     cmds.push("lsblk -o NAME,SIZE,TYPE,MOUNTPOINT");
         if (Plasmoid.configuration.sysInfoNetwork)  cmds.push("ip -br addr show");
         if (Plasmoid.configuration.sysInfoLocale)   cmds.push("echo $LANG");
+        cmds.push("echo $XDG_DATA_HOME");
+        cmds.push("echo $XDG_CONFIG_HOME");
+        cmds.push("echo $XDG_CACHE_HOME");
+        cmds.push("echo $XDG_RUNTIME_DIR");
 
         if (cmds.length === 0) {
             sysInfoTimeout.stop();
@@ -551,8 +567,10 @@ PlasmoidItem {
 
         // Escape single quotes for shell
         var escaped = text.replace(/'/g, "'\\''");
-        var filePath = "$HOME/PlasmaLLM/chats/" + currentChatFile;
-        var cmd = "mkdir -p $HOME/PlasmaLLM/chats && printf '%s' '" + escaped + "' > \"" + filePath + "\"";
+        var dataHome = "${XDG_DATA_HOME:-$HOME/.local/share}";
+        var chatsDir = dataHome + "/plasmallm/chats";
+        var filePath = chatsDir + "/" + currentChatFile;
+        var cmd = "mkdir -p \"" + chatsDir + "\" && printf '%s' '" + escaped + "' > \"" + filePath + "\"";
         saveCommands.push(cmd);
         executable.connectSource(cmd);
         if (fmt === "jsonl") updateHistoryModelLocally(currentChatFile);
@@ -618,7 +636,8 @@ lines.push(JSON.stringify({
     function fetchHistoryList() {
         isFetchingHistory = true;
         var pythonSnippet = "import os, json, sys, datetime\n" +
-            "chats_dir = os.path.expanduser('~/PlasmaLLM/chats')\n" +
+            "data_home = os.environ.get('XDG_DATA_HOME') or os.path.expanduser('~/.local/share')\n" +
+            "chats_dir = os.path.join(data_home, 'plasmallm', 'chats')\n" +
             "if not os.path.exists(chats_dir):\n" +
             "    print('[]')\n" +
             "    sys.exit(0)\n" +
@@ -643,7 +662,7 @@ lines.push(JSON.stringify({
 
         var b64 = Qt.btoa(pythonSnippet);
         var cmd = "echo '" + b64 + "' | base64 -d | python3 2>/dev/null || " +
-                  "(ls -1t $HOME/PlasmaLLM/chats/*.jsonl 2>/dev/null | head -n 10) # " + Date.now();
+                  "(ls -1t \"${XDG_DATA_HOME:-$HOME/.local/share}/plasmallm/chats/\"*.jsonl 2>/dev/null | head -n 10) # " + Date.now();
         
         lastHistoryFetchSource = cmd;
         historyFetchCommands.push(cmd);
@@ -652,7 +671,7 @@ lines.push(JSON.stringify({
 
     function updateHistoryModelLocally(fileName) {
         if (!Plasmoid.configuration.saveChatHistory) return;
-        var filePath = "$HOME/PlasmaLLM/chats/" + fileName;
+        var filePath = "${XDG_DATA_HOME:-$HOME/.local/share}/plasmallm/chats/" + fileName;
         var found = false;
         for (var i = 0; i < historyFilesModel.count; i++) {
             if (historyFilesModel.get(i).name === fileName) {
@@ -1683,14 +1702,20 @@ lines.push(JSON.stringify({
         // Sandbox check for file tools
         if (tool.sandboxed) {
             var path = args.path || "";
-            var home = sysInfo.userHome || "$HOME";
-            if (!ToolManager.isPathAllowed(path, Plasmoid.configuration.toolsPathWhitelist, home)) {
-                var displayPath = ToolManager.contractPath(path, home);
+            var paths = {
+                home: sysInfo.userHome || "$HOME",
+                xdgData: sysInfo.xdgDataHome,
+                xdgConfig: sysInfo.xdgConfigHome,
+                xdgCache: sysInfo.xdgCacheHome,
+                xdgRuntime: sysInfo.xdgRuntimeDir
+            };
+            if (!ToolManager.isPathAllowed(path, Plasmoid.configuration.toolsPathWhitelist, paths)) {
+                var displayPath = ToolManager.contractPath(path, paths.home);
                 handleToolOutput(null, "", i18n("Error: path '%1' outside whitelist", displayPath), 1, { name: name, callId: callId });
                 return;
             }
             // Expand it for internal execution
-            args.path = ToolManager.expandPath(path, home);
+            args.path = ToolManager.expandPath(path, paths);
         }
 
         // Create a visible indicator if it's not auto-run or if it's a side-effect tool
@@ -1888,13 +1913,13 @@ lines.push(JSON.stringify({
     }
 
     function openChatsFolder() {
-        var cmd = "xdg-open $HOME/PlasmaLLM/chats/";
+        var cmd = "xdg-open \"${XDG_DATA_HOME:-$HOME/.local/share}/plasmallm/chats/\"";
         saveCommands.push(cmd);
         executable.connectSource(cmd);
     }
 
     function clearAllHistory() {
-        var cmd = "rm -f $HOME/PlasmaLLM/chats/*.jsonl $HOME/PlasmaLLM/chats/*.txt";
+        var cmd = "rm -f \"${XDG_DATA_HOME:-$HOME/.local/share}/plasmallm/chats/\"*.jsonl \"${XDG_DATA_HOME:-$HOME/.local/share}/plasmallm/chats/\"*.txt";
         saveCommands.push(cmd);
         executable.connectSource(cmd);
         historyFilesModel.clear();
@@ -2174,6 +2199,22 @@ lines.push(JSON.stringify({
             });
             Profiles.saveProfiles(Plasmoid.configuration, profiles);
             Plasmoid.configuration.profilesSchemaVersion = 2;
+        }
+
+        // XDG Migration: move chats from ~/PlasmaLLM/chats to $XDG_DATA_HOME/plasmallm/chats
+        if (Plasmoid.configuration.xdgMigrationDone === false) {
+             var migrationCmd = `
+OLD_DIR="$HOME/PlasmaLLM/chats"
+NEW_DIR="\${XDG_DATA_HOME:-\$HOME/.local/share}/plasmallm/chats"
+if [ -d "\$OLD_DIR" ] && [ ! -d "\$NEW_DIR" ]; then
+    mkdir -p "\$(dirname "\$NEW_DIR")"
+    mv "\$OLD_DIR" "\$NEW_DIR"
+    rmdir "\$HOME/PlasmaLLM" 2>/dev/null
+fi
+`.trim();
+             saveCommands.push(migrationCmd);
+             executable.connectSource(migrationCmd);
+             Plasmoid.configuration.xdgMigrationDone = true;
         }
 
         // Migration: v2 -> v3 (Tools Overhaul)
