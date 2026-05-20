@@ -19,8 +19,8 @@ ColumnLayout {
         onCheckedChanged: if (_initialized) cfg_autoRunCommands = !checked
 
         QQC2.ToolTip.text: i18n("Prompt for approval before executing shell commands from the LLM. Dangerous to uncheck as the LLM will see output and may run further commands.")
-        QQC2.ToolTip.visible: hovered
         QQC2.ToolTip.delay: 500
+        QQC2.ToolTip.visible: hovered
     }
 
     QQC2.Label {
@@ -61,8 +61,8 @@ ColumnLayout {
         enabled: configPage.hasTmux || configPage.hasScreen
 
         QQC2.ToolTip.text: i18n("Execute LLM commands inside a long-lived tmux or screen session so state persists across turns.")
-        QQC2.ToolTip.visible: hovered
         QQC2.ToolTip.delay: 500
+        QQC2.ToolTip.visible: hovered
     }
 
     QQC2.Button {

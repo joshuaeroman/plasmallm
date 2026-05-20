@@ -115,7 +115,8 @@ Rectangle {
                 icon.name: "process-stop"
                 onClicked: toolBlock.stopRequested(args.command || "")
                 PlasmaComponents.ToolTip.text: i18n("Stop command")
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
             }
 
             Kirigami.Chip {
@@ -127,7 +128,8 @@ Rectangle {
                 hoverEnabled: true
                 activeFocusOnTab: true
                 PlasmaComponents.ToolTip.text: i18n("Open terminal attached to this session")
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                 onClicked: toolBlock.terminalRequested(args.command || "")
             }
 
@@ -140,7 +142,8 @@ Rectangle {
                     copyToClipboard(text);
                 }
                 PlasmaComponents.ToolTip.text: i18n("Copy output")
-                PlasmaComponents.ToolTip.visible: hovered
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
             }
         }
 

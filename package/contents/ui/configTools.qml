@@ -107,6 +107,7 @@ BaseConfigPage {
             }
             
             QQC2.ToolTip.text: i18n("Master switch for all tool-calling functionality.")
+            QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
             QQC2.ToolTip.visible: hovered
         }
 
@@ -235,8 +236,8 @@ BaseConfigPage {
             enabled: cfg_enableTools
 
             QQC2.ToolTip.text: i18n("Use Gemini's built-in Google Search for grounding. This overrides the standard web search tool.")
-            QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
         }
 
         QQC2.CheckBox {
@@ -253,8 +254,8 @@ BaseConfigPage {
             enabled: cfg_enableTools
 
             QQC2.ToolTip.text: i18n("Allow Gemini to write and execute Python code in a secure server-side sandbox.")
-            QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
         }
 
         Kirigami.InlineMessage {

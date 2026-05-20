@@ -7,7 +7,16 @@
 
 var name = "run_command";
 var displayName = "Run Any Terminal Command";
-var description = "Execute a shell command on the user's system and return its output. You MUST prefer other, more specific tools (like read_file, write_file, search_files, etc.) if they can accomplish the task. Only use this tool if no other tool is suitable.";
+var description = "Execute a shell command on the user's system and return its output.";
+var longDescription = "Execute a shell command on the user's system and return its output. " +
+    "Guidelines:\n" +
+    "- Use `pkexec` instead of `sudo` for any command requiring superuser privileges.\n" +
+    "- Chain steps with `&&`.\n" +
+    "- Commands run non-interactively. Never use commands that wait for user input (like `read`).\n" +
+    "- Use `kdialog` if you need to prompt the user for input or show a message box (e.g., `kdialog --inputbox \"Prompt\"`).\n" +
+    "- NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission.\n" +
+    "- When permission is needed, ask the user in plain text first.\n" +
+    "You MUST prefer other, more specific tools (like read_file, write_file, search_files, etc.) if they can accomplish the task. Only use this tool if no other tool is suitable.";
 var parameters = {
     type: "object",
     properties: {

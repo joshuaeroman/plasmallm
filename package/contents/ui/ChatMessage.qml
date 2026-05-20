@@ -348,7 +348,8 @@ Kirigami.AbstractCard {
                 PlasmaComponents.ToolButton {
                     icon.name: "edit-copy"
                     PlasmaComponents.ToolTip.text: i18n("Copy to clipboard")
-                    PlasmaComponents.ToolTip.visible: hovered
+                    PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                    PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                     onClicked: {
                         var temp = Qt.createQmlObject('import QtQuick 2.0; TextEdit { visible: false }', messageItem);
                         temp.text = strippedContent;
@@ -362,7 +363,8 @@ Kirigami.AbstractCard {
                     icon.name: "share"
                     visible: isCommandOutput && !shared
                     PlasmaComponents.ToolTip.text: i18n("Share output with assistant")
-                    PlasmaComponents.ToolTip.visible: hovered
+                    PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                    PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                     onClicked: messageItem.shareRequested(messageItem.messageIndex)
                 }
             }

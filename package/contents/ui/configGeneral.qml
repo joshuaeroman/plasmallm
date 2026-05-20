@@ -533,6 +533,7 @@ BaseConfigPage {
             QQC2.Button {
                 icon.name: "list-add"
                 QQC2.ToolTip.text: i18n("New Profile")
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
                 display: QQC2.AbstractButton.IconOnly
                 onClicked: createNewProfile()
@@ -541,6 +542,7 @@ BaseConfigPage {
             QQC2.Button {
                 icon.name: "edit-rename"
                 QQC2.ToolTip.text: i18n("Rename Profile")
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
                 display: QQC2.AbstractButton.IconOnly
                 onClicked: renamePopup.open()
@@ -549,6 +551,7 @@ BaseConfigPage {
             QQC2.Button {
                 icon.name: "edit-copy"
                 QQC2.ToolTip.text: i18n("Duplicate Profile")
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
                 display: QQC2.AbstractButton.IconOnly
                 onClicked: duplicateActiveProfile()
@@ -557,6 +560,7 @@ BaseConfigPage {
             QQC2.Button {
                 icon.name: "edit-delete"
                 QQC2.ToolTip.text: i18n("Delete Profile")
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
                 display: QQC2.AbstractButton.IconOnly
                 enabled: profilesList ? profilesList.length > 1 : false
@@ -875,20 +879,28 @@ BaseConfigPage {
                 // Prepend the persisted model name when it isn't in the fetched
                 // list so it stays selectable (initial load, stale value, etc.).
                 readonly property var displayModels: {
-                    var list = availableModels.slice();
-                    if (cfg_modelName && cfg_modelName.length > 0 && list.indexOf(cfg_modelName) === -1) {
+                    if (cfg_modelName && cfg_modelName.length > 0 && availableModels.indexOf(cfg_modelName) === -1) {
+                        var list = availableModels.slice();
                         list.unshift(cfg_modelName);
+                        return list;
                     }
-                    return list;
+                    return availableModels;
                 }
                 model: displayModels
                 enabled: displayModels.length > 0 && !fetchInProgress
 
-                Connections {
-                    target: configPage
-                    function onAvailableModelsChanged() {
-                        var idx = modelCombo.displayModels.indexOf(cfg_modelName);
-                        modelCombo.currentIndex = idx >= 0 ? idx : 0;
+                onDisplayModelsChanged: {
+                    var idx = displayModels.indexOf(cfg_modelName);
+                    currentIndex = idx >= 0 ? idx : 0;
+
+                    // Persist the visible selection so applying without
+                    // touching the combo doesn't leave cfg_modelName empty.
+                    if (_initialized && (!cfg_modelName || cfg_modelName.length === 0) && displayModels.length > 0) {
+                        Qt.callLater(() => {
+                            if (!cfg_modelName && displayModels.length > 0) {
+                                cfg_modelName = displayModels[0];
+                            }
+                        });
                     }
                 }
 
@@ -897,16 +909,6 @@ BaseConfigPage {
                     function onCfg_modelNameChanged() {
                         var idx = modelCombo.displayModels.indexOf(cfg_modelName);
                         modelCombo.currentIndex = idx >= 0 ? idx : 0;
-                    }
-                }
-
-                onDisplayModelsChanged: {
-                    var idx = displayModels.indexOf(cfg_modelName);
-                    currentIndex = idx >= 0 ? idx : 0;
-                    // Persist the visible selection so applying without
-                    // touching the combo doesn't leave cfg_modelName empty.
-                    if ((!cfg_modelName || cfg_modelName.length === 0) && displayModels.length > 0) {
-                        cfg_modelName = displayModels[0];
                     }
                 }
 
@@ -977,8 +979,8 @@ BaseConfigPage {
                 enabled: !fetchInProgress
                 display: QQC2.AbstractButton.IconOnly
                 QQC2.ToolTip.text: fetchInProgress ? i18n("Refreshing…") : i18n("Refresh model list")
-                QQC2.ToolTip.visible: hovered
                 QQC2.ToolTip.delay: 300
+                QQC2.ToolTip.visible: hovered
                 onClicked: ensureModelsLoaded(true)
             }
         }
@@ -1130,8 +1132,8 @@ BaseConfigPage {
             onCheckedChanged: if (_initialized) cfg_showThoughts = checked
 
             QQC2.ToolTip.text: i18n("When enabled, the model's reasoning is shown above each reply with a collapsible header. Round-trip of signed thoughts to the API still happens regardless of this setting.")
-            QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
         }
 
         QQC2.CheckBox {
@@ -1142,8 +1144,8 @@ BaseConfigPage {
             onCheckedChanged: if (_initialized) cfg_usesResponsesAPI = checked
 
             QQC2.ToolTip.text: i18n("Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure (POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when picking a preset.")
-            QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
         }
 
 
@@ -1161,8 +1163,8 @@ BaseConfigPage {
             onCheckedChanged: if (_initialized) cfg_saveChatHistory = checked
 
             QQC2.ToolTip.text: i18n("Saves to ~/.local/share/plasmallm/chats/")
-            QQC2.ToolTip.visible: hovered
             QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
         }
 
         QQC2.ComboBox {

@@ -1600,12 +1600,7 @@ lines.push(JSON.stringify({
                         Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
                     }
 
-                    if ((sessionAutoMode || Plasmoid.configuration.autoRunCommands) && fullText.length > 0) {
-                        var parsedCmds = Plasmoid.configuration.useCommandTool ? [] : Api.parseCommandBlocks(fullText);
-                        for (var ci = 0; ci < parsedCmds.length; ci++) {
-                            executeCommand(parsedCmds[ci]);
-                        }
-                    } else if (taskAutoMode) {
+                    if (taskAutoMode) {
                         sessionAutoMode = false;
                         taskAutoMode = false;
                     }

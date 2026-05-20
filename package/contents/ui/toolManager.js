@@ -32,6 +32,7 @@ function _init() {
             name: t.name,
             displayName: t.displayName || formatToolDisplayName(t.name),
             description: t.description,
+            longDescription: t.longDescription || t.description,
             parameters: t.parameters,
             sandboxed: t.sandboxed,
             sideEffect: t.sideEffect,
@@ -167,6 +168,7 @@ function getToolMetadata(name, config) {
                     name: built.name,
                     displayName: built.displayName,
                     description: built.description,
+                    longDescription: built.longDescription || built.description,
                     parameters: built.parameters,
                     sandboxed: built.sandboxed,
                     sideEffect: built.sideEffect,
@@ -296,9 +298,17 @@ function buildSystemPromptSection(config) {
         if (id === "write_file") details += ". Max " + (config.toolsWriteMaxBytes || 1048576) + " bytes";
         if (id === "http_get" || id === "http_request") details += ". Max " + (config.toolsHttpMaxBytes || 524288) + " bytes response";
 
-        section += "- " + tool.name + " (" + status + "): " + tool.description + details + "\n";
+        section += "- " + tool.name + " (" + status + "): " + tool.longDescription + details + "\n";
     }
     
+    section += "\n### Command Guidelines\n" +
+        "When using tools that execute shell commands (like `run_command` or certain custom tools):\n" +
+        "- Use `pkexec` instead of `sudo` for superuser privileges.\n" +
+        "- Chain steps with `&&`.\n" +
+        "- Use `kdialog` for user prompts; commands run non-interactively.\n" +
+        "- NEVER install packages or modify system configuration without explicit user permission asked in plain text.\n" +
+        "- For auto-run tools: Be conservative and prefer read-only commands. If an action is potentially disruptive, describe it in plain text and wait for explicit user approval before calling the tool.\n";
+
     return section;
 }
 

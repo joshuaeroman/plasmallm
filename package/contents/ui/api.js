@@ -76,11 +76,6 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
         "Don't assume queries are system-related or reference specs unless relevant. " +
         "Always use the `~` alias instead of absolute paths when referring to the user's home directory in tool calls or text.\n\n";
 
-    if (options && !options.commandToolEnabled) {
-        prompt += "## Code blocks\n" +
-            "Standard markdown code blocks (e.g., ```bash) are for display only and are NOT interactive. " +
-            "Do NOT ask the user to click or run them. ";
-    }
 
     if (options && options.sessionMultiplexer) {
         var parts = options.sessionMultiplexer.split(": ");
@@ -133,18 +128,6 @@ function stripCodeBlocks(text) {
     return text.replace(/\n?```\w*\n[\s\S]*?```\n?/g, "\n");
 }
 
-function parseCommandBlocks(text) {
-    var commands = [];
-    var regex = /```(?:bash|sh|shell|zsh)\s*\r?\n([\s\S]*?)```/g;
-    var match;
-    while ((match = regex.exec(text)) !== null) {
-        var cmd = match[1].trim();
-        if (cmd.length > 0) {
-            commands.push(cmd);
-        }
-    }
-    return commands;
-}
 
 function decodeHtmlEntities(text) {
     if (!text) return "";
