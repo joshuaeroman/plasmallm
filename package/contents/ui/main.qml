@@ -35,6 +35,9 @@ PlasmoidItem {
     readonly property string thoughtsFontFamily: Plasmoid.configuration.useCustomThoughtsFont ? Plasmoid.configuration.customThoughtsFontFamily : Kirigami.Theme.smallFont.family
     readonly property int thoughtsFontPointSize: Plasmoid.configuration.useCustomThoughtsFont ? Plasmoid.configuration.customThoughtsFontSize : Kirigami.Theme.smallFont.pointSize
 
+    readonly property color userColor: Plasmoid.configuration.useCustomUserColor ? Plasmoid.configuration.userColor : Kirigami.Theme.highlightColor
+    readonly property color assistantColor: Plasmoid.configuration.useCustomAssistantColor ? Plasmoid.configuration.assistantColor : Qt.darker(Kirigami.Theme.alternateBackgroundColor, 1.15)
+
     Timer {
         id: sessionStatusTimer
         interval: 5000

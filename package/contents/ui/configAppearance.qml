@@ -8,6 +8,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
+
 BaseConfigPage {
     id: configPage
 
@@ -61,6 +62,64 @@ BaseConfigPage {
                 QQC2.Label {
                     text: i18n("Spacious")
                     font: Kirigami.Theme.smallFont
+                }
+            }
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Layout.fillWidth: true
+        }
+
+        Item {
+            Kirigami.FormData.label: i18n("Chat Colors:")
+            Layout.fillWidth: true
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            QQC2.CheckBox {
+                text: i18n("Use custom user color")
+                checked: cfg_useCustomUserColor
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_useCustomUserColor = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
+            }
+            ColorButton {
+                enabled: cfg_useCustomUserColor
+                color: cfg_userColor
+                onAccepted: color => {
+                    if (_initialized) {
+                        cfg_userColor = color;
+                        rootItem.triggerCapture();
+                    }
+                }
+            }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            QQC2.CheckBox {
+                text: i18n("Use custom assistant color")
+                checked: cfg_useCustomAssistantColor
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_useCustomAssistantColor = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
+            }
+            ColorButton {
+                enabled: cfg_useCustomAssistantColor
+                color: cfg_assistantColor
+                onAccepted: color => {
+                    if (_initialized) {
+                        cfg_assistantColor = color;
+                        rootItem.triggerCapture();
+                    }
                 }
             }
         }

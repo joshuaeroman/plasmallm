@@ -74,6 +74,12 @@ Kirigami.AbstractCard {
     readonly property bool useConsoleStyle: outputScheme === "console style" || (outputScheme === "" && (isCommandOutput || isCommandRunning))
     readonly property bool useScrollableContent: outputScheme === "console style" || (outputScheme === "" && isCommandOutput)
 
+    readonly property color bubbleTextColor: {
+        var c = isUser ? root.userColor : root.assistantColor;
+        var luminance = (0.299 * c.r + 0.587 * c.g + 0.114 * c.b);
+        return luminance < 0.5 ? "#eff0f1" : "#232629";
+    }
+
     readonly property real itemSpacing: Math.min(Kirigami.Units.smallSpacing, Plasmoid.configuration.chatSpacing)
     readonly property real bubblePadding: Math.max(Kirigami.Units.smallSpacing, Math.min(Kirigami.Units.gridUnit * 0.75, Plasmoid.configuration.chatSpacing + Kirigami.Units.smallSpacing))
     readonly property int messageAlignment: isUser ? Qt.AlignRight : Qt.AlignLeft
@@ -177,7 +183,7 @@ Kirigami.AbstractCard {
             Layout.alignment: messageItem.shouldLimitWidth ? messageItem.messageAlignment : Qt.AlignLeft
             Layout.preferredHeight: contentLayout.implicitHeight + (messageItem.bubblePadding * 2)
             visible: hasBubbleContent
-            color: isUser ? Kirigami.Theme.alternateBackgroundColor : Kirigami.Theme.backgroundColor
+            color: isUser ? root.userColor : root.assistantColor
             radius: Math.max(4, messageItem.bubblePadding / 2)
             border.color: isError ? Kirigami.Theme.negativeTextColor : (isUser ? "transparent" : Kirigami.Theme.alternateBackgroundColor)
             border.width: isError ? 2 : 1
@@ -203,6 +209,7 @@ Kirigami.AbstractCard {
                     visible: isWebSearchRunning || (isWebSearchResults && toolSummary !== "")
                     text: isWebSearchRunning ? content : i18n("Searched for: %1", toolSummary)
                     font.italic: true
+                    color: messageItem.bubbleTextColor
                     opacity: 0.8
                 }
 
@@ -244,6 +251,7 @@ Kirigami.AbstractCard {
                                     } catch(e) { return 0; }
                                 })())
                                 font.bold: true
+                                color: messageItem.bubbleTextColor
                                 Layout.alignment: Qt.AlignVCenter
                             }
 
@@ -286,6 +294,7 @@ Kirigami.AbstractCard {
                                     text: (modelData.snippet || modelData.description || modelData.content || "").trim()
                                     wrapMode: Text.Wrap
                                     font: Kirigami.Theme.smallFont
+                                    color: messageItem.bubbleTextColor
                                     maximumLineCount: 3
                                     elide: Text.ElideRight
                                     visible: text !== ""
@@ -295,6 +304,7 @@ Kirigami.AbstractCard {
                                     Layout.fillWidth: true
                                     text: modelData.url || modelData.link || ""
                                     font: Kirigami.Theme.smallFont
+                                    color: messageItem.bubbleTextColor
                                     opacity: 0.5
                                     elide: Text.ElideMiddle
                                     visible: text !== ""
@@ -312,7 +322,7 @@ Kirigami.AbstractCard {
                     wrapMode: Text.Wrap
                     font.family: useConsoleStyle ? root.codeFontFamily : root.uiFontFamily
                     font.pointSize: useConsoleStyle ? root.codeFontPointSize : root.uiFontPointSize
-                    color: isError ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.textColor
+                    color: isError ? Kirigami.Theme.negativeTextColor : messageItem.bubbleTextColor
 
                     // We use the markdown capability of Kirigami.SelectableLabel if available,
                     // or just plain text if it's a console-style output.
