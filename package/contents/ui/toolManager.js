@@ -302,13 +302,22 @@ function buildSystemPromptSection(config) {
     return section;
 }
 
-function expandPath(path, homePath) {
+function expandPath(path, paths) {
     if (!path) return "";
     var res = path;
+    var home = paths.home || "";
     if (res.indexOf("~") === 0) {
-        res = homePath + res.substring(1);
+        res = home + res.substring(1);
     } else if (res.indexOf("$HOME") === 0) {
-        res = homePath + res.substring(5);
+        res = home + res.substring(5);
+    } else if (res.indexOf("$XDG_DATA_HOME") === 0) {
+        res = (paths.xdgData || (home + "/.local/share")) + res.substring(14);
+    } else if (res.indexOf("$XDG_CONFIG_HOME") === 0) {
+        res = (paths.xdgConfig || (home + "/.config")) + res.substring(16);
+    } else if (res.indexOf("$XDG_CACHE_HOME") === 0) {
+        res = (paths.xdgCache || (home + "/.cache")) + res.substring(15);
+    } else if (res.indexOf("$XDG_RUNTIME_DIR") === 0) {
+        res = (paths.xdgRuntime || "/tmp") + res.substring(16);
     }
     return res;
 }
@@ -329,8 +338,8 @@ function contractAllPaths(text, homePath) {
     return text.replace(re, "~");
 }
 
-function isPathAllowed(path, whitelistStr, homePath) {
-    var expandedPath = expandPath(path, homePath);
+function isPathAllowed(path, whitelistStr, paths) {
+    var expandedPath = expandPath(path, paths);
     expandedPath = expandedPath.replace(/\/+/g, "/").replace(/\/$/, "");
     if (!expandedPath) return false;
     
@@ -342,7 +351,7 @@ function isPathAllowed(path, whitelistStr, homePath) {
     }
 
     for (var i = 0; i < whitelist.length; i++) {
-        var allowed = expandPath(whitelist[i].trim(), homePath).replace(/\/+/g, "/").replace(/\/$/, "");
+        var allowed = expandPath(whitelist[i].trim(), paths).replace(/\/+/g, "/").replace(/\/$/, "");
         if (!allowed) continue;
 
         if (expandedPath === allowed || expandedPath.indexOf(allowed + "/") === 0) {

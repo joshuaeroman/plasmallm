@@ -31,7 +31,7 @@ BaseConfigPage {
 
     function parseWhitelist() {
         if (!cfg_toolsPathWhitelist) {
-            whitelistPaths = ["$HOME"];
+            whitelistPaths = ["$HOME", "/tmp", "$XDG_RUNTIME_DIR"];
             return;
         }
         try {
@@ -39,11 +39,11 @@ BaseConfigPage {
             if (Array.isArray(parsed)) {
                 whitelistPaths = parsed;
             } else {
-                whitelistPaths = ["$HOME"];
+                whitelistPaths = ["$HOME", "/tmp", "$XDG_RUNTIME_DIR"];
             }
         } catch (e) {
             console.error("Error parsing whitelist:", e);
-            whitelistPaths = ["$HOME"];
+            whitelistPaths = ["$HOME", "/tmp", "$XDG_RUNTIME_DIR"];
         }
     }
 
@@ -154,7 +154,7 @@ BaseConfigPage {
                 QQC2.TextField {
                     id: newPathField
                     Layout.fillWidth: true
-                    placeholderText: i18n("Add path, e.g. $HOME/projects")
+                    placeholderText: i18n("Add path, e.g. $HOME/projects, /tmp")
                     onAccepted: addPathButton.clicked()
                 }
                 QQC2.Button {

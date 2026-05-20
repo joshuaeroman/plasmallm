@@ -200,6 +200,10 @@
       <label>Include locale in system prompt</label>
       <default>true</default>
     </entry>
+    <entry name="xdgMigrationDone" type="Bool">
+      <label>Internal: whether XDG path migration has been performed</label>
+      <default>false</default>
+    </entry>
     <entry name="sysInfoDateTime" type="Bool">
       <label>Include current date/time in system prompt</label>
       <default>true</default>
