@@ -23,11 +23,12 @@ $(LOCALE_DIR)/$(DOMAIN).pot: $(SRC_FILES)
 	xgettext --from-code=UTF-8 --language=JavaScript \
 		--keyword=i18n --keyword=i18n:1,2 \
 		--package-name="PlasmaLLM" \
+		--no-location \
 		-o $@ $^
 
 $(LOCALE_DIR)/%.po: $(LOCALE_DIR)/$(DOMAIN).pot
 	@echo "Updating translation file for $*..."
-	msgmerge --update --no-fuzzy-matching --backup=none $@ $<
+	msgmerge --update --no-fuzzy-matching --backup=none --no-location $@ $<
 
 check-translations: $(PO_FILES)
 	@echo "Checking translations..."
