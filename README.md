@@ -29,7 +29,17 @@ PlasmaLLM is designed for quick tasks and system-integrated workflows—not as a
 
 ## Screenshots
 
+<img width="711" height="703" alt="image" src="https://github.com/user-attachments/assets/fd9f1c74-778d-44ff-b7dd-4b3870b4baad" />
 
+<img width="711" height="703" alt="image" src="https://github.com/user-attachments/assets/7a801fb0-720a-4c9d-a1dd-3995cdef5f71" />
+
+<img width="771" height="947" alt="image" src="https://github.com/user-attachments/assets/8a6ddd79-2398-4f81-a803-56daa4e44fed" />
+
+<img width="676" height="704" alt="image" src="https://github.com/user-attachments/assets/44814c7e-00e5-4946-8250-e0c5ab158b7e" />
+
+<img width="909" height="787" alt="image" src="https://github.com/user-attachments/assets/e1f3855c-cc49-4f27-affa-6fc5780c718d" />
+
+<img width="875" height="849" alt="image" src="https://github.com/user-attachments/assets/94007511-2bfd-4680-8bd0-8c1c4df1ba21" />
 
 ---
 
