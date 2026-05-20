@@ -20,9 +20,6 @@ msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
 "budget below. Temperature is forced to max while thinking."
 msgstr ""
-"Anthropic enables extended thinking when effort is not Off, using the token "
-"budget below. Temperature is forced to max while thinking."
-
 "当力度不为“关闭”时，Anthropic 启用扩展思考，并使用下方的令牌预算作为最大输"
 "出。"
 
@@ -107,17 +104,12 @@ msgid ""
 "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
 "reasoning_content."
 msgstr ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-
 "推理力度（低 / 中 / 高）控制扩展思考。要查看思考内容，请确保您已在“常规”选项"
 "卡中启用“显示思考”。"
 
 #: package/contents/ui/adapters/gemini_interactions.js:27
 msgid "Gemini uses the thinking level dropdown directly."
-msgstr "Gemini uses the thinking level dropdown directly."
+msgstr "Gemini 直接使用思考级别下拉菜单。"
 
 #: package/contents/ui/adapters/gemini_interactions.js:113
 #: package/contents/ui/adapters/gemini.js:121
@@ -139,10 +131,7 @@ msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
 "disable Native features in Settings."
-msgstr ""
-"This model version does not support combining Native tools (Search/Code) "
-"with custom commands. Please select a newer model (e.g., Gemini 3+) or "
-"disable Native features in Settings."
+msgstr "此模型版本不支持将原生工具（搜索/代码）与自定义命令结合使用。请选择更新的模型（例如 Gemini 3+）或在设置中禁用原生功能。"
 
 
 #: package/contents/ui/adapters/gemini_interactions.js:484
@@ -155,9 +144,6 @@ msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
 "on supported models."
 msgstr ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
-
 "Gemini 直接使用思考令牌预算。设置为 0 以禁用思考（某些模型需要此设置）。"
 
 #: package/contents/ui/adapters/gemini.js:150
@@ -280,7 +266,7 @@ msgstr "显示或切换模型 (/model <name>)"
 
 #: package/contents/ui/FullRepresentation.qml:28
 msgid "Switch profile (/profile <name>)"
-msgstr "Switch profile (/profile <name>)"
+msgstr "切换配置文件 (/profile <名称>)"
 
 #: package/contents/ui/FullRepresentation.qml:29
 msgid "Run last command"
@@ -305,7 +291,7 @@ msgstr "在终端中运行上一条命令"
 #: package/contents/ui/FullRepresentation.qml:147
 #: package/contents/ui/FullRepresentation.qml:148
 msgid "Toggle Auto Mode"
-msgstr "Toggle Auto Mode"
+msgstr "切换自动模式"
 
 #: package/contents/ui/FullRepresentation.qml:157
 #: package/contents/ui/FullRepresentation.qml:158
@@ -415,9 +401,6 @@ msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 msgstr ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-
 "文本文件 (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf *.sh "
 "*.py *.js *.ts *.qml)"
 
@@ -436,7 +419,7 @@ msgstr "初始化中…"
 #: package/contents/ui/FullRepresentation.qml:931
 #: package/contents/ui/configTasks.qml:55
 msgid "AUTO"
-msgstr "AUTO"
+msgstr "自动"
 
 #: package/contents/ui/FullRepresentation.qml:956
 msgid "Attach file or image"
@@ -462,9 +445,7 @@ msgstr "取消 LLM 请求"
 msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
 "installed and authenticated."
-msgstr ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
+msgstr "无法获取 gcloud 令牌（退出 %1）：%2。请确保 gcloud 已安装并已通过身份验证。"
 
 
 #: package/contents/ui/main.qml:1118
@@ -485,31 +466,31 @@ msgstr "自动模式已禁用。"
 
 #: package/contents/ui/main.qml:1137 package/contents/ui/main.qml:2099
 msgid "Default"
-msgstr "Default"
+msgstr "默认"
 
 #: package/contents/ui/main.qml:1137
 msgid "Current profile: **%1**"
-msgstr "Current profile: **%1**"
+msgstr "当前配置文件：**%1**"
 
 #: package/contents/ui/main.qml:1139
 msgid "Available profiles:"
-msgstr "Available profiles:"
+msgstr "可用配置文件："
 
 #: package/contents/ui/main.qml:1141
 msgid "active"
-msgstr "active"
+msgstr "活跃"
 
 #: package/contents/ui/main.qml:1144
 msgid "Type `/profile <name>` to switch."
-msgstr "Type `/profile <name>` to switch."
+msgstr "输入 `/profile <名称>` 进行切换。"
 
 #: package/contents/ui/main.qml:1161
 msgid "Switched to profile: **%1**"
-msgstr "Switched to profile: **%1**"
+msgstr "已切换到配置文件：**%1**"
 
 #: package/contents/ui/main.qml:1163
 msgid "Unknown profile: **%1**"
-msgstr "Unknown profile: **%1**"
+msgstr "未知配置文件：**%1**"
 
 #: package/contents/ui/main.qml:1170 package/contents/ui/main.qml:1251
 msgid "none"
@@ -577,7 +558,7 @@ msgstr "运行中：%1"
 
 #: package/contents/ui/main.qml:1853
 msgid "stderr: %1"
-msgstr "stderr：%1"
+msgstr "标准错误：%1"
 
 #: package/contents/ui/main.qml:1855
 msgid "[truncated — output exceeded %1KB]"
@@ -605,11 +586,11 @@ msgstr "Google Gemini"
 
 #: package/contents/ui/configAppearance.qml:18
 msgid "Profile Header:"
-msgstr "Profile Header:"
+msgstr "配置文件标头："
 
 #: package/contents/ui/configAppearance.qml:19
 msgid "Show provider and model in profile header"
-msgstr "Show provider and model in profile header"
+msgstr "在配置文件标头中显示提供商和模型"
 
 #: package/contents/ui/configAppearance.qml:30
 msgid "Chat Spacing: %1px"
@@ -649,39 +630,39 @@ msgstr "使用自定义思维字体"
 
 #: package/contents/ui/configAppearance.qml:173
 msgid "Header Icons:"
-msgstr "Header Icons:"
+msgstr "标头图标："
 
 #: package/contents/ui/configAppearance.qml:178
 msgid "Profile Header"
-msgstr "Profile Header"
+msgstr "配置文件标头"
 
 #: package/contents/ui/configAppearance.qml:184
 msgid "Always show Tasks"
-msgstr "Always show Tasks"
+msgstr "始终显示任务"
 
 #: package/contents/ui/configAppearance.qml:190
 msgid "Always show Auto Toggle"
-msgstr "Always show Auto Toggle"
+msgstr "始终显示自动切换"
 
 #: package/contents/ui/configAppearance.qml:196
 msgid "Show History"
-msgstr "Show History"
+msgstr "显示历史记录"
 
 #: package/contents/ui/configAppearance.qml:202
 msgid "Show Copy conversation"
-msgstr "Show Copy conversation"
+msgstr "显示复制对话"
 
 #: package/contents/ui/configAppearance.qml:208
 msgid "Show Clear chat"
-msgstr "Show Clear chat"
+msgstr "显示清除聊天"
 
 #: package/contents/ui/configAppearance.qml:214
 msgid "Show Settings"
-msgstr "Show Settings"
+msgstr "显示设置"
 
 #: package/contents/ui/configAppearance.qml:220
 msgid "Show Pin"
-msgstr "Show Pin"
+msgstr "显示固定"
 
 #: package/contents/ui/configSystemPrompt.qml:46
 msgid "System Info:"
@@ -793,16 +774,12 @@ msgid ""
 "button to run them. Tasks with auto mode will temporarily enable auto-run "
 "and auto-share."
 msgstr ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
-"button to run them. Tasks with auto mode will temporarily enable auto-run "
-"and auto-share."
-
 "任务是可重用的提示快捷方式。在聊天中使用 /task <name> 或工具栏按钮运行它们。"
 "自动模式的任务将临时启用自动运行和自动共享。"
 
 #: package/contents/ui/configGeneral.qml:59
 msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Failed to fetch gcloud token (exit %1): %2"
+msgstr "无法获取 gcloud 令牌（退出 %1）：%2"
 
 #: package/contents/ui/configGeneral.qml:320
 msgid "No models found."
@@ -811,36 +788,36 @@ msgstr "未找到模型。"
 #: package/contents/ui/configGeneral.qml:455
 #: package/contents/ui/configGeneral.qml:531
 msgid "New Profile"
-msgstr "New Profile"
+msgstr "新建配置文件"
 
 #: package/contents/ui/configGeneral.qml:471
 msgid "%1 (Copy)"
-msgstr "%1 (Copy)"
+msgstr "%1（副本）"
 
 #: package/contents/ui/configGeneral.qml:509
 msgid "Profile:"
-msgstr "Profile:"
+msgstr "配置文件："
 
 #: package/contents/ui/configGeneral.qml:539
 #: package/contents/ui/configGeneral.qml:573
 msgid "Rename Profile"
-msgstr "Rename Profile"
+msgstr "重命名配置文件"
 
 #: package/contents/ui/configGeneral.qml:547
 msgid "Duplicate Profile"
-msgstr "Duplicate Profile"
+msgstr "复制配置文件"
 
 #: package/contents/ui/configGeneral.qml:555
 msgid "Delete Profile"
-msgstr "Delete Profile"
+msgstr "删除配置文件"
 
 #: package/contents/ui/configGeneral.qml:577
 msgid "Profile Name"
-msgstr "Profile Name"
+msgstr "配置文件名称"
 
 #: package/contents/ui/configGeneral.qml:592
 msgid "Rename"
-msgstr "Rename"
+msgstr "重命名"
 
 #: package/contents/ui/configGeneral.qml:612
 msgid "Adapter:"
@@ -848,11 +825,11 @@ msgstr "适配器："
 
 #: package/contents/ui/configGeneral.qml:635
 msgid "Authentication:"
-msgstr "Authentication:"
+msgstr "身份验证："
 
 #: package/contents/ui/configGeneral.qml:638
 msgid "API Key (Express Mode)"
-msgstr "API Key (Express Mode)"
+msgstr "API 密钥（快速模式）"
 
 #: package/contents/ui/configGeneral.qml:638
 msgid "Google Cloud CLI (gcloud)"
@@ -861,26 +838,25 @@ msgstr "Google Cloud CLI (gcloud)"
 #: package/contents/ui/configGeneral.qml:648
 msgid ""
 "gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLI not found. Please install it to use this authentication method."
+msgstr "未找到 gcloud CLI。请安装它以使用此身份验证方法。"
 
 
 #: package/contents/ui/configGeneral.qml:655
 msgid "API Variant:"
-msgstr "API Variant:"
+msgstr "API 变体："
 
 #: package/contents/ui/configGeneral.qml:659
 #: package/contents/ui/configGeneral.qml:660
 msgid "Legacy (generateContent)"
-msgstr "Legacy (generateContent)"
+msgstr "旧版 (generateContent)"
 
 #: package/contents/ui/configGeneral.qml:660
 msgid "Interactions API (Stateful)"
-msgstr "Interactions API (Stateful)"
+msgstr "Interactions API（有状态）"
 
 #: package/contents/ui/configGeneral.qml:680
 msgid "Platform:"
-msgstr "Platform:"
+msgstr "平台："
 
 #: package/contents/ui/configGeneral.qml:683
 msgid "Google AI Studio"
@@ -892,11 +868,11 @@ msgstr "Google Cloud Agent Platform (Vertex AI)"
 
 #: package/contents/ui/configGeneral.qml:697
 msgid "Project ID:"
-msgstr "Project ID:"
+msgstr "项目 ID："
 
 #: package/contents/ui/configGeneral.qml:710
 msgid "Location:"
-msgstr "Location:"
+msgstr "位置："
 
 #: package/contents/ui/configGeneral.qml:724
 msgid "Provider:"
@@ -925,7 +901,7 @@ msgstr "API密钥："
 
 #: package/contents/ui/configGeneral.qml:981
 msgid "Paste short-lived access token"
-msgstr "Paste short-lived access token"
+msgstr "粘贴短期访问令牌"
 
 #: package/contents/ui/configGeneral.qml:981
 msgid "Optional - for OpenAI, etc."
@@ -1014,10 +990,6 @@ msgid ""
 "collapsible header. Round-trip of signed thoughts to the API still happens "
 "regardless of this setting."
 msgstr ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-
 "启用后，模型的推理会以可折叠标题的形式显示在每条回复上方。无论此设置如何，签"
 "名思考的API往返仍会进行。"
 
@@ -1031,10 +1003,6 @@ msgid ""
 "(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
 "picking a preset."
 msgstr ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-
 "在OpenAI / Poe / OpenRouter / Azure上显示推理内容所必需（POST到/v1/responses"
 "而非/v1/chat/completions）。选择预设时自动设置。"
 
@@ -1100,9 +1068,6 @@ msgid ""
 "Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
 "share."
 msgstr ""
-"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
-"share."
-
 "允许 LLM 执行 shell 命令。如果与“自动共享”结合使用则非常危险。请自担风险。"
 
 #: package/contents/ui/configTools.qml:303
@@ -1128,9 +1093,6 @@ msgid ""
 "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
 "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
 msgstr ""
-"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-
 "⚠️ 危险：两个选项均已启用——LLM现在可以执行命令并查看其输出，从而启用代理工作"
 "流。请仅与可信的LLM一起使用。"
 
@@ -1147,9 +1109,6 @@ msgid ""
 "Execute LLM commands inside a long-lived tmux or screen session so state "
 "persists across turns."
 msgstr ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-
 "在一个长期的 tmux 或 screen 会话中执行 LLM 命令，以便状态在对话轮次间保持不"
 "变。"
 
@@ -1173,46 +1132,40 @@ msgstr "系统中未找到 'tmux' 或 'screen'。会话多路复用不可用。"
 
 #: package/contents/ui/configTools.qml:413
 msgid "Native Adapter Features"
-msgstr "Native Adapter Features"
+msgstr "原生适配器功能"
 
 #: package/contents/ui/configTools.qml:419
 msgid "Enable Native Google Search Grounding"
-msgstr "Enable Native Google Search Grounding"
+msgstr "启用原生 Google 搜索基础"
 
 #: package/contents/ui/configTools.qml:427
 msgid ""
 "Use Gemini's built-in Google Search for grounding. This overrides the "
 "standard web search tool."
-msgstr ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
+msgstr "使用 Gemini 内置的 Google 搜索进行基础。这会覆盖标准的网络搜索工具。"
 
 
 #: package/contents/ui/configTools.qml:434
 msgid "Enable Native Python Code Execution"
-msgstr "Enable Native Python Code Execution"
+msgstr "启用原生 Python 代码执行"
 
 #: package/contents/ui/configTools.qml:442
 msgid ""
 "Allow Gemini to write and execute Python code in a secure server-side "
 "sandbox."
-msgstr ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
+msgstr "允许 Gemini 在安全的服务器端沙盒中编写和执行 Python 代码。"
 
 
 #: package/contents/ui/configTools.qml:450
 msgid ""
 "Combining Native tools with commands requires a newer model. Your currently "
 "selected model (%1) may encounter errors."
-msgstr ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
+msgstr "将原生工具与命令结合使用需要更新的模型。当前选定的模型 (%1) 可能会遇到错误。"
 
 
 #: package/contents/ui/configTools.qml:458
 msgid "Standard Web Search"
-msgstr "Standard Web Search"
+msgstr "标准网络搜索"
 
 #: package/contents/ui/configTools.qml:463
 msgid "Enable web search tool"

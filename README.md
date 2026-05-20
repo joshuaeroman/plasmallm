@@ -1,56 +1,52 @@
 # PlasmaLLM
 
-A KDE Plasma 6 widget that provides a chat interface to various LLM endpoints. Integrates system information gathering, markdown rendering, and shell command execution directly from the desktop.
+PlasmaLLM is a system-aware AI assistant widget for the KDE Plasma 6 desktop. It provides a native interface to various LLM endpoints, integrating system information gathering, web search, and shell command execution directly into your desktop workflow.
 
 ![License: GPL-2.0-or-later](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)
+![KDE Plasma 6](https://img.shields.io/badge/Plasma-6.0%2B-blue)
+![Qt 6](https://img.shields.io/badge/Qt-6.0%2B-green)
 
-PlasmaLLM is designed for quick questions and system tasks right from your panel — not as a full-featured AI chat application. Think of it as a handy assistant for looking things up, running commands, and getting help with your system without leaving the desktop.
+PlasmaLLM is designed for quick tasks and system-integrated workflows—not as a replacement for full-featured chat applications. It excels at answering technical questions about your system, running terminal commands, and providing an agentic interface for desktop automation.
 
 ## Features
 
-- Chat with any OpenAI-compatible API (Ollama, LM Studio, OpenAI, Anthropic, Groq, and more), Anthropic Claude, or Google Gemini (bring your own API key) 
-- System-aware: automatically gathers hardware and OS info for contextual responses
-- Interactive command blocks: run, copy, save, or open suggested shell commands in a terminal
-- Markdown rendering for assistant responses
-- Skip approvals mode for agentic workflows
-- Chat history auto-save
-- Configurable provider presets, temperature, max tokens, and custom system prompts
-
-<img width="514" height="582" alt="image" src="https://github.com/user-attachments/assets/0ab720f7-786c-4975-b88c-f54ab5716efd" />
+- **Multi-Provider Support**: Connects to Ollama, LM Studio, OpenAI, Anthropic Claude, Google Gemini, and any OpenAI-compatible API.
+- **System Awareness**: Optionally gathers hardware, OS, and environment info to provide context for assistant responses.
+- **Tool-Calling System**: Modular architecture allowing LLMs to interact with the filesystem, run shell commands, and fetch web data (with user approval).
+- **Interactive Terminal Blocks**: View, copy, or execute suggested terminal commands. Supports session multiplexing via `tmux` or `screen`.
+- **Web Search Integration**: Native support for DuckDuckGo and SearXNG.
+- **Vision Support**: Supports image attachments for providers with multimodal capabilities (e.g., Gemini).
+- **Secure Storage**: Integrates with KWallet for secure management of API keys and secrets.
+- **Markdown Rendering**: Full support for markdown, including syntax highlighting for code blocks and LaTeX for mathematical notation.
 
 ## Requirements
 
 - KDE Plasma 6.0+
 - Qt 6
+- Optional: `tmux` or `screen` for session multiplexing.
 
-No external dependencies — uses only Qt and KDE Plasma APIs.
+---
+
+## Screenshots
+
+
+
+---
 
 ## Installation
 
 ### From the KDE Store
-
-PlasmaLLM is available on the [KDE Store](https://store.kde.org/p/2348409/). You can install it directly from **Add Widgets** → **Get New Widgets** → **Download New Widgets** in Plasma.
+You can install PlasmaLLM directly from the Plasma widget explorer:
+**Add Widgets** → **Get New Widgets** → **Download New Plasma Widgets** → Search for "PlasmaLLM".
 
 ### From GitHub Releases
-
-Download the latest `.plasmoid` file from the [Releases](https://github.com/joshuaeroman/plasmallm/releases) page, then install it:
+Download the latest `.plasmoid` file from the [Releases](https://github.com/joshuaeroman/plasmallm/releases) page:
 
 ```bash
 plasmapkg2 --install PlasmaLLM-*.plasmoid
 ```
 
-Or right-click your desktop → **Add Widgets** → **Get New Widgets** → **Install from Local File**.
-
-Then restart Plasma:
-
-```bash
-plasmashell --replace &
-```
-
 ### From Source
-
-Clone the repository and run the install script:
-
 ```bash
 git clone https://github.com/joshuaeroman/plasmallm.git
 cd plasmallm
@@ -58,55 +54,31 @@ make install
 plasmashell --replace &
 ```
 
-For development (symlinks the package directory so changes apply on Plasma restart instead of requiring a reinstall):
-
+For development (symlinks the package directory):
 ```bash
 make install-dev
 ```
 
-To uninstall:
-
-```bash
-make remove
-```
-
-> **Note:** If you previously used `make install-dev`, run `make remove` before switching to a release version from GitHub or the [KDE Store](https://store.kde.org/p/2348409/) to remove the development symlink.
-
-### Building a `.plasmoid` from Source
-
-`make package` automatically runs translations and zips the `package/` directory into a versioned `.plasmoid` file (a standard KDE widget archive):
-
-```bash
-make package
-# Creates e.g. PlasmaLLM-x.y.z.plasmoid
-```
-
-If you want to build a package without compiling translations (e.g. for development builds or untranslated commits):
-
-```bash
-make package-no-i18n
-```
-
-Requires `make`, `zip`, and GNU `gettext` for I18N.
+---
 
 ## Configuration
 
-Right-click the widget and open **Configure...**. Settings include:
+Right-click the widget and select **Configure PlasmaLLM...**:
 
-- **Provider**: choose a preset (Ollama, LM Studio, OpenAI, etc.) or enter a custom endpoint
-- **Model**: select from available models via "Fetch Models" or type manually
-- **API Key**: required for cloud providers
-- **Temperature / Max Tokens**: control response behavior
-- **Auto-save chat history**: saves conversations to `~/PlasmaLLM/chats/`
-- **Skip approvals**: automatically executes tools and sends output back to the LLM (enables agentic loops)
-- **Custom system prompt**: appended to the built-in prompt with highest precedence
+- **General**: Set your provider, model, and API keys.
+- **Appearance**: Configure fonts, bubble styles, and interface behavior.
+- **Tools**: Enable/disable specific tools and configure the filesystem whitelist for sandboxed operations.
+- **Tasks**: Manage custom script tools and shell command templates.
 
 ## Support
 
-If you find this useful, consider donating to [KDE](https://kde.org/community/donations/) — the project that makes all of this possible.
+If you find this widget useful, please consider supporting the [KDE Project](https://kde.org/community/donations/).
 
 ## License
 
 This project is licensed under the [GNU General Public License v2.0 or later](LICENSE).
 
-Vibe-coded with 🤖
+## AI Disclosure
+
+This project was created with extensive use of AI-based tooling.
+
