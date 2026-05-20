@@ -114,6 +114,8 @@ SimpleKCM {
     property int cfg_customThoughtsFontSizeDefault
     property string cfg_customSystemPrompt
     property string cfg_customSystemPromptDefault
+    property bool cfg_resizeImageAttachments
+    property bool cfg_resizeImageAttachmentsDefault
     property bool cfg_saveChatHistory
     property bool cfg_saveChatHistoryDefault
     property string cfg_chatSaveFormat

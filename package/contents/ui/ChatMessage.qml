@@ -337,11 +337,13 @@ Kirigami.AbstractCard {
 
                     Repeater {
                         model: attachmentPaths
-                        delegate: Kirigami.Chip {
-                            text: modelData.split("/").pop()
-                            icon.name: Api.isImageFile(modelData) ? "image-x-generic" : "document-export"
-                            closable: false
-                            checkable: false
+                        delegate: Loader {
+                            id: attachmentLoader
+                            readonly property string filePath: modelData
+                            readonly property bool isImage: Api.isImageFile(filePath)
+                            readonly property string fileName: filePath.split("/").pop()
+
+                            sourceComponent: isImage ? imageThumbnailComponent : genericFileComponent
                         }
                     }
                 }
@@ -421,6 +423,80 @@ Kirigami.AbstractCard {
                 onDenied: function(name, callId) {
                     messageItem.toolDenied(name, callId);
                 }
+            }
+        }
+
+        Component {
+            id: imageThumbnailComponent
+            Rectangle {
+                id: imageThumb
+                readonly property string filePath: parent ? (parent.filePath || "") : ""
+                readonly property string fileName: parent ? (parent.fileName || "") : ""
+
+                readonly property real maxW: Kirigami.Units.gridUnit * 10
+                readonly property real maxH: Kirigami.Units.gridUnit * 10
+                readonly property real aspect: (thumbImg.sourceSize.width > 0 && thumbImg.sourceSize.height > 0) ? (thumbImg.sourceSize.width / thumbImg.sourceSize.height) : 1.0
+
+                width: aspect > (maxW / maxH) ? maxW : maxH * aspect
+                height: aspect > (maxW / maxH) ? maxW / aspect : maxH
+                radius: 4
+                color: Kirigami.Theme.alternateBackgroundColor
+                border.color: mouseArea.containsMouse ? Kirigami.Theme.highlightColor : Kirigami.Theme.disabledTextColor
+                border.width: mouseArea.containsMouse ? 2 : 1
+                clip: true
+
+                Image {
+                    id: thumbImg
+                    anchors.fill: parent
+                    anchors.margins: imageThumb.border.width
+                    source: "file://" + imageThumb.filePath
+                    autoTransform: true
+                    fillMode: Image.PreserveAspectFit
+                    asynchronous: true
+                }
+
+                Kirigami.Icon {
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    anchors.margins: Kirigami.Units.smallSpacing
+                    width: Kirigami.Units.iconSizes.small
+                    height: Kirigami.Units.iconSizes.small
+                    source: "zoom-in"
+                    visible: mouseArea.containsMouse
+
+                    Rectangle {
+                        anchors.centerIn: parent
+                        width: parent.width + 4
+                        height: parent.height + 4
+                        radius: width / 2
+                        color: "#80000000"
+                        z: -1
+                    }
+                }
+
+                MouseArea {
+                    id: mouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: Qt.openUrlExternally("file://" + imageThumb.filePath)
+                }
+
+                PlasmaComponents.ToolTip.text: imageThumb.fileName
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: mouseArea.containsMouse
+            }
+        }
+
+        Component {
+            id: genericFileComponent
+            Kirigami.Chip {
+                id: chipItem
+                readonly property string fileName: parent ? (parent.fileName || "") : ""
+                text: fileName
+                icon.name: "document-export"
+                closable: false
+                checkable: false
             }
         }
     }
