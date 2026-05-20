@@ -875,20 +875,28 @@ BaseConfigPage {
                 // Prepend the persisted model name when it isn't in the fetched
                 // list so it stays selectable (initial load, stale value, etc.).
                 readonly property var displayModels: {
-                    var list = availableModels.slice();
-                    if (cfg_modelName && cfg_modelName.length > 0 && list.indexOf(cfg_modelName) === -1) {
+                    if (cfg_modelName && cfg_modelName.length > 0 && availableModels.indexOf(cfg_modelName) === -1) {
+                        var list = availableModels.slice();
                         list.unshift(cfg_modelName);
+                        return list;
                     }
-                    return list;
+                    return availableModels;
                 }
                 model: displayModels
                 enabled: displayModels.length > 0 && !fetchInProgress
 
-                Connections {
-                    target: configPage
-                    function onAvailableModelsChanged() {
-                        var idx = modelCombo.displayModels.indexOf(cfg_modelName);
-                        modelCombo.currentIndex = idx >= 0 ? idx : 0;
+                onDisplayModelsChanged: {
+                    var idx = displayModels.indexOf(cfg_modelName);
+                    currentIndex = idx >= 0 ? idx : 0;
+
+                    // Persist the visible selection so applying without
+                    // touching the combo doesn't leave cfg_modelName empty.
+                    if (_initialized && (!cfg_modelName || cfg_modelName.length === 0) && displayModels.length > 0) {
+                        Qt.callLater(() => {
+                            if (!cfg_modelName && displayModels.length > 0) {
+                                cfg_modelName = displayModels[0];
+                            }
+                        });
                     }
                 }
 
@@ -897,16 +905,6 @@ BaseConfigPage {
                     function onCfg_modelNameChanged() {
                         var idx = modelCombo.displayModels.indexOf(cfg_modelName);
                         modelCombo.currentIndex = idx >= 0 ? idx : 0;
-                    }
-                }
-
-                onDisplayModelsChanged: {
-                    var idx = displayModels.indexOf(cfg_modelName);
-                    currentIndex = idx >= 0 ? idx : 0;
-                    // Persist the visible selection so applying without
-                    // touching the combo doesn't leave cfg_modelName empty.
-                    if ((!cfg_modelName || cfg_modelName.length === 0) && displayModels.length > 0) {
-                        cfg_modelName = displayModels[0];
                     }
                 }
 

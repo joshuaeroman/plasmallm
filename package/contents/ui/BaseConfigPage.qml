@@ -140,6 +140,8 @@ SimpleKCM {
     property bool cfg_sysInfoNetworkDefault
     property bool cfg_sysInfoLocale
     property bool cfg_sysInfoLocaleDefault
+    property bool cfg_xdgMigrationDone
+    property bool cfg_xdgMigrationDoneDefault
     property bool cfg_sysInfoDateTime
     property bool cfg_sysInfoDateTimeDefault
     property string cfg_gatheredSysInfo
