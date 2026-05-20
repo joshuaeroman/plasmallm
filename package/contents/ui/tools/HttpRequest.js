@@ -29,6 +29,11 @@ function execute(args, context) {
     }
     var max = context.config.toolsHttpMaxBytes || 524288;
     var method = (args.method || "GET").toUpperCase();
+    var allowedMethods = ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"];
+    if (allowedMethods.indexOf(method) === -1) {
+        context.error(context.i18n("Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS are allowed."));
+        return;
+    }
     var curlArgs = ["curl -sS --max-time 30 --max-filesize " + max + " -L"];
     curlArgs.push("-X " + method);
     if (args.headers) {

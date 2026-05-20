@@ -1723,8 +1723,8 @@ lines.push(JSON.stringify({
                 handleToolOutput(null, "", i18n("Error: path '%1' outside whitelist", displayPath), 1, { name: name, callId: callId });
                 return;
             }
-            // Expand it for internal execution
-            args.path = ToolManager.expandPath(path, paths);
+            // Expand and normalize it for internal execution
+            args.path = ToolManager.normalizePath(ToolManager.expandPath(path, paths));
         }
 
         // Create a visible indicator if it's not auto-run or if it's a side-effect tool

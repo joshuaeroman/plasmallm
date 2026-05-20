@@ -348,8 +348,35 @@ function contractAllPaths(text, homePath) {
     return text.replace(re, "~");
 }
 
+function normalizePath(path) {
+    if (!path) return "";
+    var parts = path.split('/');
+    var resolvedParts = [];
+    var isAbsolute = path.charAt(0) === '/';
+    
+    for (var i = 0; i < parts.length; i++) {
+        var part = parts[i];
+        if (part === '.' || part === '') {
+            continue;
+        }
+        if (part === '..') {
+            if (resolvedParts.length > 0 && resolvedParts[resolvedParts.length - 1] !== '..') {
+                resolvedParts.pop();
+            } else if (!isAbsolute) {
+                resolvedParts.push('..');
+            }
+        } else {
+            resolvedParts.push(part);
+        }
+    }
+    
+    var prefix = isAbsolute ? "/" : "";
+    return prefix + resolvedParts.join('/');
+}
+
 function isPathAllowed(path, whitelistStr, paths) {
     var expandedPath = expandPath(path, paths);
+    expandedPath = normalizePath(expandedPath);
     expandedPath = expandedPath.replace(/\/+/g, "/").replace(/\/$/, "");
     if (!expandedPath) return false;
     
@@ -361,7 +388,9 @@ function isPathAllowed(path, whitelistStr, paths) {
     }
 
     for (var i = 0; i < whitelist.length; i++) {
-        var allowed = expandPath(whitelist[i].trim(), paths).replace(/\/+/g, "/").replace(/\/$/, "");
+        var allowed = expandPath(whitelist[i].trim(), paths);
+        allowed = normalizePath(allowed);
+        allowed = allowed.replace(/\/+/g, "/").replace(/\/$/, "");
         if (!allowed) continue;
 
         if (expandedPath === allowed || expandedPath.indexOf(allowed + "/") === 0) {
@@ -370,3 +399,4 @@ function isPathAllowed(path, whitelistStr, paths) {
     }
     return false;
 }
+
