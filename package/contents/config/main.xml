@@ -148,6 +148,10 @@
       <label>Custom System Prompt Additions</label>
       <default></default>
     </entry>
+    <entry name="resizeImageAttachments" type="Bool">
+      <label>Resize image attachments to max 800x600 before sending</label>
+      <default>false</default>
+    </entry>
     <entry name="saveChatHistory" type="Bool">
       <label>Auto-save chat history</label>
       <default>false</default>

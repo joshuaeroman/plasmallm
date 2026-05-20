@@ -1104,6 +1104,17 @@ lines.push(JSON.stringify({
             var handler = function() {
                 if (rotator.status === Image.Ready) {
                     rotator.statusChanged.disconnect(handler);
+                    
+                    var w = rotator.implicitWidth > 0 ? rotator.implicitWidth : rotator.sourceSize.width;
+                    var h = rotator.implicitHeight > 0 ? rotator.implicitHeight : rotator.sourceSize.height;
+                    var targetSize = undefined;
+                    if (Plasmoid.configuration.resizeImageAttachments && (w > 600 || h > 800)) {
+                        var scale = Math.min(600 / w, 800 / h);
+                        var tw = Math.round(w * scale);
+                        var th = Math.round(h * scale);
+                        targetSize = Qt.size(tw, th);
+                    }
+
                     rotator.grabToImage(function(result) {
                         result.saveToFile(tempPath);
                         rotator.destroy(); // Cleanup dynamic object
@@ -1111,7 +1122,7 @@ lines.push(JSON.stringify({
                         var cmd = "base64 -w0 '" + tempPath + "' && rm -f '" + tempPath + "'";
                         pendingFileReads[cmd] = { filePath: filePath, fileName: fileName, isImage: true };
                         fileReader.connectSource(cmd);
-                    });
+                    }, targetSize);
                 } else if (rotator.status === Image.Error) {
                     rotator.statusChanged.disconnect(handler);
                     rotator.destroy();

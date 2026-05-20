@@ -1156,6 +1156,23 @@ BaseConfigPage {
         }
 
         QQC2.CheckBox {
+            id: resizeImageAttachmentsCheckBox
+            Kirigami.FormData.label: i18n("Attachments:")
+            text: i18n("Resize image attachments")
+            checked: cfg_resizeImageAttachments
+            onCheckedChanged: if (_initialized) cfg_resizeImageAttachments = checked
+
+            QQC2.ToolTip.text: i18n("Resizes large image attachments to fit within 800x600 before sending, reducing upload size and context tokens.")
+            QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Layout.fillWidth: true
+        }
+
+        QQC2.CheckBox {
             id: saveChatHistoryCheckBox
             Kirigami.FormData.label: i18n("Chat History:")
             text: i18n("Auto-save chat history")
