@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-19 23:01-0400\n"
+"POT-Creation-Date: 2026-05-20 17:11-0400\n"
 "PO-Revision-Date: 2026-05-04 00:00+0300\n"
 "Last-Translator: Matvel007\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -663,7 +663,7 @@ msgid "Keep open"
 msgstr "Держать открытым"
 
 #: package/contents/ui/FullRepresentation.qml:499
-#: package/contents/ui/main.qml:1173
+#: package/contents/ui/main.qml:1184
 msgid "The user denied this tool call."
 msgstr "Пользователь отклонил этот вызов инструмента."
 
@@ -752,6 +752,230 @@ msgstr "Anthropic"
 #: package/contents/ui/api.js:194
 msgid "Google Gemini"
 msgstr "Google Gemini"
+
+#: package/contents/ui/configTools.qml:94
+msgid "General Tool Settings"
+msgstr "Общие настройки инструментов"
+
+#: package/contents/ui/configTools.qml:99
+msgid "System state:"
+msgstr "Состояние системы:"
+
+#: package/contents/ui/configTools.qml:100
+msgid "Enable Tools"
+msgstr "Включить инструменты"
+
+#: package/contents/ui/configTools.qml:109
+msgid "Master switch for all tool-calling functionality."
+msgstr "Главный переключатель для всех функций вызова инструментов."
+
+#: package/contents/ui/configTools.qml:116
+msgid "Path whitelist:"
+msgstr "Белый список путей:"
+
+#: package/contents/ui/configTools.qml:158
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Добавить путь, напр. $HOME/projects, /tmp"
+
+#: package/contents/ui/configTools.qml:164
+msgid "Add"
+msgstr "Добавить"
+
+#: package/contents/ui/configTools.qml:176
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Белый список применяется к инструментам файловой системы (чтение, запись, "
+"список, поиск). Примечание: 'run_command' не ограничен этим списком."
+
+#: package/contents/ui/configTools.qml:184
+msgid "Max read size:"
+msgstr "Макс. размер чтения:"
+
+#: package/contents/ui/configTools.qml:196
+msgid "Max write size:"
+msgstr "Макс. размер записи:"
+
+#: package/contents/ui/configTools.qml:208
+msgid "Max HTTP response:"
+msgstr "Макс. HTTP-ответ:"
+
+#: package/contents/ui/configTools.qml:221
+msgid "Native Adapter Features"
+msgstr "Встроенные функции адаптера"
+
+#: package/contents/ui/configTools.qml:227
+msgid "Google Search:"
+msgstr "Google Поиск:"
+
+#: package/contents/ui/configTools.qml:228
+msgid "Enable Native Google Search Grounding"
+msgstr "Включить нативную привязку Google Search"
+
+#: package/contents/ui/configTools.qml:238
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Использовать встроенный Google Поиск Gemini для привязки. Это переопределяет "
+"стандартный инструмент веб-поиска."
+
+#: package/contents/ui/configTools.qml:245
+msgid "Code Execution:"
+msgstr "Выполнение кода:"
+
+#: package/contents/ui/configTools.qml:246
+msgid "Enable Native Python Code Execution"
+msgstr "Включить нативное выполнение кода Python"
+
+#: package/contents/ui/configTools.qml:256
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Разрешить Gemini писать и выполнять код Python в безопасной серверной "
+"песочнице."
+
+#: package/contents/ui/configTools.qml:264
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Объединение встроенных инструментов с командами требует более новой модели. "
+"Текущая выбранная модель (%1) может столкнуться с ошибками."
+
+#: package/contents/ui/configTools.qml:272
+msgid "Individual Tools"
+msgstr "Отдельные инструменты"
+
+#: package/contents/ui/ColorButton.qml:26
+msgid "Color button"
+msgstr "Кнопка цвета"
+
+#: package/contents/ui/ColorButton.qml:28
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Текущий цвет: %1. Эта кнопка откроет диалог выбора цвета."
+
+#: package/contents/ui/ColorButton.qml:29
+msgid "Current color is %1."
+msgstr "Текущий цвет: %1."
+
+#: package/contents/ui/configAppearance.qml:19
+msgid "Profile Header:"
+msgstr "Заголовок профиля:"
+
+#: package/contents/ui/configAppearance.qml:20
+msgid "Show provider and model in profile header"
+msgstr "Показывать провайдера и модель в заголовке профиля"
+
+#: package/contents/ui/configAppearance.qml:36
+msgid "Chat Spacing: %1px"
+msgstr "Отступы чата: %1px"
+
+#: package/contents/ui/configAppearance.qml:58
+msgid "Compact"
+msgstr "Компактный"
+
+#: package/contents/ui/configAppearance.qml:63
+msgid "Spacious"
+msgstr "Просторный"
+
+#: package/contents/ui/configAppearance.qml:75
+msgid "Chat Colors:"
+msgstr "Цвета чата:"
+
+#: package/contents/ui/configAppearance.qml:82
+msgid "Use custom user color"
+msgstr "Использовать пользовательский цвет"
+
+#: package/contents/ui/configAppearance.qml:106
+msgid "Use custom assistant color"
+msgstr "Использовать цвет помощника"
+
+#: package/contents/ui/configAppearance.qml:133
+msgid "UI Font:"
+msgstr "Шрифт интерфейса:"
+
+#: package/contents/ui/configAppearance.qml:134
+msgid "Use custom UI font"
+msgstr "Использовать пользовательский шрифт интерфейса"
+
+#: package/contents/ui/configAppearance.qml:184
+msgid "Code Font:"
+msgstr "Шрифт кода:"
+
+#: package/contents/ui/configAppearance.qml:185
+msgid "Use custom code font"
+msgstr "Использовать пользовательский шрифт кода"
+
+#: package/contents/ui/configAppearance.qml:230
+msgid "Thoughts Font:"
+msgstr "Шрифт размышлений:"
+
+#: package/contents/ui/configAppearance.qml:231
+msgid "Use custom thoughts font"
+msgstr "Использовать пользовательский шрифт размышлений"
+
+#: package/contents/ui/configAppearance.qml:281
+msgid "Header Icons:"
+msgstr "Иконки заголовка:"
+
+#: package/contents/ui/configAppearance.qml:286
+msgid "Profile Header"
+msgstr "Заголовок профиля"
+
+#: package/contents/ui/configAppearance.qml:297
+msgid "Always show Tasks"
+msgstr "Всегда показывать Задачи"
+
+#: package/contents/ui/configAppearance.qml:308
+msgid "Always show Auto Toggle"
+msgstr "Всегда показывать переключатель Авто"
+
+#: package/contents/ui/configAppearance.qml:319
+msgid "Show History"
+msgstr "Показать историю"
+
+#: package/contents/ui/configAppearance.qml:330
+msgid "Show Copy conversation"
+msgstr "Показать Копировать разговор"
+
+#: package/contents/ui/configAppearance.qml:341
+msgid "Show Clear chat"
+msgstr "Показать Очистить чат"
+
+#: package/contents/ui/configAppearance.qml:352
+msgid "Show Settings"
+msgstr "Показать Настройки"
+
+#: package/contents/ui/configAppearance.qml:363
+msgid "Show Pin"
+msgstr "Показать закрепление"
+
+#: package/contents/ui/ChatMessage.qml:117
+msgid "Web Search"
+msgstr "Поиск в интернете"
+
+#: package/contents/ui/ChatMessage.qml:144
+msgid "Thinking"
+msgstr "Размышляю…"
+
+#: package/contents/ui/ChatMessage.qml:210
+msgid "Searched for: %1"
+msgstr "Искал: %1"
+
+#: package/contents/ui/ChatMessage.qml:246
+msgid "Show %1 results"
+msgstr "Показать %1 результатов"
+
+#: package/contents/ui/ChatMessage.qml:362
+msgid "Copy to clipboard"
+msgstr "Копировать в буфер обмена"
+
+#: package/contents/ui/ChatMessage.qml:377
+msgid "Share output with assistant"
+msgstr "Поделиться выводом с ассистентом"
 
 #: package/contents/ui/configGeneral.qml:59
 msgid "Failed to fetch gcloud token (exit %1): %2"
@@ -962,277 +1186,67 @@ msgstr ""
 "Устанавливается автоматически при выборе пресета."
 
 #: package/contents/ui/configGeneral.qml:1160
+msgid "Attachments:"
+msgstr "Вложения:"
+
+#: package/contents/ui/configGeneral.qml:1161
+msgid "Resize image attachments"
+msgstr "Изменять размер изображений во вложениях"
+
+#: package/contents/ui/configGeneral.qml:1165
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr "Изменяет размер больших изображений во вложениях до 800x600 перед отправкой, уменьшая размер загрузки и количество токенов контекста."
+
+#: package/contents/ui/configGeneral.qml:1177
 msgid "Chat History:"
 msgstr "История чата:"
 
-#: package/contents/ui/configGeneral.qml:1161
+#: package/contents/ui/configGeneral.qml:1178
 msgid "Auto-save chat history"
 msgstr "Автосохранение истории чата"
 
-#: package/contents/ui/configGeneral.qml:1165
-#: package/contents/ui/configGeneral.qml:1180
+#: package/contents/ui/configGeneral.qml:1182
+#: package/contents/ui/configGeneral.qml:1197
 msgid "Saves to ~/.local/share/plasmallm/chats/"
 msgstr "Сохраняет в ~/.local/share/plasmallm/chats/"
 
-#: package/contents/ui/configGeneral.qml:1172
+#: package/contents/ui/configGeneral.qml:1189
 msgid "Save format:"
 msgstr "Формат сохранения:"
 
-#: package/contents/ui/configGeneral.qml:1173
+#: package/contents/ui/configGeneral.qml:1190
 msgid "Plain text (.txt)"
 msgstr "Обычный текст (.txt)"
 
-#: package/contents/ui/configGeneral.qml:1173
+#: package/contents/ui/configGeneral.qml:1190
 msgid "Structured (.jsonl)"
 msgstr "Структурированный (.jsonl)"
 
-#: package/contents/ui/configGeneral.qml:1192
+#: package/contents/ui/configGeneral.qml:1209
 msgid "Auto-clear:"
 msgstr "Автоочистка:"
 
-#: package/contents/ui/configGeneral.qml:1196
+#: package/contents/ui/configGeneral.qml:1213
 msgid "Disabled"
 msgstr "Отключено"
 
-#: package/contents/ui/configGeneral.qml:1202
+#: package/contents/ui/configGeneral.qml:1219
 msgid "Instant (always clear when panel opens)"
 msgstr "Мгновенно (всегда очищать при открытии панели)"
 
-#: package/contents/ui/configGeneral.qml:1211
+#: package/contents/ui/configGeneral.qml:1228
 msgid "After"
 msgstr "Через"
 
-#: package/contents/ui/configGeneral.qml:1231
+#: package/contents/ui/configGeneral.qml:1248
 msgid "seconds"
 msgstr "секунд"
 
-#: package/contents/ui/configGeneral.qml:1231
+#: package/contents/ui/configGeneral.qml:1248
 msgid "minutes"
 msgstr "минут"
-
-#: package/contents/ui/configTools.qml:94
-msgid "General Tool Settings"
-msgstr "Общие настройки инструментов"
-
-#: package/contents/ui/configTools.qml:99
-msgid "System state:"
-msgstr "Состояние системы:"
-
-#: package/contents/ui/configTools.qml:100
-msgid "Enable Tools"
-msgstr "Включить инструменты"
-
-#: package/contents/ui/configTools.qml:109
-msgid "Master switch for all tool-calling functionality."
-msgstr "Главный переключатель для всех функций вызова инструментов."
-
-#: package/contents/ui/configTools.qml:116
-msgid "Path whitelist:"
-msgstr "Белый список путей:"
-
-#: package/contents/ui/configTools.qml:158
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Добавить путь, напр. $HOME/projects, /tmp"
-
-#: package/contents/ui/configTools.qml:164
-msgid "Add"
-msgstr "Добавить"
-
-#: package/contents/ui/configTools.qml:176
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Белый список применяется к инструментам файловой системы (чтение, запись, "
-"список, поиск). Примечание: 'run_command' не ограничен этим списком."
-
-#: package/contents/ui/configTools.qml:184
-msgid "Max read size:"
-msgstr "Макс. размер чтения:"
-
-#: package/contents/ui/configTools.qml:196
-msgid "Max write size:"
-msgstr "Макс. размер записи:"
-
-#: package/contents/ui/configTools.qml:208
-msgid "Max HTTP response:"
-msgstr "Макс. HTTP-ответ:"
-
-#: package/contents/ui/configTools.qml:221
-msgid "Native Adapter Features"
-msgstr "Встроенные функции адаптера"
-
-#: package/contents/ui/configTools.qml:227
-msgid "Google Search:"
-msgstr "Google Поиск:"
-
-#: package/contents/ui/configTools.qml:228
-msgid "Enable Native Google Search Grounding"
-msgstr "Включить нативную привязку Google Search"
-
-#: package/contents/ui/configTools.qml:238
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Использовать встроенный Google Поиск Gemini для привязки. Это переопределяет "
-"стандартный инструмент веб-поиска."
-
-#: package/contents/ui/configTools.qml:245
-msgid "Code Execution:"
-msgstr "Выполнение кода:"
-
-#: package/contents/ui/configTools.qml:246
-msgid "Enable Native Python Code Execution"
-msgstr "Включить нативное выполнение кода Python"
-
-#: package/contents/ui/configTools.qml:256
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Разрешить Gemini писать и выполнять код Python в безопасной серверной "
-"песочнице."
-
-#: package/contents/ui/configTools.qml:264
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Объединение встроенных инструментов с командами требует более новой модели. "
-"Текущая выбранная модель (%1) может столкнуться с ошибками."
-
-#: package/contents/ui/configTools.qml:272
-msgid "Individual Tools"
-msgstr "Отдельные инструменты"
-
-#: package/contents/ui/ChatMessage.qml:117
-msgid "Web Search"
-msgstr "Поиск в интернете"
-
-#: package/contents/ui/ChatMessage.qml:144
-msgid "Thinking"
-msgstr "Размышляю…"
-
-#: package/contents/ui/ChatMessage.qml:210
-msgid "Searched for: %1"
-msgstr "Искал: %1"
-
-#: package/contents/ui/ChatMessage.qml:246
-msgid "Show %1 results"
-msgstr "Показать %1 результатов"
-
-#: package/contents/ui/ChatMessage.qml:360
-msgid "Copy to clipboard"
-msgstr "Копировать в буфер обмена"
-
-#: package/contents/ui/ChatMessage.qml:375
-msgid "Share output with assistant"
-msgstr "Поделиться выводом с ассистентом"
-
-#: package/contents/ui/ColorButton.qml:26
-msgid "Color button"
-msgstr "Кнопка цвета"
-
-#: package/contents/ui/ColorButton.qml:28
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Текущий цвет: %1. Эта кнопка откроет диалог выбора цвета."
-
-#: package/contents/ui/ColorButton.qml:29
-msgid "Current color is %1."
-msgstr "Текущий цвет: %1."
-
-#: package/contents/ui/configAppearance.qml:19
-msgid "Profile Header:"
-msgstr "Заголовок профиля:"
-
-#: package/contents/ui/configAppearance.qml:20
-msgid "Show provider and model in profile header"
-msgstr "Показывать провайдера и модель в заголовке профиля"
-
-#: package/contents/ui/configAppearance.qml:36
-msgid "Chat Spacing: %1px"
-msgstr "Отступы чата: %1px"
-
-#: package/contents/ui/configAppearance.qml:58
-msgid "Compact"
-msgstr "Компактный"
-
-#: package/contents/ui/configAppearance.qml:63
-msgid "Spacious"
-msgstr "Просторный"
-
-#: package/contents/ui/configAppearance.qml:75
-msgid "Chat Colors:"
-msgstr "Цвета чата:"
-
-#: package/contents/ui/configAppearance.qml:82
-msgid "Use custom user color"
-msgstr "Использовать пользовательский цвет"
-
-#: package/contents/ui/configAppearance.qml:106
-msgid "Use custom assistant color"
-msgstr "Использовать цвет помощника"
-
-#: package/contents/ui/configAppearance.qml:133
-msgid "UI Font:"
-msgstr "Шрифт интерфейса:"
-
-#: package/contents/ui/configAppearance.qml:134
-msgid "Use custom UI font"
-msgstr "Использовать пользовательский шрифт интерфейса"
-
-#: package/contents/ui/configAppearance.qml:184
-msgid "Code Font:"
-msgstr "Шрифт кода:"
-
-#: package/contents/ui/configAppearance.qml:185
-msgid "Use custom code font"
-msgstr "Использовать пользовательский шрифт кода"
-
-#: package/contents/ui/configAppearance.qml:230
-msgid "Thoughts Font:"
-msgstr "Шрифт размышлений:"
-
-#: package/contents/ui/configAppearance.qml:231
-msgid "Use custom thoughts font"
-msgstr "Использовать пользовательский шрифт размышлений"
-
-#: package/contents/ui/configAppearance.qml:281
-msgid "Header Icons:"
-msgstr "Иконки заголовка:"
-
-#: package/contents/ui/configAppearance.qml:286
-msgid "Profile Header"
-msgstr "Заголовок профиля"
-
-#: package/contents/ui/configAppearance.qml:297
-msgid "Always show Tasks"
-msgstr "Всегда показывать Задачи"
-
-#: package/contents/ui/configAppearance.qml:308
-msgid "Always show Auto Toggle"
-msgstr "Всегда показывать переключатель Авто"
-
-#: package/contents/ui/configAppearance.qml:319
-msgid "Show History"
-msgstr "Показать историю"
-
-#: package/contents/ui/configAppearance.qml:330
-msgid "Show Copy conversation"
-msgstr "Показать Копировать разговор"
-
-#: package/contents/ui/configAppearance.qml:341
-msgid "Show Clear chat"
-msgstr "Показать Очистить чат"
-
-#: package/contents/ui/configAppearance.qml:352
-msgid "Show Settings"
-msgstr "Показать Настройки"
-
-#: package/contents/ui/configAppearance.qml:363
-msgid "Show Pin"
-msgstr "Показать закрепление"
 
 #: package/contents/ui/main.qml:221
 msgid ""
@@ -1242,15 +1256,15 @@ msgstr ""
 "Не удалось получить токен gcloud (выход %1): %2. Убедитесь, что gcloud "
 "установлен и аутентифицирован."
 
-#: package/contents/ui/main.qml:1158
+#: package/contents/ui/main.qml:1169
 msgid "No tool request pending to approve."
 msgstr "Нет ожидающих запросов инструментов для одобрения."
 
-#: package/contents/ui/main.qml:1175
+#: package/contents/ui/main.qml:1186
 msgid "No tool request pending to deny."
 msgstr "Нет ожидающих запросов инструментов для отклонения."
 
-#: package/contents/ui/main.qml:1202
+#: package/contents/ui/main.qml:1213
 msgid ""
 "Skip approvals mode enabled for this session. All enabled tools will run "
 "automatically, bypassing 'Ask before running' settings."
@@ -1259,7 +1273,7 @@ msgstr ""
 "инструменты будут запускаться автоматически, обходя настройки 'Спрашивать "
 "перед запуском'."
 
-#: package/contents/ui/main.qml:1203
+#: package/contents/ui/main.qml:1214
 msgid ""
 "Skip approvals mode disabled. Tools will revert to your configured 'Ask "
 "before running' settings."
@@ -1267,95 +1281,95 @@ msgstr ""
 "Режим пропуска подтверждений отключён. Инструменты вернутся к настроенным "
 "параметрам 'Спрашивать перед запуском'."
 
-#: package/contents/ui/main.qml:1222 package/contents/ui/main.qml:2179
+#: package/contents/ui/main.qml:1233 package/contents/ui/main.qml:2190
 msgid "Default"
 msgstr "По умолчанию"
 
-#: package/contents/ui/main.qml:1222
+#: package/contents/ui/main.qml:1233
 msgid "Current profile: **%1**"
 msgstr "Текущий профиль: **%1**"
 
-#: package/contents/ui/main.qml:1224
+#: package/contents/ui/main.qml:1235
 msgid "Available profiles:"
 msgstr "Доступные профили:"
 
-#: package/contents/ui/main.qml:1226
+#: package/contents/ui/main.qml:1237
 msgid "active"
 msgstr "активный"
 
-#: package/contents/ui/main.qml:1229
+#: package/contents/ui/main.qml:1240
 msgid "Type `/profile <name>` to switch."
 msgstr "Введите `/profile <имя>` для переключения."
 
-#: package/contents/ui/main.qml:1246
+#: package/contents/ui/main.qml:1257
 msgid "Switched to profile: **%1**"
 msgstr "Переключено на профиль: **%1**"
 
-#: package/contents/ui/main.qml:1248
+#: package/contents/ui/main.qml:1259
 msgid "Unknown profile: **%1**"
 msgstr "Неизвестный профиль: **%1**"
 
-#: package/contents/ui/main.qml:1255 package/contents/ui/main.qml:1338
+#: package/contents/ui/main.qml:1266 package/contents/ui/main.qml:1349
 msgid "none"
 msgstr "нет"
 
-#: package/contents/ui/main.qml:1255
+#: package/contents/ui/main.qml:1266
 msgid "Current model: **%1**"
 msgstr "Текущая модель: **%1**"
 
-#: package/contents/ui/main.qml:1257
+#: package/contents/ui/main.qml:1268
 msgid "Available models:"
 msgstr "Доступные модели:"
 
-#: package/contents/ui/main.qml:1259
+#: package/contents/ui/main.qml:1270
 msgid "Type `/model <name>` to switch."
 msgstr "Введите `/model <name>` для переключения."
 
-#: package/contents/ui/main.qml:1261
+#: package/contents/ui/main.qml:1272
 msgid "No models cached. Use **Fetch Models** in settings."
 msgstr "Нет кэшированных моделей. Используйте **Fetch Models** в настройках."
 
-#: package/contents/ui/main.qml:1286
+#: package/contents/ui/main.qml:1297
 msgid "Switched to model: **%1**"
 msgstr "Переключено на модель: **%1**"
 
-#: package/contents/ui/main.qml:1295
+#: package/contents/ui/main.qml:1306
 msgid "No tasks configured. Add tasks in Settings."
 msgstr "Нет настроенных задач. Добавьте задачи в настройках."
 
-#: package/contents/ui/main.qml:1297
+#: package/contents/ui/main.qml:1308
 msgid "(auto)"
 msgstr "(авто)"
 
-#: package/contents/ui/main.qml:1298
+#: package/contents/ui/main.qml:1309
 msgid "Available tasks:"
 msgstr "Доступные задачи:"
 
-#: package/contents/ui/main.qml:1298
+#: package/contents/ui/main.qml:1309
 msgid "Type `/task <name>` to run."
 msgstr "Введите `/task <name>` для запуска."
 
-#: package/contents/ui/main.qml:1338
+#: package/contents/ui/main.qml:1349
 msgid "Unknown task: **%1**. Available: %2"
 msgstr "Неизвестная задача: **%1**. Доступны: %2"
 
-#: package/contents/ui/main.qml:1352
+#: package/contents/ui/main.qml:1363
 msgid "The user declined to run this command."
 msgstr "Пользователь отказался от выполнения этой команды."
 
-#: package/contents/ui/main.qml:1696
+#: package/contents/ui/main.qml:1707
 msgid "Unknown tool %1"
 msgstr "Неизвестный инструмент %1"
 
-#: package/contents/ui/main.qml:1712
+#: package/contents/ui/main.qml:1723
 msgid "Error: path '%1' outside whitelist"
 msgstr "Ошибка: путь '%1' за пределами белого списка"
 
-#: package/contents/ui/main.qml:1725
+#: package/contents/ui/main.qml:1736
 msgid "Executing %1…"
 msgstr "Выполнение %1…"
 
-#: package/contents/ui/main.qml:1978
+#: package/contents/ui/main.qml:1989
 msgid "Session reset requested."
 msgstr "Запрошен сброс сессии."
 

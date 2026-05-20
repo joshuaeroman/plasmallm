@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-19 23:01-0400\n"
+"POT-Creation-Date: 2026-05-20 17:11-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Chinese (Simplified)\n"
@@ -641,7 +641,7 @@ msgid "Keep open"
 msgstr "保持打开"
 
 #: package/contents/ui/FullRepresentation.qml:499
-#: package/contents/ui/main.qml:1173
+#: package/contents/ui/main.qml:1184
 msgid "The user denied this tool call."
 msgstr "用户拒绝了此工具调用。"
 
@@ -728,6 +728,225 @@ msgstr "Anthropic"
 #: package/contents/ui/api.js:194
 msgid "Google Gemini"
 msgstr "Google Gemini"
+
+#: package/contents/ui/configTools.qml:94
+msgid "General Tool Settings"
+msgstr "常规工具设置"
+
+#: package/contents/ui/configTools.qml:99
+msgid "System state:"
+msgstr "系统状态："
+
+#: package/contents/ui/configTools.qml:100
+msgid "Enable Tools"
+msgstr "启用工具"
+
+#: package/contents/ui/configTools.qml:109
+msgid "Master switch for all tool-calling functionality."
+msgstr "所有工具调用功能的主开关。"
+
+#: package/contents/ui/configTools.qml:116
+msgid "Path whitelist:"
+msgstr "路径白名单："
+
+#: package/contents/ui/configTools.qml:158
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "添加路径，例如 $HOME/projects，/tmp"
+
+#: package/contents/ui/configTools.qml:164
+msgid "Add"
+msgstr "添加"
+
+#: package/contents/ui/configTools.qml:176
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"白名单适用于文件系统工具（读取、写入、列出、搜索）。注意：'run_command' 不受"
+"此列表限制。"
+
+#: package/contents/ui/configTools.qml:184
+msgid "Max read size:"
+msgstr "最大读取大小："
+
+#: package/contents/ui/configTools.qml:196
+msgid "Max write size:"
+msgstr "最大写入大小："
+
+#: package/contents/ui/configTools.qml:208
+msgid "Max HTTP response:"
+msgstr "最大 HTTP 响应："
+
+#: package/contents/ui/configTools.qml:221
+msgid "Native Adapter Features"
+msgstr "原生适配器功能"
+
+#: package/contents/ui/configTools.qml:227
+msgid "Google Search:"
+msgstr "Google 搜索："
+
+#: package/contents/ui/configTools.qml:228
+msgid "Enable Native Google Search Grounding"
+msgstr "启用原生 Google 搜索基础"
+
+#: package/contents/ui/configTools.qml:238
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr "使用 Gemini 内置的 Google 搜索进行基础。这会覆盖标准的网络搜索工具。"
+
+#: package/contents/ui/configTools.qml:245
+msgid "Code Execution:"
+msgstr "代码执行："
+
+#: package/contents/ui/configTools.qml:246
+msgid "Enable Native Python Code Execution"
+msgstr "启用原生 Python 代码执行"
+
+#: package/contents/ui/configTools.qml:256
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr "允许 Gemini 在安全的服务器端沙盒中编写和执行 Python 代码。"
+
+#: package/contents/ui/configTools.qml:264
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"将原生工具与命令结合使用需要更新的模型。当前选定的模型 (%1) 可能会遇到错误。"
+
+#: package/contents/ui/configTools.qml:272
+msgid "Individual Tools"
+msgstr "单个工具"
+
+#: package/contents/ui/ColorButton.qml:26
+msgid "Color button"
+msgstr "颜色按钮"
+
+#: package/contents/ui/ColorButton.qml:28
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "当前颜色为 %1。点击此按钮将打开颜色选择器。"
+
+#: package/contents/ui/ColorButton.qml:29
+msgid "Current color is %1."
+msgstr "当前颜色为 %1。"
+
+#: package/contents/ui/configAppearance.qml:19
+msgid "Profile Header:"
+msgstr "配置文件标头："
+
+#: package/contents/ui/configAppearance.qml:20
+msgid "Show provider and model in profile header"
+msgstr "在配置文件标头中显示提供商和模型"
+
+#: package/contents/ui/configAppearance.qml:36
+msgid "Chat Spacing: %1px"
+msgstr "聊天间距：%1px"
+
+#: package/contents/ui/configAppearance.qml:58
+msgid "Compact"
+msgstr "紧凑"
+
+#: package/contents/ui/configAppearance.qml:63
+msgid "Spacious"
+msgstr "宽敞"
+
+#: package/contents/ui/configAppearance.qml:75
+msgid "Chat Colors:"
+msgstr "聊天颜色："
+
+#: package/contents/ui/configAppearance.qml:82
+msgid "Use custom user color"
+msgstr "使用自定义用户颜色"
+
+#: package/contents/ui/configAppearance.qml:106
+msgid "Use custom assistant color"
+msgstr "使用自定义助手颜色"
+
+#: package/contents/ui/configAppearance.qml:133
+msgid "UI Font:"
+msgstr "界面字体："
+
+#: package/contents/ui/configAppearance.qml:134
+msgid "Use custom UI font"
+msgstr "使用自定义界面字体"
+
+#: package/contents/ui/configAppearance.qml:184
+msgid "Code Font:"
+msgstr "代码字体："
+
+#: package/contents/ui/configAppearance.qml:185
+msgid "Use custom code font"
+msgstr "使用自定义代码字体"
+
+#: package/contents/ui/configAppearance.qml:230
+msgid "Thoughts Font:"
+msgstr "思维字体："
+
+#: package/contents/ui/configAppearance.qml:231
+msgid "Use custom thoughts font"
+msgstr "使用自定义思维字体"
+
+#: package/contents/ui/configAppearance.qml:281
+msgid "Header Icons:"
+msgstr "标头图标："
+
+#: package/contents/ui/configAppearance.qml:286
+msgid "Profile Header"
+msgstr "配置文件标头"
+
+#: package/contents/ui/configAppearance.qml:297
+msgid "Always show Tasks"
+msgstr "始终显示任务"
+
+#: package/contents/ui/configAppearance.qml:308
+msgid "Always show Auto Toggle"
+msgstr "始终显示自动切换"
+
+#: package/contents/ui/configAppearance.qml:319
+msgid "Show History"
+msgstr "显示历史记录"
+
+#: package/contents/ui/configAppearance.qml:330
+msgid "Show Copy conversation"
+msgstr "显示复制对话"
+
+#: package/contents/ui/configAppearance.qml:341
+msgid "Show Clear chat"
+msgstr "显示清除聊天"
+
+#: package/contents/ui/configAppearance.qml:352
+msgid "Show Settings"
+msgstr "显示设置"
+
+#: package/contents/ui/configAppearance.qml:363
+msgid "Show Pin"
+msgstr "显示固定"
+
+#: package/contents/ui/ChatMessage.qml:117
+msgid "Web Search"
+msgstr "网络搜索"
+
+#: package/contents/ui/ChatMessage.qml:144
+msgid "Thinking"
+msgstr "思考中…"
+
+#: package/contents/ui/ChatMessage.qml:210
+msgid "Searched for: %1"
+msgstr "已搜索：%1"
+
+#: package/contents/ui/ChatMessage.qml:246
+msgid "Show %1 results"
+msgstr "显示 %1 条结果"
+
+#: package/contents/ui/ChatMessage.qml:362
+msgid "Copy to clipboard"
+msgstr "复制到剪贴板"
+
+#: package/contents/ui/ChatMessage.qml:377
+msgid "Share output with assistant"
+msgstr "与助手共享输出"
 
 #: package/contents/ui/configGeneral.qml:59
 msgid "Failed to fetch gcloud token (exit %1): %2"
@@ -934,272 +1153,67 @@ msgstr ""
 "而非/v1/chat/completions）。选择预设时自动设置。"
 
 #: package/contents/ui/configGeneral.qml:1160
+msgid "Attachments:"
+msgstr "附件："
+
+#: package/contents/ui/configGeneral.qml:1161
+msgid "Resize image attachments"
+msgstr "调整图片附件大小"
+
+#: package/contents/ui/configGeneral.qml:1165
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr "发送前将大图片附件的大小调整到 800x600 以内，以减少上传大小和上下文 Token。"
+
+#: package/contents/ui/configGeneral.qml:1177
 msgid "Chat History:"
 msgstr "聊天记录："
 
-#: package/contents/ui/configGeneral.qml:1161
+#: package/contents/ui/configGeneral.qml:1178
 msgid "Auto-save chat history"
 msgstr "自动保存聊天记录"
 
-#: package/contents/ui/configGeneral.qml:1165
-#: package/contents/ui/configGeneral.qml:1180
+#: package/contents/ui/configGeneral.qml:1182
+#: package/contents/ui/configGeneral.qml:1197
 msgid "Saves to ~/.local/share/plasmallm/chats/"
 msgstr "保存到 ~/.local/share/plasmallm/chats/"
 
-#: package/contents/ui/configGeneral.qml:1172
+#: package/contents/ui/configGeneral.qml:1189
 msgid "Save format:"
 msgstr "保存格式："
 
-#: package/contents/ui/configGeneral.qml:1173
+#: package/contents/ui/configGeneral.qml:1190
 msgid "Plain text (.txt)"
 msgstr "纯文本 (.txt)"
 
-#: package/contents/ui/configGeneral.qml:1173
+#: package/contents/ui/configGeneral.qml:1190
 msgid "Structured (.jsonl)"
 msgstr "结构化 (.jsonl)"
 
-#: package/contents/ui/configGeneral.qml:1192
+#: package/contents/ui/configGeneral.qml:1209
 msgid "Auto-clear:"
 msgstr "自动清除："
 
-#: package/contents/ui/configGeneral.qml:1196
+#: package/contents/ui/configGeneral.qml:1213
 msgid "Disabled"
 msgstr "已禁用"
 
-#: package/contents/ui/configGeneral.qml:1202
+#: package/contents/ui/configGeneral.qml:1219
 msgid "Instant (always clear when panel opens)"
 msgstr "即时（每次打开面板时清除）"
 
-#: package/contents/ui/configGeneral.qml:1211
+#: package/contents/ui/configGeneral.qml:1228
 msgid "After"
 msgstr "之后"
 
-#: package/contents/ui/configGeneral.qml:1231
+#: package/contents/ui/configGeneral.qml:1248
 msgid "seconds"
 msgstr "秒"
 
-#: package/contents/ui/configGeneral.qml:1231
+#: package/contents/ui/configGeneral.qml:1248
 msgid "minutes"
 msgstr "分钟"
-
-#: package/contents/ui/configTools.qml:94
-msgid "General Tool Settings"
-msgstr "常规工具设置"
-
-#: package/contents/ui/configTools.qml:99
-msgid "System state:"
-msgstr "系统状态："
-
-#: package/contents/ui/configTools.qml:100
-msgid "Enable Tools"
-msgstr "启用工具"
-
-#: package/contents/ui/configTools.qml:109
-msgid "Master switch for all tool-calling functionality."
-msgstr "所有工具调用功能的主开关。"
-
-#: package/contents/ui/configTools.qml:116
-msgid "Path whitelist:"
-msgstr "路径白名单："
-
-#: package/contents/ui/configTools.qml:158
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "添加路径，例如 $HOME/projects，/tmp"
-
-#: package/contents/ui/configTools.qml:164
-msgid "Add"
-msgstr "添加"
-
-#: package/contents/ui/configTools.qml:176
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"白名单适用于文件系统工具（读取、写入、列出、搜索）。注意：'run_command' 不受"
-"此列表限制。"
-
-#: package/contents/ui/configTools.qml:184
-msgid "Max read size:"
-msgstr "最大读取大小："
-
-#: package/contents/ui/configTools.qml:196
-msgid "Max write size:"
-msgstr "最大写入大小："
-
-#: package/contents/ui/configTools.qml:208
-msgid "Max HTTP response:"
-msgstr "最大 HTTP 响应："
-
-#: package/contents/ui/configTools.qml:221
-msgid "Native Adapter Features"
-msgstr "原生适配器功能"
-
-#: package/contents/ui/configTools.qml:227
-msgid "Google Search:"
-msgstr "Google 搜索："
-
-#: package/contents/ui/configTools.qml:228
-msgid "Enable Native Google Search Grounding"
-msgstr "启用原生 Google 搜索基础"
-
-#: package/contents/ui/configTools.qml:238
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr "使用 Gemini 内置的 Google 搜索进行基础。这会覆盖标准的网络搜索工具。"
-
-#: package/contents/ui/configTools.qml:245
-msgid "Code Execution:"
-msgstr "代码执行："
-
-#: package/contents/ui/configTools.qml:246
-msgid "Enable Native Python Code Execution"
-msgstr "启用原生 Python 代码执行"
-
-#: package/contents/ui/configTools.qml:256
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr "允许 Gemini 在安全的服务器端沙盒中编写和执行 Python 代码。"
-
-#: package/contents/ui/configTools.qml:264
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"将原生工具与命令结合使用需要更新的模型。当前选定的模型 (%1) 可能会遇到错误。"
-
-#: package/contents/ui/configTools.qml:272
-msgid "Individual Tools"
-msgstr "单个工具"
-
-#: package/contents/ui/ChatMessage.qml:117
-msgid "Web Search"
-msgstr "网络搜索"
-
-#: package/contents/ui/ChatMessage.qml:144
-msgid "Thinking"
-msgstr "思考中…"
-
-#: package/contents/ui/ChatMessage.qml:210
-msgid "Searched for: %1"
-msgstr "已搜索：%1"
-
-#: package/contents/ui/ChatMessage.qml:246
-msgid "Show %1 results"
-msgstr "显示 %1 条结果"
-
-#: package/contents/ui/ChatMessage.qml:360
-msgid "Copy to clipboard"
-msgstr "复制到剪贴板"
-
-#: package/contents/ui/ChatMessage.qml:375
-msgid "Share output with assistant"
-msgstr "与助手共享输出"
-
-#: package/contents/ui/ColorButton.qml:26
-msgid "Color button"
-msgstr "颜色按钮"
-
-#: package/contents/ui/ColorButton.qml:28
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "当前颜色为 %1。点击此按钮将打开颜色选择器。"
-
-#: package/contents/ui/ColorButton.qml:29
-msgid "Current color is %1."
-msgstr "当前颜色为 %1。"
-
-#: package/contents/ui/configAppearance.qml:19
-msgid "Profile Header:"
-msgstr "配置文件标头："
-
-#: package/contents/ui/configAppearance.qml:20
-msgid "Show provider and model in profile header"
-msgstr "在配置文件标头中显示提供商和模型"
-
-#: package/contents/ui/configAppearance.qml:36
-msgid "Chat Spacing: %1px"
-msgstr "聊天间距：%1px"
-
-#: package/contents/ui/configAppearance.qml:58
-msgid "Compact"
-msgstr "紧凑"
-
-#: package/contents/ui/configAppearance.qml:63
-msgid "Spacious"
-msgstr "宽敞"
-
-#: package/contents/ui/configAppearance.qml:75
-msgid "Chat Colors:"
-msgstr "聊天颜色："
-
-#: package/contents/ui/configAppearance.qml:82
-msgid "Use custom user color"
-msgstr "使用自定义用户颜色"
-
-#: package/contents/ui/configAppearance.qml:106
-msgid "Use custom assistant color"
-msgstr "使用自定义助手颜色"
-
-#: package/contents/ui/configAppearance.qml:133
-msgid "UI Font:"
-msgstr "界面字体："
-
-#: package/contents/ui/configAppearance.qml:134
-msgid "Use custom UI font"
-msgstr "使用自定义界面字体"
-
-#: package/contents/ui/configAppearance.qml:184
-msgid "Code Font:"
-msgstr "代码字体："
-
-#: package/contents/ui/configAppearance.qml:185
-msgid "Use custom code font"
-msgstr "使用自定义代码字体"
-
-#: package/contents/ui/configAppearance.qml:230
-msgid "Thoughts Font:"
-msgstr "思维字体："
-
-#: package/contents/ui/configAppearance.qml:231
-msgid "Use custom thoughts font"
-msgstr "使用自定义思维字体"
-
-#: package/contents/ui/configAppearance.qml:281
-msgid "Header Icons:"
-msgstr "标头图标："
-
-#: package/contents/ui/configAppearance.qml:286
-msgid "Profile Header"
-msgstr "配置文件标头"
-
-#: package/contents/ui/configAppearance.qml:297
-msgid "Always show Tasks"
-msgstr "始终显示任务"
-
-#: package/contents/ui/configAppearance.qml:308
-msgid "Always show Auto Toggle"
-msgstr "始终显示自动切换"
-
-#: package/contents/ui/configAppearance.qml:319
-msgid "Show History"
-msgstr "显示历史记录"
-
-#: package/contents/ui/configAppearance.qml:330
-msgid "Show Copy conversation"
-msgstr "显示复制对话"
-
-#: package/contents/ui/configAppearance.qml:341
-msgid "Show Clear chat"
-msgstr "显示清除聊天"
-
-#: package/contents/ui/configAppearance.qml:352
-msgid "Show Settings"
-msgstr "显示设置"
-
-#: package/contents/ui/configAppearance.qml:363
-msgid "Show Pin"
-msgstr "显示固定"
 
 #: package/contents/ui/main.qml:221
 msgid ""
@@ -1208,15 +1222,15 @@ msgid ""
 msgstr ""
 "无法获取 gcloud 令牌（退出 %1）：%2。请确保 gcloud 已安装并已通过身份验证。"
 
-#: package/contents/ui/main.qml:1158
+#: package/contents/ui/main.qml:1169
 msgid "No tool request pending to approve."
 msgstr "没有待批准的工具请求。"
 
-#: package/contents/ui/main.qml:1175
+#: package/contents/ui/main.qml:1186
 msgid "No tool request pending to deny."
 msgstr "没有待拒绝的工具请求。"
 
-#: package/contents/ui/main.qml:1202
+#: package/contents/ui/main.qml:1213
 msgid ""
 "Skip approvals mode enabled for this session. All enabled tools will run "
 "automatically, bypassing 'Ask before running' settings."
@@ -1224,101 +1238,101 @@ msgstr ""
 "此会话已启用跳过审批模式。所有已启用的工具将自动运行，绕过「运行前询问」设"
 "置。"
 
-#: package/contents/ui/main.qml:1203
+#: package/contents/ui/main.qml:1214
 msgid ""
 "Skip approvals mode disabled. Tools will revert to your configured 'Ask "
 "before running' settings."
 msgstr "跳过审批模式已禁用。工具将恢复为您配置的「运行前询问」设置。"
 
-#: package/contents/ui/main.qml:1222 package/contents/ui/main.qml:2179
+#: package/contents/ui/main.qml:1233 package/contents/ui/main.qml:2190
 msgid "Default"
 msgstr "默认"
 
-#: package/contents/ui/main.qml:1222
+#: package/contents/ui/main.qml:1233
 msgid "Current profile: **%1**"
 msgstr "当前配置文件：**%1**"
 
-#: package/contents/ui/main.qml:1224
+#: package/contents/ui/main.qml:1235
 msgid "Available profiles:"
 msgstr "可用配置文件："
 
-#: package/contents/ui/main.qml:1226
+#: package/contents/ui/main.qml:1237
 msgid "active"
 msgstr "活跃"
 
-#: package/contents/ui/main.qml:1229
+#: package/contents/ui/main.qml:1240
 msgid "Type `/profile <name>` to switch."
 msgstr "输入 `/profile <名称>` 进行切换。"
 
-#: package/contents/ui/main.qml:1246
+#: package/contents/ui/main.qml:1257
 msgid "Switched to profile: **%1**"
 msgstr "已切换到配置文件：**%1**"
 
-#: package/contents/ui/main.qml:1248
+#: package/contents/ui/main.qml:1259
 msgid "Unknown profile: **%1**"
 msgstr "未知配置文件：**%1**"
 
-#: package/contents/ui/main.qml:1255 package/contents/ui/main.qml:1338
+#: package/contents/ui/main.qml:1266 package/contents/ui/main.qml:1349
 msgid "none"
 msgstr "无"
 
-#: package/contents/ui/main.qml:1255
+#: package/contents/ui/main.qml:1266
 msgid "Current model: **%1**"
 msgstr "当前模型：**%1**"
 
-#: package/contents/ui/main.qml:1257
+#: package/contents/ui/main.qml:1268
 msgid "Available models:"
 msgstr "可用模型："
 
-#: package/contents/ui/main.qml:1259
+#: package/contents/ui/main.qml:1270
 msgid "Type `/model <name>` to switch."
 msgstr "输入 `/model <name>` 进行切换。"
 
-#: package/contents/ui/main.qml:1261
+#: package/contents/ui/main.qml:1272
 msgid "No models cached. Use **Fetch Models** in settings."
 msgstr "没有缓存的模型。请在设置中使用**获取模型**。"
 
-#: package/contents/ui/main.qml:1286
+#: package/contents/ui/main.qml:1297
 msgid "Switched to model: **%1**"
 msgstr "已切换到模型：**%1**"
 
-#: package/contents/ui/main.qml:1295
+#: package/contents/ui/main.qml:1306
 msgid "No tasks configured. Add tasks in Settings."
 msgstr "未配置任务。请在设置中添加任务。"
 
-#: package/contents/ui/main.qml:1297
+#: package/contents/ui/main.qml:1308
 msgid "(auto)"
 msgstr "（自动）"
 
-#: package/contents/ui/main.qml:1298
+#: package/contents/ui/main.qml:1309
 msgid "Available tasks:"
 msgstr "可用任务："
 
-#: package/contents/ui/main.qml:1298
+#: package/contents/ui/main.qml:1309
 msgid "Type `/task <name>` to run."
 msgstr "输入 `/task <name>` 运行。"
 
-#: package/contents/ui/main.qml:1338
+#: package/contents/ui/main.qml:1349
 msgid "Unknown task: **%1**. Available: %2"
 msgstr "未知任务：**%1**。可用：%2"
 
-#: package/contents/ui/main.qml:1352
+#: package/contents/ui/main.qml:1363
 msgid "The user declined to run this command."
 msgstr "用户拒绝运行此命令。"
 
-#: package/contents/ui/main.qml:1696
+#: package/contents/ui/main.qml:1707
 msgid "Unknown tool %1"
 msgstr "未知工具 %1"
 
-#: package/contents/ui/main.qml:1712
+#: package/contents/ui/main.qml:1723
 msgid "Error: path '%1' outside whitelist"
 msgstr "错误：路径 '%1' 不在白名单内"
 
-#: package/contents/ui/main.qml:1725
+#: package/contents/ui/main.qml:1736
 msgid "Executing %1…"
 msgstr "正在执行 %1…"
 
-#: package/contents/ui/main.qml:1978
+#: package/contents/ui/main.qml:1989
 msgid "Session reset requested."
 msgstr "已请求重置会话。"
 

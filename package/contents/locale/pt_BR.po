@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-19 23:01-0400\n"
+"POT-Creation-Date: 2026-05-20 17:11-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -668,7 +668,7 @@ msgid "Keep open"
 msgstr "Manter aberto"
 
 #: package/contents/ui/FullRepresentation.qml:499
-#: package/contents/ui/main.qml:1173
+#: package/contents/ui/main.qml:1184
 msgid "The user denied this tool call."
 msgstr "O usuário negou esta chamada de ferramenta."
 
@@ -757,6 +757,232 @@ msgstr "Anthropic"
 #: package/contents/ui/api.js:194
 msgid "Google Gemini"
 msgstr "Google Gemini"
+
+#: package/contents/ui/configTools.qml:94
+msgid "General Tool Settings"
+msgstr "Configurações gerais de ferramentas"
+
+#: package/contents/ui/configTools.qml:99
+msgid "System state:"
+msgstr "Estado do sistema:"
+
+#: package/contents/ui/configTools.qml:100
+msgid "Enable Tools"
+msgstr "Habilitar ferramentas"
+
+#: package/contents/ui/configTools.qml:109
+msgid "Master switch for all tool-calling functionality."
+msgstr ""
+"Interruptor principal para toda a funcionalidade de chamada de ferramentas."
+
+#: package/contents/ui/configTools.qml:116
+msgid "Path whitelist:"
+msgstr "Lista de permissões de caminhos:"
+
+#: package/contents/ui/configTools.qml:158
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Adicionar caminho, ex. $HOME/projects, /tmp"
+
+#: package/contents/ui/configTools.qml:164
+msgid "Add"
+msgstr "Adicionar"
+
+#: package/contents/ui/configTools.qml:176
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"A lista de permissões aplica-se a ferramentas do sistema de arquivos (ler, "
+"escrever, listar, pesquisar). Nota: 'run_command' não é restringido por esta "
+"lista."
+
+#: package/contents/ui/configTools.qml:184
+msgid "Max read size:"
+msgstr "Tamanho máximo de leitura:"
+
+#: package/contents/ui/configTools.qml:196
+msgid "Max write size:"
+msgstr "Tamanho máximo de gravação:"
+
+#: package/contents/ui/configTools.qml:208
+msgid "Max HTTP response:"
+msgstr "Resposta HTTP máxima:"
+
+#: package/contents/ui/configTools.qml:221
+msgid "Native Adapter Features"
+msgstr "Recursos nativos do adaptador"
+
+#: package/contents/ui/configTools.qml:227
+msgid "Google Search:"
+msgstr "Pesquisa Google:"
+
+#: package/contents/ui/configTools.qml:228
+msgid "Enable Native Google Search Grounding"
+msgstr "Habilitar grounding nativo do Google Search"
+
+#: package/contents/ui/configTools.qml:238
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Usar a pesquisa Google integrada do Gemini para grounding. Isso substitui a "
+"ferramenta de pesquisa web padrão."
+
+#: package/contents/ui/configTools.qml:245
+msgid "Code Execution:"
+msgstr "Execução de código:"
+
+#: package/contents/ui/configTools.qml:246
+msgid "Enable Native Python Code Execution"
+msgstr "Habilitar execução nativa de código Python"
+
+#: package/contents/ui/configTools.qml:256
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Permitir que o Gemini escreva e execute código Python em uma sandbox segura "
+"do lado do servidor."
+
+#: package/contents/ui/configTools.qml:264
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Combinar ferramentas nativas com comandos requer um modelo mais recente. O "
+"modelo atualmente selecionado (%1) pode encontrar erros."
+
+#: package/contents/ui/configTools.qml:272
+msgid "Individual Tools"
+msgstr "Ferramentas individuais"
+
+#: package/contents/ui/ColorButton.qml:26
+msgid "Color button"
+msgstr "Botão de cor"
+
+#: package/contents/ui/ColorButton.qml:28
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "A cor atual é %1. Este botão abrirá um diálogo de seleção de cores."
+
+#: package/contents/ui/ColorButton.qml:29
+msgid "Current color is %1."
+msgstr "A cor atual é %1."
+
+#: package/contents/ui/configAppearance.qml:19
+msgid "Profile Header:"
+msgstr "Cabeçalho de perfil:"
+
+#: package/contents/ui/configAppearance.qml:20
+msgid "Show provider and model in profile header"
+msgstr "Mostrar provedor e modelo no cabeçalho de perfil"
+
+#: package/contents/ui/configAppearance.qml:36
+msgid "Chat Spacing: %1px"
+msgstr "Espaçamento do chat: %1px"
+
+#: package/contents/ui/configAppearance.qml:58
+msgid "Compact"
+msgstr "Compacto"
+
+#: package/contents/ui/configAppearance.qml:63
+msgid "Spacious"
+msgstr "Espaçoso"
+
+#: package/contents/ui/configAppearance.qml:75
+msgid "Chat Colors:"
+msgstr "Cores do chat:"
+
+#: package/contents/ui/configAppearance.qml:82
+msgid "Use custom user color"
+msgstr "Usar cor de usuário personalizada"
+
+#: package/contents/ui/configAppearance.qml:106
+msgid "Use custom assistant color"
+msgstr "Usar cor de assistente personalizada"
+
+#: package/contents/ui/configAppearance.qml:133
+msgid "UI Font:"
+msgstr "Fonte da interface:"
+
+#: package/contents/ui/configAppearance.qml:134
+msgid "Use custom UI font"
+msgstr "Usar fonte de interface personalizada"
+
+#: package/contents/ui/configAppearance.qml:184
+msgid "Code Font:"
+msgstr "Fonte de código:"
+
+#: package/contents/ui/configAppearance.qml:185
+msgid "Use custom code font"
+msgstr "Usar fonte de código personalizada"
+
+#: package/contents/ui/configAppearance.qml:230
+msgid "Thoughts Font:"
+msgstr "Fonte de pensamentos:"
+
+#: package/contents/ui/configAppearance.qml:231
+msgid "Use custom thoughts font"
+msgstr "Usar fonte de pensamentos personalizada"
+
+#: package/contents/ui/configAppearance.qml:281
+msgid "Header Icons:"
+msgstr "Ícones do cabeçalho:"
+
+#: package/contents/ui/configAppearance.qml:286
+msgid "Profile Header"
+msgstr "Cabeçalho de perfil"
+
+#: package/contents/ui/configAppearance.qml:297
+msgid "Always show Tasks"
+msgstr "Sempre mostrar Tarefas"
+
+#: package/contents/ui/configAppearance.qml:308
+msgid "Always show Auto Toggle"
+msgstr "Sempre mostrar o botão Auto"
+
+#: package/contents/ui/configAppearance.qml:319
+msgid "Show History"
+msgstr "Mostrar histórico"
+
+#: package/contents/ui/configAppearance.qml:330
+msgid "Show Copy conversation"
+msgstr "Mostrar Copiar conversa"
+
+#: package/contents/ui/configAppearance.qml:341
+msgid "Show Clear chat"
+msgstr "Mostrar Limpar chat"
+
+#: package/contents/ui/configAppearance.qml:352
+msgid "Show Settings"
+msgstr "Mostrar Configurações"
+
+#: package/contents/ui/configAppearance.qml:363
+msgid "Show Pin"
+msgstr "Mostrar fixar"
+
+#: package/contents/ui/ChatMessage.qml:117
+msgid "Web Search"
+msgstr "Busca na Web"
+
+#: package/contents/ui/ChatMessage.qml:144
+msgid "Thinking"
+msgstr "Pensando…"
+
+#: package/contents/ui/ChatMessage.qml:210
+msgid "Searched for: %1"
+msgstr "Pesquisado: %1"
+
+#: package/contents/ui/ChatMessage.qml:246
+msgid "Show %1 results"
+msgstr "Mostrar %1 resultados"
+
+#: package/contents/ui/ChatMessage.qml:362
+msgid "Copy to clipboard"
+msgstr "Copiar para a área de transferência"
+
+#: package/contents/ui/ChatMessage.qml:377
+msgid "Share output with assistant"
+msgstr "Compartilhar saída com o assistente"
 
 #: package/contents/ui/configGeneral.qml:59
 msgid "Failed to fetch gcloud token (exit %1): %2"
@@ -967,279 +1193,67 @@ msgstr ""
 "automaticamente ao escolher um preset."
 
 #: package/contents/ui/configGeneral.qml:1160
+msgid "Attachments:"
+msgstr "Anexos:"
+
+#: package/contents/ui/configGeneral.qml:1161
+msgid "Resize image attachments"
+msgstr "Redimensionar imagens anexadas"
+
+#: package/contents/ui/configGeneral.qml:1165
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr "Redimensiona imagens anexadas grandes para caberem em 800x600 antes do envio, reduzindo o tamanho do upload e os tokens de contexto."
+
+#: package/contents/ui/configGeneral.qml:1177
 msgid "Chat History:"
 msgstr "Histórico de chat:"
 
-#: package/contents/ui/configGeneral.qml:1161
+#: package/contents/ui/configGeneral.qml:1178
 msgid "Auto-save chat history"
 msgstr "Salvar histórico de chat automaticamente"
 
-#: package/contents/ui/configGeneral.qml:1165
-#: package/contents/ui/configGeneral.qml:1180
+#: package/contents/ui/configGeneral.qml:1182
+#: package/contents/ui/configGeneral.qml:1197
 msgid "Saves to ~/.local/share/plasmallm/chats/"
 msgstr "Salva em ~/.local/share/plasmallm/chats/"
 
-#: package/contents/ui/configGeneral.qml:1172
+#: package/contents/ui/configGeneral.qml:1189
 msgid "Save format:"
 msgstr "Formato de salvamento:"
 
-#: package/contents/ui/configGeneral.qml:1173
+#: package/contents/ui/configGeneral.qml:1190
 msgid "Plain text (.txt)"
 msgstr "Texto simples (.txt)"
 
-#: package/contents/ui/configGeneral.qml:1173
+#: package/contents/ui/configGeneral.qml:1190
 msgid "Structured (.jsonl)"
 msgstr "Estruturado (.jsonl)"
 
-#: package/contents/ui/configGeneral.qml:1192
+#: package/contents/ui/configGeneral.qml:1209
 msgid "Auto-clear:"
 msgstr "Limpeza automática:"
 
-#: package/contents/ui/configGeneral.qml:1196
+#: package/contents/ui/configGeneral.qml:1213
 msgid "Disabled"
 msgstr "Desativado"
 
-#: package/contents/ui/configGeneral.qml:1202
+#: package/contents/ui/configGeneral.qml:1219
 msgid "Instant (always clear when panel opens)"
 msgstr "Instantâneo (sempre limpar ao abrir o painel)"
 
-#: package/contents/ui/configGeneral.qml:1211
+#: package/contents/ui/configGeneral.qml:1228
 msgid "After"
 msgstr "Após"
 
-#: package/contents/ui/configGeneral.qml:1231
+#: package/contents/ui/configGeneral.qml:1248
 msgid "seconds"
 msgstr "segundos"
 
-#: package/contents/ui/configGeneral.qml:1231
+#: package/contents/ui/configGeneral.qml:1248
 msgid "minutes"
 msgstr "minutos"
-
-#: package/contents/ui/configTools.qml:94
-msgid "General Tool Settings"
-msgstr "Configurações gerais de ferramentas"
-
-#: package/contents/ui/configTools.qml:99
-msgid "System state:"
-msgstr "Estado do sistema:"
-
-#: package/contents/ui/configTools.qml:100
-msgid "Enable Tools"
-msgstr "Habilitar ferramentas"
-
-#: package/contents/ui/configTools.qml:109
-msgid "Master switch for all tool-calling functionality."
-msgstr ""
-"Interruptor principal para toda a funcionalidade de chamada de ferramentas."
-
-#: package/contents/ui/configTools.qml:116
-msgid "Path whitelist:"
-msgstr "Lista de permissões de caminhos:"
-
-#: package/contents/ui/configTools.qml:158
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Adicionar caminho, ex. $HOME/projects, /tmp"
-
-#: package/contents/ui/configTools.qml:164
-msgid "Add"
-msgstr "Adicionar"
-
-#: package/contents/ui/configTools.qml:176
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"A lista de permissões aplica-se a ferramentas do sistema de arquivos (ler, "
-"escrever, listar, pesquisar). Nota: 'run_command' não é restringido por esta "
-"lista."
-
-#: package/contents/ui/configTools.qml:184
-msgid "Max read size:"
-msgstr "Tamanho máximo de leitura:"
-
-#: package/contents/ui/configTools.qml:196
-msgid "Max write size:"
-msgstr "Tamanho máximo de gravação:"
-
-#: package/contents/ui/configTools.qml:208
-msgid "Max HTTP response:"
-msgstr "Resposta HTTP máxima:"
-
-#: package/contents/ui/configTools.qml:221
-msgid "Native Adapter Features"
-msgstr "Recursos nativos do adaptador"
-
-#: package/contents/ui/configTools.qml:227
-msgid "Google Search:"
-msgstr "Pesquisa Google:"
-
-#: package/contents/ui/configTools.qml:228
-msgid "Enable Native Google Search Grounding"
-msgstr "Habilitar grounding nativo do Google Search"
-
-#: package/contents/ui/configTools.qml:238
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Usar a pesquisa Google integrada do Gemini para grounding. Isso substitui a "
-"ferramenta de pesquisa web padrão."
-
-#: package/contents/ui/configTools.qml:245
-msgid "Code Execution:"
-msgstr "Execução de código:"
-
-#: package/contents/ui/configTools.qml:246
-msgid "Enable Native Python Code Execution"
-msgstr "Habilitar execução nativa de código Python"
-
-#: package/contents/ui/configTools.qml:256
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Permitir que o Gemini escreva e execute código Python em uma sandbox segura "
-"do lado do servidor."
-
-#: package/contents/ui/configTools.qml:264
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Combinar ferramentas nativas com comandos requer um modelo mais recente. O "
-"modelo atualmente selecionado (%1) pode encontrar erros."
-
-#: package/contents/ui/configTools.qml:272
-msgid "Individual Tools"
-msgstr "Ferramentas individuais"
-
-#: package/contents/ui/ChatMessage.qml:117
-msgid "Web Search"
-msgstr "Busca na Web"
-
-#: package/contents/ui/ChatMessage.qml:144
-msgid "Thinking"
-msgstr "Pensando…"
-
-#: package/contents/ui/ChatMessage.qml:210
-msgid "Searched for: %1"
-msgstr "Pesquisado: %1"
-
-#: package/contents/ui/ChatMessage.qml:246
-msgid "Show %1 results"
-msgstr "Mostrar %1 resultados"
-
-#: package/contents/ui/ChatMessage.qml:360
-msgid "Copy to clipboard"
-msgstr "Copiar para a área de transferência"
-
-#: package/contents/ui/ChatMessage.qml:375
-msgid "Share output with assistant"
-msgstr "Compartilhar saída com o assistente"
-
-#: package/contents/ui/ColorButton.qml:26
-msgid "Color button"
-msgstr "Botão de cor"
-
-#: package/contents/ui/ColorButton.qml:28
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "A cor atual é %1. Este botão abrirá um diálogo de seleção de cores."
-
-#: package/contents/ui/ColorButton.qml:29
-msgid "Current color is %1."
-msgstr "A cor atual é %1."
-
-#: package/contents/ui/configAppearance.qml:19
-msgid "Profile Header:"
-msgstr "Cabeçalho de perfil:"
-
-#: package/contents/ui/configAppearance.qml:20
-msgid "Show provider and model in profile header"
-msgstr "Mostrar provedor e modelo no cabeçalho de perfil"
-
-#: package/contents/ui/configAppearance.qml:36
-msgid "Chat Spacing: %1px"
-msgstr "Espaçamento do chat: %1px"
-
-#: package/contents/ui/configAppearance.qml:58
-msgid "Compact"
-msgstr "Compacto"
-
-#: package/contents/ui/configAppearance.qml:63
-msgid "Spacious"
-msgstr "Espaçoso"
-
-#: package/contents/ui/configAppearance.qml:75
-msgid "Chat Colors:"
-msgstr "Cores do chat:"
-
-#: package/contents/ui/configAppearance.qml:82
-msgid "Use custom user color"
-msgstr "Usar cor de usuário personalizada"
-
-#: package/contents/ui/configAppearance.qml:106
-msgid "Use custom assistant color"
-msgstr "Usar cor de assistente personalizada"
-
-#: package/contents/ui/configAppearance.qml:133
-msgid "UI Font:"
-msgstr "Fonte da interface:"
-
-#: package/contents/ui/configAppearance.qml:134
-msgid "Use custom UI font"
-msgstr "Usar fonte de interface personalizada"
-
-#: package/contents/ui/configAppearance.qml:184
-msgid "Code Font:"
-msgstr "Fonte de código:"
-
-#: package/contents/ui/configAppearance.qml:185
-msgid "Use custom code font"
-msgstr "Usar fonte de código personalizada"
-
-#: package/contents/ui/configAppearance.qml:230
-msgid "Thoughts Font:"
-msgstr "Fonte de pensamentos:"
-
-#: package/contents/ui/configAppearance.qml:231
-msgid "Use custom thoughts font"
-msgstr "Usar fonte de pensamentos personalizada"
-
-#: package/contents/ui/configAppearance.qml:281
-msgid "Header Icons:"
-msgstr "Ícones do cabeçalho:"
-
-#: package/contents/ui/configAppearance.qml:286
-msgid "Profile Header"
-msgstr "Cabeçalho de perfil"
-
-#: package/contents/ui/configAppearance.qml:297
-msgid "Always show Tasks"
-msgstr "Sempre mostrar Tarefas"
-
-#: package/contents/ui/configAppearance.qml:308
-msgid "Always show Auto Toggle"
-msgstr "Sempre mostrar o botão Auto"
-
-#: package/contents/ui/configAppearance.qml:319
-msgid "Show History"
-msgstr "Mostrar histórico"
-
-#: package/contents/ui/configAppearance.qml:330
-msgid "Show Copy conversation"
-msgstr "Mostrar Copiar conversa"
-
-#: package/contents/ui/configAppearance.qml:341
-msgid "Show Clear chat"
-msgstr "Mostrar Limpar chat"
-
-#: package/contents/ui/configAppearance.qml:352
-msgid "Show Settings"
-msgstr "Mostrar Configurações"
-
-#: package/contents/ui/configAppearance.qml:363
-msgid "Show Pin"
-msgstr "Mostrar fixar"
 
 #: package/contents/ui/main.qml:221
 msgid ""
@@ -1249,15 +1263,15 @@ msgstr ""
 "Falha ao obter o token do gcloud (saída %1): %2. Certifique-se de que o "
 "gcloud está instalado e autenticado."
 
-#: package/contents/ui/main.qml:1158
+#: package/contents/ui/main.qml:1169
 msgid "No tool request pending to approve."
 msgstr "Nenhuma solicitação de ferramenta pendente para aprovar."
 
-#: package/contents/ui/main.qml:1175
+#: package/contents/ui/main.qml:1186
 msgid "No tool request pending to deny."
 msgstr "Nenhuma solicitação de ferramenta pendente para negar."
 
-#: package/contents/ui/main.qml:1202
+#: package/contents/ui/main.qml:1213
 msgid ""
 "Skip approvals mode enabled for this session. All enabled tools will run "
 "automatically, bypassing 'Ask before running' settings."
@@ -1266,7 +1280,7 @@ msgstr ""
 "habilitadas serão executadas automaticamente, ignorando as configurações de "
 "'Perguntar antes de executar'."
 
-#: package/contents/ui/main.qml:1203
+#: package/contents/ui/main.qml:1214
 msgid ""
 "Skip approvals mode disabled. Tools will revert to your configured 'Ask "
 "before running' settings."
@@ -1274,95 +1288,95 @@ msgstr ""
 "Modo de pular aprovações desabilitado. As ferramentas reverterão para as "
 "configurações definidas de 'Perguntar antes de executar'."
 
-#: package/contents/ui/main.qml:1222 package/contents/ui/main.qml:2179
+#: package/contents/ui/main.qml:1233 package/contents/ui/main.qml:2190
 msgid "Default"
 msgstr "Padrão"
 
-#: package/contents/ui/main.qml:1222
+#: package/contents/ui/main.qml:1233
 msgid "Current profile: **%1**"
 msgstr "Perfil atual: **%1**"
 
-#: package/contents/ui/main.qml:1224
+#: package/contents/ui/main.qml:1235
 msgid "Available profiles:"
 msgstr "Perfis disponíveis:"
 
-#: package/contents/ui/main.qml:1226
+#: package/contents/ui/main.qml:1237
 msgid "active"
 msgstr "ativo"
 
-#: package/contents/ui/main.qml:1229
+#: package/contents/ui/main.qml:1240
 msgid "Type `/profile <name>` to switch."
 msgstr "Digite `/profile <nome>` para alternar."
 
-#: package/contents/ui/main.qml:1246
+#: package/contents/ui/main.qml:1257
 msgid "Switched to profile: **%1**"
 msgstr "Mudou para o perfil: **%1**"
 
-#: package/contents/ui/main.qml:1248
+#: package/contents/ui/main.qml:1259
 msgid "Unknown profile: **%1**"
 msgstr "Perfil desconhecido: **%1**"
 
-#: package/contents/ui/main.qml:1255 package/contents/ui/main.qml:1338
+#: package/contents/ui/main.qml:1266 package/contents/ui/main.qml:1349
 msgid "none"
 msgstr "nenhum"
 
-#: package/contents/ui/main.qml:1255
+#: package/contents/ui/main.qml:1266
 msgid "Current model: **%1**"
 msgstr "Modelo atual: **%1**"
 
-#: package/contents/ui/main.qml:1257
+#: package/contents/ui/main.qml:1268
 msgid "Available models:"
 msgstr "Modelos disponíveis:"
 
-#: package/contents/ui/main.qml:1259
+#: package/contents/ui/main.qml:1270
 msgid "Type `/model <name>` to switch."
 msgstr "Digite `/model <name>` para trocar."
 
-#: package/contents/ui/main.qml:1261
+#: package/contents/ui/main.qml:1272
 msgid "No models cached. Use **Fetch Models** in settings."
 msgstr "Nenhum modelo em cache. Use **Buscar modelos** nas configurações."
 
-#: package/contents/ui/main.qml:1286
+#: package/contents/ui/main.qml:1297
 msgid "Switched to model: **%1**"
 msgstr "Trocado para o modelo: **%1**"
 
-#: package/contents/ui/main.qml:1295
+#: package/contents/ui/main.qml:1306
 msgid "No tasks configured. Add tasks in Settings."
 msgstr "Nenhuma tarefa configurada. Adicione tarefas em Configurações."
 
-#: package/contents/ui/main.qml:1297
+#: package/contents/ui/main.qml:1308
 msgid "(auto)"
 msgstr "(automático)"
 
-#: package/contents/ui/main.qml:1298
+#: package/contents/ui/main.qml:1309
 msgid "Available tasks:"
 msgstr "Tarefas disponíveis:"
 
-#: package/contents/ui/main.qml:1298
+#: package/contents/ui/main.qml:1309
 msgid "Type `/task <name>` to run."
 msgstr "Digite `/task <name>` para executar."
 
-#: package/contents/ui/main.qml:1338
+#: package/contents/ui/main.qml:1349
 msgid "Unknown task: **%1**. Available: %2"
 msgstr "Tarefa desconhecida: **%1**. Disponíveis: %2"
 
-#: package/contents/ui/main.qml:1352
+#: package/contents/ui/main.qml:1363
 msgid "The user declined to run this command."
 msgstr "O usuário recusou executar este comando."
 
-#: package/contents/ui/main.qml:1696
+#: package/contents/ui/main.qml:1707
 msgid "Unknown tool %1"
 msgstr "Ferramenta desconhecida %1"
 
-#: package/contents/ui/main.qml:1712
+#: package/contents/ui/main.qml:1723
 msgid "Error: path '%1' outside whitelist"
 msgstr "Erro: caminho '%1' fora da lista de permissões"
 
-#: package/contents/ui/main.qml:1725
+#: package/contents/ui/main.qml:1736
 msgid "Executing %1…"
 msgstr "Executando %1…"
 
-#: package/contents/ui/main.qml:1978
+#: package/contents/ui/main.qml:1989
 msgid "Session reset requested."
 msgstr "Redefinição de sessão solicitada."
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-19 23:01-0400\n"
+"POT-Creation-Date: 2026-05-20 17:11-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Dutch\n"
@@ -667,7 +667,7 @@ msgid "Keep open"
 msgstr "Open houden"
 
 #: package/contents/ui/FullRepresentation.qml:499
-#: package/contents/ui/main.qml:1173
+#: package/contents/ui/main.qml:1184
 msgid "The user denied this tool call."
 msgstr "De gebruiker heeft deze gereedschapsaanroep geweigerd."
 
@@ -755,6 +755,231 @@ msgstr "Anthropic"
 #: package/contents/ui/api.js:194
 msgid "Google Gemini"
 msgstr "Google Gemini"
+
+#: package/contents/ui/configTools.qml:94
+msgid "General Tool Settings"
+msgstr "Algemene toolinstellingen"
+
+#: package/contents/ui/configTools.qml:99
+msgid "System state:"
+msgstr "Systeemstatus:"
+
+#: package/contents/ui/configTools.qml:100
+msgid "Enable Tools"
+msgstr "Tools inschakelen"
+
+#: package/contents/ui/configTools.qml:109
+msgid "Master switch for all tool-calling functionality."
+msgstr "Hoofdschakelaar voor alle tool-aanroepfunctionaliteit."
+
+#: package/contents/ui/configTools.qml:116
+msgid "Path whitelist:"
+msgstr "Padwitte lijst:"
+
+#: package/contents/ui/configTools.qml:158
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Pad toevoegen, bijv. $HOME/projects, /tmp"
+
+#: package/contents/ui/configTools.qml:164
+msgid "Add"
+msgstr "Toevoegen"
+
+#: package/contents/ui/configTools.qml:176
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Witte lijst is van toepassing op bestandssysteemtools (lezen, schrijven, "
+"weergeven, zoeken). Opmerking: 'run_command' wordt niet beperkt door deze "
+"lijst."
+
+#: package/contents/ui/configTools.qml:184
+msgid "Max read size:"
+msgstr "Maximale leesgrootte:"
+
+#: package/contents/ui/configTools.qml:196
+msgid "Max write size:"
+msgstr "Maximale schrijfgrootte:"
+
+#: package/contents/ui/configTools.qml:208
+msgid "Max HTTP response:"
+msgstr "Maximale HTTP-respons:"
+
+#: package/contents/ui/configTools.qml:221
+msgid "Native Adapter Features"
+msgstr "Ingebouwde adapterfuncties"
+
+#: package/contents/ui/configTools.qml:227
+msgid "Google Search:"
+msgstr "Google Zoeken:"
+
+#: package/contents/ui/configTools.qml:228
+msgid "Enable Native Google Search Grounding"
+msgstr "Ingebouwde Google Zoeken-grounding inschakelen"
+
+#: package/contents/ui/configTools.qml:238
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Gebruik de ingebouwde Google Zoeken van Gemini voor grounding. Dit "
+"overschrijft de standaard websearchtool."
+
+#: package/contents/ui/configTools.qml:245
+msgid "Code Execution:"
+msgstr "Code-uitvoering:"
+
+#: package/contents/ui/configTools.qml:246
+msgid "Enable Native Python Code Execution"
+msgstr "Ingebouwde Python-codeuitvoering inschakelen"
+
+#: package/contents/ui/configTools.qml:256
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Gemini toestaan om Python-code te schrijven en uit te voeren in een "
+"beveiligde server-side sandbox."
+
+#: package/contents/ui/configTools.qml:264
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Het combineren van native tools met commando's vereist een nieuwer model. "
+"Het momenteel geselecteerde model (%1) kan fouten ondervinden."
+
+#: package/contents/ui/configTools.qml:272
+msgid "Individual Tools"
+msgstr "Afzonderlijke tools"
+
+#: package/contents/ui/ColorButton.qml:26
+msgid "Color button"
+msgstr "Kleurknop"
+
+#: package/contents/ui/ColorButton.qml:28
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Huidige kleur is %1. Deze knop opent een kleurkeuzevenster."
+
+#: package/contents/ui/ColorButton.qml:29
+msgid "Current color is %1."
+msgstr "Huidige kleur is %1."
+
+#: package/contents/ui/configAppearance.qml:19
+msgid "Profile Header:"
+msgstr "Profielkoptekst:"
+
+#: package/contents/ui/configAppearance.qml:20
+msgid "Show provider and model in profile header"
+msgstr "Toon provider en model in profielkoptekst"
+
+#: package/contents/ui/configAppearance.qml:36
+msgid "Chat Spacing: %1px"
+msgstr "Chatafstand: %1px"
+
+#: package/contents/ui/configAppearance.qml:58
+msgid "Compact"
+msgstr "Compact"
+
+#: package/contents/ui/configAppearance.qml:63
+msgid "Spacious"
+msgstr "Ruim"
+
+#: package/contents/ui/configAppearance.qml:75
+msgid "Chat Colors:"
+msgstr "Chatkleuren:"
+
+#: package/contents/ui/configAppearance.qml:82
+msgid "Use custom user color"
+msgstr "Aangepaste gebruikerskleur gebruiken"
+
+#: package/contents/ui/configAppearance.qml:106
+msgid "Use custom assistant color"
+msgstr "Aangepaste assistentkleur gebruiken"
+
+#: package/contents/ui/configAppearance.qml:133
+msgid "UI Font:"
+msgstr "UI-lettertype:"
+
+#: package/contents/ui/configAppearance.qml:134
+msgid "Use custom UI font"
+msgstr "Aangepast UI-lettertype gebruiken"
+
+#: package/contents/ui/configAppearance.qml:184
+msgid "Code Font:"
+msgstr "Code-lettertype:"
+
+#: package/contents/ui/configAppearance.qml:185
+msgid "Use custom code font"
+msgstr "Aangepast code-lettertype gebruiken"
+
+#: package/contents/ui/configAppearance.qml:230
+msgid "Thoughts Font:"
+msgstr "Gedachten-lettertype:"
+
+#: package/contents/ui/configAppearance.qml:231
+msgid "Use custom thoughts font"
+msgstr "Aangepast gedachten-lettertype gebruiken"
+
+#: package/contents/ui/configAppearance.qml:281
+msgid "Header Icons:"
+msgstr "Koptekstpictogrammen:"
+
+#: package/contents/ui/configAppearance.qml:286
+msgid "Profile Header"
+msgstr "Profielkoptekst"
+
+#: package/contents/ui/configAppearance.qml:297
+msgid "Always show Tasks"
+msgstr "Taken altijd tonen"
+
+#: package/contents/ui/configAppearance.qml:308
+msgid "Always show Auto Toggle"
+msgstr "Auto-schakelaar altijd tonen"
+
+#: package/contents/ui/configAppearance.qml:319
+msgid "Show History"
+msgstr "Geschiedenis tonen"
+
+#: package/contents/ui/configAppearance.qml:330
+msgid "Show Copy conversation"
+msgstr "Gesprek kopiëren tonen"
+
+#: package/contents/ui/configAppearance.qml:341
+msgid "Show Clear chat"
+msgstr "Chat wissen tonen"
+
+#: package/contents/ui/configAppearance.qml:352
+msgid "Show Settings"
+msgstr "Instellingen tonen"
+
+#: package/contents/ui/configAppearance.qml:363
+msgid "Show Pin"
+msgstr "Vastmaakpictogram tonen"
+
+#: package/contents/ui/ChatMessage.qml:117
+msgid "Web Search"
+msgstr "Webzoekopdracht"
+
+#: package/contents/ui/ChatMessage.qml:144
+msgid "Thinking"
+msgstr "Denken…"
+
+#: package/contents/ui/ChatMessage.qml:210
+msgid "Searched for: %1"
+msgstr "Gezocht naar: %1"
+
+#: package/contents/ui/ChatMessage.qml:246
+msgid "Show %1 results"
+msgstr "%1 resultaten tonen"
+
+#: package/contents/ui/ChatMessage.qml:362
+msgid "Copy to clipboard"
+msgstr "Naar klembord kopiëren"
+
+#: package/contents/ui/ChatMessage.qml:377
+msgid "Share output with assistant"
+msgstr "Uitvoer delen met assistent"
 
 #: package/contents/ui/configGeneral.qml:59
 msgid "Failed to fetch gcloud token (exit %1): %2"
@@ -966,278 +1191,67 @@ msgstr ""
 "Automatisch ingesteld bij het kiezen van een preset."
 
 #: package/contents/ui/configGeneral.qml:1160
+msgid "Attachments:"
+msgstr "Bijlagen:"
+
+#: package/contents/ui/configGeneral.qml:1161
+msgid "Resize image attachments"
+msgstr "Afbeeldingsbijlagen verkleinen"
+
+#: package/contents/ui/configGeneral.qml:1165
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr "Verkleint grote afbeeldingsbijlagen tot maximaal 800x600 vóór het verzenden, waardoor de uploadgrootte en het aantal contexttokens worden verminderd."
+
+#: package/contents/ui/configGeneral.qml:1177
 msgid "Chat History:"
 msgstr "Chatgeschiedenis:"
 
-#: package/contents/ui/configGeneral.qml:1161
+#: package/contents/ui/configGeneral.qml:1178
 msgid "Auto-save chat history"
 msgstr "Chatgeschiedenis automatisch opslaan"
 
-#: package/contents/ui/configGeneral.qml:1165
-#: package/contents/ui/configGeneral.qml:1180
+#: package/contents/ui/configGeneral.qml:1182
+#: package/contents/ui/configGeneral.qml:1197
 msgid "Saves to ~/.local/share/plasmallm/chats/"
 msgstr "Slaat op in ~/.local/share/plasmallm/chats/"
 
-#: package/contents/ui/configGeneral.qml:1172
+#: package/contents/ui/configGeneral.qml:1189
 msgid "Save format:"
 msgstr "Opslagformaat:"
 
-#: package/contents/ui/configGeneral.qml:1173
+#: package/contents/ui/configGeneral.qml:1190
 msgid "Plain text (.txt)"
 msgstr "Platte tekst (.txt)"
 
-#: package/contents/ui/configGeneral.qml:1173
+#: package/contents/ui/configGeneral.qml:1190
 msgid "Structured (.jsonl)"
 msgstr "Gestructureerd (.jsonl)"
 
-#: package/contents/ui/configGeneral.qml:1192
+#: package/contents/ui/configGeneral.qml:1209
 msgid "Auto-clear:"
 msgstr "Automatisch wissen:"
 
-#: package/contents/ui/configGeneral.qml:1196
+#: package/contents/ui/configGeneral.qml:1213
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
-#: package/contents/ui/configGeneral.qml:1202
+#: package/contents/ui/configGeneral.qml:1219
 msgid "Instant (always clear when panel opens)"
 msgstr "Onmiddellijk (altijd wissen bij openen paneel)"
 
-#: package/contents/ui/configGeneral.qml:1211
+#: package/contents/ui/configGeneral.qml:1228
 msgid "After"
 msgstr "Na"
 
-#: package/contents/ui/configGeneral.qml:1231
+#: package/contents/ui/configGeneral.qml:1248
 msgid "seconds"
 msgstr "seconden"
 
-#: package/contents/ui/configGeneral.qml:1231
+#: package/contents/ui/configGeneral.qml:1248
 msgid "minutes"
 msgstr "minuten"
-
-#: package/contents/ui/configTools.qml:94
-msgid "General Tool Settings"
-msgstr "Algemene toolinstellingen"
-
-#: package/contents/ui/configTools.qml:99
-msgid "System state:"
-msgstr "Systeemstatus:"
-
-#: package/contents/ui/configTools.qml:100
-msgid "Enable Tools"
-msgstr "Tools inschakelen"
-
-#: package/contents/ui/configTools.qml:109
-msgid "Master switch for all tool-calling functionality."
-msgstr "Hoofdschakelaar voor alle tool-aanroepfunctionaliteit."
-
-#: package/contents/ui/configTools.qml:116
-msgid "Path whitelist:"
-msgstr "Padwitte lijst:"
-
-#: package/contents/ui/configTools.qml:158
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Pad toevoegen, bijv. $HOME/projects, /tmp"
-
-#: package/contents/ui/configTools.qml:164
-msgid "Add"
-msgstr "Toevoegen"
-
-#: package/contents/ui/configTools.qml:176
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Witte lijst is van toepassing op bestandssysteemtools (lezen, schrijven, "
-"weergeven, zoeken). Opmerking: 'run_command' wordt niet beperkt door deze "
-"lijst."
-
-#: package/contents/ui/configTools.qml:184
-msgid "Max read size:"
-msgstr "Maximale leesgrootte:"
-
-#: package/contents/ui/configTools.qml:196
-msgid "Max write size:"
-msgstr "Maximale schrijfgrootte:"
-
-#: package/contents/ui/configTools.qml:208
-msgid "Max HTTP response:"
-msgstr "Maximale HTTP-respons:"
-
-#: package/contents/ui/configTools.qml:221
-msgid "Native Adapter Features"
-msgstr "Ingebouwde adapterfuncties"
-
-#: package/contents/ui/configTools.qml:227
-msgid "Google Search:"
-msgstr "Google Zoeken:"
-
-#: package/contents/ui/configTools.qml:228
-msgid "Enable Native Google Search Grounding"
-msgstr "Ingebouwde Google Zoeken-grounding inschakelen"
-
-#: package/contents/ui/configTools.qml:238
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Gebruik de ingebouwde Google Zoeken van Gemini voor grounding. Dit "
-"overschrijft de standaard websearchtool."
-
-#: package/contents/ui/configTools.qml:245
-msgid "Code Execution:"
-msgstr "Code-uitvoering:"
-
-#: package/contents/ui/configTools.qml:246
-msgid "Enable Native Python Code Execution"
-msgstr "Ingebouwde Python-codeuitvoering inschakelen"
-
-#: package/contents/ui/configTools.qml:256
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Gemini toestaan om Python-code te schrijven en uit te voeren in een "
-"beveiligde server-side sandbox."
-
-#: package/contents/ui/configTools.qml:264
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Het combineren van native tools met commando's vereist een nieuwer model. "
-"Het momenteel geselecteerde model (%1) kan fouten ondervinden."
-
-#: package/contents/ui/configTools.qml:272
-msgid "Individual Tools"
-msgstr "Afzonderlijke tools"
-
-#: package/contents/ui/ChatMessage.qml:117
-msgid "Web Search"
-msgstr "Webzoekopdracht"
-
-#: package/contents/ui/ChatMessage.qml:144
-msgid "Thinking"
-msgstr "Denken…"
-
-#: package/contents/ui/ChatMessage.qml:210
-msgid "Searched for: %1"
-msgstr "Gezocht naar: %1"
-
-#: package/contents/ui/ChatMessage.qml:246
-msgid "Show %1 results"
-msgstr "%1 resultaten tonen"
-
-#: package/contents/ui/ChatMessage.qml:360
-msgid "Copy to clipboard"
-msgstr "Naar klembord kopiëren"
-
-#: package/contents/ui/ChatMessage.qml:375
-msgid "Share output with assistant"
-msgstr "Uitvoer delen met assistent"
-
-#: package/contents/ui/ColorButton.qml:26
-msgid "Color button"
-msgstr "Kleurknop"
-
-#: package/contents/ui/ColorButton.qml:28
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Huidige kleur is %1. Deze knop opent een kleurkeuzevenster."
-
-#: package/contents/ui/ColorButton.qml:29
-msgid "Current color is %1."
-msgstr "Huidige kleur is %1."
-
-#: package/contents/ui/configAppearance.qml:19
-msgid "Profile Header:"
-msgstr "Profielkoptekst:"
-
-#: package/contents/ui/configAppearance.qml:20
-msgid "Show provider and model in profile header"
-msgstr "Toon provider en model in profielkoptekst"
-
-#: package/contents/ui/configAppearance.qml:36
-msgid "Chat Spacing: %1px"
-msgstr "Chatafstand: %1px"
-
-#: package/contents/ui/configAppearance.qml:58
-msgid "Compact"
-msgstr "Compact"
-
-#: package/contents/ui/configAppearance.qml:63
-msgid "Spacious"
-msgstr "Ruim"
-
-#: package/contents/ui/configAppearance.qml:75
-msgid "Chat Colors:"
-msgstr "Chatkleuren:"
-
-#: package/contents/ui/configAppearance.qml:82
-msgid "Use custom user color"
-msgstr "Aangepaste gebruikerskleur gebruiken"
-
-#: package/contents/ui/configAppearance.qml:106
-msgid "Use custom assistant color"
-msgstr "Aangepaste assistentkleur gebruiken"
-
-#: package/contents/ui/configAppearance.qml:133
-msgid "UI Font:"
-msgstr "UI-lettertype:"
-
-#: package/contents/ui/configAppearance.qml:134
-msgid "Use custom UI font"
-msgstr "Aangepast UI-lettertype gebruiken"
-
-#: package/contents/ui/configAppearance.qml:184
-msgid "Code Font:"
-msgstr "Code-lettertype:"
-
-#: package/contents/ui/configAppearance.qml:185
-msgid "Use custom code font"
-msgstr "Aangepast code-lettertype gebruiken"
-
-#: package/contents/ui/configAppearance.qml:230
-msgid "Thoughts Font:"
-msgstr "Gedachten-lettertype:"
-
-#: package/contents/ui/configAppearance.qml:231
-msgid "Use custom thoughts font"
-msgstr "Aangepast gedachten-lettertype gebruiken"
-
-#: package/contents/ui/configAppearance.qml:281
-msgid "Header Icons:"
-msgstr "Koptekstpictogrammen:"
-
-#: package/contents/ui/configAppearance.qml:286
-msgid "Profile Header"
-msgstr "Profielkoptekst"
-
-#: package/contents/ui/configAppearance.qml:297
-msgid "Always show Tasks"
-msgstr "Taken altijd tonen"
-
-#: package/contents/ui/configAppearance.qml:308
-msgid "Always show Auto Toggle"
-msgstr "Auto-schakelaar altijd tonen"
-
-#: package/contents/ui/configAppearance.qml:319
-msgid "Show History"
-msgstr "Geschiedenis tonen"
-
-#: package/contents/ui/configAppearance.qml:330
-msgid "Show Copy conversation"
-msgstr "Gesprek kopiëren tonen"
-
-#: package/contents/ui/configAppearance.qml:341
-msgid "Show Clear chat"
-msgstr "Chat wissen tonen"
-
-#: package/contents/ui/configAppearance.qml:352
-msgid "Show Settings"
-msgstr "Instellingen tonen"
-
-#: package/contents/ui/configAppearance.qml:363
-msgid "Show Pin"
-msgstr "Vastmaakpictogram tonen"
 
 #: package/contents/ui/main.qml:221
 msgid ""
@@ -1247,15 +1261,15 @@ msgstr ""
 "Kan gcloud-token niet ophalen (afsluiting %1): %2. Zorg ervoor dat gcloud is "
 "geïnstalleerd en geverifieerd."
 
-#: package/contents/ui/main.qml:1158
+#: package/contents/ui/main.qml:1169
 msgid "No tool request pending to approve."
 msgstr "Geen gereedschapsverzoek in afwachting van goedkeuring."
 
-#: package/contents/ui/main.qml:1175
+#: package/contents/ui/main.qml:1186
 msgid "No tool request pending to deny."
 msgstr "Geen gereedschapsverzoek in afwachting van weigering."
 
-#: package/contents/ui/main.qml:1202
+#: package/contents/ui/main.qml:1213
 msgid ""
 "Skip approvals mode enabled for this session. All enabled tools will run "
 "automatically, bypassing 'Ask before running' settings."
@@ -1264,7 +1278,7 @@ msgstr ""
 "Alle ingeschakelde tools worden automatisch uitgevoerd, waarbij de "
 "instellingen voor 'Vragen voor uitvoering' worden omzeild."
 
-#: package/contents/ui/main.qml:1203
+#: package/contents/ui/main.qml:1214
 msgid ""
 "Skip approvals mode disabled. Tools will revert to your configured 'Ask "
 "before running' settings."
@@ -1272,95 +1286,95 @@ msgstr ""
 "Modus voor het overslaan van goedkeuringen uitgeschakeld. Tools keren terug "
 "naar uw geconfigureerde instellingen voor 'Vragen voor uitvoering'."
 
-#: package/contents/ui/main.qml:1222 package/contents/ui/main.qml:2179
+#: package/contents/ui/main.qml:1233 package/contents/ui/main.qml:2190
 msgid "Default"
 msgstr "Standaard"
 
-#: package/contents/ui/main.qml:1222
+#: package/contents/ui/main.qml:1233
 msgid "Current profile: **%1**"
 msgstr "Huidig profiel: **%1**"
 
-#: package/contents/ui/main.qml:1224
+#: package/contents/ui/main.qml:1235
 msgid "Available profiles:"
 msgstr "Beschikbare profielen:"
 
-#: package/contents/ui/main.qml:1226
+#: package/contents/ui/main.qml:1237
 msgid "active"
 msgstr "actief"
 
-#: package/contents/ui/main.qml:1229
+#: package/contents/ui/main.qml:1240
 msgid "Type `/profile <name>` to switch."
 msgstr "Typ `/profile <naam>` om te wisselen."
 
-#: package/contents/ui/main.qml:1246
+#: package/contents/ui/main.qml:1257
 msgid "Switched to profile: **%1**"
 msgstr "Profiel gewisseld naar: **%1**"
 
-#: package/contents/ui/main.qml:1248
+#: package/contents/ui/main.qml:1259
 msgid "Unknown profile: **%1**"
 msgstr "Onbekend profiel: **%1**"
 
-#: package/contents/ui/main.qml:1255 package/contents/ui/main.qml:1338
+#: package/contents/ui/main.qml:1266 package/contents/ui/main.qml:1349
 msgid "none"
 msgstr "geen"
 
-#: package/contents/ui/main.qml:1255
+#: package/contents/ui/main.qml:1266
 msgid "Current model: **%1**"
 msgstr "Huidig model: **%1**"
 
-#: package/contents/ui/main.qml:1257
+#: package/contents/ui/main.qml:1268
 msgid "Available models:"
 msgstr "Beschikbare modellen:"
 
-#: package/contents/ui/main.qml:1259
+#: package/contents/ui/main.qml:1270
 msgid "Type `/model <name>` to switch."
 msgstr "Typ `/model <name>` om te wisselen."
 
-#: package/contents/ui/main.qml:1261
+#: package/contents/ui/main.qml:1272
 msgid "No models cached. Use **Fetch Models** in settings."
 msgstr "Geen modellen gecached. Gebruik **Modellen ophalen** in instellingen."
 
-#: package/contents/ui/main.qml:1286
+#: package/contents/ui/main.qml:1297
 msgid "Switched to model: **%1**"
 msgstr "Overgeschakeld naar model: **%1**"
 
-#: package/contents/ui/main.qml:1295
+#: package/contents/ui/main.qml:1306
 msgid "No tasks configured. Add tasks in Settings."
 msgstr "Geen taken geconfigureerd. Voeg taken toe in Instellingen."
 
-#: package/contents/ui/main.qml:1297
+#: package/contents/ui/main.qml:1308
 msgid "(auto)"
 msgstr "(automatisch)"
 
-#: package/contents/ui/main.qml:1298
+#: package/contents/ui/main.qml:1309
 msgid "Available tasks:"
 msgstr "Beschikbare taken:"
 
-#: package/contents/ui/main.qml:1298
+#: package/contents/ui/main.qml:1309
 msgid "Type `/task <name>` to run."
 msgstr "Typ `/task <name>` om uit te voeren."
 
-#: package/contents/ui/main.qml:1338
+#: package/contents/ui/main.qml:1349
 msgid "Unknown task: **%1**. Available: %2"
 msgstr "Onbekende taak: **%1**. Beschikbaar: %2"
 
-#: package/contents/ui/main.qml:1352
+#: package/contents/ui/main.qml:1363
 msgid "The user declined to run this command."
 msgstr "De gebruiker heeft geweigerd deze opdracht uit te voeren."
 
-#: package/contents/ui/main.qml:1696
+#: package/contents/ui/main.qml:1707
 msgid "Unknown tool %1"
 msgstr "Onbekende tool %1"
 
-#: package/contents/ui/main.qml:1712
+#: package/contents/ui/main.qml:1723
 msgid "Error: path '%1' outside whitelist"
 msgstr "Fout: pad '%1' buiten witte lijst"
 
-#: package/contents/ui/main.qml:1725
+#: package/contents/ui/main.qml:1736
 msgid "Executing %1…"
 msgstr "%1 uitvoeren…"
 
-#: package/contents/ui/main.qml:1978
+#: package/contents/ui/main.qml:1989
 msgid "Session reset requested."
 msgstr "Sessie-reset aangevraagd."
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-19 23:01-0400\n"
+"POT-Creation-Date: 2026-05-20 17:11-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -659,7 +659,7 @@ msgid "Keep open"
 msgstr "Hold åpent"
 
 #: package/contents/ui/FullRepresentation.qml:499
-#: package/contents/ui/main.qml:1173
+#: package/contents/ui/main.qml:1184
 msgid "The user denied this tool call."
 msgstr "Brukeren avslo dette verktøykallet."
 
@@ -748,6 +748,230 @@ msgstr "Anthropic"
 #: package/contents/ui/api.js:194
 msgid "Google Gemini"
 msgstr "Google Gemini"
+
+#: package/contents/ui/configTools.qml:94
+msgid "General Tool Settings"
+msgstr "Generelle verktøyinnstillinger"
+
+#: package/contents/ui/configTools.qml:99
+msgid "System state:"
+msgstr "Systemtilstand:"
+
+#: package/contents/ui/configTools.qml:100
+msgid "Enable Tools"
+msgstr "Aktiver verktøy"
+
+#: package/contents/ui/configTools.qml:109
+msgid "Master switch for all tool-calling functionality."
+msgstr "Hovedbryter for all verktøykallfunksjonalitet."
+
+#: package/contents/ui/configTools.qml:116
+msgid "Path whitelist:"
+msgstr "Sti-hviteliste:"
+
+#: package/contents/ui/configTools.qml:158
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Legg til sti, f.eks. $HOME/projects, /tmp"
+
+#: package/contents/ui/configTools.qml:164
+msgid "Add"
+msgstr "Legg til"
+
+#: package/contents/ui/configTools.qml:176
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Hvitelisten gjelder for filsystemverktøy (les, skriv, list, søk). Merk: "
+"'run_command' er ikke begrenset av denne listen."
+
+#: package/contents/ui/configTools.qml:184
+msgid "Max read size:"
+msgstr "Maks lesestørrelse:"
+
+#: package/contents/ui/configTools.qml:196
+msgid "Max write size:"
+msgstr "Maks skrivingsstørrelse:"
+
+#: package/contents/ui/configTools.qml:208
+msgid "Max HTTP response:"
+msgstr "Maks HTTP-svar:"
+
+#: package/contents/ui/configTools.qml:221
+msgid "Native Adapter Features"
+msgstr "Innebygde adapterfunksjoner"
+
+#: package/contents/ui/configTools.qml:227
+msgid "Google Search:"
+msgstr "Google-søk:"
+
+#: package/contents/ui/configTools.qml:228
+msgid "Enable Native Google Search Grounding"
+msgstr "Aktiver innebygd Google-søkegrunnlag"
+
+#: package/contents/ui/configTools.qml:238
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Bruk Geminis innebygde Google-søk for grunnlag. Dette overstyrer det "
+"standard nettsøkverktøyet."
+
+#: package/contents/ui/configTools.qml:245
+msgid "Code Execution:"
+msgstr "Kodekjøring:"
+
+#: package/contents/ui/configTools.qml:246
+msgid "Enable Native Python Code Execution"
+msgstr "Aktiver innebygd Python-kodekjøring"
+
+#: package/contents/ui/configTools.qml:256
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Tillat Gemini å skrive og kjøre Python-kode i en sikker sandkasse på "
+"serversiden."
+
+#: package/contents/ui/configTools.qml:264
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Å kombinere innebygde verktøy med kommandoer krever en nyere modell. Din "
+"valgte modell (%1) kan oppleve feil."
+
+#: package/contents/ui/configTools.qml:272
+msgid "Individual Tools"
+msgstr "Individuelle verktøy"
+
+#: package/contents/ui/ColorButton.qml:26
+msgid "Color button"
+msgstr "Fargeknapp"
+
+#: package/contents/ui/ColorButton.qml:28
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Gjeldende farge er %1. Denne knappen vil åpne en fargevelgerdialog."
+
+#: package/contents/ui/ColorButton.qml:29
+msgid "Current color is %1."
+msgstr "Gjeldende farge er %1."
+
+#: package/contents/ui/configAppearance.qml:19
+msgid "Profile Header:"
+msgstr "Profiloverskrift:"
+
+#: package/contents/ui/configAppearance.qml:20
+msgid "Show provider and model in profile header"
+msgstr "Vis leverandør og modell i profiloverskrift"
+
+#: package/contents/ui/configAppearance.qml:36
+msgid "Chat Spacing: %1px"
+msgstr "Chatavstand: %1px"
+
+#: package/contents/ui/configAppearance.qml:58
+msgid "Compact"
+msgstr "Kompakt"
+
+#: package/contents/ui/configAppearance.qml:63
+msgid "Spacious"
+msgstr "Romslig"
+
+#: package/contents/ui/configAppearance.qml:75
+msgid "Chat Colors:"
+msgstr "Chat-farger:"
+
+#: package/contents/ui/configAppearance.qml:82
+msgid "Use custom user color"
+msgstr "Bruk tilpasset brukerfarge"
+
+#: package/contents/ui/configAppearance.qml:106
+msgid "Use custom assistant color"
+msgstr "Bruk tilpasset assistentfarge"
+
+#: package/contents/ui/configAppearance.qml:133
+msgid "UI Font:"
+msgstr "Grensesnittskrift:"
+
+#: package/contents/ui/configAppearance.qml:134
+msgid "Use custom UI font"
+msgstr "Bruk egendefinert grensesnittskrift"
+
+#: package/contents/ui/configAppearance.qml:184
+msgid "Code Font:"
+msgstr "Kodeskrift:"
+
+#: package/contents/ui/configAppearance.qml:185
+msgid "Use custom code font"
+msgstr "Bruk egendefinert kodeskrift"
+
+#: package/contents/ui/configAppearance.qml:230
+msgid "Thoughts Font:"
+msgstr "Tankeskrift:"
+
+#: package/contents/ui/configAppearance.qml:231
+msgid "Use custom thoughts font"
+msgstr "Bruk egendefinert tankeskrift"
+
+#: package/contents/ui/configAppearance.qml:281
+msgid "Header Icons:"
+msgstr "Overskriftsikoner:"
+
+#: package/contents/ui/configAppearance.qml:286
+msgid "Profile Header"
+msgstr "Profiloverskrift"
+
+#: package/contents/ui/configAppearance.qml:297
+msgid "Always show Tasks"
+msgstr "Vis alltid Oppgaver"
+
+#: package/contents/ui/configAppearance.qml:308
+msgid "Always show Auto Toggle"
+msgstr "Vis alltid Auto-veksler"
+
+#: package/contents/ui/configAppearance.qml:319
+msgid "Show History"
+msgstr "Vis historikk"
+
+#: package/contents/ui/configAppearance.qml:330
+msgid "Show Copy conversation"
+msgstr "Vis Kopier samtale"
+
+#: package/contents/ui/configAppearance.qml:341
+msgid "Show Clear chat"
+msgstr "Vis Tøm chat"
+
+#: package/contents/ui/configAppearance.qml:352
+msgid "Show Settings"
+msgstr "Vis Innstillinger"
+
+#: package/contents/ui/configAppearance.qml:363
+msgid "Show Pin"
+msgstr "Vis festikonet"
+
+#: package/contents/ui/ChatMessage.qml:117
+msgid "Web Search"
+msgstr "Nettsøk"
+
+#: package/contents/ui/ChatMessage.qml:144
+msgid "Thinking"
+msgstr "Tenker…"
+
+#: package/contents/ui/ChatMessage.qml:210
+msgid "Searched for: %1"
+msgstr "Søkte etter: %1"
+
+#: package/contents/ui/ChatMessage.qml:246
+msgid "Show %1 results"
+msgstr "Vis %1 resultater"
+
+#: package/contents/ui/ChatMessage.qml:362
+msgid "Copy to clipboard"
+msgstr "Kopier til utklippstavle"
+
+#: package/contents/ui/ChatMessage.qml:377
+msgid "Share output with assistant"
+msgstr "Del utdata med assistenten"
 
 #: package/contents/ui/configGeneral.qml:59
 msgid "Failed to fetch gcloud token (exit %1): %2"
@@ -958,277 +1182,67 @@ msgstr ""
 "automatisk ved valg av forhåndsinnstilling."
 
 #: package/contents/ui/configGeneral.qml:1160
+msgid "Attachments:"
+msgstr "Vedlegg:"
+
+#: package/contents/ui/configGeneral.qml:1161
+msgid "Resize image attachments"
+msgstr "Endre størrelse på bildevedlegg"
+
+#: package/contents/ui/configGeneral.qml:1165
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr "Endrer størrelse på store bildevedlegg til å passe innenfor 800x600 før sending, noe som reduserer opplastingsstørrelse og konteksttokener."
+
+#: package/contents/ui/configGeneral.qml:1177
 msgid "Chat History:"
 msgstr "Chathistorikk:"
 
-#: package/contents/ui/configGeneral.qml:1161
+#: package/contents/ui/configGeneral.qml:1178
 msgid "Auto-save chat history"
 msgstr "Lagre chathistorikk automatisk"
 
-#: package/contents/ui/configGeneral.qml:1165
-#: package/contents/ui/configGeneral.qml:1180
+#: package/contents/ui/configGeneral.qml:1182
+#: package/contents/ui/configGeneral.qml:1197
 msgid "Saves to ~/.local/share/plasmallm/chats/"
 msgstr "Lagrer til ~/.local/share/plasmallm/chats/"
 
-#: package/contents/ui/configGeneral.qml:1172
+#: package/contents/ui/configGeneral.qml:1189
 msgid "Save format:"
 msgstr "Lagringsformat:"
 
-#: package/contents/ui/configGeneral.qml:1173
+#: package/contents/ui/configGeneral.qml:1190
 msgid "Plain text (.txt)"
 msgstr "Ren tekst (.txt)"
 
-#: package/contents/ui/configGeneral.qml:1173
+#: package/contents/ui/configGeneral.qml:1190
 msgid "Structured (.jsonl)"
 msgstr "Strukturert (.jsonl)"
 
-#: package/contents/ui/configGeneral.qml:1192
+#: package/contents/ui/configGeneral.qml:1209
 msgid "Auto-clear:"
 msgstr "Automatisk sletting:"
 
-#: package/contents/ui/configGeneral.qml:1196
+#: package/contents/ui/configGeneral.qml:1213
 msgid "Disabled"
 msgstr "Deaktivert"
 
-#: package/contents/ui/configGeneral.qml:1202
+#: package/contents/ui/configGeneral.qml:1219
 msgid "Instant (always clear when panel opens)"
 msgstr "Øyeblikkelig (alltid slett når panel åpnes)"
 
-#: package/contents/ui/configGeneral.qml:1211
+#: package/contents/ui/configGeneral.qml:1228
 msgid "After"
 msgstr "Etter"
 
-#: package/contents/ui/configGeneral.qml:1231
+#: package/contents/ui/configGeneral.qml:1248
 msgid "seconds"
 msgstr "sekunder"
 
-#: package/contents/ui/configGeneral.qml:1231
+#: package/contents/ui/configGeneral.qml:1248
 msgid "minutes"
 msgstr "minutter"
-
-#: package/contents/ui/configTools.qml:94
-msgid "General Tool Settings"
-msgstr "Generelle verktøyinnstillinger"
-
-#: package/contents/ui/configTools.qml:99
-msgid "System state:"
-msgstr "Systemtilstand:"
-
-#: package/contents/ui/configTools.qml:100
-msgid "Enable Tools"
-msgstr "Aktiver verktøy"
-
-#: package/contents/ui/configTools.qml:109
-msgid "Master switch for all tool-calling functionality."
-msgstr "Hovedbryter for all verktøykallfunksjonalitet."
-
-#: package/contents/ui/configTools.qml:116
-msgid "Path whitelist:"
-msgstr "Sti-hviteliste:"
-
-#: package/contents/ui/configTools.qml:158
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Legg til sti, f.eks. $HOME/projects, /tmp"
-
-#: package/contents/ui/configTools.qml:164
-msgid "Add"
-msgstr "Legg til"
-
-#: package/contents/ui/configTools.qml:176
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Hvitelisten gjelder for filsystemverktøy (les, skriv, list, søk). Merk: "
-"'run_command' er ikke begrenset av denne listen."
-
-#: package/contents/ui/configTools.qml:184
-msgid "Max read size:"
-msgstr "Maks lesestørrelse:"
-
-#: package/contents/ui/configTools.qml:196
-msgid "Max write size:"
-msgstr "Maks skrivingsstørrelse:"
-
-#: package/contents/ui/configTools.qml:208
-msgid "Max HTTP response:"
-msgstr "Maks HTTP-svar:"
-
-#: package/contents/ui/configTools.qml:221
-msgid "Native Adapter Features"
-msgstr "Innebygde adapterfunksjoner"
-
-#: package/contents/ui/configTools.qml:227
-msgid "Google Search:"
-msgstr "Google-søk:"
-
-#: package/contents/ui/configTools.qml:228
-msgid "Enable Native Google Search Grounding"
-msgstr "Aktiver innebygd Google-søkegrunnlag"
-
-#: package/contents/ui/configTools.qml:238
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Bruk Geminis innebygde Google-søk for grunnlag. Dette overstyrer det "
-"standard nettsøkverktøyet."
-
-#: package/contents/ui/configTools.qml:245
-msgid "Code Execution:"
-msgstr "Kodekjøring:"
-
-#: package/contents/ui/configTools.qml:246
-msgid "Enable Native Python Code Execution"
-msgstr "Aktiver innebygd Python-kodekjøring"
-
-#: package/contents/ui/configTools.qml:256
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Tillat Gemini å skrive og kjøre Python-kode i en sikker sandkasse på "
-"serversiden."
-
-#: package/contents/ui/configTools.qml:264
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Å kombinere innebygde verktøy med kommandoer krever en nyere modell. Din "
-"valgte modell (%1) kan oppleve feil."
-
-#: package/contents/ui/configTools.qml:272
-msgid "Individual Tools"
-msgstr "Individuelle verktøy"
-
-#: package/contents/ui/ChatMessage.qml:117
-msgid "Web Search"
-msgstr "Nettsøk"
-
-#: package/contents/ui/ChatMessage.qml:144
-msgid "Thinking"
-msgstr "Tenker…"
-
-#: package/contents/ui/ChatMessage.qml:210
-msgid "Searched for: %1"
-msgstr "Søkte etter: %1"
-
-#: package/contents/ui/ChatMessage.qml:246
-msgid "Show %1 results"
-msgstr "Vis %1 resultater"
-
-#: package/contents/ui/ChatMessage.qml:360
-msgid "Copy to clipboard"
-msgstr "Kopier til utklippstavle"
-
-#: package/contents/ui/ChatMessage.qml:375
-msgid "Share output with assistant"
-msgstr "Del utdata med assistenten"
-
-#: package/contents/ui/ColorButton.qml:26
-msgid "Color button"
-msgstr "Fargeknapp"
-
-#: package/contents/ui/ColorButton.qml:28
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Gjeldende farge er %1. Denne knappen vil åpne en fargevelgerdialog."
-
-#: package/contents/ui/ColorButton.qml:29
-msgid "Current color is %1."
-msgstr "Gjeldende farge er %1."
-
-#: package/contents/ui/configAppearance.qml:19
-msgid "Profile Header:"
-msgstr "Profiloverskrift:"
-
-#: package/contents/ui/configAppearance.qml:20
-msgid "Show provider and model in profile header"
-msgstr "Vis leverandør og modell i profiloverskrift"
-
-#: package/contents/ui/configAppearance.qml:36
-msgid "Chat Spacing: %1px"
-msgstr "Chatavstand: %1px"
-
-#: package/contents/ui/configAppearance.qml:58
-msgid "Compact"
-msgstr "Kompakt"
-
-#: package/contents/ui/configAppearance.qml:63
-msgid "Spacious"
-msgstr "Romslig"
-
-#: package/contents/ui/configAppearance.qml:75
-msgid "Chat Colors:"
-msgstr "Chat-farger:"
-
-#: package/contents/ui/configAppearance.qml:82
-msgid "Use custom user color"
-msgstr "Bruk tilpasset brukerfarge"
-
-#: package/contents/ui/configAppearance.qml:106
-msgid "Use custom assistant color"
-msgstr "Bruk tilpasset assistentfarge"
-
-#: package/contents/ui/configAppearance.qml:133
-msgid "UI Font:"
-msgstr "Grensesnittskrift:"
-
-#: package/contents/ui/configAppearance.qml:134
-msgid "Use custom UI font"
-msgstr "Bruk egendefinert grensesnittskrift"
-
-#: package/contents/ui/configAppearance.qml:184
-msgid "Code Font:"
-msgstr "Kodeskrift:"
-
-#: package/contents/ui/configAppearance.qml:185
-msgid "Use custom code font"
-msgstr "Bruk egendefinert kodeskrift"
-
-#: package/contents/ui/configAppearance.qml:230
-msgid "Thoughts Font:"
-msgstr "Tankeskrift:"
-
-#: package/contents/ui/configAppearance.qml:231
-msgid "Use custom thoughts font"
-msgstr "Bruk egendefinert tankeskrift"
-
-#: package/contents/ui/configAppearance.qml:281
-msgid "Header Icons:"
-msgstr "Overskriftsikoner:"
-
-#: package/contents/ui/configAppearance.qml:286
-msgid "Profile Header"
-msgstr "Profiloverskrift"
-
-#: package/contents/ui/configAppearance.qml:297
-msgid "Always show Tasks"
-msgstr "Vis alltid Oppgaver"
-
-#: package/contents/ui/configAppearance.qml:308
-msgid "Always show Auto Toggle"
-msgstr "Vis alltid Auto-veksler"
-
-#: package/contents/ui/configAppearance.qml:319
-msgid "Show History"
-msgstr "Vis historikk"
-
-#: package/contents/ui/configAppearance.qml:330
-msgid "Show Copy conversation"
-msgstr "Vis Kopier samtale"
-
-#: package/contents/ui/configAppearance.qml:341
-msgid "Show Clear chat"
-msgstr "Vis Tøm chat"
-
-#: package/contents/ui/configAppearance.qml:352
-msgid "Show Settings"
-msgstr "Vis Innstillinger"
-
-#: package/contents/ui/configAppearance.qml:363
-msgid "Show Pin"
-msgstr "Vis festikonet"
 
 #: package/contents/ui/main.qml:221
 msgid ""
@@ -1238,15 +1252,15 @@ msgstr ""
 "Klarte ikke hente gcloud-token (avslutningskode %1): %2. Kontroller at "
 "gcloud er installert og autentisert."
 
-#: package/contents/ui/main.qml:1158
+#: package/contents/ui/main.qml:1169
 msgid "No tool request pending to approve."
 msgstr "Ingen verktøyforespørsel venter på godkjenning."
 
-#: package/contents/ui/main.qml:1175
+#: package/contents/ui/main.qml:1186
 msgid "No tool request pending to deny."
 msgstr "Ingen verktøyforespørsel venter på avslag."
 
-#: package/contents/ui/main.qml:1202
+#: package/contents/ui/main.qml:1213
 msgid ""
 "Skip approvals mode enabled for this session. All enabled tools will run "
 "automatically, bypassing 'Ask before running' settings."
@@ -1255,7 +1269,7 @@ msgstr ""
 "aktiverte verktøy vil kjøre automatisk og omgå innstillingene for 'Spør før "
 "kjøring'."
 
-#: package/contents/ui/main.qml:1203
+#: package/contents/ui/main.qml:1214
 msgid ""
 "Skip approvals mode disabled. Tools will revert to your configured 'Ask "
 "before running' settings."
@@ -1263,95 +1277,95 @@ msgstr ""
 "Modus for å hoppe over godkjenninger er deaktivert. Verktøy vil gå tilbake "
 "til dine konfigurerte innstillinger for 'Spør før kjøring'."
 
-#: package/contents/ui/main.qml:1222 package/contents/ui/main.qml:2179
+#: package/contents/ui/main.qml:1233 package/contents/ui/main.qml:2190
 msgid "Default"
 msgstr "Standard"
 
-#: package/contents/ui/main.qml:1222
+#: package/contents/ui/main.qml:1233
 msgid "Current profile: **%1**"
 msgstr "Gjeldende profil: **%1**"
 
-#: package/contents/ui/main.qml:1224
+#: package/contents/ui/main.qml:1235
 msgid "Available profiles:"
 msgstr "Tilgjengelige profiler:"
 
-#: package/contents/ui/main.qml:1226
+#: package/contents/ui/main.qml:1237
 msgid "active"
 msgstr "aktiv"
 
-#: package/contents/ui/main.qml:1229
+#: package/contents/ui/main.qml:1240
 msgid "Type `/profile <name>` to switch."
 msgstr "Skriv `/profile <navn>` for å bytte."
 
-#: package/contents/ui/main.qml:1246
+#: package/contents/ui/main.qml:1257
 msgid "Switched to profile: **%1**"
 msgstr "Byttet til profil: **%1**"
 
-#: package/contents/ui/main.qml:1248
+#: package/contents/ui/main.qml:1259
 msgid "Unknown profile: **%1**"
 msgstr "Ukjent profil: **%1**"
 
-#: package/contents/ui/main.qml:1255 package/contents/ui/main.qml:1338
+#: package/contents/ui/main.qml:1266 package/contents/ui/main.qml:1349
 msgid "none"
 msgstr "ingen"
 
-#: package/contents/ui/main.qml:1255
+#: package/contents/ui/main.qml:1266
 msgid "Current model: **%1**"
 msgstr "Gjeldende modell: **%1**"
 
-#: package/contents/ui/main.qml:1257
+#: package/contents/ui/main.qml:1268
 msgid "Available models:"
 msgstr "Tilgjengelige modeller:"
 
-#: package/contents/ui/main.qml:1259
+#: package/contents/ui/main.qml:1270
 msgid "Type `/model <name>` to switch."
 msgstr "Skriv `/model <name>` for å bytte."
 
-#: package/contents/ui/main.qml:1261
+#: package/contents/ui/main.qml:1272
 msgid "No models cached. Use **Fetch Models** in settings."
 msgstr "Ingen modeller bufret. Bruk **Hent modeller** i innstillinger."
 
-#: package/contents/ui/main.qml:1286
+#: package/contents/ui/main.qml:1297
 msgid "Switched to model: **%1**"
 msgstr "Byttet til modell: **%1**"
 
-#: package/contents/ui/main.qml:1295
+#: package/contents/ui/main.qml:1306
 msgid "No tasks configured. Add tasks in Settings."
 msgstr "Ingen oppgaver konfigurert. Legg til oppgaver i Innstillinger."
 
-#: package/contents/ui/main.qml:1297
+#: package/contents/ui/main.qml:1308
 msgid "(auto)"
 msgstr "(automatisk)"
 
-#: package/contents/ui/main.qml:1298
+#: package/contents/ui/main.qml:1309
 msgid "Available tasks:"
 msgstr "Tilgjengelige oppgaver:"
 
-#: package/contents/ui/main.qml:1298
+#: package/contents/ui/main.qml:1309
 msgid "Type `/task <name>` to run."
 msgstr "Skriv `/task <name>` for å kjøre."
 
-#: package/contents/ui/main.qml:1338
+#: package/contents/ui/main.qml:1349
 msgid "Unknown task: **%1**. Available: %2"
 msgstr "Ukjent oppgave: **%1**. Tilgjengelig: %2"
 
-#: package/contents/ui/main.qml:1352
+#: package/contents/ui/main.qml:1363
 msgid "The user declined to run this command."
 msgstr "Brukeren avslo å kjøre denne kommandoen."
 
-#: package/contents/ui/main.qml:1696
+#: package/contents/ui/main.qml:1707
 msgid "Unknown tool %1"
 msgstr "Ukjent verktøy %1"
 
-#: package/contents/ui/main.qml:1712
+#: package/contents/ui/main.qml:1723
 msgid "Error: path '%1' outside whitelist"
 msgstr "Feil: sti '%1' utenfor hviteliste"
 
-#: package/contents/ui/main.qml:1725
+#: package/contents/ui/main.qml:1736
 msgid "Executing %1…"
 msgstr "Kjører %1…"
 
-#: package/contents/ui/main.qml:1978
+#: package/contents/ui/main.qml:1989
 msgid "Session reset requested."
 msgstr "Øktnullstilling forespurt."
 
