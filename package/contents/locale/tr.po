@@ -21,9 +21,6 @@ msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
 "budget below. Temperature is forced to max while thinking."
 msgstr ""
-"Anthropic enables extended thinking when effort is not Off, using the token "
-"budget below. Temperature is forced to max while thinking."
-
 "Anthropic, çaba Kapalı olmadığında aşağıdaki token bütçesini kullanarak "
 "genişletilmiş düşünmeyi etkinleştirir. Düşünme sırasında sıcaklık maksimuma "
 "zorlanır."
@@ -82,7 +79,7 @@ msgstr "Kimlik doğrulama başarısız (HTTP %1) — API anahtarınızı kontrol
 #: package/contents/ui/adapters/openai_chat.js:276
 #: package/contents/ui/adapters/openai_responses.js:533
 msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
-msgstr "Rate limited (HTTP 429) — too many requests, try again shortly"
+msgstr ""
 "Hız sınırı aşıldı (HTTP 429) — çok fazla istek, kısa süre sonra tekrar "
 "deneyin"
 
@@ -111,11 +108,6 @@ msgid ""
 "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
 "reasoning_content."
 msgstr ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-
 "Akıl yürütme çabası (düşük / orta / yüksek) genişletilmiş düşünmeyi kontrol "
 "eder. OpenAI / Poe / OpenRouter / Azure'da düşünceleri görmek için Use "
 "Responses API'yi etkinleştirin; sohbet tamamlama sağlayıcıları (DeepSeek, "
@@ -123,7 +115,7 @@ msgstr ""
 
 #: package/contents/ui/adapters/gemini_interactions.js:27
 msgid "Gemini uses the thinking level dropdown directly."
-msgstr "Gemini uses the thinking level dropdown directly."
+msgstr "Gemini, düşünme düzeyi açılır menüsünü doğrudan kullanır."
 
 #: package/contents/ui/adapters/gemini_interactions.js:113
 #: package/contents/ui/adapters/gemini.js:121
@@ -133,14 +125,14 @@ msgstr "Modeller getirilemedi"
 #: package/contents/ui/adapters/gemini_interactions.js:131
 #: package/contents/ui/adapters/gemini.js:142
 msgid "Authentication failed — check your API key (HTTP 400): %1"
-msgstr "Authentication failed — check your API key (HTTP 400): %1"
+msgstr ""
 "Kimlik doğrulama başarısız oldu — API anahtarınızı kontrol edin (HTTP 400): "
 "%1"
 
 #: package/contents/ui/adapters/gemini_interactions.js:134
 #: package/contents/ui/adapters/gemini.js:145
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
-msgstr "Authentication failed (HTTP %1) — check your API key: %2"
+msgstr ""
 "Kimlik doğrulama başarısız oldu (HTTP %1) — API anahtarınızı kontrol edin: %2"
 
 #: package/contents/ui/adapters/gemini_interactions.js:379
@@ -149,9 +141,9 @@ msgid ""
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
 "disable Native features in Settings."
 msgstr ""
-"This model version does not support combining Native tools (Search/Code) "
-"with custom commands. Please select a newer model (e.g., Gemini 3+) or "
-"disable Native features in Settings."
+"Bu model sürümü, yerel araçları (Arama/Kod) özel komutlarla birleştirmeyi "
+"desteklemiyor. Lütfen daha yeni bir model seçin (örn. Gemini 3+) veya "
+"Ayarlar'da yerel özellikleri devre dışı bırakın."
 
 
 #: package/contents/ui/adapters/gemini_interactions.js:484
@@ -164,9 +156,6 @@ msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
 "on supported models."
 msgstr ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
-
 "Gemini, düşünme token bütçesini doğrudan kullanır. Desteklenen modellerde "
 "düşünmeyi devre dışı bırakmak için 0 olarak ayarlayın."
 
@@ -266,7 +255,7 @@ msgstr "Tüm dosyalar (*)"
 
 #: package/contents/ui/FullRepresentation.qml:22
 msgid "Toggle auto mode (auto-run + auto-share) for this session"
-msgstr "Toggle auto mode (auto-run + auto-share) for this session"
+msgstr ""
 "Bu oturum için otomatik modu (otomatik çalıştır + otomatik paylaş) değiştir"
 
 #: package/contents/ui/FullRepresentation.qml:23
@@ -291,7 +280,7 @@ msgstr "Modeli göster veya değiştir (/model <ad>)"
 
 #: package/contents/ui/FullRepresentation.qml:28
 msgid "Switch profile (/profile <name>)"
-msgstr "Switch profile (/profile <name>)"
+msgstr "Profil değiştir (/profile <ad>)"
 
 #: package/contents/ui/FullRepresentation.qml:29
 msgid "Run last command"
@@ -316,7 +305,7 @@ msgstr "Son komutu terminalde çalıştır"
 #: package/contents/ui/FullRepresentation.qml:147
 #: package/contents/ui/FullRepresentation.qml:148
 msgid "Toggle Auto Mode"
-msgstr "Toggle Auto Mode"
+msgstr "Otomatik modu aç/kapat"
 
 #: package/contents/ui/FullRepresentation.qml:157
 #: package/contents/ui/FullRepresentation.qml:158
@@ -353,9 +342,6 @@ msgid ""
 "Are you sure you want to delete all chat history files? This action cannot "
 "be undone."
 msgstr ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-
 "Tüm sohbet geçmişi dosyalarını silmek istediğinizden emin misiniz? Bu işlem "
 "geri alınamaz."
 
@@ -431,9 +417,6 @@ msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 msgstr ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-
 "Metin dosyaları (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
 "*.conf *.sh *.py *.js *.ts *.qml)"
 
@@ -452,7 +435,7 @@ msgstr "Başlatılıyor…"
 #: package/contents/ui/FullRepresentation.qml:931
 #: package/contents/ui/configTasks.qml:55
 msgid "AUTO"
-msgstr "OTOMATİK"
+msgstr "OTO"
 
 #: package/contents/ui/FullRepresentation.qml:956
 msgid "Attach file or image"
@@ -464,7 +447,7 @@ msgstr "Sonlandır"
 
 #: package/contents/ui/FullRepresentation.qml:967
 msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
 "Kalıcı oturumu sonlandır (tüm işlemleri durdurur ve kabuk durumunu sıfırlar)"
 
 #: package/contents/ui/FullRepresentation.qml:986
@@ -480,8 +463,8 @@ msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
 "installed and authenticated."
 msgstr ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
+"gcloud token alınamadı (çıkış %1): %2. Lütfen gcloud'un kurulu ve kimlik "
+"doğrulaması yapılmış olduğundan emin olun."
 
 
 #: package/contents/ui/main.qml:1118
@@ -489,9 +472,6 @@ msgid ""
 "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
 "are on)."
 msgstr ""
-"Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
-"are on)."
-
 "Otomatik mod ayarlar aracılığıyla kalıcı olarak etkinleştirildi (hem "
 "Otomatik çalıştır hem de Otomatik paylaş açık)."
 
@@ -500,9 +480,6 @@ msgid ""
 "Auto mode enabled for this session. Commands will run and share output "
 "automatically."
 msgstr ""
-"Auto mode enabled for this session. Commands will run and share output "
-"automatically."
-
 "Bu oturum için otomatik mod etkinleştirildi. Komutlar çalışacak ve çıktıyı "
 "otomatik olarak paylaşacak."
 
@@ -512,31 +489,31 @@ msgstr "Otomatik mod devre dışı bırakıldı."
 
 #: package/contents/ui/main.qml:1137 package/contents/ui/main.qml:2099
 msgid "Default"
-msgstr "Default"
+msgstr "Varsayılan"
 
 #: package/contents/ui/main.qml:1137
 msgid "Current profile: **%1**"
-msgstr "Current profile: **%1**"
+msgstr "Geçerli profil: **%1**"
 
 #: package/contents/ui/main.qml:1139
 msgid "Available profiles:"
-msgstr "Available profiles:"
+msgstr "Mevcut profiller:"
 
 #: package/contents/ui/main.qml:1141
 msgid "active"
-msgstr "active"
+msgstr "etkin"
 
 #: package/contents/ui/main.qml:1144
 msgid "Type `/profile <name>` to switch."
-msgstr "Type `/profile <name>` to switch."
+msgstr "Geçiş yapmak için `/profile <ad>` yazın."
 
 #: package/contents/ui/main.qml:1161
 msgid "Switched to profile: **%1**"
-msgstr "Switched to profile: **%1**"
+msgstr "Profile geçildi: **%1**"
 
 #: package/contents/ui/main.qml:1163
 msgid "Unknown profile: **%1**"
-msgstr "Unknown profile: **%1**"
+msgstr "Bilinmeyen profil: **%1**"
 
 #: package/contents/ui/main.qml:1170 package/contents/ui/main.qml:1251
 msgid "none"
@@ -556,7 +533,7 @@ msgstr "Geçiş yapmak için `/model <ad>` yazın."
 
 #: package/contents/ui/main.qml:1176
 msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "No models cached. Use **Fetch Models** in settings."
+msgstr ""
 "Önbellekte model yok. Ayarlarda **Modelleri Getir** seçeneğini kullanın."
 
 #: package/contents/ui/main.qml:1201
@@ -633,11 +610,11 @@ msgstr "Google Gemini"
 
 #: package/contents/ui/configAppearance.qml:18
 msgid "Profile Header:"
-msgstr "Profile Header:"
+msgstr "Profil Başlığı:"
 
 #: package/contents/ui/configAppearance.qml:19
 msgid "Show provider and model in profile header"
-msgstr "Show provider and model in profile header"
+msgstr "Profil başlığında sağlayıcı ve modeli göster"
 
 #: package/contents/ui/configAppearance.qml:30
 msgid "Chat Spacing: %1px"
@@ -677,39 +654,39 @@ msgstr "Özel düşünce yazı tipi kullan"
 
 #: package/contents/ui/configAppearance.qml:173
 msgid "Header Icons:"
-msgstr "Header Icons:"
+msgstr "Başlık Simgeleri:"
 
 #: package/contents/ui/configAppearance.qml:178
 msgid "Profile Header"
-msgstr "Profile Header"
+msgstr "Profil Başlığı"
 
 #: package/contents/ui/configAppearance.qml:184
 msgid "Always show Tasks"
-msgstr "Always show Tasks"
+msgstr "Görevleri her zaman göster"
 
 #: package/contents/ui/configAppearance.qml:190
 msgid "Always show Auto Toggle"
-msgstr "Always show Auto Toggle"
+msgstr "Otomatik geçişi her zaman göster"
 
 #: package/contents/ui/configAppearance.qml:196
 msgid "Show History"
-msgstr "Show History"
+msgstr "Geçmişi göster"
 
 #: package/contents/ui/configAppearance.qml:202
 msgid "Show Copy conversation"
-msgstr "Show Copy conversation"
+msgstr "Konuşmayı kopyalamayı göster"
 
 #: package/contents/ui/configAppearance.qml:208
 msgid "Show Clear chat"
-msgstr "Show Clear chat"
+msgstr "Sohbeti temizlemeyi göster"
 
 #: package/contents/ui/configAppearance.qml:214
 msgid "Show Settings"
-msgstr "Show Settings"
+msgstr "Ayarları göster"
 
 #: package/contents/ui/configAppearance.qml:220
 msgid "Show Pin"
-msgstr "Show Pin"
+msgstr "Sabitlemeyi göster"
 
 #: package/contents/ui/configSystemPrompt.qml:46
 msgid "System Info:"
@@ -725,7 +702,7 @@ msgstr "Kabuk"
 
 #: package/contents/ui/configSystemPrompt.qml:62
 msgid "Hostname"
-msgstr "Ana Bilgisayar Adı"
+msgstr "Ana makine adı"
 
 #: package/contents/ui/configSystemPrompt.qml:67
 msgid "Kernel"
@@ -749,7 +726,7 @@ msgstr "Bellek"
 
 #: package/contents/ui/configSystemPrompt.qml:92
 msgid "GPU"
-msgstr "Grafik İşlemci"
+msgstr "GPU"
 
 #: package/contents/ui/configSystemPrompt.qml:97
 msgid "Block Devices"
@@ -761,7 +738,7 @@ msgstr "Ağ"
 
 #: package/contents/ui/configSystemPrompt.qml:107
 msgid "Locale"
-msgstr "Yerel Ayar"
+msgstr "Yerel ayar"
 
 #: package/contents/ui/configSystemPrompt.qml:112
 msgid "Date/Time"
@@ -781,7 +758,7 @@ msgstr "Önizleme:"
 
 #: package/contents/ui/configTasks.qml:31
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr "No tasks configured. Add a task to create reusable prompt shortcuts."
+msgstr ""
 "Görev yapılandırılmadı. Yeniden kullanılabilir istem kısayolları oluşturmak "
 "için bir görev ekleyin."
 
@@ -823,10 +800,6 @@ msgid ""
 "button to run them. Tasks with auto mode will temporarily enable auto-run "
 "and auto-share."
 msgstr ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
-"button to run them. Tasks with auto mode will temporarily enable auto-run "
-"and auto-share."
-
 "Görevler yeniden kullanılabilir istem kısayollarıdır. Onları çalıştırmak "
 "için sohbette /task <ad> veya araç çubuğu düğmesini kullanın. Otomatik modlu "
 "görevler otomatik çalıştırma ve otomatik paylaşımı geçici olarak "
@@ -834,7 +807,7 @@ msgstr ""
 
 #: package/contents/ui/configGeneral.qml:59
 msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Failed to fetch gcloud token (exit %1): %2"
+msgstr "gcloud token alınamadı (çıkış %1): %2"
 
 #: package/contents/ui/configGeneral.qml:320
 msgid "No models found."
@@ -843,36 +816,36 @@ msgstr "Model bulunamadı."
 #: package/contents/ui/configGeneral.qml:455
 #: package/contents/ui/configGeneral.qml:531
 msgid "New Profile"
-msgstr "New Profile"
+msgstr "Yeni Profil"
 
 #: package/contents/ui/configGeneral.qml:471
 msgid "%1 (Copy)"
-msgstr "%1 (Copy)"
+msgstr "%1 (Kopya)"
 
 #: package/contents/ui/configGeneral.qml:509
 msgid "Profile:"
-msgstr "Profile:"
+msgstr "Profil:"
 
 #: package/contents/ui/configGeneral.qml:539
 #: package/contents/ui/configGeneral.qml:573
 msgid "Rename Profile"
-msgstr "Rename Profile"
+msgstr "Profili yeniden adlandır"
 
 #: package/contents/ui/configGeneral.qml:547
 msgid "Duplicate Profile"
-msgstr "Duplicate Profile"
+msgstr "Profili çoğalt"
 
 #: package/contents/ui/configGeneral.qml:555
 msgid "Delete Profile"
-msgstr "Delete Profile"
+msgstr "Profili sil"
 
 #: package/contents/ui/configGeneral.qml:577
 msgid "Profile Name"
-msgstr "Profile Name"
+msgstr "Profil Adı"
 
 #: package/contents/ui/configGeneral.qml:592
 msgid "Rename"
-msgstr "Rename"
+msgstr "Yeniden adlandır"
 
 #: package/contents/ui/configGeneral.qml:612
 msgid "Adapter:"
@@ -880,11 +853,11 @@ msgstr "Adaptör:"
 
 #: package/contents/ui/configGeneral.qml:635
 msgid "Authentication:"
-msgstr "Authentication:"
+msgstr "Kimlik Doğrulama:"
 
 #: package/contents/ui/configGeneral.qml:638
 msgid "API Key (Express Mode)"
-msgstr "API Key (Express Mode)"
+msgstr "API Anahtarı (Ekspres Mod)"
 
 #: package/contents/ui/configGeneral.qml:638
 msgid "Google Cloud CLI (gcloud)"
@@ -894,21 +867,22 @@ msgstr "Google Cloud CLI (gcloud)"
 msgid ""
 "gcloud CLI not found. Please install it to use this authentication method."
 msgstr ""
-"gcloud CLI not found. Please install it to use this authentication method."
+"gcloud CLI bulunamadı. Bu kimlik doğrulama yöntemini kullanmak için "
+"lütfen yükleyin."
 
 
 #: package/contents/ui/configGeneral.qml:655
 msgid "API Variant:"
-msgstr "API Variant:"
+msgstr "API Varyantı:"
 
 #: package/contents/ui/configGeneral.qml:659
 #: package/contents/ui/configGeneral.qml:660
 msgid "Legacy (generateContent)"
-msgstr "Legacy (generateContent)"
+msgstr "Eski (generateContent)"
 
 #: package/contents/ui/configGeneral.qml:660
 msgid "Interactions API (Stateful)"
-msgstr "Interactions API (Stateful)"
+msgstr "Interactions API (Durumlu)"
 
 #: package/contents/ui/configGeneral.qml:680
 msgid "Platform:"
@@ -924,11 +898,11 @@ msgstr "Google Cloud Agent Platform (Vertex AI)"
 
 #: package/contents/ui/configGeneral.qml:697
 msgid "Project ID:"
-msgstr "Project ID:"
+msgstr "Proje Kimliği:"
 
 #: package/contents/ui/configGeneral.qml:710
 msgid "Location:"
-msgstr "Location:"
+msgstr "Konum:"
 
 #: package/contents/ui/configGeneral.qml:724
 msgid "Provider:"
@@ -957,7 +931,7 @@ msgstr "API Anahtarı:"
 
 #: package/contents/ui/configGeneral.qml:981
 msgid "Paste short-lived access token"
-msgstr "Paste short-lived access token"
+msgstr "Kısa ömürlü erişim belirtecini yapıştır"
 
 #: package/contents/ui/configGeneral.qml:981
 msgid "Optional - for OpenAI, etc."
@@ -1046,10 +1020,6 @@ msgid ""
 "collapsible header. Round-trip of signed thoughts to the API still happens "
 "regardless of this setting."
 msgstr ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-
 "Etkinleştirildiğinde, modelin akıl yürütmesi her yanıtın üzerinde "
 "daraltılabilir bir başlıkla gösterilir. İmzalı düşüncelerin API'ye gidiş-"
 "dönüşü bu ayardan bağımsız olarak gerçekleşir."
@@ -1064,10 +1034,6 @@ msgid ""
 "(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
 "picking a preset."
 msgstr ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-
 "OpenAI / Poe / OpenRouter / Azure'da akıl yürütme içeriğini göstermek için "
 "gereklidir (/v1/chat/completions yerine /v1/responses'a POST gönderir). "
 "Hazır ayar seçildiğinde otomatik olarak ayarlanır."
@@ -1134,9 +1100,6 @@ msgid ""
 "Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
 "share."
 msgstr ""
-"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
-"share."
-
 "LLM'nin kabuk komutlarını yürütmesine izin verin. Otomatik paylaşım ile "
 "birleştirilirse tehlikelidir."
 
@@ -1149,9 +1112,6 @@ msgid ""
 "Use the run_command tool for command execution. If disabled, falls back to "
 "parsing code blocks."
 msgstr ""
-"Use the run_command tool for command execution. If disabled, falls back to "
-"parsing code blocks."
-
 "Komut yürütme için run_command aracını kullanın. Devre dışı bırakılırsa, kod "
 "bloklarını ayrıştırmaya geri döner."
 
@@ -1168,9 +1128,6 @@ msgid ""
 "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
 "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
 msgstr ""
-"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-
 "⚠️ TEHLİKE: Her iki seçenek de etkin - LLM artık komutları çalıştırabilir ve "
 "çıktılarını görebilir, bu da ajan tabanlı iş akışını etkinleştirir. Yalnızca "
 "güvenilir LLM'lerle kullanın."
@@ -1188,9 +1145,6 @@ msgid ""
 "Execute LLM commands inside a long-lived tmux or screen session so state "
 "persists across turns."
 msgstr ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-
 "Durumun turlar arasında kalıcı olması için LLM komutlarını uzun ömürlü bir "
 "tmux veya screen oturumu içinde yürütün."
 
@@ -1200,7 +1154,7 @@ msgstr "Oturumu Sıfırla"
 
 #: package/contents/ui/configTools.qml:365
 msgid "Backend:"
-msgstr "Arka Uç:"
+msgstr "Arka uç:"
 
 #: package/contents/ui/configTools.qml:394
 msgid "Session name:"
@@ -1211,40 +1165,37 @@ msgid ""
 "Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
 "is unavailable."
 msgstr ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
-
 "Sisteminizde 'tmux' veya 'screen' bulunamadı. Oturum çoğullama "
 "kullanılamıyor."
 
 #: package/contents/ui/configTools.qml:413
 msgid "Native Adapter Features"
-msgstr "Native Adapter Features"
+msgstr "Yerel Adaptör Özellikleri"
 
 #: package/contents/ui/configTools.qml:419
 msgid "Enable Native Google Search Grounding"
-msgstr "Enable Native Google Search Grounding"
+msgstr "Yerel Google Arama Temellemesini Etkinleştir"
 
 #: package/contents/ui/configTools.qml:427
 msgid ""
 "Use Gemini's built-in Google Search for grounding. This overrides the "
 "standard web search tool."
 msgstr ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
+"Temellemek için Gemini'nin yerleşik Google Aramasını kullanın. Bu, "
+"standart web arama aracını geçersiz kılar."
 
 
 #: package/contents/ui/configTools.qml:434
 msgid "Enable Native Python Code Execution"
-msgstr "Enable Native Python Code Execution"
+msgstr "Yerel Python Kodu Yürütmesini Etkinleştir"
 
 #: package/contents/ui/configTools.qml:442
 msgid ""
 "Allow Gemini to write and execute Python code in a secure server-side "
 "sandbox."
 msgstr ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
+"Gemini'nin güvenli bir sunucu taraflı sanal alanda Python kodu yazmasına "
+"ve yürütmesine izin verin."
 
 
 #: package/contents/ui/configTools.qml:450
@@ -1252,13 +1203,13 @@ msgid ""
 "Combining Native tools with commands requires a newer model. Your currently "
 "selected model (%1) may encounter errors."
 msgstr ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
+"Yerel araçları komutlarla birleştirmek daha yeni bir model gerektirir. Şu "
+"anda seçili model (%1) hatalarla karşılaşabilir."
 
 
 #: package/contents/ui/configTools.qml:458
 msgid "Standard Web Search"
-msgstr "Standard Web Search"
+msgstr "Standart Web Araması"
 
 #: package/contents/ui/configTools.qml:463
 msgid "Enable web search tool"
@@ -1302,7 +1253,7 @@ msgstr "SearXNG örneğinde JSON biçiminin etkinleştirildiğinden emin olun."
 
 #: package/contents/ui/configTools.qml:579
 msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Enables LLM-triggered web searches via Ollama's search API"
+msgstr ""
 "Ollama'nın arama API'si aracılığıyla LLM tarafından tetiklenen web "
 "aramalarını etkinleştirir"
 

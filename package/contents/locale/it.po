@@ -22,9 +22,6 @@ msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
 "budget below. Temperature is forced to max while thinking."
 msgstr ""
-"Anthropic enables extended thinking when effort is not Off, using the token "
-"budget below. Temperature is forced to max while thinking."
-
 "Anthropic abilita il pensiero esteso quando l'impegno non è Off, utilizzando "
 "il budget di token riportato sotto. La temperatura è forzata al massimo "
 "durante il pensiero."
@@ -89,7 +86,7 @@ msgstr "Limitato in frequenza (HTTP 429) — troppe richieste, riprova tra poco"
 #: package/contents/ui/adapters/openai_chat.js:278
 #: package/contents/ui/adapters/openai_responses.js:535
 msgid "Not found (HTTP 404) — check your API endpoint and model name"
-msgstr "Not found (HTTP 404) — check your API endpoint and model name"
+msgstr ""
 "Non trovato (HTTP 404) — verifica il tuo endpoint API e il nome del modello"
 
 #: package/contents/ui/adapters/anthropic.js:492
@@ -102,7 +99,7 @@ msgstr "Errore API %1"
 #: package/contents/ui/adapters/openai_chat.js:282
 #: package/contents/ui/adapters/openai_responses.js:539
 msgid "Request failed (no response) — check your endpoint URL"
-msgstr "Request failed (no response) — check your endpoint URL"
+msgstr ""
 "Richiesta non riuscita (nessuna risposta) — verifica l'URL dell'endpoint"
 
 #: package/contents/ui/adapters/openai.js:33
@@ -112,11 +109,6 @@ msgid ""
 "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
 "reasoning_content."
 msgstr ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-
 "L'impegno nel ragionamento (basso / medio / alto) abilita il pensiero "
 "esteso. Per vedere i pensieri su OpenAI / Poe / OpenRouter / Azure, abilita "
 "Use Responses API; i fornitori di chat-completions (DeepSeek, Qwen) mostrano "
@@ -124,7 +116,7 @@ msgstr ""
 
 #: package/contents/ui/adapters/gemini_interactions.js:27
 msgid "Gemini uses the thinking level dropdown directly."
-msgstr "Gemini uses the thinking level dropdown directly."
+msgstr "Gemini utilizza direttamente il menu a discesa del livello di pensiero."
 
 #: package/contents/ui/adapters/gemini_interactions.js:113
 #: package/contents/ui/adapters/gemini.js:121
@@ -147,9 +139,10 @@ msgid ""
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
 "disable Native features in Settings."
 msgstr ""
-"This model version does not support combining Native tools (Search/Code) "
-"with custom commands. Please select a newer model (e.g., Gemini 3+) or "
-"disable Native features in Settings."
+"Questa versione del modello non supporta la combinazione di strumenti "
+"nativi (Ricerca/Codice) con comandi personalizzati. Seleziona un modello "
+"più recente (es., Gemini 3+) o disabilita le funzionalità native nelle "
+"Impostazioni."
 
 
 #: package/contents/ui/adapters/gemini_interactions.js:484
@@ -162,9 +155,6 @@ msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
 "on supported models."
 msgstr ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
-
 "Gemini utilizza direttamente il budget di token di pensiero. Imposta a 0 per "
 "disabilitare il pensiero sui modelli supportati."
 
@@ -264,7 +254,7 @@ msgstr "Tutti i file (*)"
 
 #: package/contents/ui/FullRepresentation.qml:22
 msgid "Toggle auto mode (auto-run + auto-share) for this session"
-msgstr "Toggle auto mode (auto-run + auto-share) for this session"
+msgstr ""
 "Attiva/disattiva la modalità automatica (auto-run + auto-share) per questa "
 "sessione"
 
@@ -290,7 +280,7 @@ msgstr "Mostra o cambia modello (/model <name>)"
 
 #: package/contents/ui/FullRepresentation.qml:28
 msgid "Switch profile (/profile <name>)"
-msgstr "Switch profile (/profile <name>)"
+msgstr "Cambia profilo (/profile <nome>)"
 
 #: package/contents/ui/FullRepresentation.qml:29
 msgid "Run last command"
@@ -315,7 +305,7 @@ msgstr "Esegui ultimo comando nel terminale"
 #: package/contents/ui/FullRepresentation.qml:147
 #: package/contents/ui/FullRepresentation.qml:148
 msgid "Toggle Auto Mode"
-msgstr "Toggle Auto Mode"
+msgstr "Attiva/disattiva modalità automatica"
 
 #: package/contents/ui/FullRepresentation.qml:157
 #: package/contents/ui/FullRepresentation.qml:158
@@ -352,9 +342,6 @@ msgid ""
 "Are you sure you want to delete all chat history files? This action cannot "
 "be undone."
 msgstr ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-
 "Sei sicuro di voler eliminare tutti i file della cronologia chat? Questa "
 "azione non può essere annullata."
 
@@ -430,9 +417,6 @@ msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 msgstr ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-
 "File di testo (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 
@@ -463,7 +447,7 @@ msgstr "Termina"
 
 #: package/contents/ui/FullRepresentation.qml:967
 msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
 "Termina sessione persistente (interrompe tutti i processi e ripristina lo "
 "stato della shell)"
 
@@ -480,8 +464,8 @@ msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
 "installed and authenticated."
 msgstr ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
+"Impossibile recuperare il token gcloud (uscita %1): %2. Assicurati che "
+"gcloud sia installato e autenticato."
 
 
 #: package/contents/ui/main.qml:1118
@@ -489,9 +473,6 @@ msgid ""
 "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
 "are on)."
 msgstr ""
-"Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
-"are on)."
-
 "La modalità automatica è abilitata in modo permanente tramite le "
 "impostazioni (sia Auto-run che Auto-share sono attivati)."
 
@@ -500,9 +481,6 @@ msgid ""
 "Auto mode enabled for this session. Commands will run and share output "
 "automatically."
 msgstr ""
-"Auto mode enabled for this session. Commands will run and share output "
-"automatically."
-
 "Modalità automatica abilitata per questa sessione. I comandi verranno "
 "eseguiti e l'output condiviso automaticamente."
 
@@ -512,31 +490,31 @@ msgstr "Modalità automatica disabilitata."
 
 #: package/contents/ui/main.qml:1137 package/contents/ui/main.qml:2099
 msgid "Default"
-msgstr "Default"
+msgstr "Predefinito"
 
 #: package/contents/ui/main.qml:1137
 msgid "Current profile: **%1**"
-msgstr "Current profile: **%1**"
+msgstr "Profilo corrente: **%1**"
 
 #: package/contents/ui/main.qml:1139
 msgid "Available profiles:"
-msgstr "Available profiles:"
+msgstr "Profili disponibili:"
 
 #: package/contents/ui/main.qml:1141
 msgid "active"
-msgstr "active"
+msgstr "attivo"
 
 #: package/contents/ui/main.qml:1144
 msgid "Type `/profile <name>` to switch."
-msgstr "Type `/profile <name>` to switch."
+msgstr "Digita `/profile <nome>` per cambiare."
 
 #: package/contents/ui/main.qml:1161
 msgid "Switched to profile: **%1**"
-msgstr "Switched to profile: **%1**"
+msgstr "Passato al profilo: **%1**"
 
 #: package/contents/ui/main.qml:1163
 msgid "Unknown profile: **%1**"
-msgstr "Unknown profile: **%1**"
+msgstr "Profilo sconosciuto: **%1**"
 
 #: package/contents/ui/main.qml:1170 package/contents/ui/main.qml:1251
 msgid "none"
@@ -556,7 +534,7 @@ msgstr "Digita `/model <name>` per cambiare."
 
 #: package/contents/ui/main.qml:1176
 msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "No models cached. Use **Fetch Models** in settings."
+msgstr ""
 "Nessun modello nella cache. Usa **Scarica modelli** nelle impostazioni."
 
 #: package/contents/ui/main.qml:1201
@@ -633,11 +611,11 @@ msgstr "Google Gemini"
 
 #: package/contents/ui/configAppearance.qml:18
 msgid "Profile Header:"
-msgstr "Profile Header:"
+msgstr "Intestazione profilo:"
 
 #: package/contents/ui/configAppearance.qml:19
 msgid "Show provider and model in profile header"
-msgstr "Show provider and model in profile header"
+msgstr "Mostra il provider e il modello nell'intestazione del profilo"
 
 #: package/contents/ui/configAppearance.qml:30
 msgid "Chat Spacing: %1px"
@@ -677,39 +655,39 @@ msgstr "Usa carattere pensieri personalizzato"
 
 #: package/contents/ui/configAppearance.qml:173
 msgid "Header Icons:"
-msgstr "Header Icons:"
+msgstr "Icone dell'intestazione:"
 
 #: package/contents/ui/configAppearance.qml:178
 msgid "Profile Header"
-msgstr "Profile Header"
+msgstr "Intestazione profilo"
 
 #: package/contents/ui/configAppearance.qml:184
 msgid "Always show Tasks"
-msgstr "Always show Tasks"
+msgstr "Mostra sempre le Attività"
 
 #: package/contents/ui/configAppearance.qml:190
 msgid "Always show Auto Toggle"
-msgstr "Always show Auto Toggle"
+msgstr "Mostra sempre il pulsante Auto"
 
 #: package/contents/ui/configAppearance.qml:196
 msgid "Show History"
-msgstr "Show History"
+msgstr "Mostra cronologia"
 
 #: package/contents/ui/configAppearance.qml:202
 msgid "Show Copy conversation"
-msgstr "Show Copy conversation"
+msgstr "Mostra Copia conversazione"
 
 #: package/contents/ui/configAppearance.qml:208
 msgid "Show Clear chat"
-msgstr "Show Clear chat"
+msgstr "Mostra Cancella chat"
 
 #: package/contents/ui/configAppearance.qml:214
 msgid "Show Settings"
-msgstr "Show Settings"
+msgstr "Mostra Impostazioni"
 
 #: package/contents/ui/configAppearance.qml:220
 msgid "Show Pin"
-msgstr "Show Pin"
+msgstr "Mostra Pinna"
 
 #: package/contents/ui/configSystemPrompt.qml:46
 msgid "System Info:"
@@ -717,7 +695,7 @@ msgstr "Informazioni di sistema:"
 
 #: package/contents/ui/configSystemPrompt.qml:52
 msgid "OS"
-msgstr "OS"
+msgstr "Sistema operativo"
 
 #: package/contents/ui/configSystemPrompt.qml:57
 msgid "Shell"
@@ -761,7 +739,7 @@ msgstr "Rete"
 
 #: package/contents/ui/configSystemPrompt.qml:107
 msgid "Locale"
-msgstr "Locale"
+msgstr "Impostazioni locali"
 
 #: package/contents/ui/configSystemPrompt.qml:112
 msgid "Date/Time"
@@ -781,7 +759,7 @@ msgstr "Anteprima:"
 
 #: package/contents/ui/configTasks.qml:31
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr "No tasks configured. Add a task to create reusable prompt shortcuts."
+msgstr ""
 "Nessuna attività configurata. Aggiungi un'attività per creare scorciatoie di "
 "prompt riutilizzabili."
 
@@ -823,10 +801,6 @@ msgid ""
 "button to run them. Tasks with auto mode will temporarily enable auto-run "
 "and auto-share."
 msgstr ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
-"button to run them. Tasks with auto mode will temporarily enable auto-run "
-"and auto-share."
-
 "Le attività sono scorciatoie di prompt riutilizzabili. Usa /task <name> "
 "nella chat o il pulsante della barra degli strumenti per eseguirle. Le "
 "attività in modalità automatica abiliteranno temporaneamente auto-run e auto-"
@@ -834,7 +808,7 @@ msgstr ""
 
 #: package/contents/ui/configGeneral.qml:59
 msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Failed to fetch gcloud token (exit %1): %2"
+msgstr "Impossibile recuperare il token gcloud (uscita %1): %2"
 
 #: package/contents/ui/configGeneral.qml:320
 msgid "No models found."
@@ -843,36 +817,36 @@ msgstr "Nessun modello trovato."
 #: package/contents/ui/configGeneral.qml:455
 #: package/contents/ui/configGeneral.qml:531
 msgid "New Profile"
-msgstr "New Profile"
+msgstr "Nuovo profilo"
 
 #: package/contents/ui/configGeneral.qml:471
 msgid "%1 (Copy)"
-msgstr "%1 (Copy)"
+msgstr "%1 (Copia)"
 
 #: package/contents/ui/configGeneral.qml:509
 msgid "Profile:"
-msgstr "Profile:"
+msgstr "Profilo:"
 
 #: package/contents/ui/configGeneral.qml:539
 #: package/contents/ui/configGeneral.qml:573
 msgid "Rename Profile"
-msgstr "Rename Profile"
+msgstr "Rinomina profilo"
 
 #: package/contents/ui/configGeneral.qml:547
 msgid "Duplicate Profile"
-msgstr "Duplicate Profile"
+msgstr "Duplica profilo"
 
 #: package/contents/ui/configGeneral.qml:555
 msgid "Delete Profile"
-msgstr "Delete Profile"
+msgstr "Elimina profilo"
 
 #: package/contents/ui/configGeneral.qml:577
 msgid "Profile Name"
-msgstr "Profile Name"
+msgstr "Nome profilo"
 
 #: package/contents/ui/configGeneral.qml:592
 msgid "Rename"
-msgstr "Rename"
+msgstr "Rinomina"
 
 #: package/contents/ui/configGeneral.qml:612
 msgid "Adapter:"
@@ -880,11 +854,11 @@ msgstr "Adattatore:"
 
 #: package/contents/ui/configGeneral.qml:635
 msgid "Authentication:"
-msgstr "Authentication:"
+msgstr "Autenticazione:"
 
 #: package/contents/ui/configGeneral.qml:638
 msgid "API Key (Express Mode)"
-msgstr "API Key (Express Mode)"
+msgstr "Chiave API (Modalità Express)"
 
 #: package/contents/ui/configGeneral.qml:638
 msgid "Google Cloud CLI (gcloud)"
@@ -894,12 +868,13 @@ msgstr "Google Cloud CLI (gcloud)"
 msgid ""
 "gcloud CLI not found. Please install it to use this authentication method."
 msgstr ""
-"gcloud CLI not found. Please install it to use this authentication method."
+"gcloud CLI non trovato. Installalo per usare questo metodo di "
+"autenticazione."
 
 
 #: package/contents/ui/configGeneral.qml:655
 msgid "API Variant:"
-msgstr "API Variant:"
+msgstr "Variante API:"
 
 #: package/contents/ui/configGeneral.qml:659
 #: package/contents/ui/configGeneral.qml:660
@@ -908,11 +883,11 @@ msgstr "Legacy (generateContent)"
 
 #: package/contents/ui/configGeneral.qml:660
 msgid "Interactions API (Stateful)"
-msgstr "Interactions API (Stateful)"
+msgstr "API Interactions (con stato)"
 
 #: package/contents/ui/configGeneral.qml:680
 msgid "Platform:"
-msgstr "Platform:"
+msgstr "Piattaforma:"
 
 #: package/contents/ui/configGeneral.qml:683
 msgid "Google AI Studio"
@@ -924,15 +899,15 @@ msgstr "Google Cloud Agent Platform (Vertex AI)"
 
 #: package/contents/ui/configGeneral.qml:697
 msgid "Project ID:"
-msgstr "Project ID:"
+msgstr "ID progetto:"
 
 #: package/contents/ui/configGeneral.qml:710
 msgid "Location:"
-msgstr "Location:"
+msgstr "Posizione:"
 
 #: package/contents/ui/configGeneral.qml:724
 msgid "Provider:"
-msgstr "Provider:"
+msgstr "Fornitore:"
 
 #: package/contents/ui/configGeneral.qml:821
 msgid "API Endpoint:"
@@ -957,7 +932,7 @@ msgstr "Chiave API:"
 
 #: package/contents/ui/configGeneral.qml:981
 msgid "Paste short-lived access token"
-msgstr "Paste short-lived access token"
+msgstr "Incolla token di accesso temporaneo"
 
 #: package/contents/ui/configGeneral.qml:981
 msgid "Optional - for OpenAI, etc."
@@ -993,7 +968,7 @@ msgstr "Memorizzato in KDE Wallet"
 
 #: package/contents/ui/configGeneral.qml:1007
 msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Wallet unavailable — key stored in config file"
+msgstr ""
 "KDE Wallet non disponibile — chiave memorizzata nel file di configurazione"
 
 #: package/contents/ui/configGeneral.qml:1022
@@ -1047,10 +1022,6 @@ msgid ""
 "collapsible header. Round-trip of signed thoughts to the API still happens "
 "regardless of this setting."
 msgstr ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-
 "Quando attivato, il ragionamento del modello viene mostrato sopra ogni "
 "risposta con un'intestazione comprimibile. Lo scambio dei pensieri firmati "
 "con l'API avviene indipendentemente da questa impostazione."
@@ -1065,10 +1036,6 @@ msgid ""
 "(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
 "picking a preset."
 msgstr ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-
 "Necessario per mostrare il contenuto di ragionamento su OpenAI / Poe / "
 "OpenRouter / Azure (POST a /v1/responses invece di /v1/chat/completions). "
 "Impostato automaticamente quando si sceglie un preset."
@@ -1135,9 +1102,6 @@ msgid ""
 "Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
 "share."
 msgstr ""
-"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
-"share."
-
 "Consenti all'LLM di eseguire comandi shell. Pericoloso se combinato con Auto-"
 "share."
 
@@ -1150,9 +1114,6 @@ msgid ""
 "Use the run_command tool for command execution. If disabled, falls back to "
 "parsing code blocks."
 msgstr ""
-"Use the run_command tool for command execution. If disabled, falls back to "
-"parsing code blocks."
-
 "Usa lo strumento run_command per l'esecuzione dei comandi. Se disabilitato, "
 "ricorre all'analisi dei blocchi di codice."
 
@@ -1169,9 +1130,6 @@ msgid ""
 "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
 "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
 msgstr ""
-"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-
 "⚠️ PERICOLO: Entrambe le opzioni abilitate - l'LLM può ora eseguire comandi e "
 "vedere l'output abilitando un flusso di lavoro agentivo. Utilizzare solo con "
 "LLM affidabili."
@@ -1189,9 +1147,6 @@ msgid ""
 "Execute LLM commands inside a long-lived tmux or screen session so state "
 "persists across turns."
 msgstr ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-
 "Esegui i comandi dell'LLM all'interno di una sessione tmux o screen di lunga "
 "durata in modo che lo stato persista tra i turni."
 
@@ -1212,40 +1167,37 @@ msgid ""
 "Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
 "is unavailable."
 msgstr ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
-
 "Né 'tmux' né 'screen' sono stati trovati nel sistema. Il multiplexing di "
 "sessione non è disponibile."
 
 #: package/contents/ui/configTools.qml:413
 msgid "Native Adapter Features"
-msgstr "Native Adapter Features"
+msgstr "Funzionalità native dell'adattatore"
 
 #: package/contents/ui/configTools.qml:419
 msgid "Enable Native Google Search Grounding"
-msgstr "Enable Native Google Search Grounding"
+msgstr "Abilita il grounding nativo di Google Search"
 
 #: package/contents/ui/configTools.qml:427
 msgid ""
 "Use Gemini's built-in Google Search for grounding. This overrides the "
 "standard web search tool."
 msgstr ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
+"Usa la ricerca Google integrata di Gemini per il grounding. Questo "
+"sostituisce lo strumento di ricerca web standard."
 
 
 #: package/contents/ui/configTools.qml:434
 msgid "Enable Native Python Code Execution"
-msgstr "Enable Native Python Code Execution"
+msgstr "Abilita l'esecuzione nativa del codice Python"
 
 #: package/contents/ui/configTools.qml:442
 msgid ""
 "Allow Gemini to write and execute Python code in a secure server-side "
 "sandbox."
 msgstr ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
+"Consente a Gemini di scrivere ed eseguire codice Python in un sandbox "
+"sicuro lato server."
 
 
 #: package/contents/ui/configTools.qml:450
@@ -1253,13 +1205,14 @@ msgid ""
 "Combining Native tools with commands requires a newer model. Your currently "
 "selected model (%1) may encounter errors."
 msgstr ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
+"La combinazione di strumenti nativi con comandi richiede un modello più "
+"recente. Il modello attualmente selezionato (%1) potrebbe riscontrare "
+"errori."
 
 
 #: package/contents/ui/configTools.qml:458
 msgid "Standard Web Search"
-msgstr "Standard Web Search"
+msgstr "Ricerca web standard"
 
 #: package/contents/ui/configTools.qml:463
 msgid "Enable web search tool"
@@ -1303,7 +1256,7 @@ msgstr "Assicurati che l'istanza SearXNG abbia il formato JSON abilitato."
 
 #: package/contents/ui/configTools.qml:579
 msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Enables LLM-triggered web searches via Ollama's search API"
+msgstr ""
 "Abilita ricerche web attivate da LLM tramite l'API di ricerca di Ollama"
 
 #: package/contents/config/config.qml:11

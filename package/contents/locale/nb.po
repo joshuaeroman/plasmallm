@@ -22,9 +22,6 @@ msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
 "budget below. Temperature is forced to max while thinking."
 msgstr ""
-"Anthropic enables extended thinking when effort is not Off, using the token "
-"budget below. Temperature is forced to max while thinking."
-
 "Anthropic muliggjør utvidet tenkning når innsats ikke er Av, og bruker token-"
 "budsjettet nedenfor for maksimal utgang."
 
@@ -100,7 +97,7 @@ msgstr "API-feil %1"
 #: package/contents/ui/adapters/openai_chat.js:282
 #: package/contents/ui/adapters/openai_responses.js:539
 msgid "Request failed (no response) — check your endpoint URL"
-msgstr "Request failed (no response) — check your endpoint URL"
+msgstr ""
 "Forespørsel mislyktes (ingen respons) — kontroller endepunkts-URL-en..."
 
 #: package/contents/ui/adapters/openai.js:33
@@ -110,17 +107,12 @@ msgid ""
 "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
 "reasoning_content."
 msgstr ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-
 "Resonneringsinnsats (lav / middels / høy) styrer utvidet tenkning. For å se "
 "tanker, sørg for at du har aktivert 'Vis tanker' i Generelt-fanen."
 
 #: package/contents/ui/adapters/gemini_interactions.js:27
 msgid "Gemini uses the thinking level dropdown directly."
-msgstr "Gemini uses the thinking level dropdown directly."
+msgstr "Gemini bruker tenkenivå-nedtrekkslisten direkte."
 
 #: package/contents/ui/adapters/gemini_interactions.js:113
 #: package/contents/ui/adapters/gemini.js:121
@@ -143,9 +135,9 @@ msgid ""
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
 "disable Native features in Settings."
 msgstr ""
-"This model version does not support combining Native tools (Search/Code) "
-"with custom commands. Please select a newer model (e.g., Gemini 3+) or "
-"disable Native features in Settings."
+"Denne modellversjonen støtter ikke å kombinere innebygde verktøy "
+"(Søk/Kode) med tilpassede kommandoer. Velg en nyere modell (f.eks. Gemini "
+"3+) eller deaktiver innebygde funksjoner i innstillinger."
 
 
 #: package/contents/ui/adapters/gemini_interactions.js:484
@@ -158,9 +150,6 @@ msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
 "on supported models."
 msgstr ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
-
 "Gemini bruker tenke-token-budsjettet direkte. Sett til 0 for å deaktivere "
 "tenking (noen modeller krever det)."
 
@@ -260,7 +249,7 @@ msgstr "Alle filer (*)"
 
 #: package/contents/ui/FullRepresentation.qml:22
 msgid "Toggle auto mode (auto-run + auto-share) for this session"
-msgstr "Toggle auto mode (auto-run + auto-share) for this session"
+msgstr ""
 "Veksle automatisk modus (automatisk kjøring + automatisk deling) for denne "
 "økten"
 
@@ -286,7 +275,7 @@ msgstr "Vis eller bytt modell (/model <name>)"
 
 #: package/contents/ui/FullRepresentation.qml:28
 msgid "Switch profile (/profile <name>)"
-msgstr "Switch profile (/profile <name>)"
+msgstr "Bytt profil (/profile <navn>)"
 
 #: package/contents/ui/FullRepresentation.qml:29
 msgid "Run last command"
@@ -311,7 +300,7 @@ msgstr "Kjør siste kommando i terminal"
 #: package/contents/ui/FullRepresentation.qml:147
 #: package/contents/ui/FullRepresentation.qml:148
 msgid "Toggle Auto Mode"
-msgstr "Toggle Auto Mode"
+msgstr "Slå av/på automatisk modus"
 
 #: package/contents/ui/FullRepresentation.qml:157
 #: package/contents/ui/FullRepresentation.qml:158
@@ -348,9 +337,6 @@ msgid ""
 "Are you sure you want to delete all chat history files? This action cannot "
 "be undone."
 msgstr ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-
 "Er du sikker på at du vil slette alle chat-historikkfiler? Denne handlingen "
 "kan ikke angres."
 
@@ -426,9 +412,6 @@ msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 msgstr ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-
 "Tekstfiler (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 
@@ -459,7 +442,7 @@ msgstr "Avslutt"
 
 #: package/contents/ui/FullRepresentation.qml:967
 msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
 "Avslutt vedvarende økt (stopper alle prosesser og nullstiller "
 "skalltilstanden)"
 
@@ -476,8 +459,8 @@ msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
 "installed and authenticated."
 msgstr ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
+"Klarte ikke hente gcloud-token (avslutningskode %1): %2. Kontroller at "
+"gcloud er installert og autentisert."
 
 
 #: package/contents/ui/main.qml:1118
@@ -485,9 +468,6 @@ msgid ""
 "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
 "are on)."
 msgstr ""
-"Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
-"are on)."
-
 "Automatisk modus er permanent aktivert via innstillinger (både automatisk "
 "kjøring og automatisk deling er på)."
 
@@ -496,9 +476,6 @@ msgid ""
 "Auto mode enabled for this session. Commands will run and share output "
 "automatically."
 msgstr ""
-"Auto mode enabled for this session. Commands will run and share output "
-"automatically."
-
 "Automatisk modus aktivert for denne økten. Kommandoer vil kjøre og dele "
 "utdata automatisk."
 
@@ -508,31 +485,31 @@ msgstr "Automatisk modus deaktivert."
 
 #: package/contents/ui/main.qml:1137 package/contents/ui/main.qml:2099
 msgid "Default"
-msgstr "Default"
+msgstr "Standard"
 
 #: package/contents/ui/main.qml:1137
 msgid "Current profile: **%1**"
-msgstr "Current profile: **%1**"
+msgstr "Gjeldende profil: **%1**"
 
 #: package/contents/ui/main.qml:1139
 msgid "Available profiles:"
-msgstr "Available profiles:"
+msgstr "Tilgjengelige profiler:"
 
 #: package/contents/ui/main.qml:1141
 msgid "active"
-msgstr "active"
+msgstr "aktiv"
 
 #: package/contents/ui/main.qml:1144
 msgid "Type `/profile <name>` to switch."
-msgstr "Type `/profile <name>` to switch."
+msgstr "Skriv `/profile <navn>` for å bytte."
 
 #: package/contents/ui/main.qml:1161
 msgid "Switched to profile: **%1**"
-msgstr "Switched to profile: **%1**"
+msgstr "Byttet til profil: **%1**"
 
 #: package/contents/ui/main.qml:1163
 msgid "Unknown profile: **%1**"
-msgstr "Unknown profile: **%1**"
+msgstr "Ukjent profil: **%1**"
 
 #: package/contents/ui/main.qml:1170 package/contents/ui/main.qml:1251
 msgid "none"
@@ -600,7 +577,7 @@ msgstr "Kjører: %1"
 
 #: package/contents/ui/main.qml:1853
 msgid "stderr: %1"
-msgstr "stderr: %1"
+msgstr "feilutdata: %1"
 
 #: package/contents/ui/main.qml:1855
 msgid "[truncated — output exceeded %1KB]"
@@ -628,11 +605,11 @@ msgstr "Google Gemini"
 
 #: package/contents/ui/configAppearance.qml:18
 msgid "Profile Header:"
-msgstr "Profile Header:"
+msgstr "Profiloverskrift:"
 
 #: package/contents/ui/configAppearance.qml:19
 msgid "Show provider and model in profile header"
-msgstr "Show provider and model in profile header"
+msgstr "Vis leverandør og modell i profiloverskrift"
 
 #: package/contents/ui/configAppearance.qml:30
 msgid "Chat Spacing: %1px"
@@ -672,39 +649,39 @@ msgstr "Bruk egendefinert tankeskrift"
 
 #: package/contents/ui/configAppearance.qml:173
 msgid "Header Icons:"
-msgstr "Header Icons:"
+msgstr "Overskriftsikoner:"
 
 #: package/contents/ui/configAppearance.qml:178
 msgid "Profile Header"
-msgstr "Profile Header"
+msgstr "Profiloverskrift"
 
 #: package/contents/ui/configAppearance.qml:184
 msgid "Always show Tasks"
-msgstr "Always show Tasks"
+msgstr "Vis alltid Oppgaver"
 
 #: package/contents/ui/configAppearance.qml:190
 msgid "Always show Auto Toggle"
-msgstr "Always show Auto Toggle"
+msgstr "Vis alltid Auto-veksler"
 
 #: package/contents/ui/configAppearance.qml:196
 msgid "Show History"
-msgstr "Show History"
+msgstr "Vis historikk"
 
 #: package/contents/ui/configAppearance.qml:202
 msgid "Show Copy conversation"
-msgstr "Show Copy conversation"
+msgstr "Vis Kopier samtale"
 
 #: package/contents/ui/configAppearance.qml:208
 msgid "Show Clear chat"
-msgstr "Show Clear chat"
+msgstr "Vis Tøm chat"
 
 #: package/contents/ui/configAppearance.qml:214
 msgid "Show Settings"
-msgstr "Show Settings"
+msgstr "Vis Innstillinger"
 
 #: package/contents/ui/configAppearance.qml:220
 msgid "Show Pin"
-msgstr "Show Pin"
+msgstr "Vis festikonet"
 
 #: package/contents/ui/configSystemPrompt.qml:46
 msgid "System Info:"
@@ -716,7 +693,7 @@ msgstr "OS"
 
 #: package/contents/ui/configSystemPrompt.qml:57
 msgid "Shell"
-msgstr "Shell"
+msgstr "Skall"
 
 #: package/contents/ui/configSystemPrompt.qml:62
 msgid "Hostname"
@@ -756,7 +733,7 @@ msgstr "Nettverk"
 
 #: package/contents/ui/configSystemPrompt.qml:107
 msgid "Locale"
-msgstr "Språk og område"
+msgstr "Lokalitet"
 
 #: package/contents/ui/configSystemPrompt.qml:112
 msgid "Date/Time"
@@ -776,7 +753,7 @@ msgstr "Forhåndsvisning:"
 
 #: package/contents/ui/configTasks.qml:31
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr "No tasks configured. Add a task to create reusable prompt shortcuts."
+msgstr ""
 "Ingen oppgaver konfigurert. Legg til en oppgave for å opprette gjenbrukbare "
 "hurtigtaster for ledetekst."
 
@@ -818,17 +795,13 @@ msgid ""
 "button to run them. Tasks with auto mode will temporarily enable auto-run "
 "and auto-share."
 msgstr ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
-"button to run them. Tasks with auto mode will temporarily enable auto-run "
-"and auto-share."
-
 "Oppgaver er gjenbrukbare hurtigtaster for ledetekst. Bruk /task <name> i "
 "chat eller verktøylinjeknappen for å kjøre dem. Oppgaver med automatisk "
 "modus vil midlertidig aktivere automatisk kjøring og automatisk deling."
 
 #: package/contents/ui/configGeneral.qml:59
 msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Failed to fetch gcloud token (exit %1): %2"
+msgstr "Klarte ikke hente gcloud-token (avslutningskode %1): %2"
 
 #: package/contents/ui/configGeneral.qml:320
 msgid "No models found."
@@ -837,36 +810,36 @@ msgstr "Ingen modeller funnet."
 #: package/contents/ui/configGeneral.qml:455
 #: package/contents/ui/configGeneral.qml:531
 msgid "New Profile"
-msgstr "New Profile"
+msgstr "Ny profil"
 
 #: package/contents/ui/configGeneral.qml:471
 msgid "%1 (Copy)"
-msgstr "%1 (Copy)"
+msgstr "%1 (Kopi)"
 
 #: package/contents/ui/configGeneral.qml:509
 msgid "Profile:"
-msgstr "Profile:"
+msgstr "Profil:"
 
 #: package/contents/ui/configGeneral.qml:539
 #: package/contents/ui/configGeneral.qml:573
 msgid "Rename Profile"
-msgstr "Rename Profile"
+msgstr "Gi nytt navn til profil"
 
 #: package/contents/ui/configGeneral.qml:547
 msgid "Duplicate Profile"
-msgstr "Duplicate Profile"
+msgstr "Dupliser profil"
 
 #: package/contents/ui/configGeneral.qml:555
 msgid "Delete Profile"
-msgstr "Delete Profile"
+msgstr "Slett profil"
 
 #: package/contents/ui/configGeneral.qml:577
 msgid "Profile Name"
-msgstr "Profile Name"
+msgstr "Profilnavn"
 
 #: package/contents/ui/configGeneral.qml:592
 msgid "Rename"
-msgstr "Rename"
+msgstr "Gi nytt navn"
 
 #: package/contents/ui/configGeneral.qml:612
 msgid "Adapter:"
@@ -874,11 +847,11 @@ msgstr "Adapter:"
 
 #: package/contents/ui/configGeneral.qml:635
 msgid "Authentication:"
-msgstr "Authentication:"
+msgstr "Autentisering:"
 
 #: package/contents/ui/configGeneral.qml:638
 msgid "API Key (Express Mode)"
-msgstr "API Key (Express Mode)"
+msgstr "API-nøkkel (ekspressmodus)"
 
 #: package/contents/ui/configGeneral.qml:638
 msgid "Google Cloud CLI (gcloud)"
@@ -888,25 +861,26 @@ msgstr "Google Cloud CLI (gcloud)"
 msgid ""
 "gcloud CLI not found. Please install it to use this authentication method."
 msgstr ""
-"gcloud CLI not found. Please install it to use this authentication method."
+"gcloud CLI ikke funnet. Installer det for å bruke denne "
+"autentiseringsmetoden."
 
 
 #: package/contents/ui/configGeneral.qml:655
 msgid "API Variant:"
-msgstr "API Variant:"
+msgstr "API-variant:"
 
 #: package/contents/ui/configGeneral.qml:659
 #: package/contents/ui/configGeneral.qml:660
 msgid "Legacy (generateContent)"
-msgstr "Legacy (generateContent)"
+msgstr "Eldre (generateContent)"
 
 #: package/contents/ui/configGeneral.qml:660
 msgid "Interactions API (Stateful)"
-msgstr "Interactions API (Stateful)"
+msgstr "Interactions-API (tilstandsbasert)"
 
 #: package/contents/ui/configGeneral.qml:680
 msgid "Platform:"
-msgstr "Platform:"
+msgstr "Plattform:"
 
 #: package/contents/ui/configGeneral.qml:683
 msgid "Google AI Studio"
@@ -918,11 +892,11 @@ msgstr "Google Cloud Agent Platform (Vertex AI)"
 
 #: package/contents/ui/configGeneral.qml:697
 msgid "Project ID:"
-msgstr "Project ID:"
+msgstr "Prosjekt-ID:"
 
 #: package/contents/ui/configGeneral.qml:710
 msgid "Location:"
-msgstr "Location:"
+msgstr "Plassering:"
 
 #: package/contents/ui/configGeneral.qml:724
 msgid "Provider:"
@@ -951,7 +925,7 @@ msgstr "API-nøkkel:"
 
 #: package/contents/ui/configGeneral.qml:981
 msgid "Paste short-lived access token"
-msgstr "Paste short-lived access token"
+msgstr "Lim inn kortvarig tilgangstoken"
 
 #: package/contents/ui/configGeneral.qml:981
 msgid "Optional - for OpenAI, etc."
@@ -1040,10 +1014,6 @@ msgid ""
 "collapsible header. Round-trip of signed thoughts to the API still happens "
 "regardless of this setting."
 msgstr ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-
 "Når aktivert, vises modellens resonnering over hvert svar med en "
 "sammenleggbar overskrift. Utveksling av signerte tanker til API-et skjer "
 "uavhengig av denne innstillingen."
@@ -1058,10 +1028,6 @@ msgid ""
 "(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
 "picking a preset."
 msgstr ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-
 "Nødvendig for å vise resonnerende innhold på OpenAI / Poe / OpenRouter / "
 "Azure (POST til /v1/responses i stedet for /v1/chat/completions). Settes "
 "automatisk ved valg av forhåndsinnstilling."
@@ -1128,9 +1094,6 @@ msgid ""
 "Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
 "share."
 msgstr ""
-"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
-"share."
-
 "Tillat LLM å utføre skall-kommandoer. Farlig hvis kombinert med Automatisk "
 "deling."
 
@@ -1143,9 +1106,6 @@ msgid ""
 "Use the run_command tool for command execution. If disabled, falls back to "
 "parsing code blocks."
 msgstr ""
-"Use the run_command tool for command execution. If disabled, falls back to "
-"parsing code blocks."
-
 "Bruk run_command-verktøyet for kommandoutførelse. Hvis deaktivert, faller "
 "den tilbake til å tolke kodeblokker."
 
@@ -1162,9 +1122,6 @@ msgid ""
 "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
 "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
 msgstr ""
-"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-
 "⚠️ FARE: Begge alternativer aktivert - LLM kan nå kjøre kommandoer og se "
 "deres utdata, noe som aktiverer agentbasert arbeidsflyt. Bruk kun med "
 "pålitelige LLM-er."
@@ -1182,9 +1139,6 @@ msgid ""
 "Execute LLM commands inside a long-lived tmux or screen session so state "
 "persists across turns."
 msgstr ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-
 "Kjør LLM-kommandoer i en langvarig tmux- eller screen-økt slik at tilstanden "
 "bevares over flere trekk."
 
@@ -1194,7 +1148,7 @@ msgstr "Nullstill økt"
 
 #: package/contents/ui/configTools.qml:365
 msgid "Backend:"
-msgstr "Backend:"
+msgstr "Bakside:"
 
 #: package/contents/ui/configTools.qml:394
 msgid "Session name:"
@@ -1205,40 +1159,37 @@ msgid ""
 "Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
 "is unavailable."
 msgstr ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
-
 "Verken 'tmux' eller 'screen' ble funnet på systemet ditt. Øktmultipleksing "
 "er utilgjengelig."
 
 #: package/contents/ui/configTools.qml:413
 msgid "Native Adapter Features"
-msgstr "Native Adapter Features"
+msgstr "Innebygde adapterfunksjoner"
 
 #: package/contents/ui/configTools.qml:419
 msgid "Enable Native Google Search Grounding"
-msgstr "Enable Native Google Search Grounding"
+msgstr "Aktiver innebygd Google-søkegrunnlag"
 
 #: package/contents/ui/configTools.qml:427
 msgid ""
 "Use Gemini's built-in Google Search for grounding. This overrides the "
 "standard web search tool."
 msgstr ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
+"Bruk Geminis innebygde Google-søk for grunnlag. Dette overstyrer det "
+"standard nettsøkverktøyet."
 
 
 #: package/contents/ui/configTools.qml:434
 msgid "Enable Native Python Code Execution"
-msgstr "Enable Native Python Code Execution"
+msgstr "Aktiver innebygd Python-kodekjøring"
 
 #: package/contents/ui/configTools.qml:442
 msgid ""
 "Allow Gemini to write and execute Python code in a secure server-side "
 "sandbox."
 msgstr ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
+"Tillat Gemini å skrive og kjøre Python-kode i en sikker sandkasse på "
+"serversiden."
 
 
 #: package/contents/ui/configTools.qml:450
@@ -1246,13 +1197,13 @@ msgid ""
 "Combining Native tools with commands requires a newer model. Your currently "
 "selected model (%1) may encounter errors."
 msgstr ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
+"Å kombinere innebygde verktøy med kommandoer krever en nyere modell. Din "
+"valgte modell (%1) kan oppleve feil."
 
 
 #: package/contents/ui/configTools.qml:458
 msgid "Standard Web Search"
-msgstr "Standard Web Search"
+msgstr "Standard nettsøk"
 
 #: package/contents/ui/configTools.qml:463
 msgid "Enable web search tool"

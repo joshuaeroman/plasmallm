@@ -20,9 +20,6 @@ msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
 "budget below. Temperature is forced to max while thinking."
 msgstr ""
-"Anthropic enables extended thinking when effort is not Off, using the token "
-"budget below. Temperature is forced to max while thinking."
-
 "Anthropicは、強度がオフでない場合に拡張思考を有効にし、以下のトークンバジェッ"
 "トを最大出力に使用します。"
 
@@ -80,7 +77,7 @@ msgstr "認証に失敗しました (HTTP %1) — APIキーを確認してくだ
 #: package/contents/ui/adapters/openai_chat.js:276
 #: package/contents/ui/adapters/openai_responses.js:533
 msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
-msgstr "Rate limited (HTTP 429) — too many requests, try again shortly"
+msgstr ""
 "レート制限 (HTTP 429) — リクエストが多すぎます。しばらくしてから再試行してく"
 "ださい"
 
@@ -88,7 +85,7 @@ msgstr "Rate limited (HTTP 429) — too many requests, try again shortly"
 #: package/contents/ui/adapters/openai_chat.js:278
 #: package/contents/ui/adapters/openai_responses.js:535
 msgid "Not found (HTTP 404) — check your API endpoint and model name"
-msgstr "Not found (HTTP 404) — check your API endpoint and model name"
+msgstr ""
 "見つかりません (HTTP 404) — APIエンドポイントとモデル名を確認してください"
 
 #: package/contents/ui/adapters/anthropic.js:492
@@ -101,7 +98,7 @@ msgstr "APIエラー %1"
 #: package/contents/ui/adapters/openai_chat.js:282
 #: package/contents/ui/adapters/openai_responses.js:539
 msgid "Request failed (no response) — check your endpoint URL"
-msgstr "Request failed (no response) — check your endpoint URL"
+msgstr ""
 "リクエストに失敗しました（応答なし） — エンドポイントURLを確認してください..."
 
 #: package/contents/ui/adapters/openai.js:33
@@ -111,17 +108,12 @@ msgid ""
 "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
 "reasoning_content."
 msgstr ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-
 "推論の強度（低 / 中 / 高）は拡張思考を制御します。思考を表示するには、[全般]"
 "タブで「チャットに思考を表示」が有効になっていることを確認してください。"
 
 #: package/contents/ui/adapters/gemini_interactions.js:27
 msgid "Gemini uses the thinking level dropdown directly."
-msgstr "Gemini uses the thinking level dropdown directly."
+msgstr "Geminiは思考レベルのドロップダウンを直接使用します。"
 
 #: package/contents/ui/adapters/gemini_interactions.js:113
 #: package/contents/ui/adapters/gemini.js:121
@@ -144,9 +136,8 @@ msgid ""
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
 "disable Native features in Settings."
 msgstr ""
-"This model version does not support combining Native tools (Search/Code) "
-"with custom commands. Please select a newer model (e.g., Gemini 3+) or "
-"disable Native features in Settings."
+"このモデルバージョンは、ネイティブツール（検索/コード）とカスタムコマンドの組み合わせをサポートしていません。新しいモデル（例：Gemini "
+"3+）を選択するか、設定でネイティブ機能を無効にしてください。"
 
 
 #: package/contents/ui/adapters/gemini_interactions.js:484
@@ -159,9 +150,6 @@ msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
 "on supported models."
 msgstr ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
-
 "Geminiは思考トークンバジェットを直接使用します。思考を無効にするには0に設定し"
 "てください（一部のモデルで必要です）。"
 
@@ -285,7 +273,7 @@ msgstr "モデルを表示または切り替え (/model <name>)"
 
 #: package/contents/ui/FullRepresentation.qml:28
 msgid "Switch profile (/profile <name>)"
-msgstr "Switch profile (/profile <name>)"
+msgstr "プロファイルを切り替え (/profile <名前>)"
 
 #: package/contents/ui/FullRepresentation.qml:29
 msgid "Run last command"
@@ -310,7 +298,7 @@ msgstr "最後のコマンドをターミナルで実行"
 #: package/contents/ui/FullRepresentation.qml:147
 #: package/contents/ui/FullRepresentation.qml:148
 msgid "Toggle Auto Mode"
-msgstr "Toggle Auto Mode"
+msgstr "自動モードの切り替え"
 
 #: package/contents/ui/FullRepresentation.qml:157
 #: package/contents/ui/FullRepresentation.qml:158
@@ -347,9 +335,6 @@ msgid ""
 "Are you sure you want to delete all chat history files? This action cannot "
 "be undone."
 msgstr ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-
 "すべてのチャット履歴ファイルを削除してもよろしいですか？この操作は取り消せま"
 "せん。"
 
@@ -425,9 +410,6 @@ msgid ""
 "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
 "*.sh *.py *.js *.ts *.qml)"
 msgstr ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-
 "テキストファイル (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
 "*.conf *.sh *.py *.js *.ts *.qml)"
 
@@ -446,7 +428,7 @@ msgstr "初期化中…"
 #: package/contents/ui/FullRepresentation.qml:931
 #: package/contents/ui/configTasks.qml:55
 msgid "AUTO"
-msgstr "AUTO"
+msgstr "自動"
 
 #: package/contents/ui/FullRepresentation.qml:956
 msgid "Attach file or image"
@@ -458,7 +440,7 @@ msgstr "強制終了"
 
 #: package/contents/ui/FullRepresentation.qml:967
 msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
 "永続セッションを強制終了（すべてのプロセスを停止し、シェル状態をリセットしま"
 "す）"
 
@@ -474,9 +456,7 @@ msgstr "LLMリクエストをキャンセル"
 msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
 "installed and authenticated."
-msgstr ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
+msgstr "gcloudトークンを取得できませんでした（終了コード %1）：%2。gcloudがインストールされ、認証されていることを確認してください。"
 
 
 #: package/contents/ui/main.qml:1118
@@ -484,9 +464,6 @@ msgid ""
 "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
 "are on)."
 msgstr ""
-"Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
-"are on)."
-
 "オートモードは設定で恒久的に有効になっています（自動実行と自動共有の両方がオ"
 "ンです）。"
 
@@ -495,9 +472,6 @@ msgid ""
 "Auto mode enabled for this session. Commands will run and share output "
 "automatically."
 msgstr ""
-"Auto mode enabled for this session. Commands will run and share output "
-"automatically."
-
 "このセッションでオートモードが有効になりました。コマンドは自動的に実行され、"
 "出力が共有されます。"
 
@@ -507,31 +481,31 @@ msgstr "オートモードが無効になりました。"
 
 #: package/contents/ui/main.qml:1137 package/contents/ui/main.qml:2099
 msgid "Default"
-msgstr "Default"
+msgstr "デフォルト"
 
 #: package/contents/ui/main.qml:1137
 msgid "Current profile: **%1**"
-msgstr "Current profile: **%1**"
+msgstr "現在のプロファイル: **%1**"
 
 #: package/contents/ui/main.qml:1139
 msgid "Available profiles:"
-msgstr "Available profiles:"
+msgstr "利用可能なプロファイル："
 
 #: package/contents/ui/main.qml:1141
 msgid "active"
-msgstr "active"
+msgstr "アクティブ"
 
 #: package/contents/ui/main.qml:1144
 msgid "Type `/profile <name>` to switch."
-msgstr "Type `/profile <name>` to switch."
+msgstr "切り替えるには `/profile <名前>` と入力してください。"
 
 #: package/contents/ui/main.qml:1161
 msgid "Switched to profile: **%1**"
-msgstr "Switched to profile: **%1**"
+msgstr "プロファイルを切り替えました: **%1**"
 
 #: package/contents/ui/main.qml:1163
 msgid "Unknown profile: **%1**"
-msgstr "Unknown profile: **%1**"
+msgstr "不明なプロファイル: **%1**"
 
 #: package/contents/ui/main.qml:1170 package/contents/ui/main.qml:1251
 msgid "none"
@@ -551,7 +525,7 @@ msgstr "`/model <name>` と入力して切り替え。"
 
 #: package/contents/ui/main.qml:1176
 msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "No models cached. Use **Fetch Models** in settings."
+msgstr ""
 "キャッシュされたモデルがありません。設定の**モデルを取得**を使用してくださ"
 "い。"
 
@@ -601,7 +575,7 @@ msgstr "実行中: %1"
 
 #: package/contents/ui/main.qml:1853
 msgid "stderr: %1"
-msgstr "stderr: %1"
+msgstr "標準エラー: %1"
 
 #: package/contents/ui/main.qml:1855
 msgid "[truncated — output exceeded %1KB]"
@@ -629,11 +603,11 @@ msgstr "Google Gemini"
 
 #: package/contents/ui/configAppearance.qml:18
 msgid "Profile Header:"
-msgstr "Profile Header:"
+msgstr "プロファイルヘッダー:"
 
 #: package/contents/ui/configAppearance.qml:19
 msgid "Show provider and model in profile header"
-msgstr "Show provider and model in profile header"
+msgstr "プロファイルヘッダーにプロバイダーとモデルを表示"
 
 #: package/contents/ui/configAppearance.qml:30
 msgid "Chat Spacing: %1px"
@@ -673,39 +647,39 @@ msgstr "カスタム思考フォントを使用"
 
 #: package/contents/ui/configAppearance.qml:173
 msgid "Header Icons:"
-msgstr "Header Icons:"
+msgstr "ヘッダーアイコン:"
 
 #: package/contents/ui/configAppearance.qml:178
 msgid "Profile Header"
-msgstr "Profile Header"
+msgstr "プロファイルヘッダー"
 
 #: package/contents/ui/configAppearance.qml:184
 msgid "Always show Tasks"
-msgstr "Always show Tasks"
+msgstr "タスクを常に表示"
 
 #: package/contents/ui/configAppearance.qml:190
 msgid "Always show Auto Toggle"
-msgstr "Always show Auto Toggle"
+msgstr "自動切り替えを常に表示"
 
 #: package/contents/ui/configAppearance.qml:196
 msgid "Show History"
-msgstr "Show History"
+msgstr "履歴を表示"
 
 #: package/contents/ui/configAppearance.qml:202
 msgid "Show Copy conversation"
-msgstr "Show Copy conversation"
+msgstr "会話のコピーを表示"
 
 #: package/contents/ui/configAppearance.qml:208
 msgid "Show Clear chat"
-msgstr "Show Clear chat"
+msgstr "チャットのクリアを表示"
 
 #: package/contents/ui/configAppearance.qml:214
 msgid "Show Settings"
-msgstr "Show Settings"
+msgstr "設定を表示"
 
 #: package/contents/ui/configAppearance.qml:220
 msgid "Show Pin"
-msgstr "Show Pin"
+msgstr "ピンを表示"
 
 #: package/contents/ui/configSystemPrompt.qml:46
 msgid "System Info:"
@@ -777,7 +751,7 @@ msgstr "プレビュー:"
 
 #: package/contents/ui/configTasks.qml:31
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr "No tasks configured. Add a task to create reusable prompt shortcuts."
+msgstr ""
 "タスクが設定されていません。再利用可能なプロンプトショートカットを作成するに"
 "はタスクを追加してください。"
 
@@ -819,17 +793,13 @@ msgid ""
 "button to run them. Tasks with auto mode will temporarily enable auto-run "
 "and auto-share."
 msgstr ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
-"button to run them. Tasks with auto mode will temporarily enable auto-run "
-"and auto-share."
-
 "タスクは再利用可能なプロンプトショートカットです。チャットで /task <name> ま"
 "たはツールバーボタンで実行できます。オートモードのタスクは一時的に自動実行と"
 "自動共有を有効にします。"
 
 #: package/contents/ui/configGeneral.qml:59
 msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Failed to fetch gcloud token (exit %1): %2"
+msgstr "gcloudトークンを取得できませんでした（終了コード %1）：%2"
 
 #: package/contents/ui/configGeneral.qml:320
 msgid "No models found."
@@ -838,36 +808,36 @@ msgstr "モデルが見つかりません。"
 #: package/contents/ui/configGeneral.qml:455
 #: package/contents/ui/configGeneral.qml:531
 msgid "New Profile"
-msgstr "New Profile"
+msgstr "新しいプロファイル"
 
 #: package/contents/ui/configGeneral.qml:471
 msgid "%1 (Copy)"
-msgstr "%1 (Copy)"
+msgstr "%1 (コピー)"
 
 #: package/contents/ui/configGeneral.qml:509
 msgid "Profile:"
-msgstr "Profile:"
+msgstr "プロファイル:"
 
 #: package/contents/ui/configGeneral.qml:539
 #: package/contents/ui/configGeneral.qml:573
 msgid "Rename Profile"
-msgstr "Rename Profile"
+msgstr "プロファイルの名前変更"
 
 #: package/contents/ui/configGeneral.qml:547
 msgid "Duplicate Profile"
-msgstr "Duplicate Profile"
+msgstr "プロファイルの複製"
 
 #: package/contents/ui/configGeneral.qml:555
 msgid "Delete Profile"
-msgstr "Delete Profile"
+msgstr "プロファイルの削除"
 
 #: package/contents/ui/configGeneral.qml:577
 msgid "Profile Name"
-msgstr "Profile Name"
+msgstr "プロファイル名"
 
 #: package/contents/ui/configGeneral.qml:592
 msgid "Rename"
-msgstr "Rename"
+msgstr "名前変更"
 
 #: package/contents/ui/configGeneral.qml:612
 msgid "Adapter:"
@@ -875,11 +845,11 @@ msgstr "アダプター:"
 
 #: package/contents/ui/configGeneral.qml:635
 msgid "Authentication:"
-msgstr "Authentication:"
+msgstr "認証:"
 
 #: package/contents/ui/configGeneral.qml:638
 msgid "API Key (Express Mode)"
-msgstr "API Key (Express Mode)"
+msgstr "APIキー（エクスプレスモード）"
 
 #: package/contents/ui/configGeneral.qml:638
 msgid "Google Cloud CLI (gcloud)"
@@ -888,26 +858,25 @@ msgstr "Google Cloud CLI (gcloud)"
 #: package/contents/ui/configGeneral.qml:648
 msgid ""
 "gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLI not found. Please install it to use this authentication method."
+msgstr "gcloud CLIが見つかりません。この認証方法を使用するにはインストールしてください。"
 
 
 #: package/contents/ui/configGeneral.qml:655
 msgid "API Variant:"
-msgstr "API Variant:"
+msgstr "APIバリアント:"
 
 #: package/contents/ui/configGeneral.qml:659
 #: package/contents/ui/configGeneral.qml:660
 msgid "Legacy (generateContent)"
-msgstr "Legacy (generateContent)"
+msgstr "レガシー（generateContent）"
 
 #: package/contents/ui/configGeneral.qml:660
 msgid "Interactions API (Stateful)"
-msgstr "Interactions API (Stateful)"
+msgstr "Interactions API（ステートフル）"
 
 #: package/contents/ui/configGeneral.qml:680
 msgid "Platform:"
-msgstr "Platform:"
+msgstr "プラットフォーム:"
 
 #: package/contents/ui/configGeneral.qml:683
 msgid "Google AI Studio"
@@ -919,11 +888,11 @@ msgstr "Google Cloud Agent Platform (Vertex AI)"
 
 #: package/contents/ui/configGeneral.qml:697
 msgid "Project ID:"
-msgstr "Project ID:"
+msgstr "プロジェクトID:"
 
 #: package/contents/ui/configGeneral.qml:710
 msgid "Location:"
-msgstr "Location:"
+msgstr "場所:"
 
 #: package/contents/ui/configGeneral.qml:724
 msgid "Provider:"
@@ -952,7 +921,7 @@ msgstr "APIキー:"
 
 #: package/contents/ui/configGeneral.qml:981
 msgid "Paste short-lived access token"
-msgstr "Paste short-lived access token"
+msgstr "短命アクセストークンを貼り付け"
 
 #: package/contents/ui/configGeneral.qml:981
 msgid "Optional - for OpenAI, etc."
@@ -1041,10 +1010,6 @@ msgid ""
 "collapsible header. Round-trip of signed thoughts to the API still happens "
 "regardless of this setting."
 msgstr ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-
 "有効にすると、モデルの推論が各返答の上に折りたたみ可能なヘッダーで表示されま"
 "す。署名された思考のAPIへの往復は、この設定に関係なく行われます。"
 
@@ -1058,10 +1023,6 @@ msgid ""
 "(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
 "picking a preset."
 msgstr ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-
 "OpenAI / Poe / OpenRouter / Azureで推論コンテンツを表示するために必要です（/"
 "v1/chat/completionsの代わりに/v1/responsesにPOSTします）。プリセット選択時に"
 "自動設定されます。"
@@ -1128,9 +1089,6 @@ msgid ""
 "Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
 "share."
 msgstr ""
-"Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
-"share."
-
 "LLMにシェルコマンドの実行を許可します。自動共有と組み合わせると危険です。自己"
 "責任で使用してください。"
 
@@ -1143,9 +1101,6 @@ msgid ""
 "Use the run_command tool for command execution. If disabled, falls back to "
 "parsing code blocks."
 msgstr ""
-"Use the run_command tool for command execution. If disabled, falls back to "
-"parsing code blocks."
-
 "コマンド実行にrun_commandツールを使用します。無効な場合、レスポンスからのコー"
 "ドブロックの解析にフォールバックします。"
 
@@ -1162,9 +1117,6 @@ msgid ""
 "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
 "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
 msgstr ""
-"⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-"their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-
 "⚠️ 危険: 両方のオプションが有効です - LLMはコマンドを実行し、その出力を確認で"
 "きるようになり、エージェント型ワークフローが可能になります。信頼できるLLMでの"
 "み使用してください。"
@@ -1182,9 +1134,6 @@ msgid ""
 "Execute LLM commands inside a long-lived tmux or screen session so state "
 "persists across turns."
 msgstr ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-
 "LLMコマンドを長期間実行されるtmuxまたはscreenセッション内で実行し、ターン間で"
 "状態を保持します。"
 
@@ -1205,54 +1154,45 @@ msgid ""
 "Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
 "is unavailable."
 msgstr ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
-
 "'tmux' と 'screen' のどちらもシステムに見つかりませんでした。セッションのマル"
 "チプレックスは利用できません。"
 
 #: package/contents/ui/configTools.qml:413
 msgid "Native Adapter Features"
-msgstr "Native Adapter Features"
+msgstr "ネイティブアダプター機能"
 
 #: package/contents/ui/configTools.qml:419
 msgid "Enable Native Google Search Grounding"
-msgstr "Enable Native Google Search Grounding"
+msgstr "ネイティブ Google Search グラウンディングを有効にする"
 
 #: package/contents/ui/configTools.qml:427
 msgid ""
 "Use Gemini's built-in Google Search for grounding. This overrides the "
 "standard web search tool."
-msgstr ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
+msgstr "グラウンディングにGeminiの内蔵Google検索を使用します。これにより標準のウェブ検索ツールが上書きされます。"
 
 
 #: package/contents/ui/configTools.qml:434
 msgid "Enable Native Python Code Execution"
-msgstr "Enable Native Python Code Execution"
+msgstr "ネイティブPythonコード実行を有効にする"
 
 #: package/contents/ui/configTools.qml:442
 msgid ""
 "Allow Gemini to write and execute Python code in a secure server-side "
 "sandbox."
-msgstr ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
+msgstr "GeminiがセキュアなサーバーサイドサンドボックスでPythonコードを記述・実行できるようにします。"
 
 
 #: package/contents/ui/configTools.qml:450
 msgid ""
 "Combining Native tools with commands requires a newer model. Your currently "
 "selected model (%1) may encounter errors."
-msgstr ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
+msgstr "ネイティブツールとコマンドの組み合わせには、より新しいモデルが必要です。現在選択されているモデル（%1）はエラーが発生する可能性があります。"
 
 
 #: package/contents/ui/configTools.qml:458
 msgid "Standard Web Search"
-msgstr "Standard Web Search"
+msgstr "標準ウェブ検索"
 
 #: package/contents/ui/configTools.qml:463
 msgid "Enable web search tool"
@@ -1292,7 +1232,7 @@ msgstr "DuckDuckGo は設定を必要としません。"
 
 #: package/contents/ui/configTools.qml:578
 msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Ensure the SearXNG instance has the JSON format enabled."
+msgstr ""
 "SearXNG インスタンスで JSON 形式が有効になっていることを確認してください。"
 
 #: package/contents/ui/configTools.qml:579

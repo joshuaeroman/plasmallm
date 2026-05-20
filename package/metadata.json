@@ -7,12 +7,12 @@
             }
         ],
         "Category": "Utilities",
-        "Description": "Chat interface to OpenAI-compatible LLM endpoints",
+        "Description": "Chat interface to LLM endpoints",
         "Icon": "dialog-messages",
         "Id": "com.joshuaroman.plasmallm",
         "License": "GPL-2.0-or-later",
         "Name": "PlasmaLLM",
-        "Version": "1.6.1"
+        "Version": "2.0.0""
     },
     "X-Plasma-API-Minimum-Version": "6.0"
 }
