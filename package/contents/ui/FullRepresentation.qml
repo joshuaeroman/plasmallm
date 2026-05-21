@@ -12,6 +12,7 @@ import QtCore
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kirigami as Kirigami
+import org.kde.draganddrop as DragDrop
 
 import "profiles.js" as Profiles
 
@@ -404,10 +405,14 @@ PlasmaExtras.Representation {
         }
     }
 
-    contentItem: ColumnLayout {
-        spacing: Plasmoid.configuration.chatSpacing
+    contentItem: Item {
+        id: representationContent
 
-        Item {
+        ColumnLayout {
+            anchors.fill: parent
+            spacing: Plasmoid.configuration.chatSpacing
+
+            Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.leftMargin: Plasmoid.configuration.chatSpacing
@@ -641,11 +646,13 @@ PlasmaExtras.Representation {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.margins: Kirigami.Units.smallSpacing
-                        source: parent.isImg ? "file://" + modelData.filePath : ""
+                        source: parent.isImg ? (modelData.dataUrl || "file://" + modelData.filePath) : ""
                         autoTransform: true
                         fillMode: Image.PreserveAspectFit
                         height: Math.min(sourceSize.height, Kirigami.Units.gridUnit * 4)
                         width: Math.min(sourceSize.width, Kirigami.Units.gridUnit * 6)
+                        smooth: true
+                        mipmap: true
                     }
 
                     PlasmaComponents.Label {
@@ -702,6 +709,32 @@ PlasmaExtras.Representation {
                         enabled: !root.isLoading && root.systemPromptReady
                         focus: true
                         wrapMode: Text.Wrap
+
+                        Keys.onPressed: function(event) {
+                            var isCtrlV = (event.key === Qt.Key_V && (event.modifiers & Qt.ControlModifier));
+                            var isShiftInsert = (event.key === Qt.Key_Insert && (event.modifiers & Qt.ShiftModifier));
+                            
+                            if (isCtrlV || isShiftInsert) {
+                                clipboardHelper.text = "";
+                                clipboardHelper.paste();
+                                var clipboardText = clipboardHelper.text;
+                                
+                                if (clipboardText.startsWith("file://")) {
+                                    var lines = clipboardText.split("\n");
+                                    for (var i = 0; i < lines.length; i++) {
+                                        var line = lines[i].trim();
+                                        if (line.startsWith("file://")) {
+                                            var path = decodeURIComponent(line.replace(/^file:\/\//, ""));
+                                            root.attachFile(path);
+                                        }
+                                    }
+                                    event.accepted = true;
+                                } else if (clipboardText.length === 0) {
+                                    root.pasteImageFromClipboard();
+                                    event.accepted = true;
+                                }
+                            }
+                        }
 
                         Keys.onTabPressed: function(event) {
                             if (inputField.text.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
@@ -1051,4 +1084,90 @@ PlasmaExtras.Representation {
             }
         }
     }
+
+    DragDrop.DropArea {
+        id: mainDropArea
+        anchors.fill: parent
+        preventStealing: false
+
+        property bool containsAcceptableDrag: false
+
+        onDragEnter: event => {
+            var urls = [];
+            if (event.mimeData.urls && event.mimeData.urls.length > 0) {
+                urls = event.mimeData.urls;
+            } else if (event.mimeData.url) {
+                urls = [event.mimeData.url];
+            }
+            
+            var hasLocalFile = false;
+            for (var i = 0; i < urls.length; i++) {
+                if (urls[i].toString().startsWith("file:///")) {
+                    hasLocalFile = true;
+                    break;
+                }
+            }
+            
+            containsAcceptableDrag = hasLocalFile;
+            if (!hasLocalFile) {
+                event.ignore();
+            }
+        }
+
+        onDragLeave: event => {
+            containsAcceptableDrag = false;
+        }
+
+        onDrop: event => {
+            if (containsAcceptableDrag) {
+                var urls = [];
+                if (event.mimeData.urls && event.mimeData.urls.length > 0) {
+                    urls = event.mimeData.urls;
+                } else if (event.mimeData.url) {
+                    urls = [event.mimeData.url];
+                }
+                for (var i = 0; i < urls.length; i++) {
+                    var urlStr = urls[i].toString();
+                    if (urlStr.startsWith("file://")) {
+                        var path = decodeURIComponent(urlStr.replace(/^file:\/\//, ""));
+                        root.attachFile(path);
+                    }
+                }
+            }
+            containsAcceptableDrag = false;
+        }
+    }
+
+    Rectangle {
+        id: dropOverlay
+        anchors.fill: parent
+        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.85)
+        visible: mainDropArea.containsDrag && mainDropArea.containsAcceptableDrag
+        z: 9999
+        border.color: Kirigami.Theme.focusColor
+        border.width: 2
+        radius: Kirigami.Units.smallSpacing
+
+        ColumnLayout {
+            anchors.centerIn: parent
+            spacing: Kirigami.Units.largeSpacing
+
+            Kirigami.Icon {
+                source: "mail-attachment"
+                Layout.alignment: Qt.AlignHCenter
+                implicitWidth: Kirigami.Units.iconSizes.huge
+                implicitHeight: Kirigami.Units.iconSizes.huge
+                color: Kirigami.Theme.focusColor
+            }
+
+            PlasmaComponents.Label {
+                text: i18n("Drop files here to attach")
+                Layout.alignment: Qt.AlignHCenter
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+                font.bold: true
+                horizontalAlignment: Text.AlignHCenter
+            }
+        }
+    }
+}
 }

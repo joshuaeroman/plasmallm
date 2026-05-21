@@ -1079,7 +1079,10 @@ lines.push(JSON.stringify({
                     var list = root.pendingAttachments.slice();
                     if (info.isImage) {
                         var mime = Api.mimeForImage(info.filePath);
-                        list.push({ filePath: info.filePath, fileName: info.fileName, dataUrl: "data:" + mime + ";base64," + stdout.trim() });
+                        var base64Data = stdout.trim();
+                        if (base64Data) {
+                            list.push({ filePath: info.filePath, fileName: info.fileName, dataUrl: "data:" + mime + ";base64," + base64Data });
+                        }
                     } else {
                         list.push({ filePath: info.filePath, fileName: info.fileName, textContent: stdout });
                     }
@@ -1140,6 +1143,16 @@ lines.push(JSON.stringify({
             pendingFileReads[cmd] = { filePath: filePath, fileName: fileName, isImage: isImage };
             fileReader.connectSource(cmd);
         }
+    }
+
+    function pasteImageFromClipboard() {
+        var tempId = Math.random().toString(36).substring(2, 10);
+        var tempPath = "/tmp/plasmallm_paste_" + tempId + ".png";
+        
+        var cmd = "(wl-paste -t image/png > '" + tempPath + "' 2>/dev/null || xclip -selection clipboard -t image/png -o > '" + tempPath + "' 2>/dev/null) && [ -f '" + tempPath + "' ] && [ -s '" + tempPath + "' ] && base64 -w0 '" + tempPath + "'; rm -f '" + tempPath + "'";
+        
+        pendingFileReads[cmd] = { filePath: tempPath, fileName: "pasted_image_" + tempId + ".png", isImage: true };
+        fileReader.connectSource(cmd);
     }
 
     function sendMessage(text, attachments) {
@@ -1370,7 +1383,9 @@ lines.push(JSON.stringify({
 
         // Add user message to both models
         var attachJson = attachments.length > 0 ? JSON.stringify(attachments) : "";
-        var imagePaths = attachments.filter(function(a) { return !!a.dataUrl; }).map(function(a) { return a.filePath; });
+        var imagePaths = attachments.filter(function(a) { return !!a.dataUrl; }).map(function(a) {
+            return (a.dataUrl && a.filePath.startsWith("/tmp/plasmallm_paste_")) ? a.dataUrl : a.filePath;
+        });
         chatMessages.append({ 
             role: "user", 
             content: text, 

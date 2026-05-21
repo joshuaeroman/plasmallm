@@ -340,8 +340,8 @@ Kirigami.AbstractCard {
                         delegate: Loader {
                             id: attachmentLoader
                             readonly property string filePath: modelData
-                            readonly property bool isImage: Api.isImageFile(filePath)
-                            readonly property string fileName: filePath.split("/").pop()
+                            readonly property bool isImage: filePath.startsWith("data:") || Api.isImageFile(filePath)
+                            readonly property string fileName: filePath.startsWith("data:") ? "pasted_image.png" : filePath.split("/").pop()
 
                             sourceComponent: isImage ? imageThumbnailComponent : genericFileComponent
                         }
@@ -449,10 +449,12 @@ Kirigami.AbstractCard {
                     id: thumbImg
                     anchors.fill: parent
                     anchors.margins: imageThumb.border.width
-                    source: "file://" + imageThumb.filePath
+                    source: imageThumb.filePath.startsWith("data:") ? imageThumb.filePath : ("file://" + imageThumb.filePath)
                     autoTransform: true
                     fillMode: Image.PreserveAspectFit
                     asynchronous: true
+                    smooth: true
+                    mipmap: true
                 }
 
                 Kirigami.Icon {
@@ -478,8 +480,12 @@ Kirigami.AbstractCard {
                     id: mouseArea
                     anchors.fill: parent
                     hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onClicked: Qt.openUrlExternally("file://" + imageThumb.filePath)
+                    cursorShape: imageThumb.filePath.startsWith("data:") ? Qt.ArrowCursor : Qt.PointingHandCursor
+                    onClicked: {
+                        if (!imageThumb.filePath.startsWith("data:")) {
+                            Qt.openUrlExternally("file://" + imageThumb.filePath)
+                        }
+                    }
                 }
 
                 PlasmaComponents.ToolTip.text: imageThumb.fileName
