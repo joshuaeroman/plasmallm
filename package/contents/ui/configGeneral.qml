@@ -63,6 +63,15 @@ BaseConfigPage {
         }
     }
 
+    P5Support.DataSource {
+        id: openFolderSource
+        engine: "executable"
+        connectedSources: []
+        onNewData: function(source, data) {
+            disconnectSource(source);
+        }
+    }
+
     property var modelCache: ({})
     property var availableModels: []
     property bool fetchInProgress: false
@@ -1184,13 +1193,30 @@ BaseConfigPage {
             QQC2.ToolTip.visible: hovered
         }
 
-        QQC2.ComboBox {
-            id: chatSaveFormatCombo
+        RowLayout {
             Kirigami.FormData.label: i18n("Save format:")
-            model: [i18n("Plain text (.txt)"), i18n("Structured (.jsonl)")]
-            enabled: cfg_saveChatHistory
-            currentIndex: cfg_chatSaveFormat === "jsonl" ? 1 : 0
-            onCurrentIndexChanged: if (_initialized) cfg_chatSaveFormat = currentIndex === 1 ? "jsonl" : "txt"
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+
+            QQC2.ComboBox {
+                id: chatSaveFormatCombo
+                Layout.fillWidth: true
+                model: [i18n("Plain text (.txt)"), i18n("Structured (.jsonl)")]
+                enabled: cfg_saveChatHistory
+                currentIndex: cfg_chatSaveFormat === "jsonl" ? 1 : 0
+                onCurrentIndexChanged: if (_initialized) cfg_chatSaveFormat = currentIndex === 1 ? "jsonl" : "txt"
+            }
+
+            QQC2.Button {
+                id: openFolderButton
+                text: i18n("Open Folder")
+                icon.name: "folder-open"
+                onClicked: openFolderSource.connectSource("xdg-open \"${XDG_DATA_HOME:-$HOME/.local/share}/plasmallm/chats/\"")
+
+                QQC2.ToolTip.text: i18n("Open the folder where chat histories are saved")
+                QQC2.ToolTip.delay: 500
+                QQC2.ToolTip.visible: hovered
+            }
         }
 
         QQC2.Label {
