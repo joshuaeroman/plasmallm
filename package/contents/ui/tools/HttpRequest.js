@@ -13,7 +13,7 @@ var parameters = {
         justification: { type: "string", description: "A brief 1 sentence justification for why you are trying to run this command." },
         url: { type: "string", description: "The URL to send the request to" },
         method: { type: "string", description: "HTTP method (GET, POST, PUT, DELETE, etc.)" },
-        headers: { type: "object", description: "Optional HTTP headers", additionalProperties: { type: "string" } },
+        headers: { type: "object", description: "Optional HTTP headers" },
         body: { type: "string", description: "Optional request body" }
     },
     required: ["justification", "url", "method"]
