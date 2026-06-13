@@ -22,13 +22,11 @@ Kirigami.Card {
     signal denied(string name, string callId)
 
     readonly property var args: {
-        console.log("PlasmaLLM DEBUG: ToolApprovalCard.qml args re-evaluating. toolArgsJson type: " + (typeof toolArgsJson) + " value: " + JSON.stringify(toolArgsJson));
         if (!toolArgsJson) return {};
         if (typeof toolArgsJson === "object") return toolArgsJson;
         if (typeof toolArgsJson === "string" && toolArgsJson.length > 0) {
             try {
                 var parsed = JSON.parse(toolArgsJson);
-                console.log("PlasmaLLM DEBUG: ToolApprovalCard.qml parsed args: " + JSON.stringify(parsed));
                 return parsed;
             } catch(e) {
                 console.error("PlasmaLLM DEBUG: ToolApprovalCard.qml parse error: " + e + " for string: " + toolArgsJson);

@@ -18,6 +18,17 @@
 .import "OpenUrl.js" as OpenUrl
 .import "WebSearch.js" as WebSearch
 
+.import "driver/StartSession.js" as StartSession
+.import "driver/DesktopGetState.js" as DesktopGetState
+.import "driver/DesktopSetOperatingContext.js" as DesktopSetOperatingContext
+.import "driver/DesktopResetContext.js" as DesktopResetContext
+.import "driver/DesktopScroll.js" as DesktopScroll
+.import "driver/DesktopClick.js" as DesktopClick
+.import "driver/DesktopInput.js" as DesktopInput
+.import "driver/DesktopMoveMouse.js" as DesktopMoveMouse
+.import "driver/DesktopWindowControl.js" as DesktopWindowControl
+.import "driver/DesktopReadSelection.js" as DesktopReadSelection
+
 var tools = [
     { module: RunCommand, configUI: "tools/RunCommandConfig.qml" },
     { module: WebSearch, configUI: "tools/WebSearchConfig.qml" },
@@ -30,7 +41,17 @@ var tools = [
     { module: GetClipboard, configUI: "tools/GetClipboardConfig.qml" },
     { module: SetClipboard, configUI: "tools/SetClipboardConfig.qml" },
     { module: Notify, configUI: "tools/NotifyConfig.qml" },
-    { module: OpenUrl, configUI: "tools/OpenUrlConfig.qml" }
+    { module: OpenUrl, configUI: "tools/OpenUrlConfig.qml" },
+    { module: StartSession, configUI: "" },
+    { module: DesktopGetState, configUI: "" },
+    { module: DesktopSetOperatingContext, configUI: "" },
+    { module: DesktopResetContext, configUI: "" },
+    { module: DesktopScroll, configUI: "" },
+    { module: DesktopClick, configUI: "" },
+    { module: DesktopInput, configUI: "" },
+    { module: DesktopMoveMouse, configUI: "" },
+    { module: DesktopWindowControl, configUI: "" },
+    { module: DesktopReadSelection, configUI: "" }
 ];
 
 function getTool(name) {

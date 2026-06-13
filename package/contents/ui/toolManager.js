@@ -6,6 +6,7 @@
 .pragma library
 
 .import "tools/index.js" as ToolRegistry
+.import "driverManager.js" as DriverManager
 
 var TOOLS = {};
 
@@ -186,6 +187,24 @@ function getToolConfigUI(name) {
 
 function getEnabledTools(config) {
     if (!config || !config.enableTools) return [];
+
+    if (config.enableDesktopAutomation && DriverManager.isSessionActive) {
+        var activeTools = [];
+        if (config.useCommandTool) {
+            activeTools.push("run_command");
+        }
+        activeTools.push("DesktopGetState");
+        activeTools.push("DesktopSetOperatingContext");
+        activeTools.push("DesktopResetContext");
+        activeTools.push("DesktopScroll");
+        activeTools.push("DesktopClick");
+        activeTools.push("DesktopInput");
+        activeTools.push("DesktopMoveMouse");
+        activeTools.push("DesktopWindowControl");
+        activeTools.push("DesktopReadSelection");
+        return activeTools;
+    }
+
     var enabled = [];
 
     var custom = getCustomTools(config);
@@ -205,12 +224,32 @@ function getEnabledTools(config) {
     if (config.toolsSetClipboardEnabled) enabled.push("set_clipboard");
     if (config.toolsNotifyEnabled) enabled.push("notify");
     if (config.toolsOpenUrlEnabled) enabled.push("open_url");
+
+    if (config.enableDesktopAutomation) {
+        enabled.push("StartSession");
+    }
     
     return enabled;
 }
 
 function isAutoRun(toolId, config) {
-    if (config && config.sessionAutoMode) return true;
+    if (config && config.sessionFullAutoMode) {
+        return true;
+    }
+    if (config && config.sessionAutoMode) {
+        if (toolId === "DesktopGetState" ||
+            toolId === "DesktopSetOperatingContext" ||
+            toolId === "DesktopResetContext" ||
+            toolId === "DesktopScroll" ||
+            toolId === "DesktopClick" ||
+            toolId === "DesktopInput" ||
+            toolId === "DesktopMoveMouse" ||
+            toolId === "DesktopWindowControl" ||
+            toolId === "DesktopReadSelection" ||
+            toolId === "StartSession") {
+            return true;
+        }
+    }
     switch (toolId) {
         case "web_search": return true;
         case "run_command": return config.autoRunCommands;

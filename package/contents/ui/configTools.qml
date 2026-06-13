@@ -111,6 +111,24 @@ BaseConfigPage {
             QQC2.ToolTip.visible: hovered
         }
 
+        QQC2.CheckBox {
+            id: enableDesktopAutomationCheckbox
+            Kirigami.FormData.label: i18n("Desktop Automation:")
+            text: i18n("Enable Desktop Automation (plasmallm-desktop-driver)")
+            checked: cfg_enableDesktopAutomation
+            enabled: cfg_enableTools
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_enableDesktopAutomation = checked;
+                    rootItem.triggerCapture();
+                }
+            }
+            
+            QQC2.ToolTip.text: i18n("Allows the LLM to request a session to see and drive your desktop.")
+            QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+            QQC2.ToolTip.visible: hovered
+        }
+
         ColumnLayout {
             id: whitelistColumn
             Kirigami.FormData.label: i18n("Path whitelist:")
@@ -214,6 +232,35 @@ BaseConfigPage {
                 onValueModified: if (_initialized) cfg_toolsHttpMaxBytes = value * 1024
             }
             QQC2.Label { text: "KB" }
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Max tool loop depth:")
+            enabled: cfg_enableTools
+            QQC2.CheckBox {
+                id: enableToolCallLimitCheckBox
+                checked: cfg_enableToolCallLimit
+                onCheckedChanged: if (_initialized) cfg_enableToolCallLimit = checked
+            }
+            QQC2.SpinBox {
+                from: 1
+                to: 100
+                value: cfg_maxToolCallDepth
+                enabled: enableToolCallLimitCheckBox.checked && cfg_enableTools
+                onValueModified: if (_initialized) cfg_maxToolCallDepth = value
+            }
+            QQC2.Label { text: i18n("steps") }
+        }
+
+        QQC2.Label {
+            enabled: cfg_enableTools
+            text: i18n("Note: This limit does not apply to desktop automation sessions.")
+            font: Kirigami.Theme.smallFont
+            color: Kirigami.Theme.disabledTextColor
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
         }
 
         Kirigami.Separator {

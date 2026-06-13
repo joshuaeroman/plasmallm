@@ -72,6 +72,8 @@ SimpleKCM {
     property int cfg_thinkingBudgetDefault
     property bool cfg_showThoughts
     property bool cfg_showThoughtsDefault
+    property bool cfg_showNotificationsMinimized
+    property bool cfg_showNotificationsMinimizedDefault
     property bool cfg_usesResponsesAPI
     property bool cfg_usesResponsesAPIDefault
     property string cfg_geminiApiVariant
@@ -240,6 +242,8 @@ SimpleKCM {
 
     property bool cfg_enableTools
     property bool cfg_enableToolsDefault
+    property bool cfg_enableDesktopAutomation
+    property bool cfg_enableDesktopAutomationDefault
 
     property bool cfg_toolsReadFileEnabled
     property bool cfg_toolsReadFileEnabledDefault
@@ -289,6 +293,10 @@ SimpleKCM {
     property int cfg_toolsWriteMaxBytesDefault
     property int cfg_toolsHttpMaxBytes
     property int cfg_toolsHttpMaxBytesDefault
+    property bool cfg_enableToolCallLimit
+    property bool cfg_enableToolCallLimitDefault
+    property int cfg_maxToolCallDepth
+    property int cfg_maxToolCallDepthDefault
     property string cfg_customTools
     property string cfg_customToolsDefault
 }

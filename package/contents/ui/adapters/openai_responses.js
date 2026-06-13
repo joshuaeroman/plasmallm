@@ -12,6 +12,32 @@
 // typed SSE events, and round-trips reasoning items (with encrypted_content)
 // across turns by storing them in chatMessages' thinking_blocks_json field.
 
+function sanitizePayload(body) {
+    try {
+        var copy = JSON.parse(JSON.stringify(body));
+        if (copy.input) {
+            for (var i = 0; i < copy.input.length; i++) {
+                var item = copy.input[i];
+                if (item.type === "message" && Array.isArray(item.content)) {
+                    for (var j = 0; j < item.content.length; j++) {
+                        var part = item.content[j];
+                        if (part.type === "input_image" && typeof part.image_url === "string") {
+                            var url = part.image_url;
+                            if (url.startsWith("data:") && url.indexOf("base64,") !== -1) {
+                                var parts = url.split("base64,");
+                                part.image_url = parts[0] + "base64,<truncated, length " + parts[1].length + ">";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return copy;
+    } catch (e) {
+        return body;
+    }
+}
+
 function fetchModels(endpoint, apiKey, callback) {
     // Most Responses-API providers also expose /models with the same shape.
     var xhr = new XMLHttpRequest();
@@ -114,11 +140,36 @@ function translateMessages(neutralMessages) {
         }
 
         if (m.role === "tool") {
+            var raw = "";
+            var extraBlocks = [];
+            
+            if (typeof m.content === "string") {
+                raw = m.content;
+            } else if (Array.isArray(m.content)) {
+                for (var p = 0; p < m.content.length; p++) {
+                    var part = m.content[p];
+                    if (part.type === "input_text" && part.text) {
+                        raw += part.text;
+                    } else if (part.type === "input_image") {
+                        extraBlocks.push(part);
+                    }
+                }
+            }
+
             input.push({
                 type: "function_call_output",
                 call_id: m.tool_call_id || "",
-                output: typeof m.content === "string" ? m.content : ""
+                output: raw
             });
+            
+            if (extraBlocks.length > 0) {
+                var userContent = [{ type: "input_text", text: "Screenshot from tool. Please evaluate the screen state and continue with the task." }];
+                input.push({
+                    type: "message",
+                    role: "user",
+                    content: userContent.concat(extraBlocks)
+                });
+            }
             continue;
         }
 
@@ -198,6 +249,10 @@ function parseSSEChunks(buffer, lastIndex) {
         if (line === "") continue;
         if (line.substring(0, 6) !== "data: ") continue;
         var payload = line.substring(6);
+        if (payload === "[DONE]") {
+            tokens.push({ done: true });
+            continue;
+        }
         try {
             var obj = JSON.parse(payload);
             switch (obj.type) {
@@ -255,6 +310,7 @@ function parseSSEChunks(buffer, lastIndex) {
                 break;
             }
         } catch (e) {
+            console.warn("PlasmaLLM OpenAI Responses Adapter: failed to parse SSE chunk:", payload, e);
             // skip unparseable chunks
         }
     }
@@ -433,6 +489,7 @@ function sendStreaming(opts) {
         flushPendingThinking();
 
         if (error) {
+            console.error("PlasmaLLM OpenAI Responses Adapter: onComplete with error:", error);
             onComplete(accumulatedText, error, null, null);
         } else if (accumulatedToolCalls.length > 0) {
             var assistantMsg = {

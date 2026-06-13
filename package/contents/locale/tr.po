@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-20 13:42-0400\n"
+"POT-Creation-Date: 2026-06-10 15:51-0400\n"
 "PO-Revision-Date: 2026-04-07 00:00+0000\n"
 "Last-Translator: Claude <noreply@anthropic.com>\n"
 "Language-Team: Turkish\n"
@@ -16,16 +16,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Akıl yürütme çabası (düşük / orta / yüksek) genişletilmiş düşünmeyi kontrol "
-"eder. OpenAI / Poe / OpenRouter / Azure'da düşünceleri görmek için Use "
-"Responses API'yi etkinleştirin; sohbet tamamlama sağlayıcıları (DeepSeek, "
-"Qwen) akıl yürütmeyi reasoning_content aracılığıyla sunar."
+msgid "Tool Request: %1"
+msgstr "Araç İsteği: %1"
+
+msgid "Justification: %1"
+msgstr "Gerekçe: %1"
+
+msgid "Deny"
+msgstr "Reddet"
+
+msgid "Approve"
+msgstr "Onayla"
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -71,11 +72,18 @@ msgid "Request failed (no response) — check your endpoint URL"
 msgstr "İstek başarısız oldu (yanıt yok) — uç nokta URL'nizi kontrol edin"
 
 msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
 msgstr ""
-"Gemini, düşünme token bütçesini doğrudan kullanır. Desteklenen modellerde "
-"düşünmeyi devre dışı bırakmak için 0 olarak ayarlayın."
+"Akıl yürütme çabası (düşük / orta / yüksek) genişletilmiş düşünmeyi kontrol "
+"eder. OpenAI / Poe / OpenRouter / Azure'da düşünceleri görmek için Use "
+"Responses API'yi etkinleştirin; sohbet tamamlama sağlayıcıları (DeepSeek, "
+"Qwen) akıl yürütmeyi reasoning_content aracılığıyla sunar."
+
+msgid "Gemini uses the thinking level dropdown directly."
+msgstr "Gemini, düşünme düzeyi açılır menüsünü doğrudan kullanır."
 
 msgid "Failed to fetch models"
 msgstr "Modeller getirilemedi"
@@ -89,15 +97,6 @@ msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr ""
 "Kimlik doğrulama başarısız oldu (HTTP %1) — API anahtarınızı kontrol edin: %2"
 
-msgid "no response — check your endpoint URL"
-msgstr "yanıt yok — uç nokta URL'nizi kontrol edin"
-
-msgid "Request failed"
-msgstr "İstek başarısız oldu"
-
-msgid "Gemini uses the thinking level dropdown directly."
-msgstr "Gemini, düşünme düzeyi açılır menüsünü doğrudan kullanır."
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -107,17 +106,18 @@ msgstr ""
 "desteklemiyor. Lütfen daha yeni bir model seçin (örn. Gemini 3+) veya "
 "Ayarlar'da yerel özellikleri devre dışı bırakın."
 
-msgid "Tool Request: %1"
-msgstr "Araç İsteği: %1"
+msgid "Request failed"
+msgstr "İstek başarısız oldu"
 
-msgid "Justification: %1"
-msgstr "Gerekçe: %1"
+msgid ""
+"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
+"on supported models."
+msgstr ""
+"Gemini, düşünme token bütçesini doğrudan kullanır. Desteklenen modellerde "
+"düşünmeyi devre dışı bırakmak için 0 olarak ayarlayın."
 
-msgid "Deny"
-msgstr "Reddet"
-
-msgid "Approve"
-msgstr "Onayla"
+msgid "no response — check your endpoint URL"
+msgstr "yanıt yok — uç nokta URL'nizi kontrol edin"
 
 msgid ""
 "No custom tools configured. Add a custom tool to expose your own commands to "
@@ -366,253 +366,10 @@ msgstr ""
 "Sisteminizde 'tmux' veya 'screen' bulunamadı. Oturum çoğullama "
 "kullanılamıyor."
 
-msgid "Approve the pending tool request"
-msgstr "Bekleyen araç isteğini onayla"
-
-msgid "Toggle skip approvals for this session"
-msgstr "Bu oturum için onayları atlamayı aç/kapat"
-
-msgid "Clear the chat"
-msgstr "Sohbeti temizle"
-
-msgid "Close the panel"
-msgstr "Paneli kapat"
-
-msgid "Copy conversation to clipboard"
-msgstr "Konuşmayı panoya kopyala"
-
-msgid "Deny the pending tool request"
-msgstr "Bekleyen araç isteğini reddet"
-
-msgid "Open chat history folder"
-msgstr "Sohbet geçmişi klasörünü aç"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "Modeli göster veya değiştir (/model <ad>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "Profil değiştir (/profile <ad>)"
-
-msgid "Save chat to file"
-msgstr "Sohbeti dosyaya kaydet"
-
-msgid "Open settings"
-msgstr "Ayarları aç"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "Kaydedilmiş bir görevi çalıştır (/task <ad>)"
-
-msgid "Toggle Full Auto Mode"
-msgstr "Tam otomatik modu aç/kapat"
-
 msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-"Tam otomatik modu aç/kapat: Etkinleştirildiğinde, bu oturum için tüm araçlar "
-"otomatik olarak çalışır."
-
-msgid "Run a task"
-msgstr "Bir görev çalıştır"
-
-msgid "Chat History"
-msgstr "Sohbet Geçmişi"
-
-msgid "Loading..."
-msgstr "Yükleniyor..."
-
-msgid "No recent chats"
-msgstr "Son sohbet yok"
-
-msgid "Open history folder..."
-msgstr "Geçmiş klasörünü aç..."
-
-msgid "Clear all history..."
-msgstr "Tüm geçmişi temizle..."
-
-msgid "Clear All History"
-msgstr "Tüm Geçmişi Temizle"
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-"Tüm sohbet geçmişi dosyalarını silmek istediğinizden emin misiniz? Bu işlem "
-"geri alınamaz."
-
-msgid "Clear All"
-msgstr "Tümünü Temizle"
-
-msgid "Copy conversation"
-msgstr "Konuşmayı kopyala"
-
-msgid "You"
-msgstr "Siz"
-
-msgid "Assistant"
-msgstr "Asistan"
-
-msgid "Command"
-msgstr "Komut"
-
-msgid "Error"
-msgstr "Hata"
-
-msgid "Clear chat"
-msgstr "Sohbeti temizle"
-
-msgid "Settings"
-msgstr "Ayarlar"
-
-msgid "Don't keep open"
-msgstr "Açık tutma"
-
-msgid "Keep open"
-msgstr "Açık tut"
-
-msgid "The user denied this tool call."
-msgstr "Kullanıcı bu araç çağrısını reddetti."
-
-msgid "Send a message to start chatting"
-msgstr "Sohbet başlatmak için bir mesaj gönderin"
-
-msgid "Attach File"
-msgstr "Dosya Ekle"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Görseller (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-"Metin dosyaları (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
-"*.conf *.sh *.py *.js *.ts *.qml)"
-
-msgid "All files (*)"
-msgstr "Tüm dosyalar (*)"
-
-msgid "Message input"
-msgstr "Mesaj girişi"
-
-msgid "Type a message…"
-msgstr "Bir mesaj yazın…"
-
-msgid "Initializing…"
-msgstr "Başlatılıyor…"
-
-msgid "Attach file or image"
-msgstr "Dosya veya görsel ekle"
-
-msgid "Kill"
-msgstr "Sonlandır"
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-"Kalıcı oturumu sonlandır (tüm işlemleri durdurur ve kabuk durumunu sıfırlar)"
-
-msgid "Send"
-msgstr "Gönder"
-
-msgid "Stop"
-msgstr "Durdur"
-
-msgid "Cancel LLM request"
-msgstr "LLM isteğini iptal et"
-
-msgid "Stop command"
-msgstr "Komutu durdur"
-
-msgid "Open terminal attached to this session"
-msgstr "Bu oturuma bağlı terminali aç"
-
-msgid "Copy output"
-msgstr "Çıktıyı kopyala"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI uyumlu"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "General Tool Settings"
-msgstr "Genel Araç Ayarları"
-
-msgid "System state:"
-msgstr "Sistem durumu:"
-
-msgid "Enable Tools"
-msgstr "Araçları etkinleştir"
-
-msgid "Master switch for all tool-calling functionality."
-msgstr "Tüm araç çağrı işlevleri için ana anahtar."
-
-msgid "Path whitelist:"
-msgstr "Yol beyaz listesi:"
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Yol ekle, örn. $HOME/projects, /tmp"
-
-msgid "Add"
-msgstr "Ekle"
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Beyaz liste dosya sistemi araçlarına uygulanır (okuma, yazma, listeleme, "
-"arama). Not: 'run_command' bu listeyle kısıtlanmamıştır."
-
-msgid "Max read size:"
-msgstr "Maksimum okuma boyutu:"
-
-msgid "Max write size:"
-msgstr "Maksimum yazma boyutu:"
-
-msgid "Max HTTP response:"
-msgstr "Maksimum HTTP yanıtı:"
-
-msgid "Native Adapter Features"
-msgstr "Yerel Adaptör Özellikleri"
-
-msgid "Google Search:"
-msgstr "Google Arama:"
-
-msgid "Enable Native Google Search Grounding"
-msgstr "Yerel Google Arama Temellemesini Etkinleştir"
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Temellemek için Gemini'nin yerleşik Google Aramasını kullanın. Bu, standart "
-"web arama aracını geçersiz kılar."
-
-msgid "Code Execution:"
-msgstr "Kod Yürütme:"
-
-msgid "Enable Native Python Code Execution"
-msgstr "Yerel Python Kodu Yürütmesini Etkinleştir"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Gemini'nin güvenli bir sunucu taraflı sanal alanda Python kodu yazmasına ve "
-"yürütmesine izin verin."
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Yerel araçları komutlarla birleştirmek daha yeni bir model gerektirir. Şu "
-"anda seçili model (%1) hatalarla karşılaşabilir."
-
-msgid "Individual Tools"
-msgstr "Bireysel Araçlar"
+"Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
+"OPTIONS are allowed."
+msgstr "Hata: Geçersiz HTTP yöntemi. Yalnızca GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS izin verilir."
 
 msgid "Color button"
 msgstr "Renk düğmesi"
@@ -691,24 +448,6 @@ msgstr "Ayarları göster"
 
 msgid "Show Pin"
 msgstr "Sabitlemeyi göster"
-
-msgid "Web Search"
-msgstr "Web Araması"
-
-msgid "Thinking"
-msgstr "Düşünüyor…"
-
-msgid "Searched for: %1"
-msgstr "Aranan: %1"
-
-msgid "Show %1 results"
-msgstr "%1 sonuç göster"
-
-msgid "Copy to clipboard"
-msgstr "Panoya kopyala"
-
-msgid "Share output with assistant"
-msgstr "Çıktıyı asistanla paylaş"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "gcloud token alınamadı (çıkış %1): %2"
@@ -890,6 +629,17 @@ msgstr "Sohbet geçmişini otomatik kaydet"
 msgid "Saves to ~/.local/share/plasmallm/chats/"
 msgstr "~/.local/share/plasmallm/chats/ konumuna kaydeder"
 
+msgid "Notifications:"
+msgstr "Bildirimler:"
+
+msgid "Show notifications when minimized"
+msgstr "Küçültüldüğünde bildirimleri göster"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr "Sohbet penceresi küçültüldüğünde veya kapatıldığında gelen mesajlar ve araç çağrıları için sistem bildirimleri göster."
+
 msgid "Save format:"
 msgstr "Kaydetme biçimi:"
 
@@ -898,6 +648,12 @@ msgstr "Düz metin (.txt)"
 
 msgid "Structured (.jsonl)"
 msgstr "Yapılandırılmış (.jsonl)"
+
+msgid "Open Folder"
+msgstr "Klasörü Aç"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "Sohbet geçmişlerinin kaydedildiği klasörü aç"
 
 msgid "Auto-clear:"
 msgstr "Otomatik temizle:"
@@ -916,6 +672,308 @@ msgstr "saniye"
 
 msgid "minutes"
 msgstr "dakika"
+
+msgid "You"
+msgstr "Siz"
+
+msgid "Error"
+msgstr "Hata"
+
+msgid "Web Search"
+msgstr "Web Araması"
+
+msgid "Assistant"
+msgstr "Asistan"
+
+msgid "Thinking"
+msgstr "Düşünüyor…"
+
+msgid "Searched for: %1"
+msgstr "Aranan: %1"
+
+msgid "Show %1 results"
+msgstr "%1 sonuç göster"
+
+msgid "Copy to clipboard"
+msgstr "Panoya kopyala"
+
+msgid "Share output with assistant"
+msgstr "Çıktıyı asistanla paylaş"
+
+msgid "Approve the pending tool request"
+msgstr "Bekleyen araç isteğini onayla"
+
+msgid "Toggle skip approvals for this session"
+msgstr "Bu oturum için onayları atlamayı aç/kapat"
+
+msgid "Clear the chat"
+msgstr "Sohbeti temizle"
+
+msgid "Close the panel"
+msgstr "Paneli kapat"
+
+msgid "Copy conversation to clipboard"
+msgstr "Konuşmayı panoya kopyala"
+
+msgid "Deny the pending tool request"
+msgstr "Bekleyen araç isteğini reddet"
+
+msgid "Open chat history folder"
+msgstr "Sohbet geçmişi klasörünü aç"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "Modeli göster veya değiştir (/model <ad>)"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "Profil değiştir (/profile <ad>)"
+
+msgid "Save chat to file"
+msgstr "Sohbeti dosyaya kaydet"
+
+msgid "Open settings"
+msgstr "Ayarları aç"
+
+msgid "Run a saved task (/task <name>)"
+msgstr "Kaydedilmiş bir görevi çalıştır (/task <ad>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr "Drive Desktop modunu değiştir (el sıkışmayı ve otomatik modu başlatır)"
+
+msgid "Toggle Full Auto Mode"
+msgstr "Tam otomatik modu aç/kapat"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Tam otomatik modu aç/kapat: Etkinleştirildiğinde, bu oturum için tüm araçlar "
+"otomatik olarak çalışır."
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "Masaüstünü Yönetmeyi Durdur (bağlantıyı kes)"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop (el sıkışmayı başlatır ve otomatik modu etkinleştirir)"
+
+msgid "Run a task"
+msgstr "Bir görev çalıştır"
+
+msgid "Chat History"
+msgstr "Sohbet Geçmişi"
+
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+msgid "No recent chats"
+msgstr "Son sohbet yok"
+
+msgid "Open history folder..."
+msgstr "Geçmiş klasörünü aç..."
+
+msgid "Clear all history..."
+msgstr "Tüm geçmişi temizle..."
+
+msgid "Clear All History"
+msgstr "Tüm Geçmişi Temizle"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Tüm sohbet geçmişi dosyalarını silmek istediğinizden emin misiniz? Bu işlem "
+"geri alınamaz."
+
+msgid "Clear All"
+msgstr "Tümünü Temizle"
+
+msgid "Copy conversation"
+msgstr "Konuşmayı kopyala"
+
+msgid "Command"
+msgstr "Komut"
+
+msgid "Clear chat"
+msgstr "Sohbeti temizle"
+
+msgid "Settings"
+msgstr "Ayarlar"
+
+msgid "Don't keep open"
+msgstr "Açık tutma"
+
+msgid "Keep open"
+msgstr "Açık tut"
+
+msgid "The user denied this tool call."
+msgstr "Kullanıcı bu araç çağrısını reddetti."
+
+msgid "Send a message to start chatting"
+msgstr "Sohbet başlatmak için bir mesaj gönderin"
+
+msgid "Attach File"
+msgstr "Dosya Ekle"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Görseller (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Metin dosyaları (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
+"*.conf *.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "Tüm dosyalar (*)"
+
+msgid "Message input"
+msgstr "Mesaj girişi"
+
+msgid "Type a message…"
+msgstr "Bir mesaj yazın…"
+
+msgid "Initializing…"
+msgstr "Başlatılıyor…"
+
+msgid "Attach file or image"
+msgstr "Dosya veya görsel ekle"
+
+msgid "Kill"
+msgstr "Sonlandır"
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+"Kalıcı oturumu sonlandır (tüm işlemleri durdurur ve kabuk durumunu sıfırlar)"
+
+msgid "Send"
+msgstr "Gönder"
+
+msgid "Stop"
+msgstr "Durdur"
+
+msgid "Cancel LLM request"
+msgstr "LLM isteğini iptal et"
+
+msgid "Drop files here to attach"
+msgstr "Eklemek için dosyaları buraya bırakın"
+
+msgid "Stop command"
+msgstr "Komutu durdur"
+
+msgid "Open terminal attached to this session"
+msgstr "Bu oturuma bağlı terminali aç"
+
+msgid "Copy output"
+msgstr "Çıktıyı kopyala"
+
+msgid "OpenAI-compatible"
+msgstr "OpenAI uyumlu"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "General Tool Settings"
+msgstr "Genel Araç Ayarları"
+
+msgid "System state:"
+msgstr "Sistem durumu:"
+
+msgid "Enable Tools"
+msgstr "Araçları etkinleştir"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "Tüm araç çağrı işlevleri için ana anahtar."
+
+msgid "Desktop Automation:"
+msgstr "Masaüstü Otomasyonu:"
+
+msgid "Enable Desktop Automation (plasmallm-desktop-driver)"
+msgstr "Masaüstü Otomasyonunu Etkinleştir (plasmallm-desktop-driver)"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr "LLM'nin masaüstünüzü görmek ve yönetmek için bir oturum talep etmesine izin verir."
+
+msgid "Path whitelist:"
+msgstr "Yol beyaz listesi:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Yol ekle, örn. $HOME/projects, /tmp"
+
+msgid "Add"
+msgstr "Ekle"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Beyaz liste dosya sistemi araçlarına uygulanır (okuma, yazma, listeleme, "
+"arama). Not: 'run_command' bu listeyle kısıtlanmamıştır."
+
+msgid "Max read size:"
+msgstr "Maksimum okuma boyutu:"
+
+msgid "Max write size:"
+msgstr "Maksimum yazma boyutu:"
+
+msgid "Max HTTP response:"
+msgstr "Maksimum HTTP yanıtı:"
+
+msgid "Max tool loop depth:"
+msgstr "Maksimum araç döngü derinliği:"
+
+msgid "steps"
+msgstr "adım"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr "Not: Bu sınır masaüstü otomasyonu oturumları için geçerli değildir."
+
+msgid "Native Adapter Features"
+msgstr "Yerel Adaptör Özellikleri"
+
+msgid "Google Search:"
+msgstr "Google Arama:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Yerel Google Arama Temellemesini Etkinleştir"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Temellemek için Gemini'nin yerleşik Google Aramasını kullanın. Bu, standart "
+"web arama aracını geçersiz kılar."
+
+msgid "Code Execution:"
+msgstr "Kod Yürütme:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Yerel Python Kodu Yürütmesini Etkinleştir"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Gemini'nin güvenli bir sunucu taraflı sanal alanda Python kodu yazmasına ve "
+"yürütmesine izin verin."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Yerel araçları komutlarla birleştirmek daha yeni bir model gerektirir. Şu "
+"anda seçili model (%1) hatalarla karşılaşabilir."
+
+msgid "Individual Tools"
+msgstr "Bireysel Araçlar"
+
+msgid "Failed to stop driving: %1"
+msgstr "Yönetimi durdurma başarısız oldu: %1"
 
 msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
@@ -943,6 +1001,14 @@ msgid ""
 msgstr ""
 "Onayları atlama modu devre dışı bırakıldı. Araçlar yapılandırılmış "
 "'Çalıştırmadan önce sor' ayarlarına geri dönecek."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr "Ayarlarda masaüstü otomasyonu devre dışı bırakıldı. Masaüstünü yönetmek için önce onu etkinleştirin."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver algılanmadı veya çalışmıyor."
 
 msgid "Default"
 msgstr "Varsayılan"
@@ -1002,6 +1068,15 @@ msgstr "Bilinmeyen görev: **%1**. Mevcut: %2"
 msgid "The user declined to run this command."
 msgstr "Kullanıcı bu komutu çalıştırmayı reddetti."
 
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Araç Çağrısı"
+
+msgid "Requested tool: %1"
+msgstr "İstenen araç: %1"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
 msgid "Unknown tool %1"
 msgstr "Bilinmeyen araç %1"
 
@@ -1013,6 +1088,15 @@ msgstr "%1 çalıştırılıyor…"
 
 msgid "Session reset requested."
 msgstr "Oturum sıfırlama istendi."
+
+msgid "Failed to start drive session: %1"
+msgstr "Yönetim oturumu başlatılamadı: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "Yönetim oturumu aktif (zaten yetkilendirilmiş). Otomatik mod etkin."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "Yönetim oturumu başarıyla yetkilendirildi. Otomatik mod etkin."
 
 msgid "General"
 msgstr "Genel"

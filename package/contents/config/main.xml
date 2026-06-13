@@ -156,6 +156,10 @@
       <label>Auto-save chat history</label>
       <default>false</default>
     </entry>
+    <entry name="showNotificationsMinimized" type="Bool">
+      <label>Show desktop notifications for new messages/tool calls when chat is minimized</label>
+      <default>true</default>
+    </entry>
     <entry name="chatSaveFormat" type="String">
       <label>Chat save format</label>
       <default>jsonl</default>
@@ -401,6 +405,14 @@
       <label>Enable tools system</label>
       <default>true</default>
     </entry>
+    <entry name="enableDesktopAutomation" type="Bool">
+      <label>Enable desktop automation (plasmallm-desktop-driver)</label>
+      <default>false</default>
+    </entry>
+    <entry name="desktopAutomationToken" type="String">
+      <label>Client token for desktop automation authentication</label>
+      <default></default>
+    </entry>
     <entry name="toolsReadFileEnabled" type="Bool">
       <label>Enable read_file tool</label>
       <default>true</default>
@@ -496,6 +508,16 @@
     <entry name="toolsHttpMaxBytes" type="Int">
       <label>Max bytes for HTTP responses</label>
       <default>524288</default>
+    </entry>
+    <entry name="enableToolCallLimit" type="Bool">
+      <label>Enable tool loop step limit</label>
+      <default>true</default>
+    </entry>
+    <entry name="maxToolCallDepth" type="Int">
+      <label>Max tool loop step limit</label>
+      <default>30</default>
+      <min>1</min>
+      <max>100</max>
     </entry>
   </group>
 

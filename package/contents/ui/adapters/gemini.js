@@ -240,7 +240,22 @@ function translateMessages(neutralMessages) {
 
         if (m.role === "tool") {
             var fnName = idToName[m.tool_call_id] || "";
-            var raw = typeof m.content === "string" ? m.content : "";
+            var raw = "";
+            var extraParts = [];
+            
+            if (typeof m.content === "string") {
+                raw = m.content;
+            } else if (Array.isArray(m.content)) {
+                for (var p = 0; p < m.content.length; p++) {
+                    var part = m.content[p];
+                    if (part.text) {
+                        raw += part.text;
+                    } else if (part.inlineData || part.fileData) {
+                        extraParts.push(part);
+                    }
+                }
+            }
+            
             var responsePart = {
                 functionResponse: {
                     name: fnName,
@@ -250,8 +265,15 @@ function translateMessages(neutralMessages) {
             var prev = contents.length > 0 ? contents[contents.length - 1] : null;
             if (prev && prev.role === "user") {
                 prev.parts.push(responsePart);
+                for (var e = 0; e < extraParts.length; e++) {
+                    prev.parts.push(extraParts[e]);
+                }
             } else {
-                contents.push({ role: "user", parts: [responsePart] });
+                var partsArr = [responsePart];
+                for (var e = 0; e < extraParts.length; e++) {
+                    partsArr.push(extraParts[e]);
+                }
+                contents.push({ role: "user", parts: partsArr });
             }
             continue;
         }
@@ -372,6 +394,7 @@ function parseSSEChunks(buffer, lastIndex) {
                 tokens.push({ error: (obj.error && obj.error.message) || "stream error" });
             }
         } catch (e) {
+            console.warn("PlasmaLLM Gemini Adapter: failed to parse SSE chunk:", payload, e);
             // skip unparseable chunks
         }
     }
@@ -493,6 +516,7 @@ function sendStreaming(opts) {
         var collectedThinking = collectThinkingBlocks();
 
         if (error) {
+            console.error("PlasmaLLM Gemini Adapter: onComplete with error:", error);
             onComplete(accumulatedText, error, null, null);
         } else if (accumulatedToolCalls.length > 0) {
             var assistantMsg = { role: "assistant", content: accumulatedText || null, tool_calls: accumulatedToolCalls, thinkingBlocks: collectedThinking };

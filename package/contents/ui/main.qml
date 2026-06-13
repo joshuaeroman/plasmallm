@@ -16,6 +16,7 @@ import "api.js" as Api
 import "sessionRunner.js" as SessionRunner
 import "profiles.js" as Profiles
 import "toolManager.js" as ToolManager
+import "driverManager.js" as DriverManager
 
 PlasmoidItem {
     id: root
@@ -62,6 +63,28 @@ PlasmoidItem {
 
     ListModel {
         id: displayMessages
+        ListElement {
+            role: "user"
+            content: ""
+            shared: false
+            timestamp: ""
+            thinking: ""
+            attachmentsStr: ""
+            toolSummary: ""
+            toolDataJson: ""
+            toolView: ""
+            toolIcon: ""
+            toolTitle: ""
+            outputScheme: ""
+            tool_call_id: ""
+            callId: ""
+            toolName: ""
+            toolArgs: ""
+            stdout: ""
+            stderr: ""
+            exitCode: 0
+        }
+        Component.onCompleted: clear()
     }
 
     ListModel {
@@ -76,15 +99,42 @@ PlasmoidItem {
     property int maxApiMessages: 100
     property bool autoShareSuppressed: false
     property bool sessionAutoMode: false
+    onSessionAutoModeChanged: {
+        if (sessionAutoMode) {
+            ensureDriverSessionActive();
+        } else {
+            root.isHandshakePending = false;
+            if (root.isDrivingActive) {
+                DriverManager.stopSession(function(err) {
+                    if (!err) {
+                        root.isDrivingActive = false;
+                        console.log("[PlasmaLLM] Drive session disconnected. Auto mode disabled.");
+                    } else {
+                        displayMessages.append({
+                            role: "error",
+                            content: i18n("Failed to stop driving: %1", err.error || err),
+                            shared: false,
+                            timestamp: root.currentTimestamp()
+                        });
+                    }
+                });
+            }
+        }
+    }
     property bool taskAutoMode: false
-    readonly property bool isAutoMode: sessionAutoMode
+    property bool sessionFullAutoMode: false
+    property bool isDriverServiceActive: false
+    property bool isDrivingActive: false
+    property bool isHandshakePending: false
+    readonly property bool isAutoMode: sessionAutoMode || sessionFullAutoMode
     property var fetchedModels: []
     property string apiKey: Plasmoid.configuration.apiKey
     property string ollamaSearchApiKey: ""
     property string searxngApiKey: ""
     property bool walletAvailable: false
     property int toolCallDepth: 0
-    readonly property int maxToolCallDepth: 10
+    readonly property bool enableToolCallLimit: Plasmoid.configuration.enableToolCallLimit
+    readonly property int maxToolCallDepth: Plasmoid.configuration.maxToolCallDepth
     property var pendingToolCalls: []  // array of {id, type, ...}
     property var activeToolCalls: ({}) // sourceCmd -> { toolName, callId, displayIndex }
 
@@ -145,6 +195,60 @@ PlasmoidItem {
     property var stopCommands: ([])
     property var statusCheckCommands: ([])
     property int commandRunStateTick: 0
+    property var savedScreenshotPaths: ({})
+
+    property var chunkedSaveQueue: []
+    property bool isChunkSaving: false
+
+    function enqueueChunkSave(cmd) {
+        chunkedSaveQueue.push(cmd);
+        pumpChunkSaveQueue();
+    }
+
+    function pumpChunkSaveQueue() {
+        if (isChunkSaving || chunkedSaveQueue.length === 0) return;
+        isChunkSaving = true;
+        var cmd = chunkedSaveQueue.shift();
+        saveCommands.push(cmd);
+        executable.connectSource(cmd);
+    }
+
+    function getOrCreateScreenshotFile(base64DataUrl) {
+        if (!base64DataUrl || base64DataUrl.indexOf("data:image/jpeg;base64,") !== 0) {
+            return base64DataUrl;
+        }
+        var base64Part = base64DataUrl.substring("data:image/jpeg;base64,".length);
+        var hash = 5381;
+        for (var i = 0; i < base64Part.length; i++) {
+            hash = ((hash << 5) + hash) + base64Part.charCodeAt(i);
+        }
+        var cacheKey = "hash_" + hash.toString(36) + "_" + base64Part.length;
+        if (savedScreenshotPaths[cacheKey] !== undefined) {
+            return savedScreenshotPaths[cacheKey];
+        }
+        
+        try {
+            var now = new Date();
+            var timestamp = now.getTime() + "_" + Math.floor(Math.random() * 1000);
+            var filename = "screenshot_" + timestamp + ".jpg";
+            var dataHome = sysInfo.xdgDataHome || (sysInfo.userHome ? (sysInfo.userHome + "/.local/share") : "/home/" + (sysInfo.user || "user") + "/.local/share");
+            var screenshotsDir = dataHome + "/plasmallm/screenshots";
+            var absoluteFilePath = screenshotsDir + "/" + filename;
+            
+            var shellDataHome = "${XDG_DATA_HOME:-$HOME/.local/share}";
+            var shellScreenshotsDir = shellDataHome + "/plasmallm/screenshots";
+            var shellAbsoluteFilePath = shellScreenshotsDir + "/" + filename;
+            
+            var uid = Math.random().toString(36).substring(2, 10);
+            enqueueChunkSave("mkdir -p \"" + shellScreenshotsDir + "\" && printf '%s' '" + base64Part + "' | base64 -d > \"" + shellAbsoluteFilePath + "\" # " + uid);
+            
+            savedScreenshotPaths[cacheKey] = absoluteFilePath;
+            return absoluteFilePath;
+        } catch(e) {
+            console.warn("PlasmaLLM: Failed to save base64 attachment: " + e);
+            return base64DataUrl;
+        }
+    }
 
     function sessionChipText() {
         if (!Plasmoid.configuration.useSessionMultiplexer) return "";
@@ -247,44 +351,42 @@ PlasmoidItem {
                 terminalCommands.splice(terminalCommands.indexOf(source), 1);
                 disconnectSource(source);
             } else if (saveCommands.indexOf(source) !== -1) {
+                var isQueued = (source.indexOf("screenshots") !== -1);
+                if (exitCode === undefined && !isQueued) return;
                 // Chat save commands — suppress output bubble
                 saveCommands.splice(saveCommands.indexOf(source), 1);
                 disconnectSource(source);
+                if (isQueued) {
+                    isChunkSaving = false;
+                    pumpChunkSaveQueue();
+                }
             } else if (historyFetchCommands.indexOf(source) !== -1) {
                 historyFetchCommands.splice(historyFetchCommands.indexOf(source), 1);
                 if (source === lastHistoryFetchSource) {
                     isFetchingHistory = false;
                     historyFilesModel.clear();
                     if (stdout.length > 0) {
-                        if (stdout.startsWith("[")) {
-                            try {
-                                var files = JSON.parse(stdout);
-                                for (var i = 0; i < files.length; i++) {
-                                    var f = files[i];
-                                    if (f.mtime) {
-                                        var d = new Date(f.mtime * 1000);
-                                        f.dateTime = d.toLocaleString(Qt.locale(), Locale.ShortFormat);
-                                    }
-                                    historyFilesModel.append(f);
-                                }
-                            } catch(e) {
-                                console.warn("PlasmaLLM: Failed to parse history JSON: " + e);
+                        var lines = stdout.split("\n");
+                        for (var i = 0; i < lines.length; i++) {
+                            if (!lines[i].trim()) continue;
+                            var parts = lines[i].split("\t");
+                            var filePath = parts[0];
+                            var mtime = parseInt(parts[1]) || 0;
+                            var preview = parts[2] || "";
+                            
+                            var name = filePath.split("/").pop();
+                            var dtStr = name;
+                            if (mtime > 0) {
+                                var d = new Date(mtime * 1000);
+                                dtStr = d.toLocaleString(Qt.locale(), Locale.ShortFormat);
                             }
-                        } else {
-                            // Fallback: list of paths
-                            var lines = stdout.split("\n");
-                            for (var j = 0; j < lines.length; j++) {
-                                if (!lines[j].trim()) continue;
-                                var path = lines[j].trim();
-                                var name = path.split("/").pop();
-                                var dtMatch = name.match(/^(\d{4})-(\d{2})-(\d{2})_(\d{2})-(\d{2})/);
-                                var dtStr = name;
-                                if (dtMatch) {
-                                    var dateObj = new Date(dtMatch[1], dtMatch[2] - 1, dtMatch[3], dtMatch[4], dtMatch[5]);
-                                    dtStr = dateObj.toLocaleString(Qt.locale(), Locale.ShortFormat);
-                                }
-                                historyFilesModel.append({file: path, name: name, dateTime: dtStr, preview: ""});
-                            }
+                            historyFilesModel.append({
+                                file: filePath, 
+                                name: name, 
+                                dateTime: dtStr, 
+                                mtime: mtime,
+                                preview: preview
+                            });
                         }
                     }
                 }
@@ -333,7 +435,7 @@ PlasmoidItem {
             case "whoami":
                 sysInfo.user = output;
                 break;
-            case "echo $HOME":
+            case "realpath $HOME":
                 sysInfo.userHome = output;
                 break;
             case "echo $SHELL":
@@ -389,7 +491,7 @@ PlasmoidItem {
             case "echo $LANG":
                 sysInfo.locale = output;
                 break;
-            case "echo $XDG_DATA_HOME":
+            case "realpath ${XDG_DATA_HOME:-$HOME/.local/share}":
                 sysInfo.xdgDataHome = output;
                 break;
             case "echo $XDG_CONFIG_HOME":
@@ -406,14 +508,19 @@ PlasmoidItem {
         sysInfoPending--;
         if (sysInfoPending === 0) {
             initSystemPrompt();
+            if (historyFilesModel.count === 0 && Plasmoid.configuration.chatSaveFormat === "jsonl" && Plasmoid.configuration.saveChatHistory) {
+                fetchHistoryList();
+            }
         }
     }
 
     function getToolsConfig() {
         return {
             sessionAutoMode: root.sessionAutoMode,
+            sessionFullAutoMode: root.sessionFullAutoMode,
             enableTools: Plasmoid.configuration.enableTools,
             enableWebSearch: Plasmoid.configuration.enableWebSearch,
+            enableDesktopAutomation: Plasmoid.configuration.enableDesktopAutomation,
             searchConfigured: Api.isSearchConfigured({
                 webSearchProvider: Plasmoid.configuration.webSearchProvider,
                 searxngUrl: Plasmoid.configuration.searxngUrl,
@@ -477,14 +584,14 @@ PlasmoidItem {
         if (Plasmoid.configuration.sysInfoKernel)   cmds.push("uname -a");
         if (Plasmoid.configuration.sysInfoDesktop)  cmds.push("echo $XDG_CURRENT_DESKTOP");
         if (Plasmoid.configuration.sysInfoUser)     cmds.push("whoami");
-        cmds.push("echo $HOME");
+        cmds.push("realpath $HOME");
         if (Plasmoid.configuration.sysInfoCPU)      cmds.push("lscpu");
         if (Plasmoid.configuration.sysInfoMemory)   cmds.push("free -h");
         if (Plasmoid.configuration.sysInfoGPU)      cmds.push("bash -c \"lspci -nn | grep -iE 'vga|3d|display'\"");
         if (Plasmoid.configuration.sysInfoDisk)     cmds.push("lsblk -o NAME,SIZE,TYPE,MOUNTPOINT");
         if (Plasmoid.configuration.sysInfoNetwork)  cmds.push("ip -br addr show");
         if (Plasmoid.configuration.sysInfoLocale)   cmds.push("echo $LANG");
-        cmds.push("echo $XDG_DATA_HOME");
+        cmds.push("realpath ${XDG_DATA_HOME:-$HOME/.local/share}");
         cmds.push("echo $XDG_CONFIG_HOME");
         cmds.push("echo $XDG_CACHE_HOME");
         cmds.push("echo $XDG_RUNTIME_DIR");
@@ -517,6 +624,7 @@ PlasmoidItem {
         displayMessages.clear();
         currentChatFile = "";
         sessionAutoMode = false;
+        sessionFullAutoMode = false;
         root.pendingToolCalls = [];
         if (systemPromptReady) {
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
@@ -570,7 +678,7 @@ PlasmoidItem {
 
         // Escape single quotes for shell
         var escaped = text.replace(/'/g, "'\\''");
-        var dataHome = "${XDG_DATA_HOME:-$HOME/.local/share}";
+        var dataHome = sysInfo.xdgDataHome || "${XDG_DATA_HOME:-$HOME/.local/share}";
         var chatsDir = dataHome + "/plasmallm/chats";
         var filePath = chatsDir + "/" + currentChatFile;
         var cmd = "mkdir -p \"" + chatsDir + "\" && printf '%s' '" + escaped + "' > \"" + filePath + "\"";
@@ -593,44 +701,76 @@ lines.push(JSON.stringify({
 
         // API messages
         for (var i = 0; i < chatMessages.count; i++) {
-            var m = chatMessages.get(i);
-            var attachJson = "";
-            if (m.attachments_json && m.attachments_json.length > 0) {
-                try {
-                    var atts = JSON.parse(m.attachments_json);
-                    var slim = atts.map(function(a) {
-                        return { filePath: a.filePath, fileName: a.fileName };
-                    });
-                    attachJson = JSON.stringify(slim);
-                } catch(e) { attachJson = m.attachments_json; }
-            }
+            try {
+                var m = chatMessages.get(i);
+                var attachJson = "";
+                if (m.attachments_json && m.attachments_json.length > 0) {
+                    try {
+                        var atts = JSON.parse(m.attachments_json);
+                        var slim = atts.map(function(a) {
+                            var filePath = a.filePath;
+                            if (a.dataUrl && a.dataUrl.indexOf("data:image/jpeg;base64,") === 0) {
+                                filePath = getOrCreateScreenshotFile(a.dataUrl);
+                            }
+                            return { filePath: filePath, fileName: a.fileName || "screenshot.jpg" };
+                        });
+                        attachJson = JSON.stringify(slim);
+                    } catch(e) { attachJson = m.attachments_json; }
+                }
 
-            lines.push(JSON.stringify({
-                _type: "api",
-                index: i,
-                role: m.role,
-                content: m.content,
-                tool_calls_json: m.tool_calls_json || "",
-                tool_call_id: m.tool_call_id || "",
-                thinking_blocks_json: m.thinking_blocks_json || "",
-                attachments_json: attachJson,
-                timestamp_api: m.timestamp_api || ""
-            }));
+                lines.push(JSON.stringify({
+                    _type: "api",
+                    index: i,
+                    role: m.role,
+                    content: m.content,
+                    tool_calls_json: m.tool_calls_json || "",
+                    tool_call_id: m.tool_call_id || "",
+                    thinking_blocks_json: m.thinking_blocks_json || "",
+                    attachments_json: attachJson,
+                    timestamp_api: m.timestamp_api || ""
+                }));
+            } catch (e) {
+                console.warn("PlasmaLLM saveChatJsonl error on api msg " + i + ": " + e);
+            }
         }
         // Display messages
         for (var j = 0; j < displayMessages.count; j++) {
-            var d = displayMessages.get(j);
-            if (d.role === "command_running") continue;
-            lines.push(JSON.stringify({
-                _type: "display",
-                index: j,
-                role: d.role,
-                content: d.content,
-                thinking: d.thinking || "",
-                shared: d.shared || false,
-                timestamp: d.timestamp || "",
-                attachmentsStr: d.attachmentsStr || ""
-            }));
+            try {
+                var d = displayMessages.get(j);
+                if (d.role === "command_running") continue;
+                var displayAttachmentsStr = d.attachmentsStr || "";
+                if (displayAttachmentsStr.length > 0) {
+                    var paths = displayAttachmentsStr.split("\n").map(function(path) {
+                        return getOrCreateScreenshotFile(path);
+                    });
+                    displayAttachmentsStr = paths.join("\n");
+                }
+                lines.push(JSON.stringify({
+                    _type: "display",
+                    index: j,
+                    role: d.role,
+                    content: d.content,
+                    thinking: d.thinking || "",
+                    shared: d.shared || false,
+                    timestamp: d.timestamp || "",
+                    attachmentsStr: displayAttachmentsStr,
+                    toolTitle: d.toolTitle || "",
+                    toolIcon: d.toolIcon || "",
+                    toolSummary: d.toolSummary || "",
+                    toolDataJson: d.toolDataJson || "",
+                    toolView: d.toolView || "",
+                    toolName: d.toolName || "",
+                    toolArgs: d.toolArgs || "",
+                    stdout: d.stdout || "",
+                    stderr: d.stderr || "",
+                    exitCode: d.exitCode !== undefined ? d.exitCode : 0,
+                    outputScheme: d.outputScheme || "",
+                    tool_call_id: d.tool_call_id || "",
+                    callId: d.callId || ""
+                }));
+            } catch (e) {
+                console.warn("PlasmaLLM saveChatJsonl error on display msg " + j + ": " + e);
+            }
         }
 
         return lines.join("\n");
@@ -638,34 +778,18 @@ lines.push(JSON.stringify({
 
     function fetchHistoryList() {
         isFetchingHistory = true;
-        var pythonSnippet = "import os, json, sys, datetime\n" +
-            "data_home = os.environ.get('XDG_DATA_HOME') or os.path.expanduser('~/.local/share')\n" +
-            "chats_dir = os.path.join(data_home, 'plasmallm', 'chats')\n" +
-            "if not os.path.exists(chats_dir):\n" +
-            "    print('[]')\n" +
-            "    sys.exit(0)\n" +
-            "try:\n" +
-            "    files = sorted([f for f in os.listdir(chats_dir) if f.endswith('.jsonl')], key=lambda x: os.path.getmtime(os.path.join(chats_dir, x)), reverse=True)[:10]\n" +
-            "    res = []\n" +
-            "    for f in files:\n" +
-            "        try:\n" +
-            "            path = os.path.join(chats_dir, f)\n" +
-            "            mtime = os.path.getmtime(path)\n" +
-            "            with open(path, 'r') as j:\n" +
-            "                first_user = ''\n" +
-            "                for line in j:\n" +
-            "                    data = json.loads(line)\n" +
-            "                    if data.get('_type') == 'display' and data.get('role') == 'user':\n" +
-            "                        first_user = data.get('content', '')[:100]\n" +
-            "                        break\n" +
-            "                res.append({'file': path, 'name': f, 'mtime': mtime, 'preview': first_user})\n" +
-            "        except: pass\n" +
-            "    print(json.dumps(res))\n" +
-            "except: print('[]')";
-
-        var b64 = Qt.btoa(pythonSnippet);
-        var cmd = "echo '" + b64 + "' | base64 -d | python3 2>/dev/null || " +
-                  "(ls -1t \"${XDG_DATA_HOME:-$HOME/.local/share}/plasmallm/chats/\"*.jsonl 2>/dev/null | head -n 10) # " + Date.now();
+        var dataHome = sysInfo.xdgDataHome || "${XDG_DATA_HOME:-$HOME/.local/share}";
+        var chatsDir = dataHome + "/plasmallm/chats";
+        
+        // Pure shell command to list top 10 chats with mtime and a basic preview from the first user message.
+        // Format: filePath <TAB> mtime <TAB> previewText
+        var cmd = "mkdir -p \"" + chatsDir + "\" && " +
+                  "for f in \"" + chatsDir + "/\"*.jsonl; do " +
+                  "  [ -e \"$f\" ] || continue; " +
+                  "  mtime=$(stat -c %Y \"$f\"); " +
+                  "  preview=$(grep -m 1 '\"role\":\"user\"' \"$f\" | sed -E 's/.*\"content\":\"([^\"]*)\".*/\\1/' | head -c 100); " +
+                  "  printf \"%s\\t%s\\t%s\\n\" \"$f\" \"$mtime\" \"$preview\"; " +
+                  "done | sort -t$'\\t' -k2,2rn | head -n 10";
         
         lastHistoryFetchSource = cmd;
         historyFetchCommands.push(cmd);
@@ -674,7 +798,8 @@ lines.push(JSON.stringify({
 
     function updateHistoryModelLocally(fileName) {
         if (!Plasmoid.configuration.saveChatHistory) return;
-        var filePath = "${XDG_DATA_HOME:-$HOME/.local/share}/plasmallm/chats/" + fileName;
+        var dataHome = sysInfo.xdgDataHome || "${XDG_DATA_HOME:-$HOME/.local/share}";
+        var filePath = dataHome + "/plasmallm/chats/" + fileName;
         var found = false;
         for (var i = 0; i < historyFilesModel.count; i++) {
             if (historyFilesModel.get(i).name === fileName) {
@@ -752,7 +877,20 @@ lines.push(JSON.stringify({
                         thinking: data.thinking || "",
                         shared: data.shared || false,
                         timestamp: data.timestamp || "",
-                        attachmentsStr: data.attachmentsStr || ""
+                        attachmentsStr: data.attachmentsStr || "",
+                        toolTitle: data.toolTitle || "",
+                        toolIcon: data.toolIcon || "",
+                        toolSummary: data.toolSummary || "",
+                        toolDataJson: data.toolDataJson || "",
+                        toolView: data.toolView || "",
+                        toolName: data.toolName || "",
+                        toolArgs: data.toolArgs || "",
+                        stdout: data.stdout || "",
+                        stderr: data.stderr || "",
+                        exitCode: data.exitCode !== undefined ? data.exitCode : 0,
+                        outputScheme: data.outputScheme || "",
+                        tool_call_id: data.tool_call_id || "",
+                        callId: data.callId || ""
                     });
                 }
             } catch(e) {
@@ -1056,40 +1194,61 @@ lines.push(JSON.stringify({
         connectedSources: []
 
         onNewData: function(source, data) {
-            var stdout = data["stdout"] ? data["stdout"] : "";
             var info = root.pendingFileReads[source];
             if (info) {
-                delete root.pendingFileReads[source];
-                if (info.hasOwnProperty("chatMessageIndex")) {
-                    // Updating a message from history restore
-                    try {
-                        var msg = chatMessages.get(info.chatMessageIndex);
-                        var atts = JSON.parse(msg.attachments_json);
-                        for (var k = 0; k < atts.length; k++) {
-                            if (atts[k].filePath === info.filePath) {
-                                var mime = Api.mimeForImage(info.filePath);
-                                atts[k].dataUrl = "data:" + mime + ";base64," + stdout.trim();
+                if (data["stdout"]) {
+                    if (!info.accumulatedData) info.accumulatedData = "";
+                    info.accumulatedData += data["stdout"];
+                }
+                
+                // Wait until the process exits
+                if (data["exit code"] !== undefined) {
+                    var stdout = info.accumulatedData || "";
+                    delete root.pendingFileReads[source];
+                    
+                    if (info.hasOwnProperty("chatMessageIndex")) {
+                        // Updating a message from history restore
+                        try {
+                            var msg = chatMessages.get(info.chatMessageIndex);
+                            var atts = JSON.parse(msg.attachments_json);
+                            for (var k = 0; k < atts.length; k++) {
+                                if (atts[k].filePath === info.filePath) {
+                                    var mime = Api.mimeForImage(info.filePath);
+                                    atts[k].dataUrl = "data:" + mime + ";base64," + stdout.trim();
+                                    break;
+                                }
+                            }
+                            chatMessages.setProperty(info.chatMessageIndex, "attachments_json", JSON.stringify(atts));
+                        } catch(e) {}
+                    } else {
+                        // Standard attachment loading
+                        var list = root.pendingAttachments.slice();
+                        if (info.isImage) {
+                            var mime = Api.mimeForImage(info.filePath);
+                            var base64Data = stdout.trim();
+                            if (base64Data) {
+                                list.push({ filePath: info.filePath, fileName: info.fileName, dataUrl: "data:" + mime + ";base64," + base64Data });
+                            }
+                        } else {
+                            list.push({ filePath: info.filePath, fileName: info.fileName, textContent: stdout });
+                        }
+                        root.pendingAttachments = list;
+                    }
+                    if (info.resumeSendToLLM) {
+                        var hasMore = false;
+                        for (var key in root.pendingFileReads) {
+                            if (root.pendingFileReads[key].resumeSendToLLM) {
+                                hasMore = true;
                                 break;
                             }
                         }
-                        chatMessages.setProperty(info.chatMessageIndex, "attachments_json", JSON.stringify(atts));
-                    } catch(e) {}
-                } else {
-                    // Standard attachment loading
-                    var list = root.pendingAttachments.slice();
-                    if (info.isImage) {
-                        var mime = Api.mimeForImage(info.filePath);
-                        var base64Data = stdout.trim();
-                        if (base64Data) {
-                            list.push({ filePath: info.filePath, fileName: info.fileName, dataUrl: "data:" + mime + ";base64," + base64Data });
+                        if (!hasMore) {
+                            sendToLLM();
                         }
-                    } else {
-                        list.push({ filePath: info.filePath, fileName: info.fileName, textContent: stdout });
                     }
-                    root.pendingAttachments = list;
+                    disconnectSource(source);
                 }
             }
-            disconnectSource(source);
         }
     }
 
@@ -1147,14 +1306,19 @@ lines.push(JSON.stringify({
 
     function pasteImageFromClipboard() {
         var tempId = Math.random().toString(36).substring(2, 10);
-        var tempPath = "/tmp/plasmallm_paste_" + tempId + ".png";
-        
-        var cmd = "(wl-paste -t image/png > '" + tempPath + "' 2>/dev/null || xclip -selection clipboard -t image/png -o > '" + tempPath + "' 2>/dev/null) && [ -f '" + tempPath + "' ] && [ -s '" + tempPath + "' ] && base64 -w0 '" + tempPath + "'; rm -f '" + tempPath + "'";
-        
-        pendingFileReads[cmd] = { filePath: tempPath, fileName: "pasted_image_" + tempId + ".png", isImage: true };
+        var dataHome = sysInfo.xdgDataHome || (sysInfo.userHome ? (sysInfo.userHome + "/.local/share") : "/home/" + (sysInfo.user || "user") + "/.local/share");
+        var attachDir = dataHome + "/plasmallm/attachments";
+        var persistentPath = attachDir + "/pasted_image_" + tempId + ".png";
+
+        var shellDataHome = "${XDG_DATA_HOME:-$HOME/.local/share}";
+        var shellAttachDir = shellDataHome + "/plasmallm/attachments";
+        var shellPersistentPath = shellAttachDir + "/pasted_image_" + tempId + ".png";
+
+        var cmd = "mkdir -p \"" + shellAttachDir + "\" && (wl-paste -t image/png > \"" + shellPersistentPath + "\" 2>/dev/null || xclip -selection clipboard -t image/png -o > \"" + shellPersistentPath + "\" 2>/dev/null) && [ -f \"" + shellPersistentPath + "\" ] && [ -s \"" + shellPersistentPath + "\" ] && base64 -w0 \"" + shellPersistentPath + "\"";
+
+        pendingFileReads[cmd] = { filePath: persistentPath, fileName: "pasted_image_" + tempId + ".png", isImage: true };
         fileReader.connectSource(cmd);
     }
-
     function sendMessage(text, attachments) {
         if (!systemPromptReady) return false;
         if (!attachments) attachments = [];
@@ -1172,7 +1336,6 @@ lines.push(JSON.stringify({
                 for (var i = displayMessages.count - 1; i >= 0; i--) {
                     var msg = displayMessages.get(i);
                     if (msg.role === "tool_pending" && msg.tool_call_id === toolToApprove.id) {
-                        console.log("PlasmaLLM DEBUG: Tool approved: " + toolToApprove.name + " with args: " + JSON.stringify(toolToApprove.args));
                         displayMessages.remove(i);
                         break;
                     }
@@ -1237,6 +1400,18 @@ lines.push(JSON.stringify({
                 });
                 chatMessages.setProperty(0, "content", autoPrompt);
             }
+            return true;
+        }
+        if (lower === "/drive") {
+            if (!Plasmoid.configuration.enableDesktopAutomation) {
+                displayMessages.append({ role: "assistant", content: i18n("Desktop automation is disabled in settings. Enable it first to drive the desktop."), shared: false, timestamp: currentTimestamp() });
+                return true;
+            }
+            if (!root.isDriverServiceActive) {
+                displayMessages.append({ role: "assistant", content: i18n("plasmallm-desktop-driver is not detected or running."), shared: false, timestamp: currentTimestamp() });
+                return true;
+            }
+            sessionAutoMode = !sessionAutoMode;
             return true;
         }
         if (lower === "/profile") {
@@ -1364,41 +1539,51 @@ lines.push(JSON.stringify({
             }
         }
 
-        // If a previous turn requested tool calls that the user never ran
-        // (manual mode, then chose to send a different message instead), the
-        // API will reject the next request for missing tool_result pairs.
-        // Synthesize denial outputs and clear the queue.
-        if (root.pendingToolCalls.length > 0) {
-            for (var pi = 0; pi < root.pendingToolCalls.length; pi++) {
-                var pcall = root.pendingToolCalls[pi];
-                chatMessages.append({
-                    role: "tool",
-                    content: i18n("The user declined to run this command."),
-                    tool_call_id: pcall.id || "",
-                    timestamp_api: Api.localISODateTime(),
-                });
+        var proceed = function() {
+            // If a previous turn requested tool calls that the user never ran
+            // (manual mode, then chose to send a different message instead), the
+            // API will reject the next request for missing tool_result pairs.
+            // Synthesize denial outputs and clear the queue.
+            if (root.pendingToolCalls.length > 0) {
+                for (var pi = 0; pi < root.pendingToolCalls.length; pi++) {
+                    var pcall = root.pendingToolCalls[pi];
+                    chatMessages.append({
+                        role: "tool",
+                        content: i18n("The user declined to run this command."),
+                        tool_call_id: pcall.id || "",
+                        timestamp_api: Api.localISODateTime(),
+                    });
+                }
+                root.pendingToolCalls = [];
             }
-            root.pendingToolCalls = [];
+
+            // Add user message to both models
+            var attachJson = attachments.length > 0 ? JSON.stringify(attachments) : "";
+            var imagePaths = attachments.filter(function(a) { return !!a.dataUrl; }).map(function(a) {
+                return (a.dataUrl && a.filePath.startsWith("/tmp/plasmallm_paste_")) ? a.dataUrl : a.filePath;
+            });
+            chatMessages.append({ 
+                role: "user", 
+                content: text, 
+                attachments_json: attachJson,
+                timestamp_api: Api.localISODateTime()
+            });
+            root.appendDisplayMessage("user", text, {
+                attachmentsStr: imagePaths.join("\n")
+            });
+
+            autoShareSuppressed = false;
+            toolCallDepth = 0;
+            sendToLLM();
+        };
+
+        if (Plasmoid.configuration.enableDesktopAutomation) {
+            DriverManager.checkDriverSession(function(alive) {
+                proceed();
+            });
+        } else {
+            proceed();
         }
-
-        // Add user message to both models
-        var attachJson = attachments.length > 0 ? JSON.stringify(attachments) : "";
-        var imagePaths = attachments.filter(function(a) { return !!a.dataUrl; }).map(function(a) {
-            return (a.dataUrl && a.filePath.startsWith("/tmp/plasmallm_paste_")) ? a.dataUrl : a.filePath;
-        });
-        chatMessages.append({ 
-            role: "user", 
-            content: text, 
-            attachments_json: attachJson,
-            timestamp_api: Api.localISODateTime()
-        });
-        root.appendDisplayMessage("user", text, {
-            attachmentsStr: imagePaths.join("\n")
-        });
-
-        autoShareSuppressed = false;
-        toolCallDepth = 0;
-        sendToLLM();
         return true;
     }
 
@@ -1414,8 +1599,65 @@ lines.push(JSON.stringify({
             return;
         }
 
-
         isLoading = true;
+
+        // --- Token Optimization: Scan messages in the current turn (from the last interactive message onwards) for images that need to be read ---
+        var lastInteractiveIndex = -1;
+        for (var i = chatMessages.count - 1; i >= 0; i--) {
+            if (chatMessages.get(i).role !== "tool") {
+                lastInteractiveIndex = i;
+                break;
+            }
+        }
+        if (lastInteractiveIndex === -1) {
+            lastInteractiveIndex = 0;
+        }
+
+        var readsSpawned = 0;
+        for (var i = lastInteractiveIndex; i < chatMessages.count; i++) {
+            var msg = chatMessages.get(i);
+            if (msg.attachments_json && msg.attachments_json.length > 0) {
+                try {
+                    var atts = JSON.parse(msg.attachments_json);
+                    for (var k = 0; k < atts.length; k++) {
+                        var needsRead = false;
+                        var filePath = "";
+                        
+                        if (atts[k].filePath && !atts[k].dataUrl && Api.isImageFile(atts[k].filePath)) {
+                            needsRead = true;
+                            filePath = atts[k].filePath;
+                        } else if (atts[k].url && atts[k].url.indexOf("file://") === 0 && !atts[k].dataUrl && Api.isImageFile(atts[k].url)) {
+                            needsRead = true;
+                            filePath = atts[k].url.replace("file://", "");
+                        } else if (atts[k].dataUrl && atts[k].dataUrl.indexOf("data:") !== 0 && Api.isImageFile(atts[k].dataUrl)) {
+                            needsRead = true;
+                            filePath = atts[k].dataUrl;
+                        }
+
+                        if (needsRead) {
+                            var cmd = "cat '" + filePath.replace(/'/g, "'\\''") + "' | base64 -w0";
+                            if (!pendingFileReads[cmd]) {
+                                pendingFileReads[cmd] = {
+                                    filePath: filePath,
+                                    fileName: atts[k].fileName || "image.jpg",
+                                    isImage: true,
+                                    chatMessageIndex: i,
+                                    resumeSendToLLM: true
+                                };
+                                fileReader.connectSource(cmd);
+                                readsSpawned++;
+                            }
+                        }
+                    }
+                } catch(e) {}
+            }
+        }
+
+        if (readsSpawned > 0) {
+            isLoading = true; // Set to true while loading
+            return;
+        } else {
+        }
 
         // Refresh system prompt
         if (systemPromptReady) {
@@ -1435,6 +1677,7 @@ lines.push(JSON.stringify({
         // Build messages array from ListModel, capping to avoid unbounded growth
         var messages = [];
         var totalLength = 0;
+
         for (var i = 0; i < chatMessages.count; i++) {
             var msg = chatMessages.get(i);
             var msgContent = msg.content;
@@ -1443,7 +1686,15 @@ lines.push(JSON.stringify({
             if (msg.attachments_json && msg.attachments_json.length > 0) {
                 try {
                     var atts = JSON.parse(msg.attachments_json);
-                    msgContent = Api.buildContentArray(root.effectiveApiType, msgContent, atts, Plasmoid.configuration.usesResponsesAPI);
+                    // Filter out images if this is an older message
+                    if (i < lastInteractiveIndex) {
+                        atts = atts.filter(function(att) {
+                            return !(att.dataUrl || Api.isImageFile(att.fileName || ""));
+                        });
+                    }
+                    if (atts.length > 0) {
+                        msgContent = Api.buildContentArray(root.effectiveApiType, msgContent, atts, Plasmoid.configuration.usesResponsesAPI);
+                    }
                 } catch(e) {}
             }
             var entry = { role: msg.role, content: msgContent };
@@ -1521,7 +1772,8 @@ lines.push(JSON.stringify({
                 if (streamPollTimer.running) streamPollTimer.stop();
 
                 // Handle tool calls
-                if (toolCalls && toolCalls.length > 0 && toolCallDepth < maxToolCallDepth) {
+                var limitApplies = enableToolCallLimit && !DriverManager.isSessionActive;
+                if (toolCalls && toolCalls.length > 0 && (!limitApplies || toolCallDepth < maxToolCallDepth)) {
                     toolCallDepth++;
                     // Append the assistant's tool_call message to chat history
                     var thinkingJson = (assistantMsg && assistantMsg.thinkingBlocks && assistantMsg.thinkingBlocks.length > 0)
@@ -1533,6 +1785,20 @@ lines.push(JSON.stringify({
                         thinking_blocks_json: thinkingJson,
                         timestamp_api: Api.localISODateTime(),
                     });
+                    saveChat();
+
+                    if (!root.expanded) {
+                        root.hasUnreadResponse = true;
+                        Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
+                        var toolNames = [];
+                        for (var i = 0; i < toolCalls.length; i++) {
+                            var tcName = toolCalls[i]["function"] && toolCalls[i]["function"].name;
+                            if (tcName) {
+                                toolNames.push(tcName);
+                            }
+                        }
+                        root.showNotification(i18n("PlasmaLLM: Tool Call"), i18n("Requested tool: %1", toolNames.join(", ")));
+                    }
 
                     // Categorize all tool calls
                     var toolsQueue = [];
@@ -1627,10 +1893,12 @@ lines.push(JSON.stringify({
                     if (!root.expanded) {
                         root.hasUnreadResponse = true;
                         Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
+                        root.showNotification(i18n("PlasmaLLM"), fullText);
                     }
 
                     if (taskAutoMode) {
                         sessionAutoMode = false;
+                        sessionFullAutoMode = false;
                         taskAutoMode = false;
                     }
                 }
@@ -1651,6 +1919,16 @@ lines.push(JSON.stringify({
         } else {
             initiateStreaming(root.apiKey);
         }
+    }
+
+    function showNotification(title, message) {
+        if (!Plasmoid.configuration.showNotificationsMinimized) {
+            return;
+        }
+        var escapedTitle = (title || "").replace(/'/g, "'\\''");
+        var escapedMessage = (message || "").replace(/'/g, "'\\''");
+        var cmd = "notify-send -- '" + escapedTitle + "' '" + escapedMessage + "'";
+        executable.connectSource(cmd);
     }
 
     function cancelRequest() {
@@ -1682,7 +1960,6 @@ lines.push(JSON.stringify({
     }
 
     function processNextToolCall() {
-
         if (pendingToolCalls.length === 0) {
             sendToLLM();
             return;
@@ -1690,32 +1967,19 @@ lines.push(JSON.stringify({
 
         var next = pendingToolCalls[0];
         var toolsConfig = getToolsConfig();
-        if (next.type === "tool") {
-            if (ToolManager.isAutoRun(next.name, toolsConfig)) {
-                executeTool(next.name, next.args, next.id);
-            } else {
-                // Show approval card
-                console.log("PlasmaLLM DEBUG: Appending tool_pending for " + next.name + " with args: " + JSON.stringify(next.args));
-                root.appendDisplayMessage("tool_pending", next.name, {
-                    tool_call_id: next.id,
-                    toolArgs: JSON.stringify(next.args),
-                    shared: false
-                });
-            }
+        if (ToolManager.isAutoRun(next.name, toolsConfig)) {
+            executeTool(next.name, next.args, next.id);
         } else {
-            if (sessionAutoMode || Plasmoid.configuration.autoRunCommands) {
-                executeCommand(next.command, next.id);
-            } else {
-                // Show command for user approval
-                root.appendDisplayMessage("assistant", "", {
-                    shared: false
-                });
-            }
+            // Show approval card
+            root.appendDisplayMessage("tool_pending", next.name, {
+                tool_call_id: next.id,
+                toolArgs: JSON.stringify(next.args),
+                shared: false
+            });
         }
     }
 
     function executeTool(name, args, callId) {
-
         var toolsConfig = getToolsConfig();
         var tool = ToolManager.getTool(name, toolsConfig);
         if (!tool) {
@@ -1764,6 +2028,15 @@ lines.push(JSON.stringify({
             getSecret: function(key) {
                 return root[key] !== undefined ? root[key] : "";
             },
+            setTimeout: function(cb, delay) {
+                var t = Qt.createQmlObject("import QtQml 2.0; Timer { interval: " + delay + "; repeat: false; }", root);
+                t.triggered.connect(function() {
+                    cb();
+                    t.destroy();
+                });
+                t.start();
+                return t;
+            },
             addDisplayMessage: function(content, role, extraProps) {
                 root.appendDisplayMessage(role, content, extraProps);
             },
@@ -1785,15 +2058,41 @@ lines.push(JSON.stringify({
                 console.error("PlasmaLLM: Tool error:", name, msg);
                 handleToolOutput(null, "", msg, 1, { name: name, callId: callId, displayIndex: displayIndex, args: args });
             },
-            onDone: function(stdout, stderr, exitCode) {
-                handleToolOutput(null, stdout, stderr, exitCode, { name: name, callId: callId, displayIndex: displayIndex, args: args });
+            onDone: function(stdout, stderr, exitCode, attachmentsJson) {
+                handleToolOutput(null, stdout, stderr, exitCode, { name: name, callId: callId, displayIndex: displayIndex, args: args }, attachmentsJson);
             }
         };
+
+        // Validate arguments against tool parameters schema dynamically
+        if (tool.parameters && tool.parameters.properties) {
+            var invalidKeys = [];
+            var argKeys = Object.keys(args);
+            for (var k = 0; k < argKeys.length; k++) {
+                var key = argKeys[k];
+                if (tool.parameters.properties[key] === undefined) {
+                    invalidKeys.push(key);
+                }
+            }
+            if (invalidKeys.length > 0) {
+                var allowed = Object.keys(tool.parameters.properties).join(", ");
+                var errorMsg = "Action blocked: Unrecognized or invalid parameter(s) detected: '" + invalidKeys.join("', '") + "'. " +
+                               "Only the following parameters are allowed: " + allowed + ". ";
+                // Add specific coordinate guidance if the tool expects coordinates
+                if (tool.parameters.properties.nx !== undefined || tool.parameters.properties.ny !== undefined) {
+                    errorMsg += "To specify coordinates, you must use 'nx' and 'ny' (0-1000 scale).";
+                }
+                if (context.addDisplayMessage) {
+                    context.addDisplayMessage(errorMsg, "error");
+                }
+                context.onDone(JSON.stringify({ status: "error", message: errorMsg }), "", 0);
+                return;
+            }
+        }
 
         tool.execute(args, context);
     }
 
-    function handleToolOutput(source, stdout, stderr, exitCode, manualMeta) {
+    function handleToolOutput(source, stdout, stderr, exitCode, manualMeta, attachmentsJson) {
         var info = manualMeta || activeToolCalls[source];
         if (!info) {
             return;
@@ -1820,6 +2119,33 @@ lines.push(JSON.stringify({
         }
         header += "]";
 
+        if (name.indexOf("Desktop") === 0 && name !== "DesktopGetState" && name !== "DesktopResetContext") {
+            var contextSummary = "\n\n---\n[Desktop Driver State Monitor]\n";
+            var activeContext = DriverManager.getActiveContext();
+            var wins = DriverManager.getOpenWindows();
+
+            if (activeContext) {
+                var activeTitle = "Unknown Window";
+                for (var k = 0; k < wins.length; k++) {
+                    if (wins[k].uuid === activeContext) {
+                        activeTitle = wins[k].title;
+                        break;
+                    }
+                }
+                contextSummary += "Active Context: Window \"" + activeTitle + "\" (ID: " + activeContext + ") [Relative Coordinate Mode Active]\n";
+            } else {
+                contextSummary += "Active Context: None (Global Mode)\n";
+            }
+
+            if (wins.length > 0) {
+                contextSummary += "Available Windows:\n";
+                for (var j = 0; j < wins.length; j++) {
+                    contextSummary += "- \"" + wins[j].title + "\" (ID: " + wins[j].uuid + (wins[j].active ? ", Active" : "") + ")\n";
+                }
+            }
+            stdout = (stdout || "") + contextSummary;
+        }
+
         // Before building result string, truncate stdout at 8KB
         var MAX_TOOL_OUTPUT = 8192;
         if (stdout && stdout.length > MAX_TOOL_OUTPUT) {
@@ -1834,6 +2160,17 @@ lines.push(JSON.stringify({
         result = ToolManager.contractAllPaths(result, home);
 
         var tool = ToolManager.getTool(name, Plasmoid.configuration);
+
+        var imagePathsStr = "";
+        if (attachmentsJson) {
+            try {
+                var atts = JSON.parse(attachmentsJson);
+                var imagePaths = atts.filter(function(a) { return !!a.dataUrl; }).map(function(a) { return a.dataUrl; });
+                if (imagePaths.length > 0) {
+                    imagePathsStr = imagePaths.join("\n");
+                }
+            } catch(e) {}
+        }
 
         // Update UI in-place if we have a valid index
         var updatedInPlace = false;
@@ -1850,6 +2187,9 @@ lines.push(JSON.stringify({
                 displayMessages.setProperty(displayIndex, "exitCode", exitCode);
                 displayMessages.setProperty(displayIndex, "outputScheme", scheme);
                 displayMessages.setProperty(displayIndex, "shared", true);
+                if (imagePathsStr) {
+                    displayMessages.setProperty(displayIndex, "attachmentsStr", imagePathsStr);
+                }
                 updatedInPlace = true;
             }
         }
@@ -1874,16 +2214,25 @@ lines.push(JSON.stringify({
                 exitCode: exitCode,
                 shared: true,
                 outputScheme: scheme,
+                attachmentsStr: imagePathsStr
             });
         }
 
         // Append to chat history
-        chatMessages.append({
+        var chatEntry = {
             role: "tool",
             content: result,
             tool_call_id: callId,
             timestamp_api: Api.localISODateTime()
-        });
+        };
+        if (attachmentsJson) {
+            chatEntry.attachments_json = attachmentsJson;
+            if (imagePathsStr) {
+                chatEntry.attachmentsStr = imagePathsStr;
+            }
+        }
+        chatMessages.append(chatEntry);
+        saveChat();
 
         // Remove from queue and continue
         if (root.pendingToolCalls.length > 0 && root.pendingToolCalls[0].id === callId) {
@@ -2010,11 +2359,6 @@ lines.push(JSON.stringify({
         }
     }
 
-    function executeCommand(cmd, sourceId) {
-        var callId = sourceId || ("manual_" + generateMarker());
-        executeTool("run_command", { command: cmd }, callId);
-    }
-
 
     function shareOutput(index) {
         if (index < 0 || index >= displayMessages.count) return;
@@ -2034,6 +2378,51 @@ lines.push(JSON.stringify({
         });
 
         sendToLLM();
+    }
+
+    function ensureDriverSessionActive() {
+        if (Plasmoid.configuration.enableDesktopAutomation && root.isDriverServiceActive && !root.isDrivingActive && !root.isHandshakePending) {
+            root.isHandshakePending = true;
+            var clientToken = Plasmoid.configuration.desktopAutomationToken || "";
+            DriverManager.startSession(clientToken, function(err, token, isAlreadyAuthorized) {
+                root.isHandshakePending = false;
+                if (err) {
+                    displayMessages.append({
+                        role: "error",
+                        content: i18n("Failed to start drive session: %1", err.error || err),
+                        shared: false,
+                        timestamp: root.currentTimestamp()
+                    });
+                    root.isDrivingActive = false;
+                } else {
+                    root.isDrivingActive = true;
+                    var msg = isAlreadyAuthorized 
+                        ? i18n("Drive session active (already authorized). Auto mode enabled.")
+                        : i18n("Drive session authorized successfully. Auto mode enabled.");
+                    if (!isAlreadyAuthorized) {
+                        displayMessages.append({
+                            role: "assistant",
+                            content: msg,
+                            shared: false,
+                            timestamp: root.currentTimestamp()
+                        });
+                    } else {
+                        console.log("[PlasmaLLM] " + msg);
+                    }
+                    if (systemPromptReady) {
+                        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, {
+                            sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
+                            autoRunCommands: Plasmoid.configuration.autoRunCommands,
+                            autoMode: root.isAutoMode,
+                            commandToolEnabled: Plasmoid.configuration.useCommandTool,
+                            sessionMultiplexer: root.sessionChipText(),
+                            toolsConfig: getToolsConfig()
+                        });
+                        chatMessages.setProperty(0, "content", prompt);
+                    }
+                }
+            });
+        }
     }
 
     Connections {
@@ -2197,7 +2586,47 @@ lines.push(JSON.stringify({
         }
     }
 
+    Timer {
+        id: desktopDriverStatusTimer
+        interval: 3000
+        running: root.expanded && Plasmoid.configuration.enableDesktopAutomation
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            DriverManager.isDriverActive(function(active) {
+                root.isDriverServiceActive = active;
+                if (!active) {
+                    root.isDrivingActive = false;
+                } else {
+                    if (root.sessionAutoMode && !root.isDrivingActive) {
+                        root.ensureDriverSessionActive();
+                    } else if (root.isDrivingActive) {
+                        DriverManager.checkDriverSession(function(alive) {
+                            root.isDrivingActive = alive;
+                        }, true);
+                    }
+                }
+            });
+        }
+    }
+
     Component.onCompleted: {
+        if (!Plasmoid.configuration.desktopAutomationToken) {
+            var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+            Plasmoid.configuration.desktopAutomationToken = uuid;
+        }
+
+        DriverManager.init(DBus.SessionBus, function() {
+            var now = new Date();
+            var timestamp = now.getTime() + "_" + Math.floor(Math.random() * 1000);
+            var filename = "screenshot_" + timestamp + ".jpg";
+            var dataHome = sysInfo.xdgDataHome || (sysInfo.userHome ? (sysInfo.userHome + "/.local/share") : "/home/" + (sysInfo.user || "user") + "/.local/share");
+            return dataHome + "/plasmallm/screenshots/" + filename;
+        });
+        
         // First-run profile migration
         if (Plasmoid.configuration.profilesSchemaVersion === 0) {
             var profiles = Profiles.loadProfiles(Plasmoid.configuration);
@@ -2287,6 +2716,13 @@ fi
             Plasmoid.configuration.customTools = JSON.stringify(ctGlobal);
 
             Plasmoid.configuration.profilesSchemaVersion = 3;
+        }
+
+        // Seed sysInfo from previous run if available
+        if (Plasmoid.configuration.gatheredSysInfo) {
+            try {
+                sysInfo = JSON.parse(Plasmoid.configuration.gatheredSysInfo);
+            } catch(e) {}
         }
 
         regatherSysInfo();

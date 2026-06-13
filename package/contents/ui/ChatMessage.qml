@@ -49,6 +49,7 @@ Kirigami.AbstractCard {
     signal toolApproved(string name, var args, string callId)
     signal toolDenied(string name, string callId)
     signal scrollRequested()
+    signal imageViewRequested(string sourceUrl)
 
     property bool sessionMode: false
     property string sessionLabel: ""
@@ -405,6 +406,7 @@ Kirigami.AbstractCard {
                 isRunning: messageItem.isToolRunning
                 sessionMode: messageItem.sessionMode
                 sessionLabel: messageItem.sessionLabel
+                attachmentPaths: messageItem.attachmentPaths
                 onTerminalRequested: cmd => messageItem.terminalRequested(cmd)
                 onStopRequested: cmd => messageItem.stopRequested(cmd, "")
             }
@@ -449,7 +451,7 @@ Kirigami.AbstractCard {
                     id: thumbImg
                     anchors.fill: parent
                     anchors.margins: imageThumb.border.width
-                    source: imageThumb.filePath.startsWith("data:") ? imageThumb.filePath : ("file://" + imageThumb.filePath)
+                    source: imageThumb.filePath.startsWith("data:") ? imageThumb.filePath : Qt.resolvedUrl("file://" + imageThumb.filePath)
                     autoTransform: true
                     fillMode: Image.PreserveAspectFit
                     asynchronous: true
@@ -480,9 +482,11 @@ Kirigami.AbstractCard {
                     id: mouseArea
                     anchors.fill: parent
                     hoverEnabled: true
-                    cursorShape: imageThumb.filePath.startsWith("data:") ? Qt.ArrowCursor : Qt.PointingHandCursor
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: {
-                        if (!imageThumb.filePath.startsWith("data:")) {
+                        if (imageThumb.filePath.startsWith("data:")) {
+                            messageItem.imageViewRequested(imageThumb.filePath)
+                        } else {
                             Qt.openUrlExternally("file://" + imageThumb.filePath)
                         }
                     }

@@ -35,7 +35,7 @@ const PROFILE_FIELDS = [
     "enableNativeGoogleSearch", "enableNativeCodeExecution",
     "useCommandTool", "autoRunCommands", "autoShareCommandOutput",
     "enableWebSearch", "webSearchProvider", "searxngUrl",
-    "enableTools",
+    "enableTools", "enableDesktopAutomation",
     "toolsReadFileEnabled", "toolsReadFileAutoRun",
     "toolsWriteFileEnabled", "toolsWriteFileAutoRun",
     "toolsListDirEnabled", "toolsListDirAutoRun",

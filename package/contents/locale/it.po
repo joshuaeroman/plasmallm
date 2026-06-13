@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-20 13:42-0400\n"
+"POT-Creation-Date: 2026-06-10 15:51-0400\n"
 "PO-Revision-Date: 2026-04-07 22:00-0400\n"
 "Last-Translator: Gemini CLI (machine translation)\n"
 "Language-Team: Italian\n"
@@ -17,16 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"L'impegno nel ragionamento (basso / medio / alto) abilita il pensiero "
-"esteso. Per vedere i pensieri su OpenAI / Poe / OpenRouter / Azure, abilita "
-"Use Responses API; i fornitori di chat-completions (DeepSeek, Qwen) mostrano "
-"il ragionamento tramite reasoning_content."
+msgid "Tool Request: %1"
+msgstr "Richiesta strumento: %1"
+
+msgid "Justification: %1"
+msgstr "Giustificazione: %1"
+
+msgid "Deny"
+msgstr "Nega"
+
+msgid "Approve"
+msgstr "Approva"
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -72,11 +73,19 @@ msgstr ""
 "Richiesta non riuscita (nessuna risposta) — verifica l'URL dell'endpoint"
 
 msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
 msgstr ""
-"Gemini utilizza direttamente il budget di token di pensiero. Imposta a 0 per "
-"disabilitare il pensiero sui modelli supportati."
+"L'impegno nel ragionamento (basso / medio / alto) abilita il pensiero "
+"esteso. Per vedere i pensieri su OpenAI / Poe / OpenRouter / Azure, abilita "
+"Use Responses API; i fornitori di chat-completions (DeepSeek, Qwen) mostrano "
+"il ragionamento tramite reasoning_content."
+
+msgid "Gemini uses the thinking level dropdown directly."
+msgstr ""
+"Gemini utilizza direttamente il menu a discesa del livello di pensiero."
 
 msgid "Failed to fetch models"
 msgstr "Impossibile recuperare i modelli"
@@ -86,16 +95,6 @@ msgstr "Autenticazione fallita — controlla la tua chiave API (HTTP 400): %1"
 
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr "Autenticazione fallita (HTTP %1) — controlla la tua chiave API: %2"
-
-msgid "no response — check your endpoint URL"
-msgstr "nessuna risposta — controlla l'URL del tuo endpoint"
-
-msgid "Request failed"
-msgstr "Richiesta fallita"
-
-msgid "Gemini uses the thinking level dropdown directly."
-msgstr ""
-"Gemini utilizza direttamente il menu a discesa del livello di pensiero."
 
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
@@ -107,17 +106,18 @@ msgstr ""
 "recente (es., Gemini 3+) o disabilita le funzionalità native nelle "
 "Impostazioni."
 
-msgid "Tool Request: %1"
-msgstr "Richiesta strumento: %1"
+msgid "Request failed"
+msgstr "Richiesta fallita"
 
-msgid "Justification: %1"
-msgstr "Giustificazione: %1"
+msgid ""
+"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
+"on supported models."
+msgstr ""
+"Gemini utilizza direttamente il budget di token di pensiero. Imposta a 0 per "
+"disabilitare il pensiero sui modelli supportati."
 
-msgid "Deny"
-msgstr "Nega"
-
-msgid "Approve"
-msgstr "Approva"
+msgid "no response — check your endpoint URL"
+msgstr "nessuna risposta — controlla l'URL del tuo endpoint"
 
 msgid ""
 "No custom tools configured. Add a custom tool to expose your own commands to "
@@ -369,255 +369,10 @@ msgstr ""
 "Né 'tmux' né 'screen' sono stati trovati nel sistema. Il multiplexing di "
 "sessione non è disponibile."
 
-msgid "Approve the pending tool request"
-msgstr "Approva la richiesta di strumento in sospeso"
-
-msgid "Toggle skip approvals for this session"
-msgstr "Attiva/disattiva il salto delle approvazioni per questa sessione"
-
-msgid "Clear the chat"
-msgstr "Cancella la chat"
-
-msgid "Close the panel"
-msgstr "Chiudi il pannello"
-
-msgid "Copy conversation to clipboard"
-msgstr "Copia conversazione negli appunti"
-
-msgid "Deny the pending tool request"
-msgstr "Nega la richiesta di strumento in sospeso"
-
-msgid "Open chat history folder"
-msgstr "Apri cartella cronologia chat"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "Mostra o cambia modello (/model <name>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "Cambia profilo (/profile <nome>)"
-
-msgid "Save chat to file"
-msgstr "Salva chat in file"
-
-msgid "Open settings"
-msgstr "Apri impostazioni"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "Esegui un'attività salvata (/task <name>)"
-
-msgid "Toggle Full Auto Mode"
-msgstr "Attiva/disattiva modalità automatica completa"
-
 msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-"Attiva/disattiva la modalità automatica completa: Quando abilitata, tutti "
-"gli strumenti vengono eseguiti automaticamente per questa sessione."
-
-msgid "Run a task"
-msgstr "Esegui un'attività"
-
-msgid "Chat History"
-msgstr "Cronologia chat"
-
-msgid "Loading..."
-msgstr "Caricamento..."
-
-msgid "No recent chats"
-msgstr "Nessuna chat recente"
-
-msgid "Open history folder..."
-msgstr "Apri cartella cronologia..."
-
-msgid "Clear all history..."
-msgstr "Cancella tutta la cronologia..."
-
-msgid "Clear All History"
-msgstr "Cancella tutta la cronologia"
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-"Sei sicuro di voler eliminare tutti i file della cronologia chat? Questa "
-"azione non può essere annullata."
-
-msgid "Clear All"
-msgstr "Cancella tutto"
-
-msgid "Copy conversation"
-msgstr "Copia conversazione"
-
-msgid "You"
-msgstr "Tu"
-
-msgid "Assistant"
-msgstr "Assistente"
-
-msgid "Command"
-msgstr "Comando"
-
-msgid "Error"
-msgstr "Errore"
-
-msgid "Clear chat"
-msgstr "Cancella chat"
-
-msgid "Settings"
-msgstr "Impostazioni"
-
-msgid "Don't keep open"
-msgstr "Non tenere aperto"
-
-msgid "Keep open"
-msgstr "Tieni aperto"
-
-msgid "The user denied this tool call."
-msgstr "L'utente ha negato questa chiamata allo strumento."
-
-msgid "Send a message to start chatting"
-msgstr "Invia un messaggio per iniziare a chattare"
-
-msgid "Attach File"
-msgstr "Allega file"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Immagini (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-"File di testo (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-
-msgid "All files (*)"
-msgstr "Tutti i file (*)"
-
-msgid "Message input"
-msgstr "Input messaggio"
-
-msgid "Type a message…"
-msgstr "Digita un messaggio…"
-
-msgid "Initializing…"
-msgstr "Inizializzazione in corso…"
-
-msgid "Attach file or image"
-msgstr "Allega file o immagine"
-
-msgid "Kill"
-msgstr "Termina"
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-"Termina sessione persistente (interrompe tutti i processi e ripristina lo "
-"stato della shell)"
-
-msgid "Send"
-msgstr "Invia"
-
-msgid "Stop"
-msgstr "Ferma"
-
-msgid "Cancel LLM request"
-msgstr "Annulla richiesta LLM"
-
-msgid "Stop command"
-msgstr "Ferma comando"
-
-msgid "Open terminal attached to this session"
-msgstr "Apri terminale collegato a questa sessione"
-
-msgid "Copy output"
-msgstr "Copia output"
-
-msgid "OpenAI-compatible"
-msgstr "Compatibile con OpenAI"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "General Tool Settings"
-msgstr "Impostazioni generali degli strumenti"
-
-msgid "System state:"
-msgstr "Stato di sistema:"
-
-msgid "Enable Tools"
-msgstr "Abilita strumenti"
-
-msgid "Master switch for all tool-calling functionality."
-msgstr ""
-"Interruttore principale per tutte le funzionalità di chiamata agli strumenti."
-
-msgid "Path whitelist:"
-msgstr "Whitelist percorsi:"
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Aggiungi percorso, es. $HOME/projects, /tmp"
-
-msgid "Add"
-msgstr "Aggiungi"
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"La whitelist si applica agli strumenti del file system (lettura, scrittura, "
-"elenco, ricerca). Nota: 'run_command' non è limitato da questa lista."
-
-msgid "Max read size:"
-msgstr "Dimensione massima di lettura:"
-
-msgid "Max write size:"
-msgstr "Dimensione massima di scrittura:"
-
-msgid "Max HTTP response:"
-msgstr "Risposta HTTP massima:"
-
-msgid "Native Adapter Features"
-msgstr "Funzionalità native dell'adattatore"
-
-msgid "Google Search:"
-msgstr "Ricerca Google:"
-
-msgid "Enable Native Google Search Grounding"
-msgstr "Abilita il grounding nativo di Google Search"
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Usa la ricerca Google integrata di Gemini per il grounding. Questo "
-"sostituisce lo strumento di ricerca web standard."
-
-msgid "Code Execution:"
-msgstr "Esecuzione del codice:"
-
-msgid "Enable Native Python Code Execution"
-msgstr "Abilita l'esecuzione nativa del codice Python"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Consente a Gemini di scrivere ed eseguire codice Python in un sandbox sicuro "
-"lato server."
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"La combinazione di strumenti nativi con comandi richiede un modello più "
-"recente. Il modello attualmente selezionato (%1) potrebbe riscontrare errori."
-
-msgid "Individual Tools"
-msgstr "Strumenti individuali"
+"Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
+"OPTIONS are allowed."
+msgstr "Errore: Metodo HTTP non valido. Sono consentiti solo GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS."
 
 msgid "Color button"
 msgstr "Pulsante colore"
@@ -698,24 +453,6 @@ msgstr "Mostra Impostazioni"
 
 msgid "Show Pin"
 msgstr "Mostra fissa"
-
-msgid "Web Search"
-msgstr "Ricerca Web"
-
-msgid "Thinking"
-msgstr "In elaborazione…"
-
-msgid "Searched for: %1"
-msgstr "Cercato: %1"
-
-msgid "Show %1 results"
-msgstr "Mostra %1 risultati"
-
-msgid "Copy to clipboard"
-msgstr "Copia negli appunti"
-
-msgid "Share output with assistant"
-msgstr "Condividi output con l'assistente"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Impossibile recuperare il token gcloud (uscita %1): %2"
@@ -896,6 +633,17 @@ msgstr "Salva automaticamente la cronologia chat"
 msgid "Saves to ~/.local/share/plasmallm/chats/"
 msgstr "Salva in ~/.local/share/plasmallm/chats/"
 
+msgid "Notifications:"
+msgstr "Notifiche:"
+
+msgid "Show notifications when minimized"
+msgstr "Mostra notifiche quando ridotto a icona"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr "Mostra notifiche di sistema per messaggi in arrivo e chiamate di strumenti quando la finestra di chat è ridotta a icona o chiusa."
+
 msgid "Save format:"
 msgstr "Formato di salvataggio:"
 
@@ -904,6 +652,12 @@ msgstr "Testo semplice (.txt)"
 
 msgid "Structured (.jsonl)"
 msgstr "Strutturato (.jsonl)"
+
+msgid "Open Folder"
+msgstr "Apri cartella"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "Apri la cartella in cui sono salvate le cronologie dei chat"
 
 msgid "Auto-clear:"
 msgstr "Cancellazione automatica:"
@@ -922,6 +676,310 @@ msgstr "secondi"
 
 msgid "minutes"
 msgstr "minuti"
+
+msgid "You"
+msgstr "Tu"
+
+msgid "Error"
+msgstr "Errore"
+
+msgid "Web Search"
+msgstr "Ricerca Web"
+
+msgid "Assistant"
+msgstr "Assistente"
+
+msgid "Thinking"
+msgstr "In elaborazione…"
+
+msgid "Searched for: %1"
+msgstr "Cercato: %1"
+
+msgid "Show %1 results"
+msgstr "Mostra %1 risultati"
+
+msgid "Copy to clipboard"
+msgstr "Copia negli appunti"
+
+msgid "Share output with assistant"
+msgstr "Condividi output con l'assistente"
+
+msgid "Approve the pending tool request"
+msgstr "Approva la richiesta di strumento in sospeso"
+
+msgid "Toggle skip approvals for this session"
+msgstr "Attiva/disattiva il salto delle approvazioni per questa sessione"
+
+msgid "Clear the chat"
+msgstr "Cancella la chat"
+
+msgid "Close the panel"
+msgstr "Chiudi il pannello"
+
+msgid "Copy conversation to clipboard"
+msgstr "Copia conversazione negli appunti"
+
+msgid "Deny the pending tool request"
+msgstr "Nega la richiesta di strumento in sospeso"
+
+msgid "Open chat history folder"
+msgstr "Apri cartella cronologia chat"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "Mostra o cambia modello (/model <name>)"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "Cambia profilo (/profile <nome>)"
+
+msgid "Save chat to file"
+msgstr "Salva chat in file"
+
+msgid "Open settings"
+msgstr "Apri impostazioni"
+
+msgid "Run a saved task (/task <name>)"
+msgstr "Esegui un'attività salvata (/task <name>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr "Attiva/disattiva la modalità Drive Desktop (avvia l'handshake e la modalità automatica)"
+
+msgid "Toggle Full Auto Mode"
+msgstr "Attiva/disattiva modalità automatica completa"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Attiva/disattiva la modalità automatica completa: Quando abilitata, tutti "
+"gli strumenti vengono eseguiti automaticamente per questa sessione."
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "Interrompi controllo desktop (disconnetti)"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop (avvia l'handshake ed abilita la modalità automatica)"
+
+msgid "Run a task"
+msgstr "Esegui un'attività"
+
+msgid "Chat History"
+msgstr "Cronologia chat"
+
+msgid "Loading..."
+msgstr "Caricamento..."
+
+msgid "No recent chats"
+msgstr "Nessuna chat recente"
+
+msgid "Open history folder..."
+msgstr "Apri cartella cronologia..."
+
+msgid "Clear all history..."
+msgstr "Cancella tutta la cronologia..."
+
+msgid "Clear All History"
+msgstr "Cancella tutta la cronologia"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Sei sicuro di voler eliminare tutti i file della cronologia chat? Questa "
+"azione non può essere annullata."
+
+msgid "Clear All"
+msgstr "Cancella tutto"
+
+msgid "Copy conversation"
+msgstr "Copia conversazione"
+
+msgid "Command"
+msgstr "Comando"
+
+msgid "Clear chat"
+msgstr "Cancella chat"
+
+msgid "Settings"
+msgstr "Impostazioni"
+
+msgid "Don't keep open"
+msgstr "Non tenere aperto"
+
+msgid "Keep open"
+msgstr "Tieni aperto"
+
+msgid "The user denied this tool call."
+msgstr "L'utente ha negato questa chiamata allo strumento."
+
+msgid "Send a message to start chatting"
+msgstr "Invia un messaggio per iniziare a chattare"
+
+msgid "Attach File"
+msgstr "Allega file"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Immagini (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"File di testo (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "Tutti i file (*)"
+
+msgid "Message input"
+msgstr "Input messaggio"
+
+msgid "Type a message…"
+msgstr "Digita un messaggio…"
+
+msgid "Initializing…"
+msgstr "Inizializzazione in corso…"
+
+msgid "Attach file or image"
+msgstr "Allega file o immagine"
+
+msgid "Kill"
+msgstr "Termina"
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+"Termina sessione persistente (interrompe tutti i processi e ripristina lo "
+"stato della shell)"
+
+msgid "Send"
+msgstr "Invia"
+
+msgid "Stop"
+msgstr "Ferma"
+
+msgid "Cancel LLM request"
+msgstr "Annulla richiesta LLM"
+
+msgid "Drop files here to attach"
+msgstr "Trascina qui i file da allegare"
+
+msgid "Stop command"
+msgstr "Ferma comando"
+
+msgid "Open terminal attached to this session"
+msgstr "Apri terminale collegato a questa sessione"
+
+msgid "Copy output"
+msgstr "Copia output"
+
+msgid "OpenAI-compatible"
+msgstr "Compatibile con OpenAI"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "General Tool Settings"
+msgstr "Impostazioni generali degli strumenti"
+
+msgid "System state:"
+msgstr "Stato di sistema:"
+
+msgid "Enable Tools"
+msgstr "Abilita strumenti"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr ""
+"Interruttore principale per tutte le funzionalità di chiamata agli strumenti."
+
+msgid "Desktop Automation:"
+msgstr "Automazione desktop:"
+
+msgid "Enable Desktop Automation (plasmallm-desktop-driver)"
+msgstr "Abilita automazione desktop (plasmallm-desktop-driver)"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr "Consente al LLM di richiedere una sessione per vedere e controllare il desktop."
+
+msgid "Path whitelist:"
+msgstr "Whitelist percorsi:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Aggiungi percorso, es. $HOME/projects, /tmp"
+
+msgid "Add"
+msgstr "Aggiungi"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"La whitelist si applica agli strumenti del file system (lettura, scrittura, "
+"elenco, ricerca). Nota: 'run_command' non è limitato da questa lista."
+
+msgid "Max read size:"
+msgstr "Dimensione massima di lettura:"
+
+msgid "Max write size:"
+msgstr "Dimensione massima di scrittura:"
+
+msgid "Max HTTP response:"
+msgstr "Risposta HTTP massima:"
+
+msgid "Max tool loop depth:"
+msgstr "Profondità massima del ciclo degli strumenti:"
+
+msgid "steps"
+msgstr "passi"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr "Nota: Questo limite non si applica alle sessioni di automazione desktop."
+
+msgid "Native Adapter Features"
+msgstr "Funzionalità native dell'adattatore"
+
+msgid "Google Search:"
+msgstr "Ricerca Google:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Abilita il grounding nativo di Google Search"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Usa la ricerca Google integrata di Gemini per il grounding. Questo "
+"sostituisce lo strumento di ricerca web standard."
+
+msgid "Code Execution:"
+msgstr "Esecuzione del codice:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Abilita l'esecuzione nativa del codice Python"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Consente a Gemini di scrivere ed eseguire codice Python in un sandbox sicuro "
+"lato server."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"La combinazione di strumenti nativi con comandi richiede un modello più "
+"recente. Il modello attualmente selezionato (%1) potrebbe riscontrare errori."
+
+msgid "Individual Tools"
+msgstr "Strumenti individuali"
+
+msgid "Failed to stop driving: %1"
+msgstr "Impossibile interrompere il controllo: %1"
 
 msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
@@ -950,6 +1008,14 @@ msgid ""
 msgstr ""
 "Modalità salto approvazioni disabilitata. Gli strumenti torneranno alle "
 "impostazioni configurate 'Chiedi prima di eseguire'."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr "L'automazione desktop è disabilitata nelle impostazioni. Abilitala prima per controllare il desktop."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver non è rilevato o in esecuzione."
 
 msgid "Default"
 msgstr "Predefinito"
@@ -1009,6 +1075,15 @@ msgstr "Attività sconosciuta: **%1**. Disponibili: %2"
 msgid "The user declined to run this command."
 msgstr "L'utente ha rifiutato di eseguire questo comando."
 
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Chiamata strumento"
+
+msgid "Requested tool: %1"
+msgstr "Strumento richiesto: %1"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
 msgid "Unknown tool %1"
 msgstr "Strumento sconosciuto %1"
 
@@ -1020,6 +1095,15 @@ msgstr "Esecuzione di %1…"
 
 msgid "Session reset requested."
 msgstr "Ripristino sessione richiesto."
+
+msgid "Failed to start drive session: %1"
+msgstr "Impossibile avviare la sessione di controllo: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "Sessione di controllo attiva (già autorizzata). Modalità automatica abilitata."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "Sessione di controllo autorizzata con successo. Modalità automatica abilitata."
 
 msgid "General"
 msgstr "Generale"

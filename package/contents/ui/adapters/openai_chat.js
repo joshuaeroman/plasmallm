@@ -11,6 +11,32 @@
 // accumulated tool_calls) intentionally match this baseline since other
 // adapters translate to/from it.
 
+function sanitizePayload(body) {
+    try {
+        var copy = JSON.parse(JSON.stringify(body));
+        if (copy.messages) {
+            for (var i = 0; i < copy.messages.length; i++) {
+                var msg = copy.messages[i];
+                if (Array.isArray(msg.content)) {
+                    for (var j = 0; j < msg.content.length; j++) {
+                        var part = msg.content[j];
+                        if (part.type === "image_url" && part.image_url && typeof part.image_url.url === "string") {
+                            var url = part.image_url.url;
+                            if (url.startsWith("data:") && url.indexOf("base64,") !== -1) {
+                                var parts = url.split("base64,");
+                                part.image_url.url = parts[0] + "base64,<truncated, length " + parts[1].length + ">";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return copy;
+    } catch (e) {
+        return body;
+    }
+}
+
 function fetchModels(endpoint, apiKey, callback) {
     var xhr = new XMLHttpRequest();
     var url = endpoint.replace(/\/+$/, "") + "/models";
@@ -124,6 +150,7 @@ function parseSSEChunks(buffer, lastIndex) {
                 }
             }
         } catch (e) {
+            console.warn("PlasmaLLM OpenAI Chat Adapter: failed to parse SSE chunk:", payload, e);
             // skip unparseable chunks
         }
     }
@@ -211,6 +238,7 @@ function sendStreaming(opts) {
         if (pollTimer && pollTimer.running) pollTimer.stop();
 
         if (error) {
+            console.error("PlasmaLLM OpenAI Chat Adapter: onComplete with error:", error);
             onComplete(accumulatedText, error, null, null);
         } else if (accumulatedToolCalls.length > 0) {
             var assistantMsg = { role: "assistant", content: accumulatedText || null, tool_calls: accumulatedToolCalls };
@@ -280,9 +308,40 @@ function sendStreaming(opts) {
         }
     };
 
+    var translatedMessages = [];
+    for (var i = 0; i < messages.length; i++) {
+        var m = messages[i];
+        if (m.role === "tool" && Array.isArray(m.content)) {
+            var raw = "";
+            var extraParts = [];
+            for (var p = 0; p < m.content.length; p++) {
+                var part = m.content[p];
+                if (part.type === "text") {
+                    raw += part.text;
+                } else {
+                    extraParts.push(part);
+                }
+            }
+            translatedMessages.push({
+                role: "tool",
+                tool_call_id: m.tool_call_id,
+                content: raw
+            });
+            if (extraParts.length > 0) {
+                var userContent = [{ type: "text", text: "Screenshot from tool. Please evaluate the screen state and continue with the task." }];
+                translatedMessages.push({
+                    role: "user",
+                    content: userContent.concat(extraParts)
+                });
+            }
+        } else {
+            translatedMessages.push(m);
+        }
+    }
+
     var body = {
         model: model,
-        messages: messages,
+        messages: translatedMessages,
         temperature: temperature / 100.0,
         max_tokens: maxTokens,
         stream: true
@@ -295,7 +354,6 @@ function sendStreaming(opts) {
     }
 
     var payload = JSON.stringify(body, null, 2);
-    console.error("PlasmaLLM DEBUG payload:", payload);
     xhr.send(payload);
 
     var handle = {
