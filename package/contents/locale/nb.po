@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-20 13:42-0400\n"
+"POT-Creation-Date: 2026-06-10 15:51-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -17,14 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Resonneringsinnsats (lav / middels / høy) styrer utvidet tenkning. For å se "
-"tanker, sørg for at du har aktivert 'Vis tanker' i Generelt-fanen."
+msgid "Tool Request: %1"
+msgstr "Verktøyforespørsel: %1"
+
+msgid "Justification: %1"
+msgstr "Begrunnelse: %1"
+
+msgid "Deny"
+msgstr "Avslå"
+
+msgid "Approve"
+msgstr "Godkjenn"
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -68,11 +71,16 @@ msgstr ""
 "Forespørsel mislyktes (ingen respons) — kontroller endepunkts-URL-en..."
 
 msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
 msgstr ""
-"Gemini bruker tenke-token-budsjettet direkte. Sett til 0 for å deaktivere "
-"tenking (noen modeller krever det)."
+"Resonneringsinnsats (lav / middels / høy) styrer utvidet tenkning. For å se "
+"tanker, sørg for at du har aktivert 'Vis tanker' i Generelt-fanen."
+
+msgid "Gemini uses the thinking level dropdown directly."
+msgstr "Gemini bruker tenkenivå-nedtrekkslisten direkte."
 
 msgid "Failed to fetch models"
 msgstr "Kunne ikke hente modeller..."
@@ -83,15 +91,6 @@ msgstr "Autentisering feilet — sjekk API-nøkkelen din (HTTP 400): %1"
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr "Autentisering feilet (HTTP %1) — sjekk API-nøkkelen din: %2"
 
-msgid "no response — check your endpoint URL"
-msgstr "ingen respons — sjekk endepunkt-URL-en din..."
-
-msgid "Request failed"
-msgstr "Forespørsel feilet..."
-
-msgid "Gemini uses the thinking level dropdown directly."
-msgstr "Gemini bruker tenkenivå-nedtrekkslisten direkte."
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -101,17 +100,18 @@ msgstr ""
 "med tilpassede kommandoer. Velg en nyere modell (f.eks. Gemini 3+) eller "
 "deaktiver innebygde funksjoner i innstillinger."
 
-msgid "Tool Request: %1"
-msgstr "Verktøyforespørsel: %1"
+msgid "Request failed"
+msgstr "Forespørsel feilet..."
 
-msgid "Justification: %1"
-msgstr "Begrunnelse: %1"
+msgid ""
+"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
+"on supported models."
+msgstr ""
+"Gemini bruker tenke-token-budsjettet direkte. Sett til 0 for å deaktivere "
+"tenking (noen modeller krever det)."
 
-msgid "Deny"
-msgstr "Avslå"
-
-msgid "Approve"
-msgstr "Godkjenn"
+msgid "no response — check your endpoint URL"
+msgstr "ingen respons — sjekk endepunkt-URL-en din..."
 
 msgid ""
 "No custom tools configured. Add a custom tool to expose your own commands to "
@@ -356,254 +356,10 @@ msgstr ""
 "Verken 'tmux' eller 'screen' ble funnet på systemet ditt. Øktmultipleksing "
 "er utilgjengelig."
 
-msgid "Approve the pending tool request"
-msgstr "Godkjenn ventende verktøyforespørsel"
-
-msgid "Toggle skip approvals for this session"
-msgstr "Slå av/på hopp over godkjenninger for denne økten"
-
-msgid "Clear the chat"
-msgstr "Tøm chatten"
-
-msgid "Close the panel"
-msgstr "Lukk panelet"
-
-msgid "Copy conversation to clipboard"
-msgstr "Kopier samtale til utklippstavle"
-
-msgid "Deny the pending tool request"
-msgstr "Avslå ventende verktøyforespørsel"
-
-msgid "Open chat history folder"
-msgstr "Åpne chathistorikk-mappe"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "Vis eller bytt modell (/model <name>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "Bytt profil (/profile <navn>)"
-
-msgid "Save chat to file"
-msgstr "Lagre chat til fil"
-
-msgid "Open settings"
-msgstr "Åpne innstillinger"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "Kjør en lagret oppgave (/task <name>)"
-
-msgid "Toggle Full Auto Mode"
-msgstr "Slå av/på fullautomatisk modus"
-
 msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-"Slå av/på fullautomatisk modus: Når aktivert, kjøres alle verktøy automatisk "
-"for denne økten."
-
-msgid "Run a task"
-msgstr "Kjør en oppgave"
-
-msgid "Chat History"
-msgstr "Chat-historikk"
-
-msgid "Loading..."
-msgstr "Laster..."
-
-msgid "No recent chats"
-msgstr "Ingen nylige chatter"
-
-msgid "Open history folder..."
-msgstr "Åpne historikkmappe..."
-
-msgid "Clear all history..."
-msgstr "Tøm all historikk..."
-
-msgid "Clear All History"
-msgstr "Tøm all historikk"
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-"Er du sikker på at du vil slette alle chat-historikkfiler? Denne handlingen "
-"kan ikke angres."
-
-msgid "Clear All"
-msgstr "Tøm alle"
-
-msgid "Copy conversation"
-msgstr "Kopier samtale"
-
-msgid "You"
-msgstr "Du"
-
-msgid "Assistant"
-msgstr "Assistent"
-
-msgid "Command"
-msgstr "Kommando"
-
-msgid "Error"
-msgstr "Feil"
-
-msgid "Clear chat"
-msgstr "Tøm chat"
-
-msgid "Settings"
-msgstr "Innstillinger"
-
-msgid "Don't keep open"
-msgstr "Ikke hold åpent"
-
-msgid "Keep open"
-msgstr "Hold åpent"
-
-msgid "The user denied this tool call."
-msgstr "Brukeren avslo dette verktøykallet."
-
-msgid "Send a message to start chatting"
-msgstr "Send en melding for å begynne å chatte"
-
-msgid "Attach File"
-msgstr "Legg til fil"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Bilder (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-"Tekstfiler (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-
-msgid "All files (*)"
-msgstr "Alle filer (*)"
-
-msgid "Message input"
-msgstr "Meldingsinput"
-
-msgid "Type a message…"
-msgstr "Skriv en melding…"
-
-msgid "Initializing…"
-msgstr "Initialiserer…"
-
-msgid "Attach file or image"
-msgstr "Legg til fil eller bilde"
-
-msgid "Kill"
-msgstr "Avslutt"
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-"Avslutt vedvarende økt (stopper alle prosesser og nullstiller "
-"skalltilstanden)"
-
-msgid "Send"
-msgstr "Send"
-
-msgid "Stop"
-msgstr "Stopp"
-
-msgid "Cancel LLM request"
-msgstr "Avbryt LLM-forespørsel"
-
-msgid "Stop command"
-msgstr "Stopp kommando"
-
-msgid "Open terminal attached to this session"
-msgstr "Åpne terminal tilknyttet denne sesjonen"
-
-msgid "Copy output"
-msgstr "Kopier utdata"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI-kompatibel"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "General Tool Settings"
-msgstr "Generelle verktøyinnstillinger"
-
-msgid "System state:"
-msgstr "Systemtilstand:"
-
-msgid "Enable Tools"
-msgstr "Aktiver verktøy"
-
-msgid "Master switch for all tool-calling functionality."
-msgstr "Hovedbryter for all verktøykallfunksjonalitet."
-
-msgid "Path whitelist:"
-msgstr "Sti-hviteliste:"
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Legg til sti, f.eks. $HOME/projects, /tmp"
-
-msgid "Add"
-msgstr "Legg til"
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Hvitelisten gjelder for filsystemverktøy (les, skriv, list, søk). Merk: "
-"'run_command' er ikke begrenset av denne listen."
-
-msgid "Max read size:"
-msgstr "Maks lesestørrelse:"
-
-msgid "Max write size:"
-msgstr "Maks skrivingsstørrelse:"
-
-msgid "Max HTTP response:"
-msgstr "Maks HTTP-svar:"
-
-msgid "Native Adapter Features"
-msgstr "Innebygde adapterfunksjoner"
-
-msgid "Google Search:"
-msgstr "Google-søk:"
-
-msgid "Enable Native Google Search Grounding"
-msgstr "Aktiver innebygd Google-søkegrunnlag"
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Bruk Geminis innebygde Google-søk for grunnlag. Dette overstyrer det "
-"standard nettsøkverktøyet."
-
-msgid "Code Execution:"
-msgstr "Kodekjøring:"
-
-msgid "Enable Native Python Code Execution"
-msgstr "Aktiver innebygd Python-kodekjøring"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Tillat Gemini å skrive og kjøre Python-kode i en sikker sandkasse på "
-"serversiden."
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Å kombinere innebygde verktøy med kommandoer krever en nyere modell. Din "
-"valgte modell (%1) kan oppleve feil."
-
-msgid "Individual Tools"
-msgstr "Individuelle verktøy"
+"Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
+"OPTIONS are allowed."
+msgstr "Feil: Ugyldig HTTP-metode. Bare GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS er tillatt."
 
 msgid "Color button"
 msgstr "Fargeknapp"
@@ -682,24 +438,6 @@ msgstr "Vis Innstillinger"
 
 msgid "Show Pin"
 msgstr "Vis festikonet"
-
-msgid "Web Search"
-msgstr "Nettsøk"
-
-msgid "Thinking"
-msgstr "Tenker…"
-
-msgid "Searched for: %1"
-msgstr "Søkte etter: %1"
-
-msgid "Show %1 results"
-msgstr "Vis %1 resultater"
-
-msgid "Copy to clipboard"
-msgstr "Kopier til utklippstavle"
-
-msgid "Share output with assistant"
-msgstr "Del utdata med assistenten"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Klarte ikke hente gcloud-token (avslutningskode %1): %2"
@@ -880,6 +618,17 @@ msgstr "Lagre chathistorikk automatisk"
 msgid "Saves to ~/.local/share/plasmallm/chats/"
 msgstr "Lagrer til ~/.local/share/plasmallm/chats/"
 
+msgid "Notifications:"
+msgstr "Varslinger:"
+
+msgid "Show notifications when minimized"
+msgstr "Vis varsler når minimert"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr "Vis systemvarsler for innkommende meldinger og verktøykall når chat-vinduet er minimert eller lukket."
+
 msgid "Save format:"
 msgstr "Lagringsformat:"
 
@@ -888,6 +637,12 @@ msgstr "Ren tekst (.txt)"
 
 msgid "Structured (.jsonl)"
 msgstr "Strukturert (.jsonl)"
+
+msgid "Open Folder"
+msgstr "Åpne mappe"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "Åpne mappen der chatloggene lagres"
 
 msgid "Auto-clear:"
 msgstr "Automatisk sletting:"
@@ -906,6 +661,309 @@ msgstr "sekunder"
 
 msgid "minutes"
 msgstr "minutter"
+
+msgid "You"
+msgstr "Du"
+
+msgid "Error"
+msgstr "Feil"
+
+msgid "Web Search"
+msgstr "Nettsøk"
+
+msgid "Assistant"
+msgstr "Assistent"
+
+msgid "Thinking"
+msgstr "Tenker…"
+
+msgid "Searched for: %1"
+msgstr "Søkte etter: %1"
+
+msgid "Show %1 results"
+msgstr "Vis %1 resultater"
+
+msgid "Copy to clipboard"
+msgstr "Kopier til utklippstavle"
+
+msgid "Share output with assistant"
+msgstr "Del utdata med assistenten"
+
+msgid "Approve the pending tool request"
+msgstr "Godkjenn ventende verktøyforespørsel"
+
+msgid "Toggle skip approvals for this session"
+msgstr "Slå av/på hopp over godkjenninger for denne økten"
+
+msgid "Clear the chat"
+msgstr "Tøm chatten"
+
+msgid "Close the panel"
+msgstr "Lukk panelet"
+
+msgid "Copy conversation to clipboard"
+msgstr "Kopier samtale til utklippstavle"
+
+msgid "Deny the pending tool request"
+msgstr "Avslå ventende verktøyforespørsel"
+
+msgid "Open chat history folder"
+msgstr "Åpne chathistorikk-mappe"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "Vis eller bytt modell (/model <name>)"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "Bytt profil (/profile <navn>)"
+
+msgid "Save chat to file"
+msgstr "Lagre chat til fil"
+
+msgid "Open settings"
+msgstr "Åpne innstillinger"
+
+msgid "Run a saved task (/task <name>)"
+msgstr "Kjør en lagret oppgave (/task <name>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr "Veksle Drive Desktop-modus (starter håndtrykk og automodus)"
+
+msgid "Toggle Full Auto Mode"
+msgstr "Slå av/på fullautomatisk modus"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Slå av/på fullautomatisk modus: Når aktivert, kjøres alle verktøy automatisk "
+"for denne økten."
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "Stopp styring av skrivebord (koble fra)"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop (starter håndtrykk og aktiverer automodus)"
+
+msgid "Run a task"
+msgstr "Kjør en oppgave"
+
+msgid "Chat History"
+msgstr "Chat-historikk"
+
+msgid "Loading..."
+msgstr "Laster..."
+
+msgid "No recent chats"
+msgstr "Ingen nylige chatter"
+
+msgid "Open history folder..."
+msgstr "Åpne historikkmappe..."
+
+msgid "Clear all history..."
+msgstr "Tøm all historikk..."
+
+msgid "Clear All History"
+msgstr "Tøm all historikk"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Er du sikker på at du vil slette alle chat-historikkfiler? Denne handlingen "
+"kan ikke angres."
+
+msgid "Clear All"
+msgstr "Tøm alle"
+
+msgid "Copy conversation"
+msgstr "Kopier samtale"
+
+msgid "Command"
+msgstr "Kommando"
+
+msgid "Clear chat"
+msgstr "Tøm chat"
+
+msgid "Settings"
+msgstr "Innstillinger"
+
+msgid "Don't keep open"
+msgstr "Ikke hold åpent"
+
+msgid "Keep open"
+msgstr "Hold åpent"
+
+msgid "The user denied this tool call."
+msgstr "Brukeren avslo dette verktøykallet."
+
+msgid "Send a message to start chatting"
+msgstr "Send en melding for å begynne å chatte"
+
+msgid "Attach File"
+msgstr "Legg til fil"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Bilder (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Tekstfiler (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "Alle filer (*)"
+
+msgid "Message input"
+msgstr "Meldingsinput"
+
+msgid "Type a message…"
+msgstr "Skriv en melding…"
+
+msgid "Initializing…"
+msgstr "Initialiserer…"
+
+msgid "Attach file or image"
+msgstr "Legg til fil eller bilde"
+
+msgid "Kill"
+msgstr "Avslutt"
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+"Avslutt vedvarende økt (stopper alle prosesser og nullstiller "
+"skalltilstanden)"
+
+msgid "Send"
+msgstr "Send"
+
+msgid "Stop"
+msgstr "Stopp"
+
+msgid "Cancel LLM request"
+msgstr "Avbryt LLM-forespørsel"
+
+msgid "Drop files here to attach"
+msgstr "Slipp filer her for å legge ved"
+
+msgid "Stop command"
+msgstr "Stopp kommando"
+
+msgid "Open terminal attached to this session"
+msgstr "Åpne terminal tilknyttet denne sesjonen"
+
+msgid "Copy output"
+msgstr "Kopier utdata"
+
+msgid "OpenAI-compatible"
+msgstr "OpenAI-kompatibel"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "General Tool Settings"
+msgstr "Generelle verktøyinnstillinger"
+
+msgid "System state:"
+msgstr "Systemtilstand:"
+
+msgid "Enable Tools"
+msgstr "Aktiver verktøy"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "Hovedbryter for all verktøykallfunksjonalitet."
+
+msgid "Desktop Automation:"
+msgstr "Skrivebordsautomatisering:"
+
+msgid "Enable Desktop Automation (plasmallm-desktop-driver)"
+msgstr "Aktiver skrivebordsautomatisering (plasmallm-desktop-driver)"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr "Lar LLM forespørre en økt for å se og styre skrivebordet ditt."
+
+msgid "Path whitelist:"
+msgstr "Sti-hviteliste:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Legg til sti, f.eks. $HOME/projects, /tmp"
+
+msgid "Add"
+msgstr "Legg til"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Hvitelisten gjelder for filsystemverktøy (les, skriv, list, søk). Merk: "
+"'run_command' er ikke begrenset av denne listen."
+
+msgid "Max read size:"
+msgstr "Maks lesestørrelse:"
+
+msgid "Max write size:"
+msgstr "Maks skrivingsstørrelse:"
+
+msgid "Max HTTP response:"
+msgstr "Maks HTTP-svar:"
+
+msgid "Max tool loop depth:"
+msgstr "Maksimal dybde for verktøyløkke:"
+
+msgid "steps"
+msgstr "trinn"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr "Merk: Denne grensen gjelder ikke for skrivebordsautomatiseringsøkter."
+
+msgid "Native Adapter Features"
+msgstr "Innebygde adapterfunksjoner"
+
+msgid "Google Search:"
+msgstr "Google-søk:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Aktiver innebygd Google-søkegrunnlag"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Bruk Geminis innebygde Google-søk for grunnlag. Dette overstyrer det "
+"standard nettsøkverktøyet."
+
+msgid "Code Execution:"
+msgstr "Kodekjøring:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Aktiver innebygd Python-kodekjøring"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Tillat Gemini å skrive og kjøre Python-kode i en sikker sandkasse på "
+"serversiden."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Å kombinere innebygde verktøy med kommandoer krever en nyere modell. Din "
+"valgte modell (%1) kan oppleve feil."
+
+msgid "Individual Tools"
+msgstr "Individuelle verktøy"
+
+msgid "Failed to stop driving: %1"
+msgstr "Klarte ikke å stoppe styring: %1"
 
 msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
@@ -934,6 +992,14 @@ msgid ""
 msgstr ""
 "Modus for å hoppe over godkjenninger er deaktivert. Verktøy vil gå tilbake "
 "til dine konfigurerte innstillinger for 'Spør før kjøring'."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr "Skrivebordsautomatisering er deaktivert i innstillingene. Aktiver det først for å styre skrivebordet."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver er ikke oppdaget eller kjører ikke."
 
 msgid "Default"
 msgstr "Standard"
@@ -992,6 +1058,15 @@ msgstr "Ukjent oppgave: **%1**. Tilgjengelig: %2"
 msgid "The user declined to run this command."
 msgstr "Brukeren avslo å kjøre denne kommandoen."
 
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Verktøykall"
+
+msgid "Requested tool: %1"
+msgstr "Forespurt verktøy: %1"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
 msgid "Unknown tool %1"
 msgstr "Ukjent verktøy %1"
 
@@ -1003,6 +1078,15 @@ msgstr "Kjører %1…"
 
 msgid "Session reset requested."
 msgstr "Øktnullstilling forespurt."
+
+msgid "Failed to start drive session: %1"
+msgstr "Klarte ikke å starte styringsøkt: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "Styringsøkt aktiv (allerede autorisert). Automodus aktivert."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "Styringsøkt autorisert. Automodus aktivert."
 
 msgid "General"
 msgstr "Generelt"

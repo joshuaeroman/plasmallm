@@ -20,6 +20,7 @@ Rectangle {
     property string stderr: ""
     property int exitCode: 0
     property bool isRunning: false
+    property var attachmentPaths: []
 
     property bool sessionMode: false
     property string sessionLabel: ""
@@ -183,6 +184,48 @@ Rectangle {
                 font.family: root.codeFontFamily
                 font.pointSize: root.codeFontPointSize
                 color: toolBlock.exitCode === 0 ? "white" : Kirigami.Theme.negativeTextColor
+            }
+        }
+
+        Flow {
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+            visible: toolBlock.attachmentPaths && toolBlock.attachmentPaths.length > 0
+
+            Repeater {
+                model: toolBlock.attachmentPaths
+                delegate: Rectangle {
+                    id: imageThumb
+                    readonly property string filePath: modelData
+                    // We assume it's an image if it's rendered here, as tool results only pass dataUrl currently
+                    readonly property bool isImage: filePath.startsWith("data:") || (typeof Api !== 'undefined' && Api.isImageFile(filePath))
+                    readonly property string fileName: filePath.startsWith("data:") ? "pasted_image.png" : filePath.split("/").pop()
+
+                    readonly property real maxW: Kirigami.Units.gridUnit * 10
+                    readonly property real maxH: Kirigami.Units.gridUnit * 10
+                    readonly property real aspect: (thumbImg.sourceSize.width > 0 && thumbImg.sourceSize.height > 0) ? (thumbImg.sourceSize.width / thumbImg.sourceSize.height) : 1.0
+
+                    visible: isImage
+                    width: aspect > (maxW / maxH) ? maxW : maxH * aspect
+                    height: aspect > (maxW / maxH) ? maxW / aspect : maxH
+                    radius: 4
+                    color: Kirigami.Theme.alternateBackgroundColor
+                    border.color: Kirigami.Theme.disabledTextColor
+                    border.width: 1
+                    clip: true
+
+                    Image {
+                        id: thumbImg
+                        anchors.fill: parent
+                        anchors.margins: imageThumb.border.width
+                        source: imageThumb.filePath.startsWith("data:") ? imageThumb.filePath : Qt.resolvedUrl("file://" + imageThumb.filePath)
+                        autoTransform: true
+                        fillMode: Image.PreserveAspectFit
+                        asynchronous: true
+                        smooth: true
+                        mipmap: true
+                    }
+                }
             }
         }
     }

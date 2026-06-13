@@ -15,24 +15,31 @@ import org.kde.kirigami as Kirigami
 import org.kde.draganddrop as DragDrop
 
 import "profiles.js" as Profiles
+import "driverManager.js" as DriverManager
 
 PlasmaExtras.Representation {
     id: fullRep
 
-    readonly property var slashCommands: [
-        { cmd: "/approve",  desc: i18n("Approve the pending tool request") },
-        { cmd: "/auto",     desc: i18n("Toggle skip approvals for this session") },
-        { cmd: "/clear",    desc: i18n("Clear the chat") },
-        { cmd: "/close",    desc: i18n("Close the panel") },
-        { cmd: "/copy",     desc: i18n("Copy conversation to clipboard") },
-        { cmd: "/deny",     desc: i18n("Deny the pending tool request") },
-        { cmd: "/history",  desc: i18n("Open chat history folder") },
-        { cmd: "/model",    desc: i18n("Show or switch model (/model <name>)") },
-        { cmd: "/profile",  desc: i18n("Switch profile (/profile <name>)") },
-        { cmd: "/save",     desc: i18n("Save chat to file") },
-        { cmd: "/settings", desc: i18n("Open settings") },
-        { cmd: "/task",     desc: i18n("Run a saved task (/task <name>)") },
-    ]
+    property var slashCommands: {
+        var list = [
+            { cmd: "/approve",  desc: i18n("Approve the pending tool request") },
+            { cmd: "/auto",     desc: i18n("Toggle skip approvals for this session") },
+            { cmd: "/clear",    desc: i18n("Clear the chat") },
+            { cmd: "/close",    desc: i18n("Close the panel") },
+            { cmd: "/copy",     desc: i18n("Copy conversation to clipboard") },
+            { cmd: "/deny",     desc: i18n("Deny the pending tool request") },
+            { cmd: "/history",  desc: i18n("Open chat history folder") },
+            { cmd: "/model",    desc: i18n("Show or switch model (/model <name>)") },
+            { cmd: "/profile",  desc: i18n("Switch profile (/profile <name>)") },
+            { cmd: "/save",     desc: i18n("Save chat to file") },
+            { cmd: "/settings", desc: i18n("Open settings") },
+            { cmd: "/task",     desc: i18n("Run a saved task (/task <name>)") }
+        ];
+        if (root.isDriverServiceActive) {
+            list.push({ cmd: "/drive", desc: i18n("Toggle Drive Desktop mode (starts handshake and auto mode)") });
+        }
+        return list;
+    }
 
     property var configuredTasks: {
         var json = Plasmoid.configuration.tasks;
@@ -143,12 +150,30 @@ PlasmaExtras.Representation {
                 icon.name: "media-playback-start"
                 visible: Plasmoid.configuration.showIconAuto || root.isAutoMode
                 checkable: true
-                checked: root.isAutoMode
+                checked: root.sessionFullAutoMode
                 Accessible.name: i18n("Toggle Full Auto Mode")
                 PlasmaComponents.ToolTip.text: i18n("Toggle Full Auto Mode: When enabled, all tools run automatically for this session.")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                 onClicked: root.sendMessage("/auto")
+            }
+
+            PlasmaComponents.ToolButton {
+                id: driveToolButton
+                icon.name: "input-mouse"
+                visible: Plasmoid.configuration.enableDesktopAutomation && root.isDriverServiceActive
+                checkable: true
+                checked: root.isDrivingActive
+                Accessible.name: i18n("Drive Desktop")
+                PlasmaComponents.ToolTip.text: root.isDrivingActive 
+                    ? i18n("Stop Driving Desktop (disconnect)") 
+                    : i18n("Drive Desktop (starts handshake and enables auto mode)")
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+                onClicked: {
+                    root.sessionAutoMode = !root.sessionAutoMode;
+                    inputField.forceActiveFocus();
+                }
             }
 
             PlasmaComponents.ToolButton {
@@ -311,6 +336,63 @@ PlasmaExtras.Representation {
                         PlasmaComponents.Button {
                             text: i18n("Cancel")
                             onClicked: clearHistorySheet.close()
+                        }
+                    }
+                }
+            }
+
+            QQC2.Popup {
+                id: imageViewerPopup
+                parent: QQC2.Overlay.overlay
+                x: Math.round((parent.width - width) / 2)
+                y: Math.round((parent.height - height) / 2)
+                width: Math.min(parent.width - Kirigami.Units.largeSpacing * 2, imgViewerImage.implicitWidth + padding * 2)
+                height: Math.min(parent.height - Kirigami.Units.largeSpacing * 2, imgViewerImage.implicitHeight + padding * 2)
+                modal: true
+                focus: true
+                closePolicy: QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnPressOutside
+                padding: 0
+                property string sourceUrl: ""
+
+                background: Rectangle {
+                    color: Kirigami.Theme.backgroundColor
+                    border.color: Kirigami.Theme.focusColor
+                    border.width: 1
+                    radius: Kirigami.Units.smallSpacing
+                }
+
+                contentItem: Item {
+                    Flickable {
+                        anchors.fill: parent
+                        contentWidth: imgViewerImage.width
+                        contentHeight: imgViewerImage.height
+                        clip: true
+
+                        Image {
+                            id: imgViewerImage
+                            source: imageViewerPopup.sourceUrl
+                            asynchronous: true
+                            smooth: true
+                            mipmap: true
+                            fillMode: Image.Pad
+                        }
+                    }
+                    
+                    PlasmaComponents.ToolButton {
+                        anchors.top: parent.top
+                        anchors.right: parent.right
+                        anchors.margins: Kirigami.Units.smallSpacing
+                        icon.name: "window-close"
+                        onClicked: imageViewerPopup.close()
+                        
+                        Rectangle {
+                            anchors.centerIn: parent
+                            width: parent.width
+                            height: parent.height
+                            radius: width / 2
+                            color: Kirigami.Theme.backgroundColor
+                            opacity: 0.8
+                            z: -1
                         }
                     }
                 }
@@ -493,16 +575,18 @@ PlasmaExtras.Representation {
                     onTerminalRequested: function(command) { root.runInTerminal(command); }
                     onStopRequested: function(command, sourceId) { root.stopCommandByText(command, sourceId); }
                     onToolApproved: function(name, args, callId) {
-                        console.log("PlasmaLLM DEBUG: Tool approved: " + name + " with args: " + JSON.stringify(args));
                         displayMessages.remove(index);
                         root.executeTool(name, args, callId);
                         inputField.forceActiveFocus();
                     }
                     onToolDenied: function(name, callId) {
-                        console.log("PlasmaLLM DEBUG: Tool denied: " + name);
                         displayMessages.remove(index);
                         root.handleToolOutput(null, "", i18n("The user denied this tool call."), 1, { name: name, callId: callId });
                         inputField.forceActiveFocus();
+                    }
+                    onImageViewRequested: function(sourceUrl) {
+                        imageViewerPopup.sourceUrl = sourceUrl;
+                        imageViewerPopup.open();
                     }
                 }
 
@@ -646,7 +730,7 @@ PlasmaExtras.Representation {
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.margins: Kirigami.Units.smallSpacing
-                        source: parent.isImg ? (modelData.dataUrl || "file://" + modelData.filePath) : ""
+                        source: parent.isImg ? (modelData.dataUrl || Qt.resolvedUrl("file://" + modelData.filePath)) : ""
                         autoTransform: true
                         fillMode: Image.PreserveAspectFit
                         height: Math.min(sourceSize.height, Kirigami.Units.gridUnit * 4)

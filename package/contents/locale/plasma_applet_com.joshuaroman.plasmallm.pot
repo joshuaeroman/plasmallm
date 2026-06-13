@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-20 13:42-0400\n"
+"POT-Creation-Date: 2026-06-10 15:51-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
+msgid "Tool Request: %1"
+msgstr ""
+
+msgid "Justification: %1"
+msgstr ""
+
+msgid "Deny"
+msgstr ""
+
+msgid "Approve"
 msgstr ""
 
 msgid ""
@@ -63,8 +68,13 @@ msgid "Request failed (no response) — check your endpoint URL"
 msgstr ""
 
 msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+
+msgid "Gemini uses the thinking level dropdown directly."
 msgstr ""
 
 msgid "Failed to fetch models"
@@ -76,31 +86,21 @@ msgstr ""
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr ""
 
-msgid "no response — check your endpoint URL"
-msgstr ""
-
-msgid "Request failed"
-msgstr ""
-
-msgid "Gemini uses the thinking level dropdown directly."
-msgstr ""
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
 "disable Native features in Settings."
 msgstr ""
 
-msgid "Tool Request: %1"
+msgid "Request failed"
 msgstr ""
 
-msgid "Justification: %1"
+msgid ""
+"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
+"on supported models."
 msgstr ""
 
-msgid "Deny"
-msgstr ""
-
-msgid "Approve"
+msgid "no response — check your endpoint URL"
 msgstr ""
 
 msgid ""
@@ -327,237 +327,9 @@ msgid ""
 "is unavailable."
 msgstr ""
 
-msgid "Approve the pending tool request"
-msgstr ""
-
-msgid "Toggle skip approvals for this session"
-msgstr ""
-
-msgid "Clear the chat"
-msgstr ""
-
-msgid "Close the panel"
-msgstr ""
-
-msgid "Copy conversation to clipboard"
-msgstr ""
-
-msgid "Deny the pending tool request"
-msgstr ""
-
-msgid "Open chat history folder"
-msgstr ""
-
-msgid "Show or switch model (/model <name>)"
-msgstr ""
-
-msgid "Switch profile (/profile <name>)"
-msgstr ""
-
-msgid "Save chat to file"
-msgstr ""
-
-msgid "Open settings"
-msgstr ""
-
-msgid "Run a saved task (/task <name>)"
-msgstr ""
-
-msgid "Toggle Full Auto Mode"
-msgstr ""
-
 msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-
-msgid "Run a task"
-msgstr ""
-
-msgid "Chat History"
-msgstr ""
-
-msgid "Loading..."
-msgstr ""
-
-msgid "No recent chats"
-msgstr ""
-
-msgid "Open history folder..."
-msgstr ""
-
-msgid "Clear all history..."
-msgstr ""
-
-msgid "Clear All History"
-msgstr ""
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-
-msgid "Clear All"
-msgstr ""
-
-msgid "Copy conversation"
-msgstr ""
-
-msgid "You"
-msgstr ""
-
-msgid "Assistant"
-msgstr ""
-
-msgid "Command"
-msgstr ""
-
-msgid "Error"
-msgstr ""
-
-msgid "Clear chat"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Don't keep open"
-msgstr ""
-
-msgid "Keep open"
-msgstr ""
-
-msgid "The user denied this tool call."
-msgstr ""
-
-msgid "Send a message to start chatting"
-msgstr ""
-
-msgid "Attach File"
-msgstr ""
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr ""
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-
-msgid "All files (*)"
-msgstr ""
-
-msgid "Message input"
-msgstr ""
-
-msgid "Type a message…"
-msgstr ""
-
-msgid "Initializing…"
-msgstr ""
-
-msgid "Attach file or image"
-msgstr ""
-
-msgid "Kill"
-msgstr ""
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-
-msgid "Send"
-msgstr ""
-
-msgid "Stop"
-msgstr ""
-
-msgid "Cancel LLM request"
-msgstr ""
-
-msgid "Stop command"
-msgstr ""
-
-msgid "Open terminal attached to this session"
-msgstr ""
-
-msgid "Copy output"
-msgstr ""
-
-msgid "OpenAI-compatible"
-msgstr ""
-
-msgid "Anthropic"
-msgstr ""
-
-msgid "Google Gemini"
-msgstr ""
-
-msgid "General Tool Settings"
-msgstr ""
-
-msgid "System state:"
-msgstr ""
-
-msgid "Enable Tools"
-msgstr ""
-
-msgid "Master switch for all tool-calling functionality."
-msgstr ""
-
-msgid "Path whitelist:"
-msgstr ""
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr ""
-
-msgid "Add"
-msgstr ""
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-
-msgid "Max read size:"
-msgstr ""
-
-msgid "Max write size:"
-msgstr ""
-
-msgid "Max HTTP response:"
-msgstr ""
-
-msgid "Native Adapter Features"
-msgstr ""
-
-msgid "Google Search:"
-msgstr ""
-
-msgid "Enable Native Google Search Grounding"
-msgstr ""
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-
-msgid "Code Execution:"
-msgstr ""
-
-msgid "Enable Native Python Code Execution"
-msgstr ""
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-
-msgid "Individual Tools"
+"Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
+"OPTIONS are allowed."
 msgstr ""
 
 msgid "Color button"
@@ -636,24 +408,6 @@ msgid "Show Settings"
 msgstr ""
 
 msgid "Show Pin"
-msgstr ""
-
-msgid "Web Search"
-msgstr ""
-
-msgid "Thinking"
-msgstr ""
-
-msgid "Searched for: %1"
-msgstr ""
-
-msgid "Show %1 results"
-msgstr ""
-
-msgid "Copy to clipboard"
-msgstr ""
-
-msgid "Share output with assistant"
 msgstr ""
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
@@ -825,6 +579,17 @@ msgstr ""
 msgid "Saves to ~/.local/share/plasmallm/chats/"
 msgstr ""
 
+msgid "Notifications:"
+msgstr ""
+
+msgid "Show notifications when minimized"
+msgstr ""
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+
 msgid "Save format:"
 msgstr ""
 
@@ -832,6 +597,12 @@ msgid "Plain text (.txt)"
 msgstr ""
 
 msgid "Structured (.jsonl)"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
+
+msgid "Open the folder where chat histories are saved"
 msgstr ""
 
 msgid "Auto-clear:"
@@ -850,6 +621,293 @@ msgid "seconds"
 msgstr ""
 
 msgid "minutes"
+msgstr ""
+
+msgid "You"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Web Search"
+msgstr ""
+
+msgid "Assistant"
+msgstr ""
+
+msgid "Thinking"
+msgstr ""
+
+msgid "Searched for: %1"
+msgstr ""
+
+msgid "Show %1 results"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Share output with assistant"
+msgstr ""
+
+msgid "Approve the pending tool request"
+msgstr ""
+
+msgid "Toggle skip approvals for this session"
+msgstr ""
+
+msgid "Clear the chat"
+msgstr ""
+
+msgid "Close the panel"
+msgstr ""
+
+msgid "Copy conversation to clipboard"
+msgstr ""
+
+msgid "Deny the pending tool request"
+msgstr ""
+
+msgid "Open chat history folder"
+msgstr ""
+
+msgid "Show or switch model (/model <name>)"
+msgstr ""
+
+msgid "Switch profile (/profile <name>)"
+msgstr ""
+
+msgid "Save chat to file"
+msgstr ""
+
+msgid "Open settings"
+msgstr ""
+
+msgid "Run a saved task (/task <name>)"
+msgstr ""
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr ""
+
+msgid "Toggle Full Auto Mode"
+msgstr ""
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+
+msgid "Drive Desktop"
+msgstr ""
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr ""
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr ""
+
+msgid "Run a task"
+msgstr ""
+
+msgid "Chat History"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "No recent chats"
+msgstr ""
+
+msgid "Open history folder..."
+msgstr ""
+
+msgid "Clear all history..."
+msgstr ""
+
+msgid "Clear All History"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+
+msgid "Clear All"
+msgstr ""
+
+msgid "Copy conversation"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Clear chat"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Don't keep open"
+msgstr ""
+
+msgid "Keep open"
+msgstr ""
+
+msgid "The user denied this tool call."
+msgstr ""
+
+msgid "Send a message to start chatting"
+msgstr ""
+
+msgid "Attach File"
+msgstr ""
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr ""
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+
+msgid "All files (*)"
+msgstr ""
+
+msgid "Message input"
+msgstr ""
+
+msgid "Type a message…"
+msgstr ""
+
+msgid "Initializing…"
+msgstr ""
+
+msgid "Attach file or image"
+msgstr ""
+
+msgid "Kill"
+msgstr ""
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Cancel LLM request"
+msgstr ""
+
+msgid "Drop files here to attach"
+msgstr ""
+
+msgid "Stop command"
+msgstr ""
+
+msgid "Open terminal attached to this session"
+msgstr ""
+
+msgid "Copy output"
+msgstr ""
+
+msgid "OpenAI-compatible"
+msgstr ""
+
+msgid "Anthropic"
+msgstr ""
+
+msgid "Google Gemini"
+msgstr ""
+
+msgid "General Tool Settings"
+msgstr ""
+
+msgid "System state:"
+msgstr ""
+
+msgid "Enable Tools"
+msgstr ""
+
+msgid "Master switch for all tool-calling functionality."
+msgstr ""
+
+msgid "Desktop Automation:"
+msgstr ""
+
+msgid "Enable Desktop Automation (plasmallm-desktop-driver)"
+msgstr ""
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+
+msgid "Path whitelist:"
+msgstr ""
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+
+msgid "Max read size:"
+msgstr ""
+
+msgid "Max write size:"
+msgstr ""
+
+msgid "Max HTTP response:"
+msgstr ""
+
+msgid "Max tool loop depth:"
+msgstr ""
+
+msgid "steps"
+msgstr ""
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr ""
+
+msgid "Native Adapter Features"
+msgstr ""
+
+msgid "Google Search:"
+msgstr ""
+
+msgid "Enable Native Google Search Grounding"
+msgstr ""
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+
+msgid "Code Execution:"
+msgstr ""
+
+msgid "Enable Native Python Code Execution"
+msgstr ""
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+
+msgid "Individual Tools"
+msgstr ""
+
+msgid "Failed to stop driving: %1"
 msgstr ""
 
 msgid ""
@@ -871,6 +929,14 @@ msgstr ""
 msgid ""
 "Skip approvals mode disabled. Tools will revert to your configured 'Ask "
 "before running' settings."
+msgstr ""
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+
+msgid "plasmallm-desktop-driver is not detected or running."
 msgstr ""
 
 msgid "Default"
@@ -930,6 +996,15 @@ msgstr ""
 msgid "The user declined to run this command."
 msgstr ""
 
+msgid "PlasmaLLM: Tool Call"
+msgstr ""
+
+msgid "Requested tool: %1"
+msgstr ""
+
+msgid "PlasmaLLM"
+msgstr ""
+
 msgid "Unknown tool %1"
 msgstr ""
 
@@ -940,6 +1015,15 @@ msgid "Executing %1…"
 msgstr ""
 
 msgid "Session reset requested."
+msgstr ""
+
+msgid "Failed to start drive session: %1"
+msgstr ""
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr ""
+
+msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr ""
 
 msgid "General"

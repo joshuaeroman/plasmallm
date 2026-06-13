@@ -9,6 +9,7 @@
 
 .import "adapters/index.js" as Adapters
 .import "toolManager.js" as ToolManager
+.import "driverManager.js" as DriverManager
 
 function localISODateTime() {
     var d = new Date();
@@ -72,7 +73,13 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
         prompt += "- Network Interfaces:\n" + sysInfo.network + "\n";
     }
 
-    prompt += "\nGeneral-purpose assistant. Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational. " +
+    var drivingInstructions = DriverManager.getDrivingInstructions();
+    var responseLengthInstruction = "Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational.";
+    if (drivingInstructions && drivingInstructions.trim().length > 0) {
+        responseLengthInstruction = "Be concise and conversational in standard chat. However, when automating the desktop, prioritizing thorough visual analysis and planning is essential; explain your observations in detail.";
+    }
+
+    prompt += "\nGeneral-purpose assistant. " + responseLengthInstruction + " " +
         "Don't assume queries are system-related or reference specs unless relevant. " +
         "Always use the `~` alias instead of absolute paths when referring to the user's home directory in tool calls or text.\n\n";
 
@@ -102,6 +109,10 @@ function buildSystemPrompt(sysInfo, customAdditions, options) {
     if (customAdditions && customAdditions.trim().length > 0) {
         prompt += "The below instructions are given by the user and take the utmost precedence over the instructions above.\n";
         prompt += "\n" + customAdditions.trim() + "\n";
+    }
+
+    if (drivingInstructions) {
+        prompt += drivingInstructions + "\n";
     }
 
     prompt += "\nEND OF SYSTEM PROMPT\n";

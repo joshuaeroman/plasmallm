@@ -1193,6 +1193,23 @@ BaseConfigPage {
             QQC2.ToolTip.visible: hovered
         }
 
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Layout.fillWidth: true
+        }
+
+        QQC2.CheckBox {
+            id: showNotificationsMinimizedCheckBox
+            Kirigami.FormData.label: i18n("Notifications:")
+            text: i18n("Show notifications when minimized")
+            checked: cfg_showNotificationsMinimized
+            onCheckedChanged: if (_initialized) cfg_showNotificationsMinimized = checked
+
+            QQC2.ToolTip.text: i18n("Show system notifications for incoming messages and tool calls when the chat window is minimized or closed.")
+            QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
+        }
+
         RowLayout {
             Kirigami.FormData.label: i18n("Save format:")
             Layout.fillWidth: true

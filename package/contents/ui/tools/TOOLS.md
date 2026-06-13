@@ -13,7 +13,7 @@ Each tool in PlasmaLLM is a standalone JavaScript module located in `package/con
 - **`sandboxed`**: Boolean. If true, the tool's path arguments are checked against the Path Whitelist.
 - **`sideEffect`**: Boolean. If true, the tool is considered to have system-altering effects (used to decide when to show UI indicators).
 - **`outputScheme`**: Controls how results are rendered (e.g., `"console style"`).
-- **`uiHidden`**: Boolean. If true, the tool suppresses the default "Executing..." and "Result" UI blocks. The tool is responsible for providing its own UI feedback if necessary (e.g., via `context.addDisplayMessage`).
+- **`uiHidden`**: Boolean. If true, the tool suppresses the default "Executing..." and "Result" UI blocks. The tool is responsible for providing its own UI feedback if necessary (e.g., via `context.addDisplayMessage`). **Important:** If your tool manually dispatches a custom rich UI card (e.g., role `tool_result_rich`), you *must* set `uiHidden = true` in the module definition; otherwise, the main engine will render its empty default `ToolResultBlock` alongside your custom UI.
 - **`execute(args, context)`**: The function called when the LLM invokes the tool.
 
 ---
@@ -77,6 +77,16 @@ PlasmaLLM automatically parses your `Command Template`, identifies the parameter
 - **`notify`**: Send a system notification via `notify-send`.
 - **`open_url`**: Open a URL or file in the default application via `xdg-open`.
 
+### Desktop Automation Tools
+- **`StartSession`**: Initializes a Remote Desktop Wayland session and authorization token exchange.
+- **`DesktopGetState`**: Unified tool that retrieves the current visual screenshot (optionally cropped to operating context) and the active window list + interactive accessibility element tree.
+- **`DesktopSetOperatingContext`**: Binds the LLM's operational context to a specific window UUID, converting coordinates to be window-relative and isolating observation/screenshots.
+- **`DesktopResetContext`**: Clears window-specific boundaries and returns the global full-screen state in a single call.
+- **`DesktopScroll`**: Simulator for mouse wheel scrolling (up, down, left, right) relative to the active operating context.
+- **`DesktopClick` / `DesktopInput` / `DesktopMoveMouse`**: Mouse interaction and text entry tools that automatically adapt coordinates when operating inside an active context window.
+- **`DesktopWindowControl`**: Single tool to minimize, maximize, restore, close, or resize/reposition windows using UUIDs.
+- **`DesktopReadSelection`**: Triggers a copy keypress sequence and returns the selected text from the clipboard in a single turn.
+
 ---
 
 ## Visual Styling (Output Schemes)
@@ -98,5 +108,5 @@ To add a built-in tool, create a new file in `package/contents/ui/tools/` and re
 - **`replaceDisplayMessage(oldRole, newContent, newRole)`**: Find the last message with `oldRole` and update its content and role in place. Useful for replacing a "Loading..." indicator with actual results.
 - **`exec(command, name, args)`**: Run a shell command.
 - **`error(message)`**: Report a failure to the LLM.
-- **`onDone(stdout, stderr, exitCode)`**: Callback for command completion. Results passed here are sent back to the LLM context.
+- **`onDone(stdout, stderr, exitCode, attachmentsJson)`**: Callback for command completion. Results passed here are sent back to the LLM context. `attachmentsJson` is an optional JSON string containing an array of attachment objects (e.g. data URLs for image confirmation screenshots).
 
