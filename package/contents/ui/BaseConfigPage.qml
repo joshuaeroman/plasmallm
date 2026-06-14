@@ -244,6 +244,8 @@ SimpleKCM {
     property bool cfg_enableToolsDefault
     property bool cfg_enableDesktopAutomation
     property bool cfg_enableDesktopAutomationDefault
+    property string cfg_desktopAutomationToken
+    property string cfg_desktopAutomationTokenDefault
 
     property bool cfg_toolsReadFileEnabled
     property bool cfg_toolsReadFileEnabledDefault
