@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-10 15:51-0400\n"
+"POT-Creation-Date: 2026-06-12 23:17-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Chinese (Simplified)\n"
@@ -346,7 +346,8 @@ msgstr "系统中未找到 'tmux' 或 'screen'。会话多路复用不可用。"
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS are allowed."
-msgstr "错误：无效的 HTTP 方法。仅允许 GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS。"
+msgstr ""
+"错误：无效的 HTTP 方法。仅允许 GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS。"
 
 msgid "Color button"
 msgstr "颜色按钮"
@@ -859,11 +860,16 @@ msgstr "所有工具调用功能的主开关。"
 msgid "Desktop Automation:"
 msgstr "桌面自动化："
 
-msgid "Enable Desktop Automation (plasmallm-desktop-driver)"
-msgstr "启用桌面自动化 (plasmallm-desktop-driver)"
-
 msgid "Allows the LLM to request a session to see and drive your desktop."
 msgstr "允许 LLM 请求会话以查看和操作您的桌面。"
+
+msgid "Enable Desktop Automation"
+msgstr "启用桌面自动化"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr "启用桌面自动化（需要<a href=\"https://github.com/joshuaeroman/plasmallm-desktop-driver\">驱动程序</a>）"
 
 msgid "Path whitelist:"
 msgstr "路径白名单："
@@ -1072,6 +1078,9 @@ msgstr "工具"
 
 msgid "Custom Tools"
 msgstr "自定义工具"
+
+#~ msgid "Enable Desktop Automation (plasmallm-desktop-driver)"
+#~ msgstr "启用桌面自动化 (plasmallm-desktop-driver)"
 
 #~ msgid "Thoughts"
 #~ msgstr "思考"

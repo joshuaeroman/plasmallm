@@ -13,6 +13,7 @@ import org.kde.plasma.plasma5support as P5Support
 
 import "api.js" as Api
 import "toolManager.js" as ToolManager
+import "driverManager.js" as DriverManager
 
 BaseConfigPage {
     id: configPage
@@ -24,6 +25,7 @@ BaseConfigPage {
     property bool hasScreen: false
     property bool _tmuxChecked: false
     property bool _screenChecked: false
+    property bool driverDetected: false
 
     property alias execSource: execSource
 
@@ -82,7 +84,21 @@ BaseConfigPage {
         }
     }
 
+    Timer {
+        id: driverCheckTimer
+        interval: 5000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            DriverManager.isDriverActive(function(active) {
+                configPage.driverDetected = active;
+            });
+        }
+    }
+
     Component.onCompleted: {
+        DriverManager.init(DBus.SessionBus);
         execSource.connectSource("command -v tmux");
         execSource.connectSource("command -v screen");
         configPage.parseWhitelist();
@@ -111,22 +127,47 @@ BaseConfigPage {
             QQC2.ToolTip.visible: hovered
         }
 
-        QQC2.CheckBox {
-            id: enableDesktopAutomationCheckbox
+        RowLayout {
+            id: desktopAutomationRow
             Kirigami.FormData.label: i18n("Desktop Automation:")
-            text: i18n("Enable Desktop Automation (plasmallm-desktop-driver)")
-            checked: cfg_enableDesktopAutomation
-            enabled: cfg_enableTools
-            onCheckedChanged: {
-                if (_initialized) {
-                    cfg_enableDesktopAutomation = checked;
-                    rootItem.triggerCapture();
+            spacing: Kirigami.Units.smallSpacing
+
+            QQC2.CheckBox {
+                id: enableDesktopAutomationCheckbox
+                checked: cfg_enableDesktopAutomation
+                enabled: cfg_enableTools && configPage.driverDetected
+                onCheckedChanged: {
+                    if (_initialized) {
+                        cfg_enableDesktopAutomation = checked;
+                        rootItem.triggerCapture();
+                    }
+                }
+                
+                QQC2.ToolTip.text: i18n("Allows the LLM to request a session to see and drive your desktop.")
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+                QQC2.ToolTip.visible: hovered
+            }
+
+            QQC2.Label {
+                id: enableDesktopAutomationLabel
+                text: configPage.driverDetected ? i18n("Enable Desktop Automation") : i18n("Enable Desktop Automation (requires <a href=\"https://github.com/joshuaeroman/plasmallm-desktop-driver\">driver</a>)")
+                textFormat: Text.RichText
+                opacity: cfg_enableTools ? 1.0 : 0.6
+                onLinkActivated: function(link) {
+                    Qt.openUrlExternally(link)
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.NoButton
+                    hoverEnabled: true
+                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+
+                    QQC2.ToolTip.text: i18n("Allows the LLM to request a session to see and drive your desktop.")
+                    QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+                    QQC2.ToolTip.visible: containsMouse
                 }
             }
-            
-            QQC2.ToolTip.text: i18n("Allows the LLM to request a session to see and drive your desktop.")
-            QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
-            QQC2.ToolTip.visible: hovered
         }
 
         ColumnLayout {
