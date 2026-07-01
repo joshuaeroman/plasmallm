@@ -88,6 +88,12 @@ SimpleKCM {
     property string cfg_geminiLocationDefault
     property int cfg_chatSpacing
     property int cfg_chatSpacingDefault
+    property string cfg_userName
+    property string cfg_userNameDefault
+    property string cfg_assistantName
+    property string cfg_assistantNameDefault
+    property bool cfg_showModelNameAsAssistant
+    property bool cfg_showModelNameAsAssistantDefault
     property bool cfg_useCustomUserColor
     property bool cfg_useCustomUserColorDefault
     property color cfg_userColor

@@ -263,7 +263,7 @@ Kirigami.AbstractCard {
             }
 
             PlasmaComponents.Label {
-                text: isUser ? i18n("You") : (isError ? i18n("Error") : (toolTitle !== "" ? toolTitle : (isWebSearchRunning || isWebSearchResults ? i18n("Web Search") : i18n("Assistant"))))
+                text: isUser ? (Plasmoid.configuration.userName || i18n("You")) : (isError ? i18n("Error") : (toolTitle !== "" ? toolTitle : (isWebSearchRunning || isWebSearchResults ? i18n("Web Search") : (Plasmoid.configuration.showModelNameAsAssistant ? (Plasmoid.configuration.modelName || Plasmoid.configuration.assistantName || i18n("Assistant")) : (Plasmoid.configuration.assistantName || i18n("Assistant"))))))
                 font.bold: true
                 font.pointSize: Math.max(8, Kirigami.Theme.defaultFont.pointSize - (Plasmoid.configuration.chatSpacing < 4 ? 1 : 0))
                 Layout.alignment: Qt.AlignVCenter

@@ -94,6 +94,57 @@ BaseConfigPage {
         }
 
         Item {
+            Kirigami.FormData.label: i18n("Chat Labels:")
+            Layout.fillWidth: true
+        }
+
+        QQC2.TextField {
+            id: userNameField
+            Kirigami.FormData.label: i18n("User label:")
+            Layout.fillWidth: true
+            text: cfg_userName
+            placeholderText: i18n("You")
+            onTextChanged: {
+                if (_initialized) {
+                    cfg_userName = text;
+                    rootItem.triggerCapture();
+                }
+            }
+        }
+
+        QQC2.TextField {
+            id: assistantNameField
+            Kirigami.FormData.label: i18n("Assistant label:")
+            Layout.fillWidth: true
+            text: cfg_assistantName
+            placeholderText: i18n("Assistant")
+            enabled: !cfg_showModelNameAsAssistant
+            onTextChanged: {
+                if (_initialized) {
+                    cfg_assistantName = text;
+                    rootItem.triggerCapture();
+                }
+            }
+        }
+
+        QQC2.CheckBox {
+            id: showModelNameAsAssistantCheck
+            text: i18n("Use model name as assistant label")
+            checked: cfg_showModelNameAsAssistant
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_showModelNameAsAssistant = checked;
+                    rootItem.triggerCapture();
+                }
+            }
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Layout.fillWidth: true
+        }
+
+        Item {
             Kirigami.FormData.label: i18n("Chat Colors:")
             Layout.fillWidth: true
         }
