@@ -7,3 +7,5 @@ reference/
 *.kate-swp
 *.plasmoid
 .antigravitycli/
+__pycache__/
+

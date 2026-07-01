@@ -519,6 +519,10 @@
       <min>1</min>
       <max>100</max>
     </entry>
+    <entry name="latexRenderMode" type="Int">
+      <label>LaTeX rendering mode: -1=unset, 0=none, 1=replace, 2=advanced</label>
+      <default>-1</default>
+    </entry>
   </group>
 
 </kcfg>

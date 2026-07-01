@@ -9,6 +9,7 @@ import org.kde.plasma.plasmoid
 import QtQuick.Controls as QQC2
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasma5support as P5Support
 
 import "api.js" as Api
 
@@ -41,6 +42,153 @@ Kirigami.AbstractCard {
     onToolDataJsonChanged: toolExpanded = false
     property bool toolExpanded: false
     property bool thinkingExpanded: false
+
+    property string advancedRenderedContent: ""
+    property bool isRenderingLatex: false
+    readonly property int currentUiFontPointSize: root ? root.uiFontPointSize : Kirigami.Theme.defaultFont.pointSize
+    property string activeRenderCommand: ""
+    property bool advancedRenderFailed: false
+    readonly property int latexRenderMode: Plasmoid.configuration.latexRenderMode
+    readonly property bool isLatexFallback: latexRenderMode === 2 && advancedRenderFailed
+
+    readonly property string displayContent: {
+        var mode = latexRenderMode;
+        if (mode === 0) {
+            return strippedContent;
+        } else if (mode === 1) {
+            return Api.replaceLatexSymbols(strippedContent);
+        } else if (mode === 2) {
+            if (advancedRenderedContent.length > 0) {
+                return advancedRenderedContent;
+            }
+            if (advancedRenderFailed) {
+                return Api.replaceLatexSymbols(strippedContent);
+            }
+            return strippedContent;
+        }
+        return Api.replaceLatexSymbols(strippedContent);
+    }
+
+    function triggerAdvancedRender() {
+        if (isRenderingLatex || isAwaitingResponse) return;
+        
+        var hasMath = strippedContent.indexOf('$') !== -1 || 
+                      strippedContent.indexOf('\\(') !== -1 || 
+                      strippedContent.indexOf('\\[') !== -1;
+                      
+        if (!hasMath) {
+            advancedRenderedContent = strippedContent;
+            advancedRenderFailed = false;
+            return;
+        }
+        
+        isRenderingLatex = true;
+        advancedRenderFailed = false;
+        var scriptPath = Qt.resolvedUrl("latex_renderer.py").toString();
+        if (scriptPath.indexOf("file://") === 0) {
+            scriptPath = scriptPath.substring(7);
+        }
+        var safeScriptPath = scriptPath.replace(/'/g, "'\\''");
+        
+        var colorHex = messageItem.bubbleTextColor.toString();
+        var b64 = Api.base64Encode(messageItem.strippedContent);
+        var cmd = "echo '" + b64 + "' | base64 -d | python3 '" + safeScriptPath + "' --color '" + colorHex + "' --font-size " + currentUiFontPointSize;
+        
+        if (activeRenderCommand !== "" && activeRenderCommand !== cmd) {
+            latexRendererSource.disconnectSource(activeRenderCommand);
+        }
+        activeRenderCommand = cmd;
+        latexRendererSource.connectSource(cmd);
+    }
+
+    onLatexRenderModeChanged: {
+        isRenderingLatex = false;
+        advancedRenderedContent = "";
+        advancedRenderFailed = false;
+        if (latexRenderMode === 2 && !isAwaitingResponse) {
+            triggerAdvancedRender();
+        }
+    }
+
+    onStrippedContentChanged: {
+        if (activeRenderCommand !== "") {
+            latexRendererSource.disconnectSource(activeRenderCommand);
+            activeRenderCommand = "";
+        }
+        isRenderingLatex = false;
+        advancedRenderedContent = "";
+        advancedRenderFailed = false;
+        
+        if (latexRenderMode === 2 && !isAwaitingResponse) {
+            triggerAdvancedRender();
+        }
+    }
+
+    onBubbleTextColorChanged: {
+        if (latexRenderMode === 2 && !isAwaitingResponse) {
+            isRenderingLatex = false;
+            advancedRenderedContent = "";
+            advancedRenderFailed = false;
+            triggerAdvancedRender();
+        }
+    }
+
+    onCurrentUiFontPointSizeChanged: {
+        if (latexRenderMode === 2 && !isAwaitingResponse) {
+            isRenderingLatex = false;
+            advancedRenderedContent = "";
+            advancedRenderFailed = false;
+            triggerAdvancedRender();
+        }
+    }
+
+    onIsAwaitingResponseChanged: {
+        if (!isAwaitingResponse && latexRenderMode === 2) {
+            triggerAdvancedRender();
+        }
+    }
+
+    Component.onCompleted: {
+        if (latexRenderMode === 2 && !isAwaitingResponse) {
+            triggerAdvancedRender();
+        }
+    }
+
+    P5Support.DataSource {
+        id: latexRendererSource
+        engine: "executable"
+        connectedSources: []
+        
+        onNewData: function(source, data) {
+            // Ignore results from stale/previous commands due to delegate recycling
+            if (source !== activeRenderCommand) {
+                disconnectSource(source);
+                return;
+            }
+            
+            var stdout = data["stdout"] || "";
+            var exitCode = data["exit code"];
+            
+            if (exitCode !== undefined) {
+                isRenderingLatex = false;
+                activeRenderCommand = "";
+                disconnectSource(source);
+                
+                if (exitCode === 0) {
+                    advancedRenderedContent = stdout;
+                    advancedRenderFailed = false;
+                } else if (exitCode === 3) {
+                    console.error("PlasmaLLM: Mathtext rendering failed (matplotlib not installed). Falling back to Unicode replacement.");
+                    advancedRenderedContent = Api.replaceLatexSymbols(strippedContent);
+                    advancedRenderFailed = true;
+                } else {
+                    console.error("PlasmaLLM: Mathtext rendering failed with exit code " + exitCode + ". Falling back to Unicode replacement. Stderr: " + (data["stderr"] || ""));
+                    advancedRenderedContent = Api.replaceLatexSymbols(strippedContent);
+                    advancedRenderFailed = true;
+                }
+            }
+        }
+    }
 
     signal shareRequested(int index)
     signal retryRequested()
@@ -127,6 +275,17 @@ Kirigami.AbstractCard {
                 opacity: 0.6
                 Layout.alignment: Qt.AlignVCenter
                 Layout.fillWidth: true
+            }
+
+            Kirigami.Icon {
+                source: "dialog-warning"
+                implicitWidth: Kirigami.Units.iconSizes.small
+                implicitHeight: Kirigami.Units.iconSizes.small
+                visible: messageItem.isLatexFallback
+                Layout.alignment: Qt.AlignVCenter
+                PlasmaComponents.ToolTip.text: i18n("Mathtext rendering fell back to Unicode replacement (matplotlib not installed or error occurred)")
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
             }
         }
 
@@ -319,7 +478,7 @@ Kirigami.AbstractCard {
                 Kirigami.SelectableLabel {
                     Layout.fillWidth: true
                     visible: strippedContent.length > 0 && !isWebSearchResults && !isWebSearchRunning
-                    text: strippedContent
+                    text: displayContent
                     wrapMode: Text.Wrap
                     font.family: useConsoleStyle ? root.codeFontFamily : root.uiFontFamily
                     font.pointSize: useConsoleStyle ? root.codeFontPointSize : root.uiFontPointSize
@@ -328,6 +487,14 @@ Kirigami.AbstractCard {
                     // We use the markdown capability of Kirigami.SelectableLabel if available,
                     // or just plain text if it's a console-style output.
                     textFormat: useConsoleStyle ? Text.PlainText : Text.MarkdownText
+
+                    onLinkActivated: function(link) {
+                        if (link.startsWith("file://") && (link.endsWith(".svg") || link.indexOf(".svg?") !== -1)) {
+                            messageItem.imageViewRequested(link);
+                        } else {
+                            Qt.openUrlExternally(link);
+                        }
+                    }
                 }
 
                 // Attachments

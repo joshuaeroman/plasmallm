@@ -7,12 +7,34 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasma5support as P5Support
 
 
 BaseConfigPage {
     id: configPage
 
     property var availableFonts: Qt.fontFamilies()
+
+    property bool hasMatplotlib: true
+
+    onHasMatplotlibChanged: {
+        if (!hasMatplotlib && cfg_latexRenderMode === 2) {
+            cfg_latexRenderMode = 1;
+            rootItem.triggerCapture();
+        }
+    }
+
+    P5Support.DataSource {
+        id: matplotlibChecker
+        engine: "executable"
+        connectedSources: ["python3 -c 'import matplotlib'"]
+        onNewData: function(source, data) {
+            if (data["exit code"] !== undefined) {
+                hasMatplotlib = (data["exit code"] === 0);
+                disconnectSource(source);
+            }
+        }
+    }
 
     Kirigami.FormLayout {
         QQC2.CheckBox {
@@ -269,6 +291,39 @@ BaseConfigPage {
                         rootItem.triggerCapture();
                     }
                 }
+            }
+        }
+
+        Kirigami.Separator {
+            Kirigami.FormData.isSection: true
+            Layout.fillWidth: true
+        }
+
+        Item {
+            Kirigami.FormData.label: i18n("LaTeX Rendering:")
+            Layout.fillWidth: true
+        }
+
+        QQC2.ComboBox {
+            id: latexRenderModeCombo
+            Layout.fillWidth: true
+            model: [
+                i18n("Leave as TeX"),
+                i18n("Replace with Unicode (Default)"),
+                configPage.hasMatplotlib ? i18n("Mathtext") : i18n("Mathtext (python3-matplotlib missing)")
+            ]
+            currentIndex: cfg_latexRenderMode === -1 ? (configPage.hasMatplotlib ? 2 : 1) : cfg_latexRenderMode
+            onActivated: function(index) {
+                if (_initialized) {
+                    cfg_latexRenderMode = index;
+                    rootItem.triggerCapture();
+                }
+            }
+            delegate: QQC2.ItemDelegate {
+                width: latexRenderModeCombo.width
+                text: modelData
+                enabled: index !== 2 || configPage.hasMatplotlib
+                highlighted: latexRenderModeCombo.highlightedIndex === index
             }
         }
 
