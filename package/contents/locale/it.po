@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-12 23:17-0400\n"
+"POT-Creation-Date: 2026-06-30 22:15-0400\n"
 "PO-Revision-Date: 2026-04-07 22:00-0400\n"
 "Last-Translator: Gemini CLI (machine translation)\n"
 "Language-Team: Italian\n"
@@ -17,17 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Tool Request: %1"
-msgstr "Richiesta strumento: %1"
+msgid "Color button"
+msgstr "Pulsante colore"
 
-msgid "Justification: %1"
-msgstr "Giustificazione: %1"
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr ""
+"Il colore corrente è %1. Questo pulsante aprirà una finestra di dialogo per "
+"la scelta del colore."
 
-msgid "Deny"
-msgstr "Nega"
-
-msgid "Approve"
-msgstr "Approva"
+msgid "Current color is %1."
+msgstr "Il colore corrente è %1."
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -72,17 +71,6 @@ msgid "Request failed (no response) — check your endpoint URL"
 msgstr ""
 "Richiesta non riuscita (nessuna risposta) — verifica l'URL dell'endpoint"
 
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"L'impegno nel ragionamento (basso / medio / alto) abilita il pensiero "
-"esteso. Per vedere i pensieri su OpenAI / Poe / OpenRouter / Azure, abilita "
-"Use Responses API; i fornitori di chat-completions (DeepSeek, Qwen) mostrano "
-"il ragionamento tramite reasoning_content."
-
 msgid "Gemini uses the thinking level dropdown directly."
 msgstr ""
 "Gemini utilizza direttamente il menu a discesa del livello di pensiero."
@@ -108,6 +96,17 @@ msgstr ""
 
 msgid "Request failed"
 msgstr "Richiesta fallita"
+
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"L'impegno nel ragionamento (basso / medio / alto) abilita il pensiero "
+"esteso. Per vedere i pensieri su OpenAI / Poe / OpenRouter / Azure, abilita "
+"Use Responses API; i fornitori di chat-completions (DeepSeek, Qwen) mostrano "
+"il ragionamento tramite reasoning_content."
 
 msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
@@ -270,6 +269,55 @@ msgstr "Chiedi prima di eseguire"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Errore: l'URL deve iniziare con http:// o https://"
 
+msgid "No command provided."
+msgstr "Nessun comando fornito."
+
+msgid "Ask before running commands from LLM"
+msgstr "Chiedi prima di eseguire i comandi dall'LLM"
+
+msgid ""
+"Prompt for approval before executing shell commands from the LLM. Dangerous "
+"to uncheck as the LLM will see output and may run further commands."
+msgstr ""
+"Richiedi approvazione prima di eseguire comandi shell dall'LLM. Pericoloso "
+"togliere la spunta poiché l'LLM vedrà l'output e potrà eseguire altri "
+"comandi."
+
+msgid ""
+"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
+"commands without permission and will see their output, enabling an agentic "
+"workflow. Only use with trustworthy LLMs."
+msgstr ""
+"⚠️ PERICOLO: 'Chiedi prima di eseguire' è disabilitato — l'LLM può ora "
+"eseguire comandi senza permesso e vedrà il loro output, abilitando un flusso "
+"di lavoro agentivo. Usare solo con LLM affidabili."
+
+msgid "Note: This tool is not restricted by the path whitelist."
+msgstr "Nota: Questo strumento non è limitato dalla whitelist dei percorsi."
+
+msgid "Session Multiplexer"
+msgstr "Multiplexer di sessione"
+
+msgid "Run commands inside a persistent session"
+msgstr "Esegui i comandi all'interno di una sessione persistente"
+
+msgid ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
+msgstr ""
+"Esegui i comandi dell'LLM all'interno di una sessione tmux o screen di lunga "
+"durata in modo che lo stato persista tra i turni."
+
+msgid "Reset Session"
+msgstr "Ripristina sessione"
+
+msgid ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
+msgstr ""
+"Né 'tmux' né 'screen' sono stati trovati nel sistema. Il multiplexing di "
+"sessione non è disponibile."
+
 msgid "Search provider %1 not supported"
 msgstr "Provider di ricerca %1 non supportato"
 
@@ -320,55 +368,6 @@ msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr ""
 "Errore: il contenuto supera la dimensione massima di scrittura (%1 byte)"
 
-msgid "No command provided."
-msgstr "Nessun comando fornito."
-
-msgid "Ask before running commands from LLM"
-msgstr "Chiedi prima di eseguire i comandi dall'LLM"
-
-msgid ""
-"Prompt for approval before executing shell commands from the LLM. Dangerous "
-"to uncheck as the LLM will see output and may run further commands."
-msgstr ""
-"Richiedi approvazione prima di eseguire comandi shell dall'LLM. Pericoloso "
-"togliere la spunta poiché l'LLM vedrà l'output e potrà eseguire altri "
-"comandi."
-
-msgid ""
-"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
-"commands without permission and will see their output, enabling an agentic "
-"workflow. Only use with trustworthy LLMs."
-msgstr ""
-"⚠️ PERICOLO: 'Chiedi prima di eseguire' è disabilitato — l'LLM può ora "
-"eseguire comandi senza permesso e vedrà il loro output, abilitando un flusso "
-"di lavoro agentivo. Usare solo con LLM affidabili."
-
-msgid "Note: This tool is not restricted by the path whitelist."
-msgstr "Nota: Questo strumento non è limitato dalla whitelist dei percorsi."
-
-msgid "Session Multiplexer"
-msgstr "Multiplexer di sessione"
-
-msgid "Run commands inside a persistent session"
-msgstr "Esegui i comandi all'interno di una sessione persistente"
-
-msgid ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-msgstr ""
-"Esegui i comandi dell'LLM all'interno di una sessione tmux o screen di lunga "
-"durata in modo che lo stato persista tra i turni."
-
-msgid "Reset Session"
-msgstr "Ripristina sessione"
-
-msgid ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
-msgstr ""
-"Né 'tmux' né 'screen' sono stati trovati nel sistema. Il multiplexing di "
-"sessione non è disponibile."
-
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS are allowed."
@@ -376,85 +375,26 @@ msgstr ""
 "Errore: Metodo HTTP non valido. Sono consentiti solo GET, POST, PUT, DELETE, "
 "PATCH, HEAD, OPTIONS."
 
-msgid "Color button"
-msgstr "Pulsante colore"
+msgid "Tool Request: %1"
+msgstr "Richiesta strumento: %1"
 
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr ""
-"Il colore corrente è %1. Questo pulsante aprirà una finestra di dialogo per "
-"la scelta del colore."
+msgid "Justification: %1"
+msgstr "Giustificazione: %1"
 
-msgid "Current color is %1."
-msgstr "Il colore corrente è %1."
+msgid "Deny"
+msgstr "Nega"
 
-msgid "Profile Header:"
-msgstr "Intestazione profilo:"
+msgid "Approve"
+msgstr "Approva"
 
-msgid "Show provider and model in profile header"
-msgstr "Mostra il provider e il modello nell'intestazione del profilo"
+msgid "Stop command"
+msgstr "Ferma comando"
 
-msgid "Chat Spacing: %1px"
-msgstr "Spaziatura chat: %1px"
+msgid "Open terminal attached to this session"
+msgstr "Apri terminale collegato a questa sessione"
 
-msgid "Compact"
-msgstr "Compatto"
-
-msgid "Spacious"
-msgstr "Spazioso"
-
-msgid "Chat Colors:"
-msgstr "Colori chat:"
-
-msgid "Use custom user color"
-msgstr "Usa colore utente personalizzato"
-
-msgid "Use custom assistant color"
-msgstr "Usa colore assistente personalizzato"
-
-msgid "UI Font:"
-msgstr "Carattere interfaccia:"
-
-msgid "Use custom UI font"
-msgstr "Usa carattere interfaccia personalizzato"
-
-msgid "Code Font:"
-msgstr "Carattere codice:"
-
-msgid "Use custom code font"
-msgstr "Usa carattere codice personalizzato"
-
-msgid "Thoughts Font:"
-msgstr "Carattere pensieri:"
-
-msgid "Use custom thoughts font"
-msgstr "Usa carattere pensieri personalizzato"
-
-msgid "Header Icons:"
-msgstr "Icone dell'intestazione:"
-
-msgid "Profile Header"
-msgstr "Intestazione profilo"
-
-msgid "Always show Tasks"
-msgstr "Mostra sempre le Attività"
-
-msgid "Always show Auto Toggle"
-msgstr "Mostra sempre il pulsante Auto"
-
-msgid "Show History"
-msgstr "Mostra cronologia"
-
-msgid "Show Copy conversation"
-msgstr "Mostra Copia conversazione"
-
-msgid "Show Clear chat"
-msgstr "Mostra Cancella chat"
-
-msgid "Show Settings"
-msgstr "Mostra Impostazioni"
-
-msgid "Show Pin"
-msgstr "Mostra fissa"
+msgid "Copy output"
+msgstr "Copia output"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Impossibile recuperare il token gcloud (uscita %1): %2"
@@ -681,6 +621,256 @@ msgstr "secondi"
 msgid "minutes"
 msgstr "minuti"
 
+msgid "General Tool Settings"
+msgstr "Impostazioni generali degli strumenti"
+
+msgid "System state:"
+msgstr "Stato di sistema:"
+
+msgid "Enable Tools"
+msgstr "Abilita strumenti"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr ""
+"Interruttore principale per tutte le funzionalità di chiamata agli strumenti."
+
+msgid "Desktop Automation:"
+msgstr "Automazione desktop:"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+"Consente al LLM di richiedere una sessione per vedere e controllare il "
+"desktop."
+
+msgid "Enable Desktop Automation"
+msgstr "Abilita l'automazione desktop"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Abilita l'automazione desktop (richiede il <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+
+msgid "Path whitelist:"
+msgstr "Whitelist percorsi:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Aggiungi percorso, es. $HOME/projects, /tmp"
+
+msgid "Add"
+msgstr "Aggiungi"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"La whitelist si applica agli strumenti del file system (lettura, scrittura, "
+"elenco, ricerca). Nota: 'run_command' non è limitato da questa lista."
+
+msgid "Max read size:"
+msgstr "Dimensione massima di lettura:"
+
+msgid "Max write size:"
+msgstr "Dimensione massima di scrittura:"
+
+msgid "Max HTTP response:"
+msgstr "Risposta HTTP massima:"
+
+msgid "Max tool loop depth:"
+msgstr "Profondità massima del ciclo degli strumenti:"
+
+msgid "steps"
+msgstr "passi"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr ""
+"Nota: Questo limite non si applica alle sessioni di automazione desktop."
+
+msgid "Native Adapter Features"
+msgstr "Funzionalità native dell'adattatore"
+
+msgid "Google Search:"
+msgstr "Ricerca Google:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Abilita il grounding nativo di Google Search"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Usa la ricerca Google integrata di Gemini per il grounding. Questo "
+"sostituisce lo strumento di ricerca web standard."
+
+msgid "Code Execution:"
+msgstr "Esecuzione del codice:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Abilita l'esecuzione nativa del codice Python"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Consente a Gemini di scrivere ed eseguire codice Python in un sandbox sicuro "
+"lato server."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"La combinazione di strumenti nativi con comandi richiede un modello più "
+"recente. Il modello attualmente selezionato (%1) potrebbe riscontrare errori."
+
+msgid "Individual Tools"
+msgstr "Strumenti individuali"
+
+msgid "OpenAI-compatible"
+msgstr "Compatibile con OpenAI"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "Failed to stop driving: %1"
+msgstr "Impossibile interrompere il controllo: %1"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"Impossibile recuperare il token gcloud (uscita %1): %2. Assicurati che "
+"gcloud sia installato e autenticato."
+
+msgid "No tool request pending to approve."
+msgstr "Nessuna richiesta di strumento in attesa di approvazione."
+
+msgid "The user denied this tool call."
+msgstr "L'utente ha negato questa chiamata allo strumento."
+
+msgid "No tool request pending to deny."
+msgstr "Nessuna richiesta di strumento in attesa di negazione."
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"Modalità salto approvazioni abilitata per questa sessione. Tutti gli "
+"strumenti abilitati verranno eseguiti automaticamente, ignorando le "
+"impostazioni 'Chiedi prima di eseguire'."
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+"Modalità salto approvazioni disabilitata. Gli strumenti torneranno alle "
+"impostazioni configurate 'Chiedi prima di eseguire'."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+"L'automazione desktop è disabilitata nelle impostazioni. Abilitala prima per "
+"controllare il desktop."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver non è rilevato o in esecuzione."
+
+msgid "Default"
+msgstr "Predefinito"
+
+msgid "Current profile: **%1**"
+msgstr "Profilo corrente: **%1**"
+
+msgid "Available profiles:"
+msgstr "Profili disponibili:"
+
+msgid "active"
+msgstr "attivo"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "Digita `/profile <nome>` per cambiare."
+
+msgid "Switched to profile: **%1**"
+msgstr "Passato al profilo: **%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "Profilo sconosciuto: **%1**"
+
+msgid "none"
+msgstr "nessuno"
+
+msgid "Current model: **%1**"
+msgstr "Modello attuale: **%1**"
+
+msgid "Available models:"
+msgstr "Modelli disponibili:"
+
+msgid "Type `/model <name>` to switch."
+msgstr "Digita `/model <name>` per cambiare."
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr ""
+"Nessun modello nella cache. Usa **Scarica modelli** nelle impostazioni."
+
+msgid "Switched to model: **%1**"
+msgstr "Passato al modello: **%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "Nessuna attività configurata. Aggiungi attività nelle impostazioni."
+
+msgid "(auto)"
+msgstr "(automatico)"
+
+msgid "Available tasks:"
+msgstr "Attività disponibili:"
+
+msgid "Type `/task <name>` to run."
+msgstr "Digita `/task <name>` per eseguire."
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Attività sconosciuta: **%1**. Disponibili: %2"
+
+msgid "The user declined to run this command."
+msgstr "L'utente ha rifiutato di eseguire questo comando."
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Chiamata strumento"
+
+msgid "Requested tool: %1"
+msgstr "Strumento richiesto: %1"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Unknown tool %1"
+msgstr "Strumento sconosciuto %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "Errore: il percorso '%1' è fuori dalla whitelist"
+
+msgid "Executing %1…"
+msgstr "Esecuzione di %1…"
+
+msgid "Session reset requested."
+msgstr "Ripristino sessione richiesto."
+
+msgid "Failed to start drive session: %1"
+msgstr "Impossibile avviare la sessione di controllo: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr ""
+"Sessione di controllo attiva (già autorizzata). Modalità automatica "
+"abilitata."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr ""
+"Sessione di controllo autorizzata con successo. Modalità automatica "
+"abilitata."
+
 msgid "You"
 msgstr "Tu"
 
@@ -692,6 +882,11 @@ msgstr "Ricerca Web"
 
 msgid "Assistant"
 msgstr "Assistente"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr "Il rendering Mathtext è passato alla sostituzione Unicode (matplotlib non installato o si è verificato un errore)"
 
 msgid "Thinking"
 msgstr "In elaborazione…"
@@ -817,9 +1012,6 @@ msgstr "Non tenere aperto"
 msgid "Keep open"
 msgstr "Tieni aperto"
 
-msgid "The user denied this tool call."
-msgstr "L'utente ha negato questa chiamata allo strumento."
-
 msgid "Send a message to start chatting"
 msgstr "Invia un messaggio per iniziare a chattare"
 
@@ -871,259 +1063,101 @@ msgstr "Annulla richiesta LLM"
 msgid "Drop files here to attach"
 msgstr "Trascina qui i file da allegare"
 
-msgid "Stop command"
-msgstr "Ferma comando"
+msgid "Profile Header:"
+msgstr "Intestazione profilo:"
 
-msgid "Open terminal attached to this session"
-msgstr "Apri terminale collegato a questa sessione"
+msgid "Show provider and model in profile header"
+msgstr "Mostra il provider e il modello nell'intestazione del profilo"
 
-msgid "Copy output"
-msgstr "Copia output"
+msgid "Chat Spacing: %1px"
+msgstr "Spaziatura chat: %1px"
 
-msgid "OpenAI-compatible"
-msgstr "Compatibile con OpenAI"
+msgid "Compact"
+msgstr "Compatto"
 
-msgid "Anthropic"
-msgstr "Anthropic"
+msgid "Spacious"
+msgstr "Spazioso"
 
-msgid "Google Gemini"
-msgstr "Google Gemini"
+msgid "Chat Labels:"
+msgstr "Etichette chat:"
 
-msgid "General Tool Settings"
-msgstr "Impostazioni generali degli strumenti"
+msgid "User label:"
+msgstr "Etichetta utente:"
 
-msgid "System state:"
-msgstr "Stato di sistema:"
+msgid "Assistant label:"
+msgstr "Etichetta assistente:"
 
-msgid "Enable Tools"
-msgstr "Abilita strumenti"
+msgid "Use model name as assistant label"
+msgstr "Usa il nome del modello come etichetta dell'assistente"
 
-msgid "Master switch for all tool-calling functionality."
-msgstr ""
-"Interruttore principale per tutte le funzionalità di chiamata agli strumenti."
+msgid "Chat Colors:"
+msgstr "Colori chat:"
 
-msgid "Desktop Automation:"
-msgstr "Automazione desktop:"
+msgid "Use custom user color"
+msgstr "Usa colore utente personalizzato"
 
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr ""
-"Consente al LLM di richiedere una sessione per vedere e controllare il "
-"desktop."
+msgid "Use custom assistant color"
+msgstr "Usa colore assistente personalizzato"
 
-msgid "Enable Desktop Automation"
-msgstr "Abilita l'automazione desktop"
+msgid "UI Font:"
+msgstr "Carattere interfaccia:"
 
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr "Abilita l'automazione desktop (richiede il <a href=\"https://github.com/joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgid "Use custom UI font"
+msgstr "Usa carattere interfaccia personalizzato"
 
-msgid "Path whitelist:"
-msgstr "Whitelist percorsi:"
+msgid "Code Font:"
+msgstr "Carattere codice:"
 
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Aggiungi percorso, es. $HOME/projects, /tmp"
+msgid "Use custom code font"
+msgstr "Usa carattere codice personalizzato"
 
-msgid "Add"
-msgstr "Aggiungi"
+msgid "Thoughts Font:"
+msgstr "Carattere pensieri:"
 
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"La whitelist si applica agli strumenti del file system (lettura, scrittura, "
-"elenco, ricerca). Nota: 'run_command' non è limitato da questa lista."
+msgid "Use custom thoughts font"
+msgstr "Usa carattere pensieri personalizzato"
 
-msgid "Max read size:"
-msgstr "Dimensione massima di lettura:"
+msgid "LaTeX Rendering:"
+msgstr "Rendering LaTeX:"
 
-msgid "Max write size:"
-msgstr "Dimensione massima di scrittura:"
+msgid "Leave as TeX"
+msgstr "Lascia come TeX"
 
-msgid "Max HTTP response:"
-msgstr "Risposta HTTP massima:"
+msgid "Replace with Unicode (Default)"
+msgstr "Sostituisci con Unicode (Predefinito)"
 
-msgid "Max tool loop depth:"
-msgstr "Profondità massima del ciclo degli strumenti:"
+msgid "Mathtext"
+msgstr "Mathtext"
 
-msgid "steps"
-msgstr "passi"
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib mancante)"
 
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr ""
-"Nota: Questo limite non si applica alle sessioni di automazione desktop."
+msgid "Header Icons:"
+msgstr "Icone dell'intestazione:"
 
-msgid "Native Adapter Features"
-msgstr "Funzionalità native dell'adattatore"
+msgid "Profile Header"
+msgstr "Intestazione profilo"
 
-msgid "Google Search:"
-msgstr "Ricerca Google:"
+msgid "Always show Tasks"
+msgstr "Mostra sempre le Attività"
 
-msgid "Enable Native Google Search Grounding"
-msgstr "Abilita il grounding nativo di Google Search"
+msgid "Always show Auto Toggle"
+msgstr "Mostra sempre il pulsante Auto"
 
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Usa la ricerca Google integrata di Gemini per il grounding. Questo "
-"sostituisce lo strumento di ricerca web standard."
+msgid "Show History"
+msgstr "Mostra cronologia"
 
-msgid "Code Execution:"
-msgstr "Esecuzione del codice:"
+msgid "Show Copy conversation"
+msgstr "Mostra Copia conversazione"
 
-msgid "Enable Native Python Code Execution"
-msgstr "Abilita l'esecuzione nativa del codice Python"
+msgid "Show Clear chat"
+msgstr "Mostra Cancella chat"
 
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Consente a Gemini di scrivere ed eseguire codice Python in un sandbox sicuro "
-"lato server."
+msgid "Show Settings"
+msgstr "Mostra Impostazioni"
 
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"La combinazione di strumenti nativi con comandi richiede un modello più "
-"recente. Il modello attualmente selezionato (%1) potrebbe riscontrare errori."
-
-msgid "Individual Tools"
-msgstr "Strumenti individuali"
-
-msgid "Failed to stop driving: %1"
-msgstr "Impossibile interrompere il controllo: %1"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"Impossibile recuperare il token gcloud (uscita %1): %2. Assicurati che "
-"gcloud sia installato e autenticato."
-
-msgid "No tool request pending to approve."
-msgstr "Nessuna richiesta di strumento in attesa di approvazione."
-
-msgid "No tool request pending to deny."
-msgstr "Nessuna richiesta di strumento in attesa di negazione."
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"Modalità salto approvazioni abilitata per questa sessione. Tutti gli "
-"strumenti abilitati verranno eseguiti automaticamente, ignorando le "
-"impostazioni 'Chiedi prima di eseguire'."
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr ""
-"Modalità salto approvazioni disabilitata. Gli strumenti torneranno alle "
-"impostazioni configurate 'Chiedi prima di eseguire'."
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr ""
-"L'automazione desktop è disabilitata nelle impostazioni. Abilitala prima per "
-"controllare il desktop."
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "plasmallm-desktop-driver non è rilevato o in esecuzione."
-
-msgid "Default"
-msgstr "Predefinito"
-
-msgid "Current profile: **%1**"
-msgstr "Profilo corrente: **%1**"
-
-msgid "Available profiles:"
-msgstr "Profili disponibili:"
-
-msgid "active"
-msgstr "attivo"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "Digita `/profile <nome>` per cambiare."
-
-msgid "Switched to profile: **%1**"
-msgstr "Passato al profilo: **%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "Profilo sconosciuto: **%1**"
-
-msgid "none"
-msgstr "nessuno"
-
-msgid "Current model: **%1**"
-msgstr "Modello attuale: **%1**"
-
-msgid "Available models:"
-msgstr "Modelli disponibili:"
-
-msgid "Type `/model <name>` to switch."
-msgstr "Digita `/model <name>` per cambiare."
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr ""
-"Nessun modello nella cache. Usa **Scarica modelli** nelle impostazioni."
-
-msgid "Switched to model: **%1**"
-msgstr "Passato al modello: **%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "Nessuna attività configurata. Aggiungi attività nelle impostazioni."
-
-msgid "(auto)"
-msgstr "(automatico)"
-
-msgid "Available tasks:"
-msgstr "Attività disponibili:"
-
-msgid "Type `/task <name>` to run."
-msgstr "Digita `/task <name>` per eseguire."
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "Attività sconosciuta: **%1**. Disponibili: %2"
-
-msgid "The user declined to run this command."
-msgstr "L'utente ha rifiutato di eseguire questo comando."
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM: Chiamata strumento"
-
-msgid "Requested tool: %1"
-msgstr "Strumento richiesto: %1"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Unknown tool %1"
-msgstr "Strumento sconosciuto %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "Errore: il percorso '%1' è fuori dalla whitelist"
-
-msgid "Executing %1…"
-msgstr "Esecuzione di %1…"
-
-msgid "Session reset requested."
-msgstr "Ripristino sessione richiesto."
-
-msgid "Failed to start drive session: %1"
-msgstr "Impossibile avviare la sessione di controllo: %1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr ""
-"Sessione di controllo attiva (già autorizzata). Modalità automatica "
-"abilitata."
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr ""
-"Sessione di controllo autorizzata con successo. Modalità automatica "
-"abilitata."
+msgid "Show Pin"
+msgstr "Mostra fissa"
 
 msgid "General"
 msgstr "Generale"

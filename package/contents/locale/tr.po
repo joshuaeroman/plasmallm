@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-12 23:17-0400\n"
+"POT-Creation-Date: 2026-06-30 22:15-0400\n"
 "PO-Revision-Date: 2026-04-07 00:00+0000\n"
 "Last-Translator: Claude <noreply@anthropic.com>\n"
 "Language-Team: Turkish\n"
@@ -16,17 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Tool Request: %1"
-msgstr "Araç İsteği: %1"
+msgid "Color button"
+msgstr "Renk düğmesi"
 
-msgid "Justification: %1"
-msgstr "Gerekçe: %1"
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Geçerli renk %1. Bu düğme bir renk seçici iletişim kutusu açacaktır."
 
-msgid "Deny"
-msgstr "Reddet"
-
-msgid "Approve"
-msgstr "Onayla"
+msgid "Current color is %1."
+msgstr "Geçerli renk %1."
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -71,17 +68,6 @@ msgstr "API hatası %1"
 msgid "Request failed (no response) — check your endpoint URL"
 msgstr "İstek başarısız oldu (yanıt yok) — uç nokta URL'nizi kontrol edin"
 
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Akıl yürütme çabası (düşük / orta / yüksek) genişletilmiş düşünmeyi kontrol "
-"eder. OpenAI / Poe / OpenRouter / Azure'da düşünceleri görmek için Use "
-"Responses API'yi etkinleştirin; sohbet tamamlama sağlayıcıları (DeepSeek, "
-"Qwen) akıl yürütmeyi reasoning_content aracılığıyla sunar."
-
 msgid "Gemini uses the thinking level dropdown directly."
 msgstr "Gemini, düşünme düzeyi açılır menüsünü doğrudan kullanır."
 
@@ -108,6 +94,17 @@ msgstr ""
 
 msgid "Request failed"
 msgstr "İstek başarısız oldu"
+
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"Akıl yürütme çabası (düşük / orta / yüksek) genişletilmiş düşünmeyi kontrol "
+"eder. OpenAI / Poe / OpenRouter / Azure'da düşünceleri görmek için Use "
+"Responses API'yi etkinleştirin; sohbet tamamlama sağlayıcıları (DeepSeek, "
+"Qwen) akıl yürütmeyi reasoning_content aracılığıyla sunar."
 
 msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
@@ -267,6 +264,55 @@ msgstr "Çalıştırmadan önce sor"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Hata: URL http:// veya https:// ile başlamalıdır"
 
+msgid "No command provided."
+msgstr "Komut sağlanmadı."
+
+msgid "Ask before running commands from LLM"
+msgstr "LLM'den komutları çalıştırmadan önce sor"
+
+msgid ""
+"Prompt for approval before executing shell commands from the LLM. Dangerous "
+"to uncheck as the LLM will see output and may run further commands."
+msgstr ""
+"LLM'den gelen kabuk komutlarını yürütmeden önce onay isteyin. LLM çıktıyı "
+"görecek ve daha fazla komut çalıştırabilecek olduğundan işareti kaldırmak "
+"tehlikelidir."
+
+msgid ""
+"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
+"commands without permission and will see their output, enabling an agentic "
+"workflow. Only use with trustworthy LLMs."
+msgstr ""
+"⚠️ TEHLİKE: 'Çalıştırmadan önce sor' devre dışı — LLM artık izinsiz komut "
+"çalıştırabilir ve çıktılarını görecek, bu da ajansal bir iş akışını mümkün "
+"kılar. Yalnızca güvenilir LLM'lerle kullanın."
+
+msgid "Note: This tool is not restricted by the path whitelist."
+msgstr "Not: Bu araç, yol beyaz listesiyle kısıtlanmamıştır."
+
+msgid "Session Multiplexer"
+msgstr "Oturum Çoğullayıcı"
+
+msgid "Run commands inside a persistent session"
+msgstr "Komutları kalıcı bir oturum içinde çalıştır"
+
+msgid ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
+msgstr ""
+"Durumun turlar arasında kalıcı olması için LLM komutlarını uzun ömürlü bir "
+"tmux veya screen oturumu içinde yürütün."
+
+msgid "Reset Session"
+msgstr "Oturumu Sıfırla"
+
+msgid ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
+msgstr ""
+"Sisteminizde 'tmux' veya 'screen' bulunamadı. Oturum çoğullama "
+"kullanılamıyor."
+
 msgid "Search provider %1 not supported"
 msgstr "Arama sağlayıcısı %1 desteklenmiyor"
 
@@ -317,55 +363,6 @@ msgstr ""
 msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr "Hata: içerik maksimum yazma boyutunu aşıyor (%1 bayt)"
 
-msgid "No command provided."
-msgstr "Komut sağlanmadı."
-
-msgid "Ask before running commands from LLM"
-msgstr "LLM'den komutları çalıştırmadan önce sor"
-
-msgid ""
-"Prompt for approval before executing shell commands from the LLM. Dangerous "
-"to uncheck as the LLM will see output and may run further commands."
-msgstr ""
-"LLM'den gelen kabuk komutlarını yürütmeden önce onay isteyin. LLM çıktıyı "
-"görecek ve daha fazla komut çalıştırabilecek olduğundan işareti kaldırmak "
-"tehlikelidir."
-
-msgid ""
-"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
-"commands without permission and will see their output, enabling an agentic "
-"workflow. Only use with trustworthy LLMs."
-msgstr ""
-"⚠️ TEHLİKE: 'Çalıştırmadan önce sor' devre dışı — LLM artık izinsiz komut "
-"çalıştırabilir ve çıktılarını görecek, bu da ajansal bir iş akışını mümkün "
-"kılar. Yalnızca güvenilir LLM'lerle kullanın."
-
-msgid "Note: This tool is not restricted by the path whitelist."
-msgstr "Not: Bu araç, yol beyaz listesiyle kısıtlanmamıştır."
-
-msgid "Session Multiplexer"
-msgstr "Oturum Çoğullayıcı"
-
-msgid "Run commands inside a persistent session"
-msgstr "Komutları kalıcı bir oturum içinde çalıştır"
-
-msgid ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-msgstr ""
-"Durumun turlar arasında kalıcı olması için LLM komutlarını uzun ömürlü bir "
-"tmux veya screen oturumu içinde yürütün."
-
-msgid "Reset Session"
-msgstr "Oturumu Sıfırla"
-
-msgid ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
-msgstr ""
-"Sisteminizde 'tmux' veya 'screen' bulunamadı. Oturum çoğullama "
-"kullanılamıyor."
-
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS are allowed."
@@ -373,83 +370,26 @@ msgstr ""
 "Hata: Geçersiz HTTP yöntemi. Yalnızca GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS izin verilir."
 
-msgid "Color button"
-msgstr "Renk düğmesi"
+msgid "Tool Request: %1"
+msgstr "Araç İsteği: %1"
 
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Geçerli renk %1. Bu düğme bir renk seçici iletişim kutusu açacaktır."
+msgid "Justification: %1"
+msgstr "Gerekçe: %1"
 
-msgid "Current color is %1."
-msgstr "Geçerli renk %1."
+msgid "Deny"
+msgstr "Reddet"
 
-msgid "Profile Header:"
-msgstr "Profil Başlığı:"
+msgid "Approve"
+msgstr "Onayla"
 
-msgid "Show provider and model in profile header"
-msgstr "Profil başlığında sağlayıcı ve modeli göster"
+msgid "Stop command"
+msgstr "Komutu durdur"
 
-msgid "Chat Spacing: %1px"
-msgstr "Sohbet Aralığı: %1px"
+msgid "Open terminal attached to this session"
+msgstr "Bu oturuma bağlı terminali aç"
 
-msgid "Compact"
-msgstr "Kompakt"
-
-msgid "Spacious"
-msgstr "Geniş"
-
-msgid "Chat Colors:"
-msgstr "Sohbet Renkleri:"
-
-msgid "Use custom user color"
-msgstr "Özel kullanıcı rengi kullan"
-
-msgid "Use custom assistant color"
-msgstr "Özel asistan rengi kullan"
-
-msgid "UI Font:"
-msgstr "Arayüz Yazı Tipi:"
-
-msgid "Use custom UI font"
-msgstr "Özel arayüz yazı tipi kullan"
-
-msgid "Code Font:"
-msgstr "Kod Yazı Tipi:"
-
-msgid "Use custom code font"
-msgstr "Özel kod yazı tipi kullan"
-
-msgid "Thoughts Font:"
-msgstr "Düşünce Yazı Tipi:"
-
-msgid "Use custom thoughts font"
-msgstr "Özel düşünce yazı tipi kullan"
-
-msgid "Header Icons:"
-msgstr "Başlık Simgeleri:"
-
-msgid "Profile Header"
-msgstr "Profil Başlığı"
-
-msgid "Always show Tasks"
-msgstr "Görevleri her zaman göster"
-
-msgid "Always show Auto Toggle"
-msgstr "Otomatik geçişi her zaman göster"
-
-msgid "Show History"
-msgstr "Geçmişi göster"
-
-msgid "Show Copy conversation"
-msgstr "Konuşmayı kopyalamayı göster"
-
-msgid "Show Clear chat"
-msgstr "Sohbeti temizlemeyi göster"
-
-msgid "Show Settings"
-msgstr "Ayarları göster"
-
-msgid "Show Pin"
-msgstr "Sabitlemeyi göster"
+msgid "Copy output"
+msgstr "Çıktıyı kopyala"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "gcloud token alınamadı (çıkış %1): %2"
@@ -677,6 +617,249 @@ msgstr "saniye"
 msgid "minutes"
 msgstr "dakika"
 
+msgid "General Tool Settings"
+msgstr "Genel Araç Ayarları"
+
+msgid "System state:"
+msgstr "Sistem durumu:"
+
+msgid "Enable Tools"
+msgstr "Araçları etkinleştir"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "Tüm araç çağrı işlevleri için ana anahtar."
+
+msgid "Desktop Automation:"
+msgstr "Masaüstü Otomasyonu:"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+"LLM'nin masaüstünüzü görmek ve yönetmek için bir oturum talep etmesine izin "
+"verir."
+
+msgid "Enable Desktop Automation"
+msgstr "Masaüstü Otomasyonunu Etkinleştir"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Masaüstü Otomasyonunu Etkinleştir (<a href=\"https://github.com/joshuaeroman/"
+"plasmallm-desktop-driver\">sürücü</a> gerekir)"
+
+msgid "Path whitelist:"
+msgstr "Yol beyaz listesi:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Yol ekle, örn. $HOME/projects, /tmp"
+
+msgid "Add"
+msgstr "Ekle"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Beyaz liste dosya sistemi araçlarına uygulanır (okuma, yazma, listeleme, "
+"arama). Not: 'run_command' bu listeyle kısıtlanmamıştır."
+
+msgid "Max read size:"
+msgstr "Maksimum okuma boyutu:"
+
+msgid "Max write size:"
+msgstr "Maksimum yazma boyutu:"
+
+msgid "Max HTTP response:"
+msgstr "Maksimum HTTP yanıtı:"
+
+msgid "Max tool loop depth:"
+msgstr "Maksimum araç döngü derinliği:"
+
+msgid "steps"
+msgstr "adım"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr "Not: Bu sınır masaüstü otomasyonu oturumları için geçerli değildir."
+
+msgid "Native Adapter Features"
+msgstr "Yerel Adaptör Özellikleri"
+
+msgid "Google Search:"
+msgstr "Google Arama:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Yerel Google Arama Temellemesini Etkinleştir"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Temellemek için Gemini'nin yerleşik Google Aramasını kullanın. Bu, standart "
+"web arama aracını geçersiz kılar."
+
+msgid "Code Execution:"
+msgstr "Kod Yürütme:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Yerel Python Kodu Yürütmesini Etkinleştir"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Gemini'nin güvenli bir sunucu taraflı sanal alanda Python kodu yazmasına ve "
+"yürütmesine izin verin."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Yerel araçları komutlarla birleştirmek daha yeni bir model gerektirir. Şu "
+"anda seçili model (%1) hatalarla karşılaşabilir."
+
+msgid "Individual Tools"
+msgstr "Bireysel Araçlar"
+
+msgid "OpenAI-compatible"
+msgstr "OpenAI uyumlu"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "Failed to stop driving: %1"
+msgstr "Yönetimi durdurma başarısız oldu: %1"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"gcloud token alınamadı (çıkış %1): %2. Lütfen gcloud'un kurulu ve kimlik "
+"doğrulaması yapılmış olduğundan emin olun."
+
+msgid "No tool request pending to approve."
+msgstr "Onaylanacak bekleyen araç isteği yok."
+
+msgid "The user denied this tool call."
+msgstr "Kullanıcı bu araç çağrısını reddetti."
+
+msgid "No tool request pending to deny."
+msgstr "Reddedilecek bekleyen araç isteği yok."
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"Bu oturum için onayları atlama modu etkinleştirildi. Tüm etkin araçlar, "
+"'Çalıştırmadan önce sor' ayarlarını atlayarak otomatik olarak çalışacak."
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+"Onayları atlama modu devre dışı bırakıldı. Araçlar yapılandırılmış "
+"'Çalıştırmadan önce sor' ayarlarına geri dönecek."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+"Ayarlarda masaüstü otomasyonu devre dışı bırakıldı. Masaüstünü yönetmek için "
+"önce onu etkinleştirin."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver algılanmadı veya çalışmıyor."
+
+msgid "Default"
+msgstr "Varsayılan"
+
+msgid "Current profile: **%1**"
+msgstr "Geçerli profil: **%1**"
+
+msgid "Available profiles:"
+msgstr "Mevcut profiller:"
+
+msgid "active"
+msgstr "etkin"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "Geçiş yapmak için `/profile <ad>` yazın."
+
+msgid "Switched to profile: **%1**"
+msgstr "Profile geçildi: **%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "Bilinmeyen profil: **%1**"
+
+msgid "none"
+msgstr "yok"
+
+msgid "Current model: **%1**"
+msgstr "Mevcut model: **%1**"
+
+msgid "Available models:"
+msgstr "Mevcut modeller:"
+
+msgid "Type `/model <name>` to switch."
+msgstr "Geçiş yapmak için `/model <ad>` yazın."
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr ""
+"Önbellekte model yok. Ayarlarda **Modelleri Getir** seçeneğini kullanın."
+
+msgid "Switched to model: **%1**"
+msgstr "Modele geçildi: **%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "Görev yapılandırılmadı. Ayarlar'da görev ekleyin."
+
+msgid "(auto)"
+msgstr "(otomatik)"
+
+msgid "Available tasks:"
+msgstr "Mevcut görevler:"
+
+msgid "Type `/task <name>` to run."
+msgstr "Çalıştırmak için `/task <ad>` yazın."
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Bilinmeyen görev: **%1**. Mevcut: %2"
+
+msgid "The user declined to run this command."
+msgstr "Kullanıcı bu komutu çalıştırmayı reddetti."
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Araç Çağrısı"
+
+msgid "Requested tool: %1"
+msgstr "İstenen araç: %1"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Unknown tool %1"
+msgstr "Bilinmeyen araç %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "Hata: '%1' yolu beyaz liste dışında"
+
+msgid "Executing %1…"
+msgstr "%1 çalıştırılıyor…"
+
+msgid "Session reset requested."
+msgstr "Oturum sıfırlama istendi."
+
+msgid "Failed to start drive session: %1"
+msgstr "Yönetim oturumu başlatılamadı: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "Yönetim oturumu aktif (zaten yetkilendirilmiş). Otomatik mod etkin."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "Yönetim oturumu başarıyla yetkilendirildi. Otomatik mod etkin."
+
 msgid "You"
 msgstr "Siz"
 
@@ -688,6 +871,11 @@ msgstr "Web Araması"
 
 msgid "Assistant"
 msgstr "Asistan"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr "Mathtext işleme Unicode değiştirme yöntemine geri döndü (matplotlib yüklü değil veya hata oluştu)"
 
 msgid "Thinking"
 msgstr "Düşünüyor…"
@@ -811,9 +999,6 @@ msgstr "Açık tutma"
 msgid "Keep open"
 msgstr "Açık tut"
 
-msgid "The user denied this tool call."
-msgstr "Kullanıcı bu araç çağrısını reddetti."
-
 msgid "Send a message to start chatting"
 msgstr "Sohbet başlatmak için bir mesaj gönderin"
 
@@ -864,252 +1049,101 @@ msgstr "LLM isteğini iptal et"
 msgid "Drop files here to attach"
 msgstr "Eklemek için dosyaları buraya bırakın"
 
-msgid "Stop command"
-msgstr "Komutu durdur"
+msgid "Profile Header:"
+msgstr "Profil Başlığı:"
 
-msgid "Open terminal attached to this session"
-msgstr "Bu oturuma bağlı terminali aç"
+msgid "Show provider and model in profile header"
+msgstr "Profil başlığında sağlayıcı ve modeli göster"
 
-msgid "Copy output"
-msgstr "Çıktıyı kopyala"
+msgid "Chat Spacing: %1px"
+msgstr "Sohbet Aralığı: %1px"
 
-msgid "OpenAI-compatible"
-msgstr "OpenAI uyumlu"
+msgid "Compact"
+msgstr "Kompakt"
 
-msgid "Anthropic"
-msgstr "Anthropic"
+msgid "Spacious"
+msgstr "Geniş"
 
-msgid "Google Gemini"
-msgstr "Google Gemini"
+msgid "Chat Labels:"
+msgstr "Sohbet Etiketleri:"
 
-msgid "General Tool Settings"
-msgstr "Genel Araç Ayarları"
+msgid "User label:"
+msgstr "Kullanıcı etiketi:"
 
-msgid "System state:"
-msgstr "Sistem durumu:"
+msgid "Assistant label:"
+msgstr "Asistan etiketi:"
 
-msgid "Enable Tools"
-msgstr "Araçları etkinleştir"
+msgid "Use model name as assistant label"
+msgstr "Asistan etiketi olarak model adını kullan"
 
-msgid "Master switch for all tool-calling functionality."
-msgstr "Tüm araç çağrı işlevleri için ana anahtar."
+msgid "Chat Colors:"
+msgstr "Sohbet Renkleri:"
 
-msgid "Desktop Automation:"
-msgstr "Masaüstü Otomasyonu:"
+msgid "Use custom user color"
+msgstr "Özel kullanıcı rengi kullan"
 
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr ""
-"LLM'nin masaüstünüzü görmek ve yönetmek için bir oturum talep etmesine izin "
-"verir."
+msgid "Use custom assistant color"
+msgstr "Özel asistan rengi kullan"
 
-msgid "Enable Desktop Automation"
-msgstr "Masaüstü Otomasyonunu Etkinleştir"
+msgid "UI Font:"
+msgstr "Arayüz Yazı Tipi:"
 
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr "Masaüstü Otomasyonunu Etkinleştir (<a href=\"https://github.com/joshuaeroman/plasmallm-desktop-driver\">sürücü</a> gerekir)"
+msgid "Use custom UI font"
+msgstr "Özel arayüz yazı tipi kullan"
 
-msgid "Path whitelist:"
-msgstr "Yol beyaz listesi:"
+msgid "Code Font:"
+msgstr "Kod Yazı Tipi:"
 
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Yol ekle, örn. $HOME/projects, /tmp"
+msgid "Use custom code font"
+msgstr "Özel kod yazı tipi kullan"
 
-msgid "Add"
-msgstr "Ekle"
+msgid "Thoughts Font:"
+msgstr "Düşünce Yazı Tipi:"
 
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Beyaz liste dosya sistemi araçlarına uygulanır (okuma, yazma, listeleme, "
-"arama). Not: 'run_command' bu listeyle kısıtlanmamıştır."
+msgid "Use custom thoughts font"
+msgstr "Özel düşünce yazı tipi kullan"
 
-msgid "Max read size:"
-msgstr "Maksimum okuma boyutu:"
+msgid "LaTeX Rendering:"
+msgstr "LaTeX Oluşturma:"
 
-msgid "Max write size:"
-msgstr "Maksimum yazma boyutu:"
+msgid "Leave as TeX"
+msgstr "TeX olarak bırak"
 
-msgid "Max HTTP response:"
-msgstr "Maksimum HTTP yanıtı:"
+msgid "Replace with Unicode (Default)"
+msgstr "Unicode ile değiştir (Varsayılan)"
 
-msgid "Max tool loop depth:"
-msgstr "Maksimum araç döngü derinliği:"
+msgid "Mathtext"
+msgstr "Mathtext"
 
-msgid "steps"
-msgstr "adım"
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib eksik)"
 
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr "Not: Bu sınır masaüstü otomasyonu oturumları için geçerli değildir."
+msgid "Header Icons:"
+msgstr "Başlık Simgeleri:"
 
-msgid "Native Adapter Features"
-msgstr "Yerel Adaptör Özellikleri"
+msgid "Profile Header"
+msgstr "Profil Başlığı"
 
-msgid "Google Search:"
-msgstr "Google Arama:"
+msgid "Always show Tasks"
+msgstr "Görevleri her zaman göster"
 
-msgid "Enable Native Google Search Grounding"
-msgstr "Yerel Google Arama Temellemesini Etkinleştir"
+msgid "Always show Auto Toggle"
+msgstr "Otomatik geçişi her zaman göster"
 
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Temellemek için Gemini'nin yerleşik Google Aramasını kullanın. Bu, standart "
-"web arama aracını geçersiz kılar."
+msgid "Show History"
+msgstr "Geçmişi göster"
 
-msgid "Code Execution:"
-msgstr "Kod Yürütme:"
+msgid "Show Copy conversation"
+msgstr "Konuşmayı kopyalamayı göster"
 
-msgid "Enable Native Python Code Execution"
-msgstr "Yerel Python Kodu Yürütmesini Etkinleştir"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Gemini'nin güvenli bir sunucu taraflı sanal alanda Python kodu yazmasına ve "
-"yürütmesine izin verin."
+msgid "Show Clear chat"
+msgstr "Sohbeti temizlemeyi göster"
 
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Yerel araçları komutlarla birleştirmek daha yeni bir model gerektirir. Şu "
-"anda seçili model (%1) hatalarla karşılaşabilir."
+msgid "Show Settings"
+msgstr "Ayarları göster"
 
-msgid "Individual Tools"
-msgstr "Bireysel Araçlar"
-
-msgid "Failed to stop driving: %1"
-msgstr "Yönetimi durdurma başarısız oldu: %1"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"gcloud token alınamadı (çıkış %1): %2. Lütfen gcloud'un kurulu ve kimlik "
-"doğrulaması yapılmış olduğundan emin olun."
-
-msgid "No tool request pending to approve."
-msgstr "Onaylanacak bekleyen araç isteği yok."
-
-msgid "No tool request pending to deny."
-msgstr "Reddedilecek bekleyen araç isteği yok."
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"Bu oturum için onayları atlama modu etkinleştirildi. Tüm etkin araçlar, "
-"'Çalıştırmadan önce sor' ayarlarını atlayarak otomatik olarak çalışacak."
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr ""
-"Onayları atlama modu devre dışı bırakıldı. Araçlar yapılandırılmış "
-"'Çalıştırmadan önce sor' ayarlarına geri dönecek."
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr ""
-"Ayarlarda masaüstü otomasyonu devre dışı bırakıldı. Masaüstünü yönetmek için "
-"önce onu etkinleştirin."
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "plasmallm-desktop-driver algılanmadı veya çalışmıyor."
-
-msgid "Default"
-msgstr "Varsayılan"
-
-msgid "Current profile: **%1**"
-msgstr "Geçerli profil: **%1**"
-
-msgid "Available profiles:"
-msgstr "Mevcut profiller:"
-
-msgid "active"
-msgstr "etkin"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "Geçiş yapmak için `/profile <ad>` yazın."
-
-msgid "Switched to profile: **%1**"
-msgstr "Profile geçildi: **%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "Bilinmeyen profil: **%1**"
-
-msgid "none"
-msgstr "yok"
-
-msgid "Current model: **%1**"
-msgstr "Mevcut model: **%1**"
-
-msgid "Available models:"
-msgstr "Mevcut modeller:"
-
-msgid "Type `/model <name>` to switch."
-msgstr "Geçiş yapmak için `/model <ad>` yazın."
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr ""
-"Önbellekte model yok. Ayarlarda **Modelleri Getir** seçeneğini kullanın."
-
-msgid "Switched to model: **%1**"
-msgstr "Modele geçildi: **%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "Görev yapılandırılmadı. Ayarlar'da görev ekleyin."
-
-msgid "(auto)"
-msgstr "(otomatik)"
-
-msgid "Available tasks:"
-msgstr "Mevcut görevler:"
-
-msgid "Type `/task <name>` to run."
-msgstr "Çalıştırmak için `/task <ad>` yazın."
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "Bilinmeyen görev: **%1**. Mevcut: %2"
-
-msgid "The user declined to run this command."
-msgstr "Kullanıcı bu komutu çalıştırmayı reddetti."
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM: Araç Çağrısı"
-
-msgid "Requested tool: %1"
-msgstr "İstenen araç: %1"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Unknown tool %1"
-msgstr "Bilinmeyen araç %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "Hata: '%1' yolu beyaz liste dışında"
-
-msgid "Executing %1…"
-msgstr "%1 çalıştırılıyor…"
-
-msgid "Session reset requested."
-msgstr "Oturum sıfırlama istendi."
-
-msgid "Failed to start drive session: %1"
-msgstr "Yönetim oturumu başlatılamadı: %1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr "Yönetim oturumu aktif (zaten yetkilendirilmiş). Otomatik mod etkin."
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr "Yönetim oturumu başarıyla yetkilendirildi. Otomatik mod etkin."
+msgid "Show Pin"
+msgstr "Sabitlemeyi göster"
 
 msgid "General"
 msgstr "Genel"
