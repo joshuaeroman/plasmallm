@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-12 23:17-0400\n"
+"POT-Creation-Date: 2026-06-30 22:15-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Dutch\n"
@@ -17,17 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Tool Request: %1"
-msgstr "Gereedschapsverzoek: %1"
+msgid "Color button"
+msgstr "Kleurknop"
 
-msgid "Justification: %1"
-msgstr "Rechtvaardiging: %1"
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Huidige kleur is %1. Deze knop opent een kleurkeuzevenster."
 
-msgid "Deny"
-msgstr "Weigeren"
-
-msgid "Approve"
-msgstr "Goedkeuren"
+msgid "Current color is %1."
+msgstr "Huidige kleur is %1."
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -72,17 +69,6 @@ msgstr "API-fout %1"
 msgid "Request failed (no response) — check your endpoint URL"
 msgstr "Verzoek mislukt (geen antwoord) — controleer uw eindpunt-URL"
 
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Redeneerinspanning (laag / gemiddeld / hoog) bepaalt uitgebreid denken. Om "
-"gedachten te zien op OpenAI / Poe / OpenRouter / Azure, schakelt u de Use "
-"Responses API in; chat-completions providers (DeepSeek, Qwen) tonen "
-"redeneringen via reasoning_content."
-
 msgid "Gemini uses the thinking level dropdown directly."
 msgstr "Gemini gebruikt de vervolgkeuzelijst voor denkniveau direct."
 
@@ -106,6 +92,17 @@ msgstr ""
 
 msgid "Request failed"
 msgstr "Verzoek mislukt"
+
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"Redeneerinspanning (laag / gemiddeld / hoog) bepaalt uitgebreid denken. Om "
+"gedachten te zien op OpenAI / Poe / OpenRouter / Azure, schakelt u de Use "
+"Responses API in; chat-completions providers (DeepSeek, Qwen) tonen "
+"redeneringen via reasoning_content."
 
 msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
@@ -265,6 +262,55 @@ msgstr "Vragen voor uitvoering"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Fout: URL moet beginnen met http:// of https://"
 
+msgid "No command provided."
+msgstr "Geen opdracht opgegeven."
+
+msgid "Ask before running commands from LLM"
+msgstr "Vragen voor het uitvoeren van LLM-opdrachten"
+
+msgid ""
+"Prompt for approval before executing shell commands from the LLM. Dangerous "
+"to uncheck as the LLM will see output and may run further commands."
+msgstr ""
+"Vragen om goedkeuring voor het uitvoeren van shell-opdrachten van de LLM. "
+"Gevaarlijk om uit te schakelen omdat de LLM de uitvoer zal zien en mogelijk "
+"verdere opdrachten uitvoert."
+
+msgid ""
+"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
+"commands without permission and will see their output, enabling an agentic "
+"workflow. Only use with trustworthy LLMs."
+msgstr ""
+"⚠️ GEVAAR: 'Vragen voor uitvoering' is uitgeschakeld — de LLM kan nu "
+"opdrachten uitvoeren zonder toestemming en zal hun uitvoer zien, waardoor "
+"een agentische workflow mogelijk wordt. Gebruik alleen met betrouwbare LLM's."
+
+msgid "Note: This tool is not restricted by the path whitelist."
+msgstr "Opmerking: Dit tool wordt niet beperkt door de padwitte lijst."
+
+msgid "Session Multiplexer"
+msgstr "Sessie-multiplexer"
+
+msgid "Run commands inside a persistent session"
+msgstr "Opdrachten uitvoeren binnen een persistente sessie"
+
+msgid ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
+msgstr ""
+"Voer LLM-opdrachten uit binnen een langlopende tmux- of screen-sessie zodat "
+"de status behouden blijft over meerdere beurten."
+
+msgid "Reset Session"
+msgstr "Sessie resetten"
+
+msgid ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
+msgstr ""
+"Noch 'tmux' noch 'screen' is op uw systeem gevonden. Sessie-multiplexing is "
+"niet beschikbaar."
+
 msgid "Search provider %1 not supported"
 msgstr "Zoekaanbieder %1 niet ondersteund"
 
@@ -315,55 +361,6 @@ msgstr ""
 msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr "Fout: inhoud overschrijdt maximale schrijfgrootte (%1 bytes)"
 
-msgid "No command provided."
-msgstr "Geen opdracht opgegeven."
-
-msgid "Ask before running commands from LLM"
-msgstr "Vragen voor het uitvoeren van LLM-opdrachten"
-
-msgid ""
-"Prompt for approval before executing shell commands from the LLM. Dangerous "
-"to uncheck as the LLM will see output and may run further commands."
-msgstr ""
-"Vragen om goedkeuring voor het uitvoeren van shell-opdrachten van de LLM. "
-"Gevaarlijk om uit te schakelen omdat de LLM de uitvoer zal zien en mogelijk "
-"verdere opdrachten uitvoert."
-
-msgid ""
-"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
-"commands without permission and will see their output, enabling an agentic "
-"workflow. Only use with trustworthy LLMs."
-msgstr ""
-"⚠️ GEVAAR: 'Vragen voor uitvoering' is uitgeschakeld — de LLM kan nu "
-"opdrachten uitvoeren zonder toestemming en zal hun uitvoer zien, waardoor "
-"een agentische workflow mogelijk wordt. Gebruik alleen met betrouwbare LLM's."
-
-msgid "Note: This tool is not restricted by the path whitelist."
-msgstr "Opmerking: Dit tool wordt niet beperkt door de padwitte lijst."
-
-msgid "Session Multiplexer"
-msgstr "Sessie-multiplexer"
-
-msgid "Run commands inside a persistent session"
-msgstr "Opdrachten uitvoeren binnen een persistente sessie"
-
-msgid ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-msgstr ""
-"Voer LLM-opdrachten uit binnen een langlopende tmux- of screen-sessie zodat "
-"de status behouden blijft over meerdere beurten."
-
-msgid "Reset Session"
-msgstr "Sessie resetten"
-
-msgid ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
-msgstr ""
-"Noch 'tmux' noch 'screen' is op uw systeem gevonden. Sessie-multiplexing is "
-"niet beschikbaar."
-
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS are allowed."
@@ -371,83 +368,26 @@ msgstr ""
 "Fout: Ongeldige HTTP-methode. Alleen GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS zijn toegestaan."
 
-msgid "Color button"
-msgstr "Kleurknop"
+msgid "Tool Request: %1"
+msgstr "Gereedschapsverzoek: %1"
 
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Huidige kleur is %1. Deze knop opent een kleurkeuzevenster."
+msgid "Justification: %1"
+msgstr "Rechtvaardiging: %1"
 
-msgid "Current color is %1."
-msgstr "Huidige kleur is %1."
+msgid "Deny"
+msgstr "Weigeren"
 
-msgid "Profile Header:"
-msgstr "Profielkoptekst:"
+msgid "Approve"
+msgstr "Goedkeuren"
 
-msgid "Show provider and model in profile header"
-msgstr "Toon provider en model in profielkoptekst"
+msgid "Stop command"
+msgstr "Opdracht stoppen"
 
-msgid "Chat Spacing: %1px"
-msgstr "Chatafstand: %1px"
+msgid "Open terminal attached to this session"
+msgstr "Terminal gekoppeld aan deze sessie openen"
 
-msgid "Compact"
-msgstr "Compact"
-
-msgid "Spacious"
-msgstr "Ruim"
-
-msgid "Chat Colors:"
-msgstr "Chatkleuren:"
-
-msgid "Use custom user color"
-msgstr "Aangepaste gebruikerskleur gebruiken"
-
-msgid "Use custom assistant color"
-msgstr "Aangepaste assistentkleur gebruiken"
-
-msgid "UI Font:"
-msgstr "UI-lettertype:"
-
-msgid "Use custom UI font"
-msgstr "Aangepast UI-lettertype gebruiken"
-
-msgid "Code Font:"
-msgstr "Code-lettertype:"
-
-msgid "Use custom code font"
-msgstr "Aangepast code-lettertype gebruiken"
-
-msgid "Thoughts Font:"
-msgstr "Gedachten-lettertype:"
-
-msgid "Use custom thoughts font"
-msgstr "Aangepast gedachten-lettertype gebruiken"
-
-msgid "Header Icons:"
-msgstr "Koptekstpictogrammen:"
-
-msgid "Profile Header"
-msgstr "Profielkoptekst"
-
-msgid "Always show Tasks"
-msgstr "Taken altijd tonen"
-
-msgid "Always show Auto Toggle"
-msgstr "Auto-schakelaar altijd tonen"
-
-msgid "Show History"
-msgstr "Geschiedenis tonen"
-
-msgid "Show Copy conversation"
-msgstr "Gesprek kopiëren tonen"
-
-msgid "Show Clear chat"
-msgstr "Chat wissen tonen"
-
-msgid "Show Settings"
-msgstr "Instellingen tonen"
-
-msgid "Show Pin"
-msgstr "Vastmaakpictogram tonen"
+msgid "Copy output"
+msgstr "Uitvoer kopiëren"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Kan gcloud-token niet ophalen (afsluiting %1): %2"
@@ -675,6 +615,253 @@ msgstr "seconden"
 msgid "minutes"
 msgstr "minuten"
 
+msgid "General Tool Settings"
+msgstr "Algemene toolinstellingen"
+
+msgid "System state:"
+msgstr "Systeemstatus:"
+
+msgid "Enable Tools"
+msgstr "Tools inschakelen"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "Hoofdschakelaar voor alle tool-aanroepfunctionaliteit."
+
+msgid "Desktop Automation:"
+msgstr "Bureaubladautomatisering:"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+"Staat de LLM toe om een sessie aan te vragen om uw bureaublad te bekijken en "
+"te besturen."
+
+msgid "Enable Desktop Automation"
+msgstr "Bureaubladautomatisering inschakelen"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Bureaubladautomatisering inschakelen (vereist <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+
+msgid "Path whitelist:"
+msgstr "Padwitte lijst:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Pad toevoegen, bijv. $HOME/projects, /tmp"
+
+msgid "Add"
+msgstr "Toevoegen"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Witte lijst is van toepassing op bestandssysteemtools (lezen, schrijven, "
+"weergeven, zoeken). Opmerking: 'run_command' wordt niet beperkt door deze "
+"lijst."
+
+msgid "Max read size:"
+msgstr "Maximale leesgrootte:"
+
+msgid "Max write size:"
+msgstr "Maximale schrijfgrootte:"
+
+msgid "Max HTTP response:"
+msgstr "Maximale HTTP-respons:"
+
+msgid "Max tool loop depth:"
+msgstr "Maximale tool-lusdiepte:"
+
+msgid "steps"
+msgstr "stappen"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr ""
+"Opmerking: Deze limiet geldt niet voor bureaubladautomatiseringssessies."
+
+msgid "Native Adapter Features"
+msgstr "Ingebouwde adapterfuncties"
+
+msgid "Google Search:"
+msgstr "Google Zoeken:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Ingebouwde Google Zoeken-grounding inschakelen"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Gebruik de ingebouwde Google Zoeken van Gemini voor grounding. Dit "
+"overschrijft de standaard websearchtool."
+
+msgid "Code Execution:"
+msgstr "Code-uitvoering:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Ingebouwde Python-codeuitvoering inschakelen"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Gemini toestaan om Python-code te schrijven en uit te voeren in een "
+"beveiligde server-side sandbox."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Het combineren van native tools met commando's vereist een nieuwer model. "
+"Het momenteel geselecteerde model (%1) kan fouten ondervinden."
+
+msgid "Individual Tools"
+msgstr "Afzonderlijke tools"
+
+msgid "OpenAI-compatible"
+msgstr "OpenAI-compatibel"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "Failed to stop driving: %1"
+msgstr "Besturing stoppen mislukt: %1"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"Kan gcloud-token niet ophalen (afsluiting %1): %2. Zorg ervoor dat gcloud is "
+"geïnstalleerd en geverifieerd."
+
+msgid "No tool request pending to approve."
+msgstr "Geen gereedschapsverzoek in afwachting van goedkeuring."
+
+msgid "The user denied this tool call."
+msgstr "De gebruiker heeft deze gereedschapsaanroep geweigerd."
+
+msgid "No tool request pending to deny."
+msgstr "Geen gereedschapsverzoek in afwachting van weigering."
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"Modus voor het overslaan van goedkeuringen ingeschakeld voor deze sessie. "
+"Alle ingeschakelde tools worden automatisch uitgevoerd, waarbij de "
+"instellingen voor 'Vragen voor uitvoering' worden omzeild."
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+"Modus voor het overslaan van goedkeuringen uitgeschakeld. Tools keren terug "
+"naar uw geconfigureerde instellingen voor 'Vragen voor uitvoering'."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+"Bureaubladautomatisering is uitgeschakeld in de instellingen. Schakel dit "
+"eerst in om het bureaublad te besturen."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver is niet gedetecteerd of draait niet."
+
+msgid "Default"
+msgstr "Standaard"
+
+msgid "Current profile: **%1**"
+msgstr "Huidig profiel: **%1**"
+
+msgid "Available profiles:"
+msgstr "Beschikbare profielen:"
+
+msgid "active"
+msgstr "actief"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "Typ `/profile <naam>` om te wisselen."
+
+msgid "Switched to profile: **%1**"
+msgstr "Profiel gewisseld naar: **%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "Onbekend profiel: **%1**"
+
+msgid "none"
+msgstr "geen"
+
+msgid "Current model: **%1**"
+msgstr "Huidig model: **%1**"
+
+msgid "Available models:"
+msgstr "Beschikbare modellen:"
+
+msgid "Type `/model <name>` to switch."
+msgstr "Typ `/model <name>` om te wisselen."
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr "Geen modellen gecached. Gebruik **Modellen ophalen** in instellingen."
+
+msgid "Switched to model: **%1**"
+msgstr "Overgeschakeld naar model: **%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "Geen taken geconfigureerd. Voeg taken toe in Instellingen."
+
+msgid "(auto)"
+msgstr "(automatisch)"
+
+msgid "Available tasks:"
+msgstr "Beschikbare taken:"
+
+msgid "Type `/task <name>` to run."
+msgstr "Typ `/task <name>` om uit te voeren."
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Onbekende taak: **%1**. Beschikbaar: %2"
+
+msgid "The user declined to run this command."
+msgstr "De gebruiker heeft geweigerd deze opdracht uit te voeren."
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Tool-aanroep"
+
+msgid "Requested tool: %1"
+msgstr "Aangevraagde tool: %1"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Unknown tool %1"
+msgstr "Onbekende tool %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "Fout: pad '%1' buiten witte lijst"
+
+msgid "Executing %1…"
+msgstr "%1 uitvoeren…"
+
+msgid "Session reset requested."
+msgstr "Sessie-reset aangevraagd."
+
+msgid "Failed to start drive session: %1"
+msgstr "Starten besturingssessie mislukt: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr ""
+"Besturingssessie actief (al geautoriseerd). Automatische modus ingeschakeld."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr ""
+"Besturingssessie succesvol geautoriseerd. Automatische modus ingeschakeld."
+
 msgid "You"
 msgstr "U"
 
@@ -686,6 +873,11 @@ msgstr "Webzoekopdracht"
 
 msgid "Assistant"
 msgstr "Assistent"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr "Mathtext-rendering is teruggevallen op Unicode-vervanging (matplotlib niet geïnstalleerd of er is een fout opgetreden)"
 
 msgid "Thinking"
 msgstr "Denken…"
@@ -810,9 +1002,6 @@ msgstr "Niet open houden"
 msgid "Keep open"
 msgstr "Open houden"
 
-msgid "The user denied this tool call."
-msgstr "De gebruiker heeft deze gereedschapsaanroep geweigerd."
-
 msgid "Send a message to start chatting"
 msgstr "Stuur een bericht om te beginnen met chatten"
 
@@ -863,256 +1052,101 @@ msgstr "LLM-verzoek annuleren"
 msgid "Drop files here to attach"
 msgstr "Sleep bestanden hierheen om ze bij te voegen"
 
-msgid "Stop command"
-msgstr "Opdracht stoppen"
+msgid "Profile Header:"
+msgstr "Profielkoptekst:"
 
-msgid "Open terminal attached to this session"
-msgstr "Terminal gekoppeld aan deze sessie openen"
+msgid "Show provider and model in profile header"
+msgstr "Toon provider en model in profielkoptekst"
 
-msgid "Copy output"
-msgstr "Uitvoer kopiëren"
+msgid "Chat Spacing: %1px"
+msgstr "Chatafstand: %1px"
 
-msgid "OpenAI-compatible"
-msgstr "OpenAI-compatibel"
+msgid "Compact"
+msgstr "Compact"
 
-msgid "Anthropic"
-msgstr "Anthropic"
+msgid "Spacious"
+msgstr "Ruim"
 
-msgid "Google Gemini"
-msgstr "Google Gemini"
+msgid "Chat Labels:"
+msgstr "Chatlabels:"
 
-msgid "General Tool Settings"
-msgstr "Algemene toolinstellingen"
+msgid "User label:"
+msgstr "Gebruikerslabel:"
 
-msgid "System state:"
-msgstr "Systeemstatus:"
+msgid "Assistant label:"
+msgstr "Assistentlabel:"
 
-msgid "Enable Tools"
-msgstr "Tools inschakelen"
+msgid "Use model name as assistant label"
+msgstr "Modelnaam gebruiken als assistentlabel"
 
-msgid "Master switch for all tool-calling functionality."
-msgstr "Hoofdschakelaar voor alle tool-aanroepfunctionaliteit."
+msgid "Chat Colors:"
+msgstr "Chatkleuren:"
 
-msgid "Desktop Automation:"
-msgstr "Bureaubladautomatisering:"
+msgid "Use custom user color"
+msgstr "Aangepaste gebruikerskleur gebruiken"
 
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr ""
-"Staat de LLM toe om een sessie aan te vragen om uw bureaublad te bekijken en "
-"te besturen."
+msgid "Use custom assistant color"
+msgstr "Aangepaste assistentkleur gebruiken"
 
-msgid "Enable Desktop Automation"
-msgstr "Bureaubladautomatisering inschakelen"
+msgid "UI Font:"
+msgstr "UI-lettertype:"
 
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr "Bureaubladautomatisering inschakelen (vereist <a href=\"https://github.com/joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgid "Use custom UI font"
+msgstr "Aangepast UI-lettertype gebruiken"
 
-msgid "Path whitelist:"
-msgstr "Padwitte lijst:"
+msgid "Code Font:"
+msgstr "Code-lettertype:"
 
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Pad toevoegen, bijv. $HOME/projects, /tmp"
+msgid "Use custom code font"
+msgstr "Aangepast code-lettertype gebruiken"
 
-msgid "Add"
-msgstr "Toevoegen"
+msgid "Thoughts Font:"
+msgstr "Gedachten-lettertype:"
 
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Witte lijst is van toepassing op bestandssysteemtools (lezen, schrijven, "
-"weergeven, zoeken). Opmerking: 'run_command' wordt niet beperkt door deze "
-"lijst."
+msgid "Use custom thoughts font"
+msgstr "Aangepast gedachten-lettertype gebruiken"
 
-msgid "Max read size:"
-msgstr "Maximale leesgrootte:"
+msgid "LaTeX Rendering:"
+msgstr "LaTeX-rendering:"
 
-msgid "Max write size:"
-msgstr "Maximale schrijfgrootte:"
+msgid "Leave as TeX"
+msgstr "Als TeX behouden"
 
-msgid "Max HTTP response:"
-msgstr "Maximale HTTP-respons:"
+msgid "Replace with Unicode (Default)"
+msgstr "Vervangen door Unicode (standaard)"
 
-msgid "Max tool loop depth:"
-msgstr "Maximale tool-lusdiepte:"
+msgid "Mathtext"
+msgstr "Mathtext"
 
-msgid "steps"
-msgstr "stappen"
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib ontbreekt)"
 
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr ""
-"Opmerking: Deze limiet geldt niet voor bureaubladautomatiseringssessies."
+msgid "Header Icons:"
+msgstr "Koptekstpictogrammen:"
 
-msgid "Native Adapter Features"
-msgstr "Ingebouwde adapterfuncties"
+msgid "Profile Header"
+msgstr "Profielkoptekst"
 
-msgid "Google Search:"
-msgstr "Google Zoeken:"
+msgid "Always show Tasks"
+msgstr "Taken altijd tonen"
 
-msgid "Enable Native Google Search Grounding"
-msgstr "Ingebouwde Google Zoeken-grounding inschakelen"
+msgid "Always show Auto Toggle"
+msgstr "Auto-schakelaar altijd tonen"
 
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Gebruik de ingebouwde Google Zoeken van Gemini voor grounding. Dit "
-"overschrijft de standaard websearchtool."
+msgid "Show History"
+msgstr "Geschiedenis tonen"
 
-msgid "Code Execution:"
-msgstr "Code-uitvoering:"
+msgid "Show Copy conversation"
+msgstr "Gesprek kopiëren tonen"
 
-msgid "Enable Native Python Code Execution"
-msgstr "Ingebouwde Python-codeuitvoering inschakelen"
+msgid "Show Clear chat"
+msgstr "Chat wissen tonen"
 
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Gemini toestaan om Python-code te schrijven en uit te voeren in een "
-"beveiligde server-side sandbox."
+msgid "Show Settings"
+msgstr "Instellingen tonen"
 
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Het combineren van native tools met commando's vereist een nieuwer model. "
-"Het momenteel geselecteerde model (%1) kan fouten ondervinden."
-
-msgid "Individual Tools"
-msgstr "Afzonderlijke tools"
-
-msgid "Failed to stop driving: %1"
-msgstr "Besturing stoppen mislukt: %1"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"Kan gcloud-token niet ophalen (afsluiting %1): %2. Zorg ervoor dat gcloud is "
-"geïnstalleerd en geverifieerd."
-
-msgid "No tool request pending to approve."
-msgstr "Geen gereedschapsverzoek in afwachting van goedkeuring."
-
-msgid "No tool request pending to deny."
-msgstr "Geen gereedschapsverzoek in afwachting van weigering."
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"Modus voor het overslaan van goedkeuringen ingeschakeld voor deze sessie. "
-"Alle ingeschakelde tools worden automatisch uitgevoerd, waarbij de "
-"instellingen voor 'Vragen voor uitvoering' worden omzeild."
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr ""
-"Modus voor het overslaan van goedkeuringen uitgeschakeld. Tools keren terug "
-"naar uw geconfigureerde instellingen voor 'Vragen voor uitvoering'."
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr ""
-"Bureaubladautomatisering is uitgeschakeld in de instellingen. Schakel dit "
-"eerst in om het bureaublad te besturen."
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "plasmallm-desktop-driver is niet gedetecteerd of draait niet."
-
-msgid "Default"
-msgstr "Standaard"
-
-msgid "Current profile: **%1**"
-msgstr "Huidig profiel: **%1**"
-
-msgid "Available profiles:"
-msgstr "Beschikbare profielen:"
-
-msgid "active"
-msgstr "actief"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "Typ `/profile <naam>` om te wisselen."
-
-msgid "Switched to profile: **%1**"
-msgstr "Profiel gewisseld naar: **%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "Onbekend profiel: **%1**"
-
-msgid "none"
-msgstr "geen"
-
-msgid "Current model: **%1**"
-msgstr "Huidig model: **%1**"
-
-msgid "Available models:"
-msgstr "Beschikbare modellen:"
-
-msgid "Type `/model <name>` to switch."
-msgstr "Typ `/model <name>` om te wisselen."
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "Geen modellen gecached. Gebruik **Modellen ophalen** in instellingen."
-
-msgid "Switched to model: **%1**"
-msgstr "Overgeschakeld naar model: **%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "Geen taken geconfigureerd. Voeg taken toe in Instellingen."
-
-msgid "(auto)"
-msgstr "(automatisch)"
-
-msgid "Available tasks:"
-msgstr "Beschikbare taken:"
-
-msgid "Type `/task <name>` to run."
-msgstr "Typ `/task <name>` om uit te voeren."
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "Onbekende taak: **%1**. Beschikbaar: %2"
-
-msgid "The user declined to run this command."
-msgstr "De gebruiker heeft geweigerd deze opdracht uit te voeren."
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM: Tool-aanroep"
-
-msgid "Requested tool: %1"
-msgstr "Aangevraagde tool: %1"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Unknown tool %1"
-msgstr "Onbekende tool %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "Fout: pad '%1' buiten witte lijst"
-
-msgid "Executing %1…"
-msgstr "%1 uitvoeren…"
-
-msgid "Session reset requested."
-msgstr "Sessie-reset aangevraagd."
-
-msgid "Failed to start drive session: %1"
-msgstr "Starten besturingssessie mislukt: %1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr ""
-"Besturingssessie actief (al geautoriseerd). Automatische modus ingeschakeld."
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr ""
-"Besturingssessie succesvol geautoriseerd. Automatische modus ingeschakeld."
+msgid "Show Pin"
+msgstr "Vastmaakpictogram tonen"
 
 msgid "General"
 msgstr "Algemeen"

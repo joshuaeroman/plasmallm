@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-12 23:17-0400\n"
+"POT-Creation-Date: 2026-06-30 22:15-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: German\n"
@@ -17,17 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Tool Request: %1"
-msgstr "Werkzeuganfrage: %1"
+msgid "Color button"
+msgstr "Farbschaltfläche"
 
-msgid "Justification: %1"
-msgstr "Begründung: %1"
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr ""
+"Die aktuelle Farbe ist %1. Diese Schaltfläche öffnet einen Farbwähler-Dialog."
 
-msgid "Deny"
-msgstr "Ablehnen"
-
-msgid "Approve"
-msgstr "Genehmigen"
+msgid "Current color is %1."
+msgstr "Die aktuelle Farbe ist %1."
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -76,17 +74,6 @@ msgid "Request failed (no response) — check your endpoint URL"
 msgstr ""
 "Anfrage fehlgeschlagen (keine Antwort) — überprüfen Sie Ihre Endpunkt-URL"
 
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Der Denkaufwand (niedrig / mittel / hoch) steuert das erweiterte Denken. Um "
-"Gedanken bei OpenAI / Poe / OpenRouter / Azure zu sehen, aktivieren Sie "
-"'Responses-API verwenden'; Chat-Completions-Anbieter (DeepSeek, Qwen) zeigen "
-"das Denken über reasoning_content an."
-
 msgid "Gemini uses the thinking level dropdown directly."
 msgstr "Gemini verwendet direkt das Dropdown-Menü für das Denklevel."
 
@@ -114,6 +101,17 @@ msgstr ""
 
 msgid "Request failed"
 msgstr "Anfrage fehlgeschlagen"
+
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"Der Denkaufwand (niedrig / mittel / hoch) steuert das erweiterte Denken. Um "
+"Gedanken bei OpenAI / Poe / OpenRouter / Azure zu sehen, aktivieren Sie "
+"'Responses-API verwenden'; Chat-Completions-Anbieter (DeepSeek, Qwen) zeigen "
+"das Denken über reasoning_content an."
 
 msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
@@ -275,56 +273,6 @@ msgstr "Vor Ausführung fragen"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Fehler: URL muss mit http:// oder https:// beginnen"
 
-msgid "Search provider %1 not supported"
-msgstr "Suchanbieter %1 wird nicht unterstützt"
-
-msgid "Searching the web for: %1…"
-msgstr "Suche im Web nach: %1…"
-
-msgid "Ollama API"
-msgstr "Ollama-API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ollama API key"
-msgstr "Ollama-API-Schlüssel"
-
-msgid "Saving…"
-msgstr "Speichern…"
-
-msgid "Saved"
-msgstr "Gespeichert"
-
-msgid "Save to Config (Insecure)"
-msgstr "In Konfiguration speichern (unsicher)"
-
-msgid "Save Key"
-msgstr "Schlüssel speichern"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG-Instanz-URL (z. B. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG-API-Schlüssel/Token (optional)"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo erfordert keine Konfiguration."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr ""
-"Stellen Sie sicher, dass für die SearXNG-Instanz das JSON-Format aktiviert "
-"ist."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Ermöglicht LLM-ausgelöste Websuchen über die Ollama-Such-API"
-
-msgid "Error: content exceeds max write size (%1 bytes)"
-msgstr "Fehler: Inhalt überschreitet die maximale Schreibgröße (%1 Bytes)"
-
 msgid "No command provided."
 msgstr "Kein Befehl angegeben."
 
@@ -376,6 +324,56 @@ msgstr ""
 "Weder 'tmux' noch 'screen' wurde auf Ihrem System gefunden. Sitzungs-"
 "Multiplexing ist nicht verfügbar."
 
+msgid "Search provider %1 not supported"
+msgstr "Suchanbieter %1 wird nicht unterstützt"
+
+msgid "Searching the web for: %1…"
+msgstr "Suche im Web nach: %1…"
+
+msgid "Ollama API"
+msgstr "Ollama-API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Ollama API key"
+msgstr "Ollama-API-Schlüssel"
+
+msgid "Saving…"
+msgstr "Speichern…"
+
+msgid "Saved"
+msgstr "Gespeichert"
+
+msgid "Save to Config (Insecure)"
+msgstr "In Konfiguration speichern (unsicher)"
+
+msgid "Save Key"
+msgstr "Schlüssel speichern"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG-Instanz-URL (z. B. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG-API-Schlüssel/Token (optional)"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo erfordert keine Konfiguration."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr ""
+"Stellen Sie sicher, dass für die SearXNG-Instanz das JSON-Format aktiviert "
+"ist."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Ermöglicht LLM-ausgelöste Websuchen über die Ollama-Such-API"
+
+msgid "Error: content exceeds max write size (%1 bytes)"
+msgstr "Fehler: Inhalt überschreitet die maximale Schreibgröße (%1 Bytes)"
+
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS are allowed."
@@ -383,84 +381,26 @@ msgstr ""
 "Fehler: Ungültige HTTP-Methode. Nur GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS sind erlaubt."
 
-msgid "Color button"
-msgstr "Farbschaltfläche"
+msgid "Tool Request: %1"
+msgstr "Werkzeuganfrage: %1"
 
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr ""
-"Die aktuelle Farbe ist %1. Diese Schaltfläche öffnet einen Farbwähler-Dialog."
+msgid "Justification: %1"
+msgstr "Begründung: %1"
 
-msgid "Current color is %1."
-msgstr "Die aktuelle Farbe ist %1."
+msgid "Deny"
+msgstr "Ablehnen"
 
-msgid "Profile Header:"
-msgstr "Profilkopfzeile:"
+msgid "Approve"
+msgstr "Genehmigen"
 
-msgid "Show provider and model in profile header"
-msgstr "Anbieter und Modell in der Profilkopfzeile anzeigen"
+msgid "Stop command"
+msgstr "Befehl stoppen"
 
-msgid "Chat Spacing: %1px"
-msgstr "Chat-Abstand: %1px"
+msgid "Open terminal attached to this session"
+msgstr "Terminal für diese Sitzung öffnen"
 
-msgid "Compact"
-msgstr "Kompakt"
-
-msgid "Spacious"
-msgstr "Geräumig"
-
-msgid "Chat Colors:"
-msgstr "Chat-Farben:"
-
-msgid "Use custom user color"
-msgstr "Benutzerdefinierte Benutzerfarbe verwenden"
-
-msgid "Use custom assistant color"
-msgstr "Benutzerdefinierte Assistentenfarbe verwenden"
-
-msgid "UI Font:"
-msgstr "Benutzeroberflächenschrift:"
-
-msgid "Use custom UI font"
-msgstr "Benutzerdefinierte UI-Schrift verwenden"
-
-msgid "Code Font:"
-msgstr "Code-Schrift:"
-
-msgid "Use custom code font"
-msgstr "Benutzerdefinierte Code-Schrift verwenden"
-
-msgid "Thoughts Font:"
-msgstr "Gedanken-Schrift:"
-
-msgid "Use custom thoughts font"
-msgstr "Benutzerdefinierte Gedanken-Schrift verwenden"
-
-msgid "Header Icons:"
-msgstr "Kopfzeilen-Icons:"
-
-msgid "Profile Header"
-msgstr "Profilkopfzeile"
-
-msgid "Always show Tasks"
-msgstr "Aufgaben immer anzeigen"
-
-msgid "Always show Auto Toggle"
-msgstr "Auto-Umschalter immer anzeigen"
-
-msgid "Show History"
-msgstr "Verlauf anzeigen"
-
-msgid "Show Copy conversation"
-msgstr "Unterhaltung kopieren anzeigen"
-
-msgid "Show Clear chat"
-msgstr "Chat löschen anzeigen"
-
-msgid "Show Settings"
-msgstr "Einstellungen anzeigen"
-
-msgid "Show Pin"
-msgstr "Pin anzeigen"
+msgid "Copy output"
+msgstr "Ausgabe kopieren"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "gcloud-Token konnte nicht abgerufen werden (Beendigungscode %1): %2"
@@ -688,6 +628,253 @@ msgstr "Sekunden"
 msgid "minutes"
 msgstr "Minuten"
 
+msgid "General Tool Settings"
+msgstr "Allgemeine Werkzeugeinstellungen"
+
+msgid "System state:"
+msgstr "Systemzustand:"
+
+msgid "Enable Tools"
+msgstr "Werkzeuge aktivieren"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "Hauptschalter für alle Werkzeugaufruffunktionen."
+
+msgid "Desktop Automation:"
+msgstr "Desktop-Automatisierung:"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+"Ermöglicht es dem LLM, eine Sitzung anzufordern, um Ihren Desktop zu sehen "
+"und zu steuern."
+
+msgid "Enable Desktop Automation"
+msgstr "Desktop-Automatisierung aktivieren"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Desktop-Automatisierung aktivieren (erfordert <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">Treiber</a>)"
+
+msgid "Path whitelist:"
+msgstr "Pfad-Whitelist:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Pfad hinzufügen, z. B. $HOME/projects, /tmp"
+
+msgid "Add"
+msgstr "Hinzufügen"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Die Whitelist gilt für Dateisystem-Werkzeuge (Lesen, Schreiben, Auflisten, "
+"Suchen). Hinweis: 'run_command' ist nicht durch diese Liste eingeschränkt."
+
+msgid "Max read size:"
+msgstr "Maximale Lesegröße:"
+
+msgid "Max write size:"
+msgstr "Maximale Schreibgröße:"
+
+msgid "Max HTTP response:"
+msgstr "Maximale HTTP-Antwort:"
+
+msgid "Max tool loop depth:"
+msgstr "Maximale Tool-Schleifentiefe:"
+
+msgid "steps"
+msgstr "Schritte"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr ""
+"Hinweis: Dieses Limit gilt nicht für Desktop-Automatisierungssitzungen."
+
+msgid "Native Adapter Features"
+msgstr "Native Adapter-Funktionen"
+
+msgid "Google Search:"
+msgstr "Google-Suche:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Natives Google Search Grounding aktivieren"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Geminis eingebaute Google-Suche für Grounding verwenden. Dies überschreibt "
+"das Standard-Websuchwerkeug."
+
+msgid "Code Execution:"
+msgstr "Code-Ausführung:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Natives Python-Code-Ausführung aktivieren"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Gemini erlauben, Python-Code in einer sicheren serverseitigen Sandbox zu "
+"schreiben und auszuführen."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Das Kombinieren nativer Tools mit Befehlen erfordert ein neueres Modell. Das "
+"aktuell ausgewählte Modell (%1) könnte auf Fehler stoßen."
+
+msgid "Individual Tools"
+msgstr "Einzelne Werkzeuge"
+
+msgid "OpenAI-compatible"
+msgstr "OpenAI-kompatibel"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "Failed to stop driving: %1"
+msgstr "Beenden der Steuerung fehlgeschlagen: %1"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"gcloud-Token konnte nicht abgerufen werden (Beendigungscode %1): %2. Bitte "
+"stellen Sie sicher, dass gcloud installiert und authentifiziert ist."
+
+msgid "No tool request pending to approve."
+msgstr "Kein ausstehender Werkzeugaufruf zur Genehmigung."
+
+msgid "The user denied this tool call."
+msgstr "Der Benutzer hat diesen Werkzeugaufruf abgelehnt."
+
+msgid "No tool request pending to deny."
+msgstr "Kein ausstehender Werkzeugaufruf zum Ablehnen."
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"Modus 'Genehmigungen überspringen' für diese Sitzung aktiviert. Alle "
+"aktivierten Werkzeuge werden automatisch ausgeführt und umgehen die 'Vor "
+"Ausführung fragen'-Einstellungen."
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+"Modus 'Genehmigungen überspringen' deaktiviert. Werkzeuge kehren zu Ihren "
+"konfigurierten 'Vor Ausführung fragen'-Einstellungen zurück."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+"Desktop-Automatisierung ist in den Einstellungen deaktiviert. Aktivieren Sie "
+"sie zuerst, um den Desktop zu steuern."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver wurde nicht erkannt oder läuft nicht."
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "Current profile: **%1**"
+msgstr "Aktuelles Profil: **%1**"
+
+msgid "Available profiles:"
+msgstr "Verfügbare Profile:"
+
+msgid "active"
+msgstr "aktiv"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "Geben Sie `/profile <Name>` ein, um zu wechseln."
+
+msgid "Switched to profile: **%1**"
+msgstr "Zu Profil gewechselt: **%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "Unbekanntes Profil: **%1**"
+
+msgid "none"
+msgstr "keins"
+
+msgid "Current model: **%1**"
+msgstr "Aktuelles Modell: **%1**"
+
+msgid "Available models:"
+msgstr "Verfügbare Modelle:"
+
+msgid "Type `/model <name>` to switch."
+msgstr "Geben Sie `/model <name>` zum Wechseln ein."
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr ""
+"Keine Modelle gecacht. Verwenden Sie **Modelle abrufen** in den "
+"Einstellungen."
+
+msgid "Switched to model: **%1**"
+msgstr "Zu Modell gewechselt: **%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr ""
+"Keine Aufgaben konfiguriert. Fügen Sie Aufgaben in den Einstellungen hinzu."
+
+msgid "(auto)"
+msgstr "(automatisch)"
+
+msgid "Available tasks:"
+msgstr "Verfügbare Aufgaben:"
+
+msgid "Type `/task <name>` to run."
+msgstr "Geben Sie `/task <name>` zum Ausführen ein."
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Unbekannte Aufgabe: **%1**. Verfügbar: %2"
+
+msgid "The user declined to run this command."
+msgstr "Der Benutzer hat die Ausführung dieses Befehls abgelehnt."
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Tool-Aufruf"
+
+msgid "Requested tool: %1"
+msgstr "Angefordertes Tool: %1"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Unknown tool %1"
+msgstr "Unbekanntes Werkzeug %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "Fehler: Pfad '%1' außerhalb der Whitelist"
+
+msgid "Executing %1…"
+msgstr "Ausführen von %1…"
+
+msgid "Session reset requested."
+msgstr "Zurücksetzen der Sitzung angefordert."
+
+msgid "Failed to start drive session: %1"
+msgstr "Starten der Steuerungssitzung fehlgeschlagen: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "Steuerungssitzung aktiv (bereits autorisiert). Auto-Modus aktiviert."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "Steuerungssitzung erfolgreich autorisiert. Auto-Modus aktiviert."
+
 msgid "You"
 msgstr "Sie"
 
@@ -699,6 +886,11 @@ msgstr "Websuche"
 
 msgid "Assistant"
 msgstr "Assistent"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr "Mathtext-Rendering fiel auf Unicode-Ersatz zurück (matplotlib nicht installiert oder Fehler aufgetreten)"
 
 msgid "Thinking"
 msgstr "Denkt…"
@@ -822,9 +1014,6 @@ msgstr "Nicht offen halten"
 msgid "Keep open"
 msgstr "Offen halten"
 
-msgid "The user denied this tool call."
-msgstr "Der Benutzer hat diesen Werkzeugaufruf abgelehnt."
-
 msgid "Send a message to start chatting"
 msgstr "Senden Sie eine Nachricht, um mit dem Chatten zu beginnen"
 
@@ -876,256 +1065,101 @@ msgstr "LLM-Anfrage abbrechen"
 msgid "Drop files here to attach"
 msgstr "Dateien hier ablegen, um sie anzuhängen"
 
-msgid "Stop command"
-msgstr "Befehl stoppen"
+msgid "Profile Header:"
+msgstr "Profilkopfzeile:"
 
-msgid "Open terminal attached to this session"
-msgstr "Terminal für diese Sitzung öffnen"
+msgid "Show provider and model in profile header"
+msgstr "Anbieter und Modell in der Profilkopfzeile anzeigen"
 
-msgid "Copy output"
-msgstr "Ausgabe kopieren"
+msgid "Chat Spacing: %1px"
+msgstr "Chat-Abstand: %1px"
 
-msgid "OpenAI-compatible"
-msgstr "OpenAI-kompatibel"
+msgid "Compact"
+msgstr "Kompakt"
 
-msgid "Anthropic"
-msgstr "Anthropic"
+msgid "Spacious"
+msgstr "Geräumig"
 
-msgid "Google Gemini"
-msgstr "Google Gemini"
+msgid "Chat Labels:"
+msgstr "Chat-Labels:"
 
-msgid "General Tool Settings"
-msgstr "Allgemeine Werkzeugeinstellungen"
+msgid "User label:"
+msgstr "Benutzer-Label:"
 
-msgid "System state:"
-msgstr "Systemzustand:"
+msgid "Assistant label:"
+msgstr "Assistenten-Label:"
 
-msgid "Enable Tools"
-msgstr "Werkzeuge aktivieren"
+msgid "Use model name as assistant label"
+msgstr "Modellnamen als Assistenten-Label verwenden"
 
-msgid "Master switch for all tool-calling functionality."
-msgstr "Hauptschalter für alle Werkzeugaufruffunktionen."
+msgid "Chat Colors:"
+msgstr "Chat-Farben:"
 
-msgid "Desktop Automation:"
-msgstr "Desktop-Automatisierung:"
+msgid "Use custom user color"
+msgstr "Benutzerdefinierte Benutzerfarbe verwenden"
 
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr ""
-"Ermöglicht es dem LLM, eine Sitzung anzufordern, um Ihren Desktop zu sehen "
-"und zu steuern."
+msgid "Use custom assistant color"
+msgstr "Benutzerdefinierte Assistentenfarbe verwenden"
 
-msgid "Enable Desktop Automation"
-msgstr "Desktop-Automatisierung aktivieren"
+msgid "UI Font:"
+msgstr "Benutzeroberflächenschrift:"
 
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr "Desktop-Automatisierung aktivieren (erfordert <a href=\"https://github.com/joshuaeroman/plasmallm-desktop-driver\">Treiber</a>)"
+msgid "Use custom UI font"
+msgstr "Benutzerdefinierte UI-Schrift verwenden"
 
-msgid "Path whitelist:"
-msgstr "Pfad-Whitelist:"
+msgid "Code Font:"
+msgstr "Code-Schrift:"
 
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Pfad hinzufügen, z. B. $HOME/projects, /tmp"
+msgid "Use custom code font"
+msgstr "Benutzerdefinierte Code-Schrift verwenden"
 
-msgid "Add"
-msgstr "Hinzufügen"
+msgid "Thoughts Font:"
+msgstr "Gedanken-Schrift:"
 
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Die Whitelist gilt für Dateisystem-Werkzeuge (Lesen, Schreiben, Auflisten, "
-"Suchen). Hinweis: 'run_command' ist nicht durch diese Liste eingeschränkt."
+msgid "Use custom thoughts font"
+msgstr "Benutzerdefinierte Gedanken-Schrift verwenden"
 
-msgid "Max read size:"
-msgstr "Maximale Lesegröße:"
+msgid "LaTeX Rendering:"
+msgstr "LaTeX-Rendering:"
 
-msgid "Max write size:"
-msgstr "Maximale Schreibgröße:"
+msgid "Leave as TeX"
+msgstr "Als TeX belassen"
 
-msgid "Max HTTP response:"
-msgstr "Maximale HTTP-Antwort:"
+msgid "Replace with Unicode (Default)"
+msgstr "Durch Unicode ersetzen (Standard)"
 
-msgid "Max tool loop depth:"
-msgstr "Maximale Tool-Schleifentiefe:"
+msgid "Mathtext"
+msgstr "Mathtext"
 
-msgid "steps"
-msgstr "Schritte"
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib fehlt)"
 
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr ""
-"Hinweis: Dieses Limit gilt nicht für Desktop-Automatisierungssitzungen."
+msgid "Header Icons:"
+msgstr "Kopfzeilen-Icons:"
 
-msgid "Native Adapter Features"
-msgstr "Native Adapter-Funktionen"
+msgid "Profile Header"
+msgstr "Profilkopfzeile"
 
-msgid "Google Search:"
-msgstr "Google-Suche:"
+msgid "Always show Tasks"
+msgstr "Aufgaben immer anzeigen"
 
-msgid "Enable Native Google Search Grounding"
-msgstr "Natives Google Search Grounding aktivieren"
+msgid "Always show Auto Toggle"
+msgstr "Auto-Umschalter immer anzeigen"
 
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Geminis eingebaute Google-Suche für Grounding verwenden. Dies überschreibt "
-"das Standard-Websuchwerkeug."
+msgid "Show History"
+msgstr "Verlauf anzeigen"
 
-msgid "Code Execution:"
-msgstr "Code-Ausführung:"
+msgid "Show Copy conversation"
+msgstr "Unterhaltung kopieren anzeigen"
 
-msgid "Enable Native Python Code Execution"
-msgstr "Natives Python-Code-Ausführung aktivieren"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Gemini erlauben, Python-Code in einer sicheren serverseitigen Sandbox zu "
-"schreiben und auszuführen."
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Das Kombinieren nativer Tools mit Befehlen erfordert ein neueres Modell. Das "
-"aktuell ausgewählte Modell (%1) könnte auf Fehler stoßen."
+msgid "Show Clear chat"
+msgstr "Chat löschen anzeigen"
 
-msgid "Individual Tools"
-msgstr "Einzelne Werkzeuge"
+msgid "Show Settings"
+msgstr "Einstellungen anzeigen"
 
-msgid "Failed to stop driving: %1"
-msgstr "Beenden der Steuerung fehlgeschlagen: %1"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"gcloud-Token konnte nicht abgerufen werden (Beendigungscode %1): %2. Bitte "
-"stellen Sie sicher, dass gcloud installiert und authentifiziert ist."
-
-msgid "No tool request pending to approve."
-msgstr "Kein ausstehender Werkzeugaufruf zur Genehmigung."
-
-msgid "No tool request pending to deny."
-msgstr "Kein ausstehender Werkzeugaufruf zum Ablehnen."
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"Modus 'Genehmigungen überspringen' für diese Sitzung aktiviert. Alle "
-"aktivierten Werkzeuge werden automatisch ausgeführt und umgehen die 'Vor "
-"Ausführung fragen'-Einstellungen."
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr ""
-"Modus 'Genehmigungen überspringen' deaktiviert. Werkzeuge kehren zu Ihren "
-"konfigurierten 'Vor Ausführung fragen'-Einstellungen zurück."
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr ""
-"Desktop-Automatisierung ist in den Einstellungen deaktiviert. Aktivieren Sie "
-"sie zuerst, um den Desktop zu steuern."
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "plasmallm-desktop-driver wurde nicht erkannt oder läuft nicht."
-
-msgid "Default"
-msgstr "Standard"
-
-msgid "Current profile: **%1**"
-msgstr "Aktuelles Profil: **%1**"
-
-msgid "Available profiles:"
-msgstr "Verfügbare Profile:"
-
-msgid "active"
-msgstr "aktiv"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "Geben Sie `/profile <Name>` ein, um zu wechseln."
-
-msgid "Switched to profile: **%1**"
-msgstr "Zu Profil gewechselt: **%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "Unbekanntes Profil: **%1**"
-
-msgid "none"
-msgstr "keins"
-
-msgid "Current model: **%1**"
-msgstr "Aktuelles Modell: **%1**"
-
-msgid "Available models:"
-msgstr "Verfügbare Modelle:"
-
-msgid "Type `/model <name>` to switch."
-msgstr "Geben Sie `/model <name>` zum Wechseln ein."
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr ""
-"Keine Modelle gecacht. Verwenden Sie **Modelle abrufen** in den "
-"Einstellungen."
-
-msgid "Switched to model: **%1**"
-msgstr "Zu Modell gewechselt: **%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr ""
-"Keine Aufgaben konfiguriert. Fügen Sie Aufgaben in den Einstellungen hinzu."
-
-msgid "(auto)"
-msgstr "(automatisch)"
-
-msgid "Available tasks:"
-msgstr "Verfügbare Aufgaben:"
-
-msgid "Type `/task <name>` to run."
-msgstr "Geben Sie `/task <name>` zum Ausführen ein."
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "Unbekannte Aufgabe: **%1**. Verfügbar: %2"
-
-msgid "The user declined to run this command."
-msgstr "Der Benutzer hat die Ausführung dieses Befehls abgelehnt."
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM: Tool-Aufruf"
-
-msgid "Requested tool: %1"
-msgstr "Angefordertes Tool: %1"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Unknown tool %1"
-msgstr "Unbekanntes Werkzeug %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "Fehler: Pfad '%1' außerhalb der Whitelist"
-
-msgid "Executing %1…"
-msgstr "Ausführen von %1…"
-
-msgid "Session reset requested."
-msgstr "Zurücksetzen der Sitzung angefordert."
-
-msgid "Failed to start drive session: %1"
-msgstr "Starten der Steuerungssitzung fehlgeschlagen: %1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr "Steuerungssitzung aktiv (bereits autorisiert). Auto-Modus aktiviert."
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr "Steuerungssitzung erfolgreich autorisiert. Auto-Modus aktiviert."
+msgid "Show Pin"
+msgstr "Pin anzeigen"
 
 msgid "General"
 msgstr "Allgemein"

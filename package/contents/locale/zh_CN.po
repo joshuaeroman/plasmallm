@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-12 23:17-0400\n"
+"POT-Creation-Date: 2026-06-30 22:15-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Chinese (Simplified)\n"
@@ -15,17 +15,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "Tool Request: %1"
-msgstr "工具请求：%1"
+msgid "Color button"
+msgstr "颜色按钮"
 
-msgid "Justification: %1"
-msgstr "理由：%1"
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "当前颜色为 %1。点击此按钮将打开颜色选择器。"
 
-msgid "Deny"
-msgstr "拒绝"
-
-msgid "Approve"
-msgstr "批准"
+msgid "Current color is %1."
+msgstr "当前颜色为 %1。"
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -67,16 +64,6 @@ msgstr "API 错误 %1"
 msgid "Request failed (no response) — check your endpoint URL"
 msgstr "请求失败（无响应） — 请检查您的端点 URL..."
 
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"推理力度（低 / 中 / 高）控制扩展思考。要查看 OpenAI / Poe / OpenRouter / "
-"Azure 的思考，请启用“使用 Responses API”；聊天补全提供商（DeepSeek、Qwen）通"
-"过 reasoning_content 呈现推理。"
-
 msgid "Gemini uses the thinking level dropdown directly."
 msgstr "Gemini 直接使用思考级别下拉菜单。"
 
@@ -99,6 +86,16 @@ msgstr ""
 
 msgid "Request failed"
 msgstr "请求失败..."
+
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"推理力度（低 / 中 / 高）控制扩展思考。要查看 OpenAI / Poe / OpenRouter / "
+"Azure 的思考，请启用“使用 Responses API”；聊天补全提供商（DeepSeek、Qwen）通"
+"过 reasoning_content 呈现推理。"
 
 msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
@@ -250,6 +247,51 @@ msgstr "运行前询问"
 msgid "Error: URL must start with http:// or https://"
 msgstr "错误：URL 必须以 http:// 或 https:// 开头"
 
+msgid "No command provided."
+msgstr "未提供命令。"
+
+msgid "Ask before running commands from LLM"
+msgstr "在运行 LLM 命令前询问"
+
+msgid ""
+"Prompt for approval before executing shell commands from the LLM. Dangerous "
+"to uncheck as the LLM will see output and may run further commands."
+msgstr ""
+"在执行 LLM 的 shell 命令前请求批准。取消勾选很危险，因为 LLM 会看到输出并可能"
+"运行更多命令。"
+
+msgid ""
+"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
+"commands without permission and will see their output, enabling an agentic "
+"workflow. Only use with trustworthy LLMs."
+msgstr ""
+"⚠️ 危险：「运行前询问」已禁用 — LLM 现在可以无需许可执行命令并查看其输出，从而"
+"启用代理工作流。仅与可信的 LLM 一起使用。"
+
+msgid "Note: This tool is not restricted by the path whitelist."
+msgstr "注意：此工具不受路径白名单限制。"
+
+msgid "Session Multiplexer"
+msgstr "会话多路复用器"
+
+msgid "Run commands inside a persistent session"
+msgstr "在持久会话中运行命令"
+
+msgid ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
+msgstr ""
+"在一个长期的 tmux 或 screen 会话中执行 LLM 命令，以便状态在对话轮次间保持不"
+"变。"
+
+msgid "Reset Session"
+msgstr "重置会话"
+
+msgid ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
+msgstr "系统中未找到 'tmux' 或 'screen'。会话多路复用不可用。"
+
 msgid "Search provider %1 not supported"
 msgstr "不支持的搜索提供商 %1"
 
@@ -298,134 +340,32 @@ msgstr "通过Ollama的搜索API启用LLM触发的网络搜索"
 msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr "错误：内容超过最大写入大小（%1 字节）"
 
-msgid "No command provided."
-msgstr "未提供命令。"
-
-msgid "Ask before running commands from LLM"
-msgstr "在运行 LLM 命令前询问"
-
-msgid ""
-"Prompt for approval before executing shell commands from the LLM. Dangerous "
-"to uncheck as the LLM will see output and may run further commands."
-msgstr ""
-"在执行 LLM 的 shell 命令前请求批准。取消勾选很危险，因为 LLM 会看到输出并可能"
-"运行更多命令。"
-
-msgid ""
-"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
-"commands without permission and will see their output, enabling an agentic "
-"workflow. Only use with trustworthy LLMs."
-msgstr ""
-"⚠️ 危险：「运行前询问」已禁用 — LLM 现在可以无需许可执行命令并查看其输出，从而"
-"启用代理工作流。仅与可信的 LLM 一起使用。"
-
-msgid "Note: This tool is not restricted by the path whitelist."
-msgstr "注意：此工具不受路径白名单限制。"
-
-msgid "Session Multiplexer"
-msgstr "会话多路复用器"
-
-msgid "Run commands inside a persistent session"
-msgstr "在持久会话中运行命令"
-
-msgid ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-msgstr ""
-"在一个长期的 tmux 或 screen 会话中执行 LLM 命令，以便状态在对话轮次间保持不"
-"变。"
-
-msgid "Reset Session"
-msgstr "重置会话"
-
-msgid ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
-msgstr "系统中未找到 'tmux' 或 'screen'。会话多路复用不可用。"
-
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS are allowed."
 msgstr ""
 "错误：无效的 HTTP 方法。仅允许 GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS。"
 
-msgid "Color button"
-msgstr "颜色按钮"
+msgid "Tool Request: %1"
+msgstr "工具请求：%1"
 
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "当前颜色为 %1。点击此按钮将打开颜色选择器。"
+msgid "Justification: %1"
+msgstr "理由：%1"
 
-msgid "Current color is %1."
-msgstr "当前颜色为 %1。"
+msgid "Deny"
+msgstr "拒绝"
 
-msgid "Profile Header:"
-msgstr "配置文件标头："
+msgid "Approve"
+msgstr "批准"
 
-msgid "Show provider and model in profile header"
-msgstr "在配置文件标头中显示提供商和模型"
+msgid "Stop command"
+msgstr "停止命令"
 
-msgid "Chat Spacing: %1px"
-msgstr "聊天间距：%1px"
+msgid "Open terminal attached to this session"
+msgstr "打开连接到此会话的终端"
 
-msgid "Compact"
-msgstr "紧凑"
-
-msgid "Spacious"
-msgstr "宽敞"
-
-msgid "Chat Colors:"
-msgstr "聊天颜色："
-
-msgid "Use custom user color"
-msgstr "使用自定义用户颜色"
-
-msgid "Use custom assistant color"
-msgstr "使用自定义助手颜色"
-
-msgid "UI Font:"
-msgstr "界面字体："
-
-msgid "Use custom UI font"
-msgstr "使用自定义界面字体"
-
-msgid "Code Font:"
-msgstr "代码字体："
-
-msgid "Use custom code font"
-msgstr "使用自定义代码字体"
-
-msgid "Thoughts Font:"
-msgstr "思维字体："
-
-msgid "Use custom thoughts font"
-msgstr "使用自定义思维字体"
-
-msgid "Header Icons:"
-msgstr "标头图标："
-
-msgid "Profile Header"
-msgstr "配置文件标头"
-
-msgid "Always show Tasks"
-msgstr "始终显示任务"
-
-msgid "Always show Auto Toggle"
-msgstr "始终显示自动切换"
-
-msgid "Show History"
-msgstr "显示历史记录"
-
-msgid "Show Copy conversation"
-msgstr "显示复制对话"
-
-msgid "Show Clear chat"
-msgstr "显示清除聊天"
-
-msgid "Show Settings"
-msgstr "显示设置"
-
-msgid "Show Pin"
-msgstr "显示固定"
+msgid "Copy output"
+msgstr "复制输出"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "无法获取 gcloud 令牌（退出 %1）：%2"
@@ -645,6 +585,236 @@ msgstr "秒"
 msgid "minutes"
 msgstr "分钟"
 
+msgid "General Tool Settings"
+msgstr "常规工具设置"
+
+msgid "System state:"
+msgstr "系统状态："
+
+msgid "Enable Tools"
+msgstr "启用工具"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "所有工具调用功能的主开关。"
+
+msgid "Desktop Automation:"
+msgstr "桌面自动化："
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr "允许 LLM 请求会话以查看和操作您的桌面。"
+
+msgid "Enable Desktop Automation"
+msgstr "启用桌面自动化"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"启用桌面自动化（需要<a href=\"https://github.com/joshuaeroman/plasmallm-"
+"desktop-driver\">驱动程序</a>）"
+
+msgid "Path whitelist:"
+msgstr "路径白名单："
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "添加路径，例如 $HOME/projects，/tmp"
+
+msgid "Add"
+msgstr "添加"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"白名单适用于文件系统工具（读取、写入、列出、搜索）。注意：'run_command' 不受"
+"此列表限制。"
+
+msgid "Max read size:"
+msgstr "最大读取大小："
+
+msgid "Max write size:"
+msgstr "最大写入大小："
+
+msgid "Max HTTP response:"
+msgstr "最大 HTTP 响应："
+
+msgid "Max tool loop depth:"
+msgstr "最大工具循环深度："
+
+msgid "steps"
+msgstr "步"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr "注意：此限制不适用于桌面自动化会话。"
+
+msgid "Native Adapter Features"
+msgstr "原生适配器功能"
+
+msgid "Google Search:"
+msgstr "Google 搜索："
+
+msgid "Enable Native Google Search Grounding"
+msgstr "启用原生 Google 搜索基础"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr "使用 Gemini 内置的 Google 搜索进行基础。这会覆盖标准的网络搜索工具。"
+
+msgid "Code Execution:"
+msgstr "代码执行："
+
+msgid "Enable Native Python Code Execution"
+msgstr "启用原生 Python 代码执行"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr "允许 Gemini 在安全的服务器端沙盒中编写和执行 Python 代码。"
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"将原生工具与命令结合使用需要更新的模型。当前选定的模型 (%1) 可能会遇到错误。"
+
+msgid "Individual Tools"
+msgstr "单个工具"
+
+msgid "OpenAI-compatible"
+msgstr "OpenAI兼容"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "Failed to stop driving: %1"
+msgstr "无法停止控制：%1"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"无法获取 gcloud 令牌（退出 %1）：%2。请确保 gcloud 已安装并已通过身份验证。"
+
+msgid "No tool request pending to approve."
+msgstr "没有待批准的工具请求。"
+
+msgid "The user denied this tool call."
+msgstr "用户拒绝了此工具调用。"
+
+msgid "No tool request pending to deny."
+msgstr "没有待拒绝的工具请求。"
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"此会话已启用跳过审批模式。所有已启用的工具将自动运行，绕过「运行前询问」设"
+"置。"
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr "跳过审批模式已禁用。工具将恢复为您配置的「运行前询问」设置。"
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr "设置中已禁用桌面自动化。请先启用它以操作桌面。"
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "未检测到 plasmallm-desktop-driver 或该程序未运行。"
+
+msgid "Default"
+msgstr "默认"
+
+msgid "Current profile: **%1**"
+msgstr "当前配置文件：**%1**"
+
+msgid "Available profiles:"
+msgstr "可用配置文件："
+
+msgid "active"
+msgstr "活跃"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "输入 `/profile <名称>` 进行切换。"
+
+msgid "Switched to profile: **%1**"
+msgstr "已切换到配置文件：**%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "未知配置文件：**%1**"
+
+msgid "none"
+msgstr "无"
+
+msgid "Current model: **%1**"
+msgstr "当前模型：**%1**"
+
+msgid "Available models:"
+msgstr "可用模型："
+
+msgid "Type `/model <name>` to switch."
+msgstr "输入 `/model <name>` 进行切换。"
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr "没有缓存的模型。请在设置中使用**获取模型**。"
+
+msgid "Switched to model: **%1**"
+msgstr "已切换到模型：**%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "未配置任务。请在设置中添加任务。"
+
+msgid "(auto)"
+msgstr "（自动）"
+
+msgid "Available tasks:"
+msgstr "可用任务："
+
+msgid "Type `/task <name>` to run."
+msgstr "输入 `/task <name>` 运行。"
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "未知任务：**%1**。可用：%2"
+
+msgid "The user declined to run this command."
+msgstr "用户拒绝运行此命令。"
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM：工具调用"
+
+msgid "Requested tool: %1"
+msgstr "请求的工具：%1"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Unknown tool %1"
+msgstr "未知工具 %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "错误：路径 '%1' 不在白名单内"
+
+msgid "Executing %1…"
+msgstr "正在执行 %1…"
+
+msgid "Session reset requested."
+msgstr "已请求重置会话。"
+
+msgid "Failed to start drive session: %1"
+msgstr "无法启动控制会话：%1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "控制会话处于活动状态（已授权）。自动模式已启用。"
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "控制会话授权成功。自动模式已启用。"
+
 msgid "You"
 msgstr "你"
 
@@ -656,6 +826,11 @@ msgstr "网络搜索"
 
 msgid "Assistant"
 msgstr "助手"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr "Mathtext 渲染回退到 Unicode 替换（matplotlib 未安装或发生错误）"
 
 msgid "Thinking"
 msgstr "思考中…"
@@ -775,9 +950,6 @@ msgstr "不保持打开"
 msgid "Keep open"
 msgstr "保持打开"
 
-msgid "The user denied this tool call."
-msgstr "用户拒绝了此工具调用。"
-
 msgid "Send a message to start chatting"
 msgstr "发送消息开始聊天"
 
@@ -827,239 +999,101 @@ msgstr "取消 LLM 请求"
 msgid "Drop files here to attach"
 msgstr "将文件拖放到此处以添加附件"
 
-msgid "Stop command"
-msgstr "停止命令"
+msgid "Profile Header:"
+msgstr "配置文件标头："
 
-msgid "Open terminal attached to this session"
-msgstr "打开连接到此会话的终端"
+msgid "Show provider and model in profile header"
+msgstr "在配置文件标头中显示提供商和模型"
 
-msgid "Copy output"
-msgstr "复制输出"
+msgid "Chat Spacing: %1px"
+msgstr "聊天间距：%1px"
 
-msgid "OpenAI-compatible"
-msgstr "OpenAI兼容"
+msgid "Compact"
+msgstr "紧凑"
 
-msgid "Anthropic"
-msgstr "Anthropic"
+msgid "Spacious"
+msgstr "宽敞"
 
-msgid "Google Gemini"
-msgstr "Google Gemini"
+msgid "Chat Labels:"
+msgstr "聊天标签："
 
-msgid "General Tool Settings"
-msgstr "常规工具设置"
+msgid "User label:"
+msgstr "用户标签："
 
-msgid "System state:"
-msgstr "系统状态："
+msgid "Assistant label:"
+msgstr "助手标签："
 
-msgid "Enable Tools"
-msgstr "启用工具"
+msgid "Use model name as assistant label"
+msgstr "使用模型名称作为助手标签"
 
-msgid "Master switch for all tool-calling functionality."
-msgstr "所有工具调用功能的主开关。"
+msgid "Chat Colors:"
+msgstr "聊天颜色："
 
-msgid "Desktop Automation:"
-msgstr "桌面自动化："
+msgid "Use custom user color"
+msgstr "使用自定义用户颜色"
 
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr "允许 LLM 请求会话以查看和操作您的桌面。"
+msgid "Use custom assistant color"
+msgstr "使用自定义助手颜色"
 
-msgid "Enable Desktop Automation"
-msgstr "启用桌面自动化"
+msgid "UI Font:"
+msgstr "界面字体："
 
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr "启用桌面自动化（需要<a href=\"https://github.com/joshuaeroman/plasmallm-desktop-driver\">驱动程序</a>）"
+msgid "Use custom UI font"
+msgstr "使用自定义界面字体"
 
-msgid "Path whitelist:"
-msgstr "路径白名单："
+msgid "Code Font:"
+msgstr "代码字体："
 
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "添加路径，例如 $HOME/projects，/tmp"
+msgid "Use custom code font"
+msgstr "使用自定义代码字体"
 
-msgid "Add"
-msgstr "添加"
+msgid "Thoughts Font:"
+msgstr "思维字体："
 
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"白名单适用于文件系统工具（读取、写入、列出、搜索）。注意：'run_command' 不受"
-"此列表限制。"
+msgid "Use custom thoughts font"
+msgstr "使用自定义思维字体"
 
-msgid "Max read size:"
-msgstr "最大读取大小："
+msgid "LaTeX Rendering:"
+msgstr "LaTeX 渲染："
 
-msgid "Max write size:"
-msgstr "最大写入大小："
+msgid "Leave as TeX"
+msgstr "保留为 TeX"
 
-msgid "Max HTTP response:"
-msgstr "最大 HTTP 响应："
+msgid "Replace with Unicode (Default)"
+msgstr "替换为 Unicode（默认）"
 
-msgid "Max tool loop depth:"
-msgstr "最大工具循环深度："
+msgid "Mathtext"
+msgstr "Mathtext"
 
-msgid "steps"
-msgstr "步"
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext（缺少 python3-matplotlib）"
 
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr "注意：此限制不适用于桌面自动化会话。"
+msgid "Header Icons:"
+msgstr "标头图标："
 
-msgid "Native Adapter Features"
-msgstr "原生适配器功能"
+msgid "Profile Header"
+msgstr "配置文件标头"
 
-msgid "Google Search:"
-msgstr "Google 搜索："
+msgid "Always show Tasks"
+msgstr "始终显示任务"
 
-msgid "Enable Native Google Search Grounding"
-msgstr "启用原生 Google 搜索基础"
+msgid "Always show Auto Toggle"
+msgstr "始终显示自动切换"
 
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr "使用 Gemini 内置的 Google 搜索进行基础。这会覆盖标准的网络搜索工具。"
+msgid "Show History"
+msgstr "显示历史记录"
 
-msgid "Code Execution:"
-msgstr "代码执行："
+msgid "Show Copy conversation"
+msgstr "显示复制对话"
 
-msgid "Enable Native Python Code Execution"
-msgstr "启用原生 Python 代码执行"
+msgid "Show Clear chat"
+msgstr "显示清除聊天"
 
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr "允许 Gemini 在安全的服务器端沙盒中编写和执行 Python 代码。"
+msgid "Show Settings"
+msgstr "显示设置"
 
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"将原生工具与命令结合使用需要更新的模型。当前选定的模型 (%1) 可能会遇到错误。"
-
-msgid "Individual Tools"
-msgstr "单个工具"
-
-msgid "Failed to stop driving: %1"
-msgstr "无法停止控制：%1"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"无法获取 gcloud 令牌（退出 %1）：%2。请确保 gcloud 已安装并已通过身份验证。"
-
-msgid "No tool request pending to approve."
-msgstr "没有待批准的工具请求。"
-
-msgid "No tool request pending to deny."
-msgstr "没有待拒绝的工具请求。"
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"此会话已启用跳过审批模式。所有已启用的工具将自动运行，绕过「运行前询问」设"
-"置。"
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr "跳过审批模式已禁用。工具将恢复为您配置的「运行前询问」设置。"
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr "设置中已禁用桌面自动化。请先启用它以操作桌面。"
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "未检测到 plasmallm-desktop-driver 或该程序未运行。"
-
-msgid "Default"
-msgstr "默认"
-
-msgid "Current profile: **%1**"
-msgstr "当前配置文件：**%1**"
-
-msgid "Available profiles:"
-msgstr "可用配置文件："
-
-msgid "active"
-msgstr "活跃"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "输入 `/profile <名称>` 进行切换。"
-
-msgid "Switched to profile: **%1**"
-msgstr "已切换到配置文件：**%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "未知配置文件：**%1**"
-
-msgid "none"
-msgstr "无"
-
-msgid "Current model: **%1**"
-msgstr "当前模型：**%1**"
-
-msgid "Available models:"
-msgstr "可用模型："
-
-msgid "Type `/model <name>` to switch."
-msgstr "输入 `/model <name>` 进行切换。"
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "没有缓存的模型。请在设置中使用**获取模型**。"
-
-msgid "Switched to model: **%1**"
-msgstr "已切换到模型：**%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "未配置任务。请在设置中添加任务。"
-
-msgid "(auto)"
-msgstr "（自动）"
-
-msgid "Available tasks:"
-msgstr "可用任务："
-
-msgid "Type `/task <name>` to run."
-msgstr "输入 `/task <name>` 运行。"
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "未知任务：**%1**。可用：%2"
-
-msgid "The user declined to run this command."
-msgstr "用户拒绝运行此命令。"
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM：工具调用"
-
-msgid "Requested tool: %1"
-msgstr "请求的工具：%1"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Unknown tool %1"
-msgstr "未知工具 %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "错误：路径 '%1' 不在白名单内"
-
-msgid "Executing %1…"
-msgstr "正在执行 %1…"
-
-msgid "Session reset requested."
-msgstr "已请求重置会话。"
-
-msgid "Failed to start drive session: %1"
-msgstr "无法启动控制会话：%1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr "控制会话处于活动状态（已授权）。自动模式已启用。"
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr "控制会话授权成功。自动模式已启用。"
+msgid "Show Pin"
+msgstr "显示固定"
 
 msgid "General"
 msgstr "常规"

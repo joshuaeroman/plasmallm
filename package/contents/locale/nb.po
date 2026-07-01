@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-12 23:17-0400\n"
+"POT-Creation-Date: 2026-06-30 22:15-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -17,17 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Tool Request: %1"
-msgstr "Verktøyforespørsel: %1"
+msgid "Color button"
+msgstr "Fargeknapp"
 
-msgid "Justification: %1"
-msgstr "Begrunnelse: %1"
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Gjeldende farge er %1. Denne knappen vil åpne en fargevelgerdialog."
 
-msgid "Deny"
-msgstr "Avslå"
-
-msgid "Approve"
-msgstr "Godkjenn"
+msgid "Current color is %1."
+msgstr "Gjeldende farge er %1."
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -70,15 +67,6 @@ msgid "Request failed (no response) — check your endpoint URL"
 msgstr ""
 "Forespørsel mislyktes (ingen respons) — kontroller endepunkts-URL-en..."
 
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Resonneringsinnsats (lav / middels / høy) styrer utvidet tenkning. For å se "
-"tanker, sørg for at du har aktivert 'Vis tanker' i Generelt-fanen."
-
 msgid "Gemini uses the thinking level dropdown directly."
 msgstr "Gemini bruker tenkenivå-nedtrekkslisten direkte."
 
@@ -102,6 +90,15 @@ msgstr ""
 
 msgid "Request failed"
 msgstr "Forespørsel feilet..."
+
+msgid ""
+"Reasoning effort (low / medium / high) gates extended thinking. To see "
+"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+"reasoning_content."
+msgstr ""
+"Resonneringsinnsats (lav / middels / høy) styrer utvidet tenkning. For å se "
+"tanker, sørg for at du har aktivert 'Vis tanker' i Generelt-fanen."
 
 msgid ""
 "Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
@@ -260,54 +257,6 @@ msgstr "Spør før kjøring"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Feil: URL må starte med http:// eller https://"
 
-msgid "Search provider %1 not supported"
-msgstr "Søkeleverandør %1 støttes ikke"
-
-msgid "Searching the web for: %1…"
-msgstr "Søker på nettet etter: %1…"
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ollama API key"
-msgstr "Ollama API-nøkkel"
-
-msgid "Saving…"
-msgstr "Lagrer…"
-
-msgid "Saved"
-msgstr "Lagret"
-
-msgid "Save to Config (Insecure)"
-msgstr "Lagre til konfigurasjon (usikker)"
-
-msgid "Save Key"
-msgstr "Lagre nøkkel"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG-instans-URL (f.eks. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API-nøkkel/Token (valgfritt)"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo krever ingen konfigurasjon."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Sørg for at SearXNG-instansen har JSON-formatet aktivert."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
-
-msgid "Error: content exceeds max write size (%1 bytes)"
-msgstr "Feil: innhold overskrider maksimal skrivingsstørrelse (%1 byte)"
-
 msgid "No command provided."
 msgstr "Ingen kommando oppgitt."
 
@@ -356,6 +305,54 @@ msgstr ""
 "Verken 'tmux' eller 'screen' ble funnet på systemet ditt. Øktmultipleksing "
 "er utilgjengelig."
 
+msgid "Search provider %1 not supported"
+msgstr "Søkeleverandør %1 støttes ikke"
+
+msgid "Searching the web for: %1…"
+msgstr "Søker på nettet etter: %1…"
+
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Ollama API key"
+msgstr "Ollama API-nøkkel"
+
+msgid "Saving…"
+msgstr "Lagrer…"
+
+msgid "Saved"
+msgstr "Lagret"
+
+msgid "Save to Config (Insecure)"
+msgstr "Lagre til konfigurasjon (usikker)"
+
+msgid "Save Key"
+msgstr "Lagre nøkkel"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG-instans-URL (f.eks. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API-nøkkel/Token (valgfritt)"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo krever ingen konfigurasjon."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Sørg for at SearXNG-instansen har JSON-formatet aktivert."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
+
+msgid "Error: content exceeds max write size (%1 bytes)"
+msgstr "Feil: innhold overskrider maksimal skrivingsstørrelse (%1 byte)"
+
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS are allowed."
@@ -363,83 +360,26 @@ msgstr ""
 "Feil: Ugyldig HTTP-metode. Bare GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS "
 "er tillatt."
 
-msgid "Color button"
-msgstr "Fargeknapp"
+msgid "Tool Request: %1"
+msgstr "Verktøyforespørsel: %1"
 
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Gjeldende farge er %1. Denne knappen vil åpne en fargevelgerdialog."
+msgid "Justification: %1"
+msgstr "Begrunnelse: %1"
 
-msgid "Current color is %1."
-msgstr "Gjeldende farge er %1."
+msgid "Deny"
+msgstr "Avslå"
 
-msgid "Profile Header:"
-msgstr "Profiloverskrift:"
+msgid "Approve"
+msgstr "Godkjenn"
 
-msgid "Show provider and model in profile header"
-msgstr "Vis leverandør og modell i profiloverskrift"
+msgid "Stop command"
+msgstr "Stopp kommando"
 
-msgid "Chat Spacing: %1px"
-msgstr "Chatavstand: %1px"
+msgid "Open terminal attached to this session"
+msgstr "Åpne terminal tilknyttet denne sesjonen"
 
-msgid "Compact"
-msgstr "Kompakt"
-
-msgid "Spacious"
-msgstr "Romslig"
-
-msgid "Chat Colors:"
-msgstr "Chat-farger:"
-
-msgid "Use custom user color"
-msgstr "Bruk tilpasset brukerfarge"
-
-msgid "Use custom assistant color"
-msgstr "Bruk tilpasset assistentfarge"
-
-msgid "UI Font:"
-msgstr "Grensesnittskrift:"
-
-msgid "Use custom UI font"
-msgstr "Bruk egendefinert grensesnittskrift"
-
-msgid "Code Font:"
-msgstr "Kodeskrift:"
-
-msgid "Use custom code font"
-msgstr "Bruk egendefinert kodeskrift"
-
-msgid "Thoughts Font:"
-msgstr "Tankeskrift:"
-
-msgid "Use custom thoughts font"
-msgstr "Bruk egendefinert tankeskrift"
-
-msgid "Header Icons:"
-msgstr "Overskriftsikoner:"
-
-msgid "Profile Header"
-msgstr "Profiloverskrift"
-
-msgid "Always show Tasks"
-msgstr "Vis alltid Oppgaver"
-
-msgid "Always show Auto Toggle"
-msgstr "Vis alltid Auto-veksler"
-
-msgid "Show History"
-msgstr "Vis historikk"
-
-msgid "Show Copy conversation"
-msgstr "Vis Kopier samtale"
-
-msgid "Show Clear chat"
-msgstr "Vis Tøm chat"
-
-msgid "Show Settings"
-msgstr "Vis Innstillinger"
-
-msgid "Show Pin"
-msgstr "Vis festikonet"
+msgid "Copy output"
+msgstr "Kopier utdata"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Klarte ikke hente gcloud-token (avslutningskode %1): %2"
@@ -666,6 +606,247 @@ msgstr "sekunder"
 msgid "minutes"
 msgstr "minutter"
 
+msgid "General Tool Settings"
+msgstr "Generelle verktøyinnstillinger"
+
+msgid "System state:"
+msgstr "Systemtilstand:"
+
+msgid "Enable Tools"
+msgstr "Aktiver verktøy"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "Hovedbryter for all verktøykallfunksjonalitet."
+
+msgid "Desktop Automation:"
+msgstr "Skrivebordsautomatisering:"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr "Lar LLM forespørre en økt for å se og styre skrivebordet ditt."
+
+msgid "Enable Desktop Automation"
+msgstr "Aktiver skrivebordsautomatisering"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Aktiver skrivebordsautomatisering (krever <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+
+msgid "Path whitelist:"
+msgstr "Sti-hviteliste:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Legg til sti, f.eks. $HOME/projects, /tmp"
+
+msgid "Add"
+msgstr "Legg til"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Hvitelisten gjelder for filsystemverktøy (les, skriv, list, søk). Merk: "
+"'run_command' er ikke begrenset av denne listen."
+
+msgid "Max read size:"
+msgstr "Maks lesestørrelse:"
+
+msgid "Max write size:"
+msgstr "Maks skrivingsstørrelse:"
+
+msgid "Max HTTP response:"
+msgstr "Maks HTTP-svar:"
+
+msgid "Max tool loop depth:"
+msgstr "Maksimal dybde for verktøyløkke:"
+
+msgid "steps"
+msgstr "trinn"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr "Merk: Denne grensen gjelder ikke for skrivebordsautomatiseringsøkter."
+
+msgid "Native Adapter Features"
+msgstr "Innebygde adapterfunksjoner"
+
+msgid "Google Search:"
+msgstr "Google-søk:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Aktiver innebygd Google-søkegrunnlag"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Bruk Geminis innebygde Google-søk for grunnlag. Dette overstyrer det "
+"standard nettsøkverktøyet."
+
+msgid "Code Execution:"
+msgstr "Kodekjøring:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Aktiver innebygd Python-kodekjøring"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Tillat Gemini å skrive og kjøre Python-kode i en sikker sandkasse på "
+"serversiden."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Å kombinere innebygde verktøy med kommandoer krever en nyere modell. Din "
+"valgte modell (%1) kan oppleve feil."
+
+msgid "Individual Tools"
+msgstr "Individuelle verktøy"
+
+msgid "OpenAI-compatible"
+msgstr "OpenAI-kompatibel"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "Failed to stop driving: %1"
+msgstr "Klarte ikke å stoppe styring: %1"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"Klarte ikke hente gcloud-token (avslutningskode %1): %2. Kontroller at "
+"gcloud er installert og autentisert."
+
+msgid "No tool request pending to approve."
+msgstr "Ingen verktøyforespørsel venter på godkjenning."
+
+msgid "The user denied this tool call."
+msgstr "Brukeren avslo dette verktøykallet."
+
+msgid "No tool request pending to deny."
+msgstr "Ingen verktøyforespørsel venter på avslag."
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"Modus for å hoppe over godkjenninger er aktivert for denne økten. Alle "
+"aktiverte verktøy vil kjøre automatisk og omgå innstillingene for 'Spør før "
+"kjøring'."
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+"Modus for å hoppe over godkjenninger er deaktivert. Verktøy vil gå tilbake "
+"til dine konfigurerte innstillinger for 'Spør før kjøring'."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+"Skrivebordsautomatisering er deaktivert i innstillingene. Aktiver det først "
+"for å styre skrivebordet."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver er ikke oppdaget eller kjører ikke."
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "Current profile: **%1**"
+msgstr "Gjeldende profil: **%1**"
+
+msgid "Available profiles:"
+msgstr "Tilgjengelige profiler:"
+
+msgid "active"
+msgstr "aktiv"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "Skriv `/profile <navn>` for å bytte."
+
+msgid "Switched to profile: **%1**"
+msgstr "Byttet til profil: **%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "Ukjent profil: **%1**"
+
+msgid "none"
+msgstr "ingen"
+
+msgid "Current model: **%1**"
+msgstr "Gjeldende modell: **%1**"
+
+msgid "Available models:"
+msgstr "Tilgjengelige modeller:"
+
+msgid "Type `/model <name>` to switch."
+msgstr "Skriv `/model <name>` for å bytte."
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr "Ingen modeller bufret. Bruk **Hent modeller** i innstillinger."
+
+msgid "Switched to model: **%1**"
+msgstr "Byttet til modell: **%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "Ingen oppgaver konfigurert. Legg til oppgaver i Innstillinger."
+
+msgid "(auto)"
+msgstr "(automatisk)"
+
+msgid "Available tasks:"
+msgstr "Tilgjengelige oppgaver:"
+
+msgid "Type `/task <name>` to run."
+msgstr "Skriv `/task <name>` for å kjøre."
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Ukjent oppgave: **%1**. Tilgjengelig: %2"
+
+msgid "The user declined to run this command."
+msgstr "Brukeren avslo å kjøre denne kommandoen."
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Verktøykall"
+
+msgid "Requested tool: %1"
+msgstr "Forespurt verktøy: %1"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Unknown tool %1"
+msgstr "Ukjent verktøy %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "Feil: sti '%1' utenfor hviteliste"
+
+msgid "Executing %1…"
+msgstr "Kjører %1…"
+
+msgid "Session reset requested."
+msgstr "Øktnullstilling forespurt."
+
+msgid "Failed to start drive session: %1"
+msgstr "Klarte ikke å starte styringsøkt: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "Styringsøkt aktiv (allerede autorisert). Automodus aktivert."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "Styringsøkt autorisert. Automodus aktivert."
+
 msgid "You"
 msgstr "Du"
 
@@ -677,6 +858,11 @@ msgstr "Nettsøk"
 
 msgid "Assistant"
 msgstr "Assistent"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr "Mathtext-rendering falt tilbake til Unicode-erstatning (matplotlib er ikke installert eller det oppstod en feil)"
 
 msgid "Thinking"
 msgstr "Tenker…"
@@ -800,9 +986,6 @@ msgstr "Ikke hold åpent"
 msgid "Keep open"
 msgstr "Hold åpent"
 
-msgid "The user denied this tool call."
-msgstr "Brukeren avslo dette verktøykallet."
-
 msgid "Send a message to start chatting"
 msgstr "Send en melding for å begynne å chatte"
 
@@ -854,250 +1037,101 @@ msgstr "Avbryt LLM-forespørsel"
 msgid "Drop files here to attach"
 msgstr "Slipp filer her for å legge ved"
 
-msgid "Stop command"
-msgstr "Stopp kommando"
+msgid "Profile Header:"
+msgstr "Profiloverskrift:"
 
-msgid "Open terminal attached to this session"
-msgstr "Åpne terminal tilknyttet denne sesjonen"
+msgid "Show provider and model in profile header"
+msgstr "Vis leverandør og modell i profiloverskrift"
 
-msgid "Copy output"
-msgstr "Kopier utdata"
+msgid "Chat Spacing: %1px"
+msgstr "Chatavstand: %1px"
 
-msgid "OpenAI-compatible"
-msgstr "OpenAI-kompatibel"
+msgid "Compact"
+msgstr "Kompakt"
 
-msgid "Anthropic"
-msgstr "Anthropic"
+msgid "Spacious"
+msgstr "Romslig"
 
-msgid "Google Gemini"
-msgstr "Google Gemini"
+msgid "Chat Labels:"
+msgstr "Chat-etiketter:"
 
-msgid "General Tool Settings"
-msgstr "Generelle verktøyinnstillinger"
+msgid "User label:"
+msgstr "Brukeretikett:"
 
-msgid "System state:"
-msgstr "Systemtilstand:"
+msgid "Assistant label:"
+msgstr "Assistentetikett:"
 
-msgid "Enable Tools"
-msgstr "Aktiver verktøy"
+msgid "Use model name as assistant label"
+msgstr "Bruk modellnavn som assistentetikett"
 
-msgid "Master switch for all tool-calling functionality."
-msgstr "Hovedbryter for all verktøykallfunksjonalitet."
+msgid "Chat Colors:"
+msgstr "Chat-farger:"
 
-msgid "Desktop Automation:"
-msgstr "Skrivebordsautomatisering:"
+msgid "Use custom user color"
+msgstr "Bruk tilpasset brukerfarge"
 
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr "Lar LLM forespørre en økt for å se og styre skrivebordet ditt."
+msgid "Use custom assistant color"
+msgstr "Bruk tilpasset assistentfarge"
 
-msgid "Enable Desktop Automation"
-msgstr "Aktiver skrivebordsautomatisering"
+msgid "UI Font:"
+msgstr "Grensesnittskrift:"
 
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr "Aktiver skrivebordsautomatisering (krever <a href=\"https://github.com/joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgid "Use custom UI font"
+msgstr "Bruk egendefinert grensesnittskrift"
 
-msgid "Path whitelist:"
-msgstr "Sti-hviteliste:"
+msgid "Code Font:"
+msgstr "Kodeskrift:"
 
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Legg til sti, f.eks. $HOME/projects, /tmp"
+msgid "Use custom code font"
+msgstr "Bruk egendefinert kodeskrift"
 
-msgid "Add"
-msgstr "Legg til"
+msgid "Thoughts Font:"
+msgstr "Tankeskrift:"
 
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Hvitelisten gjelder for filsystemverktøy (les, skriv, list, søk). Merk: "
-"'run_command' er ikke begrenset av denne listen."
+msgid "Use custom thoughts font"
+msgstr "Bruk egendefinert tankeskrift"
 
-msgid "Max read size:"
-msgstr "Maks lesestørrelse:"
+msgid "LaTeX Rendering:"
+msgstr "LaTeX-rendering:"
 
-msgid "Max write size:"
-msgstr "Maks skrivingsstørrelse:"
+msgid "Leave as TeX"
+msgstr "Behold som TeX"
 
-msgid "Max HTTP response:"
-msgstr "Maks HTTP-svar:"
+msgid "Replace with Unicode (Default)"
+msgstr "Erstatt med Unicode (standard)"
 
-msgid "Max tool loop depth:"
-msgstr "Maksimal dybde for verktøyløkke:"
+msgid "Mathtext"
+msgstr "Mathtext"
 
-msgid "steps"
-msgstr "trinn"
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib mangler)"
 
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr "Merk: Denne grensen gjelder ikke for skrivebordsautomatiseringsøkter."
+msgid "Header Icons:"
+msgstr "Overskriftsikoner:"
 
-msgid "Native Adapter Features"
-msgstr "Innebygde adapterfunksjoner"
+msgid "Profile Header"
+msgstr "Profiloverskrift"
 
-msgid "Google Search:"
-msgstr "Google-søk:"
+msgid "Always show Tasks"
+msgstr "Vis alltid Oppgaver"
 
-msgid "Enable Native Google Search Grounding"
-msgstr "Aktiver innebygd Google-søkegrunnlag"
+msgid "Always show Auto Toggle"
+msgstr "Vis alltid Auto-veksler"
 
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Bruk Geminis innebygde Google-søk for grunnlag. Dette overstyrer det "
-"standard nettsøkverktøyet."
+msgid "Show History"
+msgstr "Vis historikk"
 
-msgid "Code Execution:"
-msgstr "Kodekjøring:"
+msgid "Show Copy conversation"
+msgstr "Vis Kopier samtale"
 
-msgid "Enable Native Python Code Execution"
-msgstr "Aktiver innebygd Python-kodekjøring"
+msgid "Show Clear chat"
+msgstr "Vis Tøm chat"
 
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Tillat Gemini å skrive og kjøre Python-kode i en sikker sandkasse på "
-"serversiden."
+msgid "Show Settings"
+msgstr "Vis Innstillinger"
 
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Å kombinere innebygde verktøy med kommandoer krever en nyere modell. Din "
-"valgte modell (%1) kan oppleve feil."
-
-msgid "Individual Tools"
-msgstr "Individuelle verktøy"
-
-msgid "Failed to stop driving: %1"
-msgstr "Klarte ikke å stoppe styring: %1"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"Klarte ikke hente gcloud-token (avslutningskode %1): %2. Kontroller at "
-"gcloud er installert og autentisert."
-
-msgid "No tool request pending to approve."
-msgstr "Ingen verktøyforespørsel venter på godkjenning."
-
-msgid "No tool request pending to deny."
-msgstr "Ingen verktøyforespørsel venter på avslag."
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"Modus for å hoppe over godkjenninger er aktivert for denne økten. Alle "
-"aktiverte verktøy vil kjøre automatisk og omgå innstillingene for 'Spør før "
-"kjøring'."
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr ""
-"Modus for å hoppe over godkjenninger er deaktivert. Verktøy vil gå tilbake "
-"til dine konfigurerte innstillinger for 'Spør før kjøring'."
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr ""
-"Skrivebordsautomatisering er deaktivert i innstillingene. Aktiver det først "
-"for å styre skrivebordet."
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "plasmallm-desktop-driver er ikke oppdaget eller kjører ikke."
-
-msgid "Default"
-msgstr "Standard"
-
-msgid "Current profile: **%1**"
-msgstr "Gjeldende profil: **%1**"
-
-msgid "Available profiles:"
-msgstr "Tilgjengelige profiler:"
-
-msgid "active"
-msgstr "aktiv"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "Skriv `/profile <navn>` for å bytte."
-
-msgid "Switched to profile: **%1**"
-msgstr "Byttet til profil: **%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "Ukjent profil: **%1**"
-
-msgid "none"
-msgstr "ingen"
-
-msgid "Current model: **%1**"
-msgstr "Gjeldende modell: **%1**"
-
-msgid "Available models:"
-msgstr "Tilgjengelige modeller:"
-
-msgid "Type `/model <name>` to switch."
-msgstr "Skriv `/model <name>` for å bytte."
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "Ingen modeller bufret. Bruk **Hent modeller** i innstillinger."
-
-msgid "Switched to model: **%1**"
-msgstr "Byttet til modell: **%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "Ingen oppgaver konfigurert. Legg til oppgaver i Innstillinger."
-
-msgid "(auto)"
-msgstr "(automatisk)"
-
-msgid "Available tasks:"
-msgstr "Tilgjengelige oppgaver:"
-
-msgid "Type `/task <name>` to run."
-msgstr "Skriv `/task <name>` for å kjøre."
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "Ukjent oppgave: **%1**. Tilgjengelig: %2"
-
-msgid "The user declined to run this command."
-msgstr "Brukeren avslo å kjøre denne kommandoen."
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM: Verktøykall"
-
-msgid "Requested tool: %1"
-msgstr "Forespurt verktøy: %1"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Unknown tool %1"
-msgstr "Ukjent verktøy %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "Feil: sti '%1' utenfor hviteliste"
-
-msgid "Executing %1…"
-msgstr "Kjører %1…"
-
-msgid "Session reset requested."
-msgstr "Øktnullstilling forespurt."
-
-msgid "Failed to start drive session: %1"
-msgstr "Klarte ikke å starte styringsøkt: %1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr "Styringsøkt aktiv (allerede autorisert). Automodus aktivert."
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr "Styringsøkt autorisert. Automodus aktivert."
+msgid "Show Pin"
+msgstr "Vis festikonet"
 
 msgid "General"
 msgstr "Generelt"
