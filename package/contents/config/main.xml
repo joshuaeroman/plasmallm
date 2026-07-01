@@ -86,6 +86,18 @@
       <min>0</min>
       <max>24</max>
     </entry>
+    <entry name="userName" type="String">
+      <label>User name displayed above chat bubbles</label>
+      <default>You</default>
+    </entry>
+    <entry name="assistantName" type="String">
+      <label>Assistant name displayed above chat bubbles</label>
+      <default>Assistant</default>
+    </entry>
+    <entry name="showModelNameAsAssistant" type="Bool">
+      <label>Show the model name instead of the assistant name label</label>
+      <default>false</default>
+    </entry>
     <entry name="useCustomUserColor" type="Bool">
       <label>Use custom user bubble color</label>
       <default>true</default>

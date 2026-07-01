@@ -410,8 +410,8 @@ PlasmaExtras.Representation {
                     var text = "";
                     for (var i = 0; i < root.displayMessages.count; i++) {
                         var msg = root.displayMessages.get(i);
-                        var prefix = msg.role === "user" ? i18n("You") :
-                                     msg.role === "assistant" ? i18n("Assistant") :
+                        var prefix = msg.role === "user" ? (Plasmoid.configuration.userName || i18n("You")) :
+                                     msg.role === "assistant" ? (Plasmoid.configuration.showModelNameAsAssistant ? (Plasmoid.configuration.modelName || Plasmoid.configuration.assistantName || i18n("Assistant")) : (Plasmoid.configuration.assistantName || i18n("Assistant"))) :
                                      msg.role === "command_output" ? i18n("Command") :
                                      msg.role === "error" ? i18n("Error") : "";
                         if (prefix) {
@@ -470,8 +470,8 @@ PlasmaExtras.Representation {
             var text = "";
             for (var i = 0; i < root.displayMessages.count; i++) {
                 var msg = root.displayMessages.get(i);
-                var prefix = msg.role === "user" ? i18n("You") :
-                             msg.role === "assistant" ? i18n("Assistant") :
+                var prefix = msg.role === "user" ? (Plasmoid.configuration.userName || i18n("You")) :
+                             msg.role === "assistant" ? (Plasmoid.configuration.showModelNameAsAssistant ? (Plasmoid.configuration.modelName || Plasmoid.configuration.assistantName || i18n("Assistant")) : (Plasmoid.configuration.assistantName || i18n("Assistant"))) :
                              msg.role === "command_output" ? i18n("Command") :
                              msg.role === "error" ? i18n("Error") : "";
                 if (prefix) text += prefix + ": " + msg.content + "\n\n";
