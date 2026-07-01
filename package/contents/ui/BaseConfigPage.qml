@@ -299,6 +299,8 @@ SimpleKCM {
     property bool cfg_enableToolCallLimitDefault
     property int cfg_maxToolCallDepth
     property int cfg_maxToolCallDepthDefault
+    property int cfg_latexRenderMode
+    property int cfg_latexRenderModeDefault
     property string cfg_customTools
     property string cfg_customToolsDefault
 }

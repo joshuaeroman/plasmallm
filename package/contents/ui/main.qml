@@ -48,6 +48,19 @@ PlasmoidItem {
         onTriggered: updateSessionStatus()
     }
 
+    P5Support.DataSource {
+        id: latexMatplotlibDetector
+        engine: "executable"
+        connectedSources: []
+        onNewData: function(source, data) {
+            if (data["exit code"] !== undefined) {
+                var hasMatplotlib = (data["exit code"] === 0);
+                Plasmoid.configuration.latexRenderMode = hasMatplotlib ? 2 : 1;
+                disconnectSource(source);
+            }
+        }
+    }
+
     property bool hasUnreadResponse: false
     property var activeRequest: null
     property int streamingMessageIndex: -1
@@ -2611,6 +2624,10 @@ lines.push(JSON.stringify({
     }
 
     Component.onCompleted: {
+        if (Plasmoid.configuration.latexRenderMode === -1) {
+            latexMatplotlibDetector.connectSource("python3 -c 'import matplotlib'");
+        }
+
         if (!Plasmoid.configuration.desktopAutomationToken) {
             var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
                 var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
