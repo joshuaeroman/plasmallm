@@ -16,7 +16,7 @@ SRC_FILES := $(shell find $(PACKAGE_DIR)/contents/ui $(PACKAGE_DIR)/contents/con
 all: package
 
 # Translations
-translations: $(MO_FILES)
+translations: check-translations $(MO_FILES)
 
 $(LOCALE_DIR)/$(DOMAIN).pot: $(SRC_FILES)
 	@echo "Extracting translation strings..."
@@ -37,6 +37,7 @@ check-translations: $(PO_FILES)
 		untranslated=$$(msgattrib --untranslated --no-fuzzy $$po | grep -c '^msgid ' || true); \
 		untranslated=$$((untranslated > 0 ? untranslated - 1 : 0)); \
 		fuzzy=$$(msgattrib --only-fuzzy $$po | grep -c '^msgid ' || true); \
+		fuzzy=$$((fuzzy > 0 ? fuzzy - 1 : 0)); \
 		if [ "$$untranslated" -gt 0 ] || [ "$$fuzzy" -gt 0 ]; then \
 			echo "Error: $$po has $$untranslated untranslated and $$fuzzy fuzzy string(s)"; \
 			if [ "$$untranslated" -gt 0 ]; then \
@@ -61,7 +62,7 @@ check-translations: $(PO_FILES)
 		exit 1; \
 	fi
 
-$(LOCALE_DIR)/%/LC_MESSAGES/$(DOMAIN).mo: $(LOCALE_DIR)/%.po | check-translations
+$(LOCALE_DIR)/%/LC_MESSAGES/$(DOMAIN).mo: $(LOCALE_DIR)/%.po
 	@echo "Compiling translation for $*..."
 	@mkdir -p $(dir $@)
 	msgfmt -o $@ $<

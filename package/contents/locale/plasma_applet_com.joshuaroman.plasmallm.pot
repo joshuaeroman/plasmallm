@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-30 22:15-0400\n"
+"POT-Creation-Date: 2026-07-01 19:31-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -663,6 +663,287 @@ msgstr ""
 msgid "Google Gemini"
 msgstr ""
 
+msgid "You"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Web Search"
+msgstr ""
+
+msgid "Assistant"
+msgstr ""
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+
+msgid "Thinking"
+msgstr ""
+
+msgid "Searched for: %1"
+msgstr ""
+
+msgid "Show %1 results"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Share output with assistant"
+msgstr ""
+
+msgid "Profile Header:"
+msgstr ""
+
+msgid "Show provider and model in profile header"
+msgstr ""
+
+msgid "Chat Spacing: %1px"
+msgstr ""
+
+msgid "Compact"
+msgstr ""
+
+msgid "Spacious"
+msgstr ""
+
+msgid "Chat Labels:"
+msgstr ""
+
+msgid "User label:"
+msgstr ""
+
+msgid "Assistant label:"
+msgstr ""
+
+msgid "Use model name as assistant label"
+msgstr ""
+
+msgid "Chat Colors:"
+msgstr ""
+
+msgid "Use custom user color"
+msgstr ""
+
+msgid "Use custom assistant color"
+msgstr ""
+
+msgid "UI Font:"
+msgstr ""
+
+msgid "Use custom UI font"
+msgstr ""
+
+msgid "Code Font:"
+msgstr ""
+
+msgid "Use custom code font"
+msgstr ""
+
+msgid "Thoughts Font:"
+msgstr ""
+
+msgid "Use custom thoughts font"
+msgstr ""
+
+msgid "LaTeX Rendering:"
+msgstr ""
+
+msgid "Leave as TeX"
+msgstr ""
+
+msgid "Replace with Unicode (Default)"
+msgstr ""
+
+msgid "Mathtext"
+msgstr ""
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr ""
+
+msgid "Header Icons:"
+msgstr ""
+
+msgid "Profile Header"
+msgstr ""
+
+msgid "Always show Tasks"
+msgstr ""
+
+msgid "Always show Auto Toggle"
+msgstr ""
+
+msgid "Show History"
+msgstr ""
+
+msgid "Show Copy conversation"
+msgstr ""
+
+msgid "Show Clear chat"
+msgstr ""
+
+msgid "Show Settings"
+msgstr ""
+
+msgid "Show Pin"
+msgstr ""
+
+msgid "Approve the pending tool request"
+msgstr ""
+
+msgid "Toggle skip approvals for this session"
+msgstr ""
+
+msgid "Clear the chat"
+msgstr ""
+
+msgid "Close the panel"
+msgstr ""
+
+msgid "Copy conversation to clipboard"
+msgstr ""
+
+msgid "Deny the pending tool request"
+msgstr ""
+
+msgid "Open chat history folder"
+msgstr ""
+
+msgid "Show or switch model (/model <name>)"
+msgstr ""
+
+msgid "Switch profile (/profile <name>)"
+msgstr ""
+
+msgid "Save chat to file"
+msgstr ""
+
+msgid "Open settings"
+msgstr ""
+
+msgid "Run a saved task (/task <name>)"
+msgstr ""
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr ""
+
+msgid "Toggle Full Auto Mode"
+msgstr ""
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+
+msgid "Drive Desktop"
+msgstr ""
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr ""
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr ""
+
+msgid "Run a task"
+msgstr ""
+
+msgid "Chat History"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "No recent chats"
+msgstr ""
+
+msgid "Open history folder..."
+msgstr ""
+
+msgid "Clear all history..."
+msgstr ""
+
+msgid "Clear All History"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+
+msgid "Clear All"
+msgstr ""
+
+msgid "Copy conversation"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Clear chat"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Don't keep open"
+msgstr ""
+
+msgid "Keep open"
+msgstr ""
+
+msgid "The user denied this tool call."
+msgstr ""
+
+msgid "Send a message to start chatting"
+msgstr ""
+
+msgid "Attach File"
+msgstr ""
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr ""
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+
+msgid "All files (*)"
+msgstr ""
+
+msgid "Message input"
+msgstr ""
+
+msgid "Type a message…"
+msgstr ""
+
+msgid "Initializing…"
+msgstr ""
+
+msgid "Attach file or image"
+msgstr ""
+
+msgid "Kill"
+msgstr ""
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Cancel LLM request"
+msgstr ""
+
+msgid "Drop files here to attach"
+msgstr ""
+
 msgid "Failed to stop driving: %1"
 msgstr ""
 
@@ -672,9 +953,6 @@ msgid ""
 msgstr ""
 
 msgid "No tool request pending to approve."
-msgstr ""
-
-msgid "The user denied this tool call."
 msgstr ""
 
 msgid "No tool request pending to deny."
@@ -783,284 +1061,6 @@ msgid "Drive session active (already authorized). Auto mode enabled."
 msgstr ""
 
 msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr ""
-
-msgid "You"
-msgstr ""
-
-msgid "Error"
-msgstr ""
-
-msgid "Web Search"
-msgstr ""
-
-msgid "Assistant"
-msgstr ""
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-
-msgid "Thinking"
-msgstr ""
-
-msgid "Searched for: %1"
-msgstr ""
-
-msgid "Show %1 results"
-msgstr ""
-
-msgid "Copy to clipboard"
-msgstr ""
-
-msgid "Share output with assistant"
-msgstr ""
-
-msgid "Approve the pending tool request"
-msgstr ""
-
-msgid "Toggle skip approvals for this session"
-msgstr ""
-
-msgid "Clear the chat"
-msgstr ""
-
-msgid "Close the panel"
-msgstr ""
-
-msgid "Copy conversation to clipboard"
-msgstr ""
-
-msgid "Deny the pending tool request"
-msgstr ""
-
-msgid "Open chat history folder"
-msgstr ""
-
-msgid "Show or switch model (/model <name>)"
-msgstr ""
-
-msgid "Switch profile (/profile <name>)"
-msgstr ""
-
-msgid "Save chat to file"
-msgstr ""
-
-msgid "Open settings"
-msgstr ""
-
-msgid "Run a saved task (/task <name>)"
-msgstr ""
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr ""
-
-msgid "Toggle Full Auto Mode"
-msgstr ""
-
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-
-msgid "Drive Desktop"
-msgstr ""
-
-msgid "Stop Driving Desktop (disconnect)"
-msgstr ""
-
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr ""
-
-msgid "Run a task"
-msgstr ""
-
-msgid "Chat History"
-msgstr ""
-
-msgid "Loading..."
-msgstr ""
-
-msgid "No recent chats"
-msgstr ""
-
-msgid "Open history folder..."
-msgstr ""
-
-msgid "Clear all history..."
-msgstr ""
-
-msgid "Clear All History"
-msgstr ""
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-
-msgid "Clear All"
-msgstr ""
-
-msgid "Copy conversation"
-msgstr ""
-
-msgid "Command"
-msgstr ""
-
-msgid "Clear chat"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Don't keep open"
-msgstr ""
-
-msgid "Keep open"
-msgstr ""
-
-msgid "Send a message to start chatting"
-msgstr ""
-
-msgid "Attach File"
-msgstr ""
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr ""
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-
-msgid "All files (*)"
-msgstr ""
-
-msgid "Message input"
-msgstr ""
-
-msgid "Type a message…"
-msgstr ""
-
-msgid "Initializing…"
-msgstr ""
-
-msgid "Attach file or image"
-msgstr ""
-
-msgid "Kill"
-msgstr ""
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-
-msgid "Send"
-msgstr ""
-
-msgid "Stop"
-msgstr ""
-
-msgid "Cancel LLM request"
-msgstr ""
-
-msgid "Drop files here to attach"
-msgstr ""
-
-msgid "Profile Header:"
-msgstr ""
-
-msgid "Show provider and model in profile header"
-msgstr ""
-
-msgid "Chat Spacing: %1px"
-msgstr ""
-
-msgid "Compact"
-msgstr ""
-
-msgid "Spacious"
-msgstr ""
-
-msgid "Chat Labels:"
-msgstr ""
-
-msgid "User label:"
-msgstr ""
-
-msgid "Assistant label:"
-msgstr ""
-
-msgid "Use model name as assistant label"
-msgstr ""
-
-msgid "Chat Colors:"
-msgstr ""
-
-msgid "Use custom user color"
-msgstr ""
-
-msgid "Use custom assistant color"
-msgstr ""
-
-msgid "UI Font:"
-msgstr ""
-
-msgid "Use custom UI font"
-msgstr ""
-
-msgid "Code Font:"
-msgstr ""
-
-msgid "Use custom code font"
-msgstr ""
-
-msgid "Thoughts Font:"
-msgstr ""
-
-msgid "Use custom thoughts font"
-msgstr ""
-
-msgid "LaTeX Rendering:"
-msgstr ""
-
-msgid "Leave as TeX"
-msgstr ""
-
-msgid "Replace with Unicode (Default)"
-msgstr ""
-
-msgid "Mathtext"
-msgstr ""
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr ""
-
-msgid "Header Icons:"
-msgstr ""
-
-msgid "Profile Header"
-msgstr ""
-
-msgid "Always show Tasks"
-msgstr ""
-
-msgid "Always show Auto Toggle"
-msgstr ""
-
-msgid "Show History"
-msgstr ""
-
-msgid "Show Copy conversation"
-msgstr ""
-
-msgid "Show Clear chat"
-msgstr ""
-
-msgid "Show Settings"
-msgstr ""
-
-msgid "Show Pin"
 msgstr ""
 
 msgid "General"

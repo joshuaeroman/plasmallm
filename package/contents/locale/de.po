@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-30 22:15-0400\n"
+"POT-Creation-Date: 2026-07-01 19:31-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: German\n"
@@ -741,6 +741,297 @@ msgstr "Anthropic"
 msgid "Google Gemini"
 msgstr "Google Gemini"
 
+msgid "You"
+msgstr "Sie"
+
+msgid "Error"
+msgstr "Fehler"
+
+msgid "Web Search"
+msgstr "Websuche"
+
+msgid "Assistant"
+msgstr "Assistent"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Mathtext-Rendering fiel auf Unicode-Ersatz zurück (matplotlib nicht "
+"installiert oder Fehler aufgetreten)"
+
+msgid "Thinking"
+msgstr "Denkt…"
+
+msgid "Searched for: %1"
+msgstr "Gesucht nach: %1"
+
+msgid "Show %1 results"
+msgstr "%1 Ergebnisse anzeigen"
+
+msgid "Copy to clipboard"
+msgstr "In die Zwischenablage kopieren"
+
+msgid "Share output with assistant"
+msgstr "Ausgabe mit Assistent teilen"
+
+msgid "Profile Header:"
+msgstr "Profilkopfzeile:"
+
+msgid "Show provider and model in profile header"
+msgstr "Anbieter und Modell in der Profilkopfzeile anzeigen"
+
+msgid "Chat Spacing: %1px"
+msgstr "Chat-Abstand: %1px"
+
+msgid "Compact"
+msgstr "Kompakt"
+
+msgid "Spacious"
+msgstr "Geräumig"
+
+msgid "Chat Labels:"
+msgstr "Chat-Labels:"
+
+msgid "User label:"
+msgstr "Benutzer-Label:"
+
+msgid "Assistant label:"
+msgstr "Assistenten-Label:"
+
+msgid "Use model name as assistant label"
+msgstr "Modellnamen als Assistenten-Label verwenden"
+
+msgid "Chat Colors:"
+msgstr "Chat-Farben:"
+
+msgid "Use custom user color"
+msgstr "Benutzerdefinierte Benutzerfarbe verwenden"
+
+msgid "Use custom assistant color"
+msgstr "Benutzerdefinierte Assistentenfarbe verwenden"
+
+msgid "UI Font:"
+msgstr "Benutzeroberflächenschrift:"
+
+msgid "Use custom UI font"
+msgstr "Benutzerdefinierte UI-Schrift verwenden"
+
+msgid "Code Font:"
+msgstr "Code-Schrift:"
+
+msgid "Use custom code font"
+msgstr "Benutzerdefinierte Code-Schrift verwenden"
+
+msgid "Thoughts Font:"
+msgstr "Gedanken-Schrift:"
+
+msgid "Use custom thoughts font"
+msgstr "Benutzerdefinierte Gedanken-Schrift verwenden"
+
+msgid "LaTeX Rendering:"
+msgstr "LaTeX-Rendering:"
+
+msgid "Leave as TeX"
+msgstr "Als TeX belassen"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Durch Unicode ersetzen (Standard)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib fehlt)"
+
+msgid "Header Icons:"
+msgstr "Kopfzeilen-Icons:"
+
+msgid "Profile Header"
+msgstr "Profilkopfzeile"
+
+msgid "Always show Tasks"
+msgstr "Aufgaben immer anzeigen"
+
+msgid "Always show Auto Toggle"
+msgstr "Auto-Umschalter immer anzeigen"
+
+msgid "Show History"
+msgstr "Verlauf anzeigen"
+
+msgid "Show Copy conversation"
+msgstr "Unterhaltung kopieren anzeigen"
+
+msgid "Show Clear chat"
+msgstr "Chat löschen anzeigen"
+
+msgid "Show Settings"
+msgstr "Einstellungen anzeigen"
+
+msgid "Show Pin"
+msgstr "Pin anzeigen"
+
+msgid "Approve the pending tool request"
+msgstr "Ausstehende Werkzeuganfrage genehmigen"
+
+msgid "Toggle skip approvals for this session"
+msgstr "Genehmigungsüberspringen für diese Sitzung umschalten"
+
+msgid "Clear the chat"
+msgstr "Chat leeren"
+
+msgid "Close the panel"
+msgstr "Panel schließen"
+
+msgid "Copy conversation to clipboard"
+msgstr "Unterhaltung in die Zwischenablage kopieren"
+
+msgid "Deny the pending tool request"
+msgstr "Ausstehende Werkzeuganfrage ablehnen"
+
+msgid "Open chat history folder"
+msgstr "Chatverlaufsordner öffnen"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "Modell anzeigen oder wechseln (/model <name>)"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "Profil wechseln (/profile <Name>)"
+
+msgid "Save chat to file"
+msgstr "Chat in Datei speichern"
+
+msgid "Open settings"
+msgstr "Einstellungen öffnen"
+
+msgid "Run a saved task (/task <name>)"
+msgstr "Gespeicherte Aufgabe ausführen (/task <name>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr "Drive-Desktop-Modus umschalten (startet Handshake und Auto-Modus)"
+
+msgid "Toggle Full Auto Mode"
+msgstr "Vollautomatischen Modus umschalten"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Vollautomatischen Modus umschalten: Wenn aktiviert, werden alle Werkzeuge "
+"für diese Sitzung automatisch ausgeführt."
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "Steuerung des Desktops beenden (trennen)"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop (startet Handshake und aktiviert den Auto-Modus)"
+
+msgid "Run a task"
+msgstr "Aufgabe ausführen"
+
+msgid "Chat History"
+msgstr "Chatverlauf"
+
+msgid "Loading..."
+msgstr "Lädt..."
+
+msgid "No recent chats"
+msgstr "Keine aktuellen Chats"
+
+msgid "Open history folder..."
+msgstr "Verlaufsordner öffnen..."
+
+msgid "Clear all history..."
+msgstr "Gesamten Verlauf löschen..."
+
+msgid "Clear All History"
+msgstr "Gesamten Verlauf löschen"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Sind Sie sicher, dass Sie alle Chatverlaufsdateien löschen möchten? Diese "
+"Aktion kann nicht rückgängig gemacht werden."
+
+msgid "Clear All"
+msgstr "Alles löschen"
+
+msgid "Copy conversation"
+msgstr "Unterhaltung kopieren"
+
+msgid "Command"
+msgstr "Befehl"
+
+msgid "Clear chat"
+msgstr "Chat löschen"
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "Don't keep open"
+msgstr "Nicht offen halten"
+
+msgid "Keep open"
+msgstr "Offen halten"
+
+msgid "The user denied this tool call."
+msgstr "Der Benutzer hat diesen Werkzeugaufruf abgelehnt."
+
+msgid "Send a message to start chatting"
+msgstr "Senden Sie eine Nachricht, um mit dem Chatten zu beginnen"
+
+msgid "Attach File"
+msgstr "Datei anhängen"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Bilder (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Textdateien (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "Alle Dateien (*)"
+
+msgid "Message input"
+msgstr "Nachrichteneingabe"
+
+msgid "Type a message…"
+msgstr "Nachricht eingeben…"
+
+msgid "Initializing…"
+msgstr "Initialisierung…"
+
+msgid "Attach file or image"
+msgstr "Datei oder Bild anhängen"
+
+msgid "Kill"
+msgstr "Beenden"
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+"Persistente Sitzung beenden (stoppt alle Prozesse und setzt den Shell-Status "
+"zurück)"
+
+msgid "Send"
+msgstr "Senden"
+
+msgid "Stop"
+msgstr "Stopp"
+
+msgid "Cancel LLM request"
+msgstr "LLM-Anfrage abbrechen"
+
+msgid "Drop files here to attach"
+msgstr "Dateien hier ablegen, um sie anzuhängen"
+
 msgid "Failed to stop driving: %1"
 msgstr "Beenden der Steuerung fehlgeschlagen: %1"
 
@@ -753,9 +1044,6 @@ msgstr ""
 
 msgid "No tool request pending to approve."
 msgstr "Kein ausstehender Werkzeugaufruf zur Genehmigung."
-
-msgid "The user denied this tool call."
-msgstr "Der Benutzer hat diesen Werkzeugaufruf abgelehnt."
 
 msgid "No tool request pending to deny."
 msgstr "Kein ausstehender Werkzeugaufruf zum Ablehnen."
@@ -874,292 +1162,6 @@ msgstr "Steuerungssitzung aktiv (bereits autorisiert). Auto-Modus aktiviert."
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Steuerungssitzung erfolgreich autorisiert. Auto-Modus aktiviert."
-
-msgid "You"
-msgstr "Sie"
-
-msgid "Error"
-msgstr "Fehler"
-
-msgid "Web Search"
-msgstr "Websuche"
-
-msgid "Assistant"
-msgstr "Assistent"
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr "Mathtext-Rendering fiel auf Unicode-Ersatz zurück (matplotlib nicht installiert oder Fehler aufgetreten)"
-
-msgid "Thinking"
-msgstr "Denkt…"
-
-msgid "Searched for: %1"
-msgstr "Gesucht nach: %1"
-
-msgid "Show %1 results"
-msgstr "%1 Ergebnisse anzeigen"
-
-msgid "Copy to clipboard"
-msgstr "In die Zwischenablage kopieren"
-
-msgid "Share output with assistant"
-msgstr "Ausgabe mit Assistent teilen"
-
-msgid "Approve the pending tool request"
-msgstr "Ausstehende Werkzeuganfrage genehmigen"
-
-msgid "Toggle skip approvals for this session"
-msgstr "Genehmigungsüberspringen für diese Sitzung umschalten"
-
-msgid "Clear the chat"
-msgstr "Chat leeren"
-
-msgid "Close the panel"
-msgstr "Panel schließen"
-
-msgid "Copy conversation to clipboard"
-msgstr "Unterhaltung in die Zwischenablage kopieren"
-
-msgid "Deny the pending tool request"
-msgstr "Ausstehende Werkzeuganfrage ablehnen"
-
-msgid "Open chat history folder"
-msgstr "Chatverlaufsordner öffnen"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "Modell anzeigen oder wechseln (/model <name>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "Profil wechseln (/profile <Name>)"
-
-msgid "Save chat to file"
-msgstr "Chat in Datei speichern"
-
-msgid "Open settings"
-msgstr "Einstellungen öffnen"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "Gespeicherte Aufgabe ausführen (/task <name>)"
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr "Drive-Desktop-Modus umschalten (startet Handshake und Auto-Modus)"
-
-msgid "Toggle Full Auto Mode"
-msgstr "Vollautomatischen Modus umschalten"
-
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-"Vollautomatischen Modus umschalten: Wenn aktiviert, werden alle Werkzeuge "
-"für diese Sitzung automatisch ausgeführt."
-
-msgid "Drive Desktop"
-msgstr "Drive Desktop"
-
-msgid "Stop Driving Desktop (disconnect)"
-msgstr "Steuerung des Desktops beenden (trennen)"
-
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr "Drive Desktop (startet Handshake und aktiviert den Auto-Modus)"
-
-msgid "Run a task"
-msgstr "Aufgabe ausführen"
-
-msgid "Chat History"
-msgstr "Chatverlauf"
-
-msgid "Loading..."
-msgstr "Lädt..."
-
-msgid "No recent chats"
-msgstr "Keine aktuellen Chats"
-
-msgid "Open history folder..."
-msgstr "Verlaufsordner öffnen..."
-
-msgid "Clear all history..."
-msgstr "Gesamten Verlauf löschen..."
-
-msgid "Clear All History"
-msgstr "Gesamten Verlauf löschen"
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-"Sind Sie sicher, dass Sie alle Chatverlaufsdateien löschen möchten? Diese "
-"Aktion kann nicht rückgängig gemacht werden."
-
-msgid "Clear All"
-msgstr "Alles löschen"
-
-msgid "Copy conversation"
-msgstr "Unterhaltung kopieren"
-
-msgid "Command"
-msgstr "Befehl"
-
-msgid "Clear chat"
-msgstr "Chat löschen"
-
-msgid "Settings"
-msgstr "Einstellungen"
-
-msgid "Don't keep open"
-msgstr "Nicht offen halten"
-
-msgid "Keep open"
-msgstr "Offen halten"
-
-msgid "Send a message to start chatting"
-msgstr "Senden Sie eine Nachricht, um mit dem Chatten zu beginnen"
-
-msgid "Attach File"
-msgstr "Datei anhängen"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Bilder (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-"Textdateien (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-
-msgid "All files (*)"
-msgstr "Alle Dateien (*)"
-
-msgid "Message input"
-msgstr "Nachrichteneingabe"
-
-msgid "Type a message…"
-msgstr "Nachricht eingeben…"
-
-msgid "Initializing…"
-msgstr "Initialisierung…"
-
-msgid "Attach file or image"
-msgstr "Datei oder Bild anhängen"
-
-msgid "Kill"
-msgstr "Beenden"
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-"Persistente Sitzung beenden (stoppt alle Prozesse und setzt den Shell-Status "
-"zurück)"
-
-msgid "Send"
-msgstr "Senden"
-
-msgid "Stop"
-msgstr "Stopp"
-
-msgid "Cancel LLM request"
-msgstr "LLM-Anfrage abbrechen"
-
-msgid "Drop files here to attach"
-msgstr "Dateien hier ablegen, um sie anzuhängen"
-
-msgid "Profile Header:"
-msgstr "Profilkopfzeile:"
-
-msgid "Show provider and model in profile header"
-msgstr "Anbieter und Modell in der Profilkopfzeile anzeigen"
-
-msgid "Chat Spacing: %1px"
-msgstr "Chat-Abstand: %1px"
-
-msgid "Compact"
-msgstr "Kompakt"
-
-msgid "Spacious"
-msgstr "Geräumig"
-
-msgid "Chat Labels:"
-msgstr "Chat-Labels:"
-
-msgid "User label:"
-msgstr "Benutzer-Label:"
-
-msgid "Assistant label:"
-msgstr "Assistenten-Label:"
-
-msgid "Use model name as assistant label"
-msgstr "Modellnamen als Assistenten-Label verwenden"
-
-msgid "Chat Colors:"
-msgstr "Chat-Farben:"
-
-msgid "Use custom user color"
-msgstr "Benutzerdefinierte Benutzerfarbe verwenden"
-
-msgid "Use custom assistant color"
-msgstr "Benutzerdefinierte Assistentenfarbe verwenden"
-
-msgid "UI Font:"
-msgstr "Benutzeroberflächenschrift:"
-
-msgid "Use custom UI font"
-msgstr "Benutzerdefinierte UI-Schrift verwenden"
-
-msgid "Code Font:"
-msgstr "Code-Schrift:"
-
-msgid "Use custom code font"
-msgstr "Benutzerdefinierte Code-Schrift verwenden"
-
-msgid "Thoughts Font:"
-msgstr "Gedanken-Schrift:"
-
-msgid "Use custom thoughts font"
-msgstr "Benutzerdefinierte Gedanken-Schrift verwenden"
-
-msgid "LaTeX Rendering:"
-msgstr "LaTeX-Rendering:"
-
-msgid "Leave as TeX"
-msgstr "Als TeX belassen"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Durch Unicode ersetzen (Standard)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib fehlt)"
-
-msgid "Header Icons:"
-msgstr "Kopfzeilen-Icons:"
-
-msgid "Profile Header"
-msgstr "Profilkopfzeile"
-
-msgid "Always show Tasks"
-msgstr "Aufgaben immer anzeigen"
-
-msgid "Always show Auto Toggle"
-msgstr "Auto-Umschalter immer anzeigen"
-
-msgid "Show History"
-msgstr "Verlauf anzeigen"
-
-msgid "Show Copy conversation"
-msgstr "Unterhaltung kopieren anzeigen"
-
-msgid "Show Clear chat"
-msgstr "Chat löschen anzeigen"
-
-msgid "Show Settings"
-msgstr "Einstellungen anzeigen"
-
-msgid "Show Pin"
-msgstr "Pin anzeigen"
 
 msgid "General"
 msgstr "Allgemein"
