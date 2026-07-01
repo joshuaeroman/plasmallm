@@ -23,6 +23,15 @@ PlasmoidItem {
 
     hideOnWindowDeactivate: !Plasmoid.configuration.pin
 
+    Connections {
+        target: Plasmoid
+        function onFormFactorChanged() {
+            if (Plasmoid.formFactor === PlasmaCore.Types.Planar) {
+                Plasmoid.configuration.pin = false;
+            }
+        }
+    }
+
     property bool isLoading: false
     property bool sessionActive: false
     property bool _switchingProfile: false
