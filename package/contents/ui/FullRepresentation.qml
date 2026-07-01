@@ -6,6 +6,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
 import QtQuick.Controls as QQC2
 import QtQuick.Dialogs
 import QtCore
@@ -51,6 +52,12 @@ PlasmaExtras.Representation {
     Layout.minimumHeight: Kirigami.Units.gridUnit * 24
     Layout.preferredWidth: Kirigami.Units.gridUnit * 28
     Layout.preferredHeight: Kirigami.Units.gridUnit * 32
+    
+    onActiveFocusChanged: {
+        if (!activeFocus) {
+            Plasmoid.status = PlasmaCore.Types.ActiveStatus;
+        }
+    }
 
     header: PlasmaExtras.BasicPlasmoidHeading {
         contentItem: RowLayout {
@@ -446,7 +453,7 @@ PlasmaExtras.Representation {
 
             PlasmaComponents.ToolButton {
                 icon.name: "window-pin"
-                visible: Plasmoid.configuration.showIconPin
+                visible: Plasmoid.configuration.showIconPin && Plasmoid.formFactor !== PlasmaCore.Types.Planar
                 checkable: true
                 checked: Plasmoid.configuration.pin
                 Accessible.name: Plasmoid.configuration.pin ? i18n("Don't keep open") : i18n("Keep open")
@@ -489,6 +496,16 @@ PlasmaExtras.Representation {
 
     contentItem: Item {
         id: representationContent
+
+        MouseArea {
+            anchors.fill: parent
+            z: 99
+            propagateComposedEvents: true
+            onPressed: function(mouse) {
+                Plasmoid.status = PlasmaCore.Types.AcceptingInputStatus;
+                mouse.accepted = false;
+            }
+        }
 
         ColumnLayout {
             anchors.fill: parent
@@ -793,6 +810,12 @@ PlasmaExtras.Representation {
                         enabled: !root.isLoading && root.systemPromptReady
                         focus: true
                         wrapMode: Text.Wrap
+                        
+                        onActiveFocusChanged: {
+                            if (activeFocus) {
+                                Plasmoid.status = PlasmaCore.Types.AcceptingInputStatus;
+                            }
+                        }
 
                         Keys.onPressed: function(event) {
                             var isCtrlV = (event.key === Qt.Key_V && (event.modifiers & Qt.ControlModifier));
