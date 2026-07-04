@@ -21,8 +21,18 @@ import "driverManager.js" as DriverManager
 PlasmoidItem {
     id: root
 
-    hideOnWindowDeactivate: !Plasmoid.configuration.pin
+    hideOnWindowDeactivate: !Plasmoid.configuration.pin && !preventDeactivationClose
     activationTogglesExpanded: true
+
+    property bool preventDeactivationClose: false
+
+    Timer {
+        id: focusSettleTimer
+        interval: 250
+        onTriggered: {
+            root.preventDeactivationClose = false;
+        }
+    }
 
     Connections {
         target: Plasmoid
@@ -2809,8 +2819,12 @@ fi
 
     onExpandedChanged: function(expanded) {
         if (!expanded) {
+            focusSettleTimer.stop();
+            root.preventDeactivationClose = false;
             Plasmoid.configuration.lastClosedTimestamp = String(Date.now());
         } else {
+            root.preventDeactivationClose = true;
+            focusSettleTimer.start();
             var hadUnread = root.hasUnreadResponse;
             if (root.hasUnreadResponse) {
                 root.hasUnreadResponse = false;

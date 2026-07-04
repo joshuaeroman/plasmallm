@@ -53,12 +53,6 @@ PlasmaExtras.Representation {
     Layout.preferredWidth: Kirigami.Units.gridUnit * 28
     Layout.preferredHeight: Kirigami.Units.gridUnit * 32
     
-    onActiveFocusChanged: {
-        if (!activeFocus) {
-            Plasmoid.status = PlasmaCore.Types.ActiveStatus;
-        }
-    }
-
     header: PlasmaExtras.BasicPlasmoidHeading {
         contentItem: RowLayout {
             spacing: Kirigami.Units.smallSpacing
@@ -652,6 +646,9 @@ PlasmaExtras.Representation {
                     target: root
                     function onExpandedChanged() {
                         if (root.expanded) {
+                            if (fullRep.Window.window) {
+                                fullRep.Window.window.requestActivate();
+                            }
                             inputField.forceActiveFocus(Qt.ShortcutFocusReason);
                         }
                     }
@@ -815,12 +812,6 @@ PlasmaExtras.Representation {
                         focus: true
                         wrapMode: Text.Wrap
                         
-                        onActiveFocusChanged: {
-                            if (activeFocus) {
-                                Plasmoid.status = PlasmaCore.Types.AcceptingInputStatus;
-                            }
-                        }
-
                         Keys.onPressed: function(event) {
                             var isCtrlV = (event.key === Qt.Key_V && (event.modifiers & Qt.ControlModifier));
                             var isShiftInsert = (event.key === Qt.Key_Insert && (event.modifiers & Qt.ShiftModifier));
