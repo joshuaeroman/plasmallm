@@ -652,9 +652,13 @@ PlasmaExtras.Representation {
                     target: root
                     function onExpandedChanged() {
                         if (root.expanded) {
-                            inputField.forceActiveFocus();
+                            inputField.forceActiveFocus(Qt.ShortcutFocusReason);
                         }
                     }
+                }
+
+                Connections {
+                    target: root
                     function onResponseReady(messageIndex) {
                         messageList.trackingStream = false;
                         Qt.callLater(function() {

@@ -22,6 +22,7 @@ PlasmoidItem {
     id: root
 
     hideOnWindowDeactivate: !Plasmoid.configuration.pin
+    activationTogglesExpanded: true
 
     Connections {
         target: Plasmoid
@@ -294,14 +295,22 @@ PlasmoidItem {
 
     preferredRepresentation: Plasmoid.formFactor === PlasmaCore.Types.Planar ? fullRepresentation : null
 
-    switchWidth: Kirigami.Units.gridUnit * 5
-    switchHeight: Kirigami.Units.gridUnit * 5
+    switchWidth: Kirigami.Units.gridUnit * 10
+    switchHeight: Kirigami.Units.gridUnit * 10
 
     compactRepresentation: MouseArea {
+        id: compactRoot
         property bool wasExpanded
 
-        onPressed: wasExpanded = root.expanded
-        onClicked: root.expanded = !wasExpanded
+        implicitWidth: Plasmoid.formFactor === PlasmaCore.Types.Vertical ? width : (Plasmoid.formFactor === PlasmaCore.Types.Horizontal ? height : Kirigami.Units.gridUnit * 2)
+        implicitHeight: Plasmoid.formFactor === PlasmaCore.Types.Horizontal ? height : (Plasmoid.formFactor === PlasmaCore.Types.Vertical ? width : Kirigami.Units.gridUnit * 2)
+
+        onPressed: {
+            wasExpanded = root.expanded;
+        }
+        onClicked: {
+            root.expanded = !wasExpanded;
+        }
 
         Kirigami.Icon {
             anchors.fill: parent
@@ -321,7 +330,9 @@ PlasmoidItem {
         }
     }
 
-    fullRepresentation: FullRepresentation {}
+    fullRepresentation: FullRepresentation {
+        id: fullRepItem
+    }
 
         P5Support.DataSource {
         id: gcloudTokenSource
