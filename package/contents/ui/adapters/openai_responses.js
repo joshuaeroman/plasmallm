@@ -38,6 +38,18 @@ function sanitizePayload(body) {
     }
 }
 
+function setHeaders(xhr, apiKey, endpoint) {
+    xhr.setRequestHeader("Content-Type", "application/json");
+    if (apiKey && apiKey.length > 0) {
+        xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
+        if (apiKey.indexOf("sk-ant-") === 0 || (endpoint && endpoint.indexOf("anthropic") !== -1)) {
+            xhr.setRequestHeader("x-api-key", apiKey);
+            xhr.setRequestHeader("anthropic-version", "2023-06-01");
+            xhr.setRequestHeader("anthropic-dangerous-direct-browser-access", "true");
+        }
+    }
+}
+
 function fetchModels(endpoint, apiKey, callback) {
     // Most Responses-API providers also expose /models with the same shape.
     var xhr = new XMLHttpRequest();
@@ -45,10 +57,7 @@ function fetchModels(endpoint, apiKey, callback) {
 
     xhr.open("GET", url);
     xhr.timeout = 30000;
-    xhr.setRequestHeader("Content-Type", "application/json");
-    if (apiKey && apiKey.length > 0) {
-        xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
-    }
+    setHeaders(xhr, apiKey, endpoint);
 
     xhr.ontimeout = function() {
         callback(i18n("Request timed out after 30 seconds"), null);
@@ -65,12 +74,12 @@ function fetchModels(endpoint, apiKey, callback) {
                             models.push(response.data[i].id);
                         }
                     }
-                    callback(null, models);
+                    callback(null, models, xhr.status);
                 } catch (e) {
-                    callback(i18n("Failed to parse models: %1", e.message), null);
+                    callback(i18n("Failed to parse models: %1", e.message), null, xhr.status);
                 }
             } else {
-                callback(i18n("Failed to fetch models: HTTP %1", xhr.status), null);
+                callback(i18n("Failed to fetch models: HTTP %1", xhr.status), null, xhr.status);
             }
         }
     };
@@ -335,10 +344,7 @@ function sendStreaming(opts) {
 
     xhr.open("POST", url);
     xhr.timeout = 120000;
-    xhr.setRequestHeader("Content-Type", "application/json");
-    if (apiKey && apiKey.length > 0) {
-        xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
-    }
+    setHeaders(xhr, apiKey, endpoint);
 
     var pollTimer = null;
     var lastParseIndex = 0;

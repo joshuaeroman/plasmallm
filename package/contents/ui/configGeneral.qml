@@ -121,7 +121,27 @@ BaseConfigPage {
         
         var t = cfg_apiType;
         if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
-        return Api.apiKeySlot(t, cfg_providerName);
+        var p = cfg_providerName || "Custom";
+        if (p === "Custom" && cfg_apiEndpoint) {
+            p = "Custom:" + cfg_apiEndpoint;
+        }
+        return Api.apiKeySlot(t, p);
+    }
+
+    // Model cache slot always includes adapter+provider so each adapter's
+    // model list is stored separately, even when a profile is active.
+    function currentModelCacheSlot() {
+        var t = cfg_apiType;
+        if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
+        var p = cfg_providerName || "Custom";
+        if (p === "Custom" && cfg_apiEndpoint) {
+            p = "Custom:" + cfg_apiEndpoint;
+        }
+        var base = Api.apiKeySlot(t, p);
+        if (cfg_activeProfileId) {
+            return "models:" + cfg_activeProfileId + ":" + base;
+        }
+        return base;
     }
 
     function readFallbackMap() {
@@ -276,7 +296,7 @@ BaseConfigPage {
     }
 
     function refreshAvailableModels() {
-        var slot = currentSlot();
+        var slot = currentModelCacheSlot();
         var list = modelCache[slot];
         availableModels = Array.isArray(list) ? list : [];
     }
@@ -296,7 +316,7 @@ BaseConfigPage {
 
     function ensureModelsLoaded(force) {
         if (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform") return;
-        var slot = currentSlot();
+        var slot = currentModelCacheSlot();
         var have = Array.isArray(modelCache[slot]) && modelCache[slot].length > 0;
         if (!force && have) return;
         if (fetchInProgress) return;
@@ -320,15 +340,19 @@ BaseConfigPage {
         };
 
         var fetchAction = function(effectiveKey) {
-            Api.fetchModels(effectiveApiType, apiEndpointField.text, effectiveKey, cfg_usesResponsesAPI, opts, function(error, models) {
+            Api.fetchModels(effectiveApiType, apiEndpointField.text, effectiveKey, cfg_usesResponsesAPI, opts, function(error, models, status) {
             fetchInProgress = false;
             if (error) {
-                fetchStatusLabel.text = error;
-                fetchStatusLabel.visible = true;
+                if (status && status >= 400) {
+                    fetchStatusLabel.text = error;
+                    fetchStatusLabel.visible = true;
+                } else {
+                    fetchStatusLabel.visible = false;
+                }
             } else if (!models || models.length === 0) {
-                fetchStatusLabel.text = i18n("No models found.");
-                fetchStatusLabel.visible = true;
+                fetchStatusLabel.visible = false;
             } else {
+                fetchStatusLabel.visible = false;
                 var next = {};
                 for (var k in modelCache) if (modelCache.hasOwnProperty(k)) next[k] = modelCache[k];
                 next[slot] = models;
@@ -376,10 +400,9 @@ BaseConfigPage {
 
     readonly property var adapterChoices: Api.getAdapterChoices()
     readonly property string effectiveApiType: (cfg_apiType === "gemini" && cfg_geminiApiVariant === "interactions") ? "gemini_interactions" : cfg_apiType
-    property var caps: Api.getCapabilities(effectiveApiType) || {}
+    readonly property var caps: Api.getCapabilities(effectiveApiType) || {}
 
     onCfg_apiTypeChanged: {
-        caps = Api.getCapabilities(effectiveApiType) || {};
         loadWalletKey();
         refreshAvailableModels();
         rootItem.triggerCapture();
@@ -389,7 +412,6 @@ BaseConfigPage {
     }
 
     onCfg_geminiApiVariantChanged: {
-        caps = Api.getCapabilities(effectiveApiType) || {};
         loadWalletKey();
         refreshAvailableModels();
         ensureModelsLoaded(false);
@@ -404,6 +426,7 @@ BaseConfigPage {
     }
 
     onCfg_providerNameChanged: {
+        if (_initialized) cfg_modelName = "";
         loadWalletKey();
         refreshAvailableModels();
         ensureModelsLoaded(false);
@@ -411,6 +434,7 @@ BaseConfigPage {
     }
 
     function applyAdapterDefaults(apiType) {
+        _initialized = false;
         var presets = Api.getPresets(apiType) || [];
         var pick = null;
         // For Gemini, we might have switched to "gemini" from "gemini_interactions" or vice versa
@@ -430,6 +454,7 @@ BaseConfigPage {
                 apiEndpointField.text = cfg_openaiLastEndpoint;
                 cfg_providerName = pick.name;
                 cfg_modelName = "";
+                _initialized = true;
                 refreshAvailableModels();
                 ensureModelsLoaded(false);
                 return;
@@ -449,8 +474,12 @@ BaseConfigPage {
             cfg_usesResponsesAPI = !!pick.usesResponsesAPI;
         }
         cfg_modelName = "";
+        _initialized = true;
         refreshAvailableModels();
         ensureModelsLoaded(false);
+        if (cfg_apiType === "openai") {
+            rememberOpenAIChoice(cfg_providerName, cfg_apiEndpoint);
+        }
     }
 
     function rememberOpenAIChoice(providerName, endpointUrl) {
@@ -823,6 +852,7 @@ BaseConfigPage {
                 }
                 if (idx === -1) return;
 
+                if (_initialized) cfg_modelName = "";
                 endpointPreset.currentIndex = idx;
                 if (idx > 0) {
                     var p = presetEndpoints[idx];

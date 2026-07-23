@@ -71,6 +71,10 @@ var presets = [
 ];
 
 function fetchModels(endpoint, apiKey, usesResponsesAPI, callback) {
+    if (typeof usesResponsesAPI === "function") {
+        callback = usesResponsesAPI;
+        usesResponsesAPI = false;
+    }
     return usesResponsesAPI
         ? Responses.fetchModels(endpoint, apiKey, callback)
         : Chat.fetchModels(endpoint, apiKey, callback);

@@ -989,7 +989,28 @@ lines.push(JSON.stringify({
 
         var t = Plasmoid.configuration.apiType;
         if (t === "gemini" && Plasmoid.configuration.geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
-        return Api.apiKeySlot(t, Plasmoid.configuration.providerName);
+        var p = Plasmoid.configuration.providerName || "Custom";
+        if (p === "Custom" && Plasmoid.configuration.apiEndpoint) {
+            p = "Custom:" + Plasmoid.configuration.apiEndpoint;
+        }
+        return Api.apiKeySlot(t, p);
+    }
+
+    // Model cache slot always includes adapter+provider so each adapter's
+    // model list is stored separately, even when a profile is active.
+    function currentModelCacheSlot() {
+        var t = Plasmoid.configuration.apiType;
+        if (t === "gemini" && Plasmoid.configuration.geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
+        var p = Plasmoid.configuration.providerName || "Custom";
+        if (p === "Custom" && Plasmoid.configuration.apiEndpoint) {
+            p = "Custom:" + Plasmoid.configuration.apiEndpoint;
+        }
+        var base = Api.apiKeySlot(t, p);
+        var profileId = Plasmoid.configuration.activeProfileId;
+        if (profileId) {
+            return "models:" + profileId + ":" + base;
+        }
+        return base;
     }
 
     function fallbackKeyForSlot(slot) {
@@ -2536,25 +2557,7 @@ lines.push(JSON.stringify({
             loadSearxngKeyFromWallet();
         }
         function onApiEndpointChanged() {
-            if (root._switchingProfile) return;
-            // Only clear the current slot's cache, not the whole map
-            var stored = Plasmoid.configuration.availableModels;
-            if (stored && stored.length > 0) {
-                try {
-                    var m = JSON.parse(stored);
-                    if (m && typeof m === "object" && !Array.isArray(m)) {
-                        var slot = currentApiKeySlot();
-                        delete m[slot];
-                        Plasmoid.configuration.availableModels = JSON.stringify(m);
-                    } else {
-                        Plasmoid.configuration.availableModels = "";
-                    }
-                } catch(e) {
-                    Plasmoid.configuration.availableModels = "";
-                }
-            } else {
-                Plasmoid.configuration.availableModels = "";
-            }
+            // Endpoint URL updates do not invalidate the slot map; each slot manages its own cache entry.
         }
         function onChatSaveFormatChanged() {
             if (Plasmoid.configuration.chatSaveFormat === "jsonl" && historyFilesModel.count === 0) {
@@ -2571,7 +2574,7 @@ lines.push(JSON.stringify({
             if (stored && stored.length > 0) {
                 try {
                     var m = JSON.parse(stored);
-                    var slot = currentApiKeySlot();
+                    var slot = currentModelCacheSlot();
                     // Handle both the new map shape and the legacy flat-array shape
                     if (m && typeof m === "object" && !Array.isArray(m)) {
                         root.fetchedModels = m[slot] || [];

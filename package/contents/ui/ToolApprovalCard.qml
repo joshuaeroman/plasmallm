@@ -29,7 +29,7 @@ Kirigami.Card {
                 var parsed = JSON.parse(toolArgsJson);
                 return parsed;
             } catch(e) {
-                console.error("PlasmaLLM DEBUG: ToolApprovalCard.qml parse error: " + e + " for string: " + toolArgsJson);
+                console.error("PlasmaLLM: ToolApprovalCard parse error: " + e + " for string: " + toolArgsJson);
                 return {};
             }
         }
