@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-01 19:31-0400\n"
+"POT-Creation-Date: 2026-07-03 21:44-0400\n"
 "PO-Revision-Date: 2026-05-04 00:00+0300\n"
 "Last-Translator: Matvel007\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -15,15 +15,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid "Color button"
-msgstr "Кнопка цвета"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Текущий цвет: %1. Эта кнопка откроет диалог выбора цвета."
-
-msgid "Current color is %1."
-msgstr "Текущий цвет: %1."
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -67,8 +58,12 @@ msgstr "Ошибка API %1"
 msgid "Request failed (no response) — check your endpoint URL"
 msgstr "Запрос не удался (нет ответа) — проверьте URL эндпоинта"
 
-msgid "Gemini uses the thinking level dropdown directly."
-msgstr "Gemini использует выпадающий список уровня мышления напрямую."
+msgid ""
+"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
+"on supported models."
+msgstr ""
+"Gemini использует бюджет токенов размышления напрямую. Установите 0, чтобы "
+"отключить размышление на поддерживаемых моделях."
 
 msgid "Failed to fetch models"
 msgstr "Не удалось получить модели"
@@ -79,6 +74,15 @@ msgstr "Ошибка аутентификации — проверьте API-к�
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr "Ошибка аутентификации (HTTP %1) — проверьте API-ключ: %2"
 
+msgid "no response — check your endpoint URL"
+msgstr "нет ответа — проверьте URL эндпоинта"
+
+msgid "Request failed"
+msgstr "Запрос не удался"
+
+msgid "Gemini uses the thinking level dropdown directly."
+msgstr "Gemini использует выпадающий список уровня мышления напрямую."
+
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -87,9 +91,6 @@ msgstr ""
 "Эта версия модели не поддерживает сочетание встроенных инструментов (Поиск/"
 "Код) с пользовательскими командами. Выберите более новую модель (например, "
 "Gemini 3+) или отключите встроенные функции в Настройках."
-
-msgid "Request failed"
-msgstr "Запрос не удался"
 
 msgid ""
 "Reasoning effort (low / medium / high) gates extended thinking. To see "
@@ -101,16 +102,6 @@ msgstr ""
 "мышлением. Чтобы видеть размышления на OpenAI / Poe / OpenRouter / Azure, "
 "включите Use Responses API; провайдеры chat-completions (DeepSeek, Qwen) "
 "показывают рассуждения через reasoning_content."
-
-msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
-msgstr ""
-"Gemini использует бюджет токенов размышления напрямую. Установите 0, чтобы "
-"отключить размышление на поддерживаемых моделях."
-
-msgid "no response — check your endpoint URL"
-msgstr "нет ответа — проверьте URL эндпоинта"
 
 msgid ""
 "No custom tools configured. Add a custom tool to expose your own commands to "
@@ -260,6 +251,54 @@ msgstr "Спрашивать перед запуском"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Ошибка: URL должен начинаться с http:// или https://"
 
+msgid "Search provider %1 not supported"
+msgstr "Поисковый провайдер %1 не поддерживается"
+
+msgid "Searching the web for: %1…"
+msgstr "Поиск в интернете: %1…"
+
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Ollama API key"
+msgstr "API-ключ Ollama"
+
+msgid "Saving…"
+msgstr "Сохранение…"
+
+msgid "Saved"
+msgstr "Сохранено"
+
+msgid "Save to Config (Insecure)"
+msgstr "Сохранить в конфиг (небезопасно)"
+
+msgid "Save Key"
+msgstr "Сохранить ключ"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "URL экземпляра SearXNG (напр. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "API-ключ/токен SearXNG (опционально)"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo не требует настройки."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Убедитесь, что на экземпляре SearXNG включён формат JSON."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Включает веб-поиск от LLM через поисковый API Ollama"
+
+msgid "Error: content exceeds max write size (%1 bytes)"
+msgstr "Ошибка: содержимое превышает максимальный размер записи (%1 байт)"
+
 msgid "No command provided."
 msgstr "Команда не указана."
 
@@ -309,60 +348,436 @@ msgstr ""
 "В вашей системе не найдены ни 'tmux', ни 'screen'. Мультиплексирование "
 "сессий недоступно."
 
-msgid "Search provider %1 not supported"
-msgstr "Поисковый провайдер %1 не поддерживается"
-
-msgid "Searching the web for: %1…"
-msgstr "Поиск в интернете: %1…"
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ollama API key"
-msgstr "API-ключ Ollama"
-
-msgid "Saving…"
-msgstr "Сохранение…"
-
-msgid "Saved"
-msgstr "Сохранено"
-
-msgid "Save to Config (Insecure)"
-msgstr "Сохранить в конфиг (небезопасно)"
-
-msgid "Save Key"
-msgstr "Сохранить ключ"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "URL экземпляра SearXNG (напр. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "API-ключ/токен SearXNG (опционально)"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo не требует настройки."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Убедитесь, что на экземпляре SearXNG включён формат JSON."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Включает веб-поиск от LLM через поисковый API Ollama"
-
-msgid "Error: content exceeds max write size (%1 bytes)"
-msgstr "Ошибка: содержимое превышает максимальный размер записи (%1 байт)"
-
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS are allowed."
 msgstr ""
 "Ошибка: Недопустимый метод HTTP. Разрешены только GET, POST, PUT, DELETE, "
 "PATCH, HEAD, OPTIONS."
+
+msgid "Color button"
+msgstr "Кнопка цвета"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Текущий цвет: %1. Эта кнопка откроет диалог выбора цвета."
+
+msgid "Current color is %1."
+msgstr "Текущий цвет: %1."
+
+msgid "Stop command"
+msgstr "Остановить команду"
+
+msgid "Open terminal attached to this session"
+msgstr "Открыть терминал, подключенный к этой сессии"
+
+msgid "Copy output"
+msgstr "Скопировать вывод"
+
+msgid "You"
+msgstr "Вы"
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Web Search"
+msgstr "Поиск в интернете"
+
+msgid "Assistant"
+msgstr "Ассистент"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Рендеринг Mathtext переключен на замену Unicode (matplotlib не установлен "
+"или произошла ошибка)"
+
+msgid "Thinking"
+msgstr "Размышляю…"
+
+msgid "Searched for: %1"
+msgstr "Искал: %1"
+
+msgid "Show %1 results"
+msgstr "Показать %1 результатов"
+
+msgid "Copy to clipboard"
+msgstr "Копировать в буфер обмена"
+
+msgid "Share output with assistant"
+msgstr "Поделиться выводом с ассистентом"
+
+msgid "OpenAI-compatible"
+msgstr "OpenAI-совместимый"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "Profile Header:"
+msgstr "Заголовок профиля:"
+
+msgid "Show provider and model in profile header"
+msgstr "Показывать провайдера и модель в заголовке профиля"
+
+msgid "Chat Spacing: %1px"
+msgstr "Отступы чата: %1px"
+
+msgid "Compact"
+msgstr "Компактный"
+
+msgid "Spacious"
+msgstr "Просторный"
+
+msgid "Chat Labels:"
+msgstr "Ярлыки чата:"
+
+msgid "User label:"
+msgstr "Ярлык пользователя:"
+
+msgid "Assistant label:"
+msgstr "Ярлык помощника:"
+
+msgid "Use model name as assistant label"
+msgstr "Использовать имя модели в качестве ярлыка помощника"
+
+msgid "Chat Colors:"
+msgstr "Цвета чата:"
+
+msgid "Use custom user color"
+msgstr "Использовать пользовательский цвет"
+
+msgid "Use custom assistant color"
+msgstr "Использовать цвет помощника"
+
+msgid "UI Font:"
+msgstr "Шрифт интерфейса:"
+
+msgid "Use custom UI font"
+msgstr "Использовать пользовательский шрифт интерфейса"
+
+msgid "Code Font:"
+msgstr "Шрифт кода:"
+
+msgid "Use custom code font"
+msgstr "Использовать пользовательский шрифт кода"
+
+msgid "Thoughts Font:"
+msgstr "Шрифт размышлений:"
+
+msgid "Use custom thoughts font"
+msgstr "Использовать пользовательский шрифт размышлений"
+
+msgid "LaTeX Rendering:"
+msgstr "Рендеринг LaTeX:"
+
+msgid "Leave as TeX"
+msgstr "Оставить как TeX"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Заменить на Unicode (по умолчанию)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (отсутствует python3-matplotlib)"
+
+msgid "Header Icons:"
+msgstr "Иконки заголовка:"
+
+msgid "Profile Header"
+msgstr "Заголовок профиля"
+
+msgid "Always show Tasks"
+msgstr "Всегда показывать Задачи"
+
+msgid "Always show Auto Toggle"
+msgstr "Всегда показывать переключатель Авто"
+
+msgid "Show History"
+msgstr "Показать историю"
+
+msgid "Show Copy conversation"
+msgstr "Показать Копировать разговор"
+
+msgid "Show Clear chat"
+msgstr "Показать Очистить чат"
+
+msgid "Show Settings"
+msgstr "Показать Настройки"
+
+msgid "Show Pin"
+msgstr "Показать закрепление"
+
+msgid "General Tool Settings"
+msgstr "Общие настройки инструментов"
+
+msgid "System state:"
+msgstr "Состояние системы:"
+
+msgid "Enable Tools"
+msgstr "Включить инструменты"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "Главный переключатель для всех функций вызова инструментов."
+
+msgid "Desktop Automation:"
+msgstr "Автоматизация рабочего стола:"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+"Позволяет LLM запрашивать сеанс для просмотра и управления вашим рабочим "
+"столом."
+
+msgid "Enable Desktop Automation"
+msgstr "Включить автоматизацию рабочего стола"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Включить автоматизацию рабочего стола (требуется <a href=\"https://"
+"github.com/joshuaeroman/plasmallm-desktop-driver\">драйвер</a>)"
+
+msgid "Path whitelist:"
+msgstr "Белый список путей:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Добавить путь, напр. $HOME/projects, /tmp"
+
+msgid "Add"
+msgstr "Добавить"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Белый список применяется к инструментам файловой системы (чтение, запись, "
+"список, поиск). Примечание: 'run_command' не ограничен этим списком."
+
+msgid "Max read size:"
+msgstr "Макс. размер чтения:"
+
+msgid "Max write size:"
+msgstr "Макс. размер записи:"
+
+msgid "Max HTTP response:"
+msgstr "Макс. HTTP-ответ:"
+
+msgid "Max tool loop depth:"
+msgstr "Максимальная глубина цикла инструментов:"
+
+msgid "steps"
+msgstr "шагов"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr ""
+"Примечание: Это ограничение не применяется к сеансам автоматизации рабочего "
+"стола."
+
+msgid "Native Adapter Features"
+msgstr "Встроенные функции адаптера"
+
+msgid "Google Search:"
+msgstr "Google Поиск:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Включить нативную привязку Google Search"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Использовать встроенный Google Поиск Gemini для привязки. Это переопределяет "
+"стандартный инструмент веб-поиска."
+
+msgid "Code Execution:"
+msgstr "Выполнение кода:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Включить нативное выполнение кода Python"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Разрешить Gemini писать и выполнять код Python в безопасной серверной "
+"песочнице."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Объединение встроенных инструментов с командами требует более новой модели. "
+"Текущая выбранная модель (%1) может столкнуться с ошибками."
+
+msgid "Individual Tools"
+msgstr "Отдельные инструменты"
+
+msgid "Approve the pending tool request"
+msgstr "Одобрить ожидающий запрос инструмента"
+
+msgid "Toggle skip approvals for this session"
+msgstr "Переключить пропуск подтверждений для этого сеанса"
+
+msgid "Clear the chat"
+msgstr "Очистить чат"
+
+msgid "Close the panel"
+msgstr "Закрыть панель"
+
+msgid "Copy conversation to clipboard"
+msgstr "Скопировать разговор в буфер обмена"
+
+msgid "Deny the pending tool request"
+msgstr "Отклонить ожидающий запрос инструмента"
+
+msgid "Open chat history folder"
+msgstr "Открыть папку истории чатов"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "Показать или сменить модель (/model <name>)"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "Сменить профиль (/profile <имя>)"
+
+msgid "Save chat to file"
+msgstr "Сохранить чат в файл"
+
+msgid "Open settings"
+msgstr "Открыть настройки"
+
+msgid "Run a saved task (/task <name>)"
+msgstr "Выполнить сохранённую задачу (/task <name>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr ""
+"Переключить режим Drive Desktop (запуск установления связи и авторежима)"
+
+msgid "Toggle Full Auto Mode"
+msgstr "Переключить полностью автоматический режим"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Переключить полностью автоматический режим: При включении все инструменты "
+"запускаются автоматически для этого сеанса."
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "Остановить управление рабочим столом (отключиться)"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop (запуск установления связи и включение авторежима)"
+
+msgid "Run a task"
+msgstr "Выполнить задачу"
+
+msgid "Chat History"
+msgstr "История чатов"
+
+msgid "Loading..."
+msgstr "Загрузка…"
+
+msgid "No recent chats"
+msgstr "Нет недавних чатов"
+
+msgid "Open history folder..."
+msgstr "Открыть папку истории…"
+
+msgid "Clear all history..."
+msgstr "Очистить всю историю…"
+
+msgid "Clear All History"
+msgstr "Очистить всю историю"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Вы уверены, что хотите удалить все файлы истории чатов? Это действие нельзя "
+"отменить."
+
+msgid "Clear All"
+msgstr "Очистить всё"
+
+msgid "Copy conversation"
+msgstr "Копировать разговор"
+
+msgid "Command"
+msgstr "Команда"
+
+msgid "Clear chat"
+msgstr "Очистить чат"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Don't keep open"
+msgstr "Не держать открытым"
+
+msgid "Keep open"
+msgstr "Держать открытым"
+
+msgid "The user denied this tool call."
+msgstr "Пользователь отклонил этот вызов инструмента."
+
+msgid "Send a message to start chatting"
+msgstr "Отправьте сообщение, чтобы начать чат"
+
+msgid "Attach File"
+msgstr "Прикрепить файл"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Изображения (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Текстовые файлы (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
+"*.conf *.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "Все файлы (*)"
+
+msgid "Message input"
+msgstr "Ввод сообщения"
+
+msgid "Type a message…"
+msgstr "Напишите сообщение…"
+
+msgid "Initializing…"
+msgstr "Инициализация…"
+
+msgid "Attach file or image"
+msgstr "Прикрепить файл или изображение"
+
+msgid "Kill"
+msgstr "Завершить"
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+"Завершить постоянную сессию (останавливает все процессы и сбрасывает "
+"состояние оболочки)"
+
+msgid "Send"
+msgstr "Отправить"
+
+msgid "Stop"
+msgstr "Стоп"
+
+msgid "Cancel LLM request"
+msgstr "Отменить запрос LLM"
+
+msgid "Drop files here to attach"
+msgstr "Перетащите файлы сюда для прикрепления"
 
 msgid "Tool Request: %1"
 msgstr "Запрос инструмента: %1"
@@ -376,20 +791,8 @@ msgstr "Отклонить"
 msgid "Approve"
 msgstr "Одобрить"
 
-msgid "Stop command"
-msgstr "Остановить команду"
-
-msgid "Open terminal attached to this session"
-msgstr "Открыть терминал, подключенный к этой сессии"
-
-msgid "Copy output"
-msgstr "Скопировать вывод"
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Не удалось получить токен gcloud (выход %1): %2"
-
-msgid "No models found."
-msgstr "Модели не найдены."
 
 msgid "New Profile"
 msgstr "Новый профиль"
@@ -610,412 +1013,6 @@ msgstr "секунд"
 msgid "minutes"
 msgstr "минут"
 
-msgid "General Tool Settings"
-msgstr "Общие настройки инструментов"
-
-msgid "System state:"
-msgstr "Состояние системы:"
-
-msgid "Enable Tools"
-msgstr "Включить инструменты"
-
-msgid "Master switch for all tool-calling functionality."
-msgstr "Главный переключатель для всех функций вызова инструментов."
-
-msgid "Desktop Automation:"
-msgstr "Автоматизация рабочего стола:"
-
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr ""
-"Позволяет LLM запрашивать сеанс для просмотра и управления вашим рабочим "
-"столом."
-
-msgid "Enable Desktop Automation"
-msgstr "Включить автоматизацию рабочего стола"
-
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr ""
-"Включить автоматизацию рабочего стола (требуется <a href=\"https://"
-"github.com/joshuaeroman/plasmallm-desktop-driver\">драйвер</a>)"
-
-msgid "Path whitelist:"
-msgstr "Белый список путей:"
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Добавить путь, напр. $HOME/projects, /tmp"
-
-msgid "Add"
-msgstr "Добавить"
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Белый список применяется к инструментам файловой системы (чтение, запись, "
-"список, поиск). Примечание: 'run_command' не ограничен этим списком."
-
-msgid "Max read size:"
-msgstr "Макс. размер чтения:"
-
-msgid "Max write size:"
-msgstr "Макс. размер записи:"
-
-msgid "Max HTTP response:"
-msgstr "Макс. HTTP-ответ:"
-
-msgid "Max tool loop depth:"
-msgstr "Максимальная глубина цикла инструментов:"
-
-msgid "steps"
-msgstr "шагов"
-
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr ""
-"Примечание: Это ограничение не применяется к сеансам автоматизации рабочего "
-"стола."
-
-msgid "Native Adapter Features"
-msgstr "Встроенные функции адаптера"
-
-msgid "Google Search:"
-msgstr "Google Поиск:"
-
-msgid "Enable Native Google Search Grounding"
-msgstr "Включить нативную привязку Google Search"
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Использовать встроенный Google Поиск Gemini для привязки. Это переопределяет "
-"стандартный инструмент веб-поиска."
-
-msgid "Code Execution:"
-msgstr "Выполнение кода:"
-
-msgid "Enable Native Python Code Execution"
-msgstr "Включить нативное выполнение кода Python"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Разрешить Gemini писать и выполнять код Python в безопасной серверной "
-"песочнице."
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Объединение встроенных инструментов с командами требует более новой модели. "
-"Текущая выбранная модель (%1) может столкнуться с ошибками."
-
-msgid "Individual Tools"
-msgstr "Отдельные инструменты"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI-совместимый"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "You"
-msgstr "Вы"
-
-msgid "Error"
-msgstr "Ошибка"
-
-msgid "Web Search"
-msgstr "Поиск в интернете"
-
-msgid "Assistant"
-msgstr "Ассистент"
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"Рендеринг Mathtext переключен на замену Unicode (matplotlib не установлен "
-"или произошла ошибка)"
-
-msgid "Thinking"
-msgstr "Размышляю…"
-
-msgid "Searched for: %1"
-msgstr "Искал: %1"
-
-msgid "Show %1 results"
-msgstr "Показать %1 результатов"
-
-msgid "Copy to clipboard"
-msgstr "Копировать в буфер обмена"
-
-msgid "Share output with assistant"
-msgstr "Поделиться выводом с ассистентом"
-
-msgid "Profile Header:"
-msgstr "Заголовок профиля:"
-
-msgid "Show provider and model in profile header"
-msgstr "Показывать провайдера и модель в заголовке профиля"
-
-msgid "Chat Spacing: %1px"
-msgstr "Отступы чата: %1px"
-
-msgid "Compact"
-msgstr "Компактный"
-
-msgid "Spacious"
-msgstr "Просторный"
-
-msgid "Chat Labels:"
-msgstr "Ярлыки чата:"
-
-msgid "User label:"
-msgstr "Ярлык пользователя:"
-
-msgid "Assistant label:"
-msgstr "Ярлык помощника:"
-
-msgid "Use model name as assistant label"
-msgstr "Использовать имя модели в качестве ярлыка помощника"
-
-msgid "Chat Colors:"
-msgstr "Цвета чата:"
-
-msgid "Use custom user color"
-msgstr "Использовать пользовательский цвет"
-
-msgid "Use custom assistant color"
-msgstr "Использовать цвет помощника"
-
-msgid "UI Font:"
-msgstr "Шрифт интерфейса:"
-
-msgid "Use custom UI font"
-msgstr "Использовать пользовательский шрифт интерфейса"
-
-msgid "Code Font:"
-msgstr "Шрифт кода:"
-
-msgid "Use custom code font"
-msgstr "Использовать пользовательский шрифт кода"
-
-msgid "Thoughts Font:"
-msgstr "Шрифт размышлений:"
-
-msgid "Use custom thoughts font"
-msgstr "Использовать пользовательский шрифт размышлений"
-
-msgid "LaTeX Rendering:"
-msgstr "Рендеринг LaTeX:"
-
-msgid "Leave as TeX"
-msgstr "Оставить как TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Заменить на Unicode (по умолчанию)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (отсутствует python3-matplotlib)"
-
-msgid "Header Icons:"
-msgstr "Иконки заголовка:"
-
-msgid "Profile Header"
-msgstr "Заголовок профиля"
-
-msgid "Always show Tasks"
-msgstr "Всегда показывать Задачи"
-
-msgid "Always show Auto Toggle"
-msgstr "Всегда показывать переключатель Авто"
-
-msgid "Show History"
-msgstr "Показать историю"
-
-msgid "Show Copy conversation"
-msgstr "Показать Копировать разговор"
-
-msgid "Show Clear chat"
-msgstr "Показать Очистить чат"
-
-msgid "Show Settings"
-msgstr "Показать Настройки"
-
-msgid "Show Pin"
-msgstr "Показать закрепление"
-
-msgid "Approve the pending tool request"
-msgstr "Одобрить ожидающий запрос инструмента"
-
-msgid "Toggle skip approvals for this session"
-msgstr "Переключить пропуск подтверждений для этого сеанса"
-
-msgid "Clear the chat"
-msgstr "Очистить чат"
-
-msgid "Close the panel"
-msgstr "Закрыть панель"
-
-msgid "Copy conversation to clipboard"
-msgstr "Скопировать разговор в буфер обмена"
-
-msgid "Deny the pending tool request"
-msgstr "Отклонить ожидающий запрос инструмента"
-
-msgid "Open chat history folder"
-msgstr "Открыть папку истории чатов"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "Показать или сменить модель (/model <name>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "Сменить профиль (/profile <имя>)"
-
-msgid "Save chat to file"
-msgstr "Сохранить чат в файл"
-
-msgid "Open settings"
-msgstr "Открыть настройки"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "Выполнить сохранённую задачу (/task <name>)"
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr ""
-"Переключить режим Drive Desktop (запуск установления связи и авторежима)"
-
-msgid "Toggle Full Auto Mode"
-msgstr "Переключить полностью автоматический режим"
-
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-"Переключить полностью автоматический режим: При включении все инструменты "
-"запускаются автоматически для этого сеанса."
-
-msgid "Drive Desktop"
-msgstr "Drive Desktop"
-
-msgid "Stop Driving Desktop (disconnect)"
-msgstr "Остановить управление рабочим столом (отключиться)"
-
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr "Drive Desktop (запуск установления связи и включение авторежима)"
-
-msgid "Run a task"
-msgstr "Выполнить задачу"
-
-msgid "Chat History"
-msgstr "История чатов"
-
-msgid "Loading..."
-msgstr "Загрузка…"
-
-msgid "No recent chats"
-msgstr "Нет недавних чатов"
-
-msgid "Open history folder..."
-msgstr "Открыть папку истории…"
-
-msgid "Clear all history..."
-msgstr "Очистить всю историю…"
-
-msgid "Clear All History"
-msgstr "Очистить всю историю"
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-"Вы уверены, что хотите удалить все файлы истории чатов? Это действие нельзя "
-"отменить."
-
-msgid "Clear All"
-msgstr "Очистить всё"
-
-msgid "Copy conversation"
-msgstr "Копировать разговор"
-
-msgid "Command"
-msgstr "Команда"
-
-msgid "Clear chat"
-msgstr "Очистить чат"
-
-msgid "Settings"
-msgstr "Настройки"
-
-msgid "Don't keep open"
-msgstr "Не держать открытым"
-
-msgid "Keep open"
-msgstr "Держать открытым"
-
-msgid "The user denied this tool call."
-msgstr "Пользователь отклонил этот вызов инструмента."
-
-msgid "Send a message to start chatting"
-msgstr "Отправьте сообщение, чтобы начать чат"
-
-msgid "Attach File"
-msgstr "Прикрепить файл"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Изображения (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-"Текстовые файлы (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
-"*.conf *.sh *.py *.js *.ts *.qml)"
-
-msgid "All files (*)"
-msgstr "Все файлы (*)"
-
-msgid "Message input"
-msgstr "Ввод сообщения"
-
-msgid "Type a message…"
-msgstr "Напишите сообщение…"
-
-msgid "Initializing…"
-msgstr "Инициализация…"
-
-msgid "Attach file or image"
-msgstr "Прикрепить файл или изображение"
-
-msgid "Kill"
-msgstr "Завершить"
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-"Завершить постоянную сессию (останавливает все процессы и сбрасывает "
-"состояние оболочки)"
-
-msgid "Send"
-msgstr "Отправить"
-
-msgid "Stop"
-msgstr "Стоп"
-
-msgid "Cancel LLM request"
-msgstr "Отменить запрос LLM"
-
-msgid "Drop files here to attach"
-msgstr "Перетащите файлы сюда для прикрепления"
-
 msgid "Failed to stop driving: %1"
 msgstr "Не удалось остановить управление: %1"
 
@@ -1161,6 +1158,9 @@ msgstr "Инструменты"
 
 msgid "Custom Tools"
 msgstr "Пользовательские инструменты"
+
+#~ msgid "No models found."
+#~ msgstr "Модели не найдены."
 
 #~ msgid "Enable Desktop Automation (plasmallm-desktop-driver)"
 #~ msgstr "Включить автоматизацию рабочего стола (plasmallm-desktop-driver)"

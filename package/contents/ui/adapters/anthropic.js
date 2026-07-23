@@ -49,7 +49,11 @@ function setHeaders(xhr, apiKey) {
     }
 }
 
-function fetchModels(endpoint, apiKey, callback) {
+function fetchModels(endpoint, apiKey, opts, callback) {
+    if (typeof opts === "function") {
+        callback = opts;
+        opts = null;
+    }
     var xhr = new XMLHttpRequest();
     var url = endpoint.replace(/\/+$/, "") + "/v1/models";
 
@@ -72,12 +76,12 @@ function fetchModels(endpoint, apiKey, callback) {
                             models.push(response.data[i].id);
                         }
                     }
-                    callback(null, models);
+                    callback(null, models, xhr.status);
                 } catch (e) {
-                    callback(i18n("Failed to parse models: %1", e.message), null);
+                    callback(i18n("Failed to parse models: %1", e.message), null, xhr.status);
                 }
             } else {
-                callback(i18n("Failed to fetch models: HTTP %1", xhr.status), null);
+                callback(i18n("Failed to fetch models: HTTP %1", xhr.status), null, xhr.status);
             }
         }
     };
@@ -513,7 +517,6 @@ function sendStreaming(opts) {
     }
 
     var payload = JSON.stringify(body, null, 2);
-    console.error("PlasmaLLM DEBUG Anthropic payload:", payload);
     xhr.send(payload);
 
     var handle = {

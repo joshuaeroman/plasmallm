@@ -115,12 +115,12 @@ function fetchModels(endpoint, apiKey, opts, callback) {
                             }
                         }
                     }
-                    callback(null, models);
+                    callback(null, models, xhr.status);
                 } catch (e) {
-                    callback(i18n("Failed to parse models: %1", e.message), null);
+                    callback(i18n("Failed to parse models: %1", e.message), null, xhr.status);
                 }
             } else {
-                callback(formatGeminiError(xhr, i18n("Failed to fetch models")), null);
+                callback(formatGeminiError(xhr, i18n("Failed to fetch models")), null, xhr.status);
             }
         }
     };
