@@ -260,6 +260,10 @@
       <label>Internal: legacy single-slot API key has been migrated to per-slot</label>
       <default>false</default>
     </entry>
+    <entry name="apiKeySlotSchemeVersion" type="Int">
+      <label>Internal: wallet API key slot scheme (0=legacy apiKey:…, 2=v1/chat|search path names)</label>
+      <default>0</default>
+    </entry>
     <entry name="autoClearMode" type="Int">
       <label>Auto-clear mode: 0=disabled, 1=instant, 2=seconds, 3=minutes</label>
       <default>0</default>

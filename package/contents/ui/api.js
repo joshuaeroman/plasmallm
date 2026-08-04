@@ -187,18 +187,181 @@ function getCapabilities(apiType) {
     return Adapters.getAdapter(apiType).capabilities;
 }
 
-// Wallet entry name for an (adapter, provider) slot. Falls back to the adapter
-// id when providerName is blank so adapters without presets still get a stable
-// slot.
-function apiKeySlot(apiType, providerName) {
+// ---------------------------------------------------------------------------
+// KWallet password entry names (PlasmaLLM folder)
+//
+// Current scheme (KEY_SLOT_SCHEME_VERSION = 2):
+//   Chat:   v1/chat/<profileId>/<apiType>/<providerOr[url]>
+//   Search: v1/search/_/<provider>          (global; "_" = shared)
+//
+// Custom chat endpoints use square brackets around the URL:
+//   v1/chat/p_default/openai/[http://localhost:11434/v1]
+//
+// Legacy names (read fallback + one-time migration only; never write):
+//   apiKey
+//   apiKey:openai:OpenRouter
+//   apiKey:profile:p_default
+//   exaApiKey / ollamaSearchApiKey / ollamaApiKey / searxngApiKey
+// ---------------------------------------------------------------------------
+
+var KEY_SLOT_SCHEME_VERSION = 2;
+
+function normalizeEndpoint(endpoint) {
+    if (!endpoint) return "";
+    return String(endpoint).replace(/\/+$/, "");
+}
+
+// Single path token for api type (no colons — reserved for legacy parsing only).
+function slotApiType(apiType, geminiAuthMethod) {
     var t = apiType || "openai";
-    var p = (providerName && providerName.length > 0) ? providerName : t;
+    if (t === "gemini" && geminiAuthMethod === "agentplatform")
+        return "gemini_agentplatform";
+    if (t === "gemini:agentplatform" || t === "gemini_agentplatform")
+        return "gemini_agentplatform";
+    return t;
+}
+
+// Final path segment for chat: preset name, or [url] for Custom.
+function slotProviderPart(providerName, endpoint) {
+    var p = (providerName && String(providerName).length > 0) ? String(providerName) : "Custom";
+    if (p === "Custom")
+        return "[" + normalizeEndpoint(endpoint) + "]";
+    return p;
+}
+
+function chatKeySlot(profileId, apiType, providerName, endpoint, geminiAuthMethod) {
+    var pid = (profileId && String(profileId).length > 0) ? String(profileId) : "_";
+    return "v1/chat/" + pid + "/"
+        + slotApiType(apiType, geminiAuthMethod) + "/"
+        + slotProviderPart(providerName, endpoint);
+}
+
+// Search keys are global across profiles (matches historical exaApiKey, etc.).
+function searchKeySlot(searchProvider) {
+    var p = searchProvider || "ollama";
+    return "v1/search/_/" + p;
+}
+
+// --- Public names used by main.qml / configGeneral.qml ---
+
+function currentKeySlot(activeProfileId, apiType, providerName, endpoint, geminiAuthMethod) {
+    return chatKeySlot(activeProfileId, apiType, providerName, endpoint, geminiAuthMethod);
+}
+
+// Legacy provider-only (pre-path scheme).
+function legacyProviderKeySlot(apiType, providerName, endpoint, geminiAuthMethod) {
+    var t = apiType || "openai";
+    if (t === "gemini" && geminiAuthMethod === "agentplatform")
+        t = "gemini:agentplatform";
+    var p = (providerName && providerName.length > 0) ? providerName : "Custom";
+    if (p === "Custom" && endpoint && String(endpoint).length > 0)
+        p = "Custom:" + normalizeEndpoint(endpoint);
     return "apiKey:" + t + ":" + p;
 }
 
-function profileKeySlot(profileId) {
+function legacyProfileKeySlot(profileId) {
     return "apiKey:profile:" + profileId;
 }
+
+// Ordered fallbacks when the v1/chat primary is empty (load + migration source).
+function legacyKeySlots(activeProfileId, apiType, providerName, endpoint, geminiAuthMethod) {
+    var out = [legacyProviderKeySlot(apiType, providerName, endpoint, geminiAuthMethod)];
+    if (activeProfileId && String(activeProfileId).length > 0)
+        out.push(legacyProfileKeySlot(activeProfileId));
+    out.push("apiKey");
+    return out;
+}
+
+// Aliases kept so older call sites / migration code keep working.
+function apiKeySlot(apiType, providerName) {
+    return legacyProviderKeySlot(apiType, providerName, "", null);
+}
+function profileKeySlot(profileId) {
+    return legacyProfileKeySlot(profileId);
+}
+function providerKeySlot(apiType, providerName, endpoint, geminiAuthMethod) {
+    return legacyProviderKeySlot(apiType, providerName, endpoint, geminiAuthMethod);
+}
+function compositeKeySlot(profileId, apiType, providerPart) {
+    // Map old composite builder onto v1/chat (providerPart may be "Custom:url").
+    var providerName = providerPart;
+    var endpoint = "";
+    if (providerPart && providerPart.indexOf("Custom:") === 0) {
+        providerName = "Custom";
+        endpoint = providerPart.substring(7);
+    }
+    // apiType may be "gemini:agentplatform" from old parsers
+    var geminiAuth = null;
+    var t = apiType || "openai";
+    if (t === "gemini:agentplatform") {
+        t = "gemini";
+        geminiAuth = "agentplatform";
+    }
+    return chatKeySlot(profileId, t, providerName, endpoint, geminiAuth);
+}
+
+function isLegacyProfileOnlySlot(name) {
+    return /^apiKey:profile:[^:]+$/.test(name || "");
+}
+
+function isProviderOnlyChatSlot(name) {
+    if (!name || name.indexOf("apiKey:") !== 0) return false;
+    if (name === "apiKey") return false;
+    if (name.indexOf("apiKey:profile:") === 0) return false;
+    return name.substring(7).indexOf(":") !== -1;
+}
+
+function parseProviderOnlySlot(name) {
+    if (!isProviderOnlyChatSlot(name)) return null;
+    var rest = name.substring(7);
+    if (rest.indexOf("gemini:agentplatform:") === 0) {
+        return {
+            apiType: "gemini",
+            geminiAuthMethod: "agentplatform",
+            providerName: rest.substring("gemini:agentplatform:".length),
+            endpoint: ""
+        };
+    }
+    var colon = rest.indexOf(":");
+    if (colon < 0) return null;
+    var type = rest.substring(0, colon);
+    var prov = rest.substring(colon + 1);
+    var endpoint = "";
+    var providerName = prov;
+    if (prov.indexOf("Custom:") === 0) {
+        providerName = "Custom";
+        endpoint = prov.substring(7);
+    }
+    return {
+        apiType: type,
+        geminiAuthMethod: null,
+        providerName: providerName,
+        endpoint: endpoint
+    };
+}
+
+function parseLegacyProfileOnlySlot(name) {
+    if (!isLegacyProfileOnlySlot(name)) return null;
+    return name.substring("apiKey:profile:".length);
+}
+
+// Model-list cache (config JSON, not KWallet). Keep independent of wallet scheme.
+function modelCacheSlot(apiType, providerName, endpoint, activeProfileId, geminiAuthMethod) {
+    var type = slotApiType(apiType, geminiAuthMethod);
+    var prov = slotProviderPart(providerName, endpoint);
+    var base = "models:" + type + ":" + prov;
+    if (activeProfileId && String(activeProfileId).length > 0)
+        return "models:" + activeProfileId + ":" + type + ":" + prov;
+    return base;
+}
+
+// Legacy search wallet entry names → new v1/search/_/<provider>
+var LEGACY_SEARCH_KEY_MAP = {
+    "exaApiKey": "exa",
+    "ollamaSearchApiKey": "ollama",
+    "ollamaApiKey": "ollama",
+    "searxngApiKey": "searxng"
+};
 
 function getAdapterChoices() {
     return [

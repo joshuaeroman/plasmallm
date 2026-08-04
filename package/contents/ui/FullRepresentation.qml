@@ -505,6 +505,26 @@ PlasmaExtras.Representation {
             anchors.fill: parent
             spacing: Plasmoid.configuration.chatSpacing
 
+            Kirigami.InlineMessage {
+                Layout.fillWidth: true
+                Layout.leftMargin: Plasmoid.configuration.chatSpacing
+                Layout.rightMargin: Plasmoid.configuration.chatSpacing
+                Layout.topMargin: Plasmoid.configuration.chatSpacing
+                visible: root.showApiKeyMigrationNotice
+                type: Kirigami.MessageType.Information
+                text: root.apiKeyMigrationNoticeText
+                // Kirigami's built-in X only sets visible=false (no signal) and
+                // would break the binding to showApiKeyMigrationNotice; use an
+                // action so dismiss stays in sync with clearChat().
+                actions: [
+                    Kirigami.Action {
+                        text: i18n("Dismiss")
+                        icon.name: "dialog-ok"
+                        onTriggered: root.dismissApiKeyMigrationNotice()
+                    }
+                ]
+            }
+
             Item {
             Layout.fillWidth: true
             Layout.fillHeight: true

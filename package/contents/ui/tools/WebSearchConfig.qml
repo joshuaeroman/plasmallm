@@ -9,6 +9,8 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.workspace.dbus as DBus
 
+import "../api.js" as Api
+
 ColumnLayout {
     spacing: Kirigami.Units.smallSpacing
     Layout.fillWidth: true
@@ -65,85 +67,76 @@ ColumnLayout {
         );
     }
 
-    function walletWriteOllamaKey(handle, key, onDone) {
+    function walletWriteSearchKey(handle, provider, key, onDone) {
         ensureWalletFolder(handle, function(ok) {
             if (!ok) {
                 onDone(false);
                 return;
             }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaSearchApiKey", key, "PlasmaLLM"],
+            var slot = Api.searchKeySlot(provider);
+            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", slot, key, "PlasmaLLM"],
                 function(result) { onDone(result === 0); },
                 function(err) {
-                    console.warn("PlasmaLLM: wallet writePassword (ollama) error: " + err);
+                    console.warn("PlasmaLLM: wallet writePassword (" + provider + ") error: " + err);
                     onDone(false);
                 }
             );
         });
+    }
+
+    function walletWriteOllamaKey(handle, key, onDone) {
+        walletWriteSearchKey(handle, "ollama", key, onDone);
     }
 
     function walletWriteSearxngKey(handle, key, onDone) {
-        ensureWalletFolder(handle, function(ok) {
-            if (!ok) {
-                onDone(false);
-                return;
-            }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "searxngApiKey", key, "PlasmaLLM"],
-                function(result) { onDone(result === 0); },
-                function(err) {
-                    console.warn("PlasmaLLM: wallet writePassword (searxng) error: " + err);
-                    onDone(false);
-                }
-            );
-        });
+        walletWriteSearchKey(handle, "searxng", key, onDone);
     }
 
     function walletWriteExaKey(handle, key, onDone) {
-        ensureWalletFolder(handle, function(ok) {
-            if (!ok) {
-                onDone(false);
-                return;
-            }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "exaApiKey", key, "PlasmaLLM"],
-                function(result) { onDone(result === 0); },
-                function(err) {
-                    console.warn("PlasmaLLM: wallet writePassword (exa) error: " + err);
-                    onDone(false);
-                }
-            );
-        });
+        walletWriteSearchKey(handle, "exa", key, onDone);
     }
 
-    function loadWalletOllamaKey() {
+    // Try v1/search/_/<provider>, then legacy entry names, then cfg default.
+    function loadSearchWalletKey(provider, legacyNames, cfgDefault, applyFn) {
+        var primary = Api.searchKeySlot(provider);
+        var trySlots = [primary].concat(legacyNames || []);
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
                 if (handle < 0) {
-                    walletOllamaKey = cfg_ollamaSearchApiKey;
-                    walletOllamaKeyLoaded = true;
+                    applyFn(cfgDefault || "");
                     return;
                 }
                 walletAvailable = true;
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "ollamaSearchApiKey", "PlasmaLLM"],
-                    function(password) {
-                        if (password && password.length > 0) {
-                            walletOllamaKey = password;
-                        } else {
-                            walletOllamaKey = cfg_ollamaSearchApiKey;
-                        }
-                        walletOllamaKeyLoaded = true;
+                function tryAt(index) {
+                    if (index >= trySlots.length) {
+                        applyFn(cfgDefault || "");
                         walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    },
-                    function(err) {
-                        walletOllamaKey = cfg_ollamaSearchApiKey;
-                        walletOllamaKeyLoaded = true;
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                        return;
                     }
-                );
+                    walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", trySlots[index], "PlasmaLLM"],
+                        function(password) {
+                            if (password && password.length > 0) {
+                                applyFn(password);
+                                walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                                return;
+                            }
+                            tryAt(index + 1);
+                        },
+                        function() { tryAt(index + 1); }
+                    );
+                }
+                tryAt(0);
             },
-            function(err) {
-                walletOllamaKey = cfg_ollamaSearchApiKey;
-                walletOllamaKeyLoaded = true;
-            }
+            function() { applyFn(cfgDefault || ""); }
         );
+    }
+
+    function loadWalletOllamaKey() {
+        loadSearchWalletKey("ollama", ["ollamaSearchApiKey", "ollamaApiKey"], cfg_ollamaSearchApiKey,
+            function(k) {
+                walletOllamaKey = k;
+                walletOllamaKeyLoaded = true;
+            });
     }
 
     function saveWalletOllamaKey() {
@@ -183,36 +176,11 @@ ColumnLayout {
     }
 
     function loadWalletSearxngKey() {
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    walletSearxngKey = cfg_searxngApiKey;
-                    walletSearxngKeyLoaded = true;
-                    return;
-                }
-                walletAvailable = true;
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "searxngApiKey", "PlasmaLLM"],
-                    function(password) {
-                        if (password && password.length > 0) {
-                            walletSearxngKey = password;
-                        } else {
-                            walletSearxngKey = cfg_searxngApiKey;
-                        }
-                        walletSearxngKeyLoaded = true;
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    },
-                    function(err) {
-                        walletSearxngKey = cfg_searxngApiKey;
-                        walletSearxngKeyLoaded = true;
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    }
-                );
-            },
-            function(err) {
-                walletSearxngKey = cfg_searxngApiKey;
+        loadSearchWalletKey("searxng", ["searxngApiKey"], cfg_searxngApiKey,
+            function(k) {
+                walletSearxngKey = k;
                 walletSearxngKeyLoaded = true;
-            }
-        );
+            });
     }
 
     function saveWalletSearxngKey() {
@@ -252,36 +220,11 @@ ColumnLayout {
     }
 
     function loadWalletExaKey() {
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    walletExaKey = cfg_exaApiKey;
-                    walletExaKeyLoaded = true;
-                    return;
-                }
-                walletAvailable = true;
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "exaApiKey", "PlasmaLLM"],
-                    function(password) {
-                        if (password && password.length > 0) {
-                            walletExaKey = password;
-                        } else {
-                            walletExaKey = cfg_exaApiKey;
-                        }
-                        walletExaKeyLoaded = true;
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    },
-                    function(err) {
-                        walletExaKey = cfg_exaApiKey;
-                        walletExaKeyLoaded = true;
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    }
-                );
-            },
-            function(err) {
-                walletExaKey = cfg_exaApiKey;
+        loadSearchWalletKey("exa", ["exaApiKey"], cfg_exaApiKey,
+            function(k) {
+                walletExaKey = k;
                 walletExaKeyLoaded = true;
-            }
-        );
+            });
     }
 
     function saveWalletExaKey() {

@@ -80,6 +80,13 @@ BaseConfigPage {
     property bool walletAvailable: false
     property bool walletKeyDirty: false
     property bool walletSaveInProgress: false
+    // Slot that the currently displayed key belongs to. Used to flush dirty
+    // (typed-but-unsaved) keys when the active slot changes.
+    property string lastKeySlot: ""
+    // Set when adapter/provider selection intentionally clears modelName so the
+    // next model-list settle may pick a default. Opening settings must never
+    // treat an empty/missing name as license to overwrite a saved selection.
+    property bool _allowModelAutoSelect: false
 
     function walletCall(member, args, resolve, reject) {
         var reply = DBus.SessionBus.asyncCall({
@@ -117,31 +124,20 @@ BaseConfigPage {
     }
 
     function currentSlot() {
-        if (cfg_activeProfileId) return Api.profileKeySlot(cfg_activeProfileId);
-        
-        var t = cfg_apiType;
-        if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
-        var p = cfg_providerName || "Custom";
-        if (p === "Custom" && cfg_apiEndpoint) {
-            p = "Custom:" + cfg_apiEndpoint;
-        }
-        return Api.apiKeySlot(t, p);
+        return Api.currentKeySlot(cfg_activeProfileId, cfg_apiType, cfg_providerName,
+                                  cfg_apiEndpoint, cfg_geminiAuthMethod);
     }
 
     // Model cache slot always includes adapter+provider so each adapter's
     // model list is stored separately, even when a profile is active.
     function currentModelCacheSlot() {
-        var t = cfg_apiType;
-        if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
-        var p = cfg_providerName || "Custom";
-        if (p === "Custom" && cfg_apiEndpoint) {
-            p = "Custom:" + cfg_apiEndpoint;
-        }
-        var base = Api.apiKeySlot(t, p);
-        if (cfg_activeProfileId) {
-            return "models:" + cfg_activeProfileId + ":" + base;
-        }
-        return base;
+        return Api.modelCacheSlot(cfg_apiType, cfg_providerName, cfg_apiEndpoint,
+                                  cfg_activeProfileId, cfg_geminiAuthMethod);
+    }
+
+    function legacyProviderSlot() {
+        return Api.providerKeySlot(cfg_apiType, cfg_providerName, cfg_apiEndpoint,
+                                   cfg_geminiAuthMethod);
     }
 
     function readFallbackMap() {
@@ -152,13 +148,14 @@ BaseConfigPage {
     function fallbackKeyFor(slot) {
         var m = readFallbackMap();
         if (m.hasOwnProperty(slot)) return m[slot];
-        
-        // If searching by profile ID and not found, fall back to the legacy slot
-        if (slot.indexOf("apiKey:profile:") === 0) {
-            var t = cfg_apiType;
-            if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
-            var legacySlot = Api.apiKeySlot(t, cfg_providerName);
-            return fallbackKeyFor(legacySlot);
+
+        // Walk legacy identity slots (profile-only, then provider-only).
+        var legacies = Api.legacyKeySlots(cfg_activeProfileId, cfg_apiType, cfg_providerName,
+                                          cfg_apiEndpoint, cfg_geminiAuthMethod);
+        for (var i = 0; i < legacies.length; i++) {
+            if (legacies[i] === slot) continue;
+            if (m.hasOwnProperty(legacies[i]) && m[legacies[i]])
+                return m[legacies[i]];
         }
 
         return cfg_apiKey || "";
@@ -186,66 +183,156 @@ BaseConfigPage {
         });
     }
 
-    function loadWalletKey(copyKey) {
+    // Persist an unsaved key to a specific slot (used when the active slot is
+    // about to change so typed-but-not-saved keys are not discarded).
+    function flushDirtyKeyToSlot(slot) {
+        if (!walletKeyDirty || !apiKeyField) return;
+        var key = apiKeyField.text.replace(/^\s+|\s+$/g, "");
+        if (!walletAvailable) {
+            writeFallbackKey(slot, key);
+            walletApiKey = key;
+            walletKeyDirty = false;
+            return;
+        }
+        // Fire-and-forget; the next load targets a different slot.
+        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
+            function(handle) {
+                if (handle < 0) {
+                    writeFallbackKey(slot, key);
+                    return;
+                }
+                walletWriteKey(handle, slot, key, function(success) {
+                    if (success) cfg_apiKeyVersion++;
+                    else writeFallbackKey(slot, key);
+                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                });
+            },
+            function(err) { writeFallbackKey(slot, key); }
+        );
+        walletApiKey = key;
+        walletKeyDirty = false;
+    }
+
+    // loadWalletKey(copyKey, gen, onReady)
+    // gen: config generation; stale callbacks no-op when gen !== _configGen
+    // onReady: optional callback after key is applied for this gen
+    function loadWalletKey(copyKey, gen, onReady) {
+        var myGen = (gen !== undefined && gen !== null) ? gen : _configGen;
         var slot = currentSlot();
+        var isCopy = copyKey !== undefined && copyKey !== null && copyKey !== "";
+
+        function done() {
+            if (myGen !== _configGen) return;
+            if (typeof onReady === "function") onReady();
+        }
+
+        // If the user typed a key without saving:
+        //  - different slot → flush to the previous slot, then load the new one
+        //  - same slot (e.g. re-reconcile without identity change) → keep the
+        //    typed value in the field; do not clobber it with a wallet re-read
+        if (!isCopy && walletKeyDirty && lastKeySlot.length > 0) {
+            if (lastKeySlot === slot) {
+                walletKeyLoaded = true;
+                done();
+                return;
+            }
+            flushDirtyKeyToSlot(lastKeySlot);
+        }
+
+        lastKeySlot = slot;
         walletKeyLoaded = false;
-        // Slot may change again before this async chain completes (e.g. adapter
-        // switch fires loadWalletKey twice in quick succession). Stale results
-        // would clobber the correct key, so each callback verifies its slot is
-        // still the active one before applying state.
-        function isCurrent() { return slot === currentSlot(); }
+        function isCurrent() {
+            return myGen === _configGen && slot === currentSlot();
+        }
         function applyKey(key) {
             if (!isCurrent()) return;
-            walletApiKey = key;
+            walletApiKey = key || "";
             walletKeyLoaded = true;
             if (apiKeyField) apiKeyField.text = walletApiKey;
             walletKeyDirty = false;
+            lastKeySlot = slot;
+            done();
         }
 
-        if (copyKey !== undefined && copyKey !== null && copyKey !== "") {
+        if (isCopy) {
             if (apiKeyField) apiKeyField.text = copyKey;
             walletKeyDirty = true;
-            saveWalletKey(); // This writes it to the new slot and sets walletApiKey
+            saveWalletKey(); // writes to the new slot and sets walletApiKey
+            // saveWalletKey is async; mark loaded so models can proceed with the
+            // typed key immediately.
+            walletApiKey = String(copyKey).replace(/^\s+|\s+$/g, "");
+            walletKeyLoaded = true;
+            lastKeySlot = slot;
+            done();
             return;
+        }
+
+        // Try primary slot, then legacy profile-only / provider-only slots.
+        // On a legacy hit, migrate the key into the primary slot so it sticks.
+        var trySlots = [slot].concat(Api.legacyKeySlots(cfg_activeProfileId, cfg_apiType,
+            cfg_providerName, cfg_apiEndpoint, cfg_geminiAuthMethod));
+        // Dedupe while preserving order.
+        var seen = {};
+        var slots = [];
+        for (var si = 0; si < trySlots.length; si++) {
+            if (!trySlots[si] || seen[trySlots[si]]) continue;
+            seen[trySlots[si]] = true;
+            slots.push(trySlots[si]);
+        }
+
+        function closeHandle(handle) {
+            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+        }
+
+        function tryReadAt(handle, index) {
+            if (!isCurrent()) {
+                closeHandle(handle);
+                return;
+            }
+            if (index >= slots.length) {
+                applyKey(fallbackKeyFor(slot));
+                closeHandle(handle);
+                return;
+            }
+            var readSlot = slots[index];
+            walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", readSlot, "PlasmaLLM"],
+                function(password) {
+                    if (!isCurrent()) {
+                        closeHandle(handle);
+                        return;
+                    }
+                    if (password && password.length > 0) {
+                        applyKey(password);
+                        // Migrate legacy → primary so OpenRouter/Exa keys stay distinct.
+                        if (readSlot !== slot) {
+                            walletWriteKey(handle, slot, password, function() {
+                                closeHandle(handle);
+                            });
+                        } else {
+                            closeHandle(handle);
+                        }
+                        return;
+                    }
+                    tryReadAt(handle, index + 1);
+                },
+                function(err) {
+                    tryReadAt(handle, index + 1);
+                }
+            );
         }
 
         walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
             function(handle) {
+                if (!isCurrent()) {
+                    if (handle >= 0) closeHandle(handle);
+                    return;
+                }
                 if (handle < 0) {
                     applyKey(fallbackKeyFor(slot));
                     return;
                 }
                 walletAvailable = true;
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", slot, "PlasmaLLM"],
-                    function(password) {
-                        if (password && password.length > 0) {
-                            applyKey(password);
-                        } else if (slot.indexOf("apiKey:profile:") === 0) {
-                            // Try legacy slot fallback
-                            var t = cfg_apiType;
-                            if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform") t = "gemini:agentplatform";
-                            var legacySlot = Api.apiKeySlot(t, cfg_providerName);
-                            walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", legacySlot, "PlasmaLLM"],
-                                function(legacyPassword) {
-                                    applyKey(legacyPassword && legacyPassword.length > 0 ? legacyPassword : fallbackKeyFor(slot));
-                                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                                },
-                                function(err) {
-                                    applyKey(fallbackKeyFor(slot));
-                                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                                }
-                            );
-                            return;
-                        } else {
-                            applyKey(fallbackKeyFor(slot));
-                        }
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    },
-                    function(err) {
-                        applyKey(fallbackKeyFor(slot));
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    }
-                );
+                tryReadAt(handle, 0);
             },
             function(err) {
                 applyKey(fallbackKeyFor(slot));
@@ -256,6 +343,7 @@ BaseConfigPage {
     function saveWalletKey() {
         var key = apiKeyField.text.replace(/^\s+|\s+$/g, "");
         var slot = currentSlot();
+        lastKeySlot = slot;
         walletSaveInProgress = true;
         if (!walletAvailable) {
             writeFallbackKey(slot, key);
@@ -295,10 +383,78 @@ BaseConfigPage {
         );
     }
 
-    function refreshAvailableModels() {
+    // Resolve a model list for the current identity, accepting legacy cache keys
+    // written by older slot schemes so opening settings does not look "empty"
+    // and re-fetch/race the combo onto index 0.
+    function modelListForCurrentSlot() {
         var slot = currentModelCacheSlot();
         var list = modelCache[slot];
-        availableModels = Array.isArray(list) ? list : [];
+        if (Array.isArray(list) && list.length > 0)
+            return list;
+
+        // Intermediate scheme: models:<profile>:apiKey:<type>:<provider>
+        var t = cfg_apiType || "openai";
+        if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform")
+            t = "gemini:agentplatform";
+        var p = cfg_providerName || "Custom";
+        if (p === "Custom" && cfg_apiEndpoint)
+            p = "Custom:" + String(cfg_apiEndpoint).replace(/\/+$/, "");
+        var legacyBase = "apiKey:" + t + ":" + p;
+        var candidates = [];
+        if (cfg_activeProfileId && cfg_activeProfileId.length > 0) {
+            candidates.push("models:" + cfg_activeProfileId + ":" + legacyBase);
+            candidates.push(legacyBase);
+            candidates.push("apiKey:profile:" + cfg_activeProfileId);
+        } else {
+            candidates.push(legacyBase);
+        }
+        for (var i = 0; i < candidates.length; i++) {
+            var legacy = modelCache[candidates[i]];
+            if (Array.isArray(legacy) && legacy.length > 0) {
+                // Promote into the current slot so later reads are stable.
+                var next = {};
+                for (var k in modelCache) {
+                    if (modelCache.hasOwnProperty(k))
+                        next[k] = modelCache[k];
+                }
+                next[slot] = legacy;
+                modelCache = next;
+                // Persist promotion so the next settings open hits the new key.
+                try {
+                    cfg_availableModels = JSON.stringify(next);
+                } catch (e) {}
+                return legacy;
+            }
+        }
+        return Array.isArray(list) ? list : [];
+    }
+
+    function refreshAvailableModels() {
+        availableModels = modelListForCurrentSlot();
+        syncModelComboIndex();
+    }
+
+    // Keep the model combo on the persisted selection. ComboBox resets
+    // currentIndex to 0 when its model is replaced; defer so we win that race.
+    function syncModelComboIndex() {
+        if (!modelCombo)
+            return;
+        var apply = function() {
+            if (!modelCombo)
+                return;
+            var list = modelCombo.displayModels || [];
+            var want = cfg_modelName || "";
+            var i = (want.length > 0) ? list.indexOf(want) : -1;
+            // Prefer the saved model. Index 0 is only used when nothing is saved
+            // or when the saved name was prepended at the front of the list.
+            if (i >= 0)
+                modelCombo.currentIndex = i;
+            else if (list.length > 0)
+                modelCombo.currentIndex = 0;
+        };
+        apply();
+        // ComboBox resets currentIndex when `model` is replaced; win that race.
+        Qt.callLater(apply);
     }
 
     function loadModelCache() {
@@ -314,15 +470,35 @@ BaseConfigPage {
         refreshAvailableModels();
     }
 
-    function ensureModelsLoaded(force) {
+    function ensureModelsLoaded(force, gen) {
+        var myGen = (gen !== undefined && gen !== null) ? gen : _configGen;
         if (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform") return;
         var slot = currentModelCacheSlot();
         var have = Array.isArray(modelCache[slot]) && modelCache[slot].length > 0;
-        if (!force && have) return;
+        // Legacy cache keys still count as a hit after promotion.
+        if (!have) {
+            var promoted = modelListForCurrentSlot();
+            have = Array.isArray(promoted) && promoted.length > 0;
+        }
+        if (!force && have) {
+            // Cache hit: still restore combo selection (open settings path).
+            syncModelComboIndex();
+            // Only after an intentional provider/adapter clear may we default.
+            if (_allowModelAutoSelect
+                    && (!cfg_modelName || cfg_modelName.length === 0)
+                    && !inConfigTxn && _initialized) {
+                var cached = modelListForCurrentSlot();
+                if (cached.length > 0) {
+                    cfg_modelName = cached[0];
+                    _allowModelAutoSelect = false;
+                    rootItem.triggerCapture();
+                    syncModelComboIndex();
+                }
+            }
+            return;
+        }
         if (fetchInProgress) return;
-        // Wallet load is async; if we fetch before it returns we'd send the
-        // previous slot's key. onWalletKeyLoadedChanged retries once the key
-        // for the current slot has actually arrived.
+        // Wallet load is async; reconcile only calls us after key is ready.
         if (!walletKeyLoaded) return;
         var key = walletApiKey;
         // Skip automatic fetches when no key is set — some endpoints (e.g. local
@@ -347,49 +523,65 @@ BaseConfigPage {
             geminiProjectId: cfg_geminiProjectId,
             geminiLocation: cfg_geminiLocation
         };
+        var endpointForFetch = endpointText;
 
         var fetchAction = function(effectiveKey) {
-            Api.fetchModels(effectiveApiType, apiEndpointField.text, effectiveKey, cfg_usesResponsesAPI, opts, function(error, models, status) {
-            fetchInProgress = false;
-            if (error) {
-                if (status && status >= 400) {
-                    fetchStatusLabel.text = error;
-                    fetchStatusLabel.visible = true;
+            Api.fetchModels(effectiveApiType, endpointForFetch, effectiveKey, cfg_usesResponsesAPI, opts, function(error, models, status) {
+                fetchInProgress = false;
+                // Stale gen: a newer reconcile wanted models while we were in
+                // flight and bailed on fetchInProgress — re-arm for latest.
+                if (myGen !== _configGen) {
+                    ensureModelsLoaded(false, _configGen);
+                    return;
+                }
+                if (error) {
+                    if (status && status >= 400) {
+                        fetchStatusLabel.text = error;
+                        fetchStatusLabel.visible = true;
+                    } else {
+                        fetchStatusLabel.visible = false;
+                    }
+                } else if (!models || models.length === 0) {
+                    fetchStatusLabel.visible = false;
                 } else {
                     fetchStatusLabel.visible = false;
+                    var next = {};
+                    for (var k in modelCache) if (modelCache.hasOwnProperty(k)) next[k] = modelCache[k];
+                    next[slot] = models;
+                    modelCache = next;
+                    cfg_availableModels = JSON.stringify(next);
+                    refreshAvailableModels();
+                    // Auto-select first model only after intentional clear
+                    // (provider/adapter switch), never when merely opening settings.
+                    if (_allowModelAutoSelect
+                            && (!cfg_modelName || cfg_modelName.length === 0)
+                            && models.length > 0
+                            && !inConfigTxn && _initialized) {
+                        cfg_modelName = models[0];
+                        _allowModelAutoSelect = false;
+                        rootItem.triggerCapture();
+                    }
+                    syncModelComboIndex();
                 }
-            } else if (!models || models.length === 0) {
-                fetchStatusLabel.visible = false;
-            } else {
-                fetchStatusLabel.visible = false;
-                var next = {};
-                for (var k in modelCache) if (modelCache.hasOwnProperty(k)) next[k] = modelCache[k];
-                next[slot] = models;
-                modelCache = next;
-                cfg_availableModels = JSON.stringify(next);
-                refreshAvailableModels();
-            }
-        });
-    };
+            });
+        };
 
-    if (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform" && cfg_geminiVertexAuthType === "gcloud") {
-        pendingModelsFetch = fetchAction;
-        gcloudTokenSource.connectSource("gcloud auth print-access-token");
-    } else {
-        fetchAction(key);
+        if (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform" && cfg_geminiVertexAuthType === "gcloud") {
+            pendingModelsFetch = fetchAction;
+            gcloudTokenSource.connectSource("gcloud auth print-access-token");
+        } else {
+            fetchAction(key);
+        }
     }
-}
 
     onCfg_availableModelsChanged: loadModelCache()
-
-    onWalletKeyLoadedChanged: {
-        if (walletKeyLoaded) ensureModelsLoaded(false);
-    }
 
     Component.onCompleted: {
         profilesList = Profiles.loadProfilesRaw(cfg_profiles);
         loadModelCache();
-        loadWalletKey();
+        // Initial reconcile: load key then models then capture.
+        _configGen++;
+        reconcileConfig({}, _configGen);
     }
 
     // OpenAI-compatible presets only (Anthropic/Gemini each have a single fixed
@@ -426,46 +618,90 @@ BaseConfigPage {
         return host === "api.exa.ai" || host === "exa.ai" || (host.length > 7 && host.slice(-7) === ".exa.ai");
     }
 
-    onCfg_apiTypeChanged: {
-        loadWalletKey();
-        refreshAvailableModels();
-        rootItem.triggerCapture();
-        // Don't auto-fetch here: when the adapter combo changes cfg_apiType,
-        // the endpoint hasn't been swapped yet — applyAdapterDefaults() runs
-        // immediately after and triggers the fetch with the correct endpoint.
+    // Out-of-band cfg changes (KCM reload, other pages): coalesce into one reconcile.
+    // Intentional multi-field paths use begin/endConfigTxn and skip these.
+    onCfg_apiTypeChanged: { if (!inConfigTxn && _initialized) scheduleFallbackReconcile(); }
+    onCfg_geminiApiVariantChanged: { if (!inConfigTxn && _initialized) scheduleFallbackReconcile(); }
+    onCfg_geminiAuthMethodChanged: { if (!inConfigTxn && _initialized) scheduleFallbackReconcile(); }
+    onCfg_providerNameChanged: { if (!inConfigTxn && _initialized) scheduleFallbackReconcile(); }
+
+    // Single post-txn pipeline: UI sync → wallet → models → capture.
+    function reconcileConfig(opts, gen) {
+        opts = opts || {};
+        var myGen = (gen !== undefined && gen !== null) ? gen : _configGen;
+        if (myGen !== _configGen) return;
+
+        syncModelParamControls();
+
+        // Flush dirty key to the previous slot when identity changed.
+        if (opts.prevKeySlot && opts.prevKeySlot.length > 0
+                && opts.prevKeySlot !== currentSlot() && walletKeyDirty) {
+            flushDirtyKeyToSlot(opts.prevKeySlot);
+        }
+
+        loadWalletKey(opts.copyKey, myGen, function() {
+            if (myGen !== _configGen) return;
+            refreshAvailableModels();
+            ensureModelsLoaded(!!opts.forceModels, myGen);
+            rootItem.triggerCapture();
+        });
     }
 
-    onCfg_geminiApiVariantChanged: {
-        loadWalletKey();
-        refreshAvailableModels();
-        ensureModelsLoaded(false);
-        rootItem.triggerCapture();
+    // Sync the Provider combo currentIndex from cfg_providerName / cfg_apiEndpoint.
+    function syncEndpointPresetIndex() {
+        if (!endpointPreset || !presetEndpoints) return;
+        var i;
+        if (cfg_providerName && cfg_providerName.length > 0) {
+            for (i = 0; i < presetEndpoints.length; i++) {
+                if (presetEndpoints[i].name === cfg_providerName) {
+                    endpointPreset.currentIndex = i;
+                    return;
+                }
+            }
+        }
+        if (cfg_apiEndpoint && cfg_apiEndpoint.length > 0) {
+            for (i = 1; i < presetEndpoints.length; i++) {
+                if (presetEndpoints[i].url === cfg_apiEndpoint) {
+                    endpointPreset.currentIndex = i;
+                    return;
+                }
+            }
+        }
+        endpointPreset.currentIndex = 0;
     }
 
-    onCfg_geminiAuthMethodChanged: {
-        loadWalletKey();
-        refreshAvailableModels();
-        ensureModelsLoaded(false);
-        rootItem.triggerCapture();
+    // Push cfg_* model-parameter values back into controls whose QML bindings
+    // may have been broken by prior user interaction.
+    function syncModelParamControls() {
+        if (adapterCombo && adapterChoices) {
+            for (var ai = 0; ai < adapterChoices.length; ai++) {
+                if (adapterChoices[ai].id === cfg_apiType) {
+                    adapterCombo.currentIndex = ai;
+                    break;
+                }
+            }
+        }
+        if (temperatureSlider) temperatureSlider.value = cfg_temperature;
+        if (maxTokensSpinBox) maxTokensSpinBox.value = cfg_maxTokens;
+        if (thinkingBudgetSpinBox) thinkingBudgetSpinBox.value = cfg_thinkingBudget;
+        if (reasoningEffortCombo) {
+            var efforts = reasoningEffortCombo.efforts || ["off", "low", "medium", "high"];
+            reasoningEffortCombo.currentIndex = Math.max(0, efforts.indexOf(cfg_reasoningEffort));
+        }
+        if (usesResponsesAPICheckBox) usesResponsesAPICheckBox.checked = cfg_usesResponsesAPI;
+        if (showThoughtsCheckBox) showThoughtsCheckBox.checked = cfg_showThoughts;
+        if (modelEntryField) modelEntryField.text = cfg_modelName;
+        if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
+        syncEndpointPresetIndex();
+        syncModelComboIndex();
     }
 
-    onCfg_providerNameChanged: {
-        if (_initialized) cfg_modelName = "";
-        loadWalletKey();
-        refreshAvailableModels();
-        ensureModelsLoaded(false);
-        rootItem.triggerCapture();
-    }
-
-    function applyAdapterDefaults(apiType) {
-        _initialized = false;
+    // Pure writes for adapter defaults — no wallet/models/capture (caller is in a txn).
+    function writeAdapterDefaults(apiType) {
         var presets = Api.getPresets(apiType) || [];
         var pick = null;
-        // For Gemini, we might have switched to "gemini" from "gemini_interactions" or vice versa
-        // through the apiVariant dropdown.
         var baseApiType = (apiType === "gemini" || apiType === "gemini_interactions") ? "gemini" : apiType;
-        
-        // For OpenAI-compatible, restore the last selected provider if we have one.
+
         if (baseApiType === "openai" && cfg_openaiLastProvider && cfg_openaiLastProvider.length > 0) {
             for (var j = 0; j < presets.length; j++) {
                 if (presets[j].name === cfg_openaiLastProvider) {
@@ -474,13 +710,12 @@ BaseConfigPage {
                 }
             }
             if (pick && (!pick.url || pick.url.length === 0) && cfg_openaiLastEndpoint && cfg_openaiLastEndpoint.length > 0) {
-                // Custom preset — use the remembered endpoint URL.
-                apiEndpointField.text = cfg_openaiLastEndpoint;
+                cfg_apiEndpoint = cfg_openaiLastEndpoint;
                 cfg_providerName = pick.name;
                 cfg_modelName = "";
-                _initialized = true;
-                refreshAvailableModels();
-                ensureModelsLoaded(false);
+                _allowModelAutoSelect = true;
+                if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
+                syncEndpointPresetIndex();
                 return;
             }
         }
@@ -493,24 +728,157 @@ BaseConfigPage {
             }
         }
         if (pick) {
-            apiEndpointField.text = pick.url;
+            if (pick.url && pick.url.length > 0)
+                cfg_apiEndpoint = pick.url;
             cfg_providerName = pick.name;
             cfg_usesResponsesAPI = !!pick.usesResponsesAPI;
+            if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
         }
-        cfg_modelName = "";
-        _initialized = true;
-        refreshAvailableModels();
-        ensureModelsLoaded(false);
-        if (cfg_apiType === "openai") {
-            rememberOpenAIChoice(cfg_providerName, cfg_apiEndpoint);
+        if (apiType === "exa") {
+            cfg_modelName = "exa";
+            _allowModelAutoSelect = false;
+            if (!cfg_apiEndpoint || cfg_apiEndpoint.length === 0)
+                cfg_apiEndpoint = "https://api.exa.ai";
+            if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
+            var exaSlot = currentModelCacheSlot();
+            var nextCache = {};
+            for (var ck in modelCache) {
+                if (modelCache.hasOwnProperty(ck)) nextCache[ck] = modelCache[ck];
+            }
+            nextCache[exaSlot] = ["exa"];
+            modelCache = nextCache;
+            cfg_availableModels = JSON.stringify(nextCache);
+        } else {
+            cfg_modelName = "";
+            _allowModelAutoSelect = true;
         }
+        syncEndpointPresetIndex();
+        if (apiType === "openai") {
+            if (cfg_providerName && cfg_providerName.length > 0)
+                cfg_openaiLastProvider = cfg_providerName;
+            if (cfg_apiEndpoint && cfg_apiEndpoint.length > 0)
+                cfg_openaiLastEndpoint = cfg_apiEndpoint;
+        }
+    }
+
+    function applyAdapterSelection(apiType) {
+        if (apiType === cfg_apiType && !inConfigTxn) {
+            // Same adapter re-selected: still refresh models/key once.
+            _configGen++;
+            reconcileConfig({}, _configGen);
+            return;
+        }
+        var prevSlot = currentSlot();
+        beginConfigTxn();
+        cfg_apiType = apiType;
+        writeAdapterDefaults(apiType);
+        endConfigTxn({ prevKeySlot: prevSlot });
+    }
+
+    function applyProviderSelection(preset) {
+        var idx = -1;
+        for (var i = 0; i < presetEndpoints.length; i++) {
+            if (presetEndpoints[i].name === preset.name) {
+                idx = i;
+                break;
+            }
+        }
+        if (idx === -1) return;
+
+        var newProviderName = (idx > 0) ? presetEndpoints[idx].name : "Custom";
+        var providerChanged = (cfg_providerName || "") !== (newProviderName || "");
+        // Re-selecting the already-active provider must not wipe the saved model
+        // (settings open / combo index churn can re-fire selection).
+        if (!providerChanged && idx > 0) {
+            if (endpointPreset) endpointPreset.currentIndex = idx;
+            return;
+        }
+
+        var prevSlot = currentSlot();
+        beginConfigTxn();
+        if (endpointPreset) endpointPreset.currentIndex = idx;
+        if (idx > 0) {
+            var p = presetEndpoints[idx];
+            if (p.url && p.url.length > 0)
+                cfg_apiEndpoint = p.url;
+            cfg_providerName = p.name;
+            cfg_usesResponsesAPI = !!p.usesResponsesAPI;
+            if (providerChanged && cfg_apiType !== "exa") {
+                cfg_modelName = "";
+                _allowModelAutoSelect = true;
+            }
+            if (apiEndpointField)
+                apiEndpointField.text = (p.url && p.url.length > 0) ? p.url : cfg_apiEndpoint;
+            if (cfg_apiType === "openai") {
+                cfg_openaiLastProvider = p.name;
+                if (cfg_apiEndpoint) cfg_openaiLastEndpoint = cfg_apiEndpoint;
+            }
+        } else {
+            cfg_providerName = "Custom";
+            if (providerChanged && cfg_apiType !== "exa") {
+                cfg_modelName = "";
+                _allowModelAutoSelect = true;
+            }
+        }
+        endConfigTxn({ prevKeySlot: prevSlot });
+    }
+
+    function applyEndpointEdit(text) {
+        var prevSlot = currentSlot();
+        beginConfigTxn();
+        cfg_apiEndpoint = text;
+        if (caps.providerPresets) {
+            var matched = false;
+            for (var i = 1; i < presetEndpoints.length; i++) {
+                if (text === presetEndpoints[i].url) {
+                    if (endpointPreset) endpointPreset.currentIndex = i;
+                    cfg_providerName = presetEndpoints[i].name;
+                    cfg_usesResponsesAPI = !!presetEndpoints[i].usesResponsesAPI;
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                if (endpointPreset) endpointPreset.currentIndex = 0;
+                cfg_providerName = "Custom";
+            }
+            if (cfg_apiType === "openai") {
+                if (cfg_providerName) cfg_openaiLastProvider = cfg_providerName;
+                if (text) cfg_openaiLastEndpoint = text;
+            }
+        }
+        endConfigTxn({ prevKeySlot: prevSlot });
+    }
+
+    function applyGeminiOptions(changes) {
+        var prevSlot = currentSlot();
+        beginConfigTxn();
+        if (changes.authMethod !== undefined) {
+            cfg_geminiAuthMethod = changes.authMethod;
+            if (changes.authMethod === "agentplatform"
+                    && (cfg_apiEndpoint.indexOf("generativelanguage.googleapis.com") !== -1)) {
+                cfg_apiEndpoint = "https://aiplatform.googleapis.com";
+            } else if (changes.authMethod === "aistudio"
+                    && (cfg_apiEndpoint.indexOf("aiplatform.googleapis.com") !== -1)) {
+                cfg_apiEndpoint = "https://generativelanguage.googleapis.com";
+            }
+            if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
+        }
+        if (changes.apiVariant !== undefined)
+            cfg_geminiApiVariant = changes.apiVariant;
+        if (changes.vertexAuthType !== undefined)
+            cfg_geminiVertexAuthType = changes.vertexAuthType;
+        if (changes.projectId !== undefined)
+            cfg_geminiProjectId = changes.projectId;
+        if (changes.location !== undefined)
+            cfg_geminiLocation = changes.location;
+        endConfigTxn({ prevKeySlot: prevSlot });
     }
 
     function rememberOpenAIChoice(providerName, endpointUrl) {
         if (cfg_apiType !== "openai") return;
         if (providerName && providerName.length > 0) cfg_openaiLastProvider = providerName;
         if (endpointUrl && endpointUrl.length > 0) cfg_openaiLastEndpoint = endpointUrl;
-        rootItem.triggerCapture();
     }
 
     function createNewProfile() {
@@ -520,54 +888,58 @@ BaseConfigPage {
         list.push(p);
         cfg_profiles = JSON.stringify(list);
         profilesList = list;
-        switchToProfile(p.id);
+        applyProfileSelection(p.id);
     }
 
     function duplicateActiveProfile() {
         var profiles = Profiles.loadProfilesRaw(cfg_profiles);
         var active = Profiles.getActive(profiles, cfg_activeProfileId);
         if (!active) return;
-        
+
         var currentKey = walletApiKey;
-        
+
         var p = Profiles.duplicateProfile(active, i18n("%1 (Copy)", active.name));
         profiles.push(p);
         cfg_profiles = JSON.stringify(profiles);
         profilesList = profiles;
-        switchToProfile(p.id, currentKey);
+        applyProfileSelection(p.id, currentKey);
     }
 
     function deleteActiveProfile() {
         var profiles = Profiles.loadProfilesRaw(cfg_profiles);
         if (profiles.length <= 1) return;
-        
+
         var toDelete = cfg_activeProfileId;
         profiles = Profiles.deleteProfile(profiles, toDelete);
         cfg_profiles = JSON.stringify(profiles);
         profilesList = profiles;
-        
-        // Pick a new active profile
+
         var nextId = profiles[0].id;
-        switchToProfile(nextId);
+        applyProfileSelection(nextId);
     }
 
-    function switchToProfile(id, copyKey) {
+    function applyProfileSelection(id, copyKey) {
         var profiles = Profiles.loadProfilesRaw(cfg_profiles);
         var p = Profiles.getActive(profiles, id);
         if (!p) return;
 
-        _initialized = false;
+        var prevSlot = currentSlot();
+        if (walletKeyDirty && lastKeySlot.length > 0)
+            flushDirtyKeyToSlot(lastKeySlot);
+
+        beginConfigTxn();
         _switchingProfile = true;
         cfg_activeProfileId = id;
         Profiles.applyToKCM(p, configPage);
-        _switchingProfile = false;
-
-        // Reset models to ensure we don't show stale models from previous profile
+        syncModelParamControls();
         availableModels = [];
-        loadWalletKey(copyKey);
-        refreshAvailableModels();
-        ensureModelsLoaded(false);
-        _initialized = true;
+        _switchingProfile = false;
+        endConfigTxn({ prevKeySlot: prevSlot, copyKey: copyKey });
+    }
+
+    // Back-compat alias used by older call sites / mental model.
+    function switchToProfile(id, copyKey) {
+        applyProfileSelection(id, copyKey);
     }
 
     Kirigami.FormLayout {
@@ -694,8 +1066,7 @@ BaseConfigPage {
             onActivated: function(index) {
                 var picked = adapterChoices[index].id;
                 if (picked === cfg_apiType) return;
-                cfg_apiType = picked;
-                applyAdapterDefaults(picked);
+                applyAdapterSelection(picked);
             }
         }
 
@@ -715,7 +1086,8 @@ BaseConfigPage {
             model: [i18n("API Key (Express Mode)"), i18n("Google Cloud CLI (gcloud)")]
             currentIndex: cfg_geminiVertexAuthType === "gcloud" ? 1 : 0
             onActivated: function(index) {
-                if (_initialized) cfg_geminiVertexAuthType = (index === 1 ? "gcloud" : "apikey");
+                if (!_initialized) return;
+                applyGeminiOptions({ vertexAuthType: (index === 1 ? "gcloud" : "apikey") });
             }
         }
 
@@ -743,11 +1115,12 @@ BaseConfigPage {
                 return 0;
             }
             onActivated: function(index) {
-                if (_initialized) cfg_geminiApiVariant = variants[index].value;
+                if (!_initialized) return;
+                applyGeminiOptions({ apiVariant: variants[index].value });
             }
             onVariantsChanged: {
-                if (_initialized && cfg_geminiApiVariant === "interactions" && variants.length === 1) {
-                    cfg_geminiApiVariant = "legacy";
+                if (_initialized && !inConfigTxn && cfg_geminiApiVariant === "interactions" && variants.length === 1) {
+                    applyGeminiOptions({ apiVariant: "legacy" });
                 }
             }
         }
@@ -761,12 +1134,7 @@ BaseConfigPage {
             currentIndex: cfg_geminiAuthMethod === "agentplatform" ? 1 : 0
             onActivated: function(index) {
                 if (!_initialized) return;
-                cfg_geminiAuthMethod = (index === 1 ? "agentplatform" : "aistudio");
-                if (index === 1 && apiEndpointField.text.indexOf("generativelanguage.googleapis.com") !== -1) {
-                    apiEndpointField.text = "https://aiplatform.googleapis.com";
-                } else if (index === 0 && apiEndpointField.text.indexOf("aiplatform.googleapis.com") !== -1) {
-                    apiEndpointField.text = "https://generativelanguage.googleapis.com";
-                }
+                applyGeminiOptions({ authMethod: (index === 1 ? "agentplatform" : "aistudio") });
             }
         }
 
@@ -777,11 +1145,14 @@ BaseConfigPage {
             visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
             text: cfg_geminiProjectId
             onTextChanged: {
-                if (!_initialized) return;
+                if (!_initialized || inConfigTxn) return;
                 cfg_geminiProjectId = text;
                 rootItem.triggerCapture();
             }
-            onEditingFinished: ensureModelsLoaded(false)
+            onEditingFinished: {
+                if (!_initialized) return;
+                applyGeminiOptions({ projectId: text });
+            }
         }
 
         QQC2.TextField {
@@ -791,11 +1162,14 @@ BaseConfigPage {
             visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
             text: cfg_geminiLocation
             onTextChanged: {
-                if (!_initialized) return;
+                if (!_initialized || inConfigTxn) return;
                 cfg_geminiLocation = text;
                 rootItem.triggerCapture();
             }
-            onEditingFinished: ensureModelsLoaded(false)
+            onEditingFinished: {
+                if (!_initialized) return;
+                applyGeminiOptions({ location: text });
+            }
         }
         // --- End Gemini Specific Settings ---
 
@@ -874,26 +1248,8 @@ BaseConfigPage {
             }
 
             function selectPreset(preset) {
-                var idx = -1;
-                for (var i = 0; i < presetEndpoints.length; i++) {
-                    if (presetEndpoints[i].name === preset.name) {
-                        idx = i;
-                        break;
-                    }
-                }
-                if (idx === -1) return;
-
-                if (_initialized) cfg_modelName = "";
-                endpointPreset.currentIndex = idx;
-                if (idx > 0) {
-                    var p = presetEndpoints[idx];
-                    apiEndpointField.text = p.url;
-                    if (_initialized) cfg_providerName = p.name;
-                    if (_initialized) cfg_usesResponsesAPI = !!p.usesResponsesAPI;
-                    rememberOpenAIChoice(p.name, p.url);
-                } else {
-                    if (_initialized) cfg_providerName = "Custom";
-                }
+                if (!_initialized) return;
+                applyProviderSelection(preset);
             }
         }
 
@@ -905,27 +1261,16 @@ BaseConfigPage {
             // Adapters with customEndpoint:false (e.g. Exa) keep a fixed URL.
             visible: caps.customEndpoint !== false
             text: cfg_apiEndpoint
+            // Live typing updates cfg only; provider identity + wallet/models
+            // reconcile on editingFinished so we don't thrash mid-keystroke.
             onTextChanged: {
-                if (!_initialized) return;
+                if (!_initialized || inConfigTxn) return;
                 cfg_apiEndpoint = text;
-                if (!caps.providerPresets) return;
-                // Sync preset selector when active adapter uses presets.
-                var matched = false;
-                for (var i = 1; i < presetEndpoints.length; i++) {
-                    if (text === presetEndpoints[i].url) {
-                        endpointPreset.currentIndex = i;
-                        cfg_usesResponsesAPI = !!presetEndpoints[i].usesResponsesAPI;
-                        matched = true;
-                        break;
-                    }
-                }
-                if (!matched) {
-                    endpointPreset.currentIndex = 0;
-                    cfg_providerName = "Custom";
-                }
-                rememberOpenAIChoice(cfg_providerName, text);
             }
-            onEditingFinished: ensureModelsLoaded(false)
+            onEditingFinished: {
+                if (!_initialized || inConfigTxn) return;
+                applyEndpointEdit(text);
+            }
         }
 
         QQC2.TextField {
@@ -934,7 +1279,11 @@ BaseConfigPage {
             Layout.fillWidth: true
             visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
             text: cfg_modelName
-            onTextChanged: if (_initialized) cfg_modelName = text
+            onTextChanged: {
+                if (!_initialized) return;
+                cfg_modelName = text;
+                rootItem.triggerCapture();
+            }
         }
 
         RowLayout {
@@ -960,27 +1309,22 @@ BaseConfigPage {
                 }
                 model: displayModels
                 enabled: displayModels.length > 0 && !fetchInProgress
-
-                onDisplayModelsChanged: {
-                    var idx = displayModels.indexOf(cfg_modelName);
-                    currentIndex = idx >= 0 ? idx : 0;
-
-                    // Persist the visible selection so applying without
-                    // touching the combo doesn't leave cfg_modelName empty.
-                    if (_initialized && (!cfg_modelName || cfg_modelName.length === 0) && displayModels.length > 0) {
-                        Qt.callLater(() => {
-                            if (!cfg_modelName && displayModels.length > 0) {
-                                cfg_modelName = displayModels[0];
-                            }
-                        });
-                    }
+                // Always show the saved model even if currentIndex briefly races
+                // to 0 when the model list is replaced on settings open.
+                displayText: {
+                    if (cfg_modelName && cfg_modelName.length > 0)
+                        return cfg_modelName;
+                    if (currentIndex >= 0 && currentIndex < displayModels.length)
+                        return displayModels[currentIndex];
+                    return "";
                 }
+
+                onDisplayModelsChanged: syncModelComboIndex()
 
                 Connections {
                     target: configPage
                     function onCfg_modelNameChanged() {
-                        var idx = modelCombo.displayModels.indexOf(cfg_modelName);
-                        modelCombo.currentIndex = idx >= 0 ? idx : 0;
+                        syncModelComboIndex();
                     }
                 }
 
@@ -1128,7 +1472,11 @@ BaseConfigPage {
                 to: 100
                 stepSize: 1
                 value: cfg_temperature
-                onValueChanged: if (_initialized) cfg_temperature = value
+                onValueChanged: {
+                    if (!_initialized) return;
+                    cfg_temperature = value;
+                    rootItem.triggerCapture();
+                }
             }
 
             RowLayout {
@@ -1153,7 +1501,11 @@ BaseConfigPage {
             stepSize: 64
             editable: true
             value: cfg_maxTokens
-            onValueModified: if (_initialized) cfg_maxTokens = value
+            onValueModified: {
+                if (!_initialized) return;
+                cfg_maxTokens = value;
+                rootItem.triggerCapture();
+            }
         }
 
         QQC2.ComboBox {
@@ -1165,7 +1517,9 @@ BaseConfigPage {
             model: [i18n("Off"), i18n("Low"), i18n("Medium"), i18n("High")]
             currentIndex: Math.max(0, efforts.indexOf(cfg_reasoningEffort))
             onActivated: function(index) {
-                if (_initialized) cfg_reasoningEffort = efforts[index];
+                if (!_initialized) return;
+                cfg_reasoningEffort = efforts[index];
+                rootItem.triggerCapture();
             }
         }
 
@@ -1178,7 +1532,11 @@ BaseConfigPage {
             stepSize: 256
             editable: true
             value: cfg_thinkingBudget
-            onValueModified: if (_initialized) cfg_thinkingBudget = value
+            onValueModified: {
+                if (!_initialized) return;
+                cfg_thinkingBudget = value;
+                rootItem.triggerCapture();
+            }
             // Anthropic gates thinking on reasoningEffort != "off"; Gemini uses
             // the budget directly so the spinbox is always enabled there.
             enabled: !caps.reasoningEffort || cfg_reasoningEffort !== "off"
@@ -1202,7 +1560,11 @@ BaseConfigPage {
             text: i18n("Show thoughts in chat (collapsible)")
             visible: caps.reasoningEffort === true || caps.thinkingBudget === true
             checked: cfg_showThoughts
-            onCheckedChanged: if (_initialized) cfg_showThoughts = checked
+            onCheckedChanged: {
+                if (!_initialized) return;
+                cfg_showThoughts = checked;
+                rootItem.triggerCapture();
+            }
 
             QQC2.ToolTip.text: i18n("When enabled, the model's reasoning is shown above each reply with a collapsible header. Round-trip of signed thoughts to the API still happens regardless of this setting.")
             QQC2.ToolTip.delay: 500
@@ -1214,7 +1576,11 @@ BaseConfigPage {
             text: i18n("Use Responses API")
             visible: cfg_apiType === "openai"
             checked: cfg_usesResponsesAPI
-            onCheckedChanged: if (_initialized) cfg_usesResponsesAPI = checked
+            onCheckedChanged: {
+                if (!_initialized) return;
+                cfg_usesResponsesAPI = checked;
+                rootItem.triggerCapture();
+            }
 
             QQC2.ToolTip.text: i18n("Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure (POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when picking a preset.")
             QQC2.ToolTip.delay: 500
