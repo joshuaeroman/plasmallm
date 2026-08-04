@@ -66,7 +66,9 @@ function execute(args, context) {
         webSearchProvider: context.config.webSearchProvider,
         searxngUrl: context.config.searxngUrl,
         searxngApiKey: context.getSecret("searxngApiKey"),
-        ollamaSearchApiKey: context.getSecret("ollamaSearchApiKey")
+        ollamaSearchApiKey: context.getSecret("ollamaSearchApiKey"),
+        exaApiKey: context.getSecret("exaApiKey"),
+        exaSearchType: context.config.exaSearchType
     };
 
     if (context.addDisplayMessage) {

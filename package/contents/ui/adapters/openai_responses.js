@@ -50,7 +50,21 @@ function setHeaders(xhr, apiKey, endpoint) {
     }
 }
 
+// Match Exa hosts strictly (api.exa.ai / exa.ai / *.exa.ai), not bare substring.
+function isExaEndpoint(endpoint) {
+    if (!endpoint || typeof endpoint !== "string") return false;
+    var m = endpoint.match(/^https?:\/\/([^\/:?#]+)/i);
+    if (!m) return false;
+    var host = m[1].toLowerCase();
+    return host === "api.exa.ai" || host === "exa.ai" || host.length > 7 && host.slice(-7) === ".exa.ai";
+}
+
 function fetchModels(endpoint, apiKey, callback) {
+    if (isExaEndpoint(endpoint)) {
+        var exaModels = ["exa-agent"];
+        if (callback) callback(null, exaModels, 200);
+        return;
+    }
     // Most Responses-API providers also expose /models with the same shape.
     var xhr = new XMLHttpRequest();
     var url = endpoint.replace(/\/+$/, "") + "/models";
@@ -336,6 +350,16 @@ function sendStreaming(opts) {
     var onChunk = opts.onChunk;
     var onThinkingChunk = opts.onThinkingChunk;
     var onComplete = opts.onComplete;
+
+    if (isExaEndpoint(endpoint)) {
+        endpoint = "https://api.exa.ai";
+        if ((!apiKey || apiKey.trim() === "") && opts.exaApiKey) {
+            apiKey = opts.exaApiKey;
+        }
+        if (!model || model !== "exa-agent") {
+            model = "exa-agent";
+        }
+    }
 
     var translated = translateMessages(opts.messages);
 

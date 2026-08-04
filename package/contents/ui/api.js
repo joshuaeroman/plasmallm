@@ -163,10 +163,12 @@ function isSearchConfigured(options) {
     
     if (provider === "duckduckgo") {
         return true;
+    } else if (provider === "exa") {
+        return !!(options.exaApiKey && options.exaApiKey.trim().length > 0);
     } else if (provider === "searxng") {
         return !!(options.searxngUrl && options.searxngUrl.length > 0);
     } else if (provider === "ollama") {
-        return !!(options.ollamaSearchApiKey && options.ollamaSearchApiKey.length > 0);
+        return !!(options.ollamaSearchApiKey && options.ollamaSearchApiKey.trim().length > 0);
     }
     return false;
 }
@@ -202,7 +204,8 @@ function getAdapterChoices() {
     return [
         { id: "openai",    name: i18n("OpenAI-compatible") },
         { id: "anthropic", name: i18n("Anthropic") },
-        { id: "gemini",    name: i18n("Google Gemini") }
+        { id: "gemini",    name: i18n("Google Gemini") },
+        { id: "exa",       name: i18n("Exa") }
     ];
 }
 

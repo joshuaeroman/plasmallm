@@ -65,6 +65,7 @@ var presets = [
     { name: "Cohere",                        url: "https://api.cohere.ai/compatibility/v1" },
     { name: "SambaNova",                     url: "https://api.sambanova.ai/v1" },
     { name: "Novita AI",                     url: "https://api.novita.ai/v3/openai" },
+    { name: "Exa",                           url: "https://api.exa.ai" },
     // Russian providers
     { name: "RouterAI (RU)",                 url: "https://routerai.ru/api/v1" },
     { name: "AITunnel (RU)",                 url: "https://api.aitunnel.ru/v1" }

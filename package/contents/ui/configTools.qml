@@ -20,6 +20,21 @@ BaseConfigPage {
 
     property var activeAdapter: Api.getAdapter(cfg_apiType)
     property var adapterCapabilities: activeAdapter ? activeAdapter.capabilities : {}
+    // Dedicated Exa adapter, or OpenAI-compatible preset/endpoint pointed at Exa.
+    readonly property bool usingExaChat: {
+        if (cfg_apiType === "exa")
+            return true;
+        if (cfg_apiType !== "openai")
+            return false;
+        if ((cfg_providerName || "") === "Exa")
+            return true;
+        var ep = cfg_apiEndpoint || "";
+        var m = String(ep).match(/^https?:\/\/([^\/:?#]+)/i);
+        if (!m)
+            return false;
+        var host = m[1].toLowerCase();
+        return host === "api.exa.ai" || host === "exa.ai" || (host.length > 7 && host.slice(-7) === ".exa.ai");
+    }
 
     property bool hasTmux: false
     property bool hasScreen: false
@@ -125,6 +140,13 @@ BaseConfigPage {
             QQC2.ToolTip.text: i18n("Master switch for all tool-calling functionality.")
             QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
             QQC2.ToolTip.visible: hovered
+        }
+
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            type: Kirigami.MessageType.Warning
+            text: i18n("Exa does not support tool use")
+            visible: cfg_enableTools && usingExaChat
         }
 
         RowLayout {

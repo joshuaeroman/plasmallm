@@ -49,7 +49,21 @@ function setHeaders(xhr, apiKey, endpoint) {
     }
 }
 
+// Match Exa hosts strictly (api.exa.ai / exa.ai / *.exa.ai), not bare substring.
+function isExaEndpoint(endpoint) {
+    if (!endpoint || typeof endpoint !== "string") return false;
+    var m = endpoint.match(/^https?:\/\/([^\/:?#]+)/i);
+    if (!m) return false;
+    var host = m[1].toLowerCase();
+    return host === "api.exa.ai" || host === "exa.ai" || host.length > 7 && host.slice(-7) === ".exa.ai";
+}
+
 function fetchModels(endpoint, apiKey, callback) {
+    if (isExaEndpoint(endpoint)) {
+        var exaModels = ["exa"];
+        if (callback) callback(null, exaModels, 200);
+        return;
+    }
     var xhr = new XMLHttpRequest();
     var url = endpoint.replace(/\/+$/, "") + "/models";
 
@@ -140,22 +154,36 @@ function parseSSEChunks(buffer, lastIndex) {
         }
         try {
             var obj = JSON.parse(payload);
-            if (obj.choices && obj.choices[0] && obj.choices[0].delta) {
-                var delta = obj.choices[0].delta;
-                if (typeof delta.content === "string" && delta.content.length > 0) {
-                    tokens.push({ content: delta.content });
+            // Exa Answer streams may emit a top-level citations array (not under delta).
+            if (obj.citations && Array.isArray(obj.citations) && obj.citations.length > 0) {
+                tokens.push({ citations: obj.citations });
+            }
+            if (obj.choices && obj.choices[0]) {
+                var choice = obj.choices[0];
+                if (choice.delta) {
+                    var delta = choice.delta;
+                    if (typeof delta.content === "string" && delta.content.length > 0) {
+                        tokens.push({ content: delta.content });
+                    }
+                    // Reasoning text: OpenAI o-series via /chat/completions exposes
+                    // `delta.reasoning`; DeepSeek/Qwen-style providers use
+                    // `delta.reasoning_content`. Display-only — providers
+                    // explicitly say not to round-trip these on chat completions.
+                    if (typeof delta.reasoning === "string" && delta.reasoning.length > 0) {
+                        tokens.push({ thinking_delta: delta.reasoning });
+                    } else if (typeof delta.reasoning_content === "string" && delta.reasoning_content.length > 0) {
+                        tokens.push({ thinking_delta: delta.reasoning_content });
+                    }
+                    if (delta.citations && Array.isArray(delta.citations)) {
+                        tokens.push({ citations: delta.citations });
+                    }
+                    if (delta.tool_calls) {
+                        tokens.push({ tool_calls_delta: delta.tool_calls });
+                    }
                 }
-                // Reasoning text: OpenAI o-series via /chat/completions exposes
-                // `delta.reasoning`; DeepSeek/Qwen-style providers use
-                // `delta.reasoning_content`. Display-only — providers
-                // explicitly say not to round-trip these on chat completions.
-                if (typeof delta.reasoning === "string" && delta.reasoning.length > 0) {
-                    tokens.push({ thinking_delta: delta.reasoning });
-                } else if (typeof delta.reasoning_content === "string" && delta.reasoning_content.length > 0) {
-                    tokens.push({ thinking_delta: delta.reasoning_content });
-                }
-                if (delta.tool_calls) {
-                    tokens.push({ tool_calls_delta: delta.tool_calls });
+                // Non-delta message form (some providers finish with a full message chunk).
+                if (choice.message && choice.message.citations && Array.isArray(choice.message.citations)) {
+                    tokens.push({ citations: choice.message.citations });
                 }
             }
         } catch (e) {
@@ -178,6 +206,16 @@ function sendStreaming(opts) {
     var onThinkingChunk = opts.onThinkingChunk;
     var onComplete = opts.onComplete;
 
+    if (isExaEndpoint(endpoint)) {
+        endpoint = "https://api.exa.ai";
+        if ((!apiKey || apiKey.trim() === "") && opts.exaApiKey) {
+            apiKey = opts.exaApiKey;
+        }
+        if (!model || model !== "exa") {
+            model = "exa";
+        }
+    }
+
     var xhr = new XMLHttpRequest();
     var url = endpoint.replace(/\/+$/, "") + "/chat/completions";
 
@@ -190,19 +228,35 @@ function sendStreaming(opts) {
     var accumulatedText = "";
     var accumulatedToolCalls = []; // [{id, type, function: {name, arguments}}]
     var accumulatedThinkingText = "";
+    var accumulatedCitations = [];
     var streamDone = false;
     var completeCalled = false;
 
+    function pushCitations(list) {
+        if (!list || !Array.isArray(list)) return;
+        for (var c = 0; c < list.length; c++) {
+            var item = list[c];
+            if (item && typeof item === "object") {
+                accumulatedCitations.push(item);
+            }
+        }
+    }
+
     function processBuffer() {
-        if (streamDone) return;
         var result = parseSSEChunks(xhr.responseText, lastParseIndex);
         lastParseIndex = result.newIndex;
         for (var i = 0; i < result.tokens.length; i++) {
             var tok = result.tokens[i];
             if (tok.done) {
                 streamDone = true;
-                return;
+                continue;
             }
+            // Always accept citations (Exa may emit them after content / near end).
+            if (tok.citations) {
+                pushCitations(tok.citations);
+            }
+            // After [DONE], ignore further content/tool deltas.
+            if (streamDone) continue;
             if (tok.content) {
                 accumulatedText += tok.content;
                 onChunk(tok.content, accumulatedText);
@@ -238,6 +292,33 @@ function sendStreaming(opts) {
         }
     }
 
+    function sanitizeCiteTitle(title) {
+        // Prevent markdown link breakage from ] or ( in titles.
+        return String(title).replace(/[\[\]\(\)\n\r]/g, " ").replace(/\s+/g, " ").trim();
+    }
+
+    function formatCitations() {
+        if (accumulatedCitations.length === 0) return;
+        var citeText = "\n\n### Sources & Citations\n";
+        var n = 0;
+        for (var c = 0; c < accumulatedCitations.length; c++) {
+            var cite = accumulatedCitations[c];
+            if (!cite || typeof cite !== "object") continue;
+            n++;
+            var rawUrl = (typeof cite.url === "string") ? cite.url : "";
+            var isHttp = /^https?:\/\//i.test(rawUrl);
+            var title = sanitizeCiteTitle(cite.title || (isHttp ? rawUrl : "") || ("Source " + n));
+            if (isHttp) {
+                citeText += n + ". [" + title + "](" + rawUrl + ")\n";
+            } else {
+                citeText += n + ". " + title + "\n";
+            }
+        }
+        if (n === 0) return;
+        accumulatedText += citeText;
+        onChunk("", accumulatedText);
+    }
+
     function finish(error) {
         if (completeCalled) return;
         completeCalled = true;
@@ -246,30 +327,55 @@ function sendStreaming(opts) {
         if (error) {
             console.error("PlasmaLLM OpenAI Chat Adapter: onComplete with error:", error);
             onComplete(accumulatedText, error, null, null);
-        } else if (accumulatedToolCalls.length > 0) {
+            return;
+        }
+
+        if (accumulatedToolCalls.length > 0) {
+            if (accumulatedCitations.length > 0) formatCitations();
             var assistantMsg = { role: "assistant", content: accumulatedText || null, tool_calls: accumulatedToolCalls };
             onComplete(accumulatedText, null, accumulatedToolCalls, assistantMsg);
-        } else if (accumulatedText.length > 0) {
+            return;
+        }
+
+        if (accumulatedText.length > 0) {
+            if (accumulatedCitations.length > 0) formatCitations();
             onComplete(accumulatedText, null, null, null);
-        } else {
-            // Non-streaming fallback: server returned a regular JSON response
-            try {
-                var response = JSON.parse(xhr.responseText);
-                if (response.choices && response.choices[0] && response.choices[0].message) {
-                    var msg = response.choices[0].message;
-                    if (msg.tool_calls && msg.tool_calls.length > 0) {
-                        onComplete("", null, msg.tool_calls, msg);
-                    } else if (typeof msg.content === "string") {
-                        onComplete(msg.content, null);
-                    } else {
-                        onComplete("", i18n("Invalid response format"));
+            return;
+        }
+
+        // Non-streaming fallback: server returned a regular JSON response
+        try {
+            var response = JSON.parse(xhr.responseText);
+            // Top-level citations (some Exa / search APIs)
+            if (response.citations && Array.isArray(response.citations)) {
+                pushCitations(response.citations);
+            }
+            if (response.choices && response.choices[0] && response.choices[0].message) {
+                var msg = response.choices[0].message;
+                if (msg.citations && Array.isArray(msg.citations)) {
+                    pushCitations(msg.citations);
+                }
+                if (msg.tool_calls && msg.tool_calls.length > 0) {
+                    if (typeof msg.content === "string" && msg.content.length > 0) {
+                        accumulatedText = msg.content;
                     }
+                    if (accumulatedCitations.length > 0) formatCitations();
+                    if (accumulatedText.length > 0) {
+                        msg = { role: msg.role || "assistant", content: accumulatedText, tool_calls: msg.tool_calls };
+                    }
+                    onComplete(accumulatedText, null, msg.tool_calls, msg);
+                } else if (typeof msg.content === "string") {
+                    accumulatedText = msg.content;
+                    if (accumulatedCitations.length > 0) formatCitations();
+                    onComplete(accumulatedText, null, null, null);
                 } else {
                     onComplete("", i18n("Invalid response format"));
                 }
-            } catch (e) {
-                onComplete("", i18n("Failed to parse response: %1", e.message));
+            } else {
+                onComplete("", i18n("Invalid response format"));
             }
+        } catch (e) {
+            onComplete("", i18n("Failed to parse response: %1", e.message));
         }
     }
 
