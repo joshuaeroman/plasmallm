@@ -1839,6 +1839,7 @@ lines.push(JSON.stringify({
             var streamHandle = Api.sendStreaming(root.effectiveApiType, {
                 endpoint: Plasmoid.configuration.apiEndpoint,
                 apiKey: effectiveKey,
+                exaApiKey: root.exaApiKey,
                 model: Plasmoid.configuration.modelName,
                 messages: messages,
                 temperature: Plasmoid.configuration.temperature,

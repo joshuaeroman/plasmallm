@@ -328,7 +328,16 @@ BaseConfigPage {
         // Skip automatic fetches when no key is set — some endpoints (e.g. local
         // LM Studio) don't need one, but we shouldn't hammer remote providers
         // with guaranteed-401 requests. The manual refresh button bypasses this.
-        if (!force && (!key || key.length === 0)) return;
+        // Exception: Exa exposes a static model list that does not require a key.
+        var endpointText = apiEndpointField ? apiEndpointField.text : (cfg_apiEndpoint || "");
+        var isExaStatic = (cfg_apiType === "exa") || (function(ep) {
+            if (!ep) return false;
+            var m = String(ep).match(/^https?:\/\/([^\/:?#]+)/i);
+            if (!m) return false;
+            var host = m[1].toLowerCase();
+            return host === "api.exa.ai" || host === "exa.ai" || (host.length > 7 && host.slice(-7) === ".exa.ai");
+        })(endpointText);
+        if (!force && (!key || key.length === 0) && !isExaStatic) return;
         fetchInProgress = true;
         fetchStatusLabel.visible = false;
 
@@ -401,6 +410,21 @@ BaseConfigPage {
     readonly property var adapterChoices: Api.getAdapterChoices()
     readonly property string effectiveApiType: (cfg_apiType === "gemini" && cfg_geminiApiVariant === "interactions") ? "gemini_interactions" : cfg_apiType
     readonly property var caps: Api.getCapabilities(effectiveApiType) || {}
+    // Dedicated Exa adapter, or OpenAI-compatible preset/endpoint pointed at Exa.
+    readonly property bool usingExaChat: {
+        if (cfg_apiType === "exa")
+            return true;
+        if (cfg_apiType !== "openai")
+            return false;
+        if ((cfg_providerName || "") === "Exa")
+            return true;
+        var ep = cfg_apiEndpoint || "";
+        var m = String(ep).match(/^https?:\/\/([^\/:?#]+)/i);
+        if (!m)
+            return false;
+        var host = m[1].toLowerCase();
+        return host === "api.exa.ai" || host === "exa.ai" || (host.length > 7 && host.slice(-7) === ".exa.ai");
+    }
 
     onCfg_apiTypeChanged: {
         loadWalletKey();
@@ -675,6 +699,13 @@ BaseConfigPage {
             }
         }
 
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            type: Kirigami.MessageType.Warning
+            text: i18n("Exa does not support tool use")
+            visible: cfg_enableTools && usingExaChat
+        }
+
         // --- Gemini Specific Settings ---
         QQC2.ComboBox {
             id: geminiVertexAuthCombo
@@ -871,6 +902,8 @@ BaseConfigPage {
             Kirigami.FormData.label: i18n("API Endpoint:")
             placeholderText: "http://localhost:11434/v1"
             Layout.fillWidth: true
+            // Adapters with customEndpoint:false (e.g. Exa) keep a fixed URL.
+            visible: caps.customEndpoint !== false
             text: cfg_apiEndpoint
             onTextChanged: {
                 if (!_initialized) return;
@@ -1159,8 +1192,9 @@ BaseConfigPage {
             wrapMode: Text.WordWrap
             opacity: 0.7
             font: Kirigami.Theme.smallFont
-            visible: (caps.reasoningEffort === true || caps.thinkingBudget === true)
-                     && (caps.reasoningHelp || "").length > 0
+            // Show any non-empty help text (e.g. Exa grounded-search blurb),
+            // not only when thinking knobs are enabled.
+            visible: (caps.reasoningHelp || "").length > 0
         }
 
         QQC2.CheckBox {

@@ -204,7 +204,8 @@ function getAdapterChoices() {
     return [
         { id: "openai",    name: i18n("OpenAI-compatible") },
         { id: "anthropic", name: i18n("Anthropic") },
-        { id: "gemini",    name: i18n("Google Gemini") }
+        { id: "gemini",    name: i18n("Google Gemini") },
+        { id: "exa",       name: i18n("Exa") }
     ];
 }
 
