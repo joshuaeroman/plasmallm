@@ -34,7 +34,7 @@ const PROFILE_FIELDS = [
     "geminiLocation", "openaiLastProvider", "openaiLastEndpoint",
     "enableNativeGoogleSearch", "enableNativeCodeExecution",
     "useCommandTool", "autoRunCommands", "autoShareCommandOutput",
-    "enableWebSearch", "webSearchProvider", "searxngUrl",
+    "enableWebSearch", "webSearchProvider", "searxngUrl", "exaSearchType",
     "enableTools", "enableDesktopAutomation",
     "toolsReadFileEnabled", "toolsReadFileAutoRun",
     "toolsWriteFileEnabled", "toolsWriteFileAutoRun",

@@ -164,6 +164,7 @@ PlasmoidItem {
     property string apiKey: Plasmoid.configuration.apiKey
     property string ollamaSearchApiKey: ""
     property string searxngApiKey: ""
+    property string exaApiKey: ""
     property bool walletAvailable: false
     property int toolCallDepth: 0
     readonly property bool enableToolCallLimit: Plasmoid.configuration.enableToolCallLimit
@@ -568,7 +569,8 @@ PlasmoidItem {
                 webSearchProvider: Plasmoid.configuration.webSearchProvider,
                 searxngUrl: Plasmoid.configuration.searxngUrl,
                 searxngApiKey: root.searxngApiKey,
-                ollamaSearchApiKey: root.ollamaSearchApiKey
+                ollamaSearchApiKey: root.ollamaSearchApiKey,
+                exaApiKey: root.exaApiKey
             }),
             useCommandTool: Plasmoid.configuration.useCommandTool,
             autoRunCommands: Plasmoid.configuration.autoRunCommands,
@@ -1249,6 +1251,34 @@ lines.push(JSON.stringify({
             }
         );
     }
+
+    function loadExaKeyFromWallet() {
+        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
+            function(handle) {
+                if (handle < 0) {
+                    root.exaApiKey = Plasmoid.configuration.exaApiKey;
+                    return;
+                }
+                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "exaApiKey", "PlasmaLLM"],
+                    function(password) {
+                        if (password && password.length > 0) {
+                            root.exaApiKey = password;
+                        } else {
+                            root.exaApiKey = Plasmoid.configuration.exaApiKey;
+                        }
+                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                    },
+                    function(err) {
+                        root.exaApiKey = Plasmoid.configuration.exaApiKey;
+                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                    }
+                );
+            },
+            function(err) {
+                root.exaApiKey = Plasmoid.configuration.exaApiKey;
+            }
+        );
+    }
     property var pendingAttachments: []
     property var pendingFileReads: ({}) // command -> {filePath, fileName, isImage}
 
@@ -1795,6 +1825,8 @@ lines.push(JSON.stringify({
             searxngUrl: Plasmoid.configuration.searxngUrl,
             searxngApiKey: root.searxngApiKey,
             ollamaSearchApiKey: root.ollamaSearchApiKey,
+            exaApiKey: root.exaApiKey,
+            exaSearchType: Plasmoid.configuration.exaSearchType,
             commandToolEnabled: Plasmoid.configuration.useCommandTool,
             webSearchEnabled: Plasmoid.configuration.enableWebSearch,
             usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
@@ -2556,6 +2588,12 @@ lines.push(JSON.stringify({
         function onSearxngApiKeyVersionChanged() {
             loadSearxngKeyFromWallet();
         }
+        function onExaApiKeyChanged() {
+            if (Plasmoid.configuration.exaApiKey) root.exaApiKey = Plasmoid.configuration.exaApiKey;
+        }
+        function onExaApiKeyVersionChanged() {
+            loadExaKeyFromWallet();
+        }
         function onApiEndpointChanged() {
             // Endpoint URL updates do not invalidate the slot map; each slot manages its own cache entry.
         }
@@ -2779,6 +2817,7 @@ fi
         loadApiKeyFromWallet();
         loadOllamaSearchKeyFromWallet();
         loadSearxngKeyFromWallet();
+        loadExaKeyFromWallet();
         var stored = Plasmoid.configuration.availableModels;
         if (stored && stored.length > 0) {
             try {

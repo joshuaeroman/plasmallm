@@ -23,6 +23,11 @@ ColumnLayout {
     property bool walletSearxngKeyDirty: false
     property bool walletSearxngSaveInProgress: false
 
+    property string walletExaKey: ""
+    property bool walletExaKeyLoaded: false
+    property bool walletExaKeyDirty: false
+    property bool walletExaSaveInProgress: false
+
     property bool walletAvailable: false
 
     function walletCall(member, args, resolve, reject) {
@@ -86,6 +91,22 @@ ColumnLayout {
                 function(result) { onDone(result === 0); },
                 function(err) {
                     console.warn("PlasmaLLM: wallet writePassword (searxng) error: " + err);
+                    onDone(false);
+                }
+            );
+        });
+    }
+
+    function walletWriteExaKey(handle, key, onDone) {
+        ensureWalletFolder(handle, function(ok) {
+            if (!ok) {
+                onDone(false);
+                return;
+            }
+            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", "exaApiKey", key, "PlasmaLLM"],
+                function(result) { onDone(result === 0); },
+                function(err) {
+                    console.warn("PlasmaLLM: wallet writePassword (exa) error: " + err);
                     onDone(false);
                 }
             );
@@ -230,15 +251,86 @@ ColumnLayout {
         );
     }
 
+    function loadWalletExaKey() {
+        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
+            function(handle) {
+                if (handle < 0) {
+                    walletExaKey = cfg_exaApiKey;
+                    walletExaKeyLoaded = true;
+                    return;
+                }
+                walletAvailable = true;
+                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", "exaApiKey", "PlasmaLLM"],
+                    function(password) {
+                        if (password && password.length > 0) {
+                            walletExaKey = password;
+                        } else {
+                            walletExaKey = cfg_exaApiKey;
+                        }
+                        walletExaKeyLoaded = true;
+                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                    },
+                    function(err) {
+                        walletExaKey = cfg_exaApiKey;
+                        walletExaKeyLoaded = true;
+                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                    }
+                );
+            },
+            function(err) {
+                walletExaKey = cfg_exaApiKey;
+                walletExaKeyLoaded = true;
+            }
+        );
+    }
+
+    function saveWalletExaKey() {
+        var key = exaApiKeyField.text;
+        walletExaSaveInProgress = true;
+        if (!walletAvailable) {
+            cfg_exaApiKey = key;
+            walletExaKeyDirty = false;
+            walletExaSaveInProgress = false;
+            return;
+        }
+        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
+            function(handle) {
+                if (handle < 0) {
+                    cfg_exaApiKey = key;
+                    walletExaKeyDirty = false;
+                    walletExaSaveInProgress = false;
+                    return;
+                }
+                walletWriteExaKey(handle, key, function(success) {
+                    if (success) {
+                        walletExaKey = key;
+                        cfg_exaApiKey = "";
+                        walletExaKeyDirty = false;
+                        cfg_exaApiKeyVersion++;
+                    }
+                    walletExaSaveInProgress = false;
+                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+                });
+            },
+            function(err) {
+                cfg_exaApiKey = key;
+                walletExaKeyDirty = false;
+                walletExaSaveInProgress = false;
+            }
+        );
+    }
+
     Component.onCompleted: {
         loadWalletOllamaKey();
         loadWalletSearxngKey();
+        loadWalletExaKey();
     }
 
     Connections {
         target: typeof configPage !== 'undefined' ? configPage : null
         function onCfg_ollamaSearchApiKeyVersionChanged() { loadWalletOllamaKey(); }
         function onCfg_searxngApiKeyVersionChanged() { loadWalletSearxngKey(); }
+        function onCfg_exaApiKeyVersionChanged() { loadWalletExaKey(); }
     }
 
     QQC2.ComboBox {
@@ -248,7 +340,8 @@ ColumnLayout {
         model: [
             { text: i18n("Ollama API"), value: "ollama" },
             { text: i18n("SearXNG"), value: "searxng" },
-            { text: i18n("DuckDuckGo"), value: "duckduckgo" }
+            { text: i18n("DuckDuckGo"), value: "duckduckgo" },
+            { text: i18n("Exa Search"), value: "exa" }
         ]
         textRole: "text"
         valueRole: "value"
@@ -338,12 +431,83 @@ ColumnLayout {
         }
     }
 
+    // Exa options
+    RowLayout {
+        Layout.fillWidth: true
+        spacing: Kirigami.Units.smallSpacing
+        visible: cfg_webSearchProvider === "exa"
+
+        QQC2.TextField {
+            id: exaApiKeyField
+            Layout.fillWidth: true
+            placeholderText: i18n("Exa API key")
+            echoMode: TextInput.Password
+            text: walletExaKeyLoaded ? walletExaKey : cfg_exaApiKey
+            onTextChanged: {
+                if (walletExaKeyLoaded) {
+                    walletExaKeyDirty = (text !== walletExaKey);
+                }
+            }
+            onEditingFinished: {
+                if (walletExaKeyDirty) saveWalletExaKey();
+            }
+        }
+
+        QQC2.Button {
+            text: walletExaSaveInProgress ? i18n("Saving…") :
+                  !walletExaKeyDirty ? i18n("Saved") :
+                  !walletAvailable ? i18n("Save to Config (Insecure)") : i18n("Save Key")
+            icon.name: !walletExaKeyDirty ? "dialog-ok-apply" : "document-save"
+            enabled: walletExaKeyDirty && !walletExaSaveInProgress
+            onClicked: saveWalletExaKey()
+        }
+    }
+
+    RowLayout {
+        Layout.fillWidth: true
+        spacing: Kirigami.Units.smallSpacing
+        visible: cfg_webSearchProvider === "exa"
+
+        QQC2.Label {
+            text: i18n("Search Type:")
+        }
+
+        QQC2.ComboBox {
+            id: exaSearchTypeComboBox
+            Layout.fillWidth: true
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 12
+            model: [
+                { text: i18n("Auto (Default)"), value: "auto" },
+                { text: i18n("Fast"), value: "fast" },
+                { text: i18n("Instant"), value: "instant" },
+                { text: i18n("Deep Lite"), value: "deep-lite" },
+                { text: i18n("Deep"), value: "deep" },
+                { text: i18n("Deep Reasoning"), value: "deep-reasoning" }
+            ]
+            textRole: "text"
+            valueRole: "value"
+            Component.onCompleted: {
+                for (var i = 0; i < count; i++) {
+                    if (model[i].value === cfg_exaSearchType) {
+                        currentIndex = i;
+                        break;
+                    }
+                }
+            }
+            onActivated: {
+                if (_initialized) cfg_exaSearchType = currentValue;
+            }
+        }
+    }
+
     QQC2.Label {
         text: cfg_webSearchProvider === "duckduckgo" 
               ? i18n("DuckDuckGo requires no configuration.") 
               : cfg_webSearchProvider === "searxng" 
                 ? i18n("Ensure the SearXNG instance has the JSON format enabled.") 
-                : i18n("Enables LLM-triggered web searches via Ollama's search API")
+                : cfg_webSearchProvider === "exa"
+                  ? i18n("Enables LLM-triggered neural web searches via Exa API.")
+                  : i18n("Enables LLM-triggered web searches via Ollama's search API")
         font: Kirigami.Theme.smallFont
         color: Kirigami.Theme.disabledTextColor
         wrapMode: Text.Wrap

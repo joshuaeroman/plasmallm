@@ -103,7 +103,7 @@ Tools can specify how their results look in the chat:
 To add a built-in tool, create a new file in `package/contents/ui/tools/` and register it in `index.js`. The `execute` function receives a `context` object with:
 - **`config`**: Access to widget configuration.
 - **`i18n`**: Function for translating strings.
-- **`getSecret(key)`**: Securely retrieve sensitive keys (e.g., `"searxngApiKey"`, `"ollamaSearchApiKey"`).
+- **`getSecret(key)`**: Securely retrieve sensitive keys (e.g., `"searxngApiKey"`, `"ollamaSearchApiKey"`, `"exaApiKey"`).
 - **`addDisplayMessage(content, role)`**: Manually push a message to the UI. Useful when `uiHidden` is enabled.
 - **`replaceDisplayMessage(oldRole, newContent, newRole)`**: Find the last message with `oldRole` and update its content and role in place. Useful for replacing a "Loading..." indicator with actual results.
 - **`exec(command, name, args)`**: Run a shell command.

@@ -6,9 +6,12 @@
 .import "ollama.js" as OllamaSearch
 .import "searxng.js" as SearxngSearch
 .import "duckduckgo.js" as DuckDuckGoSearch
+.import "exa.js" as ExaSearch
 
 function getSearchAdapter(provider) {
     switch (provider) {
+    case "exa":
+        return ExaSearch;
     case "searxng":
         return SearxngSearch;
     case "duckduckgo":

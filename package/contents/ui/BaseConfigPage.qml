@@ -196,6 +196,12 @@ SimpleKCM {
     property string cfg_searxngApiKeyDefault
     property int cfg_searxngApiKeyVersion
     property int cfg_searxngApiKeyVersionDefault
+    property string cfg_exaApiKey
+    property string cfg_exaApiKeyDefault
+    property int cfg_exaApiKeyVersion
+    property int cfg_exaApiKeyVersionDefault
+    property string cfg_exaSearchType
+    property string cfg_exaSearchTypeDefault
     property string cfg_ollamaApiKey
     property string cfg_ollamaApiKeyDefault
     property string cfg_ollamaSearchApiKey
