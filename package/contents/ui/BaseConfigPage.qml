@@ -18,6 +18,13 @@ SimpleKCM {
     property bool _switchingProfile: false
     property bool _initialized: false
 
+    // Config transaction: multi-field writes set _configTxnDepth > 0 so
+    // onCfg_* handlers skip side effects (wallet/models/capture). endConfigTxn
+    // bumps _configGen and runs reconcileConfig once on complete state.
+    property int _configTxnDepth: 0
+    property int _configGen: 0
+    readonly property bool inConfigTxn: _configTxnDepth > 0
+
     Component.onCompleted: {
         // Use a timer to ensure all child components have finished their own onCompleted
         // and any initial bindings have settled.
@@ -29,7 +36,7 @@ SimpleKCM {
         interval: 250
         repeat: false
         onTriggered: {
-            if (!_initialized || _switchingProfile) return;
+            if (!_initialized || _switchingProfile || inConfigTxn) return;
             var profiles = Profiles.loadProfilesRaw(cfg_profiles);
             var active = Profiles.getActive(profiles, cfg_activeProfileId);
             if (!active) return;
@@ -47,8 +54,47 @@ SimpleKCM {
         }
     }
 
+    // Debounced fallback when cfg changes arrive outside an explicit entry
+    // point (KCM Apply, external write). Coalesces a burst of property updates
+    // into one reconcile.
+    Timer {
+        id: fallbackReconcileDebounce
+        interval: 80
+        repeat: false
+        onTriggered: {
+            if (!_initialized || inConfigTxn || _switchingProfile) return;
+            _configGen++;
+            if (typeof reconcileConfig === "function")
+                reconcileConfig({}, _configGen);
+            else
+                triggerCapture();
+        }
+    }
+
+    function beginConfigTxn() {
+        _configTxnDepth++;
+    }
+
+    function endConfigTxn(opts) {
+        if (_configTxnDepth > 0)
+            _configTxnDepth--;
+        if (_configTxnDepth > 0)
+            return;
+        _configGen++;
+        if (typeof reconcileConfig === "function")
+            reconcileConfig(opts || {}, _configGen);
+        else
+            triggerCapture();
+    }
+
+    // Schedule a single reconcile for out-of-band cfg changes.
+    function scheduleFallbackReconcile() {
+        if (!_initialized || inConfigTxn || _switchingProfile) return;
+        fallbackReconcileDebounce.restart();
+    }
+
     function triggerCapture() {
-        if (!_initialized || _switchingProfile) return;
+        if (!_initialized || _switchingProfile || inConfigTxn) return;
         captureDebounce.restart();
     }
 
@@ -170,6 +216,8 @@ SimpleKCM {
     property string cfg_apiKeysFallbackDefault
     property bool cfg_apiKeyMigrated
     property bool cfg_apiKeyMigratedDefault
+    property int cfg_apiKeySlotSchemeVersion
+    property int cfg_apiKeySlotSchemeVersionDefault
     property int cfg_autoClearMode
     property int cfg_autoClearModeDefault
     property int cfg_autoClearSeconds
