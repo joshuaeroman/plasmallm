@@ -28,7 +28,15 @@ SimpleKCM {
     Component.onCompleted: {
         // Use a timer to ensure all child components have finished their own onCompleted
         // and any initial bindings have settled.
-        Qt.callLater(() => { _initialized = true; });
+        Qt.callLater(() => {
+            _initialized = true;
+            // Re-sync model/provider combos after init so opening settings does
+            // not leave ComboBox stuck on index 0 after model assignment.
+            if (typeof syncModelComboIndex === "function")
+                syncModelComboIndex();
+            if (typeof syncEndpointPresetIndex === "function")
+                syncEndpointPresetIndex();
+        });
     }
 
     Timer {

@@ -83,6 +83,10 @@ BaseConfigPage {
     // Slot that the currently displayed key belongs to. Used to flush dirty
     // (typed-but-unsaved) keys when the active slot changes.
     property string lastKeySlot: ""
+    // Set when adapter/provider selection intentionally clears modelName so the
+    // next model-list settle may pick a default. Opening settings must never
+    // treat an empty/missing name as license to overwrite a saved selection.
+    property bool _allowModelAutoSelect: false
 
     function walletCall(member, args, resolve, reject) {
         var reply = DBus.SessionBus.asyncCall({
@@ -379,10 +383,78 @@ BaseConfigPage {
         );
     }
 
-    function refreshAvailableModels() {
+    // Resolve a model list for the current identity, accepting legacy cache keys
+    // written by older slot schemes so opening settings does not look "empty"
+    // and re-fetch/race the combo onto index 0.
+    function modelListForCurrentSlot() {
         var slot = currentModelCacheSlot();
         var list = modelCache[slot];
-        availableModels = Array.isArray(list) ? list : [];
+        if (Array.isArray(list) && list.length > 0)
+            return list;
+
+        // Intermediate scheme: models:<profile>:apiKey:<type>:<provider>
+        var t = cfg_apiType || "openai";
+        if (t === "gemini" && cfg_geminiAuthMethod === "agentplatform")
+            t = "gemini:agentplatform";
+        var p = cfg_providerName || "Custom";
+        if (p === "Custom" && cfg_apiEndpoint)
+            p = "Custom:" + String(cfg_apiEndpoint).replace(/\/+$/, "");
+        var legacyBase = "apiKey:" + t + ":" + p;
+        var candidates = [];
+        if (cfg_activeProfileId && cfg_activeProfileId.length > 0) {
+            candidates.push("models:" + cfg_activeProfileId + ":" + legacyBase);
+            candidates.push(legacyBase);
+            candidates.push("apiKey:profile:" + cfg_activeProfileId);
+        } else {
+            candidates.push(legacyBase);
+        }
+        for (var i = 0; i < candidates.length; i++) {
+            var legacy = modelCache[candidates[i]];
+            if (Array.isArray(legacy) && legacy.length > 0) {
+                // Promote into the current slot so later reads are stable.
+                var next = {};
+                for (var k in modelCache) {
+                    if (modelCache.hasOwnProperty(k))
+                        next[k] = modelCache[k];
+                }
+                next[slot] = legacy;
+                modelCache = next;
+                // Persist promotion so the next settings open hits the new key.
+                try {
+                    cfg_availableModels = JSON.stringify(next);
+                } catch (e) {}
+                return legacy;
+            }
+        }
+        return Array.isArray(list) ? list : [];
+    }
+
+    function refreshAvailableModels() {
+        availableModels = modelListForCurrentSlot();
+        syncModelComboIndex();
+    }
+
+    // Keep the model combo on the persisted selection. ComboBox resets
+    // currentIndex to 0 when its model is replaced; defer so we win that race.
+    function syncModelComboIndex() {
+        if (!modelCombo)
+            return;
+        var apply = function() {
+            if (!modelCombo)
+                return;
+            var list = modelCombo.displayModels || [];
+            var want = cfg_modelName || "";
+            var i = (want.length > 0) ? list.indexOf(want) : -1;
+            // Prefer the saved model. Index 0 is only used when nothing is saved
+            // or when the saved name was prepended at the front of the list.
+            if (i >= 0)
+                modelCombo.currentIndex = i;
+            else if (list.length > 0)
+                modelCombo.currentIndex = 0;
+        };
+        apply();
+        // ComboBox resets currentIndex when `model` is replaced; win that race.
+        Qt.callLater(apply);
     }
 
     function loadModelCache() {
@@ -403,7 +475,28 @@ BaseConfigPage {
         if (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform") return;
         var slot = currentModelCacheSlot();
         var have = Array.isArray(modelCache[slot]) && modelCache[slot].length > 0;
-        if (!force && have) return;
+        // Legacy cache keys still count as a hit after promotion.
+        if (!have) {
+            var promoted = modelListForCurrentSlot();
+            have = Array.isArray(promoted) && promoted.length > 0;
+        }
+        if (!force && have) {
+            // Cache hit: still restore combo selection (open settings path).
+            syncModelComboIndex();
+            // Only after an intentional provider/adapter clear may we default.
+            if (_allowModelAutoSelect
+                    && (!cfg_modelName || cfg_modelName.length === 0)
+                    && !inConfigTxn && _initialized) {
+                var cached = modelListForCurrentSlot();
+                if (cached.length > 0) {
+                    cfg_modelName = cached[0];
+                    _allowModelAutoSelect = false;
+                    rootItem.triggerCapture();
+                    syncModelComboIndex();
+                }
+            }
+            return;
+        }
         if (fetchInProgress) return;
         // Wallet load is async; reconcile only calls us after key is ready.
         if (!walletKeyLoaded) return;
@@ -458,12 +551,17 @@ BaseConfigPage {
                     modelCache = next;
                     cfg_availableModels = JSON.stringify(next);
                     refreshAvailableModels();
-                    // Auto-select first model when none chosen (after fetch settles).
-                    if ((!cfg_modelName || cfg_modelName.length === 0) && models.length > 0
+                    // Auto-select first model only after intentional clear
+                    // (provider/adapter switch), never when merely opening settings.
+                    if (_allowModelAutoSelect
+                            && (!cfg_modelName || cfg_modelName.length === 0)
+                            && models.length > 0
                             && !inConfigTxn && _initialized) {
                         cfg_modelName = models[0];
+                        _allowModelAutoSelect = false;
                         rootItem.triggerCapture();
                     }
+                    syncModelComboIndex();
                 }
             });
         };
@@ -595,6 +693,7 @@ BaseConfigPage {
         if (modelEntryField) modelEntryField.text = cfg_modelName;
         if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
         syncEndpointPresetIndex();
+        syncModelComboIndex();
     }
 
     // Pure writes for adapter defaults — no wallet/models/capture (caller is in a txn).
@@ -614,6 +713,7 @@ BaseConfigPage {
                 cfg_apiEndpoint = cfg_openaiLastEndpoint;
                 cfg_providerName = pick.name;
                 cfg_modelName = "";
+                _allowModelAutoSelect = true;
                 if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
                 syncEndpointPresetIndex();
                 return;
@@ -636,6 +736,7 @@ BaseConfigPage {
         }
         if (apiType === "exa") {
             cfg_modelName = "exa";
+            _allowModelAutoSelect = false;
             if (!cfg_apiEndpoint || cfg_apiEndpoint.length === 0)
                 cfg_apiEndpoint = "https://api.exa.ai";
             if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
@@ -649,6 +750,7 @@ BaseConfigPage {
             cfg_availableModels = JSON.stringify(nextCache);
         } else {
             cfg_modelName = "";
+            _allowModelAutoSelect = true;
         }
         syncEndpointPresetIndex();
         if (apiType === "openai") {
@@ -683,6 +785,15 @@ BaseConfigPage {
         }
         if (idx === -1) return;
 
+        var newProviderName = (idx > 0) ? presetEndpoints[idx].name : "Custom";
+        var providerChanged = (cfg_providerName || "") !== (newProviderName || "");
+        // Re-selecting the already-active provider must not wipe the saved model
+        // (settings open / combo index churn can re-fire selection).
+        if (!providerChanged && idx > 0) {
+            if (endpointPreset) endpointPreset.currentIndex = idx;
+            return;
+        }
+
         var prevSlot = currentSlot();
         beginConfigTxn();
         if (endpointPreset) endpointPreset.currentIndex = idx;
@@ -692,8 +803,10 @@ BaseConfigPage {
                 cfg_apiEndpoint = p.url;
             cfg_providerName = p.name;
             cfg_usesResponsesAPI = !!p.usesResponsesAPI;
-            if (cfg_apiType !== "exa")
+            if (providerChanged && cfg_apiType !== "exa") {
                 cfg_modelName = "";
+                _allowModelAutoSelect = true;
+            }
             if (apiEndpointField)
                 apiEndpointField.text = (p.url && p.url.length > 0) ? p.url : cfg_apiEndpoint;
             if (cfg_apiType === "openai") {
@@ -702,8 +815,10 @@ BaseConfigPage {
             }
         } else {
             cfg_providerName = "Custom";
-            if (cfg_apiType !== "exa")
+            if (providerChanged && cfg_apiType !== "exa") {
                 cfg_modelName = "";
+                _allowModelAutoSelect = true;
+            }
         }
         endConfigTxn({ prevKeySlot: prevSlot });
     }
@@ -1194,19 +1309,22 @@ BaseConfigPage {
                 }
                 model: displayModels
                 enabled: displayModels.length > 0 && !fetchInProgress
-
-                onDisplayModelsChanged: {
-                    var idx = displayModels.indexOf(cfg_modelName);
-                    currentIndex = idx >= 0 ? idx : 0;
-                    // Model auto-select for empty cfg_modelName is done in
-                    // ensureModelsLoaded after a gen-gated fetch completes.
+                // Always show the saved model even if currentIndex briefly races
+                // to 0 when the model list is replaced on settings open.
+                displayText: {
+                    if (cfg_modelName && cfg_modelName.length > 0)
+                        return cfg_modelName;
+                    if (currentIndex >= 0 && currentIndex < displayModels.length)
+                        return displayModels[currentIndex];
+                    return "";
                 }
+
+                onDisplayModelsChanged: syncModelComboIndex()
 
                 Connections {
                     target: configPage
                     function onCfg_modelNameChanged() {
-                        var idx = modelCombo.displayModels.indexOf(cfg_modelName);
-                        modelCombo.currentIndex = idx >= 0 ? idx : 0;
+                        syncModelComboIndex();
                     }
                 }
 
