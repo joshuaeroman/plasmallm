@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-03 21:44-0400\n"
+"POT-Creation-Date: 2026-08-03 23:22-0400\n"
 "PO-Revision-Date: 2026-04-07 22:00-0400\n"
 "Last-Translator: Gemini CLI (machine translation)\n"
 "Language-Team: Italian\n"
@@ -95,6 +95,13 @@ msgstr ""
 "(Ricerca/Codice) con comandi personalizzati. Seleziona un modello più "
 "recente (es., Gemini 3+) o disabilita le funzionalità native nelle "
 "Impostazioni."
+
+msgid ""
+"Exa performs real-time neural search and synthesizes grounded answers with "
+"live web citations."
+msgstr ""
+"Exa esegue ricerche neurali in tempo reale e sintetizza risposte fondate su "
+"fonti con citazioni web live."
 
 msgid ""
 "Reasoning effort (low / medium / high) gates extended thinking. To see "
@@ -258,52 +265,6 @@ msgstr "Chiedi prima di eseguire"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Errore: l'URL deve iniziare con http:// o https://"
 
-msgid "Search provider %1 not supported"
-msgstr "Provider di ricerca %1 non supportato"
-
-msgid "Searching the web for: %1…"
-msgstr "Ricerca sul web per: %1…"
-
-msgid "Ollama API"
-msgstr "API Ollama"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ollama API key"
-msgstr "Chiave API Ollama"
-
-msgid "Saving…"
-msgstr "Salvataggio in corso…"
-
-msgid "Saved"
-msgstr "Salvato"
-
-msgid "Save to Config (Insecure)"
-msgstr "Salva nella configurazione (Non sicuro)"
-
-msgid "Save Key"
-msgstr "Salva chiave"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "URL istanza SearXNG (es. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "Chiave/Token API SearXNG (opzionale)"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo non richiede alcuna configurazione."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Assicurati che l'istanza SearXNG abbia il formato JSON abilitato."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr ""
-"Abilita ricerche web attivate da LLM tramite l'API di ricerca di Ollama"
-
 msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr ""
 "Errore: il contenuto supera la dimensione massima di scrittura (%1 byte)"
@@ -364,6 +325,82 @@ msgstr ""
 "Errore: Metodo HTTP non valido. Sono consentiti solo GET, POST, PUT, DELETE, "
 "PATCH, HEAD, OPTIONS."
 
+msgid "Search provider %1 not supported"
+msgstr "Provider di ricerca %1 non supportato"
+
+msgid "Searching the web for: %1…"
+msgstr "Ricerca sul web per: %1…"
+
+msgid "Ollama API"
+msgstr "API Ollama"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Ricerca Exa"
+
+msgid "Ollama API key"
+msgstr "Chiave API Ollama"
+
+msgid "Saving…"
+msgstr "Salvataggio in corso…"
+
+msgid "Saved"
+msgstr "Salvato"
+
+msgid "Save to Config (Insecure)"
+msgstr "Salva nella configurazione (Non sicuro)"
+
+msgid "Save Key"
+msgstr "Salva chiave"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "URL istanza SearXNG (es. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "Chiave/Token API SearXNG (opzionale)"
+
+msgid "Exa API key"
+msgstr "Chiave API Exa"
+
+msgid "Search Type:"
+msgstr "Tipo di ricerca:"
+
+msgid "Auto (Default)"
+msgstr "Automatico (Predefinito)"
+
+msgid "Fast"
+msgstr "Veloce"
+
+msgid "Instant"
+msgstr "Istantaneo"
+
+msgid "Deep Lite"
+msgstr "Profondità leggera"
+
+msgid "Deep"
+msgstr "Profondo"
+
+msgid "Deep Reasoning"
+msgstr "Ragionamento profondo"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo non richiede alcuna configurazione."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Assicurati che l'istanza SearXNG abbia il formato JSON abilitato."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr "Abilita ricerche web neurali attivate da LLM tramite l'API Exa."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr ""
+"Abilita ricerche web attivate da LLM tramite l'API di ricerca di Ollama"
+
 msgid "Color button"
 msgstr "Pulsante colore"
 
@@ -417,15 +454,6 @@ msgstr "Copia negli appunti"
 
 msgid "Share output with assistant"
 msgstr "Condividi output con l'assistente"
-
-msgid "OpenAI-compatible"
-msgstr "Compatibile con OpenAI"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
 
 msgid "Profile Header:"
 msgstr "Intestazione profilo:"
@@ -523,6 +551,18 @@ msgstr "Mostra Impostazioni"
 msgid "Show Pin"
 msgstr "Mostra fissa"
 
+msgid "Tool Request: %1"
+msgstr "Richiesta strumento: %1"
+
+msgid "Justification: %1"
+msgstr "Giustificazione: %1"
+
+msgid "Deny"
+msgstr "Nega"
+
+msgid "Approve"
+msgstr "Approva"
+
 msgid "General Tool Settings"
 msgstr "Impostazioni generali degli strumenti"
 
@@ -535,6 +575,9 @@ msgstr "Abilita strumenti"
 msgid "Master switch for all tool-calling functionality."
 msgstr ""
 "Interruttore principale per tutte le funzionalità di chiamata agli strumenti."
+
+msgid "Exa does not support tool use"
+msgstr "Exa non supporta l'uso di strumenti"
 
 msgid "Desktop Automation:"
 msgstr "Automazione desktop:"
@@ -737,6 +780,9 @@ msgstr "Non tenere aperto"
 msgid "Keep open"
 msgstr "Tieni aperto"
 
+msgid "Dismiss"
+msgstr "Chiudi"
+
 msgid "The user denied this tool call."
 msgstr "L'utente ha negato questa chiamata allo strumento."
 
@@ -791,17 +837,17 @@ msgstr "Annulla richiesta LLM"
 msgid "Drop files here to attach"
 msgstr "Trascina qui i file da allegare"
 
-msgid "Tool Request: %1"
-msgstr "Richiesta strumento: %1"
+msgid "OpenAI-compatible"
+msgstr "Compatibile con OpenAI"
 
-msgid "Justification: %1"
-msgstr "Giustificazione: %1"
+msgid "Anthropic"
+msgstr "Anthropic"
 
-msgid "Deny"
-msgstr "Nega"
+msgid "Google Gemini"
+msgstr "Google Gemini"
 
-msgid "Approve"
-msgstr "Approva"
+msgid "Exa"
+msgstr "Exa"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Impossibile recuperare il token gcloud (uscita %1): %2"
@@ -1024,6 +1070,13 @@ msgstr "secondi"
 
 msgid "minutes"
 msgstr "minuti"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"Lo schema interno delle chiavi API è stato migrato. Se la tua chiave risulta "
+"mancante o non funziona, puoi recuperare la vecchia chiave da KWalletManager."
 
 msgid "Failed to stop driving: %1"
 msgstr "Impossibile interrompere il controllo: %1"

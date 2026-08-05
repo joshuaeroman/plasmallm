@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-03 21:44-0400\n"
+"POT-Creation-Date: 2026-08-03 23:22-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Japanese\n"
@@ -92,6 +92,13 @@ msgstr ""
 "このモデルバージョンは、ネイティブツール（検索/コード）とカスタムコマンドの組"
 "み合わせをサポートしていません。新しいモデル（例：Gemini 3+）を選択するか、設"
 "定でネイティブ機能を無効にしてください。"
+
+msgid ""
+"Exa performs real-time neural search and synthesizes grounded answers with "
+"live web citations."
+msgstr ""
+"Exaはリアルタイムのニューラル検索を実行し、ライブのウェブ引用を含む根拠のある"
+"回答を合成します。"
 
 msgid ""
 "Reasoning effort (low / medium / high) gates extended thinking. To see "
@@ -251,52 +258,6 @@ msgstr "実行前に確認"
 msgid "Error: URL must start with http:// or https://"
 msgstr "エラー：URLはhttp://またはhttps://で始まる必要があります"
 
-msgid "Search provider %1 not supported"
-msgstr "検索プロバイダー %1 はサポートされていません"
-
-msgid "Searching the web for: %1…"
-msgstr "ウェブを検索中：%1…"
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ollama API key"
-msgstr "Ollama APIキー..."
-
-msgid "Saving…"
-msgstr "保存中…"
-
-msgid "Saved"
-msgstr "保存済み"
-
-msgid "Save to Config (Insecure)"
-msgstr "設定に保存（安全でない）"
-
-msgid "Save Key"
-msgstr "キーを保存"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG インスタンス URL (例: https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API キー/トークン (オプション)"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo は設定を必要としません。"
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr ""
-"SearXNG インスタンスで JSON 形式が有効になっていることを確認してください。"
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "OllamaのSearch APIを介したLLMトリガーのウェブ検索を有効にする"
-
 msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr "エラー：コンテンツが最大書き込みサイズを超えています（%1バイト）"
 
@@ -355,6 +316,82 @@ msgstr ""
 "エラー: 無効なHTTPメソッドです。GET、POST、PUT、DELETE、PATCH、HEAD、OPTIONS"
 "のみが許可されています。"
 
+msgid "Search provider %1 not supported"
+msgstr "検索プロバイダー %1 はサポートされていません"
+
+msgid "Searching the web for: %1…"
+msgstr "ウェブを検索中：%1…"
+
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Exa検索"
+
+msgid "Ollama API key"
+msgstr "Ollama APIキー..."
+
+msgid "Saving…"
+msgstr "保存中…"
+
+msgid "Saved"
+msgstr "保存済み"
+
+msgid "Save to Config (Insecure)"
+msgstr "設定に保存（安全でない）"
+
+msgid "Save Key"
+msgstr "キーを保存"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG インスタンス URL (例: https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API キー/トークン (オプション)"
+
+msgid "Exa API key"
+msgstr "Exa APIキー"
+
+msgid "Search Type:"
+msgstr "検索タイプ:"
+
+msgid "Auto (Default)"
+msgstr "自動（デフォルト）"
+
+msgid "Fast"
+msgstr "高速"
+
+msgid "Instant"
+msgstr "即時"
+
+msgid "Deep Lite"
+msgstr "ディープ Lite"
+
+msgid "Deep"
+msgstr "ディープ"
+
+msgid "Deep Reasoning"
+msgstr "ディープ推論"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo は設定を必要としません。"
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr ""
+"SearXNG インスタンスで JSON 形式が有効になっていることを確認してください。"
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr "Exa APIを介したLLMトリガーのニューラルウェブ検索を有効にする"
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "OllamaのSearch APIを介したLLMトリガーのウェブ検索を有効にする"
+
 msgid "Color button"
 msgstr "カラーボタン"
 
@@ -406,15 +443,6 @@ msgstr "クリップボードにコピー"
 
 msgid "Share output with assistant"
 msgstr "出力をアシスタントと共有"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI互換"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
 
 msgid "Profile Header:"
 msgstr "プロファイルヘッダー:"
@@ -512,6 +540,18 @@ msgstr "設定を表示"
 msgid "Show Pin"
 msgstr "ピンを表示"
 
+msgid "Tool Request: %1"
+msgstr "ツールリクエスト：%1"
+
+msgid "Justification: %1"
+msgstr "理由：%1"
+
+msgid "Deny"
+msgstr "拒否"
+
+msgid "Approve"
+msgstr "承認"
+
 msgid "General Tool Settings"
 msgstr "一般ツール設定"
 
@@ -523,6 +563,9 @@ msgstr "ツールを有効にする"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "すべてのツール呼び出し機能のマスタースイッチ。"
+
+msgid "Exa does not support tool use"
+msgstr "Exaはツールの使用をサポートしていません"
 
 msgid "Desktop Automation:"
 msgstr "デスクトップ自動化:"
@@ -721,6 +764,9 @@ msgstr "開いたままにしない"
 msgid "Keep open"
 msgstr "開いたままにする"
 
+msgid "Dismiss"
+msgstr "閉じる"
+
 msgid "The user denied this tool call."
 msgstr "ユーザーがこのツール呼び出しを拒否しました。"
 
@@ -775,17 +821,17 @@ msgstr "LLMリクエストをキャンセル"
 msgid "Drop files here to attach"
 msgstr "ここにファイルをドロップして添付します"
 
-msgid "Tool Request: %1"
-msgstr "ツールリクエスト：%1"
+msgid "OpenAI-compatible"
+msgstr "OpenAI互換"
 
-msgid "Justification: %1"
-msgstr "理由：%1"
+msgid "Anthropic"
+msgstr "Anthropic"
 
-msgid "Deny"
-msgstr "拒否"
+msgid "Google Gemini"
+msgstr "Google Gemini"
 
-msgid "Approve"
-msgstr "承認"
+msgid "Exa"
+msgstr "Exa"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "gcloudトークンを取得できませんでした（終了コード %1）：%2"
@@ -1007,6 +1053,13 @@ msgstr "秒"
 
 msgid "minutes"
 msgstr "分"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"APIキーの内部スキームが移行されました。キーが見つからない、または動作しない場"
+"合は、KWalletManagerから古いキーを復元できます。"
 
 msgid "Failed to stop driving: %1"
 msgstr "操作の停止に失敗しました: %1"

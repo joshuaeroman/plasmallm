@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-03 21:44-0400\n"
+"POT-Creation-Date: 2026-08-03 23:22-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Chinese (Simplified)\n"
@@ -86,6 +86,12 @@ msgid ""
 msgstr ""
 "此模型版本不支持将原生工具（搜索/代码）与自定义命令结合使用。请选择更新的模型"
 "（例如 Gemini 3+）或在设置中禁用原生功能。"
+
+msgid ""
+"Exa performs real-time neural search and synthesizes grounded answers with "
+"live web citations."
+msgstr ""
+"Exa 执行实时神经搜索，并综合生成附带实时网络引用的有据答案。"
 
 msgid ""
 "Reasoning effort (low / medium / high) gates extended thinking. To see "
@@ -238,51 +244,6 @@ msgstr "运行前询问"
 msgid "Error: URL must start with http:// or https://"
 msgstr "错误：URL 必须以 http:// 或 https:// 开头"
 
-msgid "Search provider %1 not supported"
-msgstr "不支持的搜索提供商 %1"
-
-msgid "Searching the web for: %1…"
-msgstr "正在网络搜索：%1…"
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ollama API key"
-msgstr "Ollama API 密钥"
-
-msgid "Saving…"
-msgstr "保存中…"
-
-msgid "Saved"
-msgstr "已保存"
-
-msgid "Save to Config (Insecure)"
-msgstr "保存到配置（不安全）"
-
-msgid "Save Key"
-msgstr "保存密钥"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG 实例 URL (例如 https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API 密钥/令牌 (可选)"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo 无需配置。"
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "确保 SearXNG 实例已启用 JSON 格式。"
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "通过Ollama的搜索API启用LLM触发的网络搜索"
-
 msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr "错误：内容超过最大写入大小（%1 字节）"
 
@@ -337,6 +298,81 @@ msgid ""
 msgstr ""
 "错误：无效的 HTTP 方法。仅允许 GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS。"
 
+msgid "Search provider %1 not supported"
+msgstr "不支持的搜索提供商 %1"
+
+msgid "Searching the web for: %1…"
+msgstr "正在网络搜索：%1…"
+
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Exa 搜索"
+
+msgid "Ollama API key"
+msgstr "Ollama API 密钥"
+
+msgid "Saving…"
+msgstr "保存中…"
+
+msgid "Saved"
+msgstr "已保存"
+
+msgid "Save to Config (Insecure)"
+msgstr "保存到配置（不安全）"
+
+msgid "Save Key"
+msgstr "保存密钥"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG 实例 URL (例如 https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API 密钥/令牌 (可选)"
+
+msgid "Exa API key"
+msgstr "Exa API 密钥"
+
+msgid "Search Type:"
+msgstr "搜索类型："
+
+msgid "Auto (Default)"
+msgstr "自动（默认）"
+
+msgid "Fast"
+msgstr "快速"
+
+msgid "Instant"
+msgstr "即时"
+
+msgid "Deep Lite"
+msgstr "轻量深度"
+
+msgid "Deep"
+msgstr "深度"
+
+msgid "Deep Reasoning"
+msgstr "深度推理"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo 无需配置。"
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "确保 SearXNG 实例已启用 JSON 格式。"
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr "通过 Exa API 启用 LLM 触发的神经网络搜索。"
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "通过Ollama的搜索API启用LLM触发的网络搜索"
+
 msgid "Color button"
 msgstr "颜色按钮"
 
@@ -386,15 +422,6 @@ msgstr "复制到剪贴板"
 
 msgid "Share output with assistant"
 msgstr "与助手共享输出"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI兼容"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
 
 msgid "Profile Header:"
 msgstr "配置文件标头："
@@ -492,6 +519,18 @@ msgstr "显示设置"
 msgid "Show Pin"
 msgstr "显示固定"
 
+msgid "Tool Request: %1"
+msgstr "工具请求：%1"
+
+msgid "Justification: %1"
+msgstr "理由：%1"
+
+msgid "Deny"
+msgstr "拒绝"
+
+msgid "Approve"
+msgstr "批准"
+
 msgid "General Tool Settings"
 msgstr "常规工具设置"
 
@@ -503,6 +542,9 @@ msgstr "启用工具"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "所有工具调用功能的主开关。"
+
+msgid "Exa does not support tool use"
+msgstr "Exa 不支持工具使用"
 
 msgid "Desktop Automation:"
 msgstr "桌面自动化："
@@ -691,6 +733,9 @@ msgstr "不保持打开"
 msgid "Keep open"
 msgstr "保持打开"
 
+msgid "Dismiss"
+msgstr "关闭"
+
 msgid "The user denied this tool call."
 msgstr "用户拒绝了此工具调用。"
 
@@ -743,17 +788,17 @@ msgstr "取消 LLM 请求"
 msgid "Drop files here to attach"
 msgstr "将文件拖放到此处以添加附件"
 
-msgid "Tool Request: %1"
-msgstr "工具请求：%1"
+msgid "OpenAI-compatible"
+msgstr "OpenAI兼容"
 
-msgid "Justification: %1"
-msgstr "理由：%1"
+msgid "Anthropic"
+msgstr "Anthropic"
 
-msgid "Deny"
-msgstr "拒绝"
+msgid "Google Gemini"
+msgstr "Google Gemini"
 
-msgid "Approve"
-msgstr "批准"
+msgid "Exa"
+msgstr "Exa"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "无法获取 gcloud 令牌（退出 %1）：%2"
@@ -969,6 +1014,13 @@ msgstr "秒"
 
 msgid "minutes"
 msgstr "分钟"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"API 密钥的内部存储方案已迁移。如果您的密钥现已丢失或无法使用，可以从 "
+"KWalletManager 中恢复旧密钥。"
 
 msgid "Failed to stop driving: %1"
 msgstr "无法停止控制：%1"

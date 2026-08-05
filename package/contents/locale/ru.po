@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-03 21:44-0400\n"
+"POT-Creation-Date: 2026-08-03 23:22-0400\n"
 "PO-Revision-Date: 2026-05-04 00:00+0300\n"
 "Last-Translator: Matvel007\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -91,6 +91,13 @@ msgstr ""
 "Эта версия модели не поддерживает сочетание встроенных инструментов (Поиск/"
 "Код) с пользовательскими командами. Выберите более новую модель (например, "
 "Gemini 3+) или отключите встроенные функции в Настройках."
+
+msgid ""
+"Exa performs real-time neural search and synthesizes grounded answers with "
+"live web citations."
+msgstr ""
+"Exa выполняет нейронный поиск в реальном времени и формирует обоснованные "
+"ответы с актуальными веб-цитатами."
 
 msgid ""
 "Reasoning effort (low / medium / high) gates extended thinking. To see "
@@ -251,51 +258,6 @@ msgstr "Спрашивать перед запуском"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Ошибка: URL должен начинаться с http:// или https://"
 
-msgid "Search provider %1 not supported"
-msgstr "Поисковый провайдер %1 не поддерживается"
-
-msgid "Searching the web for: %1…"
-msgstr "Поиск в интернете: %1…"
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ollama API key"
-msgstr "API-ключ Ollama"
-
-msgid "Saving…"
-msgstr "Сохранение…"
-
-msgid "Saved"
-msgstr "Сохранено"
-
-msgid "Save to Config (Insecure)"
-msgstr "Сохранить в конфиг (небезопасно)"
-
-msgid "Save Key"
-msgstr "Сохранить ключ"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "URL экземпляра SearXNG (напр. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "API-ключ/токен SearXNG (опционально)"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo не требует настройки."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Убедитесь, что на экземпляре SearXNG включён формат JSON."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Включает веб-поиск от LLM через поисковый API Ollama"
-
 msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr "Ошибка: содержимое превышает максимальный размер записи (%1 байт)"
 
@@ -355,6 +317,81 @@ msgstr ""
 "Ошибка: Недопустимый метод HTTP. Разрешены только GET, POST, PUT, DELETE, "
 "PATCH, HEAD, OPTIONS."
 
+msgid "Search provider %1 not supported"
+msgstr "Поисковый провайдер %1 не поддерживается"
+
+msgid "Searching the web for: %1…"
+msgstr "Поиск в интернете: %1…"
+
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Поиск Exa"
+
+msgid "Ollama API key"
+msgstr "API-ключ Ollama"
+
+msgid "Saving…"
+msgstr "Сохранение…"
+
+msgid "Saved"
+msgstr "Сохранено"
+
+msgid "Save to Config (Insecure)"
+msgstr "Сохранить в конфиг (небезопасно)"
+
+msgid "Save Key"
+msgstr "Сохранить ключ"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "URL экземпляра SearXNG (напр. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "API-ключ/токен SearXNG (опционально)"
+
+msgid "Exa API key"
+msgstr "API-ключ Exa"
+
+msgid "Search Type:"
+msgstr "Тип поиска:"
+
+msgid "Auto (Default)"
+msgstr "Авто (по умолчанию)"
+
+msgid "Fast"
+msgstr "Быстрый"
+
+msgid "Instant"
+msgstr "Мгновенный"
+
+msgid "Deep Lite"
+msgstr "Глубокий Lite"
+
+msgid "Deep"
+msgstr "Глубокий"
+
+msgid "Deep Reasoning"
+msgstr "Глубокое рассуждение"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo не требует настройки."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Убедитесь, что на экземпляре SearXNG включён формат JSON."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr "Включает нейронный веб-поиск от LLM через API Exa."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Включает веб-поиск от LLM через поисковый API Ollama"
+
 msgid "Color button"
 msgstr "Кнопка цвета"
 
@@ -406,15 +443,6 @@ msgstr "Копировать в буфер обмена"
 
 msgid "Share output with assistant"
 msgstr "Поделиться выводом с ассистентом"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI-совместимый"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
 
 msgid "Profile Header:"
 msgstr "Заголовок профиля:"
@@ -512,6 +540,18 @@ msgstr "Показать Настройки"
 msgid "Show Pin"
 msgstr "Показать закрепление"
 
+msgid "Tool Request: %1"
+msgstr "Запрос инструмента: %1"
+
+msgid "Justification: %1"
+msgstr "Обоснование: %1"
+
+msgid "Deny"
+msgstr "Отклонить"
+
+msgid "Approve"
+msgstr "Одобрить"
+
 msgid "General Tool Settings"
 msgstr "Общие настройки инструментов"
 
@@ -523,6 +563,9 @@ msgstr "Включить инструменты"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "Главный переключатель для всех функций вызова инструментов."
+
+msgid "Exa does not support tool use"
+msgstr "Exa не поддерживает использование инструментов"
 
 msgid "Desktop Automation:"
 msgstr "Автоматизация рабочего стола:"
@@ -725,6 +768,9 @@ msgstr "Не держать открытым"
 msgid "Keep open"
 msgstr "Держать открытым"
 
+msgid "Dismiss"
+msgstr "Закрыть"
+
 msgid "The user denied this tool call."
 msgstr "Пользователь отклонил этот вызов инструмента."
 
@@ -779,17 +825,17 @@ msgstr "Отменить запрос LLM"
 msgid "Drop files here to attach"
 msgstr "Перетащите файлы сюда для прикрепления"
 
-msgid "Tool Request: %1"
-msgstr "Запрос инструмента: %1"
+msgid "OpenAI-compatible"
+msgstr "OpenAI-совместимый"
 
-msgid "Justification: %1"
-msgstr "Обоснование: %1"
+msgid "Anthropic"
+msgstr "Anthropic"
 
-msgid "Deny"
-msgstr "Отклонить"
+msgid "Google Gemini"
+msgstr "Google Gemini"
 
-msgid "Approve"
-msgstr "Одобрить"
+msgid "Exa"
+msgstr "Exa"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Не удалось получить токен gcloud (выход %1): %2"
@@ -1012,6 +1058,14 @@ msgstr "секунд"
 
 msgid "minutes"
 msgstr "минут"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"Внутренняя схема для API-ключей была перенесена. Если ваш ключ сейчас "
+"отсутствует или не работает, вы можете восстановить старый ключ из "
+"KWalletManager."
 
 msgid "Failed to stop driving: %1"
 msgstr "Не удалось остановить управление: %1"
