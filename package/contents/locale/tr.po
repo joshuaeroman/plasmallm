@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-03 21:44-0400\n"
+"POT-Creation-Date: 2026-08-03 23:22-0400\n"
 "PO-Revision-Date: 2026-04-07 00:00+0000\n"
 "Last-Translator: Claude <noreply@anthropic.com>\n"
 "Language-Team: Turkish\n"
@@ -95,6 +95,13 @@ msgstr ""
 "Bu model sürümü, yerel araçları (Arama/Kod) özel komutlarla birleştirmeyi "
 "desteklemiyor. Lütfen daha yeni bir model seçin (örn. Gemini 3+) veya "
 "Ayarlar'da yerel özellikleri devre dışı bırakın."
+
+msgid ""
+"Exa performs real-time neural search and synthesizes grounded answers with "
+"live web citations."
+msgstr ""
+"Exa gerçek zamanlı nöral arama yapar ve canlı web alıntılarıyla temellenmiş "
+"yanıtlar sentezler."
 
 msgid ""
 "Reasoning effort (low / medium / high) gates extended thinking. To see "
@@ -255,53 +262,6 @@ msgstr "Çalıştırmadan önce sor"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Hata: URL http:// veya https:// ile başlamalıdır"
 
-msgid "Search provider %1 not supported"
-msgstr "Arama sağlayıcısı %1 desteklenmiyor"
-
-msgid "Searching the web for: %1…"
-msgstr "Web'de aranıyor: %1…"
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ollama API key"
-msgstr "Ollama API anahtarı"
-
-msgid "Saving…"
-msgstr "Kaydediliyor…"
-
-msgid "Saved"
-msgstr "Kaydedildi"
-
-msgid "Save to Config (Insecure)"
-msgstr "Yapılandırmaya Kaydet (Güvensiz)"
-
-msgid "Save Key"
-msgstr "Anahtarı Kaydet"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG Örnek URL'si (örn. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API Anahtarı/Token'i (isteğe bağlı)"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo yapılandırma gerektirmez."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "SearXNG örneğinde JSON biçiminin etkinleştirildiğinden emin olun."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr ""
-"Ollama'nın arama API'si aracılığıyla LLM tarafından tetiklenen web "
-"aramalarını etkinleştirir"
-
 msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr "Hata: içerik maksimum yazma boyutunu aşıyor (%1 bayt)"
 
@@ -361,6 +321,85 @@ msgstr ""
 "Hata: Geçersiz HTTP yöntemi. Yalnızca GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS izin verilir."
 
+msgid "Search provider %1 not supported"
+msgstr "Arama sağlayıcısı %1 desteklenmiyor"
+
+msgid "Searching the web for: %1…"
+msgstr "Web'de aranıyor: %1…"
+
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Exa Arama"
+
+msgid "Ollama API key"
+msgstr "Ollama API anahtarı"
+
+msgid "Saving…"
+msgstr "Kaydediliyor…"
+
+msgid "Saved"
+msgstr "Kaydedildi"
+
+msgid "Save to Config (Insecure)"
+msgstr "Yapılandırmaya Kaydet (Güvensiz)"
+
+msgid "Save Key"
+msgstr "Anahtarı Kaydet"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG Örnek URL'si (örn. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API Anahtarı/Token'i (isteğe bağlı)"
+
+msgid "Exa API key"
+msgstr "Exa API anahtarı"
+
+msgid "Search Type:"
+msgstr "Arama Türü:"
+
+msgid "Auto (Default)"
+msgstr "Otomatik (Varsayılan)"
+
+msgid "Fast"
+msgstr "Hızlı"
+
+msgid "Instant"
+msgstr "Anında"
+
+msgid "Deep Lite"
+msgstr "Hafif Derin"
+
+msgid "Deep"
+msgstr "Derin"
+
+msgid "Deep Reasoning"
+msgstr "Derin Akıl Yürütme"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo yapılandırma gerektirmez."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "SearXNG örneğinde JSON biçiminin etkinleştirildiğinden emin olun."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr ""
+"Exa API aracılığıyla LLM tarafından tetiklenen nöral web aramalarını "
+"etkinleştirir."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr ""
+"Ollama'nın arama API'si aracılığıyla LLM tarafından tetiklenen web "
+"aramalarını etkinleştirir"
+
 msgid "Color button"
 msgstr "Renk düğmesi"
 
@@ -412,15 +451,6 @@ msgstr "Panoya kopyala"
 
 msgid "Share output with assistant"
 msgstr "Çıktıyı asistanla paylaş"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI uyumlu"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
 
 msgid "Profile Header:"
 msgstr "Profil Başlığı:"
@@ -518,6 +548,18 @@ msgstr "Ayarları göster"
 msgid "Show Pin"
 msgstr "Sabitlemeyi göster"
 
+msgid "Tool Request: %1"
+msgstr "Araç İsteği: %1"
+
+msgid "Justification: %1"
+msgstr "Gerekçe: %1"
+
+msgid "Deny"
+msgstr "Reddet"
+
+msgid "Approve"
+msgstr "Onayla"
+
 msgid "General Tool Settings"
 msgstr "Genel Araç Ayarları"
 
@@ -529,6 +571,9 @@ msgstr "Araçları etkinleştir"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "Tüm araç çağrı işlevleri için ana anahtar."
+
+msgid "Exa does not support tool use"
+msgstr "Exa araç kullanımını desteklemiyor"
 
 msgid "Desktop Automation:"
 msgstr "Masaüstü Otomasyonu:"
@@ -728,6 +773,9 @@ msgstr "Açık tutma"
 msgid "Keep open"
 msgstr "Açık tut"
 
+msgid "Dismiss"
+msgstr "Yoksay"
+
 msgid "The user denied this tool call."
 msgstr "Kullanıcı bu araç çağrısını reddetti."
 
@@ -781,17 +829,17 @@ msgstr "LLM isteğini iptal et"
 msgid "Drop files here to attach"
 msgstr "Eklemek için dosyaları buraya bırakın"
 
-msgid "Tool Request: %1"
-msgstr "Araç İsteği: %1"
+msgid "OpenAI-compatible"
+msgstr "OpenAI uyumlu"
 
-msgid "Justification: %1"
-msgstr "Gerekçe: %1"
+msgid "Anthropic"
+msgstr "Anthropic"
 
-msgid "Deny"
-msgstr "Reddet"
+msgid "Google Gemini"
+msgstr "Google Gemini"
 
-msgid "Approve"
-msgstr "Onayla"
+msgid "Exa"
+msgstr "Exa"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "gcloud token alınamadı (çıkış %1): %2"
@@ -1015,6 +1063,13 @@ msgstr "saniye"
 
 msgid "minutes"
 msgstr "dakika"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"API anahtarları için dahili şema taşındı. Anahtarınız artık eksikse veya "
+"çalışmıyorsa, eski anahtarınızı KWalletManager'dan kurtarabilirsiniz."
 
 msgid "Failed to stop driving: %1"
 msgstr "Yönetimi durdurma başarısız oldu: %1"

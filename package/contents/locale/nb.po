@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-03 21:44-0400\n"
+"POT-Creation-Date: 2026-08-03 23:22-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -91,6 +91,13 @@ msgstr ""
 "Denne modellversjonen støtter ikke å kombinere innebygde verktøy (Søk/Kode) "
 "med tilpassede kommandoer. Velg en nyere modell (f.eks. Gemini 3+) eller "
 "deaktiver innebygde funksjoner i innstillinger."
+
+msgid ""
+"Exa performs real-time neural search and synthesizes grounded answers with "
+"live web citations."
+msgstr ""
+"Exa utfører nevrale søk i sanntid og syntetiserer forankrede svar med live "
+"siteringer fra nettet."
 
 msgid ""
 "Reasoning effort (low / medium / high) gates extended thinking. To see "
@@ -248,51 +255,6 @@ msgstr "Spør før kjøring"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Feil: URL må starte med http:// eller https://"
 
-msgid "Search provider %1 not supported"
-msgstr "Søkeleverandør %1 støttes ikke"
-
-msgid "Searching the web for: %1…"
-msgstr "Søker på nettet etter: %1…"
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Ollama API key"
-msgstr "Ollama API-nøkkel"
-
-msgid "Saving…"
-msgstr "Lagrer…"
-
-msgid "Saved"
-msgstr "Lagret"
-
-msgid "Save to Config (Insecure)"
-msgstr "Lagre til konfigurasjon (usikker)"
-
-msgid "Save Key"
-msgstr "Lagre nøkkel"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG-instans-URL (f.eks. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API-nøkkel/Token (valgfritt)"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo krever ingen konfigurasjon."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Sørg for at SearXNG-instansen har JSON-formatet aktivert."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
-
 msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr "Feil: innhold overskrider maksimal skrivingsstørrelse (%1 byte)"
 
@@ -351,6 +313,81 @@ msgstr ""
 "Feil: Ugyldig HTTP-metode. Bare GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS "
 "er tillatt."
 
+msgid "Search provider %1 not supported"
+msgstr "Søkeleverandør %1 støttes ikke"
+
+msgid "Searching the web for: %1…"
+msgstr "Søker på nettet etter: %1…"
+
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Exa-søk"
+
+msgid "Ollama API key"
+msgstr "Ollama API-nøkkel"
+
+msgid "Saving…"
+msgstr "Lagrer…"
+
+msgid "Saved"
+msgstr "Lagret"
+
+msgid "Save to Config (Insecure)"
+msgstr "Lagre til konfigurasjon (usikker)"
+
+msgid "Save Key"
+msgstr "Lagre nøkkel"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG-instans-URL (f.eks. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API-nøkkel/Token (valgfritt)"
+
+msgid "Exa API key"
+msgstr "Exa API-nøkkel"
+
+msgid "Search Type:"
+msgstr "Søketype:"
+
+msgid "Auto (Default)"
+msgstr "Auto (standard)"
+
+msgid "Fast"
+msgstr "Rask"
+
+msgid "Instant"
+msgstr "Øyeblikkelig"
+
+msgid "Deep Lite"
+msgstr "Dyp Lite"
+
+msgid "Deep"
+msgstr "Dyp"
+
+msgid "Deep Reasoning"
+msgstr "Dyp resonnering"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo krever ingen konfigurasjon."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Sørg for at SearXNG-instansen har JSON-formatet aktivert."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr "Muliggjør LLM-utløste nevrale nettsøk via Exa API."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
+
 msgid "Color button"
 msgstr "Fargeknapp"
 
@@ -402,15 +439,6 @@ msgstr "Kopier til utklippstavle"
 
 msgid "Share output with assistant"
 msgstr "Del utdata med assistenten"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI-kompatibel"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
 
 msgid "Profile Header:"
 msgstr "Profiloverskrift:"
@@ -508,6 +536,18 @@ msgstr "Vis Innstillinger"
 msgid "Show Pin"
 msgstr "Vis festikonet"
 
+msgid "Tool Request: %1"
+msgstr "Verktøyforespørsel: %1"
+
+msgid "Justification: %1"
+msgstr "Begrunnelse: %1"
+
+msgid "Deny"
+msgstr "Avslå"
+
+msgid "Approve"
+msgstr "Godkjenn"
+
 msgid "General Tool Settings"
 msgstr "Generelle verktøyinnstillinger"
 
@@ -519,6 +559,9 @@ msgstr "Aktiver verktøy"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "Hovedbryter for all verktøykallfunksjonalitet."
+
+msgid "Exa does not support tool use"
+msgstr "Exa støtter ikke bruk av verktøy"
 
 msgid "Desktop Automation:"
 msgstr "Skrivebordsautomatisering:"
@@ -716,6 +759,9 @@ msgstr "Ikke hold åpent"
 msgid "Keep open"
 msgstr "Hold åpent"
 
+msgid "Dismiss"
+msgstr "Lukk"
+
 msgid "The user denied this tool call."
 msgstr "Brukeren avslo dette verktøykallet."
 
@@ -770,17 +816,17 @@ msgstr "Avbryt LLM-forespørsel"
 msgid "Drop files here to attach"
 msgstr "Slipp filer her for å legge ved"
 
-msgid "Tool Request: %1"
-msgstr "Verktøyforespørsel: %1"
+msgid "OpenAI-compatible"
+msgstr "OpenAI-kompatibel"
 
-msgid "Justification: %1"
-msgstr "Begrunnelse: %1"
+msgid "Anthropic"
+msgstr "Anthropic"
 
-msgid "Deny"
-msgstr "Avslå"
+msgid "Google Gemini"
+msgstr "Google Gemini"
 
-msgid "Approve"
-msgstr "Godkjenn"
+msgid "Exa"
+msgstr "Exa"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Klarte ikke hente gcloud-token (avslutningskode %1): %2"
@@ -1003,6 +1049,14 @@ msgstr "sekunder"
 
 msgid "minutes"
 msgstr "minutter"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"Internt skjema for API-nøkler er migrert. Hvis nøkkelen din nå mangler "
+"eller ikke fungerer, kan du gjenopprette den gamle nøkkelen fra "
+"KWalletManager."
 
 msgid "Failed to stop driving: %1"
 msgstr "Klarte ikke å stoppe styring: %1"
