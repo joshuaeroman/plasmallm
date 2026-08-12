@@ -278,6 +278,32 @@ SimpleKCM {
     property string cfg_activeProfileIdDefault
     property int cfg_profilesSchemaVersion
     property int cfg_profilesSchemaVersionDefault
+    property string cfg_sttProfileId
+    property string cfg_sttProfileIdDefault
+    property bool cfg_sttEnabled
+    property bool cfg_sttEnabledDefault
+    property string cfg_sttProviderName
+    property string cfg_sttProviderNameDefault
+    property string cfg_sttApiEndpoint
+    property string cfg_sttApiEndpointDefault
+    property string cfg_sttModelName
+    property string cfg_sttModelNameDefault
+    property string cfg_sttBackend
+    property string cfg_sttBackendDefault
+    property string cfg_sttLanguage
+    property string cfg_sttLanguageDefault
+    property int cfg_sttMaxSeconds
+    property int cfg_sttMaxSecondsDefault
+    property string cfg_sttMicMode
+    property string cfg_sttMicModeDefault
+    property int cfg_sttAutoHoldMs
+    property int cfg_sttAutoHoldMsDefault
+    property string cfg_sttPanelShortcut
+    property string cfg_sttPanelShortcutDefault
+    property string cfg_sttAvailableModels
+    property string cfg_sttAvailableModelsDefault
+    property bool cfg_sttMigratedFromProfile
+    property bool cfg_sttMigratedFromProfileDefault
     property bool cfg_useCommandTool
     property bool cfg_useCommandToolDefault
     property bool cfg_pin

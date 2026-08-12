@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-03 23:22-0400\n"
+"POT-Creation-Date: 2026-08-11 21:02-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -745,6 +745,30 @@ msgstr ""
 msgid "Attach file or image"
 msgstr ""
 
+msgid "Transcribing…"
+msgstr ""
+
+msgid "Preparing…"
+msgstr ""
+
+msgid "Wait for the current reply"
+msgstr ""
+
+msgid "Click to stop and send"
+msgstr ""
+
+msgid "Release to send"
+msgstr ""
+
+msgid "Click to start"
+msgstr ""
+
+msgid "Hold to talk"
+msgstr ""
+
+msgid "Click to toggle, hold to talk"
+msgstr ""
+
 msgid "Kill"
 msgstr ""
 
@@ -993,6 +1017,42 @@ msgstr ""
 msgid "Failed to stop driving: %1"
 msgstr ""
 
+msgid "Speech-to-text is not configured"
+msgstr ""
+
+msgid "Still preparing system context…"
+msgstr ""
+
+msgid "Recording…"
+msgstr ""
+
+msgid "Voice input is not configured. Open Speech to Text settings."
+msgstr ""
+
+msgid "Recording produced no audio file."
+msgstr ""
+
+msgid "Recording was empty or could not be read."
+msgstr ""
+
+msgid "No speech detected."
+msgstr ""
+
+msgid "Could not send transcribed message."
+msgstr ""
+
+msgid "Failed to read recorded audio."
+msgstr ""
+
+msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
+msgstr ""
+
+msgid "Failed to finalize recording"
+msgstr ""
+
+msgid "Recording failed"
+msgstr ""
+
 msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
 "installed and authenticated."
@@ -1107,6 +1167,177 @@ msgid "Drive session active (already authorized). Auto mode enabled."
 msgstr ""
 
 msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr ""
+
+msgid "STT endpoint is not configured"
+msgstr ""
+
+msgid "Model list request failed: %1"
+msgstr ""
+
+msgid "No STT models returned"
+msgstr ""
+
+msgid "No audio data to transcribe"
+msgstr ""
+
+msgid "STT model is not configured"
+msgstr ""
+
+msgid "Speech-to-text request timed out"
+msgstr ""
+
+msgid "Failed to parse STT response: %1"
+msgstr ""
+
+msgid "STT failed (HTTP %1): %2"
+msgstr ""
+
+msgid "STT failed (HTTP %1)"
+msgstr ""
+
+msgid "STT request failed: %1"
+msgstr ""
+
+msgid "Unknown STT backend: %1"
+msgstr ""
+
+msgid "STT backend does not support model listing"
+msgstr ""
+
+msgid "Microphone recording failed"
+msgstr ""
+
+msgid "No microphone found"
+msgstr ""
+
+msgid "No microphone available"
+msgstr ""
+
+msgid "Could not start recording: %1"
+msgstr ""
+
+msgid "Processing…"
+msgstr ""
+
+msgid "Failed to stop recording"
+msgstr ""
+
+msgid "Shell recorder stop is not configured"
+msgstr ""
+
+msgid "Shell recording failed"
+msgstr ""
+
+msgid "Recording stopped unexpectedly"
+msgstr ""
+
+msgid "Recording produced no file"
+msgstr ""
+
+msgid "Speech to Text"
+msgstr ""
+
+msgid "API key saved to local fallback (KWallet unavailable)."
+msgstr ""
+
+msgid "API key saved to KWallet."
+msgstr ""
+
+msgid "API key saved to local fallback."
+msgstr ""
+
+msgid "Set an API endpoint first."
+msgstr ""
+
+msgid "Fetching STT models…"
+msgstr ""
+
+msgid "Loaded %1 STT model(s)."
+msgstr ""
+
+msgid "Voice input:"
+msgstr ""
+
+msgid "Enable microphone input"
+msgstr ""
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+
+msgid "Mic button:"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Toggle"
+msgstr ""
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+
+msgid "Voice shortcut:"
+msgstr ""
+
+msgid ""
+"Toggles recording while PlasmaLLM is open and focused. Does not open the "
+"panel—use Activate widget on the Shortcuts page for that. Default: Ctrl+M. "
+"Clear to disable."
+msgstr ""
+
+msgid "Transcriber"
+msgstr ""
+
+msgid "Endpoint:"
+msgstr ""
+
+msgid "Fetching…"
+msgstr ""
+
+msgid "Fetch"
+msgstr ""
+
+msgid "Fetch STT models"
+msgstr ""
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+
+msgid "API key:"
+msgstr ""
+
+msgid "Provider API key"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Save API key"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Language hint:"
+msgstr ""
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr ""
+
+msgid "Max recording (seconds):"
+msgstr ""
+
+msgid "STT backend:"
+msgstr ""
+
+msgid "OpenAI-compatible transcriptions"
 msgstr ""
 
 msgid "General"

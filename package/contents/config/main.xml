@@ -368,6 +368,63 @@
       <label>Internal schema version for profiles migration</label>
       <default>0</default>
     </entry>
+    <!-- Legacy: previously pointed at a chat profile for STT. Migrated once into stt* fields. -->
+    <entry name="sttProfileId" type="String">
+      <label>Legacy STT chat profile id (migrated; prefer sttEnabled + sttApiEndpoint)</label>
+      <default></default>
+    </entry>
+    <entry name="sttEnabled" type="Bool">
+      <label>Enable hold-to-talk voice input</label>
+      <default>false</default>
+    </entry>
+    <entry name="sttProviderName" type="String">
+      <label>STT provider preset name (OpenRouter, OpenAI, Custom, …)</label>
+      <default></default>
+    </entry>
+    <entry name="sttApiEndpoint" type="String">
+      <label>STT API base URL (OpenAI-compatible, ending in /v1)</label>
+      <default></default>
+    </entry>
+    <entry name="sttModelName" type="String">
+      <label>STT model id (e.g. openai/gpt-transcribe)</label>
+      <default></default>
+    </entry>
+    <entry name="sttBackend" type="String">
+      <label>STT backend adapter id (openai_transcriptions, future: whisper_cli, …)</label>
+      <default>openai_transcriptions</default>
+    </entry>
+    <entry name="sttLanguage" type="String">
+      <label>Optional ISO-639-1 language hint for STT (empty = auto-detect)</label>
+      <default></default>
+    </entry>
+    <entry name="sttMaxSeconds" type="Int">
+      <label>Maximum voice note duration in seconds</label>
+      <default>60</default>
+      <min>5</min>
+      <max>300</max>
+    </entry>
+    <entry name="sttMicMode" type="String">
+      <label>Mic button mode: auto, hold, or toggle</label>
+      <default>auto</default>
+    </entry>
+    <entry name="sttAutoHoldMs" type="Int">
+      <label>Hold threshold in ms for auto mic mode (click vs push-to-talk)</label>
+      <default>250</default>
+      <min>100</min>
+      <max>1000</max>
+    </entry>
+    <entry name="sttPanelShortcut" type="String">
+      <label>Panel-local shortcut to toggle voice while PlasmaLLM is open (portable key sequence string)</label>
+      <default>Ctrl+M</default>
+    </entry>
+    <entry name="sttAvailableModels" type="String">
+      <label>Cached STT model list JSON array</label>
+      <default></default>
+    </entry>
+    <entry name="sttMigratedFromProfile" type="Bool">
+      <label>Internal: once migrated sttProfileId into dedicated STT fields</label>
+      <default>false</default>
+    </entry>
     <entry name="useCommandTool" type="Bool">
       <label>Use tool calling for command execution</label>
       <default>true</default>
