@@ -13,6 +13,11 @@ ConfigModel {
         source: "configGeneral.qml"
     }
     ConfigCategory {
+        name: i18n("Speech to Text")
+        icon: "audio-input-microphone"
+        source: "configSpeech.qml"
+    }
+    ConfigCategory {
         name: i18n("Appearance")
         icon: "preferences-desktop-font"
         source: "configAppearance.qml"

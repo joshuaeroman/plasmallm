@@ -17,6 +17,7 @@ import "sessionRunner.js" as SessionRunner
 import "profiles.js" as Profiles
 import "toolManager.js" as ToolManager
 import "driverManager.js" as DriverManager
+import "stt.js" as Stt
 
 PlasmoidItem {
     id: root
@@ -48,6 +49,25 @@ PlasmoidItem {
     property bool _switchingProfile: false
     // Bumped on each profile/config identity change; stale wallet callbacks no-op.
     property int _configGen: 0
+
+    // --- Speech-to-text / hold-to-talk ---
+    property bool isRecording: false
+    property bool isTranscribing: false
+    property string sttStatusText: ""
+    property int _sttGen: 0
+    property var _pendingSttCleanup: []
+    // Latched toggle recording should keep the panel open when focus leaves.
+    property bool voiceLatched: false
+    property bool _voiceSavedPreventClose: false
+    // Bind STT fields so the mic reappears when Speech-to-Text config changes.
+    readonly property bool sttAvailable: {
+        var _en = Plasmoid.configuration.sttEnabled;
+        var _ep = Plasmoid.configuration.sttApiEndpoint;
+        var _model = Plasmoid.configuration.sttModelName;
+        return Stt.isSttConfigured(Plasmoid.configuration);
+    }
+    readonly property bool voiceInputBusy: isRecording || isTranscribing
+    readonly property string sttMicMode: Plasmoid.configuration.sttMicMode || "auto"
     // One-time post-migration banner (not a chat message — clearChat dismisses it).
     property bool showApiKeyMigrationNotice: false
     readonly property string apiKeyMigrationNoticeText: i18n(
@@ -110,6 +130,7 @@ PlasmoidItem {
             timestamp: ""
             thinking: ""
             attachmentsStr: ""
+            fromVoice: false
             toolSummary: ""
             toolDataJson: ""
             toolView: ""
@@ -183,6 +204,416 @@ PlasmoidItem {
     signal copyConversationRequested()
     signal populateInputRequested(string text)
 
+    // Resolve XDG data home for voice notes (mirrors attachment path logic).
+    function voiceDataDir() {
+        var dataHome = sysInfo.xdgDataHome
+            || (sysInfo.userHome ? (sysInfo.userHome + "/.local/share")
+                : ("/home/" + (sysInfo.user || "user") + "/.local/share"));
+        return dataHome + "/plasmallm/voice";
+    }
+
+    function shellVoiceDataDir() {
+        return "${XDG_DATA_HOME:-$HOME/.local/share}/plasmallm/voice";
+    }
+
+    function absoluteFromShellVoicePath(shellPath) {
+        if (!shellPath)
+            return "";
+        var s = String(shellPath);
+        var marker = "${XDG_DATA_HOME:-$HOME/.local/share}";
+        if (s.indexOf(marker) === 0)
+            return voiceDataDir() + s.substring(marker.length);
+        return s;
+    }
+
+    function enqueueVoiceCleanup(filePath) {
+        if (!filePath || String(filePath).length === 0)
+            return;
+        var p = String(filePath).replace(/'/g, "'\\''");
+        executable.connectSource("rm -f '" + p + "'");
+    }
+
+    function showSttNotice(message) {
+        displayMessages.append({
+            role: "assistant",
+            content: message,
+            shared: false,
+            timestamp: currentTimestamp()
+        });
+    }
+
+    /**
+     * Load API key for the dedicated STT connection (Speech to Text page).
+     */
+    function loadSttApiKey(callback) {
+        if (!Stt.isSttConfigured(Plasmoid.configuration)) {
+            callback(i18n("Speech-to-text is not configured"), "");
+            return;
+        }
+        var slot = Api.sttKeySlot(
+            Plasmoid.configuration.sttProviderName || "",
+            Plasmoid.configuration.sttApiEndpoint || ""
+        );
+
+        function closeHandle(handle) {
+            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+        }
+
+        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
+            function(handle) {
+                if (handle < 0) {
+                    callback(null, fallbackKeyForSlot(slot) || "");
+                    return;
+                }
+                root.walletAvailable = true;
+                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", slot, "PlasmaLLM"],
+                    function(password) {
+                        closeHandle(handle);
+                        if (password && password.length > 0)
+                            callback(null, String(password).replace(/^\s+|\s+$/g, ""));
+                        else
+                            callback(null, fallbackKeyForSlot(slot) || "");
+                    },
+                    function(err) {
+                        closeHandle(handle);
+                        callback(null, fallbackKeyForSlot(slot) || "");
+                    }
+                );
+            },
+            function(err) {
+                console.warn("PlasmaLLM: STT KWallet open error:", err);
+                callback(null, fallbackKeyForSlot(slot) || "");
+            }
+        );
+    }
+
+    function setVoiceLatched(latched) {
+        if (latched === voiceLatched)
+            return;
+        if (latched) {
+            _voiceSavedPreventClose = preventDeactivationClose;
+            preventDeactivationClose = true;
+            voiceLatched = true;
+        } else {
+            voiceLatched = false;
+            // Only clear if we were the ones holding it open (and user has not pinned).
+            if (!Plasmoid.configuration.pin)
+                preventDeactivationClose = _voiceSavedPreventClose;
+            _voiceSavedPreventClose = false;
+        }
+    }
+
+    function clearVoiceSessionFlags() {
+        setVoiceLatched(false);
+        isRecording = false;
+        sttStatusText = "";
+    }
+
+    function startVoiceInput() {
+        if (!sttAvailable || isLoading || isTranscribing || isRecording)
+            return false;
+        if (!systemPromptReady) {
+            showSttNotice(i18n("Still preparing system context…"));
+            return false;
+        }
+        voiceCapture.outputDir = voiceDataDir();
+        voiceCapture.shellOutputDir = shellVoiceDataDir();
+        voiceCapture.maxSeconds = Plasmoid.configuration.sttMaxSeconds || 60;
+        // Ensure voice directory exists before Qt writes there.
+        executable.connectSource("mkdir -p \"" + shellVoiceDataDir() + "\"");
+        var ok = voiceCapture.start();
+        isRecording = ok;
+        if (ok)
+            sttStatusText = i18n("Recording…");
+        else
+            setVoiceLatched(false);
+        return ok;
+    }
+
+    function stopVoiceInput() {
+        if (!isRecording)
+            return "ignored";
+        // Will clear latched flag when recording finishes/fails (or cancel if too short).
+        return voiceCapture.stop();
+    }
+
+    function cancelVoiceInput() {
+        if (!isRecording && !isTranscribing)
+            return;
+        if (isRecording)
+            voiceCapture.cancel();
+        // Abandon any in-flight transcription callbacks.
+        if (isTranscribing)
+            root._sttGen++;
+        clearVoiceSessionFlags();
+        isTranscribing = false;
+    }
+
+    /**
+     * Panel-local shortcut / mic toggle: toggle recording while the panel is open.
+     */
+    function toggleVoiceInput() {
+        if (!sttAvailable) {
+            showSttNotice(i18n("Voice input is not configured. Open Speech to Text settings."));
+            return;
+        }
+        if (isTranscribing || isLoading)
+            return;
+        if (!systemPromptReady)
+            return;
+        if (isRecording) {
+            var result = stopVoiceInput();
+            if (result === "canceled")
+                showSttNotice(i18n("Recording too short — hold a bit longer, then toggle again to stop."));
+        } else {
+            if (startVoiceInput())
+                setVoiceLatched(true);
+        }
+    }
+
+    function processVoiceRecording(filePath, format) {
+        clearVoiceSessionFlags();
+        if (!filePath || String(filePath).length === 0) {
+            showSttNotice(i18n("Recording produced no audio file."));
+            sttStatusText = "";
+            return;
+        }
+
+        isTranscribing = true;
+        sttStatusText = i18n("Transcribing…");
+        var myGen = ++root._sttGen;
+        var absPath = String(filePath);
+        var fmt = format || Stt.formatFromPath(absPath);
+        var safePath = absPath.replace(/'/g, "'\\''");
+        // Reject tiny/empty clips before paying for STT (WAV header alone is ~44 bytes;
+        // genuine speech is usually many KB). Also measure duration via soxi/ffprobe when present.
+        var cmd = "f='" + safePath + "'; "
+            + "if [ ! -f \"$f\" ]; then echo 'ERR empty'; exit 1; fi; "
+            + "sz=$(wc -c < \"$f\" | tr -d ' '); "
+            + "if [ \"${sz:-0}\" -lt 2048 ]; then echo 'ERR tiny'; exit 2; fi; "
+            + "base64 -w0 \"$f\"";
+
+        pendingSttReads[cmd] = {
+            filePath: absPath,
+            format: fmt,
+            gen: myGen
+        };
+        sttFileReader.connectSource(cmd);
+    }
+
+    function finishSttWithBase64(audioBase64, format, filePath, gen) {
+        if (gen !== root._sttGen) {
+            enqueueVoiceCleanup(filePath);
+            return;
+        }
+        if (!audioBase64 || audioBase64.length === 0) {
+            isTranscribing = false;
+            sttStatusText = "";
+            enqueueVoiceCleanup(filePath);
+            showSttNotice(i18n("Recording was empty or could not be read."));
+            return;
+        }
+
+        loadSttApiKey(function(err, apiKey) {
+            if (gen !== root._sttGen) {
+                enqueueVoiceCleanup(filePath);
+                return;
+            }
+            if (err) {
+                isTranscribing = false;
+                sttStatusText = "";
+                enqueueVoiceCleanup(filePath);
+                showSttNotice(err);
+                return;
+            }
+
+            Stt.transcribe({
+                config: Plasmoid.configuration,
+                apiKey: apiKey || "",
+                audioBase64: audioBase64,
+                format: format || "wav",
+                filePath: filePath,
+                callback: function(sttErr, result) {
+                    if (gen !== root._sttGen) {
+                        enqueueVoiceCleanup(filePath);
+                        return;
+                    }
+                    isTranscribing = false;
+                    sttStatusText = "";
+                    enqueueVoiceCleanup(filePath);
+
+                    if (sttErr) {
+                        showSttNotice(sttErr);
+                        return;
+                    }
+                    var text = (result && result.text) ? String(result.text).replace(/^\s+|\s+$/g, "") : "";
+                    if (!text.length) {
+                        showSttNotice(i18n("No speech detected."));
+                        return;
+                    }
+                    if (!root.sendMessage(text, [], { fromVoice: true })) {
+                        showSttNotice(i18n("Could not send transcribed message."));
+                    }
+                }
+            });
+        });
+    }
+
+    property var pendingSttReads: ({})
+    property string _shellRecordPid: ""
+    property string _shellRecordPath: ""
+
+    P5Support.DataSource {
+        id: sttFileReader
+        engine: "executable"
+        connectedSources: []
+        onNewData: function(source, data) {
+            var info = pendingSttReads[source];
+            delete pendingSttReads[source];
+            disconnectSource(source);
+            if (!info)
+                return;
+            var exitCode = data["exit code"];
+            var stdout = (data.stdout || "").trim();
+            if (exitCode !== 0 || !stdout || stdout.length === 0) {
+                root.isTranscribing = false;
+                root.sttStatusText = "";
+                root.enqueueVoiceCleanup(info.filePath);
+                if (stdout.indexOf("ERR tiny") === 0 || stdout.indexOf("ERR empty") === 0 || exitCode === 2)
+                    root.showSttNotice(i18n("Recording too short or silent — try again."));
+                else
+                    root.showSttNotice(i18n("Failed to read recorded audio."));
+                return;
+            }
+            root.finishSttWithBase64(stdout, info.format, info.filePath, info.gen);
+        }
+    }
+
+    P5Support.DataSource {
+        id: shellRecordStarter
+        engine: "executable"
+        connectedSources: []
+        onNewData: function(source, data) {
+            disconnectSource(source);
+            var stdout = (data.stdout || "").trim();
+            var exitCode = data["exit code"];
+            // Starter prints: PID\nABSPATH or just fails
+            if (exitCode !== 0 || !stdout) {
+                voiceCapture.notifyShellFailed(i18n("Could not start shell audio recorder (install pw-record or ffmpeg)"));
+                return;
+            }
+            var lines = stdout.split("\n");
+            var pid = (lines[0] || "").trim();
+            var absPath = (lines[1] || root._shellRecordPath || "").trim();
+            root._shellRecordPid = pid;
+            root._shellRecordPath = absPath;
+            // Recording continues until shellRecordStopper runs.
+        }
+    }
+
+    P5Support.DataSource {
+        id: shellRecordStopper
+        engine: "executable"
+        connectedSources: []
+        onNewData: function(source, data) {
+            disconnectSource(source);
+            var exitCode = data["exit code"];
+            var absPath = root._shellRecordPath;
+            root._shellRecordPid = "";
+            if (exitCode !== 0) {
+                voiceCapture.notifyShellFailed(i18n("Failed to finalize recording"));
+                root.enqueueVoiceCleanup(absPath);
+                root._shellRecordPath = "";
+                return;
+            }
+            // Give filesystem a moment; file should exist
+            var path = absPath;
+            root._shellRecordPath = "";
+            voiceCapture.notifyShellFinished(path);
+        }
+    }
+
+    VoiceCapture {
+        id: voiceCapture
+        maxSeconds: Plasmoid.configuration.sttMaxSeconds || 60
+        outputDir: root.voiceDataDir()
+        shellOutputDir: root.shellVoiceDataDir()
+        shellFallbackAvailable: true
+
+        shellStartFn: function(shellPath) {
+            // Prefer pw-record, then ffmpeg (pipewire/pulse), then arecord.
+            // Prints PID and absolute path on success.
+            var absPath = root.absoluteFromShellVoicePath(shellPath);
+            root._shellRecordPath = absPath;
+            root._shellRecordPid = "";
+            var safeAbs = absPath.replace(/'/g, "'\\''");
+            var dir = root.shellVoiceDataDir();
+            // nohup + disown so the recorder survives when the starter shell exits.
+            var cmd =
+                "mkdir -p \"" + dir + "\" && (" +
+                "if command -v pw-record >/dev/null 2>&1; then " +
+                "  nohup pw-record -- '" + safeAbs + "' >/dev/null 2>&1 & echo $!; echo '" + safeAbs + "'; " +
+                "elif command -v ffmpeg >/dev/null 2>&1; then " +
+                "  nohup ffmpeg -y -nostdin -loglevel error -f pulse -i default '" + safeAbs + "' >/dev/null 2>&1 & echo $!; echo '" + safeAbs + "'; " +
+                "elif command -v arecord >/dev/null 2>&1; then " +
+                "  nohup arecord -q -f cd -t wav '" + safeAbs + "' >/dev/null 2>&1 & echo $!; echo '" + safeAbs + "'; " +
+                "else echo ''; exit 1; fi)";
+            shellRecordStarter.connectSource(cmd);
+            // Return a placeholder object; PID arrives async via shellRecordStarter.
+            // VoiceCapture treats truthy as success and waits for notifyShellFinished.
+            return { pid: "pending", filePath: absPath };
+        }
+
+        shellStopFn: function(pid, filePath) {
+            var p = (root._shellRecordPid && root._shellRecordPid.length > 0)
+                ? root._shellRecordPid
+                : (pid && pid !== "pending" ? String(pid) : "");
+            var absPath = root._shellRecordPath || filePath || "";
+            root._shellRecordPath = absPath;
+            if (!p || p === "pending") {
+                // PID not ready yet — kill recorders by path / name best-effort
+                var safeAbs = String(absPath).replace(/'/g, "'\\''");
+                var cmd = "pkill -f \"pw-record.*'" + safeAbs + "'\" 2>/dev/null; " +
+                    "pkill -f \"ffmpeg.*'" + safeAbs + "'\" 2>/dev/null; " +
+                    "pkill -f \"arecord.*'" + safeAbs + "'\" 2>/dev/null; " +
+                    "sleep 0.15; test -s '" + safeAbs + "'";
+                shellRecordStopper.connectSource(cmd);
+                return;
+            }
+            var safePid = String(p).replace(/[^0-9]/g, "");
+            var safeAbs2 = String(absPath).replace(/'/g, "'\\''");
+            var stopCmd = "kill " + safePid + " 2>/dev/null; sleep 0.15; " +
+                "kill -9 " + safePid + " 2>/dev/null; " +
+                "test -s '" + safeAbs2 + "'";
+            shellRecordStopper.connectSource(stopCmd);
+        }
+
+        onRecordingFinished: function(filePath, format) {
+            if (pendingCleanupPath && pendingCleanupPath.length > 0
+                    && pendingCleanupPath !== filePath) {
+                root.enqueueVoiceCleanup(pendingCleanupPath);
+                pendingCleanupPath = "";
+            }
+            root.processVoiceRecording(filePath, format);
+        }
+        onRecordingFailed: function(message) {
+            root.clearVoiceSessionFlags();
+            root.isTranscribing = false;
+            if (pendingCleanupPath && pendingCleanupPath.length > 0) {
+                root.enqueueVoiceCleanup(pendingCleanupPath);
+                pendingCleanupPath = "";
+            }
+            root.showSttNotice(message || i18n("Recording failed"));
+        }
+        onRecordingCanceled: function() {
+            root.clearVoiceSessionFlags();
+            if (pendingCleanupPath && pendingCleanupPath.length > 0) {
+                root.enqueueVoiceCleanup(pendingCleanupPath);
+                pendingCleanupPath = "";
+            }
+        }
+    }
+
     readonly property string effectiveApiType: (Plasmoid.configuration.apiType === "gemini" && Plasmoid.configuration.geminiApiVariant === "interactions") ? "gemini_interactions" : Plasmoid.configuration.apiType
 
     function currentTimestamp() {
@@ -197,6 +628,7 @@ PlasmoidItem {
             timestamp: currentTimestamp(),
             thinking: "",
             attachmentsStr: "",
+            fromVoice: false,
             toolSummary: "",
             toolDataJson: "",
             toolView: "",
@@ -719,7 +1151,7 @@ PlasmoidItem {
 
                 var prefix;
                 switch (msg.role) {
-                    case "user": prefix = "You"; break;
+                    case "user": prefix = msg.fromVoice ? "🗣️ You" : "You"; break;
                     case "assistant": prefix = "Assistant"; break;
                     case "command_output": prefix = "Command"; break;
                     case "web_search_results": prefix = "Web Search"; break;
@@ -809,6 +1241,7 @@ lines.push(JSON.stringify({
                     shared: d.shared || false,
                     timestamp: d.timestamp || "",
                     attachmentsStr: displayAttachmentsStr,
+                    fromVoice: !!d.fromVoice,
                     toolTitle: d.toolTitle || "",
                     toolIcon: d.toolIcon || "",
                     toolSummary: d.toolSummary || "",
@@ -933,6 +1366,7 @@ lines.push(JSON.stringify({
                         shared: data.shared || false,
                         timestamp: data.timestamp || "",
                         attachmentsStr: data.attachmentsStr || "",
+                        fromVoice: !!data.fromVoice,
                         toolTitle: data.toolTitle || "",
                         toolIcon: data.toolIcon || "",
                         toolSummary: data.toolSummary || "",
@@ -1644,9 +2078,11 @@ lines.push(JSON.stringify({
         pendingFileReads[cmd] = { filePath: persistentPath, fileName: "pasted_image_" + tempId + ".png", isImage: true };
         fileReader.connectSource(cmd);
     }
-    function sendMessage(text, attachments) {
+    function sendMessage(text, attachments, options) {
         if (!systemPromptReady) return false;
         if (!attachments) attachments = [];
+        if (!options) options = {};
+        var fromVoice = !!options.fromVoice;
 
         // Slash commands
         var lower = text.toLowerCase().trim();
@@ -1887,14 +2323,17 @@ lines.push(JSON.stringify({
             var imagePaths = attachments.filter(function(a) { return !!a.dataUrl; }).map(function(a) {
                 return (a.dataUrl && a.filePath.startsWith("/tmp/plasmallm_paste_")) ? a.dataUrl : a.filePath;
             });
+            // Hidden STT tag for the model only (not shown in the chat bubble).
+            var apiText = fromVoice ? ("[voice STT]\n" + text) : text;
             chatMessages.append({ 
                 role: "user", 
-                content: text, 
+                content: apiText, 
                 attachments_json: attachJson,
                 timestamp_api: Api.localISODateTime()
             });
             root.appendDisplayMessage("user", text, {
-                attachmentsStr: imagePaths.join("\n")
+                attachmentsStr: imagePaths.join("\n"),
+                fromVoice: fromVoice
             });
 
             autoShareSuppressed = false;
@@ -2954,6 +3393,24 @@ lines.push(JSON.stringify({
     }
 
     Component.onCompleted: {
+        // One-time: migrate legacy sttProfileId (chat profile pointer) → dedicated STT fields.
+        if (!Plasmoid.configuration.sttMigratedFromProfile) {
+            if (!(Plasmoid.configuration.sttApiEndpoint && Plasmoid.configuration.sttApiEndpoint.length > 0)
+                    && Plasmoid.configuration.sttProfileId
+                    && Plasmoid.configuration.sttProfileId.length > 0) {
+                var sttProfiles = Profiles.loadProfiles(Plasmoid.configuration);
+                var sttP = Profiles.getActive(sttProfiles, Plasmoid.configuration.sttProfileId);
+                if (sttP) {
+                    Plasmoid.configuration.sttProviderName = sttP.providerName || "";
+                    Plasmoid.configuration.sttApiEndpoint = sttP.apiEndpoint || "";
+                    Plasmoid.configuration.sttModelName = sttP.modelName || "";
+                    if (Plasmoid.configuration.sttApiEndpoint && Plasmoid.configuration.sttModelName)
+                        Plasmoid.configuration.sttEnabled = true;
+                }
+            }
+            Plasmoid.configuration.sttMigratedFromProfile = true;
+        }
+
         if (Plasmoid.configuration.latexRenderMode === -1) {
             latexMatplotlibDetector.connectSource("python3 -c 'import matplotlib'");
         }
@@ -3118,6 +3575,11 @@ fi
 
     onExpandedChanged: function(expanded) {
         if (!expanded) {
+            // Drop in-progress voice capture when the panel closes.
+            if (root.isRecording || (typeof voiceCapture !== "undefined" && voiceCapture.recording)) {
+                root.cancelVoiceInput();
+            }
+            root.setVoiceLatched(false);
             focusSettleTimer.stop();
             root.preventDeactivationClose = false;
             Plasmoid.configuration.lastClosedTimestamp = String(Date.now());

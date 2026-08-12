@@ -21,6 +21,230 @@ import "driverManager.js" as DriverManager
 PlasmaExtras.Representation {
     id: fullRep
 
+    // Panel-local voice hotkey: same hold / toggle / auto logic as the mic button.
+    // Uses Keys (press+release) so hold-to-talk works; Shortcut alone cannot see releases.
+    readonly property string voiceKeySeq: (Plasmoid.configuration.sttPanelShortcut || "").trim()
+    readonly property string voiceKeyMicMode: Plasmoid.configuration.sttMicMode || "auto"
+    readonly property int voiceKeyAutoHoldMs: Math.max(100, Plasmoid.configuration.sttAutoHoldMs || 250)
+    readonly property int voiceKeyHoldMinMs: 250
+    property real _voiceKeyPressTime: 0
+    property bool _voiceKeyPressActive: false
+    property bool _voiceKeyPressStartedRecording: false
+    property bool _voiceKeyPttArmed: false
+
+    function _normalizeKeySeq(s) {
+        if (!s) return "";
+        var t = String(s).toLowerCase().replace(/\s+/g, "");
+        t = t.replace(/control/g, "ctrl").replace(/command/g, "meta").replace(/cmd/g, "meta")
+             .replace(/option/g, "alt").replace(/osleft/g, "meta").replace(/super/g, "meta");
+        var bits = t.split("+").filter(function(b) { return b.length > 0; });
+        if (bits.length === 0) return "";
+        var key = bits[bits.length - 1];
+        var mods = { meta: false, ctrl: false, alt: false, shift: false };
+        for (var i = 0; i < bits.length - 1; i++) {
+            if (mods.hasOwnProperty(bits[i]))
+                mods[bits[i]] = true;
+        }
+        var out = [];
+        if (mods.meta) out.push("meta");
+        if (mods.ctrl) out.push("ctrl");
+        if (mods.alt) out.push("alt");
+        if (mods.shift) out.push("shift");
+        out.push(key);
+        return out.join("+");
+    }
+
+    function _keyNameFromEvent(key) {
+        if (key >= Qt.Key_A && key <= Qt.Key_Z)
+            return String.fromCharCode(key - Qt.Key_A + 97); // a-z
+        if (key >= Qt.Key_0 && key <= Qt.Key_9)
+            return String.fromCharCode(key);
+        if (key >= Qt.Key_F1 && key <= Qt.Key_F12)
+            return "f" + (key - Qt.Key_F1 + 1);
+        var named = {};
+        named[Qt.Key_Space] = "space";
+        named[Qt.Key_Return] = "return";
+        named[Qt.Key_Enter] = "enter";
+        named[Qt.Key_Tab] = "tab";
+        named[Qt.Key_Backspace] = "backspace";
+        named[Qt.Key_Escape] = "esc";
+        named[Qt.Key_Insert] = "ins";
+        named[Qt.Key_Delete] = "del";
+        named[Qt.Key_Home] = "home";
+        named[Qt.Key_End] = "end";
+        named[Qt.Key_PageUp] = "pgup";
+        named[Qt.Key_PageDown] = "pgdown";
+        named[Qt.Key_Left] = "left";
+        named[Qt.Key_Right] = "right";
+        named[Qt.Key_Up] = "up";
+        named[Qt.Key_Down] = "down";
+        named[Qt.Key_Minus] = "-";
+        named[Qt.Key_Equal] = "=";
+        named[Qt.Key_BracketLeft] = "[";
+        named[Qt.Key_BracketRight] = "]";
+        named[Qt.Key_Semicolon] = ";";
+        named[Qt.Key_Apostrophe] = "'";
+        named[Qt.Key_Comma] = ",";
+        named[Qt.Key_Period] = ".";
+        named[Qt.Key_Slash] = "/";
+        named[Qt.Key_Backslash] = "\\";
+        named[Qt.Key_QuoteLeft] = "`";
+        return named[key] || "";
+    }
+
+    function _seqFromKeyEvent(event) {
+        var keyName = _keyNameFromEvent(event.key);
+        if (!keyName)
+            return "";
+        // Ignore pure modifier key events
+        if (event.key === Qt.Key_Control || event.key === Qt.Key_Shift
+                || event.key === Qt.Key_Alt || event.key === Qt.Key_Meta
+                || event.key === Qt.Key_AltGr)
+            return "";
+        var parts = [];
+        if (event.modifiers & Qt.MetaModifier) parts.push("meta");
+        if (event.modifiers & Qt.ControlModifier) parts.push("ctrl");
+        if (event.modifiers & Qt.AltModifier) parts.push("alt");
+        if (event.modifiers & Qt.ShiftModifier) parts.push("shift");
+        parts.push(keyName);
+        return parts.join("+");
+    }
+
+    // Match full chord on press. On release, modifiers may already be up — match main key only
+    // while a voice-key press is active.
+    function voiceKeyPressMatches(event) {
+        if (!voiceKeySeq || voiceKeySeq.length === 0)
+            return false;
+        if (!root.expanded || !root.sttAvailable)
+            return false;
+        var got = _seqFromKeyEvent(event);
+        if (!got)
+            return false;
+        return got === _normalizeKeySeq(voiceKeySeq);
+    }
+
+    function voiceKeyReleaseMatches(event) {
+        if (!fullRep._voiceKeyPressActive)
+            return false;
+        if (event.isAutoRepeat)
+            return false;
+        // Main key released
+        var keyName = _keyNameFromEvent(event.key);
+        if (keyName) {
+            var want = _normalizeKeySeq(voiceKeySeq);
+            var wantKey = want.split("+").pop();
+            return keyName === wantKey;
+        }
+        // Or a required modifier released while holding (end PTT early)
+        if (event.key === Qt.Key_Control || event.key === Qt.Key_Shift
+                || event.key === Qt.Key_Alt || event.key === Qt.Key_Meta
+                || event.key === Qt.Key_AltGr) {
+            return true;
+        }
+        return false;
+    }
+
+    function handleVoiceKeyPressed(event) {
+        if (event.isAutoRepeat)
+            return;
+        if (root.isTranscribing || root.isLoading || !root.systemPromptReady)
+            return;
+
+        fullRep._voiceKeyPressTime = Date.now();
+        fullRep._voiceKeyPressActive = true;
+        fullRep._voiceKeyPressStartedRecording = root.isRecording;
+        fullRep._voiceKeyPttArmed = false;
+        voiceKeyHoldTimer.stop();
+
+        var mode = fullRep.voiceKeyMicMode;
+        if (mode === "hold") {
+            root.startVoiceInput();
+            root.setVoiceLatched(false);
+            return;
+        }
+        if (mode === "toggle")
+            return;
+        // auto: if already recording (toggle session), wait for release to stop
+        if (fullRep._voiceKeyPressStartedRecording)
+            return;
+        voiceKeyHoldTimer.interval = fullRep.voiceKeyAutoHoldMs;
+        voiceKeyHoldTimer.start();
+    }
+
+    function handleVoiceKeyReleased(event) {
+        if (event.isAutoRepeat)
+            return;
+        fullRep._voiceKeyPressActive = false;
+        voiceKeyHoldTimer.stop();
+        var mode = fullRep.voiceKeyMicMode;
+        var held = Date.now() - fullRep._voiceKeyPressTime;
+
+        if (mode === "hold") {
+            if (!root.isRecording)
+                return;
+            if (held < fullRep.voiceKeyHoldMinMs)
+                root.cancelVoiceInput();
+            else
+                root.stopVoiceInput();
+            return;
+        }
+
+        if (mode === "toggle") {
+            if (root.isTranscribing || root.isLoading)
+                return;
+            if (root.isRecording)
+                root.stopVoiceInput();
+            else if (root.startVoiceInput())
+                root.setVoiceLatched(true);
+            return;
+        }
+
+        // --- auto (same as mic button) ---
+        if (fullRep._voiceKeyPressStartedRecording) {
+            if (root.isRecording)
+                root.stopVoiceInput();
+            return;
+        }
+        if (fullRep._voiceKeyPttArmed) {
+            if (root.isRecording)
+                root.stopVoiceInput();
+            fullRep._voiceKeyPttArmed = false;
+            return;
+        }
+        // Released before hold threshold → click-toggle start
+        if (!root.isRecording) {
+            if (root.startVoiceInput())
+                root.setVoiceLatched(true);
+        }
+    }
+
+    function handleVoiceKeyCanceled() {
+        fullRep._voiceKeyPressActive = false;
+        voiceKeyHoldTimer.stop();
+        if (fullRep.voiceKeyMicMode === "hold" || fullRep._voiceKeyPttArmed) {
+            if (root.isRecording)
+                root.cancelVoiceInput();
+        }
+        fullRep._voiceKeyPttArmed = false;
+    }
+
+    Timer {
+        id: voiceKeyHoldTimer
+        interval: fullRep.voiceKeyAutoHoldMs
+        repeat: false
+        onTriggered: {
+            if (!fullRep._voiceKeyPressActive || fullRep._voiceKeyPressStartedRecording)
+                return;
+            if (fullRep.voiceKeyMicMode !== "auto")
+                return;
+            if (root.isTranscribing || root.isLoading || !root.systemPromptReady)
+                return;
+            fullRep._voiceKeyPttArmed = true;
+            root.startVoiceInput();
+            root.setVoiceLatched(false); // PTT, not latched toggle
+        }
+    }
+
     property var slashCommands: {
         var list = [
             { cmd: "/approve",  desc: i18n("Approve the pending tool request") },
@@ -411,7 +635,7 @@ PlasmaExtras.Representation {
                     var text = "";
                     for (var i = 0; i < root.displayMessages.count; i++) {
                         var msg = root.displayMessages.get(i);
-                        var prefix = msg.role === "user" ? (Plasmoid.configuration.userName || i18n("You")) :
+                        var prefix = msg.role === "user" ? ((msg.fromVoice ? "🗣️ " : "") + (Plasmoid.configuration.userName || i18n("You"))) :
                                      msg.role === "assistant" ? (Plasmoid.configuration.showModelNameAsAssistant ? (Plasmoid.configuration.modelName || Plasmoid.configuration.assistantName || i18n("Assistant")) : (Plasmoid.configuration.assistantName || i18n("Assistant"))) :
                                      msg.role === "command_output" ? i18n("Command") :
                                      msg.role === "error" ? i18n("Error") : "";
@@ -471,7 +695,7 @@ PlasmaExtras.Representation {
             var text = "";
             for (var i = 0; i < root.displayMessages.count; i++) {
                 var msg = root.displayMessages.get(i);
-                var prefix = msg.role === "user" ? (Plasmoid.configuration.userName || i18n("You")) :
+                var prefix = msg.role === "user" ? ((msg.fromVoice ? "🗣️ " : "") + (Plasmoid.configuration.userName || i18n("You"))) :
                              msg.role === "assistant" ? (Plasmoid.configuration.showModelNameAsAssistant ? (Plasmoid.configuration.modelName || Plasmoid.configuration.assistantName || i18n("Assistant")) : (Plasmoid.configuration.assistantName || i18n("Assistant"))) :
                              msg.role === "command_output" ? i18n("Command") :
                              msg.role === "error" ? i18n("Error") : "";
@@ -578,6 +802,7 @@ PlasmaExtras.Representation {
                     messageIndex: index
                     timestamp: model.timestamp !== undefined ? model.timestamp : ""
                     attachmentsStr: model.attachmentsStr !== undefined ? model.attachmentsStr : ""
+                    fromVoice: !!model.fromVoice
                     isAwaitingResponse: index === root.streamingMessageIndex && root.isLoading
                     outputScheme: model.outputScheme !== undefined ? model.outputScheme : ""
                     tool_call_id: model.tool_call_id !== undefined ? model.tool_call_id : ""
@@ -833,6 +1058,13 @@ PlasmaExtras.Representation {
                         wrapMode: Text.Wrap
                         
                         Keys.onPressed: function(event) {
+                            // Voice hotkey (same hold/toggle/auto as mic) — steal chord before typing.
+                            if (fullRep.voiceKeyPressMatches(event)) {
+                                event.accepted = true;
+                                fullRep.handleVoiceKeyPressed(event);
+                                return;
+                            }
+
                             var isCtrlV = (event.key === Qt.Key_V && (event.modifiers & Qt.ControlModifier));
                             var isShiftInsert = (event.key === Qt.Key_Insert && (event.modifiers & Qt.ShiftModifier));
                             
@@ -855,6 +1087,13 @@ PlasmaExtras.Representation {
                                     root.pasteImageFromClipboard();
                                     event.accepted = true;
                                 }
+                            }
+                        }
+
+                        Keys.onReleased: function(event) {
+                            if (fullRep.voiceKeyReleaseMatches(event)) {
+                                event.accepted = true;
+                                fullRep.handleVoiceKeyReleased(event);
                             }
                         }
 
@@ -1143,6 +1382,165 @@ PlasmaExtras.Representation {
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                 onClicked: attachDialog.open()
+            }
+
+            // Microphone: hold / toggle / auto (click toggle, hold ≥250ms = PTT).
+            PlasmaComponents.ToolButton {
+                id: micButton
+                visible: root.sttAvailable
+                enabled: !root.isLoading && !root.isTranscribing && root.systemPromptReady
+                checkable: false
+                icon.name: root.isRecording ? "media-record" : (root.isTranscribing ? "view-refresh" : "audio-input-microphone")
+
+                readonly property string micMode: Plasmoid.configuration.sttMicMode || "auto"
+                readonly property int autoHoldMs: Math.max(100, Plasmoid.configuration.sttAutoHoldMs || 250)
+                readonly property int holdMinMs: 250
+
+                // Press tracking for hold / auto
+                property real _pressTime: 0
+                property bool _pressStartedRecording: false  // was already recording on press
+                property bool _pttArmed: false               // auto: committed to push-to-talk
+                property bool _pressActive: false
+
+                PlasmaComponents.ToolTip.text: {
+                    if (root.isTranscribing)
+                        return i18n("Transcribing…");
+                    if (!root.systemPromptReady)
+                        return i18n("Preparing…");
+                    if (root.isLoading)
+                        return i18n("Wait for the current reply");
+                    if (root.isRecording) {
+                        if (micMode === "toggle" || (micMode === "auto" && !micButton._pttArmed))
+                            return i18n("Click to stop and send");
+                        return i18n("Release to send");
+                    }
+                    if (micMode === "toggle")
+                        return i18n("Click to start");
+                    if (micMode === "hold")
+                        return i18n("Hold to talk");
+                    return i18n("Click to toggle, hold to talk");
+                }
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+
+                contentItem: Item {
+                    implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                    implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                    Kirigami.Icon {
+                        anchors.centerIn: parent
+                        source: micButton.icon.name
+                        width: Kirigami.Units.iconSizes.smallMedium
+                        height: Kirigami.Units.iconSizes.smallMedium
+                        color: root.isRecording ? Kirigami.Theme.negativeTextColor
+                             : (micButton.enabled ? Kirigami.Theme.textColor : Kirigami.Theme.disabledTextColor)
+                    }
+                }
+
+                Timer {
+                    id: autoHoldTimer
+                    interval: micButton.autoHoldMs
+                    repeat: false
+                    onTriggered: {
+                        if (!micButton._pressActive || micButton._pressStartedRecording)
+                            return;
+                        if (micButton.micMode !== "auto")
+                            return;
+                        // Commit to push-to-talk
+                        micButton._pttArmed = true;
+                        root.startVoiceInput();
+                        root.setVoiceLatched(false); // PTT, not latched toggle
+                    }
+                }
+
+                MouseArea {
+                    id: micMouse
+                    anchors.fill: parent
+                    acceptedButtons: Qt.LeftButton
+                    preventStealing: true
+                    enabled: micButton.enabled
+
+                    onPressed: function(mouse) {
+                        micButton._pressTime = Date.now();
+                        micButton._pressActive = true;
+                        micButton._pressStartedRecording = root.isRecording;
+                        micButton._pttArmed = false;
+                        autoHoldTimer.stop();
+
+                        var mode = micButton.micMode;
+                        if (mode === "hold") {
+                            root.startVoiceInput();
+                            root.setVoiceLatched(false);
+                            return;
+                        }
+                        if (mode === "toggle") {
+                            // Decide on release (so press doesn't double-fire)
+                            return;
+                        }
+                        // auto: if already in a toggle session, wait for release to stop
+                        if (micButton._pressStartedRecording)
+                            return;
+                        autoHoldTimer.interval = micButton.autoHoldMs;
+                        autoHoldTimer.start();
+                    }
+                    onReleased: function(mouse) {
+                        micButton._pressActive = false;
+                        autoHoldTimer.stop();
+                        var mode = micButton.micMode;
+                        var held = Date.now() - micButton._pressTime;
+
+                        if (mode === "hold") {
+                            if (!root.isRecording)
+                                return;
+                            if (held < micButton.holdMinMs)
+                                root.cancelVoiceInput();
+                            else
+                                root.stopVoiceInput();
+                            return;
+                        }
+
+                        if (mode === "toggle") {
+                            if (root.isTranscribing || root.isLoading)
+                                return;
+                            if (root.isRecording)
+                                root.stopVoiceInput();
+                            else {
+                                if (root.startVoiceInput())
+                                    root.setVoiceLatched(true);
+                            }
+                            return;
+                        }
+
+                        // --- auto ---
+                        if (micButton._pressStartedRecording) {
+                            // Second click on latched recording → stop & send
+                            if (root.isRecording)
+                                root.stopVoiceInput();
+                            return;
+                        }
+                        if (micButton._pttArmed) {
+                            // PTT session: release ends recording
+                            if (root.isRecording)
+                                root.stopVoiceInput();
+                            micButton._pttArmed = false;
+                            return;
+                        }
+                        // Released before hold threshold → click-toggle start
+                        if (!root.isRecording) {
+                            if (root.startVoiceInput())
+                                root.setVoiceLatched(true);
+                        }
+                    }
+                    onCanceled: {
+                        micButton._pressActive = false;
+                        autoHoldTimer.stop();
+                        if (micButton.micMode === "hold" || micButton._pttArmed) {
+                            if (root.isRecording)
+                                root.cancelVoiceInput();
+                        }
+                        // Do not start toggle on cancel
+                        micButton._pttArmed = false;
+                    }
+                }
             }
 
             PlasmaComponents.Button {

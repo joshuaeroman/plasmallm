@@ -242,6 +242,13 @@ function searchKeySlot(searchProvider) {
     return "v1/search/_/" + p;
 }
 
+// Speech-to-text keys are global (one STT connection), not per chat profile.
+//   v1/stt/OpenRouter
+//   v1/stt/[https://openrouter.ai/api/v1]
+function sttKeySlot(providerName, endpoint) {
+    return "v1/stt/" + slotProviderPart(providerName, endpoint);
+}
+
 // --- Public names used by main.qml / configGeneral.qml ---
 
 function currentKeySlot(activeProfileId, apiType, providerName, endpoint, geminiAuthMethod) {
