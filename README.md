@@ -16,6 +16,7 @@ PlasmaLLM is designed for quick tasks and system-integrated workflows—not as a
 - **Interactive Terminal Blocks**: View, copy, or execute suggested terminal commands. Supports session multiplexing via `tmux` or `screen`.
 - **Web Search Integration**: Native support for DuckDuckGo and SearXNG.
 - **Vision Support**: Supports image attachments for providers with multimodal capabilities (e.g., Gemini).
+- **Voice Input (STT)**: Hold-to-talk microphone that transcribes via a designated profile (OpenAI-compatible `/audio/transcriptions`, e.g. OpenRouter `openai/gpt-transcribe`) and sends the text to your active chat profile.
 - **Secure Storage**: Integrates with KWallet for secure management of API keys and secrets.
 - **Markdown Rendering**: Full support for markdown, including syntax highlighting for code blocks and LaTeX for mathematical notation.
 
@@ -23,7 +24,23 @@ PlasmaLLM is designed for quick tasks and system-integrated workflows—not as a
 
 - KDE Plasma 6.0+
 - Qt 6
+- Optional: `qt6-qtmultimedia` (or distro equivalent) for microphone capture via Qt Multimedia
+- Optional: `pw-record`, `ffmpeg`, or `arecord` as a shell fallback if Qt capture is unavailable
 - Optional: `tmux` or `screen` for session multiplexing.
+
+### Voice input setup
+
+1. Open **Configure PlasmaLLM → Speech to Text**.
+2. Enable **microphone input**.
+3. Choose a provider (e.g. **OpenRouter**), confirm endpoint `https://openrouter.ai/api/v1`.
+4. Click **Fetch models** (this queries transcription models — OpenRouter does **not** list them on the normal chat model list).
+5. Select a model such as `openai/gpt-transcribe`, save your API key.
+6. **Mic button** mode:
+   - **Auto** (default): short click toggles recording; press and hold (~250 ms+) for push-to-talk until release.
+   - **Hold to talk**: press-and-hold only.
+   - **Toggle**: click to start, click again to stop and send.
+7. Optional: set a **Voice shortcut** (default **Ctrl+M**) while the panel is open and focused. It follows the same **Mic button** mode (auto / hold / toggle). Clear the field to disable. To open the panel from elsewhere, use **Activate widget** on the dialog’s Shortcuts page.
+8. Your **active chat profile** (General page) is still used for the conversation; STT is only the speech engine.
 
 ---
 

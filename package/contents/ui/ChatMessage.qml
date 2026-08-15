@@ -27,6 +27,7 @@ Kirigami.AbstractCard {
     property string timestamp: ""
     property string attachmentsStr: ""
     readonly property var attachmentPaths: attachmentsStr.length > 0 ? attachmentsStr.split("\n") : []
+    property bool fromVoice: false
     property string tool_call_id: ""
     property string toolArgs: ""
     property string toolName: ""
@@ -262,8 +263,30 @@ Kirigami.AbstractCard {
                 Layout.alignment: Qt.AlignVCenter
             }
 
+            // Separate label so emoji can use a color-emoji font; theme UI fonts often omit 🗣️.
             PlasmaComponents.Label {
-                text: isUser ? (Plasmoid.configuration.userName || i18n("You")) : (isError ? i18n("Error") : (toolTitle !== "" ? toolTitle : (isWebSearchRunning || isWebSearchResults ? i18n("Web Search") : (Plasmoid.configuration.showModelNameAsAssistant ? (Plasmoid.configuration.modelName || Plasmoid.configuration.assistantName || i18n("Assistant")) : (Plasmoid.configuration.assistantName || i18n("Assistant"))))))
+                visible: isUser && fromVoice
+                text: "🗣️"
+                font.family: "Noto Color Emoji, Noto Emoji, emoji, sans-serif"
+                font.pointSize: Math.max(8, Kirigami.Theme.defaultFont.pointSize - (Plasmoid.configuration.chatSpacing < 4 ? 1 : 0))
+                Layout.alignment: Qt.AlignVCenter
+                Accessible.name: i18n("Voice message")
+            }
+
+            PlasmaComponents.Label {
+                text: {
+                    if (isUser)
+                        return Plasmoid.configuration.userName || i18n("You");
+                    if (isError)
+                        return i18n("Error");
+                    if (toolTitle !== "")
+                        return toolTitle;
+                    if (isWebSearchRunning || isWebSearchResults)
+                        return i18n("Web Search");
+                    if (Plasmoid.configuration.showModelNameAsAssistant)
+                        return Plasmoid.configuration.modelName || Plasmoid.configuration.assistantName || i18n("Assistant");
+                    return Plasmoid.configuration.assistantName || i18n("Assistant");
+                }
                 font.bold: true
                 font.pointSize: Math.max(8, Kirigami.Theme.defaultFont.pointSize - (Plasmoid.configuration.chatSpacing < 4 ? 1 : 0))
                 Layout.alignment: Qt.AlignVCenter
