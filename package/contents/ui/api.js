@@ -22,102 +22,151 @@ function localISODateTime() {
            sign + pad(Math.floor(absOff / 60)) + ":" + pad(absOff % 60);
 }
 
-function buildSystemPrompt(sysInfo, customAdditions, options) {
-    var prompt = "You are a helpful assistant embedded in the user's Linux desktop.\n\n" +
-        "## System\n";
+function _tr(options, str) {
+    var fn = (options && typeof options.i18n === "function") ? options.i18n : (typeof i18n === "function" ? i18n : null);
+    if (fn) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        return fn.apply(null, args);
+    }
+    var res = str;
+    for (var i = 2; i < arguments.length; i++) {
+        res = res.replace(new RegExp("%" + (i - 1), "g"), arguments[i]);
+    }
+    return res;
+}
 
-    if (options && options.sysInfoDateTime) {
-        prompt += "- Current Date & Time: " + localISODateTime() + "\n";
+// Default system prompt template. Users may edit this wholesale; any of the
+// {{placeholder}} tags below can be moved, duplicated, or removed.
+var DEFAULT_SYSTEM_PROMPT_TEMPLATE = "You are a helpful assistant embedded in the user's Linux desktop.\n" +
+    "\n" +
+    "## System\n" +
+    "{{system_info}}\n" +
+    "\n" +
+    "General-purpose assistant. Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational. Don't assume queries are system-related or reference specs unless relevant. Always use the `~` alias instead of absolute paths when referring to the user's home directory in tool calls or text.\n" +
+    "\n" +
+    "{{session_multiplexer}}\n" +
+    "{{approval_mode}}\n" +
+    "{{tools}}\n" +
+    "{{driving_instructions}}";
+
+function getLocalizedDefaultSystemPromptTemplate(i18nFn) {
+    var fn = (typeof i18nFn === "function") ? i18nFn : (typeof i18n === "function" ? i18n : function(s) { return s; });
+    return fn("You are a helpful assistant embedded in the user's Linux desktop.") + "\n\n" +
+        "## System\n" +
+        "{{system_info}}\n\n" +
+        fn("General-purpose assistant. Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational. Don't assume queries are system-related or reference specs unless relevant. Always use the `~` alias instead of absolute paths when referring to the user's home directory in tool calls or text.") + "\n\n" +
+        "{{session_multiplexer}}\n" +
+        "{{approval_mode}}\n" +
+        "{{tools}}\n" +
+        "{{driving_instructions}}";
+}
+
+function buildSystemInfoSection(sysInfo, options) {
+    var loc = options && options.localizeSystemPrompt;
+    var lines = [];
+    if (options && options.sysInfoDateTime) lines.push("- " + (loc ? _tr(options, "Current Date & Time: ") : "Current Date & Time: ") + localISODateTime());
+    if (sysInfo.hostname) lines.push("- " + (loc ? _tr(options, "Hostname: ") : "Hostname: ") + sysInfo.hostname);
+    if (sysInfo.osRelease) lines.push("- " + (loc ? _tr(options, "OS: ") : "OS: ") + sysInfo.osRelease);
+    if (sysInfo.kernel) lines.push("- " + (loc ? _tr(options, "Kernel: ") : "Kernel: ") + sysInfo.kernel);
+    if (sysInfo.desktop) lines.push("- " + (loc ? _tr(options, "Desktop: ") : "Desktop: ") + sysInfo.desktop);
+    if (sysInfo.shell) lines.push("- " + (loc ? _tr(options, "Shell: ") : "Shell: ") + sysInfo.shell);
+    if (sysInfo.locale) lines.push("- " + (loc ? _tr(options, "Locale: ") : "Locale: ") + sysInfo.locale);
+    if (sysInfo.user) lines.push("- " + (loc ? _tr(options, "User: ") : "User: ") + sysInfo.user);
+    if (sysInfo.cpu) lines.push("- " + (loc ? _tr(options, "CPU: ") : "CPU: ") + sysInfo.cpu);
+    if (sysInfo.cpuCores) lines.push("- " + (loc ? _tr(options, "CPU Cores: ") : "CPU Cores: ") + sysInfo.cpuCores);
+    if (sysInfo.cpuArch) lines.push("- " + (loc ? _tr(options, "Architecture: ") : "Architecture: ") + sysInfo.cpuArch);
+    if (sysInfo.gpu) lines.push("- " + (loc ? _tr(options, "GPU: ") : "GPU: ") + sysInfo.gpu);
+    if (sysInfo.memory) lines.push("- " + (loc ? _tr(options, "Memory:") : "Memory:") + "\n" + sysInfo.memory);
+    if (sysInfo.disk) lines.push("- " + (loc ? _tr(options, "Block Devices:") : "Block Devices:") + "\n" + sysInfo.disk);
+    if (sysInfo.network) lines.push("- " + (loc ? _tr(options, "Network Interfaces:") : "Network Interfaces:") + "\n" + sysInfo.network);
+    return lines.join("\n");
+}
+
+function buildSessionMultiplexerSection(options) {
+    if (!options || !options.sessionMultiplexer) return "";
+    var parts = options.sessionMultiplexer.split(": ");
+    var be = parts[0] || "tmux";
+    var sess = parts[1] || "plasmallm";
+    var attachCmd = be === "tmux" ? ("tmux new-session -A -s " + sess) : ("screen -xRR " + sess);
+    if (options && options.localizeSystemPrompt) {
+        return "## " + _tr(options, "Session Multiplexer") + "\n" +
+            _tr(options, "Commands run inside a persistent **%1** session named `%2`. Working directory, exported variables, and background jobs persist across calls. Avoid `clear`, `reset`, `exit`, and full-screen TUIs (`htop`, `vim`); they would damage the shared shell. The user can attach with `%3`.", be, sess, attachCmd);
+    }
+    return "## Session Multiplexer\n" +
+        "Commands run inside a persistent **" + be + "** session named `" + sess + "`. " +
+        "Working directory, exported variables, and background jobs persist across calls. " +
+        "Avoid `clear`, `reset`, `exit`, and full-screen TUIs (`htop`, `vim`); they would damage the shared shell. " +
+        "The user can attach with `" + attachCmd + "`.";
+}
+
+function buildApprovalModeSection(options) {
+    if (!options || !options.autoMode) return "";
+    if (options && options.localizeSystemPrompt) {
+        return "## " + _tr(options, "Skip approvals mode is ACTIVE") + "\n" +
+            _tr(options, "Commands run AND their output is automatically shared back to you. You are in an agentic loop. Prefer read-only commands unless the user explicitly requests a write operation.");
+    }
+    return "## Skip approvals mode is ACTIVE\n" +
+        "Commands run AND their output is automatically shared back to you. " +
+        "You are in an agentic loop. Prefer read-only commands unless the user explicitly requests a write operation.";
+}
+
+// Renders a user-editable system prompt template. {{placeholders}} are replaced with
+// dynamic content; unknown or empty placeholders resolve to "". Critical runtime
+// sections (driving instructions, skip-approvals mode) are appended verbatim if
+// the user's template omits them while they are active, so features never break.
+function buildSystemPrompt(sysInfo, template, options) {
+    sysInfo = sysInfo || {};
+    options = options || {};
+
+    var drivingText = DriverManager.getDrivingInstructions() || "";
+    var systemInfoText = buildSystemInfoSection(sysInfo, options);
+    var sessionText = buildSessionMultiplexerSection(options);
+    var approvalText = buildApprovalModeSection(options);
+    var trFn = (options && typeof options.i18n === "function") ? options.i18n : (typeof i18n === "function" ? i18n : null);
+    var toolsText = options.toolsConfig ? ToolManager.buildSystemPromptSection(options.toolsConfig, trFn) : "";
+
+    var vars = {
+        system_info: systemInfoText,
+        tools: toolsText,
+        session_multiplexer: sessionText,
+        approval_mode: approvalText,
+        driving_instructions: drivingText,
+        datetime: options.sysInfoDateTime ? localISODateTime() : "",
+        os: sysInfo.osRelease || "",
+        kernel: sysInfo.kernel || "",
+        hostname: sysInfo.hostname || "",
+        desktop: sysInfo.desktop || "",
+        shell: sysInfo.shell || "",
+        user: sysInfo.user || "",
+        home: sysInfo.userHome || "",
+        locale: sysInfo.locale || "",
+        cpu: sysInfo.cpu || "",
+        cpu_cores: sysInfo.cpuCores || "",
+        cpu_arch: sysInfo.cpuArch || "",
+        gpu: sysInfo.gpu || "",
+        memory: sysInfo.memory || "",
+        disk: sysInfo.disk || "",
+        network: sysInfo.network || ""
+    };
+
+    var tpl = (template && template.trim().length > 0) ? template.trim() : DEFAULT_SYSTEM_PROMPT_TEMPLATE;
+    var tplLower = tpl.toLowerCase();
+
+    var out = tpl.replace(/\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/g, function(match, name) {
+        var key = name.toLowerCase();
+        return vars.hasOwnProperty(key) ? vars[key] : "";
+    });
+
+    if (drivingText && tplLower.indexOf("{{driving_instructions}}") === -1 && tplLower.indexOf("desktop automation") === -1) {
+        out += "\n\n" + drivingText;
+    }
+    if (approvalText && tplLower.indexOf("{{approval_mode}}") === -1 && tplLower.indexOf("skip approvals mode") === -1) {
+        out += "\n\n" + approvalText;
     }
 
-    if (sysInfo.hostname) {
-        prompt += "- Hostname: " + sysInfo.hostname + "\n";
-    }
-    if (sysInfo.osRelease) {
-        prompt += "- OS: " + sysInfo.osRelease + "\n";
-    }
-    if (sysInfo.kernel) {
-        prompt += "- Kernel: " + sysInfo.kernel + "\n";
-    }
-    if (sysInfo.desktop) {
-        prompt += "- Desktop: " + sysInfo.desktop + "\n";
-    }
-    if (sysInfo.shell) {
-        prompt += "- Shell: " + sysInfo.shell + "\n";
-    }
-    if (sysInfo.locale) {
-        prompt += "- Locale: " + sysInfo.locale + "\n";
-    }
-    if (sysInfo.user) {
-        prompt += "- User: " + sysInfo.user + "\n";
-    }
-    if (sysInfo.cpu) {
-        prompt += "- CPU: " + sysInfo.cpu + "\n";
-    }
-    if (sysInfo.cpuCores) {
-        prompt += "- CPU Cores: " + sysInfo.cpuCores + "\n";
-    }
-    if (sysInfo.cpuArch) {
-        prompt += "- Architecture: " + sysInfo.cpuArch + "\n";
-    }
-    if (sysInfo.gpu) {
-        prompt += "- GPU: " + sysInfo.gpu + "\n";
-    }
-    if (sysInfo.memory) {
-        prompt += "- Memory:\n" + sysInfo.memory + "\n";
-    }
-    if (sysInfo.disk) {
-        prompt += "- Block Devices:\n" + sysInfo.disk + "\n";
-    }
-    if (sysInfo.network) {
-        prompt += "- Network Interfaces:\n" + sysInfo.network + "\n";
-    }
+    out = out.replace(/\n{3,}/g, "\n\n").trim();
 
-    var drivingInstructions = DriverManager.getDrivingInstructions();
-    var responseLengthInstruction = "Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational.";
-    if (drivingInstructions && drivingInstructions.trim().length > 0) {
-        responseLengthInstruction = "Be concise and conversational in standard chat. However, when automating the desktop, prioritizing thorough visual analysis and planning is essential; explain your observations in detail.";
-    }
-
-    prompt += "\nGeneral-purpose assistant. " + responseLengthInstruction + " " +
-        "Don't assume queries are system-related or reference specs unless relevant. " +
-        "Always use the `~` alias instead of absolute paths when referring to the user's home directory in tool calls or text.\n\n";
-
-
-    if (options && options.sessionMultiplexer) {
-        var parts = options.sessionMultiplexer.split(": ");
-        var be = parts[0] || "tmux";
-        var sess = parts[1] || "plasmallm";
-        var attachCmd = be === "tmux" ? ("tmux new-session -A -s " + sess) : ("screen -xRR " + sess);
-        prompt += "\n## Session Multiplexer\n" +
-            "Commands run inside a persistent **" + be + "** session named `" + sess + "`. " +
-            "Working directory, exported variables, and background jobs persist across calls. " +
-            "Avoid `clear`, `reset`, `exit`, and full-screen TUIs (`htop`, `vim`); they would damage the shared shell. " +
-            "The user can attach with `" + attachCmd + "`.\n";
-    }
-
-    if (options && options.autoMode) {
-        prompt += "\n## Skip approvals mode is ACTIVE\n" +
-            "Commands run AND their output is automatically shared back to you. " +
-            "You are in an agentic loop. Prefer read-only commands unless the user explicitly requests a write operation.\n";
-    }
-
-    if (options && options.toolsConfig) {
-        prompt += ToolManager.buildSystemPromptSection(options.toolsConfig);
-    }
-
-    if (customAdditions && customAdditions.trim().length > 0) {
-        prompt += "The below instructions are given by the user and take the utmost precedence over the instructions above.\n";
-        prompt += "\n" + customAdditions.trim() + "\n";
-    }
-
-    if (drivingInstructions) {
-        prompt += drivingInstructions + "\n";
-    }
-
-    prompt += "\nEND OF SYSTEM PROMPT\n";
-
-    return prompt;
+    return out + "\n\nEND OF SYSTEM PROMPT\n";
 }
 
 function mimeForImage(filePath) {
@@ -372,10 +421,10 @@ var LEGACY_SEARCH_KEY_MAP = {
 
 function getAdapterChoices() {
     return [
-        { id: "openai",    name: i18n("OpenAI-compatible") },
-        { id: "anthropic", name: i18n("Anthropic") },
-        { id: "gemini",    name: i18n("Google Gemini") },
-        { id: "exa",       name: i18n("Exa") }
+        { id: "openai",    name: _tr(null, "OpenAI-compatible") },
+        { id: "anthropic", name: _tr(null, "Anthropic") },
+        { id: "gemini",    name: _tr(null, "Google Gemini") },
+        { id: "exa",       name: _tr(null, "Exa") }
     ];
 }
 

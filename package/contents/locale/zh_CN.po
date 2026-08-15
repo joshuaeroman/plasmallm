@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-14 20:58-0400\n"
+"POT-Creation-Date: 2026-08-15 17:59-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Chinese (Simplified)\n"
@@ -23,11 +23,6 @@ msgstr "当前颜色为 %1。点击此按钮将打开颜色选择器。"
 
 msgid "Current color is %1."
 msgstr "当前颜色为 %1。"
-
-msgid ""
-"Anthropic enables extended thinking when effort is not Off, using the token "
-"budget below. Temperature is forced to max while thinking."
-msgstr "当力度不为“关闭”时，Anthropic 启用扩展思考，并使用下方的令牌预算。思考时强制将温度（Temperature）设为最大值。"
 
 msgid "Request timed out after 30 seconds"
 msgstr "请求在 30 秒后超时"
@@ -62,16 +57,6 @@ msgstr "API 错误 %1"
 msgid "Request failed (no response) — check your endpoint URL"
 msgstr "请求失败（无响应） — 请检查您的端点 URL..."
 
-msgid ""
-"Exa performs real-time neural search and synthesizes grounded answers with "
-"live web citations."
-msgstr "Exa 执行实时神经搜索，并综合生成附带实时网络引用的有据答案。"
-
-msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking"
-" on supported models."
-msgstr "Gemini 直接使用思考令牌预算。设置为 0 以禁用思考（某些模型需要此设置）。"
-
 msgid "Failed to fetch models"
 msgstr "获取模型失败..."
 
@@ -87,27 +72,17 @@ msgstr "无响应 — 请检查您的端点 URL..."
 msgid "Request failed"
 msgstr "请求失败..."
 
-msgid "Gemini uses the thinking level dropdown directly."
-msgstr "Gemini 直接使用思考级别下拉菜单。"
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
 "disable Native features in Settings."
-msgstr "此模型版本不支持将原生工具（搜索/代码）与自定义命令结合使用。请选择更新的模型（例如 Gemini 3+）或在设置中禁用原生功能。"
-
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
 msgstr ""
-"推理力度（低 / 中 / 高）控制扩展思考。要查看 OpenAI / Poe / OpenRouter / Azure 的思考，请启用“使用 "
-"Responses API”；聊天补全提供商（DeepSeek、Qwen）通过 reasoning_content 呈现推理。"
+"此模型版本不支持将原生工具（搜索/代码）与自定义命令结合使用。请选择更新的模型"
+"（例如 Gemini 3+）或在设置中禁用原生功能。"
 
 msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to"
-" the LLM."
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
 msgstr "未配置自定义工具。添加自定义工具以将您自己的命令公开给 LLM。"
 
 msgid "AUTO"
@@ -149,62 +124,10 @@ msgstr "名为\"%1\"的工具已存在。"
 msgid ""
 "Custom tools allow you to expose your own commands to the LLM. Use "
 "placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-"
-"escaped."
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
 msgstr ""
-"自定义工具允许您将自己的命令公开给 LLM。在命令模板中使用 {variable} 等占位符来定义 LLM 可以填写的参数。LLM 提供的值会自动进行 "
-"shell 转义。"
-
-msgid "System Info:"
-msgstr "系统信息："
-
-msgid "OS"
-msgstr "操作系统"
-
-msgid "Shell"
-msgstr "Shell"
-
-msgid "Hostname"
-msgstr "主机名"
-
-msgid "Kernel"
-msgstr "内核"
-
-msgid "Desktop"
-msgstr "桌面"
-
-msgid "User"
-msgstr "用户"
-
-msgid "CPU"
-msgstr "CPU"
-
-msgid "Memory"
-msgstr "内存"
-
-msgid "GPU"
-msgstr "GPU"
-
-msgid "Block Devices"
-msgstr "块设备"
-
-msgid "Network"
-msgstr "网络"
-
-msgid "Locale"
-msgstr "区域设置"
-
-msgid "Date/Time"
-msgstr "日期/时间"
-
-msgid "Custom Instructions:"
-msgstr "自定义指令："
-
-msgid "Additional instructions for the LLM…"
-msgstr "给LLM的附加指令…"
-
-msgid "Preview:"
-msgstr "预览："
+"自定义工具允许您将自己的命令公开给 LLM。在命令模板中使用 {variable} 等占位符"
+"来定义 LLM 可以填写的参数。LLM 提供的值会自动进行 shell 转义。"
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr "未配置任务。添加任务以创建可重用的提示快捷方式。"
@@ -234,10 +157,12 @@ msgid "A task named \"%1\" already exists."
 msgstr "名为\"%1\"的任务已存在。"
 
 msgid ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
-" button to run them. Tasks with skip approvals enabled will run tools "
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with skip approvals enabled will run tools "
 "automatically."
-msgstr "任务是可重用的提示快捷方式。在聊天中使用 /task <名称> 或工具栏按钮来运行它们。启用了跳过审批的任务将自动运行工具。"
+msgstr ""
+"任务是可重用的提示快捷方式。在聊天中使用 /task <名称> 或工具栏按钮来运行它"
+"们。启用了跳过审批的任务将自动运行工具。"
 
 msgid "Ask before running"
 msgstr "运行前询问"
@@ -245,22 +170,23 @@ msgstr "运行前询问"
 msgid "Error: URL must start with http:// or https://"
 msgstr "错误：URL 必须以 http:// 或 https:// 开头"
 
-msgid "No command provided."
-msgstr "未提供命令。"
-
 msgid "Ask before running commands from LLM"
 msgstr "在运行 LLM 命令前询问"
 
 msgid ""
 "Prompt for approval before executing shell commands from the LLM. Dangerous "
 "to uncheck as the LLM will see output and may run further commands."
-msgstr "在执行 LLM 的 shell 命令前请求批准。取消勾选很危险，因为 LLM 会看到输出并可能运行更多命令。"
+msgstr ""
+"在执行 LLM 的 shell 命令前请求批准。取消勾选很危险，因为 LLM 会看到输出并可能"
+"运行更多命令。"
 
 msgid ""
 "⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
 "commands without permission and will see their output, enabling an agentic "
 "workflow. Only use with trustworthy LLMs."
-msgstr "⚠️ 危险：「运行前询问」已禁用 — LLM 现在可以无需许可执行命令并查看其输出，从而启用代理工作流。仅与可信的 LLM 一起使用。"
+msgstr ""
+"⚠️ 危险：「运行前询问」已禁用 — LLM 现在可以无需许可执行命令并查看其输出，从而"
+"启用代理工作流。仅与可信的 LLM 一起使用。"
 
 msgid "Note: This tool is not restricted by the path whitelist."
 msgstr "注意：此工具不受路径白名单限制。"
@@ -274,7 +200,9 @@ msgstr "在持久会话中运行命令"
 msgid ""
 "Execute LLM commands inside a long-lived tmux or screen session so state "
 "persists across turns."
-msgstr "在一个长期的 tmux 或 screen 会话中执行 LLM 命令，以便状态在对话轮次间保持不变。"
+msgstr ""
+"在一个长期的 tmux 或 screen 会话中执行 LLM 命令，以便状态在对话轮次间保持不"
+"变。"
 
 msgid "Reset Session"
 msgstr "重置会话"
@@ -290,7 +218,8 @@ msgstr "错误：内容超过最大写入大小（%1 字节）"
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS are allowed."
-msgstr "错误：无效的 HTTP 方法。仅允许 GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS。"
+msgstr ""
+"错误：无效的 HTTP 方法。仅允许 GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS。"
 
 msgid "Search provider %1 not supported"
 msgstr "不支持的搜索提供商 %1"
@@ -367,6 +296,9 @@ msgstr "通过 Exa API 启用 LLM 触发的神经网络搜索。"
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr "通过Ollama的搜索API启用LLM触发的网络搜索"
 
+msgid "No command provided."
+msgstr "未提供命令。"
+
 msgid "Tool Request: %1"
 msgstr "工具请求：%1"
 
@@ -387,6 +319,350 @@ msgstr "打开连接到此会话的终端"
 
 msgid "Copy output"
 msgstr "复制输出"
+
+msgid "Microphone recording failed"
+msgstr "麦克风录音失败"
+
+msgid "No microphone found"
+msgstr "未找到麦克风"
+
+msgid "No microphone available"
+msgstr "无可用麦克风"
+
+msgid "Recording…"
+msgstr "正在录音…"
+
+msgid "Could not start recording: %1"
+msgstr "无法开始录音：%1"
+
+msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
+msgstr "无法启动 Shell 录音器（请安装 pw-record 或 ffmpeg）"
+
+msgid "Processing…"
+msgstr "正在处理…"
+
+msgid "Failed to stop recording"
+msgstr "停止录音失败"
+
+msgid "Shell recorder stop is not configured"
+msgstr "未配置 Shell 录音停止操作"
+
+msgid "Shell recording failed"
+msgstr "Shell 录音失败"
+
+msgid "Recording stopped unexpectedly"
+msgstr "录音意外停止"
+
+msgid "Recording produced no file"
+msgstr "录音未生成文件"
+
+msgid "Recording failed"
+msgstr "录音失败"
+
+msgid "Speech to Text"
+msgstr "语音转文字"
+
+msgid "API key saved to local fallback (KWallet unavailable)."
+msgstr "API 密钥已保存到本地回退（KWallet 不可用）。"
+
+msgid "API key saved to KWallet."
+msgstr "API 密钥已保存到 KWallet。"
+
+msgid "API key saved to local fallback."
+msgstr "API 密钥已保存到本地回退。"
+
+msgid "Set an API endpoint first."
+msgstr "请先设置 API 端点。"
+
+msgid "Fetching STT models…"
+msgstr "正在获取 STT 模型…"
+
+msgid "Loaded %1 STT model(s)."
+msgstr "已加载 %1 个 STT 模型。"
+
+msgid "Voice input:"
+msgstr "语音输入："
+
+msgid "Enable microphone input"
+msgstr "启用麦克风输入"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr "仅配置语音转文字引擎。转录使用您当前活跃的聊天配置文件（常规）。"
+
+msgid "Mic button:"
+msgstr "麦克风按钮："
+
+msgid "Auto"
+msgstr "自动"
+
+msgid "Hold to talk"
+msgstr "按住说话"
+
+msgid "Toggle"
+msgstr "切换"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"自动：点击切换录音；按住 250 毫秒以上进行按住说话。按住：仅按住说话。切换：点"
+"击开始/停止。"
+
+msgid "Voice shortcut:"
+msgstr "语音快捷键："
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"当 PlasmaLLM 打开并处于焦点时，使用与按钮相同的麦克风模式（自动：短按切换，按"
+"住 250 毫秒以上按住说话）。不会打开面板 — 请使用快捷键页面上的“激活小部件”。"
+"默认值：Ctrl+M。清除以禁用。"
+
+msgid "Transcriber"
+msgstr "转录器"
+
+msgid "Provider:"
+msgstr "提供商："
+
+msgid "Endpoint:"
+msgstr "端点："
+
+msgid "Model:"
+msgstr "模型："
+
+msgid "Fetching…"
+msgstr "正在获取…"
+
+msgid "Fetch"
+msgstr "获取"
+
+msgid "Fetch STT models"
+msgstr "获取 STT 模型"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr "OpenRouter 仅通过转录模态列出 STT 模型（此页面正是这样做的）。"
+
+msgid "API key:"
+msgstr "API 密钥："
+
+msgid "Provider API key"
+msgstr "提供商 API 密钥"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Save API key"
+msgstr "保存 API 密钥"
+
+msgid "Options"
+msgstr "选项"
+
+msgid "Language hint:"
+msgstr "语言提示："
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "可选，例如 zh 或 en（留空 = 自动）"
+
+msgid "Max recording (seconds):"
+msgstr "最大录音时长（秒）："
+
+msgid "STT backend:"
+msgstr "STT 后端："
+
+msgid "OpenAI-compatible transcriptions"
+msgstr "兼容 OpenAI 的转录"
+
+msgid "Speech-to-text is not configured"
+msgstr "未配置语音转文字"
+
+msgid "Unknown STT backend: %1"
+msgstr "未知的 STT 后端：%1"
+
+msgid "STT backend does not support model listing"
+msgstr "STT 后端不支持列出模型"
+
+msgid "STT endpoint is not configured"
+msgstr "未配置 STT 端点"
+
+msgid "Model list request failed: %1"
+msgstr "模型列表请求失败：%1"
+
+msgid "No STT models returned"
+msgstr "未返回任何 STT 模型"
+
+msgid "No audio data to transcribe"
+msgstr "没有要转录的音频数据"
+
+msgid "STT model is not configured"
+msgstr "未配置 STT 模型"
+
+msgid "Speech-to-text request timed out"
+msgstr "语音转文字请求超时"
+
+msgid "Failed to parse STT response: %1"
+msgstr "无法解析 STT 响应：%1"
+
+msgid "STT failed (HTTP %1): %2"
+msgstr "STT 失败 (HTTP %1)：%2"
+
+msgid "STT failed (HTTP %1)"
+msgstr "STT 失败 (HTTP %1)"
+
+msgid "STT request failed: %1"
+msgstr "STT 请求失败：%1"
+
+msgid "Profile Header:"
+msgstr "配置文件标头："
+
+msgid "Show provider and model in profile header"
+msgstr "在配置文件标头中显示提供商和模型"
+
+msgid "Chat Spacing: %1px"
+msgstr "聊天间距：%1px"
+
+msgid "Compact"
+msgstr "紧凑"
+
+msgid "Spacious"
+msgstr "宽敞"
+
+msgid "Chat Labels:"
+msgstr "聊天标签："
+
+msgid "User label:"
+msgstr "用户标签："
+
+msgid "You"
+msgstr "你"
+
+msgid "Assistant label:"
+msgstr "助手标签："
+
+msgid "Assistant"
+msgstr "助手"
+
+msgid "Use model name as assistant label"
+msgstr "使用模型名称作为助手标签"
+
+msgid "Chat Colors:"
+msgstr "聊天颜色："
+
+msgid "Use custom user color"
+msgstr "使用自定义用户颜色"
+
+msgid "Use custom assistant color"
+msgstr "使用自定义助手颜色"
+
+msgid "UI Font:"
+msgstr "界面字体："
+
+msgid "Use custom UI font"
+msgstr "使用自定义界面字体"
+
+msgid "Code Font:"
+msgstr "代码字体："
+
+msgid "Use custom code font"
+msgstr "使用自定义代码字体"
+
+msgid "Thoughts Font:"
+msgstr "思维字体："
+
+msgid "Use custom thoughts font"
+msgstr "使用自定义思维字体"
+
+msgid "LaTeX Rendering:"
+msgstr "LaTeX 渲染："
+
+msgid "Leave as TeX"
+msgstr "保留为 TeX"
+
+msgid "Replace with Unicode (Default)"
+msgstr "替换为 Unicode（默认）"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext（缺少 python3-matplotlib）"
+
+msgid "Header Icons:"
+msgstr "标头图标："
+
+msgid "Profile Header"
+msgstr "配置文件标头"
+
+msgid "Always show Tasks"
+msgstr "始终显示任务"
+
+msgid "Always show Auto Toggle"
+msgstr "始终显示自动切换"
+
+msgid "Show History"
+msgstr "显示历史记录"
+
+msgid "Show Copy conversation"
+msgstr "显示复制对话"
+
+msgid "Show Clear chat"
+msgstr "显示清除聊天"
+
+msgid "Show Settings"
+msgstr "显示设置"
+
+msgid "Show Pin"
+msgstr "显示固定"
+
+msgid "Voice message"
+msgstr "语音消息"
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Web Search"
+msgstr "网络搜索"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr "Mathtext 渲染回退到 Unicode 替换（matplotlib 未安装或发生错误）"
+
+msgid "Thinking"
+msgstr "思考中…"
+
+msgid "Searched for: %1"
+msgstr "已搜索：%1"
+
+msgid "Show %1 results"
+msgstr "显示 %1 条结果"
+
+msgid "Save & Retry"
+msgstr "保存并重试"
+
+msgid "Copy to clipboard"
+msgstr "复制到剪贴板"
+
+msgid "Edit message"
+msgstr "编辑消息"
+
+msgid "Edit response"
+msgstr "编辑回复"
+
+msgid "Retry from here"
+msgstr "从此重试"
+
+msgid "Regenerate response"
+msgstr "重新生成回复"
+
+msgid "Share output with assistant"
+msgstr "与助手共享输出"
 
 msgid "Approve the pending tool request"
 msgstr "批准待处理的工具请求"
@@ -473,20 +749,21 @@ msgstr "您确定要删除所有聊天历史记录文件吗？此操作无法撤
 msgid "Clear All"
 msgstr "全部清除"
 
+msgid "Retry from this message?"
+msgstr "从此消息开始重试？"
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr "这将删除此点之后的 %1 条消息并生成新的回复。"
+
+msgid "Retry"
+msgstr "重试"
+
 msgid "Copy conversation"
 msgstr "复制对话"
 
-msgid "You"
-msgstr "你"
-
-msgid "Assistant"
-msgstr "助手"
-
 msgid "Command"
 msgstr "命令"
-
-msgid "Error"
-msgstr "错误"
 
 msgid "Clear chat"
 msgstr "清除聊天"
@@ -555,9 +832,6 @@ msgstr "松开以发送"
 msgid "Click to start"
 msgstr "点击开始"
 
-msgid "Hold to talk"
-msgstr "按住说话"
-
 msgid "Click to toggle, hold to talk"
 msgstr "点击切换，按住说话"
 
@@ -578,57 +852,6 @@ msgstr "取消 LLM 请求"
 
 msgid "Drop files here to attach"
 msgstr "将文件拖放到此处以添加附件"
-
-msgid "Microphone recording failed"
-msgstr "麦克风录音失败"
-
-msgid "No microphone found"
-msgstr "未找到麦克风"
-
-msgid "No microphone available"
-msgstr "无可用麦克风"
-
-msgid "Recording…"
-msgstr "正在录音…"
-
-msgid "Could not start recording: %1"
-msgstr "无法开始录音：%1"
-
-msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
-msgstr "无法启动 Shell 录音器（请安装 pw-record 或 ffmpeg）"
-
-msgid "Processing…"
-msgstr "正在处理…"
-
-msgid "Failed to stop recording"
-msgstr "停止录音失败"
-
-msgid "Shell recorder stop is not configured"
-msgstr "未配置 Shell 录音停止操作"
-
-msgid "Shell recording failed"
-msgstr "Shell 录音失败"
-
-msgid "Recording stopped unexpectedly"
-msgstr "录音意外停止"
-
-msgid "Recording produced no file"
-msgstr "录音未生成文件"
-
-msgid "Recording failed"
-msgstr "录音失败"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI兼容"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "Exa"
-msgstr "Exa"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "无法获取 gcloud 令牌（退出 %1）：%2"
@@ -700,14 +923,8 @@ msgstr "项目 ID："
 msgid "Location:"
 msgstr "位置："
 
-msgid "Provider:"
-msgstr "提供商："
-
 msgid "API Endpoint:"
 msgstr "API端点："
-
-msgid "Model:"
-msgstr "模型："
 
 msgid "Refreshing…"
 msgstr "刷新中…"
@@ -768,7 +985,9 @@ msgid ""
 "When enabled, the model's reasoning is shown above each reply with a "
 "collapsible header. Round-trip of signed thoughts to the API still happens "
 "regardless of this setting."
-msgstr "启用后，模型的推理会以可折叠标题的形式显示在每条回复上方。无论此设置如何，签名思考的API往返仍会进行。"
+msgstr ""
+"启用后，模型的推理会以可折叠标题的形式显示在每条回复上方。无论此设置如何，签"
+"名思考的API往返仍会进行。"
 
 msgid "Use Responses API"
 msgstr "使用Responses API"
@@ -778,8 +997,8 @@ msgid ""
 "(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
 "picking a preset."
 msgstr ""
-"在OpenAI / Poe / OpenRouter / "
-"Azure上显示推理内容所必需（POST到/v1/responses而非/v1/chat/completions）。选择预设时自动设置。"
+"在OpenAI / Poe / OpenRouter / Azure上显示推理内容所必需（POST到/v1/responses"
+"而非/v1/chat/completions）。选择预设时自动设置。"
 
 msgid "Attachments:"
 msgstr "附件："
@@ -790,7 +1009,8 @@ msgstr "调整图片附件大小"
 msgid ""
 "Resizes large image attachments to fit within 800x600 before sending, "
 "reducing upload size and context tokens."
-msgstr "发送前将大图片附件的大小调整到 800x600 以内，以减少上传大小和上下文 Token。"
+msgstr ""
+"发送前将大图片附件的大小调整到 800x600 以内，以减少上传大小和上下文 Token。"
 
 msgid "Chat History:"
 msgstr "聊天记录："
@@ -808,8 +1028,8 @@ msgid "Show notifications when minimized"
 msgstr "最小化时显示通知"
 
 msgid ""
-"Show system notifications for incoming messages and tool calls when the chat"
-" window is minimized or closed."
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
 msgstr "当聊天窗口最小化或关闭时，为传入的消息和工具调用显示系统通知。"
 
 msgid "Save format:"
@@ -845,113 +1065,112 @@ msgstr "秒"
 msgid "minutes"
 msgstr "分钟"
 
-msgid "Speech to Text"
-msgstr "语音转文字"
+msgid "System Info:"
+msgstr "系统信息："
 
-msgid "API key saved to local fallback (KWallet unavailable)."
-msgstr "API 密钥已保存到本地回退（KWallet 不可用）。"
+msgid "OS"
+msgstr "操作系统"
 
-msgid "API key saved to KWallet."
-msgstr "API 密钥已保存到 KWallet。"
+msgid "Shell"
+msgstr "Shell"
 
-msgid "API key saved to local fallback."
-msgstr "API 密钥已保存到本地回退。"
+msgid "Hostname"
+msgstr "主机名"
 
-msgid "Set an API endpoint first."
-msgstr "请先设置 API 端点。"
+msgid "Kernel"
+msgstr "内核"
 
-msgid "Fetching STT models…"
-msgstr "正在获取 STT 模型…"
+msgid "Desktop"
+msgstr "桌面"
 
-msgid "Loaded %1 STT model(s)."
-msgstr "已加载 %1 个 STT 模型。"
+msgid "User"
+msgstr "用户"
 
-msgid "Voice input:"
-msgstr "语音输入："
+msgid "CPU"
+msgstr "CPU"
 
-msgid "Enable microphone input"
-msgstr "启用麦克风输入"
+msgid "Memory"
+msgstr "内存"
 
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr "仅配置语音转文字引擎。转录使用您当前活跃的聊天配置文件（常规）。"
+msgid "GPU"
+msgstr "GPU"
 
-msgid "Mic button:"
-msgstr "麦克风按钮："
+msgid "Block Devices"
+msgstr "块设备"
 
-msgid "Auto"
-msgstr "自动"
+msgid "Network"
+msgstr "网络"
 
-msgid "Toggle"
-msgstr "切换"
+msgid "Locale"
+msgstr "区域设置"
 
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr "自动：点击切换录音；按住 250 毫秒以上进行按住说话。按住：仅按住说话。切换：点击开始/停止。"
+msgid "Date/Time"
+msgstr "日期/时间"
 
-msgid "Voice shortcut:"
-msgstr "语音快捷键："
+msgid "Template:"
+msgstr "模板："
 
 msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the"
-" panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
 msgstr ""
-"当 PlasmaLLM 打开并处于焦点时，使用与按钮相同的麦克风模式（自动：短按切换，按住 250 毫秒以上按住说话）。不会打开面板 — "
-"请使用快捷键页面上的“激活小部件”。默认值：Ctrl+M。清除以禁用。"
+"这是发送给模型的完整系统提示词。使用 {{placeholders}} "
+"引入动态内容，例如系统详细信息、已启用的工具或桌面自动化指令。您编写的其他任何内容都将原样使用。关键的运行时指令（驾驶、跳过审批模式）在处于活动"
+"状态时会自动附加，即使您删除了它们的占位符。"
 
-msgid "Transcriber"
-msgstr "转录器"
+msgid "System Prompt:"
+msgstr "系统提示词："
 
-msgid "Endpoint:"
-msgstr "端点："
+msgid "Write your system prompt here…"
+msgstr "在此处编写系统提示词…"
 
-msgid "Fetching…"
-msgstr "正在获取…"
+msgid "Placeholders:"
+msgstr "占位符："
 
-msgid "Fetch"
-msgstr "获取"
+msgid "Enabled system info selected in the checklist above"
+msgstr "在上方检查列表中选中的已启用系统信息"
 
-msgid "Fetch STT models"
-msgstr "获取 STT 模型"
+msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr "来自“工具”菜单的已启用工具描述和准则"
 
 msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
-msgstr "OpenRouter 仅通过转录模态列出 STT 模型（此页面正是这样做的）。"
+"Persistent tmux or screen session multiplexer instructions (when active)"
+msgstr "持久 tmux 或 screen 会话多路复用器指令（处于活动状态时）"
 
-msgid "API key:"
-msgstr "API 密钥："
+msgid "Notice indicating skip-approvals mode (/auto) is active"
+msgstr "指示跳过审批模式 (/auto) 处于活动状态的提示"
 
-msgid "Provider API key"
-msgstr "提供商 API 密钥"
+msgid "Desktop automation coordinates and guidelines (when driving)"
+msgstr "桌面自动化坐标和准则（驾驶时）"
 
-msgid "Save"
-msgstr "保存"
+msgid "Localization:"
+msgstr "本地化："
 
-msgid "Save API key"
-msgstr "保存 API 密钥"
+msgid "Localize System Prompt"
+msgstr "本地化系统提示词"
 
-msgid "Options"
-msgstr "选项"
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
+msgstr "将默认提示词模板和动态系统部分翻译为您的桌面语言。"
 
-msgid "Language hint:"
-msgstr "语言提示："
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
+msgstr "注意：将系统指令和工具本地化为非英语语言可能会降低某些模型上的工具调用可靠性和指令遵循准确性。"
 
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "可选，例如 zh 或 en（留空 = 自动）"
+msgid "Actions:"
+msgstr "操作："
 
-msgid "Max recording (seconds):"
-msgstr "最大录音时长（秒）："
+msgid "Reset to Default Template"
+msgstr "重置为默认模板"
 
-msgid "STT backend:"
-msgstr "STT 后端："
-
-msgid "OpenAI-compatible transcriptions"
-msgstr "兼容 OpenAI 的转录"
+msgid "Preview:"
+msgstr "预览："
 
 msgid "General Tool Settings"
 msgstr "常规工具设置"
@@ -975,12 +1194,11 @@ msgid "Enable Desktop Automation"
 msgstr "启用桌面自动化"
 
 msgid ""
-"Enable Desktop Automation (requires <a "
-"href=\"https://github.com/joshuaeroman/plasmallm-desktop-"
-"driver\">driver</a>)"
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
 msgstr ""
-"启用桌面自动化（需要<a href=\"https://github.com/joshuaeroman/plasmallm-desktop-"
-"driver\">驱动程序</a>）"
+"启用桌面自动化（需要<a href=\"https://github.com/joshuaeroman/plasmallm-"
+"desktop-driver\">驱动程序</a>）"
 
 msgid "Path whitelist:"
 msgstr "路径白名单："
@@ -994,7 +1212,9 @@ msgstr "添加"
 msgid ""
 "Whitelist applies to file-system tools (read, write, list, search). Note: "
 "'run_command' is not restricted by this list."
-msgstr "白名单适用于文件系统工具（读取、写入、列出、搜索）。注意：'run_command' 不受此列表限制。"
+msgstr ""
+"白名单适用于文件系统工具（读取、写入、列出、搜索）。注意：'run_command' 不受"
+"此列表限制。"
 
 msgid "Max read size:"
 msgstr "最大读取大小："
@@ -1042,176 +1262,24 @@ msgstr "允许 Gemini 在安全的服务器端沙盒中编写和执行 Python �
 msgid ""
 "Combining Native tools with commands requires a newer model. Your currently "
 "selected model (%1) may encounter errors."
-msgstr "将原生工具与命令结合使用需要更新的模型。当前选定的模型 (%1) 可能会遇到错误。"
+msgstr ""
+"将原生工具与命令结合使用需要更新的模型。当前选定的模型 (%1) 可能会遇到错误。"
 
 msgid "Individual Tools"
 msgstr "单个工具"
 
-msgid "Speech-to-text is not configured"
-msgstr "未配置语音转文字"
+msgid "Prompt Instructions:"
+msgstr "提示词指令："
 
-msgid "Unknown STT backend: %1"
-msgstr "未知的 STT 后端：%1"
-
-msgid "STT backend does not support model listing"
-msgstr "STT 后端不支持列出模型"
-
-msgid "STT endpoint is not configured"
-msgstr "未配置 STT 端点"
-
-msgid "Model list request failed: %1"
-msgstr "模型列表请求失败：%1"
-
-msgid "No STT models returned"
-msgstr "未返回任何 STT 模型"
-
-msgid "No audio data to transcribe"
-msgstr "没有要转录的音频数据"
-
-msgid "STT model is not configured"
-msgstr "未配置 STT 模型"
-
-msgid "Speech-to-text request timed out"
-msgstr "语音转文字请求超时"
-
-msgid "Failed to parse STT response: %1"
-msgstr "无法解析 STT 响应：%1"
-
-msgid "STT failed (HTTP %1): %2"
-msgstr "STT 失败 (HTTP %1)：%2"
-
-msgid "STT failed (HTTP %1)"
-msgstr "STT 失败 (HTTP %1)"
-
-msgid "STT request failed: %1"
-msgstr "STT 请求失败：%1"
-
-msgid "Voice message"
-msgstr "语音消息"
-
-msgid "Web Search"
-msgstr "网络搜索"
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr "Mathtext 渲染回退到 Unicode 替换（matplotlib 未安装或发生错误）"
-
-msgid "Thinking"
-msgstr "思考中…"
-
-msgid "Searched for: %1"
-msgstr "已搜索：%1"
-
-msgid "Show %1 results"
-msgstr "显示 %1 条结果"
-
-msgid "Copy to clipboard"
-msgstr "复制到剪贴板"
-
-msgid "Share output with assistant"
-msgstr "与助手共享输出"
-
-msgid "Profile Header:"
-msgstr "配置文件标头："
-
-msgid "Show provider and model in profile header"
-msgstr "在配置文件标头中显示提供商和模型"
-
-msgid "Chat Spacing: %1px"
-msgstr "聊天间距：%1px"
-
-msgid "Compact"
-msgstr "紧凑"
-
-msgid "Spacious"
-msgstr "宽敞"
-
-msgid "Chat Labels:"
-msgstr "聊天标签："
-
-msgid "User label:"
-msgstr "用户标签："
-
-msgid "Assistant label:"
-msgstr "助手标签："
-
-msgid "Use model name as assistant label"
-msgstr "使用模型名称作为助手标签"
-
-msgid "Chat Colors:"
-msgstr "聊天颜色："
-
-msgid "Use custom user color"
-msgstr "使用自定义用户颜色"
-
-msgid "Use custom assistant color"
-msgstr "使用自定义助手颜色"
-
-msgid "UI Font:"
-msgstr "界面字体："
-
-msgid "Use custom UI font"
-msgstr "使用自定义界面字体"
-
-msgid "Code Font:"
-msgstr "代码字体："
-
-msgid "Use custom code font"
-msgstr "使用自定义代码字体"
-
-msgid "Thoughts Font:"
-msgstr "思维字体："
-
-msgid "Use custom thoughts font"
-msgstr "使用自定义思维字体"
-
-msgid "LaTeX Rendering:"
-msgstr "LaTeX 渲染："
-
-msgid "Leave as TeX"
-msgstr "保留为 TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "替换为 Unicode（默认）"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext（缺少 python3-matplotlib）"
-
-msgid "Header Icons:"
-msgstr "标头图标："
-
-msgid "Profile Header"
-msgstr "配置文件标头"
-
-msgid "Always show Tasks"
-msgstr "始终显示任务"
-
-msgid "Always show Auto Toggle"
-msgstr "始终显示自动切换"
-
-msgid "Show History"
-msgstr "显示历史记录"
-
-msgid "Show Copy conversation"
-msgstr "显示复制对话"
-
-msgid "Show Clear chat"
-msgstr "显示清除聊天"
-
-msgid "Show Settings"
-msgstr "显示设置"
-
-msgid "Show Pin"
-msgstr "显示固定"
+msgid "Reset"
+msgstr "重置"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
-msgstr "API 密钥的内部存储方案已迁移。如果您的密钥现已丢失或无法使用，可以从 KWalletManager 中恢复旧密钥。"
+msgstr ""
+"API 密钥的内部存储方案已迁移。如果您的密钥现已丢失或无法使用，可以从 "
+"KWalletManager 中恢复旧密钥。"
 
 msgid "Failed to stop driving: %1"
 msgstr "无法停止控制：%1"
@@ -1249,7 +1317,8 @@ msgstr "完成录音失败"
 msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
 "installed and authenticated."
-msgstr "无法获取 gcloud 令牌（退出 %1）：%2。请确保 gcloud 已安装并已通过身份验证。"
+msgstr ""
+"无法获取 gcloud 令牌（退出 %1）：%2。请确保 gcloud 已安装并已通过身份验证。"
 
 msgid "No tool request pending to approve."
 msgstr "没有待批准的工具请求。"
@@ -1260,7 +1329,9 @@ msgstr "没有待拒绝的工具请求。"
 msgid ""
 "Skip approvals mode enabled for this session. All enabled tools will run "
 "automatically, bypassing 'Ask before running' settings."
-msgstr "此会话已启用跳过审批模式。所有已启用的工具将自动运行，绕过「运行前询问」设置。"
+msgstr ""
+"此会话已启用跳过审批模式。所有已启用的工具将自动运行，绕过「运行前询问」设"
+"置。"
 
 msgid ""
 "Skip approvals mode disabled. Tools will revert to your configured 'Ask "
@@ -1362,6 +1433,78 @@ msgstr "控制会话处于活动状态（已授权）。自动模式已启用。
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "控制会话授权成功。自动模式已启用。"
 
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"在用户的系统上执行 Shell 命令并返回其输出。准则：\n"
+"- 对于需要超级用户权限的任何命令，使用 `pkexec` 代替 `sudo`。\n"
+"- 使用 `&&` 链接步骤。\n"
+"- 命令以非交互方式运行。切勿使用等待用户输入的命令（如 `read`）。\n"
+"- 如果需要提示用户输入或显示消息框，使用 `kdialog`（例如 `kdialog --inputbox \"提示\"`）。\n"
+"- 未经明确许可，切勿安装软件包、修改系统配置、重启或采取任何更改系统或干扰用户的操作。\n"
+"- 需要许可时，先用纯文本询问用户。\n"
+"- 对于自动运行的工具：保持谨慎并优先使用只读命令。如果某项操作具有潜在破坏性，请以纯文本形式进行描述，并在调用该工具之前等待用户的明确批准。\n"
+"- 如果其他更具体的工具（如 read_file、write_file、search_files "
+"等）可以完成任务，则必须首选这些工具。仅在没有其他合适工具时才使用此工具。"
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr "读取指定路径的文件内容。访问受限于允许的目录。"
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr "将内容写入指定路径的文件。访问受限于允许的目录。"
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr "列出目录的内容。访问受限于允许的目录。"
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "在目录中的文件内搜索模式（递归）。"
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr "向 URL 执行 HTTP GET 请求并返回响应内容。"
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "向 URL 执行 HTTP 请求（POST、PUT 等）。"
+
+msgid "Get the current content of the system clipboard."
+msgstr "获取系统剪贴板的当前内容。"
+
+msgid "Set the content of the system clipboard."
+msgstr "设置系统剪贴板的内容。"
+
+msgid "Show a system notification."
+msgstr "显示系统通知。"
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr "在默认应用程序（例如 Web 浏览器）中打开 URL。"
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr "执行网络搜索以查找最新信息、新闻或具体事实。"
+
 msgid "General"
 msgstr "常规"
 
@@ -1380,6 +1523,55 @@ msgstr "工具"
 msgid "Custom Tools"
 msgstr "自定义工具"
 
+#~ msgid ""
+#~ "Anthropic enables extended thinking when effort is not Off, using the "
+#~ "token budget below. Temperature is forced to max while thinking."
+#~ msgstr ""
+#~ "当力度不为“关闭”时，Anthropic 启用扩展思考，并使用下方的令牌预算。思考时强"
+#~ "制将温度（Temperature）设为最大值。"
+
+#~ msgid ""
+#~ "Exa performs real-time neural search and synthesizes grounded answers "
+#~ "with live web citations."
+#~ msgstr "Exa 执行实时神经搜索，并综合生成附带实时网络引用的有据答案。"
+
+#~ msgid ""
+#~ "Gemini uses the thinking token budget directly. Set to 0 to disable "
+#~ "thinking on supported models."
+#~ msgstr ""
+#~ "Gemini 直接使用思考令牌预算。设置为 0 以禁用思考（某些模型需要此设置）。"
+
+#~ msgid "Gemini uses the thinking level dropdown directly."
+#~ msgstr "Gemini 直接使用思考级别下拉菜单。"
+
+#~ msgid ""
+#~ "Reasoning effort (low / medium / high) gates extended thinking. To see "
+#~ "thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+#~ "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+#~ "reasoning_content."
+#~ msgstr ""
+#~ "推理力度（低 / 中 / 高）控制扩展思考。要查看 OpenAI / Poe / OpenRouter / "
+#~ "Azure 的思考，请启用“使用 Responses API”；聊天补全提供商（DeepSeek、Qwen）"
+#~ "通过 reasoning_content 呈现推理。"
+
+#~ msgid "Custom Instructions:"
+#~ msgstr "自定义指令："
+
+#~ msgid "Additional instructions for the LLM…"
+#~ msgstr "给LLM的附加指令…"
+
+#~ msgid "OpenAI-compatible"
+#~ msgstr "OpenAI兼容"
+
+#~ msgid "Anthropic"
+#~ msgstr "Anthropic"
+
+#~ msgid "Google Gemini"
+#~ msgstr "Google Gemini"
+
+#~ msgid "Exa"
+#~ msgstr "Exa"
+
 #~ msgid "No models found."
 #~ msgstr "未找到模型。"
 
@@ -1397,9 +1589,6 @@ msgstr "自定义工具"
 
 #~ msgid "Copy message"
 #~ msgstr "复制消息"
-
-#~ msgid "Retry"
-#~ msgstr "重试"
 
 #~ msgid "Share with LLM"
 #~ msgstr "与LLM共享"
@@ -1450,8 +1639,8 @@ msgstr "自定义工具"
 #~ msgstr "切换自动模式"
 
 #~ msgid ""
-#~ "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
-#~ "are on)."
+#~ "Auto mode is permanently enabled via settings (both Auto-run and Auto-"
+#~ "share are on)."
 #~ msgstr "自动模式已通过设置永久启用（自动运行和自动共享均已开启）。"
 
 #~ msgid ""
@@ -1484,10 +1673,12 @@ msgstr "自定义工具"
 #~ msgstr "启用自动模式（自动运行 + 自动共享）"
 
 #~ msgid ""
-#~ "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
-#~ " button to run them. Tasks with auto mode will temporarily enable auto-run "
-#~ "and auto-share."
-#~ msgstr "任务是可重用的提示快捷方式。在聊天中使用 /task <name> 或工具栏按钮运行它们。自动模式的任务将临时启用自动运行和自动共享。"
+#~ "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the "
+#~ "toolbar button to run them. Tasks with auto mode will temporarily enable "
+#~ "auto-run and auto-share."
+#~ msgstr ""
+#~ "任务是可重用的提示快捷方式。在聊天中使用 /task <name> 或工具栏按钮运行它"
+#~ "们。自动模式的任务将临时启用自动运行和自动共享。"
 
 #~ msgid "Saves to ~/PlasmaLLM/chats/"
 #~ msgstr "保存到 ~/PlasmaLLM/chats/"
@@ -1501,15 +1692,17 @@ msgstr "自定义工具"
 #~ msgid ""
 #~ "Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
 #~ "share."
-#~ msgstr "允许 LLM 执行 shell 命令。如果与“自动共享”结合使用则非常危险。请自担风险。"
+#~ msgstr ""
+#~ "允许 LLM 执行 shell 命令。如果与“自动共享”结合使用则非常危险。请自担风险。"
 
 #~ msgid "Run as tool"
 #~ msgstr "作为工具运行"
 
 #~ msgid ""
-#~ "Use the run_command tool for command execution. If disabled, falls back to "
-#~ "parsing code blocks."
-#~ msgstr "使用 run_command 工具执行命令。如果禁用，将回退到从响应中解析代码块。"
+#~ "Use the run_command tool for command execution. If disabled, falls back "
+#~ "to parsing code blocks."
+#~ msgstr ""
+#~ "使用 run_command 工具执行命令。如果禁用，将回退到从响应中解析代码块。"
 
 #~ msgid "Auto-share command output with LLM"
 #~ msgstr "自动与LLM共享命令输出"
@@ -1519,8 +1712,11 @@ msgstr "自定义工具"
 
 #~ msgid ""
 #~ "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-#~ "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-#~ msgstr "⚠️ 危险：两个选项均已启用——LLM现在可以执行命令并查看其输出，从而启用代理工作流。请仅与可信的LLM一起使用。"
+#~ "their output, enabling an agentic workflow. Only use with trustworthy "
+#~ "LLMs."
+#~ msgstr ""
+#~ "⚠️ 危险：两个选项均已启用——LLM现在可以执行命令并查看其输出，从而启用代理工"
+#~ "作流。请仅与可信的LLM一起使用。"
 
 #~ msgid "Backend:"
 #~ msgstr "后端："
@@ -1565,9 +1761,11 @@ msgstr "自定义工具"
 #~ msgstr "自动将运行命令结果发送回LLM"
 
 #~ msgid ""
-#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only use "
-#~ "with very trustworthy LLMs."
-#~ msgstr "警告：与自动共享结合使用时，将启用代理工作流。请仅与非常可信的LLM一起使用。"
+#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only "
+#~ "use with very trustworthy LLMs."
+#~ msgstr ""
+#~ "警告：与自动共享结合使用时，将启用代理工作流。请仅与非常可信的LLM一起使"
+#~ "用。"
 
 #~ msgid "Use tool calling for commands"
 #~ msgstr "使用工具调用执行命令"
@@ -1575,7 +1773,9 @@ msgstr "自定义工具"
 #~ msgid ""
 #~ "Use the run_command tool for command execution. Disable for models that "
 #~ "don't support tool calling (falls back to code block parsing)."
-#~ msgstr "使用run_command工具执行命令。对于不支持工具调用的模型请禁用（将回退到代码块解析）。"
+#~ msgstr ""
+#~ "使用run_command工具执行命令。对于不支持工具调用的模型请禁用（将回退到代码"
+#~ "块解析）。"
 
 #~ msgid "Web Search:"
 #~ msgstr "网络搜索："

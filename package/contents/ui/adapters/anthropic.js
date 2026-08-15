@@ -30,12 +30,12 @@ var presets = [
 // thinking budget are meaningful: the effort gates whether thinking is on,
 // the budget controls the token allowance.
 var capabilities = {
-    providerPresets: false,
+    providerPresets: true,
     customEndpoint: true,
     reasoningEffort: true,
     thinkingBudget: true,
     fetchModels: true,
-    reasoningHelp: i18n("Anthropic enables extended thinking when effort is not Off, using the token budget below. Temperature is forced to max while thinking.")
+    reasoningHelp: "Anthropic enables extended thinking when effort is not Off, using the token budget below. Temperature is forced to max while thinking."
 };
 
 function setHeaders(xhr, apiKey) {

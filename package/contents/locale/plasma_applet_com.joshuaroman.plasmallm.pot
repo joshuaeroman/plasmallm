@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-14 20:58-0400\n"
+"POT-Creation-Date: 2026-08-15 17:59-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,11 +24,6 @@ msgid "Current color is %1. This button will open a color chooser dialog."
 msgstr ""
 
 msgid "Current color is %1."
-msgstr ""
-
-msgid ""
-"Anthropic enables extended thinking when effort is not Off, using the token "
-"budget below. Temperature is forced to max while thinking."
 msgstr ""
 
 msgid "Request timed out after 30 seconds"
@@ -64,16 +59,6 @@ msgstr ""
 msgid "Request failed (no response) — check your endpoint URL"
 msgstr ""
 
-msgid ""
-"Exa performs real-time neural search and synthesizes grounded answers with "
-"live web citations."
-msgstr ""
-
-msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
-msgstr ""
-
 msgid "Failed to fetch models"
 msgstr ""
 
@@ -89,20 +74,10 @@ msgstr ""
 msgid "Request failed"
 msgstr ""
 
-msgid "Gemini uses the thinking level dropdown directly."
-msgstr ""
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
 "disable Native features in Settings."
-msgstr ""
-
-msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
 msgstr ""
 
 msgid ""
@@ -152,57 +127,6 @@ msgid ""
 "the LLM can fill. Values provided by the LLM are automatically shell-escaped."
 msgstr ""
 
-msgid "System Info:"
-msgstr ""
-
-msgid "OS"
-msgstr ""
-
-msgid "Shell"
-msgstr ""
-
-msgid "Hostname"
-msgstr ""
-
-msgid "Kernel"
-msgstr ""
-
-msgid "Desktop"
-msgstr ""
-
-msgid "User"
-msgstr ""
-
-msgid "CPU"
-msgstr ""
-
-msgid "Memory"
-msgstr ""
-
-msgid "GPU"
-msgstr ""
-
-msgid "Block Devices"
-msgstr ""
-
-msgid "Network"
-msgstr ""
-
-msgid "Locale"
-msgstr ""
-
-msgid "Date/Time"
-msgstr ""
-
-msgid "Custom Instructions:"
-msgstr ""
-
-msgid "Additional instructions for the LLM…"
-msgstr ""
-
-msgid "Preview:"
-msgstr ""
-
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
 
@@ -240,9 +164,6 @@ msgid "Ask before running"
 msgstr ""
 
 msgid "Error: URL must start with http:// or https://"
-msgstr ""
-
-msgid "No command provided."
 msgstr ""
 
 msgid "Ask before running commands from LLM"
@@ -364,6 +285,9 @@ msgstr ""
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr ""
 
+msgid "No command provided."
+msgstr ""
+
 msgid "Tool Request: %1"
 msgstr ""
 
@@ -383,6 +307,345 @@ msgid "Open terminal attached to this session"
 msgstr ""
 
 msgid "Copy output"
+msgstr ""
+
+msgid "Microphone recording failed"
+msgstr ""
+
+msgid "No microphone found"
+msgstr ""
+
+msgid "No microphone available"
+msgstr ""
+
+msgid "Recording…"
+msgstr ""
+
+msgid "Could not start recording: %1"
+msgstr ""
+
+msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
+msgstr ""
+
+msgid "Processing…"
+msgstr ""
+
+msgid "Failed to stop recording"
+msgstr ""
+
+msgid "Shell recorder stop is not configured"
+msgstr ""
+
+msgid "Shell recording failed"
+msgstr ""
+
+msgid "Recording stopped unexpectedly"
+msgstr ""
+
+msgid "Recording produced no file"
+msgstr ""
+
+msgid "Recording failed"
+msgstr ""
+
+msgid "Speech to Text"
+msgstr ""
+
+msgid "API key saved to local fallback (KWallet unavailable)."
+msgstr ""
+
+msgid "API key saved to KWallet."
+msgstr ""
+
+msgid "API key saved to local fallback."
+msgstr ""
+
+msgid "Set an API endpoint first."
+msgstr ""
+
+msgid "Fetching STT models…"
+msgstr ""
+
+msgid "Loaded %1 STT model(s)."
+msgstr ""
+
+msgid "Voice input:"
+msgstr ""
+
+msgid "Enable microphone input"
+msgstr ""
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+
+msgid "Mic button:"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Hold to talk"
+msgstr ""
+
+msgid "Toggle"
+msgstr ""
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+
+msgid "Voice shortcut:"
+msgstr ""
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+
+msgid "Transcriber"
+msgstr ""
+
+msgid "Provider:"
+msgstr ""
+
+msgid "Endpoint:"
+msgstr ""
+
+msgid "Model:"
+msgstr ""
+
+msgid "Fetching…"
+msgstr ""
+
+msgid "Fetch"
+msgstr ""
+
+msgid "Fetch STT models"
+msgstr ""
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+
+msgid "API key:"
+msgstr ""
+
+msgid "Provider API key"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Save API key"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Language hint:"
+msgstr ""
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr ""
+
+msgid "Max recording (seconds):"
+msgstr ""
+
+msgid "STT backend:"
+msgstr ""
+
+msgid "OpenAI-compatible transcriptions"
+msgstr ""
+
+msgid "Speech-to-text is not configured"
+msgstr ""
+
+msgid "Unknown STT backend: %1"
+msgstr ""
+
+msgid "STT backend does not support model listing"
+msgstr ""
+
+msgid "STT endpoint is not configured"
+msgstr ""
+
+msgid "Model list request failed: %1"
+msgstr ""
+
+msgid "No STT models returned"
+msgstr ""
+
+msgid "No audio data to transcribe"
+msgstr ""
+
+msgid "STT model is not configured"
+msgstr ""
+
+msgid "Speech-to-text request timed out"
+msgstr ""
+
+msgid "Failed to parse STT response: %1"
+msgstr ""
+
+msgid "STT failed (HTTP %1): %2"
+msgstr ""
+
+msgid "STT failed (HTTP %1)"
+msgstr ""
+
+msgid "STT request failed: %1"
+msgstr ""
+
+msgid "Profile Header:"
+msgstr ""
+
+msgid "Show provider and model in profile header"
+msgstr ""
+
+msgid "Chat Spacing: %1px"
+msgstr ""
+
+msgid "Compact"
+msgstr ""
+
+msgid "Spacious"
+msgstr ""
+
+msgid "Chat Labels:"
+msgstr ""
+
+msgid "User label:"
+msgstr ""
+
+msgid "You"
+msgstr ""
+
+msgid "Assistant label:"
+msgstr ""
+
+msgid "Assistant"
+msgstr ""
+
+msgid "Use model name as assistant label"
+msgstr ""
+
+msgid "Chat Colors:"
+msgstr ""
+
+msgid "Use custom user color"
+msgstr ""
+
+msgid "Use custom assistant color"
+msgstr ""
+
+msgid "UI Font:"
+msgstr ""
+
+msgid "Use custom UI font"
+msgstr ""
+
+msgid "Code Font:"
+msgstr ""
+
+msgid "Use custom code font"
+msgstr ""
+
+msgid "Thoughts Font:"
+msgstr ""
+
+msgid "Use custom thoughts font"
+msgstr ""
+
+msgid "LaTeX Rendering:"
+msgstr ""
+
+msgid "Leave as TeX"
+msgstr ""
+
+msgid "Replace with Unicode (Default)"
+msgstr ""
+
+msgid "Mathtext"
+msgstr ""
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr ""
+
+msgid "Header Icons:"
+msgstr ""
+
+msgid "Profile Header"
+msgstr ""
+
+msgid "Always show Tasks"
+msgstr ""
+
+msgid "Always show Auto Toggle"
+msgstr ""
+
+msgid "Show History"
+msgstr ""
+
+msgid "Show Copy conversation"
+msgstr ""
+
+msgid "Show Clear chat"
+msgstr ""
+
+msgid "Show Settings"
+msgstr ""
+
+msgid "Show Pin"
+msgstr ""
+
+msgid "Voice message"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Web Search"
+msgstr ""
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+
+msgid "Thinking"
+msgstr ""
+
+msgid "Searched for: %1"
+msgstr ""
+
+msgid "Show %1 results"
+msgstr ""
+
+msgid "Save & Retry"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Edit message"
+msgstr ""
+
+msgid "Edit response"
+msgstr ""
+
+msgid "Retry from here"
+msgstr ""
+
+msgid "Regenerate response"
+msgstr ""
+
+msgid "Share output with assistant"
 msgstr ""
 
 msgid "Approve the pending tool request"
@@ -470,19 +733,20 @@ msgstr ""
 msgid "Clear All"
 msgstr ""
 
+msgid "Retry from this message?"
+msgstr ""
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
 msgid "Copy conversation"
 msgstr ""
 
-msgid "You"
-msgstr ""
-
-msgid "Assistant"
-msgstr ""
-
 msgid "Command"
-msgstr ""
-
-msgid "Error"
 msgstr ""
 
 msgid "Clear chat"
@@ -550,9 +814,6 @@ msgstr ""
 msgid "Click to start"
 msgstr ""
 
-msgid "Hold to talk"
-msgstr ""
-
 msgid "Click to toggle, hold to talk"
 msgstr ""
 
@@ -572,57 +833,6 @@ msgid "Cancel LLM request"
 msgstr ""
 
 msgid "Drop files here to attach"
-msgstr ""
-
-msgid "Microphone recording failed"
-msgstr ""
-
-msgid "No microphone found"
-msgstr ""
-
-msgid "No microphone available"
-msgstr ""
-
-msgid "Recording…"
-msgstr ""
-
-msgid "Could not start recording: %1"
-msgstr ""
-
-msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
-msgstr ""
-
-msgid "Processing…"
-msgstr ""
-
-msgid "Failed to stop recording"
-msgstr ""
-
-msgid "Shell recorder stop is not configured"
-msgstr ""
-
-msgid "Shell recording failed"
-msgstr ""
-
-msgid "Recording stopped unexpectedly"
-msgstr ""
-
-msgid "Recording produced no file"
-msgstr ""
-
-msgid "Recording failed"
-msgstr ""
-
-msgid "OpenAI-compatible"
-msgstr ""
-
-msgid "Anthropic"
-msgstr ""
-
-msgid "Google Gemini"
-msgstr ""
-
-msgid "Exa"
 msgstr ""
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
@@ -695,13 +905,7 @@ msgstr ""
 msgid "Location:"
 msgstr ""
 
-msgid "Provider:"
-msgstr ""
-
 msgid "API Endpoint:"
-msgstr ""
-
-msgid "Model:"
 msgstr ""
 
 msgid "Refreshing…"
@@ -838,110 +1042,108 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
-msgid "Speech to Text"
+msgid "System Info:"
 msgstr ""
 
-msgid "API key saved to local fallback (KWallet unavailable)."
+msgid "OS"
 msgstr ""
 
-msgid "API key saved to KWallet."
+msgid "Shell"
 msgstr ""
 
-msgid "API key saved to local fallback."
+msgid "Hostname"
 msgstr ""
 
-msgid "Set an API endpoint first."
+msgid "Kernel"
 msgstr ""
 
-msgid "Fetching STT models…"
+msgid "Desktop"
 msgstr ""
 
-msgid "Loaded %1 STT model(s)."
+msgid "User"
 msgstr ""
 
-msgid "Voice input:"
+msgid "CPU"
 msgstr ""
 
-msgid "Enable microphone input"
+msgid "Memory"
 msgstr ""
 
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
+msgid "GPU"
 msgstr ""
 
-msgid "Mic button:"
+msgid "Block Devices"
 msgstr ""
 
-msgid "Auto"
+msgid "Network"
 msgstr ""
 
-msgid "Toggle"
+msgid "Locale"
 msgstr ""
 
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
+msgid "Date/Time"
 msgstr ""
 
-msgid "Voice shortcut:"
+msgid "Template:"
 msgstr ""
 
 msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
-"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
 msgstr ""
 
-msgid "Transcriber"
+msgid "System Prompt:"
 msgstr ""
 
-msgid "Endpoint:"
+msgid "Write your system prompt here…"
 msgstr ""
 
-msgid "Fetching…"
+msgid "Placeholders:"
 msgstr ""
 
-msgid "Fetch"
+msgid "Enabled system info selected in the checklist above"
 msgstr ""
 
-msgid "Fetch STT models"
+msgid "Enabled tool descriptions and guidelines from the Tools menu"
 msgstr ""
 
 msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
+"Persistent tmux or screen session multiplexer instructions (when active)"
 msgstr ""
 
-msgid "API key:"
+msgid "Notice indicating skip-approvals mode (/auto) is active"
 msgstr ""
 
-msgid "Provider API key"
+msgid "Desktop automation coordinates and guidelines (when driving)"
 msgstr ""
 
-msgid "Save"
+msgid "Localization:"
 msgstr ""
 
-msgid "Save API key"
+msgid "Localize System Prompt"
 msgstr ""
 
-msgid "Options"
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
 msgstr ""
 
-msgid "Language hint:"
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
 msgstr ""
 
-msgid "Optional, e.g. en or ja (empty = auto)"
+msgid "Actions:"
 msgstr ""
 
-msgid "Max recording (seconds):"
+msgid "Reset to Default Template"
 msgstr ""
 
-msgid "STT backend:"
-msgstr ""
-
-msgid "OpenAI-compatible transcriptions"
+msgid "Preview:"
 msgstr ""
 
 msgid "General Tool Settings"
@@ -1035,165 +1237,10 @@ msgstr ""
 msgid "Individual Tools"
 msgstr ""
 
-msgid "Speech-to-text is not configured"
+msgid "Prompt Instructions:"
 msgstr ""
 
-msgid "Unknown STT backend: %1"
-msgstr ""
-
-msgid "STT backend does not support model listing"
-msgstr ""
-
-msgid "STT endpoint is not configured"
-msgstr ""
-
-msgid "Model list request failed: %1"
-msgstr ""
-
-msgid "No STT models returned"
-msgstr ""
-
-msgid "No audio data to transcribe"
-msgstr ""
-
-msgid "STT model is not configured"
-msgstr ""
-
-msgid "Speech-to-text request timed out"
-msgstr ""
-
-msgid "Failed to parse STT response: %1"
-msgstr ""
-
-msgid "STT failed (HTTP %1): %2"
-msgstr ""
-
-msgid "STT failed (HTTP %1)"
-msgstr ""
-
-msgid "STT request failed: %1"
-msgstr ""
-
-msgid "Voice message"
-msgstr ""
-
-msgid "Web Search"
-msgstr ""
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-
-msgid "Thinking"
-msgstr ""
-
-msgid "Searched for: %1"
-msgstr ""
-
-msgid "Show %1 results"
-msgstr ""
-
-msgid "Copy to clipboard"
-msgstr ""
-
-msgid "Share output with assistant"
-msgstr ""
-
-msgid "Profile Header:"
-msgstr ""
-
-msgid "Show provider and model in profile header"
-msgstr ""
-
-msgid "Chat Spacing: %1px"
-msgstr ""
-
-msgid "Compact"
-msgstr ""
-
-msgid "Spacious"
-msgstr ""
-
-msgid "Chat Labels:"
-msgstr ""
-
-msgid "User label:"
-msgstr ""
-
-msgid "Assistant label:"
-msgstr ""
-
-msgid "Use model name as assistant label"
-msgstr ""
-
-msgid "Chat Colors:"
-msgstr ""
-
-msgid "Use custom user color"
-msgstr ""
-
-msgid "Use custom assistant color"
-msgstr ""
-
-msgid "UI Font:"
-msgstr ""
-
-msgid "Use custom UI font"
-msgstr ""
-
-msgid "Code Font:"
-msgstr ""
-
-msgid "Use custom code font"
-msgstr ""
-
-msgid "Thoughts Font:"
-msgstr ""
-
-msgid "Use custom thoughts font"
-msgstr ""
-
-msgid "LaTeX Rendering:"
-msgstr ""
-
-msgid "Leave as TeX"
-msgstr ""
-
-msgid "Replace with Unicode (Default)"
-msgstr ""
-
-msgid "Mathtext"
-msgstr ""
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr ""
-
-msgid "Header Icons:"
-msgstr ""
-
-msgid "Profile Header"
-msgstr ""
-
-msgid "Always show Tasks"
-msgstr ""
-
-msgid "Always show Auto Toggle"
-msgstr ""
-
-msgid "Show History"
-msgstr ""
-
-msgid "Show Copy conversation"
-msgstr ""
-
-msgid "Show Clear chat"
-msgstr ""
-
-msgid "Show Settings"
-msgstr ""
-
-msgid "Show Pin"
+msgid "Reset"
 msgstr ""
 
 msgid ""
@@ -1348,6 +1395,68 @@ msgid "Drive session active (already authorized). Auto mode enabled."
 msgstr ""
 
 msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr ""
+
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr ""
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr ""
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr ""
+
+msgid "Get the current content of the system clipboard."
+msgstr ""
+
+msgid "Set the content of the system clipboard."
+msgstr ""
+
+msgid "Show a system notification."
+msgstr ""
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr ""
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
 msgstr ""
 
 msgid "General"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-14 20:58-0400\n"
+"POT-Creation-Date: 2026-08-15 17:59-0400\n"
 "PO-Revision-Date: 2026-04-07 00:00+0000\n"
 "Last-Translator: Claude <noreply@anthropic.com>\n"
 "Language-Team: Turkish\n"
@@ -24,14 +24,6 @@ msgstr "Geçerli renk %1. Bu düğme bir renk seçici iletişim kutusu açacakt�
 
 msgid "Current color is %1."
 msgstr "Geçerli renk %1."
-
-msgid ""
-"Anthropic enables extended thinking when effort is not Off, using the token "
-"budget below. Temperature is forced to max while thinking."
-msgstr ""
-"Anthropic, çaba Kapalı olmadığında aşağıdaki token bütçesini kullanarak "
-"genişletilmiş düşünmeyi etkinleştirir. Düşünme sırasında sıcaklık maksimuma "
-"zorlanır."
 
 msgid "Request timed out after 30 seconds"
 msgstr "İstek 30 saniye sonra zaman aşımına uğradı"
@@ -60,28 +52,13 @@ msgstr ""
 "deneyin"
 
 msgid "Not found (HTTP 404) — check your API endpoint and model name"
-msgstr ""
-"Bulunamadı (HTTP 404) — API uç noktanızı ve model adınızı kontrol edin"
+msgstr "Bulunamadı (HTTP 404) — API uç noktanızı ve model adınızı kontrol edin"
 
 msgid "API error %1"
 msgstr "API hatası %1"
 
 msgid "Request failed (no response) — check your endpoint URL"
 msgstr "İstek başarısız oldu (yanıt yok) — uç nokta URL'nizi kontrol edin"
-
-msgid ""
-"Exa performs real-time neural search and synthesizes grounded answers with "
-"live web citations."
-msgstr ""
-"Exa gerçek zamanlı nöral arama yapar ve canlı web alıntılarıyla temellenmiş "
-"yanıtlar sentezler."
-
-msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking"
-" on supported models."
-msgstr ""
-"Gemini, düşünme token bütçesini doğrudan kullanır. Desteklenen modellerde "
-"düşünmeyi devre dışı bırakmak için 0 olarak ayarlayın."
 
 msgid "Failed to fetch models"
 msgstr "Modeller getirilemedi"
@@ -93,17 +70,13 @@ msgstr ""
 
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr ""
-"Kimlik doğrulama başarısız oldu (HTTP %1) — API anahtarınızı kontrol edin: "
-"%2"
+"Kimlik doğrulama başarısız oldu (HTTP %1) — API anahtarınızı kontrol edin: %2"
 
 msgid "no response — check your endpoint URL"
 msgstr "yanıt yok — uç nokta URL'nizi kontrol edin"
 
 msgid "Request failed"
 msgstr "İstek başarısız oldu"
-
-msgid "Gemini uses the thinking level dropdown directly."
-msgstr "Gemini, düşünme düzeyi açılır menüsünü doğrudan kullanır."
 
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
@@ -115,19 +88,8 @@ msgstr ""
 "Ayarlar'da yerel özellikleri devre dışı bırakın."
 
 msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Akıl yürütme çabası (düşük / orta / yüksek) genişletilmiş düşünmeyi kontrol "
-"eder. OpenAI / Poe / OpenRouter / Azure'da düşünceleri görmek için Use "
-"Responses API'yi etkinleştirin; sohbet tamamlama sağlayıcıları (DeepSeek, "
-"Qwen) akıl yürütmeyi reasoning_content aracılığıyla sunar."
-
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to"
-" the LLM."
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
 msgstr ""
 "Hiç özel araç yapılandırılmadı. LLM'ye kendi komutlarınızı sunmak için özel "
 "bir araç ekleyin."
@@ -171,64 +133,12 @@ msgstr "\"%1\" adında bir araç zaten mevcut."
 msgid ""
 "Custom tools allow you to expose your own commands to the LLM. Use "
 "placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-"
-"escaped."
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
 msgstr ""
 "Özel araçlar, kendi komutlarınızı LLM'ye sunmanızı sağlar. LLM'nin "
 "doldurabileceği parametreleri tanımlamak için Komut Şablonunda {variable} "
 "gibi yer tutucular kullanın. LLM tarafından sağlanan değerler otomatik "
 "olarak shell-escaped yapılır."
-
-msgid "System Info:"
-msgstr "Sistem Bilgisi:"
-
-msgid "OS"
-msgstr "İşletim Sistemi"
-
-msgid "Shell"
-msgstr "Kabuk"
-
-msgid "Hostname"
-msgstr "Ana makine adı"
-
-msgid "Kernel"
-msgstr "Çekirdek"
-
-msgid "Desktop"
-msgstr "Masaüstü"
-
-msgid "User"
-msgstr "Kullanıcı"
-
-msgid "CPU"
-msgstr "İşlemci"
-
-msgid "Memory"
-msgstr "Bellek"
-
-msgid "GPU"
-msgstr "GPU"
-
-msgid "Block Devices"
-msgstr "Blok Aygıtlar"
-
-msgid "Network"
-msgstr "Ağ"
-
-msgid "Locale"
-msgstr "Yerel ayar"
-
-msgid "Date/Time"
-msgstr "Tarih/Saat"
-
-msgid "Custom Instructions:"
-msgstr "Özel Talimatlar:"
-
-msgid "Additional instructions for the LLM…"
-msgstr "LLM için ek talimatlar…"
-
-msgid "Preview:"
-msgstr "Önizleme:"
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -260,8 +170,8 @@ msgid "A task named \"%1\" already exists."
 msgstr "\"%1\" adlı bir görev zaten mevcut."
 
 msgid ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
-" button to run them. Tasks with skip approvals enabled will run tools "
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with skip approvals enabled will run tools "
 "automatically."
 msgstr ""
 "Görevler yeniden kullanılabilir istem kısayollarıdır. Bunları çalıştırmak "
@@ -273,9 +183,6 @@ msgstr "Çalıştırmadan önce sor"
 
 msgid "Error: URL must start with http:// or https://"
 msgstr "Hata: URL http:// veya https:// ile başlamalıdır"
-
-msgid "No command provided."
-msgstr "Komut sağlanmadı."
 
 msgid "Ask before running commands from LLM"
 msgstr "LLM'den komutları çalıştırmadan önce sor"
@@ -412,6 +319,9 @@ msgstr ""
 "Ollama'nın arama API'si aracılığıyla LLM tarafından tetiklenen web "
 "aramalarını etkinleştirir"
 
+msgid "No command provided."
+msgstr "Komut sağlanmadı."
+
 msgid "Tool Request: %1"
 msgstr "Araç İsteği: %1"
 
@@ -432,6 +342,358 @@ msgstr "Bu oturuma bağlı terminali aç"
 
 msgid "Copy output"
 msgstr "Çıktıyı kopyala"
+
+msgid "Microphone recording failed"
+msgstr "Mikrofon kaydı başarısız oldu"
+
+msgid "No microphone found"
+msgstr "Mikrofon bulunamadı"
+
+msgid "No microphone available"
+msgstr "Kullanılabilir mikrofon yok"
+
+msgid "Recording…"
+msgstr "Kaydediliyor…"
+
+msgid "Could not start recording: %1"
+msgstr "Kayıt başlatılamadı: %1"
+
+msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
+msgstr "Kabuk ses kaydedicisi başlatılamadı (pw-record veya ffmpeg yükleyin)"
+
+msgid "Processing…"
+msgstr "İşleniyor…"
+
+msgid "Failed to stop recording"
+msgstr "Kayıt durdurulamadı"
+
+msgid "Shell recorder stop is not configured"
+msgstr "Kabuk kaydedici durdurma yapılandırılmadı"
+
+msgid "Shell recording failed"
+msgstr "Kabuk kaydı başarısız oldu"
+
+msgid "Recording stopped unexpectedly"
+msgstr "Kayıt beklenmedik şekilde durdu"
+
+msgid "Recording produced no file"
+msgstr "Kayıt dosya oluşturmadı"
+
+msgid "Recording failed"
+msgstr "Kayıt başarısız oldu"
+
+msgid "Speech to Text"
+msgstr "Konuşmayı Metne Dönüştürme"
+
+msgid "API key saved to local fallback (KWallet unavailable)."
+msgstr "API anahtarı yerel yedeğe kaydedildi (KWallet kullanılamıyor)."
+
+msgid "API key saved to KWallet."
+msgstr "API anahtarı KWallet'a kaydedildi."
+
+msgid "API key saved to local fallback."
+msgstr "API anahtarı yerel yedeğe kaydedildi."
+
+msgid "Set an API endpoint first."
+msgstr "Önce bir API uç noktası ayarlayın."
+
+msgid "Fetching STT models…"
+msgstr "STT modelleri alınıyor…"
+
+msgid "Loaded %1 STT model(s)."
+msgstr "%1 STT modeli yüklendi."
+
+msgid "Voice input:"
+msgstr "Ses girişi:"
+
+msgid "Enable microphone input"
+msgstr "Mikrofon girişini etkinleştir"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"Yalnızca konuşmayı metne dönüştürme motorunu yapılandırır. Dökümler etkin "
+"sohbet profilinizi (Genel) kullanır."
+
+msgid "Mic button:"
+msgstr "Mikrofon düğmesi:"
+
+msgid "Auto"
+msgstr "Otomatik"
+
+msgid "Hold to talk"
+msgstr "Konuşmak için basılı tutun"
+
+msgid "Toggle"
+msgstr "Aç/Kapat"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"Otomatik: tıklama kaydı açar/kapatır; bas-konuş için 250 ms+ basılı tutun. "
+"Basılı tut: yalnızca basılı tutma. Aç/Kapat: başlatmak/durdurmak için "
+"tıklayın."
+
+msgid "Voice shortcut:"
+msgstr "Ses kısayolu:"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"PlasmaLLM açık ve odaktayken, düğmeyle aynı mikrofon modunu kullanır "
+"(otomatik: kısa basış açar/kapatır, 250 ms+ basılı tutma bas-konuştur). "
+"Paneli açmaz — Kısayollar sayfasındaki «Gereci Etkinleştir» seçeneğini "
+"kullanın. Varsayılan: Ctrl+M. Devre dışı bırakmak için temizleyin."
+
+msgid "Transcriber"
+msgstr "Dönüştürücü"
+
+msgid "Provider:"
+msgstr "Sağlayıcı:"
+
+msgid "Endpoint:"
+msgstr "Uç Noktası:"
+
+msgid "Model:"
+msgstr "Model:"
+
+msgid "Fetching…"
+msgstr "Alınıyor…"
+
+msgid "Fetch"
+msgstr "Al"
+
+msgid "Fetch STT models"
+msgstr "STT modellerini al"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouter STT modellerini yalnızca transkripsiyon kipleri aracılığıyla "
+"listeler (bu sayfa bunu yapar)."
+
+msgid "API key:"
+msgstr "API anahtarı:"
+
+msgid "Provider API key"
+msgstr "Sağlayıcı API anahtarı"
+
+msgid "Save"
+msgstr "Kaydet"
+
+msgid "Save API key"
+msgstr "API anahtarını kaydet"
+
+msgid "Options"
+msgstr "Seçenekler"
+
+msgid "Language hint:"
+msgstr "Dil ipucu:"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "İsteğe bağlı, örn. tr veya en (boş = otomatik)"
+
+msgid "Max recording (seconds):"
+msgstr "Maks. kayıt süresi (saniye):"
+
+msgid "STT backend:"
+msgstr "STT arka ucu:"
+
+msgid "OpenAI-compatible transcriptions"
+msgstr "OpenAI uyumlu dönüştürmeler"
+
+msgid "Speech-to-text is not configured"
+msgstr "Konuşmayı metne dönüştürme yapılandırılmadı"
+
+msgid "Unknown STT backend: %1"
+msgstr "Bilinmeyen STT arka ucu: %1"
+
+msgid "STT backend does not support model listing"
+msgstr "STT arka ucu model listelemeyi desteklemiyor"
+
+msgid "STT endpoint is not configured"
+msgstr "STT uç noktası yapılandırılmadı"
+
+msgid "Model list request failed: %1"
+msgstr "Model listesi isteği başarısız oldu: %1"
+
+msgid "No STT models returned"
+msgstr "Hiçbir STT modeli döndürülmedi"
+
+msgid "No audio data to transcribe"
+msgstr "Dönüştürülecek ses verisi yok"
+
+msgid "STT model is not configured"
+msgstr "STT modeli yapılandırılmadı"
+
+msgid "Speech-to-text request timed out"
+msgstr "Konuşmayı metne dönüştürme isteği zaman aşımına uğradı"
+
+msgid "Failed to parse STT response: %1"
+msgstr "STT yanıtı ayrıştırılamadı: %1"
+
+msgid "STT failed (HTTP %1): %2"
+msgstr "STT başarısız oldu (HTTP %1): %2"
+
+msgid "STT failed (HTTP %1)"
+msgstr "STT başarısız oldu (HTTP %1)"
+
+msgid "STT request failed: %1"
+msgstr "STT isteği başarısız oldu: %1"
+
+msgid "Profile Header:"
+msgstr "Profil Başlığı:"
+
+msgid "Show provider and model in profile header"
+msgstr "Profil başlığında sağlayıcı ve modeli göster"
+
+msgid "Chat Spacing: %1px"
+msgstr "Sohbet Aralığı: %1px"
+
+msgid "Compact"
+msgstr "Kompakt"
+
+msgid "Spacious"
+msgstr "Geniş"
+
+msgid "Chat Labels:"
+msgstr "Sohbet Etiketleri:"
+
+msgid "User label:"
+msgstr "Kullanıcı etiketi:"
+
+msgid "You"
+msgstr "Siz"
+
+msgid "Assistant label:"
+msgstr "Asistan etiketi:"
+
+msgid "Assistant"
+msgstr "Asistan"
+
+msgid "Use model name as assistant label"
+msgstr "Asistan etiketi olarak model adını kullan"
+
+msgid "Chat Colors:"
+msgstr "Sohbet Renkleri:"
+
+msgid "Use custom user color"
+msgstr "Özel kullanıcı rengi kullan"
+
+msgid "Use custom assistant color"
+msgstr "Özel asistan rengi kullan"
+
+msgid "UI Font:"
+msgstr "Arayüz Yazı Tipi:"
+
+msgid "Use custom UI font"
+msgstr "Özel arayüz yazı tipi kullan"
+
+msgid "Code Font:"
+msgstr "Kod Yazı Tipi:"
+
+msgid "Use custom code font"
+msgstr "Özel kod yazı tipi kullan"
+
+msgid "Thoughts Font:"
+msgstr "Düşünce Yazı Tipi:"
+
+msgid "Use custom thoughts font"
+msgstr "Özel düşünce yazı tipi kullan"
+
+msgid "LaTeX Rendering:"
+msgstr "LaTeX Oluşturma:"
+
+msgid "Leave as TeX"
+msgstr "TeX olarak bırak"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Unicode ile değiştir (Varsayılan)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib eksik)"
+
+msgid "Header Icons:"
+msgstr "Başlık Simgeleri:"
+
+msgid "Profile Header"
+msgstr "Profil Başlığı"
+
+msgid "Always show Tasks"
+msgstr "Görevleri her zaman göster"
+
+msgid "Always show Auto Toggle"
+msgstr "Otomatik geçişi her zaman göster"
+
+msgid "Show History"
+msgstr "Geçmişi göster"
+
+msgid "Show Copy conversation"
+msgstr "Konuşmayı kopyalamayı göster"
+
+msgid "Show Clear chat"
+msgstr "Sohbeti temizlemeyi göster"
+
+msgid "Show Settings"
+msgstr "Ayarları göster"
+
+msgid "Show Pin"
+msgstr "Sabitlemeyi göster"
+
+msgid "Voice message"
+msgstr "Sesli mesaj"
+
+msgid "Error"
+msgstr "Hata"
+
+msgid "Web Search"
+msgstr "Web Araması"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Mathtext işleme Unicode değiştirme yöntemine geri döndü (matplotlib yüklü "
+"değil veya hata oluştu)"
+
+msgid "Thinking"
+msgstr "Düşünüyor…"
+
+msgid "Searched for: %1"
+msgstr "Aranan: %1"
+
+msgid "Show %1 results"
+msgstr "%1 sonuç göster"
+
+msgid "Save & Retry"
+msgstr "Kaydet ve Yeniden Dene"
+
+msgid "Copy to clipboard"
+msgstr "Panoya kopyala"
+
+msgid "Edit message"
+msgstr "İletiyi düzenle"
+
+msgid "Edit response"
+msgstr "Yanıtı düzenle"
+
+msgid "Retry from here"
+msgstr "Buradan yeniden dene"
+
+msgid "Regenerate response"
+msgstr "Yanıtı yeniden oluştur"
+
+msgid "Share output with assistant"
+msgstr "Çıktıyı asistanla paylaş"
 
 msgid "Approve the pending tool request"
 msgstr "Bekleyen araç isteğini onayla"
@@ -470,8 +732,7 @@ msgid "Run a saved task (/task <name>)"
 msgstr "Kaydedilmiş bir görevi çalıştır (/task <ad>)"
 
 msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr ""
-"Drive Desktop modunu değiştir (el sıkışmayı ve otomatik modu başlatır)"
+msgstr "Drive Desktop modunu değiştir (el sıkışmayı ve otomatik modu başlatır)"
 
 msgid "Toggle Full Auto Mode"
 msgstr "Tam otomatik modu aç/kapat"
@@ -480,8 +741,8 @@ msgid ""
 "Toggle Full Auto Mode: When enabled, all tools run automatically for this "
 "session."
 msgstr ""
-"Tam otomatik modu aç/kapat: Etkinleştirildiğinde, bu oturum için tüm araçlar"
-" otomatik olarak çalışır."
+"Tam otomatik modu aç/kapat: Etkinleştirildiğinde, bu oturum için tüm araçlar "
+"otomatik olarak çalışır."
 
 msgid "Drive Desktop"
 msgstr "Drive Desktop"
@@ -523,20 +784,23 @@ msgstr ""
 msgid "Clear All"
 msgstr "Tümünü Temizle"
 
+msgid "Retry from this message?"
+msgstr "Bu iletiden yeniden denensin mi?"
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+"Bu, bu noktadan sonraki %1 iletiyi kaldıracak ve yeni bir yanıt "
+"oluşturacaktır."
+
+msgid "Retry"
+msgstr "Yeniden dene"
+
 msgid "Copy conversation"
 msgstr "Konuşmayı kopyala"
 
-msgid "You"
-msgstr "Siz"
-
-msgid "Assistant"
-msgstr "Asistan"
-
 msgid "Command"
 msgstr "Komut"
-
-msgid "Error"
-msgstr "Hata"
 
 msgid "Clear chat"
 msgstr "Sohbeti temizle"
@@ -605,9 +869,6 @@ msgstr "Göndermek için bırakın"
 msgid "Click to start"
 msgstr "Başlatmak için tıklayın"
 
-msgid "Hold to talk"
-msgstr "Konuşmak için basılı tutun"
-
 msgid "Click to toggle, hold to talk"
 msgstr "Açıp kapatmak için tıklayın, konuşmak için basılı tutun"
 
@@ -629,57 +890,6 @@ msgstr "LLM isteğini iptal et"
 
 msgid "Drop files here to attach"
 msgstr "Eklemek için dosyaları buraya bırakın"
-
-msgid "Microphone recording failed"
-msgstr "Mikrofon kaydı başarısız oldu"
-
-msgid "No microphone found"
-msgstr "Mikrofon bulunamadı"
-
-msgid "No microphone available"
-msgstr "Kullanılabilir mikrofon yok"
-
-msgid "Recording…"
-msgstr "Kaydediliyor…"
-
-msgid "Could not start recording: %1"
-msgstr "Kayıt başlatılamadı: %1"
-
-msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
-msgstr "Kabuk ses kaydedicisi başlatılamadı (pw-record veya ffmpeg yükleyin)"
-
-msgid "Processing…"
-msgstr "İşleniyor…"
-
-msgid "Failed to stop recording"
-msgstr "Kayıt durdurulamadı"
-
-msgid "Shell recorder stop is not configured"
-msgstr "Kabuk kaydedici durdurma yapılandırılmadı"
-
-msgid "Shell recording failed"
-msgstr "Kabuk kaydı başarısız oldu"
-
-msgid "Recording stopped unexpectedly"
-msgstr "Kayıt beklenmedik şekilde durdu"
-
-msgid "Recording produced no file"
-msgstr "Kayıt dosya oluşturmadı"
-
-msgid "Recording failed"
-msgstr "Kayıt başarısız oldu"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI uyumlu"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "Exa"
-msgstr "Exa"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "gcloud token alınamadı (çıkış %1): %2"
@@ -753,14 +963,8 @@ msgstr "Proje Kimliği:"
 msgid "Location:"
 msgstr "Konum:"
 
-msgid "Provider:"
-msgstr "Sağlayıcı:"
-
 msgid "API Endpoint:"
 msgstr "API Uç Noktası:"
-
-msgid "Model:"
-msgstr "Model:"
 
 msgid "Refreshing…"
 msgstr "Yenileniyor…"
@@ -868,8 +1072,8 @@ msgid "Show notifications when minimized"
 msgstr "Küçültüldüğünde bildirimleri göster"
 
 msgid ""
-"Show system notifications for incoming messages and tool calls when the chat"
-" window is minimized or closed."
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
 msgstr ""
 "Sohbet penceresi küçültüldüğünde veya kapatıldığında gelen mesajlar ve araç "
 "çağrıları için sistem bildirimleri göster."
@@ -907,122 +1111,121 @@ msgstr "saniye"
 msgid "minutes"
 msgstr "dakika"
 
-msgid "Speech to Text"
-msgstr "Konuşmayı Metne Dönüştürme"
+msgid "System Info:"
+msgstr "Sistem Bilgisi:"
 
-msgid "API key saved to local fallback (KWallet unavailable)."
-msgstr "API anahtarı yerel yedeğe kaydedildi (KWallet kullanılamıyor)."
+msgid "OS"
+msgstr "İşletim Sistemi"
 
-msgid "API key saved to KWallet."
-msgstr "API anahtarı KWallet'a kaydedildi."
+msgid "Shell"
+msgstr "Kabuk"
 
-msgid "API key saved to local fallback."
-msgstr "API anahtarı yerel yedeğe kaydedildi."
+msgid "Hostname"
+msgstr "Ana makine adı"
 
-msgid "Set an API endpoint first."
-msgstr "Önce bir API uç noktası ayarlayın."
+msgid "Kernel"
+msgstr "Çekirdek"
 
-msgid "Fetching STT models…"
-msgstr "STT modelleri alınıyor…"
+msgid "Desktop"
+msgstr "Masaüstü"
 
-msgid "Loaded %1 STT model(s)."
-msgstr "%1 STT modeli yüklendi."
+msgid "User"
+msgstr "Kullanıcı"
 
-msgid "Voice input:"
-msgstr "Ses girişi:"
+msgid "CPU"
+msgstr "İşlemci"
 
-msgid "Enable microphone input"
-msgstr "Mikrofon girişini etkinleştir"
+msgid "Memory"
+msgstr "Bellek"
 
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-"Yalnızca konuşmayı metne dönüştürme motorunu yapılandırır. Dökümler etkin "
-"sohbet profilinizi (Genel) kullanır."
+msgid "GPU"
+msgstr "GPU"
 
-msgid "Mic button:"
-msgstr "Mikrofon düğmesi:"
+msgid "Block Devices"
+msgstr "Blok Aygıtlar"
 
-msgid "Auto"
-msgstr "Otomatik"
+msgid "Network"
+msgstr "Ağ"
 
-msgid "Toggle"
-msgstr "Aç/Kapat"
+msgid "Locale"
+msgstr "Yerel ayar"
 
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-"Otomatik: tıklama kaydı açar/kapatır; bas-konuş için 250 ms+ basılı tutun. "
-"Basılı tut: yalnızca basılı tutma. Aç/Kapat: başlatmak/durdurmak için "
-"tıklayın."
+msgid "Date/Time"
+msgstr "Tarih/Saat"
 
-msgid "Voice shortcut:"
-msgstr "Ses kısayolu:"
+msgid "Template:"
+msgstr "Şablon:"
 
 msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the"
-" panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
 msgstr ""
-"PlasmaLLM açık ve odaktayken, düğmeyle aynı mikrofon modunu kullanır "
-"(otomatik: kısa basış açar/kapatır, 250 ms+ basılı tutma bas-konuştur). "
-"Paneli açmaz — Kısayollar sayfasındaki «Gereci Etkinleştir» seçeneğini "
-"kullanın. Varsayılan: Ctrl+M. Devre dışı bırakmak için temizleyin."
+"Bu, modele gönderilen tam sistem istemidir. Sistem ayrıntıları, etkin "
+"araçlar veya masaüstü otomasyon yönergeleri gibi dinamik içerikleri "
+"çekmek için {{placeholders}} kullanın. Yazdığınız diğer her şey aynen "
+"kullanılır. Kritik çalışma zamanı yönergeleri (sürüş, onayları atla "
+"modu), yer tutucularını kaldırsanız bile etkin olduğunda otomatik olarak "
+"eklenir."
 
-msgid "Transcriber"
-msgstr "Dönüştürücü"
+msgid "System Prompt:"
+msgstr "Sistem İstemi:"
 
-msgid "Endpoint:"
-msgstr "Uç Noktası:"
+msgid "Write your system prompt here…"
+msgstr "Sistem isteminizi buraya yazın…"
 
-msgid "Fetching…"
-msgstr "Alınıyor…"
+msgid "Placeholders:"
+msgstr "Yer Tutucular:"
 
-msgid "Fetch"
-msgstr "Al"
+msgid "Enabled system info selected in the checklist above"
+msgstr "Yukarıdaki kontrol listesinde seçilen etkin sistem bilgileri"
 
-msgid "Fetch STT models"
-msgstr "STT modellerini al"
+msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr "Araçlar menüsünden etkin araç açıklamaları ve yönergeleri"
 
 msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
+"Persistent tmux or screen session multiplexer instructions (when active)"
 msgstr ""
-"OpenRouter STT modellerini yalnızca transkripsiyon kipleri aracılığıyla "
-"listeler (bu sayfa bunu yapar)."
+"Kalıcı tmux veya screen oturum çoğullayıcı yönergeleri (etkin olduğunda)"
 
-msgid "API key:"
-msgstr "API anahtarı:"
+msgid "Notice indicating skip-approvals mode (/auto) is active"
+msgstr "Onayları atla modunun (/auto) etkin olduğunu belirten bildirim"
 
-msgid "Provider API key"
-msgstr "Sağlayıcı API anahtarı"
+msgid "Desktop automation coordinates and guidelines (when driving)"
+msgstr "Masaüstü otomasyonu koordinatları ve yönergeleri (sürüş sırasında)"
 
-msgid "Save"
-msgstr "Kaydet"
+msgid "Localization:"
+msgstr "Yerelleştirme:"
 
-msgid "Save API key"
-msgstr "API anahtarını kaydet"
+msgid "Localize System Prompt"
+msgstr "Sistem İstemini Yerelleştir"
 
-msgid "Options"
-msgstr "Seçenekler"
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
+msgstr ""
+"Varsayılan istem şablonlarını ve dinamik sistem bölümlerini masaüstü "
+"dilinize çevirin."
 
-msgid "Language hint:"
-msgstr "Dil ipucu:"
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
+msgstr ""
+"Not: Sistem yönergelerini ve araçları İngilizce dışındaki dillere "
+"yerelleştirmek, bazı modellerde araç çağırma güvenilirliğini ve yönerge "
+"takip doğruluğunu azaltabilir."
 
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "İsteğe bağlı, örn. tr veya en (boş = otomatik)"
+msgid "Actions:"
+msgstr "Eylemler:"
 
-msgid "Max recording (seconds):"
-msgstr "Maks. kayıt süresi (saniye):"
+msgid "Reset to Default Template"
+msgstr "Varsayılan Şablona Sıfırla"
 
-msgid "STT backend:"
-msgstr "STT arka ucu:"
-
-msgid "OpenAI-compatible transcriptions"
-msgstr "OpenAI uyumlu dönüştürmeler"
+msgid "Preview:"
+msgstr "Önizleme:"
 
 msgid "General Tool Settings"
 msgstr "Genel Araç Ayarları"
@@ -1048,13 +1251,11 @@ msgid "Enable Desktop Automation"
 msgstr "Masaüstü Otomasyonunu Etkinleştir"
 
 msgid ""
-"Enable Desktop Automation (requires <a "
-"href=\"https://github.com/joshuaeroman/plasmallm-desktop-"
-"driver\">driver</a>)"
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
 msgstr ""
-"Masaüstü Otomasyonunu Etkinleştir (<a "
-"href=\"https://github.com/joshuaeroman/plasmallm-desktop-driver\">sürücü</a>"
-" gerekir)"
+"Masaüstü Otomasyonunu Etkinleştir (<a href=\"https://github.com/joshuaeroman/"
+"plasmallm-desktop-driver\">sürücü</a> gerekir)"
 
 msgid "Path whitelist:"
 msgstr "Yol beyaz listesi:"
@@ -1129,168 +1330,11 @@ msgstr ""
 msgid "Individual Tools"
 msgstr "Bireysel Araçlar"
 
-msgid "Speech-to-text is not configured"
-msgstr "Konuşmayı metne dönüştürme yapılandırılmadı"
+msgid "Prompt Instructions:"
+msgstr "İstem Yönergeleri:"
 
-msgid "Unknown STT backend: %1"
-msgstr "Bilinmeyen STT arka ucu: %1"
-
-msgid "STT backend does not support model listing"
-msgstr "STT arka ucu model listelemeyi desteklemiyor"
-
-msgid "STT endpoint is not configured"
-msgstr "STT uç noktası yapılandırılmadı"
-
-msgid "Model list request failed: %1"
-msgstr "Model listesi isteği başarısız oldu: %1"
-
-msgid "No STT models returned"
-msgstr "Hiçbir STT modeli döndürülmedi"
-
-msgid "No audio data to transcribe"
-msgstr "Dönüştürülecek ses verisi yok"
-
-msgid "STT model is not configured"
-msgstr "STT modeli yapılandırılmadı"
-
-msgid "Speech-to-text request timed out"
-msgstr "Konuşmayı metne dönüştürme isteği zaman aşımına uğradı"
-
-msgid "Failed to parse STT response: %1"
-msgstr "STT yanıtı ayrıştırılamadı: %1"
-
-msgid "STT failed (HTTP %1): %2"
-msgstr "STT başarısız oldu (HTTP %1): %2"
-
-msgid "STT failed (HTTP %1)"
-msgstr "STT başarısız oldu (HTTP %1)"
-
-msgid "STT request failed: %1"
-msgstr "STT isteği başarısız oldu: %1"
-
-msgid "Voice message"
-msgstr "Sesli mesaj"
-
-msgid "Web Search"
-msgstr "Web Araması"
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"Mathtext işleme Unicode değiştirme yöntemine geri döndü (matplotlib yüklü "
-"değil veya hata oluştu)"
-
-msgid "Thinking"
-msgstr "Düşünüyor…"
-
-msgid "Searched for: %1"
-msgstr "Aranan: %1"
-
-msgid "Show %1 results"
-msgstr "%1 sonuç göster"
-
-msgid "Copy to clipboard"
-msgstr "Panoya kopyala"
-
-msgid "Share output with assistant"
-msgstr "Çıktıyı asistanla paylaş"
-
-msgid "Profile Header:"
-msgstr "Profil Başlığı:"
-
-msgid "Show provider and model in profile header"
-msgstr "Profil başlığında sağlayıcı ve modeli göster"
-
-msgid "Chat Spacing: %1px"
-msgstr "Sohbet Aralığı: %1px"
-
-msgid "Compact"
-msgstr "Kompakt"
-
-msgid "Spacious"
-msgstr "Geniş"
-
-msgid "Chat Labels:"
-msgstr "Sohbet Etiketleri:"
-
-msgid "User label:"
-msgstr "Kullanıcı etiketi:"
-
-msgid "Assistant label:"
-msgstr "Asistan etiketi:"
-
-msgid "Use model name as assistant label"
-msgstr "Asistan etiketi olarak model adını kullan"
-
-msgid "Chat Colors:"
-msgstr "Sohbet Renkleri:"
-
-msgid "Use custom user color"
-msgstr "Özel kullanıcı rengi kullan"
-
-msgid "Use custom assistant color"
-msgstr "Özel asistan rengi kullan"
-
-msgid "UI Font:"
-msgstr "Arayüz Yazı Tipi:"
-
-msgid "Use custom UI font"
-msgstr "Özel arayüz yazı tipi kullan"
-
-msgid "Code Font:"
-msgstr "Kod Yazı Tipi:"
-
-msgid "Use custom code font"
-msgstr "Özel kod yazı tipi kullan"
-
-msgid "Thoughts Font:"
-msgstr "Düşünce Yazı Tipi:"
-
-msgid "Use custom thoughts font"
-msgstr "Özel düşünce yazı tipi kullan"
-
-msgid "LaTeX Rendering:"
-msgstr "LaTeX Oluşturma:"
-
-msgid "Leave as TeX"
-msgstr "TeX olarak bırak"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Unicode ile değiştir (Varsayılan)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib eksik)"
-
-msgid "Header Icons:"
-msgstr "Başlık Simgeleri:"
-
-msgid "Profile Header"
-msgstr "Profil Başlığı"
-
-msgid "Always show Tasks"
-msgstr "Görevleri her zaman göster"
-
-msgid "Always show Auto Toggle"
-msgstr "Otomatik geçişi her zaman göster"
-
-msgid "Show History"
-msgstr "Geçmişi göster"
-
-msgid "Show Copy conversation"
-msgstr "Konuşmayı kopyalamayı göster"
-
-msgid "Show Clear chat"
-msgstr "Sohbeti temizlemeyi göster"
-
-msgid "Show Settings"
-msgstr "Ayarları göster"
-
-msgid "Show Pin"
-msgstr "Sabitlemeyi göster"
+msgid "Reset"
+msgstr "Sıfırla"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
@@ -1366,8 +1410,8 @@ msgid ""
 "Desktop automation is disabled in settings. Enable it first to drive the "
 "desktop."
 msgstr ""
-"Ayarlarda masaüstü otomasyonu devre dışı bırakıldı. Masaüstünü yönetmek için"
-" önce onu etkinleştirin."
+"Ayarlarda masaüstü otomasyonu devre dışı bırakıldı. Masaüstünü yönetmek için "
+"önce onu etkinleştirin."
 
 msgid "plasmallm-desktop-driver is not detected or running."
 msgstr "plasmallm-desktop-driver algılanmadı veya çalışmıyor."
@@ -1460,6 +1504,96 @@ msgstr "Yönetim oturumu aktif (zaten yetkilendirilmiş). Otomatik mod etkin."
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Yönetim oturumu başarıyla yetkilendirildi. Otomatik mod etkin."
 
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"Kullanıcının sisteminde bir kabuk komutu yürütür ve çıktısını döndürür. "
+"Yönergeler:\n"
+"- Süper kullanıcı ayrıcalıkları gerektiren tüm komutlar için `sudo` "
+"yerine `pkexec` kullanın.\n"
+"- Adımları `&&` ile zincirleyin.\n"
+"- Komutlar etkileşimsiz olarak çalışır. Asla kullanıcı girişini bekleyen "
+"komutlar (`read` gibi) kullanmayın.\n"
+"- Kullanıcıdan giriş istemeniz veya bir mesaj kutusu göstermeniz "
+"gerekiyorsa `kdialog` kullanın (örn. `kdialog --inputbox \"İstem\"`).\n"
+"- Açık izin olmadan ASLA paket yüklemeyin, sistem yapılandırmasını "
+"değiştirmeyin, yeniden başlatmayın veya sistemi değiştiren veya "
+"kullanıcıyı rahatsız eden herhangi bir işlem yapmayın.\n"
+"- İzin gerektiğinde, önce kullanıcıya düz metin olarak sorun.\n"
+"- Otomatik çalışan araçlar için: Muhafazakar olun ve salt okunur "
+"komutları tercih edin. Bir eylem potansiyel olarak kesintiye neden "
+"olabilecekse, düz metin olarak açıklayın ve aracı çağırmadan önce "
+"kullanıcının açık onayını bekleyin.\n"
+"- Görevi gerçekleştirebileceklerse diğer, daha özel araçları (read_file, "
+"write_file, search_files vb.) MUTLAKA tercih etmelisiniz. Bu aracı "
+"yalnızca başka hiçbir araç uygun değilse kullanın."
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Belirtilen yoldaki bir dosyanın içeriğini okur. Erişim izin verilen "
+"dizinlerle sınırlandırılmıştır."
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Belirtilen yoldaki bir dosyaya içerik yazar. Erişim izin verilen "
+"dizinlerle sınırlandırılmıştır."
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+"Bir dizinin içeriğini listeler. Erişim izin verilen dizinlerle "
+"sınırlandırılmıştır."
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "Bir dizindeki dosyalar içinde bir desen arar (özyinelemeli)."
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr "Bir URL'ye HTTP GET isteği yürütür ve yanıt içeriğini döndürür."
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "Bir URL'ye bir HTTP isteği (POST, PUT vb.) yürütür."
+
+msgid "Get the current content of the system clipboard."
+msgstr "Sistem panosunun geçerli içeriğini alır."
+
+msgid "Set the content of the system clipboard."
+msgstr "Sistem panosunun içeriğini ayarlar."
+
+msgid "Show a system notification."
+msgstr "Bir sistem bildirimi gösterir."
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr "Bir URL'yi varsayılan uygulamada (örn. web tarayıcısı) açar."
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Güncel bilgileri, haberleri veya belirli gerçekleri bulmak için bir web "
+"araması yapar."
+
 msgid "General"
 msgstr "Genel"
 
@@ -1478,6 +1612,60 @@ msgstr "Araçlar"
 msgid "Custom Tools"
 msgstr "Özel Araçlar"
 
+#~ msgid ""
+#~ "Anthropic enables extended thinking when effort is not Off, using the "
+#~ "token budget below. Temperature is forced to max while thinking."
+#~ msgstr ""
+#~ "Anthropic, çaba Kapalı olmadığında aşağıdaki token bütçesini kullanarak "
+#~ "genişletilmiş düşünmeyi etkinleştirir. Düşünme sırasında sıcaklık "
+#~ "maksimuma zorlanır."
+
+#~ msgid ""
+#~ "Exa performs real-time neural search and synthesizes grounded answers "
+#~ "with live web citations."
+#~ msgstr ""
+#~ "Exa gerçek zamanlı nöral arama yapar ve canlı web alıntılarıyla "
+#~ "temellenmiş yanıtlar sentezler."
+
+#~ msgid ""
+#~ "Gemini uses the thinking token budget directly. Set to 0 to disable "
+#~ "thinking on supported models."
+#~ msgstr ""
+#~ "Gemini, düşünme token bütçesini doğrudan kullanır. Desteklenen modellerde "
+#~ "düşünmeyi devre dışı bırakmak için 0 olarak ayarlayın."
+
+#~ msgid "Gemini uses the thinking level dropdown directly."
+#~ msgstr "Gemini, düşünme düzeyi açılır menüsünü doğrudan kullanır."
+
+#~ msgid ""
+#~ "Reasoning effort (low / medium / high) gates extended thinking. To see "
+#~ "thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+#~ "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+#~ "reasoning_content."
+#~ msgstr ""
+#~ "Akıl yürütme çabası (düşük / orta / yüksek) genişletilmiş düşünmeyi "
+#~ "kontrol eder. OpenAI / Poe / OpenRouter / Azure'da düşünceleri görmek "
+#~ "için Use Responses API'yi etkinleştirin; sohbet tamamlama sağlayıcıları "
+#~ "(DeepSeek, Qwen) akıl yürütmeyi reasoning_content aracılığıyla sunar."
+
+#~ msgid "Custom Instructions:"
+#~ msgstr "Özel Talimatlar:"
+
+#~ msgid "Additional instructions for the LLM…"
+#~ msgstr "LLM için ek talimatlar…"
+
+#~ msgid "OpenAI-compatible"
+#~ msgstr "OpenAI uyumlu"
+
+#~ msgid "Anthropic"
+#~ msgstr "Anthropic"
+
+#~ msgid "Google Gemini"
+#~ msgstr "Google Gemini"
+
+#~ msgid "Exa"
+#~ msgstr "Exa"
+
 #~ msgid "No models found."
 #~ msgstr "Model bulunamadı."
 
@@ -1495,9 +1683,6 @@ msgstr "Özel Araçlar"
 
 #~ msgid "Copy message"
 #~ msgstr "Mesajı kopyala"
-
-#~ msgid "Retry"
-#~ msgstr "Yeniden dene"
 
 #~ msgid "Share with LLM"
 #~ msgstr "LLM ile paylaş"
@@ -1537,7 +1722,8 @@ msgstr "Özel Araçlar"
 
 #~ msgid "Toggle auto mode (auto-run + auto-share) for this session"
 #~ msgstr ""
-#~ "Bu oturum için otomatik modu (otomatik çalıştır + otomatik paylaş) değiştir"
+#~ "Bu oturum için otomatik modu (otomatik çalıştır + otomatik paylaş) "
+#~ "değiştir"
 
 #~ msgid "Run last command"
 #~ msgstr "Son komutu çalıştır"
@@ -1549,8 +1735,8 @@ msgstr "Özel Araçlar"
 #~ msgstr "Otomatik modu aç/kapat"
 
 #~ msgid ""
-#~ "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
-#~ "are on)."
+#~ "Auto mode is permanently enabled via settings (both Auto-run and Auto-"
+#~ "share are on)."
 #~ msgstr ""
 #~ "Otomatik mod ayarlar aracılığıyla kalıcı olarak etkinleştirildi (hem "
 #~ "Otomatik çalıştır hem de Otomatik paylaş açık)."
@@ -1559,8 +1745,8 @@ msgstr "Özel Araçlar"
 #~ "Auto mode enabled for this session. Commands will run and share output "
 #~ "automatically."
 #~ msgstr ""
-#~ "Bu oturum için otomatik mod etkinleştirildi. Komutlar çalışacak ve çıktıyı "
-#~ "otomatik olarak paylaşacak."
+#~ "Bu oturum için otomatik mod etkinleştirildi. Komutlar çalışacak ve "
+#~ "çıktıyı otomatik olarak paylaşacak."
 
 #~ msgid "Auto mode disabled."
 #~ msgstr "Otomatik mod devre dışı bırakıldı."
@@ -1587,13 +1773,13 @@ msgstr "Özel Araçlar"
 #~ msgstr "Otomatik modu etkinleştir (otomatik çalıştır + otomatik paylaş)"
 
 #~ msgid ""
-#~ "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
-#~ " button to run them. Tasks with auto mode will temporarily enable auto-run "
-#~ "and auto-share."
+#~ "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the "
+#~ "toolbar button to run them. Tasks with auto mode will temporarily enable "
+#~ "auto-run and auto-share."
 #~ msgstr ""
 #~ "Görevler yeniden kullanılabilir istem kısayollarıdır. Onları çalıştırmak "
-#~ "için sohbette /task <ad> veya araç çubuğu düğmesini kullanın. Otomatik modlu"
-#~ " görevler otomatik çalıştırma ve otomatik paylaşımı geçici olarak "
+#~ "için sohbette /task <ad> veya araç çubuğu düğmesini kullanın. Otomatik "
+#~ "modlu görevler otomatik çalıştırma ve otomatik paylaşımı geçici olarak "
 #~ "etkinleştirir."
 
 #~ msgid "Saves to ~/PlasmaLLM/chats/"
@@ -1616,11 +1802,11 @@ msgstr "Özel Araçlar"
 #~ msgstr "Araç olarak çalıştır"
 
 #~ msgid ""
-#~ "Use the run_command tool for command execution. If disabled, falls back to "
-#~ "parsing code blocks."
+#~ "Use the run_command tool for command execution. If disabled, falls back "
+#~ "to parsing code blocks."
 #~ msgstr ""
-#~ "Komut yürütme için run_command aracını kullanın. Devre dışı bırakılırsa, kod"
-#~ " bloklarını ayrıştırmaya geri döner."
+#~ "Komut yürütme için run_command aracını kullanın. Devre dışı bırakılırsa, "
+#~ "kod bloklarını ayrıştırmaya geri döner."
 
 #~ msgid "Auto-share command output with LLM"
 #~ msgstr "Komut çıktısını LLM ile otomatik paylaş"
@@ -1630,10 +1816,11 @@ msgstr "Özel Araçlar"
 
 #~ msgid ""
 #~ "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-#~ "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
+#~ "their output, enabling an agentic workflow. Only use with trustworthy "
+#~ "LLMs."
 #~ msgstr ""
-#~ "⚠️ TEHLİKE: Her iki seçenek de etkin - LLM artık komutları çalıştırabilir ve"
-#~ " çıktılarını görebilir, bu da ajan tabanlı iş akışını etkinleştirir. "
+#~ "⚠️ TEHLİKE: Her iki seçenek de etkin - LLM artık komutları çalıştırabilir "
+#~ "ve çıktılarını görebilir, bu da ajan tabanlı iş akışını etkinleştirir. "
 #~ "Yalnızca güvenilir LLM'lerle kullanın."
 
 #~ msgid "Backend:"
@@ -1671,8 +1858,8 @@ msgstr "Özel Araçlar"
 
 #~ msgid "Allows the LLM to perform web searches using Ollama's search API."
 #~ msgstr ""
-#~ "LLM'nin Ollama'nın arama API'sini kullanarak web aramaları yapmasına olanak "
-#~ "tanır."
+#~ "LLM'nin Ollama'nın arama API'sini kullanarak web aramaları yapmasına "
+#~ "olanak tanır."
 
 #~ msgid "Commands:"
 #~ msgstr "Komutlar:"
@@ -1681,8 +1868,8 @@ msgstr "Özel Araçlar"
 #~ msgstr "Çalıştır komutunun sonuçlarını otomatik olarak LLM'e gönder"
 
 #~ msgid ""
-#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only use "
-#~ "with very trustworthy LLMs."
+#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only "
+#~ "use with very trustworthy LLMs."
 #~ msgstr ""
 #~ "UYARI: Otomatik paylaşım ile birleştirildiğinde ajan tabanlı iş akışını "
 #~ "etkinleştirir. Yalnızca çok güvenilir LLM'lerle kullanın."

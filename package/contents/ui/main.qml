@@ -1176,6 +1176,7 @@ PlasmoidItem {
 
     function getToolsConfig() {
         return {
+            i18n: i18n,
             sessionAutoMode: root.sessionAutoMode,
             sessionFullAutoMode: root.sessionFullAutoMode,
             enableTools: Plasmoid.configuration.enableTools,
@@ -1214,17 +1215,21 @@ PlasmoidItem {
             toolsReadMaxBytes: Plasmoid.configuration.toolsReadMaxBytes,
             toolsWriteMaxBytes: Plasmoid.configuration.toolsWriteMaxBytes,
             toolsHttpMaxBytes: Plasmoid.configuration.toolsHttpMaxBytes,
+            toolsInstructions: Plasmoid.configuration.toolsInstructions,
+            localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
             customTools: Plasmoid.configuration.customTools
         };
     }
 
     function initSystemPrompt() {
-        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
+        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
+            i18n: i18n,
             sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
             autoRunCommands: Plasmoid.configuration.autoRunCommands, 
             autoMode: root.isAutoMode, 
             commandToolEnabled: Plasmoid.configuration.useCommandTool, 
             sessionMultiplexer: root.sessionChipText(),
+            localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
             toolsConfig: getToolsConfig()
         });
         Plasmoid.configuration.gatheredSysInfo = JSON.stringify(sysInfo);
@@ -1291,11 +1296,13 @@ PlasmoidItem {
         sessionFullAutoMode = false;
         root.pendingToolCalls = [];
         if (systemPromptReady) {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
+                i18n: i18n,
                 sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
                 autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                 autoMode: false, 
                 commandToolEnabled: Plasmoid.configuration.useCommandTool, 
+                localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
                 toolsConfig: getToolsConfig() 
             });
             chatMessages.append({ msgId: "msg_sys_0", turnId: "turn_0", role: "system", content: prompt });
@@ -2041,12 +2048,14 @@ PlasmoidItem {
         
         // Rebuild system prompt
         if (systemPromptReady) {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
+                i18n: i18n,
                 sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
                 autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                 autoMode: root.isAutoMode, 
                 commandToolEnabled: Plasmoid.configuration.useCommandTool,
                 sessionMultiplexer: root.sessionChipText(),
+                localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
                 toolsConfig: getToolsConfig()
             });
             chatMessages.setProperty(0, "content", prompt);
@@ -2349,11 +2358,14 @@ PlasmoidItem {
             displayMessages.append({ role: "assistant", content: msg, shared: false, timestamp: currentTimestamp() });
             
             if (systemPromptReady) {
-                var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
+                var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
+                    i18n: i18n,
                     sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
                     autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                     autoMode: root.isAutoMode, 
                     commandToolEnabled: Plasmoid.configuration.useCommandTool,
+                    sessionMultiplexer: root.sessionChipText(),
+                    localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
                     toolsConfig: getToolsConfig()
                 });
                 chatMessages.setProperty(0, "content", autoPrompt);
@@ -2478,11 +2490,14 @@ PlasmoidItem {
                     sessionAutoMode = true;
                     taskAutoMode = true;
                     if (systemPromptReady) {
-                        var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, { 
+                        var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
+                            i18n: i18n,
                             sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
                             autoRunCommands: Plasmoid.configuration.autoRunCommands, 
                             autoMode: root.isAutoMode, 
                             commandToolEnabled: Plasmoid.configuration.useCommandTool,
+                            sessionMultiplexer: root.sessionChipText(),
+                            localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
                             toolsConfig: getToolsConfig()
                         });
                         chatMessages.setProperty(0, "content", autoPrompt);
@@ -2639,12 +2654,14 @@ PlasmoidItem {
 
         // Refresh system prompt
         if (systemPromptReady) {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, {
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, {
+                i18n: i18n,
                 sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
                 autoRunCommands: Plasmoid.configuration.autoRunCommands,
                 autoMode: root.isAutoMode,
                 commandToolEnabled: Plasmoid.configuration.useCommandTool,
                 sessionMultiplexer: root.sessionChipText(),
+                localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
                 toolsConfig: getToolsConfig()
             });
             chatMessages.setProperty(0, "content", prompt);
@@ -3428,12 +3445,14 @@ PlasmoidItem {
                         console.log("[PlasmaLLM] " + msg);
                     }
                     if (systemPromptReady) {
-                        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.customSystemPrompt, {
+                        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, {
+                            i18n: i18n,
                             sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
                             autoRunCommands: Plasmoid.configuration.autoRunCommands,
                             autoMode: root.isAutoMode,
                             commandToolEnabled: Plasmoid.configuration.useCommandTool,
                             sessionMultiplexer: root.sessionChipText(),
+                            localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
                             toolsConfig: getToolsConfig()
                         });
                         chatMessages.setProperty(0, "content", prompt);
@@ -3445,7 +3464,7 @@ PlasmoidItem {
 
     Connections {
         target: Plasmoid.configuration
-        function onCustomSystemPromptChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onSystemPromptChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onCustomToolsChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onEnableToolsChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onAutoRunCommandsChanged() { if (systemPromptReady) initSystemPrompt(); }
@@ -3474,6 +3493,8 @@ PlasmoidItem {
         function onToolsReadMaxBytesChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onToolsWriteMaxBytesChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onToolsHttpMaxBytesChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsInstructionsChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onLocalizeSystemPromptChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onApiKeyChanged() {
             // Legacy single-slot config field; only meaningful before migration.
             if (Plasmoid.configuration.apiKey) root.apiKey = Plasmoid.configuration.apiKey;
@@ -3635,6 +3656,9 @@ PlasmoidItem {
     }
 
     Component.onCompleted: {
+        // Keep profile defaults in sync with the canonical template from api.js.
+        Profiles.setDefaultSystemPromptTemplate(Api.DEFAULT_SYSTEM_PROMPT_TEMPLATE);
+
         // One-time: migrate legacy sttProfileId (chat profile pointer) → dedicated STT fields.
         if (!Plasmoid.configuration.sttMigratedFromProfile) {
             if (!(Plasmoid.configuration.sttApiEndpoint && Plasmoid.configuration.sttApiEndpoint.length > 0)
@@ -3770,6 +3794,34 @@ fi
             Profiles.backfillProfiles(profilesV4);
             Profiles.saveProfiles(Plasmoid.configuration, profilesV4);
             Plasmoid.configuration.profilesSchemaVersion = 4;
+        }
+
+        // Migration: v4 -> v5 (editable system prompt template).
+        // Fold the retired Custom Instructions field into the new template so
+        // existing user instructions keep their priority at the end of the prompt.
+        if (!Plasmoid.configuration.systemPromptMigrated) {
+            Profiles.setDefaultSystemPromptTemplate(Api.DEFAULT_SYSTEM_PROMPT_TEMPLATE);
+            var legacyCustomPrompt = Plasmoid.configuration.customSystemPrompt || "";
+            var baseTemplate = Api.DEFAULT_SYSTEM_PROMPT_TEMPLATE;
+            if (legacyCustomPrompt.trim().length > 0) {
+                if (!Plasmoid.configuration.systemPrompt ||
+                        Plasmoid.configuration.systemPrompt === baseTemplate ||
+                        Plasmoid.configuration.systemPrompt.trim().length === 0) {
+                    Plasmoid.configuration.systemPrompt = baseTemplate + "\n\n" + legacyCustomPrompt.trim();
+                }
+            }
+            var profilesV5 = Profiles.loadProfiles(Plasmoid.configuration);
+            profilesV5.forEach(function(p) {
+                if (p.systemPrompt === undefined || p.systemPrompt === null || p.systemPrompt.trim().length === 0) {
+                    p.systemPrompt = baseTemplate;
+                    if (legacyCustomPrompt.trim().length > 0)
+                        p.systemPrompt += "\n\n" + legacyCustomPrompt.trim();
+                }
+            });
+            Profiles.saveProfiles(Plasmoid.configuration, profilesV5);
+            Plasmoid.configuration.systemPromptMigrated = true;
+            Plasmoid.configuration.customSystemPrompt = "";
+            Plasmoid.configuration.profilesSchemaVersion = 5;
         }
 
         // Seed sysInfo from previous run if available

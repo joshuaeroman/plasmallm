@@ -643,7 +643,9 @@ BaseConfigPage {
             if (myGen !== _configGen) return;
             refreshAvailableModels();
             ensureModelsLoaded(!!opts.forceModels, myGen);
-            rootItem.triggerCapture();
+            if (opts.needsCapture) {
+                rootItem.triggerCapture();
+            }
         });
     }
 
@@ -1533,7 +1535,7 @@ BaseConfigPage {
             Layout.fillWidth: true
             Layout.preferredWidth: 1
             Layout.maximumWidth: Kirigami.Units.gridUnit * 24
-            text: caps.reasoningHelp || ""
+            text: caps.reasoningHelp ? i18n(caps.reasoningHelp) : ""
             wrapMode: Text.WordWrap
             opacity: 0.7
             font: Kirigami.Theme.smallFont

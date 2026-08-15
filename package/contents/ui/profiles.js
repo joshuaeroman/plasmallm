@@ -23,9 +23,35 @@
  *   openaiLastProvider: string,
  *   openaiLastEndpoint: string,
  *   enableNativeGoogleSearch: bool,
- *   enableNativeCodeExecution: bool
+ *   enableNativeCodeExecution: bool,
+ *   systemPrompt: string
  * }
  */
+
+// Default system prompt template. Mirrors package/contents/config/main.xml and
+// api.js. main.qml calls setDefaultSystemPromptTemplate(Api.DEFAULT_SYSTEM_PROMPT_TEMPLATE)
+// at startup so the two can never drift.
+var defaultSystemPromptTemplate = "You are a helpful assistant embedded in the user's Linux desktop.\n" +
+    "\n" +
+    "## System\n" +
+    "{{system_info}}\n" +
+    "\n" +
+    "General-purpose assistant. Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational. Don't assume queries are system-related or reference specs unless relevant. " +
+    "Always use the `~` alias instead of absolute paths when referring to the user's home directory in tool calls or text.\n" +
+    "\n" +
+    "{{session_multiplexer}}\n" +
+    "{{approval_mode}}\n" +
+    "{{tools}}\n" +
+    "{{driving_instructions}}";
+
+function setDefaultSystemPromptTemplate(tpl) {
+    if (tpl && String(tpl).trim().length > 0)
+        defaultSystemPromptTemplate = String(tpl);
+}
+
+function systemPromptTemplateDefault() {
+    return defaultSystemPromptTemplate;
+}
 
 const PROFILE_FIELDS = [
     "apiType", "apiEndpoint", "providerName", "modelName", "usesResponsesAPI",
@@ -33,6 +59,7 @@ const PROFILE_FIELDS = [
     "geminiApiVariant", "geminiAuthMethod", "geminiVertexAuthType", "geminiProjectId",
     "geminiLocation", "openaiLastProvider", "openaiLastEndpoint",
     "enableNativeGoogleSearch", "enableNativeCodeExecution",
+    "systemPrompt", "localizeSystemPrompt",
     "useCommandTool", "autoRunCommands", "autoShareCommandOutput",
     "enableWebSearch", "webSearchProvider", "searxngUrl", "exaSearchType",
     "enableTools", "enableDesktopAutomation",
@@ -48,6 +75,7 @@ const PROFILE_FIELDS = [
     "toolsOpenUrlEnabled", "toolsOpenUrlAutoRun",
     "toolsPathWhitelist",
     "toolsReadMaxBytes", "toolsWriteMaxBytes", "toolsHttpMaxBytes",
+    "toolsInstructions",
     "tasks", "customTools"
 ];
 
@@ -73,6 +101,7 @@ const PROFILE_DEFAULTS = {
     openaiLastEndpoint: "",
     enableNativeGoogleSearch: false,
     enableNativeCodeExecution: false,
+    localizeSystemPrompt: false,
     useCommandTool: true,
     autoRunCommands: false,
     autoShareCommandOutput: false,
@@ -106,9 +135,18 @@ const PROFILE_DEFAULTS = {
     toolsReadMaxBytes: 204800,
     toolsWriteMaxBytes: 1048576,
     toolsHttpMaxBytes: 524288,
+    toolsInstructions: "{}",
     tasks: "",
     customTools: '[{"name":"echo","description":"Echoes back the message provided.","commandTemplate":"echo {message}","requireSuperuser":false,"autoRun":false}]'
 };
+
+// Live getter so PROFILE_DEFAULTS always mirrors the current default template
+// even after main.qml syncs it from Api.DEFAULT_SYSTEM_PROMPT_TEMPLATE.
+Object.defineProperty(PROFILE_DEFAULTS, "systemPrompt", {
+    get: function() { return systemPromptTemplateDefault(); },
+    enumerable: true,
+    configurable: true
+});
 
 function fieldValue(profile, field) {
     if (profile && profile[field] !== undefined)

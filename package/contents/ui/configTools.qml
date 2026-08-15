@@ -112,6 +112,58 @@ BaseConfigPage {
         }
     }
 
+    function getDefaultInstruction(toolName) {
+        var meta = ToolManager.getToolMetadata(toolName, null);
+        var raw = meta ? (meta.longDescription || meta.description || "") : "";
+        if (cfg_localizeSystemPrompt && raw.length > 0) {
+            return i18n(raw);
+        }
+        return raw;
+    }
+
+    function getInstructionOverride(toolName, instructionsJson) {
+        var blob = instructionsJson !== undefined ? instructionsJson : cfg_toolsInstructions;
+        if (!blob) return "";
+        try {
+            var map = typeof blob === "string" ? JSON.parse(blob) : blob;
+            return (map && map[toolName]) ? String(map[toolName]) : "";
+        } catch(e) {
+            return "";
+        }
+    }
+
+    function getInstructionText(toolName, instructionsJson) {
+        var override = getInstructionOverride(toolName, instructionsJson);
+        if (override.length > 0) return override;
+        return getDefaultInstruction(toolName);
+    }
+
+    function hasInstructionOverride(toolName, instructionsJson) {
+        return getInstructionOverride(toolName, instructionsJson).length > 0;
+    }
+
+    function setInstructionOverride(toolName, text) {
+        if (!_initialized) return;
+        var map = {};
+        try {
+            if (cfg_toolsInstructions) {
+                map = typeof cfg_toolsInstructions === "string" ? JSON.parse(cfg_toolsInstructions) : cfg_toolsInstructions;
+            }
+        } catch(e) {}
+        if (!map || typeof map !== "object" || Array.isArray(map)) map = {};
+        var defaultInst = getDefaultInstruction(toolName);
+        if (text && text.trim().length > 0 && text.trim() !== defaultInst.trim()) {
+            map[toolName] = text.trim();
+        } else {
+            delete map[toolName];
+        }
+        var newBlob = JSON.stringify(map);
+        if (cfg_toolsInstructions !== newBlob) {
+            cfg_toolsInstructions = newBlob;
+            rootItem.triggerCapture();
+        }
+    }
+
     Component.onCompleted: {
         DriverManager.init(DBus.SessionBus);
         execSource.connectSource("command -v tmux");
@@ -452,9 +504,59 @@ BaseConfigPage {
                             radius: Kirigami.Units.smallSpacing
                         }
 
-                        contentItem: Loader {
-                            source: card.configSource
+                        contentItem: ColumnLayout {
+                            spacing: Kirigami.Units.mediumSpacing
                             Layout.fillWidth: true
+
+                            Loader {
+                                source: card.configSource
+                                Layout.fillWidth: true
+                                visible: card.configSource.length > 0
+                            }
+
+                            Kirigami.Separator {
+                                Layout.fillWidth: true
+                                visible: card.configSource.length > 0
+                            }
+
+                            ColumnLayout {
+                                Layout.fillWidth: true
+                                spacing: Kirigami.Units.smallSpacing
+
+                                RowLayout {
+                                    Layout.fillWidth: true
+                                    QQC2.Label {
+                                        text: i18n("Prompt Instructions:")
+                                        font.bold: true
+                                        Layout.fillWidth: true
+                                    }
+                                    QQC2.Button {
+                                        text: i18n("Reset")
+                                        icon.name: "edit-undo"
+                                        flat: true
+                                        visible: instructionArea.text.trim() !== configPage.getDefaultInstruction(card.toolName).trim()
+                                        onClicked: {
+                                            instructionArea.text = configPage.getDefaultInstruction(card.toolName);
+                                            configPage.setInstructionOverride(card.toolName, "");
+                                        }
+                                    }
+                                }
+
+                                QQC2.TextArea {
+                                    id: instructionArea
+                                    Layout.fillWidth: true
+                                    Layout.minimumHeight: Kirigami.Units.gridUnit * 4
+                                    wrapMode: Text.Wrap
+                                    font.family: "monospace"
+                                    font.pointSize: Kirigami.Theme.smallFont.pointSize
+                                    text: configPage.getInstructionText(card.toolName, cfg_toolsInstructions)
+                                    onTextChanged: {
+                                        if (_initialized && text !== configPage.getInstructionText(card.toolName, cfg_toolsInstructions)) {
+                                            configPage.setInstructionOverride(card.toolName, text);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
