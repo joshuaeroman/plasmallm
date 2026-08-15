@@ -103,6 +103,7 @@ SimpleKCM {
 
     function triggerCapture() {
         if (!_initialized || _switchingProfile || inConfigTxn) return;
+        console.error("[PlasmaLLM Settings DEBUG] triggerCapture requested");
         captureDebounce.restart();
     }
 
@@ -176,6 +177,12 @@ SimpleKCM {
     property int cfg_customThoughtsFontSizeDefault
     property string cfg_customSystemPrompt
     property string cfg_customSystemPromptDefault
+    property string cfg_systemPrompt
+    property string cfg_systemPromptDefault
+    property bool cfg_systemPromptMigrated
+    property bool cfg_systemPromptMigratedDefault
+    property bool cfg_localizeSystemPrompt
+    property bool cfg_localizeSystemPromptDefault
     property bool cfg_resizeImageAttachments
     property bool cfg_resizeImageAttachmentsDefault
     property bool cfg_saveChatHistory
@@ -389,6 +396,8 @@ SimpleKCM {
     property int cfg_toolsWriteMaxBytesDefault
     property int cfg_toolsHttpMaxBytes
     property int cfg_toolsHttpMaxBytesDefault
+    property string cfg_toolsInstructions
+    property string cfg_toolsInstructionsDefault
     property bool cfg_enableToolCallLimit
     property bool cfg_enableToolCallLimitDefault
     property int cfg_maxToolCallDepth

@@ -306,21 +306,58 @@ function buildToolSchemas(config) {
     return schemas;
 }
 
-function buildSystemPromptSection(config) {
+function getToolInstruction(name, config, i18nFn) {
+    if (config && config.toolsInstructions) {
+        try {
+            var map = typeof config.toolsInstructions === "string" ? JSON.parse(config.toolsInstructions) : config.toolsInstructions;
+            if (map && map[name] && typeof map[name] === "string" && map[name].trim().length > 0) {
+                return map[name].trim();
+            }
+        } catch(e) {}
+    }
+    var tool = getToolMetadata(name, config);
+    var raw = tool ? (tool.longDescription || tool.description || "") : "";
+    if (config && config.localizeSystemPrompt && raw.length > 0) {
+        return _tr(i18nFn, config, raw);
+    }
+    return raw;
+}
+
+function _tr(i18nFn, config, str) {
+    var fn = (typeof i18nFn === "function") ? i18nFn : ((config && typeof config.i18n === "function") ? config.i18n : (typeof i18n === "function" ? i18n : null));
+    if (fn) {
+        var args = Array.prototype.slice.call(arguments, 2);
+        return fn.apply(null, args);
+    }
+    var res = str;
+    for (var i = 3; i < arguments.length; i++) {
+        res = res.replace(new RegExp("%" + (i - 2), "g"), arguments[i]);
+    }
+    return res;
+}
+
+function buildSystemPromptSection(config, i18nFn) {
     var enabled = getEnabledTools(config);
     if (enabled.length === 0) return "";
+    var loc = config && config.localizeSystemPrompt;
 
-    var section = "\n## Tools\n";
-    section += "The user has pre-authorized you to use the following tools. You can call them directly without asking for permission; the user has explicitly enabled each one.\n\n";
-    section += "Auto-run tools execute immediately and return their result to you. Non-auto-run tools will pause for user approval before executing — you should still call them freely, the user will approve interactively.\n\n";
-    section += "Enabled tools:\n";
+    var section = "\n## " + (loc ? _tr(i18nFn, config, "Tools") : "Tools") + "\n";
+    section += (loc
+        ? _tr(i18nFn, config, "The user has pre-authorized you to use the following tools. You can call them directly without asking for permission; the user has explicitly enabled each one.")
+        : "The user has pre-authorized you to use the following tools. You can call them directly without asking for permission; the user has explicitly enabled each one.") + "\n\n";
+    section += (loc
+        ? _tr(i18nFn, config, "Auto-run tools execute immediately and return their result to you. Non-auto-run tools will pause for user approval before executing — you should still call them freely, the user will approve interactively.")
+        : "Auto-run tools execute immediately and return their result to you. Non-auto-run tools will pause for user approval before executing — you should still call them freely, the user will approve interactively.") + "\n\n";
+    section += (loc ? _tr(i18nFn, config, "Enabled tools:") : "Enabled tools:") + "\n";
 
     for (var i = 0; i < enabled.length; i++) {
         var id = enabled[i];
         var tool = getToolMetadata(id, config);
         if (!tool) continue;
         var auto = isAutoRun(id, config);
-        var status = auto ? "auto-run" : "requires approval";
+        var status = loc
+            ? (auto ? _tr(i18nFn, config, "auto-run") : _tr(i18nFn, config, "requires approval"))
+            : (auto ? "auto-run" : "requires approval");
         
         var details = "";
         if (tool.sandboxed) {
@@ -331,22 +368,24 @@ function buildSystemPromptSection(config) {
                 whitelist = [config.toolsPathWhitelist];
             }
             var whitelistStr = whitelist.join(", ");
-            details = ". Access restricted to: " + whitelistStr;
+            details = loc ? _tr(i18nFn, config, ". Access restricted to: %1", whitelistStr) : (". Access restricted to: " + whitelistStr);
         }
-        if (id === "read_file") details += ". Max " + (config.toolsReadMaxBytes || 204800) + " bytes";
-        if (id === "write_file") details += ". Max " + (config.toolsWriteMaxBytes || 1048576) + " bytes";
-        if (id === "http_get" || id === "http_request") details += ". Max " + (config.toolsHttpMaxBytes || 524288) + " bytes response";
+        if (id === "read_file") {
+            var readMax = config.toolsReadMaxBytes || 204800;
+            details += loc ? _tr(i18nFn, config, ". Max %1 bytes", readMax) : (". Max " + readMax + " bytes");
+        }
+        if (id === "write_file") {
+            var writeMax = config.toolsWriteMaxBytes || 1048576;
+            details += loc ? _tr(i18nFn, config, ". Max %1 bytes", writeMax) : (". Max " + writeMax + " bytes");
+        }
+        if (id === "http_get" || id === "http_request") {
+            var httpMax = config.toolsHttpMaxBytes || 524288;
+            details += loc ? _tr(i18nFn, config, ". Max %1 bytes response", httpMax) : (". Max " + httpMax + " bytes response");
+        }
 
-        section += "- " + tool.name + " (" + status + "): " + tool.longDescription + details + "\n";
+        var instruction = getToolInstruction(id, config, i18nFn);
+        section += "- " + tool.name + " (" + status + "): " + instruction + details + "\n";
     }
-    
-    section += "\n### Command Guidelines\n" +
-        "When using tools that execute shell commands (like `run_command` or certain custom tools):\n" +
-        "- Use `pkexec` instead of `sudo` for superuser privileges.\n" +
-        "- Chain steps with `&&`.\n" +
-        "- Use `kdialog` for user prompts; commands run non-interactively.\n" +
-        "- NEVER install packages or modify system configuration without explicit user permission asked in plain text.\n" +
-        "- For auto-run tools: Be conservative and prefer read-only commands. If an action is potentially disruptive, describe it in plain text and wait for explicit user approval before calling the tool.\n";
 
     return section;
 }
@@ -437,5 +476,23 @@ function isPathAllowed(path, whitelistStr, paths) {
         }
     }
     return false;
+}
+
+// Catalog strings for xgettext extraction of built-in tool descriptions.
+function _toolDescriptionsCatalog() {
+    return [
+        i18n("Execute a shell command on the user's system and return its output. Guidelines:\n- Use `pkexec` instead of `sudo` for any command requiring superuser privileges.\n- Chain steps with `&&`.\n- Commands run non-interactively. Never use commands that wait for user input (like `read`).\n- Use `kdialog` if you need to prompt the user for input or show a message box (e.g., `kdialog --inputbox \"Prompt\"`).\n- NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission.\n- When permission is needed, ask the user in plain text first.\n- For auto-run tools: Be conservative and prefer read-only commands. If an action is potentially disruptive, describe it in plain text and wait for explicit user approval before calling the tool.\n- You MUST prefer other, more specific tools (like read_file, write_file, search_files, etc.) if they can accomplish the task. Only use this tool if no other tool is suitable."),
+        i18n("Read the contents of a file at the specified path. Access is restricted to allowed directories."),
+        i18n("Write content to a file at the specified path. Access is restricted to allowed directories."),
+        i18n("List the contents of a directory. Access is restricted to allowed directories."),
+        i18n("Search for a pattern within files in a directory (recursive)."),
+        i18n("Perform an HTTP GET request to a URL and return the response content."),
+        i18n("Perform an HTTP request (POST, PUT, etc.) to a URL."),
+        i18n("Get the current content of the system clipboard."),
+        i18n("Set the content of the system clipboard."),
+        i18n("Show a system notification."),
+        i18n("Open a URL in the default application (e.g., web browser)."),
+        i18n("Perform a web search to find current information, news, or specific facts.")
+    ];
 }
 

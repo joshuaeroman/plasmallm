@@ -30,7 +30,7 @@ var capabilities = {
     reasoningEffort: true,
     thinkingBudget: false,
     fetchModels: true,
-    reasoningHelp: i18n("Reasoning effort (low / medium / high) gates extended thinking. To see thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; chat-completions providers (DeepSeek, Qwen) surface reasoning via reasoning_content.")
+    reasoningHelp: "Reasoning effort (low / medium / high) gates extended thinking. To see thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; chat-completions providers (DeepSeek, Qwen) surface reasoning via reasoning_content."
 };
 
 // Provider presets shown in the settings UI. usesResponsesAPI:true marks

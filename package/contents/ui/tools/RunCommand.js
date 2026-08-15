@@ -16,7 +16,8 @@ var longDescription = "Execute a shell command on the user's system and return i
     "- Use `kdialog` if you need to prompt the user for input or show a message box (e.g., `kdialog --inputbox \"Prompt\"`).\n" +
     "- NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission.\n" +
     "- When permission is needed, ask the user in plain text first.\n" +
-    "You MUST prefer other, more specific tools (like read_file, write_file, search_files, etc.) if they can accomplish the task. Only use this tool if no other tool is suitable.";
+    "- For auto-run tools: Be conservative and prefer read-only commands. If an action is potentially disruptive, describe it in plain text and wait for explicit user approval before calling the tool.\n" +
+    "- You MUST prefer other, more specific tools (like read_file, write_file, search_files, etc.) if they can accomplish the task. Only use this tool if no other tool is suitable.";
 var parameters = {
     type: "object",
     properties: {

@@ -19,14 +19,12 @@ var presets = [
 ];
 
 var capabilities = {
-    providerPresets: false,
+    providerPresets: true,
     customEndpoint: true,
     reasoningEffort: true,
     thinkingBudget: false,
     fetchModels: true,
-    nativeGoogleSearch: true,
-    nativeCodeExecution: true,
-    reasoningHelp: i18n("Gemini uses the thinking level dropdown directly.")
+    reasoningHelp: "Gemini uses the thinking level dropdown directly."
 };
 
 // State persistence for the current session.

@@ -29,12 +29,12 @@ var presets = [
 // effort field is hidden. Provider preset dropdown is hidden — only one
 // endpoint exists — but the endpoint field is kept editable for proxies.
 var capabilities = {
-    providerPresets: false,
+    providerPresets: true,
     customEndpoint: true,
     reasoningEffort: false,
     thinkingBudget: true,
     fetchModels: true,
-    reasoningHelp: i18n("Gemini uses the thinking token budget directly. Set to 0 to disable thinking on supported models.")
+    reasoningHelp: "Gemini uses the thinking token budget directly. Set to 0 to disable thinking on supported models."
 };
 
 var STATIC_VERTEX_GEMINI_MODELS = [

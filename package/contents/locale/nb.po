@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-14 20:58-0400\n"
+"POT-Creation-Date: 2026-08-15 17:59-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -25,13 +25,6 @@ msgstr "Gjeldende farge er %1. Denne knappen vil åpne en fargevelgerdialog."
 
 msgid "Current color is %1."
 msgstr "Gjeldende farge er %1."
-
-msgid ""
-"Anthropic enables extended thinking when effort is not Off, using the token "
-"budget below. Temperature is forced to max while thinking."
-msgstr ""
-"Anthropic muliggjør utvidet tenkning når innsats ikke er Av, og bruker "
-"token-budsjettet nedenfor for maksimal utgang."
 
 msgid "Request timed out after 30 seconds"
 msgstr "Forespørsel tidsavbrutt etter 30 sekunder"
@@ -67,20 +60,6 @@ msgid "Request failed (no response) — check your endpoint URL"
 msgstr ""
 "Forespørsel mislyktes (ingen respons) — kontroller endepunkts-URL-en..."
 
-msgid ""
-"Exa performs real-time neural search and synthesizes grounded answers with "
-"live web citations."
-msgstr ""
-"Exa utfører nevrale søk i sanntid og syntetiserer forankrede svar med live "
-"siteringer fra nettet."
-
-msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking"
-" on supported models."
-msgstr ""
-"Gemini bruker tenke-token-budsjettet direkte. Sett til 0 for å deaktivere "
-"tenking (noen modeller krever det)."
-
 msgid "Failed to fetch models"
 msgstr "Kunne ikke hente modeller..."
 
@@ -96,9 +75,6 @@ msgstr "ingen respons — sjekk endepunkt-URL-en din..."
 msgid "Request failed"
 msgstr "Forespørsel feilet..."
 
-msgid "Gemini uses the thinking level dropdown directly."
-msgstr "Gemini bruker tenkenivå-nedtrekkslisten direkte."
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -109,17 +85,8 @@ msgstr ""
 "deaktiver innebygde funksjoner i innstillinger."
 
 msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"Resonneringsinnsats (lav / middels / høy) styrer utvidet tenkning. For å se "
-"tanker, sørg for at du har aktivert 'Vis tanker' i Generelt-fanen."
-
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to"
-" the LLM."
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
 msgstr ""
 "Ingen egendefinerte verktøy konfigurert. Legg til et egendefinert verktøy "
 "for å eksponere dine egne kommandoer til LLM."
@@ -163,63 +130,11 @@ msgstr "Et verktøy med navn \"%1\" finnes allerede."
 msgid ""
 "Custom tools allow you to expose your own commands to the LLM. Use "
 "placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-"
-"escaped."
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
 msgstr ""
 "Egendefinerte verktøy lar deg eksponere dine egne kommandoer til LLM. Bruk "
 "plassholdere som {variable} i Kommandomalen for å definere parametere som "
 "LLM kan fylle ut. Verdier gitt av LLM blir automatisk shell-escaped."
-
-msgid "System Info:"
-msgstr "Systeminformasjon:"
-
-msgid "OS"
-msgstr "OS"
-
-msgid "Shell"
-msgstr "Skall"
-
-msgid "Hostname"
-msgstr "Vertsnavn"
-
-msgid "Kernel"
-msgstr "Kjerne"
-
-msgid "Desktop"
-msgstr "Skrivebord"
-
-msgid "User"
-msgstr "Bruker"
-
-msgid "CPU"
-msgstr "CPU"
-
-msgid "Memory"
-msgstr "Minne"
-
-msgid "GPU"
-msgstr "GPU"
-
-msgid "Block Devices"
-msgstr "Blokkenheter"
-
-msgid "Network"
-msgstr "Nettverk"
-
-msgid "Locale"
-msgstr "Lokalitet"
-
-msgid "Date/Time"
-msgstr "Dato/tid"
-
-msgid "Custom Instructions:"
-msgstr "Egendefinerte instruksjoner:"
-
-msgid "Additional instructions for the LLM…"
-msgstr "Tilleggsinstruksjoner for LLM-en…"
-
-msgid "Preview:"
-msgstr "Forhåndsvisning:"
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -251,8 +166,8 @@ msgid "A task named \"%1\" already exists."
 msgstr "En oppgave kalt \"%1\" finnes allerede."
 
 msgid ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
-" button to run them. Tasks with skip approvals enabled will run tools "
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with skip approvals enabled will run tools "
 "automatically."
 msgstr ""
 "Oppgaver er gjenbrukbare ledetekstsnarveger. Bruk /task <navn> i chatten "
@@ -264,9 +179,6 @@ msgstr "Spør før kjøring"
 
 msgid "Error: URL must start with http:// or https://"
 msgstr "Feil: URL må starte med http:// eller https://"
-
-msgid "No command provided."
-msgstr "Ingen kommando oppgitt."
 
 msgid "Ask before running commands from LLM"
 msgstr "Spør før du kjører kommandoer fra LLM"
@@ -283,8 +195,8 @@ msgid ""
 "commands without permission and will see their output, enabling an agentic "
 "workflow. Only use with trustworthy LLMs."
 msgstr ""
-"⚠️ FARE: 'Spør før kjøring' er deaktivert — LLM kan nå kjøre kommandoer uten"
-" tillatelse og vil se utdataene, noe som muliggjør en agentisk arbeidsflyt. "
+"⚠️ FARE: 'Spør før kjøring' er deaktivert — LLM kan nå kjøre kommandoer uten "
+"tillatelse og vil se utdataene, noe som muliggjør en agentisk arbeidsflyt. "
 "Bruk kun med pålitelige LLM-er."
 
 msgid "Note: This tool is not restricted by the path whitelist."
@@ -300,8 +212,8 @@ msgid ""
 "Execute LLM commands inside a long-lived tmux or screen session so state "
 "persists across turns."
 msgstr ""
-"Kjør LLM-kommandoer i en langvarig tmux- eller screen-økt slik at tilstanden"
-" bevares over flere trekk."
+"Kjør LLM-kommandoer i en langvarig tmux- eller screen-økt slik at tilstanden "
+"bevares over flere trekk."
 
 msgid "Reset Session"
 msgstr "Nullstill økt"
@@ -320,8 +232,8 @@ msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
 "OPTIONS are allowed."
 msgstr ""
-"Feil: Ugyldig HTTP-metode. Bare GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS"
-" er tillatt."
+"Feil: Ugyldig HTTP-metode. Bare GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS "
+"er tillatt."
 
 msgid "Search provider %1 not supported"
 msgstr "Søkeleverandør %1 støttes ikke"
@@ -398,6 +310,9 @@ msgstr "Muliggjør LLM-utløste nevrale nettsøk via Exa API."
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
 
+msgid "No command provided."
+msgstr "Ingen kommando oppgitt."
+
 msgid "Tool Request: %1"
 msgstr "Verktøyforespørsel: %1"
 
@@ -418,6 +333,357 @@ msgstr "Åpne terminal tilknyttet denne sesjonen"
 
 msgid "Copy output"
 msgstr "Kopier utdata"
+
+msgid "Microphone recording failed"
+msgstr "Mikrofonopptak mislyktes"
+
+msgid "No microphone found"
+msgstr "Ingen mikrofon funnet"
+
+msgid "No microphone available"
+msgstr "Ingen mikrofon tilgjengelig"
+
+msgid "Recording…"
+msgstr "Tar opp…"
+
+msgid "Could not start recording: %1"
+msgstr "Kunne ikke starte opptak: %1"
+
+msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
+msgstr "Kunne ikke starte skall-lydopptaker (installer pw-record eller ffmpeg)"
+
+msgid "Processing…"
+msgstr "Behandler…"
+
+msgid "Failed to stop recording"
+msgstr "Kunne ikke stoppe opptak"
+
+msgid "Shell recorder stop is not configured"
+msgstr "Stopp av skallopptaker er ikke konfigurert"
+
+msgid "Shell recording failed"
+msgstr "Skallopptak mislyktes"
+
+msgid "Recording stopped unexpectedly"
+msgstr "Opptaket stoppet uventet"
+
+msgid "Recording produced no file"
+msgstr "Opptaket produserte ingen fil"
+
+msgid "Recording failed"
+msgstr "Opptak mislyktes"
+
+msgid "Speech to Text"
+msgstr "Tale til tekst"
+
+msgid "API key saved to local fallback (KWallet unavailable)."
+msgstr "API-nøkkel lagret i lokal reserve (KWallet utilgjengelig)."
+
+msgid "API key saved to KWallet."
+msgstr "API-nøkkel lagret i KWallet."
+
+msgid "API key saved to local fallback."
+msgstr "API-nøkkel lagret i lokal reserve."
+
+msgid "Set an API endpoint first."
+msgstr "Angi et API-endepunkt først."
+
+msgid "Fetching STT models…"
+msgstr "Henter STT-modeller…"
+
+msgid "Loaded %1 STT model(s)."
+msgstr "Lastet inn %1 STT-modell(er)."
+
+msgid "Voice input:"
+msgstr "Taleinndata:"
+
+msgid "Enable microphone input"
+msgstr "Aktiver mikrofoninndata"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"Konfigurerer kun tale-til-tekst-motoren. Transkripsjoner bruker din aktive "
+"samtaleprofil (Generelt)."
+
+msgid "Mic button:"
+msgstr "Mikrofonknapp:"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Hold to talk"
+msgstr "Hold for å snakke"
+
+msgid "Toggle"
+msgstr "Veksle"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"Auto: klikk veksler opptak; hold 250 ms+ for trykk-og-snakk. Hold: kun hold "
+"inne. Veksle: klikk for å starte/stoppe."
+
+msgid "Voice shortcut:"
+msgstr "Talesnarvei:"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"Når PlasmaLLM er åpen og fokusert, brukes samme mikrofonmodus som knappen "
+"(auto: kort trykk veksler, hold 250 ms+ er trykk-og-snakk). Åpner ikke "
+"panelet – bruk «Aktiver skjermelement» på Snarveier-siden. Standard: Ctrl+M. "
+"Tøm for å deaktivere."
+
+msgid "Transcriber"
+msgstr "Transkriberer"
+
+msgid "Provider:"
+msgstr "Leverandør:"
+
+msgid "Endpoint:"
+msgstr "Endepunkt:"
+
+msgid "Model:"
+msgstr "Modell:"
+
+msgid "Fetching…"
+msgstr "Henter…"
+
+msgid "Fetch"
+msgstr "Hent"
+
+msgid "Fetch STT models"
+msgstr "Hent STT-modeller"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouter lister STT-modeller kun via transkripsjonsmodaliteter (denne "
+"siden gjør det)."
+
+msgid "API key:"
+msgstr "API-nøkkel:"
+
+msgid "Provider API key"
+msgstr "Leverandør-API-nøkkel"
+
+msgid "Save"
+msgstr "Lagre"
+
+msgid "Save API key"
+msgstr "Lagre API-nøkkel"
+
+msgid "Options"
+msgstr "Alternativer"
+
+msgid "Language hint:"
+msgstr "Språkhint:"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "Valgfritt, f.eks. no eller en (tom = auto)"
+
+msgid "Max recording (seconds):"
+msgstr "Maksimalt opptak (sekunder):"
+
+msgid "STT backend:"
+msgstr "STT-motor:"
+
+msgid "OpenAI-compatible transcriptions"
+msgstr "OpenAI-kompatible transkripsjoner"
+
+msgid "Speech-to-text is not configured"
+msgstr "Tale-til-tekst er ikke konfigurert"
+
+msgid "Unknown STT backend: %1"
+msgstr "Ukjent STT-motor: %1"
+
+msgid "STT backend does not support model listing"
+msgstr "STT-motoren støtter ikke listing av modeller"
+
+msgid "STT endpoint is not configured"
+msgstr "STT-endepunkt er ikke konfigurert"
+
+msgid "Model list request failed: %1"
+msgstr "Forespørsel om modelliste mislyktes: %1"
+
+msgid "No STT models returned"
+msgstr "Ingen STT-modeller returnert"
+
+msgid "No audio data to transcribe"
+msgstr "Ingen lyddata å transkribere"
+
+msgid "STT model is not configured"
+msgstr "STT-modell er ikke konfigurert"
+
+msgid "Speech-to-text request timed out"
+msgstr "Forespørsel om tale-til-tekst tidsavbrutt"
+
+msgid "Failed to parse STT response: %1"
+msgstr "Kunne ikke tolke STT-svar: %1"
+
+msgid "STT failed (HTTP %1): %2"
+msgstr "STT mislyktes (HTTP %1): %2"
+
+msgid "STT failed (HTTP %1)"
+msgstr "STT mislyktes (HTTP %1)"
+
+msgid "STT request failed: %1"
+msgstr "STT-forespørsel mislyktes: %1"
+
+msgid "Profile Header:"
+msgstr "Profiloverskrift:"
+
+msgid "Show provider and model in profile header"
+msgstr "Vis leverandør og modell i profiloverskrift"
+
+msgid "Chat Spacing: %1px"
+msgstr "Chatavstand: %1px"
+
+msgid "Compact"
+msgstr "Kompakt"
+
+msgid "Spacious"
+msgstr "Romslig"
+
+msgid "Chat Labels:"
+msgstr "Chat-etiketter:"
+
+msgid "User label:"
+msgstr "Brukeretikett:"
+
+msgid "You"
+msgstr "Du"
+
+msgid "Assistant label:"
+msgstr "Assistentetikett:"
+
+msgid "Assistant"
+msgstr "Assistent"
+
+msgid "Use model name as assistant label"
+msgstr "Bruk modellnavn som assistentetikett"
+
+msgid "Chat Colors:"
+msgstr "Chat-farger:"
+
+msgid "Use custom user color"
+msgstr "Bruk tilpasset brukerfarge"
+
+msgid "Use custom assistant color"
+msgstr "Bruk tilpasset assistentfarge"
+
+msgid "UI Font:"
+msgstr "Grensesnittskrift:"
+
+msgid "Use custom UI font"
+msgstr "Bruk egendefinert grensesnittskrift"
+
+msgid "Code Font:"
+msgstr "Kodeskrift:"
+
+msgid "Use custom code font"
+msgstr "Bruk egendefinert kodeskrift"
+
+msgid "Thoughts Font:"
+msgstr "Tankeskrift:"
+
+msgid "Use custom thoughts font"
+msgstr "Bruk egendefinert tankeskrift"
+
+msgid "LaTeX Rendering:"
+msgstr "LaTeX-rendering:"
+
+msgid "Leave as TeX"
+msgstr "Behold som TeX"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Erstatt med Unicode (standard)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib mangler)"
+
+msgid "Header Icons:"
+msgstr "Overskriftsikoner:"
+
+msgid "Profile Header"
+msgstr "Profiloverskrift"
+
+msgid "Always show Tasks"
+msgstr "Vis alltid Oppgaver"
+
+msgid "Always show Auto Toggle"
+msgstr "Vis alltid Auto-veksler"
+
+msgid "Show History"
+msgstr "Vis historikk"
+
+msgid "Show Copy conversation"
+msgstr "Vis Kopier samtale"
+
+msgid "Show Clear chat"
+msgstr "Vis Tøm chat"
+
+msgid "Show Settings"
+msgstr "Vis Innstillinger"
+
+msgid "Show Pin"
+msgstr "Vis festikonet"
+
+msgid "Voice message"
+msgstr "Talemelding"
+
+msgid "Error"
+msgstr "Feil"
+
+msgid "Web Search"
+msgstr "Nettsøk"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Mathtext-rendering falt tilbake til Unicode-erstatning (matplotlib er ikke "
+"installert eller det oppstod en feil)"
+
+msgid "Thinking"
+msgstr "Tenker…"
+
+msgid "Searched for: %1"
+msgstr "Søkte etter: %1"
+
+msgid "Show %1 results"
+msgstr "Vis %1 resultater"
+
+msgid "Save & Retry"
+msgstr "Lagre og prøv igjen"
+
+msgid "Copy to clipboard"
+msgstr "Kopier til utklippstavle"
+
+msgid "Edit message"
+msgstr "Rediger melding"
+
+msgid "Edit response"
+msgstr "Rediger svar"
+
+msgid "Retry from here"
+msgstr "Prøv igjen herfra"
+
+msgid "Regenerate response"
+msgstr "Regenerer svar"
+
+msgid "Share output with assistant"
+msgstr "Del utdata med assistenten"
 
 msgid "Approve the pending tool request"
 msgstr "Godkjenn ventende verktøyforespørsel"
@@ -465,8 +731,8 @@ msgid ""
 "Toggle Full Auto Mode: When enabled, all tools run automatically for this "
 "session."
 msgstr ""
-"Slå av/på fullautomatisk modus: Når aktivert, kjøres alle verktøy automatisk"
-" for denne økten."
+"Slå av/på fullautomatisk modus: Når aktivert, kjøres alle verktøy automatisk "
+"for denne økten."
 
 msgid "Drive Desktop"
 msgstr "Drive Desktop"
@@ -508,20 +774,23 @@ msgstr ""
 msgid "Clear All"
 msgstr "Tøm alle"
 
+msgid "Retry from this message?"
+msgstr "Prøv igjen fra denne meldingen?"
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+"Dette vil fjerne %1 melding(er) etter dette punktet og generere et nytt "
+"svar."
+
+msgid "Retry"
+msgstr "Prøv igjen"
+
 msgid "Copy conversation"
 msgstr "Kopier samtale"
 
-msgid "You"
-msgstr "Du"
-
-msgid "Assistant"
-msgstr "Assistent"
-
 msgid "Command"
 msgstr "Kommando"
-
-msgid "Error"
-msgstr "Feil"
 
 msgid "Clear chat"
 msgstr "Tøm chat"
@@ -590,9 +859,6 @@ msgstr "Slipp for å sende"
 msgid "Click to start"
 msgstr "Klikk for å starte"
 
-msgid "Hold to talk"
-msgstr "Hold for å snakke"
-
 msgid "Click to toggle, hold to talk"
 msgstr "Klikk for å veksle, hold for å snakke"
 
@@ -615,58 +881,6 @@ msgstr "Avbryt LLM-forespørsel"
 
 msgid "Drop files here to attach"
 msgstr "Slipp filer her for å legge ved"
-
-msgid "Microphone recording failed"
-msgstr "Mikrofonopptak mislyktes"
-
-msgid "No microphone found"
-msgstr "Ingen mikrofon funnet"
-
-msgid "No microphone available"
-msgstr "Ingen mikrofon tilgjengelig"
-
-msgid "Recording…"
-msgstr "Tar opp…"
-
-msgid "Could not start recording: %1"
-msgstr "Kunne ikke starte opptak: %1"
-
-msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
-msgstr ""
-"Kunne ikke starte skall-lydopptaker (installer pw-record eller ffmpeg)"
-
-msgid "Processing…"
-msgstr "Behandler…"
-
-msgid "Failed to stop recording"
-msgstr "Kunne ikke stoppe opptak"
-
-msgid "Shell recorder stop is not configured"
-msgstr "Stopp av skallopptaker er ikke konfigurert"
-
-msgid "Shell recording failed"
-msgstr "Skallopptak mislyktes"
-
-msgid "Recording stopped unexpectedly"
-msgstr "Opptaket stoppet uventet"
-
-msgid "Recording produced no file"
-msgstr "Opptaket produserte ingen fil"
-
-msgid "Recording failed"
-msgstr "Opptak mislyktes"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI-kompatibel"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "Exa"
-msgstr "Exa"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Klarte ikke hente gcloud-token (avslutningskode %1): %2"
@@ -740,14 +954,8 @@ msgstr "Prosjekt-ID:"
 msgid "Location:"
 msgstr "Plassering:"
 
-msgid "Provider:"
-msgstr "Leverandør:"
-
 msgid "API Endpoint:"
 msgstr "API-endepunkt:"
-
-msgid "Model:"
-msgstr "Modell:"
 
 msgid "Refreshing…"
 msgstr "Oppdaterer…"
@@ -854,8 +1062,8 @@ msgid "Show notifications when minimized"
 msgstr "Vis varsler når minimert"
 
 msgid ""
-"Show system notifications for incoming messages and tool calls when the chat"
-" window is minimized or closed."
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
 msgstr ""
 "Vis systemvarsler for innkommende meldinger og verktøykall når chat-vinduet "
 "er minimert eller lukket."
@@ -893,121 +1101,126 @@ msgstr "sekunder"
 msgid "minutes"
 msgstr "minutter"
 
-msgid "Speech to Text"
-msgstr "Tale til tekst"
+msgid "System Info:"
+msgstr "Systeminformasjon:"
 
-msgid "API key saved to local fallback (KWallet unavailable)."
-msgstr "API-nøkkel lagret i lokal reserve (KWallet utilgjengelig)."
+msgid "OS"
+msgstr "OS"
 
-msgid "API key saved to KWallet."
-msgstr "API-nøkkel lagret i KWallet."
+msgid "Shell"
+msgstr "Skall"
 
-msgid "API key saved to local fallback."
-msgstr "API-nøkkel lagret i lokal reserve."
+msgid "Hostname"
+msgstr "Vertsnavn"
 
-msgid "Set an API endpoint first."
-msgstr "Angi et API-endepunkt først."
+msgid "Kernel"
+msgstr "Kjerne"
 
-msgid "Fetching STT models…"
-msgstr "Henter STT-modeller…"
+msgid "Desktop"
+msgstr "Skrivebord"
 
-msgid "Loaded %1 STT model(s)."
-msgstr "Lastet inn %1 STT-modell(er)."
+msgid "User"
+msgstr "Bruker"
 
-msgid "Voice input:"
-msgstr "Taleinndata:"
+msgid "CPU"
+msgstr "CPU"
 
-msgid "Enable microphone input"
-msgstr "Aktiver mikrofoninndata"
+msgid "Memory"
+msgstr "Minne"
 
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-"Konfigurerer kun tale-til-tekst-motoren. Transkripsjoner bruker din aktive "
-"samtaleprofil (Generelt)."
+msgid "GPU"
+msgstr "GPU"
 
-msgid "Mic button:"
-msgstr "Mikrofonknapp:"
+msgid "Block Devices"
+msgstr "Blokkenheter"
 
-msgid "Auto"
-msgstr "Auto"
+msgid "Network"
+msgstr "Nettverk"
 
-msgid "Toggle"
-msgstr "Veksle"
+msgid "Locale"
+msgstr "Lokalitet"
 
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-"Auto: klikk veksler opptak; hold 250 ms+ for trykk-og-snakk. Hold: kun hold "
-"inne. Veksle: klikk for å starte/stoppe."
+msgid "Date/Time"
+msgstr "Dato/tid"
 
-msgid "Voice shortcut:"
-msgstr "Talesnarvei:"
+msgid "Template:"
+msgstr "Mal:"
 
 msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the"
-" panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
 msgstr ""
-"Når PlasmaLLM er åpen og fokusert, brukes samme mikrofonmodus som knappen "
-"(auto: kort trykk veksler, hold 250 ms+ er trykk-og-snakk). Åpner ikke "
-"panelet – bruk «Aktiver skjermelement» på Snarveier-siden. Standard: Ctrl+M."
-" Tøm for å deaktivere."
+"Dette er den fullstendige systeminstruksen som sendes til modellen. Bruk "
+"{{placeholders}} for å hente inn dynamisk innhold som systemdetaljer, "
+"aktiverte verktøy eller skrivebordsautomatiseringsinstruksjoner. Alt "
+"annet du skriver brukes ordrett. Kritiske kjøretidsinstruksjoner "
+"(styring, hopp over godkjenninger) legges til automatisk når de er "
+"aktive, selv om du fjerner plassholderen deres."
 
-msgid "Transcriber"
-msgstr "Transkriberer"
+msgid "System Prompt:"
+msgstr "Systeminstruks:"
 
-msgid "Endpoint:"
-msgstr "Endepunkt:"
+msgid "Write your system prompt here…"
+msgstr "Skriv systeminstruksen din her…"
 
-msgid "Fetching…"
-msgstr "Henter…"
+msgid "Placeholders:"
+msgstr "Plassholdere:"
 
-msgid "Fetch"
-msgstr "Hent"
+msgid "Enabled system info selected in the checklist above"
+msgstr "Aktivert systeminformasjon valgt i sjekklisten ovenfor"
 
-msgid "Fetch STT models"
-msgstr "Hent STT-modeller"
+msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr "Aktiverte verktøybeskrivelser og retningslinjer fra Verktøy-menyen"
 
 msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
+"Persistent tmux or screen session multiplexer instructions (when active)"
 msgstr ""
-"OpenRouter lister STT-modeller kun via transkripsjonsmodaliteter (denne "
-"siden gjør det)."
+"Instruksjoner for persistent tmux- eller screen-øktmultiplekser (når "
+"aktiv)"
 
-msgid "API key:"
-msgstr "API-nøkkel:"
+msgid "Notice indicating skip-approvals mode (/auto) is active"
+msgstr ""
+"Varsel som indikerer at modus for å hoppe over godkjenninger (/auto) er "
+"aktiv"
 
-msgid "Provider API key"
-msgstr "Leverandør-API-nøkkel"
+msgid "Desktop automation coordinates and guidelines (when driving)"
+msgstr ""
+"Koordinater og retningslinjer for skrivebordsautomatisering (ved "
+"styring)"
 
-msgid "Save"
-msgstr "Lagre"
+msgid "Localization:"
+msgstr "Lokalisering:"
 
-msgid "Save API key"
-msgstr "Lagre API-nøkkel"
+msgid "Localize System Prompt"
+msgstr "Lokaliser systeminstruks"
 
-msgid "Options"
-msgstr "Alternativer"
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
+msgstr ""
+"Oversett standard instruksmaler og dynamiske systemseksjoner til "
+"skrivebordsspråket ditt."
 
-msgid "Language hint:"
-msgstr "Språkhint:"
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
+msgstr ""
+"Merk: Lokalisering av systeminstruksjoner og verktøy til andre språk enn "
+"engelsk kan redusere påliteligheten for verktøykall og nøyaktigheten for "
+"instruksjonsfølging på enkelte modeller."
 
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "Valgfritt, f.eks. no eller en (tom = auto)"
+msgid "Actions:"
+msgstr "Handlinger:"
 
-msgid "Max recording (seconds):"
-msgstr "Maksimalt opptak (sekunder):"
+msgid "Reset to Default Template"
+msgstr "Tilbakestill til standardmal"
 
-msgid "STT backend:"
-msgstr "STT-motor:"
-
-msgid "OpenAI-compatible transcriptions"
-msgstr "OpenAI-kompatible transkripsjoner"
+msgid "Preview:"
+msgstr "Forhåndsvisning:"
 
 msgid "General Tool Settings"
 msgstr "Generelle verktøyinnstillinger"
@@ -1031,13 +1244,11 @@ msgid "Enable Desktop Automation"
 msgstr "Aktiver skrivebordsautomatisering"
 
 msgid ""
-"Enable Desktop Automation (requires <a "
-"href=\"https://github.com/joshuaeroman/plasmallm-desktop-"
-"driver\">driver</a>)"
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
 msgstr ""
-"Aktiver skrivebordsautomatisering (krever <a "
-"href=\"https://github.com/joshuaeroman/plasmallm-desktop-"
-"driver\">driver</a>)"
+"Aktiver skrivebordsautomatisering (krever <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
 
 msgid "Path whitelist:"
 msgstr "Sti-hviteliste:"
@@ -1112,175 +1323,18 @@ msgstr ""
 msgid "Individual Tools"
 msgstr "Individuelle verktøy"
 
-msgid "Speech-to-text is not configured"
-msgstr "Tale-til-tekst er ikke konfigurert"
+msgid "Prompt Instructions:"
+msgstr "Instruksjoner for prompt:"
 
-msgid "Unknown STT backend: %1"
-msgstr "Ukjent STT-motor: %1"
-
-msgid "STT backend does not support model listing"
-msgstr "STT-motoren støtter ikke listing av modeller"
-
-msgid "STT endpoint is not configured"
-msgstr "STT-endepunkt er ikke konfigurert"
-
-msgid "Model list request failed: %1"
-msgstr "Forespørsel om modelliste mislyktes: %1"
-
-msgid "No STT models returned"
-msgstr "Ingen STT-modeller returnert"
-
-msgid "No audio data to transcribe"
-msgstr "Ingen lyddata å transkribere"
-
-msgid "STT model is not configured"
-msgstr "STT-modell er ikke konfigurert"
-
-msgid "Speech-to-text request timed out"
-msgstr "Forespørsel om tale-til-tekst tidsavbrutt"
-
-msgid "Failed to parse STT response: %1"
-msgstr "Kunne ikke tolke STT-svar: %1"
-
-msgid "STT failed (HTTP %1): %2"
-msgstr "STT mislyktes (HTTP %1): %2"
-
-msgid "STT failed (HTTP %1)"
-msgstr "STT mislyktes (HTTP %1)"
-
-msgid "STT request failed: %1"
-msgstr "STT-forespørsel mislyktes: %1"
-
-msgid "Voice message"
-msgstr "Talemelding"
-
-msgid "Web Search"
-msgstr "Nettsøk"
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"Mathtext-rendering falt tilbake til Unicode-erstatning (matplotlib er ikke "
-"installert eller det oppstod en feil)"
-
-msgid "Thinking"
-msgstr "Tenker…"
-
-msgid "Searched for: %1"
-msgstr "Søkte etter: %1"
-
-msgid "Show %1 results"
-msgstr "Vis %1 resultater"
-
-msgid "Copy to clipboard"
-msgstr "Kopier til utklippstavle"
-
-msgid "Share output with assistant"
-msgstr "Del utdata med assistenten"
-
-msgid "Profile Header:"
-msgstr "Profiloverskrift:"
-
-msgid "Show provider and model in profile header"
-msgstr "Vis leverandør og modell i profiloverskrift"
-
-msgid "Chat Spacing: %1px"
-msgstr "Chatavstand: %1px"
-
-msgid "Compact"
-msgstr "Kompakt"
-
-msgid "Spacious"
-msgstr "Romslig"
-
-msgid "Chat Labels:"
-msgstr "Chat-etiketter:"
-
-msgid "User label:"
-msgstr "Brukeretikett:"
-
-msgid "Assistant label:"
-msgstr "Assistentetikett:"
-
-msgid "Use model name as assistant label"
-msgstr "Bruk modellnavn som assistentetikett"
-
-msgid "Chat Colors:"
-msgstr "Chat-farger:"
-
-msgid "Use custom user color"
-msgstr "Bruk tilpasset brukerfarge"
-
-msgid "Use custom assistant color"
-msgstr "Bruk tilpasset assistentfarge"
-
-msgid "UI Font:"
-msgstr "Grensesnittskrift:"
-
-msgid "Use custom UI font"
-msgstr "Bruk egendefinert grensesnittskrift"
-
-msgid "Code Font:"
-msgstr "Kodeskrift:"
-
-msgid "Use custom code font"
-msgstr "Bruk egendefinert kodeskrift"
-
-msgid "Thoughts Font:"
-msgstr "Tankeskrift:"
-
-msgid "Use custom thoughts font"
-msgstr "Bruk egendefinert tankeskrift"
-
-msgid "LaTeX Rendering:"
-msgstr "LaTeX-rendering:"
-
-msgid "Leave as TeX"
-msgstr "Behold som TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Erstatt med Unicode (standard)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib mangler)"
-
-msgid "Header Icons:"
-msgstr "Overskriftsikoner:"
-
-msgid "Profile Header"
-msgstr "Profiloverskrift"
-
-msgid "Always show Tasks"
-msgstr "Vis alltid Oppgaver"
-
-msgid "Always show Auto Toggle"
-msgstr "Vis alltid Auto-veksler"
-
-msgid "Show History"
-msgstr "Vis historikk"
-
-msgid "Show Copy conversation"
-msgstr "Vis Kopier samtale"
-
-msgid "Show Clear chat"
-msgstr "Vis Tøm chat"
-
-msgid "Show Settings"
-msgstr "Vis Innstillinger"
-
-msgid "Show Pin"
-msgstr "Vis festikonet"
+msgid "Reset"
+msgstr "Tilbakestill"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
 msgstr ""
-"Internt skjema for API-nøkler er migrert. Hvis nøkkelen din nå mangler eller"
-" ikke fungerer, kan du gjenopprette den gamle nøkkelen fra KWalletManager."
+"Internt skjema for API-nøkler er migrert. Hvis nøkkelen din nå mangler eller "
+"ikke fungerer, kan du gjenopprette den gamle nøkkelen fra KWalletManager."
 
 msgid "Failed to stop driving: %1"
 msgstr "Klarte ikke å stoppe styring: %1"
@@ -1443,6 +1497,96 @@ msgstr "Styringsøkt aktiv (allerede autorisert). Automodus aktivert."
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Styringsøkt autorisert. Automodus aktivert."
 
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"Kjører en skallkommando på brukerens system og returnerer utdataene. "
+"Retningslinjer:\n"
+"- Bruk `pkexec` i stedet for `sudo` for alle kommandoer som krever "
+"superbrukerrettigheter.\n"
+"- Kjed sammen trinn med `&&`.\n"
+"- Kommandoer kjøres ikke-interaktivt. Bruk aldri kommandoer som venter "
+"på brukerinndata (som `read`).\n"
+"- Bruk `kdialog` hvis du må be brukeren om inndata eller vise en "
+"meldingsboks (f.eks. `kdialog --inputbox \"Forespørsel\"`).\n"
+"- Du må ALDRI installere pakker, endre systemkonfigurasjon, starte på "
+"nytt eller utføre handlinger som endrer systemet eller forstyrrer "
+"brukeren uten eksplisitt tillatelse.\n"
+"- Når tillatelse er nødvendig, spør brukeren i ren tekst først.\n"
+"- For verktøy med automatisk kjøring: Vær konservativ og foretrekk "
+"skrivebeskyttede kommandoer. Hvis en handling er potensielt "
+"forstyrrende, beskriv den i ren tekst og vent på eksplisitt "
+"brukergodkjenning før du kaller verktøyet.\n"
+"- Du MÅ foretrekke andre, mer spesifikke verktøy (som read_file, "
+"write_file, search_files osv.) hvis de kan utføre oppgaven. Bruk bare "
+"dette verktøyet hvis ingen andre verktøy er egnet."
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Leser innholdet i en fil på den angitte banen. Tilgang er begrenset til "
+"tillatte mapper."
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Skriver innhold til en fil på den angitte banen. Tilgang er begrenset "
+"til tillatte mapper."
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+"Lister innholdet i en mappe. Tilgang er begrenset til tillatte mapper."
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "Søker etter et mønster i filer i en mappe (rekursivt)."
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr ""
+"Utfører en HTTP GET-forespørsel til en URL og returnerer svarsinnholdet."
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "Utfører en HTTP-forespørsel (POST, PUT osv.) til en URL."
+
+msgid "Get the current content of the system clipboard."
+msgstr "Henter det gjeldende innholdet i systemets utklippstavle."
+
+msgid "Set the content of the system clipboard."
+msgstr "Angir innholdet i systemets utklippstavle."
+
+msgid "Show a system notification."
+msgstr "Viser et systemvarsel."
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr "Åpner en URL i standardprogrammet (f.eks. nettleser)."
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Utfører et nettsøk for å finne oppdatert informasjon, nyheter eller "
+"spesifikke fakta."
+
 msgid "General"
 msgstr "Generelt"
 
@@ -1461,6 +1605,57 @@ msgstr "Verktøy"
 msgid "Custom Tools"
 msgstr "Egendefinerte verktøy"
 
+#~ msgid ""
+#~ "Anthropic enables extended thinking when effort is not Off, using the "
+#~ "token budget below. Temperature is forced to max while thinking."
+#~ msgstr ""
+#~ "Anthropic muliggjør utvidet tenkning når innsats ikke er Av, og bruker "
+#~ "token-budsjettet nedenfor for maksimal utgang."
+
+#~ msgid ""
+#~ "Exa performs real-time neural search and synthesizes grounded answers "
+#~ "with live web citations."
+#~ msgstr ""
+#~ "Exa utfører nevrale søk i sanntid og syntetiserer forankrede svar med "
+#~ "live siteringer fra nettet."
+
+#~ msgid ""
+#~ "Gemini uses the thinking token budget directly. Set to 0 to disable "
+#~ "thinking on supported models."
+#~ msgstr ""
+#~ "Gemini bruker tenke-token-budsjettet direkte. Sett til 0 for å deaktivere "
+#~ "tenking (noen modeller krever det)."
+
+#~ msgid "Gemini uses the thinking level dropdown directly."
+#~ msgstr "Gemini bruker tenkenivå-nedtrekkslisten direkte."
+
+#~ msgid ""
+#~ "Reasoning effort (low / medium / high) gates extended thinking. To see "
+#~ "thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+#~ "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+#~ "reasoning_content."
+#~ msgstr ""
+#~ "Resonneringsinnsats (lav / middels / høy) styrer utvidet tenkning. For å "
+#~ "se tanker, sørg for at du har aktivert 'Vis tanker' i Generelt-fanen."
+
+#~ msgid "Custom Instructions:"
+#~ msgstr "Egendefinerte instruksjoner:"
+
+#~ msgid "Additional instructions for the LLM…"
+#~ msgstr "Tilleggsinstruksjoner for LLM-en…"
+
+#~ msgid "OpenAI-compatible"
+#~ msgstr "OpenAI-kompatibel"
+
+#~ msgid "Anthropic"
+#~ msgstr "Anthropic"
+
+#~ msgid "Google Gemini"
+#~ msgstr "Google Gemini"
+
+#~ msgid "Exa"
+#~ msgstr "Exa"
+
 #~ msgid "No models found."
 #~ msgstr "Ingen modeller funnet."
 
@@ -1478,9 +1673,6 @@ msgstr "Egendefinerte verktøy"
 
 #~ msgid "Copy message"
 #~ msgstr "Kopier melding"
-
-#~ msgid "Retry"
-#~ msgstr "Prøv igjen"
 
 #~ msgid "Share with LLM"
 #~ msgstr "Del med LLM"
@@ -1520,8 +1712,8 @@ msgstr "Egendefinerte verktøy"
 
 #~ msgid "Toggle auto mode (auto-run + auto-share) for this session"
 #~ msgstr ""
-#~ "Veksle automatisk modus (automatisk kjøring + automatisk deling) for denne "
-#~ "økten"
+#~ "Veksle automatisk modus (automatisk kjøring + automatisk deling) for "
+#~ "denne økten"
 
 #~ msgid "Run last command"
 #~ msgstr "Kjør siste kommando"
@@ -1533,8 +1725,8 @@ msgstr "Egendefinerte verktøy"
 #~ msgstr "Slå av/på automatisk modus"
 
 #~ msgid ""
-#~ "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
-#~ "are on)."
+#~ "Auto mode is permanently enabled via settings (both Auto-run and Auto-"
+#~ "share are on)."
 #~ msgstr ""
 #~ "Automatisk modus er permanent aktivert via innstillinger (både automatisk "
 #~ "kjøring og automatisk deling er på)."
@@ -1571,9 +1763,9 @@ msgstr "Egendefinerte verktøy"
 #~ msgstr "Aktivér automatisk modus (automatisk kjøring + automatisk deling)"
 
 #~ msgid ""
-#~ "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
-#~ " button to run them. Tasks with auto mode will temporarily enable auto-run "
-#~ "and auto-share."
+#~ "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the "
+#~ "toolbar button to run them. Tasks with auto mode will temporarily enable "
+#~ "auto-run and auto-share."
 #~ msgstr ""
 #~ "Oppgaver er gjenbrukbare hurtigtaster for ledetekst. Bruk /task <name> i "
 #~ "chat eller verktøylinjeknappen for å kjøre dem. Oppgaver med automatisk "
@@ -1592,15 +1784,15 @@ msgstr "Egendefinerte verktøy"
 #~ "Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
 #~ "share."
 #~ msgstr ""
-#~ "Tillat LLM å utføre skall-kommandoer. Farlig hvis kombinert med Automatisk "
-#~ "deling."
+#~ "Tillat LLM å utføre skall-kommandoer. Farlig hvis kombinert med "
+#~ "Automatisk deling."
 
 #~ msgid "Run as tool"
 #~ msgstr "Kjør som verktøy"
 
 #~ msgid ""
-#~ "Use the run_command tool for command execution. If disabled, falls back to "
-#~ "parsing code blocks."
+#~ "Use the run_command tool for command execution. If disabled, falls back "
+#~ "to parsing code blocks."
 #~ msgstr ""
 #~ "Bruk run_command-verktøyet for kommandoutførelse. Hvis deaktivert, faller "
 #~ "den tilbake til å tolke kodeblokker."
@@ -1613,7 +1805,8 @@ msgstr "Egendefinerte verktøy"
 
 #~ msgid ""
 #~ "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-#~ "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
+#~ "their output, enabling an agentic workflow. Only use with trustworthy "
+#~ "LLMs."
 #~ msgstr ""
 #~ "⚠️ FARE: Begge alternativer aktivert - LLM kan nå kjøre kommandoer og se "
 #~ "deres utdata, noe som aktiverer agentbasert arbeidsflyt. Bruk kun med "
@@ -1662,8 +1855,8 @@ msgstr "Egendefinerte verktøy"
 #~ msgstr "Send automatisk resultater fra Kjør-kommando tilbake til LLM"
 
 #~ msgid ""
-#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only use "
-#~ "with very trustworthy LLMs."
+#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only "
+#~ "use with very trustworthy LLMs."
 #~ msgstr ""
 #~ "ADVARSEL: Når kombinert med Auto-share aktiveres agentbasert arbeidsflyt. "
 #~ "Bruk kun med svært pålitelige LLM-er."
@@ -1675,8 +1868,8 @@ msgstr "Egendefinerte verktøy"
 #~ "Use the run_command tool for command execution. Disable for models that "
 #~ "don't support tool calling (falls back to code block parsing)."
 #~ msgstr ""
-#~ "Bruk run_command-verktøyet for kommandoutførelse. Deaktiver for modeller som"
-#~ " ikke støtter verktøykalling (faller tilbake til kodeblokk-parsing)."
+#~ "Bruk run_command-verktøyet for kommandoutførelse. Deaktiver for modeller "
+#~ "som ikke støtter verktøykalling (faller tilbake til kodeblokk-parsing)."
 
 #~ msgid "Web Search:"
 #~ msgstr "Søk på nettet:"

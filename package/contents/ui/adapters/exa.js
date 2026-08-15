@@ -13,13 +13,12 @@ var presets = [
 ];
 
 var capabilities = {
-    providerPresets: false,
-    customEndpoint: false,
+    providerPresets: true,
+    customEndpoint: true,
     reasoningEffort: false,
     thinkingBudget: false,
     fetchModels: true,
-    // Shown in config even without thinking knobs (see configGeneral.qml).
-    reasoningHelp: i18n("Exa performs real-time neural search and synthesizes grounded answers with live web citations.")
+    reasoningHelp: "Exa performs real-time neural search and synthesizes grounded answers with live web citations."
 };
 
 function fetchModels(endpoint, apiKey, opts, callback) {

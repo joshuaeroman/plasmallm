@@ -156,8 +156,30 @@
       <min>6</min>
       <max>72</max>
     </entry>
+    <entry name="systemPrompt" type="String">
+      <label>User-editable system prompt template (supports {{placeholders}})</label>
+      <default>You are a helpful assistant embedded in the user's Linux desktop.
+
+## System
+{{system_info}}
+
+General-purpose assistant. Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational. Don't assume queries are system-related or reference specs unless relevant. Always use the `~` alias instead of absolute paths when referring to the user's home directory in tool calls or text.
+
+{{session_multiplexer}}
+{{approval_mode}}
+{{tools}}
+{{driving_instructions}}</default>
+    </entry>
+    <entry name="systemPromptMigrated" type="Bool">
+      <label>Internal: legacy customSystemPrompt folded into the editable systemPrompt template</label>
+      <default>false</default>
+    </entry>
+    <entry name="localizeSystemPrompt" type="Bool">
+      <label>Translate default system prompt and dynamic placeholders into system language</label>
+      <default>false</default>
+    </entry>
     <entry name="customSystemPrompt" type="String">
-      <label>Custom System Prompt Additions</label>
+      <label>Deprecated: legacy Custom Instructions, migrated into systemPrompt</label>
       <default></default>
     </entry>
     <entry name="resizeImageAttachments" type="Bool">
@@ -593,6 +615,10 @@
     <entry name="toolsHttpMaxBytes" type="Int">
       <label>Max bytes for HTTP responses</label>
       <default>524288</default>
+    </entry>
+    <entry name="toolsInstructions" type="String">
+      <label>Custom prompt instruction overrides for tools (JSON object: {"toolName": "instruction"})</label>
+      <default>{}</default>
     </entry>
     <entry name="enableToolCallLimit" type="Bool">
       <label>Enable tool loop step limit</label>

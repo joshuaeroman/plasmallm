@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-14 20:58-0400\n"
+"POT-Creation-Date: 2026-08-15 17:59-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Spanish\n"
@@ -26,14 +26,6 @@ msgstr ""
 
 msgid "Current color is %1."
 msgstr "El color actual es %1."
-
-msgid ""
-"Anthropic enables extended thinking when effort is not Off, using the token "
-"budget below. Temperature is forced to max while thinking."
-msgstr ""
-"Anthropic habilita el pensamiento extendido cuando el esfuerzo no está "
-"desactivado, utilizando el presupuesto de tokens a continuación. La "
-"temperatura se fuerza al máximo durante el razonamiento."
 
 msgid "Request timed out after 30 seconds"
 msgstr "La solicitud expiró después de 30 segundos"
@@ -71,21 +63,6 @@ msgstr "Error de API %1"
 msgid "Request failed (no response) — check your endpoint URL"
 msgstr "Solicitud fallida (sin respuesta) — verifique la URL de su endpoint"
 
-msgid ""
-"Exa performs real-time neural search and synthesizes grounded answers with "
-"live web citations."
-msgstr ""
-"Exa realiza búsquedas neuronales en tiempo real y sintetiza respuestas "
-"fundamentadas con citas web en vivo."
-
-msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking"
-" on supported models."
-msgstr ""
-"Gemini utiliza el presupuesto de tokens de razonamiento directamente. "
-"Establézcalo en 0 para deshabilitar el razonamiento en los modelos "
-"compatibles."
-
 msgid "Failed to fetch models"
 msgstr "Error al obtener modelos"
 
@@ -101,34 +78,18 @@ msgstr "sin respuesta — verifique la URL de su endpoint"
 msgid "Request failed"
 msgstr "Solicitud fallida"
 
-msgid "Gemini uses the thinking level dropdown directly."
-msgstr ""
-"Gemini usa directamente el menú desplegable del nivel de razonamiento."
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
 "disable Native features in Settings."
 msgstr ""
-"Esta versión del modelo no admite combinar herramientas nativas "
-"(Búsqueda/Código) con comandos personalizados. Seleccione un modelo más "
-"reciente (p. ej., Gemini 3+) o deshabilite las funciones nativas en "
-"Configuración."
+"Esta versión del modelo no admite combinar herramientas nativas (Búsqueda/"
+"Código) con comandos personalizados. Seleccione un modelo más reciente (p. "
+"ej., Gemini 3+) o deshabilite las funciones nativas en Configuración."
 
 msgid ""
-"Reasoning effort (low / medium / high) gates extended thinking. To see "
-"thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
-"chat-completions providers (DeepSeek, Qwen) surface reasoning via "
-"reasoning_content."
-msgstr ""
-"El esfuerzo de razonamiento (bajo / medio / alto) controla el pensamiento "
-"extendido. Para ver los pensamientos en OpenAI / Poe / OpenRouter / Azure, "
-"habilite 'Usar API de Responses'; los proveedores de chat-completions "
-"(DeepSeek, Qwen) muestran el razonamiento a través de reasoning_content."
-
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to"
-" the LLM."
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
 msgstr ""
 "No hay herramientas personalizadas configuradas. Agregue una herramienta "
 "personalizada para exponer sus propios comandos al LLM."
@@ -172,64 +133,12 @@ msgstr "Ya existe una herramienta llamada \"%1\"."
 msgid ""
 "Custom tools allow you to expose your own commands to the LLM. Use "
 "placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-"
-"escaped."
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
 msgstr ""
 "Las herramientas personalizadas le permiten exponer sus propios comandos al "
 "LLM. Use marcadores de posición como {variable} en la Plantilla de Comandos "
 "para definir parámetros que el LLM puede completar. Los valores "
 "proporcionados por el LLM se escapan automáticamente del shell."
-
-msgid "System Info:"
-msgstr "Info del sistema:"
-
-msgid "OS"
-msgstr "SO"
-
-msgid "Shell"
-msgstr "Shell"
-
-msgid "Hostname"
-msgstr "Nombre de host"
-
-msgid "Kernel"
-msgstr "Kernel"
-
-msgid "Desktop"
-msgstr "Escritorio"
-
-msgid "User"
-msgstr "Usuario"
-
-msgid "CPU"
-msgstr "CPU"
-
-msgid "Memory"
-msgstr "Memoria"
-
-msgid "GPU"
-msgstr "GPU"
-
-msgid "Block Devices"
-msgstr "Dispositivos de bloque"
-
-msgid "Network"
-msgstr "Red"
-
-msgid "Locale"
-msgstr "Configuración regional"
-
-msgid "Date/Time"
-msgstr "Fecha/Hora"
-
-msgid "Custom Instructions:"
-msgstr "Instrucciones personalizadas:"
-
-msgid "Additional instructions for the LLM…"
-msgstr "Instrucciones adicionales para el LLM…"
-
-msgid "Preview:"
-msgstr "Vista previa:"
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -261,12 +170,12 @@ msgid "A task named \"%1\" already exists."
 msgstr "Ya existe una tarea llamada \"%1\"."
 
 msgid ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
-" button to run them. Tasks with skip approvals enabled will run tools "
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with skip approvals enabled will run tools "
 "automatically."
 msgstr ""
-"Las tareas son atajos de prompt reutilizables. Use /task <nombre> en el chat"
-" o el botón de la barra de herramientas para ejecutarlas. Las tareas con "
+"Las tareas son atajos de prompt reutilizables. Use /task <nombre> en el chat "
+"o el botón de la barra de herramientas para ejecutarlas. Las tareas con "
 "omisión de aprobaciones habilitada ejecutarán herramientas automáticamente."
 
 msgid "Ask before running"
@@ -274,9 +183,6 @@ msgstr "Preguntar antes de ejecutar"
 
 msgid "Error: URL must start with http:// or https://"
 msgstr "Error: la URL debe comenzar con http:// o https://"
-
-msgid "No command provided."
-msgstr "No se proporcionó ningún comando."
 
 msgid "Ask before running commands from LLM"
 msgstr "Preguntar antes de ejecutar comandos del LLM"
@@ -407,13 +313,16 @@ msgstr ""
 
 msgid "Enables LLM-triggered neural web searches via Exa API."
 msgstr ""
-"Habilita búsquedas web neuronales activadas por el LLM a través de la API de"
-" Exa."
+"Habilita búsquedas web neuronales activadas por el LLM a través de la API de "
+"Exa."
 
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr ""
 "Habilita búsquedas web activadas por el LLM a través de la API de búsqueda "
 "de Ollama"
+
+msgid "No command provided."
+msgstr "No se proporcionó ningún comando."
 
 msgid "Tool Request: %1"
 msgstr "Solicitud de herramienta: %1"
@@ -435,6 +344,359 @@ msgstr "Abrir terminal vinculado a esta sesión"
 
 msgid "Copy output"
 msgstr "Copiar salida"
+
+msgid "Microphone recording failed"
+msgstr "Error en la grabación del micrófono"
+
+msgid "No microphone found"
+msgstr "No se encontró ningún micrófono"
+
+msgid "No microphone available"
+msgstr "No hay ningún micrófono disponible"
+
+msgid "Recording…"
+msgstr "Grabando…"
+
+msgid "Could not start recording: %1"
+msgstr "No se pudo iniciar la grabación: %1"
+
+msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
+msgstr ""
+"No se pudo iniciar el grabador de audio shell (instale pw-record o ffmpeg)"
+
+msgid "Processing…"
+msgstr "Procesando…"
+
+msgid "Failed to stop recording"
+msgstr "No se pudo detener la grabación"
+
+msgid "Shell recorder stop is not configured"
+msgstr "La detención del grabador shell no está configurada"
+
+msgid "Shell recording failed"
+msgstr "Error en la grabación shell"
+
+msgid "Recording stopped unexpectedly"
+msgstr "La grabación se detuvo inesperadamente"
+
+msgid "Recording produced no file"
+msgstr "La grabación no produjo ningún archivo"
+
+msgid "Recording failed"
+msgstr "Error en la grabación"
+
+msgid "Speech to Text"
+msgstr "Voz a texto"
+
+msgid "API key saved to local fallback (KWallet unavailable)."
+msgstr "Clave API guardada en el respaldo local (KWallet no disponible)."
+
+msgid "API key saved to KWallet."
+msgstr "Clave API guardada en KWallet."
+
+msgid "API key saved to local fallback."
+msgstr "Clave API guardada en el respaldo local."
+
+msgid "Set an API endpoint first."
+msgstr "Configure primero un endpoint de API."
+
+msgid "Fetching STT models…"
+msgstr "Obteniendo modelos de STT…"
+
+msgid "Loaded %1 STT model(s)."
+msgstr "%1 modelo(s) STT cargado(s)."
+
+msgid "Voice input:"
+msgstr "Entrada de voz:"
+
+msgid "Enable microphone input"
+msgstr "Activar entrada de micrófono"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"Configura solo el motor de voz a texto. Las transcripciones usan su perfil "
+"de chat activo (General)."
+
+msgid "Mic button:"
+msgstr "Botón del micrófono:"
+
+msgid "Auto"
+msgstr "Automático"
+
+msgid "Hold to talk"
+msgstr "Mantenga presionado para hablar"
+
+msgid "Toggle"
+msgstr "Alternar"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"Automático: un clic alterna la grabación; mantener 250 ms+ para pulsar para "
+"hablar. Mantener: solo mantener presionado. Alternar: clic para iniciar/"
+"detener."
+
+msgid "Voice shortcut:"
+msgstr "Atajo de voz:"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"Mientras PlasmaLLM está abierto y enfocado, usa el mismo modo de micrófono "
+"que el botón (automático: pulsación corta alterna, mantener 250 ms+ es "
+"pulsar para hablar). No abre el panel; use «Activar elemento gráfico» en la "
+"página de Atajos. Predeterminado: Ctrl+M. Borrar para desactivar."
+
+msgid "Transcriber"
+msgstr "Transcriptor"
+
+msgid "Provider:"
+msgstr "Proveedor:"
+
+msgid "Endpoint:"
+msgstr "Endpoint:"
+
+msgid "Model:"
+msgstr "Modelo:"
+
+msgid "Fetching…"
+msgstr "Obteniendo…"
+
+msgid "Fetch"
+msgstr "Obtener"
+
+msgid "Fetch STT models"
+msgstr "Obtener modelos STT"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouter lista modelos STT solo mediante modalidades de transcripción "
+"(esta página hace eso)."
+
+msgid "API key:"
+msgstr "Clave API:"
+
+msgid "Provider API key"
+msgstr "Clave API del proveedor"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Save API key"
+msgstr "Guardar clave API"
+
+msgid "Options"
+msgstr "Opciones"
+
+msgid "Language hint:"
+msgstr "Sugerencia de idioma:"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "Opcional, p. ej. es o en (vacío = automático)"
+
+msgid "Max recording (seconds):"
+msgstr "Grabación máxima (segundos):"
+
+msgid "STT backend:"
+msgstr "Backend STT:"
+
+msgid "OpenAI-compatible transcriptions"
+msgstr "Transcripciones compatibles con OpenAI"
+
+msgid "Speech-to-text is not configured"
+msgstr "Voz a texto no está configurado"
+
+msgid "Unknown STT backend: %1"
+msgstr "Backend STT desconocido: %1"
+
+msgid "STT backend does not support model listing"
+msgstr "El backend STT no admite el listado de modelos"
+
+msgid "STT endpoint is not configured"
+msgstr "El endpoint STT no está configurado"
+
+msgid "Model list request failed: %1"
+msgstr "Falló la solicitud de lista de modelos: %1"
+
+msgid "No STT models returned"
+msgstr "No se devolvieron modelos STT"
+
+msgid "No audio data to transcribe"
+msgstr "No hay datos de audio para transcribir"
+
+msgid "STT model is not configured"
+msgstr "El modelo STT no está configurado"
+
+msgid "Speech-to-text request timed out"
+msgstr "Se agotó el tiempo de espera de la solicitud de voz a texto"
+
+msgid "Failed to parse STT response: %1"
+msgstr "No se pudo analizar la respuesta STT: %1"
+
+msgid "STT failed (HTTP %1): %2"
+msgstr "STT falló (HTTP %1): %2"
+
+msgid "STT failed (HTTP %1)"
+msgstr "STT falló (HTTP %1)"
+
+msgid "STT request failed: %1"
+msgstr "La solicitud STT falló: %1"
+
+msgid "Profile Header:"
+msgstr "Encabezado de perfil:"
+
+msgid "Show provider and model in profile header"
+msgstr "Mostrar proveedor y modelo en el encabezado de perfil"
+
+msgid "Chat Spacing: %1px"
+msgstr "Espaciado del chat: %1px"
+
+msgid "Compact"
+msgstr "Compacto"
+
+msgid "Spacious"
+msgstr "Espacioso"
+
+msgid "Chat Labels:"
+msgstr "Etiquetas de chat:"
+
+msgid "User label:"
+msgstr "Etiqueta de usuario:"
+
+msgid "You"
+msgstr "Tú"
+
+msgid "Assistant label:"
+msgstr "Etiqueta de asistente:"
+
+msgid "Assistant"
+msgstr "Asistente"
+
+msgid "Use model name as assistant label"
+msgstr "Usar el nombre del modelo como etiqueta del asistente"
+
+msgid "Chat Colors:"
+msgstr "Colores del chat:"
+
+msgid "Use custom user color"
+msgstr "Usar color de usuario personalizado"
+
+msgid "Use custom assistant color"
+msgstr "Usar color de asistente personalizado"
+
+msgid "UI Font:"
+msgstr "Fuente de interfaz:"
+
+msgid "Use custom UI font"
+msgstr "Usar fuente de interfaz personalizada"
+
+msgid "Code Font:"
+msgstr "Fuente de código:"
+
+msgid "Use custom code font"
+msgstr "Usar fuente de código personalizada"
+
+msgid "Thoughts Font:"
+msgstr "Fuente de pensamientos:"
+
+msgid "Use custom thoughts font"
+msgstr "Usar fuente de pensamientos personalizada"
+
+msgid "LaTeX Rendering:"
+msgstr "Renderizado de LaTeX:"
+
+msgid "Leave as TeX"
+msgstr "Dejar como TeX"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Reemplazar con Unicode (Predeterminado)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (falta python3-matplotlib)"
+
+msgid "Header Icons:"
+msgstr "Iconos de encabezado:"
+
+msgid "Profile Header"
+msgstr "Encabezado de perfil"
+
+msgid "Always show Tasks"
+msgstr "Mostrar siempre Tareas"
+
+msgid "Always show Auto Toggle"
+msgstr "Mostrar siempre el interruptor automático"
+
+msgid "Show History"
+msgstr "Mostrar historial"
+
+msgid "Show Copy conversation"
+msgstr "Mostrar copiar conversación"
+
+msgid "Show Clear chat"
+msgstr "Mostrar limpiar chat"
+
+msgid "Show Settings"
+msgstr "Mostrar configuración"
+
+msgid "Show Pin"
+msgstr "Mostrar anclaje"
+
+msgid "Voice message"
+msgstr "Mensaje de voz"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Web Search"
+msgstr "Búsqueda web"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"El renderizado de Mathtext se revirtió al reemplazo de Unicode (matplotlib "
+"no está instalado o ocurrió un error)"
+
+msgid "Thinking"
+msgstr "Pensando…"
+
+msgid "Searched for: %1"
+msgstr "Buscado: %1"
+
+msgid "Show %1 results"
+msgstr "Mostrar %1 resultados"
+
+msgid "Save & Retry"
+msgstr "Guardar y reintentar"
+
+msgid "Copy to clipboard"
+msgstr "Copiar al portapapeles"
+
+msgid "Edit message"
+msgstr "Editar mensaje"
+
+msgid "Edit response"
+msgstr "Editar respuesta"
+
+msgid "Retry from here"
+msgstr "Reintentar desde aquí"
+
+msgid "Regenerate response"
+msgstr "Regenerar respuesta"
+
+msgid "Share output with assistant"
+msgstr "Compartir salida con el asistente"
 
 msgid "Approve the pending tool request"
 msgstr "Aprobar la solicitud de herramienta pendiente"
@@ -522,26 +784,29 @@ msgid ""
 "Are you sure you want to delete all chat history files? This action cannot "
 "be undone."
 msgstr ""
-"¿Está seguro de que desea eliminar todos los archivos del historial de chat?"
-" Esta acción no se puede deshacer."
+"¿Está seguro de que desea eliminar todos los archivos del historial de chat? "
+"Esta acción no se puede deshacer."
 
 msgid "Clear All"
 msgstr "Borrar todo"
 
+msgid "Retry from this message?"
+msgstr "¿Reintentar desde este mensaje?"
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+"Esto eliminará %1 mensaje(s) después de este punto y generará una nueva "
+"respuesta."
+
+msgid "Retry"
+msgstr "Reintentar"
+
 msgid "Copy conversation"
 msgstr "Copiar conversación"
 
-msgid "You"
-msgstr "Tú"
-
-msgid "Assistant"
-msgstr "Asistente"
-
 msgid "Command"
 msgstr "Comando"
-
-msgid "Error"
-msgstr "Error"
 
 msgid "Clear chat"
 msgstr "Limpiar chat"
@@ -610,9 +875,6 @@ msgstr "Suelte para enviar"
 msgid "Click to start"
 msgstr "Haga clic para iniciar"
 
-msgid "Hold to talk"
-msgstr "Mantenga presionado para hablar"
-
 msgid "Click to toggle, hold to talk"
 msgstr "Haga clic para alternar, mantenga presionado para hablar"
 
@@ -635,58 +897,6 @@ msgstr "Cancelar solicitud del LLM"
 
 msgid "Drop files here to attach"
 msgstr "Arrastre y suelte archivos aquí para adjuntarlos"
-
-msgid "Microphone recording failed"
-msgstr "Error en la grabación del micrófono"
-
-msgid "No microphone found"
-msgstr "No se encontró ningún micrófono"
-
-msgid "No microphone available"
-msgstr "No hay ningún micrófono disponible"
-
-msgid "Recording…"
-msgstr "Grabando…"
-
-msgid "Could not start recording: %1"
-msgstr "No se pudo iniciar la grabación: %1"
-
-msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
-msgstr ""
-"No se pudo iniciar el grabador de audio shell (instale pw-record o ffmpeg)"
-
-msgid "Processing…"
-msgstr "Procesando…"
-
-msgid "Failed to stop recording"
-msgstr "No se pudo detener la grabación"
-
-msgid "Shell recorder stop is not configured"
-msgstr "La detención del grabador shell no está configurada"
-
-msgid "Shell recording failed"
-msgstr "Error en la grabación shell"
-
-msgid "Recording stopped unexpectedly"
-msgstr "La grabación se detuvo inesperadamente"
-
-msgid "Recording produced no file"
-msgstr "La grabación no produjo ningún archivo"
-
-msgid "Recording failed"
-msgstr "Error en la grabación"
-
-msgid "OpenAI-compatible"
-msgstr "Compatible con OpenAI"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "Exa"
-msgstr "Exa"
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "No se pudo obtener el token de gcloud (salida %1): %2"
@@ -760,14 +970,8 @@ msgstr "ID del proyecto:"
 msgid "Location:"
 msgstr "Ubicación:"
 
-msgid "Provider:"
-msgstr "Proveedor:"
-
 msgid "API Endpoint:"
 msgstr "Endpoint de API:"
-
-msgid "Model:"
-msgstr "Modelo:"
 
 msgid "Refreshing…"
 msgstr "Actualizando…"
@@ -831,8 +1035,8 @@ msgid ""
 "regardless of this setting."
 msgstr ""
 "Cuando está activado, el razonamiento del modelo se muestra sobre cada "
-"respuesta con un encabezado plegable. El envío de pensamientos firmados a la"
-" API ocurre independientemente de esta configuración."
+"respuesta con un encabezado plegable. El envío de pensamientos firmados a la "
+"API ocurre independientemente de esta configuración."
 
 msgid "Use Responses API"
 msgstr "Usar API de Responses"
@@ -843,8 +1047,8 @@ msgid ""
 "picking a preset."
 msgstr ""
 "Necesario para mostrar contenido de razonamiento en OpenAI / Poe / "
-"OpenRouter / Azure (envía POST a /v1/responses en lugar de "
-"/v1/chat/completions). Se configura automáticamente al elegir un proveedor "
+"OpenRouter / Azure (envía POST a /v1/responses en lugar de /v1/chat/"
+"completions). Se configura automáticamente al elegir un proveedor "
 "predefinido."
 
 msgid "Attachments:"
@@ -876,8 +1080,8 @@ msgid "Show notifications when minimized"
 msgstr "Mostrar notificaciones al estar minimizado"
 
 msgid ""
-"Show system notifications for incoming messages and tool calls when the chat"
-" window is minimized or closed."
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
 msgstr ""
 "Mostrar notificaciones del sistema para mensajes entrantes y llamadas de "
 "herramientas cuando la ventana de chat está minimizada o cerrada."
@@ -915,122 +1119,127 @@ msgstr "segundos"
 msgid "minutes"
 msgstr "minutos"
 
-msgid "Speech to Text"
-msgstr "Voz a texto"
+msgid "System Info:"
+msgstr "Info del sistema:"
 
-msgid "API key saved to local fallback (KWallet unavailable)."
-msgstr "Clave API guardada en el respaldo local (KWallet no disponible)."
+msgid "OS"
+msgstr "SO"
 
-msgid "API key saved to KWallet."
-msgstr "Clave API guardada en KWallet."
+msgid "Shell"
+msgstr "Shell"
 
-msgid "API key saved to local fallback."
-msgstr "Clave API guardada en el respaldo local."
+msgid "Hostname"
+msgstr "Nombre de host"
 
-msgid "Set an API endpoint first."
-msgstr "Configure primero un endpoint de API."
+msgid "Kernel"
+msgstr "Kernel"
 
-msgid "Fetching STT models…"
-msgstr "Obteniendo modelos de STT…"
+msgid "Desktop"
+msgstr "Escritorio"
 
-msgid "Loaded %1 STT model(s)."
-msgstr "%1 modelo(s) STT cargado(s)."
+msgid "User"
+msgstr "Usuario"
 
-msgid "Voice input:"
-msgstr "Entrada de voz:"
+msgid "CPU"
+msgstr "CPU"
 
-msgid "Enable microphone input"
-msgstr "Activar entrada de micrófono"
+msgid "Memory"
+msgstr "Memoria"
 
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-"Configura solo el motor de voz a texto. Las transcripciones usan su perfil "
-"de chat activo (General)."
+msgid "GPU"
+msgstr "GPU"
 
-msgid "Mic button:"
-msgstr "Botón del micrófono:"
+msgid "Block Devices"
+msgstr "Dispositivos de bloque"
 
-msgid "Auto"
-msgstr "Automático"
+msgid "Network"
+msgstr "Red"
 
-msgid "Toggle"
-msgstr "Alternar"
+msgid "Locale"
+msgstr "Configuración regional"
 
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-"Automático: un clic alterna la grabación; mantener 250 ms+ para pulsar para "
-"hablar. Mantener: solo mantener presionado. Alternar: clic para "
-"iniciar/detener."
+msgid "Date/Time"
+msgstr "Fecha/Hora"
 
-msgid "Voice shortcut:"
-msgstr "Atajo de voz:"
+msgid "Template:"
+msgstr "Plantilla:"
 
 msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the"
-" panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
 msgstr ""
-"Mientras PlasmaLLM está abierto y enfocado, usa el mismo modo de micrófono "
-"que el botón (automático: pulsación corta alterna, mantener 250 ms+ es "
-"pulsar para hablar). No abre el panel; use «Activar elemento gráfico» en la "
-"página de Atajos. Predeterminado: Ctrl+M. Borrar para desactivar."
+"Este es el aviso del sistema completo enviado al modelo. Utilice "
+"{{placeholders}} para incluir contenido dinámico como detalles del "
+"sistema, herramientas habilitadas o instrucciones de automatización del "
+"escritorio. Cualquier otra cosa que escriba se utiliza textualmente. Las "
+"instrucciones críticas de tiempo de ejecución (conducción, modo sin "
+"aprobaciones) se añaden automáticamente cuando están activas, incluso si "
+"elimina su marcador de posición."
 
-msgid "Transcriber"
-msgstr "Transcriptor"
+msgid "System Prompt:"
+msgstr "Aviso del sistema:"
 
-msgid "Endpoint:"
-msgstr "Endpoint:"
+msgid "Write your system prompt here…"
+msgstr "Escriba su aviso del sistema aquí…"
 
-msgid "Fetching…"
-msgstr "Obteniendo…"
+msgid "Placeholders:"
+msgstr "Marcadores de posición:"
 
-msgid "Fetch"
-msgstr "Obtener"
+msgid "Enabled system info selected in the checklist above"
+msgstr "Información del sistema seleccionada en la lista anterior"
 
-msgid "Fetch STT models"
-msgstr "Obtener modelos STT"
+msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr ""
+"Descripciones y directrices de herramientas habilitadas desde el menú "
+"Herramientas"
 
 msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
+"Persistent tmux or screen session multiplexer instructions (when active)"
 msgstr ""
-"OpenRouter lista modelos STT solo mediante modalidades de transcripción "
-"(esta página hace eso)."
+"Instrucciones del multiplexor de sesión persistente tmux o screen "
+"(cuando esté activo)"
 
-msgid "API key:"
-msgstr "Clave API:"
+msgid "Notice indicating skip-approvals mode (/auto) is active"
+msgstr "Aviso que indica que el modo sin aprobaciones (/auto) está activo"
 
-msgid "Provider API key"
-msgstr "Clave API del proveedor"
+msgid "Desktop automation coordinates and guidelines (when driving)"
+msgstr ""
+"Coordenadas y directrices de automatización del escritorio (al conducir)"
 
-msgid "Save"
-msgstr "Guardar"
+msgid "Localization:"
+msgstr "Localización:"
 
-msgid "Save API key"
-msgstr "Guardar clave API"
+msgid "Localize System Prompt"
+msgstr "Localizar aviso del sistema"
 
-msgid "Options"
-msgstr "Opciones"
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
+msgstr ""
+"Traduzca las plantillas de aviso predeterminadas y las secciones "
+"dinámicas del sistema al idioma de su escritorio."
 
-msgid "Language hint:"
-msgstr "Sugerencia de idioma:"
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
+msgstr ""
+"Nota: La localización de instrucciones del sistema y herramientas a "
+"idiomas distintos del inglés puede reducir la fiabilidad de las llamadas "
+"a herramientas y la precisión en el seguimiento de instrucciones en "
+"algunos modelos."
 
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "Opcional, p. ej. es o en (vacío = automático)"
+msgid "Actions:"
+msgstr "Acciones:"
 
-msgid "Max recording (seconds):"
-msgstr "Grabación máxima (segundos):"
+msgid "Reset to Default Template"
+msgstr "Restablecer a plantilla predeterminada"
 
-msgid "STT backend:"
-msgstr "Backend STT:"
-
-msgid "OpenAI-compatible transcriptions"
-msgstr "Transcripciones compatibles con OpenAI"
+msgid "Preview:"
+msgstr "Vista previa:"
 
 msgid "General Tool Settings"
 msgstr "Configuración general de herramientas"
@@ -1056,13 +1265,11 @@ msgid "Enable Desktop Automation"
 msgstr "Habilitar automatización de escritorio"
 
 msgid ""
-"Enable Desktop Automation (requires <a "
-"href=\"https://github.com/joshuaeroman/plasmallm-desktop-"
-"driver\">driver</a>)"
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
 msgstr ""
-"Habilitar automatización de escritorio (requiere <a "
-"href=\"https://github.com/joshuaeroman/plasmallm-desktop-"
-"driver\">controlador</a>)"
+"Habilitar automatización de escritorio (requiere <a href=\"https://"
+"github.com/joshuaeroman/plasmallm-desktop-driver\">controlador</a>)"
 
 msgid "Path whitelist:"
 msgstr "Lista de rutas permitidas:"
@@ -1127,8 +1334,8 @@ msgid ""
 "Allow Gemini to write and execute Python code in a secure server-side "
 "sandbox."
 msgstr ""
-"Permitir que Gemini escriba y ejecute código Python en un entorno de pruebas"
-" seguro del lado del servidor."
+"Permitir que Gemini escriba y ejecute código Python en un entorno de pruebas "
+"seguro del lado del servidor."
 
 msgid ""
 "Combining Native tools with commands requires a newer model. Your currently "
@@ -1140,168 +1347,11 @@ msgstr ""
 msgid "Individual Tools"
 msgstr "Herramientas individuales"
 
-msgid "Speech-to-text is not configured"
-msgstr "Voz a texto no está configurado"
+msgid "Prompt Instructions:"
+msgstr "Instrucciones de aviso:"
 
-msgid "Unknown STT backend: %1"
-msgstr "Backend STT desconocido: %1"
-
-msgid "STT backend does not support model listing"
-msgstr "El backend STT no admite el listado de modelos"
-
-msgid "STT endpoint is not configured"
-msgstr "El endpoint STT no está configurado"
-
-msgid "Model list request failed: %1"
-msgstr "Falló la solicitud de lista de modelos: %1"
-
-msgid "No STT models returned"
-msgstr "No se devolvieron modelos STT"
-
-msgid "No audio data to transcribe"
-msgstr "No hay datos de audio para transcribir"
-
-msgid "STT model is not configured"
-msgstr "El modelo STT no está configurado"
-
-msgid "Speech-to-text request timed out"
-msgstr "Se agotó el tiempo de espera de la solicitud de voz a texto"
-
-msgid "Failed to parse STT response: %1"
-msgstr "No se pudo analizar la respuesta STT: %1"
-
-msgid "STT failed (HTTP %1): %2"
-msgstr "STT falló (HTTP %1): %2"
-
-msgid "STT failed (HTTP %1)"
-msgstr "STT falló (HTTP %1)"
-
-msgid "STT request failed: %1"
-msgstr "La solicitud STT falló: %1"
-
-msgid "Voice message"
-msgstr "Mensaje de voz"
-
-msgid "Web Search"
-msgstr "Búsqueda web"
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"El renderizado de Mathtext se revirtió al reemplazo de Unicode (matplotlib "
-"no está instalado o ocurrió un error)"
-
-msgid "Thinking"
-msgstr "Pensando…"
-
-msgid "Searched for: %1"
-msgstr "Buscado: %1"
-
-msgid "Show %1 results"
-msgstr "Mostrar %1 resultados"
-
-msgid "Copy to clipboard"
-msgstr "Copiar al portapapeles"
-
-msgid "Share output with assistant"
-msgstr "Compartir salida con el asistente"
-
-msgid "Profile Header:"
-msgstr "Encabezado de perfil:"
-
-msgid "Show provider and model in profile header"
-msgstr "Mostrar proveedor y modelo en el encabezado de perfil"
-
-msgid "Chat Spacing: %1px"
-msgstr "Espaciado del chat: %1px"
-
-msgid "Compact"
-msgstr "Compacto"
-
-msgid "Spacious"
-msgstr "Espacioso"
-
-msgid "Chat Labels:"
-msgstr "Etiquetas de chat:"
-
-msgid "User label:"
-msgstr "Etiqueta de usuario:"
-
-msgid "Assistant label:"
-msgstr "Etiqueta de asistente:"
-
-msgid "Use model name as assistant label"
-msgstr "Usar el nombre del modelo como etiqueta del asistente"
-
-msgid "Chat Colors:"
-msgstr "Colores del chat:"
-
-msgid "Use custom user color"
-msgstr "Usar color de usuario personalizado"
-
-msgid "Use custom assistant color"
-msgstr "Usar color de asistente personalizado"
-
-msgid "UI Font:"
-msgstr "Fuente de interfaz:"
-
-msgid "Use custom UI font"
-msgstr "Usar fuente de interfaz personalizada"
-
-msgid "Code Font:"
-msgstr "Fuente de código:"
-
-msgid "Use custom code font"
-msgstr "Usar fuente de código personalizada"
-
-msgid "Thoughts Font:"
-msgstr "Fuente de pensamientos:"
-
-msgid "Use custom thoughts font"
-msgstr "Usar fuente de pensamientos personalizada"
-
-msgid "LaTeX Rendering:"
-msgstr "Renderizado de LaTeX:"
-
-msgid "Leave as TeX"
-msgstr "Dejar como TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Reemplazar con Unicode (Predeterminado)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (falta python3-matplotlib)"
-
-msgid "Header Icons:"
-msgstr "Iconos de encabezado:"
-
-msgid "Profile Header"
-msgstr "Encabezado de perfil"
-
-msgid "Always show Tasks"
-msgstr "Mostrar siempre Tareas"
-
-msgid "Always show Auto Toggle"
-msgstr "Mostrar siempre el interruptor automático"
-
-msgid "Show History"
-msgstr "Mostrar historial"
-
-msgid "Show Copy conversation"
-msgstr "Mostrar copiar conversación"
-
-msgid "Show Clear chat"
-msgstr "Mostrar limpiar chat"
-
-msgid "Show Settings"
-msgstr "Mostrar configuración"
-
-msgid "Show Pin"
-msgstr "Mostrar anclaje"
+msgid "Reset"
+msgstr "Restablecer"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
@@ -1322,8 +1372,8 @@ msgstr ""
 
 msgid "Recording too short — hold a bit longer, then toggle again to stop."
 msgstr ""
-"Grabación demasiado corta — mantenga presionado un poco más y luego vuelva a"
-" alternar para detener."
+"Grabación demasiado corta — mantenga presionado un poco más y luego vuelva a "
+"alternar para detener."
 
 msgid "Recording produced no audio file."
 msgstr "La grabación no produjo ningún archivo de audio."
@@ -1371,8 +1421,8 @@ msgid ""
 "Skip approvals mode disabled. Tools will revert to your configured 'Ask "
 "before running' settings."
 msgstr ""
-"Modo de omisión de aprobaciones deshabilitado. Las herramientas revertirán a"
-" su configuración de 'Preguntar antes de ejecutar'."
+"Modo de omisión de aprobaciones deshabilitado. Las herramientas revertirán a "
+"su configuración de 'Preguntar antes de ejecutar'."
 
 msgid ""
 "Desktop automation is disabled in settings. Enable it first to drive the "
@@ -1471,6 +1521,101 @@ msgstr "Sesión de control activa (ya autorizada). Modo automático habilitado."
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Sesión de control autorizada con éxito. Modo automático habilitado."
 
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"Ejecuta un comando de shell en el sistema del usuario y devuelve su "
+"salida. Directrices:\n"
+"- Use `pkexec` en lugar de `sudo` para cualquier comando que requiera "
+"privilegios de superusuario.\n"
+"- Encadene pasos con `&&`.\n"
+"- Los comandos se ejecutan de forma no interactiva. Nunca use comandos "
+"que esperen la entrada del usuario (como `read`).\n"
+"- Use `kdialog` si necesita solicitar información al usuario o mostrar "
+"un cuadro de mensaje (por ejemplo, `kdialog --inputbox \"Pregunta\"`).\n"
+"- NUNCA instale paquetes, modifique la configuración del sistema, "
+"reinicie ni realice ninguna acción que altere el sistema o interrumpa al "
+"usuario sin permiso explícito.\n"
+"- Cuando se necesite permiso, pregunte primero al usuario en texto sin "
+"formato.\n"
+"- Para herramientas de ejecución automática: Sea conservador y prefiera "
+"comandos de solo lectura. Si una acción es potencialmente disruptiva, "
+"descríbala en texto sin formato y espere la aprobación explícita del "
+"usuario antes de llamar a la herramienta.\n"
+"- DEBE preferir otras herramientas más específicas (como read_file, "
+"write_file, search_files, etc.) si pueden realizar la tarea. Solo use "
+"esta herramienta si ninguna otra es adecuada."
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Lee el contenido de un archivo en la ruta especificada. El acceso está "
+"restringido a directorios permitidos."
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Escribe contenido en un archivo en la ruta especificada. El acceso está "
+"restringido a directorios permitidos."
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+"Enumera el contenido de un directorio. El acceso está restringido a "
+"directorios permitidos."
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "Busca un patrón dentro de los archivos de un directorio (recursivo)."
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr ""
+"Realiza una solicitud HTTP GET a una URL y devuelve el contenido de la "
+"respuesta."
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "Realiza una solicitud HTTP (POST, PUT, etc.) a una URL."
+
+msgid "Get the current content of the system clipboard."
+msgstr "Obtiene el contenido actual del portapapeles del sistema."
+
+msgid "Set the content of the system clipboard."
+msgstr "Establece el contenido del portapapeles del sistema."
+
+msgid "Show a system notification."
+msgstr "Muestra una notificación del sistema."
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr ""
+"Abre una URL en la aplicación predeterminada (por ejemplo, navegador "
+"web)."
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Realiza una búsqueda web para encontrar información actual, noticias o "
+"datos específicos."
+
 msgid "General"
 msgstr "General"
 
@@ -1489,6 +1634,63 @@ msgstr "Herramientas"
 msgid "Custom Tools"
 msgstr "Herramientas personalizadas"
 
+#~ msgid ""
+#~ "Anthropic enables extended thinking when effort is not Off, using the "
+#~ "token budget below. Temperature is forced to max while thinking."
+#~ msgstr ""
+#~ "Anthropic habilita el pensamiento extendido cuando el esfuerzo no está "
+#~ "desactivado, utilizando el presupuesto de tokens a continuación. La "
+#~ "temperatura se fuerza al máximo durante el razonamiento."
+
+#~ msgid ""
+#~ "Exa performs real-time neural search and synthesizes grounded answers "
+#~ "with live web citations."
+#~ msgstr ""
+#~ "Exa realiza búsquedas neuronales en tiempo real y sintetiza respuestas "
+#~ "fundamentadas con citas web en vivo."
+
+#~ msgid ""
+#~ "Gemini uses the thinking token budget directly. Set to 0 to disable "
+#~ "thinking on supported models."
+#~ msgstr ""
+#~ "Gemini utiliza el presupuesto de tokens de razonamiento directamente. "
+#~ "Establézcalo en 0 para deshabilitar el razonamiento en los modelos "
+#~ "compatibles."
+
+#~ msgid "Gemini uses the thinking level dropdown directly."
+#~ msgstr ""
+#~ "Gemini usa directamente el menú desplegable del nivel de razonamiento."
+
+#~ msgid ""
+#~ "Reasoning effort (low / medium / high) gates extended thinking. To see "
+#~ "thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+#~ "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+#~ "reasoning_content."
+#~ msgstr ""
+#~ "El esfuerzo de razonamiento (bajo / medio / alto) controla el pensamiento "
+#~ "extendido. Para ver los pensamientos en OpenAI / Poe / OpenRouter / "
+#~ "Azure, habilite 'Usar API de Responses'; los proveedores de chat-"
+#~ "completions (DeepSeek, Qwen) muestran el razonamiento a través de "
+#~ "reasoning_content."
+
+#~ msgid "Custom Instructions:"
+#~ msgstr "Instrucciones personalizadas:"
+
+#~ msgid "Additional instructions for the LLM…"
+#~ msgstr "Instrucciones adicionales para el LLM…"
+
+#~ msgid "OpenAI-compatible"
+#~ msgstr "Compatible con OpenAI"
+
+#~ msgid "Anthropic"
+#~ msgstr "Anthropic"
+
+#~ msgid "Google Gemini"
+#~ msgstr "Google Gemini"
+
+#~ msgid "Exa"
+#~ msgstr "Exa"
+
 #~ msgid "No models found."
 #~ msgstr "No se encontraron modelos."
 
@@ -1506,9 +1708,6 @@ msgstr "Herramientas personalizadas"
 
 #~ msgid "Copy message"
 #~ msgstr "Copiar mensaje"
-
-#~ msgid "Retry"
-#~ msgstr "Reintentar"
 
 #~ msgid "Share with LLM"
 #~ msgstr "Compartir con LLM"
@@ -1560,11 +1759,11 @@ msgstr "Herramientas personalizadas"
 #~ msgstr "Alternar modo automático"
 
 #~ msgid ""
-#~ "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
-#~ "are on)."
+#~ "Auto mode is permanently enabled via settings (both Auto-run and Auto-"
+#~ "share are on)."
 #~ msgstr ""
-#~ "El modo automático está habilitado permanentemente mediante la configuración"
-#~ " (tanto Auto-ejecutar como Auto-compartir están activados)."
+#~ "El modo automático está habilitado permanentemente mediante la "
+#~ "configuración (tanto Auto-ejecutar como Auto-compartir están activados)."
 
 #~ msgid ""
 #~ "Auto mode enabled for this session. Commands will run and share output "
@@ -1598,13 +1797,14 @@ msgstr "Herramientas personalizadas"
 #~ msgstr "Habilitar modo automático (auto-ejecutar + auto-compartir)"
 
 #~ msgid ""
-#~ "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
-#~ " button to run them. Tasks with auto mode will temporarily enable auto-run "
-#~ "and auto-share."
+#~ "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the "
+#~ "toolbar button to run them. Tasks with auto mode will temporarily enable "
+#~ "auto-run and auto-share."
 #~ msgstr ""
-#~ "Las tareas son atajos de prompt reutilizables. Use /task <name> en el chat o"
-#~ " el botón de la barra de herramientas para ejecutarlas. Las tareas en modo "
-#~ "automático habilitarán temporalmente auto-ejecutar y auto-compartir."
+#~ "Las tareas son atajos de prompt reutilizables. Use /task <name> en el "
+#~ "chat o el botón de la barra de herramientas para ejecutarlas. Las tareas "
+#~ "en modo automático habilitarán temporalmente auto-ejecutar y auto-"
+#~ "compartir."
 
 #~ msgid "Saves to ~/PlasmaLLM/chats/"
 #~ msgstr "Guarda en ~/PlasmaLLM/chats/"
@@ -1626,8 +1826,8 @@ msgstr "Herramientas personalizadas"
 #~ msgstr "Ejecutar como herramienta"
 
 #~ msgid ""
-#~ "Use the run_command tool for command execution. If disabled, falls back to "
-#~ "parsing code blocks."
+#~ "Use the run_command tool for command execution. If disabled, falls back "
+#~ "to parsing code blocks."
 #~ msgstr ""
 #~ "Use la herramienta run_command para la ejecución de comandos. Si está "
 #~ "desactivada, recurre al análisis de bloques de código."
@@ -1636,15 +1836,17 @@ msgstr "Herramientas personalizadas"
 #~ msgstr "Compartir automáticamente la salida del comando con el LLM"
 
 #~ msgid "Automatically send command execution results back to the LLM"
-#~ msgstr "Enviar automáticamente los resultados de ejecución de comandos al LLM"
+#~ msgstr ""
+#~ "Enviar automáticamente los resultados de ejecución de comandos al LLM"
 
 #~ msgid ""
 #~ "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-#~ "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
+#~ "their output, enabling an agentic workflow. Only use with trustworthy "
+#~ "LLMs."
 #~ msgstr ""
-#~ "⚠️ PELIGRO: Ambas opciones habilitadas: el LLM ahora puede ejecutar comandos"
-#~ " y ver su salida, habilitando un flujo de trabajo agéntico. Usar solo con "
-#~ "LLMs confiables."
+#~ "⚠️ PELIGRO: Ambas opciones habilitadas: el LLM ahora puede ejecutar "
+#~ "comandos y ver su salida, habilitando un flujo de trabajo agéntico. Usar "
+#~ "solo con LLMs confiables."
 
 #~ msgid "Backend:"
 #~ msgstr "Backend:"
@@ -1691,8 +1893,8 @@ msgstr "Herramientas personalizadas"
 #~ msgstr "Enviar automáticamente los resultados del comando Ejecutar al LLM"
 
 #~ msgid ""
-#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only use "
-#~ "with very trustworthy LLMs."
+#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only "
+#~ "use with very trustworthy LLMs."
 #~ msgstr ""
 #~ "ADVERTENCIA: Combinado con Auto-compartir, habilita el flujo de trabajo "
 #~ "agéntico. Usar solo con LLMs muy confiables."
@@ -1704,9 +1906,9 @@ msgstr "Herramientas personalizadas"
 #~ "Use the run_command tool for command execution. Disable for models that "
 #~ "don't support tool calling (falls back to code block parsing)."
 #~ msgstr ""
-#~ "Usar la herramienta run_command para la ejecución de comandos. Deshabilitar "
-#~ "para modelos que no admiten llamadas de herramientas (recurre al análisis de"
-#~ " bloques de código)."
+#~ "Usar la herramienta run_command para la ejecución de comandos. "
+#~ "Deshabilitar para modelos que no admiten llamadas de herramientas "
+#~ "(recurre al análisis de bloques de código)."
 
 #~ msgid "Web Search:"
 #~ msgstr "Búsqueda web:"
