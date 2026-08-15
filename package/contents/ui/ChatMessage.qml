@@ -10,6 +10,7 @@ import QtQuick.Controls as QQC2
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasma5support as P5Support
+import org.kde.plasma.workspace.dbus as DBus
 
 import "api.js" as Api
 
@@ -47,7 +48,8 @@ Kirigami.AbstractCard {
     property string advancedRenderedContent: ""
     property bool isRenderingLatex: false
     readonly property int currentUiFontPointSize: root ? root.uiFontPointSize : Kirigami.Theme.defaultFont.pointSize
-    property string activeRenderCommand: ""
+    property int activeRenderRequestId: 0
+    property int latexRetryCount: 0
     property bool advancedRenderFailed: false
     readonly property int latexRenderMode: Plasmoid.configuration.latexRenderMode
     readonly property bool isLatexFallback: latexRenderMode === 2 && advancedRenderFailed
@@ -85,21 +87,50 @@ Kirigami.AbstractCard {
         
         isRenderingLatex = true;
         advancedRenderFailed = false;
-        var scriptPath = Qt.resolvedUrl("latex_renderer.py").toString();
-        if (scriptPath.indexOf("file://") === 0) {
-            scriptPath = scriptPath.substring(7);
-        }
-        var safeScriptPath = scriptPath.replace(/'/g, "'\\''");
         
-        var colorHex = messageItem.bubbleTextColor.toString();
-        var b64 = Api.base64Encode(messageItem.strippedContent);
-        var cmd = "echo '" + b64 + "' | base64 -d | python3 '" + safeScriptPath + "' --color '" + colorHex + "' --font-size " + currentUiFontPointSize;
+        var colorHex = messageItem.bubbleTextColor ? messageItem.bubbleTextColor.toString() : "";
+        var fontPt = Math.round(currentUiFontPointSize || 11);
+        var reqId = ++activeRenderRequestId;
         
-        if (activeRenderCommand !== "" && activeRenderCommand !== cmd) {
-            latexRendererSource.disconnectSource(activeRenderCommand);
-        }
-        activeRenderCommand = cmd;
-        latexRendererSource.connectSource(cmd);
+        var reply = DBus.SessionBus.asyncCall({
+            service: "com.joshuaroman.plasmallm.latex",
+            path: "/Renderer",
+            iface: "com.joshuaroman.plasmallm.latex",
+            member: "Render",
+            arguments: [messageItem.strippedContent, colorHex, fontPt]
+        });
+
+        reply.finished.connect(function() {
+            if (reqId !== activeRenderRequestId) return;
+            isRenderingLatex = false;
+            
+            if (reply.isError) {
+                var errMsg = reply.error ? (reply.error.message || reply.error.name || String(reply.error)) : "Unknown DBus error";
+                console.warn("PlasmaLLM LaTeX DBus Error:", errMsg);
+                if (errMsg.indexOf("not provided by any") !== -1 && latexRetryCount < 5) {
+                    // Service might be starting up, retry in 500ms
+                    latexRetryCount++;
+                    dbusRetryTimer.start();
+                    return;
+                }
+                advancedRenderedContent = Api.replaceLatexSymbols(strippedContent);
+                advancedRenderFailed = true;
+            } else {
+                latexRetryCount = 0;
+                var val = reply.value;
+                if (val !== null && val !== undefined && typeof val === "object" && val.hasOwnProperty("value")) {
+                    val = val.value;
+                }
+                advancedRenderedContent = (typeof val === "string" && val.length > 0) ? val : strippedContent;
+                advancedRenderFailed = false;
+            }
+        });
+    }
+
+    Timer {
+        id: dbusRetryTimer
+        interval: 500
+        onTriggered: triggerAdvancedRender()
     }
 
     onLatexRenderModeChanged: {
@@ -112,10 +143,7 @@ Kirigami.AbstractCard {
     }
 
     onStrippedContentChanged: {
-        if (activeRenderCommand !== "") {
-            latexRendererSource.disconnectSource(activeRenderCommand);
-            activeRenderCommand = "";
-        }
+        activeRenderRequestId++;
         isRenderingLatex = false;
         advancedRenderedContent = "";
         advancedRenderFailed = false;
@@ -155,41 +183,7 @@ Kirigami.AbstractCard {
         }
     }
 
-    P5Support.DataSource {
-        id: latexRendererSource
-        engine: "executable"
-        connectedSources: []
-        
-        onNewData: function(source, data) {
-            // Ignore results from stale/previous commands due to delegate recycling
-            if (source !== activeRenderCommand) {
-                disconnectSource(source);
-                return;
-            }
-            
-            var stdout = data["stdout"] || "";
-            var exitCode = data["exit code"];
-            
-            if (exitCode !== undefined) {
-                isRenderingLatex = false;
-                activeRenderCommand = "";
-                disconnectSource(source);
-                
-                if (exitCode === 0) {
-                    advancedRenderedContent = stdout;
-                    advancedRenderFailed = false;
-                } else if (exitCode === 3) {
-                    console.error("PlasmaLLM: Mathtext rendering failed (matplotlib not installed). Falling back to Unicode replacement.");
-                    advancedRenderedContent = Api.replaceLatexSymbols(strippedContent);
-                    advancedRenderFailed = true;
-                } else {
-                    console.error("PlasmaLLM: Mathtext rendering failed with exit code " + exitCode + ". Falling back to Unicode replacement. Stderr: " + (data["stderr"] || ""));
-                    advancedRenderedContent = Api.replaceLatexSymbols(strippedContent);
-                    advancedRenderFailed = true;
-                }
-            }
-        }
-    }
+    // latexRendererSource removed for DBus replacement
 
     signal shareRequested(int index)
     signal retryRequested()
