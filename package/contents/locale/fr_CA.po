@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-14 10:20-0400\n"
+"POT-Creation-Date: 2026-08-14 20:58-0400\n"
 "PO-Revision-Date: 2026-04-07 22:00-0400\n"
 "Last-Translator: Gemini CLI (machine translation)\n"
 "Language-Team: French (Canada)\n"
@@ -73,8 +73,15 @@ msgstr ""
 "La requête a échoué (aucune réponse) — vérifiez l'URL de votre point d'accès"
 
 msgid ""
-"Gemini uses the thinking token budget directly. Set to 0 to disable thinking "
-"on supported models."
+"Exa performs real-time neural search and synthesizes grounded answers with "
+"live web citations."
+msgstr ""
+"Exa effectue une recherche neuronale en temps réel et synthétise des "
+"réponses fondées avec des citations Web en direct."
+
+msgid ""
+"Gemini uses the thinking token budget directly. Set to 0 to disable thinking"
+" on supported models."
 msgstr ""
 "Gemini utilise directement le budget de jetons de réflexion. Réglez sur 0 "
 "pour désactiver la réflexion sur les modèles pris en charge."
@@ -108,13 +115,6 @@ msgstr ""
 "natives dans les Paramètres."
 
 msgid ""
-"Exa performs real-time neural search and synthesizes grounded answers with "
-"live web citations."
-msgstr ""
-"Exa effectue une recherche neuronale en temps réel et synthétise des "
-"réponses fondées avec des citations Web en direct."
-
-msgid ""
 "Reasoning effort (low / medium / high) gates extended thinking. To see "
 "thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
 "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
@@ -126,8 +126,8 @@ msgstr ""
 "Qwen) affichent le raisonnement via reasoning_content."
 
 msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
+"No custom tools configured. Add a custom tool to expose your own commands to"
+" the LLM."
 msgstr ""
 "Aucun outil personnalisé configuré. Ajoutez un outil personnalisé pour "
 "exposer vos propres commandes au LLM."
@@ -172,7 +172,8 @@ msgstr "Un outil nommé « %1 » existe déjà."
 msgid ""
 "Custom tools allow you to expose your own commands to the LLM. Use "
 "placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+"the LLM can fill. Values provided by the LLM are automatically shell-"
+"escaped."
 msgstr ""
 "Les outils personnalisés vous permettent d'exposer vos propres commandes au "
 "LLM. Utilisez des espaces réservés comme {variable} dans le Modèle de "
@@ -260,8 +261,8 @@ msgid "A task named \"%1\" already exists."
 msgstr "Une tâche nommée « %1 » existe déjà."
 
 msgid ""
-"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
-"button to run them. Tasks with skip approvals enabled will run tools "
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
+" button to run them. Tasks with skip approvals enabled will run tools "
 "automatically."
 msgstr ""
 "Les tâches sont des raccourcis d'invite réutilisables. Utilisez /task <nom> "
@@ -414,108 +415,6 @@ msgstr ""
 "Active les recherches Web déclenchées par le LLM via l'API de recherche "
 "d'Ollama"
 
-msgid "Profile Header:"
-msgstr "En-tête de profil :"
-
-msgid "Show provider and model in profile header"
-msgstr "Afficher le fournisseur et le modèle dans l'en-tête de profil"
-
-msgid "Chat Spacing: %1px"
-msgstr "Espacement du clavardage : %1px"
-
-msgid "Compact"
-msgstr "Compact"
-
-msgid "Spacious"
-msgstr "Spacieux"
-
-msgid "Chat Labels:"
-msgstr "Étiquettes du clavardage :"
-
-msgid "User label:"
-msgstr "Étiquette de l'utilisateur :"
-
-msgid "You"
-msgstr "Vous"
-
-msgid "Assistant label:"
-msgstr "Étiquette de l'assistant :"
-
-msgid "Assistant"
-msgstr "Assistant"
-
-msgid "Use model name as assistant label"
-msgstr "Utiliser le nom du modèle comme étiquette de l'assistant"
-
-msgid "Chat Colors:"
-msgstr "Couleurs du clavardage :"
-
-msgid "Use custom user color"
-msgstr "Utiliser une couleur d'utilisateur personnalisée"
-
-msgid "Use custom assistant color"
-msgstr "Utiliser une couleur d'assistant personnalisée"
-
-msgid "UI Font:"
-msgstr "Police d'interface :"
-
-msgid "Use custom UI font"
-msgstr "Utiliser une police d'interface personnalisée"
-
-msgid "Code Font:"
-msgstr "Police de code :"
-
-msgid "Use custom code font"
-msgstr "Utiliser une police de code personnalisée"
-
-msgid "Thoughts Font:"
-msgstr "Police de réflexions :"
-
-msgid "Use custom thoughts font"
-msgstr "Utiliser une police de réflexions personnalisée"
-
-msgid "LaTeX Rendering:"
-msgstr "Rendu LaTeX :"
-
-msgid "Leave as TeX"
-msgstr "Laisser en TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Remplacer par Unicode (par défaut)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib manquant)"
-
-msgid "Header Icons:"
-msgstr "Icônes d'en-tête :"
-
-msgid "Profile Header"
-msgstr "En-tête de profil"
-
-msgid "Always show Tasks"
-msgstr "Toujours afficher les Tâches"
-
-msgid "Always show Auto Toggle"
-msgstr "Toujours afficher le bouton Auto"
-
-msgid "Show History"
-msgstr "Afficher l'historique"
-
-msgid "Show Copy conversation"
-msgstr "Afficher Copier la conversation"
-
-msgid "Show Clear chat"
-msgstr "Afficher Effacer le clavardage"
-
-msgid "Show Settings"
-msgstr "Afficher les Paramètres"
-
-msgid "Show Pin"
-msgstr "Afficher l'épingle"
-
 msgid "Tool Request: %1"
 msgstr "Demande d'outil : %1"
 
@@ -527,6 +426,256 @@ msgstr "Refuser"
 
 msgid "Approve"
 msgstr "Approuver"
+
+msgid "Stop command"
+msgstr "Arrêter la commande"
+
+msgid "Open terminal attached to this session"
+msgstr "Ouvrir le terminal associé à cette session"
+
+msgid "Copy output"
+msgstr "Copier la sortie"
+
+msgid "Approve the pending tool request"
+msgstr "Approuver la demande d'outil en attente"
+
+msgid "Toggle skip approvals for this session"
+msgstr ""
+"Activer/désactiver le contournement des approbations pour cette session"
+
+msgid "Clear the chat"
+msgstr "Effacer le clavardage"
+
+msgid "Close the panel"
+msgstr "Fermer le panneau"
+
+msgid "Copy conversation to clipboard"
+msgstr "Copier la conversation dans le presse-papiers"
+
+msgid "Deny the pending tool request"
+msgstr "Refuser la demande d'outil en attente"
+
+msgid "Open chat history folder"
+msgstr "Ouvrir le dossier d'historique des clavardages"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "Afficher ou changer de modèle (/model <nom>)"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "Changer de profil (/profile <nom>)"
+
+msgid "Save chat to file"
+msgstr "Enregistrer le clavardage dans un fichier"
+
+msgid "Open settings"
+msgstr "Ouvrir les paramètres"
+
+msgid "Run a saved task (/task <name>)"
+msgstr "Exécuter une tâche enregistrée (/task <nom>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr ""
+"Basculer vers le mode Drive Desktop (démarre la liaison et le mode "
+"automatique)"
+
+msgid "Toggle Full Auto Mode"
+msgstr "Activer/désactiver le mode automatique complet"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Activer/désactiver le mode automatique complet : Lorsqu'il est activé, tous "
+"les outils s'exécutent automatiquement pour cette session."
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "Arrêter le contrôle du bureau (déconnecter)"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop (démarre la liaison et active le mode automatique)"
+
+msgid "Run a task"
+msgstr "Exécuter une tâche"
+
+msgid "Chat History"
+msgstr "Historique des clavardages"
+
+msgid "Loading..."
+msgstr "Chargement..."
+
+msgid "No recent chats"
+msgstr "Pas de clavardages récents"
+
+msgid "Open history folder..."
+msgstr "Ouvrir le dossier d'historique..."
+
+msgid "Clear all history..."
+msgstr "Effacer tout l'historique..."
+
+msgid "Clear All History"
+msgstr "Effacer tout l'historique"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Voulez-vous vraiment supprimer tous les fichiers d'historique des "
+"clavardages ? Cette action est irréversible."
+
+msgid "Clear All"
+msgstr "Tout effacer"
+
+msgid "Copy conversation"
+msgstr "Copier la conversation"
+
+msgid "You"
+msgstr "Vous"
+
+msgid "Assistant"
+msgstr "Assistant"
+
+msgid "Command"
+msgstr "Commande"
+
+msgid "Error"
+msgstr "Erreur"
+
+msgid "Clear chat"
+msgstr "Effacer le clavardage"
+
+msgid "Settings"
+msgstr "Paramètres"
+
+msgid "Don't keep open"
+msgstr "Ne pas garder ouvert"
+
+msgid "Keep open"
+msgstr "Garder ouvert"
+
+msgid "Dismiss"
+msgstr "Ignorer"
+
+msgid "The user denied this tool call."
+msgstr "L'utilisateur a refusé cet appel d'outil."
+
+msgid "Send a message to start chatting"
+msgstr "Envoyez un message pour commencer à clavarder"
+
+msgid "Attach File"
+msgstr "Joindre un fichier"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Fichiers texte (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
+"*.conf *.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "Tous les fichiers (*)"
+
+msgid "Message input"
+msgstr "Saisie du message"
+
+msgid "Type a message…"
+msgstr "Tapez un message…"
+
+msgid "Initializing…"
+msgstr "Initialisation…"
+
+msgid "Attach file or image"
+msgstr "Joindre un fichier ou une image"
+
+msgid "Transcribing…"
+msgstr "Transcription en cours…"
+
+msgid "Preparing…"
+msgstr "Préparation…"
+
+msgid "Wait for the current reply"
+msgstr "Attendre la réponse actuelle"
+
+msgid "Click to stop and send"
+msgstr "Cliquer pour arrêter et envoyer"
+
+msgid "Release to send"
+msgstr "Relâcher pour envoyer"
+
+msgid "Click to start"
+msgstr "Cliquer pour démarrer"
+
+msgid "Hold to talk"
+msgstr "Maintenir pour parler"
+
+msgid "Click to toggle, hold to talk"
+msgstr "Cliquer pour basculer, maintenir pour parler"
+
+msgid "Kill"
+msgstr "Tuer"
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+"Tuer la session persistante (arrête tous les processus et réinitialise "
+"l'état du shell)"
+
+msgid "Send"
+msgstr "Envoyer"
+
+msgid "Stop"
+msgstr "Arrêter"
+
+msgid "Cancel LLM request"
+msgstr "Annuler la requête au LLM"
+
+msgid "Drop files here to attach"
+msgstr "Déposer des fichiers ici pour les joindre"
+
+msgid "Microphone recording failed"
+msgstr "L'enregistrement du microphone a échoué"
+
+msgid "No microphone found"
+msgstr "Aucun microphone trouvé"
+
+msgid "No microphone available"
+msgstr "Aucun microphone disponible"
+
+msgid "Recording…"
+msgstr "Enregistrement…"
+
+msgid "Could not start recording: %1"
+msgstr "Impossible de démarrer l'enregistrement : %1"
+
+msgid "Could not start shell audio recorder (install pw-record or ffmpeg)"
+msgstr ""
+"Impossible de démarrer l'enregistreur audio du shell (installez pw-record ou"
+" ffmpeg)"
+
+msgid "Processing…"
+msgstr "Traitement…"
+
+msgid "Failed to stop recording"
+msgstr "Échec de l'arrêt de l'enregistrement"
+
+msgid "Shell recorder stop is not configured"
+msgstr "L'arrêt de l'enregistreur shell n'est pas configuré"
+
+msgid "Shell recording failed"
+msgstr "L'enregistrement shell a échoué"
+
+msgid "Recording stopped unexpectedly"
+msgstr "L'enregistrement s'est arrêté de manière inattendue"
+
+msgid "Recording produced no file"
+msgstr "L'enregistrement n'a produit aucun fichier"
+
+msgid "Recording failed"
+msgstr "L'enregistrement a échoué"
 
 msgid "OpenAI-compatible"
 msgstr "Compatible OpenAI"
@@ -645,7 +794,7 @@ msgstr ""
 
 #, javascript-format
 msgid "Temperature: %1%"
-msgstr "Température : %1 %"
+msgstr "Température : %1%"
 
 msgid "Precise"
 msgstr "Précis"
@@ -695,8 +844,8 @@ msgid ""
 "picking a preset."
 msgstr ""
 "Requis pour afficher le contenu de raisonnement sur OpenAI / Poe / "
-"OpenRouter / Azure (POST vers /v1/responses au lieu de /v1/chat/"
-"completions). Défini automatiquement lors du choix d'un préréglage."
+"OpenRouter / Azure (POST vers /v1/responses au lieu de "
+"/v1/chat/completions). Défini automatiquement lors du choix d'un préréglage."
 
 msgid "Attachments:"
 msgstr "Pièces jointes :"
@@ -708,8 +857,8 @@ msgid ""
 "Resizes large image attachments to fit within 800x600 before sending, "
 "reducing upload size and context tokens."
 msgstr ""
-"Redimensionne les images jointes de grande taille pour qu'elles s'adaptent à "
-"800x600 avant l'envoi, réduisant ainsi la taille du téléchargement et les "
+"Redimensionne les images jointes de grande taille pour qu'elles s'adaptent à"
+" 800x600 avant l'envoi, réduisant ainsi la taille du téléchargement et les "
 "jetons de contexte."
 
 msgid "Chat History:"
@@ -728,8 +877,8 @@ msgid "Show notifications when minimized"
 msgstr "Afficher les notifications lorsqu'elle est réduite"
 
 msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
+"Show system notifications for incoming messages and tool calls when the chat"
+" window is minimized or closed."
 msgstr ""
 "Afficher des notifications système pour les messages entrants et les appels "
 "d'outils lorsque la fenêtre de chat est réduite ou fermée."
@@ -767,6 +916,123 @@ msgstr "secondes"
 msgid "minutes"
 msgstr "minutes"
 
+msgid "Speech to Text"
+msgstr "Reconnaissance vocale"
+
+msgid "API key saved to local fallback (KWallet unavailable)."
+msgstr "Clé API enregistrée dans le secours local (KWallet indisponible)."
+
+msgid "API key saved to KWallet."
+msgstr "Clé API enregistrée dans KWallet."
+
+msgid "API key saved to local fallback."
+msgstr "Clé API enregistrée dans le secours local."
+
+msgid "Set an API endpoint first."
+msgstr "Définissez d'abord un point d'accès API."
+
+msgid "Fetching STT models…"
+msgstr "Récupération des modèles STT…"
+
+msgid "Loaded %1 STT model(s)."
+msgstr "%1 modèle(s) STT chargé(s)."
+
+msgid "Voice input:"
+msgstr "Entrée vocale :"
+
+msgid "Enable microphone input"
+msgstr "Activer l'entrée microphone"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"Configure uniquement le moteur de reconnaissance vocale. Les transcriptions "
+"utilisent votre profil de discussion actif (Général)."
+
+msgid "Mic button:"
+msgstr "Bouton du micro :"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Toggle"
+msgstr "Basculer"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"Auto : un clic bascule l'enregistrement ; maintenir 250 ms+ pour le push-to-"
+"talk. Maintenir : maintenir enfoncé uniquement. Basculer : cliquer pour "
+"démarrer/arrêter."
+
+msgid "Voice shortcut:"
+msgstr "Raccourci vocal :"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the"
+" panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"Lorsque PlasmaLLM est ouvert et actif, utilise le même mode de micro que le "
+"bouton (auto : appui court pour basculer, maintien de 250 ms+ pour push-to-"
+"talk). N'ouvre pas le panneau — utilisez « Activer le composant » sur la "
+"page Raccourcis. Par défaut : Ctrl+M. Effacer pour désactiver."
+
+msgid "Transcriber"
+msgstr "Transcripteur"
+
+msgid "Endpoint:"
+msgstr "Point d'accès :"
+
+msgid "Fetching…"
+msgstr "Récupération…"
+
+msgid "Fetch"
+msgstr "Récupérer"
+
+msgid "Fetch STT models"
+msgstr "Récupérer les modèles STT"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouter ne liste les modèles STT que via les modalités de transcription "
+"(ce que fait cette page)."
+
+msgid "API key:"
+msgstr "Clé API :"
+
+msgid "Provider API key"
+msgstr "Clé API du fournisseur"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Save API key"
+msgstr "Enregistrer la clé API"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Language hint:"
+msgstr "Indication de langue :"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "Facultatif, ex. fr ou en (vide = auto)"
+
+msgid "Max recording (seconds):"
+msgstr "Enregistrement max (secondes) :"
+
+msgid "STT backend:"
+msgstr "Moteur STT :"
+
+msgid "OpenAI-compatible transcriptions"
+msgstr "Transcriptions compatibles OpenAI"
+
 msgid "General Tool Settings"
 msgstr "Paramètres généraux des outils"
 
@@ -791,11 +1057,13 @@ msgid "Enable Desktop Automation"
 msgstr "Activer l'automatisation du bureau"
 
 msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+"Enable Desktop Automation (requires <a "
+"href=\"https://github.com/joshuaeroman/plasmallm-desktop-"
+"driver\">driver</a>)"
 msgstr ""
-"Activer l'automatisation du bureau (requiert le <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">pilote</a>)"
+"Activer l'automatisation du bureau (requiert le <a "
+"href=\"https://github.com/joshuaeroman/plasmallm-desktop-"
+"driver\">pilote</a>)"
 
 msgid "Path whitelist:"
 msgstr "Liste blanche des chemins :"
@@ -873,17 +1141,47 @@ msgstr ""
 msgid "Individual Tools"
 msgstr "Outils individuels"
 
-msgid "Stop command"
-msgstr "Arrêter la commande"
+msgid "Speech-to-text is not configured"
+msgstr "La reconnaissance vocale n'est pas configurée"
 
-msgid "Open terminal attached to this session"
-msgstr "Ouvrir le terminal associé à cette session"
+msgid "Unknown STT backend: %1"
+msgstr "Moteur STT inconnu : %1"
 
-msgid "Copy output"
-msgstr "Copier la sortie"
+msgid "STT backend does not support model listing"
+msgstr "Le moteur STT ne prend pas en charge la liste des modèles"
 
-msgid "Error"
-msgstr "Erreur"
+msgid "STT endpoint is not configured"
+msgstr "Le point d'accès STT n'est pas configuré"
+
+msgid "Model list request failed: %1"
+msgstr "Échec de la demande de liste des modèles : %1"
+
+msgid "No STT models returned"
+msgstr "Aucun modèle STT retourné"
+
+msgid "No audio data to transcribe"
+msgstr "Aucune donnée audio à transcrire"
+
+msgid "STT model is not configured"
+msgstr "Le modèle STT n'est pas configuré"
+
+msgid "Speech-to-text request timed out"
+msgstr "Délai d'attente dépassé pour la demande de reconnaissance vocale"
+
+msgid "Failed to parse STT response: %1"
+msgstr "Impossible d'analyser la réponse STT : %1"
+
+msgid "STT failed (HTTP %1): %2"
+msgstr "STT a échoué (HTTP %1) : %2"
+
+msgid "STT failed (HTTP %1)"
+msgstr "STT a échoué (HTTP %1)"
+
+msgid "STT request failed: %1"
+msgstr "La demande STT a échoué : %1"
+
+msgid "Voice message"
+msgstr "Message vocal"
 
 msgid "Web Search"
 msgstr "Recherche Web"
@@ -910,172 +1208,101 @@ msgstr "Copier dans le presse-papiers"
 msgid "Share output with assistant"
 msgstr "Partager la sortie avec l'assistant"
 
-msgid "Approve the pending tool request"
-msgstr "Approuver la demande d'outil en attente"
+msgid "Profile Header:"
+msgstr "En-tête de profil :"
 
-msgid "Toggle skip approvals for this session"
-msgstr ""
-"Activer/désactiver le contournement des approbations pour cette session"
+msgid "Show provider and model in profile header"
+msgstr "Afficher le fournisseur et le modèle dans l'en-tête de profil"
 
-msgid "Clear the chat"
-msgstr "Effacer le clavardage"
+msgid "Chat Spacing: %1px"
+msgstr "Espacement du clavardage : %1px"
 
-msgid "Close the panel"
-msgstr "Fermer le panneau"
+msgid "Compact"
+msgstr "Compact"
 
-msgid "Copy conversation to clipboard"
-msgstr "Copier la conversation dans le presse-papiers"
+msgid "Spacious"
+msgstr "Spacieux"
 
-msgid "Deny the pending tool request"
-msgstr "Refuser la demande d'outil en attente"
+msgid "Chat Labels:"
+msgstr "Étiquettes du clavardage :"
 
-msgid "Open chat history folder"
-msgstr "Ouvrir le dossier d'historique des clavardages"
+msgid "User label:"
+msgstr "Étiquette de l'utilisateur :"
 
-msgid "Show or switch model (/model <name>)"
-msgstr "Afficher ou changer de modèle (/model <nom>)"
+msgid "Assistant label:"
+msgstr "Étiquette de l'assistant :"
 
-msgid "Switch profile (/profile <name>)"
-msgstr "Changer de profil (/profile <nom>)"
+msgid "Use model name as assistant label"
+msgstr "Utiliser le nom du modèle comme étiquette de l'assistant"
 
-msgid "Save chat to file"
-msgstr "Enregistrer le clavardage dans un fichier"
+msgid "Chat Colors:"
+msgstr "Couleurs du clavardage :"
 
-msgid "Open settings"
-msgstr "Ouvrir les paramètres"
+msgid "Use custom user color"
+msgstr "Utiliser une couleur d'utilisateur personnalisée"
 
-msgid "Run a saved task (/task <name>)"
-msgstr "Exécuter une tâche enregistrée (/task <nom>)"
+msgid "Use custom assistant color"
+msgstr "Utiliser une couleur d'assistant personnalisée"
 
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr ""
-"Basculer vers le mode Drive Desktop (démarre la liaison et le mode "
-"automatique)"
+msgid "UI Font:"
+msgstr "Police d'interface :"
 
-msgid "Toggle Full Auto Mode"
-msgstr "Activer/désactiver le mode automatique complet"
+msgid "Use custom UI font"
+msgstr "Utiliser une police d'interface personnalisée"
 
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-"Activer/désactiver le mode automatique complet : Lorsqu'il est activé, tous "
-"les outils s'exécutent automatiquement pour cette session."
+msgid "Code Font:"
+msgstr "Police de code :"
 
-msgid "Drive Desktop"
-msgstr "Drive Desktop"
+msgid "Use custom code font"
+msgstr "Utiliser une police de code personnalisée"
 
-msgid "Stop Driving Desktop (disconnect)"
-msgstr "Arrêter le contrôle du bureau (déconnecter)"
+msgid "Thoughts Font:"
+msgstr "Police de réflexions :"
 
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr "Drive Desktop (démarre la liaison et active le mode automatique)"
+msgid "Use custom thoughts font"
+msgstr "Utiliser une police de réflexions personnalisée"
 
-msgid "Run a task"
-msgstr "Exécuter une tâche"
+msgid "LaTeX Rendering:"
+msgstr "Rendu LaTeX :"
 
-msgid "Chat History"
-msgstr "Historique des clavardages"
+msgid "Leave as TeX"
+msgstr "Laisser en TeX"
 
-msgid "Loading..."
-msgstr "Chargement..."
+msgid "Replace with Unicode (Default)"
+msgstr "Remplacer par Unicode (par défaut)"
 
-msgid "No recent chats"
-msgstr "Pas de clavardages récents"
+msgid "Mathtext"
+msgstr "Mathtext"
 
-msgid "Open history folder..."
-msgstr "Ouvrir le dossier d'historique..."
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib manquant)"
 
-msgid "Clear all history..."
-msgstr "Effacer tout l'historique..."
+msgid "Header Icons:"
+msgstr "Icônes d'en-tête :"
 
-msgid "Clear All History"
-msgstr "Effacer tout l'historique"
+msgid "Profile Header"
+msgstr "En-tête de profil"
 
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-"Voulez-vous vraiment supprimer tous les fichiers d'historique des "
-"clavardages ? Cette action est irréversible."
+msgid "Always show Tasks"
+msgstr "Toujours afficher les Tâches"
 
-msgid "Clear All"
-msgstr "Tout effacer"
+msgid "Always show Auto Toggle"
+msgstr "Toujours afficher le bouton Auto"
 
-msgid "Copy conversation"
-msgstr "Copier la conversation"
+msgid "Show History"
+msgstr "Afficher l'historique"
 
-msgid "Command"
-msgstr "Commande"
+msgid "Show Copy conversation"
+msgstr "Afficher Copier la conversation"
 
-msgid "Clear chat"
-msgstr "Effacer le clavardage"
+msgid "Show Clear chat"
+msgstr "Afficher Effacer le clavardage"
 
-msgid "Settings"
-msgstr "Paramètres"
+msgid "Show Settings"
+msgstr "Afficher les Paramètres"
 
-msgid "Don't keep open"
-msgstr "Ne pas garder ouvert"
-
-msgid "Keep open"
-msgstr "Garder ouvert"
-
-msgid "Dismiss"
-msgstr "Ignorer"
-
-msgid "The user denied this tool call."
-msgstr "L'utilisateur a refusé cet appel d'outil."
-
-msgid "Send a message to start chatting"
-msgstr "Envoyez un message pour commencer à clavarder"
-
-msgid "Attach File"
-msgstr "Joindre un fichier"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-"Fichiers texte (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
-"*.conf *.sh *.py *.js *.ts *.qml)"
-
-msgid "All files (*)"
-msgstr "Tous les fichiers (*)"
-
-msgid "Message input"
-msgstr "Saisie du message"
-
-msgid "Type a message…"
-msgstr "Tapez un message…"
-
-msgid "Initializing…"
-msgstr "Initialisation…"
-
-msgid "Attach file or image"
-msgstr "Joindre un fichier ou une image"
-
-msgid "Kill"
-msgstr "Tuer"
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-"Tuer la session persistante (arrête tous les processus et réinitialise "
-"l'état du shell)"
-
-msgid "Send"
-msgstr "Envoyer"
-
-msgid "Stop"
-msgstr "Arrêter"
-
-msgid "Cancel LLM request"
-msgstr "Annuler la requête au LLM"
-
-msgid "Drop files here to attach"
-msgstr "Déposer des fichiers ici pour les joindre"
+msgid "Show Pin"
+msgstr "Afficher l'épingle"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
@@ -1087,6 +1314,40 @@ msgstr ""
 
 msgid "Failed to stop driving: %1"
 msgstr "Impossible d'arrêter le contrôle : %1"
+
+msgid "Still preparing system context…"
+msgstr "Préparation du contexte système en cours…"
+
+msgid "Voice input is not configured. Open Speech to Text settings."
+msgstr ""
+"L'entrée vocale n'est pas configurée. Ouvrez les paramètres de "
+"reconnaissance vocale."
+
+msgid "Recording too short — hold a bit longer, then toggle again to stop."
+msgstr ""
+"Enregistrement trop court — maintenez un peu plus longtemps, puis basculez à"
+" nouveau pour arrêter."
+
+msgid "Recording produced no audio file."
+msgstr "L'enregistrement n'a produit aucun fichier audio."
+
+msgid "Recording was empty or could not be read."
+msgstr "L'enregistrement était vide ou n'a pas pu être lu."
+
+msgid "No speech detected."
+msgstr "Aucune parole détectée."
+
+msgid "Could not send transcribed message."
+msgstr "Impossible d'envoyer le message transcrit."
+
+msgid "Recording too short or silent — try again."
+msgstr "Enregistrement trop court ou silencieux — réessayez."
+
+msgid "Failed to read recorded audio."
+msgstr "Échec de la lecture de l'audio enregistré."
+
+msgid "Failed to finalize recording"
+msgstr "Échec de la finalisation de l'enregistrement"
 
 msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
@@ -1125,7 +1386,8 @@ msgstr ""
 
 msgid "plasmallm-desktop-driver is not detected or running."
 msgstr ""
-"plasmallm-desktop-driver n'est pas détecté ou n'est pas en cours d'exécution."
+"plasmallm-desktop-driver n'est pas détecté ou n'est pas en cours "
+"d'exécution."
 
 msgid "Default"
 msgstr "Défaut"
@@ -1261,9 +1523,6 @@ msgstr "Outils personnalisés"
 #~ msgid "Include this output in the conversation"
 #~ msgstr "Inclure cette sortie dans la conversation"
 
-#~ msgid "Save"
-#~ msgstr "Enregistrer"
-
 #~ msgid "Save as script file"
 #~ msgstr "Enregistrer comme fichier de script"
 
@@ -1309,18 +1568,18 @@ msgstr "Outils personnalisés"
 #~ msgstr "Activer/désactiver le mode automatique"
 
 #~ msgid ""
-#~ "Auto mode is permanently enabled via settings (both Auto-run and Auto-"
-#~ "share are on)."
+#~ "Auto mode is permanently enabled via settings (both Auto-run and Auto-share "
+#~ "are on)."
 #~ msgstr ""
-#~ "Le mode automatique est activé en permanence via les paramètres "
-#~ "(exécution auto et partage auto sont activés)."
+#~ "Le mode automatique est activé en permanence via les paramètres (exécution "
+#~ "auto et partage auto sont activés)."
 
 #~ msgid ""
 #~ "Auto mode enabled for this session. Commands will run and share output "
 #~ "automatically."
 #~ msgstr ""
-#~ "Mode automatique activé pour cette session. Les commandes s'exécuteront "
-#~ "et partageront leur sortie automatiquement."
+#~ "Mode automatique activé pour cette session. Les commandes s'exécuteront et "
+#~ "partageront leur sortie automatiquement."
 
 #~ msgid "Auto mode disabled."
 #~ msgstr "Mode automatique désactivé."
@@ -1347,14 +1606,14 @@ msgstr "Outils personnalisés"
 #~ msgstr "Activer le mode automatique (exécution auto + partage auto)"
 
 #~ msgid ""
-#~ "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the "
-#~ "toolbar button to run them. Tasks with auto mode will temporarily enable "
-#~ "auto-run and auto-share."
+#~ "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar"
+#~ " button to run them. Tasks with auto mode will temporarily enable auto-run "
+#~ "and auto-share."
 #~ msgstr ""
-#~ "Les tâches sont des raccourcis d'invite réutilisables. Utilisez /task "
-#~ "<nom> dans le clavardage ou le bouton de la barre d'outils pour les "
-#~ "exécuter. Les tâches en mode automatique activeront temporairement "
-#~ "l'exécution et le partage automatiques."
+#~ "Les tâches sont des raccourcis d'invite réutilisables. Utilisez /task <nom> "
+#~ "dans le clavardage ou le bouton de la barre d'outils pour les exécuter. Les "
+#~ "tâches en mode automatique activeront temporairement l'exécution et le "
+#~ "partage automatiques."
 
 #~ msgid "Saves to ~/PlasmaLLM/chats/"
 #~ msgstr "Enregistre dans ~/PlasmaLLM/chats/"
@@ -1369,18 +1628,18 @@ msgstr "Outils personnalisés"
 #~ "Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
 #~ "share."
 #~ msgstr ""
-#~ "Autoriser le LLM à exécuter des commandes shell. Dangereux si combiné "
-#~ "avec le partage automatique."
+#~ "Autoriser le LLM à exécuter des commandes shell. Dangereux si combiné avec "
+#~ "le partage automatique."
 
 #~ msgid "Run as tool"
 #~ msgstr "Exécuter comme outil"
 
 #~ msgid ""
-#~ "Use the run_command tool for command execution. If disabled, falls back "
-#~ "to parsing code blocks."
+#~ "Use the run_command tool for command execution. If disabled, falls back to "
+#~ "parsing code blocks."
 #~ msgstr ""
-#~ "Utiliser l'outil run_command pour l'exécution des commandes. Si "
-#~ "désactivé, revient à l'analyse des blocs de code."
+#~ "Utiliser l'outil run_command pour l'exécution des commandes. Si désactivé, "
+#~ "revient à l'analyse des blocs de code."
 
 #~ msgid "Auto-share command output with LLM"
 #~ msgstr "Partager automatiquement la sortie des commandes avec le LLM"
@@ -1391,12 +1650,11 @@ msgstr "Outils personnalisés"
 
 #~ msgid ""
 #~ "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
-#~ "their output, enabling an agentic workflow. Only use with trustworthy "
-#~ "LLMs."
+#~ "their output, enabling an agentic workflow. Only use with trustworthy LLMs."
 #~ msgstr ""
-#~ "⚠️ DANGER : Les deux options sont activées — le LLM peut maintenant "
-#~ "exécuter des commandes et voir leur sortie, activant un flux de travail "
-#~ "agentique. À utiliser seulement avec des LLM de confiance."
+#~ "⚠️ DANGER : Les deux options sont activées — le LLM peut maintenant exécuter"
+#~ " des commandes et voir leur sortie, activant un flux de travail agentique. À"
+#~ " utiliser seulement avec des LLM de confiance."
 
 #~ msgid "Backend:"
 #~ msgstr "Dorsal :"
@@ -1433,8 +1691,8 @@ msgstr "Outils personnalisés"
 
 #~ msgid "Allows the LLM to perform web searches using Ollama's search API."
 #~ msgstr ""
-#~ "Permet au LLM d'effectuer des recherches Web à l'aide de l'API de "
-#~ "recherche d'Ollama."
+#~ "Permet au LLM d'effectuer des recherches Web à l'aide de l'API de recherche "
+#~ "d'Ollama."
 
 #~ msgid "Commands:"
 #~ msgstr "Commandes :"
@@ -1443,8 +1701,8 @@ msgstr "Outils personnalisés"
 #~ msgstr "Envoyer automatiquement les résultats des commandes au LLM"
 
 #~ msgid ""
-#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only "
-#~ "use with very trustworthy LLMs."
+#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only use "
+#~ "with very trustworthy LLMs."
 #~ msgstr ""
 #~ "AVERTISSEMENT : Combiné avec le partage automatique, active un flux de "
 #~ "travail agentique. À utiliser seulement avec des LLM de confiance."
@@ -1456,9 +1714,9 @@ msgstr "Outils personnalisés"
 #~ "Use the run_command tool for command execution. Disable for models that "
 #~ "don't support tool calling (falls back to code block parsing)."
 #~ msgstr ""
-#~ "Utiliser l'outil run_command pour l'exécution des commandes. Désactiver "
-#~ "pour les modèles qui ne prennent pas en charge l'appel d'outils (revient "
-#~ "à l'analyse des blocs de code)."
+#~ "Utiliser l'outil run_command pour l'exécution des commandes. Désactiver pour"
+#~ " les modèles qui ne prennent pas en charge l'appel d'outils (revient à "
+#~ "l'analyse des blocs de code)."
 
 #~ msgid "Web Search:"
 #~ msgstr "Recherche Web :"
