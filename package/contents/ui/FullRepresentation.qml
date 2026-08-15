@@ -567,6 +567,74 @@ PlasmaExtras.Representation {
             }
 
             QQC2.Popup {
+                id: retryConfirmDialog
+                parent: QQC2.Overlay.overlay
+                x: Math.round((parent.width - width) / 2)
+                y: Math.round((parent.height - height) / 2)
+                modal: true
+                focus: true
+                closePolicy: QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnPressOutside
+                padding: Kirigami.Units.largeSpacing
+
+                property int targetDisplayIndex: -1
+                property int removeCount: 0
+
+                background: Rectangle {
+                    color: Kirigami.Theme.backgroundColor
+                    border.color: Kirigami.Theme.focusColor
+                    border.width: 1
+                    radius: Kirigami.Units.smallSpacing
+                }
+
+                contentItem: ColumnLayout {
+                    spacing: Kirigami.Units.largeSpacing
+
+                    PlasmaComponents.Label {
+                        text: i18n("Retry from this message?")
+                        font.bold: true
+                    }
+
+                    PlasmaComponents.Label {
+                        Layout.preferredWidth: Kirigami.Units.gridUnit * 18
+                        text: i18n("This will remove %1 message(s) after this point and generate a new response.", retryConfirmDialog.removeCount)
+                        wrapMode: Text.WordWrap
+                        opacity: 0.7
+                    }
+
+                    RowLayout {
+                        Layout.alignment: Qt.AlignRight
+                        spacing: Kirigami.Units.smallSpacing
+
+                        PlasmaComponents.Button {
+                            text: i18n("Cancel")
+                            onClicked: retryConfirmDialog.close()
+                        }
+
+                        PlasmaComponents.Button {
+                            text: i18n("Retry")
+                            icon.name: "view-refresh"
+                            onClicked: {
+                                var idx = retryConfirmDialog.targetDisplayIndex;
+                                retryConfirmDialog.close();
+                                if (idx >= 0) {
+                                    root.doRetryTruncate(idx);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            Connections {
+                target: root
+                function onConfirmRetryRequested(displayIndex, removeCount) {
+                    retryConfirmDialog.targetDisplayIndex = displayIndex;
+                    retryConfirmDialog.removeCount = removeCount;
+                    retryConfirmDialog.open();
+                }
+            }
+
+            QQC2.Popup {
                 id: imageViewerPopup
                 parent: QQC2.Overlay.overlay
                 x: Math.round((parent.width - width) / 2)
@@ -827,7 +895,9 @@ PlasmaExtras.Representation {
                         Qt.callLater(function() { messageList.programmaticScroll = false; });
                     }
                     onShareRequested: function(index) { root.shareOutput(index); }
-                    onRetryRequested: root.sendToLLM()
+                    onRetryRequested: function(msgIndex) { root.retryFromMessage(msgIndex); }
+                    onEditSaved: function(msgIndex, newContent) { root.editMessageContent(msgIndex, newContent); }
+                    onEditAndRetryRequested: function(msgIndex, newContent) { root.editAndRetryMessage(msgIndex, newContent); }
                     onTerminalRequested: function(command) { root.runInTerminal(command); }
                     onStopRequested: function(command, sourceId) { root.stopCommandByText(command, sourceId); }
                     onToolApproved: function(name, args, callId) {

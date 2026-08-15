@@ -185,8 +185,13 @@ Kirigami.AbstractCard {
 
     // latexRendererSource removed for DBus replacement
 
+    property bool isEditing: false
+    property string editDraft: ""
+
     signal shareRequested(int index)
-    signal retryRequested()
+    signal retryRequested(int messageIndex)
+    signal editSaved(int messageIndex, string newContent)
+    signal editAndRetryRequested(int messageIndex, string newContent)
     signal terminalRequested(string command)
     signal stopRequested(string command, string sourceId)
     signal toolApproved(string name, var args, string callId)
@@ -365,6 +370,13 @@ Kirigami.AbstractCard {
             border.color: isError ? Kirigami.Theme.negativeTextColor : (isUser ? "transparent" : Kirigami.Theme.alternateBackgroundColor)
             border.width: isError ? 2 : 1
 
+            property bool bubbleHovered: false
+
+            HoverHandler {
+                id: bubbleHover
+                onHoveredChanged: bubble.bubbleHovered = hovered
+            }
+
             ColumnLayout {
                 id: contentLayout
                 anchors.fill: parent
@@ -494,7 +506,7 @@ Kirigami.AbstractCard {
                 // Text Content
                 Kirigami.SelectableLabel {
                     Layout.fillWidth: true
-                    visible: strippedContent.length > 0 && !isWebSearchResults && !isWebSearchRunning
+                    visible: strippedContent.length > 0 && !isWebSearchResults && !isWebSearchRunning && !messageItem.isEditing
                     text: displayContent
                     wrapMode: Text.Wrap
                     font.family: useConsoleStyle ? root.codeFontFamily : root.uiFontFamily
@@ -510,6 +522,92 @@ Kirigami.AbstractCard {
                             messageItem.imageViewRequested(link);
                         } else {
                             Qt.openUrlExternally(link);
+                        }
+                    }
+                }
+
+                // Inline Editor (shown when editing)
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    visible: messageItem.isEditing
+                    spacing: Kirigami.Units.smallSpacing
+
+                    QQC2.ScrollView {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: Math.min(editTextArea.contentHeight + Kirigami.Units.smallSpacing * 4, Kirigami.Units.gridUnit * 12)
+                        Layout.minimumHeight: Kirigami.Units.gridUnit * 4
+
+                        QQC2.TextArea {
+                            id: editTextArea
+                            text: messageItem.editDraft
+                            onTextChanged: messageItem.editDraft = text
+                            wrapMode: Text.Wrap
+                            font.family: root ? root.uiFontFamily : Kirigami.Theme.defaultFont.family
+                            font.pointSize: root ? root.uiFontPointSize : Kirigami.Theme.defaultFont.pointSize
+                            focus: messageItem.isEditing
+                            color: messageItem.bubbleTextColor
+                            background: Rectangle {
+                                color: Kirigami.Theme.alternateBackgroundColor
+                                border.color: Kirigami.Theme.focusColor
+                                border.width: 1
+                                radius: 4
+                            }
+
+                            Keys.onEscapePressed: function(event) {
+                                event.accepted = true;
+                                messageItem.isEditing = false;
+                                messageItem.editDraft = "";
+                            }
+
+                            Keys.onReturnPressed: function(event) {
+                                if (event.modifiers & Qt.ControlModifier) {
+                                    event.accepted = true;
+                                    if (messageItem.isUser) {
+                                        messageItem.editAndRetryRequested(messageItem.messageIndex, messageItem.editDraft);
+                                    } else {
+                                        messageItem.editSaved(messageItem.messageIndex, messageItem.editDraft);
+                                    }
+                                    messageItem.isEditing = false;
+                                    messageItem.editDraft = "";
+                                } else {
+                                    event.accepted = false; // allow multiline newline
+                                }
+                            }
+                        }
+                    }
+
+                    RowLayout {
+                        Layout.alignment: Qt.AlignRight
+                        spacing: Kirigami.Units.smallSpacing
+
+                        PlasmaComponents.Button {
+                            text: i18n("Cancel")
+                            icon.name: "dialog-cancel"
+                            onClicked: {
+                                messageItem.isEditing = false;
+                                messageItem.editDraft = "";
+                            }
+                        }
+
+                        PlasmaComponents.Button {
+                            text: i18n("Save")
+                            icon.name: "document-save"
+                            onClicked: {
+                                messageItem.editSaved(messageItem.messageIndex, messageItem.editDraft);
+                                messageItem.isEditing = false;
+                                messageItem.editDraft = "";
+                            }
+                        }
+
+                        PlasmaComponents.Button {
+                            text: i18n("Save & Retry")
+                            icon.name: "edit-redo"
+                            visible: messageItem.isUser
+                            onClicked: {
+                                messageItem.editAndRetryRequested(messageItem.messageIndex, messageItem.editDraft);
+                                messageItem.isEditing = false;
+                                messageItem.editDraft = "";
+                            }
                         }
                     }
                 }
@@ -534,35 +632,73 @@ Kirigami.AbstractCard {
                 }
             }
 
-            // Action Buttons for Bubble
-            RowLayout {
+            // Action Buttons Toolbar for Bubble (shown on hover only with opaque background)
+            Rectangle {
+                id: hoverToolbar
                 anchors.bottom: parent.bottom
                 anchors.right: parent.right
                 anchors.margins: Kirigami.Units.smallSpacing
-                spacing: Kirigami.Units.smallSpacing
-                visible: isAssistant && strippedContent.length > 0
+                implicitWidth: actionRow.implicitWidth + (Kirigami.Units.smallSpacing * 2)
+                implicitHeight: actionRow.implicitHeight + (Kirigami.Units.smallSpacing * 2)
+                radius: Math.max(4, messageItem.bubblePadding / 3)
+                color: Kirigami.Theme.backgroundColor
+                border.color: Kirigami.Theme.alternateBackgroundColor
+                border.width: 1
+                visible: bubble.bubbleHovered && !messageItem.isEditing
+                         && !messageItem.isAwaitingResponse
+                         && !(root && root.isLoading)
+                         && (messageItem.isUser || (messageItem.isAssistant && messageItem.strippedContent.length > 0))
+                z: 10
 
-                PlasmaComponents.ToolButton {
-                    icon.name: "edit-copy"
-                    PlasmaComponents.ToolTip.text: i18n("Copy to clipboard")
-                    PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                    PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
-                    onClicked: {
-                        var temp = Qt.createQmlObject('import QtQuick 2.0; TextEdit { visible: false }', messageItem);
-                        temp.text = strippedContent;
-                        temp.selectAll();
-                        temp.copy();
-                        temp.destroy();
+                RowLayout {
+                    id: actionRow
+                    anchors.centerIn: parent
+                    spacing: 2
+
+                    PlasmaComponents.ToolButton {
+                        icon.name: "edit-copy"
+                        display: PlasmaComponents.ToolButton.IconOnly
+                        PlasmaComponents.ToolTip.text: i18n("Copy to clipboard")
+                        PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                        PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+                        onClicked: {
+                            var temp = Qt.createQmlObject('import QtQuick 2.0; TextEdit { visible: false }', messageItem);
+                            temp.text = messageItem.strippedContent;
+                            temp.selectAll();
+                            temp.copy();
+                            temp.destroy();
+                        }
                     }
-                }
 
-                PlasmaComponents.ToolButton {
-                    icon.name: "share"
-                    visible: isCommandOutput && !shared
-                    PlasmaComponents.ToolTip.text: i18n("Share output with assistant")
-                    PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                    PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
-                    onClicked: messageItem.shareRequested(messageItem.messageIndex)
+                    PlasmaComponents.ToolButton {
+                        icon.name: "document-edit"
+                        display: PlasmaComponents.ToolButton.IconOnly
+                        PlasmaComponents.ToolTip.text: messageItem.isUser ? i18n("Edit message") : i18n("Edit response")
+                        PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                        PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+                        onClicked: {
+                            messageItem.editDraft = messageItem.content;
+                            messageItem.isEditing = true;
+                        }
+                    }
+
+                    PlasmaComponents.ToolButton {
+                        icon.name: "view-refresh"
+                        display: PlasmaComponents.ToolButton.IconOnly
+                        PlasmaComponents.ToolTip.text: messageItem.isUser ? i18n("Retry from here") : i18n("Regenerate response")
+                        PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                        PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+                        onClicked: messageItem.retryRequested(messageItem.messageIndex)
+                    }
+
+                    PlasmaComponents.ToolButton {
+                        icon.name: "share"
+                        visible: messageItem.isCommandOutput && !messageItem.shared
+                        PlasmaComponents.ToolTip.text: i18n("Share output with assistant")
+                        PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                        PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+                        onClicked: messageItem.shareRequested(messageItem.messageIndex)
+                    }
                 }
             }
         }
