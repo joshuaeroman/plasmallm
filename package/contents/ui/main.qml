@@ -2528,6 +2528,7 @@ lines.push(JSON.stringify({
                 usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
                 geminiApiVariant: Plasmoid.configuration.geminiApiVariant,
                 geminiAuthMethod: Plasmoid.configuration.geminiAuthMethod,
+                geminiVertexAuthType: Plasmoid.configuration.geminiVertexAuthType,
                 geminiProjectId: Plasmoid.configuration.geminiProjectId,
                 geminiLocation: Plasmoid.configuration.geminiLocation,
                 tools: tools,

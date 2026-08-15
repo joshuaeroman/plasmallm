@@ -17,6 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "Color button"
+msgstr ""
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr ""
+
+msgid "Current color is %1."
+msgstr ""
+
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
 "budget below. Temperature is forced to max while thinking."
@@ -233,9 +242,6 @@ msgstr ""
 msgid "Error: URL must start with http:// or https://"
 msgstr ""
 
-msgid "Error: content exceeds max write size (%1 bytes)"
-msgstr ""
-
 msgid "No command provided."
 msgstr ""
 
@@ -273,6 +279,9 @@ msgstr ""
 msgid ""
 "Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
 "is unavailable."
+msgstr ""
+
+msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr ""
 
 msgid ""
@@ -355,56 +364,6 @@ msgstr ""
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr ""
 
-msgid "Color button"
-msgstr ""
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr ""
-
-msgid "Current color is %1."
-msgstr ""
-
-msgid "Stop command"
-msgstr ""
-
-msgid "Open terminal attached to this session"
-msgstr ""
-
-msgid "Copy output"
-msgstr ""
-
-msgid "You"
-msgstr ""
-
-msgid "Error"
-msgstr ""
-
-msgid "Web Search"
-msgstr ""
-
-msgid "Assistant"
-msgstr ""
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-
-msgid "Thinking"
-msgstr ""
-
-msgid "Searched for: %1"
-msgstr ""
-
-msgid "Show %1 results"
-msgstr ""
-
-msgid "Copy to clipboard"
-msgstr ""
-
-msgid "Share output with assistant"
-msgstr ""
-
 msgid "Profile Header:"
 msgstr ""
 
@@ -426,7 +385,13 @@ msgstr ""
 msgid "User label:"
 msgstr ""
 
+msgid "You"
+msgstr ""
+
 msgid "Assistant label:"
+msgstr ""
+
+msgid "Assistant"
 msgstr ""
 
 msgid "Use model name as assistant label"
@@ -513,280 +478,6 @@ msgstr ""
 msgid "Approve"
 msgstr ""
 
-msgid "General Tool Settings"
-msgstr ""
-
-msgid "System state:"
-msgstr ""
-
-msgid "Enable Tools"
-msgstr ""
-
-msgid "Master switch for all tool-calling functionality."
-msgstr ""
-
-msgid "Exa does not support tool use"
-msgstr ""
-
-msgid "Desktop Automation:"
-msgstr ""
-
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr ""
-
-msgid "Enable Desktop Automation"
-msgstr ""
-
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr ""
-
-msgid "Path whitelist:"
-msgstr ""
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr ""
-
-msgid "Add"
-msgstr ""
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-
-msgid "Max read size:"
-msgstr ""
-
-msgid "Max write size:"
-msgstr ""
-
-msgid "Max HTTP response:"
-msgstr ""
-
-msgid "Max tool loop depth:"
-msgstr ""
-
-msgid "steps"
-msgstr ""
-
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr ""
-
-msgid "Native Adapter Features"
-msgstr ""
-
-msgid "Google Search:"
-msgstr ""
-
-msgid "Enable Native Google Search Grounding"
-msgstr ""
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-
-msgid "Code Execution:"
-msgstr ""
-
-msgid "Enable Native Python Code Execution"
-msgstr ""
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-
-msgid "Individual Tools"
-msgstr ""
-
-msgid "Approve the pending tool request"
-msgstr ""
-
-msgid "Toggle skip approvals for this session"
-msgstr ""
-
-msgid "Clear the chat"
-msgstr ""
-
-msgid "Close the panel"
-msgstr ""
-
-msgid "Copy conversation to clipboard"
-msgstr ""
-
-msgid "Deny the pending tool request"
-msgstr ""
-
-msgid "Open chat history folder"
-msgstr ""
-
-msgid "Show or switch model (/model <name>)"
-msgstr ""
-
-msgid "Switch profile (/profile <name>)"
-msgstr ""
-
-msgid "Save chat to file"
-msgstr ""
-
-msgid "Open settings"
-msgstr ""
-
-msgid "Run a saved task (/task <name>)"
-msgstr ""
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr ""
-
-msgid "Toggle Full Auto Mode"
-msgstr ""
-
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-
-msgid "Drive Desktop"
-msgstr ""
-
-msgid "Stop Driving Desktop (disconnect)"
-msgstr ""
-
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr ""
-
-msgid "Run a task"
-msgstr ""
-
-msgid "Chat History"
-msgstr ""
-
-msgid "Loading..."
-msgstr ""
-
-msgid "No recent chats"
-msgstr ""
-
-msgid "Open history folder..."
-msgstr ""
-
-msgid "Clear all history..."
-msgstr ""
-
-msgid "Clear All History"
-msgstr ""
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-
-msgid "Clear All"
-msgstr ""
-
-msgid "Copy conversation"
-msgstr ""
-
-msgid "Command"
-msgstr ""
-
-msgid "Clear chat"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Don't keep open"
-msgstr ""
-
-msgid "Keep open"
-msgstr ""
-
-msgid "Dismiss"
-msgstr ""
-
-msgid "The user denied this tool call."
-msgstr ""
-
-msgid "Send a message to start chatting"
-msgstr ""
-
-msgid "Attach File"
-msgstr ""
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr ""
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-
-msgid "All files (*)"
-msgstr ""
-
-msgid "Message input"
-msgstr ""
-
-msgid "Type a message…"
-msgstr ""
-
-msgid "Initializing…"
-msgstr ""
-
-msgid "Attach file or image"
-msgstr ""
-
-msgid "Transcribing…"
-msgstr ""
-
-msgid "Preparing…"
-msgstr ""
-
-msgid "Wait for the current reply"
-msgstr ""
-
-msgid "Click to stop and send"
-msgstr ""
-
-msgid "Release to send"
-msgstr ""
-
-msgid "Click to start"
-msgstr ""
-
-msgid "Hold to talk"
-msgstr ""
-
-msgid "Click to toggle, hold to talk"
-msgstr ""
-
-msgid "Kill"
-msgstr ""
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-
-msgid "Send"
-msgstr ""
-
-msgid "Stop"
-msgstr ""
-
-msgid "Cancel LLM request"
-msgstr ""
-
-msgid "Drop files here to attach"
-msgstr ""
-
 msgid "OpenAI-compatible"
 msgstr ""
 
@@ -829,6 +520,18 @@ msgstr ""
 msgid "Adapter:"
 msgstr ""
 
+msgid "Exa does not support tool use"
+msgstr ""
+
+msgid "Platform:"
+msgstr ""
+
+msgid "Google AI Studio"
+msgstr ""
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr ""
+
 msgid "Authentication:"
 msgstr ""
 
@@ -849,15 +552,6 @@ msgid "Legacy (generateContent)"
 msgstr ""
 
 msgid "Interactions API (Stateful)"
-msgstr ""
-
-msgid "Platform:"
-msgstr ""
-
-msgid "Google AI Studio"
-msgstr ""
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
 msgstr ""
 
 msgid "Project ID:"
@@ -1007,6 +701,315 @@ msgid "seconds"
 msgstr ""
 
 msgid "minutes"
+msgstr ""
+
+msgid "General Tool Settings"
+msgstr ""
+
+msgid "System state:"
+msgstr ""
+
+msgid "Enable Tools"
+msgstr ""
+
+msgid "Master switch for all tool-calling functionality."
+msgstr ""
+
+msgid "Desktop Automation:"
+msgstr ""
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+
+msgid "Enable Desktop Automation"
+msgstr ""
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+
+msgid "Transcribing…"
+msgstr ""
+
+msgid "Preparing…"
+msgstr ""
+
+msgid "Wait for the current reply"
+msgstr ""
+
+msgid "Click to stop and send"
+msgstr ""
+
+msgid "Release to send"
+msgstr ""
+
+msgid "Click to start"
+msgstr ""
+
+msgid "Hold to talk"
+msgstr ""
+
+msgid "Click to toggle, hold to talk"
+msgstr ""
+
+msgid "Kill"
+msgstr ""
+
+msgid "Path whitelist:"
+msgstr ""
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+
+msgid "Max read size:"
+msgstr ""
+
+msgid "Max write size:"
+msgstr ""
+
+msgid "Max HTTP response:"
+msgstr ""
+
+msgid "Max tool loop depth:"
+msgstr ""
+
+msgid "steps"
+msgstr ""
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr ""
+
+msgid "Native Adapter Features"
+msgstr ""
+
+msgid "Google Search:"
+msgstr ""
+
+msgid "Enable Native Google Search Grounding"
+msgstr ""
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+
+msgid "Code Execution:"
+msgstr ""
+
+msgid "Enable Native Python Code Execution"
+msgstr ""
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+
+msgid "Individual Tools"
+msgstr ""
+
+msgid "Stop command"
+msgstr ""
+
+msgid "Open terminal attached to this session"
+msgstr ""
+
+msgid "Copy output"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Web Search"
+msgstr ""
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+
+msgid "Thinking"
+msgstr ""
+
+msgid "Searched for: %1"
+msgstr ""
+
+msgid "Show %1 results"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Share output with assistant"
+msgstr ""
+
+msgid "Approve the pending tool request"
+msgstr ""
+
+msgid "Toggle skip approvals for this session"
+msgstr ""
+
+msgid "Clear the chat"
+msgstr ""
+
+msgid "Close the panel"
+msgstr ""
+
+msgid "Copy conversation to clipboard"
+msgstr ""
+
+msgid "Deny the pending tool request"
+msgstr ""
+
+msgid "Open chat history folder"
+msgstr ""
+
+msgid "Show or switch model (/model <name>)"
+msgstr ""
+
+msgid "Switch profile (/profile <name>)"
+msgstr ""
+
+msgid "Save chat to file"
+msgstr ""
+
+msgid "Open settings"
+msgstr ""
+
+msgid "Run a saved task (/task <name>)"
+msgstr ""
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr ""
+
+msgid "Toggle Full Auto Mode"
+msgstr ""
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+
+msgid "Drive Desktop"
+msgstr ""
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr ""
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr ""
+
+msgid "Run a task"
+msgstr ""
+
+msgid "Chat History"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "No recent chats"
+msgstr ""
+
+msgid "Open history folder..."
+msgstr ""
+
+msgid "Clear all history..."
+msgstr ""
+
+msgid "Clear All History"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+
+msgid "Clear All"
+msgstr ""
+
+msgid "Copy conversation"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "Clear chat"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Don't keep open"
+msgstr ""
+
+msgid "Keep open"
+msgstr ""
+
+msgid "Dismiss"
+msgstr ""
+
+msgid "The user denied this tool call."
+msgstr ""
+
+msgid "Send a message to start chatting"
+msgstr ""
+
+msgid "Attach File"
+msgstr ""
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr ""
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+
+msgid "All files (*)"
+msgstr ""
+
+msgid "Message input"
+msgstr ""
+
+msgid "Type a message…"
+msgstr ""
+
+msgid "Initializing…"
+msgstr ""
+
+msgid "Attach file or image"
+msgstr ""
+
+msgid "Kill"
+msgstr ""
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Cancel LLM request"
+msgstr ""
+
+msgid "Drop files here to attach"
 msgstr ""
 
 msgid ""
