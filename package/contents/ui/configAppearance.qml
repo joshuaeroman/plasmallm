@@ -15,22 +15,22 @@ BaseConfigPage {
 
     property var availableFonts: Qt.fontFamilies()
 
-    property bool hasMatplotlib: true
+    property bool hasLatexDependencies: true
 
-    onHasMatplotlibChanged: {
-        if (!hasMatplotlib && cfg_latexRenderMode === 2) {
+    onHasLatexDependenciesChanged: {
+        if (!hasLatexDependencies && cfg_latexRenderMode === 2) {
             cfg_latexRenderMode = 1;
             rootItem.triggerCapture();
         }
     }
 
     P5Support.DataSource {
-        id: matplotlibChecker
+        id: latexDependenciesChecker
         engine: "executable"
-        connectedSources: ["python3 -c 'import matplotlib'"]
+        connectedSources: ["python3 -c 'import matplotlib, dbus, dbus.service, dbus.mainloop.glib, gi.repository.GLib'"]
         onNewData: function(source, data) {
             if (data["exit code"] !== undefined) {
-                hasMatplotlib = (data["exit code"] === 0);
+                hasLatexDependencies = (data["exit code"] === 0);
                 disconnectSource(source);
             }
         }
@@ -361,9 +361,9 @@ BaseConfigPage {
             model: [
                 i18n("Leave as TeX"),
                 i18n("Replace with Unicode (Default)"),
-                configPage.hasMatplotlib ? i18n("Mathtext") : i18n("Mathtext (python3-matplotlib missing)")
+                configPage.hasLatexDependencies ? i18n("Mathtext") : i18n("Mathtext (python3-matplotlib missing)")
             ]
-            currentIndex: cfg_latexRenderMode === -1 ? (configPage.hasMatplotlib ? 2 : 1) : cfg_latexRenderMode
+            currentIndex: cfg_latexRenderMode === -1 ? (configPage.hasLatexDependencies ? 2 : 1) : cfg_latexRenderMode
             onActivated: function(index) {
                 if (_initialized) {
                     cfg_latexRenderMode = index;
@@ -373,7 +373,7 @@ BaseConfigPage {
             delegate: QQC2.ItemDelegate {
                 width: latexRenderModeCombo.width
                 text: modelData
-                enabled: index !== 2 || configPage.hasMatplotlib
+                enabled: index !== 2 || configPage.hasLatexDependencies
                 highlighted: latexRenderModeCombo.highlightedIndex === index
             }
         }

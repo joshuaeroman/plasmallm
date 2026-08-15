@@ -243,38 +243,11 @@ def render_formula(formula, color_hex, cache_dir, is_block, font_size):
         sys.stderr.write(f"Error rendering formula '{latex_str}': {e}\n")
         return fallback_replace_formula(math_content), None, None
 
-def main():
-    # Parse arguments
-    color_hex = ""
-    cache_dir = os.path.expanduser("~/.cache/plasmallm/latex")
-    font_size = 11  # Default fallback font size
-    
-    args = sys.argv[1:]
-    for i in range(len(args)):
-        if args[i] == "--color" and i + 1 < len(args):
-            color_hex = args[i+1]
-        elif args[i] == "--cache-dir" and i + 1 < len(args):
-            cache_dir = args[i+1]
-        elif args[i] == "--font-size" and i + 1 < len(args):
-            try:
-                font_size = int(args[i+1])
-            except ValueError:
-                pass
-            
-    # Ensure cache directory exists
-    os.makedirs(cache_dir, exist_ok=True)
-    
-    # Read text from stdin
-    text = sys.stdin.read()
-    
-    # Temporarily hide escaped dollars
+import base64
+
+def process_text(text, color_hex, cache_dir, font_size):
     text = text.replace(r'\$', '__ESCAPED_DOLLAR__')
     
-    # Regex to match LaTeX math delimiters:
-    # 1. $$ ... $$
-    # 2. \[ ... \]
-    # 3. \( ... \)
-    # 4. $ ... $
     math_pattern = re.compile(
         r'(\$\$(.*?)\$\$)|'
         r'(\\\[(.*?)\\\])|'
@@ -287,7 +260,6 @@ def main():
     result = []
     
     for match in math_pattern.finditer(text):
-        # Add preceding plaintext segment
         result.append(text[pos:match.start()])
         
         formula = match.group(0)
@@ -297,7 +269,6 @@ def main():
         
         if res.startswith("file://"):
             if w_px and h_px:
-                # Use HTML img tag with alignment and width/height attributes for high-DPI scaling and vertical alignment
                 if is_block:
                     replacement = f'<br /><div align="center" style="margin-top: 10px; margin-bottom: 10px;"><a href="{res}"><img src="{res}" width="{w_px}" height="{h_px}" /></a></div><br />'
                 else:
@@ -315,9 +286,75 @@ def main():
         pos = match.end()
         
     result.append(text[pos:])
+    return "".join(result).replace('__ESCAPED_DOLLAR__', '$')
+
+def main():
+    cache_dir = os.path.expanduser("~/.cache/plasmallm/latex")
+    os.makedirs(cache_dir, exist_ok=True)
     
-    # Reassemble and restore escaped dollars
-    final_text = "".join(result).replace('__ESCAPED_DOLLAR__', '$')
+    args = sys.argv[1:]
+    
+    if "--dbus" in args:
+        try:
+            import dbus
+            import dbus.service
+            from dbus.mainloop.glib import DBusGMainLoop
+            from gi.repository import GLib
+            
+            class LatexRendererService(dbus.service.Object):
+                def __init__(self, bus_name):
+                    super().__init__(bus_name, '/Renderer')
+
+                @dbus.service.method('com.joshuaroman.plasmallm.latex', in_signature='ssi', out_signature='s')
+                def Render(self, text, color_hex, font_size):
+                    try:
+                        return process_text(str(text), str(color_hex), cache_dir, int(font_size))
+                    except Exception as e:
+                        sys.stderr.write(f"DBus Render Error: {e}\n")
+                        return text
+
+                @dbus.service.method('com.joshuaroman.plasmallm.latex', in_signature='ssi', out_signature='s')
+                def RenderBase64(self, b64_text, color_hex, font_size):
+                    try:
+                        text = base64.b64decode(b64_text).decode('utf-8')
+                        result = process_text(text, str(color_hex), cache_dir, int(font_size))
+                        return base64.b64encode(result.encode('utf-8')).decode('utf-8')
+                    except Exception as e:
+                        sys.stderr.write(f"DBus RenderBase64 Error: {e}\n")
+                        return b64_text
+
+            DBusGMainLoop(set_as_default=True)
+            try:
+                bus_name = dbus.service.BusName('com.joshuaroman.plasmallm.latex', bus=dbus.SessionBus(), do_not_queue=True)
+            except dbus.exceptions.NameExistsException:
+                sys.exit(0)
+            service = LatexRendererService(bus_name)
+            loop = GLib.MainLoop()
+            sys.stdout.write("DBus service started\n")
+            sys.stdout.flush()
+            loop.run()
+        except ImportError as e:
+            sys.stderr.write(f"Error starting DBus service: {e}\n")
+            sys.exit(1)
+        return
+
+    # Standard CLI mode
+    color_hex = ""
+    font_size = 11
+    
+    for i in range(len(args)):
+        if args[i] == "--color" and i + 1 < len(args):
+            color_hex = args[i+1]
+        elif args[i] == "--cache-dir" and i + 1 < len(args):
+            cache_dir = args[i+1]
+        elif args[i] == "--font-size" and i + 1 < len(args):
+            try:
+                font_size = int(args[i+1])
+            except ValueError:
+                pass
+                
+    text = sys.stdin.read()
+    final_text = process_text(text, color_hex, cache_dir, font_size)
     sys.stdout.write(final_text)
 
 if __name__ == '__main__':

@@ -96,13 +96,39 @@ PlasmoidItem {
     }
 
     P5Support.DataSource {
-        id: latexMatplotlibDetector
+        id: latexDependenciesDetector
+        engine: "executable"
+        connectedSources: ["python3 -c 'import matplotlib, dbus, dbus.service, dbus.mainloop.glib, gi.repository.GLib'"]
+        onNewData: function(source, data) {
+            if (data["exit code"] !== undefined) {
+                var hasLatexDependencies = (data["exit code"] === 0);
+                if (Plasmoid.configuration.latexRenderMode === -1) {
+                    Plasmoid.configuration.latexRenderMode = hasLatexDependencies ? 2 : 1;
+                } else if (!hasLatexDependencies && Plasmoid.configuration.latexRenderMode === 2) {
+                    Plasmoid.configuration.latexRenderMode = 1;
+                }
+                disconnectSource(source);
+                
+                if (hasLatexDependencies) {
+                    var scriptPath = Qt.resolvedUrl("latex_renderer.py").toString();
+                    if (scriptPath.indexOf("file://") === 0) {
+                        scriptPath = scriptPath.substring(7);
+                    }
+                    var safeScriptPath = scriptPath.replace(/'/g, "'\\''");
+                    latexRendererDbusService.connectSource("python3 '" + safeScriptPath + "' --dbus");
+                }
+            }
+        }
+    }
+    
+    P5Support.DataSource {
+        id: latexRendererDbusService
         engine: "executable"
         connectedSources: []
         onNewData: function(source, data) {
+            // Persistent background service; no need to do anything with the output unless it crashes
             if (data["exit code"] !== undefined) {
-                var hasMatplotlib = (data["exit code"] === 0);
-                Plasmoid.configuration.latexRenderMode = hasMatplotlib ? 2 : 1;
+                console.log("PlasmaLLM LaTeX DBus service exited with code", data["exit code"]);
                 disconnectSource(source);
             }
         }

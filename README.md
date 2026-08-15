@@ -24,8 +24,9 @@ PlasmaLLM is designed for quick tasks and system-integrated workflows—not as a
 
 - KDE Plasma 6.0+
 - Qt 6
-- Optional: `qt6-qtmultimedia` (or distro equivalent) for microphone capture via Qt Multimedia
-- Optional: `pw-record`, `ffmpeg`, or `arecord` as a shell fallback if Qt capture is unavailable
+- Optional: `python3-matplotlib`, `python3-dbus`, and `python3-gobject` (or distro equivalents) for Mathtext LaTeX rendering
+- Optional: `qt6-qtmultimedia` (or distro equivalent) for microphone capture via Qt Multimedia (Voice Input)
+- Optional: `pw-record`, `ffmpeg`, or `arecord` as a shell fallback if Qt capture is unavailable (Voice Input)
 - Optional: `tmux` or `screen` for session multiplexing.
 
 ### Voice input setup
