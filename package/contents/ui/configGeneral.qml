@@ -472,7 +472,6 @@ BaseConfigPage {
 
     function ensureModelsLoaded(force, gen) {
         var myGen = (gen !== undefined && gen !== null) ? gen : _configGen;
-        if (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform") return;
         var slot = currentModelCacheSlot();
         var have = Array.isArray(modelCache[slot]) && modelCache[slot].length > 0;
         // Legacy cache keys still count as a hit after promotion.
@@ -520,6 +519,7 @@ BaseConfigPage {
         var opts = {
             geminiApiVariant: cfg_geminiApiVariant,
             geminiAuthMethod: cfg_geminiAuthMethod,
+            geminiVertexAuthType: cfg_geminiVertexAuthType,
             geminiProjectId: cfg_geminiProjectId,
             geminiLocation: cfg_geminiLocation
         };
@@ -690,7 +690,6 @@ BaseConfigPage {
         }
         if (usesResponsesAPICheckBox) usesResponsesAPICheckBox.checked = cfg_usesResponsesAPI;
         if (showThoughtsCheckBox) showThoughtsCheckBox.checked = cfg_showThoughts;
-        if (modelEntryField) modelEntryField.text = cfg_modelName;
         if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
         syncEndpointPresetIndex();
         syncModelComboIndex();
@@ -852,6 +851,7 @@ BaseConfigPage {
 
     function applyGeminiOptions(changes) {
         var prevSlot = currentSlot();
+        if (fetchStatusLabel) fetchStatusLabel.visible = false;
         beginConfigTxn();
         if (changes.authMethod !== undefined) {
             cfg_geminiAuthMethod = changes.authMethod;
@@ -1079,6 +1079,19 @@ BaseConfigPage {
 
         // --- Gemini Specific Settings ---
         QQC2.ComboBox {
+            id: geminiAuthCombo
+            Kirigami.FormData.label: i18n("Platform:")
+            Layout.fillWidth: true
+            visible: cfg_apiType === "gemini"
+            model: [i18n("Google AI Studio"), i18n("Google Cloud Agent Platform (Vertex AI)")]
+            currentIndex: cfg_geminiAuthMethod === "agentplatform" ? 1 : 0
+            onActivated: function(index) {
+                if (!_initialized) return;
+                applyGeminiOptions({ authMethod: (index === 1 ? "agentplatform" : "aistudio") });
+            }
+        }
+
+        QQC2.ComboBox {
             id: geminiVertexAuthCombo
             Kirigami.FormData.label: i18n("Authentication:")
             Layout.fillWidth: true
@@ -1125,24 +1138,11 @@ BaseConfigPage {
             }
         }
 
-        QQC2.ComboBox {
-            id: geminiAuthCombo
-            Kirigami.FormData.label: i18n("Platform:")
-            Layout.fillWidth: true
-            visible: cfg_apiType === "gemini"
-            model: [i18n("Google AI Studio"), i18n("Google Cloud Agent Platform (Vertex AI)")]
-            currentIndex: cfg_geminiAuthMethod === "agentplatform" ? 1 : 0
-            onActivated: function(index) {
-                if (!_initialized) return;
-                applyGeminiOptions({ authMethod: (index === 1 ? "agentplatform" : "aistudio") });
-            }
-        }
-
         QQC2.TextField {
             id: geminiProjectIdField
             Kirigami.FormData.label: i18n("Project ID:")
             Layout.fillWidth: true
-            visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
+            visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform" && cfg_geminiVertexAuthType === "gcloud"
             text: cfg_geminiProjectId
             onTextChanged: {
                 if (!_initialized || inConfigTxn) return;
@@ -1158,8 +1158,9 @@ BaseConfigPage {
         QQC2.TextField {
             id: geminiLocationField
             Kirigami.FormData.label: i18n("Location:")
+            placeholderText: "global"
             Layout.fillWidth: true
-            visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
+            visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform" && cfg_geminiVertexAuthType === "gcloud"
             text: cfg_geminiLocation
             onTextChanged: {
                 if (!_initialized || inConfigTxn) return;
@@ -1273,22 +1274,8 @@ BaseConfigPage {
             }
         }
 
-        QQC2.TextField {
-            id: modelEntryField
-            Kirigami.FormData.label: i18n("Model:")
-            Layout.fillWidth: true
-            visible: cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform"
-            text: cfg_modelName
-            onTextChanged: {
-                if (!_initialized) return;
-                cfg_modelName = text;
-                rootItem.triggerCapture();
-            }
-        }
-
         RowLayout {
             Kirigami.FormData.label: i18n("Model:")
-            visible: !modelEntryField.visible
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
 
@@ -1391,7 +1378,7 @@ BaseConfigPage {
 
             QQC2.Button {
                 icon.name: "view-refresh"
-                visible: caps.fetchModels === true && !modelEntryField.visible
+                visible: caps.fetchModels === true
                 enabled: !fetchInProgress
                 display: QQC2.AbstractButton.IconOnly
                 QQC2.ToolTip.text: fetchInProgress ? i18n("Refreshing…") : i18n("Refresh model list")

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-03 23:22-0400\n"
+"POT-Creation-Date: 2026-08-14 10:27-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "Color button"
+msgstr ""
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr ""
+
+msgid "Current color is %1."
+msgstr ""
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -233,9 +242,6 @@ msgstr ""
 msgid "Error: URL must start with http:// or https://"
 msgstr ""
 
-msgid "Error: content exceeds max write size (%1 bytes)"
-msgstr ""
-
 msgid "No command provided."
 msgstr ""
 
@@ -273,6 +279,9 @@ msgstr ""
 msgid ""
 "Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
 "is unavailable."
+msgstr ""
+
+msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr ""
 
 msgid ""
@@ -355,56 +364,6 @@ msgstr ""
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr ""
 
-msgid "Color button"
-msgstr ""
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr ""
-
-msgid "Current color is %1."
-msgstr ""
-
-msgid "Stop command"
-msgstr ""
-
-msgid "Open terminal attached to this session"
-msgstr ""
-
-msgid "Copy output"
-msgstr ""
-
-msgid "You"
-msgstr ""
-
-msgid "Error"
-msgstr ""
-
-msgid "Web Search"
-msgstr ""
-
-msgid "Assistant"
-msgstr ""
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-
-msgid "Thinking"
-msgstr ""
-
-msgid "Searched for: %1"
-msgstr ""
-
-msgid "Show %1 results"
-msgstr ""
-
-msgid "Copy to clipboard"
-msgstr ""
-
-msgid "Share output with assistant"
-msgstr ""
-
 msgid "Profile Header:"
 msgstr ""
 
@@ -426,7 +385,13 @@ msgstr ""
 msgid "User label:"
 msgstr ""
 
+msgid "You"
+msgstr ""
+
 msgid "Assistant label:"
+msgstr ""
+
+msgid "Assistant"
 msgstr ""
 
 msgid "Use model name as assistant label"
@@ -513,6 +478,231 @@ msgstr ""
 msgid "Approve"
 msgstr ""
 
+msgid "OpenAI-compatible"
+msgstr ""
+
+msgid "Anthropic"
+msgstr ""
+
+msgid "Google Gemini"
+msgstr ""
+
+msgid "Exa"
+msgstr ""
+
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr ""
+
+msgid "New Profile"
+msgstr ""
+
+msgid "%1 (Copy)"
+msgstr ""
+
+msgid "Profile:"
+msgstr ""
+
+msgid "Rename Profile"
+msgstr ""
+
+msgid "Duplicate Profile"
+msgstr ""
+
+msgid "Delete Profile"
+msgstr ""
+
+msgid "Profile Name"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Adapter:"
+msgstr ""
+
+msgid "Exa does not support tool use"
+msgstr ""
+
+msgid "Platform:"
+msgstr ""
+
+msgid "Google AI Studio"
+msgstr ""
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr ""
+
+msgid "Authentication:"
+msgstr ""
+
+msgid "API Key (Express Mode)"
+msgstr ""
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr ""
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+
+msgid "API Variant:"
+msgstr ""
+
+msgid "Legacy (generateContent)"
+msgstr ""
+
+msgid "Interactions API (Stateful)"
+msgstr ""
+
+msgid "Project ID:"
+msgstr ""
+
+msgid "Location:"
+msgstr ""
+
+msgid "Provider:"
+msgstr ""
+
+msgid "API Endpoint:"
+msgstr ""
+
+msgid "Model:"
+msgstr ""
+
+msgid "Refreshing…"
+msgstr ""
+
+msgid "Refresh model list"
+msgstr ""
+
+msgid "API Key:"
+msgstr ""
+
+msgid "Paste short-lived access token"
+msgstr ""
+
+msgid "Optional - for OpenAI, etc."
+msgstr ""
+
+msgid "Stored in KDE Wallet"
+msgstr ""
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr ""
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr ""
+
+msgid "Precise"
+msgstr ""
+
+msgid "Creative"
+msgstr ""
+
+msgid "Max Tokens:"
+msgstr ""
+
+msgid "Thinking:"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "Low"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "High"
+msgstr ""
+
+msgid "Thinking budget:"
+msgstr ""
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr ""
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+
+msgid "Use Responses API"
+msgstr ""
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+
+msgid "Attachments:"
+msgstr ""
+
+msgid "Resize image attachments"
+msgstr ""
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+
+msgid "Chat History:"
+msgstr ""
+
+msgid "Auto-save chat history"
+msgstr ""
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr ""
+
+msgid "Notifications:"
+msgstr ""
+
+msgid "Show notifications when minimized"
+msgstr ""
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+
+msgid "Save format:"
+msgstr ""
+
+msgid "Plain text (.txt)"
+msgstr ""
+
+msgid "Structured (.jsonl)"
+msgstr ""
+
+msgid "Open Folder"
+msgstr ""
+
+msgid "Open the folder where chat histories are saved"
+msgstr ""
+
+msgid "Auto-clear:"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Instant (always clear when panel opens)"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
 msgid "General Tool Settings"
 msgstr ""
 
@@ -523,9 +713,6 @@ msgid "Enable Tools"
 msgstr ""
 
 msgid "Master switch for all tool-calling functionality."
-msgstr ""
-
-msgid "Exa does not support tool use"
 msgstr ""
 
 msgid "Desktop Automation:"
@@ -605,6 +792,41 @@ msgid ""
 msgstr ""
 
 msgid "Individual Tools"
+msgstr ""
+
+msgid "Stop command"
+msgstr ""
+
+msgid "Open terminal attached to this session"
+msgstr ""
+
+msgid "Copy output"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Web Search"
+msgstr ""
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+
+msgid "Thinking"
+msgstr ""
+
+msgid "Searched for: %1"
+msgstr ""
+
+msgid "Show %1 results"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Share output with assistant"
 msgstr ""
 
 msgid "Approve the pending tool request"
@@ -761,228 +983,6 @@ msgid "Cancel LLM request"
 msgstr ""
 
 msgid "Drop files here to attach"
-msgstr ""
-
-msgid "OpenAI-compatible"
-msgstr ""
-
-msgid "Anthropic"
-msgstr ""
-
-msgid "Google Gemini"
-msgstr ""
-
-msgid "Exa"
-msgstr ""
-
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr ""
-
-msgid "New Profile"
-msgstr ""
-
-msgid "%1 (Copy)"
-msgstr ""
-
-msgid "Profile:"
-msgstr ""
-
-msgid "Rename Profile"
-msgstr ""
-
-msgid "Duplicate Profile"
-msgstr ""
-
-msgid "Delete Profile"
-msgstr ""
-
-msgid "Profile Name"
-msgstr ""
-
-msgid "Rename"
-msgstr ""
-
-msgid "Adapter:"
-msgstr ""
-
-msgid "Authentication:"
-msgstr ""
-
-msgid "API Key (Express Mode)"
-msgstr ""
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr ""
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-
-msgid "API Variant:"
-msgstr ""
-
-msgid "Legacy (generateContent)"
-msgstr ""
-
-msgid "Interactions API (Stateful)"
-msgstr ""
-
-msgid "Platform:"
-msgstr ""
-
-msgid "Google AI Studio"
-msgstr ""
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr ""
-
-msgid "Project ID:"
-msgstr ""
-
-msgid "Location:"
-msgstr ""
-
-msgid "Provider:"
-msgstr ""
-
-msgid "API Endpoint:"
-msgstr ""
-
-msgid "Model:"
-msgstr ""
-
-msgid "Refreshing…"
-msgstr ""
-
-msgid "Refresh model list"
-msgstr ""
-
-msgid "API Key:"
-msgstr ""
-
-msgid "Paste short-lived access token"
-msgstr ""
-
-msgid "Optional - for OpenAI, etc."
-msgstr ""
-
-msgid "Stored in KDE Wallet"
-msgstr ""
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr ""
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr ""
-
-msgid "Precise"
-msgstr ""
-
-msgid "Creative"
-msgstr ""
-
-msgid "Max Tokens:"
-msgstr ""
-
-msgid "Thinking:"
-msgstr ""
-
-msgid "Off"
-msgstr ""
-
-msgid "Low"
-msgstr ""
-
-msgid "Medium"
-msgstr ""
-
-msgid "High"
-msgstr ""
-
-msgid "Thinking budget:"
-msgstr ""
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr ""
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-
-msgid "Use Responses API"
-msgstr ""
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-
-msgid "Attachments:"
-msgstr ""
-
-msgid "Resize image attachments"
-msgstr ""
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-
-msgid "Chat History:"
-msgstr ""
-
-msgid "Auto-save chat history"
-msgstr ""
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr ""
-
-msgid "Notifications:"
-msgstr ""
-
-msgid "Show notifications when minimized"
-msgstr ""
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-
-msgid "Save format:"
-msgstr ""
-
-msgid "Plain text (.txt)"
-msgstr ""
-
-msgid "Structured (.jsonl)"
-msgstr ""
-
-msgid "Open Folder"
-msgstr ""
-
-msgid "Open the folder where chat histories are saved"
-msgstr ""
-
-msgid "Auto-clear:"
-msgstr ""
-
-msgid "Disabled"
-msgstr ""
-
-msgid "Instant (always clear when panel opens)"
-msgstr ""
-
-msgid "After"
-msgstr ""
-
-msgid "seconds"
-msgstr ""
-
-msgid "minutes"
 msgstr ""
 
 msgid ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-03 23:22-0400\n"
+"POT-Creation-Date: 2026-08-14 10:20-0400\n"
 "PO-Revision-Date: 2026-04-07 22:00-0400\n"
 "Last-Translator: Gemini CLI (machine translation)\n"
 "Language-Team: French (Canada)\n"
@@ -16,6 +16,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Color button"
+msgstr "Bouton de couleur"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr ""
+"La couleur actuelle est %1. Ce bouton ouvrira une boîte de dialogue de "
+"sélection de couleur."
+
+msgid "Current color is %1."
+msgstr "La couleur actuelle est %1."
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -264,9 +275,6 @@ msgstr "Demander avant d'exécuter"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Erreur : l'URL doit commencer par http:// ou https://"
 
-msgid "Error: content exceeds max write size (%1 bytes)"
-msgstr "Erreur : le contenu dépasse la taille maximale d'écriture (%1 octets)"
-
 msgid "No command provided."
 msgstr "Aucune commande fournie."
 
@@ -317,6 +325,9 @@ msgid ""
 msgstr ""
 "Ni 'tmux' ni 'screen' n'ont été trouvés sur votre système. Le multiplexage "
 "de session est indisponible."
+
+msgid "Error: content exceeds max write size (%1 bytes)"
+msgstr "Erreur : le contenu dépasse la taille maximale d'écriture (%1 octets)"
 
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
@@ -403,60 +414,6 @@ msgstr ""
 "Active les recherches Web déclenchées par le LLM via l'API de recherche "
 "d'Ollama"
 
-msgid "Color button"
-msgstr "Bouton de couleur"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr ""
-"La couleur actuelle est %1. Ce bouton ouvrira une boîte de dialogue de "
-"sélection de couleur."
-
-msgid "Current color is %1."
-msgstr "La couleur actuelle est %1."
-
-msgid "Stop command"
-msgstr "Arrêter la commande"
-
-msgid "Open terminal attached to this session"
-msgstr "Ouvrir le terminal associé à cette session"
-
-msgid "Copy output"
-msgstr "Copier la sortie"
-
-msgid "You"
-msgstr "Vous"
-
-msgid "Error"
-msgstr "Erreur"
-
-msgid "Web Search"
-msgstr "Recherche Web"
-
-msgid "Assistant"
-msgstr "Assistant"
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"Le rendu Mathtext a basculé sur le remplacement Unicode (matplotlib non "
-"installé ou une erreur est survenue)"
-
-msgid "Thinking"
-msgstr "Réflexion…"
-
-msgid "Searched for: %1"
-msgstr "Recherché : %1"
-
-msgid "Show %1 results"
-msgstr "Afficher %1 résultats"
-
-msgid "Copy to clipboard"
-msgstr "Copier dans le presse-papiers"
-
-msgid "Share output with assistant"
-msgstr "Partager la sortie avec l'assistant"
-
 msgid "Profile Header:"
 msgstr "En-tête de profil :"
 
@@ -478,8 +435,14 @@ msgstr "Étiquettes du clavardage :"
 msgid "User label:"
 msgstr "Étiquette de l'utilisateur :"
 
+msgid "You"
+msgstr "Vous"
+
 msgid "Assistant label:"
 msgstr "Étiquette de l'assistant :"
+
+msgid "Assistant"
+msgstr "Assistant"
 
 msgid "Use model name as assistant label"
 msgstr "Utiliser le nom du modèle comme étiquette de l'assistant"
@@ -565,6 +528,245 @@ msgstr "Refuser"
 msgid "Approve"
 msgstr "Approuver"
 
+msgid "OpenAI-compatible"
+msgstr "Compatible OpenAI"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "Exa"
+msgstr "Exa"
+
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr "Impossible de récupérer le jeton gcloud (sortie %1) : %2"
+
+msgid "New Profile"
+msgstr "Nouveau profil"
+
+msgid "%1 (Copy)"
+msgstr "%1 (Copie)"
+
+msgid "Profile:"
+msgstr "Profil :"
+
+msgid "Rename Profile"
+msgstr "Renommer le profil"
+
+msgid "Duplicate Profile"
+msgstr "Dupliquer le profil"
+
+msgid "Delete Profile"
+msgstr "Supprimer le profil"
+
+msgid "Profile Name"
+msgstr "Nom du profil"
+
+msgid "Rename"
+msgstr "Renommer"
+
+msgid "Adapter:"
+msgstr "Adaptateur :"
+
+msgid "Exa does not support tool use"
+msgstr "Exa ne prend pas en charge l'utilisation d'outils"
+
+msgid "Platform:"
+msgstr "Plateforme :"
+
+msgid "Google AI Studio"
+msgstr "Google AI Studio"
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr "Google Cloud Agent Platform (Vertex AI)"
+
+msgid "Authentication:"
+msgstr "Authentification :"
+
+msgid "API Key (Express Mode)"
+msgstr "Clé API (Mode Express)"
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr "Google Cloud CLI (gcloud)"
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLI introuvable. Veuillez l'installer pour utiliser cette méthode "
+"d'authentification."
+
+msgid "API Variant:"
+msgstr "Variante API :"
+
+msgid "Legacy (generateContent)"
+msgstr "Hérité (generateContent)"
+
+msgid "Interactions API (Stateful)"
+msgstr "API Interactions (avec état)"
+
+msgid "Project ID:"
+msgstr "ID du projet :"
+
+msgid "Location:"
+msgstr "Emplacement :"
+
+msgid "Provider:"
+msgstr "Fournisseur :"
+
+msgid "API Endpoint:"
+msgstr "Point d'accès API :"
+
+msgid "Model:"
+msgstr "Modèle :"
+
+msgid "Refreshing…"
+msgstr "Actualisation…"
+
+msgid "Refresh model list"
+msgstr "Actualiser la liste des modèles"
+
+msgid "API Key:"
+msgstr "Clé API :"
+
+msgid "Paste short-lived access token"
+msgstr "Coller le jeton d'accès à durée limitée"
+
+msgid "Optional - for OpenAI, etc."
+msgstr "Optionnel — pour OpenAI, etc."
+
+msgid "Stored in KDE Wallet"
+msgstr "Stockée dans KDE Wallet"
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr ""
+"KDE Wallet non disponible — clé stockée dans le fichier de configuration"
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "Température : %1 %"
+
+msgid "Precise"
+msgstr "Précis"
+
+msgid "Creative"
+msgstr "Créatif"
+
+msgid "Max Tokens:"
+msgstr "Jetons max. :"
+
+msgid "Thinking:"
+msgstr "Réflexion :"
+
+msgid "Off"
+msgstr "Désactivé"
+
+msgid "Low"
+msgstr "Faible"
+
+msgid "Medium"
+msgstr "Moyen"
+
+msgid "High"
+msgstr "Élevé"
+
+msgid "Thinking budget:"
+msgstr "Budget de réflexion :"
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr "Afficher les réflexions dans le clavardage (repliable)"
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"Lorsqu'activé, le raisonnement du modèle est affiché au-dessus de chaque "
+"réponse avec un en-tête repliable. L'aller-retour des pensées signées vers "
+"l'API se produit indépendamment de ce paramètre."
+
+msgid "Use Responses API"
+msgstr "Utiliser l'API Responses"
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"Requis pour afficher le contenu de raisonnement sur OpenAI / Poe / "
+"OpenRouter / Azure (POST vers /v1/responses au lieu de /v1/chat/"
+"completions). Défini automatiquement lors du choix d'un préréglage."
+
+msgid "Attachments:"
+msgstr "Pièces jointes :"
+
+msgid "Resize image attachments"
+msgstr "Redimensionner les images jointes"
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+"Redimensionne les images jointes de grande taille pour qu'elles s'adaptent à "
+"800x600 avant l'envoi, réduisant ainsi la taille du téléchargement et les "
+"jetons de contexte."
+
+msgid "Chat History:"
+msgstr "Historique des clavardages :"
+
+msgid "Auto-save chat history"
+msgstr "Enregistrer automatiquement l'historique des clavardages"
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr "Enregistre dans ~/.local/share/plasmallm/chats/"
+
+msgid "Notifications:"
+msgstr "Notifications :"
+
+msgid "Show notifications when minimized"
+msgstr "Afficher les notifications lorsqu'elle est réduite"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+"Afficher des notifications système pour les messages entrants et les appels "
+"d'outils lorsque la fenêtre de chat est réduite ou fermée."
+
+msgid "Save format:"
+msgstr "Format d'enregistrement :"
+
+msgid "Plain text (.txt)"
+msgstr "Texte brut (.txt)"
+
+msgid "Structured (.jsonl)"
+msgstr "Structuré (.jsonl)"
+
+msgid "Open Folder"
+msgstr "Ouvrir le dossier"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "Ouvrir le dossier où sont enregistrés les historiques de chat"
+
+msgid "Auto-clear:"
+msgstr "Effacement automatique :"
+
+msgid "Disabled"
+msgstr "Désactivé"
+
+msgid "Instant (always clear when panel opens)"
+msgstr "Instantané (toujours effacer à l'ouverture du panneau)"
+
+msgid "After"
+msgstr "Après"
+
+msgid "seconds"
+msgstr "secondes"
+
+msgid "minutes"
+msgstr "minutes"
+
 msgid "General Tool Settings"
 msgstr "Paramètres généraux des outils"
 
@@ -577,9 +779,6 @@ msgstr "Activer les outils"
 msgid "Master switch for all tool-calling functionality."
 msgstr ""
 "Interrupteur principal pour toutes les fonctionnalités d'appel d'outils."
-
-msgid "Exa does not support tool use"
-msgstr "Exa ne prend pas en charge l'utilisation d'outils"
 
 msgid "Desktop Automation:"
 msgstr "Automatisation du bureau :"
@@ -673,6 +872,43 @@ msgstr ""
 
 msgid "Individual Tools"
 msgstr "Outils individuels"
+
+msgid "Stop command"
+msgstr "Arrêter la commande"
+
+msgid "Open terminal attached to this session"
+msgstr "Ouvrir le terminal associé à cette session"
+
+msgid "Copy output"
+msgstr "Copier la sortie"
+
+msgid "Error"
+msgstr "Erreur"
+
+msgid "Web Search"
+msgstr "Recherche Web"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Le rendu Mathtext a basculé sur le remplacement Unicode (matplotlib non "
+"installé ou une erreur est survenue)"
+
+msgid "Thinking"
+msgstr "Réflexion…"
+
+msgid "Searched for: %1"
+msgstr "Recherché : %1"
+
+msgid "Show %1 results"
+msgstr "Afficher %1 résultats"
+
+msgid "Copy to clipboard"
+msgstr "Copier dans le presse-papiers"
+
+msgid "Share output with assistant"
+msgstr "Partager la sortie avec l'assistant"
 
 msgid "Approve the pending tool request"
 msgstr "Approuver la demande d'outil en attente"
@@ -840,242 +1076,6 @@ msgstr "Annuler la requête au LLM"
 
 msgid "Drop files here to attach"
 msgstr "Déposer des fichiers ici pour les joindre"
-
-msgid "OpenAI-compatible"
-msgstr "Compatible OpenAI"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "Exa"
-msgstr "Exa"
-
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Impossible de récupérer le jeton gcloud (sortie %1) : %2"
-
-msgid "New Profile"
-msgstr "Nouveau profil"
-
-msgid "%1 (Copy)"
-msgstr "%1 (Copie)"
-
-msgid "Profile:"
-msgstr "Profil :"
-
-msgid "Rename Profile"
-msgstr "Renommer le profil"
-
-msgid "Duplicate Profile"
-msgstr "Dupliquer le profil"
-
-msgid "Delete Profile"
-msgstr "Supprimer le profil"
-
-msgid "Profile Name"
-msgstr "Nom du profil"
-
-msgid "Rename"
-msgstr "Renommer"
-
-msgid "Adapter:"
-msgstr "Adaptateur :"
-
-msgid "Authentication:"
-msgstr "Authentification :"
-
-msgid "API Key (Express Mode)"
-msgstr "Clé API (Mode Express)"
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr "Google Cloud CLI (gcloud)"
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLI introuvable. Veuillez l'installer pour utiliser cette méthode "
-"d'authentification."
-
-msgid "API Variant:"
-msgstr "Variante API :"
-
-msgid "Legacy (generateContent)"
-msgstr "Hérité (generateContent)"
-
-msgid "Interactions API (Stateful)"
-msgstr "API Interactions (avec état)"
-
-msgid "Platform:"
-msgstr "Plateforme :"
-
-msgid "Google AI Studio"
-msgstr "Google AI Studio"
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr "Google Cloud Agent Platform (Vertex AI)"
-
-msgid "Project ID:"
-msgstr "ID du projet :"
-
-msgid "Location:"
-msgstr "Emplacement :"
-
-msgid "Provider:"
-msgstr "Fournisseur :"
-
-msgid "API Endpoint:"
-msgstr "Point d'accès API :"
-
-msgid "Model:"
-msgstr "Modèle :"
-
-msgid "Refreshing…"
-msgstr "Actualisation…"
-
-msgid "Refresh model list"
-msgstr "Actualiser la liste des modèles"
-
-msgid "API Key:"
-msgstr "Clé API :"
-
-msgid "Paste short-lived access token"
-msgstr "Coller le jeton d'accès à durée limitée"
-
-msgid "Optional - for OpenAI, etc."
-msgstr "Optionnel — pour OpenAI, etc."
-
-msgid "Stored in KDE Wallet"
-msgstr "Stockée dans KDE Wallet"
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr ""
-"KDE Wallet non disponible — clé stockée dans le fichier de configuration"
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "Température : %1 %"
-
-msgid "Precise"
-msgstr "Précis"
-
-msgid "Creative"
-msgstr "Créatif"
-
-msgid "Max Tokens:"
-msgstr "Jetons max. :"
-
-msgid "Thinking:"
-msgstr "Réflexion :"
-
-msgid "Off"
-msgstr "Désactivé"
-
-msgid "Low"
-msgstr "Faible"
-
-msgid "Medium"
-msgstr "Moyen"
-
-msgid "High"
-msgstr "Élevé"
-
-msgid "Thinking budget:"
-msgstr "Budget de réflexion :"
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr "Afficher les réflexions dans le clavardage (repliable)"
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-"Lorsqu'activé, le raisonnement du modèle est affiché au-dessus de chaque "
-"réponse avec un en-tête repliable. L'aller-retour des pensées signées vers "
-"l'API se produit indépendamment de ce paramètre."
-
-msgid "Use Responses API"
-msgstr "Utiliser l'API Responses"
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-"Requis pour afficher le contenu de raisonnement sur OpenAI / Poe / "
-"OpenRouter / Azure (POST vers /v1/responses au lieu de /v1/chat/"
-"completions). Défini automatiquement lors du choix d'un préréglage."
-
-msgid "Attachments:"
-msgstr "Pièces jointes :"
-
-msgid "Resize image attachments"
-msgstr "Redimensionner les images jointes"
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-"Redimensionne les images jointes de grande taille pour qu'elles s'adaptent à "
-"800x600 avant l'envoi, réduisant ainsi la taille du téléchargement et les "
-"jetons de contexte."
-
-msgid "Chat History:"
-msgstr "Historique des clavardages :"
-
-msgid "Auto-save chat history"
-msgstr "Enregistrer automatiquement l'historique des clavardages"
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr "Enregistre dans ~/.local/share/plasmallm/chats/"
-
-msgid "Notifications:"
-msgstr "Notifications :"
-
-msgid "Show notifications when minimized"
-msgstr "Afficher les notifications lorsqu'elle est réduite"
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-"Afficher des notifications système pour les messages entrants et les appels "
-"d'outils lorsque la fenêtre de chat est réduite ou fermée."
-
-msgid "Save format:"
-msgstr "Format d'enregistrement :"
-
-msgid "Plain text (.txt)"
-msgstr "Texte brut (.txt)"
-
-msgid "Structured (.jsonl)"
-msgstr "Structuré (.jsonl)"
-
-msgid "Open Folder"
-msgstr "Ouvrir le dossier"
-
-msgid "Open the folder where chat histories are saved"
-msgstr "Ouvrir le dossier où sont enregistrés les historiques de chat"
-
-msgid "Auto-clear:"
-msgstr "Effacement automatique :"
-
-msgid "Disabled"
-msgstr "Désactivé"
-
-msgid "Instant (always clear when panel opens)"
-msgstr "Instantané (toujours effacer à l'ouverture du panneau)"
-
-msgid "After"
-msgstr "Après"
-
-msgid "seconds"
-msgstr "secondes"
-
-msgid "minutes"
-msgstr "minutes"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "

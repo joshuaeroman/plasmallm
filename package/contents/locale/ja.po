@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-03 23:22-0400\n"
+"POT-Creation-Date: 2026-08-14 10:20-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Japanese\n"
@@ -14,6 +14,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Color button"
+msgstr "カラーボタン"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "現在の色は %1 です。このボタンを押すと色選択ダイアログが開きます。"
+
+msgid "Current color is %1."
+msgstr "現在の色は %1 です。"
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -258,9 +267,6 @@ msgstr "実行前に確認"
 msgid "Error: URL must start with http:// or https://"
 msgstr "エラー：URLはhttp://またはhttps://で始まる必要があります"
 
-msgid "Error: content exceeds max write size (%1 bytes)"
-msgstr "エラー：コンテンツが最大書き込みサイズを超えています（%1バイト）"
-
 msgid "No command provided."
 msgstr "コマンドが指定されていません。"
 
@@ -308,6 +314,9 @@ msgid ""
 msgstr ""
 "'tmux' と 'screen' のどちらもシステムに見つかりませんでした。セッションのマル"
 "チプレックスは利用できません。"
+
+msgid "Error: content exceeds max write size (%1 bytes)"
+msgstr "エラー：コンテンツが最大書き込みサイズを超えています（%1バイト）"
 
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
@@ -392,58 +401,6 @@ msgstr "Exa APIを介したLLMトリガーのニューラルウェブ検索を�
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr "OllamaのSearch APIを介したLLMトリガーのウェブ検索を有効にする"
 
-msgid "Color button"
-msgstr "カラーボタン"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "現在の色は %1 です。このボタンを押すと色選択ダイアログが開きます。"
-
-msgid "Current color is %1."
-msgstr "現在の色は %1 です。"
-
-msgid "Stop command"
-msgstr "コマンドを停止"
-
-msgid "Open terminal attached to this session"
-msgstr "このセッションに接続されたターミナルを開く"
-
-msgid "Copy output"
-msgstr "出力をコピー"
-
-msgid "You"
-msgstr "あなた"
-
-msgid "Error"
-msgstr "エラー"
-
-msgid "Web Search"
-msgstr "ウェブ検索..."
-
-msgid "Assistant"
-msgstr "アシスタント"
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"Mathtext レンダリングは Unicode 置換にフォールバックしました (matplotlib がイ"
-"ンストールされていないか、エラーが発生しました)"
-
-msgid "Thinking"
-msgstr "思考中…"
-
-msgid "Searched for: %1"
-msgstr "検索した内容：%1"
-
-msgid "Show %1 results"
-msgstr "%1 件の結果を表示"
-
-msgid "Copy to clipboard"
-msgstr "クリップボードにコピー"
-
-msgid "Share output with assistant"
-msgstr "出力をアシスタントと共有"
-
 msgid "Profile Header:"
 msgstr "プロファイルヘッダー:"
 
@@ -465,8 +422,14 @@ msgstr "チャットのラベル:"
 msgid "User label:"
 msgstr "ユーザーのラベル:"
 
+msgid "You"
+msgstr "あなた"
+
 msgid "Assistant label:"
 msgstr "アシスタントのラベル:"
+
+msgid "Assistant"
+msgstr "アシスタント"
 
 msgid "Use model name as assistant label"
 msgstr "モデル名をアシスタントのラベルとして使用する"
@@ -552,6 +515,242 @@ msgstr "拒否"
 msgid "Approve"
 msgstr "承認"
 
+msgid "OpenAI-compatible"
+msgstr "OpenAI互換"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "Exa"
+msgstr "Exa"
+
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr "gcloudトークンを取得できませんでした（終了コード %1）：%2"
+
+msgid "New Profile"
+msgstr "新しいプロファイル"
+
+msgid "%1 (Copy)"
+msgstr "%1 (コピー)"
+
+msgid "Profile:"
+msgstr "プロファイル:"
+
+msgid "Rename Profile"
+msgstr "プロファイルの名前変更"
+
+msgid "Duplicate Profile"
+msgstr "プロファイルの複製"
+
+msgid "Delete Profile"
+msgstr "プロファイルの削除"
+
+msgid "Profile Name"
+msgstr "プロファイル名"
+
+msgid "Rename"
+msgstr "名前変更"
+
+msgid "Adapter:"
+msgstr "アダプター:"
+
+msgid "Exa does not support tool use"
+msgstr "Exaはツールの使用をサポートしていません"
+
+msgid "Platform:"
+msgstr "プラットフォーム:"
+
+msgid "Google AI Studio"
+msgstr "Google AI Studio"
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr "Google Cloud Agent Platform (Vertex AI)"
+
+msgid "Authentication:"
+msgstr "認証:"
+
+msgid "API Key (Express Mode)"
+msgstr "APIキー（エクスプレスモード）"
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr "Google Cloud CLI (gcloud)"
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLIが見つかりません。この認証方法を使用するにはインストールしてくださ"
+"い。"
+
+msgid "API Variant:"
+msgstr "APIバリアント:"
+
+msgid "Legacy (generateContent)"
+msgstr "レガシー（generateContent）"
+
+msgid "Interactions API (Stateful)"
+msgstr "Interactions API（ステートフル）"
+
+msgid "Project ID:"
+msgstr "プロジェクトID:"
+
+msgid "Location:"
+msgstr "場所:"
+
+msgid "Provider:"
+msgstr "プロバイダー:"
+
+msgid "API Endpoint:"
+msgstr "APIエンドポイント:"
+
+msgid "Model:"
+msgstr "モデル:"
+
+msgid "Refreshing…"
+msgstr "更新中…"
+
+msgid "Refresh model list"
+msgstr "モデルリストを更新"
+
+msgid "API Key:"
+msgstr "APIキー:"
+
+msgid "Paste short-lived access token"
+msgstr "短命アクセストークンを貼り付け"
+
+msgid "Optional - for OpenAI, etc."
+msgstr "オプション – OpenAIなど用"
+
+msgid "Stored in KDE Wallet"
+msgstr "KDE Walletに保存済み"
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr "KDE Walletが利用不可 — キーは設定ファイルに保存されました"
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "温度: %1%"
+
+msgid "Precise"
+msgstr "正確"
+
+msgid "Creative"
+msgstr "創造的"
+
+msgid "Max Tokens:"
+msgstr "最大トークン数:"
+
+msgid "Thinking:"
+msgstr "思考:"
+
+msgid "Off"
+msgstr "オフ"
+
+msgid "Low"
+msgstr "低"
+
+msgid "Medium"
+msgstr "中"
+
+msgid "High"
+msgstr "高"
+
+msgid "Thinking budget:"
+msgstr "思考バジェット:"
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr "チャットに思考を表示（折りたたみ可能）"
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"有効にすると、モデルの推論が各返答の上に折りたたみ可能なヘッダーで表示されま"
+"す。署名された思考のAPIへの往復は、この設定に関係なく行われます。"
+
+msgid "Use Responses API"
+msgstr "Responses APIを使用"
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"OpenAI / Poe / OpenRouter / Azureで推論コンテンツを表示するために必要です（/"
+"v1/chat/completionsの代わりに/v1/responsesにPOSTします）。プリセット選択時に"
+"自動設定されます。"
+
+msgid "Attachments:"
+msgstr "添付ファイル:"
+
+msgid "Resize image attachments"
+msgstr "画像添付ファイルのサイズ変更"
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+"送信前に大きな画像添付ファイルを800x600以内に収まるように縮小し、アップロード"
+"サイズとコンテキストトークン数を削減します。"
+
+msgid "Chat History:"
+msgstr "チャット履歴:"
+
+msgid "Auto-save chat history"
+msgstr "チャット履歴を自動保存"
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr "~/.local/share/plasmallm/chats/ に保存"
+
+msgid "Notifications:"
+msgstr "通知:"
+
+msgid "Show notifications when minimized"
+msgstr "最小化時に通知を表示する"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+"チャットウィンドウが最小化または閉じられているときに、受信メッセージとツール"
+"呼び出しのシステム通知を表示します。"
+
+msgid "Save format:"
+msgstr "保存形式:"
+
+msgid "Plain text (.txt)"
+msgstr "プレーンテキスト (.txt)"
+
+msgid "Structured (.jsonl)"
+msgstr "構造化 (.jsonl)"
+
+msgid "Open Folder"
+msgstr "フォルダーを開く"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "チャット履歴が保存されているフォルダーを開きます"
+
+msgid "Auto-clear:"
+msgstr "自動クリア:"
+
+msgid "Disabled"
+msgstr "無効"
+
+msgid "Instant (always clear when panel opens)"
+msgstr "即時（パネルを開くたびにクリア）"
+
+msgid "After"
+msgstr "後"
+
+msgid "seconds"
+msgstr "秒"
+
+msgid "minutes"
+msgstr "分"
+
 msgid "General Tool Settings"
 msgstr "一般ツール設定"
 
@@ -563,9 +762,6 @@ msgstr "ツールを有効にする"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "すべてのツール呼び出し機能のマスタースイッチ。"
-
-msgid "Exa does not support tool use"
-msgstr "Exaはツールの使用をサポートしていません"
 
 msgid "Desktop Automation:"
 msgstr "デスクトップ自動化:"
@@ -656,6 +852,43 @@ msgstr ""
 
 msgid "Individual Tools"
 msgstr "個別ツール"
+
+msgid "Stop command"
+msgstr "コマンドを停止"
+
+msgid "Open terminal attached to this session"
+msgstr "このセッションに接続されたターミナルを開く"
+
+msgid "Copy output"
+msgstr "出力をコピー"
+
+msgid "Error"
+msgstr "エラー"
+
+msgid "Web Search"
+msgstr "ウェブ検索..."
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Mathtext レンダリングは Unicode 置換にフォールバックしました (matplotlib がイ"
+"ンストールされていないか、エラーが発生しました)"
+
+msgid "Thinking"
+msgstr "思考中…"
+
+msgid "Searched for: %1"
+msgstr "検索した内容：%1"
+
+msgid "Show %1 results"
+msgstr "%1 件の結果を表示"
+
+msgid "Copy to clipboard"
+msgstr "クリップボードにコピー"
+
+msgid "Share output with assistant"
+msgstr "出力をアシスタントと共有"
 
 msgid "Approve the pending tool request"
 msgstr "保留中のツールリクエストを承認"
@@ -820,239 +1053,6 @@ msgstr "LLMリクエストをキャンセル"
 
 msgid "Drop files here to attach"
 msgstr "ここにファイルをドロップして添付します"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI互換"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "Exa"
-msgstr "Exa"
-
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "gcloudトークンを取得できませんでした（終了コード %1）：%2"
-
-msgid "New Profile"
-msgstr "新しいプロファイル"
-
-msgid "%1 (Copy)"
-msgstr "%1 (コピー)"
-
-msgid "Profile:"
-msgstr "プロファイル:"
-
-msgid "Rename Profile"
-msgstr "プロファイルの名前変更"
-
-msgid "Duplicate Profile"
-msgstr "プロファイルの複製"
-
-msgid "Delete Profile"
-msgstr "プロファイルの削除"
-
-msgid "Profile Name"
-msgstr "プロファイル名"
-
-msgid "Rename"
-msgstr "名前変更"
-
-msgid "Adapter:"
-msgstr "アダプター:"
-
-msgid "Authentication:"
-msgstr "認証:"
-
-msgid "API Key (Express Mode)"
-msgstr "APIキー（エクスプレスモード）"
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr "Google Cloud CLI (gcloud)"
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLIが見つかりません。この認証方法を使用するにはインストールしてくださ"
-"い。"
-
-msgid "API Variant:"
-msgstr "APIバリアント:"
-
-msgid "Legacy (generateContent)"
-msgstr "レガシー（generateContent）"
-
-msgid "Interactions API (Stateful)"
-msgstr "Interactions API（ステートフル）"
-
-msgid "Platform:"
-msgstr "プラットフォーム:"
-
-msgid "Google AI Studio"
-msgstr "Google AI Studio"
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr "Google Cloud Agent Platform (Vertex AI)"
-
-msgid "Project ID:"
-msgstr "プロジェクトID:"
-
-msgid "Location:"
-msgstr "場所:"
-
-msgid "Provider:"
-msgstr "プロバイダー:"
-
-msgid "API Endpoint:"
-msgstr "APIエンドポイント:"
-
-msgid "Model:"
-msgstr "モデル:"
-
-msgid "Refreshing…"
-msgstr "更新中…"
-
-msgid "Refresh model list"
-msgstr "モデルリストを更新"
-
-msgid "API Key:"
-msgstr "APIキー:"
-
-msgid "Paste short-lived access token"
-msgstr "短命アクセストークンを貼り付け"
-
-msgid "Optional - for OpenAI, etc."
-msgstr "オプション – OpenAIなど用"
-
-msgid "Stored in KDE Wallet"
-msgstr "KDE Walletに保存済み"
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Walletが利用不可 — キーは設定ファイルに保存されました"
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "温度: %1%"
-
-msgid "Precise"
-msgstr "正確"
-
-msgid "Creative"
-msgstr "創造的"
-
-msgid "Max Tokens:"
-msgstr "最大トークン数:"
-
-msgid "Thinking:"
-msgstr "思考:"
-
-msgid "Off"
-msgstr "オフ"
-
-msgid "Low"
-msgstr "低"
-
-msgid "Medium"
-msgstr "中"
-
-msgid "High"
-msgstr "高"
-
-msgid "Thinking budget:"
-msgstr "思考バジェット:"
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr "チャットに思考を表示（折りたたみ可能）"
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-"有効にすると、モデルの推論が各返答の上に折りたたみ可能なヘッダーで表示されま"
-"す。署名された思考のAPIへの往復は、この設定に関係なく行われます。"
-
-msgid "Use Responses API"
-msgstr "Responses APIを使用"
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-"OpenAI / Poe / OpenRouter / Azureで推論コンテンツを表示するために必要です（/"
-"v1/chat/completionsの代わりに/v1/responsesにPOSTします）。プリセット選択時に"
-"自動設定されます。"
-
-msgid "Attachments:"
-msgstr "添付ファイル:"
-
-msgid "Resize image attachments"
-msgstr "画像添付ファイルのサイズ変更"
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-"送信前に大きな画像添付ファイルを800x600以内に収まるように縮小し、アップロード"
-"サイズとコンテキストトークン数を削減します。"
-
-msgid "Chat History:"
-msgstr "チャット履歴:"
-
-msgid "Auto-save chat history"
-msgstr "チャット履歴を自動保存"
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr "~/.local/share/plasmallm/chats/ に保存"
-
-msgid "Notifications:"
-msgstr "通知:"
-
-msgid "Show notifications when minimized"
-msgstr "最小化時に通知を表示する"
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-"チャットウィンドウが最小化または閉じられているときに、受信メッセージとツール"
-"呼び出しのシステム通知を表示します。"
-
-msgid "Save format:"
-msgstr "保存形式:"
-
-msgid "Plain text (.txt)"
-msgstr "プレーンテキスト (.txt)"
-
-msgid "Structured (.jsonl)"
-msgstr "構造化 (.jsonl)"
-
-msgid "Open Folder"
-msgstr "フォルダーを開く"
-
-msgid "Open the folder where chat histories are saved"
-msgstr "チャット履歴が保存されているフォルダーを開きます"
-
-msgid "Auto-clear:"
-msgstr "自動クリア:"
-
-msgid "Disabled"
-msgstr "無効"
-
-msgid "Instant (always clear when panel opens)"
-msgstr "即時（パネルを開くたびにクリア）"
-
-msgid "After"
-msgstr "後"
-
-msgid "seconds"
-msgstr "秒"
-
-msgid "minutes"
-msgstr "分"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "

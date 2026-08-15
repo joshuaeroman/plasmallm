@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-03 23:22-0400\n"
+"POT-Creation-Date: 2026-08-14 10:20-0400\n"
 "PO-Revision-Date: 2026-05-04 00:00+0300\n"
 "Last-Translator: Matvel007\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -15,6 +15,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid "Color button"
+msgstr "Кнопка цвета"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Текущий цвет: %1. Эта кнопка откроет диалог выбора цвета."
+
+msgid "Current color is %1."
+msgstr "Текущий цвет: %1."
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -258,9 +267,6 @@ msgstr "Спрашивать перед запуском"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Ошибка: URL должен начинаться с http:// или https://"
 
-msgid "Error: content exceeds max write size (%1 bytes)"
-msgstr "Ошибка: содержимое превышает максимальный размер записи (%1 байт)"
-
 msgid "No command provided."
 msgstr "Команда не указана."
 
@@ -309,6 +315,9 @@ msgid ""
 msgstr ""
 "В вашей системе не найдены ни 'tmux', ни 'screen'. Мультиплексирование "
 "сессий недоступно."
+
+msgid "Error: content exceeds max write size (%1 bytes)"
+msgstr "Ошибка: содержимое превышает максимальный размер записи (%1 байт)"
 
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
@@ -392,58 +401,6 @@ msgstr "Включает нейронный веб-поиск от LLM чере�
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr "Включает веб-поиск от LLM через поисковый API Ollama"
 
-msgid "Color button"
-msgstr "Кнопка цвета"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Текущий цвет: %1. Эта кнопка откроет диалог выбора цвета."
-
-msgid "Current color is %1."
-msgstr "Текущий цвет: %1."
-
-msgid "Stop command"
-msgstr "Остановить команду"
-
-msgid "Open terminal attached to this session"
-msgstr "Открыть терминал, подключенный к этой сессии"
-
-msgid "Copy output"
-msgstr "Скопировать вывод"
-
-msgid "You"
-msgstr "Вы"
-
-msgid "Error"
-msgstr "Ошибка"
-
-msgid "Web Search"
-msgstr "Поиск в интернете"
-
-msgid "Assistant"
-msgstr "Ассистент"
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"Рендеринг Mathtext переключен на замену Unicode (matplotlib не установлен "
-"или произошла ошибка)"
-
-msgid "Thinking"
-msgstr "Размышляю…"
-
-msgid "Searched for: %1"
-msgstr "Искал: %1"
-
-msgid "Show %1 results"
-msgstr "Показать %1 результатов"
-
-msgid "Copy to clipboard"
-msgstr "Копировать в буфер обмена"
-
-msgid "Share output with assistant"
-msgstr "Поделиться выводом с ассистентом"
-
 msgid "Profile Header:"
 msgstr "Заголовок профиля:"
 
@@ -465,8 +422,14 @@ msgstr "Ярлыки чата:"
 msgid "User label:"
 msgstr "Ярлык пользователя:"
 
+msgid "You"
+msgstr "Вы"
+
 msgid "Assistant label:"
 msgstr "Ярлык помощника:"
+
+msgid "Assistant"
+msgstr "Ассистент"
 
 msgid "Use model name as assistant label"
 msgstr "Использовать имя модели в качестве ярлыка помощника"
@@ -552,6 +515,243 @@ msgstr "Отклонить"
 msgid "Approve"
 msgstr "Одобрить"
 
+msgid "OpenAI-compatible"
+msgstr "OpenAI-совместимый"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "Exa"
+msgstr "Exa"
+
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr "Не удалось получить токен gcloud (выход %1): %2"
+
+msgid "New Profile"
+msgstr "Новый профиль"
+
+msgid "%1 (Copy)"
+msgstr "%1 (Копия)"
+
+msgid "Profile:"
+msgstr "Профиль:"
+
+msgid "Rename Profile"
+msgstr "Переименовать профиль"
+
+msgid "Duplicate Profile"
+msgstr "Дублировать профиль"
+
+msgid "Delete Profile"
+msgstr "Удалить профиль"
+
+msgid "Profile Name"
+msgstr "Название профиля"
+
+msgid "Rename"
+msgstr "Переименовать"
+
+msgid "Adapter:"
+msgstr "Адаптер:"
+
+msgid "Exa does not support tool use"
+msgstr "Exa не поддерживает использование инструментов"
+
+msgid "Platform:"
+msgstr "Платформа:"
+
+msgid "Google AI Studio"
+msgstr "Google AI Studio"
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr "Google Cloud Agent Platform (Vertex AI)"
+
+msgid "Authentication:"
+msgstr "Аутентификация:"
+
+msgid "API Key (Express Mode)"
+msgstr "Ключ API (Экспресс-режим)"
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr "Google Cloud CLI (gcloud)"
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLI не найден. Пожалуйста, установите его для использования этого "
+"метода аутентификации."
+
+msgid "API Variant:"
+msgstr "Вариант API:"
+
+msgid "Legacy (generateContent)"
+msgstr "Устаревший (generateContent)"
+
+msgid "Interactions API (Stateful)"
+msgstr "API Interactions (с состоянием)"
+
+msgid "Project ID:"
+msgstr "ID проекта:"
+
+msgid "Location:"
+msgstr "Расположение:"
+
+msgid "Provider:"
+msgstr "Провайдер:"
+
+msgid "API Endpoint:"
+msgstr "API-эндпоинт:"
+
+msgid "Model:"
+msgstr "Модель:"
+
+msgid "Refreshing…"
+msgstr "Обновление…"
+
+msgid "Refresh model list"
+msgstr "Обновить список моделей"
+
+msgid "API Key:"
+msgstr "API-ключ:"
+
+msgid "Paste short-lived access token"
+msgstr "Вставить временный токен доступа"
+
+msgid "Optional - for OpenAI, etc."
+msgstr "Опционально — для OpenAI и др."
+
+msgid "Stored in KDE Wallet"
+msgstr "Хранится в KDE Wallet"
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr "KDE Wallet недоступен — ключ сохранён в файле конфигурации"
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "Температура: %1%"
+
+msgid "Precise"
+msgstr "Точный"
+
+msgid "Creative"
+msgstr "Креативный"
+
+msgid "Max Tokens:"
+msgstr "Макс. токенов:"
+
+msgid "Thinking:"
+msgstr "Размышление:"
+
+msgid "Off"
+msgstr "Выкл"
+
+msgid "Low"
+msgstr "Низкий"
+
+msgid "Medium"
+msgstr "Средний"
+
+msgid "High"
+msgstr "Высокий"
+
+msgid "Thinking budget:"
+msgstr "Бюджет размышления:"
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr "Показывать размышления в чате (сворачиваемые)"
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"При включении рассуждения модели показываются над каждым ответом в "
+"сворачиваемом заголовке. Отправка подписанных размышлений в API всё равно "
+"происходит независимо от этой настройки."
+
+msgid "Use Responses API"
+msgstr "Использовать Responses API"
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"Необходимо для отображения рассуждений на OpenAI / Poe / OpenRouter / Azure "
+"(отправляет POST на /v1/responses вместо /v1/chat/completions). "
+"Устанавливается автоматически при выборе пресета."
+
+msgid "Attachments:"
+msgstr "Вложения:"
+
+msgid "Resize image attachments"
+msgstr "Изменять размер изображений во вложениях"
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+"Изменяет размер больших изображений во вложениях до 800x600 перед отправкой, "
+"уменьшая размер загрузки и количество токенов контекста."
+
+msgid "Chat History:"
+msgstr "История чата:"
+
+msgid "Auto-save chat history"
+msgstr "Автосохранение истории чата"
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr "Сохраняет в ~/.local/share/plasmallm/chats/"
+
+msgid "Notifications:"
+msgstr "Уведомления:"
+
+msgid "Show notifications when minimized"
+msgstr "Показывать уведомления при сворачивании"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+"Показывать системные уведомления о входящих сообщениях и вызовах "
+"инструментов, когда окно чата свернуто или закрыто."
+
+msgid "Save format:"
+msgstr "Формат сохранения:"
+
+msgid "Plain text (.txt)"
+msgstr "Обычный текст (.txt)"
+
+msgid "Structured (.jsonl)"
+msgstr "Структурированный (.jsonl)"
+
+msgid "Open Folder"
+msgstr "Открыть папку"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "Открыть папку, в которой сохраняется история чатов"
+
+msgid "Auto-clear:"
+msgstr "Автоочистка:"
+
+msgid "Disabled"
+msgstr "Отключено"
+
+msgid "Instant (always clear when panel opens)"
+msgstr "Мгновенно (всегда очищать при открытии панели)"
+
+msgid "After"
+msgstr "Через"
+
+msgid "seconds"
+msgstr "секунд"
+
+msgid "minutes"
+msgstr "минут"
+
 msgid "General Tool Settings"
 msgstr "Общие настройки инструментов"
 
@@ -563,9 +763,6 @@ msgstr "Включить инструменты"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "Главный переключатель для всех функций вызова инструментов."
-
-msgid "Exa does not support tool use"
-msgstr "Exa не поддерживает использование инструментов"
 
 msgid "Desktop Automation:"
 msgstr "Автоматизация рабочего стола:"
@@ -659,6 +856,43 @@ msgstr ""
 
 msgid "Individual Tools"
 msgstr "Отдельные инструменты"
+
+msgid "Stop command"
+msgstr "Остановить команду"
+
+msgid "Open terminal attached to this session"
+msgstr "Открыть терминал, подключенный к этой сессии"
+
+msgid "Copy output"
+msgstr "Скопировать вывод"
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Web Search"
+msgstr "Поиск в интернете"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Рендеринг Mathtext переключен на замену Unicode (matplotlib не установлен "
+"или произошла ошибка)"
+
+msgid "Thinking"
+msgstr "Размышляю…"
+
+msgid "Searched for: %1"
+msgstr "Искал: %1"
+
+msgid "Show %1 results"
+msgstr "Показать %1 результатов"
+
+msgid "Copy to clipboard"
+msgstr "Копировать в буфер обмена"
+
+msgid "Share output with assistant"
+msgstr "Поделиться выводом с ассистентом"
 
 msgid "Approve the pending tool request"
 msgstr "Одобрить ожидающий запрос инструмента"
@@ -824,240 +1058,6 @@ msgstr "Отменить запрос LLM"
 
 msgid "Drop files here to attach"
 msgstr "Перетащите файлы сюда для прикрепления"
-
-msgid "OpenAI-compatible"
-msgstr "OpenAI-совместимый"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "Exa"
-msgstr "Exa"
-
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Не удалось получить токен gcloud (выход %1): %2"
-
-msgid "New Profile"
-msgstr "Новый профиль"
-
-msgid "%1 (Copy)"
-msgstr "%1 (Копия)"
-
-msgid "Profile:"
-msgstr "Профиль:"
-
-msgid "Rename Profile"
-msgstr "Переименовать профиль"
-
-msgid "Duplicate Profile"
-msgstr "Дублировать профиль"
-
-msgid "Delete Profile"
-msgstr "Удалить профиль"
-
-msgid "Profile Name"
-msgstr "Название профиля"
-
-msgid "Rename"
-msgstr "Переименовать"
-
-msgid "Adapter:"
-msgstr "Адаптер:"
-
-msgid "Authentication:"
-msgstr "Аутентификация:"
-
-msgid "API Key (Express Mode)"
-msgstr "Ключ API (Экспресс-режим)"
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr "Google Cloud CLI (gcloud)"
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLI не найден. Пожалуйста, установите его для использования этого "
-"метода аутентификации."
-
-msgid "API Variant:"
-msgstr "Вариант API:"
-
-msgid "Legacy (generateContent)"
-msgstr "Устаревший (generateContent)"
-
-msgid "Interactions API (Stateful)"
-msgstr "API Interactions (с состоянием)"
-
-msgid "Platform:"
-msgstr "Платформа:"
-
-msgid "Google AI Studio"
-msgstr "Google AI Studio"
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr "Google Cloud Agent Platform (Vertex AI)"
-
-msgid "Project ID:"
-msgstr "ID проекта:"
-
-msgid "Location:"
-msgstr "Расположение:"
-
-msgid "Provider:"
-msgstr "Провайдер:"
-
-msgid "API Endpoint:"
-msgstr "API-эндпоинт:"
-
-msgid "Model:"
-msgstr "Модель:"
-
-msgid "Refreshing…"
-msgstr "Обновление…"
-
-msgid "Refresh model list"
-msgstr "Обновить список моделей"
-
-msgid "API Key:"
-msgstr "API-ключ:"
-
-msgid "Paste short-lived access token"
-msgstr "Вставить временный токен доступа"
-
-msgid "Optional - for OpenAI, etc."
-msgstr "Опционально — для OpenAI и др."
-
-msgid "Stored in KDE Wallet"
-msgstr "Хранится в KDE Wallet"
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Wallet недоступен — ключ сохранён в файле конфигурации"
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "Температура: %1%"
-
-msgid "Precise"
-msgstr "Точный"
-
-msgid "Creative"
-msgstr "Креативный"
-
-msgid "Max Tokens:"
-msgstr "Макс. токенов:"
-
-msgid "Thinking:"
-msgstr "Размышление:"
-
-msgid "Off"
-msgstr "Выкл"
-
-msgid "Low"
-msgstr "Низкий"
-
-msgid "Medium"
-msgstr "Средний"
-
-msgid "High"
-msgstr "Высокий"
-
-msgid "Thinking budget:"
-msgstr "Бюджет размышления:"
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr "Показывать размышления в чате (сворачиваемые)"
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-"При включении рассуждения модели показываются над каждым ответом в "
-"сворачиваемом заголовке. Отправка подписанных размышлений в API всё равно "
-"происходит независимо от этой настройки."
-
-msgid "Use Responses API"
-msgstr "Использовать Responses API"
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-"Необходимо для отображения рассуждений на OpenAI / Poe / OpenRouter / Azure "
-"(отправляет POST на /v1/responses вместо /v1/chat/completions). "
-"Устанавливается автоматически при выборе пресета."
-
-msgid "Attachments:"
-msgstr "Вложения:"
-
-msgid "Resize image attachments"
-msgstr "Изменять размер изображений во вложениях"
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-"Изменяет размер больших изображений во вложениях до 800x600 перед отправкой, "
-"уменьшая размер загрузки и количество токенов контекста."
-
-msgid "Chat History:"
-msgstr "История чата:"
-
-msgid "Auto-save chat history"
-msgstr "Автосохранение истории чата"
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr "Сохраняет в ~/.local/share/plasmallm/chats/"
-
-msgid "Notifications:"
-msgstr "Уведомления:"
-
-msgid "Show notifications when minimized"
-msgstr "Показывать уведомления при сворачивании"
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-"Показывать системные уведомления о входящих сообщениях и вызовах "
-"инструментов, когда окно чата свернуто или закрыто."
-
-msgid "Save format:"
-msgstr "Формат сохранения:"
-
-msgid "Plain text (.txt)"
-msgstr "Обычный текст (.txt)"
-
-msgid "Structured (.jsonl)"
-msgstr "Структурированный (.jsonl)"
-
-msgid "Open Folder"
-msgstr "Открыть папку"
-
-msgid "Open the folder where chat histories are saved"
-msgstr "Открыть папку, в которой сохраняется история чатов"
-
-msgid "Auto-clear:"
-msgstr "Автоочистка:"
-
-msgid "Disabled"
-msgstr "Отключено"
-
-msgid "Instant (always clear when panel opens)"
-msgstr "Мгновенно (всегда очищать при открытии панели)"
-
-msgid "After"
-msgstr "Через"
-
-msgid "seconds"
-msgstr "секунд"
-
-msgid "minutes"
-msgstr "минут"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "

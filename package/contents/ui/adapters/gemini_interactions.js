@@ -33,18 +33,51 @@ var capabilities = {
 var previousInteractionId = "";
 var lastMessageCount = 0;
 
+var STATIC_VERTEX_GEMINI_MODELS = [
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
+    "gemini-2.5-pro",
+    "gemini-3-flash-preview",
+    "gemini-3.1-pro-preview"
+];
+
+function fetchModelsDev(providerId, filterFn, fallbackList, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://models.dev/api.json");
+    xhr.timeout = 10000;
+    xhr.ontimeout = function() {
+        callback(null, fallbackList, 200);
+    };
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                try {
+                    var data = JSON.parse(xhr.responseText);
+                    var entry = data[providerId];
+                    if (entry && entry.models) {
+                        var ids = Object.keys(entry.models);
+                        if (filterFn) ids = ids.filter(filterFn);
+                        if (ids.length > 0) {
+                            callback(null, ids, 200);
+                            return;
+                        }
+                    }
+                } catch (e) {
+                    // ignore parse error
+                }
+            }
+            callback(null, fallbackList, 200);
+        }
+    };
+    xhr.send();
+}
+
 function setHeaders(xhr, apiKey, opts) {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Api-Revision", "2026-05-20");
     if (apiKey && apiKey.length > 0) {
-        if (opts && opts.geminiAuthMethod === "agentplatform") {
-            // OAuth2 tokens usually start with 'ya29.' and are much longer than API keys.
-            // API keys from Agent Platform/Vertex AI Express Mode should use x-goog-api-key.
-            if (apiKey.indexOf("ya29.") === 0 || apiKey.length > 128) {
-                xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
-            } else {
-                xhr.setRequestHeader("x-goog-api-key", apiKey);
-            }
+        if (opts && (opts.geminiVertexAuthType === "gcloud" || apiKey.indexOf("ya29.") === 0)) {
+            xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
         } else {
             xhr.setRequestHeader("x-goog-api-key", apiKey);
         }
@@ -58,8 +91,6 @@ function fetchModels(endpoint, apiKey, opts, callback) {
         opts = null;
     }
 
-    var xhr = new XMLHttpRequest();
-    var url;
     var location = (opts && opts.geminiLocation) || "global";
     var baseUrl = endpoint.replace(/\/+$/, "");
 
@@ -68,16 +99,77 @@ function fetchModels(endpoint, apiKey, opts, callback) {
         baseUrl = baseUrl.replace("://", "://" + location + "-");
     }
 
-    if (opts && opts.geminiAuthMethod === "agentplatform") {
-        var projectId = opts.geminiProjectId || "";
-        url = baseUrl + "/v1beta1/projects/" + encodeURIComponent(projectId) + "/locations/" + encodeURIComponent(location) + "/publishers/google/models";
-    } else {
-        url = baseUrl + "/v1beta/models?pageSize=1000";
+    var isAgentPlatform = opts && opts.geminiAuthMethod === "agentplatform";
+    var isGcloud = opts && opts.geminiVertexAuthType === "gcloud";
+    var projectId = (opts && opts.geminiProjectId ? opts.geminiProjectId.trim() : "");
+
+    var geminiFilter = function(m) {
+        var lower = m.toLowerCase();
+        return lower.indexOf("gemini") !== -1 && lower.indexOf("-tts") === -1 && lower.indexOf("embedding") === -1;
+    };
+
+    if (isAgentPlatform) {
+        // If gcloud auth with a project ID is specified, attempt Model Garden query first
+        if (isGcloud && projectId.length > 0) {
+            var xhr = new XMLHttpRequest();
+            var url = baseUrl + "/v1beta1/projects/" + encodeURIComponent(projectId) + "/locations/" + encodeURIComponent(location) + "/publishers/google/models";
+            xhr.open("GET", url);
+            xhr.timeout = 15000;
+            setHeaders(xhr, apiKey, opts);
+
+            xhr.ontimeout = function() {
+                fetchModelsDev("google-vertex", geminiFilter, STATIC_VERTEX_GEMINI_MODELS, callback);
+            };
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        try {
+                            var response = JSON.parse(xhr.responseText);
+                            var models = [];
+                            var rawModels = response.publisherModels || response.models || [];
+                            for (var i = 0; i < rawModels.length; i++) {
+                                var m = rawModels[i];
+                                var name = m.name || "";
+                                if (name.indexOf("models/") === 0) name = name.substring(7);
+                                else if (name.indexOf("publishers/google/models/") !== -1) {
+                                    name = name.split("/").pop();
+                                }
+                                if (name.toLowerCase().indexOf("gemini") !== -1) {
+                                    models.push(name);
+                                }
+                            }
+                            if (models.length > 0) {
+                                callback(null, models, xhr.status);
+                                return;
+                            }
+                        } catch (e) {
+                            // parse failed
+                        }
+                    }
+                    // If Model Garden query failed, fallback to models.dev
+                    fetchModelsDev("google-vertex", geminiFilter, STATIC_VERTEX_GEMINI_MODELS, callback);
+                }
+            };
+            xhr.send();
+            return;
+        }
+
+        // For Express Mode (API key) or missing project ID, query models.dev directly
+        fetchModelsDev("google-vertex", geminiFilter, STATIC_VERTEX_GEMINI_MODELS, callback);
+        return;
     }
 
+    // Google AI Studio
+    var xhr = new XMLHttpRequest();
+    var url = baseUrl + "/v1beta/models?pageSize=1000";
     xhr.open("GET", url);
     xhr.timeout = 30000;
     setHeaders(xhr, apiKey, opts);
+
+    xhr.ontimeout = function() {
+        callback(i18n("Request timed out after 30 seconds"), null);
+    };
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -85,26 +177,14 @@ function fetchModels(endpoint, apiKey, opts, callback) {
                 try {
                     var response = JSON.parse(xhr.responseText);
                     var models = [];
-                    // Model Garden returns 'publisherModels', project models return 'models'
-                    var rawModels = response.publisherModels || response.models || [];
+                    var rawModels = response.models || [];
                     for (var i = 0; i < rawModels.length; i++) {
                         var m = rawModels[i];
                         var name = m.name || "";
                         if (name.indexOf("models/") === 0) name = name.substring(7);
-                        else if (name.indexOf("publishers/google/models/") !== -1) {
-                            name = name.split("/").pop();
-                        }
-
-                        if (opts && opts.geminiAuthMethod === "agentplatform") {
-                            // Filter for Gemini models if listing from Model Garden
-                            if (name.toLowerCase().indexOf("gemini") !== -1) {
-                                models.push(name);
-                            }
-                        } else {
-                            var methods = m.supportedGenerationMethods || [];
-                            if (methods.indexOf("generateContent") !== -1) {
-                                models.push(name);
-                            }
+                        var methods = m.supportedGenerationMethods || [];
+                        if (methods.indexOf("generateContent") !== -1) {
+                            models.push(name);
                         }
                     }
                     callback(null, models, xhr.status);
@@ -382,7 +462,7 @@ function sendStreaming(opts) {
     var baseUrl = endpoint.replace(/\/+$/, "");
 
     if (opts && opts.geminiAuthMethod === "agentplatform") {
-        var projectId = opts.geminiProjectId || "";
+        var projectId = (opts.geminiProjectId ? opts.geminiProjectId.trim() : "");
         var location = opts.geminiLocation || "global";
         
         // Automatically prefix location if it's not global and not already prefixed.
@@ -390,10 +470,15 @@ function sendStreaming(opts) {
             baseUrl = baseUrl.replace("://", "://" + location + "-");
         }
 
-        url = baseUrl +
-              "/v1beta1/projects/" + encodeURIComponent(projectId) +
-              "/locations/" + encodeURIComponent(location) +
-              "/interactions?alt=sse";
+        if (projectId.length > 0) {
+            url = baseUrl +
+                  "/v1beta1/projects/" + encodeURIComponent(projectId) +
+                  "/locations/" + encodeURIComponent(location) +
+                  "/interactions?alt=sse";
+        } else {
+            url = baseUrl +
+                  "/v1beta1/interactions?alt=sse";
+        }
     } else {
         url = baseUrl + "/v1beta/interactions?alt=sse";
     }

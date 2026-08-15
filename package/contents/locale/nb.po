@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-03 23:22-0400\n"
+"POT-Creation-Date: 2026-08-14 10:20-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -16,6 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Color button"
+msgstr "Fargeknapp"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Gjeldende farge er %1. Denne knappen vil åpne en fargevelgerdialog."
+
+msgid "Current color is %1."
+msgstr "Gjeldende farge er %1."
 
 msgid ""
 "Anthropic enables extended thinking when effort is not Off, using the token "
@@ -255,9 +264,6 @@ msgstr "Spør før kjøring"
 msgid "Error: URL must start with http:// or https://"
 msgstr "Feil: URL må starte med http:// eller https://"
 
-msgid "Error: content exceeds max write size (%1 bytes)"
-msgstr "Feil: innhold overskrider maksimal skrivingsstørrelse (%1 byte)"
-
 msgid "No command provided."
 msgstr "Ingen kommando oppgitt."
 
@@ -305,6 +311,9 @@ msgid ""
 msgstr ""
 "Verken 'tmux' eller 'screen' ble funnet på systemet ditt. Øktmultipleksing "
 "er utilgjengelig."
+
+msgid "Error: content exceeds max write size (%1 bytes)"
+msgstr "Feil: innhold overskrider maksimal skrivingsstørrelse (%1 byte)"
 
 msgid ""
 "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
@@ -388,58 +397,6 @@ msgstr "Muliggjør LLM-utløste nevrale nettsøk via Exa API."
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
 
-msgid "Color button"
-msgstr "Fargeknapp"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Gjeldende farge er %1. Denne knappen vil åpne en fargevelgerdialog."
-
-msgid "Current color is %1."
-msgstr "Gjeldende farge er %1."
-
-msgid "Stop command"
-msgstr "Stopp kommando"
-
-msgid "Open terminal attached to this session"
-msgstr "Åpne terminal tilknyttet denne sesjonen"
-
-msgid "Copy output"
-msgstr "Kopier utdata"
-
-msgid "You"
-msgstr "Du"
-
-msgid "Error"
-msgstr "Feil"
-
-msgid "Web Search"
-msgstr "Nettsøk"
-
-msgid "Assistant"
-msgstr "Assistent"
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"Mathtext-rendering falt tilbake til Unicode-erstatning (matplotlib er ikke "
-"installert eller det oppstod en feil)"
-
-msgid "Thinking"
-msgstr "Tenker…"
-
-msgid "Searched for: %1"
-msgstr "Søkte etter: %1"
-
-msgid "Show %1 results"
-msgstr "Vis %1 resultater"
-
-msgid "Copy to clipboard"
-msgstr "Kopier til utklippstavle"
-
-msgid "Share output with assistant"
-msgstr "Del utdata med assistenten"
-
 msgid "Profile Header:"
 msgstr "Profiloverskrift:"
 
@@ -461,8 +418,14 @@ msgstr "Chat-etiketter:"
 msgid "User label:"
 msgstr "Brukeretikett:"
 
+msgid "You"
+msgstr "Du"
+
 msgid "Assistant label:"
 msgstr "Assistentetikett:"
+
+msgid "Assistant"
+msgstr "Assistent"
 
 msgid "Use model name as assistant label"
 msgstr "Bruk modellnavn som assistentetikett"
@@ -548,6 +511,243 @@ msgstr "Avslå"
 msgid "Approve"
 msgstr "Godkjenn"
 
+msgid "OpenAI-compatible"
+msgstr "OpenAI-kompatibel"
+
+msgid "Anthropic"
+msgstr "Anthropic"
+
+msgid "Google Gemini"
+msgstr "Google Gemini"
+
+msgid "Exa"
+msgstr "Exa"
+
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr "Klarte ikke hente gcloud-token (avslutningskode %1): %2"
+
+msgid "New Profile"
+msgstr "Ny profil"
+
+msgid "%1 (Copy)"
+msgstr "%1 (Kopi)"
+
+msgid "Profile:"
+msgstr "Profil:"
+
+msgid "Rename Profile"
+msgstr "Gi nytt navn til profil"
+
+msgid "Duplicate Profile"
+msgstr "Dupliser profil"
+
+msgid "Delete Profile"
+msgstr "Slett profil"
+
+msgid "Profile Name"
+msgstr "Profilnavn"
+
+msgid "Rename"
+msgstr "Gi nytt navn"
+
+msgid "Adapter:"
+msgstr "Adapter:"
+
+msgid "Exa does not support tool use"
+msgstr "Exa støtter ikke bruk av verktøy"
+
+msgid "Platform:"
+msgstr "Plattform:"
+
+msgid "Google AI Studio"
+msgstr "Google AI Studio"
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr "Google Cloud Agent Platform (Vertex AI)"
+
+msgid "Authentication:"
+msgstr "Autentisering:"
+
+msgid "API Key (Express Mode)"
+msgstr "API-nøkkel (ekspressmodus)"
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr "Google Cloud CLI (gcloud)"
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLI ikke funnet. Installer det for å bruke denne "
+"autentiseringsmetoden."
+
+msgid "API Variant:"
+msgstr "API-variant:"
+
+msgid "Legacy (generateContent)"
+msgstr "Eldre (generateContent)"
+
+msgid "Interactions API (Stateful)"
+msgstr "Interactions-API (tilstandsbasert)"
+
+msgid "Project ID:"
+msgstr "Prosjekt-ID:"
+
+msgid "Location:"
+msgstr "Plassering:"
+
+msgid "Provider:"
+msgstr "Leverandør:"
+
+msgid "API Endpoint:"
+msgstr "API-endepunkt:"
+
+msgid "Model:"
+msgstr "Modell:"
+
+msgid "Refreshing…"
+msgstr "Oppdaterer…"
+
+msgid "Refresh model list"
+msgstr "Oppdater modellliste"
+
+msgid "API Key:"
+msgstr "API-nøkkel:"
+
+msgid "Paste short-lived access token"
+msgstr "Lim inn kortvarig tilgangstoken"
+
+msgid "Optional - for OpenAI, etc."
+msgstr "Valgfritt - for OpenAI, osv."
+
+msgid "Stored in KDE Wallet"
+msgstr "Lagret i KDE Wallet"
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr "KDE Wallet utilgjengelig — nøkkel lagret i konfigurasjonsfil"
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "Temperatur: %1%"
+
+msgid "Precise"
+msgstr "Presist"
+
+msgid "Creative"
+msgstr "Kreativt"
+
+msgid "Max Tokens:"
+msgstr "Maksimale tokens:"
+
+msgid "Thinking:"
+msgstr "Tenkning:"
+
+msgid "Off"
+msgstr "Av"
+
+msgid "Low"
+msgstr "Lav"
+
+msgid "Medium"
+msgstr "Middels"
+
+msgid "High"
+msgstr "Høy"
+
+msgid "Thinking budget:"
+msgstr "Tenkningsbudsjett:"
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr "Vis tanker i chatten (sammenleggbar)"
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"Når aktivert, vises modellens resonnering over hvert svar med en "
+"sammenleggbar overskrift. Utveksling av signerte tanker til API-et skjer "
+"uavhengig av denne innstillingen."
+
+msgid "Use Responses API"
+msgstr "Bruk Responses API"
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"Nødvendig for å vise resonnerende innhold på OpenAI / Poe / OpenRouter / "
+"Azure (POST til /v1/responses i stedet for /v1/chat/completions). Settes "
+"automatisk ved valg av forhåndsinnstilling."
+
+msgid "Attachments:"
+msgstr "Vedlegg:"
+
+msgid "Resize image attachments"
+msgstr "Endre størrelse på bildevedlegg"
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+"Endrer størrelse på store bildevedlegg til å passe innenfor 800x600 før "
+"sending, noe som reduserer opplastingsstørrelse og konteksttokener."
+
+msgid "Chat History:"
+msgstr "Chathistorikk:"
+
+msgid "Auto-save chat history"
+msgstr "Lagre chathistorikk automatisk"
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr "Lagrer til ~/.local/share/plasmallm/chats/"
+
+msgid "Notifications:"
+msgstr "Varslinger:"
+
+msgid "Show notifications when minimized"
+msgstr "Vis varsler når minimert"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+"Vis systemvarsler for innkommende meldinger og verktøykall når chat-vinduet "
+"er minimert eller lukket."
+
+msgid "Save format:"
+msgstr "Lagringsformat:"
+
+msgid "Plain text (.txt)"
+msgstr "Ren tekst (.txt)"
+
+msgid "Structured (.jsonl)"
+msgstr "Strukturert (.jsonl)"
+
+msgid "Open Folder"
+msgstr "Åpne mappe"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "Åpne mappen der chatloggene lagres"
+
+msgid "Auto-clear:"
+msgstr "Automatisk sletting:"
+
+msgid "Disabled"
+msgstr "Deaktivert"
+
+msgid "Instant (always clear when panel opens)"
+msgstr "Øyeblikkelig (alltid slett når panel åpnes)"
+
+msgid "After"
+msgstr "Etter"
+
+msgid "seconds"
+msgstr "sekunder"
+
+msgid "minutes"
+msgstr "minutter"
+
 msgid "General Tool Settings"
 msgstr "Generelle verktøyinnstillinger"
 
@@ -559,9 +759,6 @@ msgstr "Aktiver verktøy"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "Hovedbryter for all verktøykallfunksjonalitet."
-
-msgid "Exa does not support tool use"
-msgstr "Exa støtter ikke bruk av verktøy"
 
 msgid "Desktop Automation:"
 msgstr "Skrivebordsautomatisering:"
@@ -651,6 +848,43 @@ msgstr ""
 
 msgid "Individual Tools"
 msgstr "Individuelle verktøy"
+
+msgid "Stop command"
+msgstr "Stopp kommando"
+
+msgid "Open terminal attached to this session"
+msgstr "Åpne terminal tilknyttet denne sesjonen"
+
+msgid "Copy output"
+msgstr "Kopier utdata"
+
+msgid "Error"
+msgstr "Feil"
+
+msgid "Web Search"
+msgstr "Nettsøk"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Mathtext-rendering falt tilbake til Unicode-erstatning (matplotlib er ikke "
+"installert eller det oppstod en feil)"
+
+msgid "Thinking"
+msgstr "Tenker…"
+
+msgid "Searched for: %1"
+msgstr "Søkte etter: %1"
+
+msgid "Show %1 results"
+msgstr "Vis %1 resultater"
+
+msgid "Copy to clipboard"
+msgstr "Kopier til utklippstavle"
+
+msgid "Share output with assistant"
+msgstr "Del utdata med assistenten"
 
 msgid "Approve the pending tool request"
 msgstr "Godkjenn ventende verktøyforespørsel"
@@ -816,247 +1050,12 @@ msgstr "Avbryt LLM-forespørsel"
 msgid "Drop files here to attach"
 msgstr "Slipp filer her for å legge ved"
 
-msgid "OpenAI-compatible"
-msgstr "OpenAI-kompatibel"
-
-msgid "Anthropic"
-msgstr "Anthropic"
-
-msgid "Google Gemini"
-msgstr "Google Gemini"
-
-msgid "Exa"
-msgstr "Exa"
-
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Klarte ikke hente gcloud-token (avslutningskode %1): %2"
-
-msgid "New Profile"
-msgstr "Ny profil"
-
-msgid "%1 (Copy)"
-msgstr "%1 (Kopi)"
-
-msgid "Profile:"
-msgstr "Profil:"
-
-msgid "Rename Profile"
-msgstr "Gi nytt navn til profil"
-
-msgid "Duplicate Profile"
-msgstr "Dupliser profil"
-
-msgid "Delete Profile"
-msgstr "Slett profil"
-
-msgid "Profile Name"
-msgstr "Profilnavn"
-
-msgid "Rename"
-msgstr "Gi nytt navn"
-
-msgid "Adapter:"
-msgstr "Adapter:"
-
-msgid "Authentication:"
-msgstr "Autentisering:"
-
-msgid "API Key (Express Mode)"
-msgstr "API-nøkkel (ekspressmodus)"
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr "Google Cloud CLI (gcloud)"
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLI ikke funnet. Installer det for å bruke denne "
-"autentiseringsmetoden."
-
-msgid "API Variant:"
-msgstr "API-variant:"
-
-msgid "Legacy (generateContent)"
-msgstr "Eldre (generateContent)"
-
-msgid "Interactions API (Stateful)"
-msgstr "Interactions-API (tilstandsbasert)"
-
-msgid "Platform:"
-msgstr "Plattform:"
-
-msgid "Google AI Studio"
-msgstr "Google AI Studio"
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr "Google Cloud Agent Platform (Vertex AI)"
-
-msgid "Project ID:"
-msgstr "Prosjekt-ID:"
-
-msgid "Location:"
-msgstr "Plassering:"
-
-msgid "Provider:"
-msgstr "Leverandør:"
-
-msgid "API Endpoint:"
-msgstr "API-endepunkt:"
-
-msgid "Model:"
-msgstr "Modell:"
-
-msgid "Refreshing…"
-msgstr "Oppdaterer…"
-
-msgid "Refresh model list"
-msgstr "Oppdater modellliste"
-
-msgid "API Key:"
-msgstr "API-nøkkel:"
-
-msgid "Paste short-lived access token"
-msgstr "Lim inn kortvarig tilgangstoken"
-
-msgid "Optional - for OpenAI, etc."
-msgstr "Valgfritt - for OpenAI, osv."
-
-msgid "Stored in KDE Wallet"
-msgstr "Lagret i KDE Wallet"
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Wallet utilgjengelig — nøkkel lagret i konfigurasjonsfil"
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "Temperatur: %1%"
-
-msgid "Precise"
-msgstr "Presist"
-
-msgid "Creative"
-msgstr "Kreativt"
-
-msgid "Max Tokens:"
-msgstr "Maksimale tokens:"
-
-msgid "Thinking:"
-msgstr "Tenkning:"
-
-msgid "Off"
-msgstr "Av"
-
-msgid "Low"
-msgstr "Lav"
-
-msgid "Medium"
-msgstr "Middels"
-
-msgid "High"
-msgstr "Høy"
-
-msgid "Thinking budget:"
-msgstr "Tenkningsbudsjett:"
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr "Vis tanker i chatten (sammenleggbar)"
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-"Når aktivert, vises modellens resonnering over hvert svar med en "
-"sammenleggbar overskrift. Utveksling av signerte tanker til API-et skjer "
-"uavhengig av denne innstillingen."
-
-msgid "Use Responses API"
-msgstr "Bruk Responses API"
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-"Nødvendig for å vise resonnerende innhold på OpenAI / Poe / OpenRouter / "
-"Azure (POST til /v1/responses i stedet for /v1/chat/completions). Settes "
-"automatisk ved valg av forhåndsinnstilling."
-
-msgid "Attachments:"
-msgstr "Vedlegg:"
-
-msgid "Resize image attachments"
-msgstr "Endre størrelse på bildevedlegg"
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-"Endrer størrelse på store bildevedlegg til å passe innenfor 800x600 før "
-"sending, noe som reduserer opplastingsstørrelse og konteksttokener."
-
-msgid "Chat History:"
-msgstr "Chathistorikk:"
-
-msgid "Auto-save chat history"
-msgstr "Lagre chathistorikk automatisk"
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr "Lagrer til ~/.local/share/plasmallm/chats/"
-
-msgid "Notifications:"
-msgstr "Varslinger:"
-
-msgid "Show notifications when minimized"
-msgstr "Vis varsler når minimert"
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-"Vis systemvarsler for innkommende meldinger og verktøykall når chat-vinduet "
-"er minimert eller lukket."
-
-msgid "Save format:"
-msgstr "Lagringsformat:"
-
-msgid "Plain text (.txt)"
-msgstr "Ren tekst (.txt)"
-
-msgid "Structured (.jsonl)"
-msgstr "Strukturert (.jsonl)"
-
-msgid "Open Folder"
-msgstr "Åpne mappe"
-
-msgid "Open the folder where chat histories are saved"
-msgstr "Åpne mappen der chatloggene lagres"
-
-msgid "Auto-clear:"
-msgstr "Automatisk sletting:"
-
-msgid "Disabled"
-msgstr "Deaktivert"
-
-msgid "Instant (always clear when panel opens)"
-msgstr "Øyeblikkelig (alltid slett når panel åpnes)"
-
-msgid "After"
-msgstr "Etter"
-
-msgid "seconds"
-msgstr "sekunder"
-
-msgid "minutes"
-msgstr "minutter"
-
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
 msgstr ""
-"Internt skjema for API-nøkler er migrert. Hvis nøkkelen din nå mangler "
-"eller ikke fungerer, kan du gjenopprette den gamle nøkkelen fra "
-"KWalletManager."
+"Internt skjema for API-nøkler er migrert. Hvis nøkkelen din nå mangler eller "
+"ikke fungerer, kan du gjenopprette den gamle nøkkelen fra KWalletManager."
 
 msgid "Failed to stop driving: %1"
 msgstr "Klarte ikke å stoppe styring: %1"
