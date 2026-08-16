@@ -19,6 +19,7 @@ PlasmaLLM is designed for quick tasks and system-integrated workflows—not as a
 - **Voice Input (STT)**: Hold-to-talk microphone that transcribes via a designated profile (OpenAI-compatible `/audio/transcriptions`, e.g. OpenRouter `openai/gpt-transcribe`) and sends the text to your active chat profile.
 - **Secure Storage**: Integrates with KWallet for secure management of API keys and secrets.
 - **Markdown Rendering**: Full support for markdown, including syntax highlighting for code blocks and LaTeX for mathematical notation.
+- **Context Compaction**: Save tokens and speed up local model processing by reducing the size of the context that needs to process.
 
 ## Requirements
 
@@ -75,6 +76,7 @@ plasmapkg2 --install PlasmaLLM-*.plasmoid
 ```
 
 ### From Source
+## Note: Building code directly from master branch may pull in unreleased features without translations from English. Translations are only done in release prep. Checkout a specific tag first if you'd prefer to build a particular release.
 ```bash
 git clone https://github.com/joshuaeroman/plasmallm.git
 cd plasmallm
