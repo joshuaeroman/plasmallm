@@ -444,6 +444,17 @@ BaseConfigPage {
         }
 
         QQC2.CheckBox {
+            text: i18n("Show Context compaction summary")
+            checked: cfg_showIconCompacted
+            onCheckedChanged: {
+                if (_initialized) {
+                    cfg_showIconCompacted = checked;
+                    rootItem.triggerCapture();
+                }
+            }
+        }
+
+        QQC2.CheckBox {
             text: i18n("Show Clear chat")
             checked: cfg_showIconClear
             onCheckedChanged: {

@@ -224,6 +224,10 @@ function getEnabledTools(config) {
     if (config.toolsSetClipboardEnabled) enabled.push("set_clipboard");
     if (config.toolsNotifyEnabled) enabled.push("notify");
     if (config.toolsOpenUrlEnabled) enabled.push("open_url");
+    if (config.compactionEnabled) {
+        enabled.push("restore_context");
+        enabled.push("recall_attachment");
+    }
 
     if (config.enableDesktopAutomation) {
         enabled.push("StartSession");
@@ -252,6 +256,8 @@ function isAutoRun(toolId, config) {
     }
     switch (toolId) {
         case "web_search": return true;
+        case "restore_context": return true;
+        case "recall_attachment": return true;
         case "run_command": return config.autoRunCommands;
         case "read_file": return config.toolsReadFileAutoRun;
         case "write_file": return config.toolsWriteFileAutoRun;
@@ -492,7 +498,8 @@ function _toolDescriptionsCatalog() {
         i18n("Set the content of the system clipboard."),
         i18n("Show a system notification."),
         i18n("Open a URL in the default application (e.g., web browser)."),
-        i18n("Perform a web search to find current information, news, or specific facts.")
+        i18n("Perform a web search to find current information, news, or specific facts."),
+        i18n("Restore the full verbatim text and tool outputs of previously compacted messages by specifying the start and end message IDs from a cited message range.")
     ];
 }
 

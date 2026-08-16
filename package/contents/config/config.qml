@@ -18,6 +18,11 @@ ConfigModel {
         source: "configSpeech.qml"
     }
     ConfigCategory {
+        name: i18n("Context Compaction")
+        icon: "archive-insert"
+        source: "configCompaction.qml"
+    }
+    ConfigCategory {
         name: i18n("Appearance")
         icon: "preferences-desktop-font"
         source: "configAppearance.qml"

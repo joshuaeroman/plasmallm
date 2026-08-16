@@ -18,6 +18,7 @@ import "profiles.js" as Profiles
 import "toolManager.js" as ToolManager
 import "driverManager.js" as DriverManager
 import "stt.js" as Stt
+import "contextCompactor.js" as ContextCompactor
 import "legacyChatLoader.js" as LegacyChatLoader
 
 PlasmoidItem {
@@ -239,6 +240,12 @@ PlasmoidItem {
     property string ollamaSearchApiKey: ""
     property string searxngApiKey: ""
     property string exaApiKey: ""
+    property var activeCompaction: ({
+        summary: "",
+        compactedUpToMsgId: "",
+        lastCompactedTimestamp: ""
+    })
+    property bool isCompacting: false
     property bool walletAvailable: false
     property int toolCallDepth: 0
     readonly property bool enableToolCallLimit: Plasmoid.configuration.enableToolCallLimit
@@ -332,6 +339,346 @@ PlasmoidItem {
                 callback(null, fallbackKeyForSlot(slot) || "");
             }
         );
+    }
+
+    /**
+     * Resolves endpoint, apiKey, and model for the configured compaction profile.
+     */
+    function loadCompactorConfig(callback) {
+        var profileId = Plasmoid.configuration.compactionProfileId || "active";
+        if (profileId === "active" || !profileId) {
+            callback({
+                endpoint: Plasmoid.configuration.apiEndpoint,
+                apiKey: root.apiKey || "",
+                model: Plasmoid.configuration.modelName,
+                apiType: root.effectiveApiType,
+                geminiAuthMethod: Plasmoid.configuration.geminiAuthMethod,
+                geminiProjectId: Plasmoid.configuration.geminiProjectId,
+                geminiLocation: Plasmoid.configuration.geminiLocation,
+                geminiVertexAuthType: Plasmoid.configuration.geminiVertexAuthType,
+                usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI
+            });
+            return;
+        }
+
+        var profiles = Profiles.loadProfilesRaw(Plasmoid.configuration.profiles);
+        var targetProf = null;
+        for (var i = 0; i < profiles.length; i++) {
+            if (profiles[i].id === profileId) {
+                targetProf = profiles[i];
+                break;
+            }
+        }
+
+        if (!targetProf) {
+            callback({
+                endpoint: Plasmoid.configuration.apiEndpoint,
+                apiKey: root.apiKey || "",
+                model: Plasmoid.configuration.modelName,
+                apiType: root.effectiveApiType,
+                geminiAuthMethod: Plasmoid.configuration.geminiAuthMethod,
+                geminiProjectId: Plasmoid.configuration.geminiProjectId,
+                geminiLocation: Plasmoid.configuration.geminiLocation,
+                geminiVertexAuthType: Plasmoid.configuration.geminiVertexAuthType,
+                usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI
+            });
+            return;
+        }
+
+        var slot = Api.currentKeySlot(
+            targetProf.id,
+            targetProf.apiType || "openai",
+            targetProf.providerName || "",
+            targetProf.apiEndpoint || "",
+            targetProf.geminiAuthMethod || ""
+        );
+
+        function closeHandle(handle) {
+            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+        }
+
+        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
+            function(handle) {
+                if (handle < 0) {
+                    callback({
+                        endpoint: targetProf.apiEndpoint,
+                        apiKey: fallbackKeyForSlot(slot) || "",
+                        model: targetProf.modelName,
+                        apiType: targetProf.apiType || "openai",
+                        geminiAuthMethod: targetProf.geminiAuthMethod,
+                        geminiProjectId: targetProf.geminiProjectId,
+                        geminiLocation: targetProf.geminiLocation,
+                        geminiVertexAuthType: targetProf.geminiVertexAuthType,
+                        usesResponsesAPI: targetProf.usesResponsesAPI
+                    });
+                    return;
+                }
+                root.walletAvailable = true;
+                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", slot, "PlasmaLLM"],
+                    function(password) {
+                        closeHandle(handle);
+                        var key = (password && password.length > 0)
+                            ? String(password).replace(/^\s+|\s+$/g, "")
+                            : (fallbackKeyForSlot(slot) || "");
+                        callback({
+                            endpoint: targetProf.apiEndpoint,
+                            apiKey: key,
+                            model: targetProf.modelName,
+                            apiType: targetProf.apiType || "openai",
+                            geminiAuthMethod: targetProf.geminiAuthMethod,
+                            geminiProjectId: targetProf.geminiProjectId,
+                            geminiLocation: targetProf.geminiLocation,
+                            geminiVertexAuthType: targetProf.geminiVertexAuthType,
+                            usesResponsesAPI: targetProf.usesResponsesAPI
+                        });
+                    },
+                    function(err) {
+                        closeHandle(handle);
+                        callback({
+                            endpoint: targetProf.apiEndpoint,
+                            apiKey: fallbackKeyForSlot(slot) || "",
+                            model: targetProf.modelName,
+                            apiType: targetProf.apiType || "openai",
+                            geminiAuthMethod: targetProf.geminiAuthMethod,
+                            geminiProjectId: targetProf.geminiProjectId,
+                            geminiLocation: targetProf.geminiLocation,
+                            geminiVertexAuthType: targetProf.geminiVertexAuthType,
+                            usesResponsesAPI: targetProf.usesResponsesAPI
+                        });
+                    }
+                );
+            },
+            function(err) {
+                callback({
+                    endpoint: targetProf.apiEndpoint,
+                    apiKey: fallbackKeyForSlot(slot) || "",
+                    model: targetProf.modelName,
+                    apiType: targetProf.apiType || "openai",
+                    geminiAuthMethod: targetProf.geminiAuthMethod,
+                    geminiProjectId: targetProf.geminiProjectId,
+                    geminiLocation: targetProf.geminiLocation,
+                    geminiVertexAuthType: targetProf.geminiVertexAuthType,
+                    usesResponsesAPI: targetProf.usesResponsesAPI
+                });
+            }
+        );
+    }
+
+    /**
+     * Retrieves and formats raw transcript for a range of messages by ID.
+     */
+    function getMessagesRange(startMsgId, endMsgId) {
+        if (!startMsgId || !endMsgId) return "";
+        var startIdx = -1;
+        var endIdx = -1;
+
+        function idMatches(actualId, queryId, idx) {
+            if (!queryId) return false;
+            var cleanQuery = String(queryId).replace(/^msg_/, "").trim();
+            if (cleanQuery === String(idx)) return true;
+            if (actualId && actualId === queryId) return true;
+            var cleanActual = String(actualId || "").replace(/^msg_/, "").trim();
+            return cleanActual === cleanQuery;
+        }
+
+        for (var i = 1; i < chatMessages.count; i++) {
+            var m = chatMessages.get(i);
+            var id = m.msgId || m.id || ("msg_" + i);
+            if (idMatches(id, startMsgId, i) && startIdx === -1) {
+                startIdx = i;
+            }
+            if (idMatches(id, endMsgId, i)) {
+                endIdx = i;
+            }
+        }
+
+        if (startIdx === -1 || endIdx === -1) {
+            if (startIdx !== -1 && endIdx === -1) endIdx = startIdx;
+            else if (startIdx === -1 && endIdx !== -1) startIdx = endIdx;
+            else return "";
+        }
+
+        if (startIdx > endIdx) {
+            var tmp = startIdx;
+            startIdx = endIdx;
+            endIdx = tmp;
+        }
+
+        var lines = ["=== Restored Messages from " + startMsgId + " to " + endMsgId + " ==="];
+        for (var k = startIdx; k <= endIdx; k++) {
+            var msg = chatMessages.get(k);
+            if (!msg || msg.role === "system") continue;
+            var mid = k;
+            var time = msg.timestamp_api || "";
+            lines.push("[" + mid + "] Role: " + msg.role + (time ? " (" + time + ")" : ""));
+            if (msg.role === "tool") {
+                if (msg.tool_call_id) lines.push("Tool Call ID: " + msg.tool_call_id);
+                lines.push("Output:\n" + (msg.content || ""));
+            } else {
+                if (msg.tool_calls_json && msg.tool_calls_json.length > 0) {
+                    try {
+                        var calls = JSON.parse(msg.tool_calls_json);
+                        lines.push("Tool Calls:");
+                        for (var c = 0; c < calls.length; c++) {
+                            var fn = calls[c]["function"] || {};
+                            lines.push("  - " + fn.name + "(" + (fn.arguments || "") + ")");
+                        }
+                    } catch(e) {}
+                }
+                if (msg.content && msg.content.length > 0) {
+                    lines.push("Content:\n" + msg.content);
+                }
+            }
+            lines.push("");
+        }
+        lines.push("=== End of Restored Messages ===");
+        return lines.join("\n");
+    }
+
+    function getAttachmentInfo(target) {
+        if (!target) return null;
+        var cleanTarget = String(target).trim().toLowerCase();
+        
+        for (var i = 1; i < chatMessages.count; i++) {
+            var msg = chatMessages.get(i);
+            if (!msg || !msg.attachments_json || msg.attachments_json.length === 0) continue;
+            
+            var isIndexMatch = (String(i) === cleanTarget || ("msg_" + i) === cleanTarget || (msg.msgId && String(msg.msgId).toLowerCase() === cleanTarget));
+            try {
+                var atts = JSON.parse(msg.attachments_json);
+                for (var a = 0; a < atts.length; a++) {
+                    var att = atts[a];
+                    var fn = (att.fileName || "").toLowerCase();
+                    var fp = (att.filePath || "").toLowerCase();
+                    if (isIndexMatch || fn === cleanTarget || fp.endsWith("/" + cleanTarget) || fn.indexOf(cleanTarget) !== -1) {
+                        return {
+                            filePath: att.filePath || "",
+                            fileName: att.fileName || target,
+                            textContent: att.textContent || att.content || "",
+                            dataUrl: att.dataUrl || "",
+                            msgIndex: i
+                        };
+                    }
+                }
+            } catch(e) {}
+        }
+        return null;
+    }
+
+    function forceCompaction(recompactAll) {
+        if (isCompacting || isLoading || chatMessages.count <= 1)
+            return;
+
+        var keepTurns = Plasmoid.configuration.compactionKeepRecentTurns || 4;
+        var startIndex = 1;
+        var endIndex = -1;
+        var endMsgId = "";
+        var prevSummary = "";
+
+        if (recompactAll) {
+            // Recompact the entire conversation from message 1 up to the recent-turns cutoff
+            var userTurnsCount = 0;
+            var cutoffIndex = chatMessages.count;
+            for (var i = chatMessages.count - 1; i >= 1; i--) {
+                var m = chatMessages.get(i);
+                if (m && m.role === "user") {
+                    userTurnsCount++;
+                    if (userTurnsCount >= keepTurns) {
+                        cutoffIndex = i;
+                        break;
+                    }
+                }
+            }
+            endIndex = cutoffIndex - 1;
+            if (endIndex < 1) {
+                endIndex = Math.max(1, chatMessages.count - 1);
+            }
+            prevSummary = ""; // Start fresh summary from scratch
+        } else {
+            var lastMsgId = activeCompaction ? (activeCompaction.compactedUpToMsgId || "") : "";
+            var range = ContextCompactor.findCompactionRange(chatMessages, lastMsgId, keepTurns);
+            if (!range)
+                return;
+            startIndex = range.startIndex;
+            endIndex = range.endIndex;
+            prevSummary = activeCompaction ? (activeCompaction.summary || "") : "";
+        }
+
+        if (endIndex < startIndex || startIndex >= chatMessages.count)
+            return;
+
+        var endMsg = chatMessages.get(endIndex);
+        endMsgId = endMsg ? (endMsg.msgId || endMsg.id || "") : "";
+        if (!endMsgId)
+            return;
+
+        isCompacting = true;
+        var transcript = ContextCompactor.formatTranscript(chatMessages, startIndex, endIndex);
+
+        loadCompactorConfig(function(compConfig) {
+            if (!compConfig || !compConfig.endpoint || !compConfig.model) {
+                isCompacting = false;
+                return;
+            }
+
+            ContextCompactor.compactHistory({
+                apiType: compConfig.apiType,
+                endpoint: compConfig.endpoint,
+                apiKey: compConfig.apiKey,
+                model: compConfig.model,
+                geminiAuthMethod: compConfig.geminiAuthMethod,
+                geminiProjectId: compConfig.geminiProjectId,
+                geminiLocation: compConfig.geminiLocation,
+                geminiVertexAuthType: compConfig.geminiVertexAuthType,
+                usesResponsesAPI: compConfig.usesResponsesAPI,
+                transcript: transcript,
+                previousSummary: prevSummary,
+                instructions: Plasmoid.configuration.compactionInstructions
+            }, function(compErr, summary) {
+                isCompacting = false;
+                if (!compErr && summary && summary.length > 0) {
+                    activeCompaction = {
+                        summary: summary,
+                        compactedUpToMsgId: endMsgId,
+                        lastCompactedTimestamp: Api.localISODateTime()
+                    };
+                    saveChat();
+                } else if (compErr) {
+                    console.warn("PlasmaLLM: Context compaction error:", compErr);
+                }
+            });
+        });
+    }
+
+    /**
+     * Runs context compaction in the background if candidate uncompacted text exceeds threshold.
+     */
+    function triggerBackgroundCompactionIfNeeded() {
+        if (!Plasmoid.configuration.compactionEnabled || isCompacting || isLoading)
+            return;
+
+        var mode = Plasmoid.configuration.compactionTriggerMode || "chars";
+        var charThreshold = Plasmoid.configuration.compactionThresholdChars || 20000;
+        var turnThreshold = Plasmoid.configuration.compactionThresholdTurns || 2;
+        var keepTurns = Plasmoid.configuration.compactionKeepRecentTurns || 4;
+        var lastMsgId = activeCompaction ? (activeCompaction.compactedUpToMsgId || "") : "";
+
+        var range = ContextCompactor.findCompactionRange(chatMessages, lastMsgId, keepTurns);
+        if (!range)
+            return;
+
+        var shouldTrigger = false;
+        if (mode === "chars") {
+            shouldTrigger = range.totalChars >= charThreshold;
+        } else if (mode === "turns") {
+            shouldTrigger = (range.candidateTurns || 0) >= turnThreshold;
+        } else if (mode === "both") {
+            shouldTrigger = (range.totalChars >= charThreshold) || ((range.candidateTurns || 0) >= turnThreshold);
+        }
+
+        if (shouldTrigger) {
+            forceCompaction(false);
+        }
     }
 
     function setVoiceLatched(latched) {
@@ -1217,7 +1564,8 @@ PlasmoidItem {
             toolsHttpMaxBytes: Plasmoid.configuration.toolsHttpMaxBytes,
             toolsInstructions: Plasmoid.configuration.toolsInstructions,
             localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
-            customTools: Plasmoid.configuration.customTools
+            customTools: Plasmoid.configuration.customTools,
+            compactionEnabled: Plasmoid.configuration.compactionEnabled
         };
     }
 
@@ -1295,6 +1643,12 @@ PlasmoidItem {
         sessionAutoMode = false;
         sessionFullAutoMode = false;
         root.pendingToolCalls = [];
+        root.activeCompaction = {
+            summary: "",
+            compactedUpToMsgId: "",
+            lastCompactedTimestamp: ""
+        };
+        root.isCompacting = false;
         if (systemPromptReady) {
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
                 i18n: i18n,
@@ -1368,6 +1722,16 @@ PlasmoidItem {
             provider: Plasmoid.configuration.providerName || "",
             model: Plasmoid.configuration.modelName || ""
         }));
+
+        // Compaction state
+        if (root.activeCompaction && root.activeCompaction.summary && root.activeCompaction.summary.length > 0) {
+            lines.push(JSON.stringify({
+                _type: "compaction",
+                summary: root.activeCompaction.summary,
+                compactedUpToMsgId: root.activeCompaction.compactedUpToMsgId || "",
+                lastCompactedTimestamp: root.activeCompaction.lastCompactedTimestamp || ""
+            }));
+        }
 
         // API messages
         for (var i = 0; i < chatMessages.count; i++) {
@@ -1527,7 +1891,13 @@ PlasmoidItem {
             if (!lines[i].trim()) continue;
             try {
                 var data = JSON.parse(lines[i]);
-                if (data._type === "api") {
+                if (data._type === "compaction") {
+                    root.activeCompaction = {
+                        summary: data.summary || "",
+                        compactedUpToMsgId: data.compactedUpToMsgId || "",
+                        lastCompactedTimestamp: data.lastCompactedTimestamp || ""
+                    };
+                } else if (data._type === "api") {
                     chatMessages.append({
                         msgId: data.msgId || data.id || nextMsgId("c"),
                         turnId: data.turnId || "",
@@ -2681,7 +3051,34 @@ PlasmoidItem {
         var messages = [];
         var totalLength = 0;
 
-        for (var i = 0; i < chatMessages.count; i++) {
+        // Keep system prompt at index 0
+        if (chatMessages.count > 0) {
+            messages.push({ role: chatMessages.get(0).role, content: chatMessages.get(0).content });
+        }
+
+        // If context compaction is active, inject the compact summary
+        var startChatIdx = 1;
+        if (Plasmoid.configuration.compactionEnabled && root.activeCompaction && root.activeCompaction.summary && root.activeCompaction.summary.length > 0) {
+            messages.push({
+                role: "system",
+                content: "## Compacted Conversation History\n" +
+                         "Earlier turns in this conversation have been compacted into this summary:\n\n" +
+                         root.activeCompaction.summary +
+                         "\n\n---\n*Context Restoration: If you need the exact verbatim content or tool outputs from any cited message range above (e.g. `[1 to 4]`), call the `restore_context` tool. If you need the complete contents of an attached file, call the `recall_attachment` tool.*"
+            });
+
+            if (root.activeCompaction.compactedUpToMsgId) {
+                for (var ci = 1; ci < chatMessages.count; ci++) {
+                    var cmId = chatMessages.get(ci).msgId || chatMessages.get(ci).id;
+                    if (cmId === root.activeCompaction.compactedUpToMsgId) {
+                        startChatIdx = ci + 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        for (var i = startChatIdx; i < chatMessages.count; i++) {
             var msg = chatMessages.get(i);
             var msgContent = msg.content;
             totalLength += msgContent.length;
@@ -2906,6 +3303,7 @@ PlasmoidItem {
                     }
                     streamingMessageIndex = -1;
                     saveChat();
+                    triggerBackgroundCompactionIfNeeded();
 
                     if (!root.expanded) {
                         root.hasUnreadResponse = true;
@@ -3050,6 +3448,12 @@ PlasmoidItem {
             i18n: i18n,
             getSecret: function(key) {
                 return root[key] !== undefined ? root[key] : "";
+            },
+            getMessagesRange: function(startId, endId) {
+                return root.getMessagesRange(startId, endId);
+            },
+            getAttachmentInfo: function(target) {
+                return root.getAttachmentInfo(target);
             },
             setTimeout: function(cb, delay) {
                 var t = Qt.createQmlObject("import QtQml 2.0; Timer { interval: " + delay + "; repeat: false; }", root);

@@ -272,6 +272,24 @@ PlasmaExtras.Representation {
         try { return JSON.parse(json); } catch(e) { return []; }
     }
 
+    readonly property int compactCutoffDisplayIndex: {
+        if (!Plasmoid.configuration.compactionEnabled || !root.activeCompaction || !root.activeCompaction.summary)
+            return -1;
+
+        var keepTurns = Plasmoid.configuration.compactionKeepRecentTurns || 4;
+        var userCount = 0;
+        for (var i = root.displayMessages.count - 1; i >= 0; i--) {
+            var msg = root.displayMessages.get(i);
+            if (msg && msg.role === "user") {
+                userCount++;
+                if (userCount === keepTurns) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
     Layout.minimumWidth: Kirigami.Units.gridUnit * 20
     Layout.minimumHeight: Kirigami.Units.gridUnit * 24
     Layout.preferredWidth: Kirigami.Units.gridUnit * 28
@@ -625,6 +643,137 @@ PlasmaExtras.Representation {
                 }
             }
 
+            QQC2.Popup {
+                id: compactionSummaryDialog
+                parent: QQC2.Overlay.overlay
+                x: Math.round((parent.width - width) / 2)
+                y: Math.round((parent.height - height) / 2)
+                width: Math.min(parent.width - Kirigami.Units.largeSpacing * 2, Kirigami.Units.gridUnit * 26)
+                height: Math.min(parent.height - Kirigami.Units.largeSpacing * 2, Kirigami.Units.gridUnit * 22)
+                modal: true
+                focus: true
+                closePolicy: QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnPressOutside
+                padding: Kirigami.Units.largeSpacing
+
+                background: Rectangle {
+                    color: Kirigami.Theme.backgroundColor
+                    border.color: Kirigami.Theme.focusColor
+                    border.width: 1
+                    radius: Kirigami.Units.smallSpacing
+                }
+
+                contentItem: ColumnLayout {
+                    spacing: Kirigami.Units.smallSpacing
+
+                    RowLayout {
+                        Layout.fillWidth: true
+                        spacing: Kirigami.Units.smallSpacing
+
+                        Kirigami.Icon {
+                            source: "archive-insert"
+                            Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                            Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
+                        }
+
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            spacing: 2
+
+                            PlasmaComponents.Label {
+                                text: i18n("Compacted Context Summary")
+                                font.bold: true
+                            }
+
+                            PlasmaComponents.Label {
+                                text: {
+                                    if (!root.activeCompaction) return "";
+                                    var upTo = root.activeCompaction.compactedUpToMsgId || "";
+                                    var time = root.activeCompaction.timestamp ? new Date(root.activeCompaction.timestamp).toLocaleTimeString() : "";
+                                    return i18n("Compacted up to %1%2 • Citations active", upTo, time ? " (" + time + ")" : "");
+                                }
+                                font: Kirigami.Theme.smallFont
+                                opacity: 0.7
+                            }
+                        }
+
+                        PlasmaComponents.ToolButton {
+                            icon.name: "window-close"
+                            Accessible.name: i18n("Close")
+                            onClicked: compactionSummaryDialog.close()
+                        }
+                    }
+
+                    Kirigami.Separator {
+                        Layout.fillWidth: true
+                    }
+
+                    QQC2.ScrollView {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+
+                        QQC2.TextArea {
+                            id: compactionSummaryArea
+                            readOnly: true
+                            wrapMode: TextEdit.Wrap
+                            text: (root.activeCompaction && root.activeCompaction.summary) ? root.activeCompaction.summary : i18n("No compaction summary available.")
+                            selectByMouse: true
+                            font: Kirigami.Theme.smallFont
+                            background: Rectangle {
+                                color: Kirigami.Theme.alternateBackgroundColor
+                                radius: Kirigami.Units.smallSpacing / 2
+                            }
+                        }
+                    }
+
+                    RowLayout {
+                        Layout.fillWidth: true
+                        spacing: Kirigami.Units.smallSpacing
+
+                        PlasmaComponents.Button {
+                            text: i18n("Copy")
+                            icon.name: "edit-copy"
+                            enabled: !!(root.activeCompaction && root.activeCompaction.summary)
+                            onClicked: {
+                                clipboardHelper.text = compactionSummaryArea.text;
+                                clipboardHelper.selectAll();
+                                clipboardHelper.copy();
+                            }
+                        }
+
+                        PlasmaComponents.Button {
+                            text: root.isCompacting ? i18n("Compacting…") : i18n("Re-compact")
+                            icon.name: "view-refresh"
+                            enabled: !root.isCompacting && chatMessages.count > 1
+                            PlasmaComponents.ToolTip.text: i18n("Incrementally compact new uncompacted conversation turns.")
+                            PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                            PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+                            onClicked: {
+                                root.forceCompaction(false);
+                            }
+                        }
+
+                        PlasmaComponents.Button {
+                            text: root.isCompacting ? i18n("Compacting…") : i18n("Recompact All")
+                            icon.name: "view-refresh"
+                            enabled: !root.isCompacting && chatMessages.count > 1
+                            PlasmaComponents.ToolTip.text: i18n("Re-summarize the entire conversation from turn 1 from scratch, creating a fresh, unified compaction.")
+                            PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                            PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+                            onClicked: {
+                                root.forceCompaction(true);
+                            }
+                        }
+
+                        Item { Layout.fillWidth: true }
+
+                        PlasmaComponents.Button {
+                            text: i18n("Close")
+                            onClicked: compactionSummaryDialog.close()
+                        }
+                    }
+                }
+            }
+
             Connections {
                 target: root
                 function onConfirmRetryRequested(displayIndex, removeCount) {
@@ -714,6 +863,23 @@ PlasmaExtras.Representation {
                     clipboardHelper.text = text.trim();
                     clipboardHelper.selectAll();
                     clipboardHelper.copy();
+                }
+            }
+
+            PlasmaComponents.ToolButton {
+                id: compactionToolButton
+                icon.name: root.isCompacting ? "view-refresh" : "archive-insert"
+                visible: Plasmoid.configuration.compactionEnabled && Plasmoid.configuration.showIconCompacted && ((root.activeCompaction && root.activeCompaction.summary && root.activeCompaction.summary.length > 0) || root.isCompacting)
+                Accessible.name: i18n("View compacted context summary")
+                PlasmaComponents.ToolTip.text: root.isCompacting ? i18n("Compacting context in background…") : i18n("View compacted context summary")
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered
+                onClicked: {
+                    if (compactionSummaryDialog.opened) {
+                        compactionSummaryDialog.close();
+                    } else {
+                        compactionSummaryDialog.open();
+                    }
                 }
             }
 
@@ -871,6 +1037,7 @@ PlasmaExtras.Representation {
                     timestamp: model.timestamp !== undefined ? model.timestamp : ""
                     attachmentsStr: model.attachmentsStr !== undefined ? model.attachmentsStr : ""
                     fromVoice: !!model.fromVoice
+                    isCompacted: fullRep.compactCutoffDisplayIndex >= 0 && index < fullRep.compactCutoffDisplayIndex
                     isAwaitingResponse: index === root.streamingMessageIndex && root.isLoading
                     outputScheme: model.outputScheme !== undefined ? model.outputScheme : ""
                     tool_call_id: model.tool_call_id !== undefined ? model.tool_call_id : ""

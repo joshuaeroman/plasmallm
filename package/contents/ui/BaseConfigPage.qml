@@ -334,6 +334,8 @@ SimpleKCM {
     property bool cfg_showIconHistoryDefault
     property bool cfg_showIconCopy
     property bool cfg_showIconCopyDefault
+    property bool cfg_showIconCompacted
+    property bool cfg_showIconCompactedDefault
     property bool cfg_showIconClear
     property bool cfg_showIconClearDefault
     property bool cfg_showIconSettings
@@ -406,4 +408,19 @@ SimpleKCM {
     property int cfg_latexRenderModeDefault
     property string cfg_customTools
     property string cfg_customToolsDefault
+
+    property bool cfg_compactionEnabled
+    property bool cfg_compactionEnabledDefault
+    property string cfg_compactionProfileId
+    property string cfg_compactionProfileIdDefault
+    property string cfg_compactionTriggerMode
+    property string cfg_compactionTriggerModeDefault
+    property int cfg_compactionThresholdChars
+    property int cfg_compactionThresholdCharsDefault
+    property int cfg_compactionThresholdTurns
+    property int cfg_compactionThresholdTurnsDefault
+    property int cfg_compactionKeepRecentTurns
+    property int cfg_compactionKeepRecentTurnsDefault
+    property string cfg_compactionInstructions
+    property string cfg_compactionInstructionsDefault
 }
