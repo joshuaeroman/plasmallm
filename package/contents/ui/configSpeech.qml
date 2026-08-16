@@ -217,13 +217,8 @@ BaseConfigPage {
     }
 
     function syncModelCombo() {
-        var list = modelCombo.displayModels;
-        var name = cfg_sttModelName || "";
-        var idx = list.indexOf(name);
-        if (idx < 0)
-            idx = 0;
-        if (modelCombo.currentIndex !== idx)
-            modelCombo.currentIndex = idx;
+        if (modelPicker)
+            modelPicker.syncIndex();
     }
 
     function loadModelCache() {
@@ -453,50 +448,22 @@ BaseConfigPage {
             }
         }
 
-        RowLayout {
+        ModelPicker {
+            id: modelPicker
             Kirigami.FormData.label: i18n("Model:")
             Layout.fillWidth: true
             Layout.maximumWidth: Kirigami.Units.gridUnit * 28
-            spacing: Kirigami.Units.smallSpacing
-
-            QQC2.ComboBox {
-                id: modelCombo
-                Layout.fillWidth: true
-                Layout.preferredWidth: 0
-                Layout.minimumWidth: Kirigami.Units.gridUnit * 8
-                editable: true
-                readonly property var displayModels: {
-                    var list = availableModels.slice();
-                    if (cfg_sttModelName && cfg_sttModelName.length > 0 && list.indexOf(cfg_sttModelName) === -1)
-                        list.unshift(cfg_sttModelName);
-                    return list;
-                }
-                model: displayModels
-                displayText: cfg_sttModelName || ""
-                onActivated: function(index) {
-                    if (!_initialized) return;
-                    if (index >= 0 && index < displayModels.length)
-                        cfg_sttModelName = displayModels[index];
-                }
-                onAccepted: {
-                    if (!_initialized) return;
-                    cfg_sttModelName = editText;
-                }
-                // Keep editText in sync when selection changes externally
-                onDisplayModelsChanged: syncModelCombo()
+            modelName: cfg_sttModelName
+            availableModels: configPage.availableModels
+            fetchInProgress: configPage.fetchInProgress
+            fetchVisible: true
+            fetchEnabled: !configPage.fetchInProgress && (cfg_sttApiEndpoint || "").length > 0
+            fetchTooltip: i18n("Fetch STT models")
+            onModelSelected: function(selected) {
+                cfg_sttModelName = selected;
+                rootItem.triggerCapture();
             }
-
-            QQC2.Button {
-                text: fetchInProgress ? i18n("Fetching…") : i18n("Fetch")
-                icon.name: "view-refresh"
-                // Icon+short label avoids clipping the trailing button in narrow dialogs.
-                display: QQC2.AbstractButton.TextBesideIcon
-                enabled: !fetchInProgress && (cfg_sttApiEndpoint || "").length > 0
-                onClicked: fetchModels()
-                QQC2.ToolTip.text: i18n("Fetch STT models")
-                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
-                QQC2.ToolTip.visible: hovered
-            }
+            onFetchRequested: fetchModels()
         }
 
         QQC2.Label {

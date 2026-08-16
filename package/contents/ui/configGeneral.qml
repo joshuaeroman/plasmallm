@@ -437,24 +437,8 @@ BaseConfigPage {
     // Keep the model combo on the persisted selection. ComboBox resets
     // currentIndex to 0 when its model is replaced; defer so we win that race.
     function syncModelComboIndex() {
-        if (!modelCombo)
-            return;
-        var apply = function() {
-            if (!modelCombo)
-                return;
-            var list = modelCombo.displayModels || [];
-            var want = cfg_modelName || "";
-            var i = (want.length > 0) ? list.indexOf(want) : -1;
-            // Prefer the saved model. Index 0 is only used when nothing is saved
-            // or when the saved name was prepended at the front of the list.
-            if (i >= 0)
-                modelCombo.currentIndex = i;
-            else if (list.length > 0)
-                modelCombo.currentIndex = 0;
-        };
-        apply();
-        // ComboBox resets currentIndex when `model` is replaced; win that race.
-        Qt.callLater(apply);
+        if (modelPicker)
+            modelPicker.syncIndex();
     }
 
     function loadModelCache() {
@@ -1276,118 +1260,20 @@ BaseConfigPage {
             }
         }
 
-        RowLayout {
+        ModelPicker {
+            id: modelPicker
             Kirigami.FormData.label: i18n("Model:")
             Layout.fillWidth: true
-            spacing: Kirigami.Units.smallSpacing
-
-            QQC2.ComboBox {
-                id: modelCombo
-                Layout.fillWidth: true
-                editable: false
-
-                // Prepend the persisted model name when it isn't in the fetched
-                // list so it stays selectable (initial load, stale value, etc.).
-                readonly property var displayModels: {
-                    if (cfg_modelName && cfg_modelName.length > 0 && availableModels.indexOf(cfg_modelName) === -1) {
-                        var list = availableModels.slice();
-                        list.unshift(cfg_modelName);
-                        return list;
-                    }
-                    return availableModels;
-                }
-                model: displayModels
-                enabled: displayModels.length > 0 && !fetchInProgress
-                // Always show the saved model even if currentIndex briefly races
-                // to 0 when the model list is replaced on settings open.
-                displayText: {
-                    if (cfg_modelName && cfg_modelName.length > 0)
-                        return cfg_modelName;
-                    if (currentIndex >= 0 && currentIndex < displayModels.length)
-                        return displayModels[currentIndex];
-                    return "";
-                }
-
-                onDisplayModelsChanged: syncModelComboIndex()
-
-                Connections {
-                    target: configPage
-                    function onCfg_modelNameChanged() {
-                        syncModelComboIndex();
-                    }
-                }
-
-                popup: QQC2.Popup {
-                    width: modelCombo.width
-                    implicitHeight: Math.min(modelContentColumn.implicitHeight + (padding * 2),
-                                             Kirigami.Units.gridUnit * 20)
-                    padding: Kirigami.Units.smallSpacing
-
-                    onOpened: {
-                        modelSearchField.text = "";
-                        modelListView.currentIndex = modelCombo.currentIndex;
-                        modelSearchField.forceActiveFocus();
-                    }
-
-                    ColumnLayout {
-                        id: modelContentColumn
-                        anchors.fill: parent
-                        spacing: Kirigami.Units.smallSpacing
-
-                        Kirigami.SearchField {
-                            id: modelSearchField
-                            Layout.fillWidth: true
-                            Keys.onDownPressed: modelListView.forceActiveFocus()
-                            Keys.onReturnPressed: {
-                                if (modelListView.count > 0) {
-                                    var pick = modelListView.model[0];
-                                    cfg_modelName = pick;
-                                    modelCombo.currentIndex = modelCombo.displayModels.indexOf(pick);
-                                    modelCombo.popup.close();
-                                }
-                            }
-                        }
-
-                        QQC2.ScrollView {
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            // Use ScrollView's background or it might be transparent
-                            background: null
-
-                            ListView {
-                                id: modelListView
-                                clip: true
-                                model: modelCombo.displayModels.filter(function(m) {
-                                    return modelSearchField.text.length === 0
-                                        || m.toLowerCase().indexOf(modelSearchField.text.toLowerCase()) !== -1;
-                                })
-                                delegate: QQC2.ItemDelegate {
-                                    width: ListView.view.width
-                                    text: modelData
-                                    highlighted: ListView.isCurrentItem || modelData === cfg_modelName
-                                    onClicked: {
-                                        cfg_modelName = modelData;
-                                        modelCombo.currentIndex = modelCombo.displayModels.indexOf(modelData);
-                                        modelCombo.popup.close();
-                                        rootItem.triggerCapture();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            modelName: cfg_modelName
+            availableModels: configPage.availableModels
+            fetchInProgress: configPage.fetchInProgress
+            fetchVisible: caps.fetchModels === true
+            fetchEnabled: !configPage.fetchInProgress && (cfg_apiEndpoint || "").length > 0
+            onModelSelected: function(selected) {
+                cfg_modelName = selected;
+                rootItem.triggerCapture();
             }
-
-            QQC2.Button {
-                icon.name: "view-refresh"
-                visible: caps.fetchModels === true
-                enabled: !fetchInProgress
-                display: QQC2.AbstractButton.IconOnly
-                QQC2.ToolTip.text: fetchInProgress ? i18n("Refreshing…") : i18n("Refresh model list")
-                QQC2.ToolTip.delay: 300
-                QQC2.ToolTip.visible: hovered
-                onClicked: ensureModelsLoaded(true)
-            }
+            onFetchRequested: ensureModelsLoaded(true)
         }
 
         QQC2.Label {

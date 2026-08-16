@@ -29,6 +29,7 @@ Kirigami.AbstractCard {
     property string attachmentsStr: ""
     readonly property var attachmentPaths: attachmentsStr.length > 0 ? attachmentsStr.split("\n") : []
     property bool fromVoice: false
+    property bool isCompacted: false
     property string tool_call_id: ""
     property string toolArgs: ""
     property string toolName: ""
@@ -296,7 +297,38 @@ Kirigami.AbstractCard {
                 font: Kirigami.Theme.smallFont
                 opacity: 0.6
                 Layout.alignment: Qt.AlignVCenter
+                Layout.fillWidth: !messageItem.isCompacted
+            }
+
+            RowLayout {
+                visible: messageItem.isCompacted
+                spacing: 2
+                opacity: 0.65
+                Layout.alignment: Qt.AlignVCenter
+
+                Kirigami.Icon {
+                    source: "archive-insert"
+                    implicitWidth: Math.round(Kirigami.Units.iconSizes.small * 0.8)
+                    implicitHeight: Math.round(Kirigami.Units.iconSizes.small * 0.8)
+                }
+
+                PlasmaComponents.Label {
+                    text: i18n("compacted")
+                    font.pointSize: Math.max(7, Kirigami.Theme.smallFont.pointSize - 1)
+                }
+
+                PlasmaComponents.ToolTip.text: i18n("This message has been summarized into the compacted context. Citations active.")
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: compactedBadgeHover.hovered
+
+                HoverHandler {
+                    id: compactedBadgeHover
+                }
+            }
+
+            Item {
                 Layout.fillWidth: true
+                visible: messageItem.isCompacted
             }
 
             Kirigami.Icon {
@@ -365,7 +397,14 @@ Kirigami.AbstractCard {
             Layout.alignment: messageItem.shouldLimitWidth ? messageItem.messageAlignment : Qt.AlignLeft
             Layout.preferredHeight: contentLayout.implicitHeight + (messageItem.bubblePadding * 2)
             visible: hasBubbleContent
-            color: isUser ? root.userColor : root.assistantColor
+            color: {
+                var base = isUser ? root.userColor : root.assistantColor;
+                if (messageItem.isCompacted) {
+                    var lum = (0.299 * base.r + 0.587 * base.g + 0.114 * base.b);
+                    return lum < 0.5 ? Qt.lighter(base, 1.18) : Qt.tint(base, Qt.rgba(1, 1, 1, 0.35));
+                }
+                return base;
+            }
             radius: Math.max(4, messageItem.bubblePadding / 2)
             border.color: isError ? Kirigami.Theme.negativeTextColor : (isUser ? "transparent" : Kirigami.Theme.alternateBackgroundColor)
             border.width: isError ? 2 : 1
