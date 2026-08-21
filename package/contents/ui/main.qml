@@ -66,6 +66,8 @@ PlasmoidItem {
         var _en = Plasmoid.configuration.sttEnabled;
         var _ep = Plasmoid.configuration.sttApiEndpoint;
         var _model = Plasmoid.configuration.sttModelName;
+        var _backend = Plasmoid.configuration.sttBackend;
+        var _bin = Plasmoid.configuration.sttCliBinary;
         return Stt.isSttConfigured(Plasmoid.configuration);
     }
     readonly property bool voiceInputBusy: isRecording || isTranscribing
@@ -280,16 +282,26 @@ PlasmoidItem {
         return s;
     }
 
+    function voiceSidecarTxt(filePath) {
+        var p = String(filePath || "");
+        var slash = p.lastIndexOf("/");
+        var dot = p.lastIndexOf(".");
+        if (dot > slash)
+            return p.substring(0, dot) + ".txt";
+        return p + ".txt";
+    }
+
     function enqueueVoiceCleanup(filePath) {
         if (!filePath || String(filePath).length === 0)
             return;
         var p = String(filePath).replace(/'/g, "'\\''");
-        executable.connectSource("rm -f '" + p + "'");
+        var txt = voiceSidecarTxt(filePath).replace(/'/g, "'\\''");
+        executable.connectSource("rm -f '" + p + "' '" + txt + "'");
     }
 
     function showSttNotice(message) {
         displayMessages.append({
-            role: "assistant",
+            role: "error",
             content: message,
             shared: false,
             timestamp: currentTimestamp()
@@ -779,18 +791,20 @@ PlasmoidItem {
         var absPath = String(filePath);
         var fmt = format || Stt.formatFromPath(absPath);
         var safePath = absPath.replace(/'/g, "'\\''");
+        var cli = Stt.isCliTransport(Plasmoid.configuration);
         // Reject tiny/empty clips before paying for STT (WAV header alone is ~44 bytes;
-        // genuine speech is usually many KB). Also measure duration via soxi/ffprobe when present.
+        // genuine speech is usually many KB).
         var cmd = "f='" + safePath + "'; "
             + "if [ ! -f \"$f\" ]; then echo 'ERR empty'; exit 1; fi; "
             + "sz=$(wc -c < \"$f\" | tr -d ' '); "
             + "if [ \"${sz:-0}\" -lt 2048 ]; then echo 'ERR tiny'; exit 2; fi; "
-            + "base64 -w0 \"$f\"";
+            + (cli ? "echo OK" : "base64 -w0 \"$f\"");
 
         pendingSttReads[cmd] = {
             filePath: absPath,
             format: fmt,
-            gen: myGen
+            gen: myGen,
+            cli: cli
         };
         sttFileReader.connectSource(cmd);
     }
@@ -853,9 +867,74 @@ PlasmoidItem {
         });
     }
 
+    function finishSttWithCli(filePath, format, gen) {
+        if (gen !== root._sttGen) {
+            enqueueVoiceCleanup(filePath);
+            return;
+        }
+
+        Stt.transcribe({
+            config: Plasmoid.configuration,
+            filePath: filePath,
+            format: format || "wav",
+            runCommand: function(cmd, cb) {
+                if (gen !== root._sttGen) {
+                    cb(i18n("Transcription canceled"), null);
+                    return;
+                }
+                pendingWhisperRuns[cmd] = { cb: cb, gen: gen, filePath: filePath };
+                whisperExec.connectSource(cmd);
+            },
+            callback: function(sttErr, result) {
+                if (gen !== root._sttGen) {
+                    enqueueVoiceCleanup(filePath);
+                    return;
+                }
+                isTranscribing = false;
+                sttStatusText = "";
+                enqueueVoiceCleanup(filePath);
+
+                if (sttErr) {
+                    showSttNotice(sttErr);
+                    return;
+                }
+                var text = (result && result.text) ? String(result.text).replace(/^\s+|\s+$/g, "") : "";
+                if (!text.length) {
+                    showSttNotice(i18n("No speech detected."));
+                    return;
+                }
+                if (!root.sendMessage(text, [], { fromVoice: true })) {
+                    showSttNotice(i18n("Could not send transcribed message."));
+                }
+            }
+        });
+    }
+
     property var pendingSttReads: ({})
+    property var pendingWhisperRuns: ({})
     property string _shellRecordPid: ""
     property string _shellRecordPath: ""
+
+    P5Support.DataSource {
+        id: whisperExec
+        engine: "executable"
+        connectedSources: []
+        onNewData: function(source, data) {
+            var exitCode = data["exit code"];
+            if (exitCode === undefined)
+                return;
+            var pending = pendingWhisperRuns[source];
+            delete pendingWhisperRuns[source];
+            disconnectSource(source);
+            if (!pending || typeof pending.cb !== "function")
+                return;
+            pending.cb(null, {
+                stdout: data.stdout || "",
+                stderr: data.stderr || "",
+                exitCode: exitCode
+            });
+        }
+    }
 
     P5Support.DataSource {
         id: sttFileReader
@@ -879,7 +958,10 @@ PlasmoidItem {
                     root.showSttNotice(i18n("Failed to read recorded audio."));
                 return;
             }
-            root.finishSttWithBase64(stdout, info.format, info.filePath, info.gen);
+            if (info.cli)
+                root.finishSttWithCli(info.filePath, info.format, info.gen);
+            else
+                root.finishSttWithBase64(stdout, info.format, info.filePath, info.gen);
         }
     }
 

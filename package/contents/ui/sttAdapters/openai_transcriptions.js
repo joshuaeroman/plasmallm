@@ -9,6 +9,17 @@
 
 var id = "openai_transcriptions";
 var displayName = "OpenAI-compatible transcriptions";
+var transport = "http";
+
+function isConfigured(conn) {
+    if (!conn || !conn.enabled)
+        return false;
+    if (!conn.endpoint || String(conn.endpoint).length === 0)
+        return false;
+    if (!conn.model || String(conn.model).length === 0)
+        return false;
+    return true;
+}
 
 function setHeaders(xhr, apiKey) {
     xhr.setRequestHeader("Content-Type", "application/json");

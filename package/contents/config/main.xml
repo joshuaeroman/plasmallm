@@ -412,8 +412,38 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
       <default></default>
     </entry>
     <entry name="sttBackend" type="String">
-      <label>STT backend adapter id (openai_transcriptions, future: whisper_cli, …)</label>
+      <label>STT backend adapter id (openai_transcriptions, whisper_cli)</label>
       <default>openai_transcriptions</default>
+    </entry>
+    <entry name="sttCliBinary" type="String">
+      <label>Whisper CLI command prefix (e.g. whisper, python3 -m whisper, toolbox run whisper)</label>
+      <default>whisper</default>
+    </entry>
+    <entry name="sttCliTask" type="String">
+      <label>Whisper CLI task: transcribe or translate</label>
+      <default>transcribe</default>
+    </entry>
+    <entry name="sttCliDevice" type="String">
+      <label>Whisper CLI device (empty = default, cpu, cuda)</label>
+      <default></default>
+    </entry>
+    <entry name="sttCliFp16" type="Bool">
+      <label>Pass --fp16 True to Whisper CLI (leave off for CPU)</label>
+      <default>false</default>
+    </entry>
+    <entry name="sttCliThreads" type="Int">
+      <label>Whisper CLI --threads (0 = omit)</label>
+      <default>0</default>
+      <min>0</min>
+      <max>64</max>
+    </entry>
+    <entry name="sttCliInitialPrompt" type="String">
+      <label>Optional Whisper CLI --initial_prompt</label>
+      <default></default>
+    </entry>
+    <entry name="sttCliExtraArgs" type="String">
+      <label>Extra arguments appended to the Whisper CLI command</label>
+      <default></default>
     </entry>
     <entry name="sttLanguage" type="String">
       <label>Optional ISO-639-1 language hint for STT (empty = auto-detect)</label>
