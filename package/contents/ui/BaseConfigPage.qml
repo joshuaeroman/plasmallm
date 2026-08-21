@@ -297,6 +297,20 @@ SimpleKCM {
     property string cfg_sttModelNameDefault
     property string cfg_sttBackend
     property string cfg_sttBackendDefault
+    property string cfg_sttCliBinary
+    property string cfg_sttCliBinaryDefault
+    property string cfg_sttCliTask
+    property string cfg_sttCliTaskDefault
+    property string cfg_sttCliDevice
+    property string cfg_sttCliDeviceDefault
+    property bool cfg_sttCliFp16
+    property bool cfg_sttCliFp16Default
+    property int cfg_sttCliThreads
+    property int cfg_sttCliThreadsDefault
+    property string cfg_sttCliInitialPrompt
+    property string cfg_sttCliInitialPromptDefault
+    property string cfg_sttCliExtraArgs
+    property string cfg_sttCliExtraArgsDefault
     property string cfg_sttLanguage
     property string cfg_sttLanguageDefault
     property int cfg_sttMaxSeconds

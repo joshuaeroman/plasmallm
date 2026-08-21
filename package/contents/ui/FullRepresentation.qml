@@ -1269,6 +1269,28 @@ PlasmaExtras.Representation {
         }
 
         RowLayout {
+            visible: root.sttStatusText && root.sttStatusText.length > 0
+            Layout.fillWidth: true
+            Layout.leftMargin: Plasmoid.configuration.chatSpacing
+            Layout.rightMargin: Plasmoid.configuration.chatSpacing
+            spacing: Kirigami.Units.smallSpacing
+
+            QQC2.BusyIndicator {
+                running: visible
+                Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                Layout.preferredHeight: Kirigami.Units.iconSizes.small
+            }
+
+            PlasmaComponents.Label {
+                Layout.fillWidth: true
+                text: root.sttStatusText
+                wrapMode: Text.WordWrap
+                font: Kirigami.Theme.smallFont
+                opacity: 0.9
+            }
+        }
+
+        RowLayout {
             Layout.fillWidth: true
             Layout.leftMargin: Plasmoid.configuration.chatSpacing
             Layout.rightMargin: Plasmoid.configuration.chatSpacing

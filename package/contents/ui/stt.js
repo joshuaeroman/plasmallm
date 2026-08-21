@@ -14,19 +14,37 @@ function getSttConnection(config) {
         endpoint: config.sttApiEndpoint || "",
         model: config.sttModelName || "",
         backend: config.sttBackend || "openai_transcriptions",
-        language: config.sttLanguage || ""
+        language: config.sttLanguage || "",
+        cliBinary: config.sttCliBinary || "whisper",
+        cliTask: config.sttCliTask || "transcribe",
+        cliDevice: config.sttCliDevice || "",
+        cliFp16: !!config.sttCliFp16,
+        cliThreads: config.sttCliThreads || 0,
+        cliInitialPrompt: config.sttCliInitialPrompt || "",
+        cliExtraArgs: config.sttCliExtraArgs || ""
     };
 }
 
 function isSttConfigured(config) {
     var c = getSttConnection(config);
-    if (!c || !c.enabled)
+    if (!c)
+        return false;
+    var adapter = SttAdapters.get(c.backend);
+    if (adapter && typeof adapter.isConfigured === "function")
+        return adapter.isConfigured(c);
+    if (!c.enabled)
         return false;
     if (!c.endpoint || String(c.endpoint).length === 0)
         return false;
     if (!c.model || String(c.model).length === 0)
         return false;
     return true;
+}
+
+function isCliTransport(config) {
+    var c = getSttConnection(config);
+    var adapter = SttAdapters.get(c && c.backend);
+    return !!(adapter && adapter.transport === "cli");
 }
 
 function formatFromPath(filePath) {
@@ -69,12 +87,67 @@ function transcribe(opts) {
     }
 
     var adapter = SttAdapters.get(conn.backend);
-    if (!adapter || typeof adapter.transcribe !== "function") {
+    if (!adapter) {
         callback(i18n("Unknown STT backend: %1", conn.backend), null);
         return;
     }
 
     var format = opts.format || formatFromPath(opts.filePath);
+
+    if (adapter.transport === "cli") {
+        if (!opts.filePath || String(opts.filePath).length === 0) {
+            callback(i18n("No audio file to transcribe"), null);
+            return;
+        }
+        if (typeof opts.runCommand !== "function") {
+            callback(i18n("Whisper CLI runner is not available"), null);
+            return;
+        }
+        if (typeof adapter.buildCommand !== "function" || typeof adapter.parseResult !== "function") {
+            callback(i18n("Unknown STT backend: %1", conn.backend), null);
+            return;
+        }
+        var cmd;
+        try {
+            cmd = adapter.buildCommand({
+                filePath: opts.filePath,
+                model: conn.model,
+                language: conn.language,
+                cliBinary: conn.cliBinary,
+                cliTask: conn.cliTask,
+                cliDevice: conn.cliDevice,
+                cliFp16: conn.cliFp16,
+                cliThreads: conn.cliThreads,
+                cliInitialPrompt: conn.cliInitialPrompt,
+                cliExtraArgs: conn.cliExtraArgs
+            });
+        } catch (buildErr) {
+            callback(buildErr.message || String(buildErr), null);
+            return;
+        }
+        if (!cmd) {
+            callback(i18n("Could not build Whisper command"), null);
+            return;
+        }
+        opts.runCommand(cmd, function(runErr, proc) {
+            if (runErr) {
+                callback(runErr, null);
+                return;
+            }
+            proc = proc || {};
+            var parsed = adapter.parseResult(proc.stdout, proc.stderr, proc.exitCode, opts);
+            if (parsed && parsed.err)
+                callback(parsed.err, null);
+            else
+                callback(null, (parsed && parsed.result) || { text: "" });
+        });
+        return;
+    }
+
+    if (typeof adapter.transcribe !== "function") {
+        callback(i18n("Unknown STT backend: %1", conn.backend), null);
+        return;
+    }
 
     adapter.transcribe({
         endpoint: conn.endpoint,
@@ -98,6 +171,27 @@ function fetchModels(endpoint, apiKey, backendId, callback) {
 
 function backendChoices() {
     return SttAdapters.list();
+}
+
+function whisperCacheCheckCommand(model) {
+    var adapter = SttAdapters.get("whisper_cli");
+    if (!adapter || typeof adapter.buildCacheCheckCommand !== "function")
+        return "";
+    return adapter.buildCacheCheckCommand(model);
+}
+
+function whisperDownloadSizeHint(model) {
+    var adapter = SttAdapters.get("whisper_cli");
+    if (!adapter || typeof adapter.downloadSizeHint !== "function")
+        return "";
+    return adapter.downloadSizeHint(model);
+}
+
+function whisperCudaCheckCommand(cliBinary) {
+    var adapter = SttAdapters.get("whisper_cli");
+    if (!adapter || typeof adapter.buildCudaCheckCommand !== "function")
+        return "";
+    return adapter.buildCudaCheckCommand(cliBinary);
 }
 
 function providerPresets() {

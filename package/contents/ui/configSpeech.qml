@@ -10,6 +10,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.kcmutils
 import org.kde.kquickcontrols
 import org.kde.plasma.workspace.dbus as DBus
+import org.kde.plasma.plasma5support as P5Support
 
 import "api.js" as Api
 import "stt.js" as Stt
@@ -28,8 +29,93 @@ BaseConfigPage {
     property bool walletKeyDirty: false
     property string lastKeySlot: ""
     property int _sttKeyGen: 0
+    property bool cliTestInProgress: false
+    property bool cliCacheCheckInProgress: false
+    property string cliCacheStatus: ""
+    property int _cacheGen: 0
+    property string cliCudaStatus: ""
+    property int _cudaGen: 0
 
     readonly property var sttPresets: Stt.providerPresets()
+    readonly property var sttBackends: Stt.backendChoices()
+    readonly property bool isCliBackend: (cfg_sttBackend || "") === "whisper_cli"
+
+    P5Support.DataSource {
+        id: whisperCacheCheck
+        engine: "executable"
+        connectedSources: []
+        property string pendingModel: ""
+        property int pendingGen: 0
+        onNewData: function(source, data) {
+            var exitCode = data["exit code"];
+            if (exitCode === undefined)
+                return;
+            disconnectSource(source);
+            var model = pendingModel;
+            var gen = pendingGen;
+            if (gen !== configPage._cacheGen)
+                return;
+            cliCacheCheckInProgress = false;
+            pendingModel = "";
+            var stdout = ((data.stdout || "") + "").replace(/^\s+|\s+$/g, "");
+            if (stdout.indexOf("DOWNLOADED") === 0) {
+                cliCacheStatus = i18n("Model “%1” is on disk.", model);
+            } else {
+                var hint = Stt.whisperDownloadSizeHint(model);
+                if (hint && hint.length)
+                    cliCacheStatus = i18n("Model “%1” is not downloaded. The first transcription will fetch it (%2) into ~/.cache/whisper and can take a long time.", model, hint);
+                else
+                    cliCacheStatus = i18n("Model “%1” is not downloaded. The first transcription will fetch it into ~/.cache/whisper and can take a long time.", model);
+            }
+        }
+    }
+
+    P5Support.DataSource {
+        id: whisperCudaCheck
+        engine: "executable"
+        connectedSources: []
+        property int pendingGen: 0
+        onNewData: function(source, data) {
+            var exitCode = data["exit code"];
+            if (exitCode === undefined)
+                return;
+            disconnectSource(source);
+            if (pendingGen !== configPage._cudaGen)
+                return;
+            var stdout = ((data.stdout || "") + "").replace(/^\s+|\s+$/g, "");
+            if (exitCode === 0 && stdout.indexOf("1") === 0)
+                cliCudaStatus = i18n("CUDA is available to Whisper.");
+            else
+                cliCudaStatus = i18n("CUDA is not available in this Whisper environment. Use cpu or Default.");
+        }
+    }
+
+    P5Support.DataSource {
+        id: whisperTest
+        engine: "executable"
+        connectedSources: []
+        onNewData: function(source, data) {
+            var exitCode = data["exit code"];
+            if (exitCode === undefined)
+                return;
+            disconnectSource(source);
+            cliTestInProgress = false;
+            var stderr = (data.stderr || "").replace(/^\s+|\s+$/g, "");
+            var stdout = (data.stdout || "").replace(/^\s+|\s+$/g, "");
+            if (exitCode === 0) {
+                statusLabel.text = i18n("Whisper CLI responded to --help.");
+            } else {
+                var detail = stderr || stdout || "";
+                if (detail.length > 240)
+                    detail = detail.substring(0, 240);
+                if (detail.length)
+                    statusLabel.text = i18n("Whisper CLI test failed (exit %1): %2", exitCode, detail);
+                else
+                    statusLabel.text = i18n("Whisper CLI test failed (exit %1). Check the command.", exitCode);
+            }
+            statusLabel.visible = true;
+        }
+    }
 
     function walletCall(member, args, resolve, reject) {
         var reply = DBus.SessionBus.asyncCall({
@@ -233,9 +319,104 @@ BaseConfigPage {
         syncModelCombo();
     }
 
+    function syncBackendCombo() {
+        var id = cfg_sttBackend || "openai_transcriptions";
+        var idx = 0;
+        for (var i = 0; i < sttBackends.length; i++) {
+            if (sttBackends[i].id === id) {
+                idx = i;
+                break;
+            }
+        }
+        if (backendCombo.currentIndex !== idx)
+            backendCombo.currentIndex = idx;
+    }
+
+    function applyCliModelList() {
+        Stt.fetchModels("", "", "whisper_cli", function(err, models) {
+            availableModels = models || [];
+            if (!cfg_sttModelName || cfg_sttModelName.length === 0
+                    || availableModels.indexOf(cfg_sttModelName) === -1) {
+                cfg_sttModelName = "base";
+            }
+            syncModelCombo();
+            checkWhisperCache(cfg_sttModelName);
+        });
+    }
+
+    function checkWhisperCache(model) {
+        if (!isCliBackend) {
+            cliCacheStatus = "";
+            return;
+        }
+        var id = (model || cfg_sttModelName || "").replace(/^\s+|\s+$/g, "");
+        if (!id.length) {
+            cliCacheStatus = "";
+            return;
+        }
+        var cmd = Stt.whisperCacheCheckCommand(id);
+        if (!cmd || cmd.length === 0) {
+            cliCacheStatus = "";
+            return;
+        }
+        var myGen = ++_cacheGen;
+        cliCacheCheckInProgress = true;
+        cliCacheStatus = i18n("Checking whether “%1” is downloaded…", id);
+        whisperCacheCheck.pendingModel = id;
+        whisperCacheCheck.pendingGen = myGen;
+        whisperCacheCheck.connectSource(cmd);
+    }
+
+    function checkWhisperCuda() {
+        if (!isCliBackend || (cfg_sttCliDevice || "") !== "cuda") {
+            cliCudaStatus = "";
+            return;
+        }
+        var cmd = Stt.whisperCudaCheckCommand(cfg_sttCliBinary || "whisper");
+        if (!cmd || cmd.length === 0) {
+            cliCudaStatus = "";
+            return;
+        }
+        var myGen = ++_cudaGen;
+        cliCudaStatus = i18n("Checking CUDA…");
+        whisperCudaCheck.pendingGen = myGen;
+        whisperCudaCheck.connectSource(cmd);
+    }
+
+    function applyBackend(index) {
+        if (!_initialized) return;
+        var choice = sttBackends[index];
+        if (!choice) return;
+        cfg_sttBackend = choice.id;
+        if (choice.id === "whisper_cli") {
+            if (!cfg_sttCliBinary || cfg_sttCliBinary.length === 0)
+                cfg_sttCliBinary = "whisper";
+            applyCliModelList();
+        } else {
+            loadModelCache();
+            cliCacheStatus = "";
+        }
+    }
+
+    function testWhisperCli() {
+        if (cliTestInProgress)
+            return;
+        var prefix = (cfg_sttCliBinary || "whisper").replace(/^\s+|\s+$/g, "") || "whisper";
+        cliTestInProgress = true;
+        statusLabel.text = i18n("Testing Whisper CLI…");
+        statusLabel.visible = true;
+        whisperTest.connectSource(prefix + " --help");
+    }
+
     function fetchModels() {
         if (fetchInProgress)
             return;
+        if (isCliBackend) {
+            applyCliModelList();
+            statusLabel.text = i18n("Loaded %1 STT model(s).", availableModels.length);
+            statusLabel.visible = true;
+            return;
+        }
         var endpoint = (cfg_sttApiEndpoint || "").replace(/\/+$/, "");
         if (!endpoint) {
             statusLabel.text = i18n("Set an API endpoint first.");
@@ -302,21 +483,50 @@ BaseConfigPage {
 
     Component.onCompleted: {
         migrateFromChatProfileIfNeeded();
-        loadModelCache();
+        if (!cfg_sttBackend || cfg_sttBackend.length === 0)
+            cfg_sttBackend = "openai_transcriptions";
+        if (isCliBackend) {
+            applyCliModelList();
+        } else {
+            loadModelCache();
+            cliCacheStatus = "";
+        }
         syncProviderCombo();
+        syncBackendCombo();
         loadWalletKey();
         Qt.callLater(function() {
             _initialized = true;
+            if (isCliBackend)
+                checkWhisperCuda();
         });
     }
 
+    onCfg_sttBackendChanged: {
+        if (!_initialized) return;
+        syncBackendCombo();
+        if (isCliBackend) {
+            applyCliModelList();
+        } else {
+            loadModelCache();
+            cliCacheStatus = "";
+            cliCudaStatus = "";
+        }
+    }
+    onCfg_sttCliBinaryChanged: if (_initialized && isCliBackend) checkWhisperCuda()
+    onCfg_sttCliDeviceChanged: if (_initialized) checkWhisperCuda()
     onCfg_sttProviderNameChanged: if (_initialized) syncProviderCombo()
     onCfg_sttApiEndpointChanged: {
         if (!_initialized) return;
         // Reload key for new slot when endpoint identity changes
         loadWalletKey();
     }
-    onCfg_sttModelNameChanged: if (_initialized) syncModelCombo()
+    onCfg_sttModelNameChanged: {
+        if (_initialized) {
+            syncModelCombo();
+            if (isCliBackend)
+                checkWhisperCache(cfg_sttModelName);
+        }
+    }
     onCfg_sttAvailableModelsChanged: if (_initialized) loadModelCache()
 
     Kirigami.FormLayout {
@@ -407,7 +617,20 @@ BaseConfigPage {
         }
 
         QQC2.ComboBox {
+            id: backendCombo
+            Kirigami.FormData.label: i18n("STT backend:")
+            Layout.fillWidth: true
+            Layout.preferredWidth: 0
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 22
+            model: sttBackends.map(function(b) { return b.name; })
+            onActivated: function(index) {
+                applyBackend(index);
+            }
+        }
+
+        QQC2.ComboBox {
             id: providerCombo
+            visible: !isCliBackend
             Kirigami.FormData.label: i18n("Provider:")
             Layout.fillWidth: true
             Layout.preferredWidth: 0
@@ -420,6 +643,7 @@ BaseConfigPage {
 
         QQC2.TextField {
             id: endpointField
+            visible: !isCliBackend
             Kirigami.FormData.label: i18n("Endpoint:")
             Layout.fillWidth: true
             Layout.preferredWidth: 0
@@ -456,8 +680,8 @@ BaseConfigPage {
             modelName: cfg_sttModelName
             availableModels: configPage.availableModels
             fetchInProgress: configPage.fetchInProgress
-            fetchVisible: true
-            fetchEnabled: !configPage.fetchInProgress && (cfg_sttApiEndpoint || "").length > 0
+            fetchVisible: !isCliBackend
+            fetchEnabled: !isCliBackend && !configPage.fetchInProgress && (cfg_sttApiEndpoint || "").length > 0
             fetchTooltip: i18n("Fetch STT models")
             onModelSelected: function(selected) {
                 cfg_sttModelName = selected;
@@ -467,6 +691,17 @@ BaseConfigPage {
         }
 
         QQC2.Label {
+            visible: isCliBackend && cliCacheStatus.length > 0
+            Layout.fillWidth: true
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 28
+            wrapMode: Text.WordWrap
+            font: Kirigami.Theme.smallFont
+            opacity: 0.85
+            text: cliCacheStatus
+        }
+
+        QQC2.Label {
+            visible: !isCliBackend
             Layout.fillWidth: true
             Layout.maximumWidth: Kirigami.Units.gridUnit * 28
             wrapMode: Text.WordWrap
@@ -476,6 +711,7 @@ BaseConfigPage {
         }
 
         RowLayout {
+            visible: !isCliBackend
             Kirigami.FormData.label: i18n("API key:")
             Layout.fillWidth: true
             Layout.maximumWidth: Kirigami.Units.gridUnit * 28
@@ -502,6 +738,161 @@ BaseConfigPage {
                 QQC2.ToolTip.text: i18n("Save API key")
                 QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                 QQC2.ToolTip.visible: hovered
+            }
+        }
+
+        QQC2.TextField {
+            id: cliBinaryField
+            visible: isCliBackend
+            Kirigami.FormData.label: i18n("Command:")
+            Layout.fillWidth: true
+            Layout.preferredWidth: 0
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 22
+            placeholderText: "whisper"
+            text: cfg_sttCliBinary
+            onTextChanged: {
+                if (!_initialized) return;
+                cfg_sttCliBinary = text;
+            }
+        }
+
+        QQC2.Label {
+            visible: isCliBackend
+            Layout.fillWidth: true
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 28
+            wrapMode: Text.WordWrap
+            font: Kirigami.Theme.smallFont
+            opacity: 0.7
+            text: i18n("Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, toolbox run whisper.")
+        }
+
+        RowLayout {
+            visible: isCliBackend
+            Kirigami.FormData.label: i18n("Test:")
+            Layout.fillWidth: true
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 28
+            spacing: Kirigami.Units.smallSpacing
+
+            QQC2.Button {
+                text: i18n("Test CLI")
+                icon.name: "dialog-ok-apply"
+                enabled: !cliTestInProgress
+                onClicked: testWhisperCli()
+            }
+        }
+
+        QQC2.ComboBox {
+            id: cliTaskCombo
+            visible: isCliBackend
+            Kirigami.FormData.label: i18n("Task:")
+            Layout.fillWidth: true
+            Layout.preferredWidth: 0
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 22
+            model: [i18n("Transcribe"), i18n("Translate")]
+            readonly property var taskIds: ["transcribe", "translate"]
+            currentIndex: {
+                var t = cfg_sttCliTask || "transcribe";
+                var i = taskIds.indexOf(t);
+                return i >= 0 ? i : 0;
+            }
+            onActivated: function(index) {
+                if (!_initialized) return;
+                cfg_sttCliTask = taskIds[index] || "transcribe";
+            }
+        }
+
+        QQC2.ComboBox {
+            id: cliDeviceCombo
+            visible: isCliBackend
+            Kirigami.FormData.label: i18n("Device:")
+            Layout.fillWidth: true
+            Layout.preferredWidth: 0
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 22
+            model: [i18n("Default"), "cpu", "cuda"]
+            readonly property var deviceIds: ["", "cpu", "cuda"]
+            currentIndex: {
+                var d = cfg_sttCliDevice || "";
+                var i = deviceIds.indexOf(d);
+                return i >= 0 ? i : 0;
+            }
+            onActivated: function(index) {
+                if (!_initialized) return;
+                cfg_sttCliDevice = deviceIds[index] || "";
+            }
+        }
+
+        QQC2.Label {
+            visible: isCliBackend && cliCudaStatus.length > 0
+            Layout.fillWidth: true
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 28
+            wrapMode: Text.WordWrap
+            font: Kirigami.Theme.smallFont
+            opacity: 0.85
+            text: cliCudaStatus
+        }
+
+        QQC2.CheckBox {
+            id: cliFp16Check
+            visible: isCliBackend
+            Kirigami.FormData.label: i18n("FP16:")
+            text: i18n("Use --fp16 True (GPU)")
+            checked: cfg_sttCliFp16
+            onCheckedChanged: {
+                if (!_initialized) return;
+                cfg_sttCliFp16 = checked;
+            }
+        }
+
+        QQC2.SpinBox {
+            id: cliThreadsSpin
+            visible: isCliBackend
+            Kirigami.FormData.label: i18n("Threads:")
+            from: 0
+            to: 64
+            value: cfg_sttCliThreads >= 0 ? cfg_sttCliThreads : 0
+            onValueModified: {
+                if (!_initialized) return;
+                cfg_sttCliThreads = value;
+            }
+        }
+
+        QQC2.Label {
+            visible: isCliBackend
+            Layout.fillWidth: true
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 28
+            wrapMode: Text.WordWrap
+            font: Kirigami.Theme.smallFont
+            opacity: 0.7
+            text: i18n("0 omits --threads (Whisper default). FP16 off is safer on CPU.")
+        }
+
+        QQC2.TextField {
+            id: cliPromptField
+            visible: isCliBackend
+            Kirigami.FormData.label: i18n("Initial prompt:")
+            Layout.fillWidth: true
+            Layout.preferredWidth: 0
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 22
+            placeholderText: i18n("Optional vocabulary / style hint")
+            text: cfg_sttCliInitialPrompt
+            onTextChanged: {
+                if (!_initialized) return;
+                cfg_sttCliInitialPrompt = text;
+            }
+        }
+
+        QQC2.TextField {
+            id: cliExtraField
+            visible: isCliBackend
+            Kirigami.FormData.label: i18n("Extra args:")
+            Layout.fillWidth: true
+            Layout.preferredWidth: 0
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 22
+            placeholderText: i18n("Optional, appended as-is")
+            text: cfg_sttCliExtraArgs
+            onTextChanged: {
+                if (!_initialized) return;
+                cfg_sttCliExtraArgs = text;
             }
         }
 
@@ -532,22 +923,6 @@ BaseConfigPage {
             onValueModified: {
                 if (!_initialized) return;
                 cfg_sttMaxSeconds = value;
-            }
-        }
-
-        QQC2.ComboBox {
-            id: backendCombo
-            Kirigami.FormData.label: i18n("STT backend:")
-            Layout.fillWidth: true
-            model: [i18n("OpenAI-compatible transcriptions")]
-            currentIndex: 0
-            onActivated: {
-                if (!_initialized) return;
-                cfg_sttBackend = "openai_transcriptions";
-            }
-            Component.onCompleted: {
-                if (!cfg_sttBackend || cfg_sttBackend.length === 0)
-                    cfg_sttBackend = "openai_transcriptions";
             }
         }
 

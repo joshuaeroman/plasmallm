@@ -7,9 +7,11 @@
 // Imported from stt.js (.pragma library).
 
 .import "openai_transcriptions.js" as OpenaiTranscriptions
+.import "whisper_cli.js" as WhisperCli
 
 var backends = {
-    "openai_transcriptions": OpenaiTranscriptions
+    "openai_transcriptions": OpenaiTranscriptions,
+    "whisper_cli": WhisperCli
 };
 
 function get(backendId) {
@@ -19,6 +21,7 @@ function get(backendId) {
 
 function list() {
     return [
-        { id: OpenaiTranscriptions.id, name: OpenaiTranscriptions.displayName }
+        { id: OpenaiTranscriptions.id, name: OpenaiTranscriptions.displayName },
+        { id: WhisperCli.id, name: WhisperCli.displayName }
     ];
 }
