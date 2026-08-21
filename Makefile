@@ -11,9 +11,13 @@ PO_FILES := $(wildcard $(LOCALE_DIR)/*.po)
 MO_FILES := $(patsubst $(LOCALE_DIR)/%.po,$(LOCALE_DIR)/%/LC_MESSAGES/$(DOMAIN).mo,$(PO_FILES))
 SRC_FILES := $(shell find $(PACKAGE_DIR)/contents/ui $(PACKAGE_DIR)/contents/config -type f -name '*.qml' -o -name '*.js')
 
-.PHONY: all package package-no-i18n do-package translations install install-dev remove clean check-translations
+.PHONY: all package package-no-i18n do-package translations install install-dev remove clean check-translations test
 
 all: package
+
+test:
+	node tests/wallet_core.mjs
+	node tests/gemini_thinking.mjs
 
 # Translations
 translations: check-translations $(MO_FILES)

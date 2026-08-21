@@ -12,6 +12,8 @@ import org.kde.plasma.workspace.dbus as DBus
 import org.kde.plasma.plasma5support as P5Support
 
 import "api.js" as Api
+import "wallet.js" as Wallet
+import "walletCore.js" as WalletCore
 import "profiles.js" as Profiles
 
 BaseConfigPage {
@@ -88,41 +90,6 @@ BaseConfigPage {
     // treat an empty/missing name as license to overwrite a saved selection.
     property bool _allowModelAutoSelect: false
 
-    function walletCall(member, args, resolve, reject) {
-        var reply = DBus.SessionBus.asyncCall({
-            service: "org.kde.kwalletd6",
-            path: "/modules/kwalletd6",
-            iface: "org.kde.KWallet",
-            member: member,
-            arguments: args
-        });
-        reply.finished.connect(function() {
-            if (reply.isError) {
-                if (reject) reject(reply.error);
-            } else {
-                var val = reply.value;
-                if (val !== null && val !== undefined && val.hasOwnProperty("value")) val = val.value;
-                if (resolve) resolve(val);
-            }
-        });
-    }
-
-    function ensureWalletFolder(handle, callback) {
-        walletCall("hasFolder", [new DBus.int32(handle), "PlasmaLLM", "PlasmaLLM"],
-            function(exists) {
-                if (exists) {
-                    callback(true);
-                } else {
-                    walletCall("createFolder", [new DBus.int32(handle), "PlasmaLLM", "PlasmaLLM"],
-                        function(created) { callback(created); },
-                        function(err) { callback(false); }
-                    );
-                }
-            },
-            function(err) { callback(false); }
-        );
-    }
-
     function currentSlot() {
         return Api.currentKeySlot(cfg_activeProfileId, cfg_apiType, cfg_providerName,
                                   cfg_apiEndpoint, cfg_geminiAuthMethod);
@@ -162,25 +129,13 @@ BaseConfigPage {
     }
 
     function writeFallbackKey(slot, key) {
-        var m = readFallbackMap();
-        m[slot] = key;
-        cfg_apiKeysFallback = JSON.stringify(m);
+        cfg_apiKeysFallback = WalletCore.stringifyFallbackMap(
+            WalletCore.putFallback(readFallbackMap(), slot, key));
     }
 
-    function walletWriteKey(handle, slot, key, onDone) {
-        ensureWalletFolder(handle, function(ok) {
-            if (!ok) {
-                onDone(false);
-                return;
-            }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", slot, key, "PlasmaLLM"],
-                function(result) { onDone(result === 0); },
-                function(err) {
-                    console.warn("PlasmaLLM: wallet writePassword error: " + err);
-                    onDone(false);
-                }
-            );
-        });
+    function removeFallbackKey(slot) {
+        cfg_apiKeysFallback = WalletCore.stringifyFallbackMap(
+            WalletCore.removeFallback(readFallbackMap(), slot));
     }
 
     // Persist an unsaved key to a specific slot (used when the active slot is
@@ -188,29 +143,22 @@ BaseConfigPage {
     function flushDirtyKeyToSlot(slot) {
         if (!walletKeyDirty || !apiKeyField) return;
         var key = apiKeyField.text.replace(/^\s+|\s+$/g, "");
-        if (!walletAvailable) {
-            writeFallbackKey(slot, key);
-            walletApiKey = key;
-            walletKeyDirty = false;
-            return;
-        }
-        // Fire-and-forget; the next load targets a different slot.
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    writeFallbackKey(slot, key);
-                    return;
-                }
-                walletWriteKey(handle, slot, key, function(success) {
-                    if (success) cfg_apiKeyVersion++;
-                    else writeFallbackKey(slot, key);
-                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                });
-            },
-            function(err) { writeFallbackKey(slot, key); }
-        );
         walletApiKey = key;
         walletKeyDirty = false;
+        // Fire-and-forget; the next load targets a different slot.
+        // The plaintext config copy is written only when KWallet could not
+        // store the key, and scrubbed when it could.
+        Wallet.writeKey(DBus, slot, key, function(res) {
+            if (res && res.available) {
+                walletAvailable = true;
+                if (res.success) {
+                    removeFallbackKey(slot);
+                    cfg_apiKeyVersion++;
+                    return;
+                }
+            }
+            writeFallbackKey(slot, key);
+        });
     }
 
     // loadWalletKey(copyKey, gen, onReady)
@@ -267,75 +215,14 @@ BaseConfigPage {
             return;
         }
 
-        // Try primary slot, then legacy profile-only / provider-only slots.
-        // On a legacy hit, migrate the key into the primary slot so it sticks.
-        var trySlots = [slot].concat(Api.legacyKeySlots(cfg_activeProfileId, cfg_apiType,
-            cfg_providerName, cfg_apiEndpoint, cfg_geminiAuthMethod));
-        // Dedupe while preserving order.
-        var seen = {};
-        var slots = [];
-        for (var si = 0; si < trySlots.length; si++) {
-            if (!trySlots[si] || seen[trySlots[si]]) continue;
-            seen[trySlots[si]] = true;
-            slots.push(trySlots[si]);
-        }
-
-        function closeHandle(handle) {
-            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-        }
-
-        function tryReadAt(handle, index) {
-            if (!isCurrent()) {
-                closeHandle(handle);
-                return;
-            }
-            if (index >= slots.length) {
-                applyKey(fallbackKeyFor(slot));
-                closeHandle(handle);
-                return;
-            }
-            var readSlot = slots[index];
-            walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", readSlot, "PlasmaLLM"],
-                function(password) {
-                    if (!isCurrent()) {
-                        closeHandle(handle);
-                        return;
-                    }
-                    if (password && password.length > 0) {
-                        applyKey(password);
-                        // Migrate legacy → primary so OpenRouter/Exa keys stay distinct.
-                        if (readSlot !== slot) {
-                            walletWriteKey(handle, slot, password, function() {
-                                closeHandle(handle);
-                            });
-                        } else {
-                            closeHandle(handle);
-                        }
-                        return;
-                    }
-                    tryReadAt(handle, index + 1);
-                },
-                function(err) {
-                    tryReadAt(handle, index + 1);
-                }
-            );
-        }
-
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (!isCurrent()) {
-                    if (handle >= 0) closeHandle(handle);
-                    return;
-                }
-                if (handle < 0) {
-                    applyKey(fallbackKeyFor(slot));
-                    return;
-                }
-                walletAvailable = true;
-                tryReadAt(handle, 0);
-            },
-            function(err) {
-                applyKey(fallbackKeyFor(slot));
+        Wallet.readKey(DBus, slot,
+            Api.legacyKeySlots(cfg_activeProfileId, cfg_apiType, cfg_providerName,
+                cfg_apiEndpoint, cfg_geminiAuthMethod),
+            readFallbackMap(), cfg_apiKey,
+            function(res) {
+                if (!isCurrent()) return;
+                walletAvailable = !!(res && res.available);
+                applyKey(res ? res.key : fallbackKeyFor(slot));
             }
         );
     }
@@ -344,43 +231,23 @@ BaseConfigPage {
         var key = apiKeyField.text.replace(/^\s+|\s+$/g, "");
         var slot = currentSlot();
         lastKeySlot = slot;
+        walletApiKey = key;
+        walletKeyDirty = false;
         walletSaveInProgress = true;
-        if (!walletAvailable) {
-            writeFallbackKey(slot, key);
-            walletApiKey = key;
-            walletKeyDirty = false;
+        Wallet.writeKey(DBus, slot, key, function(res) {
+            if (res && res.available)
+                walletAvailable = true;
+            if (res && res.success) {
+                // Scrub any stale plaintext copy now that KWallet holds the key.
+                removeFallbackKey(slot);
+                cfg_apiKeyVersion++;
+            } else {
+                // Plaintext fallback only when KWallet could not store the key.
+                writeFallbackKey(slot, key);
+            }
             walletSaveInProgress = false;
             ensureModelsLoaded(false);
-            return;
-        }
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    writeFallbackKey(slot, key);
-                    walletApiKey = key;
-                    walletKeyDirty = false;
-                    walletSaveInProgress = false;
-                    ensureModelsLoaded(false);
-                    return;
-                }
-                walletWriteKey(handle, slot, key, function(success) {
-                    if (success) {
-                        walletApiKey = key;
-                        walletKeyDirty = false;
-                        cfg_apiKeyVersion++;
-                        ensureModelsLoaded(false);
-                    }
-                    walletSaveInProgress = false;
-                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                });
-            },
-            function(err) {
-                writeFallbackKey(slot, key);
-                walletApiKey = key;
-                walletKeyDirty = false;
-                walletSaveInProgress = false;
-            }
-        );
+        });
     }
 
     // Resolve a model list for the current identity, accepting legacy cache keys
@@ -584,7 +451,7 @@ BaseConfigPage {
     }
 
     readonly property var adapterChoices: Api.getAdapterChoices()
-    readonly property string effectiveApiType: (cfg_apiType === "gemini" && cfg_geminiApiVariant === "interactions") ? "gemini_interactions" : cfg_apiType
+    readonly property string effectiveApiType: Api.resolvedApiType(cfg_apiType, cfg_geminiApiVariant, cfg_geminiAuthMethod, cfg_geminiVertexAuthType)
     readonly property var caps: Api.getCapabilities(effectiveApiType) || {}
     // Dedicated Exa adapter, or OpenAI-compatible preset/endpoint pointed at Exa.
     readonly property bool usingExaChat: {
@@ -607,6 +474,7 @@ BaseConfigPage {
     onCfg_apiTypeChanged: { if (!inConfigTxn && _initialized) scheduleFallbackReconcile(); }
     onCfg_geminiApiVariantChanged: { if (!inConfigTxn && _initialized) scheduleFallbackReconcile(); }
     onCfg_geminiAuthMethodChanged: { if (!inConfigTxn && _initialized) scheduleFallbackReconcile(); }
+    onCfg_geminiVertexAuthTypeChanged: { if (!inConfigTxn && _initialized) scheduleFallbackReconcile(); }
     onCfg_providerNameChanged: { if (!inConfigTxn && _initialized) scheduleFallbackReconcile(); }
 
     // Single post-txn pipeline: UI sync → wallet → models → capture.
@@ -614,6 +482,21 @@ BaseConfigPage {
         opts = opts || {};
         var myGen = (gen !== undefined && gen !== null) ? gen : _configGen;
         if (myGen !== _configGen) return;
+
+        if (cfg_apiType === "gemini" && cfg_providerName !== "Google Gemini") {
+            cfg_providerName = "Google Gemini";
+            opts.needsCapture = true;
+        }
+
+        // Express Mode (Agent Platform + API key) cannot use Interactions.
+        if (cfg_apiType === "gemini") {
+            var clampedVariant = Api.clampGeminiApiVariant(
+                cfg_geminiApiVariant, cfg_geminiAuthMethod, cfg_geminiVertexAuthType);
+            if (clampedVariant !== cfg_geminiApiVariant) {
+                cfg_geminiApiVariant = clampedVariant;
+                opts.needsCapture = true;
+            }
+        }
 
         syncModelParamControls();
 
@@ -719,6 +602,8 @@ BaseConfigPage {
             cfg_usesResponsesAPI = !!pick.usesResponsesAPI;
             if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
         }
+        if (baseApiType === "gemini")
+            cfg_providerName = "Google Gemini";
         if (apiType === "exa") {
             cfg_modelName = "exa";
             _allowModelAutoSelect = false;
@@ -827,10 +712,12 @@ BaseConfigPage {
                 if (endpointPreset) endpointPreset.currentIndex = 0;
                 cfg_providerName = "Custom";
             }
-            if (cfg_apiType === "openai") {
-                if (cfg_providerName) cfg_openaiLastProvider = cfg_providerName;
-                if (text) cfg_openaiLastEndpoint = text;
-            }
+        }
+        if (cfg_apiType === "gemini")
+            cfg_providerName = "Google Gemini";
+        if (cfg_apiType === "openai") {
+            if (cfg_providerName) cfg_openaiLastProvider = cfg_providerName;
+            if (text) cfg_openaiLastEndpoint = text;
         }
         endConfigTxn({ prevKeySlot: prevSlot });
     }
@@ -839,6 +726,7 @@ BaseConfigPage {
         var prevSlot = currentSlot();
         if (fetchStatusLabel) fetchStatusLabel.visible = false;
         beginConfigTxn();
+        cfg_providerName = "Google Gemini";
         if (changes.authMethod !== undefined) {
             cfg_geminiAuthMethod = changes.authMethod;
             if (changes.authMethod === "agentplatform"
@@ -858,6 +746,8 @@ BaseConfigPage {
             cfg_geminiProjectId = changes.projectId;
         if (changes.location !== undefined)
             cfg_geminiLocation = changes.location;
+        cfg_geminiApiVariant = Api.clampGeminiApiVariant(
+            cfg_geminiApiVariant, cfg_geminiAuthMethod, cfg_geminiVertexAuthType);
         endConfigTxn({ prevKeySlot: prevSlot });
     }
 

@@ -193,6 +193,7 @@ function compactHistory(opts, callback) {
             messages: messages,
             temperature: 0.2,
             maxTokens: 2048,
+            geminiApiVariant: opts.geminiApiVariant,
             geminiAuthMethod: opts.geminiAuthMethod,
             geminiProjectId: opts.geminiProjectId,
             geminiLocation: opts.geminiLocation,
