@@ -92,14 +92,20 @@ PlasmaExtras.Representation {
         return named[key] || "";
     }
 
+    function isModifierKey(key) {
+        return key === Qt.Key_Control || key === Qt.Key_Shift
+            || key === Qt.Key_Alt || key === Qt.Key_Meta
+            || key === Qt.Key_AltGr || key === Qt.Key_Super_L
+            || key === Qt.Key_Super_R || key === Qt.Key_Hyper_L
+            || key === Qt.Key_Hyper_R;
+    }
+
     function _seqFromKeyEvent(event) {
         var keyName = _keyNameFromEvent(event.key);
         if (!keyName)
             return "";
         // Ignore pure modifier key events
-        if (event.key === Qt.Key_Control || event.key === Qt.Key_Shift
-                || event.key === Qt.Key_Alt || event.key === Qt.Key_Meta
-                || event.key === Qt.Key_AltGr)
+        if (isModifierKey(event.key))
             return "";
         var parts = [];
         if (event.modifiers & Qt.MetaModifier) parts.push("meta");
@@ -136,9 +142,7 @@ PlasmaExtras.Representation {
             return keyName === wantKey;
         }
         // Or a required modifier released while holding (end PTT early)
-        if (event.key === Qt.Key_Control || event.key === Qt.Key_Shift
-                || event.key === Qt.Key_Alt || event.key === Qt.Key_Meta
-                || event.key === Qt.Key_AltGr) {
+        if (isModifierKey(event.key)) {
             return true;
         }
         return false;
@@ -949,16 +953,6 @@ PlasmaExtras.Representation {
     contentItem: Item {
         id: representationContent
 
-        MouseArea {
-            anchors.fill: parent
-            z: 99
-            propagateComposedEvents: true
-            onPressed: function(mouse) {
-                Plasmoid.status = PlasmaCore.Types.AcceptingInputStatus;
-                mouse.accepted = false;
-            }
-        }
-
         ColumnLayout {
             anchors.fill: parent
             spacing: Plasmoid.configuration.chatSpacing
@@ -1127,11 +1121,20 @@ PlasmaExtras.Representation {
                 Connections {
                     target: root
                     function onExpandedChanged() {
+                        if (!root.expanded && fullRep._voiceKeyPressActive) {
+                            fullRep.handleVoiceKeyCanceled();
+                        }
                         if (root.expanded) {
+                            Plasmoid.status = PlasmaCore.Types.AcceptingInputStatus;
                             if (fullRep.Window.window) {
                                 fullRep.Window.window.requestActivate();
                             }
                             inputField.forceActiveFocus(Qt.ShortcutFocusReason);
+                            Qt.callLater(function() {
+                                if (root.expanded && inputField.enabled) {
+                                    inputField.forceActiveFocus(Qt.ShortcutFocusReason);
+                                }
+                            });
                         }
                     }
                 }
@@ -1316,6 +1319,49 @@ PlasmaExtras.Representation {
                         focus: true
                         wrapMode: Text.Wrap
                         
+                        Component.onCompleted: {
+                            if (root.expanded && enabled) {
+                                forceActiveFocus(Qt.ShortcutFocusReason);
+                            }
+                        }
+
+                        onEnabledChanged: {
+                            if (root.expanded && enabled && !activeFocus) {
+                                forceActiveFocus(Qt.ShortcutFocusReason);
+                            }
+                        }
+
+                        onActiveFocusChanged: {
+                            if (!activeFocus && fullRep._voiceKeyPressActive) {
+                                fullRep.handleVoiceKeyCanceled();
+                            }
+                        }
+
+                        function submitMessage(event) {
+                            if (event.modifiers & Qt.ShiftModifier) {
+                                event.accepted = false;
+                            } else {
+                                event.accepted = true;
+                                var sendText = text.trim();
+                                if (sendText.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
+                                    sendText = "/task " + taskPopup.filteredTasks[0].name;
+                                } else if (sendText.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
+                                    sendText = "/model " + modelPopup.filteredModels[0];
+                                } else if (sendText.toLowerCase().startsWith("/profile ") && profilePopup.filteredProfiles.length === 1) {
+                                    sendText = "/profile " + profilePopup.filteredProfiles[0].name;
+                                } else if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
+                                        slashPopup.filteredSlashCommands.length === 1) {
+                                    sendText = slashPopup.filteredSlashCommands[0].cmd;
+                                }
+                                if (sendText.length > 0 || root.pendingAttachments.length > 0) {
+                                    if (root.sendMessage(sendText, root.pendingAttachments)) {
+                                        text = "";
+                                        root.pendingAttachments = [];
+                                    }
+                                }
+                            }
+                        }
+
                         Keys.onPressed: function(event) {
                             // Voice hotkey (same hold/toggle/auto as mic) — steal chord before typing.
                             if (fullRep.voiceKeyPressMatches(event)) {
@@ -1351,7 +1397,9 @@ PlasmaExtras.Representation {
 
                         Keys.onReleased: function(event) {
                             if (fullRep.voiceKeyReleaseMatches(event)) {
-                                event.accepted = true;
+                                if (!fullRep.isModifierKey(event.key)) {
+                                    event.accepted = true;
+                                }
                                 fullRep.handleVoiceKeyReleased(event);
                             }
                         }
@@ -1380,28 +1428,11 @@ PlasmaExtras.Representation {
                         }
 
                         Keys.onReturnPressed: function(event) {
-                            if (event.modifiers & Qt.ShiftModifier) {
-                                event.accepted = false;
-                            } else {
-                                event.accepted = true;
-                                var sendText = text.trim();
-                                if (sendText.toLowerCase().startsWith("/task ") && taskPopup.filteredTasks.length === 1) {
-                                    sendText = "/task " + taskPopup.filteredTasks[0].name;
-                                } else if (sendText.toLowerCase().startsWith("/model ") && modelPopup.filteredModels.length === 1) {
-                                    sendText = "/model " + modelPopup.filteredModels[0];
-                                } else if (sendText.toLowerCase().startsWith("/profile ") && profilePopup.filteredProfiles.length === 1) {
-                                    sendText = "/profile " + profilePopup.filteredProfiles[0].name;
-                                } else if (sendText.startsWith("/") && sendText.indexOf(" ") === -1 &&
-                                        slashPopup.filteredSlashCommands.length === 1) {
-                                    sendText = slashPopup.filteredSlashCommands[0].cmd;
-                                }
-                                if (sendText.length > 0 || root.pendingAttachments.length > 0) {
-                                    if (root.sendMessage(sendText, root.pendingAttachments)) {
-                                        text = "";
-                                        root.pendingAttachments = [];
-                                    }
-                                }
-                            }
+                            inputField.submitMessage(event);
+                        }
+
+                        Keys.onEnterPressed: function(event) {
+                            inputField.submitMessage(event);
                         }
                     }
                 }

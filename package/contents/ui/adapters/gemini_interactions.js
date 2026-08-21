@@ -19,7 +19,7 @@ var presets = [
 ];
 
 var capabilities = {
-    providerPresets: true,
+    providerPresets: false,
     customEndpoint: true,
     reasoningEffort: true,
     thinkingBudget: false,
@@ -74,7 +74,8 @@ function setHeaders(xhr, apiKey, opts) {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Api-Revision", "2026-05-20");
     if (apiKey && apiKey.length > 0) {
-        if (opts && (opts.geminiVertexAuthType === "gcloud" || apiKey.indexOf("ya29.") === 0)) {
+        var isGcloud = opts && opts.geminiAuthMethod === "agentplatform" && opts.geminiVertexAuthType === "gcloud";
+        if (isGcloud || apiKey.indexOf("ya29.") === 0) {
             xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
         } else {
             xhr.setRequestHeader("x-goog-api-key", apiKey);

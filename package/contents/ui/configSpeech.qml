@@ -13,6 +13,8 @@ import org.kde.plasma.workspace.dbus as DBus
 import org.kde.plasma.plasma5support as P5Support
 
 import "api.js" as Api
+import "wallet.js" as Wallet
+import "walletCore.js" as WalletCore
 import "stt.js" as Stt
 import "profiles.js" as Profiles
 
@@ -117,77 +119,22 @@ BaseConfigPage {
         }
     }
 
-    function walletCall(member, args, resolve, reject) {
-        var reply = DBus.SessionBus.asyncCall({
-            service: "org.kde.kwalletd6",
-            path: "/modules/kwalletd6",
-            iface: "org.kde.KWallet",
-            member: member,
-            arguments: args
-        });
-        reply.finished.connect(function() {
-            if (reply.isError) {
-                if (reject) reject(reply.error);
-            } else {
-                var val = reply.value;
-                if (val !== null && val !== undefined && val.hasOwnProperty("value"))
-                    val = val.value;
-                if (resolve) resolve(val);
-            }
-        });
-    }
-
-    function ensureWalletFolder(handle, callback) {
-        walletCall("hasFolder", [new DBus.int32(handle), "PlasmaLLM", "PlasmaLLM"],
-            function(exists) {
-                if (exists) {
-                    callback(true);
-                } else {
-                    walletCall("createFolder", [new DBus.int32(handle), "PlasmaLLM", "PlasmaLLM"],
-                        function(created) { callback(!!created); },
-                        function(err) { callback(false); }
-                    );
-                }
-            },
-            function(err) { callback(false); }
-        );
-    }
-
     function currentSttSlot() {
         return Api.sttKeySlot(cfg_sttProviderName, cfg_sttApiEndpoint);
     }
 
     function readFallbackMap() {
-        if (!cfg_apiKeysFallback || cfg_apiKeysFallback.length === 0) return {};
-        try { return JSON.parse(cfg_apiKeysFallback) || {}; } catch (e) { return {}; }
+        return WalletCore.parseFallbackMap(cfg_apiKeysFallback);
     }
 
     function fallbackKeyFor(slot) {
-        var m = readFallbackMap();
-        if (m.hasOwnProperty(slot)) return m[slot] || "";
-        return "";
+        return WalletCore.lookupFallback(readFallbackMap(),
+            [slot].concat(Api.sttLegacyKeySlots(cfg_sttProviderName, cfg_sttApiEndpoint)), "");
     }
 
     function writeFallbackKey(slot, key) {
-        var m = readFallbackMap();
-        m[slot] = key;
-        cfg_apiKeysFallback = JSON.stringify(m);
-    }
-
-    function walletWriteKey(handle, slot, key, onDone) {
-        ensureWalletFolder(handle, function(ok) {
-            if (!ok) {
-                onDone(false);
-                return;
-            }
-            walletCall("writePassword", [new DBus.int32(handle), "PlasmaLLM", slot, key, "PlasmaLLM"],
-                function(result) { onDone(result === 0); },
-                function(err) {
-                    console.warn("PlasmaLLM STT: wallet writePassword error:", err);
-                    onDone(false);
-                }
-            );
-        });
+        cfg_apiKeysFallback = WalletCore.stringifyFallbackMap(
+            WalletCore.putFallback(readFallbackMap(), slot, key));
     }
 
     function loadWalletKey() {
@@ -206,36 +153,13 @@ BaseConfigPage {
             walletKeyDirty = false;
         }
 
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (myGen !== _sttKeyGen) {
-                    if (handle >= 0)
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
+        Wallet.readKey(DBus, slot, Api.sttLegacyKeySlots(cfg_sttProviderName, cfg_sttApiEndpoint),
+            readFallbackMap(), "",
+            function(res) {
+                if (myGen !== _sttKeyGen || slot !== currentSttSlot())
                     return;
-                }
-                if (handle < 0) {
-                    walletAvailable = false;
-                    applyKey(fallbackKeyFor(slot));
-                    return;
-                }
-                walletAvailable = true;
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", slot, "PlasmaLLM"],
-                    function(password) {
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                        if (password && password.length > 0)
-                            applyKey(String(password).replace(/^\s+|\s+$/g, ""));
-                        else
-                            applyKey(fallbackKeyFor(slot));
-                    },
-                    function(err) {
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                        applyKey(fallbackKeyFor(slot));
-                    }
-                );
-            },
-            function(err) {
-                walletAvailable = false;
-                applyKey(fallbackKeyFor(slot));
+                walletAvailable = !!(res && res.available);
+                applyKey(res ? res.key : fallbackKeyFor(slot));
             }
         );
     }
@@ -246,38 +170,21 @@ BaseConfigPage {
         walletApiKey = key;
         walletKeyDirty = false;
 
-        if (!walletAvailable) {
-            writeFallbackKey(slot, key);
-            statusLabel.text = i18n("API key saved to local fallback (KWallet unavailable).");
-            statusLabel.visible = true;
-            return;
-        }
-
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    writeFallbackKey(slot, key);
-                    statusLabel.text = i18n("API key saved to local fallback (KWallet unavailable).");
-                    statusLabel.visible = true;
-                    return;
-                }
-                walletWriteKey(handle, slot, key, function(success) {
-                    walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                    if (success) {
-                        statusLabel.text = i18n("API key saved to KWallet.");
-                    } else {
-                        writeFallbackKey(slot, key);
-                        statusLabel.text = i18n("API key saved to local fallback.");
-                    }
-                    statusLabel.visible = true;
-                });
-            },
-            function(err) {
+        // The plaintext config copy is written only when KWallet could not
+        // store the key, and scrubbed when it could.
+        Wallet.writeKey(DBus, slot, key, function(res) {
+            if (res && res.available)
+                walletAvailable = true;
+            if (res && res.success) {
+                cfg_apiKeysFallback = WalletCore.stringifyFallbackMap(
+                    WalletCore.removeFallback(readFallbackMap(), slot));
+                statusLabel.text = i18n("API key saved to KWallet.");
+            } else {
                 writeFallbackKey(slot, key);
                 statusLabel.text = i18n("API key saved to local fallback.");
-                statusLabel.visible = true;
             }
-        );
+            statusLabel.visible = true;
+        });
     }
 
     function syncProviderCombo() {

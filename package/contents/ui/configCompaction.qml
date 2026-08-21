@@ -11,6 +11,8 @@ import org.kde.kcmutils
 import org.kde.plasma.workspace.dbus as DBus
 
 import "api.js" as Api
+import "wallet.js" as Wallet
+import "walletCore.js" as WalletCore
 import "contextCompactor.js" as ContextCompactor
 import "profiles.js" as Profiles
 
@@ -91,6 +93,7 @@ BaseConfigPage {
                 modelName: cfg_modelName || "",
                 apiEndpoint: cfg_apiEndpoint || "",
                 apiType: cfg_apiType || "openai",
+                geminiApiVariant: cfg_geminiApiVariant || "",
                 geminiAuthMethod: cfg_geminiAuthMethod || "",
                 geminiProjectId: cfg_geminiProjectId || "",
                 geminiLocation: cfg_geminiLocation || "",
@@ -109,6 +112,7 @@ BaseConfigPage {
             modelName: cfg_modelName || "",
             apiEndpoint: cfg_apiEndpoint || "",
             apiType: cfg_apiType || "openai",
+            geminiApiVariant: cfg_geminiApiVariant || "",
             geminiAuthMethod: cfg_geminiAuthMethod || "",
             geminiProjectId: cfg_geminiProjectId || "",
             geminiLocation: cfg_geminiLocation || "",
@@ -130,104 +134,23 @@ BaseConfigPage {
             profileCombo.currentIndex = 0;
     }
 
-    function walletCall(member, args, resolve, reject) {
-        var reply = DBus.SessionBus.asyncCall({
-            service: "org.kde.kwalletd6",
-            path: "/modules/kwalletd6",
-            iface: "org.kde.KWallet",
-            member: member,
-            arguments: args
-        });
-        reply.finished.connect(function() {
-            if (reply.isError) {
-                if (reject) reject(reply.error);
-            } else {
-                var val = reply.value;
-                if (val !== null && val !== undefined && val.hasOwnProperty("value"))
-                    val = val.value;
-                if (resolve) resolve(val);
-            }
-        });
-    }
-
-    function fallbackKeyFor(slot) {
-        if (!cfg_apiKeysFallback || cfg_apiKeysFallback.length === 0) return "";
-        try {
-            var m = JSON.parse(cfg_apiKeysFallback) || {};
-            return m[slot] || "";
-        } catch (e) {
-            return "";
-        }
+    function fallbackMap() {
+        return WalletCore.parseFallbackMap(cfg_apiKeysFallback);
     }
 
     function loadProfileKey(profile, callback) {
-        if (!profile || profile.id === "active") {
-            var activeSlot = Api.currentKeySlot(
-                cfg_activeProfileId,
-                cfg_apiType,
-                cfg_providerName,
-                cfg_apiEndpoint,
-                cfg_geminiAuthMethod
-            );
-            walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-                function(handle) {
-                    if (handle < 0) {
-                        callback(fallbackKeyFor(activeSlot) || cfg_apiKey || "");
-                        return;
-                    }
-                    walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", activeSlot, "PlasmaLLM"],
-                        function(pwd) {
-                            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                            if (pwd && pwd.length > 0)
-                                callback(String(pwd).replace(/^\s+|\s+$/g, ""));
-                            else
-                                callback(fallbackKeyFor(activeSlot) || cfg_apiKey || "");
-                        },
-                        function(err) {
-                            walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                            callback(fallbackKeyFor(activeSlot) || cfg_apiKey || "");
-                        }
-                    );
-                },
-                function(err) {
-                    callback(fallbackKeyFor(activeSlot) || cfg_apiKey || "");
-                }
-            );
-            return;
-        }
-
-        var slot = Api.currentKeySlot(
-            profile.id,
-            profile.apiType || "openai",
-            profile.providerName || "",
-            profile.apiEndpoint || "",
-            profile.geminiAuthMethod || ""
-        );
-
-        walletCall("open", ["kdewallet", new DBus.int64(0), "PlasmaLLM"],
-            function(handle) {
-                if (handle < 0) {
-                    callback(fallbackKeyFor(slot) || "");
-                    return;
-                }
-                walletCall("readPassword", [new DBus.int32(handle), "PlasmaLLM", slot, "PlasmaLLM"],
-                    function(pwd) {
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                        if (pwd && pwd.length > 0)
-                            callback(String(pwd).replace(/^\s+|\s+$/g, ""));
-                        else
-                            callback(fallbackKeyFor(slot) || "");
-                    },
-                    function(err) {
-                        walletCall("close", [new DBus.int32(handle), new DBus.bool(false), "PlasmaLLM"], function(){}, function(){});
-                        callback(fallbackKeyFor(slot) || "");
-                    }
-                );
-            },
-            function(err) {
-                callback(fallbackKeyFor(slot) || "");
-            }
-        );
+        var pid = (!profile || profile.id === "active") ? cfg_activeProfileId : profile.id;
+        var apiType = (!profile || profile.id === "active") ? cfg_apiType : (profile.apiType || "openai");
+        var providerName = (!profile || profile.id === "active") ? cfg_providerName : (profile.providerName || "");
+        var endpoint = (!profile || profile.id === "active") ? cfg_apiEndpoint : (profile.apiEndpoint || "");
+        var geminiAuth = (!profile || profile.id === "active") ? cfg_geminiAuthMethod : (profile.geminiAuthMethod || "");
+        var slot = Api.currentKeySlot(pid, apiType, providerName, endpoint, geminiAuth);
+        var extras = Api.legacyKeySlots(pid, apiType, providerName, endpoint, geminiAuth);
+        var cfgKey = (!profile || profile.id === "active") ? (cfg_apiKey || "") : "";
+        Wallet.readKey(DBus, slot, extras, fallbackMap(), cfgKey, function(res) {
+            // readKey already walks extras + fallbackMap + cfgKey.
+            callback((res && res.key) || "");
+        });
     }
 
     function testCompactionConnection() {
@@ -251,10 +174,18 @@ BaseConfigPage {
             var transcriptToSend = configPage.sampleTranscript || configPage.defaultSampleTranscript;
 
             ContextCompactor.compactHistory({
-                apiType: prof.apiType || "openai",
+                apiType: Api.resolvedApiType(
+                    prof.apiType || "openai",
+                    prof.geminiApiVariant,
+                    prof.geminiAuthMethod,
+                    prof.geminiVertexAuthType),
                 endpoint: ep,
                 apiKey: key,
                 model: model,
+                geminiApiVariant: Api.clampGeminiApiVariant(
+                    prof.geminiApiVariant,
+                    prof.geminiAuthMethod,
+                    prof.geminiVertexAuthType),
                 geminiAuthMethod: prof.geminiAuthMethod,
                 geminiProjectId: prof.geminiProjectId,
                 geminiLocation: prof.geminiLocation,

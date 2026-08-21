@@ -592,13 +592,7 @@ Kirigami.AbstractCard {
                                 radius: 4
                             }
 
-                            Keys.onEscapePressed: function(event) {
-                                event.accepted = true;
-                                messageItem.isEditing = false;
-                                messageItem.editDraft = "";
-                            }
-
-                            Keys.onReturnPressed: function(event) {
+                            function submitEdit(event) {
                                 if (event.modifiers & Qt.ControlModifier) {
                                     event.accepted = true;
                                     if (messageItem.isUser) {
@@ -611,6 +605,20 @@ Kirigami.AbstractCard {
                                 } else {
                                     event.accepted = false; // allow multiline newline
                                 }
+                            }
+
+                            Keys.onEscapePressed: function(event) {
+                                event.accepted = true;
+                                messageItem.isEditing = false;
+                                messageItem.editDraft = "";
+                            }
+
+                            Keys.onReturnPressed: function(event) {
+                                submitEdit(event);
+                            }
+
+                            Keys.onEnterPressed: function(event) {
+                                submitEdit(event);
                             }
                         }
                     }

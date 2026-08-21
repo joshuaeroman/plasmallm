@@ -4,6 +4,7 @@
 */
 
 .import "../toolManager.js" as ToolManager
+.import "geminiThinking.js" as GeminiThinking
 
 // Native Google Gemini adapter (POST /v1beta/models/{model}:streamGenerateContent
 // ?alt=sse, GET /v1beta/models). Translates the host's OpenAI-shaped neutral
@@ -29,7 +30,7 @@ var presets = [
 // effort field is hidden. Provider preset dropdown is hidden — only one
 // endpoint exists — but the endpoint field is kept editable for proxies.
 var capabilities = {
-    providerPresets: true,
+    providerPresets: false,
     customEndpoint: true,
     reasoningEffort: false,
     thinkingBudget: true,
@@ -80,7 +81,8 @@ function setHeaders(xhr, apiKey, opts) {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Api-Revision", "2026-05-07");
     if (apiKey && apiKey.length > 0) {
-        if (opts && (opts.geminiVertexAuthType === "gcloud" || apiKey.indexOf("ya29.") === 0)) {
+        var isGcloud = opts && opts.geminiAuthMethod === "agentplatform" && opts.geminiVertexAuthType === "gcloud";
+        if (isGcloud || apiKey.indexOf("ya29.") === 0) {
             xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
         } else {
             xhr.setRequestHeader("x-goog-api-key", apiKey);
@@ -681,9 +683,14 @@ function sendStreaming(opts) {
             maxOutputTokens: maxTokens
         }
     };
-    // Gemini uses the thinking budget directly; setting it to 0 explicitly
-    // disables auto-thinking on 2.5-class models.
-    body.generationConfig.thinkingConfig = { thinkingBudget: opts.thinkingBudget || 0 };
+    // AI Studio lite rejects thinkingBudget:0; Vertex 2.5 rejects thinkingLevel.
+    // Helper picks a platform-safe config (never both fields).
+    body.generationConfig.thinkingConfig = GeminiThinking.buildThinkingConfig(
+        model,
+        opts.thinkingBudget || 0,
+        !!opts.showThoughts,
+        opts.geminiAuthMethod || "aistudio"
+    );
     if (translated.systemText && translated.systemText.length > 0) {
         body.systemInstruction = { parts: [{ text: translated.systemText }] };
     }
