@@ -51,7 +51,6 @@ PlasmoidItem {
     }
 
     property bool isLoading: false
-    property bool sessionActive: false
     property bool _switchingProfile: false
     // Bumped on each profile/config identity change; stale wallet callbacks no-op.
     property int _configGen: 0
@@ -93,15 +92,6 @@ PlasmoidItem {
 
     readonly property color userColor: Plasmoid.configuration.useCustomUserColor ? Plasmoid.configuration.userColor : Kirigami.Theme.highlightColor
     readonly property color assistantColor: Plasmoid.configuration.useCustomAssistantColor ? Plasmoid.configuration.assistantColor : Qt.darker(Kirigami.Theme.alternateBackgroundColor, 1.15)
-
-    Timer {
-        id: sessionStatusTimer
-        interval: 5000
-        running: root.expanded && SessionRunner.isEnabled(Plasmoid.configuration)
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: updateSessionStatus()
-    }
 
     P5Support.DataSource {
         id: latexDependenciesDetector
@@ -1227,7 +1217,6 @@ PlasmoidItem {
     // Commands currently in-flight as system info gather (populated by regatherSysInfo)
     property var pendingSysInfoCommands: ({})
     property var stopCommands: ([])
-    property var statusCheckCommands: ([])
     property int commandRunStateTick: 0
     property var savedScreenshotPaths: ({})
 
@@ -1462,10 +1451,6 @@ PlasmoidItem {
             } else if (stopCommands.indexOf(source) !== -1) {
                 // Stop commands from the multiplexer
                 stopCommands.splice(stopCommands.indexOf(source), 1);
-                disconnectSource(source);
-            } else if (statusCheckCommands.indexOf(source) !== -1) {
-                statusCheckCommands.splice(statusCheckCommands.indexOf(source), 1);
-                root.sessionActive = (exitCode === 0);
                 disconnectSource(source);
             } else {
                 if (stdout.length > 0 || stderr.length > 0) {
@@ -3717,35 +3702,6 @@ PlasmoidItem {
                 toolsExec.connectSource(stopCmd);
                 return;
             }
-        }
-    }
-
-    function updateSessionStatus() {
-        if (!SessionRunner.isEnabled(Plasmoid.configuration)) {
-            sessionActive = false;
-            return;
-        }
-        var be = SessionRunner.backend(Plasmoid.configuration);
-        var sess = SessionRunner.sessionName(Plasmoid.configuration);
-        var cmd = be === "tmux" ? "tmux has-session -t '" + sess + "' 2>/dev/null" : "screen -ls '" + sess + "' | grep -q '\\." + sess + "\\b'";
-        statusCheckCommands.push(cmd);
-        executable.connectSource(cmd);
-    }
-
-    function resetSession() {
-        if (SessionRunner.isEnabled(Plasmoid.configuration)) {
-            var killCmd = SessionRunner.killSession(Plasmoid.configuration);
-            saveCommands.push(killCmd); // Use saveCommands to avoid output bubble
-            executable.connectSource(killCmd);
-            sessionActive = false;
-            displayMessages.append({
-                role: "assistant",
-                content: i18n("Session reset requested."),
-
-                shared: false,
-                timestamp: currentTimestamp(),
-            });
-            Qt.callLater(updateSessionStatus);
         }
     }
 

@@ -112,13 +112,3 @@ function stopCommand(cfg, marker) {
         return `screen -S '${sess}' -p 0 -X eval "stuff \\003" "stuff \\"printf '\\\\n__PLM_DONE_${marker}_130\\\\n'\\\\015\\""`;
     }
 }
-
-function killSession(cfg) {
-    var be = backend(cfg);
-    var sess = sessionName(cfg);
-    if (be === "tmux") {
-        return `tmux kill-session -t '${sess}'`;
-    } else {
-        return `screen -S '${sess}' -X quit`;
-    }
-}

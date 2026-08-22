@@ -1835,31 +1835,6 @@ PlasmaExtras.Representation {
             }
 
             PlasmaComponents.Button {
-                id: killButton
-                text: i18n("Kill")
-                visible: Plasmoid.configuration.useSessionMultiplexer
-                enabled: root.systemPromptReady && root.sessionActive
-                onClicked: root.resetSession()
-                PlasmaComponents.ToolTip.text: i18n("Kill persistent session (stops all processes and resets shell state)")
-                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
-
-                contentItem: RowLayout {
-                    spacing: Kirigami.Units.smallSpacing
-                    Kirigami.Icon {
-                        source: "media-playback-stop"
-                        implicitWidth: Kirigami.Units.iconSizes.small
-                        implicitHeight: Kirigami.Units.iconSizes.small
-                        color: killButton.enabled ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.disabledTextColor
-                    }
-                    PlasmaComponents.Label {
-                        text: killButton.text
-                        color: killButton.enabled ? Kirigami.Theme.negativeTextColor : Kirigami.Theme.disabledTextColor
-                    }
-                }
-            }
-
-            PlasmaComponents.Button {
                 text: i18n("Send")
                 icon.name: "document-send"
                 visible: true
