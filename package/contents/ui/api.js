@@ -210,6 +210,17 @@ function isImageFile(filePath) {
     return ["png", "jpg", "jpeg", "gif", "webp", "bmp", "svg"].indexOf(ext) !== -1;
 }
 
+// Breeze icon name for a non-image attachment, by extension.
+function iconForFile(filePath) {
+    var ext = filePath.split(".").pop().toLowerCase();
+    if (ext === "pdf") return "application-pdf";
+    if (["zip", "tar", "gz", "bz2", "xz", "7z", "rar"].indexOf(ext) !== -1) return "application-zip";
+    if (["mp3", "wav", "ogg", "flac", "m4a", "opus"].indexOf(ext) !== -1) return "audio-x-generic";
+    if (["mp4", "mkv", "webm", "mov", "avi"].indexOf(ext) !== -1) return "video-x-generic";
+    if (["md", "markdown"].indexOf(ext) !== -1) return "text-markdown";
+    return "text-x-generic";
+}
+
 function stripCodeBlocks(text) {
     return text.replace(/\n?```\w*\n[\s\S]*?```\n?/g, "\n");
 }

@@ -9,6 +9,7 @@ import QtQuick.Controls as QQC2
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
 
+import "api.js" as Api
 import "toolManager.js" as ToolManager
 
 Rectangle {
@@ -182,39 +183,60 @@ Rectangle {
 
             Repeater {
                 model: toolBlock.attachmentPaths
-                delegate: Rectangle {
-                    id: imageThumb
+                delegate: Loader {
+                    id: attachmentLoader
                     readonly property string filePath: modelData
-                    // We assume it's an image if it's rendered here, as tool results only pass dataUrl currently
                     readonly property bool isImage: filePath.startsWith("data:") || (typeof Api !== 'undefined' && Api.isImageFile(filePath))
                     readonly property string fileName: filePath.startsWith("data:") ? "pasted_image.png" : filePath.split("/").pop()
 
-                    readonly property real maxW: Kirigami.Units.gridUnit * 10
-                    readonly property real maxH: Kirigami.Units.gridUnit * 10
-                    readonly property real aspect: (thumbImg.sourceSize.width > 0 && thumbImg.sourceSize.height > 0) ? (thumbImg.sourceSize.width / thumbImg.sourceSize.height) : 1.0
-
-                    visible: isImage
-                    width: aspect > (maxW / maxH) ? maxW : maxH * aspect
-                    height: aspect > (maxW / maxH) ? maxW / aspect : maxH
-                    radius: 4
-                    color: Kirigami.Theme.alternateBackgroundColor
-                    border.color: Kirigami.Theme.disabledTextColor
-                    border.width: 1
-                    clip: true
-
-                    Image {
-                        id: thumbImg
-                        anchors.fill: parent
-                        anchors.margins: imageThumb.border.width
-                        source: imageThumb.filePath.startsWith("data:") ? imageThumb.filePath : Qt.resolvedUrl("file://" + imageThumb.filePath)
-                        autoTransform: true
-                        fillMode: Image.PreserveAspectFit
-                        asynchronous: true
-                        smooth: true
-                        mipmap: true
-                    }
+                    sourceComponent: isImage ? imageThumbComponent : genericFileChipComponent
                 }
             }
+        }
+    }
+
+    Component {
+        id: imageThumbComponent
+        Rectangle {
+            id: imageThumb
+            readonly property string filePath: parent ? (parent.filePath || "") : ""
+            readonly property string fileName: parent ? (parent.fileName || "") : ""
+
+            readonly property real maxW: Kirigami.Units.gridUnit * 10
+            readonly property real maxH: Kirigami.Units.gridUnit * 10
+            readonly property real aspect: (thumbImg.sourceSize.width > 0 && thumbImg.sourceSize.height > 0) ? (thumbImg.sourceSize.width / thumbImg.sourceSize.height) : 1.0
+
+            width: aspect > (maxW / maxH) ? maxW : maxH * aspect
+            height: aspect > (maxW / maxH) ? maxW / aspect : maxH
+            radius: 4
+            color: Kirigami.Theme.alternateBackgroundColor
+            border.color: Kirigami.Theme.disabledTextColor
+            border.width: 1
+            clip: true
+
+            Image {
+                id: thumbImg
+                anchors.fill: parent
+                anchors.margins: imageThumb.border.width
+                source: imageThumb.filePath.startsWith("data:") ? imageThumb.filePath : Qt.resolvedUrl("file://" + imageThumb.filePath)
+                autoTransform: true
+                fillMode: Image.PreserveAspectFit
+                asynchronous: true
+                smooth: true
+                mipmap: true
+            }
+        }
+    }
+
+    Component {
+        id: genericFileChipComponent
+        Kirigami.Chip {
+            readonly property string fileName: parent ? (parent.fileName || "") : ""
+            readonly property string filePath: parent ? (parent.filePath || "") : ""
+            text: fileName
+            icon.name: (filePath && filePath.indexOf(".") !== -1) ? Api.iconForFile(filePath) : "text-x-generic"
+            closable: false
+            checkable: false
         }
     }
 
