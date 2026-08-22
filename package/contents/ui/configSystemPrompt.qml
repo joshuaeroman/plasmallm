@@ -267,6 +267,7 @@ BaseConfigPage {
                 model: [
                     { tag: "{{system_info}}", desc: i18n("Enabled system info selected in the checklist above") },
                     { tag: "{{tools}}", desc: i18n("Enabled tool descriptions and guidelines from the Tools menu") },
+                    { tag: "{{skills}}", desc: i18n("Available skills index and instructions for skills loaded this session (from the Skills settings page)") },
                     { tag: "{{session_multiplexer}}", desc: i18n("Persistent tmux or screen session multiplexer instructions (when active)") },
                     { tag: "{{approval_mode}}", desc: i18n("Notice indicating skip-approvals mode (/auto) is active") },
                     { tag: "{{driving_instructions}}", desc: i18n("Desktop automation coordinates and guidelines (when driving)") }

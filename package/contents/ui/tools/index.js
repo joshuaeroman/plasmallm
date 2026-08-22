@@ -19,6 +19,7 @@
 .import "WebSearch.js" as WebSearch
 .import "RestoreContext.js" as RestoreContext
 .import "RecallAttachment.js" as RecallAttachment
+.import "Skill.js" as Skill
 
 .import "driver/StartSession.js" as StartSession
 .import "driver/DesktopGetState.js" as DesktopGetState
@@ -36,6 +37,7 @@ var tools = [
     { module: WebSearch, configUI: "tools/WebSearchConfig.qml" },
     { module: RestoreContext, configUI: "tools/RestoreContextConfig.qml" },
     { module: RecallAttachment, configUI: "" },
+    { module: Skill, configUI: "" },
     { module: ReadFile, configUI: "tools/ReadFileConfig.qml" },
     { module: WriteFile, configUI: "tools/WriteFileConfig.qml" },
     { module: ListDir, configUI: "tools/ListDirConfig.qml" },

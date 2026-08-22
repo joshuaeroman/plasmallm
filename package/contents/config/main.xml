@@ -167,6 +167,7 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
 
 {{session_multiplexer}}
 {{approval_mode}}
+{{skills}}
 {{tools}}
 {{driving_instructions}}</default>
     </entry>
@@ -493,6 +494,42 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
       <label>User-defined tools (JSON array)</label>
       <default>[{"name":"echo","description":"Echoes back the message provided.","commandTemplate":"echo {message}","requireSuperuser":false,"autoRun":false}]</default>
     </entry>
+    <entry name="skillsEnabled" type="Bool">
+      <label>Master switch for skill file support</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsSkillEnabled" type="Bool">
+      <label>Enable skill tool (on-demand loading of skill instructions)</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsSkillAutoRun" type="Bool">
+      <label>Auto-run skill tool</label>
+      <default>true</default>
+    </entry>
+    <entry name="skillsDisabledList" type="String">
+      <label>Disabled skills (JSON array of names; discovered skills are enabled unless listed)</label>
+      <default></default>
+    </entry>
+    <entry name="skillsScanClaude" type="Bool">
+      <label>Also scan ~/.claude/skills for skills</label>
+      <default>false</default>
+    </entry>
+    <entry name="skillsScanAgents" type="Bool">
+      <label>Also scan ~/.agents/skills for skills</label>
+      <default>false</default>
+    </entry>
+    <entry name="skillsExtraDirs" type="String">
+      <label>Additional skill directories to scan (JSON array of absolute paths)</label>
+      <default></default>
+    </entry>
+    <entry name="skillsCache" type="String">
+      <label>Internal: cached skill metadata from the last directory scan (JSON array, no bodies)</label>
+      <default></default>
+    </entry>
+    <entry name="skillsRescan" type="Int">
+      <label>Internal: bump to request a skill directory rescan</label>
+      <default>0</default>
+    </entry>
     <entry name="useSessionMultiplexer" type="Bool">
       <label>Run commands inside a persistent session</label>
       <default>false</default>
@@ -651,8 +688,12 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
       <default>524288</default>
     </entry>
     <entry name="toolsInstructions" type="String">
-      <label>Custom prompt instruction overrides for tools (JSON object: {"toolName": "instruction"})</label>
+      <label>Per-tool prompt instruction overrides (JSON object)</label>
       <default>{}</default>
+    </entry>
+    <entry name="toolsCollapseResults" type="String">
+      <label>Per-tool collapsed-result preferences (JSON object; absent = default)</label>
+      <default></default>
     </entry>
     <entry name="enableToolCallLimit" type="Bool">
       <label>Enable tool loop step limit</label>

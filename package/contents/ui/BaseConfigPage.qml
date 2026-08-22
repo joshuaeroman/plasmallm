@@ -414,6 +414,8 @@ SimpleKCM {
     property int cfg_toolsHttpMaxBytesDefault
     property string cfg_toolsInstructions
     property string cfg_toolsInstructionsDefault
+    property string cfg_toolsCollapseResults
+    property string cfg_toolsCollapseResultsDefault
     property bool cfg_enableToolCallLimit
     property bool cfg_enableToolCallLimitDefault
     property int cfg_maxToolCallDepth
@@ -422,6 +424,26 @@ SimpleKCM {
     property int cfg_latexRenderModeDefault
     property string cfg_customTools
     property string cfg_customToolsDefault
+
+    // Skills (per-skill toggles and scan dirs are global, not profile-captured)
+    property bool cfg_skillsEnabled
+    property bool cfg_skillsEnabledDefault
+    property bool cfg_toolsSkillEnabled
+    property bool cfg_toolsSkillEnabledDefault
+    property bool cfg_toolsSkillAutoRun
+    property bool cfg_toolsSkillAutoRunDefault
+    property string cfg_skillsDisabledList
+    property string cfg_skillsDisabledListDefault
+    property bool cfg_skillsScanClaude
+    property bool cfg_skillsScanClaudeDefault
+    property bool cfg_skillsScanAgents
+    property bool cfg_skillsScanAgentsDefault
+    property string cfg_skillsExtraDirs
+    property string cfg_skillsExtraDirsDefault
+    property string cfg_skillsCache
+    property string cfg_skillsCacheDefault
+    property int cfg_skillsRescan
+    property int cfg_skillsRescanDefault
 
     property bool cfg_compactionEnabled
     property bool cfg_compactionEnabledDefault

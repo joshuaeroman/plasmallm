@@ -65,6 +65,7 @@ BaseConfigPage {
                             toolCmdField.text = customToolsList[index].commandTemplate;
                             toolRootCheck.checked = customToolsList[index].requireSuperuser;
                             toolAutoCheck.checked = customToolsList[index].autoRun;
+                            toolCollapseCheck.checked = customToolsList[index].hasOwnProperty("collapseResult") ? customToolsList[index].collapseResult : true;
                             toolEditorVisible = true;
                         }
                     }
@@ -136,6 +137,15 @@ BaseConfigPage {
                     text: i18n("Auto-run tool (no confirmation dialog)")
                 }
 
+                QQC2.CheckBox {
+                    id: toolCollapseCheck
+                    text: i18n("Collapse results")
+                    checked: true
+                    QQC2.ToolTip.text: i18n("Show finished results as a small pill; click the pill to view the full output.")
+                    QQC2.ToolTip.delay: 500
+                    QQC2.ToolTip.visible: hovered
+                }
+
                 QQC2.Label {
                     id: toolErrorLabel
                     visible: false
@@ -164,7 +174,8 @@ BaseConfigPage {
                             description: toolDescField.text.trim(),
                             commandTemplate: toolCmdField.text.trim(),
                             requireSuperuser: toolRootCheck.checked,
-                            autoRun: toolAutoCheck.checked
+                            autoRun: toolAutoCheck.checked,
+                            collapseResult: toolCollapseCheck.checked
                         };
                         if (toolEditIndex >= 0) {
                             arr[toolEditIndex] = entry;

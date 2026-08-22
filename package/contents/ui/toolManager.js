@@ -7,8 +7,109 @@
 
 .import "tools/index.js" as ToolRegistry
 .import "driverManager.js" as DriverManager
+.import "skills.js" as Skills
 
 var TOOLS = {};
+
+// Tools whose results stay expanded by default (rich formatted output or
+// image payloads). An explicit entry in toolsCollapseResults overrides this.
+var DEFAULT_EXPANDED_TOOLS = [
+    "web_search",
+    "StartSession",
+    "DesktopGetState",
+    "DesktopSetOperatingContext",
+    "DesktopResetContext",
+    "DesktopScroll",
+    "DesktopClick",
+    "DesktopInput",
+    "DesktopMoveMouse",
+    "DesktopWindowControl",
+    "DesktopReadSelection"
+];
+
+function toolIconName(toolName) {
+    switch (toolName) {
+        case "run_command": return "utilities-terminal";
+        case "web_search": return "browser-search";
+        case "read_file": return "document-open";
+        case "write_file": return "document-save";
+        case "list_dir": return "folder-open";
+        case "skill": return "applications-education";
+        case "http_get": return "download";
+        case "http_request": return "network-wired";
+        case "search_files": return "system-search";
+        case "get_clipboard": return "edit-paste";
+        case "set_clipboard": return "edit-copy";
+        case "notify": return "notifications";
+        case "open_url": return "internet-services";
+    }
+    return "services";
+}
+
+/** One-line descriptor for a finished tool result (icon label / collapsed pill). */
+function resultLabel(toolName, args, home) {
+    var label = toolName || "";
+    args = args || {};
+    home = home || "$HOME";
+    if (args.path) {
+        label += ": " + contractPath(args.path, home);
+    } else if (args.url) {
+        label += ": " + args.url;
+    } else if (args.query) {
+        label += ": " + args.query;
+    } else if (args.command) {
+        label += ": " + args.command;
+    } else if (toolName === "skill" && args.name) {
+        label += ": " + args.name;
+    }
+    return label;
+}
+
+/**
+ * Whether a successful plain tool result should start collapsed as a small
+ * pill. Precedence:
+ *   1. explicit entry in the toolsCollapseResults JSON map ("what user says goes")
+ *   2. a custom script tool's own collapseResult field
+ *   3. defaults — collapsed for ordinary tools, expanded for DEFAULT_EXPANDED_TOOLS
+ */
+function parseCollapseMap(mapJson) {
+    if (!mapJson) return {};
+    try {
+        var parsed = typeof mapJson === "string" ? JSON.parse(mapJson) : mapJson;
+        return (parsed && typeof parsed === "object" && !Array.isArray(parsed)) ? parsed : {};
+    } catch (e) {
+        return {};
+    }
+}
+
+function shouldCollapseResult(toolName, collapseMapJson, customToolsJson) {
+    if (!toolName) return false;
+    var map = parseCollapseMap(collapseMapJson);
+    if (map.hasOwnProperty(toolName)) return !!map[toolName];
+    if (customToolsJson) {
+        try {
+            var customs = typeof customToolsJson === "string" ? JSON.parse(customToolsJson) : customToolsJson;
+            if (Array.isArray(customs)) {
+                for (var i = 0; i < customs.length; i++) {
+                    if (customs[i] && customs[i].name === toolName && customs[i].collapseResult !== undefined) {
+                        return !!customs[i].collapseResult;
+                    }
+                }
+            }
+        } catch (e) {}
+    }
+    for (var d = 0; d < DEFAULT_EXPANDED_TOOLS.length; d++) {
+        if (DEFAULT_EXPANDED_TOOLS[d] === toolName) return false;
+    }
+    return true;
+}
+
+/** Writes one explicit preference into the collapse map and returns the JSON string. */
+function setToolCollapsed(mapJson, toolName, collapsed) {
+    var map = parseCollapseMap(mapJson);
+    map[toolName] = !!collapsed;
+    return JSON.stringify(map);
+}
 
 function formatToolDisplayName(name) {
     if (!name) return "";
@@ -214,6 +315,7 @@ function getEnabledTools(config) {
 
     if (config.useCommandTool) enabled.push("run_command");
     if (config.enableWebSearch && config.searchConfigured) enabled.push("web_search");
+    if (config.skillsEnabled && config.toolsSkillEnabled) enabled.push("skill");
     if (config.toolsReadFileEnabled) enabled.push("read_file");
     if (config.toolsWriteFileEnabled) enabled.push("write_file");
     if (config.toolsListDirEnabled) enabled.push("list_dir");
@@ -258,6 +360,7 @@ function isAutoRun(toolId, config) {
         case "web_search": return true;
         case "restore_context": return true;
         case "recall_attachment": return true;
+        case "skill": return config.toolsSkillAutoRun !== undefined ? config.toolsSkillAutoRun : true;
         case "run_command": return config.autoRunCommands;
         case "read_file": return config.toolsReadFileAutoRun;
         case "write_file": return config.toolsWriteFileAutoRun;
@@ -286,6 +389,20 @@ function getEnabledToolsMetadata(config) {
         var id = enabled[i];
         var meta = getToolMetadata(id, config);
         if (meta) {
+            // Advertise available skills inside the skill tool's schema
+            // description so models see the list at tool-selection time. Clone first — meta may be the shared registry object, and
+            // mutating it would leak XML into the settings UI and prompt text.
+            if (config && config.skillsEnabled && id === "skill") {
+                var clone = {};
+                for (var k in meta) {
+                    if (meta.hasOwnProperty(k)) clone[k] = meta[k];
+                }
+                clone.description = Skills.embedSkillsIndex(
+                    meta.description,
+                    Skills.filterEnabledSkills(config.loadedSkills || [], config.skillsDisabledList)
+                );
+                meta = clone;
+            }
             metadata.push(meta);
         }
     }

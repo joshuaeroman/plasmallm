@@ -38,6 +38,11 @@ ConfigModel {
         source: "configTasks.qml"
     }
     ConfigCategory {
+        name: i18n("Skills")
+        icon: "preferences-desktop-activities"
+        source: "configSkills.qml"
+    }
+    ConfigCategory {
         name: i18n("Tools")
         icon: "tools"
         source: "configTools.qml"

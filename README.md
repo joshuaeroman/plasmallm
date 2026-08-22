@@ -113,8 +113,9 @@ Right-click the widget and select **Configure PlasmaLLM...**:
 
 - **General**: Set your provider, model, and API keys.
 - **Appearance**: Configure fonts, bubble styles, and interface behavior.
-- **Tools**: Enable/disable specific tools and configure the filesystem whitelist for sandboxed operations.
+- **Tools**: Enable/disable specific tools and configure the filesystem whitelist for sandboxed operations. Finished tool results collapse to a small pill by default (per-tool toggle); click to expand.
 - **Tasks**: Manage custom script tools and shell command templates.
+- **Skills**: Discover and toggle Agent Skills (`SKILL.md` folders or `<name>.md` files) loaded on demand from `~/.local/share/plasmallm/skills/` or custom directories. Use `/skills` in chat to list what is available.
 
 ## Support
 

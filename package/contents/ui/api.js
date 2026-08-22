@@ -11,6 +11,7 @@
 .import "toolManager.js" as ToolManager
 .import "driverManager.js" as DriverManager
 .import "walletCore.js" as WalletCore
+.import "skills.js" as Skills
 
 function localISODateTime() {
     var d = new Date();
@@ -47,6 +48,7 @@ var DEFAULT_SYSTEM_PROMPT_TEMPLATE = "You are a helpful assistant embedded in th
     "\n" +
     "{{session_multiplexer}}\n" +
     "{{approval_mode}}\n" +
+    "{{skills}}\n" +
     "{{tools}}\n" +
     "{{driving_instructions}}";
 
@@ -58,6 +60,7 @@ function getLocalizedDefaultSystemPromptTemplate(i18nFn) {
         fn("General-purpose assistant. Keep responses short (~1 paragraph) unless more detail is needed to properly answer. Be concise and conversational. Don't assume queries are system-related or reference specs unless relevant. Always use the `~` alias instead of absolute paths when referring to the user's home directory in tool calls or text.") + "\n\n" +
         "{{session_multiplexer}}\n" +
         "{{approval_mode}}\n" +
+        "{{skills}}\n" +
         "{{tools}}\n" +
         "{{driving_instructions}}";
 }
@@ -125,10 +128,19 @@ function buildSystemPrompt(sysInfo, template, options) {
     var approvalText = buildApprovalModeSection(options);
     var trFn = (options && typeof options.i18n === "function") ? options.i18n : (typeof i18n === "function" ? i18n : null);
     var toolsText = options.toolsConfig ? ToolManager.buildSystemPromptSection(options.toolsConfig, trFn) : "";
+    var skillsText = "";
+    if (options.toolsConfig && options.toolsConfig.skillsEnabled) {
+        skillsText = Skills.buildSystemPromptSection(
+            options.toolsConfig.loadedSkills || [],
+            options.toolsConfig.skillsDisabledList,
+            options.toolsConfig.activeSkills || []
+        );
+    }
 
     var vars = {
         system_info: systemInfoText,
         tools: toolsText,
+        skills: skillsText,
         session_multiplexer: sessionText,
         approval_mode: approvalText,
         driving_instructions: drivingText,
@@ -163,6 +175,11 @@ function buildSystemPrompt(sysInfo, template, options) {
     }
     if (approvalText && tplLower.indexOf("{{approval_mode}}") === -1 && tplLower.indexOf("skip approvals mode") === -1) {
         out += "\n\n" + approvalText;
+    }
+    // Skills are force-appended like the critical runtime sections above:
+    // without the index the model can never discover the skill tool's purpose.
+    if (skillsText && tplLower.indexOf("{{skills}}") === -1 && tplLower.indexOf("<available_skills>") === -1) {
+        out += "\n\n" + skillsText;
     }
 
     out = out.replace(/\n{3,}/g, "\n\n").trim();
