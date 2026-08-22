@@ -211,15 +211,7 @@ PlasmoidItem {
                         root.isDrivingActive = false;
                         console.log("[PlasmaLLM] Drive session disconnected. Auto mode disabled.");
                     } else {
-                        displayMessages.append({
-                            msgId: nextMsgId("d"),
-                            turnId: "",
-                            apiMsgId: "",
-                            role: "error",
-                            content: i18n("Failed to stop driving: %1", err.error || err),
-                            shared: false,
-                            timestamp: root.currentTimestamp()
-                        });
+                        root.appendDisplayMessage("error", i18n("Failed to stop driving: %1", err.error || err), { shared: false });
                     }
                 });
             }
@@ -253,6 +245,9 @@ PlasmoidItem {
     property var activeToolCalls: ({}) // sourceCmd -> { toolName, callId, displayIndex }
 
     signal responseReady(int messageIndex)
+    // Emitted after any append or height-affecting update to displayMessages so
+    // views can follow output. Removals and user-driven edits stay silent.
+    signal chatContentChanged()
     signal copyConversationRequested()
     signal populateInputRequested(string text)
     signal confirmRetryRequested(int displayIndex, int removeCount)
@@ -297,12 +292,7 @@ PlasmoidItem {
     }
 
     function showSttNotice(message) {
-        displayMessages.append({
-            role: "error",
-            content: message,
-            shared: false,
-            timestamp: currentTimestamp()
-        });
+        root.appendDisplayMessage("error", message, { shared: false });
     }
 
     /**
@@ -1073,6 +1063,7 @@ PlasmoidItem {
             }
         }
         displayMessages.append(msg);
+        root.chatContentChanged();
         return displayMessages.count - 1;
     }
 
@@ -1085,6 +1076,7 @@ PlasmoidItem {
                 displayMessages.setProperty(index, p, extraProps[p]);
             }
         }
+        root.chatContentChanged();
     }
 
     function findChatIndexForDisplayIndex(displayIndex) {
@@ -1368,13 +1360,7 @@ PlasmoidItem {
                 isLoading = false;
                 if (streamingMessageIndex >= 0) displayMessages.remove(streamingMessageIndex);
                 streamingMessageIndex = -1;
-                displayMessages.append({
-                    role: "error",
-                    content: i18n("Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is installed and authenticated.", exitCode, data["stderr"] || ""),
-
-                    shared: false,
-                    timestamp: currentTimestamp(),
-                });
+                root.appendDisplayMessage("error", i18n("Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is installed and authenticated.", exitCode, data["stderr"] || ""), { shared: false });
                 pendingRequest = null;
             }
         }
@@ -2047,7 +2033,7 @@ PlasmoidItem {
         var version = (meta && meta.version) ? meta.version : 1;
 
         if (version === 1) {
-            LegacyChatLoader.loadV1(lines, chatMessages, displayMessages, fileReader, pendingFileReads);
+            LegacyChatLoader.loadV1(lines, chatMessages, displayMessages, fileReader, pendingFileReads, root.appendDisplayMessage);
             return;
         }
 
@@ -2111,12 +2097,10 @@ PlasmoidItem {
                     if (restoredAttachmentsStr.length === 0 && data.apiMsgId && apiAttachmentPaths[data.apiMsgId]) {
                         restoredAttachmentsStr = apiAttachmentPaths[data.apiMsgId];
                     }
-                    displayMessages.append({
+                    root.appendDisplayMessage(data.role, data.content, {
                         msgId: data.msgId || data.id || nextMsgId("d"),
                         turnId: data.turnId || "",
                         apiMsgId: data.apiMsgId || "",
-                        role: data.role,
-                        content: data.content,
                         thinking: data.thinking || "",
                         shared: data.shared || false,
                         timestamp: data.timestamp || "",
@@ -2596,7 +2580,7 @@ PlasmoidItem {
                 }
                 executeTool(toolToApprove.name, toolToApprove.args, toolToApprove.id);
             } else {
-                displayMessages.append({ role: "assistant", content: i18n("No tool request pending to approve."), shared: false, timestamp: currentTimestamp() });
+                root.appendDisplayMessage("assistant", i18n("No tool request pending to approve."), { shared: false });
             }
             return true;
         }
@@ -2613,7 +2597,7 @@ PlasmoidItem {
                 }
                 handleToolOutput(null, "", i18n("The user denied this tool call."), 1, { name: toolToDeny.name, callId: toolToDeny.id });
             } else {
-                displayMessages.append({ role: "assistant", content: i18n("No tool request pending to deny."), shared: false, timestamp: currentTimestamp() });
+                root.appendDisplayMessage("assistant", i18n("No tool request pending to deny."), { shared: false });
             }
             return true;
         }
@@ -2642,7 +2626,7 @@ PlasmoidItem {
             var msg = sessionAutoMode 
                 ? i18n("Skip approvals mode enabled for this session. All enabled tools will run automatically, bypassing 'Ask before running' settings.") 
                 : i18n("Skip approvals mode disabled. Tools will revert to your configured 'Ask before running' settings.");
-            displayMessages.append({ role: "assistant", content: msg, shared: false, timestamp: currentTimestamp() });
+            root.appendDisplayMessage("assistant", msg, { shared: false });
             
             if (systemPromptReady) {
                 var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
@@ -2661,11 +2645,11 @@ PlasmoidItem {
         }
         if (lower === "/drive") {
             if (!Plasmoid.configuration.enableDesktopAutomation) {
-                displayMessages.append({ role: "assistant", content: i18n("Desktop automation is disabled in settings. Enable it first to drive the desktop."), shared: false, timestamp: currentTimestamp() });
+                root.appendDisplayMessage("assistant", i18n("Desktop automation is disabled in settings. Enable it first to drive the desktop."), { shared: false });
                 return true;
             }
             if (!root.isDriverServiceActive) {
-                displayMessages.append({ role: "assistant", content: i18n("plasmallm-desktop-driver is not detected or running."), shared: false, timestamp: currentTimestamp() });
+                root.appendDisplayMessage("assistant", i18n("plasmallm-desktop-driver is not detected or running."), { shared: false });
                 return true;
             }
             sessionAutoMode = !sessionAutoMode;
@@ -2684,7 +2668,7 @@ PlasmoidItem {
                        }).join("\n") +
                        "\n\n" + i18n("Type `/profile <name>` to switch.");
             }
-            displayMessages.append({ role: "assistant", content: msg, shared: false, timestamp: currentTimestamp() });
+            root.appendDisplayMessage("assistant", msg, { shared: false });
             return true;
         }
         if (lower.startsWith("/profile ")) {
@@ -2699,9 +2683,9 @@ PlasmoidItem {
             }
             if (found) {
                 switchProfile(found.id);
-                displayMessages.append({ role: "assistant", content: i18n("Switched to profile: **%1**", found.name), shared: false, timestamp: currentTimestamp() });
+                root.appendDisplayMessage("assistant", i18n("Switched to profile: **%1**", found.name), { shared: false });
             } else {
-                displayMessages.append({ role: "error", content: i18n("Unknown profile: **%1**", targetName), shared: false, timestamp: currentTimestamp() });
+                root.appendDisplayMessage("error", i18n("Unknown profile: **%1**", targetName), { shared: false });
             }
             return true;
         }
@@ -2716,7 +2700,7 @@ PlasmoidItem {
             } else {
                 msg += "\n\n" + i18n("No models cached. Use **Fetch Models** in settings.");
             }
-            displayMessages.append({ role: "assistant", content: msg, shared: false, timestamp: currentTimestamp() });
+            root.appendDisplayMessage("assistant", msg, { shared: false });
             return true;
         }
         if (lower.startsWith("/model ")) {
@@ -2739,12 +2723,12 @@ PlasmoidItem {
                     Profiles.saveProfiles(Plasmoid.configuration, profiles);
                 }
 
-                displayMessages.append({ role: "assistant", content: i18n("Switched to model: **%1**", newModel), shared: false, timestamp: currentTimestamp() });
+                root.appendDisplayMessage("assistant", i18n("Switched to model: **%1**", newModel), { shared: false });
             }
             return true;
         }
         if (lower === "/skills") {
-            displayMessages.append({ role: "assistant", content: skillStatusText(), shared: false, timestamp: currentTimestamp() });
+            root.appendDisplayMessage("assistant", skillStatusText(), { shared: false });
             loadSkills();
             return true;
         }
@@ -2753,10 +2737,10 @@ PlasmoidItem {
             var tasks = [];
             if (tasksJson) try { tasks = JSON.parse(tasksJson); } catch(e) {}
             if (tasks.length === 0) {
-                displayMessages.append({ role: "assistant", content: i18n("No tasks configured. Add tasks in Settings."), shared: false, timestamp: currentTimestamp() });
+                root.appendDisplayMessage("assistant", i18n("No tasks configured. Add tasks in Settings."), { shared: false });
             } else {
                 var taskList = tasks.map(function(t) { return "- **" + t.name + "**" + (t.auto ? " " + i18n("(auto)") : "") + " — " + t.prompt; }).join("\n");
-                displayMessages.append({ role: "assistant", content: i18n("Available tasks:") + "\n" + taskList + "\n\n" + i18n("Type `/task <name>` to run."), shared: false, timestamp: currentTimestamp() });
+                root.appendDisplayMessage("assistant", i18n("Available tasks:") + "\n" + taskList + "\n\n" + i18n("Type `/task <name>` to run."), { shared: false });
             }
             return true;
         }
@@ -2799,7 +2783,7 @@ PlasmoidItem {
                 return true;
             } else {
                 var availNames = tasks2.map(function(t) { return t.name; }).join(", ");
-                displayMessages.append({ role: "error", content: i18n("Unknown task: **%1**. Available: %2", taskName, availNames || i18n("none")), shared: false, timestamp: currentTimestamp() });
+                root.appendDisplayMessage("error", i18n("Unknown task: **%1**. Available: %2", taskName, availNames || i18n("none")), { shared: false });
                 return true;
             }
         }
@@ -2876,12 +2860,7 @@ PlasmoidItem {
         }
 
         if (!Plasmoid.configuration.apiEndpoint || !Plasmoid.configuration.modelName) {
-            displayMessages.append({
-                role: "error",
-                content: "Please configure API endpoint and model name in widget settings.",
-                shared: false,
-                timestamp: currentTimestamp(),
-            });
+            root.appendDisplayMessage("error", "Please configure API endpoint and model name in widget settings.", { shared: false });
             isLoading = false;
             return;
         }
@@ -3095,11 +3074,13 @@ PlasmoidItem {
                 onChunk: function(delta, accumulated) {
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                         displayMessages.setProperty(streamingMessageIndex, "content", accumulated);
+                        root.chatContentChanged();
                     }
                 },
                 onThinkingChunk: function(delta, accumulated) {
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                         displayMessages.setProperty(streamingMessageIndex, "thinking", accumulated);
+                        root.chatContentChanged();
                     }
                 },
                 onComplete: function(fullText, error, toolCalls, assistantMsg) {
@@ -3576,6 +3557,7 @@ PlasmoidItem {
                     displayMessages.setProperty(displayIndex, "attachmentsStr", attachmentPathsStr);
                 }
                 updatedInPlace = true;
+                root.chatContentChanged();
             }
         }
 
@@ -3762,12 +3744,7 @@ PlasmoidItem {
             DriverManager.startSession(clientToken, function(err, token, isAlreadyAuthorized) {
                 root.isHandshakePending = false;
                 if (err) {
-                    displayMessages.append({
-                        role: "error",
-                        content: i18n("Failed to start drive session: %1", err.error || err),
-                        shared: false,
-                        timestamp: root.currentTimestamp()
-                    });
+                    root.appendDisplayMessage("error", i18n("Failed to start drive session: %1", err.error || err), { shared: false });
                     root.isDrivingActive = false;
                 } else {
                     root.isDrivingActive = true;
@@ -3775,12 +3752,7 @@ PlasmoidItem {
                         ? i18n("Drive session active (already authorized). Auto mode enabled.")
                         : i18n("Drive session authorized successfully. Auto mode enabled.");
                     if (!isAlreadyAuthorized) {
-                        displayMessages.append({
-                            role: "assistant",
-                            content: msg,
-                            shared: false,
-                            timestamp: root.currentTimestamp()
-                        });
+                        root.appendDisplayMessage("assistant", msg, { shared: false });
                     } else {
                         console.log("[PlasmaLLM] " + msg);
                     }
