@@ -20,6 +20,7 @@
 .import "RestoreContext.js" as RestoreContext
 .import "RecallAttachment.js" as RecallAttachment
 .import "Skill.js" as Skill
+.import "EditMemory.js" as EditMemory
 
 .import "driver/StartSession.js" as StartSession
 .import "driver/DesktopGetState.js" as DesktopGetState
@@ -47,6 +48,7 @@ var tools = [
     { module: GetClipboard, configUI: "tools/GetClipboardConfig.qml" },
     { module: SetClipboard, configUI: "tools/SetClipboardConfig.qml" },
     { module: Notify, configUI: "tools/NotifyConfig.qml" },
+    { module: EditMemory, configUI: "tools/EditMemoryConfig.qml" },
     { module: OpenUrl, configUI: "tools/OpenUrlConfig.qml" },
     { module: StartSession, configUI: "" },
     { module: DesktopGetState, configUI: "" },

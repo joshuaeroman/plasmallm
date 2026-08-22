@@ -23,6 +23,7 @@ import "stt.js" as Stt
 import "contextCompactor.js" as ContextCompactor
 import "legacyChatLoader.js" as LegacyChatLoader
 import "skills.js" as Skills
+import "memory.js" as Memory
 
 PlasmoidItem {
     id: root
@@ -1242,6 +1243,12 @@ PlasmoidItem {
     property var pendingSkillScanCommands: ({})
     property int lastSkillsScanMs: 0
 
+    // Persistent memory: short phrases saved via the edit_memory tool (or the
+    // settings editor) that are injected into every system prompt rebuild.
+    // Backing store is the "memoryPhrases" KConfig key (JSON array string);
+    // see memory.js for parsing, matching, and rendering rules.
+    property var memoryPhrases: []
+
     function enqueueChunkSave(cmd) {
         chunkedSaveQueue.push(cmd);
         pumpChunkSaveQueue();
@@ -1608,6 +1615,8 @@ PlasmoidItem {
             toolsNotifyAutoRun: Plasmoid.configuration.toolsNotifyAutoRun,
             toolsOpenUrlEnabled: Plasmoid.configuration.toolsOpenUrlEnabled,
             toolsOpenUrlAutoRun: Plasmoid.configuration.toolsOpenUrlAutoRun,
+            toolsEditMemoryEnabled: Plasmoid.configuration.toolsEditMemoryEnabled,
+            toolsEditMemoryAutoRun: Plasmoid.configuration.toolsEditMemoryAutoRun,
             toolsSkillEnabled: Plasmoid.configuration.toolsSkillEnabled,
             toolsSkillAutoRun: Plasmoid.configuration.toolsSkillAutoRun,
             toolsPathWhitelist: Plasmoid.configuration.toolsPathWhitelist,
@@ -1622,8 +1631,19 @@ PlasmoidItem {
             skillsEnabled: Plasmoid.configuration.skillsEnabled,
             skillsDisabledList: Plasmoid.configuration.skillsDisabledList,
             loadedSkills: root.loadedSkills,
-            activeSkills: root.activeSkills
+            activeSkills: root.activeSkills,
+            memoryPhrases: root.memoryPhrases
         };
+    }
+
+    function loadMemoryPhrases() {
+        root.memoryPhrases = Memory.parseStored(Plasmoid.configuration.memoryPhrases);
+    }
+
+    function setMemoryPhrases(list) {
+        root.memoryPhrases = Memory.parseStored(list);
+        Plasmoid.configuration.memoryPhrases = Memory.serialize(root.memoryPhrases);
+        if (systemPromptReady) initSystemPrompt();
     }
 
     function initSystemPrompt() {
@@ -3358,6 +3378,12 @@ PlasmoidItem {
             getSkills: function() {
                 return root.loadedSkills;
             },
+            getMemory: function() {
+                return root.memoryPhrases.slice();
+            },
+            setMemory: function(list) {
+                root.setMemoryPhrases(list);
+            },
             getSecret: function(key) {
                 return root[key] !== undefined ? root[key] : "";
             },
@@ -3824,6 +3850,12 @@ PlasmoidItem {
         function onToolsNotifyAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onToolsOpenUrlEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onToolsOpenUrlAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsEditMemoryEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onToolsEditMemoryAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onMemoryPhrasesChanged() {
+            loadMemoryPhrases();
+            if (systemPromptReady) initSystemPrompt();
+        }
         function onToolsPathWhitelistChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onToolsReadMaxBytesChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onToolsWriteMaxBytesChanged() { if (systemPromptReady) initSystemPrompt(); }
@@ -4179,6 +4211,31 @@ fi
             Plasmoid.configuration.profilesSchemaVersion = 5;
         }
 
+        // Migration: v5 -> v6 (persistent memory placeholder).
+        // Vanilla copies of the template — stored verbatim by earlier
+        // migrations or profile saves — gain the new {{memories}} placeholder.
+        // Genuinely customized templates are left untouched.
+        if (Plasmoid.configuration.profilesSchemaVersion === 5) {
+            var baseTemplateV6 = Api.DEFAULT_SYSTEM_PROMPT_TEMPLATE;
+            var previousTemplate = baseTemplateV6.replace("{{memories}}\n", "");
+            if (Plasmoid.configuration.systemPrompt &&
+                    Plasmoid.configuration.systemPrompt === previousTemplate) {
+                Plasmoid.configuration.systemPrompt = baseTemplateV6;
+            }
+            var profilesV6 = Profiles.loadProfiles(Plasmoid.configuration);
+            var profilesV6Dirty = false;
+            profilesV6.forEach(function(p) {
+                if (p.systemPrompt === previousTemplate) {
+                    p.systemPrompt = baseTemplateV6;
+                    profilesV6Dirty = true;
+                }
+            });
+            if (profilesV6Dirty) {
+                Profiles.saveProfiles(Plasmoid.configuration, profilesV6);
+            }
+            Plasmoid.configuration.profilesSchemaVersion = 6;
+        }
+
         // Seed sysInfo from previous run if available
         if (Plasmoid.configuration.gatheredSysInfo) {
             try {
@@ -4188,6 +4245,7 @@ fi
 
         regatherSysInfo();
         loadSkills();
+        loadMemoryPhrases();
         normalizeGeminiApiVariant();
         // Migrate wallet keys to profile+provider slots, then load the active key.
         migrateApiKeySlotScheme(function(ran) {

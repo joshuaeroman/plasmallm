@@ -404,6 +404,10 @@ SimpleKCM {
     property bool cfg_toolsOpenUrlEnabledDefault
     property bool cfg_toolsOpenUrlAutoRun
     property bool cfg_toolsOpenUrlAutoRunDefault
+    property bool cfg_toolsEditMemoryEnabled
+    property bool cfg_toolsEditMemoryEnabledDefault
+    property bool cfg_toolsEditMemoryAutoRun
+    property bool cfg_toolsEditMemoryAutoRunDefault
     property string cfg_toolsPathWhitelist
     property string cfg_toolsPathWhitelistDefault
     property int cfg_toolsReadMaxBytes
@@ -424,6 +428,8 @@ SimpleKCM {
     property int cfg_latexRenderModeDefault
     property string cfg_customTools
     property string cfg_customToolsDefault
+    property string cfg_memoryPhrases
+    property string cfg_memoryPhrasesDefault
 
     // Skills (per-skill toggles and scan dirs are global, not profile-captured)
     property bool cfg_skillsEnabled

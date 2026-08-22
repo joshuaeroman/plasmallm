@@ -12,6 +12,7 @@
 .import "driverManager.js" as DriverManager
 .import "walletCore.js" as WalletCore
 .import "skills.js" as Skills
+.import "memory.js" as Memory
 
 function localISODateTime() {
     var d = new Date();
@@ -49,6 +50,7 @@ var DEFAULT_SYSTEM_PROMPT_TEMPLATE = "You are a helpful assistant embedded in th
     "{{session_multiplexer}}\n" +
     "{{approval_mode}}\n" +
     "{{skills}}\n" +
+    "{{memories}}\n" +
     "{{tools}}\n" +
     "{{driving_instructions}}";
 
@@ -61,6 +63,7 @@ function getLocalizedDefaultSystemPromptTemplate(i18nFn) {
         "{{session_multiplexer}}\n" +
         "{{approval_mode}}\n" +
         "{{skills}}\n" +
+        "{{memories}}\n" +
         "{{tools}}\n" +
         "{{driving_instructions}}";
 }
@@ -136,11 +139,16 @@ function buildSystemPrompt(sysInfo, template, options) {
             options.toolsConfig.activeSkills || []
         );
     }
+    var memoryText = "";
+    if (options.toolsConfig) {
+        memoryText = Memory.renderSection(options.toolsConfig.memoryPhrases);
+    }
 
     var vars = {
         system_info: systemInfoText,
         tools: toolsText,
         skills: skillsText,
+        memories: memoryText,
         session_multiplexer: sessionText,
         approval_mode: approvalText,
         driving_instructions: drivingText,

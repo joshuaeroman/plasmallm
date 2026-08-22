@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 17:59-0400\n"
+"POT-Creation-Date: 2026-08-22 00:06-0400\n"
 "PO-Revision-Date: 2026-05-04 00:00+0300\n"
 "Last-Translator: Matvel007\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -83,63 +83,16 @@ msgstr ""
 "Код) с пользовательскими командами. Выберите более новую модель (например, "
 "Gemini 3+) или отключите встроенные функции в Настройках."
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
+msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
-"Пользовательские инструменты не настроены. Добавьте пользовательский "
-"инструмент, чтобы предоставить LLM доступ к вашим командам."
+"Нет настроенных задач. Добавьте задачу, чтобы создать многоразовые ярлыки "
+"промптов."
 
 msgid "AUTO"
 msgstr "АВТО"
 
 msgid "Cancel"
 msgstr "Отмена"
-
-msgid "Add Custom Tool"
-msgstr "Добавить пользовательский инструмент"
-
-msgid "Echoes back the message provided."
-msgstr "Возвращает предоставленное сообщение."
-
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "Название инструмента (например, systemctl_service)"
-
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "Описание (инструктирует LLM о том, что делает этот инструмент)"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "Шаблон команды (например, systemctl {action} {service})"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "Требуется суперпользователь (запускается с pkexec)"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "Автозапуск инструмента (без диалога подтверждения)"
-
-msgid "Update Tool"
-msgstr "Обновить инструмент"
-
-msgid "Save Tool"
-msgstr "Сохранить инструмент"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "Инструмент с именем \"%1\" уже существует."
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"Пользовательские инструменты позволяют предоставить LLM доступ к вашим "
-"командам. Используйте заполнители вроде {variable} в шаблоне команды для "
-"определения параметров, которые LLM может заполнить. Значения, "
-"предоставленные LLM, автоматически экранируются для оболочки."
-
-msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr ""
-"Нет настроенных задач. Добавьте задачу, чтобы создать многоразовые ярлыки "
-"промптов."
 
 msgid "Add Task"
 msgstr "Добавить задачу"
@@ -242,6 +195,15 @@ msgstr "Поисковый провайдер %1 не поддерживаетс
 msgid "Searching the web for: %1…"
 msgstr "Поиск в интернете: %1…"
 
+msgid ""
+"This tool allows the primary assistant to retrieve original transcripts from "
+"cited message ranges. It runs automatically without asking for permission "
+"when Context Compaction is active."
+msgstr ""
+
+msgid "No command provided."
+msgstr "Команда не указана."
+
 msgid "Ollama API"
 msgstr "Ollama API"
 
@@ -311,8 +273,34 @@ msgstr "Включает нейронный веб-поиск от LLM чере�
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr "Включает веб-поиск от LLM через поисковый API Ollama"
 
-msgid "No command provided."
-msgstr "Команда не указана."
+msgid "Manage and discover skills in the Skills settings page."
+msgstr ""
+
+msgid "Saved phrases:"
+msgstr ""
+
+msgid ""
+"Nothing remembered yet. The assistant can save phrases with its edit_memory "
+"tool, or add them below."
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Remove"
+msgstr ""
+
+msgid "Memory is full"
+msgstr ""
+
+msgid "Add a phrase…"
+msgstr ""
+
+msgid "Add"
+msgstr "Добавить"
 
 msgid "Tool Request: %1"
 msgstr "Запрос инструмента: %1"
@@ -325,15 +313,6 @@ msgstr "Отклонить"
 
 msgid "Approve"
 msgstr "Одобрить"
-
-msgid "Stop command"
-msgstr "Остановить команду"
-
-msgid "Open terminal attached to this session"
-msgstr "Открыть терминал, подключенный к этой сессии"
-
-msgid "Copy output"
-msgstr "Скопировать вывод"
 
 msgid "Microphone recording failed"
 msgstr "Ошибка записи с микрофона"
@@ -375,140 +354,6 @@ msgstr "Запись не создала файл"
 msgid "Recording failed"
 msgstr "Ошибка записи"
 
-msgid "Speech to Text"
-msgstr "Распознавание речи"
-
-msgid "API key saved to local fallback (KWallet unavailable)."
-msgstr "API-ключ сохранён в локальном хранилище (KWallet недоступен)."
-
-msgid "API key saved to KWallet."
-msgstr "API-ключ сохранён в KWallet."
-
-msgid "API key saved to local fallback."
-msgstr "API-ключ сохранён в локальном хранилище."
-
-msgid "Set an API endpoint first."
-msgstr "Сначала укажите эндпоинт API."
-
-msgid "Fetching STT models…"
-msgstr "Получение моделей STT…"
-
-msgid "Loaded %1 STT model(s)."
-msgstr "Загружено моделей STT: %1."
-
-msgid "Voice input:"
-msgstr "Голосовой ввод:"
-
-msgid "Enable microphone input"
-msgstr "Включить ввод с микрофона"
-
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-"Настраивает только модуль распознавания речи. Для транскриптов используется "
-"активный профиль чата (Основные)."
-
-msgid "Mic button:"
-msgstr "Кнопка микрофона:"
-
-msgid "Auto"
-msgstr "Авто"
-
-msgid "Hold to talk"
-msgstr "Удерживайте, чтобы говорить"
-
-msgid "Toggle"
-msgstr "Переключение"
-
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-"Авто: нажатие переключает запись; удержание 250 мс+ для рации. Удержание: "
-"только нажатие и удержание. Переключение: нажатие для запуска/остановки."
-
-msgid "Voice shortcut:"
-msgstr "Голосовая комбинация клавиш:"
-
-msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
-"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
-msgstr ""
-"Когда PlasmaLLM открыт и в фокусе, используется тот же режим микрофона, что "
-"и кнопка (авто: короткое нажатие переключает, удержание 250 мс+ — рация). Не "
-"открывает панель — используйте «Активировать виджет» на странице комбинаций "
-"клавиш. По умолчанию: Ctrl+M. Очистите, чтобы отключить."
-
-msgid "Transcriber"
-msgstr "Транскрибатор"
-
-msgid "Provider:"
-msgstr "Провайдер:"
-
-msgid "Endpoint:"
-msgstr "Эндпоинт:"
-
-msgid "Model:"
-msgstr "Модель:"
-
-msgid "Fetching…"
-msgstr "Получение…"
-
-msgid "Fetch"
-msgstr "Получить"
-
-msgid "Fetch STT models"
-msgstr "Получить модели STT"
-
-msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
-msgstr ""
-"OpenRouter перечисляет модели STT только через модальности транскрипции (эта "
-"страница выполняет это)."
-
-msgid "API key:"
-msgstr "API-ключ:"
-
-msgid "Provider API key"
-msgstr "API-ключ провайдера"
-
-msgid "Save"
-msgstr "Сохранить"
-
-msgid "Save API key"
-msgstr "Сохранить API-ключ"
-
-msgid "Options"
-msgstr "Параметры"
-
-msgid "Language hint:"
-msgstr "Подсказка языка:"
-
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "Необязательно, например ru или en (пусто = авто)"
-
-msgid "Max recording (seconds):"
-msgstr "Макс. время записи (секунды):"
-
-msgid "STT backend:"
-msgstr "Бэкенд STT:"
-
-msgid "OpenAI-compatible transcriptions"
-msgstr "OpenAI-совместимое распознавание"
-
-msgid "Speech-to-text is not configured"
-msgstr "Распознавание речи не настроено"
-
-msgid "Unknown STT backend: %1"
-msgstr "Неизвестный бэкенд STT: %1"
-
-msgid "STT backend does not support model listing"
-msgstr "Бэкенд STT не поддерживает получение списка моделей"
-
 msgid "STT endpoint is not configured"
 msgstr "Эндпоинт STT не настроен"
 
@@ -538,6 +383,45 @@ msgstr "Ошибка STT (HTTP %1)"
 
 msgid "STT request failed: %1"
 msgstr "Запрос STT не удался: %1"
+
+msgid "No audio file to transcribe"
+msgstr ""
+
+msgid "Invalid Whisper model id"
+msgstr ""
+
+msgid "Invalid Whisper task"
+msgstr ""
+
+msgid "Invalid Whisper device"
+msgstr ""
+
+msgid "Whisper CLI failed (exit %1): %2"
+msgstr ""
+
+msgid "Whisper CLI failed (exit %1)"
+msgstr ""
+
+msgid "Try Device: cpu or Default in Speech to Text settings."
+msgstr ""
+
+msgid "Refresh model list"
+msgstr "Обновить список моделей"
+
+msgid "Select or enter a model"
+msgstr ""
+
+msgid "Search or type custom model…"
+msgstr ""
+
+msgid "Search models…"
+msgstr ""
+
+msgid "Use \"%1\""
+msgstr ""
+
+msgid "Fetching…"
+msgstr "Получение…"
 
 msgid "Profile Header:"
 msgstr "Заголовок профиля:"
@@ -632,6 +516,9 @@ msgstr "Показать историю"
 msgid "Show Copy conversation"
 msgstr "Показать Копировать разговор"
 
+msgid "Show Context compaction summary"
+msgstr ""
+
 msgid "Show Clear chat"
 msgstr "Показать Очистить чат"
 
@@ -641,247 +528,144 @@ msgstr "Показать Настройки"
 msgid "Show Pin"
 msgstr "Показать закрепление"
 
-msgid "Voice message"
-msgstr "Голосовое сообщение"
+msgid "Speech-to-text is not configured"
+msgstr "Распознавание речи не настроено"
 
-msgid "Error"
-msgstr "Ошибка"
+msgid "Unknown STT backend: %1"
+msgstr "Неизвестный бэкенд STT: %1"
 
-msgid "Web Search"
-msgstr "Поиск в интернете"
+msgid "Whisper CLI runner is not available"
+msgstr ""
+
+msgid "Could not build Whisper command"
+msgstr ""
+
+msgid "STT backend does not support model listing"
+msgstr "Бэкенд STT не поддерживает получение списка моделей"
+
+msgid "Context Compaction"
+msgstr ""
+
+msgid "(Active Chat Profile)"
+msgstr ""
+
+msgid "Unnamed Profile"
+msgstr ""
+
+msgid "Active Chat Profile"
+msgstr ""
+
+msgid "Active Chat Profile (Fallback)"
+msgstr ""
+
+msgid "Selected profile does not have an endpoint URL or model configured."
+msgstr ""
+
+msgid "Testing compaction call using '%1'…"
+msgstr ""
+
+msgid "Compaction test failed: %1"
+msgstr ""
+
+msgid "Compaction test succeeded!"
+msgstr ""
+
+msgid "Context Compaction:"
+msgstr ""
+
+msgid "Enable context compaction"
+msgstr ""
 
 msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
+"Dramatically reduces token usage and speeds up responses in long "
+"conversations by compressing older turns into a dense background summary. "
+"Keeps your chats lightweight and cost-effective while your full history "
+"remains visible."
 msgstr ""
-"Рендеринг Mathtext переключен на замену Unicode (matplotlib не установлен "
-"или произошла ошибка)"
 
-msgid "Thinking"
-msgstr "Размышляю…"
-
-msgid "Searched for: %1"
-msgstr "Искал: %1"
-
-msgid "Show %1 results"
-msgstr "Показать %1 результатов"
-
-msgid "Save & Retry"
-msgstr "Сохранить и повторить"
-
-msgid "Copy to clipboard"
-msgstr "Копировать в буфер обмена"
-
-msgid "Edit message"
-msgstr "Изменить сообщение"
-
-msgid "Edit response"
-msgstr "Изменить ответ"
-
-msgid "Retry from here"
-msgstr "Повторить отсюда"
-
-msgid "Regenerate response"
-msgstr "Сгенерировать ответ заново"
-
-msgid "Share output with assistant"
-msgstr "Поделиться выводом с ассистентом"
-
-msgid "Approve the pending tool request"
-msgstr "Одобрить ожидающий запрос инструмента"
-
-msgid "Toggle skip approvals for this session"
-msgstr "Переключить пропуск подтверждений для этого сеанса"
-
-msgid "Clear the chat"
-msgstr "Очистить чат"
-
-msgid "Close the panel"
-msgstr "Закрыть панель"
-
-msgid "Copy conversation to clipboard"
-msgstr "Скопировать разговор в буфер обмена"
-
-msgid "Deny the pending tool request"
-msgstr "Отклонить ожидающий запрос инструмента"
-
-msgid "Open chat history folder"
-msgstr "Открыть папку истории чатов"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "Показать или сменить модель (/model <name>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "Сменить профиль (/profile <имя>)"
-
-msgid "Save chat to file"
-msgstr "Сохранить чат в файл"
-
-msgid "Open settings"
-msgstr "Открыть настройки"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "Выполнить сохранённую задачу (/task <name>)"
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgid "Compaction Profile"
 msgstr ""
-"Переключить режим Drive Desktop (запуск установления связи и авторежима)"
 
-msgid "Toggle Full Auto Mode"
-msgstr "Переключить полностью автоматический режим"
+msgid "Model Profile:"
+msgstr ""
+
+msgid "None"
+msgstr ""
 
 msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
+"Provider: %1  |  Model: %2\n"
+"Endpoint: %3"
+msgid_plural "Default"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Trigger Thresholds"
 msgstr ""
-"Переключить полностью автоматический режим: При включении все инструменты "
-"запускаются автоматически для этого сеанса."
 
-msgid "Drive Desktop"
-msgstr "Drive Desktop"
+msgid "Trigger Condition:"
+msgstr ""
 
-msgid "Stop Driving Desktop (disconnect)"
-msgstr "Остановить управление рабочим столом (отключиться)"
+msgid "By Character Count"
+msgstr ""
 
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr "Drive Desktop (запуск установления связи и включение авторежима)"
+msgid "By Turn Count"
+msgstr ""
 
-msgid "Run a task"
-msgstr "Выполнить задачу"
+msgid "Whichever comes first (Chars or Turns)"
+msgstr ""
 
-msgid "Chat History"
-msgstr "История чатов"
+msgid "Character threshold:"
+msgstr ""
 
-msgid "Loading..."
-msgstr "Загрузка…"
+msgid "chars (~%1 tokens)"
+msgstr ""
 
-msgid "No recent chats"
-msgstr "Нет недавних чатов"
+msgid "Turn count interval:"
+msgstr ""
 
-msgid "Open history folder..."
-msgstr "Открыть папку истории…"
+msgid "turn (compacts after every turn)"
+msgstr ""
 
-msgid "Clear all history..."
-msgstr "Очистить всю историю…"
+msgid "turns"
+msgstr ""
 
-msgid "Clear All History"
-msgstr "Очистить всю историю"
+msgid "Keep recent turns:"
+msgstr ""
+
+msgid "full turns kept verbatim and uncompacted"
+msgstr ""
+
+msgid "Compaction Instructions"
+msgstr ""
+
+msgid "Instructions template:"
+msgstr ""
+
+msgid "Reset to Default Instructions"
+msgstr ""
+
+msgid "Diagnostic & Testing"
+msgstr ""
 
 msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
+"Test compaction against your selected model profile using the sample "
+"transcript below:"
 msgstr ""
-"Вы уверены, что хотите удалить все файлы истории чатов? Это действие нельзя "
-"отменить."
 
-msgid "Clear All"
-msgstr "Очистить всё"
-
-msgid "Retry from this message?"
-msgstr "Повторить с этого сообщения?"
-
-msgid ""
-"This will remove %1 message(s) after this point and generate a new response."
-msgstr "Это удалит %1 сообщений после этой точки и сгенерирует новый ответ."
-
-msgid "Retry"
-msgstr "Повторить"
-
-msgid "Copy conversation"
-msgstr "Копировать разговор"
-
-msgid "Command"
-msgstr "Команда"
-
-msgid "Clear chat"
-msgstr "Очистить чат"
-
-msgid "Settings"
-msgstr "Настройки"
-
-msgid "Don't keep open"
-msgstr "Не держать открытым"
-
-msgid "Keep open"
-msgstr "Держать открытым"
-
-msgid "Dismiss"
-msgstr "Закрыть"
-
-msgid "The user denied this tool call."
-msgstr "Пользователь отклонил этот вызов инструмента."
-
-msgid "Send a message to start chatting"
-msgstr "Отправьте сообщение, чтобы начать чат"
-
-msgid "Attach File"
-msgstr "Прикрепить файл"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Изображения (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
+msgid "Sample Conversation Transcript:"
 msgstr ""
-"Текстовые файлы (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
-"*.conf *.sh *.py *.js *.ts *.qml)"
 
-msgid "All files (*)"
-msgstr "Все файлы (*)"
-
-msgid "Message input"
-msgstr "Ввод сообщения"
-
-msgid "Type a message…"
-msgstr "Напишите сообщение…"
-
-msgid "Initializing…"
-msgstr "Инициализация…"
-
-msgid "Attach file or image"
-msgstr "Прикрепить файл или изображение"
-
-msgid "Transcribing…"
-msgstr "Транскрибирование…"
-
-msgid "Preparing…"
-msgstr "Подготовка…"
-
-msgid "Wait for the current reply"
-msgstr "Дождитесь текущего ответа"
-
-msgid "Click to stop and send"
-msgstr "Нажмите, чтобы остановить и отправить"
-
-msgid "Release to send"
-msgstr "Отпустите для отправки"
-
-msgid "Click to start"
-msgstr "Нажмите для начала"
-
-msgid "Click to toggle, hold to talk"
-msgstr "Нажмите для переключения, удерживайте, чтобы говорить"
-
-msgid "Kill"
-msgstr "Завершить"
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
+msgid "Reset Sample"
 msgstr ""
-"Завершить постоянную сессию (останавливает все процессы и сбрасывает "
-"состояние оболочки)"
 
-msgid "Send"
-msgstr "Отправить"
+msgid "Testing…"
+msgstr ""
 
-msgid "Stop"
-msgstr "Стоп"
+msgid "Test Compaction Connection"
+msgstr ""
 
-msgid "Cancel LLM request"
-msgstr "Отменить запрос LLM"
-
-msgid "Drop files here to attach"
-msgstr "Перетащите файлы сюда для прикрепления"
+msgid "Model Summary Response:"
+msgstr ""
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Не удалось получить токен gcloud (выход %1): %2"
@@ -955,14 +739,14 @@ msgstr "ID проекта:"
 msgid "Location:"
 msgstr "Расположение:"
 
+msgid "Provider:"
+msgstr "Провайдер:"
+
 msgid "API Endpoint:"
 msgstr "API-эндпоинт:"
 
-msgid "Refreshing…"
-msgstr "Обновление…"
-
-msgid "Refresh model list"
-msgstr "Обновить список моделей"
+msgid "Model:"
+msgstr "Модель:"
 
 msgid "API Key:"
 msgstr "API-ключ:"
@@ -1102,6 +886,612 @@ msgstr "секунд"
 msgid "minutes"
 msgstr "минут"
 
+msgid "Speech to Text"
+msgstr "Распознавание речи"
+
+msgid "Model “%1” is on disk."
+msgstr ""
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
+"into ~/.cache/whisper and can take a long time."
+msgstr ""
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it into "
+"~/.cache/whisper and can take a long time."
+msgstr ""
+
+msgid "CUDA is available to Whisper."
+msgstr ""
+
+msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
+msgstr ""
+
+msgid "Whisper CLI responded to --help."
+msgstr ""
+
+msgid "Whisper CLI test failed (exit %1): %2"
+msgstr ""
+
+msgid "Whisper CLI test failed (exit %1). Check the command."
+msgstr ""
+
+msgid "API key saved to KWallet."
+msgstr "API-ключ сохранён в KWallet."
+
+msgid "API key saved to local fallback."
+msgstr "API-ключ сохранён в локальном хранилище."
+
+msgid "Checking whether “%1” is downloaded…"
+msgstr ""
+
+msgid "Checking CUDA…"
+msgstr ""
+
+msgid "Testing Whisper CLI…"
+msgstr ""
+
+msgid "Loaded %1 STT model(s)."
+msgstr "Загружено моделей STT: %1."
+
+msgid "Set an API endpoint first."
+msgstr "Сначала укажите эндпоинт API."
+
+msgid "Fetching STT models…"
+msgstr "Получение моделей STT…"
+
+msgid "Voice input:"
+msgstr "Голосовой ввод:"
+
+msgid "Enable microphone input"
+msgstr "Включить ввод с микрофона"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"Настраивает только модуль распознавания речи. Для транскриптов используется "
+"активный профиль чата (Основные)."
+
+msgid "Mic button:"
+msgstr "Кнопка микрофона:"
+
+msgid "Auto"
+msgstr "Авто"
+
+msgid "Hold to talk"
+msgstr "Удерживайте, чтобы говорить"
+
+msgid "Toggle"
+msgstr "Переключение"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"Авто: нажатие переключает запись; удержание 250 мс+ для рации. Удержание: "
+"только нажатие и удержание. Переключение: нажатие для запуска/остановки."
+
+msgid "Voice shortcut:"
+msgstr "Голосовая комбинация клавиш:"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"Когда PlasmaLLM открыт и в фокусе, используется тот же режим микрофона, что "
+"и кнопка (авто: короткое нажатие переключает, удержание 250 мс+ — рация). Не "
+"открывает панель — используйте «Активировать виджет» на странице комбинаций "
+"клавиш. По умолчанию: Ctrl+M. Очистите, чтобы отключить."
+
+msgid "Transcriber"
+msgstr "Транскрибатор"
+
+msgid "STT backend:"
+msgstr "Бэкенд STT:"
+
+msgid "Endpoint:"
+msgstr "Эндпоинт:"
+
+msgid "Fetch STT models"
+msgstr "Получить модели STT"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouter перечисляет модели STT только через модальности транскрипции (эта "
+"страница выполняет это)."
+
+msgid "API key:"
+msgstr "API-ключ:"
+
+msgid "Provider API key"
+msgstr "API-ключ провайдера"
+
+msgid "Save API key"
+msgstr "Сохранить API-ключ"
+
+msgid "Command:"
+msgstr ""
+
+msgid ""
+"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
+"toolbox run whisper."
+msgstr ""
+
+msgid "Test:"
+msgstr ""
+
+msgid "Test CLI"
+msgstr ""
+
+msgid "Task:"
+msgstr ""
+
+msgid "Transcribe"
+msgstr ""
+
+msgid "Translate"
+msgstr ""
+
+msgid "Device:"
+msgstr ""
+
+msgid "Default"
+msgstr "По умолчанию"
+
+msgid "FP16:"
+msgstr ""
+
+msgid "Use --fp16 True (GPU)"
+msgstr ""
+
+msgid "Threads:"
+msgstr ""
+
+msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
+msgstr ""
+
+msgid "Initial prompt:"
+msgstr ""
+
+msgid "Optional vocabulary / style hint"
+msgstr ""
+
+msgid "Extra args:"
+msgstr ""
+
+msgid "Optional, appended as-is"
+msgstr ""
+
+msgid "Options"
+msgstr "Параметры"
+
+msgid "Language hint:"
+msgstr "Подсказка языка:"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "Необязательно, например ru или en (пусто = авто)"
+
+msgid "Max recording (seconds):"
+msgstr "Макс. время записи (секунды):"
+
+msgid "Loaded %1 skill"
+msgid_plural ""
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Voice message"
+msgstr "Голосовое сообщение"
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Web Search"
+msgstr "Поиск в интернете"
+
+msgid "compacted"
+msgstr ""
+
+msgid ""
+"This message has been summarized into the compacted context. Citations "
+"active."
+msgstr ""
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Рендеринг Mathtext переключен на замену Unicode (matplotlib не установлен "
+"или произошла ошибка)"
+
+msgid "Thinking"
+msgstr "Размышляю…"
+
+msgid "Searched for: %1"
+msgstr "Искал: %1"
+
+msgid "Show %1 results"
+msgstr "Показать %1 результатов"
+
+msgid "Save & Retry"
+msgstr "Сохранить и повторить"
+
+msgid "Copy to clipboard"
+msgstr "Копировать в буфер обмена"
+
+msgid "Edit message"
+msgstr "Изменить сообщение"
+
+msgid "Edit response"
+msgstr "Изменить ответ"
+
+msgid "Retry from here"
+msgstr "Повторить отсюда"
+
+msgid "Regenerate response"
+msgstr "Сгенерировать ответ заново"
+
+msgid "Share output with assistant"
+msgstr "Поделиться выводом с ассистентом"
+
+msgid "The model loaded this skill's instructions into context before acting."
+msgstr ""
+
+msgid "Approve the pending tool request"
+msgstr "Одобрить ожидающий запрос инструмента"
+
+msgid "Toggle skip approvals for this session"
+msgstr "Переключить пропуск подтверждений для этого сеанса"
+
+msgid "Clear the chat"
+msgstr "Очистить чат"
+
+msgid "Close the panel"
+msgstr "Закрыть панель"
+
+msgid "Copy conversation to clipboard"
+msgstr "Скопировать разговор в буфер обмена"
+
+msgid "Deny the pending tool request"
+msgstr "Отклонить ожидающий запрос инструмента"
+
+msgid "Open chat history folder"
+msgstr "Открыть папку истории чатов"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "Показать или сменить модель (/model <name>)"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "Сменить профиль (/profile <имя>)"
+
+msgid "Save chat to file"
+msgstr "Сохранить чат в файл"
+
+msgid "Open settings"
+msgstr "Открыть настройки"
+
+msgid "List discovered skills and their status"
+msgstr ""
+
+msgid "Run a saved task (/task <name>)"
+msgstr "Выполнить сохранённую задачу (/task <name>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr ""
+"Переключить режим Drive Desktop (запуск установления связи и авторежима)"
+
+msgid "Toggle Full Auto Mode"
+msgstr "Переключить полностью автоматический режим"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Переключить полностью автоматический режим: При включении все инструменты "
+"запускаются автоматически для этого сеанса."
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "Остановить управление рабочим столом (отключиться)"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop (запуск установления связи и включение авторежима)"
+
+msgid "Run a task"
+msgstr "Выполнить задачу"
+
+msgid "Chat History"
+msgstr "История чатов"
+
+msgid "Loading..."
+msgstr "Загрузка…"
+
+msgid "No recent chats"
+msgstr "Нет недавних чатов"
+
+msgid "Open history folder..."
+msgstr "Открыть папку истории…"
+
+msgid "Clear all history..."
+msgstr "Очистить всю историю…"
+
+msgid "Clear All History"
+msgstr "Очистить всю историю"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Вы уверены, что хотите удалить все файлы истории чатов? Это действие нельзя "
+"отменить."
+
+msgid "Clear All"
+msgstr "Очистить всё"
+
+msgid "Retry from this message?"
+msgstr "Повторить с этого сообщения?"
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr "Это удалит %1 сообщений после этой точки и сгенерирует новый ответ."
+
+msgid "Retry"
+msgstr "Повторить"
+
+msgid "Compacted Context Summary"
+msgstr ""
+
+#, javascript-format
+msgid "Compacted up to %1%2 • Citations active"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "No compaction summary available."
+msgstr ""
+
+msgid "Copy"
+msgstr "Копировать"
+
+msgid "Compacting…"
+msgstr ""
+
+msgid "Re-compact"
+msgstr ""
+
+msgid "Incrementally compact new uncompacted conversation turns."
+msgstr ""
+
+msgid "Recompact All"
+msgstr ""
+
+msgid ""
+"Re-summarize the entire conversation from turn 1 from scratch, creating a "
+"fresh, unified compaction."
+msgstr ""
+
+msgid "Copy conversation"
+msgstr "Копировать разговор"
+
+msgid "Command"
+msgstr "Команда"
+
+msgid "View compacted context summary"
+msgstr ""
+
+msgid "Compacting context in background…"
+msgstr ""
+
+msgid "Clear chat"
+msgstr "Очистить чат"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Don't keep open"
+msgstr "Не держать открытым"
+
+msgid "Keep open"
+msgstr "Держать открытым"
+
+msgid "Dismiss"
+msgstr "Закрыть"
+
+msgid "The user denied this tool call."
+msgstr "Пользователь отклонил этот вызов инструмента."
+
+msgid "Send a message to start chatting"
+msgstr "Отправьте сообщение, чтобы начать чат"
+
+msgid "Attach File"
+msgstr "Прикрепить файл"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Изображения (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Текстовые файлы (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
+"*.conf *.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "Все файлы (*)"
+
+msgid "Message input"
+msgstr "Ввод сообщения"
+
+msgid "Type a message…"
+msgstr "Напишите сообщение…"
+
+msgid "Initializing…"
+msgstr "Инициализация…"
+
+msgid "Attach file or image"
+msgstr "Прикрепить файл или изображение"
+
+msgid "Transcribing…"
+msgstr "Транскрибирование…"
+
+msgid "Preparing…"
+msgstr "Подготовка…"
+
+msgid "Wait for the current reply"
+msgstr "Дождитесь текущего ответа"
+
+msgid "Click to stop and send"
+msgstr "Нажмите, чтобы остановить и отправить"
+
+msgid "Release to send"
+msgstr "Отпустите для отправки"
+
+msgid "Click to start"
+msgstr "Нажмите для начала"
+
+msgid "Click to toggle, hold to talk"
+msgstr "Нажмите для переключения, удерживайте, чтобы говорить"
+
+msgid "Kill"
+msgstr "Завершить"
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+"Завершить постоянную сессию (останавливает все процессы и сбрасывает "
+"состояние оболочки)"
+
+msgid "Send"
+msgstr "Отправить"
+
+msgid "Stop"
+msgstr "Стоп"
+
+msgid "Cancel LLM request"
+msgstr "Отменить запрос LLM"
+
+msgid "Drop files here to attach"
+msgstr "Перетащите файлы сюда для прикрепления"
+
+msgid "Stop command"
+msgstr "Остановить команду"
+
+msgid "Open terminal attached to this session"
+msgstr "Открыть терминал, подключенный к этой сессии"
+
+msgid "Collapse result"
+msgstr ""
+
+msgid "Copy output"
+msgstr "Скопировать вывод"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"Пользовательские инструменты не настроены. Добавьте пользовательский "
+"инструмент, чтобы предоставить LLM доступ к вашим командам."
+
+msgid "Add Custom Tool"
+msgstr "Добавить пользовательский инструмент"
+
+msgid "Echoes back the message provided."
+msgstr "Возвращает предоставленное сообщение."
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "Название инструмента (например, systemctl_service)"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "Описание (инструктирует LLM о том, что делает этот инструмент)"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "Шаблон команды (например, systemctl {action} {service})"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "Требуется суперпользователь (запускается с pkexec)"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "Автозапуск инструмента (без диалога подтверждения)"
+
+msgid "Collapse results"
+msgstr ""
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+
+msgid "Update Tool"
+msgstr "Обновить инструмент"
+
+msgid "Save Tool"
+msgstr "Сохранить инструмент"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "Инструмент с именем \"%1\" уже существует."
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"Пользовательские инструменты позволяют предоставить LLM доступ к вашим "
+"командам. Используйте заполнители вроде {variable} в шаблоне команды для "
+"определения параметров, которые LLM может заполнить. Значения, "
+"предоставленные LLM, автоматически экранируются для оболочки."
+
+msgid "Enable skills"
+msgstr ""
+
+msgid ""
+"Skills are reusable instruction sets the model loads on demand via the skill "
+"tool. Add them to ~/.local/share/plasmallm/skills/ as either a folder per "
+"skill containing a SKILL.md file, or a single self-contained <name>.md file."
+msgstr ""
+
+msgid ""
+"No skills discovered yet. Add a SKILL.md folder to the directory above or "
+"enable the extra directories below."
+msgstr ""
+
+msgid "DISABLED"
+msgstr ""
+
+msgid "Refresh"
+msgstr ""
+
+msgid "Open the skills directory in the file manager"
+msgstr ""
+
+msgid "Also scan ~/.claude/skills"
+msgstr ""
+
+msgid "Also scan ~/.agents/skills"
+msgstr ""
+
+msgid "/absolute/path/to/skills"
+msgstr ""
+
+msgid "Save directory"
+msgstr ""
+
+msgid "Add directory"
+msgstr ""
+
+msgid ""
+"Enabled skills are advertised to the model by name and description; the "
+"model loads full instructions on demand with the skill tool. Loaded skill "
+"content is re-sent in full every turn and is never affected by context "
+"compaction. Toggles here are global (not per-profile)."
+msgstr ""
+
 msgid "System Info:"
 msgstr "Информация о системе:"
 
@@ -1155,12 +1545,11 @@ msgid ""
 "automatically when active, even if you remove their placeholder."
 msgstr ""
 "Это полный системный промпт, отправляемый модели. Используйте "
-"{{placeholders}} для вставки динамического содержимого, такого как "
-"сведения о системе, включенные инструменты или инструкции по "
-"автоматизации рабочего стола. Все остальное используется буквально. "
-"Критические инструкции времени выполнения (управление рабочим столом, "
-"режим без подтверждений) добавляются автоматически при активации, даже "
-"если вы удалите их заполнитель."
+"{{placeholders}} для вставки динамического содержимого, такого как сведения "
+"о системе, включенные инструменты или инструкции по автоматизации рабочего "
+"стола. Все остальное используется буквально. Критические инструкции времени "
+"выполнения (управление рабочим столом, режим без подтверждений) добавляются "
+"автоматически при активации, даже если вы удалите их заполнитель."
 
 msgid "System Prompt:"
 msgstr "Системный промпт:"
@@ -1175,22 +1564,24 @@ msgid "Enabled system info selected in the checklist above"
 msgstr "Сведения о системе, выбранные в списке выше"
 
 msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr "Описания и руководства для включенных инструментов из меню Инструменты"
+
+msgid ""
+"Available skills index and instructions for skills loaded this session (from "
+"the Skills settings page)"
 msgstr ""
-"Описания и руководства для включенных инструментов из меню Инструменты"
 
 msgid ""
 "Persistent tmux or screen session multiplexer instructions (when active)"
 msgstr ""
-"Инструкции постоянного мультиплексора сеансов tmux или screen (когда "
-"активен)"
+"Инструкции постоянного мультиплексора сеансов tmux или screen (когда активен)"
 
 msgid "Notice indicating skip-approvals mode (/auto) is active"
 msgstr "Уведомление о том, что режим без подтверждений (/auto) активен"
 
 msgid "Desktop automation coordinates and guidelines (when driving)"
 msgstr ""
-"Координаты и рекомендации по автоматизации рабочего стола (при "
-"управлении)"
+"Координаты и рекомендации по автоматизации рабочего стола (при управлении)"
 
 msgid "Localization:"
 msgstr "Локализация:"
@@ -1202,8 +1593,8 @@ msgid ""
 "Translate default prompt templates and dynamic system sections into your "
 "desktop language."
 msgstr ""
-"Переводить стандартные шаблоны промптов и динамические разделы системы "
-"на язык вашего рабочего стола."
+"Переводить стандартные шаблоны промптов и динамические разделы системы на "
+"язык вашего рабочего стола."
 
 msgid ""
 "Note: Localizing system instructions and tools into non-English languages "
@@ -1258,9 +1649,6 @@ msgstr "Белый список путей:"
 
 msgid "Add path, e.g. $HOME/projects, /tmp"
 msgstr "Добавить путь, напр. $HOME/projects, /tmp"
-
-msgid "Add"
-msgstr "Добавить"
 
 msgid ""
 "Whitelist applies to file-system tools (read, write, list, search). Note: "
@@ -1335,6 +1723,105 @@ msgid "Reset"
 msgstr "Сбросить"
 
 msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"Выполняет команду оболочки в системе пользователя и возвращает ее вывод. "
+"Рекомендации:\n"
+"- Используйте `pkexec` вместо `sudo` для любых команд, требующих прав "
+"суперпользователя.\n"
+"- Объединяйте шаги с помощью `&&`.\n"
+"- Команды выполняются неинтерактивно. Никогда не используйте команды, "
+"ожидающие ввода данных пользователем (например, `read`).\n"
+"- Используйте `kdialog`, если вам нужно запросить ввод данных у пользователя "
+"или показать диалоговое окно (например, `kdialog --inputbox \"Запрос\"`).\n"
+"- НИКОГДА не устанавливайте пакеты, не изменяйте конфигурацию системы, не "
+"перезагружайте компьютер и не предпринимайте никаких действий, изменяющих "
+"систему или мешающих работе пользователя, без явного разрешения.\n"
+"- Когда требуется разрешение, сначала спросите пользователя простым "
+"текстом.\n"
+"- Для автоматически запускаемых инструментов: Будьте осторожны и отдавайте "
+"предпочтение командам только для чтения. Если действие потенциально "
+"деструктивно, опишите его простым текстом и дождитесь явного одобрения "
+"пользователя перед вызовом инструмента.\n"
+"- Вы ДОЛЖНЫ отдавать предпочтение другим, более специализированным "
+"инструментам (таким как read_file, write_file, search_files и т. д.), если "
+"они могут выполнить задачу. Используйте этот инструмент только в том случае, "
+"если ни один другой не подходит."
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Считывает содержимое файла по указанному пути. Доступ ограничен разрешенными "
+"каталогами."
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Записывает содержимое в файл по указанному пути. Доступ ограничен "
+"разрешенными каталогами."
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+"Отображает список содержимого каталога. Доступ ограничен разрешенными "
+"каталогами."
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "Ищет шаблон внутри файлов в каталоге (рекурсивно)."
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr "Выполняет HTTP-запрос GET к URL-адресу и возвращает содержимое ответа."
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "Выполняет HTTP-запрос (POST, PUT и т. д.) к URL-адресу."
+
+msgid "Get the current content of the system clipboard."
+msgstr "Получает текущее содержимое системного буфера обмена."
+
+msgid "Set the content of the system clipboard."
+msgstr "Задает содержимое системного буфера обмена."
+
+msgid "Show a system notification."
+msgstr "Показывает системное уведомление."
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr ""
+"Открывает URL-адрес в приложении по умолчанию (например, в веб-браузере)."
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Выполняет поиск в Интернете для поиска актуальной информации, новостей или "
+"конкретных фактов."
+
+msgid ""
+"Restore the full verbatim text and tool outputs of previously compacted "
+"messages by specifying the start and end message IDs from a cited message "
+"range."
+msgstr ""
+
+msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
 msgstr ""
@@ -1368,6 +1855,9 @@ msgstr "Речь не обнаружена."
 msgid "Could not send transcribed message."
 msgstr "Не удалось отправить распознанное сообщение."
 
+msgid "Transcription canceled"
+msgstr ""
+
 msgid "Recording too short or silent — try again."
 msgstr "Запись слишком короткая или тихая — попробуйте снова."
 
@@ -1383,6 +1873,26 @@ msgid ""
 msgstr ""
 "Не удалось получить токен gcloud (выход %1): %2. Убедитесь, что gcloud "
 "установлен и аутентифицирован."
+
+msgid ""
+"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
+"plasmallm/skills/ (configure extra directories in Settings → Skills)."
+msgstr ""
+
+msgid "invalid:"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+msgid "loaded"
+msgstr ""
+
+msgid "Available skills (%1 enabled):"
+msgstr ""
+
+msgid "Enable or disable individual skills in Settings → Skills."
+msgstr ""
 
 msgid "No tool request pending to approve."
 msgstr "Нет ожидающих запросов инструментов для одобрения."
@@ -1414,9 +1924,6 @@ msgstr ""
 
 msgid "plasmallm-desktop-driver is not detected or running."
 msgstr "plasmallm-desktop-driver не обнаружен или не запущен."
-
-msgid "Default"
-msgstr "По умолчанию"
 
 msgid "Current profile: **%1**"
 msgstr "Текущий профиль: **%1**"
@@ -1490,6 +1997,13 @@ msgstr "Ошибка: путь '%1' за пределами белого спи�
 msgid "Executing %1…"
 msgstr "Выполнение %1…"
 
+msgid ""
+"Loaded '%1' skill — its full instructions were added to this conversation's "
+"context."
+msgid_plural ""
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Session reset requested."
 msgstr "Запрошен сброс сессии."
 
@@ -1501,103 +2015,6 @@ msgstr "Сеанс управления активен (уже авторизо�
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Сеанс управления успешно авторизован. Включен авторежим."
-
-msgid ""
-"Execute a shell command on the user's system and return its output. "
-"Guidelines:\n"
-"- Use `pkexec` instead of `sudo` for any command requiring superuser "
-"privileges.\n"
-"- Chain steps with `&&`.\n"
-"- Commands run non-interactively. Never use commands that wait for user "
-"input (like `read`).\n"
-"- Use `kdialog` if you need to prompt the user for input or show a message "
-"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
-"- NEVER install packages, modify system configuration, reboot, or take any "
-"action that alters the system or disrupts the user without explicit "
-"permission.\n"
-"- When permission is needed, ask the user in plain text first.\n"
-"- For auto-run tools: Be conservative and prefer read-only commands. If an "
-"action is potentially disruptive, describe it in plain text and wait for "
-"explicit user approval before calling the tool.\n"
-"- You MUST prefer other, more specific tools (like read_file, write_file, "
-"search_files, etc.) if they can accomplish the task. Only use this tool if "
-"no other tool is suitable."
-msgstr ""
-"Выполняет команду оболочки в системе пользователя и возвращает ее вывод. "
-"Рекомендации:\n"
-"- Используйте `pkexec` вместо `sudo` для любых команд, требующих прав "
-"суперпользователя.\n"
-"- Объединяйте шаги с помощью `&&`.\n"
-"- Команды выполняются неинтерактивно. Никогда не используйте команды, "
-"ожидающие ввода данных пользователем (например, `read`).\n"
-"- Используйте `kdialog`, если вам нужно запросить ввод данных у "
-"пользователя или показать диалоговое окно (например, `kdialog --inputbox "
-"\"Запрос\"`).\n"
-"- НИКОГДА не устанавливайте пакеты, не изменяйте конфигурацию системы, "
-"не перезагружайте компьютер и не предпринимайте никаких действий, "
-"изменяющих систему или мешающих работе пользователя, без явного "
-"разрешения.\n"
-"- Когда требуется разрешение, сначала спросите пользователя простым "
-"текстом.\n"
-"- Для автоматически запускаемых инструментов: Будьте осторожны и "
-"отдавайте предпочтение командам только для чтения. Если действие "
-"потенциально деструктивно, опишите его простым текстом и дождитесь "
-"явного одобрения пользователя перед вызовом инструмента.\n"
-"- Вы ДОЛЖНЫ отдавать предпочтение другим, более специализированным "
-"инструментам (таким как read_file, write_file, search_files и т. д.), "
-"если они могут выполнить задачу. Используйте этот инструмент только в "
-"том случае, если ни один другой не подходит."
-
-msgid ""
-"Read the contents of a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Считывает содержимое файла по указанному пути. Доступ ограничен "
-"разрешенными каталогами."
-
-msgid ""
-"Write content to a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Записывает содержимое в файл по указанному пути. Доступ ограничен "
-"разрешенными каталогами."
-
-msgid ""
-"List the contents of a directory. Access is restricted to allowed "
-"directories."
-msgstr ""
-"Отображает список содержимого каталога. Доступ ограничен разрешенными "
-"каталогами."
-
-msgid "Search for a pattern within files in a directory (recursive)."
-msgstr "Ищет шаблон внутри файлов в каталоге (рекурсивно)."
-
-msgid "Perform an HTTP GET request to a URL and return the response content."
-msgstr ""
-"Выполняет HTTP-запрос GET к URL-адресу и возвращает содержимое ответа."
-
-msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
-msgstr "Выполняет HTTP-запрос (POST, PUT и т. д.) к URL-адресу."
-
-msgid "Get the current content of the system clipboard."
-msgstr "Получает текущее содержимое системного буфера обмена."
-
-msgid "Set the content of the system clipboard."
-msgstr "Задает содержимое системного буфера обмена."
-
-msgid "Show a system notification."
-msgstr "Показывает системное уведомление."
-
-msgid "Open a URL in the default application (e.g., web browser)."
-msgstr ""
-"Открывает URL-адрес в приложении по умолчанию (например, в "
-"веб-браузере)."
-
-msgid ""
-"Perform a web search to find current information, news, or specific facts."
-msgstr ""
-"Выполняет поиск в Интернете для поиска актуальной информации, новостей "
-"или конкретных фактов."
 
 msgid "General"
 msgstr "Основные"
@@ -1611,11 +2028,26 @@ msgstr "Системный промпт"
 msgid "Tasks"
 msgstr "Задачи"
 
+msgid "Skills"
+msgstr ""
+
 msgid "Tools"
 msgstr "Инструменты"
 
 msgid "Custom Tools"
 msgstr "Пользовательские инструменты"
+
+#~ msgid "API key saved to local fallback (KWallet unavailable)."
+#~ msgstr "API-ключ сохранён в локальном хранилище (KWallet недоступен)."
+
+#~ msgid "Fetch"
+#~ msgstr "Получить"
+
+#~ msgid "OpenAI-compatible transcriptions"
+#~ msgstr "OpenAI-совместимое распознавание"
+
+#~ msgid "Refreshing…"
+#~ msgstr "Обновление…"
 
 #~ msgid ""
 #~ "Anthropic enables extended thinking when effort is not Off, using the "
@@ -1697,9 +2129,6 @@ msgstr "Пользовательские инструменты"
 
 #~ msgid "Save as script file"
 #~ msgstr "Сохранить как скрипт"
-
-#~ msgid "Copy"
-#~ msgstr "Копировать"
 
 #~ msgid "Ran"
 #~ msgstr "Запущено"

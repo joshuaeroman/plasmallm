@@ -74,6 +74,7 @@ PlasmaLLM automatically parses your `Command Template`, identifies the parameter
 ### Desktop & System Tools
 - **`run_command`**: Execute any shell command. This is the most powerful tool and should be used with caution. It supports **Session Multiplexing** (via `tmux` or `screen`) if enabled in settings.
 - **`skill`**: Load the full instructions of an available skill by name. Skills are discovered in `~/.local/share/plasmallm/skills/` as `<name>/SKILL.md` folders or self-contained `<name>.md` files (plus optional extra directories); an `<available_skills>` index is embedded in this tool's schema description so the model checks it before reaching for other tools, and calls it to load a skill's body on demand. Bodies already loaded this session are re-injected in full into every prompt rebuild, so context compaction never drops them. (Auto-run by default; manage skills in Settings → Skills.)
+- **`edit_memory`**: Manage persistent memory in one call — `operation` is one of `add`, `update`, or `remove`. Entries are short phrases (max 100 chars, 100 entries) identified by their number in the rendered `## Persistent Memory` list or by matching text. They are stored in the widget's config and rendered into the system prompt on every rebuild, so they survive restarts and compaction. Duplicates are ignored case-insensitively; never store secrets. (Side-effect; approval card by default; manage saved phrases in Settings → Tools → Edit Memory.)
 - **`get_clipboard` / `set_clipboard`**: Interact with the system clipboard.
 - **`notify`**: Send a system notification via `notify-send`.
 - **`open_url`**: Open a URL or file in the default application via `xdg-open`.
@@ -109,6 +110,8 @@ To add a built-in tool, create a new file in `package/contents/ui/tools/` and re
 - **`config`**: Access to widget configuration.
 - **`i18n`**: Function for translating strings.
 - **`getSecret(key)`**: Securely retrieve sensitive keys (e.g., `"searxngApiKey"`, `"ollamaSearchApiKey"`, `"exaApiKey"`).
+- **`getSkills()`**: The parsed skill records currently discovered on disk (used by the `skill` tool).
+- **`getMemory()` / `setMemory(list)`**: Read and write the persistent memory phrase list used by the `edit_memory` tool. `setMemory` persists to config and triggers a system prompt rebuild.
 - **`addDisplayMessage(content, role)`**: Manually push a message to the UI. Useful when `uiHidden` is enabled.
 - **`replaceDisplayMessage(oldRole, newContent, newRole)`**: Find the last message with `oldRole` and update its content and role in place. Useful for replacing a "Loading..." indicator with actual results.
 - **`exec(command, name, args)`**: Run a shell command.
