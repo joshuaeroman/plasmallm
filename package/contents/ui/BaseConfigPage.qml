@@ -103,7 +103,6 @@ SimpleKCM {
 
     function triggerCapture() {
         if (!_initialized || _switchingProfile || inConfigTxn) return;
-        console.error("[PlasmaLLM Settings DEBUG] triggerCapture requested");
         captureDebounce.restart();
     }
 
