@@ -9,7 +9,7 @@
 /**
  * Parses legacy V1 JSONL history files and synthesizes turn IDs on the fly.
  */
-function loadV1(lines, chatMessages, displayMessages, fileReader, pendingFileReads) {
+function loadV1(lines, chatMessages, displayMessages, fileReader, pendingFileReads, appendDisplay) {
     for (var i = 0; i < lines.length; i++) {
         if (!lines[i].trim()) continue;
         try {
@@ -46,12 +46,10 @@ function loadV1(lines, chatMessages, displayMessages, fileReader, pendingFileRea
                     } catch(e) {}
                 }
             } else if (data._type === "display") {
-                displayMessages.append({
-                    msgId: "",
-                    turnId: "",
-                    apiMsgId: "",
-                    role: data.role,
-                    content: data.content,
+                appendDisplay(data.role, data.content, {
+                    msgId: data.msgId || data.id || "",
+                    turnId: data.turnId || "",
+                    apiMsgId: data.apiMsgId || "",
                     thinking: data.thinking || "",
                     shared: data.shared || false,
                     timestamp: data.timestamp || "",
