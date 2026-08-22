@@ -2051,6 +2051,7 @@ PlasmoidItem {
             return;
         }
 
+        var apiAttachmentPaths = {};
         for (var i = 0; i < lines.length; i++) {
             if (!lines[i].trim()) continue;
             try {
@@ -2062,6 +2063,18 @@ PlasmoidItem {
                         lastCompactedTimestamp: data.lastCompactedTimestamp || ""
                     };
                 } else if (data._type === "api") {
+                    // Record attachment paths keyed by api msg id so display
+                    // lines saved before non-image attachments were shown in
+                    // the UI can be backfilled below.
+                    if (data.attachments_json && data.attachments_json.length > 0) {
+                        try {
+                            var apiAtts = JSON.parse(data.attachments_json);
+                            var apiPaths = apiAtts.map(function(a) { return a.filePath || ""; }).filter(function(p) { return !!p; });
+                            if (apiPaths.length > 0 && (data.id || data.msgId)) {
+                                apiAttachmentPaths[data.id || data.msgId] = apiPaths.join("\n");
+                            }
+                        } catch(e) {}
+                    }
                     chatMessages.append({
                         msgId: data.msgId || data.id || nextMsgId("c"),
                         turnId: data.turnId || "",
@@ -2094,6 +2107,10 @@ PlasmoidItem {
                         } catch(e) {}
                     }
                 } else if (data._type === "display") {
+                    var restoredAttachmentsStr = data.attachmentsStr || "";
+                    if (restoredAttachmentsStr.length === 0 && data.apiMsgId && apiAttachmentPaths[data.apiMsgId]) {
+                        restoredAttachmentsStr = apiAttachmentPaths[data.apiMsgId];
+                    }
                     displayMessages.append({
                         msgId: data.msgId || data.id || nextMsgId("d"),
                         turnId: data.turnId || "",
@@ -2103,7 +2120,7 @@ PlasmoidItem {
                         thinking: data.thinking || "",
                         shared: data.shared || false,
                         timestamp: data.timestamp || "",
-                        attachmentsStr: data.attachmentsStr || "",
+                        attachmentsStr: restoredAttachmentsStr,
                         fromVoice: !!data.fromVoice,
                         toolTitle: data.toolTitle || "",
                         toolIcon: data.toolIcon || "",
@@ -2811,8 +2828,10 @@ PlasmoidItem {
             var turnId = nextTurnId();
             var chatMsgId = nextMsgId("c");
             var attachJson = attachments.length > 0 ? JSON.stringify(attachments) : "";
-            var imagePaths = attachments.filter(function(a) { return !!a.dataUrl; }).map(function(a) {
-                return (a.dataUrl && a.filePath.startsWith("/tmp/plasmallm_paste_")) ? a.dataUrl : a.filePath;
+            // Every attachment gets a display entry; pasted temp images fall
+            // back to their dataUrl because the temp file is deleted after send.
+            var displayPaths = attachments.map(function(a) {
+                return (a.dataUrl && a.filePath && a.filePath.startsWith("/tmp/plasmallm_paste_")) ? a.dataUrl : a.filePath;
             });
             // Hidden STT tag for the model only (not shown in the chat bubble).
             var apiText = fromVoice ? ("[voice STT]\n" + text) : text;
@@ -2827,7 +2846,7 @@ PlasmoidItem {
             root.appendDisplayMessage("user", text, {
                 turnId: turnId,
                 apiMsgId: chatMsgId,
-                attachmentsStr: imagePaths.join("\n"),
+                attachmentsStr: displayPaths.filter(function(p) { return !!p; }).join("\n"),
                 fromVoice: fromVoice
             });
 
@@ -3523,13 +3542,17 @@ PlasmoidItem {
 
         var tool = ToolManager.getTool(name, Plasmoid.configuration);
 
-        var imagePathsStr = "";
+        var attachmentPathsStr = "";
         if (attachmentsJson) {
             try {
                 var atts = JSON.parse(attachmentsJson);
-                var imagePaths = atts.filter(function(a) { return !!a.dataUrl; }).map(function(a) { return a.dataUrl; });
-                if (imagePaths.length > 0) {
-                    imagePathsStr = imagePaths.join("\n");
+                // Show every attachment; pasted temp images fall back to their
+                // dataUrl because the temp file is deleted after capture.
+                var attPaths = atts.map(function(a) {
+                    return (a.dataUrl && a.filePath && a.filePath.startsWith("/tmp/plasmallm_paste_")) ? a.dataUrl : (a.filePath || a.dataUrl || "");
+                }).filter(function(p) { return !!p; });
+                if (attPaths.length > 0) {
+                    attachmentPathsStr = attPaths.join("\n");
                 }
             } catch(e) {}
         }
@@ -3549,8 +3572,8 @@ PlasmoidItem {
                 displayMessages.setProperty(displayIndex, "exitCode", exitCode);
                 displayMessages.setProperty(displayIndex, "outputScheme", scheme);
                 displayMessages.setProperty(displayIndex, "shared", true);
-                if (imagePathsStr) {
-                    displayMessages.setProperty(displayIndex, "attachmentsStr", imagePathsStr);
+                if (attachmentPathsStr) {
+                    displayMessages.setProperty(displayIndex, "attachmentsStr", attachmentPathsStr);
                 }
                 updatedInPlace = true;
             }
@@ -3577,7 +3600,7 @@ PlasmoidItem {
                 exitCode: exitCode,
                 shared: true,
                 outputScheme: scheme,
-                attachmentsStr: imagePathsStr
+                attachmentsStr: attachmentPathsStr
             });
         }
 
@@ -3602,8 +3625,8 @@ PlasmoidItem {
         };
         if (attachmentsJson) {
             chatEntry.attachments_json = attachmentsJson;
-            if (imagePathsStr) {
-                chatEntry.attachmentsStr = imagePathsStr;
+            if (attachmentPathsStr) {
+                chatEntry.attachmentsStr = attachmentPathsStr;
             }
         }
         chatMessages.append(chatEntry);

@@ -951,11 +951,22 @@ Kirigami.AbstractCard {
             id: genericFileComponent
             Kirigami.Chip {
                 id: chipItem
+                readonly property string filePath: parent ? (parent.filePath || "") : ""
                 readonly property string fileName: parent ? (parent.fileName || "") : ""
                 text: fileName
-                icon.name: "document-export"
+                icon.name: Api.iconForFile(filePath)
                 closable: false
                 checkable: false
+                hoverEnabled: true
+                onClicked: {
+                    if (filePath.length > 0 && !filePath.startsWith("data:")) {
+                        Qt.openUrlExternally("file://" + filePath);
+                    }
+                }
+
+                PlasmaComponents.ToolTip.text: filePath
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered && filePath !== ""
             }
         }
     }
