@@ -680,6 +680,13 @@ BaseConfigPage {
                 onToggled: checked => { if (_initialized) { cfg_toolsSkillEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/SkillConfig.qml"
             }
+
+            ToolCard {
+                toolName: "edit_memory"
+                isToolEnabled: cfg_toolsEditMemoryEnabled
+                onToggled: checked => { if (_initialized) { cfg_toolsEditMemoryEnabled = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/EditMemoryConfig.qml"
+            }
         }
     }
 }

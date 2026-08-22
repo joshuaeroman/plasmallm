@@ -19,6 +19,7 @@ test:
 	node tests/wallet_core.mjs
 	node tests/gemini_thinking.mjs
 	node tests/skills.mjs
+	node tests/memory.mjs
 
 # Translations
 translations: check-translations $(MO_FILES)

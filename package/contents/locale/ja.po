@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 17:59-0400\n"
+"POT-Creation-Date: 2026-08-22 00:06-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Japanese\n"
@@ -85,62 +85,16 @@ msgstr ""
 "み合わせをサポートしていません。新しいモデル（例：Gemini 3+）を選択するか、設"
 "定でネイティブ機能を無効にしてください。"
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
+msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
-"カスタムツールが設定されていません。LLMに独自のコマンドを公開するカスタムツー"
-"ルを追加してください。"
+"タスクが設定されていません。再利用可能なプロンプトショートカットを作成するに"
+"はタスクを追加してください。"
 
 msgid "AUTO"
 msgstr "自動"
 
 msgid "Cancel"
 msgstr "キャンセル"
-
-msgid "Add Custom Tool"
-msgstr "カスタムツールを追加"
-
-msgid "Echoes back the message provided."
-msgstr "提供されたメッセージをエコーバックします。"
-
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "ツール名（例：systemctl_service）"
-
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "説明（このツールの機能をLLMに指示する）"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "コマンドテンプレート（例：systemctl {action} {service}）"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "スーパーユーザーが必要（pkexecで実行）"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "ツールを自動実行（確認ダイアログなし）"
-
-msgid "Update Tool"
-msgstr "ツールを更新"
-
-msgid "Save Tool"
-msgstr "ツールを保存"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "\"%1\" という名前のツールが既に存在します。"
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"カスタムツールを使用すると、独自のコマンドをLLMに公開できます。コマンドテンプ"
-"レートで {variable} のようなプレースホルダーを使用して、LLMが入力できるパラ"
-"メーターを定義します。LLMが提供する値は自動的にシェルエスケープされます。"
-
-msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr ""
-"タスクが設定されていません。再利用可能なプロンプトショートカットを作成するに"
-"はタスクを追加してください。"
 
 msgid "Add Task"
 msgstr "タスクを追加"
@@ -242,6 +196,15 @@ msgstr "検索プロバイダー %1 はサポートされていません"
 msgid "Searching the web for: %1…"
 msgstr "ウェブを検索中：%1…"
 
+msgid ""
+"This tool allows the primary assistant to retrieve original transcripts from "
+"cited message ranges. It runs automatically without asking for permission "
+"when Context Compaction is active."
+msgstr ""
+
+msgid "No command provided."
+msgstr "コマンドが指定されていません。"
+
 msgid "Ollama API"
 msgstr "Ollama API"
 
@@ -312,8 +275,34 @@ msgstr "Exa APIを介したLLMトリガーのニューラルウェブ検索を�
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr "OllamaのSearch APIを介したLLMトリガーのウェブ検索を有効にする"
 
-msgid "No command provided."
-msgstr "コマンドが指定されていません。"
+msgid "Manage and discover skills in the Skills settings page."
+msgstr ""
+
+msgid "Saved phrases:"
+msgstr ""
+
+msgid ""
+"Nothing remembered yet. The assistant can save phrases with its edit_memory "
+"tool, or add them below."
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Remove"
+msgstr ""
+
+msgid "Memory is full"
+msgstr ""
+
+msgid "Add a phrase…"
+msgstr ""
+
+msgid "Add"
+msgstr "追加"
 
 msgid "Tool Request: %1"
 msgstr "ツールリクエスト：%1"
@@ -326,15 +315,6 @@ msgstr "拒否"
 
 msgid "Approve"
 msgstr "承認"
-
-msgid "Stop command"
-msgstr "コマンドを停止"
-
-msgid "Open terminal attached to this session"
-msgstr "このセッションに接続されたターミナルを開く"
-
-msgid "Copy output"
-msgstr "出力をコピー"
 
 msgid "Microphone recording failed"
 msgstr "マイク録音に失敗しました"
@@ -377,140 +357,6 @@ msgstr "録音ファイルが生成されませんでした"
 msgid "Recording failed"
 msgstr "録音に失敗しました"
 
-msgid "Speech to Text"
-msgstr "音声認識 (STT)"
-
-msgid "API key saved to local fallback (KWallet unavailable)."
-msgstr "APIキーをローカルフォールバックに保存しました（KWalletは利用不可）。"
-
-msgid "API key saved to KWallet."
-msgstr "APIキーをKWalletに保存しました。"
-
-msgid "API key saved to local fallback."
-msgstr "APIキーをローカルフォールバックに保存しました。"
-
-msgid "Set an API endpoint first."
-msgstr "最初にAPIエンドポイントを設定してください。"
-
-msgid "Fetching STT models…"
-msgstr "STTモデルを取得中…"
-
-msgid "Loaded %1 STT model(s)."
-msgstr "%1 個のSTTモデルを読み込みました。"
-
-msgid "Voice input:"
-msgstr "音声入力:"
-
-msgid "Enable microphone input"
-msgstr "マイク入力を有効にする"
-
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-"音声認識エンジンのみを設定します。文字起こし結果にはアクティブなチャットプロ"
-"ファイル（一般）が使用されます。"
-
-msgid "Mic button:"
-msgstr "マイクボタン:"
-
-msgid "Auto"
-msgstr "自動"
-
-msgid "Hold to talk"
-msgstr "長押しして話す"
-
-msgid "Toggle"
-msgstr "切り替え"
-
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-"自動: クリックで録音を切り替え、250ms以上の長押しでプッシュツートーク。長押"
-"し: 押している間のみ。切り替え: クリックで開始/停止。"
-
-msgid "Voice shortcut:"
-msgstr "音声ショートカット:"
-
-msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
-"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
-msgstr ""
-"PlasmaLLMが開いてフォーカスされている間、ボタンと同じマイクモードを使用します"
-"（自動: 短押しで切り替え、250ms以上の長押しでプッシュツートーク）。パネルは開"
-"きません。「ショートカット」ページの「ウィジェットをアクティブ化」を使用して"
-"ください。デフォルト: Ctrl+M。無効にするには消去してください。"
-
-msgid "Transcriber"
-msgstr "文字起こし"
-
-msgid "Provider:"
-msgstr "プロバイダー:"
-
-msgid "Endpoint:"
-msgstr "エンドポイント:"
-
-msgid "Model:"
-msgstr "モデル:"
-
-msgid "Fetching…"
-msgstr "取得中…"
-
-msgid "Fetch"
-msgstr "取得"
-
-msgid "Fetch STT models"
-msgstr "STTモデルを取得"
-
-msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
-msgstr ""
-"OpenRouterは文字起こしモダリティ経由でのみSTTモデルを一覧表示します（このペー"
-"ジはその処理を行います）。"
-
-msgid "API key:"
-msgstr "APIキー:"
-
-msgid "Provider API key"
-msgstr "プロバイダーAPIキー"
-
-msgid "Save"
-msgstr "保存"
-
-msgid "Save API key"
-msgstr "APIキーを保存"
-
-msgid "Options"
-msgstr "オプション"
-
-msgid "Language hint:"
-msgstr "言語ヒント:"
-
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "省略可能、例: ja または en (空 = 自動)"
-
-msgid "Max recording (seconds):"
-msgstr "最大録音時間 (秒):"
-
-msgid "STT backend:"
-msgstr "STTバックエンド:"
-
-msgid "OpenAI-compatible transcriptions"
-msgstr "OpenAI互換の文字起こし"
-
-msgid "Speech-to-text is not configured"
-msgstr "音声認識が設定されていません"
-
-msgid "Unknown STT backend: %1"
-msgstr "不明なSTTバックエンド: %1"
-
-msgid "STT backend does not support model listing"
-msgstr "STTバックエンドはモデル一覧の取得をサポートしていません"
-
 msgid "STT endpoint is not configured"
 msgstr "STTエンドポイントが設定されていません"
 
@@ -540,6 +386,45 @@ msgstr "STTに失敗しました (HTTP %1)"
 
 msgid "STT request failed: %1"
 msgstr "STTリクエストに失敗しました: %1"
+
+msgid "No audio file to transcribe"
+msgstr ""
+
+msgid "Invalid Whisper model id"
+msgstr ""
+
+msgid "Invalid Whisper task"
+msgstr ""
+
+msgid "Invalid Whisper device"
+msgstr ""
+
+msgid "Whisper CLI failed (exit %1): %2"
+msgstr ""
+
+msgid "Whisper CLI failed (exit %1)"
+msgstr ""
+
+msgid "Try Device: cpu or Default in Speech to Text settings."
+msgstr ""
+
+msgid "Refresh model list"
+msgstr "モデルリストを更新"
+
+msgid "Select or enter a model"
+msgstr ""
+
+msgid "Search or type custom model…"
+msgstr ""
+
+msgid "Search models…"
+msgstr ""
+
+msgid "Use \"%1\""
+msgstr ""
+
+msgid "Fetching…"
+msgstr "取得中…"
 
 msgid "Profile Header:"
 msgstr "プロファイルヘッダー:"
@@ -634,6 +519,9 @@ msgstr "履歴を表示"
 msgid "Show Copy conversation"
 msgstr "会話のコピーを表示"
 
+msgid "Show Context compaction summary"
+msgstr ""
+
 msgid "Show Clear chat"
 msgstr "チャットのクリアを表示"
 
@@ -643,246 +531,143 @@ msgstr "設定を表示"
 msgid "Show Pin"
 msgstr "ピンを表示"
 
-msgid "Voice message"
-msgstr "音声メッセージ"
+msgid "Speech-to-text is not configured"
+msgstr "音声認識が設定されていません"
 
-msgid "Error"
-msgstr "エラー"
+msgid "Unknown STT backend: %1"
+msgstr "不明なSTTバックエンド: %1"
 
-msgid "Web Search"
-msgstr "ウェブ検索..."
+msgid "Whisper CLI runner is not available"
+msgstr ""
+
+msgid "Could not build Whisper command"
+msgstr ""
+
+msgid "STT backend does not support model listing"
+msgstr "STTバックエンドはモデル一覧の取得をサポートしていません"
+
+msgid "Context Compaction"
+msgstr ""
+
+msgid "(Active Chat Profile)"
+msgstr ""
+
+msgid "Unnamed Profile"
+msgstr ""
+
+msgid "Active Chat Profile"
+msgstr ""
+
+msgid "Active Chat Profile (Fallback)"
+msgstr ""
+
+msgid "Selected profile does not have an endpoint URL or model configured."
+msgstr ""
+
+msgid "Testing compaction call using '%1'…"
+msgstr ""
+
+msgid "Compaction test failed: %1"
+msgstr ""
+
+msgid "Compaction test succeeded!"
+msgstr ""
+
+msgid "Context Compaction:"
+msgstr ""
+
+msgid "Enable context compaction"
+msgstr ""
 
 msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
+"Dramatically reduces token usage and speeds up responses in long "
+"conversations by compressing older turns into a dense background summary. "
+"Keeps your chats lightweight and cost-effective while your full history "
+"remains visible."
 msgstr ""
-"Mathtext レンダリングは Unicode 置換にフォールバックしました (matplotlib がイ"
-"ンストールされていないか、エラーが発生しました)"
 
-msgid "Thinking"
-msgstr "思考中…"
+msgid "Compaction Profile"
+msgstr ""
 
-msgid "Searched for: %1"
-msgstr "検索した内容：%1"
+msgid "Model Profile:"
+msgstr ""
 
-msgid "Show %1 results"
-msgstr "%1 件の結果を表示"
-
-msgid "Save & Retry"
-msgstr "保存して再試行"
-
-msgid "Copy to clipboard"
-msgstr "クリップボードにコピー"
-
-msgid "Edit message"
-msgstr "メッセージを編集"
-
-msgid "Edit response"
-msgstr "応答を編集"
-
-msgid "Retry from here"
-msgstr "ここから再試行"
-
-msgid "Regenerate response"
-msgstr "応答を再生成"
-
-msgid "Share output with assistant"
-msgstr "出力をアシスタントと共有"
-
-msgid "Approve the pending tool request"
-msgstr "保留中のツールリクエストを承認"
-
-msgid "Toggle skip approvals for this session"
-msgstr "このセッションの承認スキップを切り替え"
-
-msgid "Clear the chat"
-msgstr "チャットをクリア"
-
-msgid "Close the panel"
-msgstr "パネルを閉じる"
-
-msgid "Copy conversation to clipboard"
-msgstr "会話をクリップボードにコピー"
-
-msgid "Deny the pending tool request"
-msgstr "保留中のツールリクエストを拒否"
-
-msgid "Open chat history folder"
-msgstr "チャット履歴フォルダーを開く"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "モデルを表示または切り替え (/model <name>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "プロファイルを切り替え (/profile <名前>)"
-
-msgid "Save chat to file"
-msgstr "チャットをファイルに保存"
-
-msgid "Open settings"
-msgstr "設定を開く"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "保存したタスクを実行 (/task <name>)"
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr "Drive Desktopモードを切り替える（ハンドシェイクと自動モードを開始）"
-
-msgid "Toggle Full Auto Mode"
-msgstr "完全自動モードの切り替え"
+msgid "None"
+msgstr ""
 
 msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
+"Provider: %1  |  Model: %2\n"
+"Endpoint: %3"
+msgid_plural "Default"
+msgstr[0] ""
+
+msgid "Trigger Thresholds"
 msgstr ""
-"完全自動モードの切り替え：有効にすると、このセッションのすべてのツールが自動"
-"的に実行されます。"
 
-msgid "Drive Desktop"
-msgstr "Drive Desktop"
+msgid "Trigger Condition:"
+msgstr ""
 
-msgid "Stop Driving Desktop (disconnect)"
-msgstr "デスクトップの操作を停止する（切断）"
+msgid "By Character Count"
+msgstr ""
 
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr "Drive Desktop（ハンドシェイクを開始し、自動モードを有効化）"
+msgid "By Turn Count"
+msgstr ""
 
-msgid "Run a task"
-msgstr "タスクを実行"
+msgid "Whichever comes first (Chars or Turns)"
+msgstr ""
 
-msgid "Chat History"
-msgstr "チャット履歴"
+msgid "Character threshold:"
+msgstr ""
 
-msgid "Loading..."
-msgstr "読み込み中..."
+msgid "chars (~%1 tokens)"
+msgstr ""
 
-msgid "No recent chats"
-msgstr "最近のチャットはありません"
+msgid "Turn count interval:"
+msgstr ""
 
-msgid "Open history folder..."
-msgstr "履歴フォルダーを開く..."
+msgid "turn (compacts after every turn)"
+msgstr ""
 
-msgid "Clear all history..."
-msgstr "すべての履歴を消去..."
+msgid "turns"
+msgstr ""
 
-msgid "Clear All History"
-msgstr "すべての履歴を消去"
+msgid "Keep recent turns:"
+msgstr ""
+
+msgid "full turns kept verbatim and uncompacted"
+msgstr ""
+
+msgid "Compaction Instructions"
+msgstr ""
+
+msgid "Instructions template:"
+msgstr ""
+
+msgid "Reset to Default Instructions"
+msgstr ""
+
+msgid "Diagnostic & Testing"
+msgstr ""
 
 msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
+"Test compaction against your selected model profile using the sample "
+"transcript below:"
 msgstr ""
-"すべてのチャット履歴ファイルを削除してもよろしいですか？この操作は取り消せま"
-"せん。"
 
-msgid "Clear All"
-msgstr "すべて消去"
-
-msgid "Retry from this message?"
-msgstr "このメッセージから再試行しますか？"
-
-msgid ""
-"This will remove %1 message(s) after this point and generate a new response."
-msgstr "これにより、この後の%1件のメッセージが削除され、新しい応答が生成されます。"
-
-msgid "Retry"
-msgstr "再試行"
-
-msgid "Copy conversation"
-msgstr "会話をコピー"
-
-msgid "Command"
-msgstr "コマンド"
-
-msgid "Clear chat"
-msgstr "チャットをクリア"
-
-msgid "Settings"
-msgstr "設定"
-
-msgid "Don't keep open"
-msgstr "開いたままにしない"
-
-msgid "Keep open"
-msgstr "開いたままにする"
-
-msgid "Dismiss"
-msgstr "閉じる"
-
-msgid "The user denied this tool call."
-msgstr "ユーザーがこのツール呼び出しを拒否しました。"
-
-msgid "Send a message to start chatting"
-msgstr "メッセージを送信してチャットを開始"
-
-msgid "Attach File"
-msgstr "ファイルを添付"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "画像 (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
+msgid "Sample Conversation Transcript:"
 msgstr ""
-"テキストファイル (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
-"*.conf *.sh *.py *.js *.ts *.qml)"
 
-msgid "All files (*)"
-msgstr "すべてのファイル (*)"
-
-msgid "Message input"
-msgstr "メッセージ入力"
-
-msgid "Type a message…"
-msgstr "メッセージを入力…"
-
-msgid "Initializing…"
-msgstr "初期化中…"
-
-msgid "Attach file or image"
-msgstr "ファイルまたは画像を添付"
-
-msgid "Transcribing…"
-msgstr "文字起こし中…"
-
-msgid "Preparing…"
-msgstr "準備中…"
-
-msgid "Wait for the current reply"
-msgstr "現在の応答を待機中"
-
-msgid "Click to stop and send"
-msgstr "クリックして停止し送信"
-
-msgid "Release to send"
-msgstr "離して送信"
-
-msgid "Click to start"
-msgstr "クリックして開始"
-
-msgid "Click to toggle, hold to talk"
-msgstr "クリックで切り替え、長押しで話す"
-
-msgid "Kill"
-msgstr "強制終了"
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
+msgid "Reset Sample"
 msgstr ""
-"永続セッションを強制終了（すべてのプロセスを停止し、シェル状態をリセットしま"
-"す）"
 
-msgid "Send"
-msgstr "送信"
+msgid "Testing…"
+msgstr ""
 
-msgid "Stop"
-msgstr "停止"
+msgid "Test Compaction Connection"
+msgstr ""
 
-msgid "Cancel LLM request"
-msgstr "LLMリクエストをキャンセル"
-
-msgid "Drop files here to attach"
-msgstr "ここにファイルをドロップして添付します"
+msgid "Model Summary Response:"
+msgstr ""
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "gcloudトークンを取得できませんでした（終了コード %1）：%2"
@@ -956,14 +741,14 @@ msgstr "プロジェクトID:"
 msgid "Location:"
 msgstr "場所:"
 
+msgid "Provider:"
+msgstr "プロバイダー:"
+
 msgid "API Endpoint:"
 msgstr "APIエンドポイント:"
 
-msgid "Refreshing…"
-msgstr "更新中…"
-
-msgid "Refresh model list"
-msgstr "モデルリストを更新"
+msgid "Model:"
+msgstr "モデル:"
 
 msgid "API Key:"
 msgstr "APIキー:"
@@ -1102,6 +887,610 @@ msgstr "秒"
 msgid "minutes"
 msgstr "分"
 
+msgid "Speech to Text"
+msgstr "音声認識 (STT)"
+
+msgid "Model “%1” is on disk."
+msgstr ""
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
+"into ~/.cache/whisper and can take a long time."
+msgstr ""
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it into "
+"~/.cache/whisper and can take a long time."
+msgstr ""
+
+msgid "CUDA is available to Whisper."
+msgstr ""
+
+msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
+msgstr ""
+
+msgid "Whisper CLI responded to --help."
+msgstr ""
+
+msgid "Whisper CLI test failed (exit %1): %2"
+msgstr ""
+
+msgid "Whisper CLI test failed (exit %1). Check the command."
+msgstr ""
+
+msgid "API key saved to KWallet."
+msgstr "APIキーをKWalletに保存しました。"
+
+msgid "API key saved to local fallback."
+msgstr "APIキーをローカルフォールバックに保存しました。"
+
+msgid "Checking whether “%1” is downloaded…"
+msgstr ""
+
+msgid "Checking CUDA…"
+msgstr ""
+
+msgid "Testing Whisper CLI…"
+msgstr ""
+
+msgid "Loaded %1 STT model(s)."
+msgstr "%1 個のSTTモデルを読み込みました。"
+
+msgid "Set an API endpoint first."
+msgstr "最初にAPIエンドポイントを設定してください。"
+
+msgid "Fetching STT models…"
+msgstr "STTモデルを取得中…"
+
+msgid "Voice input:"
+msgstr "音声入力:"
+
+msgid "Enable microphone input"
+msgstr "マイク入力を有効にする"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"音声認識エンジンのみを設定します。文字起こし結果にはアクティブなチャットプロ"
+"ファイル（一般）が使用されます。"
+
+msgid "Mic button:"
+msgstr "マイクボタン:"
+
+msgid "Auto"
+msgstr "自動"
+
+msgid "Hold to talk"
+msgstr "長押しして話す"
+
+msgid "Toggle"
+msgstr "切り替え"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"自動: クリックで録音を切り替え、250ms以上の長押しでプッシュツートーク。長押"
+"し: 押している間のみ。切り替え: クリックで開始/停止。"
+
+msgid "Voice shortcut:"
+msgstr "音声ショートカット:"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"PlasmaLLMが開いてフォーカスされている間、ボタンと同じマイクモードを使用します"
+"（自動: 短押しで切り替え、250ms以上の長押しでプッシュツートーク）。パネルは開"
+"きません。「ショートカット」ページの「ウィジェットをアクティブ化」を使用して"
+"ください。デフォルト: Ctrl+M。無効にするには消去してください。"
+
+msgid "Transcriber"
+msgstr "文字起こし"
+
+msgid "STT backend:"
+msgstr "STTバックエンド:"
+
+msgid "Endpoint:"
+msgstr "エンドポイント:"
+
+msgid "Fetch STT models"
+msgstr "STTモデルを取得"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouterは文字起こしモダリティ経由でのみSTTモデルを一覧表示します（このペー"
+"ジはその処理を行います）。"
+
+msgid "API key:"
+msgstr "APIキー:"
+
+msgid "Provider API key"
+msgstr "プロバイダーAPIキー"
+
+msgid "Save API key"
+msgstr "APIキーを保存"
+
+msgid "Command:"
+msgstr ""
+
+msgid ""
+"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
+"toolbox run whisper."
+msgstr ""
+
+msgid "Test:"
+msgstr ""
+
+msgid "Test CLI"
+msgstr ""
+
+msgid "Task:"
+msgstr ""
+
+msgid "Transcribe"
+msgstr ""
+
+msgid "Translate"
+msgstr ""
+
+msgid "Device:"
+msgstr ""
+
+msgid "Default"
+msgstr "デフォルト"
+
+msgid "FP16:"
+msgstr ""
+
+msgid "Use --fp16 True (GPU)"
+msgstr ""
+
+msgid "Threads:"
+msgstr ""
+
+msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
+msgstr ""
+
+msgid "Initial prompt:"
+msgstr ""
+
+msgid "Optional vocabulary / style hint"
+msgstr ""
+
+msgid "Extra args:"
+msgstr ""
+
+msgid "Optional, appended as-is"
+msgstr ""
+
+msgid "Options"
+msgstr "オプション"
+
+msgid "Language hint:"
+msgstr "言語ヒント:"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "省略可能、例: ja または en (空 = 自動)"
+
+msgid "Max recording (seconds):"
+msgstr "最大録音時間 (秒):"
+
+msgid "Loaded %1 skill"
+msgid_plural ""
+msgstr[0] ""
+
+msgid "Voice message"
+msgstr "音声メッセージ"
+
+msgid "Error"
+msgstr "エラー"
+
+msgid "Web Search"
+msgstr "ウェブ検索..."
+
+msgid "compacted"
+msgstr ""
+
+msgid ""
+"This message has been summarized into the compacted context. Citations "
+"active."
+msgstr ""
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Mathtext レンダリングは Unicode 置換にフォールバックしました (matplotlib がイ"
+"ンストールされていないか、エラーが発生しました)"
+
+msgid "Thinking"
+msgstr "思考中…"
+
+msgid "Searched for: %1"
+msgstr "検索した内容：%1"
+
+msgid "Show %1 results"
+msgstr "%1 件の結果を表示"
+
+msgid "Save & Retry"
+msgstr "保存して再試行"
+
+msgid "Copy to clipboard"
+msgstr "クリップボードにコピー"
+
+msgid "Edit message"
+msgstr "メッセージを編集"
+
+msgid "Edit response"
+msgstr "応答を編集"
+
+msgid "Retry from here"
+msgstr "ここから再試行"
+
+msgid "Regenerate response"
+msgstr "応答を再生成"
+
+msgid "Share output with assistant"
+msgstr "出力をアシスタントと共有"
+
+msgid "The model loaded this skill's instructions into context before acting."
+msgstr ""
+
+msgid "Approve the pending tool request"
+msgstr "保留中のツールリクエストを承認"
+
+msgid "Toggle skip approvals for this session"
+msgstr "このセッションの承認スキップを切り替え"
+
+msgid "Clear the chat"
+msgstr "チャットをクリア"
+
+msgid "Close the panel"
+msgstr "パネルを閉じる"
+
+msgid "Copy conversation to clipboard"
+msgstr "会話をクリップボードにコピー"
+
+msgid "Deny the pending tool request"
+msgstr "保留中のツールリクエストを拒否"
+
+msgid "Open chat history folder"
+msgstr "チャット履歴フォルダーを開く"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "モデルを表示または切り替え (/model <name>)"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "プロファイルを切り替え (/profile <名前>)"
+
+msgid "Save chat to file"
+msgstr "チャットをファイルに保存"
+
+msgid "Open settings"
+msgstr "設定を開く"
+
+msgid "List discovered skills and their status"
+msgstr ""
+
+msgid "Run a saved task (/task <name>)"
+msgstr "保存したタスクを実行 (/task <name>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr "Drive Desktopモードを切り替える（ハンドシェイクと自動モードを開始）"
+
+msgid "Toggle Full Auto Mode"
+msgstr "完全自動モードの切り替え"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"完全自動モードの切り替え：有効にすると、このセッションのすべてのツールが自動"
+"的に実行されます。"
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "デスクトップの操作を停止する（切断）"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop（ハンドシェイクを開始し、自動モードを有効化）"
+
+msgid "Run a task"
+msgstr "タスクを実行"
+
+msgid "Chat History"
+msgstr "チャット履歴"
+
+msgid "Loading..."
+msgstr "読み込み中..."
+
+msgid "No recent chats"
+msgstr "最近のチャットはありません"
+
+msgid "Open history folder..."
+msgstr "履歴フォルダーを開く..."
+
+msgid "Clear all history..."
+msgstr "すべての履歴を消去..."
+
+msgid "Clear All History"
+msgstr "すべての履歴を消去"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"すべてのチャット履歴ファイルを削除してもよろしいですか？この操作は取り消せま"
+"せん。"
+
+msgid "Clear All"
+msgstr "すべて消去"
+
+msgid "Retry from this message?"
+msgstr "このメッセージから再試行しますか？"
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+"これにより、この後の%1件のメッセージが削除され、新しい応答が生成されます。"
+
+msgid "Retry"
+msgstr "再試行"
+
+msgid "Compacted Context Summary"
+msgstr ""
+
+#, javascript-format
+msgid "Compacted up to %1%2 • Citations active"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "No compaction summary available."
+msgstr ""
+
+msgid "Copy"
+msgstr "コピー"
+
+msgid "Compacting…"
+msgstr ""
+
+msgid "Re-compact"
+msgstr ""
+
+msgid "Incrementally compact new uncompacted conversation turns."
+msgstr ""
+
+msgid "Recompact All"
+msgstr ""
+
+msgid ""
+"Re-summarize the entire conversation from turn 1 from scratch, creating a "
+"fresh, unified compaction."
+msgstr ""
+
+msgid "Copy conversation"
+msgstr "会話をコピー"
+
+msgid "Command"
+msgstr "コマンド"
+
+msgid "View compacted context summary"
+msgstr ""
+
+msgid "Compacting context in background…"
+msgstr ""
+
+msgid "Clear chat"
+msgstr "チャットをクリア"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Don't keep open"
+msgstr "開いたままにしない"
+
+msgid "Keep open"
+msgstr "開いたままにする"
+
+msgid "Dismiss"
+msgstr "閉じる"
+
+msgid "The user denied this tool call."
+msgstr "ユーザーがこのツール呼び出しを拒否しました。"
+
+msgid "Send a message to start chatting"
+msgstr "メッセージを送信してチャットを開始"
+
+msgid "Attach File"
+msgstr "ファイルを添付"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "画像 (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"テキストファイル (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
+"*.conf *.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "すべてのファイル (*)"
+
+msgid "Message input"
+msgstr "メッセージ入力"
+
+msgid "Type a message…"
+msgstr "メッセージを入力…"
+
+msgid "Initializing…"
+msgstr "初期化中…"
+
+msgid "Attach file or image"
+msgstr "ファイルまたは画像を添付"
+
+msgid "Transcribing…"
+msgstr "文字起こし中…"
+
+msgid "Preparing…"
+msgstr "準備中…"
+
+msgid "Wait for the current reply"
+msgstr "現在の応答を待機中"
+
+msgid "Click to stop and send"
+msgstr "クリックして停止し送信"
+
+msgid "Release to send"
+msgstr "離して送信"
+
+msgid "Click to start"
+msgstr "クリックして開始"
+
+msgid "Click to toggle, hold to talk"
+msgstr "クリックで切り替え、長押しで話す"
+
+msgid "Kill"
+msgstr "強制終了"
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+"永続セッションを強制終了（すべてのプロセスを停止し、シェル状態をリセットしま"
+"す）"
+
+msgid "Send"
+msgstr "送信"
+
+msgid "Stop"
+msgstr "停止"
+
+msgid "Cancel LLM request"
+msgstr "LLMリクエストをキャンセル"
+
+msgid "Drop files here to attach"
+msgstr "ここにファイルをドロップして添付します"
+
+msgid "Stop command"
+msgstr "コマンドを停止"
+
+msgid "Open terminal attached to this session"
+msgstr "このセッションに接続されたターミナルを開く"
+
+msgid "Collapse result"
+msgstr ""
+
+msgid "Copy output"
+msgstr "出力をコピー"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"カスタムツールが設定されていません。LLMに独自のコマンドを公開するカスタムツー"
+"ルを追加してください。"
+
+msgid "Add Custom Tool"
+msgstr "カスタムツールを追加"
+
+msgid "Echoes back the message provided."
+msgstr "提供されたメッセージをエコーバックします。"
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "ツール名（例：systemctl_service）"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "説明（このツールの機能をLLMに指示する）"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "コマンドテンプレート（例：systemctl {action} {service}）"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "スーパーユーザーが必要（pkexecで実行）"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "ツールを自動実行（確認ダイアログなし）"
+
+msgid "Collapse results"
+msgstr ""
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+
+msgid "Update Tool"
+msgstr "ツールを更新"
+
+msgid "Save Tool"
+msgstr "ツールを保存"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "\"%1\" という名前のツールが既に存在します。"
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"カスタムツールを使用すると、独自のコマンドをLLMに公開できます。コマンドテンプ"
+"レートで {variable} のようなプレースホルダーを使用して、LLMが入力できるパラ"
+"メーターを定義します。LLMが提供する値は自動的にシェルエスケープされます。"
+
+msgid "Enable skills"
+msgstr ""
+
+msgid ""
+"Skills are reusable instruction sets the model loads on demand via the skill "
+"tool. Add them to ~/.local/share/plasmallm/skills/ as either a folder per "
+"skill containing a SKILL.md file, or a single self-contained <name>.md file."
+msgstr ""
+
+msgid ""
+"No skills discovered yet. Add a SKILL.md folder to the directory above or "
+"enable the extra directories below."
+msgstr ""
+
+msgid "DISABLED"
+msgstr ""
+
+msgid "Refresh"
+msgstr ""
+
+msgid "Open the skills directory in the file manager"
+msgstr ""
+
+msgid "Also scan ~/.claude/skills"
+msgstr ""
+
+msgid "Also scan ~/.agents/skills"
+msgstr ""
+
+msgid "/absolute/path/to/skills"
+msgstr ""
+
+msgid "Save directory"
+msgstr ""
+
+msgid "Add directory"
+msgstr ""
+
+msgid ""
+"Enabled skills are advertised to the model by name and description; the "
+"model loads full instructions on demand with the skill tool. Loaded skill "
+"content is re-sent in full every turn and is never affected by context "
+"compaction. Toggles here are global (not per-profile)."
+msgstr ""
+
 msgid "System Info:"
 msgstr "システム情報:"
 
@@ -1154,9 +1543,11 @@ msgid ""
 "runtime instructions (driving, skip-approvals mode) are appended "
 "automatically when active, even if you remove their placeholder."
 msgstr ""
-"これはモデルに送信される完全なシステムプロンプトです。{{placeholders}}を使用して、システム詳細、有効なツール、デスクトップ自動化"
-"手順などの動的コンテンツを取り込みます。それ以外に記述した内容はそのまま使用されます。重要な実行時指示（デスクトップ操作、承認スキップモード）は"
-"、プレースホルダーを削除した場合でも、有効時に自動的に追加されます。"
+"これはモデルに送信される完全なシステムプロンプトです。{{placeholders}}を使用"
+"して、システム詳細、有効なツール、デスクトップ自動化手順などの動的コンテンツ"
+"を取り込みます。それ以外に記述した内容はそのまま使用されます。重要な実行時指"
+"示（デスクトップ操作、承認スキップモード）は、プレースホルダーを削除した場合"
+"でも、有効時に自動的に追加されます。"
 
 msgid "System Prompt:"
 msgstr "システムプロンプト:"
@@ -1174,8 +1565,14 @@ msgid "Enabled tool descriptions and guidelines from the Tools menu"
 msgstr "ツールメニューからの有効なツールの説明とガイドライン"
 
 msgid ""
+"Available skills index and instructions for skills loaded this session (from "
+"the Skills settings page)"
+msgstr ""
+
+msgid ""
 "Persistent tmux or screen session multiplexer instructions (when active)"
-msgstr "永続的な tmux または screen セッションマルチプレクサの指示（アクティブ時）"
+msgstr ""
+"永続的な tmux または screen セッションマルチプレクサの指示（アクティブ時）"
 
 msgid "Notice indicating skip-approvals mode (/auto) is active"
 msgstr "承認スキップモード（/auto）がアクティブであることを示す通知"
@@ -1192,15 +1589,17 @@ msgstr "システムプロンプトをローカライズ"
 msgid ""
 "Translate default prompt templates and dynamic system sections into your "
 "desktop language."
-msgstr "デフォルトのプロンプトテンプレートと動的システムセクションをデスクトップ言語に翻訳します。"
+msgstr ""
+"デフォルトのプロンプトテンプレートと動的システムセクションをデスクトップ言語"
+"に翻訳します。"
 
 msgid ""
 "Note: Localizing system instructions and tools into non-English languages "
 "may reduce tool-calling reliability and instruction-following accuracy on "
 "some models."
 msgstr ""
-"注意: システムの指示やツールを英語以外の言語にローカライズすると、一部のモデルでツール呼び出しの信頼性や指示追従の精度が低下する可能性がありま"
-"す。"
+"注意: システムの指示やツールを英語以外の言語にローカライズすると、一部のモデ"
+"ルでツール呼び出しの信頼性や指示追従の精度が低下する可能性があります。"
 
 msgid "Actions:"
 msgstr "アクション:"
@@ -1245,9 +1644,6 @@ msgstr "パスホワイトリスト："
 
 msgid "Add path, e.g. $HOME/projects, /tmp"
 msgstr "パスを追加（例：$HOME/projects、/tmp）"
-
-msgid "Add"
-msgstr "追加"
 
 msgid ""
 "Whitelist applies to file-system tools (read, write, list, search). Note: "
@@ -1320,6 +1716,101 @@ msgid "Reset"
 msgstr "リセット"
 
 msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"ユーザーのシステム上でシェルコマンドを実行し、その出力を返します。ガイドライ"
+"ン:\n"
+"- スーパーユーザー権限が必要なコマンドには、`sudo` の代わりに `pkexec` を使用"
+"してください。\n"
+"- ステップは `&&` で連結してください。\n"
+"- コマンドは非対話形式で実行されます。ユーザー入力を待つコマンド（`read` な"
+"ど）は絶対に使用しないでください。\n"
+"- ユーザーに入力を求めたりメッセージボックスを表示したりする必要がある場合"
+"は、`kdialog` を使用してください（例: `kdialog --inputbox \"プロンプト"
+"\"`）。\n"
+"- 明示的な許可なしに、パッケージのインストール、システム構成の変更、再起動、"
+"またはシステムを変更したりユーザーの作業を妨げたりするアクションは絶対に実行"
+"しないでください。\n"
+"- 許可が必要な場合は、まずプレーンテキストでユーザーに確認してください。\n"
+"- 自動実行ツールの場合: 慎重になり、読み取り専用コマンドを優先してください。"
+"アクションが中断を伴う可能性がある場合は、プレーンテキストで説明し、ツールを"
+"呼び出す前にユーザーの明示的な承認を待ってください。\n"
+"- タスクを達成できる場合は、より具体的な他のツール（read_file、write_file、"
+"search_files など）を必ず優先してください。他のツールが適していない場合にの"
+"み、このツールを使用してください。"
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"指定されたパスのファイルの内容を読み取ります。アクセスは許可されたディレクト"
+"リに制限されています。"
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"指定されたパスのファイルにコンテンツを書き込みます。アクセスは許可されたディ"
+"レクトリに制限されています。"
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+"ディレクトリの内容を一覧表示します。アクセスは許可されたディレクトリに制限さ"
+"れています。"
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "ディレクトリ内のファイル内のパターンを検索します（再帰的）。"
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr "URL に対して HTTP GET リクエストを実行し、レスポンスの内容を返します。"
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "URL に対して HTTP リクエスト（POST、PUT など）を実行します。"
+
+msgid "Get the current content of the system clipboard."
+msgstr "システムクリップボードの現在の内容を取得します。"
+
+msgid "Set the content of the system clipboard."
+msgstr "システムクリップボードの内容を設定します。"
+
+msgid "Show a system notification."
+msgstr "システム通知を表示します。"
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr "デフォルトのアプリケーション（Webブラウザなど）で URL を開きます。"
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Web検索を実行して、最新の情報、ニュース、または特定の事実を検索します。"
+
+msgid ""
+"Restore the full verbatim text and tool outputs of previously compacted "
+"messages by specifying the start and end message IDs from a cited message "
+"range."
+msgstr ""
+
+msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
 msgstr ""
@@ -1352,6 +1843,9 @@ msgstr "音声が検出されませんでした。"
 msgid "Could not send transcribed message."
 msgstr "文字起こしされたメッセージを送信できませんでした。"
 
+msgid "Transcription canceled"
+msgstr ""
+
 msgid "Recording too short or silent — try again."
 msgstr "録音が短すぎるか無音です — もう一度お試しください。"
 
@@ -1367,6 +1861,26 @@ msgid ""
 msgstr ""
 "gcloudトークンを取得できませんでした（終了コード %1）：%2。gcloudがインストー"
 "ルされ、認証されていることを確認してください。"
+
+msgid ""
+"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
+"plasmallm/skills/ (configure extra directories in Settings → Skills)."
+msgstr ""
+
+msgid "invalid:"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+msgid "loaded"
+msgstr ""
+
+msgid "Available skills (%1 enabled):"
+msgstr ""
+
+msgid "Enable or disable individual skills in Settings → Skills."
+msgstr ""
 
 msgid "No tool request pending to approve."
 msgstr "承認待ちのツールリクエストはありません。"
@@ -1397,9 +1911,6 @@ msgstr ""
 
 msgid "plasmallm-desktop-driver is not detected or running."
 msgstr "plasmallm-desktop-driverが検出されないか、実行されていません。"
-
-msgid "Default"
-msgstr "デフォルト"
 
 msgid "Current profile: **%1**"
 msgstr "現在のプロファイル: **%1**"
@@ -1475,6 +1986,12 @@ msgstr "エラー：パス '%1' はホワイトリスト外です"
 msgid "Executing %1…"
 msgstr "%1 を実行中…"
 
+msgid ""
+"Loaded '%1' skill — its full instructions were added to this conversation's "
+"context."
+msgid_plural ""
+msgstr[0] ""
+
 msgid "Session reset requested."
 msgstr "セッションのリセットがリクエストされました。"
 
@@ -1486,81 +2003,6 @@ msgstr "操作セッションはアクティブです（認証済み）。自動
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "操作セッションの認証に成功しました。自動モードが有効です。"
-
-msgid ""
-"Execute a shell command on the user's system and return its output. "
-"Guidelines:\n"
-"- Use `pkexec` instead of `sudo` for any command requiring superuser "
-"privileges.\n"
-"- Chain steps with `&&`.\n"
-"- Commands run non-interactively. Never use commands that wait for user "
-"input (like `read`).\n"
-"- Use `kdialog` if you need to prompt the user for input or show a message "
-"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
-"- NEVER install packages, modify system configuration, reboot, or take any "
-"action that alters the system or disrupts the user without explicit "
-"permission.\n"
-"- When permission is needed, ask the user in plain text first.\n"
-"- For auto-run tools: Be conservative and prefer read-only commands. If an "
-"action is potentially disruptive, describe it in plain text and wait for "
-"explicit user approval before calling the tool.\n"
-"- You MUST prefer other, more specific tools (like read_file, write_file, "
-"search_files, etc.) if they can accomplish the task. Only use this tool if "
-"no other tool is suitable."
-msgstr ""
-"ユーザーのシステム上でシェルコマンドを実行し、その出力を返します。ガイドライン:\n"
-"- スーパーユーザー権限が必要なコマンドには、`sudo` の代わりに `pkexec` を使用してください。\n"
-"- ステップは `&&` で連結してください。\n"
-"- コマンドは非対話形式で実行されます。ユーザー入力を待つコマンド（`read` など）は絶対に使用しないでください。\n"
-"- ユーザーに入力を求めたりメッセージボックスを表示したりする必要がある場合は、`kdialog` を使用してください（例: `kdialog "
-"--inputbox \"プロンプト\"`）。\n"
-"- 明示的な許可なしに、パッケージのインストール、システム構成の変更、再起動、またはシステムを変更したりユーザーの作業を妨げたりするアクションは"
-"絶対に実行しないでください。\n"
-"- 許可が必要な場合は、まずプレーンテキストでユーザーに確認してください。\n"
-"- 自動実行ツールの場合: 慎重になり、読み取り専用コマンドを優先してください。アクションが中断を伴う可能性がある場合は、プレーンテキストで説明"
-"し、ツールを呼び出す前にユーザーの明示的な承認を待ってください。\n"
-"- タスクを達成できる場合は、より具体的な他のツール（read_file、write_file、search_files "
-"など）を必ず優先してください。他のツールが適していない場合にのみ、このツールを使用してください。"
-
-msgid ""
-"Read the contents of a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr "指定されたパスのファイルの内容を読み取ります。アクセスは許可されたディレクトリに制限されています。"
-
-msgid ""
-"Write content to a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr "指定されたパスのファイルにコンテンツを書き込みます。アクセスは許可されたディレクトリに制限されています。"
-
-msgid ""
-"List the contents of a directory. Access is restricted to allowed "
-"directories."
-msgstr "ディレクトリの内容を一覧表示します。アクセスは許可されたディレクトリに制限されています。"
-
-msgid "Search for a pattern within files in a directory (recursive)."
-msgstr "ディレクトリ内のファイル内のパターンを検索します（再帰的）。"
-
-msgid "Perform an HTTP GET request to a URL and return the response content."
-msgstr "URL に対して HTTP GET リクエストを実行し、レスポンスの内容を返します。"
-
-msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
-msgstr "URL に対して HTTP リクエスト（POST、PUT など）を実行します。"
-
-msgid "Get the current content of the system clipboard."
-msgstr "システムクリップボードの現在の内容を取得します。"
-
-msgid "Set the content of the system clipboard."
-msgstr "システムクリップボードの内容を設定します。"
-
-msgid "Show a system notification."
-msgstr "システム通知を表示します。"
-
-msgid "Open a URL in the default application (e.g., web browser)."
-msgstr "デフォルトのアプリケーション（Webブラウザなど）で URL を開きます。"
-
-msgid ""
-"Perform a web search to find current information, news, or specific facts."
-msgstr "Web検索を実行して、最新の情報、ニュース、または特定の事実を検索します。"
 
 msgid "General"
 msgstr "一般"
@@ -1574,11 +2016,27 @@ msgstr "システムプロンプト"
 msgid "Tasks"
 msgstr "タスク"
 
+msgid "Skills"
+msgstr ""
+
 msgid "Tools"
 msgstr "ツール..."
 
 msgid "Custom Tools"
 msgstr "カスタムツール"
+
+#~ msgid "API key saved to local fallback (KWallet unavailable)."
+#~ msgstr ""
+#~ "APIキーをローカルフォールバックに保存しました（KWalletは利用不可）。"
+
+#~ msgid "Fetch"
+#~ msgstr "取得"
+
+#~ msgid "OpenAI-compatible transcriptions"
+#~ msgstr "OpenAI互換の文字起こし"
+
+#~ msgid "Refreshing…"
+#~ msgstr "更新中…"
 
 #~ msgid ""
 #~ "Anthropic enables extended thinking when effort is not Off, using the "
@@ -1660,9 +2118,6 @@ msgstr "カスタムツール"
 
 #~ msgid "Save as script file"
 #~ msgstr "スクリプトファイルとして保存"
-
-#~ msgid "Copy"
-#~ msgstr "コピー"
 
 #~ msgid "Ran"
 #~ msgstr "実行済み"

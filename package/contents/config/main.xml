@@ -168,6 +168,7 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
 {{session_multiplexer}}
 {{approval_mode}}
 {{skills}}
+{{memories}}
 {{tools}}
 {{driving_instructions}}</default>
     </entry>
@@ -669,6 +670,18 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
     </entry>
     <entry name="toolsOpenUrlAutoRun" type="Bool">
       <label>Auto-run open_url tool</label>
+      <default>false</default>
+    </entry>
+    <entry name="memoryPhrases" type="String">
+      <label>Persistent memory phrases shown in the system prompt (JSON array)</label>
+      <default></default>
+    </entry>
+    <entry name="toolsEditMemoryEnabled" type="Bool">
+      <label>Enable edit_memory tool (persistent memory)</label>
+      <default>true</default>
+    </entry>
+    <entry name="toolsEditMemoryAutoRun" type="Bool">
+      <label>Auto-run edit_memory tool</label>
       <default>false</default>
     </entry>
     <entry name="toolsPathWhitelist" type="String">

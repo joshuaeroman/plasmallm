@@ -42,6 +42,7 @@ function toolIconName(toolName) {
         case "set_clipboard": return "edit-copy";
         case "notify": return "notifications";
         case "open_url": return "internet-services";
+        case "edit_memory": return "document-edit";
     }
     return "services";
 }
@@ -59,6 +60,10 @@ function resultLabel(toolName, args, home) {
         label += ": " + args.query;
     } else if (args.command) {
         label += ": " + args.command;
+    } else if (args.text) {
+        label += ": " + args.text;
+    } else if (args.target) {
+        label += ": " + args.target;
     } else if (toolName === "skill" && args.name) {
         label += ": " + args.name;
     }
@@ -326,6 +331,7 @@ function getEnabledTools(config) {
     if (config.toolsSetClipboardEnabled) enabled.push("set_clipboard");
     if (config.toolsNotifyEnabled) enabled.push("notify");
     if (config.toolsOpenUrlEnabled) enabled.push("open_url");
+    if (config.toolsEditMemoryEnabled) enabled.push("edit_memory");
     if (config.compactionEnabled) {
         enabled.push("restore_context");
         enabled.push("recall_attachment");
@@ -372,6 +378,7 @@ function isAutoRun(toolId, config) {
         case "set_clipboard": return config.toolsSetClipboardAutoRun;
         case "notify": return config.toolsNotifyAutoRun;
         case "open_url": return config.toolsOpenUrlAutoRun;
+        case "edit_memory": return config.toolsEditMemoryAutoRun;
     }
     var custom = getCustomTools(config);
     for (var i = 0; i < custom.length; i++) {

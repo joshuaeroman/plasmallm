@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 17:59-0400\n"
+"POT-Creation-Date: 2026-08-22 00:06-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 msgid "Color button"
 msgstr ""
@@ -80,54 +81,13 @@ msgid ""
 "disable Native features in Settings."
 msgstr ""
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
+msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
 
 msgid "AUTO"
 msgstr ""
 
 msgid "Cancel"
-msgstr ""
-
-msgid "Add Custom Tool"
-msgstr ""
-
-msgid "Echoes back the message provided."
-msgstr ""
-
-msgid "Tool name (e.g. systemctl_service)"
-msgstr ""
-
-msgid "Description (instructs the LLM what this tool does)"
-msgstr ""
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr ""
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr ""
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr ""
-
-msgid "Update Tool"
-msgstr ""
-
-msgid "Save Tool"
-msgstr ""
-
-msgid "A tool named \"%1\" already exists."
-msgstr ""
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-
-msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
 
 msgid "Add Task"
@@ -216,6 +176,15 @@ msgstr ""
 msgid "Searching the web for: %1…"
 msgstr ""
 
+msgid ""
+"This tool allows the primary assistant to retrieve original transcripts from "
+"cited message ranges. It runs automatically without asking for permission "
+"when Context Compaction is active."
+msgstr ""
+
+msgid "No command provided."
+msgstr ""
+
 msgid "Ollama API"
 msgstr ""
 
@@ -285,7 +254,33 @@ msgstr ""
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr ""
 
-msgid "No command provided."
+msgid "Manage and discover skills in the Skills settings page."
+msgstr ""
+
+msgid "Saved phrases:"
+msgstr ""
+
+msgid ""
+"Nothing remembered yet. The assistant can save phrases with its edit_memory "
+"tool, or add them below."
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Memory is full"
+msgstr ""
+
+msgid "Add a phrase…"
+msgstr ""
+
+msgid "Add"
 msgstr ""
 
 msgid "Tool Request: %1"
@@ -298,15 +293,6 @@ msgid "Deny"
 msgstr ""
 
 msgid "Approve"
-msgstr ""
-
-msgid "Stop command"
-msgstr ""
-
-msgid "Open terminal attached to this session"
-msgstr ""
-
-msgid "Copy output"
 msgstr ""
 
 msgid "Microphone recording failed"
@@ -348,130 +334,6 @@ msgstr ""
 msgid "Recording failed"
 msgstr ""
 
-msgid "Speech to Text"
-msgstr ""
-
-msgid "API key saved to local fallback (KWallet unavailable)."
-msgstr ""
-
-msgid "API key saved to KWallet."
-msgstr ""
-
-msgid "API key saved to local fallback."
-msgstr ""
-
-msgid "Set an API endpoint first."
-msgstr ""
-
-msgid "Fetching STT models…"
-msgstr ""
-
-msgid "Loaded %1 STT model(s)."
-msgstr ""
-
-msgid "Voice input:"
-msgstr ""
-
-msgid "Enable microphone input"
-msgstr ""
-
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-
-msgid "Mic button:"
-msgstr ""
-
-msgid "Auto"
-msgstr ""
-
-msgid "Hold to talk"
-msgstr ""
-
-msgid "Toggle"
-msgstr ""
-
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-
-msgid "Voice shortcut:"
-msgstr ""
-
-msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
-"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
-msgstr ""
-
-msgid "Transcriber"
-msgstr ""
-
-msgid "Provider:"
-msgstr ""
-
-msgid "Endpoint:"
-msgstr ""
-
-msgid "Model:"
-msgstr ""
-
-msgid "Fetching…"
-msgstr ""
-
-msgid "Fetch"
-msgstr ""
-
-msgid "Fetch STT models"
-msgstr ""
-
-msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
-msgstr ""
-
-msgid "API key:"
-msgstr ""
-
-msgid "Provider API key"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Save API key"
-msgstr ""
-
-msgid "Options"
-msgstr ""
-
-msgid "Language hint:"
-msgstr ""
-
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr ""
-
-msgid "Max recording (seconds):"
-msgstr ""
-
-msgid "STT backend:"
-msgstr ""
-
-msgid "OpenAI-compatible transcriptions"
-msgstr ""
-
-msgid "Speech-to-text is not configured"
-msgstr ""
-
-msgid "Unknown STT backend: %1"
-msgstr ""
-
-msgid "STT backend does not support model listing"
-msgstr ""
-
 msgid "STT endpoint is not configured"
 msgstr ""
 
@@ -500,6 +362,45 @@ msgid "STT failed (HTTP %1)"
 msgstr ""
 
 msgid "STT request failed: %1"
+msgstr ""
+
+msgid "No audio file to transcribe"
+msgstr ""
+
+msgid "Invalid Whisper model id"
+msgstr ""
+
+msgid "Invalid Whisper task"
+msgstr ""
+
+msgid "Invalid Whisper device"
+msgstr ""
+
+msgid "Whisper CLI failed (exit %1): %2"
+msgstr ""
+
+msgid "Whisper CLI failed (exit %1)"
+msgstr ""
+
+msgid "Try Device: cpu or Default in Speech to Text settings."
+msgstr ""
+
+msgid "Refresh model list"
+msgstr ""
+
+msgid "Select or enter a model"
+msgstr ""
+
+msgid "Search or type custom model…"
+msgstr ""
+
+msgid "Search models…"
+msgstr ""
+
+msgid "Use \"%1\""
+msgstr ""
+
+msgid "Fetching…"
 msgstr ""
 
 msgid "Profile Header:"
@@ -595,6 +496,9 @@ msgstr ""
 msgid "Show Copy conversation"
 msgstr ""
 
+msgid "Show Context compaction summary"
+msgstr ""
+
 msgid "Show Clear chat"
 msgstr ""
 
@@ -604,235 +508,143 @@ msgstr ""
 msgid "Show Pin"
 msgstr ""
 
-msgid "Voice message"
+msgid "Speech-to-text is not configured"
 msgstr ""
 
-msgid "Error"
+msgid "Unknown STT backend: %1"
 msgstr ""
 
-msgid "Web Search"
+msgid "Whisper CLI runner is not available"
 msgstr ""
 
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
+msgid "Could not build Whisper command"
 msgstr ""
 
-msgid "Thinking"
+msgid "STT backend does not support model listing"
 msgstr ""
 
-msgid "Searched for: %1"
+msgid "Context Compaction"
 msgstr ""
 
-msgid "Show %1 results"
+msgid "(Active Chat Profile)"
 msgstr ""
 
-msgid "Save & Retry"
+msgid "Unnamed Profile"
 msgstr ""
 
-msgid "Copy to clipboard"
+msgid "Active Chat Profile"
 msgstr ""
 
-msgid "Edit message"
+msgid "Active Chat Profile (Fallback)"
 msgstr ""
 
-msgid "Edit response"
+msgid "Selected profile does not have an endpoint URL or model configured."
 msgstr ""
 
-msgid "Retry from here"
+msgid "Testing compaction call using '%1'…"
 msgstr ""
 
-msgid "Regenerate response"
+msgid "Compaction test failed: %1"
 msgstr ""
 
-msgid "Share output with assistant"
+msgid "Compaction test succeeded!"
 msgstr ""
 
-msgid "Approve the pending tool request"
+msgid "Context Compaction:"
 msgstr ""
 
-msgid "Toggle skip approvals for this session"
-msgstr ""
-
-msgid "Clear the chat"
-msgstr ""
-
-msgid "Close the panel"
-msgstr ""
-
-msgid "Copy conversation to clipboard"
-msgstr ""
-
-msgid "Deny the pending tool request"
-msgstr ""
-
-msgid "Open chat history folder"
-msgstr ""
-
-msgid "Show or switch model (/model <name>)"
-msgstr ""
-
-msgid "Switch profile (/profile <name>)"
-msgstr ""
-
-msgid "Save chat to file"
-msgstr ""
-
-msgid "Open settings"
-msgstr ""
-
-msgid "Run a saved task (/task <name>)"
-msgstr ""
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr ""
-
-msgid "Toggle Full Auto Mode"
+msgid "Enable context compaction"
 msgstr ""
 
 msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
+"Dramatically reduces token usage and speeds up responses in long "
+"conversations by compressing older turns into a dense background summary. "
+"Keeps your chats lightweight and cost-effective while your full history "
+"remains visible."
 msgstr ""
 
-msgid "Drive Desktop"
+msgid "Compaction Profile"
 msgstr ""
 
-msgid "Stop Driving Desktop (disconnect)"
+msgid "Model Profile:"
 msgstr ""
 
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr ""
-
-msgid "Run a task"
-msgstr ""
-
-msgid "Chat History"
-msgstr ""
-
-msgid "Loading..."
-msgstr ""
-
-msgid "No recent chats"
-msgstr ""
-
-msgid "Open history folder..."
-msgstr ""
-
-msgid "Clear all history..."
-msgstr ""
-
-msgid "Clear All History"
+msgid "None"
 msgstr ""
 
 msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
+"Provider: %1  |  Model: %2\n"
+"Endpoint: %3"
+msgid_plural "Default"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Trigger Thresholds"
 msgstr ""
 
-msgid "Clear All"
+msgid "Trigger Condition:"
 msgstr ""
 
-msgid "Retry from this message?"
+msgid "By Character Count"
+msgstr ""
+
+msgid "By Turn Count"
+msgstr ""
+
+msgid "Whichever comes first (Chars or Turns)"
+msgstr ""
+
+msgid "Character threshold:"
+msgstr ""
+
+msgid "chars (~%1 tokens)"
+msgstr ""
+
+msgid "Turn count interval:"
+msgstr ""
+
+msgid "turn (compacts after every turn)"
+msgstr ""
+
+msgid "turns"
+msgstr ""
+
+msgid "Keep recent turns:"
+msgstr ""
+
+msgid "full turns kept verbatim and uncompacted"
+msgstr ""
+
+msgid "Compaction Instructions"
+msgstr ""
+
+msgid "Instructions template:"
+msgstr ""
+
+msgid "Reset to Default Instructions"
+msgstr ""
+
+msgid "Diagnostic & Testing"
 msgstr ""
 
 msgid ""
-"This will remove %1 message(s) after this point and generate a new response."
+"Test compaction against your selected model profile using the sample "
+"transcript below:"
 msgstr ""
 
-msgid "Retry"
+msgid "Sample Conversation Transcript:"
 msgstr ""
 
-msgid "Copy conversation"
+msgid "Reset Sample"
 msgstr ""
 
-msgid "Command"
+msgid "Testing…"
 msgstr ""
 
-msgid "Clear chat"
+msgid "Test Compaction Connection"
 msgstr ""
 
-msgid "Settings"
-msgstr ""
-
-msgid "Don't keep open"
-msgstr ""
-
-msgid "Keep open"
-msgstr ""
-
-msgid "Dismiss"
-msgstr ""
-
-msgid "The user denied this tool call."
-msgstr ""
-
-msgid "Send a message to start chatting"
-msgstr ""
-
-msgid "Attach File"
-msgstr ""
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr ""
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-
-msgid "All files (*)"
-msgstr ""
-
-msgid "Message input"
-msgstr ""
-
-msgid "Type a message…"
-msgstr ""
-
-msgid "Initializing…"
-msgstr ""
-
-msgid "Attach file or image"
-msgstr ""
-
-msgid "Transcribing…"
-msgstr ""
-
-msgid "Preparing…"
-msgstr ""
-
-msgid "Wait for the current reply"
-msgstr ""
-
-msgid "Click to stop and send"
-msgstr ""
-
-msgid "Release to send"
-msgstr ""
-
-msgid "Click to start"
-msgstr ""
-
-msgid "Click to toggle, hold to talk"
-msgstr ""
-
-msgid "Kill"
-msgstr ""
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-
-msgid "Send"
-msgstr ""
-
-msgid "Stop"
-msgstr ""
-
-msgid "Cancel LLM request"
-msgstr ""
-
-msgid "Drop files here to attach"
+msgid "Model Summary Response:"
 msgstr ""
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
@@ -905,13 +717,13 @@ msgstr ""
 msgid "Location:"
 msgstr ""
 
+msgid "Provider:"
+msgstr ""
+
 msgid "API Endpoint:"
 msgstr ""
 
-msgid "Refreshing…"
-msgstr ""
-
-msgid "Refresh model list"
+msgid "Model:"
 msgstr ""
 
 msgid "API Key:"
@@ -1042,6 +854,585 @@ msgstr ""
 msgid "minutes"
 msgstr ""
 
+msgid "Speech to Text"
+msgstr ""
+
+msgid "Model “%1” is on disk."
+msgstr ""
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
+"into ~/.cache/whisper and can take a long time."
+msgstr ""
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it into "
+"~/.cache/whisper and can take a long time."
+msgstr ""
+
+msgid "CUDA is available to Whisper."
+msgstr ""
+
+msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
+msgstr ""
+
+msgid "Whisper CLI responded to --help."
+msgstr ""
+
+msgid "Whisper CLI test failed (exit %1): %2"
+msgstr ""
+
+msgid "Whisper CLI test failed (exit %1). Check the command."
+msgstr ""
+
+msgid "API key saved to KWallet."
+msgstr ""
+
+msgid "API key saved to local fallback."
+msgstr ""
+
+msgid "Checking whether “%1” is downloaded…"
+msgstr ""
+
+msgid "Checking CUDA…"
+msgstr ""
+
+msgid "Testing Whisper CLI…"
+msgstr ""
+
+msgid "Loaded %1 STT model(s)."
+msgstr ""
+
+msgid "Set an API endpoint first."
+msgstr ""
+
+msgid "Fetching STT models…"
+msgstr ""
+
+msgid "Voice input:"
+msgstr ""
+
+msgid "Enable microphone input"
+msgstr ""
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+
+msgid "Mic button:"
+msgstr ""
+
+msgid "Auto"
+msgstr ""
+
+msgid "Hold to talk"
+msgstr ""
+
+msgid "Toggle"
+msgstr ""
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+
+msgid "Voice shortcut:"
+msgstr ""
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+
+msgid "Transcriber"
+msgstr ""
+
+msgid "STT backend:"
+msgstr ""
+
+msgid "Endpoint:"
+msgstr ""
+
+msgid "Fetch STT models"
+msgstr ""
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+
+msgid "API key:"
+msgstr ""
+
+msgid "Provider API key"
+msgstr ""
+
+msgid "Save API key"
+msgstr ""
+
+msgid "Command:"
+msgstr ""
+
+msgid ""
+"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
+"toolbox run whisper."
+msgstr ""
+
+msgid "Test:"
+msgstr ""
+
+msgid "Test CLI"
+msgstr ""
+
+msgid "Task:"
+msgstr ""
+
+msgid "Transcribe"
+msgstr ""
+
+msgid "Translate"
+msgstr ""
+
+msgid "Device:"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "FP16:"
+msgstr ""
+
+msgid "Use --fp16 True (GPU)"
+msgstr ""
+
+msgid "Threads:"
+msgstr ""
+
+msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
+msgstr ""
+
+msgid "Initial prompt:"
+msgstr ""
+
+msgid "Optional vocabulary / style hint"
+msgstr ""
+
+msgid "Extra args:"
+msgstr ""
+
+msgid "Optional, appended as-is"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Language hint:"
+msgstr ""
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr ""
+
+msgid "Max recording (seconds):"
+msgstr ""
+
+msgid "Loaded %1 skill"
+msgid_plural ""
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Voice message"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Web Search"
+msgstr ""
+
+msgid "compacted"
+msgstr ""
+
+msgid ""
+"This message has been summarized into the compacted context. Citations "
+"active."
+msgstr ""
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+
+msgid "Thinking"
+msgstr ""
+
+msgid "Searched for: %1"
+msgstr ""
+
+msgid "Show %1 results"
+msgstr ""
+
+msgid "Save & Retry"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Edit message"
+msgstr ""
+
+msgid "Edit response"
+msgstr ""
+
+msgid "Retry from here"
+msgstr ""
+
+msgid "Regenerate response"
+msgstr ""
+
+msgid "Share output with assistant"
+msgstr ""
+
+msgid "The model loaded this skill's instructions into context before acting."
+msgstr ""
+
+msgid "Approve the pending tool request"
+msgstr ""
+
+msgid "Toggle skip approvals for this session"
+msgstr ""
+
+msgid "Clear the chat"
+msgstr ""
+
+msgid "Close the panel"
+msgstr ""
+
+msgid "Copy conversation to clipboard"
+msgstr ""
+
+msgid "Deny the pending tool request"
+msgstr ""
+
+msgid "Open chat history folder"
+msgstr ""
+
+msgid "Show or switch model (/model <name>)"
+msgstr ""
+
+msgid "Switch profile (/profile <name>)"
+msgstr ""
+
+msgid "Save chat to file"
+msgstr ""
+
+msgid "Open settings"
+msgstr ""
+
+msgid "List discovered skills and their status"
+msgstr ""
+
+msgid "Run a saved task (/task <name>)"
+msgstr ""
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr ""
+
+msgid "Toggle Full Auto Mode"
+msgstr ""
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+
+msgid "Drive Desktop"
+msgstr ""
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr ""
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr ""
+
+msgid "Run a task"
+msgstr ""
+
+msgid "Chat History"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "No recent chats"
+msgstr ""
+
+msgid "Open history folder..."
+msgstr ""
+
+msgid "Clear all history..."
+msgstr ""
+
+msgid "Clear All History"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+
+msgid "Clear All"
+msgstr ""
+
+msgid "Retry from this message?"
+msgstr ""
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Compacted Context Summary"
+msgstr ""
+
+#, javascript-format
+msgid "Compacted up to %1%2 • Citations active"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "No compaction summary available."
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Compacting…"
+msgstr ""
+
+msgid "Re-compact"
+msgstr ""
+
+msgid "Incrementally compact new uncompacted conversation turns."
+msgstr ""
+
+msgid "Recompact All"
+msgstr ""
+
+msgid ""
+"Re-summarize the entire conversation from turn 1 from scratch, creating a "
+"fresh, unified compaction."
+msgstr ""
+
+msgid "Copy conversation"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "View compacted context summary"
+msgstr ""
+
+msgid "Compacting context in background…"
+msgstr ""
+
+msgid "Clear chat"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Don't keep open"
+msgstr ""
+
+msgid "Keep open"
+msgstr ""
+
+msgid "Dismiss"
+msgstr ""
+
+msgid "The user denied this tool call."
+msgstr ""
+
+msgid "Send a message to start chatting"
+msgstr ""
+
+msgid "Attach File"
+msgstr ""
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr ""
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+
+msgid "All files (*)"
+msgstr ""
+
+msgid "Message input"
+msgstr ""
+
+msgid "Type a message…"
+msgstr ""
+
+msgid "Initializing…"
+msgstr ""
+
+msgid "Attach file or image"
+msgstr ""
+
+msgid "Transcribing…"
+msgstr ""
+
+msgid "Preparing…"
+msgstr ""
+
+msgid "Wait for the current reply"
+msgstr ""
+
+msgid "Click to stop and send"
+msgstr ""
+
+msgid "Release to send"
+msgstr ""
+
+msgid "Click to start"
+msgstr ""
+
+msgid "Click to toggle, hold to talk"
+msgstr ""
+
+msgid "Kill"
+msgstr ""
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Cancel LLM request"
+msgstr ""
+
+msgid "Drop files here to attach"
+msgstr ""
+
+msgid "Stop command"
+msgstr ""
+
+msgid "Open terminal attached to this session"
+msgstr ""
+
+msgid "Collapse result"
+msgstr ""
+
+msgid "Copy output"
+msgstr ""
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+
+msgid "Add Custom Tool"
+msgstr ""
+
+msgid "Echoes back the message provided."
+msgstr ""
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr ""
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr ""
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr ""
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr ""
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr ""
+
+msgid "Collapse results"
+msgstr ""
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+
+msgid "Update Tool"
+msgstr ""
+
+msgid "Save Tool"
+msgstr ""
+
+msgid "A tool named \"%1\" already exists."
+msgstr ""
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+
+msgid "Enable skills"
+msgstr ""
+
+msgid ""
+"Skills are reusable instruction sets the model loads on demand via the skill "
+"tool. Add them to ~/.local/share/plasmallm/skills/ as either a folder per "
+"skill containing a SKILL.md file, or a single self-contained <name>.md file."
+msgstr ""
+
+msgid ""
+"No skills discovered yet. Add a SKILL.md folder to the directory above or "
+"enable the extra directories below."
+msgstr ""
+
+msgid "DISABLED"
+msgstr ""
+
+msgid "Refresh"
+msgstr ""
+
+msgid "Open the skills directory in the file manager"
+msgstr ""
+
+msgid "Also scan ~/.claude/skills"
+msgstr ""
+
+msgid "Also scan ~/.agents/skills"
+msgstr ""
+
+msgid "/absolute/path/to/skills"
+msgstr ""
+
+msgid "Save directory"
+msgstr ""
+
+msgid "Add directory"
+msgstr ""
+
+msgid ""
+"Enabled skills are advertised to the model by name and description; the "
+"model loads full instructions on demand with the skill tool. Loaded skill "
+"content is re-sent in full every turn and is never affected by context "
+"compaction. Toggles here are global (not per-profile)."
+msgstr ""
+
 msgid "System Info:"
 msgstr ""
 
@@ -1108,6 +1499,11 @@ msgid "Enabled system info selected in the checklist above"
 msgstr ""
 
 msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr ""
+
+msgid ""
+"Available skills index and instructions for skills loaded this session (from "
+"the Skills settings page)"
 msgstr ""
 
 msgid ""
@@ -1178,9 +1574,6 @@ msgstr ""
 msgid "Add path, e.g. $HOME/projects, /tmp"
 msgstr ""
 
-msgid "Add"
-msgstr ""
-
 msgid ""
 "Whitelist applies to file-system tools (read, write, list, search). Note: "
 "'run_command' is not restricted by this list."
@@ -1244,6 +1637,74 @@ msgid "Reset"
 msgstr ""
 
 msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr ""
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr ""
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr ""
+
+msgid "Get the current content of the system clipboard."
+msgstr ""
+
+msgid "Set the content of the system clipboard."
+msgstr ""
+
+msgid "Show a system notification."
+msgstr ""
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr ""
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+
+msgid ""
+"Restore the full verbatim text and tool outputs of previously compacted "
+"messages by specifying the start and end message IDs from a cited message "
+"range."
+msgstr ""
+
+msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
 msgstr ""
@@ -1272,6 +1733,9 @@ msgstr ""
 msgid "Could not send transcribed message."
 msgstr ""
 
+msgid "Transcription canceled"
+msgstr ""
+
 msgid "Recording too short or silent — try again."
 msgstr ""
 
@@ -1284,6 +1748,26 @@ msgstr ""
 msgid ""
 "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
 "installed and authenticated."
+msgstr ""
+
+msgid ""
+"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
+"plasmallm/skills/ (configure extra directories in Settings → Skills)."
+msgstr ""
+
+msgid "invalid:"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+msgid "loaded"
+msgstr ""
+
+msgid "Available skills (%1 enabled):"
+msgstr ""
+
+msgid "Enable or disable individual skills in Settings → Skills."
 msgstr ""
 
 msgid "No tool request pending to approve."
@@ -1308,9 +1792,6 @@ msgid ""
 msgstr ""
 
 msgid "plasmallm-desktop-driver is not detected or running."
-msgstr ""
-
-msgid "Default"
 msgstr ""
 
 msgid "Current profile: **%1**"
@@ -1385,6 +1866,13 @@ msgstr ""
 msgid "Executing %1…"
 msgstr ""
 
+msgid ""
+"Loaded '%1' skill — its full instructions were added to this conversation's "
+"context."
+msgid_plural ""
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "Session reset requested."
 msgstr ""
 
@@ -1397,68 +1885,6 @@ msgstr ""
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr ""
 
-msgid ""
-"Execute a shell command on the user's system and return its output. "
-"Guidelines:\n"
-"- Use `pkexec` instead of `sudo` for any command requiring superuser "
-"privileges.\n"
-"- Chain steps with `&&`.\n"
-"- Commands run non-interactively. Never use commands that wait for user "
-"input (like `read`).\n"
-"- Use `kdialog` if you need to prompt the user for input or show a message "
-"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
-"- NEVER install packages, modify system configuration, reboot, or take any "
-"action that alters the system or disrupts the user without explicit "
-"permission.\n"
-"- When permission is needed, ask the user in plain text first.\n"
-"- For auto-run tools: Be conservative and prefer read-only commands. If an "
-"action is potentially disruptive, describe it in plain text and wait for "
-"explicit user approval before calling the tool.\n"
-"- You MUST prefer other, more specific tools (like read_file, write_file, "
-"search_files, etc.) if they can accomplish the task. Only use this tool if "
-"no other tool is suitable."
-msgstr ""
-
-msgid ""
-"Read the contents of a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-
-msgid ""
-"Write content to a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-
-msgid ""
-"List the contents of a directory. Access is restricted to allowed "
-"directories."
-msgstr ""
-
-msgid "Search for a pattern within files in a directory (recursive)."
-msgstr ""
-
-msgid "Perform an HTTP GET request to a URL and return the response content."
-msgstr ""
-
-msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
-msgstr ""
-
-msgid "Get the current content of the system clipboard."
-msgstr ""
-
-msgid "Set the content of the system clipboard."
-msgstr ""
-
-msgid "Show a system notification."
-msgstr ""
-
-msgid "Open a URL in the default application (e.g., web browser)."
-msgstr ""
-
-msgid ""
-"Perform a web search to find current information, news, or specific facts."
-msgstr ""
-
 msgid "General"
 msgstr ""
 
@@ -1469,6 +1895,9 @@ msgid "System Prompt"
 msgstr ""
 
 msgid "Tasks"
+msgstr ""
+
+msgid "Skills"
 msgstr ""
 
 msgid "Tools"
