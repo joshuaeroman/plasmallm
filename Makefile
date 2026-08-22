@@ -27,7 +27,7 @@ translations: check-translations $(MO_FILES)
 $(LOCALE_DIR)/$(DOMAIN).pot: $(SRC_FILES)
 	@echo "Extracting translation strings..."
 	xgettext --from-code=UTF-8 --language=JavaScript \
-		--keyword=i18n --keyword=i18n:1,2 \
+		--keyword=i18n \
 		--package-name="PlasmaLLM" \
 		--no-location \
 		-o $@ $^

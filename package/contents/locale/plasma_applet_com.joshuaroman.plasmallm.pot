@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-22 00:06-0400\n"
+"POT-Creation-Date: 2026-08-22 16:45-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 msgid "Color button"
 msgstr ""
@@ -124,42 +123,6 @@ msgid "Ask before running"
 msgstr ""
 
 msgid "Error: URL must start with http:// or https://"
-msgstr ""
-
-msgid "Ask before running commands from LLM"
-msgstr ""
-
-msgid ""
-"Prompt for approval before executing shell commands from the LLM. Dangerous "
-"to uncheck as the LLM will see output and may run further commands."
-msgstr ""
-
-msgid ""
-"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
-"commands without permission and will see their output, enabling an agentic "
-"workflow. Only use with trustworthy LLMs."
-msgstr ""
-
-msgid "Note: This tool is not restricted by the path whitelist."
-msgstr ""
-
-msgid "Session Multiplexer"
-msgstr ""
-
-msgid "Run commands inside a persistent session"
-msgstr ""
-
-msgid ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-msgstr ""
-
-msgid "Reset Session"
-msgstr ""
-
-msgid ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
 msgstr ""
 
 msgid "Error: content exceeds max write size (%1 bytes)"
@@ -281,6 +244,45 @@ msgid "Add a phrase…"
 msgstr ""
 
 msgid "Add"
+msgstr ""
+
+msgid "Ask before running commands from LLM"
+msgstr ""
+
+msgid ""
+"Prompt for approval before executing shell commands from the LLM. Dangerous "
+"to uncheck as the LLM will see output and may run further commands."
+msgstr ""
+
+msgid ""
+"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
+"commands without permission and will see their output, enabling an agentic "
+"workflow. Only use with trustworthy LLMs."
+msgstr ""
+
+msgid "Note: This tool is not restricted by the path whitelist."
+msgstr ""
+
+msgid "Session Multiplexer"
+msgstr ""
+
+msgid "Run commands inside a persistent session"
+msgstr ""
+
+msgid ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
+msgstr ""
+
+msgid "Reset Session"
+msgstr ""
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+
+msgid ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
 msgstr ""
 
 msgid "Tool Request: %1"
@@ -575,9 +577,7 @@ msgstr ""
 msgid ""
 "Provider: %1  |  Model: %2\n"
 "Endpoint: %3"
-msgid_plural "Default"
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
 
 msgid "Trigger Thresholds"
 msgstr ""
@@ -1038,307 +1038,6 @@ msgstr ""
 msgid "Max recording (seconds):"
 msgstr ""
 
-msgid "Loaded %1 skill"
-msgid_plural ""
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Voice message"
-msgstr ""
-
-msgid "Error"
-msgstr ""
-
-msgid "Web Search"
-msgstr ""
-
-msgid "compacted"
-msgstr ""
-
-msgid ""
-"This message has been summarized into the compacted context. Citations "
-"active."
-msgstr ""
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-
-msgid "Thinking"
-msgstr ""
-
-msgid "Searched for: %1"
-msgstr ""
-
-msgid "Show %1 results"
-msgstr ""
-
-msgid "Save & Retry"
-msgstr ""
-
-msgid "Copy to clipboard"
-msgstr ""
-
-msgid "Edit message"
-msgstr ""
-
-msgid "Edit response"
-msgstr ""
-
-msgid "Retry from here"
-msgstr ""
-
-msgid "Regenerate response"
-msgstr ""
-
-msgid "Share output with assistant"
-msgstr ""
-
-msgid "The model loaded this skill's instructions into context before acting."
-msgstr ""
-
-msgid "Approve the pending tool request"
-msgstr ""
-
-msgid "Toggle skip approvals for this session"
-msgstr ""
-
-msgid "Clear the chat"
-msgstr ""
-
-msgid "Close the panel"
-msgstr ""
-
-msgid "Copy conversation to clipboard"
-msgstr ""
-
-msgid "Deny the pending tool request"
-msgstr ""
-
-msgid "Open chat history folder"
-msgstr ""
-
-msgid "Show or switch model (/model <name>)"
-msgstr ""
-
-msgid "Switch profile (/profile <name>)"
-msgstr ""
-
-msgid "Save chat to file"
-msgstr ""
-
-msgid "Open settings"
-msgstr ""
-
-msgid "List discovered skills and their status"
-msgstr ""
-
-msgid "Run a saved task (/task <name>)"
-msgstr ""
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr ""
-
-msgid "Toggle Full Auto Mode"
-msgstr ""
-
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-
-msgid "Drive Desktop"
-msgstr ""
-
-msgid "Stop Driving Desktop (disconnect)"
-msgstr ""
-
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr ""
-
-msgid "Run a task"
-msgstr ""
-
-msgid "Chat History"
-msgstr ""
-
-msgid "Loading..."
-msgstr ""
-
-msgid "No recent chats"
-msgstr ""
-
-msgid "Open history folder..."
-msgstr ""
-
-msgid "Clear all history..."
-msgstr ""
-
-msgid "Clear All History"
-msgstr ""
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-
-msgid "Clear All"
-msgstr ""
-
-msgid "Retry from this message?"
-msgstr ""
-
-msgid ""
-"This will remove %1 message(s) after this point and generate a new response."
-msgstr ""
-
-msgid "Retry"
-msgstr ""
-
-msgid "Compacted Context Summary"
-msgstr ""
-
-#, javascript-format
-msgid "Compacted up to %1%2 • Citations active"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "No compaction summary available."
-msgstr ""
-
-msgid "Copy"
-msgstr ""
-
-msgid "Compacting…"
-msgstr ""
-
-msgid "Re-compact"
-msgstr ""
-
-msgid "Incrementally compact new uncompacted conversation turns."
-msgstr ""
-
-msgid "Recompact All"
-msgstr ""
-
-msgid ""
-"Re-summarize the entire conversation from turn 1 from scratch, creating a "
-"fresh, unified compaction."
-msgstr ""
-
-msgid "Copy conversation"
-msgstr ""
-
-msgid "Command"
-msgstr ""
-
-msgid "View compacted context summary"
-msgstr ""
-
-msgid "Compacting context in background…"
-msgstr ""
-
-msgid "Clear chat"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Don't keep open"
-msgstr ""
-
-msgid "Keep open"
-msgstr ""
-
-msgid "Dismiss"
-msgstr ""
-
-msgid "The user denied this tool call."
-msgstr ""
-
-msgid "Send a message to start chatting"
-msgstr ""
-
-msgid "Attach File"
-msgstr ""
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr ""
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-
-msgid "All files (*)"
-msgstr ""
-
-msgid "Message input"
-msgstr ""
-
-msgid "Type a message…"
-msgstr ""
-
-msgid "Initializing…"
-msgstr ""
-
-msgid "Attach file or image"
-msgstr ""
-
-msgid "Transcribing…"
-msgstr ""
-
-msgid "Preparing…"
-msgstr ""
-
-msgid "Wait for the current reply"
-msgstr ""
-
-msgid "Click to stop and send"
-msgstr ""
-
-msgid "Release to send"
-msgstr ""
-
-msgid "Click to start"
-msgstr ""
-
-msgid "Click to toggle, hold to talk"
-msgstr ""
-
-msgid "Kill"
-msgstr ""
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-
-msgid "Send"
-msgstr ""
-
-msgid "Stop"
-msgstr ""
-
-msgid "Cancel LLM request"
-msgstr ""
-
-msgid "Drop files here to attach"
-msgstr ""
-
-msgid "Stop command"
-msgstr ""
-
-msgid "Open terminal attached to this session"
-msgstr ""
-
-msgid "Collapse result"
-msgstr ""
-
-msgid "Copy output"
-msgstr ""
-
 msgid ""
 "No custom tools configured. Add a custom tool to expose your own commands to "
 "the LLM."
@@ -1704,6 +1403,299 @@ msgid ""
 "range."
 msgstr ""
 
+msgid "Loaded %1 skill"
+msgstr ""
+
+msgid "Voice message"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Web Search"
+msgstr ""
+
+msgid "compacted"
+msgstr ""
+
+msgid ""
+"This message has been summarized into the compacted context. Citations "
+"active."
+msgstr ""
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+
+msgid "Thinking"
+msgstr ""
+
+msgid "Searched for: %1"
+msgstr ""
+
+msgid "Show %1 results"
+msgstr ""
+
+msgid "Save & Retry"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Edit message"
+msgstr ""
+
+msgid "Edit response"
+msgstr ""
+
+msgid "Retry from here"
+msgstr ""
+
+msgid "Regenerate response"
+msgstr ""
+
+msgid "Share output with assistant"
+msgstr ""
+
+msgid "The model loaded this skill's instructions into context before acting."
+msgstr ""
+
+msgid "Stop command"
+msgstr ""
+
+msgid "Open terminal attached to this session"
+msgstr ""
+
+msgid "Collapse result"
+msgstr ""
+
+msgid "Copy output"
+msgstr ""
+
+msgid "Approve the pending tool request"
+msgstr ""
+
+msgid "Toggle skip approvals for this session"
+msgstr ""
+
+msgid "Clear the chat"
+msgstr ""
+
+msgid "Close the panel"
+msgstr ""
+
+msgid "Copy conversation to clipboard"
+msgstr ""
+
+msgid "Deny the pending tool request"
+msgstr ""
+
+msgid "Open chat history folder"
+msgstr ""
+
+msgid "Show or switch model (/model <name>)"
+msgstr ""
+
+msgid "Switch profile (/profile <name>)"
+msgstr ""
+
+msgid "Save chat to file"
+msgstr ""
+
+msgid "Open settings"
+msgstr ""
+
+msgid "List discovered skills and their status"
+msgstr ""
+
+msgid "Run a saved task (/task <name>)"
+msgstr ""
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr ""
+
+msgid "Toggle Full Auto Mode"
+msgstr ""
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+
+msgid "Drive Desktop"
+msgstr ""
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr ""
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr ""
+
+msgid "Run a task"
+msgstr ""
+
+msgid "Chat History"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "No recent chats"
+msgstr ""
+
+msgid "Open history folder..."
+msgstr ""
+
+msgid "Clear all history..."
+msgstr ""
+
+msgid "Clear All History"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+
+msgid "Clear All"
+msgstr ""
+
+msgid "Retry from this message?"
+msgstr ""
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Compacted Context Summary"
+msgstr ""
+
+#, javascript-format
+msgid "Compacted up to %1%2 • Citations active"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "No compaction summary available."
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Compacting…"
+msgstr ""
+
+msgid "Re-compact"
+msgstr ""
+
+msgid "Incrementally compact new uncompacted conversation turns."
+msgstr ""
+
+msgid "Recompact All"
+msgstr ""
+
+msgid ""
+"Re-summarize the entire conversation from turn 1 from scratch, creating a "
+"fresh, unified compaction."
+msgstr ""
+
+msgid "Copy conversation"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "View compacted context summary"
+msgstr ""
+
+msgid "Compacting context in background…"
+msgstr ""
+
+msgid "Clear chat"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Don't keep open"
+msgstr ""
+
+msgid "Keep open"
+msgstr ""
+
+msgid "Dismiss"
+msgstr ""
+
+msgid "The user denied this tool call."
+msgstr ""
+
+msgid "Send a message to start chatting"
+msgstr ""
+
+msgid "Attach File"
+msgstr ""
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr ""
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+
+msgid "All files (*)"
+msgstr ""
+
+msgid "Message input"
+msgstr ""
+
+msgid "Type a message…"
+msgstr ""
+
+msgid "Initializing…"
+msgstr ""
+
+msgid "Attach file or image"
+msgstr ""
+
+msgid "Transcribing…"
+msgstr ""
+
+msgid "Preparing…"
+msgstr ""
+
+msgid "Wait for the current reply"
+msgstr ""
+
+msgid "Click to stop and send"
+msgstr ""
+
+msgid "Release to send"
+msgstr ""
+
+msgid "Click to start"
+msgstr ""
+
+msgid "Click to toggle, hold to talk"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Cancel LLM request"
+msgstr ""
+
+msgid "Drop files here to attach"
+msgstr ""
+
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
@@ -1869,11 +1861,6 @@ msgstr ""
 msgid ""
 "Loaded '%1' skill — its full instructions were added to this conversation's "
 "context."
-msgid_plural ""
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Session reset requested."
 msgstr ""
 
 msgid "Failed to start drive session: %1"
