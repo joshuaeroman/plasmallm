@@ -41,6 +41,7 @@ var defaultSystemPromptTemplate = "You are a helpful assistant embedded in the u
     "\n" +
     "{{session_multiplexer}}\n" +
     "{{approval_mode}}\n" +
+    "{{skills}}\n" +
     "{{tools}}\n" +
     "{{driving_instructions}}";
 
@@ -73,6 +74,7 @@ const PROFILE_FIELDS = [
     "toolsSetClipboardEnabled", "toolsSetClipboardAutoRun",
     "toolsNotifyEnabled", "toolsNotifyAutoRun",
     "toolsOpenUrlEnabled", "toolsOpenUrlAutoRun",
+    "toolsSkillEnabled", "toolsSkillAutoRun",
     "toolsPathWhitelist",
     "toolsReadMaxBytes", "toolsWriteMaxBytes", "toolsHttpMaxBytes",
     "toolsInstructions",
@@ -133,6 +135,8 @@ const PROFILE_DEFAULTS = {
     toolsNotifyAutoRun: false,
     toolsOpenUrlEnabled: true,
     toolsOpenUrlAutoRun: false,
+    toolsSkillEnabled: true,
+    toolsSkillAutoRun: true,
     toolsPathWhitelist: '["$HOME"]',
     toolsReadMaxBytes: 204800,
     toolsWriteMaxBytes: 1048576,

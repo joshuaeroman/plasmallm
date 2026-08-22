@@ -73,6 +73,7 @@ PlasmaLLM automatically parses your `Command Template`, identifies the parameter
 
 ### Desktop & System Tools
 - **`run_command`**: Execute any shell command. This is the most powerful tool and should be used with caution. It supports **Session Multiplexing** (via `tmux` or `screen`) if enabled in settings.
+- **`skill`**: Load the full instructions of an available skill by name. Skills are discovered in `~/.local/share/plasmallm/skills/` as `<name>/SKILL.md` folders or self-contained `<name>.md` files (plus optional extra directories); an `<available_skills>` index is embedded in this tool's schema description so the model checks it before reaching for other tools, and calls it to load a skill's body on demand. Bodies already loaded this session are re-injected in full into every prompt rebuild, so context compaction never drops them. (Auto-run by default; manage skills in Settings → Skills.)
 - **`get_clipboard` / `set_clipboard`**: Interact with the system clipboard.
 - **`notify`**: Send a system notification via `notify-send`.
 - **`open_url`**: Open a URL or file in the default application via `xdg-open`.
@@ -95,6 +96,10 @@ Tools can specify how their results look in the chat:
 - **`"console style"`**: Monospace font, terminal-like black background. Used for `run_command`.
 - **`"web_search_results"`**: Rich Markdown formatting with icons and links. Used for `web_search`.
 - **`"tool result"` (Default)**: Standard chat bubble.
+
+## Collapsed Results
+
+Successful plain tool results render as a small pill ("http_get: https://…"); clicking it expands the full output card, and a chevron button collapses it again. Preferences live in **Settings → Tools → Collapse results** per tool (default: collapsed; `web_search` and desktop-driver tools default expanded; errors always expand) and as a `collapseResult` field on each custom script tool. Skill loads always show as a tiny "Loaded x skill" pill since the body goes into system context rather than the chat window.
 
 ---
 

@@ -27,6 +27,10 @@ Rectangle {
 
     signal terminalRequested(string command)
     signal stopRequested(string command)
+    signal collapseRequested()
+
+    // Whether the finished result can be folded back into the summary pill.
+    property bool collapsible: false
 
     readonly property var args: {
         if (typeof toolArgs === "object" && toolArgs !== null) return toolArgs;
@@ -40,38 +44,13 @@ Rectangle {
         return {};
     }
 
-    readonly property string toolIcon: {
-        switch (toolName) {
-            case "run_command": return "utilities-terminal";
-            case "web_search": return "browser-search";
-            case "read_file": return "document-open";
-            case "write_file": return "document-save";
-            case "list_dir": return "folder-open";
-            case "http_get": return "download";
-            case "http_request": return "network-wired";
-            case "search_files": return "system-search";
-            case "get_clipboard": return "edit-paste";
-            case "set_clipboard": return "edit-copy";
-            case "notify": return "notifications";
-            case "open_url": return "internet-services";
-            default: return "services";
-        }
-    }
+    readonly property string toolIcon: ToolManager.toolIconName(toolBlock.toolName)
 
-    readonly property string toolLabel: {
-        var label = toolName;
-        var home = (typeof root !== 'undefined' && root.sysInfo && root.sysInfo.userHome) ? root.sysInfo.userHome : "$HOME";
-        if (args.path) {
-            label += ": " + ToolManager.contractPath(args.path, home);
-        } else if (args.url) {
-            label += ": " + args.url;
-        } else if (args.query) {
-            label += ": " + args.query;
-        } else if (args.command) {
-            label += ": " + args.command;
-        }
-        return label;
-    }
+    readonly property string toolLabel: ToolManager.resultLabel(
+        toolBlock.toolName,
+        toolBlock.args,
+        (typeof root !== 'undefined' && root.sysInfo && root.sysInfo.userHome) ? root.sysInfo.userHome : "$HOME"
+    )
 
     color: Kirigami.Theme.alternateBackgroundColor
     radius: 4
@@ -130,8 +109,17 @@ Rectangle {
                 activeFocusOnTab: true
                 PlasmaComponents.ToolTip.text: i18n("Open terminal attached to this session")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+                PlasmaComponents.ToolTip.visible: hovered
                 onClicked: toolBlock.terminalRequested(args.command || "")
+            }
+
+            PlasmaComponents.ToolButton {
+                visible: toolBlock.collapsible && !toolBlock.isRunning
+                icon.name: "go-up"
+                onClicked: toolBlock.collapseRequested()
+                PlasmaComponents.ToolTip.text: i18n("Collapse result")
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered
             }
 
             PlasmaComponents.ToolButton {

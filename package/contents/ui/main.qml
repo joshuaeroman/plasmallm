@@ -22,6 +22,7 @@ import "driverManager.js" as DriverManager
 import "stt.js" as Stt
 import "contextCompactor.js" as ContextCompactor
 import "legacyChatLoader.js" as LegacyChatLoader
+import "skills.js" as Skills
 
 PlasmoidItem {
     id: root
@@ -1232,6 +1233,15 @@ PlasmoidItem {
     property var chunkedSaveQueue: []
     property bool isChunkSaving: false
 
+    // Skill files: parsed <name>/SKILL.md records from the discovery scan
+    // (see skills.js) plus the names activated via the skill tool this session.
+    // Active bodies are re-injected in full on every prompt rebuild so context
+    // compaction and message capping can never drop them.
+    property var loadedSkills: []
+    property var activeSkills: []
+    property var pendingSkillScanCommands: ({})
+    property int lastSkillsScanMs: 0
+
     function enqueueChunkSave(cmd) {
         chunkedSaveQueue.push(cmd);
         pumpChunkSaveQueue();
@@ -1387,6 +1397,10 @@ PlasmoidItem {
             if (pendingSysInfoCommands[source]) {
                 delete pendingSysInfoCommands[source];
                 handleSystemInfo(source, stdout);
+                disconnectSource(source);
+            } else if (pendingSkillScanCommands[source]) {
+                delete pendingSkillScanCommands[source];
+                handleSkillsScan(stdout);
                 disconnectSource(source);
             } else if (terminalCommands.indexOf(source) !== -1) {
                 // Terminal launches — suppress output bubble
@@ -1550,6 +1564,7 @@ PlasmoidItem {
         sysInfoPending--;
         if (sysInfoPending === 0) {
             initSystemPrompt();
+            loadSkills(true);
             if (historyFilesModel.count === 0 && Plasmoid.configuration.chatSaveFormat === "jsonl" && Plasmoid.configuration.saveChatHistory) {
                 fetchHistoryList();
             }
@@ -1593,14 +1608,21 @@ PlasmoidItem {
             toolsNotifyAutoRun: Plasmoid.configuration.toolsNotifyAutoRun,
             toolsOpenUrlEnabled: Plasmoid.configuration.toolsOpenUrlEnabled,
             toolsOpenUrlAutoRun: Plasmoid.configuration.toolsOpenUrlAutoRun,
+            toolsSkillEnabled: Plasmoid.configuration.toolsSkillEnabled,
+            toolsSkillAutoRun: Plasmoid.configuration.toolsSkillAutoRun,
             toolsPathWhitelist: Plasmoid.configuration.toolsPathWhitelist,
             toolsReadMaxBytes: Plasmoid.configuration.toolsReadMaxBytes,
             toolsWriteMaxBytes: Plasmoid.configuration.toolsWriteMaxBytes,
             toolsHttpMaxBytes: Plasmoid.configuration.toolsHttpMaxBytes,
             toolsInstructions: Plasmoid.configuration.toolsInstructions,
+            toolsCollapseResults: Plasmoid.configuration.toolsCollapseResults,
             localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
             customTools: Plasmoid.configuration.customTools,
-            compactionEnabled: Plasmoid.configuration.compactionEnabled
+            compactionEnabled: Plasmoid.configuration.compactionEnabled,
+            skillsEnabled: Plasmoid.configuration.skillsEnabled,
+            skillsDisabledList: Plasmoid.configuration.skillsDisabledList,
+            loadedSkills: root.loadedSkills,
+            activeSkills: root.activeSkills
         };
     }
 
@@ -1659,6 +1681,107 @@ PlasmoidItem {
         }
     }
 
+    // ---- Skill files -------------------------------------------------------
+    // Directories are scanned via one delimited shell command per load; the
+    // output is parsed by skills.js into root.loadedSkills and mirrored (no
+    // bodies) into skillsCache so the settings dialog can enumerate them.
+
+    function skillsRoots() {
+        var home = sysInfo.userHome || "";
+        var dataHome = sysInfo.xdgDataHome || (home ? home + "/.local/share" : "");
+        var roots = [];
+        if (dataHome) roots.push({ dir: dataHome + "/plasmallm/skills", source: "plasmallm" });
+        if (home) {
+            if (Plasmoid.configuration.skillsScanClaude) {
+                roots.push({ dir: home + "/.claude/skills", source: "claude" });
+            }
+            if (Plasmoid.configuration.skillsScanAgents) {
+                roots.push({ dir: home + "/.agents/skills", source: "agents" });
+            }
+        }
+        if (Plasmoid.configuration.skillsExtraDirs) {
+            try {
+                var extra = JSON.parse(Plasmoid.configuration.skillsExtraDirs);
+                if (Array.isArray(extra)) {
+                    for (var i = 0; i < extra.length; i++) {
+                        var d = String(extra[i] || "").trim();
+                        if (d.length > 0) roots.push({ dir: d, source: "custom" });
+                    }
+                }
+            } catch (e) {}
+        }
+        return roots;
+    }
+
+    function _shellQuotePath(p) {
+        return "'" + String(p).replace(/'/g, "'\\''") + "'";
+    }
+
+    function loadSkills(force, prefixCmd) {
+        var roots = skillsRoots();
+        if (roots.length === 0) return;
+        var now = Date.now();
+        if (!force && !prefixCmd && lastSkillsScanMs && (now - lastSkillsScanMs) < 5000) return;
+        lastSkillsScanMs = now;
+        var parts = [];
+        if (prefixCmd) {
+            // Joining with "; " means a prefix ending in "&& " (or any dangling
+            // operator) would produce invalid syntax like "} && ; for ...".
+            parts.push(String(prefixCmd).replace(/[\s;&|]+$/, ""));
+        }
+        for (var i = 0; i < roots.length; i++) {
+            // head -c caps each body; [ -f ] skips roots that don't exist
+            // (an unmatched glob leaves the pattern literal). Nested
+            // <name>/SKILL.md folders are scanned first so they win name
+            // conflicts against same-named flat <name>.md files.
+            parts.push("for f in " + _shellQuotePath(roots[i].dir) + "/*/SKILL.md; do " +
+                "if [ -f \"$f\" ]; then echo \"===PLASMALLM_SKILL $f\"; head -c 262144 \"$f\"; echo; fi; done");
+            parts.push("for f in " + _shellQuotePath(roots[i].dir) + "/*.md; do " +
+                "if [ -f \"$f\" ]; then echo \"===PLASMALLM_SKILL $f\"; head -c 262144 \"$f\"; echo; fi; done");
+        }
+        var cmd = parts.join("; ") + "; echo \"===PLASMALLM_SKILL_END\"";
+        pendingSkillScanCommands[cmd] = true;
+        executable.connectSource(cmd);
+    }
+
+    function handleSkillsScan(stdout) {
+        // A failed command (bad syntax, missing shell, etc.) yields empty
+        // stdout — keep the previous scan results rather than wiping them.
+        if (!stdout || String(stdout).indexOf("===PLASMALLM_SKILL_END") === -1) {
+            console.warn("PlasmaLLM: skill scan produced no output; keeping previous skill list");
+            return;
+        }
+        root.loadedSkills = Skills.parseScanOutput(stdout, skillsRoots());
+        Plasmoid.configuration.skillsCache = Skills.toCacheJson(root.loadedSkills);
+    }
+
+    function skillStatusText() {
+        if (root.loadedSkills.length === 0) {
+            return i18n("No skills found. Drop folders containing a SKILL.md into ~/.local/share/plasmallm/skills/ (configure extra directories in Settings → Skills).");
+        }
+        var disabled = Skills.parseDisabledList(Plasmoid.configuration.skillsDisabledList);
+        var enabledCount = Skills.filterEnabledSkills(root.loadedSkills, Plasmoid.configuration.skillsDisabledList).length;
+        var lines = [];
+        for (var i = 0; i < root.loadedSkills.length; i++) {
+            var s = root.loadedSkills[i];
+            if (!s.valid) {
+                lines.push("- **" + s.dirName + "** — " + i18n("invalid:") + " " + s.error);
+                continue;
+            }
+            var isDisabled = false;
+            for (var d = 0; d < disabled.length; d++) {
+                if (disabled[d] === s.name) { isDisabled = true; break; }
+            }
+            var active = root.activeSkills.indexOf(s.name) !== -1;
+            var tags = s.source;
+            if (isDisabled) tags += ", " + i18n("disabled");
+            if (active) tags += ", " + i18n("loaded");
+            lines.push("- **" + s.name + "** (" + tags + ") — " + s.description);
+        }
+        return i18n("Available skills (%1 enabled):", enabledCount) + "\n" + lines.join("\n") +
+            "\n\n" + i18n("Enable or disable individual skills in Settings → Skills.");
+    }
+
     function clearChat() {
         if (activeRequest) {
             if (activeRequest.xhr) activeRequest.xhr.abort();
@@ -1678,6 +1801,7 @@ PlasmoidItem {
         sessionAutoMode = false;
         sessionFullAutoMode = false;
         root.pendingToolCalls = [];
+        root.activeSkills = [];
         root.activeCompaction = {
             summary: "",
             compactedUpToMsgId: "",
@@ -2597,6 +2721,11 @@ PlasmoidItem {
             }
             return true;
         }
+        if (lower === "/skills") {
+            displayMessages.append({ role: "assistant", content: skillStatusText(), shared: false, timestamp: currentTimestamp() });
+            loadSkills();
+            return true;
+        }
         if (lower === "/task") {
             var tasksJson = Plasmoid.configuration.tasks;
             var tasks = [];
@@ -2896,6 +3025,11 @@ PlasmoidItem {
             var systemMsg = messages[0];
             messages = [systemMsg].concat(messages.slice(messages.length - maxApiMessages));
         }
+
+        // Replace already-delivered skill bodies with stubs: the full text
+        // rides in the system prompt's Active Skills section, so paying for
+        // it again inside the tool result is pure duplication.
+        messages = Skills.stubDeliveredSkillResults(messages, root.activeSkills);
 
         var tools = Api.buildTools(root.effectiveApiType, {
             webSearchProvider: Plasmoid.configuration.webSearchProvider,
@@ -3221,6 +3355,9 @@ PlasmoidItem {
         var context = {
             config: Plasmoid.configuration,
             i18n: i18n,
+            getSkills: function() {
+                return root.loadedSkills;
+            },
             getSecret: function(key) {
                 return root[key] !== undefined ? root[key] : "";
             },
@@ -3363,6 +3500,16 @@ PlasmoidItem {
         // Privacy: contract absolute home paths back to ~
         result = ToolManager.contractAllPaths(result, home);
 
+        // Skill loads get a compact chat card: the body already lives in the
+        // system prompt's Active Skills section, so dumping thousands of
+        // characters into the transcript window is pure noise.
+        var displayContent = result;
+        var displayStdout = stdout || "";
+        if (name === "skill" && exitCode === 0) {
+            displayStdout = i18n("Loaded '%1' skill — its full instructions were added to this conversation's context.", args.name || "");
+            displayContent = "[" + name + "] " + displayStdout;
+        }
+
         var tool = ToolManager.getTool(name, Plasmoid.configuration);
 
         var imagePathsStr = "";
@@ -3382,11 +3529,11 @@ PlasmoidItem {
             var msg = displayMessages.get(displayIndex);
             if (msg.role === "tool_running" && msg.tool_call_id === callId) {
                 displayMessages.setProperty(displayIndex, "role", "tool_result");
-                displayMessages.setProperty(displayIndex, "content", result);
+                displayMessages.setProperty(displayIndex, "content", displayContent);
                 displayMessages.setProperty(displayIndex, "toolArgs", JSON.stringify(args));
                 displayMessages.setProperty(displayIndex, "tool_call_id", callId);
                 displayMessages.setProperty(displayIndex, "callId", callId);
-                displayMessages.setProperty(displayIndex, "stdout", stdout || "");
+                displayMessages.setProperty(displayIndex, "stdout", displayStdout);
                 displayMessages.setProperty(displayIndex, "stderr", stderr || "");
                 displayMessages.setProperty(displayIndex, "exitCode", exitCode);
                 displayMessages.setProperty(displayIndex, "outputScheme", scheme);
@@ -3409,18 +3556,27 @@ PlasmoidItem {
             }
 
             // Append to UI
-            root.appendDisplayMessage("tool_result", result, {
+            root.appendDisplayMessage("tool_result", displayContent, {
                 turnId: (info && info.turnId) || "",
                 toolName: name,
                 toolArgs: JSON.stringify(args),
                 tool_call_id: callId,
-                stdout: stdout || "",
+                stdout: displayStdout,
                 stderr: stderr || "",
                 exitCode: exitCode,
                 shared: true,
                 outputScheme: scheme,
                 attachmentsStr: imagePathsStr
             });
+        }
+
+        // Track skill activation: once a body is loaded it is re-injected in
+        // full into every system prompt rebuild, so context compaction and
+        // message capping can never drop it mid-session. Rebuild the prompt
+        // immediately so the follow-up request already carries the body.
+        if (name === "skill" && exitCode === 0 && args.name && root.activeSkills.indexOf(args.name) === -1) {
+            root.activeSkills.push(args.name);
+            initSystemPrompt();
         }
 
         // Append to chat history
@@ -3770,6 +3926,12 @@ PlasmoidItem {
         function onSysInfoNetworkChanged()  { if (systemPromptReady) regatherSysInfo(); }
         function onSysInfoLocaleChanged()   { if (systemPromptReady) regatherSysInfo(); }
         function onSysInfoDateTimeChanged() { if (systemPromptReady) initSystemPrompt(); }
+
+        // Skills: rescan when scan roots change or on refresh
+        function onSkillsScanClaudeChanged() { loadSkills(true); }
+        function onSkillsScanAgentsChanged() { loadSkills(true); }
+        function onSkillsExtraDirsChanged()  { loadSkills(true); }
+        function onSkillsRescanChanged()     { loadSkills(true); }
     }
 
     Timer {
@@ -4025,6 +4187,7 @@ fi
         }
 
         regatherSysInfo();
+        loadSkills();
         normalizeGeminiApiVariant();
         // Migrate wallet keys to profile+provider slots, then load the active key.
         migrateApiKeySlotScheme(function(ran) {
@@ -4077,6 +4240,9 @@ fi
         } else {
             root.preventDeactivationClose = true;
             focusSettleTimer.start();
+            // Pick up newly dropped SKILL.md folders when the panel opens
+            // (throttled; forced rescans happen via settings changes).
+            loadSkills();
             var hadUnread = root.hasUnreadResponse;
             if (root.hasUnreadResponse) {
                 root.hasUnreadResponse = false;

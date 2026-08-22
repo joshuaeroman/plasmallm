@@ -262,6 +262,7 @@ PlasmaExtras.Representation {
             { cmd: "/profile",  desc: i18n("Switch profile (/profile <name>)") },
             { cmd: "/save",     desc: i18n("Save chat to file") },
             { cmd: "/settings", desc: i18n("Open settings") },
+            { cmd: "/skills",   desc: i18n("List discovered skills and their status") },
             { cmd: "/task",     desc: i18n("Run a saved task (/task <name>)") }
         ];
         if (root.isDriverServiceActive) {

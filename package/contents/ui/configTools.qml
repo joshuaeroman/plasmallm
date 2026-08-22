@@ -508,6 +508,19 @@ BaseConfigPage {
                             spacing: Kirigami.Units.mediumSpacing
                             Layout.fillWidth: true
 
+                            QQC2.CheckBox {
+                                visible: card.toolName !== "skill"
+                                text: i18n("Collapse results")
+                                checked: ToolManager.shouldCollapseResult(card.toolName, cfg_toolsCollapseResults, cfg_customTools)
+                                onToggled: {
+                                    cfg_toolsCollapseResults = ToolManager.setToolCollapsed(cfg_toolsCollapseResults, card.toolName, checked);
+                                    rootItem.triggerCapture();
+                                }
+                                QQC2.ToolTip.text: i18n("Show finished results as a small pill; click the pill to view the full output.")
+                                QQC2.ToolTip.delay: 500
+                                QQC2.ToolTip.visible: hovered
+                            }
+
                             Loader {
                                 source: card.configSource
                                 Layout.fillWidth: true
@@ -659,6 +672,13 @@ BaseConfigPage {
                 isToolEnabled: cfg_toolsOpenUrlEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsOpenUrlEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/OpenUrlConfig.qml"
+            }
+
+            ToolCard {
+                toolName: "skill"
+                isToolEnabled: cfg_toolsSkillEnabled && cfg_skillsEnabled
+                onToggled: checked => { if (_initialized) { cfg_toolsSkillEnabled = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/SkillConfig.qml"
             }
         }
     }
