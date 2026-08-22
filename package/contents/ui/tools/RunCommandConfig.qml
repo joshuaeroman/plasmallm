@@ -66,8 +66,8 @@ ColumnLayout {
     }
 
     QQC2.Button {
+        id: resetSessionButton
         text: i18n("Reset Session")
-        icon.name: "edit-clear-all"
         visible: useSessionMultiplexerCheckBox.checked
         onClicked: {
             var be = cfg_sessionMultiplexer === "screen" ? "screen" : "tmux";
@@ -75,6 +75,24 @@ ColumnLayout {
             var cmd = be === "tmux" ? "tmux kill-session -t '" + sess + "'" : "screen -S '" + sess + "' -X quit";
             configPage.execSource.connectSource(cmd);
         }
+
+        contentItem: RowLayout {
+            spacing: Kirigami.Units.smallSpacing
+            Kirigami.Icon {
+                source: "media-playback-stop"
+                implicitWidth: Kirigami.Units.iconSizes.small
+                implicitHeight: Kirigami.Units.iconSizes.small
+                color: Kirigami.Theme.negativeTextColor
+            }
+            QQC2.Label {
+                text: resetSessionButton.text
+                color: Kirigami.Theme.negativeTextColor
+            }
+        }
+
+        QQC2.ToolTip.text: i18n("Kill persistent session (stops all processes and resets shell state)")
+        QQC2.ToolTip.delay: 500
+        QQC2.ToolTip.visible: hovered
     }
 
     QQC2.ComboBox {
