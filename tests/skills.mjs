@@ -319,6 +319,89 @@ ok(!S.isValidSkillName("has_underscore"), "underscore rejected");
     eq(mixed.length, 2, "both files parsed");
     eq(mixed[0].valid, true, "nested wins name conflict");
     ok(!mixed[1].valid && mixed[1].error.indexOf("duplicate") !== -1, "flat loser flagged");
+
+    const bundledStdout = [
+        "===PLASMALLM_SKILL /opt/plasmoid/contents/skills/create-skill/SKILL.md",
+        "---",
+        "name: create-skill",
+        "description: Create skills",
+        "---",
+        "Body",
+        "===PLASMALLM_SKILL_END"
+    ].join("\n");
+    const bundled = S.parseScanOutput(bundledStdout, [
+        { dir: "/data/plasmallm/skills", source: "plasmallm" },
+        { dir: "/opt/plasmoid/contents/skills", source: "bundled" }
+    ]);
+    eq(bundled.length, 1, "bundled file parsed");
+    eq(bundled[0].source, "bundled", "bundled source assigned");
+    ok(bundled[0].valid, "bundled skill valid");
+}
+
+{
+    const shippedPath = path.join(__dirname, "../package/contents/skills/create-skill/SKILL.md");
+    const shippedText = fs.readFileSync(shippedPath, "utf8");
+    const shipped = S.parseSkillFile(shippedPath, shippedText);
+    ok(shipped.valid, "shipped create-skill parses as valid: " + shipped.error);
+    eq(shipped.name, "create-skill", "shipped name");
+    ok(shipped.description.length > 0, "shipped description present");
+    ok(shipped.body.indexOf("write_file") !== -1, "shipped body instructs write_file");
+    ok(shipped.body.indexOf("as-is") !== -1, "shipped body tells the model not to expand tilde");
+    ok(shipped.body.indexOf("run_skill_script") !== -1, "shipped body prefers run_skill_script for CLI skills");
+    ok(shipped.body.indexOf("args") !== -1, "shipped body requires documenting script args");
+}
+
+// --- skill scripts ----------------------------------------------------------
+{
+    ok(S.isValidSkillScriptName("download.sh"), "script name ok");
+    ok(!S.isValidSkillScriptName("../x.sh"), "traversal rejected");
+    ok(!S.isValidSkillScriptName("foo/bar.sh"), "slash rejected");
+    ok(!S.isValidSkillScriptName("x.sh;id"), "metachar rejected");
+    ok(S.isSkillScriptAutoRun("download-youtube", '["download-youtube"]'), "auto-run listed");
+    ok(!S.isSkillScriptAutoRun("download-youtube", "[]"), "auto-run empty");
+    ok(!S.isSkillScriptAutoRun("other", '["download-youtube"]'), "auto-run other skill");
+
+    const skill = S.parseSkillFile("/data/plasmallm/skills/download-youtube/SKILL.md",
+        "---\nname: download-youtube\ndescription: d\n---\nbody");
+    ok(skill.valid, "script host skill valid");
+    const cands = S.candidateScriptPaths(skill, "download.sh");
+    eq(cands[0], "/data/plasmallm/skills/download-youtube/scripts/download.sh", "scripts/ candidate");
+    eq(cands[1], "/data/plasmallm/skills/download-youtube/download.sh", "sidecar candidate");
+
+    const resolved = S.resolveSkillScript(
+        { skill: "download-youtube", script: "download.sh", args: ["https://youtu.be/x", "--start", "1:00"] },
+        [skill],
+        { skillsDisabledList: "[]" }
+    );
+    ok(!resolved.error, "resolve ok: " + resolved.error);
+    ok(resolved.command.indexOf("bash \"$s\"") !== -1, "invokes bash on resolved file");
+    ok(resolved.command.indexOf("cd \"$HOME\" &&") === 0, "starts in $HOME when userHome unset");
+    const resolvedHome = S.resolveSkillScript(
+        { skill: "download-youtube", script: "download.sh", args: [] },
+        [skill],
+        { skillsDisabledList: "[]", userHome: "/var/home/u" }
+    );
+    ok(resolvedHome.command.indexOf("cd '/var/home/u' &&") === 0, "cd uses realpath home when provided");
+    ok(resolved.command.indexOf("'https://youtu.be/x'") !== -1, "args quoted");
+    ok(S.resolveSkillScript({ skill: "download-youtube", script: "../etc/passwd" }, [skill], {}).error, "bad script name errors");
+    ok(S.resolveSkillScript({ skill: "nope", script: "download.sh" }, [skill], {}).error, "unknown skill errors");
+    ok(S.resolveSkillScript({ skill: "download-youtube", script: "download.sh" }, [skill], { skillsDisabledList: '["download-youtube"]' }).error,
+        "disabled skill errors");
+
+    const scriptStdout = [
+        "===PLASMALLM_SKILL /data/plasmallm/skills/download-youtube/SKILL.md",
+        "---",
+        "name: download-youtube",
+        "description: d",
+        "---",
+        "body",
+        "===PLASMALLM_SKILL_SCRIPT /data/plasmallm/skills/download-youtube/scripts/download.sh",
+        "===PLASMALLM_SKILL_END"
+    ].join("\n");
+    const withScript = S.parseScanOutput(scriptStdout, [{ dir: "/data/plasmallm/skills", source: "plasmallm" }]);
+    eq(JSON.stringify(withScript[0].scripts), JSON.stringify(["download.sh"]), "scan attaches script basename");
+    const cached = JSON.parse(S.toCacheJson(withScript));
+    eq(JSON.stringify(cached[0].scripts), JSON.stringify(["download.sh"]), "cache keeps scripts");
 }
 
 // --- cache serialization -----------------------------------------------------
@@ -330,6 +413,59 @@ ok(!S.isValidSkillName("has_underscore"), "underscore rejected");
     eq(arr.length, 1, "cache has one entry");
     ok(arr[0].body === undefined, "body not cached");
     eq(arr[0].bodyLength, 5, "bodyLength cached");
+}
+
+// --- local path / file URL -------------------------------------------------
+{
+    eq(S.toLocalPath("/home/u/.local/share"), "/home/u/.local/share", "plain path unchanged");
+    eq(S.toLocalPath("file:///home/u/.local/share"), "/home/u/.local/share", "file URL stripped");
+    eq(S.toLocalPath("file://localhost/home/u/.local/share"), "/home/u/.local/share", "localhost file URL stripped");
+    eq(S.toFileUrl("/home/u/.local/share/plasmallm/skills"),
+        "file:///home/u/.local/share/plasmallm/skills",
+        "local path to file URL has three slashes");
+    eq(S.toFileUrl("file:///home/u/.local/share"),
+        "file:///home/u/.local/share",
+        "already-a-URL is not double-prefixed");
+}
+
+// --- scan command builder ---------------------------------------------------
+{
+    eq(S.shellQuotePath("/tmp/a b"), "'/tmp/a b'", "quote path with space");
+    eq(S.shellQuotePath("/tmp/o'reilly"), "'/tmp/o'\\''reilly'", "quote path with apostrophe");
+    const cmd = S.buildScanCommand([
+        { dir: "/data/plasmallm/skills", source: "plasmallm" },
+        { dir: "/opt/contents/skills", source: "bundled" }
+    ]);
+    ok(cmd.indexOf("'/data/plasmallm/skills'/*/SKILL.md") !== -1, "nested glob for first root");
+    ok(cmd.indexOf("'/opt/contents/skills'/*.md") !== -1, "flat glob for bundled root");
+    ok(cmd.indexOf("/*/scripts/*.sh") !== -1, "nested scripts glob");
+    ok(cmd.trim().endsWith("===PLASMALLM_SKILL_END\""), "end marker");
+    const prefixed = S.buildScanCommand([{ dir: "/s", source: "plasmallm" }], "mkdir -p /s && ");
+    ok(prefixed.indexOf("mkdir -p /s") === 0, "prefix kept");
+    ok(prefixed.indexOf("&& ;") === -1, "dangling operator stripped from prefix");
+}
+
+// --- isSkillPath -------------------------------------------------------------
+{
+    const roots = [
+        { dir: "/var/home/u/.local/share/plasmallm/skills", source: "plasmallm" },
+        { dir: "/opt/plasmallm/skills", source: "bundled" },
+        { dir: "/var/home/u/.claude/skills", source: "claude" }
+    ];
+    const homePaths = { home: "/var/home/u", homeEnv: "/home/u" };
+
+    ok(S.isSkillPath("~/.local/share/plasmallm/skills/my-skill/SKILL.md", roots, homePaths), "tilde skill path matched");
+    ok(S.isSkillPath("/var/home/u/.local/share/plasmallm/skills/my-skill/SKILL.md", roots, homePaths), "canonical path matched");
+    ok(S.isSkillPath("/home/u/.local/share/plasmallm/skills/my-skill/SKILL.md", roots, homePaths), "logical env home path matched");
+    ok(S.isSkillPath("/home/u/.local/share/plasmallm/skills/my-skill/scripts/run.sh", roots, homePaths), "script path matched");
+    ok(S.isSkillPath("/home/u/.local/share/plasmallm/skills/flat.md", roots, homePaths), "flat skill path matched");
+    ok(S.isSkillPath("file:///var/home/u/.local/share/plasmallm/skills/foo/SKILL.md", roots, homePaths), "file url matched");
+    ok(S.isSkillPath("/opt/plasmallm/skills/create-skill/SKILL.md", roots, homePaths), "bundled root matched");
+    ok(S.isSkillPath("~/.claude/skills/c/SKILL.md", roots, homePaths), "claude root matched");
+
+    ok(!S.isSkillPath("~/.config/foo.json", roots, homePaths), "unrelated path rejected");
+    ok(!S.isSkillPath("/var/home/u/Downloads/video.mp4", roots, homePaths), "downloads rejected");
+    ok(!S.isSkillPath("", roots, homePaths), "empty rejected");
 }
 
 if (failed) {

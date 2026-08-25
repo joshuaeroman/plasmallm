@@ -20,6 +20,7 @@ test:
 	node tests/gemini_thinking.mjs
 	node tests/skills.mjs
 	node tests/memory.mjs
+	node tests/path_sandbox.mjs
 
 # Translations
 translations: check-translations $(MO_FILES)

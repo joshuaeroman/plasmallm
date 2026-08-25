@@ -20,6 +20,7 @@
 .import "RestoreContext.js" as RestoreContext
 .import "RecallAttachment.js" as RecallAttachment
 .import "Skill.js" as Skill
+.import "RunSkillScript.js" as RunSkillScript
 .import "EditMemory.js" as EditMemory
 
 .import "driver/StartSession.js" as StartSession
@@ -39,6 +40,7 @@ var tools = [
     { module: RestoreContext, configUI: "tools/RestoreContextConfig.qml" },
     { module: RecallAttachment, configUI: "" },
     { module: Skill, configUI: "" },
+    { module: RunSkillScript, configUI: "tools/RunSkillScriptConfig.qml" },
     { module: ReadFile, configUI: "tools/ReadFileConfig.qml" },
     { module: WriteFile, configUI: "tools/WriteFileConfig.qml" },
     { module: ListDir, configUI: "tools/ListDirConfig.qml" },

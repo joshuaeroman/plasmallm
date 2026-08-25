@@ -35,6 +35,7 @@ function toolIconName(toolName) {
         case "write_file": return "document-save";
         case "list_dir": return "folder-open";
         case "skill": return "applications-education";
+        case "run_skill_script": return "application-x-executable";
         case "http_get": return "download";
         case "http_request": return "network-wired";
         case "search_files": return "system-search";
@@ -321,6 +322,7 @@ function getEnabledTools(config) {
     if (config.useCommandTool) enabled.push("run_command");
     if (config.enableWebSearch && config.searchConfigured) enabled.push("web_search");
     if (config.skillsEnabled && config.toolsSkillEnabled) enabled.push("skill");
+    if (config.skillsEnabled && config.toolsRunSkillScriptEnabled) enabled.push("run_skill_script");
     if (config.toolsReadFileEnabled) enabled.push("read_file");
     if (config.toolsWriteFileEnabled) enabled.push("write_file");
     if (config.toolsListDirEnabled) enabled.push("list_dir");
@@ -344,7 +346,7 @@ function getEnabledTools(config) {
     return enabled;
 }
 
-function isAutoRun(toolId, config) {
+function isAutoRun(toolId, config, args) {
     if (config && config.sessionFullAutoMode) {
         return true;
     }
@@ -367,6 +369,8 @@ function isAutoRun(toolId, config) {
         case "restore_context": return true;
         case "recall_attachment": return true;
         case "skill": return config.toolsSkillAutoRun !== undefined ? config.toolsSkillAutoRun : true;
+        case "run_skill_script":
+            return Skills.isSkillScriptAutoRun(args && (args.skill || args.name), config.skillsScriptsAutoRun);
         case "run_command": return config.autoRunCommands;
         case "read_file": return config.toolsReadFileAutoRun;
         case "write_file": return config.toolsWriteFileAutoRun;
@@ -540,20 +544,48 @@ function expandPath(path, paths) {
     return res;
 }
 
-function contractPath(path, homePath) {
-    if (!path || !homePath) return path;
-    if (path === homePath) return "~";
-    if (path.indexOf(homePath + "/") === 0) {
-        return "~" + path.substring(homePath.length);
+/**
+ * $HOME is often a symlink (e.g. /home/user -> /var/home/user on ostree).
+ * sysInfo.userHome is realpath; models and `echo $HOME` still emit the
+ * logical path. Rewrite the logical prefix to the canonical home so
+ * whitelist checks and tool execution see one location.
+ */
+function resolveHomePath(path, paths) {
+    var expanded = expandPath(path, paths);
+    if (!paths) return expanded;
+    var home = normalizePath(paths.home || "").replace(/\/$/, "");
+    var homeEnv = normalizePath(paths.homeEnv || "").replace(/\/$/, "");
+    if (!home || !homeEnv || home === homeEnv) return expanded;
+    var n = normalizePath(expanded).replace(/\/$/, "");
+    if (n === homeEnv) return home;
+    if (n.indexOf(homeEnv + "/") === 0) return home + n.substring(homeEnv.length);
+    return expanded;
+}
+
+function contractPath(path, homePath, altHome) {
+    if (!path) return path;
+    var homes = [];
+    if (homePath) homes.push(homePath);
+    if (altHome && altHome !== homePath) homes.push(altHome);
+    for (var i = 0; i < homes.length; i++) {
+        var h = homes[i];
+        if (path === h) return "~";
+        if (path.indexOf(h + "/") === 0) return "~" + path.substring(h.length);
     }
     return path;
 }
 
-function contractAllPaths(text, homePath) {
-    if (!text || !homePath) return text;
-    var escapedHome = homePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    var re = new RegExp(escapedHome, 'g');
-    return text.replace(re, "~");
+function contractAllPaths(text, homePath, altHome) {
+    if (!text) return text;
+    var out = text;
+    var homes = [];
+    if (homePath) homes.push(homePath);
+    if (altHome && altHome !== homePath) homes.push(altHome);
+    for (var i = 0; i < homes.length; i++) {
+        var escapedHome = homes[i].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        out = out.replace(new RegExp(escapedHome, 'g'), "~");
+    }
+    return out;
 }
 
 function normalizePath(path) {
@@ -583,7 +615,7 @@ function normalizePath(path) {
 }
 
 function isPathAllowed(path, whitelistStr, paths) {
-    var expandedPath = expandPath(path, paths);
+    var expandedPath = resolveHomePath(path, paths);
     expandedPath = normalizePath(expandedPath);
     expandedPath = expandedPath.replace(/\/+/g, "/").replace(/\/$/, "");
     if (!expandedPath) return false;

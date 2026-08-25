@@ -26,6 +26,7 @@ var SKILL_FILE_NAME = "SKILL.md";
 var MAX_NAME_LENGTH = 64;
 var MAX_DESCRIPTION_LENGTH = 1024;
 var NAME_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
+var SCRIPT_NAME_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*\.sh$/;
 
 // Marker used when replacing an already-delivered tool result with a stub.
 var STUB_SENTINEL = "[[plasmallm-skill-stub]]";
@@ -34,6 +35,11 @@ function isValidSkillName(name) {
     if (!name || typeof name !== "string") return false;
     if (name.length < 1 || name.length > MAX_NAME_LENGTH) return false;
     return NAME_PATTERN.test(name);
+}
+
+function isValidSkillScriptName(name) {
+    if (!name || typeof name !== "string") return false;
+    return SCRIPT_NAME_PATTERN.test(name);
 }
 
 function _unquote(value) {
@@ -114,6 +120,7 @@ function parseSkillFile(path, text) {
         path: String(path === undefined ? "" : path),
         dirName: dirName,
         source: "",
+        scripts: [],
         valid: false,
         error: ""
     };
@@ -141,6 +148,107 @@ function parseSkillFile(path, text) {
     }
     skill.valid = true;
     return skill;
+}
+
+function isNameListed(name, json) {
+    var list = parseDisabledList(json);
+    var wanted = String(name || "");
+    for (var i = 0; i < list.length; i++) {
+        if (list[i] === wanted) return true;
+    }
+    return false;
+}
+
+function isSkillScriptAutoRun(skillName, autoRunJson) {
+    return isNameListed(skillName, autoRunJson);
+}
+
+/** Directory containing the skill file (folder for SKILL.md, parent for flat .md). */
+function skillDirectory(skill) {
+    var path = skill && skill.path ? String(skill.path) : "";
+    var slash = path.lastIndexOf("/");
+    if (slash <= 0) return "";
+    return path.substring(0, slash);
+}
+
+function candidateScriptPaths(skill, scriptName) {
+    var dir = skillDirectory(skill);
+    if (!dir || !isValidSkillScriptName(scriptName)) return [];
+    return [dir + "/scripts/" + scriptName, dir + "/" + scriptName];
+}
+
+function normalizeScriptArgs(raw) {
+    if (raw === undefined || raw === null || raw === "") return [];
+    if (Array.isArray(raw)) {
+        var out = [];
+        for (var i = 0; i < raw.length; i++) out.push(String(raw[i]));
+        return out;
+    }
+    return [String(raw)];
+}
+
+/**
+ * Resolves a run_skill_script call to a bash command, or { error }.
+ * Prefers scripts/<name>.sh, then <name>.sh next to SKILL.md.
+ */
+function resolveSkillScript(args, skills, config) {
+    var skillName = String(args && (args.skill || args.name) ? (args.skill || args.name) : "").trim();
+    var scriptName = String(args && args.script ? args.script : "").trim();
+    if (!skillName) return { error: "missing skill name" };
+    if (!isValidSkillScriptName(scriptName)) {
+        return { error: "invalid script name '" + scriptName + "' (lowercase-hyphen stem ending in .sh)" };
+    }
+    var list = Array.isArray(skills) ? skills : [];
+    var found = null;
+    for (var i = 0; i < list.length; i++) {
+        if (list[i] && list[i].valid && list[i].name === skillName) {
+            found = list[i];
+            break;
+        }
+    }
+    if (!found) return { error: "unknown or invalid skill '" + skillName + "'" };
+    if (isNameListed(skillName, config && config.skillsDisabledList)) {
+        return { error: "skill '" + skillName + "' is disabled" };
+    }
+    var cands = candidateScriptPaths(found, scriptName);
+    if (cands.length === 0) return { error: "cannot resolve script path" };
+    var argv = normalizeScriptArgs(args && args.args);
+    var home = config && config.userHome ? toLocalPath(config.userHome) : "";
+    var cd = home ? ("cd " + shellQuotePath(home) + " && ") : "cd \"$HOME\" && ";
+    var cmd = cd + "if [ -f " + shellQuotePath(cands[0]) + " ]; then s=" + shellQuotePath(cands[0]) +
+        "; elif [ -f " + shellQuotePath(cands[1]) + " ]; then s=" + shellQuotePath(cands[1]) +
+        "; else echo 'Skill script not found' >&2; exit 1; fi; bash \"$s\"";
+    for (var a = 0; a < argv.length; a++) {
+        cmd += " " + shellQuotePath(argv[a]);
+    }
+    return { command: cmd, paths: cands, skill: found };
+}
+
+function _basename(path) {
+    var p = String(path || "");
+    var slash = p.lastIndexOf("/");
+    return slash >= 0 ? p.substring(slash + 1) : p;
+}
+
+function attachSkillScripts(skills, scriptPaths) {
+    var list = Array.isArray(skills) ? skills : [];
+    for (var i = 0; i < list.length; i++) {
+        if (!list[i].scripts) list[i].scripts = [];
+    }
+    var paths = Array.isArray(scriptPaths) ? scriptPaths : [];
+    for (var p = 0; p < paths.length; p++) {
+        var sp = toLocalPath(paths[p]);
+        var base = _basename(sp);
+        if (!isValidSkillScriptName(base)) continue;
+        for (var s = 0; s < list.length; s++) {
+            if (!list[s] || !list[s].valid) continue;
+            var cands = candidateScriptPaths(list[s], base);
+            if (sp === cands[0] || sp === cands[1]) {
+                if (list[s].scripts.indexOf(base) === -1) list[s].scripts.push(base);
+                break;
+            }
+        }
+    }
 }
 
 /** Parses the disabled-skills JSON string into an array of names. */
@@ -308,8 +416,10 @@ function stubDeliveredSkillResults(messages, activeNames) {
  */
 function parseScanOutput(stdout, roots) {
     var MARK = "===PLASMALLM_SKILL ";
+    var SCRIPT_MARK = "===PLASMALLM_SKILL_SCRIPT ";
     var END = "===PLASMALLM_SKILL_END";
     var found = [];
+    var scriptPaths = [];
     var current = null;
     if (!stdout) return [];
 
@@ -321,7 +431,10 @@ function parseScanOutput(stdout, roots) {
     }
     for (var i = 0; i < lines.length; i++) {
         var line = lines[i];
-        if (line.indexOf(MARK) === 0) {
+        if (line.indexOf(SCRIPT_MARK) === 0) {
+            flush();
+            scriptPaths.push(line.substring(SCRIPT_MARK.length).trim());
+        } else if (line.indexOf(MARK) === 0) {
             flush();
             current = { path: line.substring(MARK.length).trim(), chunks: [] };
         } else if (line.indexOf(END) === 0) {
@@ -356,7 +469,60 @@ function parseScanOutput(stdout, roots) {
             seen[found[s].name] = found[s].path;
         }
     }
+    attachSkillScripts(found, scriptPaths);
     return found;
+}
+
+function shellQuotePath(p) {
+    return "'" + String(p).replace(/'/g, "'\\''") + "'";
+}
+
+/**
+ * StandardPaths.writableLocation in QML may return a file:// URL (or a
+ * QUrl whose toString is one). Shell globs and xdg-open need a local path;
+ * prepending another file:// makes QUrl treat "file" as a host (smb://file/...).
+ */
+function toLocalPath(p) {
+    var s = String(p === undefined || p === null ? "" : p);
+    if (s.indexOf("file://") === 0) {
+        s = s.substring(7);
+        if (s.indexOf("localhost/") === 0) s = s.substring(9);
+    }
+    return s;
+}
+
+function toFileUrl(p) {
+    var local = toLocalPath(p);
+    if (!local) return "";
+    if (local.charAt(0) !== "/") local = "/" + local;
+    return "file://" + local;
+}
+
+/**
+ * Shell command used by main.qml and the Skills settings page to dump
+ * SKILL.md / flat .md files from each root. Nested folders are listed
+ * first so they win name conflicts against same-named flat files.
+ */
+function buildScanCommand(roots, prefixCmd) {
+    var list = Array.isArray(roots) ? roots : [];
+    var parts = [];
+    if (prefixCmd) {
+        parts.push(String(prefixCmd).replace(/[\s;&|]+$/, ""));
+    }
+    for (var i = 0; i < list.length; i++) {
+        var dir = shellQuotePath(list[i].dir);
+        parts.push("for f in " + dir + "/*/SKILL.md; do " +
+            "if [ -f \"$f\" ]; then echo \"===PLASMALLM_SKILL $f\"; head -c 262144 \"$f\"; echo; fi; done");
+        parts.push("for f in " + dir + "/*.md; do " +
+            "if [ -f \"$f\" ]; then echo \"===PLASMALLM_SKILL $f\"; head -c 262144 \"$f\"; echo; fi; done");
+        parts.push("for f in " + dir + "/*/scripts/*.sh; do " +
+            "if [ -f \"$f\" ]; then echo \"===PLASMALLM_SKILL_SCRIPT $f\"; fi; done");
+        parts.push("for f in " + dir + "/*/*.sh; do " +
+            "if [ -f \"$f\" ]; then echo \"===PLASMALLM_SKILL_SCRIPT $f\"; fi; done");
+        parts.push("for f in " + dir + "/*.sh; do " +
+            "if [ -f \"$f\" ]; then echo \"===PLASMALLM_SKILL_SCRIPT $f\"; fi; done");
+    }
+    return parts.join("; ") + "; echo \"===PLASMALLM_SKILL_END\"";
 }
 
 /** Builds a compact metadata list (no bodies) safe to cache in KCFG for the settings dialog. */
@@ -372,8 +538,47 @@ function toCacheJson(skills) {
             source: list[i].source,
             valid: list[i].valid,
             error: list[i].error,
+            scripts: Array.isArray(list[i].scripts) ? list[i].scripts : [],
             bodyLength: list[i].body ? String(list[i].body).length : 0
         });
     }
     return JSON.stringify(out);
 }
+
+/**
+ * Returns true if filePath is located inside any configured skill root directory.
+ * Expands ~ and normalizes alternative home paths if homePaths {home, homeEnv} is provided.
+ */
+function isSkillPath(filePath, roots, homePaths) {
+    if (!filePath) return false;
+    var local = toLocalPath(filePath).trim();
+    if (!local) return false;
+    var expanded = local;
+    if (homePaths) {
+        var home = (homePaths.home || "").replace(/\/$/, "");
+        var homeEnv = (homePaths.homeEnv || "").replace(/\/$/, "");
+        if (expanded.indexOf("~") === 0) {
+            expanded = (home || homeEnv || "$HOME") + expanded.substring(1);
+        } else if (home && homeEnv && home !== homeEnv) {
+            if (expanded === homeEnv || expanded.indexOf(homeEnv + "/") === 0) {
+                expanded = home + expanded.substring(homeEnv.length);
+            }
+        }
+    }
+    expanded = expanded.replace(/\/+/g, "/").replace(/\/$/, "");
+    var list = Array.isArray(roots) ? roots : [];
+    for (var i = 0; i < list.length; i++) {
+        var rootDir = toLocalPath(list[i].dir || "").trim();
+        if (homePaths && homePaths.home && homePaths.homeEnv && homePaths.home !== homePaths.homeEnv) {
+            if (rootDir === homePaths.homeEnv || rootDir.indexOf(homePaths.homeEnv + "/") === 0) {
+                rootDir = homePaths.home + rootDir.substring(homePaths.homeEnv.length);
+            }
+        }
+        rootDir = rootDir.replace(/\/+/g, "/").replace(/\/$/, "");
+        if (rootDir && (expanded === rootDir || expanded.indexOf(rootDir + "/") === 0)) {
+            return true;
+        }
+    }
+    return false;
+}
+

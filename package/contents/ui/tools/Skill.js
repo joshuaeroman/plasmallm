@@ -3,6 +3,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
+.pragma library
+
 // Built-in "skill" tool: loads the full instructions of an available skill.
 // The model discovers skills via the <available_skills> index rendered into
 // the {{skills}} system prompt section (see skills.js) and calls this tool

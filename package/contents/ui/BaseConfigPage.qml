@@ -437,8 +437,12 @@ SimpleKCM {
     property bool cfg_toolsSkillEnabledDefault
     property bool cfg_toolsSkillAutoRun
     property bool cfg_toolsSkillAutoRunDefault
+    property bool cfg_toolsRunSkillScriptEnabled
+    property bool cfg_toolsRunSkillScriptEnabledDefault
     property string cfg_skillsDisabledList
     property string cfg_skillsDisabledListDefault
+    property string cfg_skillsScriptsAutoRun
+    property string cfg_skillsScriptsAutoRunDefault
     property bool cfg_skillsScanClaude
     property bool cfg_skillsScanClaudeDefault
     property bool cfg_skillsScanAgents
