@@ -507,8 +507,16 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
       <label>Auto-run skill tool</label>
       <default>true</default>
     </entry>
+    <entry name="toolsRunSkillScriptEnabled" type="Bool">
+      <label>Enable run_skill_script tool (running shell scripts bundled with skills)</label>
+      <default>true</default>
+    </entry>
     <entry name="skillsDisabledList" type="String">
       <label>Disabled skills (JSON array of names; discovered skills are enabled unless listed)</label>
+      <default></default>
+    </entry>
+    <entry name="skillsScriptsAutoRun" type="String">
+      <label>Skills whose scripts may run without approval (JSON array of names)</label>
       <default></default>
     </entry>
     <entry name="skillsScanClaude" type="Bool">

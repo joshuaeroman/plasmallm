@@ -1472,6 +1472,9 @@ PlasmoidItem {
             case "realpath $HOME":
                 sysInfo.userHome = output;
                 break;
+            case "echo $HOME":
+                sysInfo.homeEnv = output;
+                break;
             case "echo $SHELL":
                 sysInfo.shell = output;
                 break;
@@ -1590,6 +1593,7 @@ PlasmoidItem {
             toolsEditMemoryAutoRun: Plasmoid.configuration.toolsEditMemoryAutoRun,
             toolsSkillEnabled: Plasmoid.configuration.toolsSkillEnabled,
             toolsSkillAutoRun: Plasmoid.configuration.toolsSkillAutoRun,
+            toolsRunSkillScriptEnabled: Plasmoid.configuration.toolsRunSkillScriptEnabled,
             toolsPathWhitelist: Plasmoid.configuration.toolsPathWhitelist,
             toolsReadMaxBytes: Plasmoid.configuration.toolsReadMaxBytes,
             toolsWriteMaxBytes: Plasmoid.configuration.toolsWriteMaxBytes,
@@ -1601,6 +1605,8 @@ PlasmoidItem {
             compactionEnabled: Plasmoid.configuration.compactionEnabled,
             skillsEnabled: Plasmoid.configuration.skillsEnabled,
             skillsDisabledList: Plasmoid.configuration.skillsDisabledList,
+            skillsScriptsAutoRun: Plasmoid.configuration.skillsScriptsAutoRun,
+            userHome: sysInfo.userHome || "",
             loadedSkills: root.loadedSkills,
             activeSkills: root.activeSkills,
             memoryPhrases: root.memoryPhrases
@@ -1647,6 +1653,7 @@ PlasmoidItem {
         if (Plasmoid.configuration.sysInfoDesktop)  cmds.push("echo $XDG_CURRENT_DESKTOP");
         if (Plasmoid.configuration.sysInfoUser)     cmds.push("whoami");
         cmds.push("realpath $HOME");
+        cmds.push("echo $HOME");
         if (Plasmoid.configuration.sysInfoCPU)      cmds.push("lscpu");
         if (Plasmoid.configuration.sysInfoMemory)   cmds.push("free -h");
         if (Plasmoid.configuration.sysInfoGPU)      cmds.push("bash -c \"lspci -nn | grep -iE 'vga|3d|display'\"");
@@ -1677,11 +1684,20 @@ PlasmoidItem {
     // output is parsed by skills.js into root.loadedSkills and mirrored (no
     // bodies) into skillsCache so the settings dialog can enumerate them.
 
+    function bundledSkillsDir() {
+        return Skills.toLocalPath(Qt.resolvedUrl("../skills"));
+    }
+
     function skillsRoots() {
         var home = sysInfo.userHome || "";
         var dataHome = sysInfo.xdgDataHome || (home ? home + "/.local/share" : "");
         var roots = [];
+        // User files win on name conflicts; bundled ships with the plasmoid
+        // and sits above opt-in Claude/agents roots so their create-skill
+        // (wrong paths) cannot hide ours.
         if (dataHome) roots.push({ dir: dataHome + "/plasmallm/skills", source: "plasmallm" });
+        var bundled = bundledSkillsDir();
+        if (bundled) roots.push({ dir: bundled, source: "bundled" });
         if (home) {
             if (Plasmoid.configuration.skillsScanClaude) {
                 roots.push({ dir: home + "/.claude/skills", source: "claude" });
@@ -1704,33 +1720,13 @@ PlasmoidItem {
         return roots;
     }
 
-    function _shellQuotePath(p) {
-        return "'" + String(p).replace(/'/g, "'\\''") + "'";
-    }
-
     function loadSkills(force, prefixCmd) {
         var roots = skillsRoots();
         if (roots.length === 0) return;
         var now = Date.now();
         if (!force && !prefixCmd && lastSkillsScanMs && (now - lastSkillsScanMs) < 5000) return;
         lastSkillsScanMs = now;
-        var parts = [];
-        if (prefixCmd) {
-            // Joining with "; " means a prefix ending in "&& " (or any dangling
-            // operator) would produce invalid syntax like "} && ; for ...".
-            parts.push(String(prefixCmd).replace(/[\s;&|]+$/, ""));
-        }
-        for (var i = 0; i < roots.length; i++) {
-            // head -c caps each body; [ -f ] skips roots that don't exist
-            // (an unmatched glob leaves the pattern literal). Nested
-            // <name>/SKILL.md folders are scanned first so they win name
-            // conflicts against same-named flat <name>.md files.
-            parts.push("for f in " + _shellQuotePath(roots[i].dir) + "/*/SKILL.md; do " +
-                "if [ -f \"$f\" ]; then echo \"===PLASMALLM_SKILL $f\"; head -c 262144 \"$f\"; echo; fi; done");
-            parts.push("for f in " + _shellQuotePath(roots[i].dir) + "/*.md; do " +
-                "if [ -f \"$f\" ]; then echo \"===PLASMALLM_SKILL $f\"; head -c 262144 \"$f\"; echo; fi; done");
-        }
-        var cmd = parts.join("; ") + "; echo \"===PLASMALLM_SKILL_END\"";
+        var cmd = Skills.buildScanCommand(roots, prefixCmd);
         pendingSkillScanCommands[cmd] = true;
         executable.connectSource(cmd);
     }
@@ -1744,6 +1740,7 @@ PlasmoidItem {
         }
         root.loadedSkills = Skills.parseScanOutput(stdout, skillsRoots());
         Plasmoid.configuration.skillsCache = Skills.toCacheJson(root.loadedSkills);
+        if (systemPromptReady) initSystemPrompt();
     }
 
     function skillStatusText() {
@@ -2729,7 +2726,7 @@ PlasmoidItem {
         }
         if (lower === "/skills") {
             root.appendDisplayMessage("assistant", skillStatusText(), { shared: false });
-            loadSkills();
+            loadSkills(true);
             return true;
         }
         if (lower === "/task") {
@@ -3300,7 +3297,7 @@ PlasmoidItem {
 
         var next = pendingToolCalls[0];
         var toolsConfig = getToolsConfig();
-        if (ToolManager.isAutoRun(next.name, toolsConfig)) {
+        if (ToolManager.isAutoRun(next.name, toolsConfig, next.args)) {
             executeTool(next.name, next.args, next.id, next.turnId);
         } else {
             // Show approval card
@@ -3326,23 +3323,24 @@ PlasmoidItem {
             var path = args.path || "";
             var paths = {
                 home: sysInfo.userHome || "$HOME",
+                homeEnv: sysInfo.homeEnv || "",
                 xdgData: sysInfo.xdgDataHome,
                 xdgConfig: sysInfo.xdgConfigHome,
                 xdgCache: sysInfo.xdgCacheHome,
                 xdgRuntime: sysInfo.xdgRuntimeDir
             };
             if (!ToolManager.isPathAllowed(path, Plasmoid.configuration.toolsPathWhitelist, paths)) {
-                var displayPath = ToolManager.contractPath(path, paths.home);
+                var displayPath = ToolManager.contractPath(path, paths.home, paths.homeEnv);
                 handleToolOutput(null, "", i18n("Error: path '%1' outside whitelist", displayPath), 1, { name: name, callId: callId, turnId: turnId });
                 return;
             }
             // Expand and normalize it for internal execution
-            args.path = ToolManager.normalizePath(ToolManager.expandPath(path, paths));
+            args.path = ToolManager.normalizePath(ToolManager.resolveHomePath(path, paths));
         }
 
         // Create a visible indicator if it's not auto-run or if it's a side-effect tool
         var displayIndex = -1;
-        var isAuto = ToolManager.isAutoRun(name, toolsConfig);
+        var isAuto = ToolManager.isAutoRun(name, toolsConfig, args);
         var metadata = ToolManager.getToolMetadata(name, toolsConfig);
         var scheme = metadata && metadata.outputScheme ? metadata.outputScheme : "";
         if (!tool.uiHidden && (tool.sideEffect || !isAuto)) {
@@ -3362,6 +3360,9 @@ PlasmoidItem {
             i18n: i18n,
             getSkills: function() {
                 return root.loadedSkills;
+            },
+            resolveSkillScript: function(scriptArgs) {
+                return Skills.resolveSkillScript(scriptArgs, root.loadedSkills, getToolsConfig());
             },
             getMemory: function() {
                 return root.memoryPhrases.slice();
@@ -3460,10 +3461,11 @@ PlasmoidItem {
         var scheme = metadata && metadata.outputScheme ? metadata.outputScheme : "";
 
         var home = sysInfo.userHome || "$HOME";
+        var homeEnv = sysInfo.homeEnv || "";
         var status = exitCode === 0 ? "ok" : "error";
         var header = "[" + name;
         if (args.path) {
-            header += ": " + ToolManager.contractPath(args.path, home);
+            header += ": " + ToolManager.contractPath(args.path, home, homeEnv);
         } else if (args.url) {
             header += ": " + args.url;
         } else if (status !== "ok") {
@@ -3509,7 +3511,7 @@ PlasmoidItem {
         if (stderr) result += (stdout ? "\n" : "") + "stderr: " + stderr;
 
         // Privacy: contract absolute home paths back to ~
-        result = ToolManager.contractAllPaths(result, home);
+        result = ToolManager.contractAllPaths(result, home, homeEnv);
 
         // Skill loads get a compact chat card: the body already lives in the
         // system prompt's Active Skills section, so dumping thousands of
@@ -3593,6 +3595,17 @@ PlasmoidItem {
         if (name === "skill" && exitCode === 0 && args.name && root.activeSkills.indexOf(args.name) === -1) {
             root.activeSkills.push(args.name);
             initSystemPrompt();
+        }
+
+        // Auto-refresh skills when a file is written into any skills root
+        if (name === "write_file" && exitCode === 0 && args.path) {
+            var homePaths = {
+                home: sysInfo.userHome || "$HOME",
+                homeEnv: sysInfo.homeEnv || ""
+            };
+            if (Skills.isSkillPath(args.path, skillsRoots(), homePaths)) {
+                loadSkills(true);
+            }
         }
 
         // Append to chat history

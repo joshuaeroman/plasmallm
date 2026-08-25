@@ -682,6 +682,13 @@ BaseConfigPage {
             }
 
             ToolCard {
+                toolName: "run_skill_script"
+                isToolEnabled: cfg_toolsRunSkillScriptEnabled && cfg_skillsEnabled
+                onToggled: checked => { if (_initialized) { cfg_toolsRunSkillScriptEnabled = checked; rootItem.triggerCapture(); } }
+                configSource: "tools/RunSkillScriptConfig.qml"
+            }
+
+            ToolCard {
                 toolName: "edit_memory"
                 isToolEnabled: cfg_toolsEditMemoryEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsEditMemoryEnabled = checked; rootItem.triggerCapture(); } }
