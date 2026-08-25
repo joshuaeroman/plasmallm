@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-22 16:45-0400\n"
+"POT-Creation-Date: 2026-08-24 21:07-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Dutch\n"
@@ -16,15 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-msgid "Color button"
-msgstr "Kleurknop"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Huidige kleur is %1. Deze knop opent een kleurkeuzevenster."
-
-msgid "Current color is %1."
-msgstr "Huidige kleur is %1."
 
 msgid "Request timed out after 30 seconds"
 msgstr "Verzoek verlopen na 30 seconden"
@@ -48,7 +39,9 @@ msgid "Authentication failed (HTTP %1) — check your API key"
 msgstr "Authenticatie mislukt (HTTP %1) — controleer uw API-sleutel"
 
 msgid "Rate limited (HTTP 429) — too many requests, try again shortly"
-msgstr "Snelheidsbeperking (HTTP 429) — te veel verzoeken, probeer het binnenkort opnieuw"
+msgstr ""
+"Snelheidsbeperking (HTTP 429) — te veel verzoeken, probeer het binnenkort "
+"opnieuw"
 
 msgid "Not found (HTTP 404) — check your API endpoint and model name"
 msgstr "Niet gevonden (HTTP 404) — controleer uw API-eindpunt en modelnaam"
@@ -74,11 +67,19 @@ msgstr "geen reactie — controleer de URL van uw eindpunt"
 msgid "Request failed"
 msgstr "Verzoek mislukt"
 
-msgid "This model version does not support combining Native tools (Search/Code) with custom commands. Please select a newer model (e.g., Gemini 3+) or disable Native features in Settings."
-msgstr "Deze modelversie ondersteunt het combineren van native tools (Zoeken/Code) met aangepaste opdrachten niet. Selecteer een nieuwer model (bijv. Gemini 3+) of schakel native functies uit in Instellingen."
+msgid ""
+"This model version does not support combining Native tools (Search/Code) "
+"with custom commands. Please select a newer model (e.g., Gemini 3+) or "
+"disable Native features in Settings."
+msgstr ""
+"Deze modelversie ondersteunt het combineren van native tools (Zoeken/Code) "
+"met aangepaste opdrachten niet. Selecteer een nieuwer model (bijv. Gemini "
+"3+) of schakel native functies uit in Instellingen."
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
-msgstr "Geen taken geconfigureerd. Voeg een taak toe om herbruikbare promptsnelkoppelingen te maken."
+msgstr ""
+"Geen taken geconfigureerd. Voeg een taak toe om herbruikbare "
+"promptsnelkoppelingen te maken."
 
 msgid "AUTO"
 msgstr "AUTO"
@@ -110,8 +111,14 @@ msgstr "Taak opslaan"
 msgid "A task named \"%1\" already exists."
 msgstr "Er bestaat al een taak met de naam \"%1\"."
 
-msgid "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar button to run them. Tasks with skip approvals enabled will run tools automatically."
-msgstr "Taken zijn herbruikbare promptsnelkoppelingen. Gebruik /task <naam> in de chat of de werkbalkknop om ze uit te voeren. Taken met goedkeuringen overslaan ingeschakeld zullen tools automatisch uitvoeren."
+msgid ""
+"Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar "
+"button to run them. Tasks with skip approvals enabled will run tools "
+"automatically."
+msgstr ""
+"Taken zijn herbruikbare promptsnelkoppelingen. Gebruik /task <naam> in de "
+"chat of de werkbalkknop om ze uit te voeren. Taken met goedkeuringen "
+"overslaan ingeschakeld zullen tools automatisch uitvoeren."
 
 msgid "Ask before running"
 msgstr "Vragen voor uitvoering"
@@ -122,8 +129,12 @@ msgstr "Fout: URL moet beginnen met http:// of https://"
 msgid "Error: content exceeds max write size (%1 bytes)"
 msgstr "Fout: inhoud overschrijdt maximale schrijfgrootte (%1 bytes)"
 
-msgid "Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS are allowed."
-msgstr "Fout: Ongeldige HTTP-methode. Alleen GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS zijn toegestaan."
+msgid ""
+"Error: Invalid HTTP method. Only GET, POST, PUT, DELETE, PATCH, HEAD, "
+"OPTIONS are allowed."
+msgstr ""
+"Fout: Ongeldige HTTP-methode. Alleen GET, POST, PUT, DELETE, PATCH, HEAD, "
+"OPTIONS zijn toegestaan."
 
 msgid "Search provider %1 not supported"
 msgstr "Zoekaanbieder %1 niet ondersteund"
@@ -131,11 +142,99 @@ msgstr "Zoekaanbieder %1 niet ondersteund"
 msgid "Searching the web for: %1…"
 msgstr "Zoeken op het web naar: %1…"
 
-msgid "This tool allows the primary assistant to retrieve original transcripts from cited message ranges. It runs automatically without asking for permission when Context Compaction is active."
-msgstr "Met dit hulpmiddel kan de primaire assistent originele transcripten ophalen uit geciteerde berichtbereiken. Het wordt automatisch uitgevoerd zonder toestemming te vragen wanneer Contextcompressie actief is."
+msgid ""
+"This tool allows the primary assistant to retrieve original transcripts from "
+"cited message ranges. It runs automatically without asking for permission "
+"when Context Compaction is active."
+msgstr ""
+"Met dit hulpmiddel kan de primaire assistent originele transcripten ophalen "
+"uit geciteerde berichtbereiken. Het wordt automatisch uitgevoerd zonder "
+"toestemming te vragen wanneer Contextcompressie actief is."
 
 msgid "No command provided."
 msgstr "Geen opdracht opgegeven."
+
+msgid "Saved phrases:"
+msgstr "Opgeslagen zinnen:"
+
+msgid ""
+"Nothing remembered yet. The assistant can save phrases with its edit_memory "
+"tool, or add them below."
+msgstr ""
+"Nog niets onthouden. De assistent kan zinnen opslaan met het hulpmiddel "
+"edit_memory, of voeg ze hieronder toe."
+
+msgid "Edit"
+msgstr "Bewerken"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Remove"
+msgstr "Verwijderen"
+
+msgid "Memory is full"
+msgstr "Geheugen is vol"
+
+msgid "Add a phrase…"
+msgstr "Zin toevoegen…"
+
+msgid "Add"
+msgstr "Toevoegen"
+
+msgid "Ask before running commands from LLM"
+msgstr "Vragen voor het uitvoeren van LLM-opdrachten"
+
+msgid ""
+"Prompt for approval before executing shell commands from the LLM. Dangerous "
+"to uncheck as the LLM will see output and may run further commands."
+msgstr ""
+"Vragen om goedkeuring voor het uitvoeren van shell-opdrachten van de LLM. "
+"Gevaarlijk om uit te schakelen omdat de LLM de uitvoer zal zien en mogelijk "
+"verdere opdrachten uitvoert."
+
+msgid ""
+"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
+"commands without permission and will see their output, enabling an agentic "
+"workflow. Only use with trustworthy LLMs."
+msgstr ""
+"⚠️ GEVAAR: 'Vragen voor uitvoering' is uitgeschakeld — de LLM kan nu "
+"opdrachten uitvoeren zonder toestemming en zal hun uitvoer zien, waardoor "
+"een agentische workflow mogelijk wordt. Gebruik alleen met betrouwbare LLM's."
+
+msgid "Note: This tool is not restricted by the path whitelist."
+msgstr "Opmerking: Dit tool wordt niet beperkt door de padwitte lijst."
+
+msgid "Session Multiplexer"
+msgstr "Sessie-multiplexer"
+
+msgid "Run commands inside a persistent session"
+msgstr "Opdrachten uitvoeren binnen een persistente sessie"
+
+msgid ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
+msgstr ""
+"Voer LLM-opdrachten uit binnen een langlopende tmux- of screen-sessie zodat "
+"de status behouden blijft over meerdere beurten."
+
+msgid "Reset Session"
+msgstr "Sessie resetten"
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+"Persistente sessie beëindigen (stopt alle processen en reset shellstatus)"
+
+msgid ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
+msgstr ""
+"Noch 'tmux' noch 'screen' is op uw systeem gevonden. Sessie-multiplexing is "
+"niet beschikbaar."
+
+msgid "Manage and discover skills in the Skills settings page."
+msgstr ""
+"Beheer en ontdek vaardigheden op de pagina Vaardigheden in de instellingen."
 
 msgid "Ollama API"
 msgstr "Ollama API"
@@ -198,70 +297,31 @@ msgid "DuckDuckGo requires no configuration."
 msgstr "DuckDuckGo vereist geen configuratie."
 
 msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Zorg ervoor dat op de SearXNG-instantie het JSON-formaat is ingeschakeld."
+msgstr ""
+"Zorg ervoor dat op de SearXNG-instantie het JSON-formaat is ingeschakeld."
 
 msgid "Enables LLM-triggered neural web searches via Exa API."
-msgstr "Maakt LLM-geactiveerde neurale webzoekopdrachten mogelijk via de Exa API."
+msgstr ""
+"Maakt LLM-geactiveerde neurale webzoekopdrachten mogelijk via de Exa API."
 
 msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Maakt LLM-geactiveerde webzoekopdrachten mogelijk via de zoek-API van Ollama"
+msgstr ""
+"Maakt LLM-geactiveerde webzoekopdrachten mogelijk via de zoek-API van Ollama"
 
-msgid "Manage and discover skills in the Skills settings page."
-msgstr "Beheer en ontdek vaardigheden op de pagina Vaardigheden in de instellingen."
+msgid ""
+"Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
+"that skill has “Allow running skill scripts without approval” checked on the "
+"Skills settings page."
+msgstr "Voert een .sh-bestand uit binnen een vaardighedenmap. Goedkeuring per uitvoering wordt alleen overgeslagen als voor die vaardigheid “Uitvoeren van vaardigheidsscripts toestaan zonder goedkeuring” is aangevinkt op de instellingenpagina voor Vaardigheden."
 
-msgid "Saved phrases:"
-msgstr "Opgeslagen zinnen:"
+msgid "Color button"
+msgstr "Kleurknop"
 
-msgid "Nothing remembered yet. The assistant can save phrases with its edit_memory tool, or add them below."
-msgstr "Nog niets onthouden. De assistent kan zinnen opslaan met het hulpmiddel edit_memory, of voeg ze hieronder toe."
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Huidige kleur is %1. Deze knop opent een kleurkeuzevenster."
 
-msgid "Edit"
-msgstr "Bewerken"
-
-msgid "Save"
-msgstr "Opslaan"
-
-msgid "Remove"
-msgstr "Verwijderen"
-
-msgid "Memory is full"
-msgstr "Geheugen is vol"
-
-msgid "Add a phrase…"
-msgstr "Zin toevoegen…"
-
-msgid "Add"
-msgstr "Toevoegen"
-
-msgid "Ask before running commands from LLM"
-msgstr "Vragen voor het uitvoeren van LLM-opdrachten"
-
-msgid "Prompt for approval before executing shell commands from the LLM. Dangerous to uncheck as the LLM will see output and may run further commands."
-msgstr "Vragen om goedkeuring voor het uitvoeren van shell-opdrachten van de LLM. Gevaarlijk om uit te schakelen omdat de LLM de uitvoer zal zien en mogelijk verdere opdrachten uitvoert."
-
-msgid "⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute commands without permission and will see their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-msgstr "⚠️ GEVAAR: 'Vragen voor uitvoering' is uitgeschakeld — de LLM kan nu opdrachten uitvoeren zonder toestemming en zal hun uitvoer zien, waardoor een agentische workflow mogelijk wordt. Gebruik alleen met betrouwbare LLM's."
-
-msgid "Note: This tool is not restricted by the path whitelist."
-msgstr "Opmerking: Dit tool wordt niet beperkt door de padwitte lijst."
-
-msgid "Session Multiplexer"
-msgstr "Sessie-multiplexer"
-
-msgid "Run commands inside a persistent session"
-msgstr "Opdrachten uitvoeren binnen een persistente sessie"
-
-msgid "Execute LLM commands inside a long-lived tmux or screen session so state persists across turns."
-msgstr "Voer LLM-opdrachten uit binnen een langlopende tmux- of screen-sessie zodat de status behouden blijft over meerdere beurten."
-
-msgid "Reset Session"
-msgstr "Sessie resetten"
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr "Persistente sessie beëindigen (stopt alle processen en reset shellstatus)"
-
-msgid "Neither 'tmux' nor 'screen' was found on your system. Session multiplexing is unavailable."
-msgstr "Noch 'tmux' noch 'screen' is op uw systeem gevonden. Sessie-multiplexing is niet beschikbaar."
+msgid "Current color is %1."
+msgstr "Huidige kleur is %1."
 
 msgid "Tool Request: %1"
 msgstr "Gereedschapsverzoek: %1"
@@ -363,7 +423,8 @@ msgid "Whisper CLI failed (exit %1)"
 msgstr "Whisper-CLI mislukt (exit %1)"
 
 msgid "Try Device: cpu or Default in Speech to Text settings."
-msgstr "Probeer Apparaat: cpu of Standaard in de instellingen voor Spraak naar tekst."
+msgstr ""
+"Probeer Apparaat: cpu of Standaard in de instellingen voor Spraak naar tekst."
 
 msgid "Refresh model list"
 msgstr "Modellijst vernieuwen"
@@ -488,20 +549,316 @@ msgstr "Instellingen tonen"
 msgid "Show Pin"
 msgstr "Vastmaakpictogram tonen"
 
-msgid "Speech-to-text is not configured"
-msgstr "Spraak-naar-tekst is niet geconfigureerd"
+msgid "Loaded %1 skill"
+msgstr "%1 vaardigheid geladen"
 
-msgid "Unknown STT backend: %1"
-msgstr "Onbekende STT-backend: %1"
+msgid "Voice message"
+msgstr "Spraakbericht"
 
-msgid "Whisper CLI runner is not available"
-msgstr "Whisper-CLI-runner is niet beschikbaar"
+msgid "Error"
+msgstr "Fout"
 
-msgid "Could not build Whisper command"
-msgstr "Kon Whisper-opdracht niet opbouwen"
+msgid "Web Search"
+msgstr "Webzoekopdracht"
 
-msgid "STT backend does not support model listing"
-msgstr "STT-backend ondersteunt het weergeven van modellen niet"
+msgid "compacted"
+msgstr "gecomprimeerd"
+
+msgid ""
+"This message has been summarized into the compacted context. Citations "
+"active."
+msgstr ""
+"Dit bericht is samengevat in de gecomprimeerde context. Citaties actief."
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Mathtext-rendering is teruggevallen op Unicode-vervanging (matplotlib niet "
+"geïnstalleerd of er is een fout opgetreden)"
+
+msgid "Thinking"
+msgstr "Denken…"
+
+msgid "Searched for: %1"
+msgstr "Gezocht naar: %1"
+
+msgid "Show %1 results"
+msgstr "%1 resultaten tonen"
+
+msgid "Save & Retry"
+msgstr "Opslaan en opnieuw proberen"
+
+msgid "Copy to clipboard"
+msgstr "Naar klembord kopiëren"
+
+msgid "Edit message"
+msgstr "Bericht bewerken"
+
+msgid "Edit response"
+msgstr "Antwoord bewerken"
+
+msgid "Retry from here"
+msgstr "Vanaf hier opnieuw proberen"
+
+msgid "Regenerate response"
+msgstr "Antwoord opnieuw genereren"
+
+msgid "Share output with assistant"
+msgstr "Uitvoer delen met assistent"
+
+msgid "The model loaded this skill's instructions into context before acting."
+msgstr ""
+"Het model heeft de instructies van deze vaardigheid in de context geladen "
+"alvorens te handelen."
+
+msgid "Approve the pending tool request"
+msgstr "Openstaand gereedschapsverzoek goedkeuren"
+
+msgid "Toggle skip approvals for this session"
+msgstr "Goedkeuringen overslaan voor deze sessie in-/uitschakelen"
+
+msgid "Clear the chat"
+msgstr "Chat wissen"
+
+msgid "Close the panel"
+msgstr "Paneel sluiten"
+
+msgid "Copy conversation to clipboard"
+msgstr "Gesprek naar klembord kopiëren"
+
+msgid "Deny the pending tool request"
+msgstr "Openstaand gereedschapsverzoek weigeren"
+
+msgid "Open chat history folder"
+msgstr "Chatgeschiedenismap openen"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "Model weergeven of wisselen (/model <name>)"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "Profiel wisselen (/profile <naam>)"
+
+msgid "Save chat to file"
+msgstr "Chat opslaan in bestand"
+
+msgid "Open settings"
+msgstr "Instellingen openen"
+
+msgid "List discovered skills and their status"
+msgstr "Ontdekte vaardigheden en hun status weergeven"
+
+msgid "Run a saved task (/task <name>)"
+msgstr "Een opgeslagen taak uitvoeren (/task <name>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr ""
+"Drive Desktop-modus in-/uitschakelen (start handshake en automatische modus)"
+
+msgid "Toggle Full Auto Mode"
+msgstr "Volledig automatische modus in-/uitschakelen"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Volledig automatische modus in-/uitschakelen: Indien ingeschakeld, worden "
+"alle tools automatisch uitgevoerd voor deze sessie."
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "Besturing bureaublad stoppen (verbinding verbreken)"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop (start handshake en schakelt automatische modus in)"
+
+msgid "Run a task"
+msgstr "Een taak uitvoeren"
+
+msgid "Chat History"
+msgstr "Chatgeschiedenis"
+
+msgid "Loading..."
+msgstr "Laden..."
+
+msgid "No recent chats"
+msgstr "Geen recente chats"
+
+msgid "Open history folder..."
+msgstr "Geschiedenismap openen..."
+
+msgid "Clear all history..."
+msgstr "Alle geschiedenis wissen..."
+
+msgid "Clear All History"
+msgstr "Alle geschiedenis wissen"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Weet u zeker dat u alle chatgeschiedenisbestanden wilt verwijderen? Deze "
+"actie kan niet ongedaan worden gemaakt."
+
+msgid "Clear All"
+msgstr "Alles wissen"
+
+msgid "Retry from this message?"
+msgstr "Vanaf dit bericht opnieuw proberen?"
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+"Dit verwijdert %1 bericht(en) na dit punt en genereert een nieuw antwoord."
+
+msgid "Retry"
+msgstr "Opnieuw proberen"
+
+msgid "Compacted Context Summary"
+msgstr "Samenvatting van gecomprimeerde context"
+
+#, javascript-format
+msgid "Compacted up to %1%2 • Citations active"
+msgstr "Gecomprimeerd tot %1%2 • Citaties actief"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "No compaction summary available."
+msgstr "Geen compressiesamenvatting beschikbaar."
+
+msgid "Copy"
+msgstr "Kopiëren"
+
+msgid "Compacting…"
+msgstr "Comprimeren…"
+
+msgid "Re-compact"
+msgstr "Opnieuw comprimeren"
+
+msgid "Incrementally compact new uncompacted conversation turns."
+msgstr "Nieuwe ongecomprimeerde gespreksbeurten incrementeel comprimeren."
+
+msgid "Recompact All"
+msgstr "Alles opnieuw comprimeren"
+
+msgid ""
+"Re-summarize the entire conversation from turn 1 from scratch, creating a "
+"fresh, unified compaction."
+msgstr ""
+"Het hele gesprek vanaf beurt 1 vanaf nul opnieuw samenvatten, waardoor een "
+"nieuwe, uniforme compressie ontstaat."
+
+msgid "Copy conversation"
+msgstr "Gesprek kopiëren"
+
+msgid "Command"
+msgstr "Opdracht"
+
+msgid "View compacted context summary"
+msgstr "Samenvatting van gecomprimeerde context bekijken"
+
+msgid "Compacting context in background…"
+msgstr "Context comprimeren op de achtergrond…"
+
+msgid "Clear chat"
+msgstr "Chat wissen"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Don't keep open"
+msgstr "Niet open houden"
+
+msgid "Keep open"
+msgstr "Open houden"
+
+msgid "Dismiss"
+msgstr "Negeren"
+
+msgid "The user denied this tool call."
+msgstr "De gebruiker heeft deze gereedschapsaanroep geweigerd."
+
+msgid "Send a message to start chatting"
+msgstr "Stuur een bericht om te beginnen met chatten"
+
+msgid "Attach File"
+msgstr "Bestand bijvoegen"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Afbeeldingen (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Tekstbestanden (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
+"*.conf *.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "Alle bestanden (*)"
+
+msgid "Message input"
+msgstr "Berichtinvoer"
+
+msgid "Type a message…"
+msgstr "Typ een bericht…"
+
+msgid "Initializing…"
+msgstr "Initialiseren…"
+
+msgid "Attach file or image"
+msgstr "Bestand of afbeelding bijvoegen"
+
+msgid "Transcribing…"
+msgstr "Transcriberen…"
+
+msgid "Preparing…"
+msgstr "Voorbereiden…"
+
+msgid "Wait for the current reply"
+msgstr "Wachten op het huidige antwoord"
+
+msgid "Click to stop and send"
+msgstr "Klik om te stoppen en te verzenden"
+
+msgid "Release to send"
+msgstr "Laat los om te verzenden"
+
+msgid "Click to start"
+msgstr "Klik om te starten"
+
+msgid "Hold to talk"
+msgstr "Ingedrukt houden om te spreken"
+
+msgid "Click to toggle, hold to talk"
+msgstr "Klik om te wisselen, ingedrukt houden om te spreken"
+
+msgid "Send"
+msgstr "Verzenden"
+
+msgid "Stop"
+msgstr "Stoppen"
+
+msgid "Cancel LLM request"
+msgstr "LLM-verzoek annuleren"
+
+msgid "Drop files here to attach"
+msgstr "Sleep bestanden hierheen om ze bij te voegen"
+
+msgid "Stop command"
+msgstr "Opdracht stoppen"
+
+msgid "Open terminal attached to this session"
+msgstr "Terminal gekoppeld aan deze sessie openen"
+
+msgid "Collapse result"
+msgstr "Resultaat samenvouwen"
+
+msgid "Copy output"
+msgstr "Uitvoer kopiëren"
 
 msgid "Context Compaction"
 msgstr "Contextcompressie"
@@ -519,7 +876,8 @@ msgid "Active Chat Profile (Fallback)"
 msgstr "Actief chatprofiel (terugvaloptie)"
 
 msgid "Selected profile does not have an endpoint URL or model configured."
-msgstr "Het geselecteerde profiel heeft geen eindpunt-URL of model geconfigureerd."
+msgstr ""
+"Het geselecteerde profiel heeft geen eindpunt-URL of model geconfigureerd."
 
 msgid "Testing compaction call using '%1'…"
 msgstr "Compressie-aanroep testen met '%1'…"
@@ -536,8 +894,16 @@ msgstr "Contextcompressie:"
 msgid "Enable context compaction"
 msgstr "Contextcompressie inschakelen"
 
-msgid "Dramatically reduces token usage and speeds up responses in long conversations by compressing older turns into a dense background summary. Keeps your chats lightweight and cost-effective while your full history remains visible."
-msgstr "Vermindert het tokengebruik aanzienlijk en versnelt antwoorden in lange gesprekken door oudere beurten samen te vatten in een compacte achtergrondsamenvatting. Houdt uw chats licht en kosteneffectief terwijl uw volledige geschiedenis zichtbaar blijft."
+msgid ""
+"Dramatically reduces token usage and speeds up responses in long "
+"conversations by compressing older turns into a dense background summary. "
+"Keeps your chats lightweight and cost-effective while your full history "
+"remains visible."
+msgstr ""
+"Vermindert het tokengebruik aanzienlijk en versnelt antwoorden in lange "
+"gesprekken door oudere beurten samen te vatten in een compacte "
+"achtergrondsamenvatting. Houdt uw chats licht en kosteneffectief terwijl uw "
+"volledige geschiedenis zichtbaar blijft."
 
 msgid "Compaction Profile"
 msgstr "Compressieprofiel"
@@ -603,8 +969,12 @@ msgstr "Herstellen naar standaardinstructies"
 msgid "Diagnostic & Testing"
 msgstr "Diagnose & testen"
 
-msgid "Test compaction against your selected model profile using the sample transcript below:"
-msgstr "Test compressie met uw geselecteerde modelprofiel met behulp van het onderstaande voorbeeldtranscript:"
+msgid ""
+"Test compaction against your selected model profile using the sample "
+"transcript below:"
+msgstr ""
+"Test compressie met uw geselecteerde modelprofiel met behulp van het "
+"onderstaande voorbeeldtranscript:"
 
 msgid "Sample Conversation Transcript:"
 msgstr "Voorbeeld van gesprekstranscript:"
@@ -620,6 +990,63 @@ msgstr "Compressieverbinding testen"
 
 msgid "Model Summary Response:"
 msgstr "Samenvattingsantwoord van model:"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"Geen aangepaste tools geconfigureerd. Voeg een aangepaste tool toe om uw "
+"eigen opdrachten beschikbaar te maken voor de LLM."
+
+msgid "Add Custom Tool"
+msgstr "Aangepaste tool toevoegen"
+
+msgid "Echoes back the message provided."
+msgstr "Geeft het opgegeven bericht terug."
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "Toolnaam (bijv. systemctl_service)"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "Beschrijving (instrueert de LLM wat deze tool doet)"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "Opdrachtssjabloon (bijv. systemctl {action} {service})"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "Supergebruiker vereisen (wordt uitgevoerd met pkexec)"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "Tool automatisch uitvoeren (geen bevestigingsdialoog)"
+
+msgid "Collapse results"
+msgstr "Resultaten samenvouwen"
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+"Toon voltooide resultaten als een compacte pil; klik op de pil om de "
+"volledige uitvoer te bekijken."
+
+msgid "Update Tool"
+msgstr "Tool bijwerken"
+
+msgid "Save Tool"
+msgstr "Tool opslaan"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "Er bestaat al een tool met de naam \"%1\"."
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"Met aangepaste tools kunt u uw eigen opdrachten beschikbaar maken voor de "
+"LLM. Gebruik tijdelijke aanduidingen zoals {variable} in de "
+"Opdrachtssjabloon om parameters te definiëren die de LLM kan invullen. "
+"Waarden van de LLM worden automatisch shell-escaped."
 
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Kan gcloud-token niet ophalen (afsluiting %1): %2"
@@ -672,8 +1099,11 @@ msgstr "API-sleutel (Express-modus)"
 msgid "Google Cloud CLI (gcloud)"
 msgstr "Google Cloud CLI (gcloud)"
 
-msgid "gcloud CLI not found. Please install it to use this authentication method."
-msgstr "gcloud CLI niet gevonden. Installeer het om deze authenticatiemethode te gebruiken."
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLI niet gevonden. Installeer het om deze authenticatiemethode te "
+"gebruiken."
 
 msgid "API Variant:"
 msgstr "API-variant:"
@@ -712,7 +1142,8 @@ msgid "Stored in KDE Wallet"
 msgstr "Opgeslagen in KDE Wallet"
 
 msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Wallet niet beschikbaar — sleutel opgeslagen in configuratiebestand"
+msgstr ""
+"KDE Wallet niet beschikbaar — sleutel opgeslagen in configuratiebestand"
 
 #, javascript-format
 msgid "Temperature: %1%"
@@ -748,14 +1179,26 @@ msgstr "Denkbudget:"
 msgid "Show thoughts in chat (collapsible)"
 msgstr "Gedachten in chat tonen (inklapbaar)"
 
-msgid "When enabled, the model's reasoning is shown above each reply with a collapsible header. Round-trip of signed thoughts to the API still happens regardless of this setting."
-msgstr "Wanneer ingeschakeld wordt het redeneerproces van het model boven elk antwoord getoond met een inklapbare kop. De uitwisseling van ondertekende gedachten met de API vindt plaats ongeacht deze instelling."
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"Wanneer ingeschakeld wordt het redeneerproces van het model boven elk "
+"antwoord getoond met een inklapbare kop. De uitwisseling van ondertekende "
+"gedachten met de API vindt plaats ongeacht deze instelling."
 
 msgid "Use Responses API"
 msgstr "Responses API gebruiken"
 
-msgid "Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure (POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when picking a preset."
-msgstr "Vereist om redeneercontent weer te geven op OpenAI / Poe / OpenRouter / Azure (POST naar /v1/responses in plaats van /v1/chat/completions). Automatisch ingesteld bij het kiezen van een preset."
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"Vereist om redeneercontent weer te geven op OpenAI / Poe / OpenRouter / "
+"Azure (POST naar /v1/responses in plaats van /v1/chat/completions). "
+"Automatisch ingesteld bij het kiezen van een preset."
 
 msgid "Attachments:"
 msgstr "Bijlagen:"
@@ -763,8 +1206,12 @@ msgstr "Bijlagen:"
 msgid "Resize image attachments"
 msgstr "Afbeeldingsbijlagen verkleinen"
 
-msgid "Resizes large image attachments to fit within 800x600 before sending, reducing upload size and context tokens."
-msgstr "Verkleint grote afbeeldingsbijlagen tot maximaal 800x600 vóór het verzenden, waardoor de uploadgrootte en het aantal contexttokens worden verminderd."
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+"Verkleint grote afbeeldingsbijlagen tot maximaal 800x600 vóór het verzenden, "
+"waardoor de uploadgrootte en het aantal contexttokens worden verminderd."
 
 msgid "Chat History:"
 msgstr "Chatgeschiedenis:"
@@ -781,8 +1228,12 @@ msgstr "Meldingen:"
 msgid "Show notifications when minimized"
 msgstr "Meldingen weergeven wanneer geminimaliseerd"
 
-msgid "Show system notifications for incoming messages and tool calls when the chat window is minimized or closed."
-msgstr "Systeemmeldingen weergeven voor binnenkomende berichten en tool-aanroepen wanneer het chatvenster geminimaliseerd of gesloten is."
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+"Systeemmeldingen weergeven voor binnenkomende berichten en tool-aanroepen "
+"wanneer het chatvenster geminimaliseerd of gesloten is."
 
 msgid "Save format:"
 msgstr "Opslagformaat:"
@@ -823,17 +1274,26 @@ msgstr "Spraak naar tekst"
 msgid "Model “%1” is on disk."
 msgstr "Model “%1” staat op de schijf."
 
-msgid "Model “%1” is not downloaded. The first transcription will fetch it (%2) into ~/.cache/whisper and can take a long time."
-msgstr "Model “%1” is niet gedownload. De eerste transcriptie haalt het (%2) op naar ~/.cache/whisper en dit kan lang duren."
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
+"into ~/.cache/whisper and can take a long time."
+msgstr ""
+"Model “%1” is niet gedownload. De eerste transcriptie haalt het (%2) op naar "
+"~/.cache/whisper en dit kan lang duren."
 
-msgid "Model “%1” is not downloaded. The first transcription will fetch it into ~/.cache/whisper and can take a long time."
-msgstr "Model “%1” is niet gedownload. De eerste transcriptie haalt het op naar ~/.cache/whisper en dit kan lang duren."
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it into "
+"~/.cache/whisper and can take a long time."
+msgstr ""
+"Model “%1” is niet gedownload. De eerste transcriptie haalt het op naar "
+"~/.cache/whisper en dit kan lang duren."
 
 msgid "CUDA is available to Whisper."
 msgstr "CUDA is beschikbaar voor Whisper."
 
 msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
-msgstr "CUDA is niet beschikbaar in deze Whisper-omgeving. Gebruik cpu of Standaard."
+msgstr ""
+"CUDA is niet beschikbaar in deze Whisper-omgeving. Gebruik cpu of Standaard."
 
 msgid "Whisper CLI responded to --help."
 msgstr "Whisper-CLI reageerde op --help."
@@ -874,8 +1334,12 @@ msgstr "Spraakinvoer:"
 msgid "Enable microphone input"
 msgstr "Microfooninvoer inschakelen"
 
-msgid "Configures the speech-to-text engine only. Transcripts use your active chat profile (General)."
-msgstr "Configureert alleen de spraak-naar-tekst-engine. Transcripties gebruiken uw actieve chatprofiel (Algemeen)."
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"Configureert alleen de spraak-naar-tekst-engine. Transcripties gebruiken uw "
+"actieve chatprofiel (Algemeen)."
 
 msgid "Mic button:"
 msgstr "Microfoonknop:"
@@ -883,20 +1347,30 @@ msgstr "Microfoonknop:"
 msgid "Auto"
 msgstr "Automatisch"
 
-msgid "Hold to talk"
-msgstr "Ingedrukt houden om te spreken"
-
 msgid "Toggle"
 msgstr "Wisselen"
 
-msgid "Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-and-hold only. Toggle: click to start/stop."
-msgstr "Auto: klik schakelt opname in/uit; houd 250 ms+ ingedrukt voor push-to-talk. Ingedrukt houden: alleen ingedrukt houden. Wisselen: klik om te starten/stoppen."
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"Auto: klik schakelt opname in/uit; houd 250 ms+ ingedrukt voor push-to-talk. "
+"Ingedrukt houden: alleen ingedrukt houden. Wisselen: klik om te starten/"
+"stoppen."
 
 msgid "Voice shortcut:"
 msgstr "Spraaksneltoets:"
 
-msgid "While PlasmaLLM is open and focused, uses the same mic mode as the button (auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to disable."
-msgstr "Wanneer PlasmaLLM geopend en gefocust is, gebruikt dit dezelfde microfoonmodus als de knop (auto: kort indrukken wisselt, 250 ms+ ingedrukt houden is push-to-talk). Opent het paneel niet — gebruik «Widget activeren» op de pagina Sneltoetsen. Standaard: Ctrl+M. Wissen om uit te schakelen."
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"Wanneer PlasmaLLM geopend en gefocust is, gebruikt dit dezelfde "
+"microfoonmodus als de knop (auto: kort indrukken wisselt, 250 ms+ ingedrukt "
+"houden is push-to-talk). Opent het paneel niet — gebruik «Widget activeren» "
+"op de pagina Sneltoetsen. Standaard: Ctrl+M. Wissen om uit te schakelen."
 
 msgid "Transcriber"
 msgstr "Transcribeerder"
@@ -910,8 +1384,12 @@ msgstr "Eindpunt:"
 msgid "Fetch STT models"
 msgstr "STT-modellen ophalen"
 
-msgid "OpenRouter lists STT models only via transcription modalities (this page does that)."
-msgstr "OpenRouter toont STT-modellen alleen via transcriptiemodaliteiten (deze pagina doet dat)."
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouter toont STT-modellen alleen via transcriptiemodaliteiten (deze "
+"pagina doet dat)."
 
 msgid "API key:"
 msgstr "API-sleutel:"
@@ -925,8 +1403,12 @@ msgstr "API-sleutel opslaan"
 msgid "Command:"
 msgstr "Opdracht:"
 
-msgid "Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, toolbox run whisper."
-msgstr "Opdrachtvoorvoegsel, ongewijzigd ingevoegd. Voorbeelden: whisper, python3 -m whisper, toolbox run whisper."
+msgid ""
+"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
+"toolbox run whisper."
+msgstr ""
+"Opdrachtvoorvoegsel, ongewijzigd ingevoegd. Voorbeelden: whisper, python3 -m "
+"whisper, toolbox run whisper."
 
 msgid "Test:"
 msgstr "Test:"
@@ -959,7 +1441,8 @@ msgid "Threads:"
 msgstr "Threads:"
 
 msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
-msgstr "0 laat --threads weg (standaard voor Whisper). FP16 uit is veiliger op CPU."
+msgstr ""
+"0 laat --threads weg (standaard voor Whisper). FP16 uit is veiliger op CPU."
 
 msgid "Initial prompt:"
 msgstr "Initiële prompt:"
@@ -985,59 +1468,47 @@ msgstr "Optioneel, bijv. nl of en (leeg = automatisch)"
 msgid "Max recording (seconds):"
 msgstr "Max. opnameduur (seconden):"
 
-msgid "No custom tools configured. Add a custom tool to expose your own commands to the LLM."
-msgstr "Geen aangepaste tools geconfigureerd. Voeg een aangepaste tool toe om uw eigen opdrachten beschikbaar te maken voor de LLM."
+msgid "Speech-to-text is not configured"
+msgstr "Spraak-naar-tekst is niet geconfigureerd"
 
-msgid "Add Custom Tool"
-msgstr "Aangepaste tool toevoegen"
+msgid "Unknown STT backend: %1"
+msgstr "Onbekende STT-backend: %1"
 
-msgid "Echoes back the message provided."
-msgstr "Geeft het opgegeven bericht terug."
+msgid "Whisper CLI runner is not available"
+msgstr "Whisper-CLI-runner is niet beschikbaar"
 
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "Toolnaam (bijv. systemctl_service)"
+msgid "Could not build Whisper command"
+msgstr "Kon Whisper-opdracht niet opbouwen"
 
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "Beschrijving (instrueert de LLM wat deze tool doet)"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "Opdrachtssjabloon (bijv. systemctl {action} {service})"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "Supergebruiker vereisen (wordt uitgevoerd met pkexec)"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "Tool automatisch uitvoeren (geen bevestigingsdialoog)"
-
-msgid "Collapse results"
-msgstr "Resultaten samenvouwen"
-
-msgid "Show finished results as a small pill; click the pill to view the full output."
-msgstr "Toon voltooide resultaten als een compacte pil; klik op de pil om de volledige uitvoer te bekijken."
-
-msgid "Update Tool"
-msgstr "Tool bijwerken"
-
-msgid "Save Tool"
-msgstr "Tool opslaan"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "Er bestaat al een tool met de naam \"%1\"."
-
-msgid "Custom tools allow you to expose your own commands to the LLM. Use placeholders like {variable} in the Command Template to define parameters the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr "Met aangepaste tools kunt u uw eigen opdrachten beschikbaar maken voor de LLM. Gebruik tijdelijke aanduidingen zoals {variable} in de Opdrachtssjabloon om parameters te definiëren die de LLM kan invullen. Waarden van de LLM worden automatisch shell-escaped."
+msgid "STT backend does not support model listing"
+msgstr "STT-backend ondersteunt het weergeven van modellen niet"
 
 msgid "Enable skills"
 msgstr "Vaardigheden inschakelen"
 
-msgid "Skills are reusable instruction sets the model loads on demand via the skill tool. Add them to ~/.local/share/plasmallm/skills/ as either a folder per skill containing a SKILL.md file, or a single self-contained <name>.md file."
-msgstr "Vaardigheden zijn herbruikbare instructiesets die het model op aanvraag laadt via het vaardigheidshulpmiddel. Voeg ze toe aan ~/.local/share/plasmallm/skills/ als een map per vaardigheid met een SKILL.md-bestand, of als een enkel zelfstandig <naam>.md-bestand."
+msgid ""
+"Skills are reusable instruction sets the model loads on demand via the skill "
+"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
+"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
+"contained <name>.md file; a user skill with the same name overrides the "
+"bundled one."
+msgstr "Vaardigheden zijn herbruikbare instructiesets die het model op aanvraag laadt via het vaardigheidshulpmiddel. PlasmaLLM bevat ingebouwde vaardigheden (bron: meegeleverd). Voeg uw eigen vaardigheden toe aan ~/.local/share/plasmallm/skills/ als een map met een SKILL.md-bestand of een zelfstandig <naam>.md-bestand; een gebruikersvaardigheid met dezelfde naam overschrijft de meegeleverde versie."
 
-msgid "No skills discovered yet. Add a SKILL.md folder to the directory above or enable the extra directories below."
-msgstr "Nog geen vaardigheden ontdekt. Voeg een SKILL.md-map toe aan de bovenstaande map of schakel de extra mappen hieronder in."
+msgid ""
+"No skills discovered yet. Add a SKILL.md folder to the directory above or "
+"enable the extra directories below."
+msgstr ""
+"Nog geen vaardigheden ontdekt. Voeg een SKILL.md-map toe aan de bovenstaande "
+"map of schakel de extra mappen hieronder in."
 
 msgid "DISABLED"
 msgstr "UITGESCHAKELD"
+
+msgid "Allow running skill scripts without approval"
+msgstr "Uitvoeren van vaardigheidsscripts toestaan zonder goedkeuring"
+
+msgid "Refreshing…"
+msgstr "Vernieuwen…"
 
 msgid "Refresh"
 msgstr "Vernieuwen"
@@ -1060,8 +1531,17 @@ msgstr "Map opslaan"
 msgid "Add directory"
 msgstr "Map toevoegen"
 
-msgid "Enabled skills are advertised to the model by name and description; the model loads full instructions on demand with the skill tool. Loaded skill content is re-sent in full every turn and is never affected by context compaction. Toggles here are global (not per-profile)."
-msgstr "Ingeschakelde vaardigheden worden aan het model aangekondigd met naam en beschrijving; het model laadt volledige instructies op aanvraag met het vaardigheidshulpmiddel. Geladen vaardigheidsinhoud wordt elke beurt volledig opnieuw verzonden en wordt nooit beïnvloed door contextcompressie. Schakelaars hier zijn globaal (niet per profiel)."
+msgid ""
+"Enabled skills are advertised to the model by name and description; the "
+"model loads full instructions on demand with the skill tool. Loaded skill "
+"content is re-sent in full every turn and is never affected by context "
+"compaction. Toggles here are global (not per-profile)."
+msgstr ""
+"Ingeschakelde vaardigheden worden aan het model aangekondigd met naam en "
+"beschrijving; het model laadt volledige instructies op aanvraag met het "
+"vaardigheidshulpmiddel. Geladen vaardigheidsinhoud wordt elke beurt volledig "
+"opnieuw verzonden en wordt nooit beïnvloed door contextcompressie. "
+"Schakelaars hier zijn globaal (niet per profiel)."
 
 msgid "System Info:"
 msgstr "Systeeminfo:"
@@ -1108,8 +1588,20 @@ msgstr "Datum/Tijd"
 msgid "Template:"
 msgstr "Sjabloon:"
 
-msgid "This is the full system prompt sent to the model. Use {{placeholders}} to pull in dynamic content like system details, enabled tools, or desktop automation instructions. Anything else you write is used verbatim. Critical runtime instructions (driving, skip-approvals mode) are appended automatically when active, even if you remove their placeholder."
-msgstr "Dit is de volledige systeemprompt die naar het model wordt verzonden. Gebruik {{placeholders}} om dynamische inhoud op te halen, zoals systeemdetails, ingeschakelde tools of instructies voor desktopautomatisering. Al het andere dat u schrijft, wordt letterlijk gebruikt. Kritieke runtime-instructies (bediening, modus zonder goedkeuring) worden automatisch toegevoegd wanneer ze actief zijn, zelfs als u hun tijdelijke aanduiding verwijdert."
+msgid ""
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
+msgstr ""
+"Dit is de volledige systeemprompt die naar het model wordt verzonden. "
+"Gebruik {{placeholders}} om dynamische inhoud op te halen, zoals "
+"systeemdetails, ingeschakelde tools of instructies voor "
+"desktopautomatisering. Al het andere dat u schrijft, wordt letterlijk "
+"gebruikt. Kritieke runtime-instructies (bediening, modus zonder goedkeuring) "
+"worden automatisch toegevoegd wanneer ze actief zijn, zelfs als u hun "
+"tijdelijke aanduiding verwijdert."
 
 msgid "System Prompt:"
 msgstr "Systeemprompt:"
@@ -1121,22 +1613,30 @@ msgid "Placeholders:"
 msgstr "Tijdelijke aanduidingen:"
 
 msgid "Enabled system info selected in the checklist above"
-msgstr "Ingeschakelde systeeminformatie geselecteerd in de bovenstaande controlelijst"
+msgstr ""
+"Ingeschakelde systeeminformatie geselecteerd in de bovenstaande controlelijst"
 
 msgid "Enabled tool descriptions and guidelines from the Tools menu"
 msgstr "Ingeschakelde toolbeschrijvingen en richtlijnen uit het menu Tools"
 
-msgid "Available skills index and instructions for skills loaded this session (from the Skills settings page)"
-msgstr "Index van beschikbare vaardigheden en instructies voor vaardigheden die deze sessie zijn geladen (van de pagina Vaardigheden in de instellingen)"
+msgid ""
+"Available skills index and instructions for skills loaded this session (from "
+"the Skills settings page)"
+msgstr ""
+"Index van beschikbare vaardigheden en instructies voor vaardigheden die deze "
+"sessie zijn geladen (van de pagina Vaardigheden in de instellingen)"
 
-msgid "Persistent tmux or screen session multiplexer instructions (when active)"
-msgstr "Instructies voor permanente tmux- of screen-sessiemultiplexer (indien actief)"
+msgid ""
+"Persistent tmux or screen session multiplexer instructions (when active)"
+msgstr ""
+"Instructies voor permanente tmux- of screen-sessiemultiplexer (indien actief)"
 
 msgid "Notice indicating skip-approvals mode (/auto) is active"
 msgstr "Melding dat de modus zonder goedkeuring (/auto) actief is"
 
 msgid "Desktop automation coordinates and guidelines (when driving)"
-msgstr "Coördinaten en richtlijnen voor desktopautomatisering (tijdens bediening)"
+msgstr ""
+"Coördinaten en richtlijnen voor desktopautomatisering (tijdens bediening)"
 
 msgid "Localization:"
 msgstr "Lokalisatie:"
@@ -1144,11 +1644,22 @@ msgstr "Lokalisatie:"
 msgid "Localize System Prompt"
 msgstr "Systeemprompt lokaliseren"
 
-msgid "Translate default prompt templates and dynamic system sections into your desktop language."
-msgstr "Vertaal standaardsjablonen en dynamische systeemsecties naar de taal van uw desktop."
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
+msgstr ""
+"Vertaal standaardsjablonen en dynamische systeemsecties naar de taal van uw "
+"desktop."
 
-msgid "Note: Localizing system instructions and tools into non-English languages may reduce tool-calling reliability and instruction-following accuracy on some models."
-msgstr "Opmerking: Het lokaliseren van systeeminstructies en hulpprogramma's naar niet-Engelse talen kan de betrouwbaarheid van tool-aanroepen en de nauwkeurigheid bij het opvolgen van instructies op sommige modellen verminderen."
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
+msgstr ""
+"Opmerking: Het lokaliseren van systeeminstructies en hulpprogramma's naar "
+"niet-Engelse talen kan de betrouwbaarheid van tool-aanroepen en de "
+"nauwkeurigheid bij het opvolgen van instructies op sommige modellen "
+"verminderen."
 
 msgid "Actions:"
 msgstr "Acties:"
@@ -1175,13 +1686,19 @@ msgid "Desktop Automation:"
 msgstr "Bureaubladautomatisering:"
 
 msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr "Staat de LLM toe om een sessie aan te vragen om uw bureaublad te bekijken en te besturen."
+msgstr ""
+"Staat de LLM toe om een sessie aan te vragen om uw bureaublad te bekijken en "
+"te besturen."
 
 msgid "Enable Desktop Automation"
 msgstr "Bureaubladautomatisering inschakelen"
 
-msgid "Enable Desktop Automation (requires <a href=\"https://github.com/joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr "Bureaubladautomatisering inschakelen (vereist <a href=\"https://github.com/joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Bureaubladautomatisering inschakelen (vereist <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
 
 msgid "Path whitelist:"
 msgstr "Padwitte lijst:"
@@ -1189,8 +1706,13 @@ msgstr "Padwitte lijst:"
 msgid "Add path, e.g. $HOME/projects, /tmp"
 msgstr "Pad toevoegen, bijv. $HOME/projects, /tmp"
 
-msgid "Whitelist applies to file-system tools (read, write, list, search). Note: 'run_command' is not restricted by this list."
-msgstr "Witte lijst is van toepassing op bestandssysteemtools (lezen, schrijven, weergeven, zoeken). Opmerking: 'run_command' wordt niet beperkt door deze lijst."
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Witte lijst is van toepassing op bestandssysteemtools (lezen, schrijven, "
+"weergeven, zoeken). Opmerking: 'run_command' wordt niet beperkt door deze "
+"lijst."
 
 msgid "Max read size:"
 msgstr "Maximale leesgrootte:"
@@ -1208,7 +1730,8 @@ msgid "steps"
 msgstr "stappen"
 
 msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr "Opmerking: Deze limiet geldt niet voor bureaubladautomatiseringssessies."
+msgstr ""
+"Opmerking: Deze limiet geldt niet voor bureaubladautomatiseringssessies."
 
 msgid "Native Adapter Features"
 msgstr "Ingebouwde adapterfuncties"
@@ -1219,8 +1742,12 @@ msgstr "Google Zoeken:"
 msgid "Enable Native Google Search Grounding"
 msgstr "Ingebouwde Google Zoeken-grounding inschakelen"
 
-msgid "Use Gemini's built-in Google Search for grounding. This overrides the standard web search tool."
-msgstr "Gebruik de ingebouwde Google Zoeken van Gemini voor grounding. Dit overschrijft de standaard websearchtool."
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Gebruik de ingebouwde Google Zoeken van Gemini voor grounding. Dit "
+"overschrijft de standaard websearchtool."
 
 msgid "Code Execution:"
 msgstr "Code-uitvoering:"
@@ -1228,11 +1755,19 @@ msgstr "Code-uitvoering:"
 msgid "Enable Native Python Code Execution"
 msgstr "Ingebouwde Python-codeuitvoering inschakelen"
 
-msgid "Allow Gemini to write and execute Python code in a secure server-side sandbox."
-msgstr "Gemini toestaan om Python-code te schrijven en uit te voeren in een beveiligde server-side sandbox."
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Gemini toestaan om Python-code te schrijven en uit te voeren in een "
+"beveiligde server-side sandbox."
 
-msgid "Combining Native tools with commands requires a newer model. Your currently selected model (%1) may encounter errors."
-msgstr "Het combineren van native tools met commando's vereist een nieuwer model. Het momenteel geselecteerde model (%1) kan fouten ondervinden."
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Het combineren van native tools met commando's vereist een nieuwer model. "
+"Het momenteel geselecteerde model (%1) kan fouten ondervinden."
 
 msgid "Individual Tools"
 msgstr "Afzonderlijke tools"
@@ -1244,344 +1779,11 @@ msgid "Reset"
 msgstr "Herstellen"
 
 msgid ""
-"Execute a shell command on the user's system and return its output. Guidelines:\n"
-"- Use `pkexec` instead of `sudo` for any command requiring superuser privileges.\n"
-"- Chain steps with `&&`.\n"
-"- Commands run non-interactively. Never use commands that wait for user input (like `read`).\n"
-"- Use `kdialog` if you need to prompt the user for input or show a message box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
-"- NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission.\n"
-"- When permission is needed, ask the user in plain text first.\n"
-"- For auto-run tools: Be conservative and prefer read-only commands. If an action is potentially disruptive, describe it in plain text and wait for explicit user approval before calling the tool.\n"
-"- You MUST prefer other, more specific tools (like read_file, write_file, search_files, etc.) if they can accomplish the task. Only use this tool if no other tool is suitable."
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
 msgstr ""
-"Voert een shell-opdracht uit op het systeem van de gebruiker en retourneert de uitvoer. Richtlijnen:\n"
-"- Gebruik `pkexec` in plaats van `sudo` voor opdrachten die superuser-rechten vereisen.\n"
-"- Koppel stappen aan elkaar met `&&`.\n"
-"- Opdrachten worden niet-interactief uitgevoerd. Gebruik nooit opdrachten die wachten op gebruikersinvoer (zoals `read`).\n"
-"- Gebruik `kdialog` als u de gebruiker om invoer moet vragen of een berichtvenster moet weergeven (bijv. `kdialog --inputbox \"Prompt\"`).\n"
-"- Installeer NOOIT pakketten, wijzig geen systeemconfiguratie, start niet opnieuw op en onderneem geen actie die het systeem wijzigt of de gebruiker verstoort zonder expliciete toestemming.\n"
-"- Vraag de gebruiker eerst in platte tekst wanneer toestemming nodig is.\n"
-"- Voor automatisch uitgevoerde tools: wees voorzichtig en geef de voorkeur aan alleen-lezen opdrachten. Als een actie potentieel verstorend is, beschrijf deze dan in platte tekst en wacht op expliciete toestemming van de gebruiker voordat u de tool aanroept.\n"
-"- U MOET de voorkeur geven aan andere, specifiekere hulpprogramma's (zoals read_file, write_file, search_files, enz.) als deze de taak kunnen volbrengen. Gebruik deze tool alleen als geen andere tool geschikt is."
-
-msgid "Read the contents of a file at the specified path. Access is restricted to allowed directories."
-msgstr "Leest de inhoud van een bestand op het opgegeven pad. Toegang is beperkt tot toegestane mappen."
-
-msgid "Write content to a file at the specified path. Access is restricted to allowed directories."
-msgstr "Schrijft inhoud naar een bestand op het opgegeven pad. Toegang is beperkt tot toegestane mappen."
-
-msgid "List the contents of a directory. Access is restricted to allowed directories."
-msgstr "Geeft een overzicht van de inhoud van een map. Toegang is beperkt tot toegestane mappen."
-
-msgid "Search for a pattern within files in a directory (recursive)."
-msgstr "Zoekt naar een patroon in bestanden in een map (recursief)."
-
-msgid "Perform an HTTP GET request to a URL and return the response content."
-msgstr "Voert een HTTP GET-verzoek uit naar een URL en retourneert de antwoordinhoud."
-
-msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
-msgstr "Voert een HTTP-verzoek (POST, PUT, enz.) uit naar een URL."
-
-msgid "Get the current content of the system clipboard."
-msgstr "Haalt de huidige inhoud van het systeemklembord op."
-
-msgid "Set the content of the system clipboard."
-msgstr "Stelt de inhoud van het systeemklembord in."
-
-msgid "Show a system notification."
-msgstr "Toont een systeemmelding."
-
-msgid "Open a URL in the default application (e.g., web browser)."
-msgstr "Opent een URL in de standaardtoepassing (bijv. webbrowser)."
-
-msgid "Perform a web search to find current information, news, or specific facts."
-msgstr "Voert een zoekopdracht op het web uit om actuele informatie, nieuws of specifieke feiten te vinden."
-
-msgid "Restore the full verbatim text and tool outputs of previously compacted messages by specifying the start and end message IDs from a cited message range."
-msgstr "Herstel de volledige letterlijke tekst en hulpmiddeluitvoer van eerder gecomprimeerde berichten door de begin- en eind-bericht-ID's van een geciteerd berichtbereik op te geven."
-
-msgid "Loaded %1 skill"
-msgstr "%1 vaardigheid geladen"
-
-msgid "Voice message"
-msgstr "Spraakbericht"
-
-msgid "Error"
-msgstr "Fout"
-
-msgid "Web Search"
-msgstr "Webzoekopdracht"
-
-msgid "compacted"
-msgstr "gecomprimeerd"
-
-msgid "This message has been summarized into the compacted context. Citations active."
-msgstr "Dit bericht is samengevat in de gecomprimeerde context. Citaties actief."
-
-msgid "Mathtext rendering fell back to Unicode replacement (matplotlib not installed or error occurred)"
-msgstr "Mathtext-rendering is teruggevallen op Unicode-vervanging (matplotlib niet geïnstalleerd of er is een fout opgetreden)"
-
-msgid "Thinking"
-msgstr "Denken…"
-
-msgid "Searched for: %1"
-msgstr "Gezocht naar: %1"
-
-msgid "Show %1 results"
-msgstr "%1 resultaten tonen"
-
-msgid "Save & Retry"
-msgstr "Opslaan en opnieuw proberen"
-
-msgid "Copy to clipboard"
-msgstr "Naar klembord kopiëren"
-
-msgid "Edit message"
-msgstr "Bericht bewerken"
-
-msgid "Edit response"
-msgstr "Antwoord bewerken"
-
-msgid "Retry from here"
-msgstr "Vanaf hier opnieuw proberen"
-
-msgid "Regenerate response"
-msgstr "Antwoord opnieuw genereren"
-
-msgid "Share output with assistant"
-msgstr "Uitvoer delen met assistent"
-
-msgid "The model loaded this skill's instructions into context before acting."
-msgstr "Het model heeft de instructies van deze vaardigheid in de context geladen alvorens te handelen."
-
-msgid "Stop command"
-msgstr "Opdracht stoppen"
-
-msgid "Open terminal attached to this session"
-msgstr "Terminal gekoppeld aan deze sessie openen"
-
-msgid "Collapse result"
-msgstr "Resultaat samenvouwen"
-
-msgid "Copy output"
-msgstr "Uitvoer kopiëren"
-
-msgid "Approve the pending tool request"
-msgstr "Openstaand gereedschapsverzoek goedkeuren"
-
-msgid "Toggle skip approvals for this session"
-msgstr "Goedkeuringen overslaan voor deze sessie in-/uitschakelen"
-
-msgid "Clear the chat"
-msgstr "Chat wissen"
-
-msgid "Close the panel"
-msgstr "Paneel sluiten"
-
-msgid "Copy conversation to clipboard"
-msgstr "Gesprek naar klembord kopiëren"
-
-msgid "Deny the pending tool request"
-msgstr "Openstaand gereedschapsverzoek weigeren"
-
-msgid "Open chat history folder"
-msgstr "Chatgeschiedenismap openen"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "Model weergeven of wisselen (/model <name>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "Profiel wisselen (/profile <naam>)"
-
-msgid "Save chat to file"
-msgstr "Chat opslaan in bestand"
-
-msgid "Open settings"
-msgstr "Instellingen openen"
-
-msgid "List discovered skills and their status"
-msgstr "Ontdekte vaardigheden en hun status weergeven"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "Een opgeslagen taak uitvoeren (/task <name>)"
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr "Drive Desktop-modus in-/uitschakelen (start handshake en automatische modus)"
-
-msgid "Toggle Full Auto Mode"
-msgstr "Volledig automatische modus in-/uitschakelen"
-
-msgid "Toggle Full Auto Mode: When enabled, all tools run automatically for this session."
-msgstr "Volledig automatische modus in-/uitschakelen: Indien ingeschakeld, worden alle tools automatisch uitgevoerd voor deze sessie."
-
-msgid "Drive Desktop"
-msgstr "Drive Desktop"
-
-msgid "Stop Driving Desktop (disconnect)"
-msgstr "Besturing bureaublad stoppen (verbinding verbreken)"
-
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr "Drive Desktop (start handshake en schakelt automatische modus in)"
-
-msgid "Run a task"
-msgstr "Een taak uitvoeren"
-
-msgid "Chat History"
-msgstr "Chatgeschiedenis"
-
-msgid "Loading..."
-msgstr "Laden..."
-
-msgid "No recent chats"
-msgstr "Geen recente chats"
-
-msgid "Open history folder..."
-msgstr "Geschiedenismap openen..."
-
-msgid "Clear all history..."
-msgstr "Alle geschiedenis wissen..."
-
-msgid "Clear All History"
-msgstr "Alle geschiedenis wissen"
-
-msgid "Are you sure you want to delete all chat history files? This action cannot be undone."
-msgstr "Weet u zeker dat u alle chatgeschiedenisbestanden wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
-
-msgid "Clear All"
-msgstr "Alles wissen"
-
-msgid "Retry from this message?"
-msgstr "Vanaf dit bericht opnieuw proberen?"
-
-msgid "This will remove %1 message(s) after this point and generate a new response."
-msgstr "Dit verwijdert %1 bericht(en) na dit punt en genereert een nieuw antwoord."
-
-msgid "Retry"
-msgstr "Opnieuw proberen"
-
-msgid "Compacted Context Summary"
-msgstr "Samenvatting van gecomprimeerde context"
-
-#, javascript-format
-msgid "Compacted up to %1%2 • Citations active"
-msgstr "Gecomprimeerd tot %1%2 • Citaties actief"
-
-msgid "Close"
-msgstr "Sluiten"
-
-msgid "No compaction summary available."
-msgstr "Geen compressiesamenvatting beschikbaar."
-
-msgid "Copy"
-msgstr "Kopiëren"
-
-msgid "Compacting…"
-msgstr "Comprimeren…"
-
-msgid "Re-compact"
-msgstr "Opnieuw comprimeren"
-
-msgid "Incrementally compact new uncompacted conversation turns."
-msgstr "Nieuwe ongecomprimeerde gespreksbeurten incrementeel comprimeren."
-
-msgid "Recompact All"
-msgstr "Alles opnieuw comprimeren"
-
-msgid "Re-summarize the entire conversation from turn 1 from scratch, creating a fresh, unified compaction."
-msgstr "Het hele gesprek vanaf beurt 1 vanaf nul opnieuw samenvatten, waardoor een nieuwe, uniforme compressie ontstaat."
-
-msgid "Copy conversation"
-msgstr "Gesprek kopiëren"
-
-msgid "Command"
-msgstr "Opdracht"
-
-msgid "View compacted context summary"
-msgstr "Samenvatting van gecomprimeerde context bekijken"
-
-msgid "Compacting context in background…"
-msgstr "Context comprimeren op de achtergrond…"
-
-msgid "Clear chat"
-msgstr "Chat wissen"
-
-msgid "Settings"
-msgstr "Instellingen"
-
-msgid "Don't keep open"
-msgstr "Niet open houden"
-
-msgid "Keep open"
-msgstr "Open houden"
-
-msgid "Dismiss"
-msgstr "Negeren"
-
-msgid "The user denied this tool call."
-msgstr "De gebruiker heeft deze gereedschapsaanroep geweigerd."
-
-msgid "Send a message to start chatting"
-msgstr "Stuur een bericht om te beginnen met chatten"
-
-msgid "Attach File"
-msgstr "Bestand bijvoegen"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Afbeeldingen (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid "Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf *.sh *.py *.js *.ts *.qml)"
-msgstr "Tekstbestanden (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf *.sh *.py *.js *.ts *.qml)"
-
-msgid "All files (*)"
-msgstr "Alle bestanden (*)"
-
-msgid "Message input"
-msgstr "Berichtinvoer"
-
-msgid "Type a message…"
-msgstr "Typ een bericht…"
-
-msgid "Initializing…"
-msgstr "Initialiseren…"
-
-msgid "Attach file or image"
-msgstr "Bestand of afbeelding bijvoegen"
-
-msgid "Transcribing…"
-msgstr "Transcriberen…"
-
-msgid "Preparing…"
-msgstr "Voorbereiden…"
-
-msgid "Wait for the current reply"
-msgstr "Wachten op het huidige antwoord"
-
-msgid "Click to stop and send"
-msgstr "Klik om te stoppen en te verzenden"
-
-msgid "Release to send"
-msgstr "Laat los om te verzenden"
-
-msgid "Click to start"
-msgstr "Klik om te starten"
-
-msgid "Click to toggle, hold to talk"
-msgstr "Klik om te wisselen, ingedrukt houden om te spreken"
-
-msgid "Send"
-msgstr "Verzenden"
-
-msgid "Stop"
-msgstr "Stoppen"
-
-msgid "Cancel LLM request"
-msgstr "LLM-verzoek annuleren"
-
-msgid "Drop files here to attach"
-msgstr "Sleep bestanden hierheen om ze bij te voegen"
-
-msgid "Internal scheme for API keys has been migrated. If your key is now missing or does not work, you can recover your old key from KWalletManager."
-msgstr "Intern schema voor API-sleutels is gemigreerd. Als uw sleutel nu ontbreekt of niet werkt, kunt u uw oude sleutel herstellen vanuit KWalletManager."
+"Intern schema voor API-sleutels is gemigreerd. Als uw sleutel nu ontbreekt "
+"of niet werkt, kunt u uw oude sleutel herstellen vanuit KWalletManager."
 
 msgid "Failed to stop driving: %1"
 msgstr "Besturing stoppen mislukt: %1"
@@ -1590,10 +1792,12 @@ msgid "Still preparing system context…"
 msgstr "Systeemcontext nog aan het voorbereiden…"
 
 msgid "Voice input is not configured. Open Speech to Text settings."
-msgstr "Spraakinvoer is niet geconfigureerd. Open de Spraak naar tekst-instellingen."
+msgstr ""
+"Spraakinvoer is niet geconfigureerd. Open de Spraak naar tekst-instellingen."
 
 msgid "Recording too short — hold a bit longer, then toggle again to stop."
-msgstr "Opname te kort — houd iets langer ingedrukt en klik nogmaals om te stoppen."
+msgstr ""
+"Opname te kort — houd iets langer ingedrukt en klik nogmaals om te stoppen."
 
 msgid "Recording produced no audio file."
 msgstr "Opname heeft geen audiobestand opgeleverd."
@@ -1619,11 +1823,19 @@ msgstr "Kan opgenomen audio niet lezen."
 msgid "Failed to finalize recording"
 msgstr "Kan opname niet afronden"
 
-msgid "Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is installed and authenticated."
-msgstr "Kan gcloud-token niet ophalen (afsluiting %1): %2. Zorg ervoor dat gcloud is geïnstalleerd en geverifieerd."
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"Kan gcloud-token niet ophalen (afsluiting %1): %2. Zorg ervoor dat gcloud is "
+"geïnstalleerd en geverifieerd."
 
-msgid "No skills found. Drop folders containing a SKILL.md into ~/.local/share/plasmallm/skills/ (configure extra directories in Settings → Skills)."
-msgstr "Geen vaardigheden gevonden. Plaats mappen met een SKILL.md in ~/.local/share/plasmallm/skills/ (configureer extra mappen in Instellingen → Vaardigheden)."
+msgid ""
+"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
+"plasmallm/skills/ (configure extra directories in Settings → Skills)."
+msgstr ""
+"Geen vaardigheden gevonden. Plaats mappen met een SKILL.md in ~/.local/share/"
+"plasmallm/skills/ (configureer extra mappen in Instellingen → Vaardigheden)."
 
 msgid "invalid:"
 msgstr "ongeldig:"
@@ -1638,7 +1850,8 @@ msgid "Available skills (%1 enabled):"
 msgstr "Beschikbare vaardigheden (%1 ingeschakeld):"
 
 msgid "Enable or disable individual skills in Settings → Skills."
-msgstr "Schakel individuele vaardigheden in of uit in Instellingen → Vaardigheden."
+msgstr ""
+"Schakel individuele vaardigheden in of uit in Instellingen → Vaardigheden."
 
 msgid "No tool request pending to approve."
 msgstr "Geen gereedschapsverzoek in afwachting van goedkeuring."
@@ -1646,14 +1859,27 @@ msgstr "Geen gereedschapsverzoek in afwachting van goedkeuring."
 msgid "No tool request pending to deny."
 msgstr "Geen gereedschapsverzoek in afwachting van weigering."
 
-msgid "Skip approvals mode enabled for this session. All enabled tools will run automatically, bypassing 'Ask before running' settings."
-msgstr "Modus voor het overslaan van goedkeuringen ingeschakeld voor deze sessie. Alle ingeschakelde tools worden automatisch uitgevoerd, waarbij de instellingen voor 'Vragen voor uitvoering' worden omzeild."
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"Modus voor het overslaan van goedkeuringen ingeschakeld voor deze sessie. "
+"Alle ingeschakelde tools worden automatisch uitgevoerd, waarbij de "
+"instellingen voor 'Vragen voor uitvoering' worden omzeild."
 
-msgid "Skip approvals mode disabled. Tools will revert to your configured 'Ask before running' settings."
-msgstr "Modus voor het overslaan van goedkeuringen uitgeschakeld. Tools keren terug naar uw geconfigureerde instellingen voor 'Vragen voor uitvoering'."
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+"Modus voor het overslaan van goedkeuringen uitgeschakeld. Tools keren terug "
+"naar uw geconfigureerde instellingen voor 'Vragen voor uitvoering'."
 
-msgid "Desktop automation is disabled in settings. Enable it first to drive the desktop."
-msgstr "Bureaubladautomatisering is uitgeschakeld in de instellingen. Schakel dit eerst in om het bureaublad te besturen."
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+"Bureaubladautomatisering is uitgeschakeld in de instellingen. Schakel dit "
+"eerst in om het bureaublad te besturen."
 
 msgid "plasmallm-desktop-driver is not detected or running."
 msgstr "plasmallm-desktop-driver is niet gedetecteerd of draait niet."
@@ -1730,17 +1956,123 @@ msgstr "Fout: pad '%1' buiten witte lijst"
 msgid "Executing %1…"
 msgstr "%1 uitvoeren…"
 
-msgid "Loaded '%1' skill — its full instructions were added to this conversation's context."
-msgstr "Vaardigheid '%1' geladen — de volledige instructies zijn toegevoegd aan de context van dit gesprek."
+msgid ""
+"Loaded '%1' skill — its full instructions were added to this conversation's "
+"context."
+msgstr ""
+"Vaardigheid '%1' geladen — de volledige instructies zijn toegevoegd aan de "
+"context van dit gesprek."
 
 msgid "Failed to start drive session: %1"
 msgstr "Starten besturingssessie mislukt: %1"
 
 msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr "Besturingssessie actief (al geautoriseerd). Automatische modus ingeschakeld."
+msgstr ""
+"Besturingssessie actief (al geautoriseerd). Automatische modus ingeschakeld."
 
 msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr "Besturingssessie succesvol geautoriseerd. Automatische modus ingeschakeld."
+msgstr ""
+"Besturingssessie succesvol geautoriseerd. Automatische modus ingeschakeld."
+
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"Voert een shell-opdracht uit op het systeem van de gebruiker en retourneert "
+"de uitvoer. Richtlijnen:\n"
+"- Gebruik `pkexec` in plaats van `sudo` voor opdrachten die superuser-"
+"rechten vereisen.\n"
+"- Koppel stappen aan elkaar met `&&`.\n"
+"- Opdrachten worden niet-interactief uitgevoerd. Gebruik nooit opdrachten "
+"die wachten op gebruikersinvoer (zoals `read`).\n"
+"- Gebruik `kdialog` als u de gebruiker om invoer moet vragen of een "
+"berichtvenster moet weergeven (bijv. `kdialog --inputbox \"Prompt\"`).\n"
+"- Installeer NOOIT pakketten, wijzig geen systeemconfiguratie, start niet "
+"opnieuw op en onderneem geen actie die het systeem wijzigt of de gebruiker "
+"verstoort zonder expliciete toestemming.\n"
+"- Vraag de gebruiker eerst in platte tekst wanneer toestemming nodig is.\n"
+"- Voor automatisch uitgevoerde tools: wees voorzichtig en geef de voorkeur "
+"aan alleen-lezen opdrachten. Als een actie potentieel verstorend is, "
+"beschrijf deze dan in platte tekst en wacht op expliciete toestemming van de "
+"gebruiker voordat u de tool aanroept.\n"
+"- U MOET de voorkeur geven aan andere, specifiekere hulpprogramma's (zoals "
+"read_file, write_file, search_files, enz.) als deze de taak kunnen "
+"volbrengen. Gebruik deze tool alleen als geen andere tool geschikt is."
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Leest de inhoud van een bestand op het opgegeven pad. Toegang is beperkt tot "
+"toegestane mappen."
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Schrijft inhoud naar een bestand op het opgegeven pad. Toegang is beperkt "
+"tot toegestane mappen."
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+"Geeft een overzicht van de inhoud van een map. Toegang is beperkt tot "
+"toegestane mappen."
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "Zoekt naar een patroon in bestanden in een map (recursief)."
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr ""
+"Voert een HTTP GET-verzoek uit naar een URL en retourneert de antwoordinhoud."
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "Voert een HTTP-verzoek (POST, PUT, enz.) uit naar een URL."
+
+msgid "Get the current content of the system clipboard."
+msgstr "Haalt de huidige inhoud van het systeemklembord op."
+
+msgid "Set the content of the system clipboard."
+msgstr "Stelt de inhoud van het systeemklembord in."
+
+msgid "Show a system notification."
+msgstr "Toont een systeemmelding."
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr "Opent een URL in de standaardtoepassing (bijv. webbrowser)."
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Voert een zoekopdracht op het web uit om actuele informatie, nieuws of "
+"specifieke feiten te vinden."
+
+msgid ""
+"Restore the full verbatim text and tool outputs of previously compacted "
+"messages by specifying the start and end message IDs from a cited message "
+"range."
+msgstr ""
+"Herstel de volledige letterlijke tekst en hulpmiddeluitvoer van eerder "
+"gecomprimeerde berichten door de begin- en eind-bericht-ID's van een "
+"geciteerd berichtbereik op te geven."
 
 msgid "General"
 msgstr "Algemeen"
@@ -1763,6 +2095,17 @@ msgstr "Hulpmiddelen"
 msgid "Custom Tools"
 msgstr "Aangepaste tools"
 
+#~ msgid ""
+#~ "Skills are reusable instruction sets the model loads on demand via the "
+#~ "skill tool. Add them to ~/.local/share/plasmallm/skills/ as either a "
+#~ "folder per skill containing a SKILL.md file, or a single self-contained "
+#~ "<name>.md file."
+#~ msgstr ""
+#~ "Vaardigheden zijn herbruikbare instructiesets die het model op aanvraag "
+#~ "laadt via het vaardigheidshulpmiddel. Voeg ze toe aan ~/.local/share/"
+#~ "plasmallm/skills/ als een map per vaardigheid met een SKILL.md-bestand, "
+#~ "of als een enkel zelfstandig <naam>.md-bestand."
+
 #~ msgid "Kill"
 #~ msgstr "Beëindigen"
 
@@ -1770,7 +2113,8 @@ msgstr "Aangepaste tools"
 #~ msgstr "Sessie-reset aangevraagd."
 
 #~ msgid "API key saved to local fallback (KWallet unavailable)."
-#~ msgstr "API-sleutel opgeslagen in lokale fallback (KWallet niet beschikbaar)."
+#~ msgstr ""
+#~ "API-sleutel opgeslagen in lokale fallback (KWallet niet beschikbaar)."
 
 #~ msgid "Fetch"
 #~ msgstr "Ophalen"
@@ -1778,23 +2122,41 @@ msgstr "Aangepaste tools"
 #~ msgid "OpenAI-compatible transcriptions"
 #~ msgstr "OpenAI-compatibele transcripties"
 
-#~ msgid "Refreshing…"
-#~ msgstr "Vernieuwen…"
+#~ msgid ""
+#~ "Anthropic enables extended thinking when effort is not Off, using the "
+#~ "token budget below. Temperature is forced to max while thinking."
+#~ msgstr ""
+#~ "Anthropic schakelt uitgebreid denken in wanneer de inspanning niet Uit "
+#~ "staat, waarbij het onderstaande tokenbudget wordt gebruikt. De "
+#~ "temperatuur wordt geforceerd op het maximum tijdens het denken."
 
-#~ msgid "Anthropic enables extended thinking when effort is not Off, using the token budget below. Temperature is forced to max while thinking."
-#~ msgstr "Anthropic schakelt uitgebreid denken in wanneer de inspanning niet Uit staat, waarbij het onderstaande tokenbudget wordt gebruikt. De temperatuur wordt geforceerd op het maximum tijdens het denken."
+#~ msgid ""
+#~ "Exa performs real-time neural search and synthesizes grounded answers "
+#~ "with live web citations."
+#~ msgstr ""
+#~ "Exa voert realtime neurale zoekopdrachten uit en synthetiseert "
+#~ "onderbouwde antwoorden met live webcitaten."
 
-#~ msgid "Exa performs real-time neural search and synthesizes grounded answers with live web citations."
-#~ msgstr "Exa voert realtime neurale zoekopdrachten uit en synthetiseert onderbouwde antwoorden met live webcitaten."
-
-#~ msgid "Gemini uses the thinking token budget directly. Set to 0 to disable thinking on supported models."
-#~ msgstr "Gemini gebruikt het denk-tokenbudget rechtstreeks. Stel in op 0 om denken uit te schakelen op ondersteunde modellen."
+#~ msgid ""
+#~ "Gemini uses the thinking token budget directly. Set to 0 to disable "
+#~ "thinking on supported models."
+#~ msgstr ""
+#~ "Gemini gebruikt het denk-tokenbudget rechtstreeks. Stel in op 0 om denken "
+#~ "uit te schakelen op ondersteunde modellen."
 
 #~ msgid "Gemini uses the thinking level dropdown directly."
 #~ msgstr "Gemini gebruikt de vervolgkeuzelijst voor denkniveau direct."
 
-#~ msgid "Reasoning effort (low / medium / high) gates extended thinking. To see thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; chat-completions providers (DeepSeek, Qwen) surface reasoning via reasoning_content."
-#~ msgstr "Redeneerinspanning (laag / gemiddeld / hoog) bepaalt uitgebreid denken. Om gedachten te zien op OpenAI / Poe / OpenRouter / Azure, schakelt u de Use Responses API in; chat-completions providers (DeepSeek, Qwen) tonen redeneringen via reasoning_content."
+#~ msgid ""
+#~ "Reasoning effort (low / medium / high) gates extended thinking. To see "
+#~ "thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; "
+#~ "chat-completions providers (DeepSeek, Qwen) surface reasoning via "
+#~ "reasoning_content."
+#~ msgstr ""
+#~ "Redeneerinspanning (laag / gemiddeld / hoog) bepaalt uitgebreid denken. "
+#~ "Om gedachten te zien op OpenAI / Poe / OpenRouter / Azure, schakelt u de "
+#~ "Use Responses API in; chat-completions providers (DeepSeek, Qwen) tonen "
+#~ "redeneringen via reasoning_content."
 
 #~ msgid "Custom Instructions:"
 #~ msgstr "Aangepaste instructies:"
@@ -1866,7 +2228,8 @@ msgstr "Aangepaste tools"
 #~ msgstr "Shell-scripts (*.sh)"
 
 #~ msgid "Toggle auto mode (auto-run + auto-share) for this session"
-#~ msgstr "Automodus (auto-uitvoeren + auto-delen) in-/uitschakelen voor deze sessie"
+#~ msgstr ""
+#~ "Automodus (auto-uitvoeren + auto-delen) in-/uitschakelen voor deze sessie"
 
 #~ msgid "Run last command"
 #~ msgstr "Laatste opdracht uitvoeren"
@@ -1877,11 +2240,19 @@ msgstr "Aangepaste tools"
 #~ msgid "Toggle Auto Mode"
 #~ msgstr "Automodus in-/uitschakelen"
 
-#~ msgid "Auto mode is permanently enabled via settings (both Auto-run and Auto-share are on)."
-#~ msgstr "De automodus is permanent ingeschakeld via instellingen (zowel auto-uitvoeren als auto-delen zijn aan)."
+#~ msgid ""
+#~ "Auto mode is permanently enabled via settings (both Auto-run and Auto-"
+#~ "share are on)."
+#~ msgstr ""
+#~ "De automodus is permanent ingeschakeld via instellingen (zowel auto-"
+#~ "uitvoeren als auto-delen zijn aan)."
 
-#~ msgid "Auto mode enabled for this session. Commands will run and share output automatically."
-#~ msgstr "Automodus ingeschakeld voor deze sessie. Opdrachten worden automatisch uitgevoerd en de uitvoer gedeeld."
+#~ msgid ""
+#~ "Auto mode enabled for this session. Commands will run and share output "
+#~ "automatically."
+#~ msgstr ""
+#~ "Automodus ingeschakeld voor deze sessie. Opdrachten worden automatisch "
+#~ "uitgevoerd en de uitvoer gedeeld."
 
 #~ msgid "Auto mode disabled."
 #~ msgstr "Automodus uitgeschakeld."
@@ -1907,8 +2278,14 @@ msgstr "Aangepaste tools"
 #~ msgid "Enable auto mode (auto-run + auto-share)"
 #~ msgstr "Automodus inschakelen (auto-uitvoeren + auto-delen)"
 
-#~ msgid "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the toolbar button to run them. Tasks with auto mode will temporarily enable auto-run and auto-share."
-#~ msgstr "Taken zijn herbruikbare promptsnelkoppelingen. Gebruik /task <name> in de chat of de werkbalkknop om ze uit te voeren. Taken met automodus schakelen tijdelijk auto-uitvoeren en auto-delen in."
+#~ msgid ""
+#~ "Tasks are reusable prompt shortcuts. Use /task <name> in chat or the "
+#~ "toolbar button to run them. Tasks with auto mode will temporarily enable "
+#~ "auto-run and auto-share."
+#~ msgstr ""
+#~ "Taken zijn herbruikbare promptsnelkoppelingen. Gebruik /task <name> in de "
+#~ "chat of de werkbalkknop om ze uit te voeren. Taken met automodus "
+#~ "schakelen tijdelijk auto-uitvoeren en auto-delen in."
 
 #~ msgid "Saves to ~/PlasmaLLM/chats/"
 #~ msgstr "Slaat op in ~/PlasmaLLM/chats/"
@@ -1919,23 +2296,38 @@ msgstr "Aangepaste tools"
 #~ msgid "Auto-run commands from LLM"
 #~ msgstr "Opdrachten van LLM automatisch uitvoeren"
 
-#~ msgid "Allow the LLM to execute shell commands. Dangerous if combined with Auto-share."
-#~ msgstr "Sta de LLM toe om shell-opdrachten uit te voeren. Gevaarlijk in combinatie met Automatisch delen."
+#~ msgid ""
+#~ "Allow the LLM to execute shell commands. Dangerous if combined with Auto-"
+#~ "share."
+#~ msgstr ""
+#~ "Sta de LLM toe om shell-opdrachten uit te voeren. Gevaarlijk in "
+#~ "combinatie met Automatisch delen."
 
 #~ msgid "Run as tool"
 #~ msgstr "Uitvoeren als tool"
 
-#~ msgid "Use the run_command tool for command execution. If disabled, falls back to parsing code blocks."
-#~ msgstr "Gebruik de run_command-tool voor het uitvoeren van opdrachten. Indien uitgeschakeld, valt het terug op het parseren van codeblokken."
+#~ msgid ""
+#~ "Use the run_command tool for command execution. If disabled, falls back "
+#~ "to parsing code blocks."
+#~ msgstr ""
+#~ "Gebruik de run_command-tool voor het uitvoeren van opdrachten. Indien "
+#~ "uitgeschakeld, valt het terug op het parseren van codeblokken."
 
 #~ msgid "Auto-share command output with LLM"
 #~ msgstr "Opdrachtuitvoer automatisch delen met LLM"
 
 #~ msgid "Automatically send command execution results back to the LLM"
-#~ msgstr "Resultaten van opdrachtuitvoering automatisch terugsturen naar de LLM"
+#~ msgstr ""
+#~ "Resultaten van opdrachtuitvoering automatisch terugsturen naar de LLM"
 
-#~ msgid "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see their output, enabling an agentic workflow. Only use with trustworthy LLMs."
-#~ msgstr "⚠️ GEVAAR: Beide opties ingeschakeld — het LLM kan nu opdrachten uitvoeren en hun uitvoer zien, wat een agentische workflow mogelijk maakt. Alleen gebruiken met betrouwbare LLM's."
+#~ msgid ""
+#~ "⚠️ DANGER: Both options enabled - the LLM can now execute commands and see "
+#~ "their output, enabling an agentic workflow. Only use with trustworthy "
+#~ "LLMs."
+#~ msgstr ""
+#~ "⚠️ GEVAAR: Beide opties ingeschakeld — het LLM kan nu opdrachten uitvoeren "
+#~ "en hun uitvoer zien, wat een agentische workflow mogelijk maakt. Alleen "
+#~ "gebruiken met betrouwbare LLM's."
 
 #~ msgid "Backend:"
 #~ msgstr "Backend:"
@@ -1971,22 +2363,34 @@ msgstr "Aangepaste tools"
 #~ msgstr "Webzoekopdracht mislukt (HTTP %1)"
 
 #~ msgid "Allows the LLM to perform web searches using Ollama's search API."
-#~ msgstr "Stelt de LLM in staat om webzoekopdrachten uit te voeren met de zoek-API van Ollama."
+#~ msgstr ""
+#~ "Stelt de LLM in staat om webzoekopdrachten uit te voeren met de zoek-API "
+#~ "van Ollama."
 
 #~ msgid "Commands:"
 #~ msgstr "Opdrachten:"
 
 #~ msgid "Automatically send Run command results back to the LLM"
-#~ msgstr "Resultaten van Uitvoeren-opdrachten automatisch terugsturen naar het LLM"
+#~ msgstr ""
+#~ "Resultaten van Uitvoeren-opdrachten automatisch terugsturen naar het LLM"
 
-#~ msgid "WARNING: When combined with Auto-share, enables agentic workflow. Only use with very trustworthy LLMs."
-#~ msgstr "WAARSCHUWING: In combinatie met Auto-delen wordt een agentische workflow ingeschakeld. Alleen gebruiken met zeer betrouwbare LLM's."
+#~ msgid ""
+#~ "WARNING: When combined with Auto-share, enables agentic workflow. Only "
+#~ "use with very trustworthy LLMs."
+#~ msgstr ""
+#~ "WAARSCHUWING: In combinatie met Auto-delen wordt een agentische workflow "
+#~ "ingeschakeld. Alleen gebruiken met zeer betrouwbare LLM's."
 
 #~ msgid "Use tool calling for commands"
 #~ msgstr "Gereedschapsaanroep gebruiken voor opdrachten"
 
-#~ msgid "Use the run_command tool for command execution. Disable for models that don't support tool calling (falls back to code block parsing)."
-#~ msgstr "Gebruik het run_command-gereedschap voor het uitvoeren van opdrachten. Uitschakelen voor modellen die geen gereedschapsaanroep ondersteunen (valt terug op codeblok-parsering)."
+#~ msgid ""
+#~ "Use the run_command tool for command execution. Disable for models that "
+#~ "don't support tool calling (falls back to code block parsing)."
+#~ msgstr ""
+#~ "Gebruik het run_command-gereedschap voor het uitvoeren van opdrachten. "
+#~ "Uitschakelen voor modellen die geen gereedschapsaanroep ondersteunen "
+#~ "(valt terug op codeblok-parsering)."
 
 #~ msgid "Web Search:"
 #~ msgstr "Webzoeken:"
