@@ -326,6 +326,7 @@ function getAdapterChoices() {
         { id: "openai",    name: _tr(null, "OpenAI-compatible") },
         { id: "anthropic", name: _tr(null, "Anthropic") },
         { id: "gemini",    name: _tr(null, "Google Gemini") },
+        { id: "opencode",  name: _tr(null, "OpenCode") },
         { id: "exa",       name: _tr(null, "Exa") }
     ];
 }
@@ -356,10 +357,13 @@ function buildTools(apiType, options) {
     return Adapters.getAdapter(apiType).buildTools(options);
 }
 
-function buildContentArray(apiType, text, attachments, usesResponsesAPI) {
+function buildContentArray(apiType, text, attachments, usesResponsesAPI, extra) {
     var ad = Adapters.getAdapter(apiType);
     if (apiType === "openai") {
         return ad.buildContentArray(text, attachments, !!usesResponsesAPI);
+    }
+    if (apiType === "opencode") {
+        return ad.buildContentArray(text, attachments, extra || {});
     }
     return ad.buildContentArray(text, attachments);
 }

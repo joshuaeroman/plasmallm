@@ -79,10 +79,15 @@ function fetchModelsDev(providerId, filterFn, fallbackList, callback) {
 
 function setHeaders(xhr, apiKey, opts) {
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("Api-Revision", "2026-05-07");
+    if (!(opts && opts.opencodeAuth))
+        xhr.setRequestHeader("Api-Revision", "2026-05-07");
     if (apiKey && apiKey.length > 0) {
         var isGcloud = opts && opts.geminiAuthMethod === "agentplatform" && opts.geminiVertexAuthType === "gcloud";
-        if (isGcloud || apiKey.indexOf("ya29.") === 0) {
+        if (opts && opts.opencodeAuth) {
+            // Zen Gemini wants x-goog-api-key only. Authorization has been
+            // forwarded upstream and rejected as a Google token.
+            xhr.setRequestHeader("x-goog-api-key", apiKey);
+        } else if (isGcloud || apiKey.indexOf("ya29.") === 0) {
             xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
         } else {
             xhr.setRequestHeader("x-goog-api-key", apiKey);
@@ -496,7 +501,13 @@ function sendStreaming(opts) {
     var url;
     var baseUrl = endpoint.replace(/\/+$/, "");
 
-    if (opts && opts.geminiAuthMethod === "agentplatform") {
+    if (opts && opts.opencodeAuth) {
+        // OpenCode Zen: POST {base}/models/{id}:streamGenerateContent?alt=sse
+        // (base is https://opencode.ai/zen/v1).
+        url = baseUrl +
+              "/models/" + encodeURIComponent(model) +
+              ":streamGenerateContent?alt=sse";
+    } else if (opts && opts.geminiAuthMethod === "agentplatform") {
         var projectId = (opts.geminiProjectId ? opts.geminiProjectId.trim() : "");
         var location = opts.geminiLocation || "global";
         

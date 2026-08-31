@@ -38,7 +38,7 @@ var capabilities = {
     reasoningHelp: "Anthropic enables extended thinking when effort is not Off, using the token budget below. Temperature is forced to max while thinking."
 };
 
-function setHeaders(xhr, apiKey) {
+function setHeaders(xhr, apiKey, opts) {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("anthropic-version", ANTHROPIC_VERSION);
     // Required when the API is called from a browser-like UA. QML XHR uses
@@ -46,6 +46,10 @@ function setHeaders(xhr, apiKey) {
     xhr.setRequestHeader("anthropic-dangerous-direct-browser-access", "true");
     if (apiKey && apiKey.length > 0) {
         xhr.setRequestHeader("x-api-key", apiKey);
+        // OpenCode Zen/Go document Bearer auth on every endpoint; native
+        // Anthropic only wants x-api-key. Send both when used as a gateway.
+        if (opts && opts.opencodeAuth)
+            xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
     }
 }
 
@@ -314,11 +318,14 @@ function sendStreaming(opts) {
     var translated = translateMessages(opts.messages);
 
     var xhr = new XMLHttpRequest();
-    var url = endpoint.replace(/\/+$/, "") + "/v1/messages";
+    var base = endpoint.replace(/\/+$/, "");
+    // Gateways whose base already ends in /v1 (OpenCode Zen/Go) would 404 on
+    // /v1/v1/messages. Native Anthropic still uses {origin}/v1/messages.
+    var url = /\/v1$/.test(base) ? (base + "/messages") : (base + "/v1/messages");
 
     xhr.open("POST", url);
     xhr.timeout = 120000;
-    setHeaders(xhr, apiKey);
+    setHeaders(xhr, apiKey, opts);
 
     var pollTimer = null;
     var lastParseIndex = 0;
@@ -508,6 +515,10 @@ function sendStreaming(opts) {
         body.thinking = { type: "enabled", budget_tokens: opts.thinkingBudget };
         body.temperature = 1;
         body.max_tokens = maxTokens + opts.thinkingBudget;
+    } else if (opts.opencodeAuth) {
+        // Claude defaults to no thinking when the field is omitted. Qwen and
+        // MiniMax on OpenCode default to thinking-on, so Off must be explicit.
+        body.thinking = { type: "disabled" };
     }
     if (translated.system && translated.system.length > 0) {
         body.system = translated.system;

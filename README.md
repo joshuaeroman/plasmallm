@@ -10,7 +10,7 @@ PlasmaLLM is designed for quick tasks and system-integrated workflows—not as a
 
 ## Features
 
-- **Multi-Provider Support**: Connects to Ollama, LM Studio, OpenAI, Anthropic Claude, Google Gemini, and any OpenAI-compatible API.
+- **Multi-Provider Support**: Connects to Ollama, LM Studio, OpenAI, Anthropic Claude, Google Gemini, OpenCode Zen/Go, and any OpenAI-compatible API.
 - **System Awareness**: Optionally gathers hardware, OS, and environment info to provide context for assistant responses.
 - **Tool-Calling System**: Modular architecture allowing LLMs to interact with the filesystem, run shell commands, and fetch web data (with user approval).
 - **Interactive Terminal Blocks**: View, copy, or execute suggested terminal commands. Supports session multiplexing via `tmux` or `screen`.

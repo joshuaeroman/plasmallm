@@ -191,6 +191,7 @@ BaseConfigPage {
                 geminiLocation: prof.geminiLocation,
                 geminiVertexAuthType: prof.geminiVertexAuthType,
                 usesResponsesAPI: prof.usesResponsesAPI,
+                providerName: prof.providerName,
                 transcript: transcriptToSend,
                 instructions: cfg_compactionInstructions || defaultInstructions
             }, function(err, summary) {
