@@ -21,6 +21,7 @@ test:
 	node tests/skills.mjs
 	node tests/memory.mjs
 	node tests/path_sandbox.mjs
+	node tests/opencode_route.mjs
 
 # Translations
 translations: check-translations $(MO_FILES)

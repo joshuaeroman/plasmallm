@@ -1185,7 +1185,9 @@ BaseConfigPage {
             QQC2.TextField {
                 id: apiKeyField
                 Layout.fillWidth: true
-                placeholderText: (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform") ? i18n("Paste short-lived access token") : i18n("Optional - for OpenAI, etc.")
+                placeholderText: (cfg_apiType === "gemini" && cfg_geminiAuthMethod === "agentplatform") ? i18n("Paste short-lived access token")
+                                 : (cfg_apiType === "opencode") ? i18n("Paste OpenCode API key")
+                                 : i18n("Optional - for OpenAI, etc.")
                 echoMode: TextInput.Password
                 text: walletKeyLoaded ? walletApiKey : cfg_apiKey
                 onTextChanged: {

@@ -332,7 +332,8 @@ PlasmoidItem {
                 geminiProjectId: Plasmoid.configuration.geminiProjectId,
                 geminiLocation: Plasmoid.configuration.geminiLocation,
                 geminiVertexAuthType: Plasmoid.configuration.geminiVertexAuthType,
-                usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI
+                usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
+                providerName: Plasmoid.configuration.providerName
             });
             return;
         }
@@ -357,7 +358,8 @@ PlasmoidItem {
                 geminiProjectId: Plasmoid.configuration.geminiProjectId,
                 geminiLocation: Plasmoid.configuration.geminiLocation,
                 geminiVertexAuthType: Plasmoid.configuration.geminiVertexAuthType,
-                usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI
+                usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
+                providerName: Plasmoid.configuration.providerName
             });
             return;
         }
@@ -388,7 +390,8 @@ PlasmoidItem {
                 geminiProjectId: targetProf.geminiProjectId,
                 geminiLocation: targetProf.geminiLocation,
                 geminiVertexAuthType: targetProf.geminiVertexAuthType,
-                usesResponsesAPI: targetProf.usesResponsesAPI
+                usesResponsesAPI: targetProf.usesResponsesAPI,
+                providerName: targetProf.providerName
             });
         }
 
@@ -574,6 +577,7 @@ PlasmoidItem {
                 geminiLocation: compConfig.geminiLocation,
                 geminiVertexAuthType: compConfig.geminiVertexAuthType,
                 usesResponsesAPI: compConfig.usesResponsesAPI,
+                providerName: compConfig.providerName,
                 transcript: transcript,
                 previousSummary: prevSummary,
                 instructions: Plasmoid.configuration.compactionInstructions
@@ -2993,7 +2997,11 @@ PlasmoidItem {
                         });
                     }
                     if (atts.length > 0) {
-                        msgContent = Api.buildContentArray(root.effectiveApiType, msgContent, atts, Plasmoid.configuration.usesResponsesAPI);
+                        msgContent = Api.buildContentArray(root.effectiveApiType, msgContent, atts, Plasmoid.configuration.usesResponsesAPI, {
+                            model: Plasmoid.configuration.modelName,
+                            endpoint: Plasmoid.configuration.apiEndpoint,
+                            providerName: Plasmoid.configuration.providerName
+                        });
                     }
                 } catch(e) {}
             }
@@ -3041,6 +3049,9 @@ PlasmoidItem {
             commandToolEnabled: Plasmoid.configuration.useCommandTool,
             webSearchEnabled: Plasmoid.configuration.enableWebSearch,
             usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
+            model: Plasmoid.configuration.modelName,
+            endpoint: Plasmoid.configuration.apiEndpoint,
+            providerName: Plasmoid.configuration.providerName,
             nativeGoogleSearchEnabled: Plasmoid.configuration.enableNativeGoogleSearch,
             nativeCodeExecutionEnabled: Plasmoid.configuration.enableNativeCodeExecution,
             toolsConfig: getToolsConfig()
@@ -3067,6 +3078,7 @@ PlasmoidItem {
                 geminiVertexAuthType: Plasmoid.configuration.geminiVertexAuthType,
                 geminiProjectId: Plasmoid.configuration.geminiProjectId,
                 geminiLocation: Plasmoid.configuration.geminiLocation,
+                providerName: Plasmoid.configuration.providerName,
                 tools: tools,
                 onChunk: function(delta, accumulated) {
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
