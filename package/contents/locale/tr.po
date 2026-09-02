@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-24 21:07-0400\n"
+"POT-Creation-Date: 2026-09-02 09:25-0400\n"
 "PO-Revision-Date: 2026-04-07 00:00+0000\n"
 "Last-Translator: Claude <noreply@anthropic.com>\n"
 "Language-Team: Turkish\n"
@@ -15,6 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Color button"
+msgstr "Renk düğmesi"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Geçerli renk %1. Bu düğme bir renk seçici iletişim kutusu açacaktır."
+
+msgid "Current color is %1."
+msgstr "Geçerli renk %1."
 
 msgid "Request timed out after 30 seconds"
 msgstr "İstek 30 saniye sonra zaman aşımına uğradı"
@@ -63,12 +72,6 @@ msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr ""
 "Kimlik doğrulama başarısız oldu (HTTP %1) — API anahtarınızı kontrol edin: %2"
 
-msgid "no response — check your endpoint URL"
-msgstr "yanıt yok — uç nokta URL'nizi kontrol edin"
-
-msgid "Request failed"
-msgstr "İstek başarısız oldu"
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -77,6 +80,12 @@ msgstr ""
 "Bu model sürümü, yerel araçları (Arama/Kod) özel komutlarla birleştirmeyi "
 "desteklemiyor. Lütfen daha yeni bir model seçin (örn. Gemini 3+) veya "
 "Ayarlar'da yerel özellikleri devre dışı bırakın."
+
+msgid "Request failed"
+msgstr "İstek başarısız oldu"
+
+msgid "no response — check your endpoint URL"
+msgstr "yanıt yok — uç nokta URL'nizi kontrol edin"
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -156,6 +165,82 @@ msgstr ""
 msgid "No command provided."
 msgstr "Komut sağlanmadı."
 
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Exa Arama"
+
+msgid "Ollama API key"
+msgstr "Ollama API anahtarı"
+
+msgid "Saving…"
+msgstr "Kaydediliyor…"
+
+msgid "Saved"
+msgstr "Kaydedildi"
+
+msgid "Save to Config (Insecure)"
+msgstr "Yapılandırmaya Kaydet (Güvensiz)"
+
+msgid "Save Key"
+msgstr "Anahtarı Kaydet"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG Örnek URL'si (örn. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API Anahtarı/Token'i (isteğe bağlı)"
+
+msgid "Exa API key"
+msgstr "Exa API anahtarı"
+
+msgid "Search Type:"
+msgstr "Arama Türü:"
+
+msgid "Auto (Default)"
+msgstr "Otomatik (Varsayılan)"
+
+msgid "Fast"
+msgstr "Hızlı"
+
+msgid "Instant"
+msgstr "Anında"
+
+msgid "Deep Lite"
+msgstr "Hafif Derin"
+
+msgid "Deep"
+msgstr "Derin"
+
+msgid "Deep Reasoning"
+msgstr "Derin Akıl Yürütme"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo yapılandırma gerektirmez."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "SearXNG örneğinde JSON biçiminin etkinleştirildiğinden emin olun."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr ""
+"Exa API aracılığıyla LLM tarafından tetiklenen nöral web aramalarını "
+"etkinleştirir."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr ""
+"Ollama'nın arama API'si aracılığıyla LLM tarafından tetiklenen web "
+"aramalarını etkinleştirir"
+
+msgid "Manage and discover skills in the Skills settings page."
+msgstr "Beceriler ayarları sayfasında becerileri yönetin ve keşfedin."
+
 msgid "Saved phrases:"
 msgstr "Kaydedilen ifadeler:"
 
@@ -234,96 +319,15 @@ msgstr ""
 "Sisteminizde 'tmux' veya 'screen' bulunamadı. Oturum çoğullama "
 "kullanılamıyor."
 
-msgid "Manage and discover skills in the Skills settings page."
-msgstr "Beceriler ayarları sayfasında becerileri yönetin ve keşfedin."
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Exa Search"
-msgstr "Exa Arama"
-
-msgid "Ollama API key"
-msgstr "Ollama API anahtarı"
-
-msgid "Saving…"
-msgstr "Kaydediliyor…"
-
-msgid "Saved"
-msgstr "Kaydedildi"
-
-msgid "Save to Config (Insecure)"
-msgstr "Yapılandırmaya Kaydet (Güvensiz)"
-
-msgid "Save Key"
-msgstr "Anahtarı Kaydet"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG Örnek URL'si (örn. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API Anahtarı/Token'i (isteğe bağlı)"
-
-msgid "Exa API key"
-msgstr "Exa API anahtarı"
-
-msgid "Search Type:"
-msgstr "Arama Türü:"
-
-msgid "Auto (Default)"
-msgstr "Otomatik (Varsayılan)"
-
-msgid "Fast"
-msgstr "Hızlı"
-
-msgid "Instant"
-msgstr "Anında"
-
-msgid "Deep Lite"
-msgstr "Hafif Derin"
-
-msgid "Deep"
-msgstr "Derin"
-
-msgid "Deep Reasoning"
-msgstr "Derin Akıl Yürütme"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo yapılandırma gerektirmez."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "SearXNG örneğinde JSON biçiminin etkinleştirildiğinden emin olun."
-
-msgid "Enables LLM-triggered neural web searches via Exa API."
-msgstr ""
-"Exa API aracılığıyla LLM tarafından tetiklenen nöral web aramalarını "
-"etkinleştirir."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr ""
-"Ollama'nın arama API'si aracılığıyla LLM tarafından tetiklenen web "
-"aramalarını etkinleştirir"
-
 msgid ""
 "Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
 "that skill has “Allow running skill scripts without approval” checked on the "
 "Skills settings page."
-msgstr "Bir beceri klasöründeki bir .sh dosyasını çalıştırır. Çalıştırma başına onay, yalnızca Beceriler ayarları sayfasında o beceri için “Beceri betiklerinin onay olmadan çalıştırılmasına izin ver” seçeneği işaretlendiğinde atlanır."
-
-msgid "Color button"
-msgstr "Renk düğmesi"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Geçerli renk %1. Bu düğme bir renk seçici iletişim kutusu açacaktır."
-
-msgid "Current color is %1."
-msgstr "Geçerli renk %1."
+msgstr ""
+"Bir beceri klasöründeki bir .sh dosyasını çalıştırır. Çalıştırma başına "
+"onay, yalnızca Beceriler ayarları sayfasında o beceri için “Beceri "
+"betiklerinin onay olmadan çalıştırılmasına izin ver” seçeneği "
+"işaretlendiğinde atlanır."
 
 msgid "Tool Request: %1"
 msgstr "Araç İsteği: %1"
@@ -552,6 +556,289 @@ msgstr "Ayarları göster"
 msgid "Show Pin"
 msgstr "Sabitlemeyi göster"
 
+msgid "Speech-to-text is not configured"
+msgstr "Konuşmayı metne dönüştürme yapılandırılmadı"
+
+msgid "Unknown STT backend: %1"
+msgstr "Bilinmeyen STT arka ucu: %1"
+
+msgid "Whisper CLI runner is not available"
+msgstr "Whisper CLI çalıştırıcısı kullanılamıyor"
+
+msgid "Could not build Whisper command"
+msgstr "Whisper komutu oluşturulamadı"
+
+msgid "STT backend does not support model listing"
+msgstr "STT arka ucu model listelemeyi desteklemiyor"
+
+msgid "Speech to Text"
+msgstr "Konuşmayı Metne Dönüştürme"
+
+msgid "Model “%1” is on disk."
+msgstr "“%1” modeli diskte mevcut."
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
+"into ~/.cache/whisper and can take a long time."
+msgstr ""
+"“%1” modeli indirilmedi. İlk dönüştürme onu (%2) ~/.cache/whisper dizinine "
+"getirecektir ve bu işlem uzun sürebilir."
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it into "
+"~/.cache/whisper and can take a long time."
+msgstr ""
+"“%1” modeli indirilmedi. İlk dönüştürme onu ~/.cache/whisper dizinine "
+"getirecektir ve bu işlem uzun sürebilir."
+
+msgid "CUDA is available to Whisper."
+msgstr "CUDA, Whisper için kullanılabilir durumda."
+
+msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
+msgstr ""
+"CUDA bu Whisper ortamında kullanılamıyor. cpu veya Varsayılan seçeneğini "
+"kullanın."
+
+msgid "Whisper CLI responded to --help."
+msgstr "Whisper CLI --help komutuna yanıt verdi."
+
+msgid "Whisper CLI test failed (exit %1): %2"
+msgstr "Whisper CLI testi başarısız oldu (çıkış %1): %2"
+
+msgid "Whisper CLI test failed (exit %1). Check the command."
+msgstr "Whisper CLI testi başarısız oldu (çıkış %1). Komutu kontrol edin."
+
+msgid "API key saved to KWallet."
+msgstr "API anahtarı KWallet'a kaydedildi."
+
+msgid "API key saved to local fallback."
+msgstr "API anahtarı yerel yedeğe kaydedildi."
+
+msgid "Checking whether “%1” is downloaded…"
+msgstr "“%1” modelinin indirilip indirilmediği kontrol ediliyor…"
+
+msgid "Checking CUDA…"
+msgstr "CUDA kontrol ediliyor…"
+
+msgid "Testing Whisper CLI…"
+msgstr "Whisper CLI test ediliyor…"
+
+msgid "Loaded %1 STT model(s)."
+msgstr "%1 STT modeli yüklendi."
+
+msgid "Set an API endpoint first."
+msgstr "Önce bir API uç noktası ayarlayın."
+
+msgid "Fetching STT models…"
+msgstr "STT modelleri alınıyor…"
+
+msgid "Voice input:"
+msgstr "Ses girişi:"
+
+msgid "Enable microphone input"
+msgstr "Mikrofon girişini etkinleştir"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"Yalnızca konuşmayı metne dönüştürme motorunu yapılandırır. Dökümler etkin "
+"sohbet profilinizi (Genel) kullanır."
+
+msgid "Mic button:"
+msgstr "Mikrofon düğmesi:"
+
+msgid "Auto"
+msgstr "Otomatik"
+
+msgid "Hold to talk"
+msgstr "Konuşmak için basılı tutun"
+
+msgid "Toggle"
+msgstr "Aç/Kapat"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"Otomatik: tıklama kaydı açar/kapatır; bas-konuş için 250 ms+ basılı tutun. "
+"Basılı tut: yalnızca basılı tutma. Aç/Kapat: başlatmak/durdurmak için "
+"tıklayın."
+
+msgid "Voice shortcut:"
+msgstr "Ses kısayolu:"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"PlasmaLLM açık ve odaktayken, düğmeyle aynı mikrofon modunu kullanır "
+"(otomatik: kısa basış açar/kapatır, 250 ms+ basılı tutma bas-konuştur). "
+"Paneli açmaz — Kısayollar sayfasındaki «Gereci Etkinleştir» seçeneğini "
+"kullanın. Varsayılan: Ctrl+M. Devre dışı bırakmak için temizleyin."
+
+msgid "Transcriber"
+msgstr "Dönüştürücü"
+
+msgid "STT backend:"
+msgstr "STT arka ucu:"
+
+msgid "Provider:"
+msgstr "Sağlayıcı:"
+
+msgid "Endpoint:"
+msgstr "Uç Noktası:"
+
+msgid "Model:"
+msgstr "Model:"
+
+msgid "Fetch STT models"
+msgstr "STT modellerini al"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouter STT modellerini yalnızca transkripsiyon kipleri aracılığıyla "
+"listeler (bu sayfa bunu yapar)."
+
+msgid "API key:"
+msgstr "API anahtarı:"
+
+msgid "Provider API key"
+msgstr "Sağlayıcı API anahtarı"
+
+msgid "Save API key"
+msgstr "API anahtarını kaydet"
+
+msgid "Command:"
+msgstr "Komut:"
+
+msgid ""
+"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
+"toolbox run whisper."
+msgstr ""
+"Olduğu gibi eklenen komut öneki. Örnekler: whisper, python3 -m whisper, "
+"toolbox run whisper."
+
+msgid "Test:"
+msgstr "Test:"
+
+msgid "Test CLI"
+msgstr "CLI'yi Test Et"
+
+msgid "Task:"
+msgstr "Görev:"
+
+msgid "Transcribe"
+msgstr "Metne Dönüştür"
+
+msgid "Translate"
+msgstr "Çevir"
+
+msgid "Device:"
+msgstr "Aygıt:"
+
+msgid "Default"
+msgstr "Varsayılan"
+
+msgid "FP16:"
+msgstr "FP16:"
+
+msgid "Use --fp16 True (GPU)"
+msgstr "--fp16 True kullan (GPU)"
+
+msgid "Threads:"
+msgstr "İş Parçacıkları:"
+
+msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
+msgstr ""
+"0, --threads parametresini atlar (Whisper varsayılanı). CPU üzerinde FP16 "
+"kapalı olması daha güvenlidir."
+
+msgid "Initial prompt:"
+msgstr "Başlangıç istemi:"
+
+msgid "Optional vocabulary / style hint"
+msgstr "İsteğe bağlı sözlük / stil ipucu"
+
+msgid "Extra args:"
+msgstr "Ek bağımsız değişkenler:"
+
+msgid "Optional, appended as-is"
+msgstr "İsteğe bağlı, olduğu gibi eklenir"
+
+msgid "Options"
+msgstr "Seçenekler"
+
+msgid "Language hint:"
+msgstr "Dil ipucu:"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "İsteğe bağlı, örn. tr veya en (boş = otomatik)"
+
+msgid "Max recording (seconds):"
+msgstr "Maks. kayıt süresi (saniye):"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"Hiç özel araç yapılandırılmadı. LLM'ye kendi komutlarınızı sunmak için özel "
+"bir araç ekleyin."
+
+msgid "Add Custom Tool"
+msgstr "Özel araç ekle"
+
+msgid "Echoes back the message provided."
+msgstr "Sağlanan mesajı geri yansıtır."
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "Araç adı (örn. systemctl_service)"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "Açıklama (LLM'ye bu aracın ne yaptığını bildirir)"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "Komut şablonu (örn. systemctl {action} {service})"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "Süper kullanıcı gerekli (pkexec ile çalışır)"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "Aracı otomatik çalıştır (onay iletişim kutusu yok)"
+
+msgid "Collapse results"
+msgstr "Sonuçları daralt"
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+"Tamamlanan sonuçları küçük bir hap şeklinde göster; tam çıktıyı görüntülemek "
+"için tıklayın."
+
+msgid "Update Tool"
+msgstr "Aracı güncelle"
+
+msgid "Save Tool"
+msgstr "Aracı kaydet"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "\"%1\" adında bir araç zaten mevcut."
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"Özel araçlar, kendi komutlarınızı LLM'ye sunmanızı sağlar. LLM'nin "
+"doldurabileceği parametreleri tanımlamak için Komut Şablonunda {variable} "
+"gibi yer tutucular kullanın. LLM tarafından sağlanan değerler otomatik "
+"olarak shell-escaped yapılır."
+
 msgid "Loaded %1 skill"
 msgstr "%1 becerisi yüklendi"
 
@@ -611,6 +898,416 @@ msgstr "Çıktıyı asistanla paylaş"
 
 msgid "The model loaded this skill's instructions into context before acting."
 msgstr "Model, işlem yapmadan önce bu becerinin yönergelerini bağlama yükledi."
+
+msgid "Stop command"
+msgstr "Komutu durdur"
+
+msgid "Open terminal attached to this session"
+msgstr "Bu oturuma bağlı terminali aç"
+
+msgid "Collapse result"
+msgstr "Sonucu daralt"
+
+msgid "Copy output"
+msgstr "Çıktıyı kopyala"
+
+msgid "Enable skills"
+msgstr "Becerileri etkinleştir"
+
+msgid ""
+"Skills are reusable instruction sets the model loads on demand via the skill "
+"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
+"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
+"contained <name>.md file; a user skill with the same name overrides the "
+"bundled one."
+msgstr ""
+"Beceriler, modelin beceri aracı aracılığıyla talep üzerine yüklediği yeniden "
+"kullanılabilir talimat setleridir. PlasmaLLM yerleşik becerilerle birlikte "
+"gelir (kaynak: paketlenmiş). SKILL.md içeren bir klasör veya bağımsız bir "
+"<ad>.md dosyası olarak ~/.local/share/plasmallm/skills/ dizinine kendi "
+"becerilerinizi ekleyin; aynı ada sahip bir kullanıcı becerisi paketlenmiş "
+"olanı geçersiz kılar."
+
+msgid ""
+"No skills discovered yet. Add a SKILL.md folder to the directory above or "
+"enable the extra directories below."
+msgstr ""
+"Henüz hiçbir beceri keşfedilmedi. Yukarıdaki dizine bir SKILL.md klasörü "
+"ekleyin veya aşağıdaki ek dizinleri etkinleştirin."
+
+msgid "DISABLED"
+msgstr "DEVRE DIŞI"
+
+msgid "Allow running skill scripts without approval"
+msgstr "Beceri betiklerinin onay olmadan çalıştırılmasına izin ver"
+
+msgid "Refreshing…"
+msgstr "Yenileniyor…"
+
+msgid "Refresh"
+msgstr "Yenile"
+
+msgid "Open Folder"
+msgstr "Klasörü Aç"
+
+msgid "Open the skills directory in the file manager"
+msgstr "Beceriler dizinini dosya yöneticisinde aç"
+
+msgid "Also scan ~/.claude/skills"
+msgstr "Ayrıca ~/.claude/skills dizinini tara"
+
+msgid "Also scan ~/.agents/skills"
+msgstr "Ayrıca ~/.agents/skills dizinini tara"
+
+msgid "/absolute/path/to/skills"
+msgstr "/becerilere/mutlak/yol"
+
+msgid "Save directory"
+msgstr "Dizini kaydet"
+
+msgid "Add directory"
+msgstr "Dizin ekle"
+
+msgid ""
+"Enabled skills are advertised to the model by name and description; the "
+"model loads full instructions on demand with the skill tool. Loaded skill "
+"content is re-sent in full every turn and is never affected by context "
+"compaction. Toggles here are global (not per-profile)."
+msgstr ""
+"Etkinleştirilen beceriler modele ad ve açıklamayla bildirilir; model, tam "
+"yönergeleri skill aracıyla talep üzerine yükler. Yüklenen beceri içeriği her "
+"turda eksiksiz olarak yeniden gönderilir ve bağlam sıkıştırmasından asla "
+"etkilenmez. Buradaki geçişler geneldir (profil bazında değildir)."
+
+msgid "System Info:"
+msgstr "Sistem Bilgisi:"
+
+msgid "OS"
+msgstr "İşletim Sistemi"
+
+msgid "Shell"
+msgstr "Kabuk"
+
+msgid "Hostname"
+msgstr "Ana makine adı"
+
+msgid "Kernel"
+msgstr "Çekirdek"
+
+msgid "Desktop"
+msgstr "Masaüstü"
+
+msgid "User"
+msgstr "Kullanıcı"
+
+msgid "CPU"
+msgstr "İşlemci"
+
+msgid "Memory"
+msgstr "Bellek"
+
+msgid "GPU"
+msgstr "GPU"
+
+msgid "Block Devices"
+msgstr "Blok Aygıtlar"
+
+msgid "Network"
+msgstr "Ağ"
+
+msgid "Locale"
+msgstr "Yerel ayar"
+
+msgid "Date/Time"
+msgstr "Tarih/Saat"
+
+msgid "Template:"
+msgstr "Şablon:"
+
+msgid ""
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
+msgstr ""
+"Bu, modele gönderilen tam sistem istemidir. Sistem ayrıntıları, etkin "
+"araçlar veya masaüstü otomasyon yönergeleri gibi dinamik içerikleri çekmek "
+"için {{placeholders}} kullanın. Yazdığınız diğer her şey aynen kullanılır. "
+"Kritik çalışma zamanı yönergeleri (sürüş, onayları atla modu), yer "
+"tutucularını kaldırsanız bile etkin olduğunda otomatik olarak eklenir."
+
+msgid "System Prompt:"
+msgstr "Sistem İstemi:"
+
+msgid "Write your system prompt here…"
+msgstr "Sistem isteminizi buraya yazın…"
+
+msgid "Placeholders:"
+msgstr "Yer Tutucular:"
+
+msgid "Enabled system info selected in the checklist above"
+msgstr "Yukarıdaki kontrol listesinde seçilen etkin sistem bilgileri"
+
+msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr "Araçlar menüsünden etkin araç açıklamaları ve yönergeleri"
+
+msgid ""
+"Available skills index and instructions for skills loaded this session (from "
+"the Skills settings page)"
+msgstr ""
+"Kullanılabilir beceriler dizini ve bu oturumda yüklenen beceriler için "
+"yönergeler (Beceriler ayarları sayfasından)"
+
+msgid ""
+"Persistent tmux or screen session multiplexer instructions (when active)"
+msgstr ""
+"Kalıcı tmux veya screen oturum çoğullayıcı yönergeleri (etkin olduğunda)"
+
+msgid "Notice indicating skip-approvals mode (/auto) is active"
+msgstr "Onayları atla modunun (/auto) etkin olduğunu belirten bildirim"
+
+msgid "Desktop automation coordinates and guidelines (when driving)"
+msgstr "Masaüstü otomasyonu koordinatları ve yönergeleri (sürüş sırasında)"
+
+msgid "Localization:"
+msgstr "Yerelleştirme:"
+
+msgid "Localize System Prompt"
+msgstr "Sistem İstemini Yerelleştir"
+
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
+msgstr ""
+"Varsayılan istem şablonlarını ve dinamik sistem bölümlerini masaüstü "
+"dilinize çevirin."
+
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
+msgstr ""
+"Not: Sistem yönergelerini ve araçları İngilizce dışındaki dillere "
+"yerelleştirmek, bazı modellerde araç çağırma güvenilirliğini ve yönerge "
+"takip doğruluğunu azaltabilir."
+
+msgid "Actions:"
+msgstr "Eylemler:"
+
+msgid "Reset to Default Template"
+msgstr "Varsayılan Şablona Sıfırla"
+
+msgid "Preview:"
+msgstr "Önizleme:"
+
+msgid "General Tool Settings"
+msgstr "Genel Araç Ayarları"
+
+msgid "System state:"
+msgstr "Sistem durumu:"
+
+msgid "Enable Tools"
+msgstr "Araçları etkinleştir"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "Tüm araç çağrı işlevleri için ana anahtar."
+
+msgid "Exa does not support tool use"
+msgstr "Exa araç kullanımını desteklemiyor"
+
+msgid "Desktop Automation:"
+msgstr "Masaüstü Otomasyonu:"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+"LLM'nin masaüstünüzü görmek ve yönetmek için bir oturum talep etmesine izin "
+"verir."
+
+msgid "Enable Desktop Automation"
+msgstr "Masaüstü Otomasyonunu Etkinleştir"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Masaüstü Otomasyonunu Etkinleştir (<a href=\"https://github.com/joshuaeroman/"
+"plasmallm-desktop-driver\">sürücü</a> gerekir)"
+
+msgid "Path whitelist:"
+msgstr "Yol beyaz listesi:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Yol ekle, örn. $HOME/projects, /tmp"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Beyaz liste dosya sistemi araçlarına uygulanır (okuma, yazma, listeleme, "
+"arama). Not: 'run_command' bu listeyle kısıtlanmamıştır."
+
+msgid "Max read size:"
+msgstr "Maksimum okuma boyutu:"
+
+msgid "Max write size:"
+msgstr "Maksimum yazma boyutu:"
+
+msgid "Max HTTP response:"
+msgstr "Maksimum HTTP yanıtı:"
+
+msgid "Max tool loop depth:"
+msgstr "Maksimum araç döngü derinliği:"
+
+msgid "steps"
+msgstr "adım"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr "Not: Bu sınır masaüstü otomasyonu oturumları için geçerli değildir."
+
+msgid "Native Adapter Features"
+msgstr "Yerel Adaptör Özellikleri"
+
+msgid "Google Search:"
+msgstr "Google Arama:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Yerel Google Arama Temellemesini Etkinleştir"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Temellemek için Gemini'nin yerleşik Google Aramasını kullanın. Bu, standart "
+"web arama aracını geçersiz kılar."
+
+msgid "Code Execution:"
+msgstr "Kod Yürütme:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Yerel Python Kodu Yürütmesini Etkinleştir"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Gemini'nin güvenli bir sunucu taraflı sanal alanda Python kodu yazmasına ve "
+"yürütmesine izin verin."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Yerel araçları komutlarla birleştirmek daha yeni bir model gerektirir. Şu "
+"anda seçili model (%1) hatalarla karşılaşabilir."
+
+msgid "Individual Tools"
+msgstr "Bireysel Araçlar"
+
+msgid "Prompt Instructions:"
+msgstr "İstem Yönergeleri:"
+
+msgid "Reset"
+msgstr "Sıfırla"
+
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"Kullanıcının sisteminde bir kabuk komutu yürütür ve çıktısını döndürür. "
+"Yönergeler:\n"
+"- Süper kullanıcı ayrıcalıkları gerektiren tüm komutlar için `sudo` yerine "
+"`pkexec` kullanın.\n"
+"- Adımları `&&` ile zincirleyin.\n"
+"- Komutlar etkileşimsiz olarak çalışır. Asla kullanıcı girişini bekleyen "
+"komutlar (`read` gibi) kullanmayın.\n"
+"- Kullanıcıdan giriş istemeniz veya bir mesaj kutusu göstermeniz gerekiyorsa "
+"`kdialog` kullanın (örn. `kdialog --inputbox \"İstem\"`).\n"
+"- Açık izin olmadan ASLA paket yüklemeyin, sistem yapılandırmasını "
+"değiştirmeyin, yeniden başlatmayın veya sistemi değiştiren veya kullanıcıyı "
+"rahatsız eden herhangi bir işlem yapmayın.\n"
+"- İzin gerektiğinde, önce kullanıcıya düz metin olarak sorun.\n"
+"- Otomatik çalışan araçlar için: Muhafazakar olun ve salt okunur komutları "
+"tercih edin. Bir eylem potansiyel olarak kesintiye neden olabilecekse, düz "
+"metin olarak açıklayın ve aracı çağırmadan önce kullanıcının açık onayını "
+"bekleyin.\n"
+"- Görevi gerçekleştirebileceklerse diğer, daha özel araçları (read_file, "
+"write_file, search_files vb.) MUTLAKA tercih etmelisiniz. Bu aracı yalnızca "
+"başka hiçbir araç uygun değilse kullanın."
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Belirtilen yoldaki bir dosyanın içeriğini okur. Erişim izin verilen "
+"dizinlerle sınırlandırılmıştır."
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Belirtilen yoldaki bir dosyaya içerik yazar. Erişim izin verilen dizinlerle "
+"sınırlandırılmıştır."
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+"Bir dizinin içeriğini listeler. Erişim izin verilen dizinlerle "
+"sınırlandırılmıştır."
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "Bir dizindeki dosyalar içinde bir desen arar (özyinelemeli)."
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr "Bir URL'ye HTTP GET isteği yürütür ve yanıt içeriğini döndürür."
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "Bir URL'ye bir HTTP isteği (POST, PUT vb.) yürütür."
+
+msgid "Get the current content of the system clipboard."
+msgstr "Sistem panosunun geçerli içeriğini alır."
+
+msgid "Set the content of the system clipboard."
+msgstr "Sistem panosunun içeriğini ayarlar."
+
+msgid "Show a system notification."
+msgstr "Bir sistem bildirimi gösterir."
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr "Bir URL'yi varsayılan uygulamada (örn. web tarayıcısı) açar."
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Güncel bilgileri, haberleri veya belirli gerçekleri bulmak için bir web "
+"araması yapar."
+
+msgid ""
+"Restore the full verbatim text and tool outputs of previously compacted "
+"messages by specifying the start and end message IDs from a cited message "
+"range."
+msgstr ""
+"Alıntılanan ileti aralığından başlangıç ve bitiş ileti kimliklerini "
+"belirterek daha önce sıkıştırılmış iletilerin tam metnini ve araç "
+"çıktılarını geri yükleyin."
 
 msgid "Approve the pending tool request"
 msgstr "Bekleyen araç isteğini onayla"
@@ -830,9 +1527,6 @@ msgstr "Göndermek için bırakın"
 msgid "Click to start"
 msgstr "Başlatmak için tıklayın"
 
-msgid "Hold to talk"
-msgstr "Konuşmak için basılı tutun"
-
 msgid "Click to toggle, hold to talk"
 msgstr "Açıp kapatmak için tıklayın, konuşmak için basılı tutun"
 
@@ -847,18 +1541,6 @@ msgstr "LLM isteğini iptal et"
 
 msgid "Drop files here to attach"
 msgstr "Eklemek için dosyaları buraya bırakın"
-
-msgid "Stop command"
-msgstr "Komutu durdur"
-
-msgid "Open terminal attached to this session"
-msgstr "Bu oturuma bağlı terminali aç"
-
-msgid "Collapse result"
-msgstr "Sonucu daralt"
-
-msgid "Copy output"
-msgstr "Çıktıyı kopyala"
 
 msgid "Context Compaction"
 msgstr "Bağlam Sıkıştırma"
@@ -990,63 +1672,6 @@ msgstr "Sıkıştırma Bağlantısını Test Et"
 msgid "Model Summary Response:"
 msgstr "Model Özet Yanıtı:"
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
-msgstr ""
-"Hiç özel araç yapılandırılmadı. LLM'ye kendi komutlarınızı sunmak için özel "
-"bir araç ekleyin."
-
-msgid "Add Custom Tool"
-msgstr "Özel araç ekle"
-
-msgid "Echoes back the message provided."
-msgstr "Sağlanan mesajı geri yansıtır."
-
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "Araç adı (örn. systemctl_service)"
-
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "Açıklama (LLM'ye bu aracın ne yaptığını bildirir)"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "Komut şablonu (örn. systemctl {action} {service})"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "Süper kullanıcı gerekli (pkexec ile çalışır)"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "Aracı otomatik çalıştır (onay iletişim kutusu yok)"
-
-msgid "Collapse results"
-msgstr "Sonuçları daralt"
-
-msgid ""
-"Show finished results as a small pill; click the pill to view the full "
-"output."
-msgstr ""
-"Tamamlanan sonuçları küçük bir hap şeklinde göster; tam çıktıyı görüntülemek "
-"için tıklayın."
-
-msgid "Update Tool"
-msgstr "Aracı güncelle"
-
-msgid "Save Tool"
-msgstr "Aracı kaydet"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "\"%1\" adında bir araç zaten mevcut."
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"Özel araçlar, kendi komutlarınızı LLM'ye sunmanızı sağlar. LLM'nin "
-"doldurabileceği parametreleri tanımlamak için Komut Şablonunda {variable} "
-"gibi yer tutucular kullanın. LLM tarafından sağlanan değerler otomatik "
-"olarak shell-escaped yapılır."
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "gcloud token alınamadı (çıkış %1): %2"
 
@@ -1076,9 +1701,6 @@ msgstr "Yeniden adlandır"
 
 msgid "Adapter:"
 msgstr "Adaptör:"
-
-msgid "Exa does not support tool use"
-msgstr "Exa araç kullanımını desteklemiyor"
 
 msgid "Platform:"
 msgstr "Platform:"
@@ -1119,20 +1741,17 @@ msgstr "Proje Kimliği:"
 msgid "Location:"
 msgstr "Konum:"
 
-msgid "Provider:"
-msgstr "Sağlayıcı:"
-
 msgid "API Endpoint:"
 msgstr "API Uç Noktası:"
-
-msgid "Model:"
-msgstr "Model:"
 
 msgid "API Key:"
 msgstr "API Anahtarı:"
 
 msgid "Paste short-lived access token"
 msgstr "Kısa ömürlü erişim belirtecini yapıştır"
+
+msgid "Paste OpenCode API key"
+msgstr "OpenCode API anahtarını yapıştır"
 
 msgid "Optional - for OpenAI, etc."
 msgstr "İsteğe bağlı - OpenAI vb. için."
@@ -1243,9 +1862,6 @@ msgstr "Düz metin (.txt)"
 msgid "Structured (.jsonl)"
 msgstr "Yapılandırılmış (.jsonl)"
 
-msgid "Open Folder"
-msgstr "Klasörü Aç"
-
 msgid "Open the folder where chat histories are saved"
 msgstr "Sohbet geçmişlerinin kaydedildiği klasörü aç"
 
@@ -1266,510 +1882,6 @@ msgstr "saniye"
 
 msgid "minutes"
 msgstr "dakika"
-
-msgid "Speech to Text"
-msgstr "Konuşmayı Metne Dönüştürme"
-
-msgid "Model “%1” is on disk."
-msgstr "“%1” modeli diskte mevcut."
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
-"into ~/.cache/whisper and can take a long time."
-msgstr ""
-"“%1” modeli indirilmedi. İlk dönüştürme onu (%2) ~/.cache/whisper dizinine "
-"getirecektir ve bu işlem uzun sürebilir."
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it into "
-"~/.cache/whisper and can take a long time."
-msgstr ""
-"“%1” modeli indirilmedi. İlk dönüştürme onu ~/.cache/whisper dizinine "
-"getirecektir ve bu işlem uzun sürebilir."
-
-msgid "CUDA is available to Whisper."
-msgstr "CUDA, Whisper için kullanılabilir durumda."
-
-msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
-msgstr ""
-"CUDA bu Whisper ortamında kullanılamıyor. cpu veya Varsayılan seçeneğini "
-"kullanın."
-
-msgid "Whisper CLI responded to --help."
-msgstr "Whisper CLI --help komutuna yanıt verdi."
-
-msgid "Whisper CLI test failed (exit %1): %2"
-msgstr "Whisper CLI testi başarısız oldu (çıkış %1): %2"
-
-msgid "Whisper CLI test failed (exit %1). Check the command."
-msgstr "Whisper CLI testi başarısız oldu (çıkış %1). Komutu kontrol edin."
-
-msgid "API key saved to KWallet."
-msgstr "API anahtarı KWallet'a kaydedildi."
-
-msgid "API key saved to local fallback."
-msgstr "API anahtarı yerel yedeğe kaydedildi."
-
-msgid "Checking whether “%1” is downloaded…"
-msgstr "“%1” modelinin indirilip indirilmediği kontrol ediliyor…"
-
-msgid "Checking CUDA…"
-msgstr "CUDA kontrol ediliyor…"
-
-msgid "Testing Whisper CLI…"
-msgstr "Whisper CLI test ediliyor…"
-
-msgid "Loaded %1 STT model(s)."
-msgstr "%1 STT modeli yüklendi."
-
-msgid "Set an API endpoint first."
-msgstr "Önce bir API uç noktası ayarlayın."
-
-msgid "Fetching STT models…"
-msgstr "STT modelleri alınıyor…"
-
-msgid "Voice input:"
-msgstr "Ses girişi:"
-
-msgid "Enable microphone input"
-msgstr "Mikrofon girişini etkinleştir"
-
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-"Yalnızca konuşmayı metne dönüştürme motorunu yapılandırır. Dökümler etkin "
-"sohbet profilinizi (Genel) kullanır."
-
-msgid "Mic button:"
-msgstr "Mikrofon düğmesi:"
-
-msgid "Auto"
-msgstr "Otomatik"
-
-msgid "Toggle"
-msgstr "Aç/Kapat"
-
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-"Otomatik: tıklama kaydı açar/kapatır; bas-konuş için 250 ms+ basılı tutun. "
-"Basılı tut: yalnızca basılı tutma. Aç/Kapat: başlatmak/durdurmak için "
-"tıklayın."
-
-msgid "Voice shortcut:"
-msgstr "Ses kısayolu:"
-
-msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
-"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
-msgstr ""
-"PlasmaLLM açık ve odaktayken, düğmeyle aynı mikrofon modunu kullanır "
-"(otomatik: kısa basış açar/kapatır, 250 ms+ basılı tutma bas-konuştur). "
-"Paneli açmaz — Kısayollar sayfasındaki «Gereci Etkinleştir» seçeneğini "
-"kullanın. Varsayılan: Ctrl+M. Devre dışı bırakmak için temizleyin."
-
-msgid "Transcriber"
-msgstr "Dönüştürücü"
-
-msgid "STT backend:"
-msgstr "STT arka ucu:"
-
-msgid "Endpoint:"
-msgstr "Uç Noktası:"
-
-msgid "Fetch STT models"
-msgstr "STT modellerini al"
-
-msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
-msgstr ""
-"OpenRouter STT modellerini yalnızca transkripsiyon kipleri aracılığıyla "
-"listeler (bu sayfa bunu yapar)."
-
-msgid "API key:"
-msgstr "API anahtarı:"
-
-msgid "Provider API key"
-msgstr "Sağlayıcı API anahtarı"
-
-msgid "Save API key"
-msgstr "API anahtarını kaydet"
-
-msgid "Command:"
-msgstr "Komut:"
-
-msgid ""
-"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
-"toolbox run whisper."
-msgstr ""
-"Olduğu gibi eklenen komut öneki. Örnekler: whisper, python3 -m whisper, "
-"toolbox run whisper."
-
-msgid "Test:"
-msgstr "Test:"
-
-msgid "Test CLI"
-msgstr "CLI'yi Test Et"
-
-msgid "Task:"
-msgstr "Görev:"
-
-msgid "Transcribe"
-msgstr "Metne Dönüştür"
-
-msgid "Translate"
-msgstr "Çevir"
-
-msgid "Device:"
-msgstr "Aygıt:"
-
-msgid "Default"
-msgstr "Varsayılan"
-
-msgid "FP16:"
-msgstr "FP16:"
-
-msgid "Use --fp16 True (GPU)"
-msgstr "--fp16 True kullan (GPU)"
-
-msgid "Threads:"
-msgstr "İş Parçacıkları:"
-
-msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
-msgstr ""
-"0, --threads parametresini atlar (Whisper varsayılanı). CPU üzerinde FP16 "
-"kapalı olması daha güvenlidir."
-
-msgid "Initial prompt:"
-msgstr "Başlangıç istemi:"
-
-msgid "Optional vocabulary / style hint"
-msgstr "İsteğe bağlı sözlük / stil ipucu"
-
-msgid "Extra args:"
-msgstr "Ek bağımsız değişkenler:"
-
-msgid "Optional, appended as-is"
-msgstr "İsteğe bağlı, olduğu gibi eklenir"
-
-msgid "Options"
-msgstr "Seçenekler"
-
-msgid "Language hint:"
-msgstr "Dil ipucu:"
-
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "İsteğe bağlı, örn. tr veya en (boş = otomatik)"
-
-msgid "Max recording (seconds):"
-msgstr "Maks. kayıt süresi (saniye):"
-
-msgid "Speech-to-text is not configured"
-msgstr "Konuşmayı metne dönüştürme yapılandırılmadı"
-
-msgid "Unknown STT backend: %1"
-msgstr "Bilinmeyen STT arka ucu: %1"
-
-msgid "Whisper CLI runner is not available"
-msgstr "Whisper CLI çalıştırıcısı kullanılamıyor"
-
-msgid "Could not build Whisper command"
-msgstr "Whisper komutu oluşturulamadı"
-
-msgid "STT backend does not support model listing"
-msgstr "STT arka ucu model listelemeyi desteklemiyor"
-
-msgid "Enable skills"
-msgstr "Becerileri etkinleştir"
-
-msgid ""
-"Skills are reusable instruction sets the model loads on demand via the skill "
-"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
-"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
-"contained <name>.md file; a user skill with the same name overrides the "
-"bundled one."
-msgstr "Beceriler, modelin beceri aracı aracılığıyla talep üzerine yüklediği yeniden kullanılabilir talimat setleridir. PlasmaLLM yerleşik becerilerle birlikte gelir (kaynak: paketlenmiş). SKILL.md içeren bir klasör veya bağımsız bir <ad>.md dosyası olarak ~/.local/share/plasmallm/skills/ dizinine kendi becerilerinizi ekleyin; aynı ada sahip bir kullanıcı becerisi paketlenmiş olanı geçersiz kılar."
-
-msgid ""
-"No skills discovered yet. Add a SKILL.md folder to the directory above or "
-"enable the extra directories below."
-msgstr ""
-"Henüz hiçbir beceri keşfedilmedi. Yukarıdaki dizine bir SKILL.md klasörü "
-"ekleyin veya aşağıdaki ek dizinleri etkinleştirin."
-
-msgid "DISABLED"
-msgstr "DEVRE DIŞI"
-
-msgid "Allow running skill scripts without approval"
-msgstr "Beceri betiklerinin onay olmadan çalıştırılmasına izin ver"
-
-msgid "Refreshing…"
-msgstr "Yenileniyor…"
-
-msgid "Refresh"
-msgstr "Yenile"
-
-msgid "Open the skills directory in the file manager"
-msgstr "Beceriler dizinini dosya yöneticisinde aç"
-
-msgid "Also scan ~/.claude/skills"
-msgstr "Ayrıca ~/.claude/skills dizinini tara"
-
-msgid "Also scan ~/.agents/skills"
-msgstr "Ayrıca ~/.agents/skills dizinini tara"
-
-msgid "/absolute/path/to/skills"
-msgstr "/becerilere/mutlak/yol"
-
-msgid "Save directory"
-msgstr "Dizini kaydet"
-
-msgid "Add directory"
-msgstr "Dizin ekle"
-
-msgid ""
-"Enabled skills are advertised to the model by name and description; the "
-"model loads full instructions on demand with the skill tool. Loaded skill "
-"content is re-sent in full every turn and is never affected by context "
-"compaction. Toggles here are global (not per-profile)."
-msgstr ""
-"Etkinleştirilen beceriler modele ad ve açıklamayla bildirilir; model, tam "
-"yönergeleri skill aracıyla talep üzerine yükler. Yüklenen beceri içeriği her "
-"turda eksiksiz olarak yeniden gönderilir ve bağlam sıkıştırmasından asla "
-"etkilenmez. Buradaki geçişler geneldir (profil bazında değildir)."
-
-msgid "System Info:"
-msgstr "Sistem Bilgisi:"
-
-msgid "OS"
-msgstr "İşletim Sistemi"
-
-msgid "Shell"
-msgstr "Kabuk"
-
-msgid "Hostname"
-msgstr "Ana makine adı"
-
-msgid "Kernel"
-msgstr "Çekirdek"
-
-msgid "Desktop"
-msgstr "Masaüstü"
-
-msgid "User"
-msgstr "Kullanıcı"
-
-msgid "CPU"
-msgstr "İşlemci"
-
-msgid "Memory"
-msgstr "Bellek"
-
-msgid "GPU"
-msgstr "GPU"
-
-msgid "Block Devices"
-msgstr "Blok Aygıtlar"
-
-msgid "Network"
-msgstr "Ağ"
-
-msgid "Locale"
-msgstr "Yerel ayar"
-
-msgid "Date/Time"
-msgstr "Tarih/Saat"
-
-msgid "Template:"
-msgstr "Şablon:"
-
-msgid ""
-"This is the full system prompt sent to the model. Use {{placeholders}} to "
-"pull in dynamic content like system details, enabled tools, or desktop "
-"automation instructions. Anything else you write is used verbatim. Critical "
-"runtime instructions (driving, skip-approvals mode) are appended "
-"automatically when active, even if you remove their placeholder."
-msgstr ""
-"Bu, modele gönderilen tam sistem istemidir. Sistem ayrıntıları, etkin "
-"araçlar veya masaüstü otomasyon yönergeleri gibi dinamik içerikleri çekmek "
-"için {{placeholders}} kullanın. Yazdığınız diğer her şey aynen kullanılır. "
-"Kritik çalışma zamanı yönergeleri (sürüş, onayları atla modu), yer "
-"tutucularını kaldırsanız bile etkin olduğunda otomatik olarak eklenir."
-
-msgid "System Prompt:"
-msgstr "Sistem İstemi:"
-
-msgid "Write your system prompt here…"
-msgstr "Sistem isteminizi buraya yazın…"
-
-msgid "Placeholders:"
-msgstr "Yer Tutucular:"
-
-msgid "Enabled system info selected in the checklist above"
-msgstr "Yukarıdaki kontrol listesinde seçilen etkin sistem bilgileri"
-
-msgid "Enabled tool descriptions and guidelines from the Tools menu"
-msgstr "Araçlar menüsünden etkin araç açıklamaları ve yönergeleri"
-
-msgid ""
-"Available skills index and instructions for skills loaded this session (from "
-"the Skills settings page)"
-msgstr ""
-"Kullanılabilir beceriler dizini ve bu oturumda yüklenen beceriler için "
-"yönergeler (Beceriler ayarları sayfasından)"
-
-msgid ""
-"Persistent tmux or screen session multiplexer instructions (when active)"
-msgstr ""
-"Kalıcı tmux veya screen oturum çoğullayıcı yönergeleri (etkin olduğunda)"
-
-msgid "Notice indicating skip-approvals mode (/auto) is active"
-msgstr "Onayları atla modunun (/auto) etkin olduğunu belirten bildirim"
-
-msgid "Desktop automation coordinates and guidelines (when driving)"
-msgstr "Masaüstü otomasyonu koordinatları ve yönergeleri (sürüş sırasında)"
-
-msgid "Localization:"
-msgstr "Yerelleştirme:"
-
-msgid "Localize System Prompt"
-msgstr "Sistem İstemini Yerelleştir"
-
-msgid ""
-"Translate default prompt templates and dynamic system sections into your "
-"desktop language."
-msgstr ""
-"Varsayılan istem şablonlarını ve dinamik sistem bölümlerini masaüstü "
-"dilinize çevirin."
-
-msgid ""
-"Note: Localizing system instructions and tools into non-English languages "
-"may reduce tool-calling reliability and instruction-following accuracy on "
-"some models."
-msgstr ""
-"Not: Sistem yönergelerini ve araçları İngilizce dışındaki dillere "
-"yerelleştirmek, bazı modellerde araç çağırma güvenilirliğini ve yönerge "
-"takip doğruluğunu azaltabilir."
-
-msgid "Actions:"
-msgstr "Eylemler:"
-
-msgid "Reset to Default Template"
-msgstr "Varsayılan Şablona Sıfırla"
-
-msgid "Preview:"
-msgstr "Önizleme:"
-
-msgid "General Tool Settings"
-msgstr "Genel Araç Ayarları"
-
-msgid "System state:"
-msgstr "Sistem durumu:"
-
-msgid "Enable Tools"
-msgstr "Araçları etkinleştir"
-
-msgid "Master switch for all tool-calling functionality."
-msgstr "Tüm araç çağrı işlevleri için ana anahtar."
-
-msgid "Desktop Automation:"
-msgstr "Masaüstü Otomasyonu:"
-
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr ""
-"LLM'nin masaüstünüzü görmek ve yönetmek için bir oturum talep etmesine izin "
-"verir."
-
-msgid "Enable Desktop Automation"
-msgstr "Masaüstü Otomasyonunu Etkinleştir"
-
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr ""
-"Masaüstü Otomasyonunu Etkinleştir (<a href=\"https://github.com/joshuaeroman/"
-"plasmallm-desktop-driver\">sürücü</a> gerekir)"
-
-msgid "Path whitelist:"
-msgstr "Yol beyaz listesi:"
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Yol ekle, örn. $HOME/projects, /tmp"
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Beyaz liste dosya sistemi araçlarına uygulanır (okuma, yazma, listeleme, "
-"arama). Not: 'run_command' bu listeyle kısıtlanmamıştır."
-
-msgid "Max read size:"
-msgstr "Maksimum okuma boyutu:"
-
-msgid "Max write size:"
-msgstr "Maksimum yazma boyutu:"
-
-msgid "Max HTTP response:"
-msgstr "Maksimum HTTP yanıtı:"
-
-msgid "Max tool loop depth:"
-msgstr "Maksimum araç döngü derinliği:"
-
-msgid "steps"
-msgstr "adım"
-
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr "Not: Bu sınır masaüstü otomasyonu oturumları için geçerli değildir."
-
-msgid "Native Adapter Features"
-msgstr "Yerel Adaptör Özellikleri"
-
-msgid "Google Search:"
-msgstr "Google Arama:"
-
-msgid "Enable Native Google Search Grounding"
-msgstr "Yerel Google Arama Temellemesini Etkinleştir"
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Temellemek için Gemini'nin yerleşik Google Aramasını kullanın. Bu, standart "
-"web arama aracını geçersiz kılar."
-
-msgid "Code Execution:"
-msgstr "Kod Yürütme:"
-
-msgid "Enable Native Python Code Execution"
-msgstr "Yerel Python Kodu Yürütmesini Etkinleştir"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Gemini'nin güvenli bir sunucu taraflı sanal alanda Python kodu yazmasına ve "
-"yürütmesine izin verin."
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Yerel araçları komutlarla birleştirmek daha yeni bir model gerektirir. Şu "
-"anda seçili model (%1) hatalarla karşılaşabilir."
-
-msgid "Individual Tools"
-msgstr "Bireysel Araçlar"
-
-msgid "Prompt Instructions:"
-msgstr "İstem Yönergeleri:"
-
-msgid "Reset"
-msgstr "Sıfırla"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
@@ -1966,105 +2078,6 @@ msgstr "Yönetim oturumu aktif (zaten yetkilendirilmiş). Otomatik mod etkin."
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Yönetim oturumu başarıyla yetkilendirildi. Otomatik mod etkin."
-
-msgid ""
-"Execute a shell command on the user's system and return its output. "
-"Guidelines:\n"
-"- Use `pkexec` instead of `sudo` for any command requiring superuser "
-"privileges.\n"
-"- Chain steps with `&&`.\n"
-"- Commands run non-interactively. Never use commands that wait for user "
-"input (like `read`).\n"
-"- Use `kdialog` if you need to prompt the user for input or show a message "
-"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
-"- NEVER install packages, modify system configuration, reboot, or take any "
-"action that alters the system or disrupts the user without explicit "
-"permission.\n"
-"- When permission is needed, ask the user in plain text first.\n"
-"- For auto-run tools: Be conservative and prefer read-only commands. If an "
-"action is potentially disruptive, describe it in plain text and wait for "
-"explicit user approval before calling the tool.\n"
-"- You MUST prefer other, more specific tools (like read_file, write_file, "
-"search_files, etc.) if they can accomplish the task. Only use this tool if "
-"no other tool is suitable."
-msgstr ""
-"Kullanıcının sisteminde bir kabuk komutu yürütür ve çıktısını döndürür. "
-"Yönergeler:\n"
-"- Süper kullanıcı ayrıcalıkları gerektiren tüm komutlar için `sudo` yerine "
-"`pkexec` kullanın.\n"
-"- Adımları `&&` ile zincirleyin.\n"
-"- Komutlar etkileşimsiz olarak çalışır. Asla kullanıcı girişini bekleyen "
-"komutlar (`read` gibi) kullanmayın.\n"
-"- Kullanıcıdan giriş istemeniz veya bir mesaj kutusu göstermeniz gerekiyorsa "
-"`kdialog` kullanın (örn. `kdialog --inputbox \"İstem\"`).\n"
-"- Açık izin olmadan ASLA paket yüklemeyin, sistem yapılandırmasını "
-"değiştirmeyin, yeniden başlatmayın veya sistemi değiştiren veya kullanıcıyı "
-"rahatsız eden herhangi bir işlem yapmayın.\n"
-"- İzin gerektiğinde, önce kullanıcıya düz metin olarak sorun.\n"
-"- Otomatik çalışan araçlar için: Muhafazakar olun ve salt okunur komutları "
-"tercih edin. Bir eylem potansiyel olarak kesintiye neden olabilecekse, düz "
-"metin olarak açıklayın ve aracı çağırmadan önce kullanıcının açık onayını "
-"bekleyin.\n"
-"- Görevi gerçekleştirebileceklerse diğer, daha özel araçları (read_file, "
-"write_file, search_files vb.) MUTLAKA tercih etmelisiniz. Bu aracı yalnızca "
-"başka hiçbir araç uygun değilse kullanın."
-
-msgid ""
-"Read the contents of a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Belirtilen yoldaki bir dosyanın içeriğini okur. Erişim izin verilen "
-"dizinlerle sınırlandırılmıştır."
-
-msgid ""
-"Write content to a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Belirtilen yoldaki bir dosyaya içerik yazar. Erişim izin verilen dizinlerle "
-"sınırlandırılmıştır."
-
-msgid ""
-"List the contents of a directory. Access is restricted to allowed "
-"directories."
-msgstr ""
-"Bir dizinin içeriğini listeler. Erişim izin verilen dizinlerle "
-"sınırlandırılmıştır."
-
-msgid "Search for a pattern within files in a directory (recursive)."
-msgstr "Bir dizindeki dosyalar içinde bir desen arar (özyinelemeli)."
-
-msgid "Perform an HTTP GET request to a URL and return the response content."
-msgstr "Bir URL'ye HTTP GET isteği yürütür ve yanıt içeriğini döndürür."
-
-msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
-msgstr "Bir URL'ye bir HTTP isteği (POST, PUT vb.) yürütür."
-
-msgid "Get the current content of the system clipboard."
-msgstr "Sistem panosunun geçerli içeriğini alır."
-
-msgid "Set the content of the system clipboard."
-msgstr "Sistem panosunun içeriğini ayarlar."
-
-msgid "Show a system notification."
-msgstr "Bir sistem bildirimi gösterir."
-
-msgid "Open a URL in the default application (e.g., web browser)."
-msgstr "Bir URL'yi varsayılan uygulamada (örn. web tarayıcısı) açar."
-
-msgid ""
-"Perform a web search to find current information, news, or specific facts."
-msgstr ""
-"Güncel bilgileri, haberleri veya belirli gerçekleri bulmak için bir web "
-"araması yapar."
-
-msgid ""
-"Restore the full verbatim text and tool outputs of previously compacted "
-"messages by specifying the start and end message IDs from a cited message "
-"range."
-msgstr ""
-"Alıntılanan ileti aralığından başlangıç ve bitiş ileti kimliklerini "
-"belirterek daha önce sıkıştırılmış iletilerin tam metnini ve araç "
-"çıktılarını geri yükleyin."
 
 msgid "General"
 msgstr "Genel"

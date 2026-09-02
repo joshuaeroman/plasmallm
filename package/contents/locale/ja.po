@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-24 21:07-0400\n"
+"POT-Creation-Date: 2026-09-02 09:25-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Japanese\n"
@@ -14,6 +14,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Color button"
+msgstr "カラーボタン"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "現在の色は %1 です。このボタンを押すと色選択ダイアログが開きます。"
+
+msgid "Current color is %1."
+msgstr "現在の色は %1 です。"
 
 msgid "Request timed out after 30 seconds"
 msgstr "30秒後にリクエストがタイムアウトしました"
@@ -61,12 +70,6 @@ msgstr "認証に失敗しました — APIキーを確認してください (HT
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr "認証に失败しました (HTTP %1) — APIキーを確認してください: %2"
 
-msgid "no response — check your endpoint URL"
-msgstr "応答なし — エンドポイントURLを確認してください..."
-
-msgid "Request failed"
-msgstr "リクエストに失敗しました..."
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -75,6 +78,12 @@ msgstr ""
 "このモデルバージョンは、ネイティブツール（検索/コード）とカスタムコマンドの組"
 "み合わせをサポートしていません。新しいモデル（例：Gemini 3+）を選択するか、設"
 "定でネイティブ機能を無効にしてください。"
+
+msgid "Request failed"
+msgstr "リクエストに失敗しました..."
+
+msgid "no response — check your endpoint URL"
+msgstr "応答なし — エンドポイントURLを確認してください..."
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -154,6 +163,79 @@ msgstr ""
 msgid "No command provided."
 msgstr "コマンドが指定されていません。"
 
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Exa検索"
+
+msgid "Ollama API key"
+msgstr "Ollama APIキー..."
+
+msgid "Saving…"
+msgstr "保存中…"
+
+msgid "Saved"
+msgstr "保存済み"
+
+msgid "Save to Config (Insecure)"
+msgstr "設定に保存（安全でない）"
+
+msgid "Save Key"
+msgstr "キーを保存"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG インスタンス URL (例: https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API キー/トークン (オプション)"
+
+msgid "Exa API key"
+msgstr "Exa APIキー"
+
+msgid "Search Type:"
+msgstr "検索タイプ:"
+
+msgid "Auto (Default)"
+msgstr "自動（デフォルト）"
+
+msgid "Fast"
+msgstr "高速"
+
+msgid "Instant"
+msgstr "即時"
+
+msgid "Deep Lite"
+msgstr "ディープ Lite"
+
+msgid "Deep"
+msgstr "ディープ"
+
+msgid "Deep Reasoning"
+msgstr "ディープ推論"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo は設定を必要としません。"
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr ""
+"SearXNG インスタンスで JSON 形式が有効になっていることを確認してください。"
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr "Exa APIを介したLLMトリガーのニューラルウェブ検索を有効にする"
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "OllamaのSearch APIを介したLLMトリガーのウェブ検索を有効にする"
+
+msgid "Manage and discover skills in the Skills settings page."
+msgstr "「スキル」設定ページでスキルを管理および検索します。"
+
 msgid "Saved phrases:"
 msgstr "保存されたフレーズ:"
 
@@ -232,93 +314,14 @@ msgstr ""
 "'tmux' と 'screen' のどちらもシステムに見つかりませんでした。セッションのマル"
 "チプレックスは利用できません。"
 
-msgid "Manage and discover skills in the Skills settings page."
-msgstr "「スキル」設定ページでスキルを管理および検索します。"
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Exa Search"
-msgstr "Exa検索"
-
-msgid "Ollama API key"
-msgstr "Ollama APIキー..."
-
-msgid "Saving…"
-msgstr "保存中…"
-
-msgid "Saved"
-msgstr "保存済み"
-
-msgid "Save to Config (Insecure)"
-msgstr "設定に保存（安全でない）"
-
-msgid "Save Key"
-msgstr "キーを保存"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG インスタンス URL (例: https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API キー/トークン (オプション)"
-
-msgid "Exa API key"
-msgstr "Exa APIキー"
-
-msgid "Search Type:"
-msgstr "検索タイプ:"
-
-msgid "Auto (Default)"
-msgstr "自動（デフォルト）"
-
-msgid "Fast"
-msgstr "高速"
-
-msgid "Instant"
-msgstr "即時"
-
-msgid "Deep Lite"
-msgstr "ディープ Lite"
-
-msgid "Deep"
-msgstr "ディープ"
-
-msgid "Deep Reasoning"
-msgstr "ディープ推論"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo は設定を必要としません。"
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr ""
-"SearXNG インスタンスで JSON 形式が有効になっていることを確認してください。"
-
-msgid "Enables LLM-triggered neural web searches via Exa API."
-msgstr "Exa APIを介したLLMトリガーのニューラルウェブ検索を有効にする"
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "OllamaのSearch APIを介したLLMトリガーのウェブ検索を有効にする"
-
 msgid ""
 "Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
 "that skill has “Allow running skill scripts without approval” checked on the "
 "Skills settings page."
-msgstr "スキルフォルダー内の .sh ファイルを実行します。そのスキルで「スキル設定」ページの「承認なしでのスキルのスクリプト実行を許可」がチェックされている場合のみ、実行ごとの承認がスキップされます。"
-
-msgid "Color button"
-msgstr "カラーボタン"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "現在の色は %1 です。このボタンを押すと色選択ダイアログが開きます。"
-
-msgid "Current color is %1."
-msgstr "現在の色は %1 です。"
+msgstr ""
+"スキルフォルダー内の .sh ファイルを実行します。そのスキルで「スキル設定」ペー"
+"ジの「承認なしでのスキルのスクリプト実行を許可」がチェックされている場合の"
+"み、実行ごとの承認がスキップされます。"
 
 msgid "Tool Request: %1"
 msgstr "ツールリクエスト：%1"
@@ -548,6 +551,289 @@ msgstr "設定を表示"
 msgid "Show Pin"
 msgstr "ピンを表示"
 
+msgid "Speech-to-text is not configured"
+msgstr "音声認識が設定されていません"
+
+msgid "Unknown STT backend: %1"
+msgstr "不明なSTTバックエンド: %1"
+
+msgid "Whisper CLI runner is not available"
+msgstr "Whisper CLI ランナーは利用できません"
+
+msgid "Could not build Whisper command"
+msgstr "Whisper コマンドを作成できませんでした"
+
+msgid "STT backend does not support model listing"
+msgstr "STTバックエンドはモデル一覧の取得をサポートしていません"
+
+msgid "Speech to Text"
+msgstr "音声認識 (STT)"
+
+msgid "Model “%1” is on disk."
+msgstr "モデル “%1” はディスク上にあります。"
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
+"into ~/.cache/whisper and can take a long time."
+msgstr ""
+"モデル “%1” はダウンロードされていません。最初の文字起こしで ~/.cache/"
+"whisper にダウンロードされ (%2)、時間がかかる場合があります。"
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it into "
+"~/.cache/whisper and can take a long time."
+msgstr ""
+"モデル “%1” はダウンロードされていません。最初の文字起こしで ~/.cache/"
+"whisper にダウンロードされ、時間がかかる場合があります。"
+
+msgid "CUDA is available to Whisper."
+msgstr "CUDA は Whisper で利用可能です。"
+
+msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
+msgstr ""
+"この Whisper 環境では CUDA を利用できません。cpu またはデフォルトを使用してく"
+"ださい。"
+
+msgid "Whisper CLI responded to --help."
+msgstr "Whisper CLI が --help に応答しました。"
+
+msgid "Whisper CLI test failed (exit %1): %2"
+msgstr "Whisper CLI テストに失敗しました (終了コード %1): %2"
+
+msgid "Whisper CLI test failed (exit %1). Check the command."
+msgstr ""
+"Whisper CLI テストに失敗しました (終了コード %1)。コマンドを確認してくださ"
+"い。"
+
+msgid "API key saved to KWallet."
+msgstr "APIキーをKWalletに保存しました。"
+
+msgid "API key saved to local fallback."
+msgstr "APIキーをローカルフォールバックに保存しました。"
+
+msgid "Checking whether “%1” is downloaded…"
+msgstr "“%1” がダウンロードされているか確認中…"
+
+msgid "Checking CUDA…"
+msgstr "CUDA を確認中…"
+
+msgid "Testing Whisper CLI…"
+msgstr "Whisper CLI をテスト中…"
+
+msgid "Loaded %1 STT model(s)."
+msgstr "%1 個のSTTモデルを読み込みました。"
+
+msgid "Set an API endpoint first."
+msgstr "最初にAPIエンドポイントを設定してください。"
+
+msgid "Fetching STT models…"
+msgstr "STTモデルを取得中…"
+
+msgid "Voice input:"
+msgstr "音声入力:"
+
+msgid "Enable microphone input"
+msgstr "マイク入力を有効にする"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"音声認識エンジンのみを設定します。文字起こし結果にはアクティブなチャットプロ"
+"ファイル（一般）が使用されます。"
+
+msgid "Mic button:"
+msgstr "マイクボタン:"
+
+msgid "Auto"
+msgstr "自動"
+
+msgid "Hold to talk"
+msgstr "長押しして話す"
+
+msgid "Toggle"
+msgstr "切り替え"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"自動: クリックで録音を切り替え、250ms以上の長押しでプッシュツートーク。長押"
+"し: 押している間のみ。切り替え: クリックで開始/停止。"
+
+msgid "Voice shortcut:"
+msgstr "音声ショートカット:"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"PlasmaLLMが開いてフォーカスされている間、ボタンと同じマイクモードを使用します"
+"（自動: 短押しで切り替え、250ms以上の長押しでプッシュツートーク）。パネルは開"
+"きません。「ショートカット」ページの「ウィジェットをアクティブ化」を使用して"
+"ください。デフォルト: Ctrl+M。無効にするには消去してください。"
+
+msgid "Transcriber"
+msgstr "文字起こし"
+
+msgid "STT backend:"
+msgstr "STTバックエンド:"
+
+msgid "Provider:"
+msgstr "プロバイダー:"
+
+msgid "Endpoint:"
+msgstr "エンドポイント:"
+
+msgid "Model:"
+msgstr "モデル:"
+
+msgid "Fetch STT models"
+msgstr "STTモデルを取得"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouterは文字起こしモダリティ経由でのみSTTモデルを一覧表示します（このペー"
+"ジはその処理を行います）。"
+
+msgid "API key:"
+msgstr "APIキー:"
+
+msgid "Provider API key"
+msgstr "プロバイダーAPIキー"
+
+msgid "Save API key"
+msgstr "APIキーを保存"
+
+msgid "Command:"
+msgstr "コマンド:"
+
+msgid ""
+"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
+"toolbox run whisper."
+msgstr ""
+"そのまま挿入されるコマンドプレフィックス。例: whisper, python3 -m whisper, "
+"toolbox run whisper。"
+
+msgid "Test:"
+msgstr "テスト:"
+
+msgid "Test CLI"
+msgstr "CLI をテスト"
+
+msgid "Task:"
+msgstr "タスク:"
+
+msgid "Transcribe"
+msgstr "文字起こし"
+
+msgid "Translate"
+msgstr "翻訳"
+
+msgid "Device:"
+msgstr "デバイス:"
+
+msgid "Default"
+msgstr "デフォルト"
+
+msgid "FP16:"
+msgstr "FP16:"
+
+msgid "Use --fp16 True (GPU)"
+msgstr "--fp16 True を使用 (GPU)"
+
+msgid "Threads:"
+msgstr "スレッド数:"
+
+msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
+msgstr ""
+"0 を指定すると --threads を省略します (Whisper のデフォルト)。CPU では FP16 "
+"をオフにする方が安全です。"
+
+msgid "Initial prompt:"
+msgstr "初期プロンプト:"
+
+msgid "Optional vocabulary / style hint"
+msgstr "オプションの語彙/スタイルヒント"
+
+msgid "Extra args:"
+msgstr "追加の引数:"
+
+msgid "Optional, appended as-is"
+msgstr "オプション、そのまま追加されます"
+
+msgid "Options"
+msgstr "オプション"
+
+msgid "Language hint:"
+msgstr "言語ヒント:"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "省略可能、例: ja または en (空 = 自動)"
+
+msgid "Max recording (seconds):"
+msgstr "最大録音時間 (秒):"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"カスタムツールが設定されていません。LLMに独自のコマンドを公開するカスタムツー"
+"ルを追加してください。"
+
+msgid "Add Custom Tool"
+msgstr "カスタムツールを追加"
+
+msgid "Echoes back the message provided."
+msgstr "提供されたメッセージをエコーバックします。"
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "ツール名（例：systemctl_service）"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "説明（このツールの機能をLLMに指示する）"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "コマンドテンプレート（例：systemctl {action} {service}）"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "スーパーユーザーが必要（pkexecで実行）"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "ツールを自動実行（確認ダイアログなし）"
+
+msgid "Collapse results"
+msgstr "結果を折りたたむ"
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+"完了した結果を小さなピルとして表示します。ピルをクリックすると完全な出力が表"
+"示されます。"
+
+msgid "Update Tool"
+msgstr "ツールを更新"
+
+msgid "Save Tool"
+msgstr "ツールを保存"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "\"%1\" という名前のツールが既に存在します。"
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"カスタムツールを使用すると、独自のコマンドをLLMに公開できます。コマンドテンプ"
+"レートで {variable} のようなプレースホルダーを使用して、LLMが入力できるパラ"
+"メーターを定義します。LLMが提供する値は自動的にシェルエスケープされます。"
+
 msgid "Loaded %1 skill"
 msgstr "%1 スキルを読み込みました"
 
@@ -609,6 +895,411 @@ msgstr "出力をアシスタントと共有"
 msgid "The model loaded this skill's instructions into context before acting."
 msgstr ""
 "モデルは動作を実行する前に、このスキルの指示をコンテキストに読み込みました。"
+
+msgid "Stop command"
+msgstr "コマンドを停止"
+
+msgid "Open terminal attached to this session"
+msgstr "このセッションに接続されたターミナルを開く"
+
+msgid "Collapse result"
+msgstr "結果を折りたたむ"
+
+msgid "Copy output"
+msgstr "出力をコピー"
+
+msgid "Enable skills"
+msgstr "スキルを有効にする"
+
+msgid ""
+"Skills are reusable instruction sets the model loads on demand via the skill "
+"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
+"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
+"contained <name>.md file; a user skill with the same name overrides the "
+"bundled one."
+msgstr ""
+"スキルは、モデルが skill ツールを介してオンデマンドで読み込む再利用可能な指示"
+"セットです。PlasmaLLM には組み込みスキル（提供元: 同梱）が含まれています。"
+"~/.local/share/plasmallm/skills/ に SKILL.md を含むフォルダーまたは単一の自己"
+"完結型 <name>.md ファイルとして独自のスキルを追加できます。同名のユーザースキ"
+"ルは同梱のスキルを上書きします。"
+
+msgid ""
+"No skills discovered yet. Add a SKILL.md folder to the directory above or "
+"enable the extra directories below."
+msgstr ""
+"検出されたスキルはまだありません。上のディレクトリに SKILL.md フォルダーを追"
+"加するか、下部で追加のディレクトリを有効にしてください。"
+
+msgid "DISABLED"
+msgstr "無効"
+
+msgid "Allow running skill scripts without approval"
+msgstr "承認なしでのスキルのスクリプト実行を許可"
+
+msgid "Refreshing…"
+msgstr "更新中…"
+
+msgid "Refresh"
+msgstr "更新"
+
+msgid "Open Folder"
+msgstr "フォルダーを開く"
+
+msgid "Open the skills directory in the file manager"
+msgstr "ファイルマネージャーでスキルディレクトリを開く"
+
+msgid "Also scan ~/.claude/skills"
+msgstr "~/.claude/skills もスキャンする"
+
+msgid "Also scan ~/.agents/skills"
+msgstr "~/.agents/skills もスキャンする"
+
+msgid "/absolute/path/to/skills"
+msgstr "/skills/への/絶対パス"
+
+msgid "Save directory"
+msgstr "ディレクトリを保存"
+
+msgid "Add directory"
+msgstr "ディレクトリを追加"
+
+msgid ""
+"Enabled skills are advertised to the model by name and description; the "
+"model loads full instructions on demand with the skill tool. Loaded skill "
+"content is re-sent in full every turn and is never affected by context "
+"compaction. Toggles here are global (not per-profile)."
+msgstr ""
+"有効化されたスキルは名前と説明によってモデルに通知され、モデルは skill ツール"
+"を使用してオンデマンドで完全な指示を読み込みます。読み込まれたスキルの内容は"
+"毎ターン完全に再送信され、コンテキスト圧縮の影響を受けることはありません。こ"
+"こでの切り替えはグローバルです (プロファイルごとではありません)。"
+
+msgid "System Info:"
+msgstr "システム情報:"
+
+msgid "OS"
+msgstr "OS"
+
+msgid "Shell"
+msgstr "シェル"
+
+msgid "Hostname"
+msgstr "ホスト名"
+
+msgid "Kernel"
+msgstr "カーネル"
+
+msgid "Desktop"
+msgstr "デスクトップ"
+
+msgid "User"
+msgstr "ユーザー"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Memory"
+msgstr "メモリ"
+
+msgid "GPU"
+msgstr "GPU"
+
+msgid "Block Devices"
+msgstr "ブロックデバイス"
+
+msgid "Network"
+msgstr "ネットワーク"
+
+msgid "Locale"
+msgstr "ロケール"
+
+msgid "Date/Time"
+msgstr "日付/時刻"
+
+msgid "Template:"
+msgstr "テンプレート:"
+
+msgid ""
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
+msgstr ""
+"これはモデルに送信される完全なシステムプロンプトです。{{placeholders}}を使用"
+"して、システム詳細、有効なツール、デスクトップ自動化手順などの動的コンテンツ"
+"を取り込みます。それ以外に記述した内容はそのまま使用されます。重要な実行時指"
+"示（デスクトップ操作、承認スキップモード）は、プレースホルダーを削除した場合"
+"でも、有効時に自動的に追加されます。"
+
+msgid "System Prompt:"
+msgstr "システムプロンプト:"
+
+msgid "Write your system prompt here…"
+msgstr "ここにシステムプロンプトを入力…"
+
+msgid "Placeholders:"
+msgstr "プレースホルダー:"
+
+msgid "Enabled system info selected in the checklist above"
+msgstr "上のチェックリストで選択された有効なシステム情報"
+
+msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr "ツールメニューからの有効なツールの説明とガイドライン"
+
+msgid ""
+"Available skills index and instructions for skills loaded this session (from "
+"the Skills settings page)"
+msgstr ""
+"利用可能なスキルのインデックスと、このセッションで読み込まれたスキルの指示 "
+"(「スキル」設定ページより)"
+
+msgid ""
+"Persistent tmux or screen session multiplexer instructions (when active)"
+msgstr ""
+"永続的な tmux または screen セッションマルチプレクサの指示（アクティブ時）"
+
+msgid "Notice indicating skip-approvals mode (/auto) is active"
+msgstr "承認スキップモード（/auto）がアクティブであることを示す通知"
+
+msgid "Desktop automation coordinates and guidelines (when driving)"
+msgstr "デスクトップ自動化の座標とガイドライン（操作時）"
+
+msgid "Localization:"
+msgstr "ローカライゼーション:"
+
+msgid "Localize System Prompt"
+msgstr "システムプロンプトをローカライズ"
+
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
+msgstr ""
+"デフォルトのプロンプトテンプレートと動的システムセクションをデスクトップ言語"
+"に翻訳します。"
+
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
+msgstr ""
+"注意: システムの指示やツールを英語以外の言語にローカライズすると、一部のモデ"
+"ルでツール呼び出しの信頼性や指示追従の精度が低下する可能性があります。"
+
+msgid "Actions:"
+msgstr "アクション:"
+
+msgid "Reset to Default Template"
+msgstr "デフォルトテンプレートにリセット"
+
+msgid "Preview:"
+msgstr "プレビュー:"
+
+msgid "General Tool Settings"
+msgstr "一般ツール設定"
+
+msgid "System state:"
+msgstr "システム状態："
+
+msgid "Enable Tools"
+msgstr "ツールを有効にする"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "すべてのツール呼び出し機能のマスタースイッチ。"
+
+msgid "Exa does not support tool use"
+msgstr "Exaはツールの使用をサポートしていません"
+
+msgid "Desktop Automation:"
+msgstr "デスクトップ自動化:"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+"LLMがデスクトップの閲覧および操作を行うセッションを要求できるようにします。"
+
+msgid "Enable Desktop Automation"
+msgstr "デスクトップ自動化を有効にする"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"デスクトップ自動化を有効にする (<a href=\"https://github.com/joshuaeroman/"
+"plasmallm-desktop-driver\">ドライバー</a>が必要です)"
+
+msgid "Path whitelist:"
+msgstr "パスホワイトリスト："
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "パスを追加（例：$HOME/projects、/tmp）"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"ホワイトリストはファイルシステムツール（読み取り、書き込み、一覧表示、検索）"
+"に適用されます。注意：「run_command」はこのリストによる制限を受けません。"
+
+msgid "Max read size:"
+msgstr "最大読み取りサイズ："
+
+msgid "Max write size:"
+msgstr "最大書き込みサイズ："
+
+msgid "Max HTTP response:"
+msgstr "最大HTTP応答："
+
+msgid "Max tool loop depth:"
+msgstr "最大ツールループ深度:"
+
+msgid "steps"
+msgstr "ステップ"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr "注意: この制限はデスクトップ自動化セッションには適用されません。"
+
+msgid "Native Adapter Features"
+msgstr "ネイティブアダプター機能"
+
+msgid "Google Search:"
+msgstr "Google検索："
+
+msgid "Enable Native Google Search Grounding"
+msgstr "ネイティブ Google Search グラウンディングを有効にする"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"グラウンディングにGeminiの内蔵Google検索を使用します。これにより標準のウェブ"
+"検索ツールが上書きされます。"
+
+msgid "Code Execution:"
+msgstr "コード実行："
+
+msgid "Enable Native Python Code Execution"
+msgstr "ネイティブPythonコード実行を有効にする"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"GeminiがセキュアなサーバーサイドサンドボックスでPythonコードを記述・実行でき"
+"るようにします。"
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"ネイティブツールとコマンドの組み合わせには、より新しいモデルが必要です。現在"
+"選択されているモデル（%1）はエラーが発生する可能性があります。"
+
+msgid "Individual Tools"
+msgstr "個別ツール"
+
+msgid "Prompt Instructions:"
+msgstr "プロンプトの指示:"
+
+msgid "Reset"
+msgstr "リセット"
+
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"ユーザーのシステム上でシェルコマンドを実行し、その出力を返します。ガイドライ"
+"ン:\n"
+"- スーパーユーザー権限が必要なコマンドには、`sudo` の代わりに `pkexec` を使用"
+"してください。\n"
+"- ステップは `&&` で連結してください。\n"
+"- コマンドは非対話形式で実行されます。ユーザー入力を待つコマンド（`read` な"
+"ど）は絶対に使用しないでください。\n"
+"- ユーザーに入力を求めたりメッセージボックスを表示したりする必要がある場合"
+"は、`kdialog` を使用してください（例: `kdialog --inputbox \"プロンプト"
+"\"`）。\n"
+"- 明示的な許可なしに、パッケージのインストール、システム構成の変更、再起動、"
+"またはシステムを変更したりユーザーの作業を妨げたりするアクションは絶対に実行"
+"しないでください。\n"
+"- 許可が必要な場合は、まずプレーンテキストでユーザーに確認してください。\n"
+"- 自動実行ツールの場合: 慎重になり、読み取り専用コマンドを優先してください。"
+"アクションが中断を伴う可能性がある場合は、プレーンテキストで説明し、ツールを"
+"呼び出す前にユーザーの明示的な承認を待ってください。\n"
+"- タスクを達成できる場合は、より具体的な他のツール（read_file、write_file、"
+"search_files など）を必ず優先してください。他のツールが適していない場合にの"
+"み、このツールを使用してください。"
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"指定されたパスのファイルの内容を読み取ります。アクセスは許可されたディレクト"
+"リに制限されています。"
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"指定されたパスのファイルにコンテンツを書き込みます。アクセスは許可されたディ"
+"レクトリに制限されています。"
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+"ディレクトリの内容を一覧表示します。アクセスは許可されたディレクトリに制限さ"
+"れています。"
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "ディレクトリ内のファイル内のパターンを検索します（再帰的）。"
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr "URL に対して HTTP GET リクエストを実行し、レスポンスの内容を返します。"
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "URL に対して HTTP リクエスト（POST、PUT など）を実行します。"
+
+msgid "Get the current content of the system clipboard."
+msgstr "システムクリップボードの現在の内容を取得します。"
+
+msgid "Set the content of the system clipboard."
+msgstr "システムクリップボードの内容を設定します。"
+
+msgid "Show a system notification."
+msgstr "システム通知を表示します。"
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr "デフォルトのアプリケーション（Webブラウザなど）で URL を開きます。"
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Web検索を実行して、最新の情報、ニュース、または特定の事実を検索します。"
+
+msgid ""
+"Restore the full verbatim text and tool outputs of previously compacted "
+"messages by specifying the start and end message IDs from a cited message "
+"range."
+msgstr ""
+"引用されたメッセージ範囲から開始および終了メッセージ ID を指定して、以前に圧"
+"縮されたメッセージの逐語的テキストとツール出力を完全に復元します。"
 
 msgid "Approve the pending tool request"
 msgstr "保留中のツールリクエストを承認"
@@ -826,9 +1517,6 @@ msgstr "離して送信"
 msgid "Click to start"
 msgstr "クリックして開始"
 
-msgid "Hold to talk"
-msgstr "長押しして話す"
-
 msgid "Click to toggle, hold to talk"
 msgstr "クリックで切り替え、長押しで話す"
 
@@ -843,18 +1531,6 @@ msgstr "LLMリクエストをキャンセル"
 
 msgid "Drop files here to attach"
 msgstr "ここにファイルをドロップして添付します"
-
-msgid "Stop command"
-msgstr "コマンドを停止"
-
-msgid "Open terminal attached to this session"
-msgstr "このセッションに接続されたターミナルを開く"
-
-msgid "Collapse result"
-msgstr "結果を折りたたむ"
-
-msgid "Copy output"
-msgstr "出力をコピー"
 
 msgid "Context Compaction"
 msgstr "コンテキスト圧縮"
@@ -986,62 +1662,6 @@ msgstr "圧縮接続をテスト"
 msgid "Model Summary Response:"
 msgstr "モデル要約応答:"
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
-msgstr ""
-"カスタムツールが設定されていません。LLMに独自のコマンドを公開するカスタムツー"
-"ルを追加してください。"
-
-msgid "Add Custom Tool"
-msgstr "カスタムツールを追加"
-
-msgid "Echoes back the message provided."
-msgstr "提供されたメッセージをエコーバックします。"
-
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "ツール名（例：systemctl_service）"
-
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "説明（このツールの機能をLLMに指示する）"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "コマンドテンプレート（例：systemctl {action} {service}）"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "スーパーユーザーが必要（pkexecで実行）"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "ツールを自動実行（確認ダイアログなし）"
-
-msgid "Collapse results"
-msgstr "結果を折りたたむ"
-
-msgid ""
-"Show finished results as a small pill; click the pill to view the full "
-"output."
-msgstr ""
-"完了した結果を小さなピルとして表示します。ピルをクリックすると完全な出力が表"
-"示されます。"
-
-msgid "Update Tool"
-msgstr "ツールを更新"
-
-msgid "Save Tool"
-msgstr "ツールを保存"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "\"%1\" という名前のツールが既に存在します。"
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"カスタムツールを使用すると、独自のコマンドをLLMに公開できます。コマンドテンプ"
-"レートで {variable} のようなプレースホルダーを使用して、LLMが入力できるパラ"
-"メーターを定義します。LLMが提供する値は自動的にシェルエスケープされます。"
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "gcloudトークンを取得できませんでした（終了コード %1）：%2"
 
@@ -1071,9 +1691,6 @@ msgstr "名前変更"
 
 msgid "Adapter:"
 msgstr "アダプター:"
-
-msgid "Exa does not support tool use"
-msgstr "Exaはツールの使用をサポートしていません"
 
 msgid "Platform:"
 msgstr "プラットフォーム:"
@@ -1114,20 +1731,17 @@ msgstr "プロジェクトID:"
 msgid "Location:"
 msgstr "場所:"
 
-msgid "Provider:"
-msgstr "プロバイダー:"
-
 msgid "API Endpoint:"
 msgstr "APIエンドポイント:"
-
-msgid "Model:"
-msgstr "モデル:"
 
 msgid "API Key:"
 msgstr "APIキー:"
 
 msgid "Paste short-lived access token"
 msgstr "短命アクセストークンを貼り付け"
+
+msgid "Paste OpenCode API key"
+msgstr "OpenCode APIキーを貼り付け"
 
 msgid "Optional - for OpenAI, etc."
 msgstr "オプション – OpenAIなど用"
@@ -1236,9 +1850,6 @@ msgstr "プレーンテキスト (.txt)"
 msgid "Structured (.jsonl)"
 msgstr "構造化 (.jsonl)"
 
-msgid "Open Folder"
-msgstr "フォルダーを開く"
-
 msgid "Open the folder where chat histories are saved"
 msgstr "チャット履歴が保存されているフォルダーを開きます"
 
@@ -1259,509 +1870,6 @@ msgstr "秒"
 
 msgid "minutes"
 msgstr "分"
-
-msgid "Speech to Text"
-msgstr "音声認識 (STT)"
-
-msgid "Model “%1” is on disk."
-msgstr "モデル “%1” はディスク上にあります。"
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
-"into ~/.cache/whisper and can take a long time."
-msgstr ""
-"モデル “%1” はダウンロードされていません。最初の文字起こしで ~/.cache/"
-"whisper にダウンロードされ (%2)、時間がかかる場合があります。"
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it into "
-"~/.cache/whisper and can take a long time."
-msgstr ""
-"モデル “%1” はダウンロードされていません。最初の文字起こしで ~/.cache/"
-"whisper にダウンロードされ、時間がかかる場合があります。"
-
-msgid "CUDA is available to Whisper."
-msgstr "CUDA は Whisper で利用可能です。"
-
-msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
-msgstr ""
-"この Whisper 環境では CUDA を利用できません。cpu またはデフォルトを使用してく"
-"ださい。"
-
-msgid "Whisper CLI responded to --help."
-msgstr "Whisper CLI が --help に応答しました。"
-
-msgid "Whisper CLI test failed (exit %1): %2"
-msgstr "Whisper CLI テストに失敗しました (終了コード %1): %2"
-
-msgid "Whisper CLI test failed (exit %1). Check the command."
-msgstr ""
-"Whisper CLI テストに失敗しました (終了コード %1)。コマンドを確認してくださ"
-"い。"
-
-msgid "API key saved to KWallet."
-msgstr "APIキーをKWalletに保存しました。"
-
-msgid "API key saved to local fallback."
-msgstr "APIキーをローカルフォールバックに保存しました。"
-
-msgid "Checking whether “%1” is downloaded…"
-msgstr "“%1” がダウンロードされているか確認中…"
-
-msgid "Checking CUDA…"
-msgstr "CUDA を確認中…"
-
-msgid "Testing Whisper CLI…"
-msgstr "Whisper CLI をテスト中…"
-
-msgid "Loaded %1 STT model(s)."
-msgstr "%1 個のSTTモデルを読み込みました。"
-
-msgid "Set an API endpoint first."
-msgstr "最初にAPIエンドポイントを設定してください。"
-
-msgid "Fetching STT models…"
-msgstr "STTモデルを取得中…"
-
-msgid "Voice input:"
-msgstr "音声入力:"
-
-msgid "Enable microphone input"
-msgstr "マイク入力を有効にする"
-
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-"音声認識エンジンのみを設定します。文字起こし結果にはアクティブなチャットプロ"
-"ファイル（一般）が使用されます。"
-
-msgid "Mic button:"
-msgstr "マイクボタン:"
-
-msgid "Auto"
-msgstr "自動"
-
-msgid "Toggle"
-msgstr "切り替え"
-
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-"自動: クリックで録音を切り替え、250ms以上の長押しでプッシュツートーク。長押"
-"し: 押している間のみ。切り替え: クリックで開始/停止。"
-
-msgid "Voice shortcut:"
-msgstr "音声ショートカット:"
-
-msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
-"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
-msgstr ""
-"PlasmaLLMが開いてフォーカスされている間、ボタンと同じマイクモードを使用します"
-"（自動: 短押しで切り替え、250ms以上の長押しでプッシュツートーク）。パネルは開"
-"きません。「ショートカット」ページの「ウィジェットをアクティブ化」を使用して"
-"ください。デフォルト: Ctrl+M。無効にするには消去してください。"
-
-msgid "Transcriber"
-msgstr "文字起こし"
-
-msgid "STT backend:"
-msgstr "STTバックエンド:"
-
-msgid "Endpoint:"
-msgstr "エンドポイント:"
-
-msgid "Fetch STT models"
-msgstr "STTモデルを取得"
-
-msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
-msgstr ""
-"OpenRouterは文字起こしモダリティ経由でのみSTTモデルを一覧表示します（このペー"
-"ジはその処理を行います）。"
-
-msgid "API key:"
-msgstr "APIキー:"
-
-msgid "Provider API key"
-msgstr "プロバイダーAPIキー"
-
-msgid "Save API key"
-msgstr "APIキーを保存"
-
-msgid "Command:"
-msgstr "コマンド:"
-
-msgid ""
-"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
-"toolbox run whisper."
-msgstr ""
-"そのまま挿入されるコマンドプレフィックス。例: whisper, python3 -m whisper, "
-"toolbox run whisper。"
-
-msgid "Test:"
-msgstr "テスト:"
-
-msgid "Test CLI"
-msgstr "CLI をテスト"
-
-msgid "Task:"
-msgstr "タスク:"
-
-msgid "Transcribe"
-msgstr "文字起こし"
-
-msgid "Translate"
-msgstr "翻訳"
-
-msgid "Device:"
-msgstr "デバイス:"
-
-msgid "Default"
-msgstr "デフォルト"
-
-msgid "FP16:"
-msgstr "FP16:"
-
-msgid "Use --fp16 True (GPU)"
-msgstr "--fp16 True を使用 (GPU)"
-
-msgid "Threads:"
-msgstr "スレッド数:"
-
-msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
-msgstr ""
-"0 を指定すると --threads を省略します (Whisper のデフォルト)。CPU では FP16 "
-"をオフにする方が安全です。"
-
-msgid "Initial prompt:"
-msgstr "初期プロンプト:"
-
-msgid "Optional vocabulary / style hint"
-msgstr "オプションの語彙/スタイルヒント"
-
-msgid "Extra args:"
-msgstr "追加の引数:"
-
-msgid "Optional, appended as-is"
-msgstr "オプション、そのまま追加されます"
-
-msgid "Options"
-msgstr "オプション"
-
-msgid "Language hint:"
-msgstr "言語ヒント:"
-
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "省略可能、例: ja または en (空 = 自動)"
-
-msgid "Max recording (seconds):"
-msgstr "最大録音時間 (秒):"
-
-msgid "Speech-to-text is not configured"
-msgstr "音声認識が設定されていません"
-
-msgid "Unknown STT backend: %1"
-msgstr "不明なSTTバックエンド: %1"
-
-msgid "Whisper CLI runner is not available"
-msgstr "Whisper CLI ランナーは利用できません"
-
-msgid "Could not build Whisper command"
-msgstr "Whisper コマンドを作成できませんでした"
-
-msgid "STT backend does not support model listing"
-msgstr "STTバックエンドはモデル一覧の取得をサポートしていません"
-
-msgid "Enable skills"
-msgstr "スキルを有効にする"
-
-msgid ""
-"Skills are reusable instruction sets the model loads on demand via the skill "
-"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
-"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
-"contained <name>.md file; a user skill with the same name overrides the "
-"bundled one."
-msgstr "スキルは、モデルが skill ツールを介してオンデマンドで読み込む再利用可能な指示セットです。PlasmaLLM には組み込みスキル（提供元: 同梱）が含まれています。~/.local/share/plasmallm/skills/ に SKILL.md を含むフォルダーまたは単一の自己完結型 <name>.md ファイルとして独自のスキルを追加できます。同名のユーザースキルは同梱のスキルを上書きします。"
-
-msgid ""
-"No skills discovered yet. Add a SKILL.md folder to the directory above or "
-"enable the extra directories below."
-msgstr ""
-"検出されたスキルはまだありません。上のディレクトリに SKILL.md フォルダーを追"
-"加するか、下部で追加のディレクトリを有効にしてください。"
-
-msgid "DISABLED"
-msgstr "無効"
-
-msgid "Allow running skill scripts without approval"
-msgstr "承認なしでのスキルのスクリプト実行を許可"
-
-msgid "Refreshing…"
-msgstr "更新中…"
-
-msgid "Refresh"
-msgstr "更新"
-
-msgid "Open the skills directory in the file manager"
-msgstr "ファイルマネージャーでスキルディレクトリを開く"
-
-msgid "Also scan ~/.claude/skills"
-msgstr "~/.claude/skills もスキャンする"
-
-msgid "Also scan ~/.agents/skills"
-msgstr "~/.agents/skills もスキャンする"
-
-msgid "/absolute/path/to/skills"
-msgstr "/skills/への/絶対パス"
-
-msgid "Save directory"
-msgstr "ディレクトリを保存"
-
-msgid "Add directory"
-msgstr "ディレクトリを追加"
-
-msgid ""
-"Enabled skills are advertised to the model by name and description; the "
-"model loads full instructions on demand with the skill tool. Loaded skill "
-"content is re-sent in full every turn and is never affected by context "
-"compaction. Toggles here are global (not per-profile)."
-msgstr ""
-"有効化されたスキルは名前と説明によってモデルに通知され、モデルは skill ツール"
-"を使用してオンデマンドで完全な指示を読み込みます。読み込まれたスキルの内容は"
-"毎ターン完全に再送信され、コンテキスト圧縮の影響を受けることはありません。こ"
-"こでの切り替えはグローバルです (プロファイルごとではありません)。"
-
-msgid "System Info:"
-msgstr "システム情報:"
-
-msgid "OS"
-msgstr "OS"
-
-msgid "Shell"
-msgstr "シェル"
-
-msgid "Hostname"
-msgstr "ホスト名"
-
-msgid "Kernel"
-msgstr "カーネル"
-
-msgid "Desktop"
-msgstr "デスクトップ"
-
-msgid "User"
-msgstr "ユーザー"
-
-msgid "CPU"
-msgstr "CPU"
-
-msgid "Memory"
-msgstr "メモリ"
-
-msgid "GPU"
-msgstr "GPU"
-
-msgid "Block Devices"
-msgstr "ブロックデバイス"
-
-msgid "Network"
-msgstr "ネットワーク"
-
-msgid "Locale"
-msgstr "ロケール"
-
-msgid "Date/Time"
-msgstr "日付/時刻"
-
-msgid "Template:"
-msgstr "テンプレート:"
-
-msgid ""
-"This is the full system prompt sent to the model. Use {{placeholders}} to "
-"pull in dynamic content like system details, enabled tools, or desktop "
-"automation instructions. Anything else you write is used verbatim. Critical "
-"runtime instructions (driving, skip-approvals mode) are appended "
-"automatically when active, even if you remove their placeholder."
-msgstr ""
-"これはモデルに送信される完全なシステムプロンプトです。{{placeholders}}を使用"
-"して、システム詳細、有効なツール、デスクトップ自動化手順などの動的コンテンツ"
-"を取り込みます。それ以外に記述した内容はそのまま使用されます。重要な実行時指"
-"示（デスクトップ操作、承認スキップモード）は、プレースホルダーを削除した場合"
-"でも、有効時に自動的に追加されます。"
-
-msgid "System Prompt:"
-msgstr "システムプロンプト:"
-
-msgid "Write your system prompt here…"
-msgstr "ここにシステムプロンプトを入力…"
-
-msgid "Placeholders:"
-msgstr "プレースホルダー:"
-
-msgid "Enabled system info selected in the checklist above"
-msgstr "上のチェックリストで選択された有効なシステム情報"
-
-msgid "Enabled tool descriptions and guidelines from the Tools menu"
-msgstr "ツールメニューからの有効なツールの説明とガイドライン"
-
-msgid ""
-"Available skills index and instructions for skills loaded this session (from "
-"the Skills settings page)"
-msgstr ""
-"利用可能なスキルのインデックスと、このセッションで読み込まれたスキルの指示 "
-"(「スキル」設定ページより)"
-
-msgid ""
-"Persistent tmux or screen session multiplexer instructions (when active)"
-msgstr ""
-"永続的な tmux または screen セッションマルチプレクサの指示（アクティブ時）"
-
-msgid "Notice indicating skip-approvals mode (/auto) is active"
-msgstr "承認スキップモード（/auto）がアクティブであることを示す通知"
-
-msgid "Desktop automation coordinates and guidelines (when driving)"
-msgstr "デスクトップ自動化の座標とガイドライン（操作時）"
-
-msgid "Localization:"
-msgstr "ローカライゼーション:"
-
-msgid "Localize System Prompt"
-msgstr "システムプロンプトをローカライズ"
-
-msgid ""
-"Translate default prompt templates and dynamic system sections into your "
-"desktop language."
-msgstr ""
-"デフォルトのプロンプトテンプレートと動的システムセクションをデスクトップ言語"
-"に翻訳します。"
-
-msgid ""
-"Note: Localizing system instructions and tools into non-English languages "
-"may reduce tool-calling reliability and instruction-following accuracy on "
-"some models."
-msgstr ""
-"注意: システムの指示やツールを英語以外の言語にローカライズすると、一部のモデ"
-"ルでツール呼び出しの信頼性や指示追従の精度が低下する可能性があります。"
-
-msgid "Actions:"
-msgstr "アクション:"
-
-msgid "Reset to Default Template"
-msgstr "デフォルトテンプレートにリセット"
-
-msgid "Preview:"
-msgstr "プレビュー:"
-
-msgid "General Tool Settings"
-msgstr "一般ツール設定"
-
-msgid "System state:"
-msgstr "システム状態："
-
-msgid "Enable Tools"
-msgstr "ツールを有効にする"
-
-msgid "Master switch for all tool-calling functionality."
-msgstr "すべてのツール呼び出し機能のマスタースイッチ。"
-
-msgid "Desktop Automation:"
-msgstr "デスクトップ自動化:"
-
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr ""
-"LLMがデスクトップの閲覧および操作を行うセッションを要求できるようにします。"
-
-msgid "Enable Desktop Automation"
-msgstr "デスクトップ自動化を有効にする"
-
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr ""
-"デスクトップ自動化を有効にする (<a href=\"https://github.com/joshuaeroman/"
-"plasmallm-desktop-driver\">ドライバー</a>が必要です)"
-
-msgid "Path whitelist:"
-msgstr "パスホワイトリスト："
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "パスを追加（例：$HOME/projects、/tmp）"
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"ホワイトリストはファイルシステムツール（読み取り、書き込み、一覧表示、検索）"
-"に適用されます。注意：「run_command」はこのリストによる制限を受けません。"
-
-msgid "Max read size:"
-msgstr "最大読み取りサイズ："
-
-msgid "Max write size:"
-msgstr "最大書き込みサイズ："
-
-msgid "Max HTTP response:"
-msgstr "最大HTTP応答："
-
-msgid "Max tool loop depth:"
-msgstr "最大ツールループ深度:"
-
-msgid "steps"
-msgstr "ステップ"
-
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr "注意: この制限はデスクトップ自動化セッションには適用されません。"
-
-msgid "Native Adapter Features"
-msgstr "ネイティブアダプター機能"
-
-msgid "Google Search:"
-msgstr "Google検索："
-
-msgid "Enable Native Google Search Grounding"
-msgstr "ネイティブ Google Search グラウンディングを有効にする"
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"グラウンディングにGeminiの内蔵Google検索を使用します。これにより標準のウェブ"
-"検索ツールが上書きされます。"
-
-msgid "Code Execution:"
-msgstr "コード実行："
-
-msgid "Enable Native Python Code Execution"
-msgstr "ネイティブPythonコード実行を有効にする"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"GeminiがセキュアなサーバーサイドサンドボックスでPythonコードを記述・実行でき"
-"るようにします。"
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"ネイティブツールとコマンドの組み合わせには、より新しいモデルが必要です。現在"
-"選択されているモデル（%1）はエラーが発生する可能性があります。"
-
-msgid "Individual Tools"
-msgstr "個別ツール"
-
-msgid "Prompt Instructions:"
-msgstr "プロンプトの指示:"
-
-msgid "Reset"
-msgstr "リセット"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
@@ -1956,103 +2064,6 @@ msgstr "操作セッションはアクティブです（認証済み）。自動
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "操作セッションの認証に成功しました。自動モードが有効です。"
-
-msgid ""
-"Execute a shell command on the user's system and return its output. "
-"Guidelines:\n"
-"- Use `pkexec` instead of `sudo` for any command requiring superuser "
-"privileges.\n"
-"- Chain steps with `&&`.\n"
-"- Commands run non-interactively. Never use commands that wait for user "
-"input (like `read`).\n"
-"- Use `kdialog` if you need to prompt the user for input or show a message "
-"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
-"- NEVER install packages, modify system configuration, reboot, or take any "
-"action that alters the system or disrupts the user without explicit "
-"permission.\n"
-"- When permission is needed, ask the user in plain text first.\n"
-"- For auto-run tools: Be conservative and prefer read-only commands. If an "
-"action is potentially disruptive, describe it in plain text and wait for "
-"explicit user approval before calling the tool.\n"
-"- You MUST prefer other, more specific tools (like read_file, write_file, "
-"search_files, etc.) if they can accomplish the task. Only use this tool if "
-"no other tool is suitable."
-msgstr ""
-"ユーザーのシステム上でシェルコマンドを実行し、その出力を返します。ガイドライ"
-"ン:\n"
-"- スーパーユーザー権限が必要なコマンドには、`sudo` の代わりに `pkexec` を使用"
-"してください。\n"
-"- ステップは `&&` で連結してください。\n"
-"- コマンドは非対話形式で実行されます。ユーザー入力を待つコマンド（`read` な"
-"ど）は絶対に使用しないでください。\n"
-"- ユーザーに入力を求めたりメッセージボックスを表示したりする必要がある場合"
-"は、`kdialog` を使用してください（例: `kdialog --inputbox \"プロンプト"
-"\"`）。\n"
-"- 明示的な許可なしに、パッケージのインストール、システム構成の変更、再起動、"
-"またはシステムを変更したりユーザーの作業を妨げたりするアクションは絶対に実行"
-"しないでください。\n"
-"- 許可が必要な場合は、まずプレーンテキストでユーザーに確認してください。\n"
-"- 自動実行ツールの場合: 慎重になり、読み取り専用コマンドを優先してください。"
-"アクションが中断を伴う可能性がある場合は、プレーンテキストで説明し、ツールを"
-"呼び出す前にユーザーの明示的な承認を待ってください。\n"
-"- タスクを達成できる場合は、より具体的な他のツール（read_file、write_file、"
-"search_files など）を必ず優先してください。他のツールが適していない場合にの"
-"み、このツールを使用してください。"
-
-msgid ""
-"Read the contents of a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"指定されたパスのファイルの内容を読み取ります。アクセスは許可されたディレクト"
-"リに制限されています。"
-
-msgid ""
-"Write content to a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"指定されたパスのファイルにコンテンツを書き込みます。アクセスは許可されたディ"
-"レクトリに制限されています。"
-
-msgid ""
-"List the contents of a directory. Access is restricted to allowed "
-"directories."
-msgstr ""
-"ディレクトリの内容を一覧表示します。アクセスは許可されたディレクトリに制限さ"
-"れています。"
-
-msgid "Search for a pattern within files in a directory (recursive)."
-msgstr "ディレクトリ内のファイル内のパターンを検索します（再帰的）。"
-
-msgid "Perform an HTTP GET request to a URL and return the response content."
-msgstr "URL に対して HTTP GET リクエストを実行し、レスポンスの内容を返します。"
-
-msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
-msgstr "URL に対して HTTP リクエスト（POST、PUT など）を実行します。"
-
-msgid "Get the current content of the system clipboard."
-msgstr "システムクリップボードの現在の内容を取得します。"
-
-msgid "Set the content of the system clipboard."
-msgstr "システムクリップボードの内容を設定します。"
-
-msgid "Show a system notification."
-msgstr "システム通知を表示します。"
-
-msgid "Open a URL in the default application (e.g., web browser)."
-msgstr "デフォルトのアプリケーション（Webブラウザなど）で URL を開きます。"
-
-msgid ""
-"Perform a web search to find current information, news, or specific facts."
-msgstr ""
-"Web検索を実行して、最新の情報、ニュース、または特定の事実を検索します。"
-
-msgid ""
-"Restore the full verbatim text and tool outputs of previously compacted "
-"messages by specifying the start and end message IDs from a cited message "
-"range."
-msgstr ""
-"引用されたメッセージ範囲から開始および終了メッセージ ID を指定して、以前に圧"
-"縮されたメッセージの逐語的テキストとツール出力を完全に復元します。"
 
 msgid "General"
 msgstr "一般"

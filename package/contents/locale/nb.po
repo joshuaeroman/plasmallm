@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-24 21:07-0400\n"
+"POT-Creation-Date: 2026-09-02 09:25-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -16,6 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Color button"
+msgstr "Fargeknapp"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Gjeldende farge er %1. Denne knappen vil åpne en fargevelgerdialog."
+
+msgid "Current color is %1."
+msgstr "Gjeldende farge er %1."
 
 msgid "Request timed out after 30 seconds"
 msgstr "Forespørsel tidsavbrutt etter 30 sekunder"
@@ -60,12 +69,6 @@ msgstr "Autentisering feilet — sjekk API-nøkkelen din (HTTP 400): %1"
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr "Autentisering feilet (HTTP %1) — sjekk API-nøkkelen din: %2"
 
-msgid "no response — check your endpoint URL"
-msgstr "ingen respons — sjekk endepunkt-URL-en din..."
-
-msgid "Request failed"
-msgstr "Forespørsel feilet..."
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -74,6 +77,12 @@ msgstr ""
 "Denne modellversjonen støtter ikke å kombinere innebygde verktøy (Søk/Kode) "
 "med tilpassede kommandoer. Velg en nyere modell (f.eks. Gemini 3+) eller "
 "deaktiver innebygde funksjoner i innstillinger."
+
+msgid "Request failed"
+msgstr "Forespørsel feilet..."
+
+msgid "no response — check your endpoint URL"
+msgstr "ingen respons — sjekk endepunkt-URL-en din..."
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -153,6 +162,79 @@ msgstr ""
 msgid "No command provided."
 msgstr "Ingen kommando oppgitt."
 
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Exa-søk"
+
+msgid "Ollama API key"
+msgstr "Ollama API-nøkkel"
+
+msgid "Saving…"
+msgstr "Lagrer…"
+
+msgid "Saved"
+msgstr "Lagret"
+
+msgid "Save to Config (Insecure)"
+msgstr "Lagre til konfigurasjon (usikker)"
+
+msgid "Save Key"
+msgstr "Lagre nøkkel"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG-instans-URL (f.eks. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API-nøkkel/Token (valgfritt)"
+
+msgid "Exa API key"
+msgstr "Exa API-nøkkel"
+
+msgid "Search Type:"
+msgstr "Søketype:"
+
+msgid "Auto (Default)"
+msgstr "Auto (standard)"
+
+msgid "Fast"
+msgstr "Rask"
+
+msgid "Instant"
+msgstr "Øyeblikkelig"
+
+msgid "Deep Lite"
+msgstr "Dyp Lite"
+
+msgid "Deep"
+msgstr "Dyp"
+
+msgid "Deep Reasoning"
+msgstr "Dyp resonnering"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo krever ingen konfigurasjon."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Sørg for at SearXNG-instansen har JSON-formatet aktivert."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr "Muliggjør LLM-utløste nevrale nettsøk via Exa API."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
+
+msgid "Manage and discover skills in the Skills settings page."
+msgstr ""
+"Administrer og oppdag ferdigheter på innstillingssiden for ferdigheter."
+
 msgid "Saved phrases:"
 msgstr "Lagrede fraser:"
 
@@ -231,93 +313,14 @@ msgstr ""
 "Verken 'tmux' eller 'screen' ble funnet på systemet ditt. Øktmultipleksing "
 "er utilgjengelig."
 
-msgid "Manage and discover skills in the Skills settings page."
-msgstr ""
-"Administrer og oppdag ferdigheter på innstillingssiden for ferdigheter."
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Exa Search"
-msgstr "Exa-søk"
-
-msgid "Ollama API key"
-msgstr "Ollama API-nøkkel"
-
-msgid "Saving…"
-msgstr "Lagrer…"
-
-msgid "Saved"
-msgstr "Lagret"
-
-msgid "Save to Config (Insecure)"
-msgstr "Lagre til konfigurasjon (usikker)"
-
-msgid "Save Key"
-msgstr "Lagre nøkkel"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG-instans-URL (f.eks. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API-nøkkel/Token (valgfritt)"
-
-msgid "Exa API key"
-msgstr "Exa API-nøkkel"
-
-msgid "Search Type:"
-msgstr "Søketype:"
-
-msgid "Auto (Default)"
-msgstr "Auto (standard)"
-
-msgid "Fast"
-msgstr "Rask"
-
-msgid "Instant"
-msgstr "Øyeblikkelig"
-
-msgid "Deep Lite"
-msgstr "Dyp Lite"
-
-msgid "Deep"
-msgstr "Dyp"
-
-msgid "Deep Reasoning"
-msgstr "Dyp resonnering"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo krever ingen konfigurasjon."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Sørg for at SearXNG-instansen har JSON-formatet aktivert."
-
-msgid "Enables LLM-triggered neural web searches via Exa API."
-msgstr "Muliggjør LLM-utløste nevrale nettsøk via Exa API."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Muliggjør LLM-utløst nettsøk via Ollamas søke-API"
-
 msgid ""
 "Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
 "that skill has “Allow running skill scripts without approval” checked on the "
 "Skills settings page."
-msgstr "Kjører en .sh-fil i en ferdighetsmappe. Godkjenning per kjøring hoppes bare over når den ferdigheten har merket av for «Tillat kjøring av ferdighetsskript uten godkjenning» på innstillingssiden for ferdigheter."
-
-msgid "Color button"
-msgstr "Fargeknapp"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Gjeldende farge er %1. Denne knappen vil åpne en fargevelgerdialog."
-
-msgid "Current color is %1."
-msgstr "Gjeldende farge er %1."
+msgstr ""
+"Kjører en .sh-fil i en ferdighetsmappe. Godkjenning per kjøring hoppes bare "
+"over når den ferdigheten har merket av for «Tillat kjøring av "
+"ferdighetsskript uten godkjenning» på innstillingssiden for ferdigheter."
 
 msgid "Tool Request: %1"
 msgstr "Verktøyforespørsel: %1"
@@ -544,6 +547,285 @@ msgstr "Vis Innstillinger"
 msgid "Show Pin"
 msgstr "Vis festikonet"
 
+msgid "Speech-to-text is not configured"
+msgstr "Tale-til-tekst er ikke konfigurert"
+
+msgid "Unknown STT backend: %1"
+msgstr "Ukjent STT-motor: %1"
+
+msgid "Whisper CLI runner is not available"
+msgstr "Whisper-CLI-kjører er ikke tilgjengelig"
+
+msgid "Could not build Whisper command"
+msgstr "Kunne ikke bygge Whisper-kommando"
+
+msgid "STT backend does not support model listing"
+msgstr "STT-motoren støtter ikke listing av modeller"
+
+msgid "Speech to Text"
+msgstr "Tale til tekst"
+
+msgid "Model “%1” is on disk."
+msgstr "Modell “%1” er på disken."
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
+"into ~/.cache/whisper and can take a long time."
+msgstr ""
+"Modell “%1” er ikke lastet ned. Den første transkripsjonen vil hente det "
+"(%2) til ~/.cache/whisper og kan ta lang tid."
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it into "
+"~/.cache/whisper and can take a long time."
+msgstr ""
+"Modell “%1” er ikke lastet ned. Den første transkripsjonen vil hente det til "
+"~/.cache/whisper og kan ta lang tid."
+
+msgid "CUDA is available to Whisper."
+msgstr "CUDA er tilgjengelig for Whisper."
+
+msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
+msgstr ""
+"CUDA er ikke tilgjengelig i dette Whisper-miljøet. Bruk cpu eller Standard."
+
+msgid "Whisper CLI responded to --help."
+msgstr "Whisper-CLI svarte på --help."
+
+msgid "Whisper CLI test failed (exit %1): %2"
+msgstr "Whisper-CLI-test mislyktes (avslutningskode %1): %2"
+
+msgid "Whisper CLI test failed (exit %1). Check the command."
+msgstr ""
+"Whisper-CLI-test mislyktes (avslutningskode %1). Kontroller kommandoen."
+
+msgid "API key saved to KWallet."
+msgstr "API-nøkkel lagret i KWallet."
+
+msgid "API key saved to local fallback."
+msgstr "API-nøkkel lagret i lokal reserve."
+
+msgid "Checking whether “%1” is downloaded…"
+msgstr "Sjekker om “%1” er lastet ned…"
+
+msgid "Checking CUDA…"
+msgstr "Sjekker CUDA…"
+
+msgid "Testing Whisper CLI…"
+msgstr "Tester Whisper-CLI…"
+
+msgid "Loaded %1 STT model(s)."
+msgstr "Lastet inn %1 STT-modell(er)."
+
+msgid "Set an API endpoint first."
+msgstr "Angi et API-endepunkt først."
+
+msgid "Fetching STT models…"
+msgstr "Henter STT-modeller…"
+
+msgid "Voice input:"
+msgstr "Taleinndata:"
+
+msgid "Enable microphone input"
+msgstr "Aktiver mikrofoninndata"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"Konfigurerer kun tale-til-tekst-motoren. Transkripsjoner bruker din aktive "
+"samtaleprofil (Generelt)."
+
+msgid "Mic button:"
+msgstr "Mikrofonknapp:"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Hold to talk"
+msgstr "Hold for å snakke"
+
+msgid "Toggle"
+msgstr "Veksle"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"Auto: klikk veksler opptak; hold 250 ms+ for trykk-og-snakk. Hold: kun hold "
+"inne. Veksle: klikk for å starte/stoppe."
+
+msgid "Voice shortcut:"
+msgstr "Talesnarvei:"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"Når PlasmaLLM er åpen og fokusert, brukes samme mikrofonmodus som knappen "
+"(auto: kort trykk veksler, hold 250 ms+ er trykk-og-snakk). Åpner ikke "
+"panelet – bruk «Aktiver skjermelement» på Snarveier-siden. Standard: Ctrl+M. "
+"Tøm for å deaktivere."
+
+msgid "Transcriber"
+msgstr "Transkriberer"
+
+msgid "STT backend:"
+msgstr "STT-motor:"
+
+msgid "Provider:"
+msgstr "Leverandør:"
+
+msgid "Endpoint:"
+msgstr "Endepunkt:"
+
+msgid "Model:"
+msgstr "Modell:"
+
+msgid "Fetch STT models"
+msgstr "Hent STT-modeller"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouter lister STT-modeller kun via transkripsjonsmodaliteter (denne "
+"siden gjør det)."
+
+msgid "API key:"
+msgstr "API-nøkkel:"
+
+msgid "Provider API key"
+msgstr "Leverandør-API-nøkkel"
+
+msgid "Save API key"
+msgstr "Lagre API-nøkkel"
+
+msgid "Command:"
+msgstr "Kommando:"
+
+msgid ""
+"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
+"toolbox run whisper."
+msgstr ""
+"Kommandoprefiks, settes inn som det er. Eksempler: whisper, python3 -m "
+"whisper, toolbox run whisper."
+
+msgid "Test:"
+msgstr "Test:"
+
+msgid "Test CLI"
+msgstr "Test CLI"
+
+msgid "Task:"
+msgstr "Oppgave:"
+
+msgid "Transcribe"
+msgstr "Transkriber"
+
+msgid "Translate"
+msgstr "Oversett"
+
+msgid "Device:"
+msgstr "Enhet:"
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "FP16:"
+msgstr "FP16:"
+
+msgid "Use --fp16 True (GPU)"
+msgstr "Bruk --fp16 True (GPU)"
+
+msgid "Threads:"
+msgstr "Tråder:"
+
+msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
+msgstr "0 utelater --threads (Whisper-standard). FP16 av er tryggere på CPU."
+
+msgid "Initial prompt:"
+msgstr "Innledende ledetekst:"
+
+msgid "Optional vocabulary / style hint"
+msgstr "Valgfritt ordforråd / stilhint"
+
+msgid "Extra args:"
+msgstr "Ekstra argumenter:"
+
+msgid "Optional, appended as-is"
+msgstr "Valgfritt, legges til som det er"
+
+msgid "Options"
+msgstr "Alternativer"
+
+msgid "Language hint:"
+msgstr "Språkhint:"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "Valgfritt, f.eks. no eller en (tom = auto)"
+
+msgid "Max recording (seconds):"
+msgstr "Maksimalt opptak (sekunder):"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"Ingen egendefinerte verktøy konfigurert. Legg til et egendefinert verktøy "
+"for å eksponere dine egne kommandoer til LLM."
+
+msgid "Add Custom Tool"
+msgstr "Legg til egendefinert verktøy"
+
+msgid "Echoes back the message provided."
+msgstr "Ekko tilbake den angitte meldingen."
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "Verktøynavn (f.eks. systemctl_service)"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "Beskrivelse (instruerer LLM om hva dette verktøyet gjør)"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "Kommandomal (f.eks. systemctl {action} {service})"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "Krev superbruker (kjøres med pkexec)"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "Kjør verktøy automatisk (ingen bekreftelsesdialog)"
+
+msgid "Collapse results"
+msgstr "Fold sammen resultater"
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+"Vis fullførte resultater som en liten pille; klikk på pillen for å se hele "
+"utdataene."
+
+msgid "Update Tool"
+msgstr "Oppdater verktøy"
+
+msgid "Save Tool"
+msgstr "Lagre verktøy"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "Et verktøy med navn \"%1\" finnes allerede."
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"Egendefinerte verktøy lar deg eksponere dine egne kommandoer til LLM. Bruk "
+"plassholdere som {variable} i Kommandomalen for å definere parametere som "
+"LLM kan fylle ut. Verdier gitt av LLM blir automatisk shell-escaped."
+
 msgid "Loaded %1 skill"
 msgstr "%1 ferdighet lastet inn"
 
@@ -606,6 +888,416 @@ msgid "The model loaded this skill's instructions into context before acting."
 msgstr ""
 "Modellen lastet inn instruksjonene for denne ferdigheten i konteksten før "
 "den handlet."
+
+msgid "Stop command"
+msgstr "Stopp kommando"
+
+msgid "Open terminal attached to this session"
+msgstr "Åpne terminal tilknyttet denne sesjonen"
+
+msgid "Collapse result"
+msgstr "Fold sammen resultat"
+
+msgid "Copy output"
+msgstr "Kopier utdata"
+
+msgid "Enable skills"
+msgstr "Aktiver ferdigheter"
+
+msgid ""
+"Skills are reusable instruction sets the model loads on demand via the skill "
+"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
+"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
+"contained <name>.md file; a user skill with the same name overrides the "
+"bundled one."
+msgstr ""
+"Ferdigheter er gjenbrukbare instruksjonssett som modellen laster inn ved "
+"behov via ferdighetsverktøyet. PlasmaLLM leveres med innebygde ferdigheter "
+"(kilde: medfølgende). Legg til dine egne i ~/.local/share/plasmallm/skills/ "
+"som en mappe som inneholder SKILL.md eller en frittstående <navn>.md-fil; en "
+"brukerferdighet med samme navn overstyrer den medfølgende."
+
+msgid ""
+"No skills discovered yet. Add a SKILL.md folder to the directory above or "
+"enable the extra directories below."
+msgstr ""
+"Ingen ferdigheter oppdaget ennå. Legg til en SKILL.md-mappe i mappen ovenfor "
+"eller aktiver de ekstra mappene nedenfor."
+
+msgid "DISABLED"
+msgstr "DEAKTIVERT"
+
+msgid "Allow running skill scripts without approval"
+msgstr "Tillat kjøring av ferdighetsskript uten godkjenning"
+
+msgid "Refreshing…"
+msgstr "Oppdaterer…"
+
+msgid "Refresh"
+msgstr "Oppdater"
+
+msgid "Open Folder"
+msgstr "Åpne mappe"
+
+msgid "Open the skills directory in the file manager"
+msgstr "Åpne ferdighetsmappen i filbehandleren"
+
+msgid "Also scan ~/.claude/skills"
+msgstr "Skann også ~/.claude/skills"
+
+msgid "Also scan ~/.agents/skills"
+msgstr "Skann også ~/.agents/skills"
+
+msgid "/absolute/path/to/skills"
+msgstr "/absolutt/sti/til/ferdigheter"
+
+msgid "Save directory"
+msgstr "Lagre mappe"
+
+msgid "Add directory"
+msgstr "Legg til mappe"
+
+msgid ""
+"Enabled skills are advertised to the model by name and description; the "
+"model loads full instructions on demand with the skill tool. Loaded skill "
+"content is re-sent in full every turn and is never affected by context "
+"compaction. Toggles here are global (not per-profile)."
+msgstr ""
+"Aktiverte ferdigheter annonseres til modellen med navn og beskrivelse; "
+"modellen laster inn fullstendige instruksjoner ved behov med "
+"ferdighetsverktøyet. Innlastet ferdighetsinnhold sendes på nytt i sin helhet "
+"hver tur og påvirkes aldri av kontekstkomprimering. Brytere her er globale "
+"(ikke per profil)."
+
+msgid "System Info:"
+msgstr "Systeminformasjon:"
+
+msgid "OS"
+msgstr "OS"
+
+msgid "Shell"
+msgstr "Skall"
+
+msgid "Hostname"
+msgstr "Vertsnavn"
+
+msgid "Kernel"
+msgstr "Kjerne"
+
+msgid "Desktop"
+msgstr "Skrivebord"
+
+msgid "User"
+msgstr "Bruker"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Memory"
+msgstr "Minne"
+
+msgid "GPU"
+msgstr "GPU"
+
+msgid "Block Devices"
+msgstr "Blokkenheter"
+
+msgid "Network"
+msgstr "Nettverk"
+
+msgid "Locale"
+msgstr "Lokalitet"
+
+msgid "Date/Time"
+msgstr "Dato/tid"
+
+msgid "Template:"
+msgstr "Mal:"
+
+msgid ""
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
+msgstr ""
+"Dette er den fullstendige systeminstruksen som sendes til modellen. Bruk "
+"{{placeholders}} for å hente inn dynamisk innhold som systemdetaljer, "
+"aktiverte verktøy eller skrivebordsautomatiseringsinstruksjoner. Alt annet "
+"du skriver brukes ordrett. Kritiske kjøretidsinstruksjoner (styring, hopp "
+"over godkjenninger) legges til automatisk når de er aktive, selv om du "
+"fjerner plassholderen deres."
+
+msgid "System Prompt:"
+msgstr "Systeminstruks:"
+
+msgid "Write your system prompt here…"
+msgstr "Skriv systeminstruksen din her…"
+
+msgid "Placeholders:"
+msgstr "Plassholdere:"
+
+msgid "Enabled system info selected in the checklist above"
+msgstr "Aktivert systeminformasjon valgt i sjekklisten ovenfor"
+
+msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr "Aktiverte verktøybeskrivelser og retningslinjer fra Verktøy-menyen"
+
+msgid ""
+"Available skills index and instructions for skills loaded this session (from "
+"the Skills settings page)"
+msgstr ""
+"Indeks over tilgjengelige ferdigheter og instruksjoner for ferdigheter "
+"lastet inn i denne økten (fra innstillingssiden for ferdigheter)"
+
+msgid ""
+"Persistent tmux or screen session multiplexer instructions (when active)"
+msgstr ""
+"Instruksjoner for persistent tmux- eller screen-øktmultiplekser (når aktiv)"
+
+msgid "Notice indicating skip-approvals mode (/auto) is active"
+msgstr ""
+"Varsel som indikerer at modus for å hoppe over godkjenninger (/auto) er aktiv"
+
+msgid "Desktop automation coordinates and guidelines (when driving)"
+msgstr ""
+"Koordinater og retningslinjer for skrivebordsautomatisering (ved styring)"
+
+msgid "Localization:"
+msgstr "Lokalisering:"
+
+msgid "Localize System Prompt"
+msgstr "Lokaliser systeminstruks"
+
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
+msgstr ""
+"Oversett standard instruksmaler og dynamiske systemseksjoner til "
+"skrivebordsspråket ditt."
+
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
+msgstr ""
+"Merk: Lokalisering av systeminstruksjoner og verktøy til andre språk enn "
+"engelsk kan redusere påliteligheten for verktøykall og nøyaktigheten for "
+"instruksjonsfølging på enkelte modeller."
+
+msgid "Actions:"
+msgstr "Handlinger:"
+
+msgid "Reset to Default Template"
+msgstr "Tilbakestill til standardmal"
+
+msgid "Preview:"
+msgstr "Forhåndsvisning:"
+
+msgid "General Tool Settings"
+msgstr "Generelle verktøyinnstillinger"
+
+msgid "System state:"
+msgstr "Systemtilstand:"
+
+msgid "Enable Tools"
+msgstr "Aktiver verktøy"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "Hovedbryter for all verktøykallfunksjonalitet."
+
+msgid "Exa does not support tool use"
+msgstr "Exa støtter ikke bruk av verktøy"
+
+msgid "Desktop Automation:"
+msgstr "Skrivebordsautomatisering:"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr "Lar LLM forespørre en økt for å se og styre skrivebordet ditt."
+
+msgid "Enable Desktop Automation"
+msgstr "Aktiver skrivebordsautomatisering"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Aktiver skrivebordsautomatisering (krever <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+
+msgid "Path whitelist:"
+msgstr "Sti-hviteliste:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Legg til sti, f.eks. $HOME/projects, /tmp"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Hvitelisten gjelder for filsystemverktøy (les, skriv, list, søk). Merk: "
+"'run_command' er ikke begrenset av denne listen."
+
+msgid "Max read size:"
+msgstr "Maks lesestørrelse:"
+
+msgid "Max write size:"
+msgstr "Maks skrivingsstørrelse:"
+
+msgid "Max HTTP response:"
+msgstr "Maks HTTP-svar:"
+
+msgid "Max tool loop depth:"
+msgstr "Maksimal dybde for verktøyløkke:"
+
+msgid "steps"
+msgstr "trinn"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr "Merk: Denne grensen gjelder ikke for skrivebordsautomatiseringsøkter."
+
+msgid "Native Adapter Features"
+msgstr "Innebygde adapterfunksjoner"
+
+msgid "Google Search:"
+msgstr "Google-søk:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Aktiver innebygd Google-søkegrunnlag"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Bruk Geminis innebygde Google-søk for grunnlag. Dette overstyrer det "
+"standard nettsøkverktøyet."
+
+msgid "Code Execution:"
+msgstr "Kodekjøring:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Aktiver innebygd Python-kodekjøring"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Tillat Gemini å skrive og kjøre Python-kode i en sikker sandkasse på "
+"serversiden."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Å kombinere innebygde verktøy med kommandoer krever en nyere modell. Din "
+"valgte modell (%1) kan oppleve feil."
+
+msgid "Individual Tools"
+msgstr "Individuelle verktøy"
+
+msgid "Prompt Instructions:"
+msgstr "Instruksjoner for prompt:"
+
+msgid "Reset"
+msgstr "Tilbakestill"
+
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"Kjører en skallkommando på brukerens system og returnerer utdataene. "
+"Retningslinjer:\n"
+"- Bruk `pkexec` i stedet for `sudo` for alle kommandoer som krever "
+"superbrukerrettigheter.\n"
+"- Kjed sammen trinn med `&&`.\n"
+"- Kommandoer kjøres ikke-interaktivt. Bruk aldri kommandoer som venter på "
+"brukerinndata (som `read`).\n"
+"- Bruk `kdialog` hvis du må be brukeren om inndata eller vise en "
+"meldingsboks (f.eks. `kdialog --inputbox \"Forespørsel\"`).\n"
+"- Du må ALDRI installere pakker, endre systemkonfigurasjon, starte på nytt "
+"eller utføre handlinger som endrer systemet eller forstyrrer brukeren uten "
+"eksplisitt tillatelse.\n"
+"- Når tillatelse er nødvendig, spør brukeren i ren tekst først.\n"
+"- For verktøy med automatisk kjøring: Vær konservativ og foretrekk "
+"skrivebeskyttede kommandoer. Hvis en handling er potensielt forstyrrende, "
+"beskriv den i ren tekst og vent på eksplisitt brukergodkjenning før du "
+"kaller verktøyet.\n"
+"- Du MÅ foretrekke andre, mer spesifikke verktøy (som read_file, write_file, "
+"search_files osv.) hvis de kan utføre oppgaven. Bruk bare dette verktøyet "
+"hvis ingen andre verktøy er egnet."
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Leser innholdet i en fil på den angitte banen. Tilgang er begrenset til "
+"tillatte mapper."
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Skriver innhold til en fil på den angitte banen. Tilgang er begrenset til "
+"tillatte mapper."
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr "Lister innholdet i en mappe. Tilgang er begrenset til tillatte mapper."
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "Søker etter et mønster i filer i en mappe (rekursivt)."
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr ""
+"Utfører en HTTP GET-forespørsel til en URL og returnerer svarsinnholdet."
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "Utfører en HTTP-forespørsel (POST, PUT osv.) til en URL."
+
+msgid "Get the current content of the system clipboard."
+msgstr "Henter det gjeldende innholdet i systemets utklippstavle."
+
+msgid "Set the content of the system clipboard."
+msgstr "Angir innholdet i systemets utklippstavle."
+
+msgid "Show a system notification."
+msgstr "Viser et systemvarsel."
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr "Åpner en URL i standardprogrammet (f.eks. nettleser)."
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Utfører et nettsøk for å finne oppdatert informasjon, nyheter eller "
+"spesifikke fakta."
+
+msgid ""
+"Restore the full verbatim text and tool outputs of previously compacted "
+"messages by specifying the start and end message IDs from a cited message "
+"range."
+msgstr ""
+"Gjenopprett fullstendig ordrett tekst og verktøyutdata fra tidligere "
+"komprimerte meldinger ved å angi start- og slutt-meldings-ID-er fra et "
+"sitert meldingsområde."
 
 msgid "Approve the pending tool request"
 msgstr "Godkjenn ventende verktøyforespørsel"
@@ -824,9 +1516,6 @@ msgstr "Slipp for å sende"
 msgid "Click to start"
 msgstr "Klikk for å starte"
 
-msgid "Hold to talk"
-msgstr "Hold for å snakke"
-
 msgid "Click to toggle, hold to talk"
 msgstr "Klikk for å veksle, hold for å snakke"
 
@@ -841,18 +1530,6 @@ msgstr "Avbryt LLM-forespørsel"
 
 msgid "Drop files here to attach"
 msgstr "Slipp filer her for å legge ved"
-
-msgid "Stop command"
-msgstr "Stopp kommando"
-
-msgid "Open terminal attached to this session"
-msgstr "Åpne terminal tilknyttet denne sesjonen"
-
-msgid "Collapse result"
-msgstr "Fold sammen resultat"
-
-msgid "Copy output"
-msgstr "Kopier utdata"
 
 msgid "Context Compaction"
 msgstr "Kontekstkomprimering"
@@ -984,62 +1661,6 @@ msgstr "Test komprimeringsforbindelse"
 msgid "Model Summary Response:"
 msgstr "Modellsammendragssvar:"
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
-msgstr ""
-"Ingen egendefinerte verktøy konfigurert. Legg til et egendefinert verktøy "
-"for å eksponere dine egne kommandoer til LLM."
-
-msgid "Add Custom Tool"
-msgstr "Legg til egendefinert verktøy"
-
-msgid "Echoes back the message provided."
-msgstr "Ekko tilbake den angitte meldingen."
-
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "Verktøynavn (f.eks. systemctl_service)"
-
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "Beskrivelse (instruerer LLM om hva dette verktøyet gjør)"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "Kommandomal (f.eks. systemctl {action} {service})"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "Krev superbruker (kjøres med pkexec)"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "Kjør verktøy automatisk (ingen bekreftelsesdialog)"
-
-msgid "Collapse results"
-msgstr "Fold sammen resultater"
-
-msgid ""
-"Show finished results as a small pill; click the pill to view the full "
-"output."
-msgstr ""
-"Vis fullførte resultater som en liten pille; klikk på pillen for å se hele "
-"utdataene."
-
-msgid "Update Tool"
-msgstr "Oppdater verktøy"
-
-msgid "Save Tool"
-msgstr "Lagre verktøy"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "Et verktøy med navn \"%1\" finnes allerede."
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"Egendefinerte verktøy lar deg eksponere dine egne kommandoer til LLM. Bruk "
-"plassholdere som {variable} i Kommandomalen for å definere parametere som "
-"LLM kan fylle ut. Verdier gitt av LLM blir automatisk shell-escaped."
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Klarte ikke hente gcloud-token (avslutningskode %1): %2"
 
@@ -1069,9 +1690,6 @@ msgstr "Gi nytt navn"
 
 msgid "Adapter:"
 msgstr "Adapter:"
-
-msgid "Exa does not support tool use"
-msgstr "Exa støtter ikke bruk av verktøy"
 
 msgid "Platform:"
 msgstr "Plattform:"
@@ -1112,20 +1730,17 @@ msgstr "Prosjekt-ID:"
 msgid "Location:"
 msgstr "Plassering:"
 
-msgid "Provider:"
-msgstr "Leverandør:"
-
 msgid "API Endpoint:"
 msgstr "API-endepunkt:"
-
-msgid "Model:"
-msgstr "Modell:"
 
 msgid "API Key:"
 msgstr "API-nøkkel:"
 
 msgid "Paste short-lived access token"
 msgstr "Lim inn kortvarig tilgangstoken"
+
+msgid "Paste OpenCode API key"
+msgstr "Lim inn OpenCode API-nøkkel"
 
 msgid "Optional - for OpenAI, etc."
 msgstr "Valgfritt - for OpenAI, osv."
@@ -1235,9 +1850,6 @@ msgstr "Ren tekst (.txt)"
 msgid "Structured (.jsonl)"
 msgstr "Strukturert (.jsonl)"
 
-msgid "Open Folder"
-msgstr "Åpne mappe"
-
 msgid "Open the folder where chat histories are saved"
 msgstr "Åpne mappen der chatloggene lagres"
 
@@ -1258,509 +1870,6 @@ msgstr "sekunder"
 
 msgid "minutes"
 msgstr "minutter"
-
-msgid "Speech to Text"
-msgstr "Tale til tekst"
-
-msgid "Model “%1” is on disk."
-msgstr "Modell “%1” er på disken."
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
-"into ~/.cache/whisper and can take a long time."
-msgstr ""
-"Modell “%1” er ikke lastet ned. Den første transkripsjonen vil hente det "
-"(%2) til ~/.cache/whisper og kan ta lang tid."
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it into "
-"~/.cache/whisper and can take a long time."
-msgstr ""
-"Modell “%1” er ikke lastet ned. Den første transkripsjonen vil hente det til "
-"~/.cache/whisper og kan ta lang tid."
-
-msgid "CUDA is available to Whisper."
-msgstr "CUDA er tilgjengelig for Whisper."
-
-msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
-msgstr ""
-"CUDA er ikke tilgjengelig i dette Whisper-miljøet. Bruk cpu eller Standard."
-
-msgid "Whisper CLI responded to --help."
-msgstr "Whisper-CLI svarte på --help."
-
-msgid "Whisper CLI test failed (exit %1): %2"
-msgstr "Whisper-CLI-test mislyktes (avslutningskode %1): %2"
-
-msgid "Whisper CLI test failed (exit %1). Check the command."
-msgstr ""
-"Whisper-CLI-test mislyktes (avslutningskode %1). Kontroller kommandoen."
-
-msgid "API key saved to KWallet."
-msgstr "API-nøkkel lagret i KWallet."
-
-msgid "API key saved to local fallback."
-msgstr "API-nøkkel lagret i lokal reserve."
-
-msgid "Checking whether “%1” is downloaded…"
-msgstr "Sjekker om “%1” er lastet ned…"
-
-msgid "Checking CUDA…"
-msgstr "Sjekker CUDA…"
-
-msgid "Testing Whisper CLI…"
-msgstr "Tester Whisper-CLI…"
-
-msgid "Loaded %1 STT model(s)."
-msgstr "Lastet inn %1 STT-modell(er)."
-
-msgid "Set an API endpoint first."
-msgstr "Angi et API-endepunkt først."
-
-msgid "Fetching STT models…"
-msgstr "Henter STT-modeller…"
-
-msgid "Voice input:"
-msgstr "Taleinndata:"
-
-msgid "Enable microphone input"
-msgstr "Aktiver mikrofoninndata"
-
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-"Konfigurerer kun tale-til-tekst-motoren. Transkripsjoner bruker din aktive "
-"samtaleprofil (Generelt)."
-
-msgid "Mic button:"
-msgstr "Mikrofonknapp:"
-
-msgid "Auto"
-msgstr "Auto"
-
-msgid "Toggle"
-msgstr "Veksle"
-
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-"Auto: klikk veksler opptak; hold 250 ms+ for trykk-og-snakk. Hold: kun hold "
-"inne. Veksle: klikk for å starte/stoppe."
-
-msgid "Voice shortcut:"
-msgstr "Talesnarvei:"
-
-msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
-"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
-msgstr ""
-"Når PlasmaLLM er åpen og fokusert, brukes samme mikrofonmodus som knappen "
-"(auto: kort trykk veksler, hold 250 ms+ er trykk-og-snakk). Åpner ikke "
-"panelet – bruk «Aktiver skjermelement» på Snarveier-siden. Standard: Ctrl+M. "
-"Tøm for å deaktivere."
-
-msgid "Transcriber"
-msgstr "Transkriberer"
-
-msgid "STT backend:"
-msgstr "STT-motor:"
-
-msgid "Endpoint:"
-msgstr "Endepunkt:"
-
-msgid "Fetch STT models"
-msgstr "Hent STT-modeller"
-
-msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
-msgstr ""
-"OpenRouter lister STT-modeller kun via transkripsjonsmodaliteter (denne "
-"siden gjør det)."
-
-msgid "API key:"
-msgstr "API-nøkkel:"
-
-msgid "Provider API key"
-msgstr "Leverandør-API-nøkkel"
-
-msgid "Save API key"
-msgstr "Lagre API-nøkkel"
-
-msgid "Command:"
-msgstr "Kommando:"
-
-msgid ""
-"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
-"toolbox run whisper."
-msgstr ""
-"Kommandoprefiks, settes inn som det er. Eksempler: whisper, python3 -m "
-"whisper, toolbox run whisper."
-
-msgid "Test:"
-msgstr "Test:"
-
-msgid "Test CLI"
-msgstr "Test CLI"
-
-msgid "Task:"
-msgstr "Oppgave:"
-
-msgid "Transcribe"
-msgstr "Transkriber"
-
-msgid "Translate"
-msgstr "Oversett"
-
-msgid "Device:"
-msgstr "Enhet:"
-
-msgid "Default"
-msgstr "Standard"
-
-msgid "FP16:"
-msgstr "FP16:"
-
-msgid "Use --fp16 True (GPU)"
-msgstr "Bruk --fp16 True (GPU)"
-
-msgid "Threads:"
-msgstr "Tråder:"
-
-msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
-msgstr "0 utelater --threads (Whisper-standard). FP16 av er tryggere på CPU."
-
-msgid "Initial prompt:"
-msgstr "Innledende ledetekst:"
-
-msgid "Optional vocabulary / style hint"
-msgstr "Valgfritt ordforråd / stilhint"
-
-msgid "Extra args:"
-msgstr "Ekstra argumenter:"
-
-msgid "Optional, appended as-is"
-msgstr "Valgfritt, legges til som det er"
-
-msgid "Options"
-msgstr "Alternativer"
-
-msgid "Language hint:"
-msgstr "Språkhint:"
-
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "Valgfritt, f.eks. no eller en (tom = auto)"
-
-msgid "Max recording (seconds):"
-msgstr "Maksimalt opptak (sekunder):"
-
-msgid "Speech-to-text is not configured"
-msgstr "Tale-til-tekst er ikke konfigurert"
-
-msgid "Unknown STT backend: %1"
-msgstr "Ukjent STT-motor: %1"
-
-msgid "Whisper CLI runner is not available"
-msgstr "Whisper-CLI-kjører er ikke tilgjengelig"
-
-msgid "Could not build Whisper command"
-msgstr "Kunne ikke bygge Whisper-kommando"
-
-msgid "STT backend does not support model listing"
-msgstr "STT-motoren støtter ikke listing av modeller"
-
-msgid "Enable skills"
-msgstr "Aktiver ferdigheter"
-
-msgid ""
-"Skills are reusable instruction sets the model loads on demand via the skill "
-"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
-"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
-"contained <name>.md file; a user skill with the same name overrides the "
-"bundled one."
-msgstr "Ferdigheter er gjenbrukbare instruksjonssett som modellen laster inn ved behov via ferdighetsverktøyet. PlasmaLLM leveres med innebygde ferdigheter (kilde: medfølgende). Legg til dine egne i ~/.local/share/plasmallm/skills/ som en mappe som inneholder SKILL.md eller en frittstående <navn>.md-fil; en brukerferdighet med samme navn overstyrer den medfølgende."
-
-msgid ""
-"No skills discovered yet. Add a SKILL.md folder to the directory above or "
-"enable the extra directories below."
-msgstr ""
-"Ingen ferdigheter oppdaget ennå. Legg til en SKILL.md-mappe i mappen ovenfor "
-"eller aktiver de ekstra mappene nedenfor."
-
-msgid "DISABLED"
-msgstr "DEAKTIVERT"
-
-msgid "Allow running skill scripts without approval"
-msgstr "Tillat kjøring av ferdighetsskript uten godkjenning"
-
-msgid "Refreshing…"
-msgstr "Oppdaterer…"
-
-msgid "Refresh"
-msgstr "Oppdater"
-
-msgid "Open the skills directory in the file manager"
-msgstr "Åpne ferdighetsmappen i filbehandleren"
-
-msgid "Also scan ~/.claude/skills"
-msgstr "Skann også ~/.claude/skills"
-
-msgid "Also scan ~/.agents/skills"
-msgstr "Skann også ~/.agents/skills"
-
-msgid "/absolute/path/to/skills"
-msgstr "/absolutt/sti/til/ferdigheter"
-
-msgid "Save directory"
-msgstr "Lagre mappe"
-
-msgid "Add directory"
-msgstr "Legg til mappe"
-
-msgid ""
-"Enabled skills are advertised to the model by name and description; the "
-"model loads full instructions on demand with the skill tool. Loaded skill "
-"content is re-sent in full every turn and is never affected by context "
-"compaction. Toggles here are global (not per-profile)."
-msgstr ""
-"Aktiverte ferdigheter annonseres til modellen med navn og beskrivelse; "
-"modellen laster inn fullstendige instruksjoner ved behov med "
-"ferdighetsverktøyet. Innlastet ferdighetsinnhold sendes på nytt i sin helhet "
-"hver tur og påvirkes aldri av kontekstkomprimering. Brytere her er globale "
-"(ikke per profil)."
-
-msgid "System Info:"
-msgstr "Systeminformasjon:"
-
-msgid "OS"
-msgstr "OS"
-
-msgid "Shell"
-msgstr "Skall"
-
-msgid "Hostname"
-msgstr "Vertsnavn"
-
-msgid "Kernel"
-msgstr "Kjerne"
-
-msgid "Desktop"
-msgstr "Skrivebord"
-
-msgid "User"
-msgstr "Bruker"
-
-msgid "CPU"
-msgstr "CPU"
-
-msgid "Memory"
-msgstr "Minne"
-
-msgid "GPU"
-msgstr "GPU"
-
-msgid "Block Devices"
-msgstr "Blokkenheter"
-
-msgid "Network"
-msgstr "Nettverk"
-
-msgid "Locale"
-msgstr "Lokalitet"
-
-msgid "Date/Time"
-msgstr "Dato/tid"
-
-msgid "Template:"
-msgstr "Mal:"
-
-msgid ""
-"This is the full system prompt sent to the model. Use {{placeholders}} to "
-"pull in dynamic content like system details, enabled tools, or desktop "
-"automation instructions. Anything else you write is used verbatim. Critical "
-"runtime instructions (driving, skip-approvals mode) are appended "
-"automatically when active, even if you remove their placeholder."
-msgstr ""
-"Dette er den fullstendige systeminstruksen som sendes til modellen. Bruk "
-"{{placeholders}} for å hente inn dynamisk innhold som systemdetaljer, "
-"aktiverte verktøy eller skrivebordsautomatiseringsinstruksjoner. Alt annet "
-"du skriver brukes ordrett. Kritiske kjøretidsinstruksjoner (styring, hopp "
-"over godkjenninger) legges til automatisk når de er aktive, selv om du "
-"fjerner plassholderen deres."
-
-msgid "System Prompt:"
-msgstr "Systeminstruks:"
-
-msgid "Write your system prompt here…"
-msgstr "Skriv systeminstruksen din her…"
-
-msgid "Placeholders:"
-msgstr "Plassholdere:"
-
-msgid "Enabled system info selected in the checklist above"
-msgstr "Aktivert systeminformasjon valgt i sjekklisten ovenfor"
-
-msgid "Enabled tool descriptions and guidelines from the Tools menu"
-msgstr "Aktiverte verktøybeskrivelser og retningslinjer fra Verktøy-menyen"
-
-msgid ""
-"Available skills index and instructions for skills loaded this session (from "
-"the Skills settings page)"
-msgstr ""
-"Indeks over tilgjengelige ferdigheter og instruksjoner for ferdigheter "
-"lastet inn i denne økten (fra innstillingssiden for ferdigheter)"
-
-msgid ""
-"Persistent tmux or screen session multiplexer instructions (when active)"
-msgstr ""
-"Instruksjoner for persistent tmux- eller screen-øktmultiplekser (når aktiv)"
-
-msgid "Notice indicating skip-approvals mode (/auto) is active"
-msgstr ""
-"Varsel som indikerer at modus for å hoppe over godkjenninger (/auto) er aktiv"
-
-msgid "Desktop automation coordinates and guidelines (when driving)"
-msgstr ""
-"Koordinater og retningslinjer for skrivebordsautomatisering (ved styring)"
-
-msgid "Localization:"
-msgstr "Lokalisering:"
-
-msgid "Localize System Prompt"
-msgstr "Lokaliser systeminstruks"
-
-msgid ""
-"Translate default prompt templates and dynamic system sections into your "
-"desktop language."
-msgstr ""
-"Oversett standard instruksmaler og dynamiske systemseksjoner til "
-"skrivebordsspråket ditt."
-
-msgid ""
-"Note: Localizing system instructions and tools into non-English languages "
-"may reduce tool-calling reliability and instruction-following accuracy on "
-"some models."
-msgstr ""
-"Merk: Lokalisering av systeminstruksjoner og verktøy til andre språk enn "
-"engelsk kan redusere påliteligheten for verktøykall og nøyaktigheten for "
-"instruksjonsfølging på enkelte modeller."
-
-msgid "Actions:"
-msgstr "Handlinger:"
-
-msgid "Reset to Default Template"
-msgstr "Tilbakestill til standardmal"
-
-msgid "Preview:"
-msgstr "Forhåndsvisning:"
-
-msgid "General Tool Settings"
-msgstr "Generelle verktøyinnstillinger"
-
-msgid "System state:"
-msgstr "Systemtilstand:"
-
-msgid "Enable Tools"
-msgstr "Aktiver verktøy"
-
-msgid "Master switch for all tool-calling functionality."
-msgstr "Hovedbryter for all verktøykallfunksjonalitet."
-
-msgid "Desktop Automation:"
-msgstr "Skrivebordsautomatisering:"
-
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr "Lar LLM forespørre en økt for å se og styre skrivebordet ditt."
-
-msgid "Enable Desktop Automation"
-msgstr "Aktiver skrivebordsautomatisering"
-
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr ""
-"Aktiver skrivebordsautomatisering (krever <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-
-msgid "Path whitelist:"
-msgstr "Sti-hviteliste:"
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Legg til sti, f.eks. $HOME/projects, /tmp"
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Hvitelisten gjelder for filsystemverktøy (les, skriv, list, søk). Merk: "
-"'run_command' er ikke begrenset av denne listen."
-
-msgid "Max read size:"
-msgstr "Maks lesestørrelse:"
-
-msgid "Max write size:"
-msgstr "Maks skrivingsstørrelse:"
-
-msgid "Max HTTP response:"
-msgstr "Maks HTTP-svar:"
-
-msgid "Max tool loop depth:"
-msgstr "Maksimal dybde for verktøyløkke:"
-
-msgid "steps"
-msgstr "trinn"
-
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr "Merk: Denne grensen gjelder ikke for skrivebordsautomatiseringsøkter."
-
-msgid "Native Adapter Features"
-msgstr "Innebygde adapterfunksjoner"
-
-msgid "Google Search:"
-msgstr "Google-søk:"
-
-msgid "Enable Native Google Search Grounding"
-msgstr "Aktiver innebygd Google-søkegrunnlag"
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Bruk Geminis innebygde Google-søk for grunnlag. Dette overstyrer det "
-"standard nettsøkverktøyet."
-
-msgid "Code Execution:"
-msgstr "Kodekjøring:"
-
-msgid "Enable Native Python Code Execution"
-msgstr "Aktiver innebygd Python-kodekjøring"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Tillat Gemini å skrive og kjøre Python-kode i en sikker sandkasse på "
-"serversiden."
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Å kombinere innebygde verktøy med kommandoer krever en nyere modell. Din "
-"valgte modell (%1) kan oppleve feil."
-
-msgid "Individual Tools"
-msgstr "Individuelle verktøy"
-
-msgid "Prompt Instructions:"
-msgstr "Instruksjoner for prompt:"
-
-msgid "Reset"
-msgstr "Tilbakestill"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
@@ -1958,104 +2067,6 @@ msgstr "Styringsøkt aktiv (allerede autorisert). Automodus aktivert."
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Styringsøkt autorisert. Automodus aktivert."
-
-msgid ""
-"Execute a shell command on the user's system and return its output. "
-"Guidelines:\n"
-"- Use `pkexec` instead of `sudo` for any command requiring superuser "
-"privileges.\n"
-"- Chain steps with `&&`.\n"
-"- Commands run non-interactively. Never use commands that wait for user "
-"input (like `read`).\n"
-"- Use `kdialog` if you need to prompt the user for input or show a message "
-"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
-"- NEVER install packages, modify system configuration, reboot, or take any "
-"action that alters the system or disrupts the user without explicit "
-"permission.\n"
-"- When permission is needed, ask the user in plain text first.\n"
-"- For auto-run tools: Be conservative and prefer read-only commands. If an "
-"action is potentially disruptive, describe it in plain text and wait for "
-"explicit user approval before calling the tool.\n"
-"- You MUST prefer other, more specific tools (like read_file, write_file, "
-"search_files, etc.) if they can accomplish the task. Only use this tool if "
-"no other tool is suitable."
-msgstr ""
-"Kjører en skallkommando på brukerens system og returnerer utdataene. "
-"Retningslinjer:\n"
-"- Bruk `pkexec` i stedet for `sudo` for alle kommandoer som krever "
-"superbrukerrettigheter.\n"
-"- Kjed sammen trinn med `&&`.\n"
-"- Kommandoer kjøres ikke-interaktivt. Bruk aldri kommandoer som venter på "
-"brukerinndata (som `read`).\n"
-"- Bruk `kdialog` hvis du må be brukeren om inndata eller vise en "
-"meldingsboks (f.eks. `kdialog --inputbox \"Forespørsel\"`).\n"
-"- Du må ALDRI installere pakker, endre systemkonfigurasjon, starte på nytt "
-"eller utføre handlinger som endrer systemet eller forstyrrer brukeren uten "
-"eksplisitt tillatelse.\n"
-"- Når tillatelse er nødvendig, spør brukeren i ren tekst først.\n"
-"- For verktøy med automatisk kjøring: Vær konservativ og foretrekk "
-"skrivebeskyttede kommandoer. Hvis en handling er potensielt forstyrrende, "
-"beskriv den i ren tekst og vent på eksplisitt brukergodkjenning før du "
-"kaller verktøyet.\n"
-"- Du MÅ foretrekke andre, mer spesifikke verktøy (som read_file, write_file, "
-"search_files osv.) hvis de kan utføre oppgaven. Bruk bare dette verktøyet "
-"hvis ingen andre verktøy er egnet."
-
-msgid ""
-"Read the contents of a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Leser innholdet i en fil på den angitte banen. Tilgang er begrenset til "
-"tillatte mapper."
-
-msgid ""
-"Write content to a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Skriver innhold til en fil på den angitte banen. Tilgang er begrenset til "
-"tillatte mapper."
-
-msgid ""
-"List the contents of a directory. Access is restricted to allowed "
-"directories."
-msgstr "Lister innholdet i en mappe. Tilgang er begrenset til tillatte mapper."
-
-msgid "Search for a pattern within files in a directory (recursive)."
-msgstr "Søker etter et mønster i filer i en mappe (rekursivt)."
-
-msgid "Perform an HTTP GET request to a URL and return the response content."
-msgstr ""
-"Utfører en HTTP GET-forespørsel til en URL og returnerer svarsinnholdet."
-
-msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
-msgstr "Utfører en HTTP-forespørsel (POST, PUT osv.) til en URL."
-
-msgid "Get the current content of the system clipboard."
-msgstr "Henter det gjeldende innholdet i systemets utklippstavle."
-
-msgid "Set the content of the system clipboard."
-msgstr "Angir innholdet i systemets utklippstavle."
-
-msgid "Show a system notification."
-msgstr "Viser et systemvarsel."
-
-msgid "Open a URL in the default application (e.g., web browser)."
-msgstr "Åpner en URL i standardprogrammet (f.eks. nettleser)."
-
-msgid ""
-"Perform a web search to find current information, news, or specific facts."
-msgstr ""
-"Utfører et nettsøk for å finne oppdatert informasjon, nyheter eller "
-"spesifikke fakta."
-
-msgid ""
-"Restore the full verbatim text and tool outputs of previously compacted "
-"messages by specifying the start and end message IDs from a cited message "
-"range."
-msgstr ""
-"Gjenopprett fullstendig ordrett tekst og verktøyutdata fra tidligere "
-"komprimerte meldinger ved å angi start- og slutt-meldings-ID-er fra et "
-"sitert meldingsområde."
 
 msgid "General"
 msgstr "Generelt"

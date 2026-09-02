@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-24 21:07-0400\n"
+"POT-Creation-Date: 2026-09-02 09:25-0400\n"
 "PO-Revision-Date: 2026-04-07 22:00-0400\n"
 "Last-Translator: Gemini CLI (machine translation)\n"
 "Language-Team: French (Canada)\n"
@@ -16,6 +16,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Color button"
+msgstr "Bouton de couleur"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr ""
+"La couleur actuelle est %1. Ce bouton ouvrira une boîte de dialogue de "
+"sélection de couleur."
+
+msgid "Current color is %1."
+msgstr "La couleur actuelle est %1."
 
 msgid "Request timed out after 30 seconds"
 msgstr "La requête a expiré après 30 secondes"
@@ -62,12 +73,6 @@ msgstr "Échec de l'authentification — vérifiez votre clé API (HTTP 400) : %
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr "Échec de l'authentification (HTTP %1) — vérifiez votre clé API : %2"
 
-msgid "no response — check your endpoint URL"
-msgstr "aucune réponse — vérifiez l'URL de votre point d'accès"
-
-msgid "Request failed"
-msgstr "La requête a échoué"
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -77,6 +82,12 @@ msgstr ""
 "natifs (Recherche/Code) avec des commandes personnalisées. Sélectionnez un "
 "modèle plus récent (p. ex., Gemini 3+) ou désactivez les fonctionnalités "
 "natives dans les Paramètres."
+
+msgid "Request failed"
+msgstr "La requête a échoué"
+
+msgid "no response — check your endpoint URL"
+msgstr "aucune réponse — vérifiez l'URL de votre point d'accès"
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -156,6 +167,82 @@ msgstr ""
 
 msgid "No command provided."
 msgstr "Aucune commande fournie."
+
+msgid "Ollama API"
+msgstr "API Ollama"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Recherche Exa"
+
+msgid "Ollama API key"
+msgstr "Clé API Ollama"
+
+msgid "Saving…"
+msgstr "Enregistrement…"
+
+msgid "Saved"
+msgstr "Enregistré"
+
+msgid "Save to Config (Insecure)"
+msgstr "Enregistrer dans la config (non sécurisé)"
+
+msgid "Save Key"
+msgstr "Enregistrer la clé"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "URL de l'instance SearXNG (p. ex. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "Clé/Jeton API SearXNG (optionnel)"
+
+msgid "Exa API key"
+msgstr "Clé API Exa"
+
+msgid "Search Type:"
+msgstr "Type de recherche :"
+
+msgid "Auto (Default)"
+msgstr "Auto (par défaut)"
+
+msgid "Fast"
+msgstr "Rapide"
+
+msgid "Instant"
+msgstr "Instantané"
+
+msgid "Deep Lite"
+msgstr "Profond léger"
+
+msgid "Deep"
+msgstr "Profond"
+
+msgid "Deep Reasoning"
+msgstr "Raisonnement approfondi"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo ne requiert aucune configuration."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Assurez-vous que le format JSON est activé sur l'instance SearXNG."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr ""
+"Active les recherches Web neuronales déclenchées par le LLM via l'API Exa."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr ""
+"Active les recherches Web déclenchées par le LLM via l'API de recherche "
+"d'Ollama"
+
+msgid "Manage and discover skills in the Skills settings page."
+msgstr ""
+"Gérez et découvrez des compétences dans la page des paramètres Compétences."
 
 msgid "Saved phrases:"
 msgstr "Phrases enregistrées :"
@@ -238,98 +325,15 @@ msgstr ""
 "Ni 'tmux' ni 'screen' n'ont été trouvés sur votre système. Le multiplexage "
 "de session est indisponible."
 
-msgid "Manage and discover skills in the Skills settings page."
-msgstr ""
-"Gérez et découvrez des compétences dans la page des paramètres Compétences."
-
-msgid "Ollama API"
-msgstr "API Ollama"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Exa Search"
-msgstr "Recherche Exa"
-
-msgid "Ollama API key"
-msgstr "Clé API Ollama"
-
-msgid "Saving…"
-msgstr "Enregistrement…"
-
-msgid "Saved"
-msgstr "Enregistré"
-
-msgid "Save to Config (Insecure)"
-msgstr "Enregistrer dans la config (non sécurisé)"
-
-msgid "Save Key"
-msgstr "Enregistrer la clé"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "URL de l'instance SearXNG (p. ex. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "Clé/Jeton API SearXNG (optionnel)"
-
-msgid "Exa API key"
-msgstr "Clé API Exa"
-
-msgid "Search Type:"
-msgstr "Type de recherche :"
-
-msgid "Auto (Default)"
-msgstr "Auto (par défaut)"
-
-msgid "Fast"
-msgstr "Rapide"
-
-msgid "Instant"
-msgstr "Instantané"
-
-msgid "Deep Lite"
-msgstr "Profond léger"
-
-msgid "Deep"
-msgstr "Profond"
-
-msgid "Deep Reasoning"
-msgstr "Raisonnement approfondi"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo ne requiert aucune configuration."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Assurez-vous que le format JSON est activé sur l'instance SearXNG."
-
-msgid "Enables LLM-triggered neural web searches via Exa API."
-msgstr ""
-"Active les recherches Web neuronales déclenchées par le LLM via l'API Exa."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr ""
-"Active les recherches Web déclenchées par le LLM via l'API de recherche "
-"d'Ollama"
-
 msgid ""
 "Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
 "that skill has “Allow running skill scripts without approval” checked on the "
 "Skills settings page."
-msgstr "Exécute un fichier .sh dans un dossier de compétence. L'approbation par exécution n'est ignorée que lorsque cette compétence a l'option « Autoriser l'exécution des scripts de compétences sans approbation » cochée sur la page des paramètres des compétences."
-
-msgid "Color button"
-msgstr "Bouton de couleur"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
 msgstr ""
-"La couleur actuelle est %1. Ce bouton ouvrira une boîte de dialogue de "
-"sélection de couleur."
-
-msgid "Current color is %1."
-msgstr "La couleur actuelle est %1."
+"Exécute un fichier .sh dans un dossier de compétence. L'approbation par "
+"exécution n'est ignorée que lorsque cette compétence a l'option « Autoriser "
+"l'exécution des scripts de compétences sans approbation » cochée sur la page "
+"des paramètres des compétences."
 
 msgid "Tool Request: %1"
 msgstr "Demande d'outil : %1"
@@ -560,6 +564,290 @@ msgstr "Afficher les Paramètres"
 msgid "Show Pin"
 msgstr "Afficher l'épingle"
 
+msgid "Speech-to-text is not configured"
+msgstr "La reconnaissance vocale n'est pas configurée"
+
+msgid "Unknown STT backend: %1"
+msgstr "Moteur STT inconnu : %1"
+
+msgid "Whisper CLI runner is not available"
+msgstr "L'exécuteur CLI Whisper n'est pas disponible"
+
+msgid "Could not build Whisper command"
+msgstr "Impossible de construire la commande Whisper"
+
+msgid "STT backend does not support model listing"
+msgstr "Le moteur STT ne prend pas en charge la liste des modèles"
+
+msgid "Speech to Text"
+msgstr "Reconnaissance vocale"
+
+msgid "Model “%1” is on disk."
+msgstr "Le modèle « %1 » est sur le disque."
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
+"into ~/.cache/whisper and can take a long time."
+msgstr ""
+"Le modèle « %1 » n'est pas téléchargé. La première transcription le "
+"récupérera (%2) dans ~/.cache/whisper et cela peut prendre beaucoup de temps."
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it into "
+"~/.cache/whisper and can take a long time."
+msgstr ""
+"Le modèle « %1 » n'est pas téléchargé. La première transcription le "
+"récupérera dans ~/.cache/whisper et cela peut prendre beaucoup de temps."
+
+msgid "CUDA is available to Whisper."
+msgstr "CUDA est disponible pour Whisper."
+
+msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
+msgstr ""
+"CUDA n'est pas disponible dans cet environnement Whisper. Utilisez cpu ou "
+"Par défaut."
+
+msgid "Whisper CLI responded to --help."
+msgstr "Le CLI Whisper a répondu à --help."
+
+msgid "Whisper CLI test failed (exit %1): %2"
+msgstr "Le test du CLI Whisper a échoué (sortie %1) : %2"
+
+msgid "Whisper CLI test failed (exit %1). Check the command."
+msgstr "Le test du CLI Whisper a échoué (sortie %1). Vérifiez la commande."
+
+msgid "API key saved to KWallet."
+msgstr "Clé API enregistrée dans KWallet."
+
+msgid "API key saved to local fallback."
+msgstr "Clé API enregistrée dans le secours local."
+
+msgid "Checking whether “%1” is downloaded…"
+msgstr "Vérification du téléchargement de « %1 »…"
+
+msgid "Checking CUDA…"
+msgstr "Vérification de CUDA…"
+
+msgid "Testing Whisper CLI…"
+msgstr "Test du CLI Whisper…"
+
+msgid "Loaded %1 STT model(s)."
+msgstr "%1 modèle(s) STT chargé(s)."
+
+msgid "Set an API endpoint first."
+msgstr "Définissez d'abord un point d'accès API."
+
+msgid "Fetching STT models…"
+msgstr "Récupération des modèles STT…"
+
+msgid "Voice input:"
+msgstr "Entrée vocale :"
+
+msgid "Enable microphone input"
+msgstr "Activer l'entrée microphone"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"Configure uniquement le moteur de reconnaissance vocale. Les transcriptions "
+"utilisent votre profil de discussion actif (Général)."
+
+msgid "Mic button:"
+msgstr "Bouton du micro :"
+
+msgid "Auto"
+msgstr "Auto"
+
+msgid "Hold to talk"
+msgstr "Maintenir pour parler"
+
+msgid "Toggle"
+msgstr "Basculer"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"Auto : un clic bascule l'enregistrement ; maintenir 250 ms+ pour le push-to-"
+"talk. Maintenir : maintenir enfoncé uniquement. Basculer : cliquer pour "
+"démarrer/arrêter."
+
+msgid "Voice shortcut:"
+msgstr "Raccourci vocal :"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"Lorsque PlasmaLLM est ouvert et actif, utilise le même mode de micro que le "
+"bouton (auto : appui court pour basculer, maintien de 250 ms+ pour push-to-"
+"talk). N'ouvre pas le panneau — utilisez « Activer le composant » sur la "
+"page Raccourcis. Par défaut : Ctrl+M. Effacer pour désactiver."
+
+msgid "Transcriber"
+msgstr "Transcripteur"
+
+msgid "STT backend:"
+msgstr "Moteur STT :"
+
+msgid "Provider:"
+msgstr "Fournisseur :"
+
+msgid "Endpoint:"
+msgstr "Point d'accès :"
+
+msgid "Model:"
+msgstr "Modèle :"
+
+msgid "Fetch STT models"
+msgstr "Récupérer les modèles STT"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouter ne liste les modèles STT que via les modalités de transcription "
+"(ce que fait cette page)."
+
+msgid "API key:"
+msgstr "Clé API :"
+
+msgid "Provider API key"
+msgstr "Clé API du fournisseur"
+
+msgid "Save API key"
+msgstr "Enregistrer la clé API"
+
+msgid "Command:"
+msgstr "Commande :"
+
+msgid ""
+"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
+"toolbox run whisper."
+msgstr ""
+"Préfixe de commande, inséré tel quel. Exemples : whisper, python3 -m "
+"whisper, toolbox run whisper."
+
+msgid "Test:"
+msgstr "Tester :"
+
+msgid "Test CLI"
+msgstr "Tester le CLI"
+
+msgid "Task:"
+msgstr "Tâche :"
+
+msgid "Transcribe"
+msgstr "Transcrire"
+
+msgid "Translate"
+msgstr "Traduire"
+
+msgid "Device:"
+msgstr "Périphérique :"
+
+msgid "Default"
+msgstr "Défaut"
+
+msgid "FP16:"
+msgstr "FP16 :"
+
+msgid "Use --fp16 True (GPU)"
+msgstr "Utiliser --fp16 True (GPU)"
+
+msgid "Threads:"
+msgstr "Threads :"
+
+msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
+msgstr ""
+"0 omet --threads (valeur par défaut de Whisper). La désactivation de FP16 "
+"est plus sûre sur CPU."
+
+msgid "Initial prompt:"
+msgstr "Invite initiale :"
+
+msgid "Optional vocabulary / style hint"
+msgstr "Indication facultative de vocabulaire / style"
+
+msgid "Extra args:"
+msgstr "Arguments supplémentaires :"
+
+msgid "Optional, appended as-is"
+msgstr "Facultatif, ajouté tel quel"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Language hint:"
+msgstr "Indication de langue :"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "Facultatif, ex. fr ou en (vide = auto)"
+
+msgid "Max recording (seconds):"
+msgstr "Enregistrement max (secondes) :"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"Aucun outil personnalisé configuré. Ajoutez un outil personnalisé pour "
+"exposer vos propres commandes au LLM."
+
+msgid "Add Custom Tool"
+msgstr "Ajouter un outil personnalisé"
+
+msgid "Echoes back the message provided."
+msgstr "Renvoie le message fourni."
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "Nom de l'outil (p. ex. systemctl_service)"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "Description (indique au LLM ce que fait cet outil)"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "Modèle de commande (p. ex. systemctl {action} {service})"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "Nécessite les droits superutilisateur (exécuté avec pkexec)"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr ""
+"Exécution automatique de l'outil (sans boîte de dialogue de confirmation)"
+
+msgid "Collapse results"
+msgstr "Replier les résultats"
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+"Afficher les résultats terminés sous forme de pastille ; cliquez sur la "
+"pastille pour voir la sortie complète."
+
+msgid "Update Tool"
+msgstr "Mettre à jour l'outil"
+
+msgid "Save Tool"
+msgstr "Enregistrer l'outil"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "Un outil nommé « %1 » existe déjà."
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"Les outils personnalisés vous permettent d'exposer vos propres commandes au "
+"LLM. Utilisez des espaces réservés comme {variable} dans le Modèle de "
+"Commande pour définir les paramètres que le LLM peut remplir. Les valeurs "
+"fournies par le LLM sont automatiquement échappées pour le shell."
+
 msgid "Loaded %1 skill"
 msgstr "Compétence %1 chargée"
 
@@ -621,6 +909,426 @@ msgid "The model loaded this skill's instructions into context before acting."
 msgstr ""
 "Le modèle a chargé les instructions de cette compétence dans le contexte "
 "avant d'agir."
+
+msgid "Stop command"
+msgstr "Arrêter la commande"
+
+msgid "Open terminal attached to this session"
+msgstr "Ouvrir le terminal associé à cette session"
+
+msgid "Collapse result"
+msgstr "Replier le résultat"
+
+msgid "Copy output"
+msgstr "Copier la sortie"
+
+msgid "Enable skills"
+msgstr "Activer les compétences"
+
+msgid ""
+"Skills are reusable instruction sets the model loads on demand via the skill "
+"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
+"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
+"contained <name>.md file; a user skill with the same name overrides the "
+"bundled one."
+msgstr ""
+"Les compétences sont des ensembles d'instructions réutilisables que le "
+"modèle charge à la demande via l'outil skill. PlasmaLLM intègre des "
+"compétences natives (source : intégrées). Ajoutez les vôtres dans ~/.local/"
+"share/plasmallm/skills/ sous la forme d'un dossier contenant SKILL.md ou "
+"d'un fichier autonome <nom>.md ; une compétence utilisateur portant le même "
+"nom remplace la compétence intégrée."
+
+msgid ""
+"No skills discovered yet. Add a SKILL.md folder to the directory above or "
+"enable the extra directories below."
+msgstr ""
+"Aucune compétence découverte pour l'instant. Ajoutez un dossier avec "
+"SKILL.md dans le répertoire ci-dessus ou activez les répertoires "
+"supplémentaires ci-dessous."
+
+msgid "DISABLED"
+msgstr "DÉSACTIVÉ"
+
+msgid "Allow running skill scripts without approval"
+msgstr "Autoriser l'exécution des scripts de compétences sans approbation"
+
+msgid "Refreshing…"
+msgstr "Actualisation…"
+
+msgid "Refresh"
+msgstr "Actualiser"
+
+msgid "Open Folder"
+msgstr "Ouvrir le dossier"
+
+msgid "Open the skills directory in the file manager"
+msgstr "Ouvrir le répertoire des compétences dans le gestionnaire de fichiers"
+
+msgid "Also scan ~/.claude/skills"
+msgstr "Analyser également ~/.claude/skills"
+
+msgid "Also scan ~/.agents/skills"
+msgstr "Analyser également ~/.agents/skills"
+
+msgid "/absolute/path/to/skills"
+msgstr "/chemin/absolu/vers/skills"
+
+msgid "Save directory"
+msgstr "Enregistrer le répertoire"
+
+msgid "Add directory"
+msgstr "Ajouter un répertoire"
+
+msgid ""
+"Enabled skills are advertised to the model by name and description; the "
+"model loads full instructions on demand with the skill tool. Loaded skill "
+"content is re-sent in full every turn and is never affected by context "
+"compaction. Toggles here are global (not per-profile)."
+msgstr ""
+"Les compétences activées sont présentées au modèle par nom et description ; "
+"le modèle charge les instructions complètes à la demande avec l'outil skill. "
+"Le contenu des compétences chargées est renvoyé en totalité à chaque tour et "
+"n'est jamais affecté par le compactage de contexte. Les commutateurs ici "
+"sont globaux (non définis par profil)."
+
+msgid "System Info:"
+msgstr "Info système :"
+
+msgid "OS"
+msgstr "SE"
+
+msgid "Shell"
+msgstr "Shell"
+
+msgid "Hostname"
+msgstr "Nom d'hôte"
+
+msgid "Kernel"
+msgstr "Noyau"
+
+msgid "Desktop"
+msgstr "Bureau"
+
+msgid "User"
+msgstr "Utilisateur"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Memory"
+msgstr "Mémoire"
+
+msgid "GPU"
+msgstr "GPU"
+
+msgid "Block Devices"
+msgstr "Périphériques de bloc"
+
+msgid "Network"
+msgstr "Réseau"
+
+msgid "Locale"
+msgstr "Paramètres régionaux"
+
+msgid "Date/Time"
+msgstr "Date/Heure"
+
+msgid "Template:"
+msgstr "Modèle :"
+
+msgid ""
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
+msgstr ""
+"Il s'agit du prompt système complet envoyé au modèle. Utilisez des "
+"{{placeholders}} pour insérer du contenu dynamique tel que les détails "
+"système, les outils activés ou les instructions d'automatisation du bureau. "
+"Tout le reste est utilisé tel quel. Les instructions d'exécution critiques "
+"(pilotage, mode sans approbation) sont ajoutées automatiquement lorsqu'elles "
+"sont actives, même si vous supprimez leur variable substituable."
+
+msgid "System Prompt:"
+msgstr "Prompt système :"
+
+msgid "Write your system prompt here…"
+msgstr "Rédigez votre prompt système ici…"
+
+msgid "Placeholders:"
+msgstr "Variables substituables :"
+
+msgid "Enabled system info selected in the checklist above"
+msgstr "Informations système sélectionnées dans la liste ci-dessus"
+
+msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr "Descriptions et directives des outils activés depuis le menu Outils"
+
+msgid ""
+"Available skills index and instructions for skills loaded this session (from "
+"the Skills settings page)"
+msgstr ""
+"Index des compétences disponibles et instructions pour les compétences "
+"chargées durant cette session (depuis la page des paramètres Compétences)"
+
+msgid ""
+"Persistent tmux or screen session multiplexer instructions (when active)"
+msgstr ""
+"Instructions du multiplexeur de session persistante tmux ou screen (si actif)"
+
+msgid "Notice indicating skip-approvals mode (/auto) is active"
+msgstr "Notification indiquant que le mode sans approbation (/auto) est actif"
+
+msgid "Desktop automation coordinates and guidelines (when driving)"
+msgstr ""
+"Coordonnées et directives d'automatisation du bureau (lors du pilotage)"
+
+msgid "Localization:"
+msgstr "Localisation :"
+
+msgid "Localize System Prompt"
+msgstr "Localiser le prompt système"
+
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
+msgstr ""
+"Traduire les modèles de prompt par défaut et les sections système dynamiques "
+"dans la langue de votre bureau."
+
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
+msgstr ""
+"Remarque : La localisation des instructions système et des outils dans des "
+"langues non anglaises peut réduire la fiabilité des appels d'outils et la "
+"précision du suivi des instructions sur certains modèles."
+
+msgid "Actions:"
+msgstr "Actions :"
+
+msgid "Reset to Default Template"
+msgstr "Réinitialiser au modèle par défaut"
+
+msgid "Preview:"
+msgstr "Aperçu :"
+
+msgid "General Tool Settings"
+msgstr "Paramètres généraux des outils"
+
+msgid "System state:"
+msgstr "État du système :"
+
+msgid "Enable Tools"
+msgstr "Activer les outils"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr ""
+"Interrupteur principal pour toutes les fonctionnalités d'appel d'outils."
+
+msgid "Exa does not support tool use"
+msgstr "Exa ne prend pas en charge l'utilisation d'outils"
+
+msgid "Desktop Automation:"
+msgstr "Automatisation du bureau :"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+"Permet au LLM de demander une session pour voir et contrôler votre bureau."
+
+msgid "Enable Desktop Automation"
+msgstr "Activer l'automatisation du bureau"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Activer l'automatisation du bureau (requiert le <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">pilote</a>)"
+
+msgid "Path whitelist:"
+msgstr "Liste blanche des chemins :"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Ajouter un chemin, p. ex. $HOME/projects, /tmp"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"La liste blanche s'applique aux outils du système de fichiers (lecture, "
+"écriture, liste, recherche). Remarque : 'run_command' n'est pas limité par "
+"cette liste."
+
+msgid "Max read size:"
+msgstr "Taille maximale de lecture :"
+
+msgid "Max write size:"
+msgstr "Taille maximale d'écriture :"
+
+msgid "Max HTTP response:"
+msgstr "Réponse HTTP maximale :"
+
+msgid "Max tool loop depth:"
+msgstr "Profondeur maximale de la boucle d'outils :"
+
+msgid "steps"
+msgstr "étapes"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr ""
+"Remarque : Cette limite ne s'applique pas aux sessions d'automatisation du "
+"bureau."
+
+msgid "Native Adapter Features"
+msgstr "Fonctionnalités natives de l'adaptateur"
+
+msgid "Google Search:"
+msgstr "Recherche Google :"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Activer l'ancrage Google Search natif"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Utiliser la recherche Google intégrée de Gemini pour l'ancrage. Cela "
+"remplace l'outil de recherche Web standard."
+
+msgid "Code Execution:"
+msgstr "Exécution de code :"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Activer l'exécution native du code Python"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Autoriser Gemini à écrire et exécuter du code Python dans un bac à sable "
+"sécurisé côté serveur."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"La combinaison d'outils natifs avec des commandes nécessite un modèle plus "
+"récent. Le modèle actuellement sélectionné (%1) peut rencontrer des erreurs."
+
+msgid "Individual Tools"
+msgstr "Outils individuels"
+
+msgid "Prompt Instructions:"
+msgstr "Instructions du prompt :"
+
+msgid "Reset"
+msgstr "Réinitialiser"
+
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"Exécute une commande shell sur le système de l'utilisateur et renvoie sa "
+"sortie. Directives :\n"
+"- Utilisez `pkexec` au lieu de `sudo` pour toute commande nécessitant des "
+"privilèges superutilisateur.\n"
+"- Enchaînez les étapes avec `&&`.\n"
+"- Les commandes s'exécutent de façon non interactive. N'utilisez jamais de "
+"commandes attendant une saisie utilisateur (comme `read`).\n"
+"- Utilisez `kdialog` si vous devez demander une saisie à l'utilisateur ou "
+"afficher une boîte de message (ex. : `kdialog --inputbox \"Invite\"`).\n"
+"- N'installez JAMAIS de paquets, ne modifiez pas la configuration du "
+"système, ne redémarrez pas et n'effectuez aucune action qui altère le "
+"système ou perturbe l'utilisateur sans autorisation explicite.\n"
+"- Lorsqu'une autorisation est nécessaire, demandez d'abord à l'utilisateur "
+"en texte brut.\n"
+"- Pour les outils en exécution automatique : Soyez prudent et privilégiez "
+"les commandes en lecture seule. Si une action est potentiellement "
+"perturbatrice, décrivez-la en texte brut et attendez l'approbation explicite "
+"de l'utilisateur avant d'appeler l'outil.\n"
+"- Vous DEVEZ préférer d'autres outils plus spécifiques (comme read_file, "
+"write_file, search_files, etc.) s'ils peuvent accomplir la tâche. N'utilisez "
+"cet outil que si aucun autre outil ne convient."
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Lit le contenu d'un fichier au chemin spécifié. L'accès est restreint aux "
+"répertoires autorisés."
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Écrit du contenu dans un fichier au chemin spécifié. L'accès est restreint "
+"aux répertoires autorisés."
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+"Liste le contenu d'un répertoire. L'accès est restreint aux répertoires "
+"autorisés."
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "Recherche un motif dans les fichiers d'un répertoire (récursif)."
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr ""
+"Effectue une requête HTTP GET vers une URL et renvoie le contenu de la "
+"réponse."
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "Effectue une requête HTTP (POST, PUT, etc.) vers une URL."
+
+msgid "Get the current content of the system clipboard."
+msgstr "Récupère le contenu actuel du presse-papiers du système."
+
+msgid "Set the content of the system clipboard."
+msgstr "Définit le contenu du presse-papiers du système."
+
+msgid "Show a system notification."
+msgstr "Affiche une notification système."
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr "Ouvre une URL dans l'application par défaut (ex. : navigateur Web)."
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Effectue une recherche Web pour trouver des informations actuelles, des "
+"actualités ou des faits précis."
+
+msgid ""
+"Restore the full verbatim text and tool outputs of previously compacted "
+"messages by specifying the start and end message IDs from a cited message "
+"range."
+msgstr ""
+"Restaure le texte intégral textuel et les sorties d'outils des messages "
+"précédemment compactés en spécifiant les identifiants de début et de fin "
+"d'une plage de messages citée."
 
 msgid "Approve the pending tool request"
 msgstr "Approuver la demande d'outil en attente"
@@ -845,9 +1553,6 @@ msgstr "Relâcher pour envoyer"
 msgid "Click to start"
 msgstr "Cliquer pour démarrer"
 
-msgid "Hold to talk"
-msgstr "Maintenir pour parler"
-
 msgid "Click to toggle, hold to talk"
 msgstr "Cliquer pour basculer, maintenir pour parler"
 
@@ -862,18 +1567,6 @@ msgstr "Annuler la requête au LLM"
 
 msgid "Drop files here to attach"
 msgstr "Déposer des fichiers ici pour les joindre"
-
-msgid "Stop command"
-msgstr "Arrêter la commande"
-
-msgid "Open terminal attached to this session"
-msgstr "Ouvrir le terminal associé à cette session"
-
-msgid "Collapse result"
-msgstr "Replier le résultat"
-
-msgid "Copy output"
-msgstr "Copier la sortie"
 
 msgid "Context Compaction"
 msgstr "Compactage de contexte"
@@ -1007,64 +1700,6 @@ msgstr "Tester la connexion de compactage"
 msgid "Model Summary Response:"
 msgstr "Réponse du résumé du modèle :"
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
-msgstr ""
-"Aucun outil personnalisé configuré. Ajoutez un outil personnalisé pour "
-"exposer vos propres commandes au LLM."
-
-msgid "Add Custom Tool"
-msgstr "Ajouter un outil personnalisé"
-
-msgid "Echoes back the message provided."
-msgstr "Renvoie le message fourni."
-
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "Nom de l'outil (p. ex. systemctl_service)"
-
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "Description (indique au LLM ce que fait cet outil)"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "Modèle de commande (p. ex. systemctl {action} {service})"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "Nécessite les droits superutilisateur (exécuté avec pkexec)"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr ""
-"Exécution automatique de l'outil (sans boîte de dialogue de confirmation)"
-
-msgid "Collapse results"
-msgstr "Replier les résultats"
-
-msgid ""
-"Show finished results as a small pill; click the pill to view the full "
-"output."
-msgstr ""
-"Afficher les résultats terminés sous forme de pastille ; cliquez sur la "
-"pastille pour voir la sortie complète."
-
-msgid "Update Tool"
-msgstr "Mettre à jour l'outil"
-
-msgid "Save Tool"
-msgstr "Enregistrer l'outil"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "Un outil nommé « %1 » existe déjà."
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"Les outils personnalisés vous permettent d'exposer vos propres commandes au "
-"LLM. Utilisez des espaces réservés comme {variable} dans le Modèle de "
-"Commande pour définir les paramètres que le LLM peut remplir. Les valeurs "
-"fournies par le LLM sont automatiquement échappées pour le shell."
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Impossible de récupérer le jeton gcloud (sortie %1) : %2"
 
@@ -1094,9 +1729,6 @@ msgstr "Renommer"
 
 msgid "Adapter:"
 msgstr "Adaptateur :"
-
-msgid "Exa does not support tool use"
-msgstr "Exa ne prend pas en charge l'utilisation d'outils"
 
 msgid "Platform:"
 msgstr "Plateforme :"
@@ -1137,20 +1769,17 @@ msgstr "ID du projet :"
 msgid "Location:"
 msgstr "Emplacement :"
 
-msgid "Provider:"
-msgstr "Fournisseur :"
-
 msgid "API Endpoint:"
 msgstr "Point d'accès API :"
-
-msgid "Model:"
-msgstr "Modèle :"
 
 msgid "API Key:"
 msgstr "Clé API :"
 
 msgid "Paste short-lived access token"
 msgstr "Coller le jeton d'accès à durée limitée"
+
+msgid "Paste OpenCode API key"
+msgstr "Coller la clé API OpenCode"
 
 msgid "Optional - for OpenAI, etc."
 msgstr "Optionnel — pour OpenAI, etc."
@@ -1262,9 +1891,6 @@ msgstr "Texte brut (.txt)"
 msgid "Structured (.jsonl)"
 msgstr "Structuré (.jsonl)"
 
-msgid "Open Folder"
-msgstr "Ouvrir le dossier"
-
 msgid "Open the folder where chat histories are saved"
 msgstr "Ouvrir le dossier où sont enregistrés les historiques de chat"
 
@@ -1285,517 +1911,6 @@ msgstr "secondes"
 
 msgid "minutes"
 msgstr "minutes"
-
-msgid "Speech to Text"
-msgstr "Reconnaissance vocale"
-
-msgid "Model “%1” is on disk."
-msgstr "Le modèle « %1 » est sur le disque."
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
-"into ~/.cache/whisper and can take a long time."
-msgstr ""
-"Le modèle « %1 » n'est pas téléchargé. La première transcription le "
-"récupérera (%2) dans ~/.cache/whisper et cela peut prendre beaucoup de temps."
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it into "
-"~/.cache/whisper and can take a long time."
-msgstr ""
-"Le modèle « %1 » n'est pas téléchargé. La première transcription le "
-"récupérera dans ~/.cache/whisper et cela peut prendre beaucoup de temps."
-
-msgid "CUDA is available to Whisper."
-msgstr "CUDA est disponible pour Whisper."
-
-msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
-msgstr ""
-"CUDA n'est pas disponible dans cet environnement Whisper. Utilisez cpu ou "
-"Par défaut."
-
-msgid "Whisper CLI responded to --help."
-msgstr "Le CLI Whisper a répondu à --help."
-
-msgid "Whisper CLI test failed (exit %1): %2"
-msgstr "Le test du CLI Whisper a échoué (sortie %1) : %2"
-
-msgid "Whisper CLI test failed (exit %1). Check the command."
-msgstr "Le test du CLI Whisper a échoué (sortie %1). Vérifiez la commande."
-
-msgid "API key saved to KWallet."
-msgstr "Clé API enregistrée dans KWallet."
-
-msgid "API key saved to local fallback."
-msgstr "Clé API enregistrée dans le secours local."
-
-msgid "Checking whether “%1” is downloaded…"
-msgstr "Vérification du téléchargement de « %1 »…"
-
-msgid "Checking CUDA…"
-msgstr "Vérification de CUDA…"
-
-msgid "Testing Whisper CLI…"
-msgstr "Test du CLI Whisper…"
-
-msgid "Loaded %1 STT model(s)."
-msgstr "%1 modèle(s) STT chargé(s)."
-
-msgid "Set an API endpoint first."
-msgstr "Définissez d'abord un point d'accès API."
-
-msgid "Fetching STT models…"
-msgstr "Récupération des modèles STT…"
-
-msgid "Voice input:"
-msgstr "Entrée vocale :"
-
-msgid "Enable microphone input"
-msgstr "Activer l'entrée microphone"
-
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-"Configure uniquement le moteur de reconnaissance vocale. Les transcriptions "
-"utilisent votre profil de discussion actif (Général)."
-
-msgid "Mic button:"
-msgstr "Bouton du micro :"
-
-msgid "Auto"
-msgstr "Auto"
-
-msgid "Toggle"
-msgstr "Basculer"
-
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-"Auto : un clic bascule l'enregistrement ; maintenir 250 ms+ pour le push-to-"
-"talk. Maintenir : maintenir enfoncé uniquement. Basculer : cliquer pour "
-"démarrer/arrêter."
-
-msgid "Voice shortcut:"
-msgstr "Raccourci vocal :"
-
-msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
-"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
-msgstr ""
-"Lorsque PlasmaLLM est ouvert et actif, utilise le même mode de micro que le "
-"bouton (auto : appui court pour basculer, maintien de 250 ms+ pour push-to-"
-"talk). N'ouvre pas le panneau — utilisez « Activer le composant » sur la "
-"page Raccourcis. Par défaut : Ctrl+M. Effacer pour désactiver."
-
-msgid "Transcriber"
-msgstr "Transcripteur"
-
-msgid "STT backend:"
-msgstr "Moteur STT :"
-
-msgid "Endpoint:"
-msgstr "Point d'accès :"
-
-msgid "Fetch STT models"
-msgstr "Récupérer les modèles STT"
-
-msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
-msgstr ""
-"OpenRouter ne liste les modèles STT que via les modalités de transcription "
-"(ce que fait cette page)."
-
-msgid "API key:"
-msgstr "Clé API :"
-
-msgid "Provider API key"
-msgstr "Clé API du fournisseur"
-
-msgid "Save API key"
-msgstr "Enregistrer la clé API"
-
-msgid "Command:"
-msgstr "Commande :"
-
-msgid ""
-"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
-"toolbox run whisper."
-msgstr ""
-"Préfixe de commande, inséré tel quel. Exemples : whisper, python3 -m "
-"whisper, toolbox run whisper."
-
-msgid "Test:"
-msgstr "Tester :"
-
-msgid "Test CLI"
-msgstr "Tester le CLI"
-
-msgid "Task:"
-msgstr "Tâche :"
-
-msgid "Transcribe"
-msgstr "Transcrire"
-
-msgid "Translate"
-msgstr "Traduire"
-
-msgid "Device:"
-msgstr "Périphérique :"
-
-msgid "Default"
-msgstr "Défaut"
-
-msgid "FP16:"
-msgstr "FP16 :"
-
-msgid "Use --fp16 True (GPU)"
-msgstr "Utiliser --fp16 True (GPU)"
-
-msgid "Threads:"
-msgstr "Threads :"
-
-msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
-msgstr ""
-"0 omet --threads (valeur par défaut de Whisper). La désactivation de FP16 "
-"est plus sûre sur CPU."
-
-msgid "Initial prompt:"
-msgstr "Invite initiale :"
-
-msgid "Optional vocabulary / style hint"
-msgstr "Indication facultative de vocabulaire / style"
-
-msgid "Extra args:"
-msgstr "Arguments supplémentaires :"
-
-msgid "Optional, appended as-is"
-msgstr "Facultatif, ajouté tel quel"
-
-msgid "Options"
-msgstr "Options"
-
-msgid "Language hint:"
-msgstr "Indication de langue :"
-
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "Facultatif, ex. fr ou en (vide = auto)"
-
-msgid "Max recording (seconds):"
-msgstr "Enregistrement max (secondes) :"
-
-msgid "Speech-to-text is not configured"
-msgstr "La reconnaissance vocale n'est pas configurée"
-
-msgid "Unknown STT backend: %1"
-msgstr "Moteur STT inconnu : %1"
-
-msgid "Whisper CLI runner is not available"
-msgstr "L'exécuteur CLI Whisper n'est pas disponible"
-
-msgid "Could not build Whisper command"
-msgstr "Impossible de construire la commande Whisper"
-
-msgid "STT backend does not support model listing"
-msgstr "Le moteur STT ne prend pas en charge la liste des modèles"
-
-msgid "Enable skills"
-msgstr "Activer les compétences"
-
-msgid ""
-"Skills are reusable instruction sets the model loads on demand via the skill "
-"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
-"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
-"contained <name>.md file; a user skill with the same name overrides the "
-"bundled one."
-msgstr "Les compétences sont des ensembles d'instructions réutilisables que le modèle charge à la demande via l'outil skill. PlasmaLLM intègre des compétences natives (source : intégrées). Ajoutez les vôtres dans ~/.local/share/plasmallm/skills/ sous la forme d'un dossier contenant SKILL.md ou d'un fichier autonome <nom>.md ; une compétence utilisateur portant le même nom remplace la compétence intégrée."
-
-msgid ""
-"No skills discovered yet. Add a SKILL.md folder to the directory above or "
-"enable the extra directories below."
-msgstr ""
-"Aucune compétence découverte pour l'instant. Ajoutez un dossier avec "
-"SKILL.md dans le répertoire ci-dessus ou activez les répertoires "
-"supplémentaires ci-dessous."
-
-msgid "DISABLED"
-msgstr "DÉSACTIVÉ"
-
-msgid "Allow running skill scripts without approval"
-msgstr "Autoriser l'exécution des scripts de compétences sans approbation"
-
-msgid "Refreshing…"
-msgstr "Actualisation…"
-
-msgid "Refresh"
-msgstr "Actualiser"
-
-msgid "Open the skills directory in the file manager"
-msgstr "Ouvrir le répertoire des compétences dans le gestionnaire de fichiers"
-
-msgid "Also scan ~/.claude/skills"
-msgstr "Analyser également ~/.claude/skills"
-
-msgid "Also scan ~/.agents/skills"
-msgstr "Analyser également ~/.agents/skills"
-
-msgid "/absolute/path/to/skills"
-msgstr "/chemin/absolu/vers/skills"
-
-msgid "Save directory"
-msgstr "Enregistrer le répertoire"
-
-msgid "Add directory"
-msgstr "Ajouter un répertoire"
-
-msgid ""
-"Enabled skills are advertised to the model by name and description; the "
-"model loads full instructions on demand with the skill tool. Loaded skill "
-"content is re-sent in full every turn and is never affected by context "
-"compaction. Toggles here are global (not per-profile)."
-msgstr ""
-"Les compétences activées sont présentées au modèle par nom et description ; "
-"le modèle charge les instructions complètes à la demande avec l'outil skill. "
-"Le contenu des compétences chargées est renvoyé en totalité à chaque tour et "
-"n'est jamais affecté par le compactage de contexte. Les commutateurs ici "
-"sont globaux (non définis par profil)."
-
-msgid "System Info:"
-msgstr "Info système :"
-
-msgid "OS"
-msgstr "SE"
-
-msgid "Shell"
-msgstr "Shell"
-
-msgid "Hostname"
-msgstr "Nom d'hôte"
-
-msgid "Kernel"
-msgstr "Noyau"
-
-msgid "Desktop"
-msgstr "Bureau"
-
-msgid "User"
-msgstr "Utilisateur"
-
-msgid "CPU"
-msgstr "CPU"
-
-msgid "Memory"
-msgstr "Mémoire"
-
-msgid "GPU"
-msgstr "GPU"
-
-msgid "Block Devices"
-msgstr "Périphériques de bloc"
-
-msgid "Network"
-msgstr "Réseau"
-
-msgid "Locale"
-msgstr "Paramètres régionaux"
-
-msgid "Date/Time"
-msgstr "Date/Heure"
-
-msgid "Template:"
-msgstr "Modèle :"
-
-msgid ""
-"This is the full system prompt sent to the model. Use {{placeholders}} to "
-"pull in dynamic content like system details, enabled tools, or desktop "
-"automation instructions. Anything else you write is used verbatim. Critical "
-"runtime instructions (driving, skip-approvals mode) are appended "
-"automatically when active, even if you remove their placeholder."
-msgstr ""
-"Il s'agit du prompt système complet envoyé au modèle. Utilisez des "
-"{{placeholders}} pour insérer du contenu dynamique tel que les détails "
-"système, les outils activés ou les instructions d'automatisation du bureau. "
-"Tout le reste est utilisé tel quel. Les instructions d'exécution critiques "
-"(pilotage, mode sans approbation) sont ajoutées automatiquement lorsqu'elles "
-"sont actives, même si vous supprimez leur variable substituable."
-
-msgid "System Prompt:"
-msgstr "Prompt système :"
-
-msgid "Write your system prompt here…"
-msgstr "Rédigez votre prompt système ici…"
-
-msgid "Placeholders:"
-msgstr "Variables substituables :"
-
-msgid "Enabled system info selected in the checklist above"
-msgstr "Informations système sélectionnées dans la liste ci-dessus"
-
-msgid "Enabled tool descriptions and guidelines from the Tools menu"
-msgstr "Descriptions et directives des outils activés depuis le menu Outils"
-
-msgid ""
-"Available skills index and instructions for skills loaded this session (from "
-"the Skills settings page)"
-msgstr ""
-"Index des compétences disponibles et instructions pour les compétences "
-"chargées durant cette session (depuis la page des paramètres Compétences)"
-
-msgid ""
-"Persistent tmux or screen session multiplexer instructions (when active)"
-msgstr ""
-"Instructions du multiplexeur de session persistante tmux ou screen (si actif)"
-
-msgid "Notice indicating skip-approvals mode (/auto) is active"
-msgstr "Notification indiquant que le mode sans approbation (/auto) est actif"
-
-msgid "Desktop automation coordinates and guidelines (when driving)"
-msgstr ""
-"Coordonnées et directives d'automatisation du bureau (lors du pilotage)"
-
-msgid "Localization:"
-msgstr "Localisation :"
-
-msgid "Localize System Prompt"
-msgstr "Localiser le prompt système"
-
-msgid ""
-"Translate default prompt templates and dynamic system sections into your "
-"desktop language."
-msgstr ""
-"Traduire les modèles de prompt par défaut et les sections système dynamiques "
-"dans la langue de votre bureau."
-
-msgid ""
-"Note: Localizing system instructions and tools into non-English languages "
-"may reduce tool-calling reliability and instruction-following accuracy on "
-"some models."
-msgstr ""
-"Remarque : La localisation des instructions système et des outils dans des "
-"langues non anglaises peut réduire la fiabilité des appels d'outils et la "
-"précision du suivi des instructions sur certains modèles."
-
-msgid "Actions:"
-msgstr "Actions :"
-
-msgid "Reset to Default Template"
-msgstr "Réinitialiser au modèle par défaut"
-
-msgid "Preview:"
-msgstr "Aperçu :"
-
-msgid "General Tool Settings"
-msgstr "Paramètres généraux des outils"
-
-msgid "System state:"
-msgstr "État du système :"
-
-msgid "Enable Tools"
-msgstr "Activer les outils"
-
-msgid "Master switch for all tool-calling functionality."
-msgstr ""
-"Interrupteur principal pour toutes les fonctionnalités d'appel d'outils."
-
-msgid "Desktop Automation:"
-msgstr "Automatisation du bureau :"
-
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr ""
-"Permet au LLM de demander une session pour voir et contrôler votre bureau."
-
-msgid "Enable Desktop Automation"
-msgstr "Activer l'automatisation du bureau"
-
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr ""
-"Activer l'automatisation du bureau (requiert le <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">pilote</a>)"
-
-msgid "Path whitelist:"
-msgstr "Liste blanche des chemins :"
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Ajouter un chemin, p. ex. $HOME/projects, /tmp"
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"La liste blanche s'applique aux outils du système de fichiers (lecture, "
-"écriture, liste, recherche). Remarque : 'run_command' n'est pas limité par "
-"cette liste."
-
-msgid "Max read size:"
-msgstr "Taille maximale de lecture :"
-
-msgid "Max write size:"
-msgstr "Taille maximale d'écriture :"
-
-msgid "Max HTTP response:"
-msgstr "Réponse HTTP maximale :"
-
-msgid "Max tool loop depth:"
-msgstr "Profondeur maximale de la boucle d'outils :"
-
-msgid "steps"
-msgstr "étapes"
-
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr ""
-"Remarque : Cette limite ne s'applique pas aux sessions d'automatisation du "
-"bureau."
-
-msgid "Native Adapter Features"
-msgstr "Fonctionnalités natives de l'adaptateur"
-
-msgid "Google Search:"
-msgstr "Recherche Google :"
-
-msgid "Enable Native Google Search Grounding"
-msgstr "Activer l'ancrage Google Search natif"
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Utiliser la recherche Google intégrée de Gemini pour l'ancrage. Cela "
-"remplace l'outil de recherche Web standard."
-
-msgid "Code Execution:"
-msgstr "Exécution de code :"
-
-msgid "Enable Native Python Code Execution"
-msgstr "Activer l'exécution native du code Python"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Autoriser Gemini à écrire et exécuter du code Python dans un bac à sable "
-"sécurisé côté serveur."
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"La combinaison d'outils natifs avec des commandes nécessite un modèle plus "
-"récent. Le modèle actuellement sélectionné (%1) peut rencontrer des erreurs."
-
-msgid "Individual Tools"
-msgstr "Outils individuels"
-
-msgid "Prompt Instructions:"
-msgstr "Instructions du prompt :"
-
-msgid "Reset"
-msgstr "Réinitialiser"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
@@ -1998,108 +2113,6 @@ msgstr "Session de contrôle active (déjà autorisée). Mode automatique activ�
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Session de contrôle autorisée avec succès. Mode automatique activé."
-
-msgid ""
-"Execute a shell command on the user's system and return its output. "
-"Guidelines:\n"
-"- Use `pkexec` instead of `sudo` for any command requiring superuser "
-"privileges.\n"
-"- Chain steps with `&&`.\n"
-"- Commands run non-interactively. Never use commands that wait for user "
-"input (like `read`).\n"
-"- Use `kdialog` if you need to prompt the user for input or show a message "
-"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
-"- NEVER install packages, modify system configuration, reboot, or take any "
-"action that alters the system or disrupts the user without explicit "
-"permission.\n"
-"- When permission is needed, ask the user in plain text first.\n"
-"- For auto-run tools: Be conservative and prefer read-only commands. If an "
-"action is potentially disruptive, describe it in plain text and wait for "
-"explicit user approval before calling the tool.\n"
-"- You MUST prefer other, more specific tools (like read_file, write_file, "
-"search_files, etc.) if they can accomplish the task. Only use this tool if "
-"no other tool is suitable."
-msgstr ""
-"Exécute une commande shell sur le système de l'utilisateur et renvoie sa "
-"sortie. Directives :\n"
-"- Utilisez `pkexec` au lieu de `sudo` pour toute commande nécessitant des "
-"privilèges superutilisateur.\n"
-"- Enchaînez les étapes avec `&&`.\n"
-"- Les commandes s'exécutent de façon non interactive. N'utilisez jamais de "
-"commandes attendant une saisie utilisateur (comme `read`).\n"
-"- Utilisez `kdialog` si vous devez demander une saisie à l'utilisateur ou "
-"afficher une boîte de message (ex. : `kdialog --inputbox \"Invite\"`).\n"
-"- N'installez JAMAIS de paquets, ne modifiez pas la configuration du "
-"système, ne redémarrez pas et n'effectuez aucune action qui altère le "
-"système ou perturbe l'utilisateur sans autorisation explicite.\n"
-"- Lorsqu'une autorisation est nécessaire, demandez d'abord à l'utilisateur "
-"en texte brut.\n"
-"- Pour les outils en exécution automatique : Soyez prudent et privilégiez "
-"les commandes en lecture seule. Si une action est potentiellement "
-"perturbatrice, décrivez-la en texte brut et attendez l'approbation explicite "
-"de l'utilisateur avant d'appeler l'outil.\n"
-"- Vous DEVEZ préférer d'autres outils plus spécifiques (comme read_file, "
-"write_file, search_files, etc.) s'ils peuvent accomplir la tâche. N'utilisez "
-"cet outil que si aucun autre outil ne convient."
-
-msgid ""
-"Read the contents of a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Lit le contenu d'un fichier au chemin spécifié. L'accès est restreint aux "
-"répertoires autorisés."
-
-msgid ""
-"Write content to a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Écrit du contenu dans un fichier au chemin spécifié. L'accès est restreint "
-"aux répertoires autorisés."
-
-msgid ""
-"List the contents of a directory. Access is restricted to allowed "
-"directories."
-msgstr ""
-"Liste le contenu d'un répertoire. L'accès est restreint aux répertoires "
-"autorisés."
-
-msgid "Search for a pattern within files in a directory (recursive)."
-msgstr "Recherche un motif dans les fichiers d'un répertoire (récursif)."
-
-msgid "Perform an HTTP GET request to a URL and return the response content."
-msgstr ""
-"Effectue une requête HTTP GET vers une URL et renvoie le contenu de la "
-"réponse."
-
-msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
-msgstr "Effectue une requête HTTP (POST, PUT, etc.) vers une URL."
-
-msgid "Get the current content of the system clipboard."
-msgstr "Récupère le contenu actuel du presse-papiers du système."
-
-msgid "Set the content of the system clipboard."
-msgstr "Définit le contenu du presse-papiers du système."
-
-msgid "Show a system notification."
-msgstr "Affiche une notification système."
-
-msgid "Open a URL in the default application (e.g., web browser)."
-msgstr "Ouvre une URL dans l'application par défaut (ex. : navigateur Web)."
-
-msgid ""
-"Perform a web search to find current information, news, or specific facts."
-msgstr ""
-"Effectue une recherche Web pour trouver des informations actuelles, des "
-"actualités ou des faits précis."
-
-msgid ""
-"Restore the full verbatim text and tool outputs of previously compacted "
-"messages by specifying the start and end message IDs from a cited message "
-"range."
-msgstr ""
-"Restaure le texte intégral textuel et les sorties d'outils des messages "
-"précédemment compactés en spécifiant les identifiants de début et de fin "
-"d'une plage de messages citée."
 
 msgid "General"
 msgstr "Général"
