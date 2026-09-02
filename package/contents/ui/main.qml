@@ -1628,23 +1628,31 @@ PlasmoidItem {
     }
 
     function initSystemPrompt() {
-        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
-            i18n: i18n,
-            sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
-            autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-            autoMode: root.isAutoMode, 
-            commandToolEnabled: Plasmoid.configuration.useCommandTool, 
-            sessionMultiplexer: root.sessionChipText(),
-            localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
-            toolsConfig: getToolsConfig()
-        });
-        Plasmoid.configuration.gatheredSysInfo = JSON.stringify(sysInfo);
-        if (systemPromptReady) {
-            chatMessages.setProperty(0, "content", prompt);
-        } else {
-            chatMessages.append({ msgId: "msg_sys_0", turnId: "turn_0", role: "system", content: prompt });
-            systemPromptReady = true;
+        try {
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, {
+                i18n: i18n,
+                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime,
+                autoRunCommands: Plasmoid.configuration.autoRunCommands,
+                autoMode: root.isAutoMode,
+                commandToolEnabled: Plasmoid.configuration.useCommandTool,
+                sessionMultiplexer: root.sessionChipText(),
+                localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
+                toolsConfig: getToolsConfig()
+            });
+            Plasmoid.configuration.gatheredSysInfo = JSON.stringify(sysInfo);
+            if (systemPromptReady) {
+                chatMessages.setProperty(0, "content", prompt);
+            } else {
+                chatMessages.append({ msgId: "msg_sys_0", turnId: "turn_0", role: "system", content: prompt });
+            }
+        } catch (e) {
+            console.warn("PlasmaLLM: failed to build system prompt: " + e);
+            if (!systemPromptReady && chatMessages.count === 0) {
+                chatMessages.append({ msgId: "msg_sys_0", turnId: "turn_0", role: "system", content: "" });
+            }
         }
+        systemPromptReady = true;
+        sysInfoTimeout.stop();
     }
 
     function regatherSysInfo() {
@@ -3958,13 +3966,16 @@ PlasmoidItem {
     Timer {
         id: sysInfoTimeout
         interval: 3000
-        running: false
+        running: true
         repeat: false
         onTriggered: {
             if (sysInfoPending > 0) {
                 console.warn("PlasmaLLM: system info timed out with " + sysInfoPending + " commands pending");
                 pendingSysInfoCommands = {};
                 sysInfoPending = 0;
+            }
+            if (!systemPromptReady) {
+                console.warn("PlasmaLLM: system prompt was not ready after startup; enabling input anyway");
                 initSystemPrompt();
             }
         }
@@ -4038,10 +4049,6 @@ PlasmoidItem {
                 }
             }
             Plasmoid.configuration.sttMigratedFromProfile = true;
-        }
-
-        if (Plasmoid.configuration.latexRenderMode === -1) {
-            latexMatplotlibDetector.connectSource("python3 -c 'import matplotlib'");
         }
 
         if (!Plasmoid.configuration.desktopAutomationToken) {
