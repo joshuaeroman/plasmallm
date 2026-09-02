@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-24 21:07-0400\n"
+"POT-Creation-Date: 2026-09-02 09:25-0400\n"
 "PO-Revision-Date: 2026-05-04 00:00+0300\n"
 "Last-Translator: Matvel007\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -17,6 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Color button"
+msgstr "Кнопка цвета"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Текущий цвет: %1. Эта кнопка откроет диалог выбора цвета."
+
+msgid "Current color is %1."
+msgstr "Текущий цвет: %1."
 
 msgid "Request timed out after 30 seconds"
 msgstr "Тайм-аут запроса через 30 секунд"
@@ -61,12 +70,6 @@ msgstr "Ошибка аутентификации — проверьте API-к�
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr "Ошибка аутентификации (HTTP %1) — проверьте API-ключ: %2"
 
-msgid "no response — check your endpoint URL"
-msgstr "нет ответа — проверьте URL эндпоинта"
-
-msgid "Request failed"
-msgstr "Запрос не удался"
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -75,6 +78,12 @@ msgstr ""
 "Эта версия модели не поддерживает сочетание встроенных инструментов (Поиск/"
 "Код) с пользовательскими командами. Выберите более новую модель (например, "
 "Gemini 3+) или отключите встроенные функции в Настройках."
+
+msgid "Request failed"
+msgstr "Запрос не удался"
+
+msgid "no response — check your endpoint URL"
+msgstr "нет ответа — проверьте URL эндпоинта"
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -153,6 +162,78 @@ msgstr ""
 
 msgid "No command provided."
 msgstr "Команда не указана."
+
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Поиск Exa"
+
+msgid "Ollama API key"
+msgstr "API-ключ Ollama"
+
+msgid "Saving…"
+msgstr "Сохранение…"
+
+msgid "Saved"
+msgstr "Сохранено"
+
+msgid "Save to Config (Insecure)"
+msgstr "Сохранить в конфиг (небезопасно)"
+
+msgid "Save Key"
+msgstr "Сохранить ключ"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "URL экземпляра SearXNG (напр. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "API-ключ/токен SearXNG (опционально)"
+
+msgid "Exa API key"
+msgstr "API-ключ Exa"
+
+msgid "Search Type:"
+msgstr "Тип поиска:"
+
+msgid "Auto (Default)"
+msgstr "Авто (по умолчанию)"
+
+msgid "Fast"
+msgstr "Быстрый"
+
+msgid "Instant"
+msgstr "Мгновенный"
+
+msgid "Deep Lite"
+msgstr "Глубокий Lite"
+
+msgid "Deep"
+msgstr "Глубокий"
+
+msgid "Deep Reasoning"
+msgstr "Глубокое рассуждение"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo не требует настройки."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Убедитесь, что на экземпляре SearXNG включён формат JSON."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr "Включает нейронный веб-поиск от LLM через API Exa."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Включает веб-поиск от LLM через поисковый API Ollama"
+
+msgid "Manage and discover skills in the Skills settings page."
+msgstr "Управление навыками и их поиск на странице настроек «Навыки»."
 
 msgid "Saved phrases:"
 msgstr "Сохранённые фразы:"
@@ -233,92 +314,15 @@ msgstr ""
 "В вашей системе не найдены ни 'tmux', ни 'screen'. Мультиплексирование "
 "сессий недоступно."
 
-msgid "Manage and discover skills in the Skills settings page."
-msgstr "Управление навыками и их поиск на странице настроек «Навыки»."
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Exa Search"
-msgstr "Поиск Exa"
-
-msgid "Ollama API key"
-msgstr "API-ключ Ollama"
-
-msgid "Saving…"
-msgstr "Сохранение…"
-
-msgid "Saved"
-msgstr "Сохранено"
-
-msgid "Save to Config (Insecure)"
-msgstr "Сохранить в конфиг (небезопасно)"
-
-msgid "Save Key"
-msgstr "Сохранить ключ"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "URL экземпляра SearXNG (напр. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "API-ключ/токен SearXNG (опционально)"
-
-msgid "Exa API key"
-msgstr "API-ключ Exa"
-
-msgid "Search Type:"
-msgstr "Тип поиска:"
-
-msgid "Auto (Default)"
-msgstr "Авто (по умолчанию)"
-
-msgid "Fast"
-msgstr "Быстрый"
-
-msgid "Instant"
-msgstr "Мгновенный"
-
-msgid "Deep Lite"
-msgstr "Глубокий Lite"
-
-msgid "Deep"
-msgstr "Глубокий"
-
-msgid "Deep Reasoning"
-msgstr "Глубокое рассуждение"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo не требует настройки."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Убедитесь, что на экземпляре SearXNG включён формат JSON."
-
-msgid "Enables LLM-triggered neural web searches via Exa API."
-msgstr "Включает нейронный веб-поиск от LLM через API Exa."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Включает веб-поиск от LLM через поисковый API Ollama"
-
 msgid ""
 "Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
 "that skill has “Allow running skill scripts without approval” checked on the "
 "Skills settings page."
-msgstr "Запускает файл .sh внутри папки навыка. Запрос подтверждения при каждом запуске пропускается только в том случае, если для этого навыка на странице настроек «Навыки» установлен флажок «Разрешить запуск скриптов навыков без подтверждения»."
-
-msgid "Color button"
-msgstr "Кнопка цвета"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Текущий цвет: %1. Эта кнопка откроет диалог выбора цвета."
-
-msgid "Current color is %1."
-msgstr "Текущий цвет: %1."
+msgstr ""
+"Запускает файл .sh внутри папки навыка. Запрос подтверждения при каждом "
+"запуске пропускается только в том случае, если для этого навыка на странице "
+"настроек «Навыки» установлен флажок «Разрешить запуск скриптов навыков без "
+"подтверждения»."
 
 msgid "Tool Request: %1"
 msgstr "Запрос инструмента: %1"
@@ -548,6 +552,287 @@ msgstr "Показать Настройки"
 msgid "Show Pin"
 msgstr "Показать закрепление"
 
+msgid "Speech-to-text is not configured"
+msgstr "Распознавание речи не настроено"
+
+msgid "Unknown STT backend: %1"
+msgstr "Неизвестный бэкенд STT: %1"
+
+msgid "Whisper CLI runner is not available"
+msgstr "Модуль запуска Whisper CLI недоступен"
+
+msgid "Could not build Whisper command"
+msgstr "Не удалось сформировать команду Whisper"
+
+msgid "STT backend does not support model listing"
+msgstr "Бэкенд STT не поддерживает получение списка моделей"
+
+msgid "Speech to Text"
+msgstr "Распознавание речи"
+
+msgid "Model “%1” is on disk."
+msgstr "Модель “%1” найдена на диске."
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
+"into ~/.cache/whisper and can take a long time."
+msgstr ""
+"Модель “%1” не загружена. При первом распознавании она будет скачана (%2) в "
+"~/.cache/whisper, что может занять много времени."
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it into "
+"~/.cache/whisper and can take a long time."
+msgstr ""
+"Модель “%1” не загружена. При первом распознавании она будет скачана в "
+"~/.cache/whisper, что может занять много времени."
+
+msgid "CUDA is available to Whisper."
+msgstr "CUDA доступна для Whisper."
+
+msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
+msgstr ""
+"CUDA недоступна в этом окружении Whisper. Используйте cpu или «По умолчанию»."
+
+msgid "Whisper CLI responded to --help."
+msgstr "Whisper CLI ответил на запрос --help."
+
+msgid "Whisper CLI test failed (exit %1): %2"
+msgstr "Ошибка тестирования Whisper CLI (код выхода %1): %2"
+
+msgid "Whisper CLI test failed (exit %1). Check the command."
+msgstr "Ошибка тестирования Whisper CLI (код выхода %1). Проверьте команду."
+
+msgid "API key saved to KWallet."
+msgstr "API-ключ сохранён в KWallet."
+
+msgid "API key saved to local fallback."
+msgstr "API-ключ сохранён в локальном хранилище."
+
+msgid "Checking whether “%1” is downloaded…"
+msgstr "Проверка, загружена ли модель “%1”…"
+
+msgid "Checking CUDA…"
+msgstr "Проверка CUDA…"
+
+msgid "Testing Whisper CLI…"
+msgstr "Проверка Whisper CLI…"
+
+msgid "Loaded %1 STT model(s)."
+msgstr "Загружено моделей STT: %1."
+
+msgid "Set an API endpoint first."
+msgstr "Сначала укажите эндпоинт API."
+
+msgid "Fetching STT models…"
+msgstr "Получение моделей STT…"
+
+msgid "Voice input:"
+msgstr "Голосовой ввод:"
+
+msgid "Enable microphone input"
+msgstr "Включить ввод с микрофона"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"Настраивает только модуль распознавания речи. Для транскриптов используется "
+"активный профиль чата (Основные)."
+
+msgid "Mic button:"
+msgstr "Кнопка микрофона:"
+
+msgid "Auto"
+msgstr "Авто"
+
+msgid "Hold to talk"
+msgstr "Удерживайте, чтобы говорить"
+
+msgid "Toggle"
+msgstr "Переключение"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"Авто: нажатие переключает запись; удержание 250 мс+ для рации. Удержание: "
+"только нажатие и удержание. Переключение: нажатие для запуска/остановки."
+
+msgid "Voice shortcut:"
+msgstr "Голосовая комбинация клавиш:"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"Когда PlasmaLLM открыт и в фокусе, используется тот же режим микрофона, что "
+"и кнопка (авто: короткое нажатие переключает, удержание 250 мс+ — рация). Не "
+"открывает панель — используйте «Активировать виджет» на странице комбинаций "
+"клавиш. По умолчанию: Ctrl+M. Очистите, чтобы отключить."
+
+msgid "Transcriber"
+msgstr "Транскрибатор"
+
+msgid "STT backend:"
+msgstr "Бэкенд STT:"
+
+msgid "Provider:"
+msgstr "Провайдер:"
+
+msgid "Endpoint:"
+msgstr "Эндпоинт:"
+
+msgid "Model:"
+msgstr "Модель:"
+
+msgid "Fetch STT models"
+msgstr "Получить модели STT"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouter перечисляет модели STT только через модальности транскрипции (эта "
+"страница выполняет это)."
+
+msgid "API key:"
+msgstr "API-ключ:"
+
+msgid "Provider API key"
+msgstr "API-ключ провайдера"
+
+msgid "Save API key"
+msgstr "Сохранить API-ключ"
+
+msgid "Command:"
+msgstr "Команда:"
+
+msgid ""
+"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
+"toolbox run whisper."
+msgstr ""
+"Префикс команды, вставляемый как есть. Примеры: whisper, python3 -m whisper, "
+"toolbox run whisper."
+
+msgid "Test:"
+msgstr "Тест:"
+
+msgid "Test CLI"
+msgstr "Проверить CLI"
+
+msgid "Task:"
+msgstr "Задача:"
+
+msgid "Transcribe"
+msgstr "Распознать"
+
+msgid "Translate"
+msgstr "Перевести"
+
+msgid "Device:"
+msgstr "Устройство:"
+
+msgid "Default"
+msgstr "По умолчанию"
+
+msgid "FP16:"
+msgstr "FP16:"
+
+msgid "Use --fp16 True (GPU)"
+msgstr "Использовать --fp16 True (GPU)"
+
+msgid "Threads:"
+msgstr "Потоки:"
+
+msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
+msgstr ""
+"0 опускает параметр --threads (по умолчанию для Whisper). Отключение FP16 "
+"безопаснее на CPU."
+
+msgid "Initial prompt:"
+msgstr "Начальный промпт:"
+
+msgid "Optional vocabulary / style hint"
+msgstr "Необязательная подсказка по словарю / стилю"
+
+msgid "Extra args:"
+msgstr "Дополнительные аргументы:"
+
+msgid "Optional, appended as-is"
+msgstr "Необязательно, добавляется как есть"
+
+msgid "Options"
+msgstr "Параметры"
+
+msgid "Language hint:"
+msgstr "Подсказка языка:"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "Необязательно, например ru или en (пусто = авто)"
+
+msgid "Max recording (seconds):"
+msgstr "Макс. время записи (секунды):"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"Пользовательские инструменты не настроены. Добавьте пользовательский "
+"инструмент, чтобы предоставить LLM доступ к вашим командам."
+
+msgid "Add Custom Tool"
+msgstr "Добавить пользовательский инструмент"
+
+msgid "Echoes back the message provided."
+msgstr "Возвращает предоставленное сообщение."
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "Название инструмента (например, systemctl_service)"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "Описание (инструктирует LLM о том, что делает этот инструмент)"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "Шаблон команды (например, systemctl {action} {service})"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "Требуется суперпользователь (запускается с pkexec)"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "Автозапуск инструмента (без диалога подтверждения)"
+
+msgid "Collapse results"
+msgstr "Сворачивать результаты"
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+"Показывать готовые результаты в виде компактной плашки; нажмите на неё, "
+"чтобы просмотреть полный вывод."
+
+msgid "Update Tool"
+msgstr "Обновить инструмент"
+
+msgid "Save Tool"
+msgstr "Сохранить инструмент"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "Инструмент с именем \"%1\" уже существует."
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"Пользовательские инструменты позволяют предоставить LLM доступ к вашим "
+"командам. Используйте заполнители вроде {variable} в шаблоне команды для "
+"определения параметров, которые LLM может заполнить. Значения, "
+"предоставленные LLM, автоматически экранируются для оболочки."
+
 msgid "Loaded %1 skill"
 msgstr "Загружен %1 навык"
 
@@ -609,6 +894,424 @@ msgid "The model loaded this skill's instructions into context before acting."
 msgstr ""
 "Модель загрузила инструкции этого навыка в контекст перед выполнением "
 "действий."
+
+msgid "Stop command"
+msgstr "Остановить команду"
+
+msgid "Open terminal attached to this session"
+msgstr "Открыть терминал, подключенный к этой сессии"
+
+msgid "Collapse result"
+msgstr "Свернуть результат"
+
+msgid "Copy output"
+msgstr "Скопировать вывод"
+
+msgid "Enable skills"
+msgstr "Включить навыки"
+
+msgid ""
+"Skills are reusable instruction sets the model loads on demand via the skill "
+"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
+"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
+"contained <name>.md file; a user skill with the same name overrides the "
+"bundled one."
+msgstr ""
+"Навыки — это многоразовые наборы инструкций, которые модель загружает по "
+"требованию с помощью инструмента skill. PlasmaLLM поставляется со "
+"встроенными навыками (источник: встроенный). Добавляйте собственные навыки в "
+"~/.local/share/plasmallm/skills/ в виде папки с файлом SKILL.md или "
+"отдельного файла <name>.md; пользовательский навык с таким же именем "
+"переопределяет встроенный."
+
+msgid ""
+"No skills discovered yet. Add a SKILL.md folder to the directory above or "
+"enable the extra directories below."
+msgstr ""
+"Навыки пока не найдены. Добавьте папку с файлом SKILL.md в каталог выше или "
+"включите дополнительные каталоги ниже."
+
+msgid "DISABLED"
+msgstr "ОТКЛЮЧЕНО"
+
+msgid "Allow running skill scripts without approval"
+msgstr "Разрешить запуск скриптов навыков без подтверждения"
+
+msgid "Refreshing…"
+msgstr "Обновление…"
+
+msgid "Refresh"
+msgstr "Обновить"
+
+msgid "Open Folder"
+msgstr "Открыть папку"
+
+msgid "Open the skills directory in the file manager"
+msgstr "Открыть каталог навыков в диспетчере файлов"
+
+msgid "Also scan ~/.claude/skills"
+msgstr "Также сканировать ~/.claude/skills"
+
+msgid "Also scan ~/.agents/skills"
+msgstr "Также сканировать ~/.agents/skills"
+
+msgid "/absolute/path/to/skills"
+msgstr "/абсолютный/путь/к/навыкам"
+
+msgid "Save directory"
+msgstr "Сохранить каталог"
+
+msgid "Add directory"
+msgstr "Добавить каталог"
+
+msgid ""
+"Enabled skills are advertised to the model by name and description; the "
+"model loads full instructions on demand with the skill tool. Loaded skill "
+"content is re-sent in full every turn and is never affected by context "
+"compaction. Toggles here are global (not per-profile)."
+msgstr ""
+"Включённые навыки передаются модели с указанием имени и описания; модель "
+"загружает полные инструкции по требованию с помощью инструмента skill. "
+"Загруженное содержимое навыка повторно отправляется полностью на каждом шаге "
+"и никогда не затрагивается сжатием контекста. Переключатели здесь действуют "
+"глобально (не для каждого профиля)."
+
+msgid "System Info:"
+msgstr "Информация о системе:"
+
+msgid "OS"
+msgstr "ОС"
+
+msgid "Shell"
+msgstr "Оболочка"
+
+msgid "Hostname"
+msgstr "Имя хоста"
+
+msgid "Kernel"
+msgstr "Ядро"
+
+msgid "Desktop"
+msgstr "Рабочий стол"
+
+msgid "User"
+msgstr "Пользователь"
+
+msgid "CPU"
+msgstr "ЦПУ"
+
+msgid "Memory"
+msgstr "Память"
+
+msgid "GPU"
+msgstr "ГПУ"
+
+msgid "Block Devices"
+msgstr "Блочные устройства"
+
+msgid "Network"
+msgstr "Сеть"
+
+msgid "Locale"
+msgstr "Локаль"
+
+msgid "Date/Time"
+msgstr "Дата/Время"
+
+msgid "Template:"
+msgstr "Шаблон:"
+
+msgid ""
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
+msgstr ""
+"Это полный системный промпт, отправляемый модели. Используйте "
+"{{placeholders}} для вставки динамического содержимого, такого как сведения "
+"о системе, включенные инструменты или инструкции по автоматизации рабочего "
+"стола. Все остальное используется буквально. Критические инструкции времени "
+"выполнения (управление рабочим столом, режим без подтверждений) добавляются "
+"автоматически при активации, даже если вы удалите их заполнитель."
+
+msgid "System Prompt:"
+msgstr "Системный промпт:"
+
+msgid "Write your system prompt here…"
+msgstr "Напишите ваш системный промпт здесь…"
+
+msgid "Placeholders:"
+msgstr "Заполнители:"
+
+msgid "Enabled system info selected in the checklist above"
+msgstr "Сведения о системе, выбранные в списке выше"
+
+msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr "Описания и руководства для включенных инструментов из меню Инструменты"
+
+msgid ""
+"Available skills index and instructions for skills loaded this session (from "
+"the Skills settings page)"
+msgstr ""
+"Индекс доступных навыков и инструкции для навыков, загруженных в этом сеансе "
+"(со страницы настроек «Навыки»)"
+
+msgid ""
+"Persistent tmux or screen session multiplexer instructions (when active)"
+msgstr ""
+"Инструкции постоянного мультиплексора сеансов tmux или screen (когда активен)"
+
+msgid "Notice indicating skip-approvals mode (/auto) is active"
+msgstr "Уведомление о том, что режим без подтверждений (/auto) активен"
+
+msgid "Desktop automation coordinates and guidelines (when driving)"
+msgstr ""
+"Координаты и рекомендации по автоматизации рабочего стола (при управлении)"
+
+msgid "Localization:"
+msgstr "Локализация:"
+
+msgid "Localize System Prompt"
+msgstr "Локализовать системный промпт"
+
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
+msgstr ""
+"Переводить стандартные шаблоны промптов и динамические разделы системы на "
+"язык вашего рабочего стола."
+
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
+msgstr ""
+"Примечание: Локализация системных инструкций и инструментов на языки, "
+"отличные от английского, может снизить надежность вызова инструментов и "
+"точность следования инструкциям на некоторых моделях."
+
+msgid "Actions:"
+msgstr "Действия:"
+
+msgid "Reset to Default Template"
+msgstr "Сбросить на шаблон по умолчанию"
+
+msgid "Preview:"
+msgstr "Предпросмотр:"
+
+msgid "General Tool Settings"
+msgstr "Общие настройки инструментов"
+
+msgid "System state:"
+msgstr "Состояние системы:"
+
+msgid "Enable Tools"
+msgstr "Включить инструменты"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "Главный переключатель для всех функций вызова инструментов."
+
+msgid "Exa does not support tool use"
+msgstr "Exa не поддерживает использование инструментов"
+
+msgid "Desktop Automation:"
+msgstr "Автоматизация рабочего стола:"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+"Позволяет LLM запрашивать сеанс для просмотра и управления вашим рабочим "
+"столом."
+
+msgid "Enable Desktop Automation"
+msgstr "Включить автоматизацию рабочего стола"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Включить автоматизацию рабочего стола (требуется <a href=\"https://"
+"github.com/joshuaeroman/plasmallm-desktop-driver\">драйвер</a>)"
+
+msgid "Path whitelist:"
+msgstr "Белый список путей:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Добавить путь, напр. $HOME/projects, /tmp"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Белый список применяется к инструментам файловой системы (чтение, запись, "
+"список, поиск). Примечание: 'run_command' не ограничен этим списком."
+
+msgid "Max read size:"
+msgstr "Макс. размер чтения:"
+
+msgid "Max write size:"
+msgstr "Макс. размер записи:"
+
+msgid "Max HTTP response:"
+msgstr "Макс. HTTP-ответ:"
+
+msgid "Max tool loop depth:"
+msgstr "Максимальная глубина цикла инструментов:"
+
+msgid "steps"
+msgstr "шагов"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr ""
+"Примечание: Это ограничение не применяется к сеансам автоматизации рабочего "
+"стола."
+
+msgid "Native Adapter Features"
+msgstr "Встроенные функции адаптера"
+
+msgid "Google Search:"
+msgstr "Google Поиск:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Включить нативную привязку Google Search"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Использовать встроенный Google Поиск Gemini для привязки. Это переопределяет "
+"стандартный инструмент веб-поиска."
+
+msgid "Code Execution:"
+msgstr "Выполнение кода:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Включить нативное выполнение кода Python"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Разрешить Gemini писать и выполнять код Python в безопасной серверной "
+"песочнице."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Объединение встроенных инструментов с командами требует более новой модели. "
+"Текущая выбранная модель (%1) может столкнуться с ошибками."
+
+msgid "Individual Tools"
+msgstr "Отдельные инструменты"
+
+msgid "Prompt Instructions:"
+msgstr "Инструкции промпта:"
+
+msgid "Reset"
+msgstr "Сбросить"
+
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"Выполняет команду оболочки в системе пользователя и возвращает ее вывод. "
+"Рекомендации:\n"
+"- Используйте `pkexec` вместо `sudo` для любых команд, требующих прав "
+"суперпользователя.\n"
+"- Объединяйте шаги с помощью `&&`.\n"
+"- Команды выполняются неинтерактивно. Никогда не используйте команды, "
+"ожидающие ввода данных пользователем (например, `read`).\n"
+"- Используйте `kdialog`, если вам нужно запросить ввод данных у пользователя "
+"или показать диалоговое окно (например, `kdialog --inputbox \"Запрос\"`).\n"
+"- НИКОГДА не устанавливайте пакеты, не изменяйте конфигурацию системы, не "
+"перезагружайте компьютер и не предпринимайте никаких действий, изменяющих "
+"систему или мешающих работе пользователя, без явного разрешения.\n"
+"- Когда требуется разрешение, сначала спросите пользователя простым "
+"текстом.\n"
+"- Для автоматически запускаемых инструментов: Будьте осторожны и отдавайте "
+"предпочтение командам только для чтения. Если действие потенциально "
+"деструктивно, опишите его простым текстом и дождитесь явного одобрения "
+"пользователя перед вызовом инструмента.\n"
+"- Вы ДОЛЖНЫ отдавать предпочтение другим, более специализированным "
+"инструментам (таким как read_file, write_file, search_files и т. д.), если "
+"они могут выполнить задачу. Используйте этот инструмент только в том случае, "
+"если ни один другой не подходит."
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Считывает содержимое файла по указанному пути. Доступ ограничен разрешенными "
+"каталогами."
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Записывает содержимое в файл по указанному пути. Доступ ограничен "
+"разрешенными каталогами."
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+"Отображает список содержимого каталога. Доступ ограничен разрешенными "
+"каталогами."
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "Ищет шаблон внутри файлов в каталоге (рекурсивно)."
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr "Выполняет HTTP-запрос GET к URL-адресу и возвращает содержимое ответа."
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "Выполняет HTTP-запрос (POST, PUT и т. д.) к URL-адресу."
+
+msgid "Get the current content of the system clipboard."
+msgstr "Получает текущее содержимое системного буфера обмена."
+
+msgid "Set the content of the system clipboard."
+msgstr "Задает содержимое системного буфера обмена."
+
+msgid "Show a system notification."
+msgstr "Показывает системное уведомление."
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr ""
+"Открывает URL-адрес в приложении по умолчанию (например, в веб-браузере)."
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Выполняет поиск в Интернете для поиска актуальной информации, новостей или "
+"конкретных фактов."
+
+msgid ""
+"Restore the full verbatim text and tool outputs of previously compacted "
+"messages by specifying the start and end message IDs from a cited message "
+"range."
+msgstr ""
+"Восстановить полный дословный текст и результаты работы инструментов ранее "
+"сжатых сообщений, указав начальный и конечный ID сообщений из цитируемого "
+"диапазона сообщений."
 
 msgid "Approve the pending tool request"
 msgstr "Одобрить ожидающий запрос инструмента"
@@ -827,9 +1530,6 @@ msgstr "Отпустите для отправки"
 msgid "Click to start"
 msgstr "Нажмите для начала"
 
-msgid "Hold to talk"
-msgstr "Удерживайте, чтобы говорить"
-
 msgid "Click to toggle, hold to talk"
 msgstr "Нажмите для переключения, удерживайте, чтобы говорить"
 
@@ -844,18 +1544,6 @@ msgstr "Отменить запрос LLM"
 
 msgid "Drop files here to attach"
 msgstr "Перетащите файлы сюда для прикрепления"
-
-msgid "Stop command"
-msgstr "Остановить команду"
-
-msgid "Open terminal attached to this session"
-msgstr "Открыть терминал, подключенный к этой сессии"
-
-msgid "Collapse result"
-msgstr "Свернуть результат"
-
-msgid "Copy output"
-msgstr "Скопировать вывод"
 
 msgid "Context Compaction"
 msgstr "Сжатие контекста"
@@ -986,63 +1674,6 @@ msgstr "Проверить соединение для сжатия"
 msgid "Model Summary Response:"
 msgstr "Ответ модели со сводкой:"
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
-msgstr ""
-"Пользовательские инструменты не настроены. Добавьте пользовательский "
-"инструмент, чтобы предоставить LLM доступ к вашим командам."
-
-msgid "Add Custom Tool"
-msgstr "Добавить пользовательский инструмент"
-
-msgid "Echoes back the message provided."
-msgstr "Возвращает предоставленное сообщение."
-
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "Название инструмента (например, systemctl_service)"
-
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "Описание (инструктирует LLM о том, что делает этот инструмент)"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "Шаблон команды (например, systemctl {action} {service})"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "Требуется суперпользователь (запускается с pkexec)"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "Автозапуск инструмента (без диалога подтверждения)"
-
-msgid "Collapse results"
-msgstr "Сворачивать результаты"
-
-msgid ""
-"Show finished results as a small pill; click the pill to view the full "
-"output."
-msgstr ""
-"Показывать готовые результаты в виде компактной плашки; нажмите на неё, "
-"чтобы просмотреть полный вывод."
-
-msgid "Update Tool"
-msgstr "Обновить инструмент"
-
-msgid "Save Tool"
-msgstr "Сохранить инструмент"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "Инструмент с именем \"%1\" уже существует."
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"Пользовательские инструменты позволяют предоставить LLM доступ к вашим "
-"командам. Используйте заполнители вроде {variable} в шаблоне команды для "
-"определения параметров, которые LLM может заполнить. Значения, "
-"предоставленные LLM, автоматически экранируются для оболочки."
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Не удалось получить токен gcloud (выход %1): %2"
 
@@ -1072,9 +1703,6 @@ msgstr "Переименовать"
 
 msgid "Adapter:"
 msgstr "Адаптер:"
-
-msgid "Exa does not support tool use"
-msgstr "Exa не поддерживает использование инструментов"
 
 msgid "Platform:"
 msgstr "Платформа:"
@@ -1115,20 +1743,17 @@ msgstr "ID проекта:"
 msgid "Location:"
 msgstr "Расположение:"
 
-msgid "Provider:"
-msgstr "Провайдер:"
-
 msgid "API Endpoint:"
 msgstr "API-эндпоинт:"
-
-msgid "Model:"
-msgstr "Модель:"
 
 msgid "API Key:"
 msgstr "API-ключ:"
 
 msgid "Paste short-lived access token"
 msgstr "Вставить временный токен доступа"
+
+msgid "Paste OpenCode API key"
+msgstr "Вставить API-ключ OpenCode"
 
 msgid "Optional - for OpenAI, etc."
 msgstr "Опционально — для OpenAI и др."
@@ -1238,9 +1863,6 @@ msgstr "Обычный текст (.txt)"
 msgid "Structured (.jsonl)"
 msgstr "Структурированный (.jsonl)"
 
-msgid "Open Folder"
-msgstr "Открыть папку"
-
 msgid "Open the folder where chat histories are saved"
 msgstr "Открыть папку, в которой сохраняется история чатов"
 
@@ -1261,513 +1883,6 @@ msgstr "секунд"
 
 msgid "minutes"
 msgstr "минут"
-
-msgid "Speech to Text"
-msgstr "Распознавание речи"
-
-msgid "Model “%1” is on disk."
-msgstr "Модель “%1” найдена на диске."
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
-"into ~/.cache/whisper and can take a long time."
-msgstr ""
-"Модель “%1” не загружена. При первом распознавании она будет скачана (%2) в "
-"~/.cache/whisper, что может занять много времени."
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it into "
-"~/.cache/whisper and can take a long time."
-msgstr ""
-"Модель “%1” не загружена. При первом распознавании она будет скачана в "
-"~/.cache/whisper, что может занять много времени."
-
-msgid "CUDA is available to Whisper."
-msgstr "CUDA доступна для Whisper."
-
-msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
-msgstr ""
-"CUDA недоступна в этом окружении Whisper. Используйте cpu или «По умолчанию»."
-
-msgid "Whisper CLI responded to --help."
-msgstr "Whisper CLI ответил на запрос --help."
-
-msgid "Whisper CLI test failed (exit %1): %2"
-msgstr "Ошибка тестирования Whisper CLI (код выхода %1): %2"
-
-msgid "Whisper CLI test failed (exit %1). Check the command."
-msgstr "Ошибка тестирования Whisper CLI (код выхода %1). Проверьте команду."
-
-msgid "API key saved to KWallet."
-msgstr "API-ключ сохранён в KWallet."
-
-msgid "API key saved to local fallback."
-msgstr "API-ключ сохранён в локальном хранилище."
-
-msgid "Checking whether “%1” is downloaded…"
-msgstr "Проверка, загружена ли модель “%1”…"
-
-msgid "Checking CUDA…"
-msgstr "Проверка CUDA…"
-
-msgid "Testing Whisper CLI…"
-msgstr "Проверка Whisper CLI…"
-
-msgid "Loaded %1 STT model(s)."
-msgstr "Загружено моделей STT: %1."
-
-msgid "Set an API endpoint first."
-msgstr "Сначала укажите эндпоинт API."
-
-msgid "Fetching STT models…"
-msgstr "Получение моделей STT…"
-
-msgid "Voice input:"
-msgstr "Голосовой ввод:"
-
-msgid "Enable microphone input"
-msgstr "Включить ввод с микрофона"
-
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-"Настраивает только модуль распознавания речи. Для транскриптов используется "
-"активный профиль чата (Основные)."
-
-msgid "Mic button:"
-msgstr "Кнопка микрофона:"
-
-msgid "Auto"
-msgstr "Авто"
-
-msgid "Toggle"
-msgstr "Переключение"
-
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-"Авто: нажатие переключает запись; удержание 250 мс+ для рации. Удержание: "
-"только нажатие и удержание. Переключение: нажатие для запуска/остановки."
-
-msgid "Voice shortcut:"
-msgstr "Голосовая комбинация клавиш:"
-
-msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
-"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
-msgstr ""
-"Когда PlasmaLLM открыт и в фокусе, используется тот же режим микрофона, что "
-"и кнопка (авто: короткое нажатие переключает, удержание 250 мс+ — рация). Не "
-"открывает панель — используйте «Активировать виджет» на странице комбинаций "
-"клавиш. По умолчанию: Ctrl+M. Очистите, чтобы отключить."
-
-msgid "Transcriber"
-msgstr "Транскрибатор"
-
-msgid "STT backend:"
-msgstr "Бэкенд STT:"
-
-msgid "Endpoint:"
-msgstr "Эндпоинт:"
-
-msgid "Fetch STT models"
-msgstr "Получить модели STT"
-
-msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
-msgstr ""
-"OpenRouter перечисляет модели STT только через модальности транскрипции (эта "
-"страница выполняет это)."
-
-msgid "API key:"
-msgstr "API-ключ:"
-
-msgid "Provider API key"
-msgstr "API-ключ провайдера"
-
-msgid "Save API key"
-msgstr "Сохранить API-ключ"
-
-msgid "Command:"
-msgstr "Команда:"
-
-msgid ""
-"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
-"toolbox run whisper."
-msgstr ""
-"Префикс команды, вставляемый как есть. Примеры: whisper, python3 -m whisper, "
-"toolbox run whisper."
-
-msgid "Test:"
-msgstr "Тест:"
-
-msgid "Test CLI"
-msgstr "Проверить CLI"
-
-msgid "Task:"
-msgstr "Задача:"
-
-msgid "Transcribe"
-msgstr "Распознать"
-
-msgid "Translate"
-msgstr "Перевести"
-
-msgid "Device:"
-msgstr "Устройство:"
-
-msgid "Default"
-msgstr "По умолчанию"
-
-msgid "FP16:"
-msgstr "FP16:"
-
-msgid "Use --fp16 True (GPU)"
-msgstr "Использовать --fp16 True (GPU)"
-
-msgid "Threads:"
-msgstr "Потоки:"
-
-msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
-msgstr ""
-"0 опускает параметр --threads (по умолчанию для Whisper). Отключение FP16 "
-"безопаснее на CPU."
-
-msgid "Initial prompt:"
-msgstr "Начальный промпт:"
-
-msgid "Optional vocabulary / style hint"
-msgstr "Необязательная подсказка по словарю / стилю"
-
-msgid "Extra args:"
-msgstr "Дополнительные аргументы:"
-
-msgid "Optional, appended as-is"
-msgstr "Необязательно, добавляется как есть"
-
-msgid "Options"
-msgstr "Параметры"
-
-msgid "Language hint:"
-msgstr "Подсказка языка:"
-
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "Необязательно, например ru или en (пусто = авто)"
-
-msgid "Max recording (seconds):"
-msgstr "Макс. время записи (секунды):"
-
-msgid "Speech-to-text is not configured"
-msgstr "Распознавание речи не настроено"
-
-msgid "Unknown STT backend: %1"
-msgstr "Неизвестный бэкенд STT: %1"
-
-msgid "Whisper CLI runner is not available"
-msgstr "Модуль запуска Whisper CLI недоступен"
-
-msgid "Could not build Whisper command"
-msgstr "Не удалось сформировать команду Whisper"
-
-msgid "STT backend does not support model listing"
-msgstr "Бэкенд STT не поддерживает получение списка моделей"
-
-msgid "Enable skills"
-msgstr "Включить навыки"
-
-msgid ""
-"Skills are reusable instruction sets the model loads on demand via the skill "
-"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
-"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
-"contained <name>.md file; a user skill with the same name overrides the "
-"bundled one."
-msgstr "Навыки — это многоразовые наборы инструкций, которые модель загружает по требованию с помощью инструмента skill. PlasmaLLM поставляется со встроенными навыками (источник: встроенный). Добавляйте собственные навыки в ~/.local/share/plasmallm/skills/ в виде папки с файлом SKILL.md или отдельного файла <name>.md; пользовательский навык с таким же именем переопределяет встроенный."
-
-msgid ""
-"No skills discovered yet. Add a SKILL.md folder to the directory above or "
-"enable the extra directories below."
-msgstr ""
-"Навыки пока не найдены. Добавьте папку с файлом SKILL.md в каталог выше или "
-"включите дополнительные каталоги ниже."
-
-msgid "DISABLED"
-msgstr "ОТКЛЮЧЕНО"
-
-msgid "Allow running skill scripts without approval"
-msgstr "Разрешить запуск скриптов навыков без подтверждения"
-
-msgid "Refreshing…"
-msgstr "Обновление…"
-
-msgid "Refresh"
-msgstr "Обновить"
-
-msgid "Open the skills directory in the file manager"
-msgstr "Открыть каталог навыков в диспетчере файлов"
-
-msgid "Also scan ~/.claude/skills"
-msgstr "Также сканировать ~/.claude/skills"
-
-msgid "Also scan ~/.agents/skills"
-msgstr "Также сканировать ~/.agents/skills"
-
-msgid "/absolute/path/to/skills"
-msgstr "/абсолютный/путь/к/навыкам"
-
-msgid "Save directory"
-msgstr "Сохранить каталог"
-
-msgid "Add directory"
-msgstr "Добавить каталог"
-
-msgid ""
-"Enabled skills are advertised to the model by name and description; the "
-"model loads full instructions on demand with the skill tool. Loaded skill "
-"content is re-sent in full every turn and is never affected by context "
-"compaction. Toggles here are global (not per-profile)."
-msgstr ""
-"Включённые навыки передаются модели с указанием имени и описания; модель "
-"загружает полные инструкции по требованию с помощью инструмента skill. "
-"Загруженное содержимое навыка повторно отправляется полностью на каждом шаге "
-"и никогда не затрагивается сжатием контекста. Переключатели здесь действуют "
-"глобально (не для каждого профиля)."
-
-msgid "System Info:"
-msgstr "Информация о системе:"
-
-msgid "OS"
-msgstr "ОС"
-
-msgid "Shell"
-msgstr "Оболочка"
-
-msgid "Hostname"
-msgstr "Имя хоста"
-
-msgid "Kernel"
-msgstr "Ядро"
-
-msgid "Desktop"
-msgstr "Рабочий стол"
-
-msgid "User"
-msgstr "Пользователь"
-
-msgid "CPU"
-msgstr "ЦПУ"
-
-msgid "Memory"
-msgstr "Память"
-
-msgid "GPU"
-msgstr "ГПУ"
-
-msgid "Block Devices"
-msgstr "Блочные устройства"
-
-msgid "Network"
-msgstr "Сеть"
-
-msgid "Locale"
-msgstr "Локаль"
-
-msgid "Date/Time"
-msgstr "Дата/Время"
-
-msgid "Template:"
-msgstr "Шаблон:"
-
-msgid ""
-"This is the full system prompt sent to the model. Use {{placeholders}} to "
-"pull in dynamic content like system details, enabled tools, or desktop "
-"automation instructions. Anything else you write is used verbatim. Critical "
-"runtime instructions (driving, skip-approvals mode) are appended "
-"automatically when active, even if you remove their placeholder."
-msgstr ""
-"Это полный системный промпт, отправляемый модели. Используйте "
-"{{placeholders}} для вставки динамического содержимого, такого как сведения "
-"о системе, включенные инструменты или инструкции по автоматизации рабочего "
-"стола. Все остальное используется буквально. Критические инструкции времени "
-"выполнения (управление рабочим столом, режим без подтверждений) добавляются "
-"автоматически при активации, даже если вы удалите их заполнитель."
-
-msgid "System Prompt:"
-msgstr "Системный промпт:"
-
-msgid "Write your system prompt here…"
-msgstr "Напишите ваш системный промпт здесь…"
-
-msgid "Placeholders:"
-msgstr "Заполнители:"
-
-msgid "Enabled system info selected in the checklist above"
-msgstr "Сведения о системе, выбранные в списке выше"
-
-msgid "Enabled tool descriptions and guidelines from the Tools menu"
-msgstr "Описания и руководства для включенных инструментов из меню Инструменты"
-
-msgid ""
-"Available skills index and instructions for skills loaded this session (from "
-"the Skills settings page)"
-msgstr ""
-"Индекс доступных навыков и инструкции для навыков, загруженных в этом сеансе "
-"(со страницы настроек «Навыки»)"
-
-msgid ""
-"Persistent tmux or screen session multiplexer instructions (when active)"
-msgstr ""
-"Инструкции постоянного мультиплексора сеансов tmux или screen (когда активен)"
-
-msgid "Notice indicating skip-approvals mode (/auto) is active"
-msgstr "Уведомление о том, что режим без подтверждений (/auto) активен"
-
-msgid "Desktop automation coordinates and guidelines (when driving)"
-msgstr ""
-"Координаты и рекомендации по автоматизации рабочего стола (при управлении)"
-
-msgid "Localization:"
-msgstr "Локализация:"
-
-msgid "Localize System Prompt"
-msgstr "Локализовать системный промпт"
-
-msgid ""
-"Translate default prompt templates and dynamic system sections into your "
-"desktop language."
-msgstr ""
-"Переводить стандартные шаблоны промптов и динамические разделы системы на "
-"язык вашего рабочего стола."
-
-msgid ""
-"Note: Localizing system instructions and tools into non-English languages "
-"may reduce tool-calling reliability and instruction-following accuracy on "
-"some models."
-msgstr ""
-"Примечание: Локализация системных инструкций и инструментов на языки, "
-"отличные от английского, может снизить надежность вызова инструментов и "
-"точность следования инструкциям на некоторых моделях."
-
-msgid "Actions:"
-msgstr "Действия:"
-
-msgid "Reset to Default Template"
-msgstr "Сбросить на шаблон по умолчанию"
-
-msgid "Preview:"
-msgstr "Предпросмотр:"
-
-msgid "General Tool Settings"
-msgstr "Общие настройки инструментов"
-
-msgid "System state:"
-msgstr "Состояние системы:"
-
-msgid "Enable Tools"
-msgstr "Включить инструменты"
-
-msgid "Master switch for all tool-calling functionality."
-msgstr "Главный переключатель для всех функций вызова инструментов."
-
-msgid "Desktop Automation:"
-msgstr "Автоматизация рабочего стола:"
-
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr ""
-"Позволяет LLM запрашивать сеанс для просмотра и управления вашим рабочим "
-"столом."
-
-msgid "Enable Desktop Automation"
-msgstr "Включить автоматизацию рабочего стола"
-
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr ""
-"Включить автоматизацию рабочего стола (требуется <a href=\"https://"
-"github.com/joshuaeroman/plasmallm-desktop-driver\">драйвер</a>)"
-
-msgid "Path whitelist:"
-msgstr "Белый список путей:"
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Добавить путь, напр. $HOME/projects, /tmp"
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Белый список применяется к инструментам файловой системы (чтение, запись, "
-"список, поиск). Примечание: 'run_command' не ограничен этим списком."
-
-msgid "Max read size:"
-msgstr "Макс. размер чтения:"
-
-msgid "Max write size:"
-msgstr "Макс. размер записи:"
-
-msgid "Max HTTP response:"
-msgstr "Макс. HTTP-ответ:"
-
-msgid "Max tool loop depth:"
-msgstr "Максимальная глубина цикла инструментов:"
-
-msgid "steps"
-msgstr "шагов"
-
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr ""
-"Примечание: Это ограничение не применяется к сеансам автоматизации рабочего "
-"стола."
-
-msgid "Native Adapter Features"
-msgstr "Встроенные функции адаптера"
-
-msgid "Google Search:"
-msgstr "Google Поиск:"
-
-msgid "Enable Native Google Search Grounding"
-msgstr "Включить нативную привязку Google Search"
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Использовать встроенный Google Поиск Gemini для привязки. Это переопределяет "
-"стандартный инструмент веб-поиска."
-
-msgid "Code Execution:"
-msgstr "Выполнение кода:"
-
-msgid "Enable Native Python Code Execution"
-msgstr "Включить нативное выполнение кода Python"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Разрешить Gemini писать и выполнять код Python в безопасной серверной "
-"песочнице."
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Объединение встроенных инструментов с командами требует более новой модели. "
-"Текущая выбранная модель (%1) может столкнуться с ошибками."
-
-msgid "Individual Tools"
-msgstr "Отдельные инструменты"
-
-msgid "Prompt Instructions:"
-msgstr "Инструкции промпта:"
-
-msgid "Reset"
-msgstr "Сбросить"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
@@ -1962,108 +2077,6 @@ msgstr "Сеанс управления активен (уже авторизо�
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Сеанс управления успешно авторизован. Включен авторежим."
-
-msgid ""
-"Execute a shell command on the user's system and return its output. "
-"Guidelines:\n"
-"- Use `pkexec` instead of `sudo` for any command requiring superuser "
-"privileges.\n"
-"- Chain steps with `&&`.\n"
-"- Commands run non-interactively. Never use commands that wait for user "
-"input (like `read`).\n"
-"- Use `kdialog` if you need to prompt the user for input or show a message "
-"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
-"- NEVER install packages, modify system configuration, reboot, or take any "
-"action that alters the system or disrupts the user without explicit "
-"permission.\n"
-"- When permission is needed, ask the user in plain text first.\n"
-"- For auto-run tools: Be conservative and prefer read-only commands. If an "
-"action is potentially disruptive, describe it in plain text and wait for "
-"explicit user approval before calling the tool.\n"
-"- You MUST prefer other, more specific tools (like read_file, write_file, "
-"search_files, etc.) if they can accomplish the task. Only use this tool if "
-"no other tool is suitable."
-msgstr ""
-"Выполняет команду оболочки в системе пользователя и возвращает ее вывод. "
-"Рекомендации:\n"
-"- Используйте `pkexec` вместо `sudo` для любых команд, требующих прав "
-"суперпользователя.\n"
-"- Объединяйте шаги с помощью `&&`.\n"
-"- Команды выполняются неинтерактивно. Никогда не используйте команды, "
-"ожидающие ввода данных пользователем (например, `read`).\n"
-"- Используйте `kdialog`, если вам нужно запросить ввод данных у пользователя "
-"или показать диалоговое окно (например, `kdialog --inputbox \"Запрос\"`).\n"
-"- НИКОГДА не устанавливайте пакеты, не изменяйте конфигурацию системы, не "
-"перезагружайте компьютер и не предпринимайте никаких действий, изменяющих "
-"систему или мешающих работе пользователя, без явного разрешения.\n"
-"- Когда требуется разрешение, сначала спросите пользователя простым "
-"текстом.\n"
-"- Для автоматически запускаемых инструментов: Будьте осторожны и отдавайте "
-"предпочтение командам только для чтения. Если действие потенциально "
-"деструктивно, опишите его простым текстом и дождитесь явного одобрения "
-"пользователя перед вызовом инструмента.\n"
-"- Вы ДОЛЖНЫ отдавать предпочтение другим, более специализированным "
-"инструментам (таким как read_file, write_file, search_files и т. д.), если "
-"они могут выполнить задачу. Используйте этот инструмент только в том случае, "
-"если ни один другой не подходит."
-
-msgid ""
-"Read the contents of a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Считывает содержимое файла по указанному пути. Доступ ограничен разрешенными "
-"каталогами."
-
-msgid ""
-"Write content to a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Записывает содержимое в файл по указанному пути. Доступ ограничен "
-"разрешенными каталогами."
-
-msgid ""
-"List the contents of a directory. Access is restricted to allowed "
-"directories."
-msgstr ""
-"Отображает список содержимого каталога. Доступ ограничен разрешенными "
-"каталогами."
-
-msgid "Search for a pattern within files in a directory (recursive)."
-msgstr "Ищет шаблон внутри файлов в каталоге (рекурсивно)."
-
-msgid "Perform an HTTP GET request to a URL and return the response content."
-msgstr "Выполняет HTTP-запрос GET к URL-адресу и возвращает содержимое ответа."
-
-msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
-msgstr "Выполняет HTTP-запрос (POST, PUT и т. д.) к URL-адресу."
-
-msgid "Get the current content of the system clipboard."
-msgstr "Получает текущее содержимое системного буфера обмена."
-
-msgid "Set the content of the system clipboard."
-msgstr "Задает содержимое системного буфера обмена."
-
-msgid "Show a system notification."
-msgstr "Показывает системное уведомление."
-
-msgid "Open a URL in the default application (e.g., web browser)."
-msgstr ""
-"Открывает URL-адрес в приложении по умолчанию (например, в веб-браузере)."
-
-msgid ""
-"Perform a web search to find current information, news, or specific facts."
-msgstr ""
-"Выполняет поиск в Интернете для поиска актуальной информации, новостей или "
-"конкретных фактов."
-
-msgid ""
-"Restore the full verbatim text and tool outputs of previously compacted "
-"messages by specifying the start and end message IDs from a cited message "
-"range."
-msgstr ""
-"Восстановить полный дословный текст и результаты работы инструментов ранее "
-"сжатых сообщений, указав начальный и конечный ID сообщений из цитируемого "
-"диапазона сообщений."
 
 msgid "General"
 msgstr "Основные"

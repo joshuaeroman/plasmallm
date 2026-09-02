@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-24 21:07-0400\n"
+"POT-Creation-Date: 2026-09-02 09:25-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Dutch\n"
@@ -16,6 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Color button"
+msgstr "Kleurknop"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Huidige kleur is %1. Deze knop opent een kleurkeuzevenster."
+
+msgid "Current color is %1."
+msgstr "Huidige kleur is %1."
 
 msgid "Request timed out after 30 seconds"
 msgstr "Verzoek verlopen na 30 seconden"
@@ -61,12 +70,6 @@ msgstr "Authenticatie mislukt — controleer uw API-sleutel (HTTP 400): %1"
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr "Authenticatie mislukt (HTTP %1) — controleer uw API-sleutel: %2"
 
-msgid "no response — check your endpoint URL"
-msgstr "geen reactie — controleer de URL van uw eindpunt"
-
-msgid "Request failed"
-msgstr "Verzoek mislukt"
-
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -75,6 +78,12 @@ msgstr ""
 "Deze modelversie ondersteunt het combineren van native tools (Zoeken/Code) "
 "met aangepaste opdrachten niet. Selecteer een nieuwer model (bijv. Gemini "
 "3+) of schakel native functies uit in Instellingen."
+
+msgid "Request failed"
+msgstr "Verzoek mislukt"
+
+msgid "no response — check your endpoint URL"
+msgstr "geen reactie — controleer de URL van uw eindpunt"
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -154,6 +163,82 @@ msgstr ""
 msgid "No command provided."
 msgstr "Geen opdracht opgegeven."
 
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Exa Zoeken"
+
+msgid "Ollama API key"
+msgstr "Ollama API-sleutel"
+
+msgid "Saving…"
+msgstr "Opslaan…"
+
+msgid "Saved"
+msgstr "Opgeslagen"
+
+msgid "Save to Config (Insecure)"
+msgstr "Opslaan in configuratie (onveilig)"
+
+msgid "Save Key"
+msgstr "Sleutel opslaan"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG-instantie-URL (bijv. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API-sleutel/Token (optioneel)"
+
+msgid "Exa API key"
+msgstr "Exa API-sleutel"
+
+msgid "Search Type:"
+msgstr "Zoektype:"
+
+msgid "Auto (Default)"
+msgstr "Automatisch (standaard)"
+
+msgid "Fast"
+msgstr "Snel"
+
+msgid "Instant"
+msgstr "Onmiddellijk"
+
+msgid "Deep Lite"
+msgstr "Diep lite"
+
+msgid "Deep"
+msgstr "Diep"
+
+msgid "Deep Reasoning"
+msgstr "Diep redeneren"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo vereist geen configuratie."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr ""
+"Zorg ervoor dat op de SearXNG-instantie het JSON-formaat is ingeschakeld."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr ""
+"Maakt LLM-geactiveerde neurale webzoekopdrachten mogelijk via de Exa API."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr ""
+"Maakt LLM-geactiveerde webzoekopdrachten mogelijk via de zoek-API van Ollama"
+
+msgid "Manage and discover skills in the Skills settings page."
+msgstr ""
+"Beheer en ontdek vaardigheden op de pagina Vaardigheden in de instellingen."
+
 msgid "Saved phrases:"
 msgstr "Opgeslagen zinnen:"
 
@@ -232,96 +317,15 @@ msgstr ""
 "Noch 'tmux' noch 'screen' is op uw systeem gevonden. Sessie-multiplexing is "
 "niet beschikbaar."
 
-msgid "Manage and discover skills in the Skills settings page."
-msgstr ""
-"Beheer en ontdek vaardigheden op de pagina Vaardigheden in de instellingen."
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Exa Search"
-msgstr "Exa Zoeken"
-
-msgid "Ollama API key"
-msgstr "Ollama API-sleutel"
-
-msgid "Saving…"
-msgstr "Opslaan…"
-
-msgid "Saved"
-msgstr "Opgeslagen"
-
-msgid "Save to Config (Insecure)"
-msgstr "Opslaan in configuratie (onveilig)"
-
-msgid "Save Key"
-msgstr "Sleutel opslaan"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG-instantie-URL (bijv. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API-sleutel/Token (optioneel)"
-
-msgid "Exa API key"
-msgstr "Exa API-sleutel"
-
-msgid "Search Type:"
-msgstr "Zoektype:"
-
-msgid "Auto (Default)"
-msgstr "Automatisch (standaard)"
-
-msgid "Fast"
-msgstr "Snel"
-
-msgid "Instant"
-msgstr "Onmiddellijk"
-
-msgid "Deep Lite"
-msgstr "Diep lite"
-
-msgid "Deep"
-msgstr "Diep"
-
-msgid "Deep Reasoning"
-msgstr "Diep redeneren"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo vereist geen configuratie."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr ""
-"Zorg ervoor dat op de SearXNG-instantie het JSON-formaat is ingeschakeld."
-
-msgid "Enables LLM-triggered neural web searches via Exa API."
-msgstr ""
-"Maakt LLM-geactiveerde neurale webzoekopdrachten mogelijk via de Exa API."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr ""
-"Maakt LLM-geactiveerde webzoekopdrachten mogelijk via de zoek-API van Ollama"
-
 msgid ""
 "Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
 "that skill has “Allow running skill scripts without approval” checked on the "
 "Skills settings page."
-msgstr "Voert een .sh-bestand uit binnen een vaardighedenmap. Goedkeuring per uitvoering wordt alleen overgeslagen als voor die vaardigheid “Uitvoeren van vaardigheidsscripts toestaan zonder goedkeuring” is aangevinkt op de instellingenpagina voor Vaardigheden."
-
-msgid "Color button"
-msgstr "Kleurknop"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Huidige kleur is %1. Deze knop opent een kleurkeuzevenster."
-
-msgid "Current color is %1."
-msgstr "Huidige kleur is %1."
+msgstr ""
+"Voert een .sh-bestand uit binnen een vaardighedenmap. Goedkeuring per "
+"uitvoering wordt alleen overgeslagen als voor die vaardigheid “Uitvoeren van "
+"vaardigheidsscripts toestaan zonder goedkeuring” is aangevinkt op de "
+"instellingenpagina voor Vaardigheden."
 
 msgid "Tool Request: %1"
 msgstr "Gereedschapsverzoek: %1"
@@ -549,6 +553,287 @@ msgstr "Instellingen tonen"
 msgid "Show Pin"
 msgstr "Vastmaakpictogram tonen"
 
+msgid "Speech-to-text is not configured"
+msgstr "Spraak-naar-tekst is niet geconfigureerd"
+
+msgid "Unknown STT backend: %1"
+msgstr "Onbekende STT-backend: %1"
+
+msgid "Whisper CLI runner is not available"
+msgstr "Whisper-CLI-runner is niet beschikbaar"
+
+msgid "Could not build Whisper command"
+msgstr "Kon Whisper-opdracht niet opbouwen"
+
+msgid "STT backend does not support model listing"
+msgstr "STT-backend ondersteunt het weergeven van modellen niet"
+
+msgid "Speech to Text"
+msgstr "Spraak naar tekst"
+
+msgid "Model “%1” is on disk."
+msgstr "Model “%1” staat op de schijf."
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
+"into ~/.cache/whisper and can take a long time."
+msgstr ""
+"Model “%1” is niet gedownload. De eerste transcriptie haalt het (%2) op naar "
+"~/.cache/whisper en dit kan lang duren."
+
+msgid ""
+"Model “%1” is not downloaded. The first transcription will fetch it into "
+"~/.cache/whisper and can take a long time."
+msgstr ""
+"Model “%1” is niet gedownload. De eerste transcriptie haalt het op naar "
+"~/.cache/whisper en dit kan lang duren."
+
+msgid "CUDA is available to Whisper."
+msgstr "CUDA is beschikbaar voor Whisper."
+
+msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
+msgstr ""
+"CUDA is niet beschikbaar in deze Whisper-omgeving. Gebruik cpu of Standaard."
+
+msgid "Whisper CLI responded to --help."
+msgstr "Whisper-CLI reageerde op --help."
+
+msgid "Whisper CLI test failed (exit %1): %2"
+msgstr "Whisper-CLI-test mislukt (exit %1): %2"
+
+msgid "Whisper CLI test failed (exit %1). Check the command."
+msgstr "Whisper-CLI-test mislukt (exit %1). Controleer de opdracht."
+
+msgid "API key saved to KWallet."
+msgstr "API-sleutel opgeslagen in KWallet."
+
+msgid "API key saved to local fallback."
+msgstr "API-sleutel opgeslagen in lokale fallback."
+
+msgid "Checking whether “%1” is downloaded…"
+msgstr "Controleren of “%1” is gedownload…"
+
+msgid "Checking CUDA…"
+msgstr "CUDA controleren…"
+
+msgid "Testing Whisper CLI…"
+msgstr "Whisper-CLI testen…"
+
+msgid "Loaded %1 STT model(s)."
+msgstr "%1 STT-model(len) geladen."
+
+msgid "Set an API endpoint first."
+msgstr "Stel eerst een API-eindpunt in."
+
+msgid "Fetching STT models…"
+msgstr "STT-modellen ophalen…"
+
+msgid "Voice input:"
+msgstr "Spraakinvoer:"
+
+msgid "Enable microphone input"
+msgstr "Microfooninvoer inschakelen"
+
+msgid ""
+"Configures the speech-to-text engine only. Transcripts use your active chat "
+"profile (General)."
+msgstr ""
+"Configureert alleen de spraak-naar-tekst-engine. Transcripties gebruiken uw "
+"actieve chatprofiel (Algemeen)."
+
+msgid "Mic button:"
+msgstr "Microfoonknop:"
+
+msgid "Auto"
+msgstr "Automatisch"
+
+msgid "Hold to talk"
+msgstr "Ingedrukt houden om te spreken"
+
+msgid "Toggle"
+msgstr "Wisselen"
+
+msgid ""
+"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
+"and-hold only. Toggle: click to start/stop."
+msgstr ""
+"Auto: klik schakelt opname in/uit; houd 250 ms+ ingedrukt voor push-to-talk. "
+"Ingedrukt houden: alleen ingedrukt houden. Wisselen: klik om te starten/"
+"stoppen."
+
+msgid "Voice shortcut:"
+msgstr "Spraaksneltoets:"
+
+msgid ""
+"While PlasmaLLM is open and focused, uses the same mic mode as the button "
+"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
+"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
+"disable."
+msgstr ""
+"Wanneer PlasmaLLM geopend en gefocust is, gebruikt dit dezelfde "
+"microfoonmodus als de knop (auto: kort indrukken wisselt, 250 ms+ ingedrukt "
+"houden is push-to-talk). Opent het paneel niet — gebruik «Widget activeren» "
+"op de pagina Sneltoetsen. Standaard: Ctrl+M. Wissen om uit te schakelen."
+
+msgid "Transcriber"
+msgstr "Transcribeerder"
+
+msgid "STT backend:"
+msgstr "STT-backend:"
+
+msgid "Provider:"
+msgstr "Aanbieder:"
+
+msgid "Endpoint:"
+msgstr "Eindpunt:"
+
+msgid "Model:"
+msgstr "Model:"
+
+msgid "Fetch STT models"
+msgstr "STT-modellen ophalen"
+
+msgid ""
+"OpenRouter lists STT models only via transcription modalities (this page "
+"does that)."
+msgstr ""
+"OpenRouter toont STT-modellen alleen via transcriptiemodaliteiten (deze "
+"pagina doet dat)."
+
+msgid "API key:"
+msgstr "API-sleutel:"
+
+msgid "Provider API key"
+msgstr "Provider-API-sleutel"
+
+msgid "Save API key"
+msgstr "API-sleutel opslaan"
+
+msgid "Command:"
+msgstr "Opdracht:"
+
+msgid ""
+"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
+"toolbox run whisper."
+msgstr ""
+"Opdrachtvoorvoegsel, ongewijzigd ingevoegd. Voorbeelden: whisper, python3 -m "
+"whisper, toolbox run whisper."
+
+msgid "Test:"
+msgstr "Test:"
+
+msgid "Test CLI"
+msgstr "CLI testen"
+
+msgid "Task:"
+msgstr "Taak:"
+
+msgid "Transcribe"
+msgstr "Transcriberen"
+
+msgid "Translate"
+msgstr "Vertalen"
+
+msgid "Device:"
+msgstr "Apparaat:"
+
+msgid "Default"
+msgstr "Standaard"
+
+msgid "FP16:"
+msgstr "FP16:"
+
+msgid "Use --fp16 True (GPU)"
+msgstr "Gebruik --fp16 True (GPU)"
+
+msgid "Threads:"
+msgstr "Threads:"
+
+msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
+msgstr ""
+"0 laat --threads weg (standaard voor Whisper). FP16 uit is veiliger op CPU."
+
+msgid "Initial prompt:"
+msgstr "Initiële prompt:"
+
+msgid "Optional vocabulary / style hint"
+msgstr "Optionele hint voor woordenschat / stijl"
+
+msgid "Extra args:"
+msgstr "Extra argumenten:"
+
+msgid "Optional, appended as-is"
+msgstr "Optioneel, ongewijzigd toegevoegd"
+
+msgid "Options"
+msgstr "Opties"
+
+msgid "Language hint:"
+msgstr "Taalsuggestie:"
+
+msgid "Optional, e.g. en or ja (empty = auto)"
+msgstr "Optioneel, bijv. nl of en (leeg = automatisch)"
+
+msgid "Max recording (seconds):"
+msgstr "Max. opnameduur (seconden):"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"Geen aangepaste tools geconfigureerd. Voeg een aangepaste tool toe om uw "
+"eigen opdrachten beschikbaar te maken voor de LLM."
+
+msgid "Add Custom Tool"
+msgstr "Aangepaste tool toevoegen"
+
+msgid "Echoes back the message provided."
+msgstr "Geeft het opgegeven bericht terug."
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "Toolnaam (bijv. systemctl_service)"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "Beschrijving (instrueert de LLM wat deze tool doet)"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "Opdrachtssjabloon (bijv. systemctl {action} {service})"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "Supergebruiker vereisen (wordt uitgevoerd met pkexec)"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "Tool automatisch uitvoeren (geen bevestigingsdialoog)"
+
+msgid "Collapse results"
+msgstr "Resultaten samenvouwen"
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+"Toon voltooide resultaten als een compacte pil; klik op de pil om de "
+"volledige uitvoer te bekijken."
+
+msgid "Update Tool"
+msgstr "Tool bijwerken"
+
+msgid "Save Tool"
+msgstr "Tool opslaan"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "Er bestaat al een tool met de naam \"%1\"."
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"Met aangepaste tools kunt u uw eigen opdrachten beschikbaar maken voor de "
+"LLM. Gebruik tijdelijke aanduidingen zoals {variable} in de "
+"Opdrachtssjabloon om parameters te definiëren die de LLM kan invullen. "
+"Waarden van de LLM worden automatisch shell-escaped."
+
 msgid "Loaded %1 skill"
 msgstr "%1 vaardigheid geladen"
 
@@ -611,6 +896,425 @@ msgid "The model loaded this skill's instructions into context before acting."
 msgstr ""
 "Het model heeft de instructies van deze vaardigheid in de context geladen "
 "alvorens te handelen."
+
+msgid "Stop command"
+msgstr "Opdracht stoppen"
+
+msgid "Open terminal attached to this session"
+msgstr "Terminal gekoppeld aan deze sessie openen"
+
+msgid "Collapse result"
+msgstr "Resultaat samenvouwen"
+
+msgid "Copy output"
+msgstr "Uitvoer kopiëren"
+
+msgid "Enable skills"
+msgstr "Vaardigheden inschakelen"
+
+msgid ""
+"Skills are reusable instruction sets the model loads on demand via the skill "
+"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
+"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
+"contained <name>.md file; a user skill with the same name overrides the "
+"bundled one."
+msgstr ""
+"Vaardigheden zijn herbruikbare instructiesets die het model op aanvraag "
+"laadt via het vaardigheidshulpmiddel. PlasmaLLM bevat ingebouwde "
+"vaardigheden (bron: meegeleverd). Voeg uw eigen vaardigheden toe aan "
+"~/.local/share/plasmallm/skills/ als een map met een SKILL.md-bestand of een "
+"zelfstandig <naam>.md-bestand; een gebruikersvaardigheid met dezelfde naam "
+"overschrijft de meegeleverde versie."
+
+msgid ""
+"No skills discovered yet. Add a SKILL.md folder to the directory above or "
+"enable the extra directories below."
+msgstr ""
+"Nog geen vaardigheden ontdekt. Voeg een SKILL.md-map toe aan de bovenstaande "
+"map of schakel de extra mappen hieronder in."
+
+msgid "DISABLED"
+msgstr "UITGESCHAKELD"
+
+msgid "Allow running skill scripts without approval"
+msgstr "Uitvoeren van vaardigheidsscripts toestaan zonder goedkeuring"
+
+msgid "Refreshing…"
+msgstr "Vernieuwen…"
+
+msgid "Refresh"
+msgstr "Vernieuwen"
+
+msgid "Open Folder"
+msgstr "Map openen"
+
+msgid "Open the skills directory in the file manager"
+msgstr "Open de vaardighedenmap in de bestandsbeheerder"
+
+msgid "Also scan ~/.claude/skills"
+msgstr "Ook ~/.claude/skills scannen"
+
+msgid "Also scan ~/.agents/skills"
+msgstr "Ook ~/.agents/skills scannen"
+
+msgid "/absolute/path/to/skills"
+msgstr "/absoluut/pad/naar/vaardigheden"
+
+msgid "Save directory"
+msgstr "Map opslaan"
+
+msgid "Add directory"
+msgstr "Map toevoegen"
+
+msgid ""
+"Enabled skills are advertised to the model by name and description; the "
+"model loads full instructions on demand with the skill tool. Loaded skill "
+"content is re-sent in full every turn and is never affected by context "
+"compaction. Toggles here are global (not per-profile)."
+msgstr ""
+"Ingeschakelde vaardigheden worden aan het model aangekondigd met naam en "
+"beschrijving; het model laadt volledige instructies op aanvraag met het "
+"vaardigheidshulpmiddel. Geladen vaardigheidsinhoud wordt elke beurt volledig "
+"opnieuw verzonden en wordt nooit beïnvloed door contextcompressie. "
+"Schakelaars hier zijn globaal (niet per profiel)."
+
+msgid "System Info:"
+msgstr "Systeeminfo:"
+
+msgid "OS"
+msgstr "Besturingssysteem"
+
+msgid "Shell"
+msgstr "Shell"
+
+msgid "Hostname"
+msgstr "Hostnaam"
+
+msgid "Kernel"
+msgstr "Kernel"
+
+msgid "Desktop"
+msgstr "Bureaublad"
+
+msgid "User"
+msgstr "Gebruiker"
+
+msgid "CPU"
+msgstr "CPU"
+
+msgid "Memory"
+msgstr "Geheugen"
+
+msgid "GPU"
+msgstr "GPU"
+
+msgid "Block Devices"
+msgstr "Blokapparaten"
+
+msgid "Network"
+msgstr "Netwerk"
+
+msgid "Locale"
+msgstr "Landinstelling"
+
+msgid "Date/Time"
+msgstr "Datum/Tijd"
+
+msgid "Template:"
+msgstr "Sjabloon:"
+
+msgid ""
+"This is the full system prompt sent to the model. Use {{placeholders}} to "
+"pull in dynamic content like system details, enabled tools, or desktop "
+"automation instructions. Anything else you write is used verbatim. Critical "
+"runtime instructions (driving, skip-approvals mode) are appended "
+"automatically when active, even if you remove their placeholder."
+msgstr ""
+"Dit is de volledige systeemprompt die naar het model wordt verzonden. "
+"Gebruik {{placeholders}} om dynamische inhoud op te halen, zoals "
+"systeemdetails, ingeschakelde tools of instructies voor "
+"desktopautomatisering. Al het andere dat u schrijft, wordt letterlijk "
+"gebruikt. Kritieke runtime-instructies (bediening, modus zonder goedkeuring) "
+"worden automatisch toegevoegd wanneer ze actief zijn, zelfs als u hun "
+"tijdelijke aanduiding verwijdert."
+
+msgid "System Prompt:"
+msgstr "Systeemprompt:"
+
+msgid "Write your system prompt here…"
+msgstr "Schrijf hier uw systeemprompt…"
+
+msgid "Placeholders:"
+msgstr "Tijdelijke aanduidingen:"
+
+msgid "Enabled system info selected in the checklist above"
+msgstr ""
+"Ingeschakelde systeeminformatie geselecteerd in de bovenstaande controlelijst"
+
+msgid "Enabled tool descriptions and guidelines from the Tools menu"
+msgstr "Ingeschakelde toolbeschrijvingen en richtlijnen uit het menu Tools"
+
+msgid ""
+"Available skills index and instructions for skills loaded this session (from "
+"the Skills settings page)"
+msgstr ""
+"Index van beschikbare vaardigheden en instructies voor vaardigheden die deze "
+"sessie zijn geladen (van de pagina Vaardigheden in de instellingen)"
+
+msgid ""
+"Persistent tmux or screen session multiplexer instructions (when active)"
+msgstr ""
+"Instructies voor permanente tmux- of screen-sessiemultiplexer (indien actief)"
+
+msgid "Notice indicating skip-approvals mode (/auto) is active"
+msgstr "Melding dat de modus zonder goedkeuring (/auto) actief is"
+
+msgid "Desktop automation coordinates and guidelines (when driving)"
+msgstr ""
+"Coördinaten en richtlijnen voor desktopautomatisering (tijdens bediening)"
+
+msgid "Localization:"
+msgstr "Lokalisatie:"
+
+msgid "Localize System Prompt"
+msgstr "Systeemprompt lokaliseren"
+
+msgid ""
+"Translate default prompt templates and dynamic system sections into your "
+"desktop language."
+msgstr ""
+"Vertaal standaardsjablonen en dynamische systeemsecties naar de taal van uw "
+"desktop."
+
+msgid ""
+"Note: Localizing system instructions and tools into non-English languages "
+"may reduce tool-calling reliability and instruction-following accuracy on "
+"some models."
+msgstr ""
+"Opmerking: Het lokaliseren van systeeminstructies en hulpprogramma's naar "
+"niet-Engelse talen kan de betrouwbaarheid van tool-aanroepen en de "
+"nauwkeurigheid bij het opvolgen van instructies op sommige modellen "
+"verminderen."
+
+msgid "Actions:"
+msgstr "Acties:"
+
+msgid "Reset to Default Template"
+msgstr "Herstellen naar standaardsjabloon"
+
+msgid "Preview:"
+msgstr "Voorvertoning:"
+
+msgid "General Tool Settings"
+msgstr "Algemene toolinstellingen"
+
+msgid "System state:"
+msgstr "Systeemstatus:"
+
+msgid "Enable Tools"
+msgstr "Tools inschakelen"
+
+msgid "Master switch for all tool-calling functionality."
+msgstr "Hoofdschakelaar voor alle tool-aanroepfunctionaliteit."
+
+msgid "Exa does not support tool use"
+msgstr "Exa ondersteunt geen toolgebruik"
+
+msgid "Desktop Automation:"
+msgstr "Bureaubladautomatisering:"
+
+msgid "Allows the LLM to request a session to see and drive your desktop."
+msgstr ""
+"Staat de LLM toe om een sessie aan te vragen om uw bureaublad te bekijken en "
+"te besturen."
+
+msgid "Enable Desktop Automation"
+msgstr "Bureaubladautomatisering inschakelen"
+
+msgid ""
+"Enable Desktop Automation (requires <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+msgstr ""
+"Bureaubladautomatisering inschakelen (vereist <a href=\"https://github.com/"
+"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
+
+msgid "Path whitelist:"
+msgstr "Padwitte lijst:"
+
+msgid "Add path, e.g. $HOME/projects, /tmp"
+msgstr "Pad toevoegen, bijv. $HOME/projects, /tmp"
+
+msgid ""
+"Whitelist applies to file-system tools (read, write, list, search). Note: "
+"'run_command' is not restricted by this list."
+msgstr ""
+"Witte lijst is van toepassing op bestandssysteemtools (lezen, schrijven, "
+"weergeven, zoeken). Opmerking: 'run_command' wordt niet beperkt door deze "
+"lijst."
+
+msgid "Max read size:"
+msgstr "Maximale leesgrootte:"
+
+msgid "Max write size:"
+msgstr "Maximale schrijfgrootte:"
+
+msgid "Max HTTP response:"
+msgstr "Maximale HTTP-respons:"
+
+msgid "Max tool loop depth:"
+msgstr "Maximale tool-lusdiepte:"
+
+msgid "steps"
+msgstr "stappen"
+
+msgid "Note: This limit does not apply to desktop automation sessions."
+msgstr ""
+"Opmerking: Deze limiet geldt niet voor bureaubladautomatiseringssessies."
+
+msgid "Native Adapter Features"
+msgstr "Ingebouwde adapterfuncties"
+
+msgid "Google Search:"
+msgstr "Google Zoeken:"
+
+msgid "Enable Native Google Search Grounding"
+msgstr "Ingebouwde Google Zoeken-grounding inschakelen"
+
+msgid ""
+"Use Gemini's built-in Google Search for grounding. This overrides the "
+"standard web search tool."
+msgstr ""
+"Gebruik de ingebouwde Google Zoeken van Gemini voor grounding. Dit "
+"overschrijft de standaard websearchtool."
+
+msgid "Code Execution:"
+msgstr "Code-uitvoering:"
+
+msgid "Enable Native Python Code Execution"
+msgstr "Ingebouwde Python-codeuitvoering inschakelen"
+
+msgid ""
+"Allow Gemini to write and execute Python code in a secure server-side "
+"sandbox."
+msgstr ""
+"Gemini toestaan om Python-code te schrijven en uit te voeren in een "
+"beveiligde server-side sandbox."
+
+msgid ""
+"Combining Native tools with commands requires a newer model. Your currently "
+"selected model (%1) may encounter errors."
+msgstr ""
+"Het combineren van native tools met commando's vereist een nieuwer model. "
+"Het momenteel geselecteerde model (%1) kan fouten ondervinden."
+
+msgid "Individual Tools"
+msgstr "Afzonderlijke tools"
+
+msgid "Prompt Instructions:"
+msgstr "Promptinstructies:"
+
+msgid "Reset"
+msgstr "Herstellen"
+
+msgid ""
+"Execute a shell command on the user's system and return its output. "
+"Guidelines:\n"
+"- Use `pkexec` instead of `sudo` for any command requiring superuser "
+"privileges.\n"
+"- Chain steps with `&&`.\n"
+"- Commands run non-interactively. Never use commands that wait for user "
+"input (like `read`).\n"
+"- Use `kdialog` if you need to prompt the user for input or show a message "
+"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
+"- NEVER install packages, modify system configuration, reboot, or take any "
+"action that alters the system or disrupts the user without explicit "
+"permission.\n"
+"- When permission is needed, ask the user in plain text first.\n"
+"- For auto-run tools: Be conservative and prefer read-only commands. If an "
+"action is potentially disruptive, describe it in plain text and wait for "
+"explicit user approval before calling the tool.\n"
+"- You MUST prefer other, more specific tools (like read_file, write_file, "
+"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"no other tool is suitable."
+msgstr ""
+"Voert een shell-opdracht uit op het systeem van de gebruiker en retourneert "
+"de uitvoer. Richtlijnen:\n"
+"- Gebruik `pkexec` in plaats van `sudo` voor opdrachten die superuser-"
+"rechten vereisen.\n"
+"- Koppel stappen aan elkaar met `&&`.\n"
+"- Opdrachten worden niet-interactief uitgevoerd. Gebruik nooit opdrachten "
+"die wachten op gebruikersinvoer (zoals `read`).\n"
+"- Gebruik `kdialog` als u de gebruiker om invoer moet vragen of een "
+"berichtvenster moet weergeven (bijv. `kdialog --inputbox \"Prompt\"`).\n"
+"- Installeer NOOIT pakketten, wijzig geen systeemconfiguratie, start niet "
+"opnieuw op en onderneem geen actie die het systeem wijzigt of de gebruiker "
+"verstoort zonder expliciete toestemming.\n"
+"- Vraag de gebruiker eerst in platte tekst wanneer toestemming nodig is.\n"
+"- Voor automatisch uitgevoerde tools: wees voorzichtig en geef de voorkeur "
+"aan alleen-lezen opdrachten. Als een actie potentieel verstorend is, "
+"beschrijf deze dan in platte tekst en wacht op expliciete toestemming van de "
+"gebruiker voordat u de tool aanroept.\n"
+"- U MOET de voorkeur geven aan andere, specifiekere hulpprogramma's (zoals "
+"read_file, write_file, search_files, enz.) als deze de taak kunnen "
+"volbrengen. Gebruik deze tool alleen als geen andere tool geschikt is."
+
+msgid ""
+"Read the contents of a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Leest de inhoud van een bestand op het opgegeven pad. Toegang is beperkt tot "
+"toegestane mappen."
+
+msgid ""
+"Write content to a file at the specified path. Access is restricted to "
+"allowed directories."
+msgstr ""
+"Schrijft inhoud naar een bestand op het opgegeven pad. Toegang is beperkt "
+"tot toegestane mappen."
+
+msgid ""
+"List the contents of a directory. Access is restricted to allowed "
+"directories."
+msgstr ""
+"Geeft een overzicht van de inhoud van een map. Toegang is beperkt tot "
+"toegestane mappen."
+
+msgid "Search for a pattern within files in a directory (recursive)."
+msgstr "Zoekt naar een patroon in bestanden in een map (recursief)."
+
+msgid "Perform an HTTP GET request to a URL and return the response content."
+msgstr ""
+"Voert een HTTP GET-verzoek uit naar een URL en retourneert de antwoordinhoud."
+
+msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
+msgstr "Voert een HTTP-verzoek (POST, PUT, enz.) uit naar een URL."
+
+msgid "Get the current content of the system clipboard."
+msgstr "Haalt de huidige inhoud van het systeemklembord op."
+
+msgid "Set the content of the system clipboard."
+msgstr "Stelt de inhoud van het systeemklembord in."
+
+msgid "Show a system notification."
+msgstr "Toont een systeemmelding."
+
+msgid "Open a URL in the default application (e.g., web browser)."
+msgstr "Opent een URL in de standaardtoepassing (bijv. webbrowser)."
+
+msgid ""
+"Perform a web search to find current information, news, or specific facts."
+msgstr ""
+"Voert een zoekopdracht op het web uit om actuele informatie, nieuws of "
+"specifieke feiten te vinden."
+
+msgid ""
+"Restore the full verbatim text and tool outputs of previously compacted "
+"messages by specifying the start and end message IDs from a cited message "
+"range."
+msgstr ""
+"Herstel de volledige letterlijke tekst en hulpmiddeluitvoer van eerder "
+"gecomprimeerde berichten door de begin- en eind-bericht-ID's van een "
+"geciteerd berichtbereik op te geven."
 
 msgid "Approve the pending tool request"
 msgstr "Openstaand gereedschapsverzoek goedkeuren"
@@ -830,9 +1534,6 @@ msgstr "Laat los om te verzenden"
 msgid "Click to start"
 msgstr "Klik om te starten"
 
-msgid "Hold to talk"
-msgstr "Ingedrukt houden om te spreken"
-
 msgid "Click to toggle, hold to talk"
 msgstr "Klik om te wisselen, ingedrukt houden om te spreken"
 
@@ -847,18 +1548,6 @@ msgstr "LLM-verzoek annuleren"
 
 msgid "Drop files here to attach"
 msgstr "Sleep bestanden hierheen om ze bij te voegen"
-
-msgid "Stop command"
-msgstr "Opdracht stoppen"
-
-msgid "Open terminal attached to this session"
-msgstr "Terminal gekoppeld aan deze sessie openen"
-
-msgid "Collapse result"
-msgstr "Resultaat samenvouwen"
-
-msgid "Copy output"
-msgstr "Uitvoer kopiëren"
 
 msgid "Context Compaction"
 msgstr "Contextcompressie"
@@ -991,63 +1680,6 @@ msgstr "Compressieverbinding testen"
 msgid "Model Summary Response:"
 msgstr "Samenvattingsantwoord van model:"
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
-msgstr ""
-"Geen aangepaste tools geconfigureerd. Voeg een aangepaste tool toe om uw "
-"eigen opdrachten beschikbaar te maken voor de LLM."
-
-msgid "Add Custom Tool"
-msgstr "Aangepaste tool toevoegen"
-
-msgid "Echoes back the message provided."
-msgstr "Geeft het opgegeven bericht terug."
-
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "Toolnaam (bijv. systemctl_service)"
-
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "Beschrijving (instrueert de LLM wat deze tool doet)"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "Opdrachtssjabloon (bijv. systemctl {action} {service})"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "Supergebruiker vereisen (wordt uitgevoerd met pkexec)"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "Tool automatisch uitvoeren (geen bevestigingsdialoog)"
-
-msgid "Collapse results"
-msgstr "Resultaten samenvouwen"
-
-msgid ""
-"Show finished results as a small pill; click the pill to view the full "
-"output."
-msgstr ""
-"Toon voltooide resultaten als een compacte pil; klik op de pil om de "
-"volledige uitvoer te bekijken."
-
-msgid "Update Tool"
-msgstr "Tool bijwerken"
-
-msgid "Save Tool"
-msgstr "Tool opslaan"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "Er bestaat al een tool met de naam \"%1\"."
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"Met aangepaste tools kunt u uw eigen opdrachten beschikbaar maken voor de "
-"LLM. Gebruik tijdelijke aanduidingen zoals {variable} in de "
-"Opdrachtssjabloon om parameters te definiëren die de LLM kan invullen. "
-"Waarden van de LLM worden automatisch shell-escaped."
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Kan gcloud-token niet ophalen (afsluiting %1): %2"
 
@@ -1077,9 +1709,6 @@ msgstr "Hernoemen"
 
 msgid "Adapter:"
 msgstr "Adapter:"
-
-msgid "Exa does not support tool use"
-msgstr "Exa ondersteunt geen toolgebruik"
 
 msgid "Platform:"
 msgstr "Platform:"
@@ -1120,20 +1749,17 @@ msgstr "Project-ID:"
 msgid "Location:"
 msgstr "Locatie:"
 
-msgid "Provider:"
-msgstr "Aanbieder:"
-
 msgid "API Endpoint:"
 msgstr "API-eindpunt:"
-
-msgid "Model:"
-msgstr "Model:"
 
 msgid "API Key:"
 msgstr "API-sleutel:"
 
 msgid "Paste short-lived access token"
 msgstr "Tijdelijk toegangstoken plakken"
+
+msgid "Paste OpenCode API key"
+msgstr "OpenCode-API-sleutel plakken"
 
 msgid "Optional - for OpenAI, etc."
 msgstr "Optioneel – voor OpenAI, enz."
@@ -1244,9 +1870,6 @@ msgstr "Platte tekst (.txt)"
 msgid "Structured (.jsonl)"
 msgstr "Gestructureerd (.jsonl)"
 
-msgid "Open Folder"
-msgstr "Map openen"
-
 msgid "Open the folder where chat histories are saved"
 msgstr "Open de map waarin chatgeschiedenis wordt opgeslagen"
 
@@ -1267,516 +1890,6 @@ msgstr "seconden"
 
 msgid "minutes"
 msgstr "minuten"
-
-msgid "Speech to Text"
-msgstr "Spraak naar tekst"
-
-msgid "Model “%1” is on disk."
-msgstr "Model “%1” staat op de schijf."
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it (%2) "
-"into ~/.cache/whisper and can take a long time."
-msgstr ""
-"Model “%1” is niet gedownload. De eerste transcriptie haalt het (%2) op naar "
-"~/.cache/whisper en dit kan lang duren."
-
-msgid ""
-"Model “%1” is not downloaded. The first transcription will fetch it into "
-"~/.cache/whisper and can take a long time."
-msgstr ""
-"Model “%1” is niet gedownload. De eerste transcriptie haalt het op naar "
-"~/.cache/whisper en dit kan lang duren."
-
-msgid "CUDA is available to Whisper."
-msgstr "CUDA is beschikbaar voor Whisper."
-
-msgid "CUDA is not available in this Whisper environment. Use cpu or Default."
-msgstr ""
-"CUDA is niet beschikbaar in deze Whisper-omgeving. Gebruik cpu of Standaard."
-
-msgid "Whisper CLI responded to --help."
-msgstr "Whisper-CLI reageerde op --help."
-
-msgid "Whisper CLI test failed (exit %1): %2"
-msgstr "Whisper-CLI-test mislukt (exit %1): %2"
-
-msgid "Whisper CLI test failed (exit %1). Check the command."
-msgstr "Whisper-CLI-test mislukt (exit %1). Controleer de opdracht."
-
-msgid "API key saved to KWallet."
-msgstr "API-sleutel opgeslagen in KWallet."
-
-msgid "API key saved to local fallback."
-msgstr "API-sleutel opgeslagen in lokale fallback."
-
-msgid "Checking whether “%1” is downloaded…"
-msgstr "Controleren of “%1” is gedownload…"
-
-msgid "Checking CUDA…"
-msgstr "CUDA controleren…"
-
-msgid "Testing Whisper CLI…"
-msgstr "Whisper-CLI testen…"
-
-msgid "Loaded %1 STT model(s)."
-msgstr "%1 STT-model(len) geladen."
-
-msgid "Set an API endpoint first."
-msgstr "Stel eerst een API-eindpunt in."
-
-msgid "Fetching STT models…"
-msgstr "STT-modellen ophalen…"
-
-msgid "Voice input:"
-msgstr "Spraakinvoer:"
-
-msgid "Enable microphone input"
-msgstr "Microfooninvoer inschakelen"
-
-msgid ""
-"Configures the speech-to-text engine only. Transcripts use your active chat "
-"profile (General)."
-msgstr ""
-"Configureert alleen de spraak-naar-tekst-engine. Transcripties gebruiken uw "
-"actieve chatprofiel (Algemeen)."
-
-msgid "Mic button:"
-msgstr "Microfoonknop:"
-
-msgid "Auto"
-msgstr "Automatisch"
-
-msgid "Toggle"
-msgstr "Wisselen"
-
-msgid ""
-"Auto: click toggles recording; hold 250 ms+ for push-to-talk. Hold: press-"
-"and-hold only. Toggle: click to start/stop."
-msgstr ""
-"Auto: klik schakelt opname in/uit; houd 250 ms+ ingedrukt voor push-to-talk. "
-"Ingedrukt houden: alleen ingedrukt houden. Wisselen: klik om te starten/"
-"stoppen."
-
-msgid "Voice shortcut:"
-msgstr "Spraaksneltoets:"
-
-msgid ""
-"While PlasmaLLM is open and focused, uses the same mic mode as the button "
-"(auto: short press toggles, hold 250 ms+ is push-to-talk). Does not open the "
-"panel—use Activate widget on the Shortcuts page. Default: Ctrl+M. Clear to "
-"disable."
-msgstr ""
-"Wanneer PlasmaLLM geopend en gefocust is, gebruikt dit dezelfde "
-"microfoonmodus als de knop (auto: kort indrukken wisselt, 250 ms+ ingedrukt "
-"houden is push-to-talk). Opent het paneel niet — gebruik «Widget activeren» "
-"op de pagina Sneltoetsen. Standaard: Ctrl+M. Wissen om uit te schakelen."
-
-msgid "Transcriber"
-msgstr "Transcribeerder"
-
-msgid "STT backend:"
-msgstr "STT-backend:"
-
-msgid "Endpoint:"
-msgstr "Eindpunt:"
-
-msgid "Fetch STT models"
-msgstr "STT-modellen ophalen"
-
-msgid ""
-"OpenRouter lists STT models only via transcription modalities (this page "
-"does that)."
-msgstr ""
-"OpenRouter toont STT-modellen alleen via transcriptiemodaliteiten (deze "
-"pagina doet dat)."
-
-msgid "API key:"
-msgstr "API-sleutel:"
-
-msgid "Provider API key"
-msgstr "Provider-API-sleutel"
-
-msgid "Save API key"
-msgstr "API-sleutel opslaan"
-
-msgid "Command:"
-msgstr "Opdracht:"
-
-msgid ""
-"Command prefix, inserted as-is. Examples: whisper, python3 -m whisper, "
-"toolbox run whisper."
-msgstr ""
-"Opdrachtvoorvoegsel, ongewijzigd ingevoegd. Voorbeelden: whisper, python3 -m "
-"whisper, toolbox run whisper."
-
-msgid "Test:"
-msgstr "Test:"
-
-msgid "Test CLI"
-msgstr "CLI testen"
-
-msgid "Task:"
-msgstr "Taak:"
-
-msgid "Transcribe"
-msgstr "Transcriberen"
-
-msgid "Translate"
-msgstr "Vertalen"
-
-msgid "Device:"
-msgstr "Apparaat:"
-
-msgid "Default"
-msgstr "Standaard"
-
-msgid "FP16:"
-msgstr "FP16:"
-
-msgid "Use --fp16 True (GPU)"
-msgstr "Gebruik --fp16 True (GPU)"
-
-msgid "Threads:"
-msgstr "Threads:"
-
-msgid "0 omits --threads (Whisper default). FP16 off is safer on CPU."
-msgstr ""
-"0 laat --threads weg (standaard voor Whisper). FP16 uit is veiliger op CPU."
-
-msgid "Initial prompt:"
-msgstr "Initiële prompt:"
-
-msgid "Optional vocabulary / style hint"
-msgstr "Optionele hint voor woordenschat / stijl"
-
-msgid "Extra args:"
-msgstr "Extra argumenten:"
-
-msgid "Optional, appended as-is"
-msgstr "Optioneel, ongewijzigd toegevoegd"
-
-msgid "Options"
-msgstr "Opties"
-
-msgid "Language hint:"
-msgstr "Taalsuggestie:"
-
-msgid "Optional, e.g. en or ja (empty = auto)"
-msgstr "Optioneel, bijv. nl of en (leeg = automatisch)"
-
-msgid "Max recording (seconds):"
-msgstr "Max. opnameduur (seconden):"
-
-msgid "Speech-to-text is not configured"
-msgstr "Spraak-naar-tekst is niet geconfigureerd"
-
-msgid "Unknown STT backend: %1"
-msgstr "Onbekende STT-backend: %1"
-
-msgid "Whisper CLI runner is not available"
-msgstr "Whisper-CLI-runner is niet beschikbaar"
-
-msgid "Could not build Whisper command"
-msgstr "Kon Whisper-opdracht niet opbouwen"
-
-msgid "STT backend does not support model listing"
-msgstr "STT-backend ondersteunt het weergeven van modellen niet"
-
-msgid "Enable skills"
-msgstr "Vaardigheden inschakelen"
-
-msgid ""
-"Skills are reusable instruction sets the model loads on demand via the skill "
-"tool. PlasmaLLM ships built-in skills (source: bundled). Add your own to "
-"~/.local/share/plasmallm/skills/ as a folder containing SKILL.md or a self-"
-"contained <name>.md file; a user skill with the same name overrides the "
-"bundled one."
-msgstr "Vaardigheden zijn herbruikbare instructiesets die het model op aanvraag laadt via het vaardigheidshulpmiddel. PlasmaLLM bevat ingebouwde vaardigheden (bron: meegeleverd). Voeg uw eigen vaardigheden toe aan ~/.local/share/plasmallm/skills/ als een map met een SKILL.md-bestand of een zelfstandig <naam>.md-bestand; een gebruikersvaardigheid met dezelfde naam overschrijft de meegeleverde versie."
-
-msgid ""
-"No skills discovered yet. Add a SKILL.md folder to the directory above or "
-"enable the extra directories below."
-msgstr ""
-"Nog geen vaardigheden ontdekt. Voeg een SKILL.md-map toe aan de bovenstaande "
-"map of schakel de extra mappen hieronder in."
-
-msgid "DISABLED"
-msgstr "UITGESCHAKELD"
-
-msgid "Allow running skill scripts without approval"
-msgstr "Uitvoeren van vaardigheidsscripts toestaan zonder goedkeuring"
-
-msgid "Refreshing…"
-msgstr "Vernieuwen…"
-
-msgid "Refresh"
-msgstr "Vernieuwen"
-
-msgid "Open the skills directory in the file manager"
-msgstr "Open de vaardighedenmap in de bestandsbeheerder"
-
-msgid "Also scan ~/.claude/skills"
-msgstr "Ook ~/.claude/skills scannen"
-
-msgid "Also scan ~/.agents/skills"
-msgstr "Ook ~/.agents/skills scannen"
-
-msgid "/absolute/path/to/skills"
-msgstr "/absoluut/pad/naar/vaardigheden"
-
-msgid "Save directory"
-msgstr "Map opslaan"
-
-msgid "Add directory"
-msgstr "Map toevoegen"
-
-msgid ""
-"Enabled skills are advertised to the model by name and description; the "
-"model loads full instructions on demand with the skill tool. Loaded skill "
-"content is re-sent in full every turn and is never affected by context "
-"compaction. Toggles here are global (not per-profile)."
-msgstr ""
-"Ingeschakelde vaardigheden worden aan het model aangekondigd met naam en "
-"beschrijving; het model laadt volledige instructies op aanvraag met het "
-"vaardigheidshulpmiddel. Geladen vaardigheidsinhoud wordt elke beurt volledig "
-"opnieuw verzonden en wordt nooit beïnvloed door contextcompressie. "
-"Schakelaars hier zijn globaal (niet per profiel)."
-
-msgid "System Info:"
-msgstr "Systeeminfo:"
-
-msgid "OS"
-msgstr "Besturingssysteem"
-
-msgid "Shell"
-msgstr "Shell"
-
-msgid "Hostname"
-msgstr "Hostnaam"
-
-msgid "Kernel"
-msgstr "Kernel"
-
-msgid "Desktop"
-msgstr "Bureaublad"
-
-msgid "User"
-msgstr "Gebruiker"
-
-msgid "CPU"
-msgstr "CPU"
-
-msgid "Memory"
-msgstr "Geheugen"
-
-msgid "GPU"
-msgstr "GPU"
-
-msgid "Block Devices"
-msgstr "Blokapparaten"
-
-msgid "Network"
-msgstr "Netwerk"
-
-msgid "Locale"
-msgstr "Landinstelling"
-
-msgid "Date/Time"
-msgstr "Datum/Tijd"
-
-msgid "Template:"
-msgstr "Sjabloon:"
-
-msgid ""
-"This is the full system prompt sent to the model. Use {{placeholders}} to "
-"pull in dynamic content like system details, enabled tools, or desktop "
-"automation instructions. Anything else you write is used verbatim. Critical "
-"runtime instructions (driving, skip-approvals mode) are appended "
-"automatically when active, even if you remove their placeholder."
-msgstr ""
-"Dit is de volledige systeemprompt die naar het model wordt verzonden. "
-"Gebruik {{placeholders}} om dynamische inhoud op te halen, zoals "
-"systeemdetails, ingeschakelde tools of instructies voor "
-"desktopautomatisering. Al het andere dat u schrijft, wordt letterlijk "
-"gebruikt. Kritieke runtime-instructies (bediening, modus zonder goedkeuring) "
-"worden automatisch toegevoegd wanneer ze actief zijn, zelfs als u hun "
-"tijdelijke aanduiding verwijdert."
-
-msgid "System Prompt:"
-msgstr "Systeemprompt:"
-
-msgid "Write your system prompt here…"
-msgstr "Schrijf hier uw systeemprompt…"
-
-msgid "Placeholders:"
-msgstr "Tijdelijke aanduidingen:"
-
-msgid "Enabled system info selected in the checklist above"
-msgstr ""
-"Ingeschakelde systeeminformatie geselecteerd in de bovenstaande controlelijst"
-
-msgid "Enabled tool descriptions and guidelines from the Tools menu"
-msgstr "Ingeschakelde toolbeschrijvingen en richtlijnen uit het menu Tools"
-
-msgid ""
-"Available skills index and instructions for skills loaded this session (from "
-"the Skills settings page)"
-msgstr ""
-"Index van beschikbare vaardigheden en instructies voor vaardigheden die deze "
-"sessie zijn geladen (van de pagina Vaardigheden in de instellingen)"
-
-msgid ""
-"Persistent tmux or screen session multiplexer instructions (when active)"
-msgstr ""
-"Instructies voor permanente tmux- of screen-sessiemultiplexer (indien actief)"
-
-msgid "Notice indicating skip-approvals mode (/auto) is active"
-msgstr "Melding dat de modus zonder goedkeuring (/auto) actief is"
-
-msgid "Desktop automation coordinates and guidelines (when driving)"
-msgstr ""
-"Coördinaten en richtlijnen voor desktopautomatisering (tijdens bediening)"
-
-msgid "Localization:"
-msgstr "Lokalisatie:"
-
-msgid "Localize System Prompt"
-msgstr "Systeemprompt lokaliseren"
-
-msgid ""
-"Translate default prompt templates and dynamic system sections into your "
-"desktop language."
-msgstr ""
-"Vertaal standaardsjablonen en dynamische systeemsecties naar de taal van uw "
-"desktop."
-
-msgid ""
-"Note: Localizing system instructions and tools into non-English languages "
-"may reduce tool-calling reliability and instruction-following accuracy on "
-"some models."
-msgstr ""
-"Opmerking: Het lokaliseren van systeeminstructies en hulpprogramma's naar "
-"niet-Engelse talen kan de betrouwbaarheid van tool-aanroepen en de "
-"nauwkeurigheid bij het opvolgen van instructies op sommige modellen "
-"verminderen."
-
-msgid "Actions:"
-msgstr "Acties:"
-
-msgid "Reset to Default Template"
-msgstr "Herstellen naar standaardsjabloon"
-
-msgid "Preview:"
-msgstr "Voorvertoning:"
-
-msgid "General Tool Settings"
-msgstr "Algemene toolinstellingen"
-
-msgid "System state:"
-msgstr "Systeemstatus:"
-
-msgid "Enable Tools"
-msgstr "Tools inschakelen"
-
-msgid "Master switch for all tool-calling functionality."
-msgstr "Hoofdschakelaar voor alle tool-aanroepfunctionaliteit."
-
-msgid "Desktop Automation:"
-msgstr "Bureaubladautomatisering:"
-
-msgid "Allows the LLM to request a session to see and drive your desktop."
-msgstr ""
-"Staat de LLM toe om een sessie aan te vragen om uw bureaublad te bekijken en "
-"te besturen."
-
-msgid "Enable Desktop Automation"
-msgstr "Bureaubladautomatisering inschakelen"
-
-msgid ""
-"Enable Desktop Automation (requires <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-msgstr ""
-"Bureaubladautomatisering inschakelen (vereist <a href=\"https://github.com/"
-"joshuaeroman/plasmallm-desktop-driver\">driver</a>)"
-
-msgid "Path whitelist:"
-msgstr "Padwitte lijst:"
-
-msgid "Add path, e.g. $HOME/projects, /tmp"
-msgstr "Pad toevoegen, bijv. $HOME/projects, /tmp"
-
-msgid ""
-"Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
-msgstr ""
-"Witte lijst is van toepassing op bestandssysteemtools (lezen, schrijven, "
-"weergeven, zoeken). Opmerking: 'run_command' wordt niet beperkt door deze "
-"lijst."
-
-msgid "Max read size:"
-msgstr "Maximale leesgrootte:"
-
-msgid "Max write size:"
-msgstr "Maximale schrijfgrootte:"
-
-msgid "Max HTTP response:"
-msgstr "Maximale HTTP-respons:"
-
-msgid "Max tool loop depth:"
-msgstr "Maximale tool-lusdiepte:"
-
-msgid "steps"
-msgstr "stappen"
-
-msgid "Note: This limit does not apply to desktop automation sessions."
-msgstr ""
-"Opmerking: Deze limiet geldt niet voor bureaubladautomatiseringssessies."
-
-msgid "Native Adapter Features"
-msgstr "Ingebouwde adapterfuncties"
-
-msgid "Google Search:"
-msgstr "Google Zoeken:"
-
-msgid "Enable Native Google Search Grounding"
-msgstr "Ingebouwde Google Zoeken-grounding inschakelen"
-
-msgid ""
-"Use Gemini's built-in Google Search for grounding. This overrides the "
-"standard web search tool."
-msgstr ""
-"Gebruik de ingebouwde Google Zoeken van Gemini voor grounding. Dit "
-"overschrijft de standaard websearchtool."
-
-msgid "Code Execution:"
-msgstr "Code-uitvoering:"
-
-msgid "Enable Native Python Code Execution"
-msgstr "Ingebouwde Python-codeuitvoering inschakelen"
-
-msgid ""
-"Allow Gemini to write and execute Python code in a secure server-side "
-"sandbox."
-msgstr ""
-"Gemini toestaan om Python-code te schrijven en uit te voeren in een "
-"beveiligde server-side sandbox."
-
-msgid ""
-"Combining Native tools with commands requires a newer model. Your currently "
-"selected model (%1) may encounter errors."
-msgstr ""
-"Het combineren van native tools met commando's vereist een nieuwer model. "
-"Het momenteel geselecteerde model (%1) kan fouten ondervinden."
-
-msgid "Individual Tools"
-msgstr "Afzonderlijke tools"
-
-msgid "Prompt Instructions:"
-msgstr "Promptinstructies:"
-
-msgid "Reset"
-msgstr "Herstellen"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
@@ -1973,106 +2086,6 @@ msgstr ""
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr ""
 "Besturingssessie succesvol geautoriseerd. Automatische modus ingeschakeld."
-
-msgid ""
-"Execute a shell command on the user's system and return its output. "
-"Guidelines:\n"
-"- Use `pkexec` instead of `sudo` for any command requiring superuser "
-"privileges.\n"
-"- Chain steps with `&&`.\n"
-"- Commands run non-interactively. Never use commands that wait for user "
-"input (like `read`).\n"
-"- Use `kdialog` if you need to prompt the user for input or show a message "
-"box (e.g., `kdialog --inputbox \"Prompt\"`).\n"
-"- NEVER install packages, modify system configuration, reboot, or take any "
-"action that alters the system or disrupts the user without explicit "
-"permission.\n"
-"- When permission is needed, ask the user in plain text first.\n"
-"- For auto-run tools: Be conservative and prefer read-only commands. If an "
-"action is potentially disruptive, describe it in plain text and wait for "
-"explicit user approval before calling the tool.\n"
-"- You MUST prefer other, more specific tools (like read_file, write_file, "
-"search_files, etc.) if they can accomplish the task. Only use this tool if "
-"no other tool is suitable."
-msgstr ""
-"Voert een shell-opdracht uit op het systeem van de gebruiker en retourneert "
-"de uitvoer. Richtlijnen:\n"
-"- Gebruik `pkexec` in plaats van `sudo` voor opdrachten die superuser-"
-"rechten vereisen.\n"
-"- Koppel stappen aan elkaar met `&&`.\n"
-"- Opdrachten worden niet-interactief uitgevoerd. Gebruik nooit opdrachten "
-"die wachten op gebruikersinvoer (zoals `read`).\n"
-"- Gebruik `kdialog` als u de gebruiker om invoer moet vragen of een "
-"berichtvenster moet weergeven (bijv. `kdialog --inputbox \"Prompt\"`).\n"
-"- Installeer NOOIT pakketten, wijzig geen systeemconfiguratie, start niet "
-"opnieuw op en onderneem geen actie die het systeem wijzigt of de gebruiker "
-"verstoort zonder expliciete toestemming.\n"
-"- Vraag de gebruiker eerst in platte tekst wanneer toestemming nodig is.\n"
-"- Voor automatisch uitgevoerde tools: wees voorzichtig en geef de voorkeur "
-"aan alleen-lezen opdrachten. Als een actie potentieel verstorend is, "
-"beschrijf deze dan in platte tekst en wacht op expliciete toestemming van de "
-"gebruiker voordat u de tool aanroept.\n"
-"- U MOET de voorkeur geven aan andere, specifiekere hulpprogramma's (zoals "
-"read_file, write_file, search_files, enz.) als deze de taak kunnen "
-"volbrengen. Gebruik deze tool alleen als geen andere tool geschikt is."
-
-msgid ""
-"Read the contents of a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Leest de inhoud van een bestand op het opgegeven pad. Toegang is beperkt tot "
-"toegestane mappen."
-
-msgid ""
-"Write content to a file at the specified path. Access is restricted to "
-"allowed directories."
-msgstr ""
-"Schrijft inhoud naar een bestand op het opgegeven pad. Toegang is beperkt "
-"tot toegestane mappen."
-
-msgid ""
-"List the contents of a directory. Access is restricted to allowed "
-"directories."
-msgstr ""
-"Geeft een overzicht van de inhoud van een map. Toegang is beperkt tot "
-"toegestane mappen."
-
-msgid "Search for a pattern within files in a directory (recursive)."
-msgstr "Zoekt naar een patroon in bestanden in een map (recursief)."
-
-msgid "Perform an HTTP GET request to a URL and return the response content."
-msgstr ""
-"Voert een HTTP GET-verzoek uit naar een URL en retourneert de antwoordinhoud."
-
-msgid "Perform an HTTP request (POST, PUT, etc.) to a URL."
-msgstr "Voert een HTTP-verzoek (POST, PUT, enz.) uit naar een URL."
-
-msgid "Get the current content of the system clipboard."
-msgstr "Haalt de huidige inhoud van het systeemklembord op."
-
-msgid "Set the content of the system clipboard."
-msgstr "Stelt de inhoud van het systeemklembord in."
-
-msgid "Show a system notification."
-msgstr "Toont een systeemmelding."
-
-msgid "Open a URL in the default application (e.g., web browser)."
-msgstr "Opent een URL in de standaardtoepassing (bijv. webbrowser)."
-
-msgid ""
-"Perform a web search to find current information, news, or specific facts."
-msgstr ""
-"Voert een zoekopdracht op het web uit om actuele informatie, nieuws of "
-"specifieke feiten te vinden."
-
-msgid ""
-"Restore the full verbatim text and tool outputs of previously compacted "
-"messages by specifying the start and end message IDs from a cited message "
-"range."
-msgstr ""
-"Herstel de volledige letterlijke tekst en hulpmiddeluitvoer van eerder "
-"gecomprimeerde berichten door de begin- en eind-bericht-ID's van een "
-"geciteerd berichtbereik op te geven."
 
 msgid "General"
 msgstr "Algemeen"
