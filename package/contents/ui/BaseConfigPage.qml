@@ -29,6 +29,7 @@ SimpleKCM {
         // Use a timer to ensure all child components have finished their own onCompleted
         // and any initial bindings have settled.
         Qt.callLater(() => {
+            Profiles.ensureDefault(basePage, i18n("Default"));
             _initialized = true;
             // Re-sync model/provider combos after init so opening settings does
             // not leave ComboBox stuck on index 0 after model assignment.

@@ -24,7 +24,7 @@ BaseConfigPage {
     property var profilesList: []
 
     onCfg_profilesChanged: {
-        profilesList = Profiles.loadProfilesRaw(cfg_profiles);
+        profilesList = Profiles.ensureDefault(configPage, i18n("Default"));
         syncProfileCombo();
     }
 
@@ -212,7 +212,7 @@ BaseConfigPage {
     onCfg_compactionProfileIdChanged: if (_initialized) syncProfileCombo()
 
     Component.onCompleted: {
-        profilesList = Profiles.loadProfilesRaw(cfg_profiles);
+        profilesList = Profiles.ensureDefault(configPage, i18n("Default"));
         syncProfileCombo();
         Qt.callLater(function() {
             _initialized = true;
