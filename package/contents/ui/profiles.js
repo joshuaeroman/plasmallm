@@ -186,11 +186,55 @@ function loadProfilesRaw(raw) {
 }
 
 function loadProfiles(config) {
-    return loadProfilesRaw(config.profiles);
+    return loadProfilesRaw(_readProfilesRaw(config));
 }
 
 function saveProfiles(config, profiles) {
-    config.profiles = JSON.stringify(profiles);
+    _writeProfiles(config, profiles);
+}
+
+function _readProfilesRaw(config) {
+    if (!config) return "";
+    if (config.cfg_profiles !== undefined && config.cfg_profiles !== null)
+        return config.cfg_profiles;
+    return config.profiles || "";
+}
+
+function _writeProfiles(config, profiles) {
+    var json = JSON.stringify(profiles);
+    if (config.cfg_profiles !== undefined)
+        config.cfg_profiles = json;
+    else
+        config.profiles = json;
+}
+
+function _readActiveId(config) {
+    if (!config) return "";
+    if (config.cfg_activeProfileId !== undefined && config.cfg_activeProfileId !== null)
+        return config.cfg_activeProfileId;
+    return config.activeProfileId || "";
+}
+
+function _writeActiveId(config, id) {
+    if (config.cfg_activeProfileId !== undefined)
+        config.cfg_activeProfileId = id;
+    else
+        config.activeProfileId = id;
+}
+
+// Create and persist a Default profile when the list is empty.
+// `config` may be Plasmoid.configuration (`profiles`) or a KCM page (`cfg_profiles`).
+function ensureDefault(config, name) {
+    var list = loadProfiles(config);
+    if (list && list.length > 0)
+        return list;
+    var p = createProfile(name || "Default", config || {});
+    p.id = "p_default";
+    list = [p];
+    _writeProfiles(config, list);
+    if (!_readActiveId(config))
+        _writeActiveId(config, "p_default");
+    return list;
 }
 
 function getActive(profiles, activeId) {

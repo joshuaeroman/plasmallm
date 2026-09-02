@@ -307,7 +307,7 @@ PlasmaExtras.Representation {
             PlasmaComponents.ToolButton {
                 id: profileToolButton
                 text: {
-                    var profiles = Profiles.loadProfiles(Plasmoid.configuration);
+                    var profiles = root.profilesList;
                     var active = Profiles.getActive(profiles, Plasmoid.configuration.activeProfileId);
                     var name = active ? active.name : "Default";
                     
@@ -368,7 +368,7 @@ PlasmaExtras.Representation {
                 }
 
                 Instantiator {
-                    model: Profiles.loadProfiles(Plasmoid.configuration)
+                    model: root.profilesList
                     onObjectAdded: function(index, object) { profileMenu.insertItem(index, object); }
                     onObjectRemoved: function(index, object) { profileMenu.removeItem(object); }
                     delegate: QQC2.MenuItem {
@@ -1580,7 +1580,7 @@ PlasmaExtras.Representation {
                         var t = inputField.text;
                         if (!t.toLowerCase().startsWith("/profile ")) return [];
                         var query = t.substring(9).toLowerCase();
-                        var profiles = Profiles.loadProfiles(Plasmoid.configuration);
+                        var profiles = root.profilesList;
                         if (!profiles || profiles.length === 0) return [];
                         return query.length === 0 ? profiles :
                                profiles.filter(function(p) { return p.name.toLowerCase().indexOf(query) !== -1; });

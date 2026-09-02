@@ -138,6 +138,8 @@ PlasmoidItem {
     property var sysInfo: ({})
     property int sysInfoPending: 0
     property bool systemPromptReady: false
+    // Binding reads the profiles string so Instantiator/title update after first-run seed.
+    readonly property var profilesList: Profiles.loadProfilesRaw(Plasmoid.configuration.profiles)
     property var terminalCommands: ([])
     property var saveCommands: ([])
     property string currentChatFile: ""
@@ -4067,16 +4069,12 @@ PlasmoidItem {
             return dataHome + "/plasmallm/screenshots/" + filename;
         });
         
+        // First-run: seed Default when no profiles exist (also if schema was
+        // already bumped without a list, or the config KCM never ran).
+        Profiles.ensureDefault(Plasmoid.configuration, i18n("Default"));
+
         // First-run profile migration
         if (Plasmoid.configuration.profilesSchemaVersion === 0) {
-            var profiles = Profiles.loadProfiles(Plasmoid.configuration);
-            if (profiles.length === 0) {
-                var defaultProfile = Profiles.createProfile(i18n("Default"), Plasmoid.configuration);
-                defaultProfile.id = "p_default";
-                profiles = [defaultProfile];
-                Profiles.saveProfiles(Plasmoid.configuration, profiles);
-                Plasmoid.configuration.activeProfileId = "p_default";
-            }
             Plasmoid.configuration.profilesSchemaVersion = 1;
         }
 

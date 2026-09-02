@@ -22,7 +22,7 @@ BaseConfigPage {
     property var profilesList: []
 
     onCfg_profilesChanged: {
-        profilesList = Profiles.loadProfilesRaw(cfg_profiles);
+        profilesList = Profiles.ensureDefault(configPage, i18n("Default"));
     }
 
     property bool hasGcloud: false
@@ -428,7 +428,7 @@ BaseConfigPage {
     onCfg_availableModelsChanged: loadModelCache()
 
     Component.onCompleted: {
-        profilesList = Profiles.loadProfilesRaw(cfg_profiles);
+        profilesList = Profiles.ensureDefault(configPage, i18n("Default"));
         loadModelCache();
         // Initial reconcile: load key then models then capture.
         _configGen++;
