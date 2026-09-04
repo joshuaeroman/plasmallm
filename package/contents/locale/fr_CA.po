@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-02 09:25-0400\n"
+"POT-Creation-Date: 2026-09-04 17:51-0400\n"
 "PO-Revision-Date: 2026-04-07 22:00-0400\n"
 "Last-Translator: Gemini CLI (machine translation)\n"
 "Language-Team: French (Canada)\n"
@@ -73,6 +73,12 @@ msgstr "Échec de l'authentification — vérifiez votre clé API (HTTP 400) : %
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr "Échec de l'authentification (HTTP %1) — vérifiez votre clé API : %2"
 
+msgid "no response — check your endpoint URL"
+msgstr "aucune réponse — vérifiez l'URL de votre point d'accès"
+
+msgid "Request failed"
+msgstr "La requête a échoué"
+
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -82,12 +88,6 @@ msgstr ""
 "natifs (Recherche/Code) avec des commandes personnalisées. Sélectionnez un "
 "modèle plus récent (p. ex., Gemini 3+) ou désactivez les fonctionnalités "
 "natives dans les Paramètres."
-
-msgid "Request failed"
-msgstr "La requête a échoué"
-
-msgid "no response — check your endpoint URL"
-msgstr "aucune réponse — vérifiez l'URL de votre point d'accès"
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""

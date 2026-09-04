@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-02 09:25-0400\n"
+"POT-Creation-Date: 2026-09-04 17:51-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Japanese\n"
@@ -70,6 +70,12 @@ msgstr "認証に失敗しました — APIキーを確認してください (HT
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr "認証に失败しました (HTTP %1) — APIキーを確認してください: %2"
 
+msgid "no response — check your endpoint URL"
+msgstr "応答なし — エンドポイントURLを確認してください..."
+
+msgid "Request failed"
+msgstr "リクエストに失敗しました..."
+
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -78,12 +84,6 @@ msgstr ""
 "このモデルバージョンは、ネイティブツール（検索/コード）とカスタムコマンドの組"
 "み合わせをサポートしていません。新しいモデル（例：Gemini 3+）を選択するか、設"
 "定でネイティブ機能を無効にしてください。"
-
-msgid "Request failed"
-msgstr "リクエストに失敗しました..."
-
-msgid "no response — check your endpoint URL"
-msgstr "応答なし — エンドポイントURLを確認してください..."
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
