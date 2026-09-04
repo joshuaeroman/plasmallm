@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-02 09:25-0400\n"
+"POT-Creation-Date: 2026-09-04 17:51-0400\n"
 "PO-Revision-Date: 2026-05-04 00:00+0300\n"
 "Last-Translator: Matvel007\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -70,6 +70,12 @@ msgstr "Ошибка аутентификации — проверьте API-к�
 msgid "Authentication failed (HTTP %1) — check your API key: %2"
 msgstr "Ошибка аутентификации (HTTP %1) — проверьте API-ключ: %2"
 
+msgid "no response — check your endpoint URL"
+msgstr "нет ответа — проверьте URL эндпоинта"
+
+msgid "Request failed"
+msgstr "Запрос не удался"
+
 msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
@@ -78,12 +84,6 @@ msgstr ""
 "Эта версия модели не поддерживает сочетание встроенных инструментов (Поиск/"
 "Код) с пользовательскими командами. Выберите более новую модель (например, "
 "Gemini 3+) или отключите встроенные функции в Настройках."
-
-msgid "Request failed"
-msgstr "Запрос не удался"
-
-msgid "no response — check your endpoint URL"
-msgstr "нет ответа — проверьте URL эндпоинта"
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
