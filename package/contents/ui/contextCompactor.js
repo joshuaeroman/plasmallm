@@ -189,6 +189,7 @@ function compactHistory(opts, callback) {
         Api.sendStreaming(apiType, {
             endpoint: endpoint,
             apiKey: apiKey,
+            sessionId: opts.sessionId,
             model: model,
             messages: messages,
             temperature: 0.2,

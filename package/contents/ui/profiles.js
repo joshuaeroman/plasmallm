@@ -193,33 +193,41 @@ function saveProfiles(config, profiles) {
     _writeProfiles(config, profiles);
 }
 
+// Discriminate "runtime map" vs "KCM page" on the UNPREFIXED keys:
+// Plasmoid.configuration exposes declared entries directly (`profiles`,
+// `activeProfileId`), while KCM pages only carry cfg_-prefixed properties.
+// Checking cfg_ first would misread a stale dynamic cfg_ property on the
+// runtime map — the config dialog enumerates every map key and would then
+// try to inject "cfg_cfg_profiles" onto pages (see plasma's
+// AppletConfiguration.qml) — and would also persist the blob under a
+// non-declared key, which silently never survives restarts.
 function _readProfilesRaw(config) {
     if (!config) return "";
-    if (config.cfg_profiles !== undefined && config.cfg_profiles !== null)
-        return config.cfg_profiles;
-    return config.profiles || "";
+    if (config.profiles !== undefined)
+        return config.profiles || "";
+    return config.cfg_profiles || "";
 }
 
 function _writeProfiles(config, profiles) {
     var json = JSON.stringify(profiles);
-    if (config.cfg_profiles !== undefined)
-        config.cfg_profiles = json;
-    else
+    if (config.profiles !== undefined)
         config.profiles = json;
+    else
+        config.cfg_profiles = json;
 }
 
 function _readActiveId(config) {
     if (!config) return "";
-    if (config.cfg_activeProfileId !== undefined && config.cfg_activeProfileId !== null)
-        return config.cfg_activeProfileId;
-    return config.activeProfileId || "";
+    if (config.activeProfileId !== undefined)
+        return config.activeProfileId || "";
+    return config.cfg_activeProfileId || "";
 }
 
 function _writeActiveId(config, id) {
-    if (config.cfg_activeProfileId !== undefined)
-        config.cfg_activeProfileId = id;
-    else
+    if (config.activeProfileId !== undefined)
         config.activeProfileId = id;
+    else
+        config.cfg_activeProfileId = id;
 }
 
 // Create and persist a Default profile when the list is empty.

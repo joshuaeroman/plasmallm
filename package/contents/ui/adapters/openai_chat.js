@@ -37,7 +37,7 @@ function sanitizePayload(body) {
     }
 }
 
-function setHeaders(xhr, apiKey, endpoint) {
+function setHeaders(xhr, apiKey, endpoint, opts) {
     xhr.setRequestHeader("Content-Type", "application/json");
     if (apiKey && apiKey.length > 0) {
         xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
@@ -45,6 +45,27 @@ function setHeaders(xhr, apiKey, endpoint) {
             xhr.setRequestHeader("x-api-key", apiKey);
             xhr.setRequestHeader("anthropic-version", "2023-06-01");
             xhr.setRequestHeader("anthropic-dangerous-direct-browser-access", "true");
+        }
+    }
+    // Session-affinity headers for gateways that use them for prompt-cache
+    // routing / observability (Fireworks, OpenRouter).
+    if (opts && opts.sessionId) {
+        var pn = String(opts.providerName || "").toLowerCase();
+        var ep = String(endpoint || "").toLowerCase();
+        var aff = "";
+        if (pn.indexOf("fireworks") !== -1 || ep.indexOf("fireworks.ai") !== -1)
+            aff = "x-session-affinity";
+        else if (pn.indexOf("openrouter") !== -1 || ep.indexOf("openrouter.ai") !== -1)
+            aff = "x-session-id";
+        if (aff)
+            xhr.setRequestHeader(aff, opts.sessionId);
+    }
+    // Generic extra-headers path: callers (e.g. the OpenCode gateway) add
+    // request headers via opts.extraHeaders = { "Name": value }.
+    if (opts && opts.extraHeaders) {
+        for (var h in opts.extraHeaders) {
+            if (opts.extraHeaders.hasOwnProperty(h))
+                xhr.setRequestHeader(h, opts.extraHeaders[h]);
         }
     }
 }
@@ -58,7 +79,11 @@ function isExaEndpoint(endpoint) {
     return host === "api.exa.ai" || host === "exa.ai" || host.length > 7 && host.slice(-7) === ".exa.ai";
 }
 
-function fetchModels(endpoint, apiKey, callback) {
+function fetchModels(endpoint, apiKey, opts, callback) {
+    if (typeof opts === "function") {
+        callback = opts;
+        opts = null;
+    }
     if (isExaEndpoint(endpoint)) {
         var exaModels = ["exa"];
         if (callback) callback(null, exaModels, 200);
@@ -69,7 +94,7 @@ function fetchModels(endpoint, apiKey, callback) {
 
     xhr.open("GET", url);
     xhr.timeout = 30000;
-    setHeaders(xhr, apiKey, endpoint);
+    setHeaders(xhr, apiKey, endpoint, opts);
 
     xhr.ontimeout = function() {
         callback(i18n("Request timed out after 30 seconds"), null);
@@ -221,7 +246,7 @@ function sendStreaming(opts) {
 
     xhr.open("POST", url);
     xhr.timeout = 120000;
-    setHeaders(xhr, apiKey, endpoint);
+    setHeaders(xhr, apiKey, endpoint, opts);
 
     var pollTimer = null;
     var lastParseIndex = 0;

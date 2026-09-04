@@ -38,7 +38,7 @@ function sanitizePayload(body) {
     }
 }
 
-function setHeaders(xhr, apiKey, endpoint) {
+function setHeaders(xhr, apiKey, endpoint, opts) {
     xhr.setRequestHeader("Content-Type", "application/json");
     if (apiKey && apiKey.length > 0) {
         xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
@@ -46,6 +46,27 @@ function setHeaders(xhr, apiKey, endpoint) {
             xhr.setRequestHeader("x-api-key", apiKey);
             xhr.setRequestHeader("anthropic-version", "2023-06-01");
             xhr.setRequestHeader("anthropic-dangerous-direct-browser-access", "true");
+        }
+    }
+    // Session-affinity headers for gateways that use them for prompt-cache
+    // routing / observability (Fireworks, OpenRouter).
+    if (opts && opts.sessionId) {
+        var pn = String(opts.providerName || "").toLowerCase();
+        var ep = String(endpoint || "").toLowerCase();
+        var aff = "";
+        if (pn.indexOf("fireworks") !== -1 || ep.indexOf("fireworks.ai") !== -1)
+            aff = "x-session-affinity";
+        else if (pn.indexOf("openrouter") !== -1 || ep.indexOf("openrouter.ai") !== -1)
+            aff = "x-session-id";
+        if (aff)
+            xhr.setRequestHeader(aff, opts.sessionId);
+    }
+    // Generic extra-headers path: callers (e.g. the OpenCode gateway) add
+    // request headers via opts.extraHeaders = { "Name": value }.
+    if (opts && opts.extraHeaders) {
+        for (var h in opts.extraHeaders) {
+            if (opts.extraHeaders.hasOwnProperty(h))
+                xhr.setRequestHeader(h, opts.extraHeaders[h]);
         }
     }
 }
@@ -368,7 +389,7 @@ function sendStreaming(opts) {
 
     xhr.open("POST", url);
     xhr.timeout = 120000;
-    setHeaders(xhr, apiKey, endpoint);
+    setHeaders(xhr, apiKey, endpoint, opts);
 
     var pollTimer = null;
     var lastParseIndex = 0;
