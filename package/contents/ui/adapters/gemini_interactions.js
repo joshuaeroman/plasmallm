@@ -81,6 +81,14 @@ function setHeaders(xhr, apiKey, opts) {
             xhr.setRequestHeader("x-goog-api-key", apiKey);
         }
     }
+    // Generic extra-headers path: callers (e.g. the OpenCode gateway) add
+    // request headers via opts.extraHeaders = { "Name": value }.
+    if (opts && opts.extraHeaders) {
+        for (var h in opts.extraHeaders) {
+            if (opts.extraHeaders.hasOwnProperty(h))
+                xhr.setRequestHeader(h, opts.extraHeaders[h]);
+        }
+    }
 }
 
 function fetchModels(endpoint, apiKey, opts, callback) {
