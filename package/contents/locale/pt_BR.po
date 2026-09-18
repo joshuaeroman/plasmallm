@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-04 17:51-0400\n"
+"POT-Creation-Date: 2026-09-17 22:45-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -16,15 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-msgid "Color button"
-msgstr "Botão de cor"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "A cor atual é %1. Este botão abrirá um diálogo de seleção de cores."
-
-msgid "Current color is %1."
-msgstr "A cor atual é %1."
 
 msgid "Request timed out after 30 seconds"
 msgstr "Solicitação expirou após 30 segundos"
@@ -86,6 +77,15 @@ msgstr ""
 "(Pesquisa/Código) com comandos personalizados. Selecione um modelo mais "
 "recente (p. ex., Gemini 3+) ou desabilite os recursos nativos nas "
 "Configurações."
+
+msgid ""
+"Decisions models cannot generate chat text. Use it as your active profile "
+"for single-shot evaluations, or select it as the Command Validator profile "
+"in Tools settings."
+msgstr ""
+"Modelos Decisions não podem gerar texto de chat. Use-o como seu perfil ativo "
+"para avaliações únicas, ou selecione-o como perfil do validador de comandos "
+"nas configurações de Ferramentas."
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -166,80 +166,6 @@ msgstr ""
 msgid "No command provided."
 msgstr "Nenhum comando fornecido."
 
-msgid "Ollama API"
-msgstr "API do Ollama"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Exa Search"
-msgstr "Busca Exa"
-
-msgid "Ollama API key"
-msgstr "Chave de API do Ollama"
-
-msgid "Saving…"
-msgstr "Salvando…"
-
-msgid "Saved"
-msgstr "Salvo"
-
-msgid "Save to Config (Insecure)"
-msgstr "Salvar na configuração (inseguro)"
-
-msgid "Save Key"
-msgstr "Salvar chave"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "URL da Instância do SearXNG (ex.: https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "Chave/Token da API do SearXNG (opcional)"
-
-msgid "Exa API key"
-msgstr "Chave de API do Exa"
-
-msgid "Search Type:"
-msgstr "Tipo de busca:"
-
-msgid "Auto (Default)"
-msgstr "Auto (Padrão)"
-
-msgid "Fast"
-msgstr "Rápido"
-
-msgid "Instant"
-msgstr "Instantâneo"
-
-msgid "Deep Lite"
-msgstr "Profundo Lite"
-
-msgid "Deep"
-msgstr "Profundo"
-
-msgid "Deep Reasoning"
-msgstr "Raciocínio profundo"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "O DuckDuckGo não requer configuração."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr ""
-"Certifique-se de que a instância do SearXNG tenha o formato JSON habilitado."
-
-msgid "Enables LLM-triggered neural web searches via Exa API."
-msgstr "Habilita buscas neurais na web acionadas pelo LLM via API do Exa."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Habilita buscas na web acionadas pelo LLM via API de busca do Ollama"
-
-msgid "Manage and discover skills in the Skills settings page."
-msgstr ""
-"Gerencie e descubra habilidades na página de configurações Habilidades."
-
 msgid "Saved phrases:"
 msgstr "Frases salvas:"
 
@@ -319,6 +245,155 @@ msgstr ""
 "Nem 'tmux' nem 'screen' foram encontrados no seu sistema. O multiplexamento "
 "de sessão está indisponível."
 
+msgid "Command Validation"
+msgstr "Validação de Comandos"
+
+msgid "Validate commands against their justification with a second model"
+msgstr "Validar comandos em relação à sua justificativa com um segundo modelo"
+
+msgid ""
+"Before a command runs, the selected model checks that the command does what "
+"the LLM's justification says. Mismatched commands are denied automatically."
+msgstr ""
+"Antes de um comando ser executado, o modelo selecionado verifica se o "
+"comando faz o que a justificativa do LLM diz. Comandos que não correspondem "
+"são negados automaticamente."
+
+msgid ""
+"The validator checks that the command does what its justification says and "
+"that it is well-written shell (no incomplete constructs or syntax errors). "
+"Mismatched or malformed commands are denied automatically and the reason is "
+"returned to the LLM. If the validator cannot run (error or timeout), the "
+"command falls back to asking for approval."
+msgstr ""
+"O validador verifica se o comando faz o que sua justificativa diz e se é "
+"shell bem escrito (sem construções incompletas ou erros de sintaxe). "
+"Comandos que não correspondem ou malformados são negados automaticamente e o "
+"motivo é retornado ao LLM. Se o validador não puder ser executado (erro ou "
+"tempo esgotado), o comando passa a solicitar aprovação."
+
+msgid "Validator profile:"
+msgstr "Perfil do validador:"
+
+msgid "Default"
+msgstr "Padrão"
+
+msgid "None"
+msgstr "Nenhum"
+
+msgid "Structured decisions (Jev)"
+msgstr "Decisões estruturadas (Jev)"
+
+msgid "Chat completion (JSON)"
+msgstr "Conclusão de chat (JSON)"
+
+msgid ""
+"Provider: %1  |  Model: %2\n"
+"Backend: %3"
+msgstr "Provedor: %1  |  Modelo: %2\nBackend: %3"
+
+msgid "Backend:"
+msgstr "Backend:"
+
+msgid "Auto-detect"
+msgstr "Detecção automática"
+
+msgid "Structured decisions (Jev/TypeSafe)"
+msgstr "Decisões estruturadas (Jev/TypeSafe)"
+
+msgid "Chat completion (JSON verdict)"
+msgstr "Conclusão de chat (veredito JSON)"
+
+msgid ""
+"Maximum mismatch probability allowed before a command is rejected "
+"(structured decisions backend):"
+msgstr ""
+"Probabilidade máxima de divergência permitida antes de um comando ser "
+"rejeitado (backend de decisões estruturadas):"
+
+msgid "% (lower = stricter)"
+msgstr "% (menor = mais rigoroso)"
+
+msgid "Testing…"
+msgstr "Testando…"
+
+msgid "Test Validator"
+msgstr "Testar validador"
+
+msgid "Manage and discover skills in the Skills settings page."
+msgstr ""
+"Gerencie e descubra habilidades na página de configurações Habilidades."
+
+msgid "Ollama API"
+msgstr "API do Ollama"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Busca Exa"
+
+msgid "Ollama API key"
+msgstr "Chave de API do Ollama"
+
+msgid "Saving…"
+msgstr "Salvando…"
+
+msgid "Saved"
+msgstr "Salvo"
+
+msgid "Save to Config (Insecure)"
+msgstr "Salvar na configuração (inseguro)"
+
+msgid "Save Key"
+msgstr "Salvar chave"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "URL da Instância do SearXNG (ex.: https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "Chave/Token da API do SearXNG (opcional)"
+
+msgid "Exa API key"
+msgstr "Chave de API do Exa"
+
+msgid "Search Type:"
+msgstr "Tipo de busca:"
+
+msgid "Auto (Default)"
+msgstr "Auto (Padrão)"
+
+msgid "Fast"
+msgstr "Rápido"
+
+msgid "Instant"
+msgstr "Instantâneo"
+
+msgid "Deep Lite"
+msgstr "Profundo Lite"
+
+msgid "Deep"
+msgstr "Profundo"
+
+msgid "Deep Reasoning"
+msgstr "Raciocínio profundo"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "O DuckDuckGo não requer configuração."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr ""
+"Certifique-se de que a instância do SearXNG tenha o formato JSON habilitado."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr "Habilita buscas neurais na web acionadas pelo LLM via API do Exa."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Habilita buscas na web acionadas pelo LLM via API de busca do Ollama"
+
 msgid ""
 "Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
 "that skill has “Allow running skill scripts without approval” checked on the "
@@ -329,8 +404,33 @@ msgstr ""
 "execução de scripts de habilidades sem aprovação” marcada na página de "
 "configurações de Habilidades."
 
+msgid "Color button"
+msgstr "Botão de cor"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "A cor atual é %1. Este botão abrirá um diálogo de seleção de cores."
+
+msgid "Current color is %1."
+msgstr "A cor atual é %1."
+
 msgid "Tool Request: %1"
 msgstr "Solicitação de ferramenta: %1"
+
+msgid "Validating command against its justification…"
+msgstr "Validando o comando em relação à sua justificativa…"
+
+msgid " (by %1)"
+msgstr " (por %1)"
+
+msgid " confidence %1"
+msgstr " confiança %1"
+
+#, javascript-format
+msgid "Validated: matches justification%1%2"
+msgstr "Validado: corresponde à justificativa%1%2"
+
+msgid "Command does not match its justification."
+msgstr "O comando não corresponde à sua justificativa."
 
 msgid "Justification: %1"
 msgstr "Justificativa: %1"
@@ -556,20 +656,144 @@ msgstr "Mostrar Configurações"
 msgid "Show Pin"
 msgstr "Mostrar fixar"
 
-msgid "Speech-to-text is not configured"
-msgstr "Voz para texto não está configurado"
+msgid "Loaded %1 skill"
+msgstr "Habilidade %1 carregada"
 
-msgid "Unknown STT backend: %1"
-msgstr "Backend STT desconhecido: %1"
+msgid "Yes"
+msgstr "Sim"
 
-msgid "Whisper CLI runner is not available"
-msgstr "O executor da CLI do Whisper não está disponível"
+msgid "No"
+msgstr "Não"
 
-msgid "Could not build Whisper command"
-msgstr "Não foi possível construir o comando Whisper"
+msgid "Uncertain"
+msgstr "Incerto"
 
-msgid "STT backend does not support model listing"
-msgstr "O backend STT não suporta listagem de modelos"
+msgid "Voice message"
+msgstr "Mensagem de voz"
+
+msgid "Error"
+msgstr "Erro"
+
+msgid "Web Search"
+msgstr "Busca na Web"
+
+msgid "compacted"
+msgstr "compactado"
+
+msgid ""
+"This message has been summarized into the compacted context. Citations "
+"active."
+msgstr "Esta mensagem foi resumida no contexto compactado. Citações ativas."
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"A renderização do Mathtext reverteu para substituição por Unicode "
+"(matplotlib não instalado ou ocorreu um erro)"
+
+msgid "Thinking"
+msgstr "Pensando…"
+
+msgid "Searched for: %1"
+msgstr "Pesquisado: %1"
+
+msgid "Show %1 results"
+msgstr "Mostrar %1 resultados"
+
+msgid "Save & Retry"
+msgstr "Salvar e tentar novamente"
+
+msgid "Copy to clipboard"
+msgstr "Copiar para a área de transferência"
+
+msgid "Edit message"
+msgstr "Editar mensagem"
+
+msgid "Edit response"
+msgstr "Editar resposta"
+
+msgid "Retry from here"
+msgstr "Tentar novamente a partir daqui"
+
+msgid "Regenerate response"
+msgstr "Regenerar resposta"
+
+msgid "Share output with assistant"
+msgstr "Compartilhar saída com o assistente"
+
+msgid "The model loaded this skill's instructions into context before acting."
+msgstr ""
+"O modelo carregou as instruções desta habilidade no contexto antes de agir."
+
+msgid "Stop command"
+msgstr "Parar comando"
+
+msgid "Open terminal attached to this session"
+msgstr "Abrir terminal vinculado a esta sessão"
+
+msgid "Collapse result"
+msgstr "Recolher resultado"
+
+msgid "Copy output"
+msgstr "Copiar saída"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"Nenhuma ferramenta personalizada configurada. Adicione uma ferramenta "
+"personalizada para expor seus próprios comandos ao LLM."
+
+msgid "Add Custom Tool"
+msgstr "Adicionar ferramenta personalizada"
+
+msgid "Echoes back the message provided."
+msgstr "Ecoa de volta a mensagem fornecida."
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "Nome da ferramenta (ex. systemctl_service)"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "Descrição (instrui o LLM sobre o que esta ferramenta faz)"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "Modelo de comando (ex. systemctl {action} {service})"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "Requer superusuário (executa com pkexec)"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "Executar ferramenta automaticamente (sem diálogo de confirmação)"
+
+msgid "Collapse results"
+msgstr "Recolher resultados"
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+"Mostrar resultados concluídos como uma pequena pílula; clique na pílula para "
+"ver a saída completa."
+
+msgid "Update Tool"
+msgstr "Atualizar ferramenta"
+
+msgid "Save Tool"
+msgstr "Salvar ferramenta"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "Uma ferramenta chamada \"%1\" já existe."
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"As ferramentas personalizadas permitem expor seus próprios comandos ao LLM. "
+"Use marcadores de posição como {variable} no Modelo de Comando para definir "
+"parâmetros que o LLM pode preencher. Os valores fornecidos pelo LLM são "
+"automaticamente escapados do shell."
 
 msgid "Speech to Text"
 msgstr "Voz para texto"
@@ -738,9 +962,6 @@ msgstr "Traduzir"
 msgid "Device:"
 msgstr "Dispositivo:"
 
-msgid "Default"
-msgstr "Padrão"
-
 msgid "FP16:"
 msgstr "FP16:"
 
@@ -778,135 +999,20 @@ msgstr "Opcional, ex.: pt ou en (vazio = automático)"
 msgid "Max recording (seconds):"
 msgstr "Gravação máxima (segundos):"
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
-msgstr ""
-"Nenhuma ferramenta personalizada configurada. Adicione uma ferramenta "
-"personalizada para expor seus próprios comandos ao LLM."
+msgid "Speech-to-text is not configured"
+msgstr "Voz para texto não está configurado"
 
-msgid "Add Custom Tool"
-msgstr "Adicionar ferramenta personalizada"
+msgid "Unknown STT backend: %1"
+msgstr "Backend STT desconhecido: %1"
 
-msgid "Echoes back the message provided."
-msgstr "Ecoa de volta a mensagem fornecida."
+msgid "Whisper CLI runner is not available"
+msgstr "O executor da CLI do Whisper não está disponível"
 
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "Nome da ferramenta (ex. systemctl_service)"
+msgid "Could not build Whisper command"
+msgstr "Não foi possível construir o comando Whisper"
 
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "Descrição (instrui o LLM sobre o que esta ferramenta faz)"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "Modelo de comando (ex. systemctl {action} {service})"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "Requer superusuário (executa com pkexec)"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "Executar ferramenta automaticamente (sem diálogo de confirmação)"
-
-msgid "Collapse results"
-msgstr "Recolher resultados"
-
-msgid ""
-"Show finished results as a small pill; click the pill to view the full "
-"output."
-msgstr ""
-"Mostrar resultados concluídos como uma pequena pílula; clique na pílula para "
-"ver a saída completa."
-
-msgid "Update Tool"
-msgstr "Atualizar ferramenta"
-
-msgid "Save Tool"
-msgstr "Salvar ferramenta"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "Uma ferramenta chamada \"%1\" já existe."
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"As ferramentas personalizadas permitem expor seus próprios comandos ao LLM. "
-"Use marcadores de posição como {variable} no Modelo de Comando para definir "
-"parâmetros que o LLM pode preencher. Os valores fornecidos pelo LLM são "
-"automaticamente escapados do shell."
-
-msgid "Loaded %1 skill"
-msgstr "Habilidade %1 carregada"
-
-msgid "Voice message"
-msgstr "Mensagem de voz"
-
-msgid "Error"
-msgstr "Erro"
-
-msgid "Web Search"
-msgstr "Busca na Web"
-
-msgid "compacted"
-msgstr "compactado"
-
-msgid ""
-"This message has been summarized into the compacted context. Citations "
-"active."
-msgstr "Esta mensagem foi resumida no contexto compactado. Citações ativas."
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"A renderização do Mathtext reverteu para substituição por Unicode "
-"(matplotlib não instalado ou ocorreu um erro)"
-
-msgid "Thinking"
-msgstr "Pensando…"
-
-msgid "Searched for: %1"
-msgstr "Pesquisado: %1"
-
-msgid "Show %1 results"
-msgstr "Mostrar %1 resultados"
-
-msgid "Save & Retry"
-msgstr "Salvar e tentar novamente"
-
-msgid "Copy to clipboard"
-msgstr "Copiar para a área de transferência"
-
-msgid "Edit message"
-msgstr "Editar mensagem"
-
-msgid "Edit response"
-msgstr "Editar resposta"
-
-msgid "Retry from here"
-msgstr "Tentar novamente a partir daqui"
-
-msgid "Regenerate response"
-msgstr "Regenerar resposta"
-
-msgid "Share output with assistant"
-msgstr "Compartilhar saída com o assistente"
-
-msgid "The model loaded this skill's instructions into context before acting."
-msgstr ""
-"O modelo carregou as instruções desta habilidade no contexto antes de agir."
-
-msgid "Stop command"
-msgstr "Parar comando"
-
-msgid "Open terminal attached to this session"
-msgstr "Abrir terminal vinculado a esta sessão"
-
-msgid "Collapse result"
-msgstr "Recolher resultado"
-
-msgid "Copy output"
-msgstr "Copiar saída"
+msgid "STT backend does not support model listing"
+msgstr "O backend STT não suporta listagem de modelos"
 
 msgid "Enable skills"
 msgstr "Habilitar habilidades"
@@ -1101,6 +1207,37 @@ msgstr "Redefinir para o modelo padrão"
 
 msgid "Preview:"
 msgstr "Pré-visualização:"
+
+msgid "(Active Chat Profile)"
+msgstr "(Perfil de chat ativo)"
+
+msgid "Unnamed Profile"
+msgstr "Perfil sem nome"
+
+msgid "Active Chat Profile"
+msgstr "Perfil de chat ativo"
+
+msgid "Active Chat Profile (Fallback)"
+msgstr "Perfil de chat ativo (reserva)"
+
+msgid "Selected profile does not have an endpoint URL or model configured."
+msgstr ""
+"O perfil selecionado não possui um URL de endpoint ou modelo configurado."
+
+msgid "Testing command validation with '%1'…"
+msgstr "Testando a validação de comandos com '%1'…"
+
+msgid "Validation test failed: %1"
+msgstr "Falha no teste de validação: %1"
+
+msgid "Validator rejected the sample command: %1"
+msgstr "O validador rejeitou o comando de exemplo: %1"
+
+msgid "n/a"
+msgstr "n/d"
+
+msgid "Validator accepted the sample command (confidence %1)."
+msgstr "O validador aceitou o comando de exemplo (confiança %1)."
 
 msgid "General Tool Settings"
 msgstr "Configurações gerais de ferramentas"
@@ -1315,6 +1452,15 @@ msgstr ""
 "Restaura o texto literal completo e as saídas de ferramentas de mensagens "
 "compactadas anteriormente especificando os IDs de mensagem inicial e final "
 "de um intervalo de mensagens citado."
+
+msgid ""
+"Your justification is verified against the command before it runs, and the "
+"command is checked for shell syntax errors; commands that fail either check "
+"are rejected."
+msgstr ""
+"Sua justificativa é verificada em relação ao comando antes de ele ser "
+"executado, e o comando é verificado quanto a erros de sintaxe de shell; "
+"comandos que falharem em qualquer uma das verificações são rejeitados."
 
 msgid "Approve the pending tool request"
 msgstr "Aprovar a solicitação de ferramenta pendente"
@@ -1551,22 +1697,6 @@ msgstr "Solte os arquivos aqui para anexar"
 msgid "Context Compaction"
 msgstr "Compactação de contexto"
 
-msgid "(Active Chat Profile)"
-msgstr "(Perfil de chat ativo)"
-
-msgid "Unnamed Profile"
-msgstr "Perfil sem nome"
-
-msgid "Active Chat Profile"
-msgstr "Perfil de chat ativo"
-
-msgid "Active Chat Profile (Fallback)"
-msgstr "Perfil de chat ativo (reserva)"
-
-msgid "Selected profile does not have an endpoint URL or model configured."
-msgstr ""
-"O perfil selecionado não possui um URL de endpoint ou modelo configurado."
-
 msgid "Testing compaction call using '%1'…"
 msgstr "Testando chamada de compactação usando '%1'…"
 
@@ -1598,9 +1728,6 @@ msgstr "Perfil de compactação"
 
 msgid "Model Profile:"
 msgstr "Perfil de modelo:"
-
-msgid "None"
-msgstr "Nenhum"
 
 msgid ""
 "Provider: %1  |  Model: %2\n"
@@ -1670,9 +1797,6 @@ msgstr "Transcrição de conversa de exemplo:"
 msgid "Reset Sample"
 msgstr "Redefinir exemplo"
 
-msgid "Testing…"
-msgstr "Testando…"
-
 msgid "Test Compaction Connection"
 msgstr "Testar conexão de compactação"
 
@@ -1708,6 +1832,16 @@ msgstr "Renomear"
 
 msgid "Adapter:"
 msgstr "Adaptador:"
+
+msgid ""
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
+msgstr ""
+"Perfis Decisions avaliam cada mensagem uma vez e respondem com um veredito e "
+"confiança. Eles não têm memória de conversa, prompt de sistema ou "
+"ferramentas. Também podem ser selecionados como validador de comandos nas "
+"configurações de Ferramentas."
 
 msgid "Platform:"
 msgstr "Plataforma:"
@@ -1968,6 +2102,10 @@ msgstr ""
 "Habilite ou desabilite habilidades individuais em Configurações → "
 "Habilidades."
 
+msgid "Command validation is still in progress; try again in a moment."
+msgstr ""
+"A validação do comando ainda está em andamento; tente novamente em instantes."
+
 msgid "No tool request pending to approve."
 msgstr "Nenhuma solicitação de ferramenta pendente para aprovar."
 
@@ -2053,6 +2191,19 @@ msgstr "Tarefa desconhecida: **%1**. Disponíveis: %2"
 msgid "The user declined to run this command."
 msgstr "O usuário recusou executar este comando."
 
+msgid "No message to evaluate."
+msgstr "Nenhuma mensagem para avaliar."
+
+msgid "Evaluating…"
+msgstr "Avaliando…"
+
+msgid "Decision request failed: %1"
+msgstr "Falha na solicitação de decisão: %1"
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr "%1% de confiança"
+
 msgid "PlasmaLLM: Tool Call"
 msgstr "PlasmaLLM: Chamada de ferramenta"
 
@@ -2061,6 +2212,27 @@ msgstr "Ferramenta solicitada: %1"
 
 msgid "PlasmaLLM"
 msgstr "PlasmaLLM"
+
+msgid "Validation timed out."
+msgstr "Tempo de validação esgotado."
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr "O perfil do validador não tem endpoint ou modelo configurado."
+
+msgid "Empty validator response."
+msgstr "Resposta do validador vazia."
+
+msgid "empty validator response"
+msgstr "resposta do validador vazia"
+
+msgid "Could not validate: %1"
+msgstr "Não foi possível validar: %1"
+
+msgid "the command does not match its stated justification"
+msgstr "o comando não corresponde à sua justificativa declarada"
+
+msgid "Blocked by command validator: %1"
+msgstr "Bloqueado pelo validador de comandos: %1"
 
 msgid "Unknown tool %1"
 msgstr "Ferramenta desconhecida %1"
@@ -2342,9 +2514,6 @@ msgstr "Ferramentas personalizadas"
 #~ "⚠️ PERIGO: Ambas as opções habilitadas — o LLM agora pode executar "
 #~ "comandos e ver sua saída, habilitando um fluxo de trabalho agêntico. Usar "
 #~ "somente com LLMs confiáveis."
-
-#~ msgid "Backend:"
-#~ msgstr "Backend:"
 
 #~ msgid "Session name:"
 #~ msgstr "Nome da sessão:"

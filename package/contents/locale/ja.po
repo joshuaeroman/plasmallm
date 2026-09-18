@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-04 17:51-0400\n"
+"POT-Creation-Date: 2026-09-17 22:45-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Japanese\n"
@@ -14,15 +14,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-msgid "Color button"
-msgstr "カラーボタン"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "現在の色は %1 です。このボタンを押すと色選択ダイアログが開きます。"
-
-msgid "Current color is %1."
-msgstr "現在の色は %1 です。"
 
 msgid "Request timed out after 30 seconds"
 msgstr "30秒後にリクエストがタイムアウトしました"
@@ -84,6 +75,14 @@ msgstr ""
 "このモデルバージョンは、ネイティブツール（検索/コード）とカスタムコマンドの組"
 "み合わせをサポートしていません。新しいモデル（例：Gemini 3+）を選択するか、設"
 "定でネイティブ機能を無効にしてください。"
+
+msgid ""
+"Decisions models cannot generate chat text. Use it as your active profile "
+"for single-shot evaluations, or select it as the Command Validator profile "
+"in Tools settings."
+msgstr ""
+"Decisionsモデルはチャットテキストを生成できません。単発の評価に使う場合はアクティブなプロファイルとして使用し、コマンド検証に使う場合はツール設定"
+"でコマンドバリデーターのプロファイルとして選択してください。"
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -163,79 +162,6 @@ msgstr ""
 msgid "No command provided."
 msgstr "コマンドが指定されていません。"
 
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Exa Search"
-msgstr "Exa検索"
-
-msgid "Ollama API key"
-msgstr "Ollama APIキー..."
-
-msgid "Saving…"
-msgstr "保存中…"
-
-msgid "Saved"
-msgstr "保存済み"
-
-msgid "Save to Config (Insecure)"
-msgstr "設定に保存（安全でない）"
-
-msgid "Save Key"
-msgstr "キーを保存"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG インスタンス URL (例: https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API キー/トークン (オプション)"
-
-msgid "Exa API key"
-msgstr "Exa APIキー"
-
-msgid "Search Type:"
-msgstr "検索タイプ:"
-
-msgid "Auto (Default)"
-msgstr "自動（デフォルト）"
-
-msgid "Fast"
-msgstr "高速"
-
-msgid "Instant"
-msgstr "即時"
-
-msgid "Deep Lite"
-msgstr "ディープ Lite"
-
-msgid "Deep"
-msgstr "ディープ"
-
-msgid "Deep Reasoning"
-msgstr "ディープ推論"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo は設定を必要としません。"
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr ""
-"SearXNG インスタンスで JSON 形式が有効になっていることを確認してください。"
-
-msgid "Enables LLM-triggered neural web searches via Exa API."
-msgstr "Exa APIを介したLLMトリガーのニューラルウェブ検索を有効にする"
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "OllamaのSearch APIを介したLLMトリガーのウェブ検索を有効にする"
-
-msgid "Manage and discover skills in the Skills settings page."
-msgstr "「スキル」設定ページでスキルを管理および検索します。"
-
 msgid "Saved phrases:"
 msgstr "保存されたフレーズ:"
 
@@ -314,6 +240,147 @@ msgstr ""
 "'tmux' と 'screen' のどちらもシステムに見つかりませんでした。セッションのマル"
 "チプレックスは利用できません。"
 
+msgid "Command Validation"
+msgstr "コマンド検証"
+
+msgid "Validate commands against their justification with a second model"
+msgstr "2つ目のモデルでコマンドをその理由と照合して検証する"
+
+msgid ""
+"Before a command runs, the selected model checks that the command does what "
+"the LLM's justification says. Mismatched commands are denied automatically."
+msgstr "コマンドが実行される前に、選択したモデルがコマンドの内容がLLMの理由と一致するか確認します。一致しないコマンドは自動的に拒否されます。"
+
+msgid ""
+"The validator checks that the command does what its justification says and "
+"that it is well-written shell (no incomplete constructs or syntax errors). "
+"Mismatched or malformed commands are denied automatically and the reason is "
+"returned to the LLM. If the validator cannot run (error or timeout), the "
+"command falls back to asking for approval."
+msgstr ""
+"バリデーターは、コマンドがその理由と一致しているか、また正しいシェル（不完全な構成や構文エラーがない）かどうかを確認します。一致しない、または不正なコマン"
+"ドは自動的に拒否され、理由がLLMに返されます。バリデーターを実行できない場合（エラーまたはタイムアウト）、コマンドは承認を求める動作にフォールバックしま"
+"す。"
+
+msgid "Validator profile:"
+msgstr "バリデーターのプロファイル:"
+
+msgid "Default"
+msgstr "デフォルト"
+
+msgid "None"
+msgstr "なし"
+
+msgid "Structured decisions (Jev)"
+msgstr "構造化決定 (Jev)"
+
+msgid "Chat completion (JSON)"
+msgstr "チャット補完 (JSON)"
+
+msgid ""
+"Provider: %1  |  Model: %2\n"
+"Backend: %3"
+msgstr "プロバイダー: %1  |  モデル: %2\nバックエンド: %3"
+
+msgid "Backend:"
+msgstr "バックエンド:"
+
+msgid "Auto-detect"
+msgstr "自動検出"
+
+msgid "Structured decisions (Jev/TypeSafe)"
+msgstr "構造化決定 (Jev/TypeSafe)"
+
+msgid "Chat completion (JSON verdict)"
+msgstr "チャット補完 (JSON 判定)"
+
+msgid ""
+"Maximum mismatch probability allowed before a command is rejected "
+"(structured decisions backend):"
+msgstr "コマンドが拒否される前に許容される最大不一致確率（構造化決定バックエンド）:"
+
+msgid "% (lower = stricter)"
+msgstr "%（低いほど厳格）"
+
+msgid "Testing…"
+msgstr "テスト中…"
+
+msgid "Test Validator"
+msgstr "バリデーターをテスト"
+
+msgid "Manage and discover skills in the Skills settings page."
+msgstr "「スキル」設定ページでスキルを管理および検索します。"
+
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Exa検索"
+
+msgid "Ollama API key"
+msgstr "Ollama APIキー..."
+
+msgid "Saving…"
+msgstr "保存中…"
+
+msgid "Saved"
+msgstr "保存済み"
+
+msgid "Save to Config (Insecure)"
+msgstr "設定に保存（安全でない）"
+
+msgid "Save Key"
+msgstr "キーを保存"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG インスタンス URL (例: https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API キー/トークン (オプション)"
+
+msgid "Exa API key"
+msgstr "Exa APIキー"
+
+msgid "Search Type:"
+msgstr "検索タイプ:"
+
+msgid "Auto (Default)"
+msgstr "自動（デフォルト）"
+
+msgid "Fast"
+msgstr "高速"
+
+msgid "Instant"
+msgstr "即時"
+
+msgid "Deep Lite"
+msgstr "ディープ Lite"
+
+msgid "Deep"
+msgstr "ディープ"
+
+msgid "Deep Reasoning"
+msgstr "ディープ推論"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo は設定を必要としません。"
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr ""
+"SearXNG インスタンスで JSON 形式が有効になっていることを確認してください。"
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr "Exa APIを介したLLMトリガーのニューラルウェブ検索を有効にする"
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "OllamaのSearch APIを介したLLMトリガーのウェブ検索を有効にする"
+
 msgid ""
 "Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
 "that skill has “Allow running skill scripts without approval” checked on the "
@@ -323,8 +390,33 @@ msgstr ""
 "ジの「承認なしでのスキルのスクリプト実行を許可」がチェックされている場合の"
 "み、実行ごとの承認がスキップされます。"
 
+msgid "Color button"
+msgstr "カラーボタン"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "現在の色は %1 です。このボタンを押すと色選択ダイアログが開きます。"
+
+msgid "Current color is %1."
+msgstr "現在の色は %1 です。"
+
 msgid "Tool Request: %1"
 msgstr "ツールリクエスト：%1"
+
+msgid "Validating command against its justification…"
+msgstr "コマンドをその理由と照合して検証中…"
+
+msgid " (by %1)"
+msgstr "（%1 による）"
+
+msgid " confidence %1"
+msgstr " 信頼度 %1"
+
+#, javascript-format
+msgid "Validated: matches justification%1%2"
+msgstr "検証済み: 理由と一致%1%2"
+
+msgid "Command does not match its justification."
+msgstr "コマンドがその理由と一致しません。"
 
 msgid "Justification: %1"
 msgstr "理由：%1"
@@ -551,20 +643,144 @@ msgstr "設定を表示"
 msgid "Show Pin"
 msgstr "ピンを表示"
 
-msgid "Speech-to-text is not configured"
-msgstr "音声認識が設定されていません"
+msgid "Loaded %1 skill"
+msgstr "%1 スキルを読み込みました"
 
-msgid "Unknown STT backend: %1"
-msgstr "不明なSTTバックエンド: %1"
+msgid "Yes"
+msgstr "はい"
 
-msgid "Whisper CLI runner is not available"
-msgstr "Whisper CLI ランナーは利用できません"
+msgid "No"
+msgstr "いいえ"
 
-msgid "Could not build Whisper command"
-msgstr "Whisper コマンドを作成できませんでした"
+msgid "Uncertain"
+msgstr "不明"
 
-msgid "STT backend does not support model listing"
-msgstr "STTバックエンドはモデル一覧の取得をサポートしていません"
+msgid "Voice message"
+msgstr "音声メッセージ"
+
+msgid "Error"
+msgstr "エラー"
+
+msgid "Web Search"
+msgstr "ウェブ検索..."
+
+msgid "compacted"
+msgstr "圧縮済み"
+
+msgid ""
+"This message has been summarized into the compacted context. Citations "
+"active."
+msgstr ""
+"このメッセージは圧縮されたコンテキストに要約されました。引用は有効です。"
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Mathtext レンダリングは Unicode 置換にフォールバックしました (matplotlib がイ"
+"ンストールされていないか、エラーが発生しました)"
+
+msgid "Thinking"
+msgstr "思考中…"
+
+msgid "Searched for: %1"
+msgstr "検索した内容：%1"
+
+msgid "Show %1 results"
+msgstr "%1 件の結果を表示"
+
+msgid "Save & Retry"
+msgstr "保存して再試行"
+
+msgid "Copy to clipboard"
+msgstr "クリップボードにコピー"
+
+msgid "Edit message"
+msgstr "メッセージを編集"
+
+msgid "Edit response"
+msgstr "応答を編集"
+
+msgid "Retry from here"
+msgstr "ここから再試行"
+
+msgid "Regenerate response"
+msgstr "応答を再生成"
+
+msgid "Share output with assistant"
+msgstr "出力をアシスタントと共有"
+
+msgid "The model loaded this skill's instructions into context before acting."
+msgstr ""
+"モデルは動作を実行する前に、このスキルの指示をコンテキストに読み込みました。"
+
+msgid "Stop command"
+msgstr "コマンドを停止"
+
+msgid "Open terminal attached to this session"
+msgstr "このセッションに接続されたターミナルを開く"
+
+msgid "Collapse result"
+msgstr "結果を折りたたむ"
+
+msgid "Copy output"
+msgstr "出力をコピー"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"カスタムツールが設定されていません。LLMに独自のコマンドを公開するカスタムツー"
+"ルを追加してください。"
+
+msgid "Add Custom Tool"
+msgstr "カスタムツールを追加"
+
+msgid "Echoes back the message provided."
+msgstr "提供されたメッセージをエコーバックします。"
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "ツール名（例：systemctl_service）"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "説明（このツールの機能をLLMに指示する）"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "コマンドテンプレート（例：systemctl {action} {service}）"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "スーパーユーザーが必要（pkexecで実行）"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "ツールを自動実行（確認ダイアログなし）"
+
+msgid "Collapse results"
+msgstr "結果を折りたたむ"
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+"完了した結果を小さなピルとして表示します。ピルをクリックすると完全な出力が表"
+"示されます。"
+
+msgid "Update Tool"
+msgstr "ツールを更新"
+
+msgid "Save Tool"
+msgstr "ツールを保存"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "\"%1\" という名前のツールが既に存在します。"
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"カスタムツールを使用すると、独自のコマンドをLLMに公開できます。コマンドテンプ"
+"レートで {variable} のようなプレースホルダーを使用して、LLMが入力できるパラ"
+"メーターを定義します。LLMが提供する値は自動的にシェルエスケープされます。"
 
 msgid "Speech to Text"
 msgstr "音声認識 (STT)"
@@ -737,9 +953,6 @@ msgstr "翻訳"
 msgid "Device:"
 msgstr "デバイス:"
 
-msgid "Default"
-msgstr "デフォルト"
-
 msgid "FP16:"
 msgstr "FP16:"
 
@@ -778,135 +991,20 @@ msgstr "省略可能、例: ja または en (空 = 自動)"
 msgid "Max recording (seconds):"
 msgstr "最大録音時間 (秒):"
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
-msgstr ""
-"カスタムツールが設定されていません。LLMに独自のコマンドを公開するカスタムツー"
-"ルを追加してください。"
+msgid "Speech-to-text is not configured"
+msgstr "音声認識が設定されていません"
 
-msgid "Add Custom Tool"
-msgstr "カスタムツールを追加"
+msgid "Unknown STT backend: %1"
+msgstr "不明なSTTバックエンド: %1"
 
-msgid "Echoes back the message provided."
-msgstr "提供されたメッセージをエコーバックします。"
+msgid "Whisper CLI runner is not available"
+msgstr "Whisper CLI ランナーは利用できません"
 
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "ツール名（例：systemctl_service）"
+msgid "Could not build Whisper command"
+msgstr "Whisper コマンドを作成できませんでした"
 
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "説明（このツールの機能をLLMに指示する）"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "コマンドテンプレート（例：systemctl {action} {service}）"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "スーパーユーザーが必要（pkexecで実行）"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "ツールを自動実行（確認ダイアログなし）"
-
-msgid "Collapse results"
-msgstr "結果を折りたたむ"
-
-msgid ""
-"Show finished results as a small pill; click the pill to view the full "
-"output."
-msgstr ""
-"完了した結果を小さなピルとして表示します。ピルをクリックすると完全な出力が表"
-"示されます。"
-
-msgid "Update Tool"
-msgstr "ツールを更新"
-
-msgid "Save Tool"
-msgstr "ツールを保存"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "\"%1\" という名前のツールが既に存在します。"
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"カスタムツールを使用すると、独自のコマンドをLLMに公開できます。コマンドテンプ"
-"レートで {variable} のようなプレースホルダーを使用して、LLMが入力できるパラ"
-"メーターを定義します。LLMが提供する値は自動的にシェルエスケープされます。"
-
-msgid "Loaded %1 skill"
-msgstr "%1 スキルを読み込みました"
-
-msgid "Voice message"
-msgstr "音声メッセージ"
-
-msgid "Error"
-msgstr "エラー"
-
-msgid "Web Search"
-msgstr "ウェブ検索..."
-
-msgid "compacted"
-msgstr "圧縮済み"
-
-msgid ""
-"This message has been summarized into the compacted context. Citations "
-"active."
-msgstr ""
-"このメッセージは圧縮されたコンテキストに要約されました。引用は有効です。"
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"Mathtext レンダリングは Unicode 置換にフォールバックしました (matplotlib がイ"
-"ンストールされていないか、エラーが発生しました)"
-
-msgid "Thinking"
-msgstr "思考中…"
-
-msgid "Searched for: %1"
-msgstr "検索した内容：%1"
-
-msgid "Show %1 results"
-msgstr "%1 件の結果を表示"
-
-msgid "Save & Retry"
-msgstr "保存して再試行"
-
-msgid "Copy to clipboard"
-msgstr "クリップボードにコピー"
-
-msgid "Edit message"
-msgstr "メッセージを編集"
-
-msgid "Edit response"
-msgstr "応答を編集"
-
-msgid "Retry from here"
-msgstr "ここから再試行"
-
-msgid "Regenerate response"
-msgstr "応答を再生成"
-
-msgid "Share output with assistant"
-msgstr "出力をアシスタントと共有"
-
-msgid "The model loaded this skill's instructions into context before acting."
-msgstr ""
-"モデルは動作を実行する前に、このスキルの指示をコンテキストに読み込みました。"
-
-msgid "Stop command"
-msgstr "コマンドを停止"
-
-msgid "Open terminal attached to this session"
-msgstr "このセッションに接続されたターミナルを開く"
-
-msgid "Collapse result"
-msgstr "結果を折りたたむ"
-
-msgid "Copy output"
-msgstr "出力をコピー"
+msgid "STT backend does not support model listing"
+msgstr "STTバックエンドはモデル一覧の取得をサポートしていません"
 
 msgid "Enable skills"
 msgstr "スキルを有効にする"
@@ -1095,6 +1193,37 @@ msgstr "デフォルトテンプレートにリセット"
 
 msgid "Preview:"
 msgstr "プレビュー:"
+
+msgid "(Active Chat Profile)"
+msgstr "(アクティブなチャットプロファイル)"
+
+msgid "Unnamed Profile"
+msgstr "名前のないプロファイル"
+
+msgid "Active Chat Profile"
+msgstr "アクティブなチャットプロファイル"
+
+msgid "Active Chat Profile (Fallback)"
+msgstr "アクティブなチャットプロファイル (フォールバック)"
+
+msgid "Selected profile does not have an endpoint URL or model configured."
+msgstr ""
+"選択されたプロファイルにはエンドポイントURLまたはモデルが設定されていません。"
+
+msgid "Testing command validation with '%1'…"
+msgstr "コマンド検証を '%1' でテスト中…"
+
+msgid "Validation test failed: %1"
+msgstr "検証テストに失敗しました: %1"
+
+msgid "Validator rejected the sample command: %1"
+msgstr "バリデーターがサンプルコマンドを拒否しました: %1"
+
+msgid "n/a"
+msgstr "該当なし"
+
+msgid "Validator accepted the sample command (confidence %1)."
+msgstr "バリデーターがサンプルコマンドを承認しました（信頼度 %1）。"
 
 msgid "General Tool Settings"
 msgstr "一般ツール設定"
@@ -1300,6 +1429,14 @@ msgid ""
 msgstr ""
 "引用されたメッセージ範囲から開始および終了メッセージ ID を指定して、以前に圧"
 "縮されたメッセージの逐語的テキストとツール出力を完全に復元します。"
+
+msgid ""
+"Your justification is verified against the command before it runs, and the "
+"command is checked for shell syntax errors; commands that fail either check "
+"are rejected."
+msgstr ""
+"コマンドの実行前に、あなたの理由がコマンドと照合して検証され、コマンドのシェル構文エラーがチェックされます。どちらかのチェックに失敗したコマンドは拒否され"
+"ます。"
 
 msgid "Approve the pending tool request"
 msgstr "保留中のツールリクエストを承認"
@@ -1535,22 +1672,6 @@ msgstr "ここにファイルをドロップして添付します"
 msgid "Context Compaction"
 msgstr "コンテキスト圧縮"
 
-msgid "(Active Chat Profile)"
-msgstr "(アクティブなチャットプロファイル)"
-
-msgid "Unnamed Profile"
-msgstr "名前のないプロファイル"
-
-msgid "Active Chat Profile"
-msgstr "アクティブなチャットプロファイル"
-
-msgid "Active Chat Profile (Fallback)"
-msgstr "アクティブなチャットプロファイル (フォールバック)"
-
-msgid "Selected profile does not have an endpoint URL or model configured."
-msgstr ""
-"選択されたプロファイルにはエンドポイントURLまたはモデルが設定されていません。"
-
 msgid "Testing compaction call using '%1'…"
 msgstr "'%1' を使用して圧縮呼び出しをテスト中…"
 
@@ -1581,9 +1702,6 @@ msgstr "圧縮プロファイル"
 
 msgid "Model Profile:"
 msgstr "モデルプロファイル:"
-
-msgid "None"
-msgstr "なし"
 
 msgid ""
 "Provider: %1  |  Model: %2\n"
@@ -1653,9 +1771,6 @@ msgstr "サンプル会話トランスクリプト:"
 msgid "Reset Sample"
 msgstr "サンプルをリセット"
 
-msgid "Testing…"
-msgstr "テスト中…"
-
 msgid "Test Compaction Connection"
 msgstr "圧縮接続をテスト"
 
@@ -1691,6 +1806,14 @@ msgstr "名前変更"
 
 msgid "Adapter:"
 msgstr "アダプター:"
+
+msgid ""
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
+msgstr ""
+"Decisionsプロファイルは各メッセージを一度だけ評価し、判定と信頼度を返します。会話メモリ、システムプロンプト、ツールはありません。ツール設定でコマ"
+"ンドバリデーターとして選択することもできます。"
 
 msgid "Platform:"
 msgstr "プラットフォーム:"
@@ -1945,6 +2068,9 @@ msgstr "利用可能なスキル (%1 件有効):"
 msgid "Enable or disable individual skills in Settings → Skills."
 msgstr "「設定 → スキル」で個々のスキルを有効または無効にします。"
 
+msgid "Command validation is still in progress; try again in a moment."
+msgstr "コマンド検証はまだ進行中です。しばらくしてからもう一度お試しください。"
+
 msgid "No tool request pending to approve."
 msgstr "承認待ちのツールリクエストはありません。"
 
@@ -2031,6 +2157,19 @@ msgstr "不明なタスク: **%1**。利用可能: %2"
 msgid "The user declined to run this command."
 msgstr "ユーザーはこのコマンドの実行を拒否しました。"
 
+msgid "No message to evaluate."
+msgstr "評価するメッセージがありません。"
+
+msgid "Evaluating…"
+msgstr "評価中…"
+
+msgid "Decision request failed: %1"
+msgstr "決定リクエストに失敗しました: %1"
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr "信頼度 %1%"
+
 msgid "PlasmaLLM: Tool Call"
 msgstr "PlasmaLLM: ツール呼び出し"
 
@@ -2039,6 +2178,27 @@ msgstr "要求されたツール: %1"
 
 msgid "PlasmaLLM"
 msgstr "PlasmaLLM"
+
+msgid "Validation timed out."
+msgstr "検証がタイムアウトしました。"
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr "バリデーターのプロファイルにエンドポイントまたはモデルが設定されていません。"
+
+msgid "Empty validator response."
+msgstr "バリデーターの応答が空です。"
+
+msgid "empty validator response"
+msgstr "バリデーターの応答が空です"
+
+msgid "Could not validate: %1"
+msgstr "検証できませんでした: %1"
+
+msgid "the command does not match its stated justification"
+msgstr "コマンドが表明された理由と一致しません"
+
+msgid "Blocked by command validator: %1"
+msgstr "コマンドバリデーターによってブロックされました: %1"
 
 msgid "Unknown tool %1"
 msgstr "不明なツール %1"
@@ -2317,9 +2477,6 @@ msgstr "カスタムツール"
 #~ "⚠️ 危険: 両方のオプションが有効です - LLMはコマンドを実行し、その出力を確認"
 #~ "できるようになり、エージェント型ワークフローが可能になります。信頼できる"
 #~ "LLMでのみ使用してください。"
-
-#~ msgid "Backend:"
-#~ msgstr "バックエンド:"
 
 #~ msgid "Session name:"
 #~ msgstr "セッション名:"

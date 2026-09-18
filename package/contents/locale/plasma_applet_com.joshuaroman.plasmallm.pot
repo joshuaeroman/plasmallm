@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-04 17:51-0400\n"
+"POT-Creation-Date: 2026-09-17 22:45-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,15 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid "Color button"
-msgstr ""
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr ""
-
-msgid "Current color is %1."
-msgstr ""
 
 msgid "Request timed out after 30 seconds"
 msgstr ""
@@ -78,6 +69,12 @@ msgid ""
 "This model version does not support combining Native tools (Search/Code) "
 "with custom commands. Please select a newer model (e.g., Gemini 3+) or "
 "disable Native features in Settings."
+msgstr ""
+
+msgid ""
+"Decisions models cannot generate chat text. Use it as your active profile "
+"for single-shot evaluations, or select it as the Command Validator profile "
+"in Tools settings."
 msgstr ""
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
@@ -146,6 +143,139 @@ msgid ""
 msgstr ""
 
 msgid "No command provided."
+msgstr ""
+
+msgid "Saved phrases:"
+msgstr ""
+
+msgid ""
+"Nothing remembered yet. The assistant can save phrases with its edit_memory "
+"tool, or add them below."
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Memory is full"
+msgstr ""
+
+msgid "Add a phrase…"
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Ask before running commands from LLM"
+msgstr ""
+
+msgid ""
+"Prompt for approval before executing shell commands from the LLM. Dangerous "
+"to uncheck as the LLM will see output and may run further commands."
+msgstr ""
+
+msgid ""
+"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
+"commands without permission and will see their output, enabling an agentic "
+"workflow. Only use with trustworthy LLMs."
+msgstr ""
+
+msgid "Note: This tool is not restricted by the path whitelist."
+msgstr ""
+
+msgid "Session Multiplexer"
+msgstr ""
+
+msgid "Run commands inside a persistent session"
+msgstr ""
+
+msgid ""
+"Execute LLM commands inside a long-lived tmux or screen session so state "
+"persists across turns."
+msgstr ""
+
+msgid "Reset Session"
+msgstr ""
+
+msgid "Kill persistent session (stops all processes and resets shell state)"
+msgstr ""
+
+msgid ""
+"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
+"is unavailable."
+msgstr ""
+
+msgid "Command Validation"
+msgstr ""
+
+msgid "Validate commands against their justification with a second model"
+msgstr ""
+
+msgid ""
+"Before a command runs, the selected model checks that the command does what "
+"the LLM's justification says. Mismatched commands are denied automatically."
+msgstr ""
+
+msgid ""
+"The validator checks that the command does what its justification says and "
+"that it is well-written shell (no incomplete constructs or syntax errors). "
+"Mismatched or malformed commands are denied automatically and the reason is "
+"returned to the LLM. If the validator cannot run (error or timeout), the "
+"command falls back to asking for approval."
+msgstr ""
+
+msgid "Validator profile:"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Structured decisions (Jev)"
+msgstr ""
+
+msgid "Chat completion (JSON)"
+msgstr ""
+
+msgid ""
+"Provider: %1  |  Model: %2\n"
+"Backend: %3"
+msgstr ""
+
+msgid "Backend:"
+msgstr ""
+
+msgid "Auto-detect"
+msgstr ""
+
+msgid "Structured decisions (Jev/TypeSafe)"
+msgstr ""
+
+msgid "Chat completion (JSON verdict)"
+msgstr ""
+
+msgid ""
+"Maximum mismatch probability allowed before a command is rejected "
+"(structured decisions backend):"
+msgstr ""
+
+msgid "% (lower = stricter)"
+msgstr ""
+
+msgid "Testing…"
+msgstr ""
+
+msgid "Test Validator"
+msgstr ""
+
+msgid "Manage and discover skills in the Skills settings page."
 msgstr ""
 
 msgid "Ollama API"
@@ -217,81 +347,38 @@ msgstr ""
 msgid "Enables LLM-triggered web searches via Ollama's search API"
 msgstr ""
 
-msgid "Manage and discover skills in the Skills settings page."
-msgstr ""
-
-msgid "Saved phrases:"
-msgstr ""
-
-msgid ""
-"Nothing remembered yet. The assistant can save phrases with its edit_memory "
-"tool, or add them below."
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Remove"
-msgstr ""
-
-msgid "Memory is full"
-msgstr ""
-
-msgid "Add a phrase…"
-msgstr ""
-
-msgid "Add"
-msgstr ""
-
-msgid "Ask before running commands from LLM"
-msgstr ""
-
-msgid ""
-"Prompt for approval before executing shell commands from the LLM. Dangerous "
-"to uncheck as the LLM will see output and may run further commands."
-msgstr ""
-
-msgid ""
-"⚠️ DANGER: 'Ask before running' is disabled - the LLM can now execute "
-"commands without permission and will see their output, enabling an agentic "
-"workflow. Only use with trustworthy LLMs."
-msgstr ""
-
-msgid "Note: This tool is not restricted by the path whitelist."
-msgstr ""
-
-msgid "Session Multiplexer"
-msgstr ""
-
-msgid "Run commands inside a persistent session"
-msgstr ""
-
-msgid ""
-"Execute LLM commands inside a long-lived tmux or screen session so state "
-"persists across turns."
-msgstr ""
-
-msgid "Reset Session"
-msgstr ""
-
-msgid "Kill persistent session (stops all processes and resets shell state)"
-msgstr ""
-
-msgid ""
-"Neither 'tmux' nor 'screen' was found on your system. Session multiplexing "
-"is unavailable."
-msgstr ""
-
 msgid ""
 "Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
 "that skill has “Allow running skill scripts without approval” checked on the "
 "Skills settings page."
 msgstr ""
 
+msgid "Color button"
+msgstr ""
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr ""
+
+msgid "Current color is %1."
+msgstr ""
+
 msgid "Tool Request: %1"
+msgstr ""
+
+msgid "Validating command against its justification…"
+msgstr ""
+
+msgid " (by %1)"
+msgstr ""
+
+msgid " confidence %1"
+msgstr ""
+
+#, javascript-format
+msgid "Validated: matches justification%1%2"
+msgstr ""
+
+msgid "Command does not match its justification."
 msgstr ""
 
 msgid "Justification: %1"
@@ -516,19 +603,132 @@ msgstr ""
 msgid "Show Pin"
 msgstr ""
 
-msgid "Speech-to-text is not configured"
+msgid "Loaded %1 skill"
 msgstr ""
 
-msgid "Unknown STT backend: %1"
+msgid "Yes"
 msgstr ""
 
-msgid "Whisper CLI runner is not available"
+msgid "No"
 msgstr ""
 
-msgid "Could not build Whisper command"
+msgid "Uncertain"
 msgstr ""
 
-msgid "STT backend does not support model listing"
+msgid "Voice message"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Web Search"
+msgstr ""
+
+msgid "compacted"
+msgstr ""
+
+msgid ""
+"This message has been summarized into the compacted context. Citations "
+"active."
+msgstr ""
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+
+msgid "Thinking"
+msgstr ""
+
+msgid "Searched for: %1"
+msgstr ""
+
+msgid "Show %1 results"
+msgstr ""
+
+msgid "Save & Retry"
+msgstr ""
+
+msgid "Copy to clipboard"
+msgstr ""
+
+msgid "Edit message"
+msgstr ""
+
+msgid "Edit response"
+msgstr ""
+
+msgid "Retry from here"
+msgstr ""
+
+msgid "Regenerate response"
+msgstr ""
+
+msgid "Share output with assistant"
+msgstr ""
+
+msgid "The model loaded this skill's instructions into context before acting."
+msgstr ""
+
+msgid "Stop command"
+msgstr ""
+
+msgid "Open terminal attached to this session"
+msgstr ""
+
+msgid "Collapse result"
+msgstr ""
+
+msgid "Copy output"
+msgstr ""
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+
+msgid "Add Custom Tool"
+msgstr ""
+
+msgid "Echoes back the message provided."
+msgstr ""
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr ""
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr ""
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr ""
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr ""
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr ""
+
+msgid "Collapse results"
+msgstr ""
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+
+msgid "Update Tool"
+msgstr ""
+
+msgid "Save Tool"
+msgstr ""
+
+msgid "A tool named \"%1\" already exists."
+msgstr ""
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
 msgstr ""
 
 msgid "Speech to Text"
@@ -682,9 +882,6 @@ msgstr ""
 msgid "Device:"
 msgstr ""
 
-msgid "Default"
-msgstr ""
-
 msgid "FP16:"
 msgstr ""
 
@@ -721,123 +918,19 @@ msgstr ""
 msgid "Max recording (seconds):"
 msgstr ""
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
+msgid "Speech-to-text is not configured"
 msgstr ""
 
-msgid "Add Custom Tool"
+msgid "Unknown STT backend: %1"
 msgstr ""
 
-msgid "Echoes back the message provided."
+msgid "Whisper CLI runner is not available"
 msgstr ""
 
-msgid "Tool name (e.g. systemctl_service)"
+msgid "Could not build Whisper command"
 msgstr ""
 
-msgid "Description (instructs the LLM what this tool does)"
-msgstr ""
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr ""
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr ""
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr ""
-
-msgid "Collapse results"
-msgstr ""
-
-msgid ""
-"Show finished results as a small pill; click the pill to view the full "
-"output."
-msgstr ""
-
-msgid "Update Tool"
-msgstr ""
-
-msgid "Save Tool"
-msgstr ""
-
-msgid "A tool named \"%1\" already exists."
-msgstr ""
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-
-msgid "Loaded %1 skill"
-msgstr ""
-
-msgid "Voice message"
-msgstr ""
-
-msgid "Error"
-msgstr ""
-
-msgid "Web Search"
-msgstr ""
-
-msgid "compacted"
-msgstr ""
-
-msgid ""
-"This message has been summarized into the compacted context. Citations "
-"active."
-msgstr ""
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-
-msgid "Thinking"
-msgstr ""
-
-msgid "Searched for: %1"
-msgstr ""
-
-msgid "Show %1 results"
-msgstr ""
-
-msgid "Save & Retry"
-msgstr ""
-
-msgid "Copy to clipboard"
-msgstr ""
-
-msgid "Edit message"
-msgstr ""
-
-msgid "Edit response"
-msgstr ""
-
-msgid "Retry from here"
-msgstr ""
-
-msgid "Regenerate response"
-msgstr ""
-
-msgid "Share output with assistant"
-msgstr ""
-
-msgid "The model loaded this skill's instructions into context before acting."
-msgstr ""
-
-msgid "Stop command"
-msgstr ""
-
-msgid "Open terminal attached to this session"
-msgstr ""
-
-msgid "Collapse result"
-msgstr ""
-
-msgid "Copy output"
+msgid "STT backend does not support model listing"
 msgstr ""
 
 msgid "Enable skills"
@@ -1005,6 +1098,36 @@ msgstr ""
 msgid "Preview:"
 msgstr ""
 
+msgid "(Active Chat Profile)"
+msgstr ""
+
+msgid "Unnamed Profile"
+msgstr ""
+
+msgid "Active Chat Profile"
+msgstr ""
+
+msgid "Active Chat Profile (Fallback)"
+msgstr ""
+
+msgid "Selected profile does not have an endpoint URL or model configured."
+msgstr ""
+
+msgid "Testing command validation with '%1'…"
+msgstr ""
+
+msgid "Validation test failed: %1"
+msgstr ""
+
+msgid "Validator rejected the sample command: %1"
+msgstr ""
+
+msgid "n/a"
+msgstr ""
+
+msgid "Validator accepted the sample command (confidence %1)."
+msgstr ""
+
 msgid "General Tool Settings"
 msgstr ""
 
@@ -1168,6 +1291,12 @@ msgid ""
 "Restore the full verbatim text and tool outputs of previously compacted "
 "messages by specifying the start and end message IDs from a cited message "
 "range."
+msgstr ""
+
+msgid ""
+"Your justification is verified against the command before it runs, and the "
+"command is checked for shell syntax errors; commands that fail either check "
+"are rejected."
 msgstr ""
 
 msgid "Approve the pending tool request"
@@ -1396,21 +1525,6 @@ msgstr ""
 msgid "Context Compaction"
 msgstr ""
 
-msgid "(Active Chat Profile)"
-msgstr ""
-
-msgid "Unnamed Profile"
-msgstr ""
-
-msgid "Active Chat Profile"
-msgstr ""
-
-msgid "Active Chat Profile (Fallback)"
-msgstr ""
-
-msgid "Selected profile does not have an endpoint URL or model configured."
-msgstr ""
-
 msgid "Testing compaction call using '%1'…"
 msgstr ""
 
@@ -1437,9 +1551,6 @@ msgid "Compaction Profile"
 msgstr ""
 
 msgid "Model Profile:"
-msgstr ""
-
-msgid "None"
 msgstr ""
 
 msgid ""
@@ -1506,9 +1617,6 @@ msgstr ""
 msgid "Reset Sample"
 msgstr ""
 
-msgid "Testing…"
-msgstr ""
-
 msgid "Test Compaction Connection"
 msgstr ""
 
@@ -1543,6 +1651,12 @@ msgid "Rename"
 msgstr ""
 
 msgid "Adapter:"
+msgstr ""
+
+msgid ""
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
 msgstr ""
 
 msgid "Platform:"
@@ -1779,6 +1893,9 @@ msgstr ""
 msgid "Enable or disable individual skills in Settings → Skills."
 msgstr ""
 
+msgid "Command validation is still in progress; try again in a moment."
+msgstr ""
+
 msgid "No tool request pending to approve."
 msgstr ""
 
@@ -1857,6 +1974,19 @@ msgstr ""
 msgid "The user declined to run this command."
 msgstr ""
 
+msgid "No message to evaluate."
+msgstr ""
+
+msgid "Evaluating…"
+msgstr ""
+
+msgid "Decision request failed: %1"
+msgstr ""
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr ""
+
 msgid "PlasmaLLM: Tool Call"
 msgstr ""
 
@@ -1864,6 +1994,27 @@ msgid "Requested tool: %1"
 msgstr ""
 
 msgid "PlasmaLLM"
+msgstr ""
+
+msgid "Validation timed out."
+msgstr ""
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr ""
+
+msgid "Empty validator response."
+msgstr ""
+
+msgid "empty validator response"
+msgstr ""
+
+msgid "Could not validate: %1"
+msgstr ""
+
+msgid "the command does not match its stated justification"
+msgstr ""
+
+msgid "Blocked by command validator: %1"
 msgstr ""
 
 msgid "Unknown tool %1"

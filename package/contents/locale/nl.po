@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-04 17:51-0400\n"
+"POT-Creation-Date: 2026-09-17 22:45-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Dutch\n"
@@ -16,15 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-msgid "Color button"
-msgstr "Kleurknop"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Huidige kleur is %1. Deze knop opent een kleurkeuzevenster."
-
-msgid "Current color is %1."
-msgstr "Huidige kleur is %1."
 
 msgid "Request timed out after 30 seconds"
 msgstr "Verzoek verlopen na 30 seconden"
@@ -84,6 +75,15 @@ msgstr ""
 "Deze modelversie ondersteunt het combineren van native tools (Zoeken/Code) "
 "met aangepaste opdrachten niet. Selecteer een nieuwer model (bijv. Gemini "
 "3+) of schakel native functies uit in Instellingen."
+
+msgid ""
+"Decisions models cannot generate chat text. Use it as your active profile "
+"for single-shot evaluations, or select it as the Command Validator profile "
+"in Tools settings."
+msgstr ""
+"Decisions-modellen kunnen geen chattekst genereren. Gebruik deze als uw "
+"actieve profiel voor eenmalige evaluaties, of selecteer deze als profiel "
+"voor de opdrachtvalidator in de Hulpmiddelen-instellingen."
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -163,82 +163,6 @@ msgstr ""
 msgid "No command provided."
 msgstr "Geen opdracht opgegeven."
 
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Exa Search"
-msgstr "Exa Zoeken"
-
-msgid "Ollama API key"
-msgstr "Ollama API-sleutel"
-
-msgid "Saving…"
-msgstr "Opslaan…"
-
-msgid "Saved"
-msgstr "Opgeslagen"
-
-msgid "Save to Config (Insecure)"
-msgstr "Opslaan in configuratie (onveilig)"
-
-msgid "Save Key"
-msgstr "Sleutel opslaan"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "SearXNG-instantie-URL (bijv. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "SearXNG API-sleutel/Token (optioneel)"
-
-msgid "Exa API key"
-msgstr "Exa API-sleutel"
-
-msgid "Search Type:"
-msgstr "Zoektype:"
-
-msgid "Auto (Default)"
-msgstr "Automatisch (standaard)"
-
-msgid "Fast"
-msgstr "Snel"
-
-msgid "Instant"
-msgstr "Onmiddellijk"
-
-msgid "Deep Lite"
-msgstr "Diep lite"
-
-msgid "Deep"
-msgstr "Diep"
-
-msgid "Deep Reasoning"
-msgstr "Diep redeneren"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo vereist geen configuratie."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr ""
-"Zorg ervoor dat op de SearXNG-instantie het JSON-formaat is ingeschakeld."
-
-msgid "Enables LLM-triggered neural web searches via Exa API."
-msgstr ""
-"Maakt LLM-geactiveerde neurale webzoekopdrachten mogelijk via de Exa API."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr ""
-"Maakt LLM-geactiveerde webzoekopdrachten mogelijk via de zoek-API van Ollama"
-
-msgid "Manage and discover skills in the Skills settings page."
-msgstr ""
-"Beheer en ontdek vaardigheden op de pagina Vaardigheden in de instellingen."
-
 msgid "Saved phrases:"
 msgstr "Opgeslagen zinnen:"
 
@@ -317,6 +241,159 @@ msgstr ""
 "Noch 'tmux' noch 'screen' is op uw systeem gevonden. Sessie-multiplexing is "
 "niet beschikbaar."
 
+msgid "Command Validation"
+msgstr "Opdrachtvalidatie"
+
+msgid "Validate commands against their justification with a second model"
+msgstr ""
+"Valideer opdrachten aan de hand van hun rechtvaardiging met een tweede model"
+
+msgid ""
+"Before a command runs, the selected model checks that the command does what "
+"the LLM's justification says. Mismatched commands are denied automatically."
+msgstr ""
+"Voordat een opdracht wordt uitgevoerd, controleert het geselecteerde model "
+"of de opdracht doet wat de rechtvaardiging van de LLM zegt. Opdrachten die "
+"niet overeenkomen, worden automatisch geweigerd."
+
+msgid ""
+"The validator checks that the command does what its justification says and "
+"that it is well-written shell (no incomplete constructs or syntax errors). "
+"Mismatched or malformed commands are denied automatically and the reason is "
+"returned to the LLM. If the validator cannot run (error or timeout), the "
+"command falls back to asking for approval."
+msgstr ""
+"De validator controleert of de opdracht doet wat de rechtvaardiging zegt en "
+"of het goed geschreven shell is (geen onvolledige constructies of "
+"syntaxfouten). Opdrachten die niet overeenkomen of onjuist zijn opgebouwd, "
+"worden automatisch geweigerd en de reden wordt aan de LLM teruggegeven. Als "
+"de validator niet kan worden uitgevoerd (fout of time-out), valt de opdracht "
+"terug op het vragen om goedkeuring."
+
+msgid "Validator profile:"
+msgstr "Validatorprofiel:"
+
+msgid "Default"
+msgstr "Standaard"
+
+msgid "None"
+msgstr "Geen"
+
+msgid "Structured decisions (Jev)"
+msgstr "Gestructureerde beslissingen (Jev)"
+
+msgid "Chat completion (JSON)"
+msgstr "Chatvoltooiing (JSON)"
+
+msgid ""
+"Provider: %1  |  Model: %2\n"
+"Backend: %3"
+msgstr "Provider: %1  |  Model: %2\nBackend: %3"
+
+msgid "Backend:"
+msgstr "Backend:"
+
+msgid "Auto-detect"
+msgstr "Automatische detectie"
+
+msgid "Structured decisions (Jev/TypeSafe)"
+msgstr "Gestructureerde beslissingen (Jev/TypeSafe)"
+
+msgid "Chat completion (JSON verdict)"
+msgstr "Chatvoltooiing (JSON-uitspraak)"
+
+msgid ""
+"Maximum mismatch probability allowed before a command is rejected "
+"(structured decisions backend):"
+msgstr ""
+"Maximale kans op afwijking die is toegestaan voordat een opdracht wordt "
+"geweigerd (backend voor gestructureerde beslissingen):"
+
+msgid "% (lower = stricter)"
+msgstr "% (lager = strenger)"
+
+msgid "Testing…"
+msgstr "Testen…"
+
+msgid "Test Validator"
+msgstr "Validator testen"
+
+msgid "Manage and discover skills in the Skills settings page."
+msgstr ""
+"Beheer en ontdek vaardigheden op de pagina Vaardigheden in de instellingen."
+
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Exa Zoeken"
+
+msgid "Ollama API key"
+msgstr "Ollama API-sleutel"
+
+msgid "Saving…"
+msgstr "Opslaan…"
+
+msgid "Saved"
+msgstr "Opgeslagen"
+
+msgid "Save to Config (Insecure)"
+msgstr "Opslaan in configuratie (onveilig)"
+
+msgid "Save Key"
+msgstr "Sleutel opslaan"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "SearXNG-instantie-URL (bijv. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "SearXNG API-sleutel/Token (optioneel)"
+
+msgid "Exa API key"
+msgstr "Exa API-sleutel"
+
+msgid "Search Type:"
+msgstr "Zoektype:"
+
+msgid "Auto (Default)"
+msgstr "Automatisch (standaard)"
+
+msgid "Fast"
+msgstr "Snel"
+
+msgid "Instant"
+msgstr "Onmiddellijk"
+
+msgid "Deep Lite"
+msgstr "Diep lite"
+
+msgid "Deep"
+msgstr "Diep"
+
+msgid "Deep Reasoning"
+msgstr "Diep redeneren"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo vereist geen configuratie."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr ""
+"Zorg ervoor dat op de SearXNG-instantie het JSON-formaat is ingeschakeld."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr ""
+"Maakt LLM-geactiveerde neurale webzoekopdrachten mogelijk via de Exa API."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr ""
+"Maakt LLM-geactiveerde webzoekopdrachten mogelijk via de zoek-API van Ollama"
+
 msgid ""
 "Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
 "that skill has “Allow running skill scripts without approval” checked on the "
@@ -327,8 +404,33 @@ msgstr ""
 "vaardigheidsscripts toestaan zonder goedkeuring” is aangevinkt op de "
 "instellingenpagina voor Vaardigheden."
 
+msgid "Color button"
+msgstr "Kleurknop"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Huidige kleur is %1. Deze knop opent een kleurkeuzevenster."
+
+msgid "Current color is %1."
+msgstr "Huidige kleur is %1."
+
 msgid "Tool Request: %1"
 msgstr "Gereedschapsverzoek: %1"
+
+msgid "Validating command against its justification…"
+msgstr "Opdracht wordt aan de hand van de rechtvaardiging gevalideerd…"
+
+msgid " (by %1)"
+msgstr " (door %1)"
+
+msgid " confidence %1"
+msgstr " zekerheid %1"
+
+#, javascript-format
+msgid "Validated: matches justification%1%2"
+msgstr "Gevalideerd: komt overeen met de rechtvaardiging%1%2"
+
+msgid "Command does not match its justification."
+msgstr "De opdracht komt niet overeen met de rechtvaardiging."
 
 msgid "Justification: %1"
 msgstr "Rechtvaardiging: %1"
@@ -553,20 +655,146 @@ msgstr "Instellingen tonen"
 msgid "Show Pin"
 msgstr "Vastmaakpictogram tonen"
 
-msgid "Speech-to-text is not configured"
-msgstr "Spraak-naar-tekst is niet geconfigureerd"
+msgid "Loaded %1 skill"
+msgstr "%1 vaardigheid geladen"
 
-msgid "Unknown STT backend: %1"
-msgstr "Onbekende STT-backend: %1"
+msgid "Yes"
+msgstr "Ja"
 
-msgid "Whisper CLI runner is not available"
-msgstr "Whisper-CLI-runner is niet beschikbaar"
+msgid "No"
+msgstr "Nee"
 
-msgid "Could not build Whisper command"
-msgstr "Kon Whisper-opdracht niet opbouwen"
+msgid "Uncertain"
+msgstr "Onzeker"
 
-msgid "STT backend does not support model listing"
-msgstr "STT-backend ondersteunt het weergeven van modellen niet"
+msgid "Voice message"
+msgstr "Spraakbericht"
+
+msgid "Error"
+msgstr "Fout"
+
+msgid "Web Search"
+msgstr "Webzoekopdracht"
+
+msgid "compacted"
+msgstr "gecomprimeerd"
+
+msgid ""
+"This message has been summarized into the compacted context. Citations "
+"active."
+msgstr ""
+"Dit bericht is samengevat in de gecomprimeerde context. Citaties actief."
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Mathtext-rendering is teruggevallen op Unicode-vervanging (matplotlib niet "
+"geïnstalleerd of er is een fout opgetreden)"
+
+msgid "Thinking"
+msgstr "Denken…"
+
+msgid "Searched for: %1"
+msgstr "Gezocht naar: %1"
+
+msgid "Show %1 results"
+msgstr "%1 resultaten tonen"
+
+msgid "Save & Retry"
+msgstr "Opslaan en opnieuw proberen"
+
+msgid "Copy to clipboard"
+msgstr "Naar klembord kopiëren"
+
+msgid "Edit message"
+msgstr "Bericht bewerken"
+
+msgid "Edit response"
+msgstr "Antwoord bewerken"
+
+msgid "Retry from here"
+msgstr "Vanaf hier opnieuw proberen"
+
+msgid "Regenerate response"
+msgstr "Antwoord opnieuw genereren"
+
+msgid "Share output with assistant"
+msgstr "Uitvoer delen met assistent"
+
+msgid "The model loaded this skill's instructions into context before acting."
+msgstr ""
+"Het model heeft de instructies van deze vaardigheid in de context geladen "
+"alvorens te handelen."
+
+msgid "Stop command"
+msgstr "Opdracht stoppen"
+
+msgid "Open terminal attached to this session"
+msgstr "Terminal gekoppeld aan deze sessie openen"
+
+msgid "Collapse result"
+msgstr "Resultaat samenvouwen"
+
+msgid "Copy output"
+msgstr "Uitvoer kopiëren"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"Geen aangepaste tools geconfigureerd. Voeg een aangepaste tool toe om uw "
+"eigen opdrachten beschikbaar te maken voor de LLM."
+
+msgid "Add Custom Tool"
+msgstr "Aangepaste tool toevoegen"
+
+msgid "Echoes back the message provided."
+msgstr "Geeft het opgegeven bericht terug."
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "Toolnaam (bijv. systemctl_service)"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "Beschrijving (instrueert de LLM wat deze tool doet)"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "Opdrachtssjabloon (bijv. systemctl {action} {service})"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "Supergebruiker vereisen (wordt uitgevoerd met pkexec)"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "Tool automatisch uitvoeren (geen bevestigingsdialoog)"
+
+msgid "Collapse results"
+msgstr "Resultaten samenvouwen"
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+"Toon voltooide resultaten als een compacte pil; klik op de pil om de "
+"volledige uitvoer te bekijken."
+
+msgid "Update Tool"
+msgstr "Tool bijwerken"
+
+msgid "Save Tool"
+msgstr "Tool opslaan"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "Er bestaat al een tool met de naam \"%1\"."
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"Met aangepaste tools kunt u uw eigen opdrachten beschikbaar maken voor de "
+"LLM. Gebruik tijdelijke aanduidingen zoals {variable} in de "
+"Opdrachtssjabloon om parameters te definiëren die de LLM kan invullen. "
+"Waarden van de LLM worden automatisch shell-escaped."
 
 msgid "Speech to Text"
 msgstr "Spraak naar tekst"
@@ -737,9 +965,6 @@ msgstr "Vertalen"
 msgid "Device:"
 msgstr "Apparaat:"
 
-msgid "Default"
-msgstr "Standaard"
-
 msgid "FP16:"
 msgstr "FP16:"
 
@@ -777,137 +1002,20 @@ msgstr "Optioneel, bijv. nl of en (leeg = automatisch)"
 msgid "Max recording (seconds):"
 msgstr "Max. opnameduur (seconden):"
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
-msgstr ""
-"Geen aangepaste tools geconfigureerd. Voeg een aangepaste tool toe om uw "
-"eigen opdrachten beschikbaar te maken voor de LLM."
+msgid "Speech-to-text is not configured"
+msgstr "Spraak-naar-tekst is niet geconfigureerd"
 
-msgid "Add Custom Tool"
-msgstr "Aangepaste tool toevoegen"
+msgid "Unknown STT backend: %1"
+msgstr "Onbekende STT-backend: %1"
 
-msgid "Echoes back the message provided."
-msgstr "Geeft het opgegeven bericht terug."
+msgid "Whisper CLI runner is not available"
+msgstr "Whisper-CLI-runner is niet beschikbaar"
 
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "Toolnaam (bijv. systemctl_service)"
+msgid "Could not build Whisper command"
+msgstr "Kon Whisper-opdracht niet opbouwen"
 
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "Beschrijving (instrueert de LLM wat deze tool doet)"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "Opdrachtssjabloon (bijv. systemctl {action} {service})"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "Supergebruiker vereisen (wordt uitgevoerd met pkexec)"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "Tool automatisch uitvoeren (geen bevestigingsdialoog)"
-
-msgid "Collapse results"
-msgstr "Resultaten samenvouwen"
-
-msgid ""
-"Show finished results as a small pill; click the pill to view the full "
-"output."
-msgstr ""
-"Toon voltooide resultaten als een compacte pil; klik op de pil om de "
-"volledige uitvoer te bekijken."
-
-msgid "Update Tool"
-msgstr "Tool bijwerken"
-
-msgid "Save Tool"
-msgstr "Tool opslaan"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "Er bestaat al een tool met de naam \"%1\"."
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"Met aangepaste tools kunt u uw eigen opdrachten beschikbaar maken voor de "
-"LLM. Gebruik tijdelijke aanduidingen zoals {variable} in de "
-"Opdrachtssjabloon om parameters te definiëren die de LLM kan invullen. "
-"Waarden van de LLM worden automatisch shell-escaped."
-
-msgid "Loaded %1 skill"
-msgstr "%1 vaardigheid geladen"
-
-msgid "Voice message"
-msgstr "Spraakbericht"
-
-msgid "Error"
-msgstr "Fout"
-
-msgid "Web Search"
-msgstr "Webzoekopdracht"
-
-msgid "compacted"
-msgstr "gecomprimeerd"
-
-msgid ""
-"This message has been summarized into the compacted context. Citations "
-"active."
-msgstr ""
-"Dit bericht is samengevat in de gecomprimeerde context. Citaties actief."
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"Mathtext-rendering is teruggevallen op Unicode-vervanging (matplotlib niet "
-"geïnstalleerd of er is een fout opgetreden)"
-
-msgid "Thinking"
-msgstr "Denken…"
-
-msgid "Searched for: %1"
-msgstr "Gezocht naar: %1"
-
-msgid "Show %1 results"
-msgstr "%1 resultaten tonen"
-
-msgid "Save & Retry"
-msgstr "Opslaan en opnieuw proberen"
-
-msgid "Copy to clipboard"
-msgstr "Naar klembord kopiëren"
-
-msgid "Edit message"
-msgstr "Bericht bewerken"
-
-msgid "Edit response"
-msgstr "Antwoord bewerken"
-
-msgid "Retry from here"
-msgstr "Vanaf hier opnieuw proberen"
-
-msgid "Regenerate response"
-msgstr "Antwoord opnieuw genereren"
-
-msgid "Share output with assistant"
-msgstr "Uitvoer delen met assistent"
-
-msgid "The model loaded this skill's instructions into context before acting."
-msgstr ""
-"Het model heeft de instructies van deze vaardigheid in de context geladen "
-"alvorens te handelen."
-
-msgid "Stop command"
-msgstr "Opdracht stoppen"
-
-msgid "Open terminal attached to this session"
-msgstr "Terminal gekoppeld aan deze sessie openen"
-
-msgid "Collapse result"
-msgstr "Resultaat samenvouwen"
-
-msgid "Copy output"
-msgstr "Uitvoer kopiëren"
+msgid "STT backend does not support model listing"
+msgstr "STT-backend ondersteunt het weergeven van modellen niet"
 
 msgid "Enable skills"
 msgstr "Vaardigheden inschakelen"
@@ -1104,6 +1212,37 @@ msgstr "Herstellen naar standaardsjabloon"
 
 msgid "Preview:"
 msgstr "Voorvertoning:"
+
+msgid "(Active Chat Profile)"
+msgstr "(Actief chatprofiel)"
+
+msgid "Unnamed Profile"
+msgstr "Naamloos profiel"
+
+msgid "Active Chat Profile"
+msgstr "Actief chatprofiel"
+
+msgid "Active Chat Profile (Fallback)"
+msgstr "Actief chatprofiel (terugvaloptie)"
+
+msgid "Selected profile does not have an endpoint URL or model configured."
+msgstr ""
+"Het geselecteerde profiel heeft geen eindpunt-URL of model geconfigureerd."
+
+msgid "Testing command validation with '%1'…"
+msgstr "Opdrachtvalidatie wordt getest met '%1'…"
+
+msgid "Validation test failed: %1"
+msgstr "Validatietest mislukt: %1"
+
+msgid "Validator rejected the sample command: %1"
+msgstr "Validator heeft de voorbeeldopdracht geweigerd: %1"
+
+msgid "n/a"
+msgstr "n.v.t."
+
+msgid "Validator accepted the sample command (confidence %1)."
+msgstr "Validator heeft de voorbeeldopdracht geaccepteerd (zekerheid %1)."
 
 msgid "General Tool Settings"
 msgstr "Algemene toolinstellingen"
@@ -1315,6 +1454,15 @@ msgstr ""
 "Herstel de volledige letterlijke tekst en hulpmiddeluitvoer van eerder "
 "gecomprimeerde berichten door de begin- en eind-bericht-ID's van een "
 "geciteerd berichtbereik op te geven."
+
+msgid ""
+"Your justification is verified against the command before it runs, and the "
+"command is checked for shell syntax errors; commands that fail either check "
+"are rejected."
+msgstr ""
+"Uw rechtvaardiging wordt vóór uitvoering tegen de opdracht geverifieerd en "
+"de opdracht wordt gecontroleerd op shell-syntaxfouten; opdrachten die een "
+"van beide controles niet doorstaan, worden geweigerd."
 
 msgid "Approve the pending tool request"
 msgstr "Openstaand gereedschapsverzoek goedkeuren"
@@ -1552,22 +1700,6 @@ msgstr "Sleep bestanden hierheen om ze bij te voegen"
 msgid "Context Compaction"
 msgstr "Contextcompressie"
 
-msgid "(Active Chat Profile)"
-msgstr "(Actief chatprofiel)"
-
-msgid "Unnamed Profile"
-msgstr "Naamloos profiel"
-
-msgid "Active Chat Profile"
-msgstr "Actief chatprofiel"
-
-msgid "Active Chat Profile (Fallback)"
-msgstr "Actief chatprofiel (terugvaloptie)"
-
-msgid "Selected profile does not have an endpoint URL or model configured."
-msgstr ""
-"Het geselecteerde profiel heeft geen eindpunt-URL of model geconfigureerd."
-
 msgid "Testing compaction call using '%1'…"
 msgstr "Compressie-aanroep testen met '%1'…"
 
@@ -1599,9 +1731,6 @@ msgstr "Compressieprofiel"
 
 msgid "Model Profile:"
 msgstr "Modelprofiel:"
-
-msgid "None"
-msgstr "Geen"
 
 msgid ""
 "Provider: %1  |  Model: %2\n"
@@ -1671,9 +1800,6 @@ msgstr "Voorbeeld van gesprekstranscript:"
 msgid "Reset Sample"
 msgstr "Voorbeeld herstellen"
 
-msgid "Testing…"
-msgstr "Testen…"
-
 msgid "Test Compaction Connection"
 msgstr "Compressieverbinding testen"
 
@@ -1709,6 +1835,16 @@ msgstr "Hernoemen"
 
 msgid "Adapter:"
 msgstr "Adapter:"
+
+msgid ""
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
+msgstr ""
+"Decisions-profielen evalueren elk bericht één keer en antwoorden met een "
+"uitspraak en zekerheid. Ze hebben geen gespreksgeheugen, systeemprompt of "
+"hulpmiddelen. Ze kunnen ook worden geselecteerd als opdrachtvalidator in de "
+"Hulpmiddelen-instellingen."
 
 msgid "Platform:"
 msgstr "Platform:"
@@ -1966,6 +2102,9 @@ msgid "Enable or disable individual skills in Settings → Skills."
 msgstr ""
 "Schakel individuele vaardigheden in of uit in Instellingen → Vaardigheden."
 
+msgid "Command validation is still in progress; try again in a moment."
+msgstr "De opdrachtvalidatie is nog bezig; probeer het zo opnieuw."
+
 msgid "No tool request pending to approve."
 msgstr "Geen gereedschapsverzoek in afwachting van goedkeuring."
 
@@ -2051,6 +2190,19 @@ msgstr "Onbekende taak: **%1**. Beschikbaar: %2"
 msgid "The user declined to run this command."
 msgstr "De gebruiker heeft geweigerd deze opdracht uit te voeren."
 
+msgid "No message to evaluate."
+msgstr "Geen bericht om te evalueren."
+
+msgid "Evaluating…"
+msgstr "Evalueren…"
+
+msgid "Decision request failed: %1"
+msgstr "Verzoek om beslissing mislukt: %1"
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr "%1% zekerheid"
+
 msgid "PlasmaLLM: Tool Call"
 msgstr "PlasmaLLM: Tool-aanroep"
 
@@ -2059,6 +2211,27 @@ msgstr "Aangevraagde tool: %1"
 
 msgid "PlasmaLLM"
 msgstr "PlasmaLLM"
+
+msgid "Validation timed out."
+msgstr "Validatie is verlopen."
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr "Het validatorprofiel heeft geen eindpunt of model geconfigureerd."
+
+msgid "Empty validator response."
+msgstr "Leeg antwoord van validator."
+
+msgid "empty validator response"
+msgstr "leeg antwoord van validator"
+
+msgid "Could not validate: %1"
+msgstr "Kon niet valideren: %1"
+
+msgid "the command does not match its stated justification"
+msgstr "de opdracht komt niet overeen met de opgegeven rechtvaardiging"
+
+msgid "Blocked by command validator: %1"
+msgstr "Geblokkeerd door de opdrachtvalidator: %1"
 
 msgid "Unknown tool %1"
 msgstr "Onbekende tool %1"
@@ -2341,9 +2514,6 @@ msgstr "Aangepaste tools"
 #~ "⚠️ GEVAAR: Beide opties ingeschakeld — het LLM kan nu opdrachten uitvoeren "
 #~ "en hun uitvoer zien, wat een agentische workflow mogelijk maakt. Alleen "
 #~ "gebruiken met betrouwbare LLM's."
-
-#~ msgid "Backend:"
-#~ msgstr "Backend:"
 
 #~ msgid "Session name:"
 #~ msgstr "Sessienaam:"

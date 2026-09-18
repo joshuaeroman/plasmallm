@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-04 17:51-0400\n"
+"POT-Creation-Date: 2026-09-17 22:45-0400\n"
 "PO-Revision-Date: 2026-05-04 00:00+0300\n"
 "Last-Translator: Matvel007\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -17,15 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-
-msgid "Color button"
-msgstr "Кнопка цвета"
-
-msgid "Current color is %1. This button will open a color chooser dialog."
-msgstr "Текущий цвет: %1. Эта кнопка откроет диалог выбора цвета."
-
-msgid "Current color is %1."
-msgstr "Текущий цвет: %1."
 
 msgid "Request timed out after 30 seconds"
 msgstr "Тайм-аут запроса через 30 секунд"
@@ -84,6 +75,15 @@ msgstr ""
 "Эта версия модели не поддерживает сочетание встроенных инструментов (Поиск/"
 "Код) с пользовательскими командами. Выберите более новую модель (например, "
 "Gemini 3+) или отключите встроенные функции в Настройках."
+
+msgid ""
+"Decisions models cannot generate chat text. Use it as your active profile "
+"for single-shot evaluations, or select it as the Command Validator profile "
+"in Tools settings."
+msgstr ""
+"Модели Decisions не могут генерировать текст чата. Используйте её как "
+"активный профиль для разовых оценок или выберите её в качестве профиля "
+"валидатора команд в настройках инструментов."
 
 msgid "No tasks configured. Add a task to create reusable prompt shortcuts."
 msgstr ""
@@ -162,78 +162,6 @@ msgstr ""
 
 msgid "No command provided."
 msgstr "Команда не указана."
-
-msgid "Ollama API"
-msgstr "Ollama API"
-
-msgid "SearXNG"
-msgstr "SearXNG"
-
-msgid "DuckDuckGo"
-msgstr "DuckDuckGo"
-
-msgid "Exa Search"
-msgstr "Поиск Exa"
-
-msgid "Ollama API key"
-msgstr "API-ключ Ollama"
-
-msgid "Saving…"
-msgstr "Сохранение…"
-
-msgid "Saved"
-msgstr "Сохранено"
-
-msgid "Save to Config (Insecure)"
-msgstr "Сохранить в конфиг (небезопасно)"
-
-msgid "Save Key"
-msgstr "Сохранить ключ"
-
-msgid "SearXNG Instance URL (e.g. https://searx.be)"
-msgstr "URL экземпляра SearXNG (напр. https://searx.be)"
-
-msgid "SearXNG API Key/Token (optional)"
-msgstr "API-ключ/токен SearXNG (опционально)"
-
-msgid "Exa API key"
-msgstr "API-ключ Exa"
-
-msgid "Search Type:"
-msgstr "Тип поиска:"
-
-msgid "Auto (Default)"
-msgstr "Авто (по умолчанию)"
-
-msgid "Fast"
-msgstr "Быстрый"
-
-msgid "Instant"
-msgstr "Мгновенный"
-
-msgid "Deep Lite"
-msgstr "Глубокий Lite"
-
-msgid "Deep"
-msgstr "Глубокий"
-
-msgid "Deep Reasoning"
-msgstr "Глубокое рассуждение"
-
-msgid "DuckDuckGo requires no configuration."
-msgstr "DuckDuckGo не требует настройки."
-
-msgid "Ensure the SearXNG instance has the JSON format enabled."
-msgstr "Убедитесь, что на экземпляре SearXNG включён формат JSON."
-
-msgid "Enables LLM-triggered neural web searches via Exa API."
-msgstr "Включает нейронный веб-поиск от LLM через API Exa."
-
-msgid "Enables LLM-triggered web searches via Ollama's search API"
-msgstr "Включает веб-поиск от LLM через поисковый API Ollama"
-
-msgid "Manage and discover skills in the Skills settings page."
-msgstr "Управление навыками и их поиск на странице настроек «Навыки»."
 
 msgid "Saved phrases:"
 msgstr "Сохранённые фразы:"
@@ -314,6 +242,154 @@ msgstr ""
 "В вашей системе не найдены ни 'tmux', ни 'screen'. Мультиплексирование "
 "сессий недоступно."
 
+msgid "Command Validation"
+msgstr "Проверка команд"
+
+msgid "Validate commands against their justification with a second model"
+msgstr "Проверять команды на соответствие обоснованию с помощью второй модели"
+
+msgid ""
+"Before a command runs, the selected model checks that the command does what "
+"the LLM's justification says. Mismatched commands are denied automatically."
+msgstr ""
+"Перед выполнением команды выбранная модель проверяет, делает ли команда то, "
+"что указано в обосновании LLM. Несоответствующие команды автоматически "
+"отклоняются."
+
+msgid ""
+"The validator checks that the command does what its justification says and "
+"that it is well-written shell (no incomplete constructs or syntax errors). "
+"Mismatched or malformed commands are denied automatically and the reason is "
+"returned to the LLM. If the validator cannot run (error or timeout), the "
+"command falls back to asking for approval."
+msgstr ""
+"Валидатор проверяет, делает ли команда то, что указано в её обосновании, и "
+"является ли она хорошо написанным shell-кодом (без незавершённых конструкций "
+"и синтаксических ошибок). Несоответствующие или некорректные команды "
+"автоматически отклоняются, а причина возвращается LLM. Если валидатор не "
+"может запуститься (ошибка или тайм-аут), команда переходит к запросу "
+"подтверждения."
+
+msgid "Validator profile:"
+msgstr "Профиль валидатора:"
+
+msgid "Default"
+msgstr "По умолчанию"
+
+msgid "None"
+msgstr "Нет"
+
+msgid "Structured decisions (Jev)"
+msgstr "Структурированные решения (Jev)"
+
+msgid "Chat completion (JSON)"
+msgstr "Завершение чата (JSON)"
+
+msgid ""
+"Provider: %1  |  Model: %2\n"
+"Backend: %3"
+msgstr "Провайдер: %1  |  Модель: %2\nБэкенд: %3"
+
+msgid "Backend:"
+msgstr "Бэкенд:"
+
+msgid "Auto-detect"
+msgstr "Автоопределение"
+
+msgid "Structured decisions (Jev/TypeSafe)"
+msgstr "Структурированные решения (Jev/TypeSafe)"
+
+msgid "Chat completion (JSON verdict)"
+msgstr "Завершение чата (вердикт JSON)"
+
+msgid ""
+"Maximum mismatch probability allowed before a command is rejected "
+"(structured decisions backend):"
+msgstr ""
+"Максимальная допустимая вероятность несоответствия до отклонения команды "
+"(бэкенд структурированных решений):"
+
+msgid "% (lower = stricter)"
+msgstr "% (меньше = строже)"
+
+msgid "Testing…"
+msgstr "Проверка…"
+
+msgid "Test Validator"
+msgstr "Проверить валидатор"
+
+msgid "Manage and discover skills in the Skills settings page."
+msgstr "Управление навыками и их поиск на странице настроек «Навыки»."
+
+msgid "Ollama API"
+msgstr "Ollama API"
+
+msgid "SearXNG"
+msgstr "SearXNG"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Exa Search"
+msgstr "Поиск Exa"
+
+msgid "Ollama API key"
+msgstr "API-ключ Ollama"
+
+msgid "Saving…"
+msgstr "Сохранение…"
+
+msgid "Saved"
+msgstr "Сохранено"
+
+msgid "Save to Config (Insecure)"
+msgstr "Сохранить в конфиг (небезопасно)"
+
+msgid "Save Key"
+msgstr "Сохранить ключ"
+
+msgid "SearXNG Instance URL (e.g. https://searx.be)"
+msgstr "URL экземпляра SearXNG (напр. https://searx.be)"
+
+msgid "SearXNG API Key/Token (optional)"
+msgstr "API-ключ/токен SearXNG (опционально)"
+
+msgid "Exa API key"
+msgstr "API-ключ Exa"
+
+msgid "Search Type:"
+msgstr "Тип поиска:"
+
+msgid "Auto (Default)"
+msgstr "Авто (по умолчанию)"
+
+msgid "Fast"
+msgstr "Быстрый"
+
+msgid "Instant"
+msgstr "Мгновенный"
+
+msgid "Deep Lite"
+msgstr "Глубокий Lite"
+
+msgid "Deep"
+msgstr "Глубокий"
+
+msgid "Deep Reasoning"
+msgstr "Глубокое рассуждение"
+
+msgid "DuckDuckGo requires no configuration."
+msgstr "DuckDuckGo не требует настройки."
+
+msgid "Ensure the SearXNG instance has the JSON format enabled."
+msgstr "Убедитесь, что на экземпляре SearXNG включён формат JSON."
+
+msgid "Enables LLM-triggered neural web searches via Exa API."
+msgstr "Включает нейронный веб-поиск от LLM через API Exa."
+
+msgid "Enables LLM-triggered web searches via Ollama's search API"
+msgstr "Включает веб-поиск от LLM через поисковый API Ollama"
+
 msgid ""
 "Runs a .sh file inside a skill folder. Per-run approval is skipped only when "
 "that skill has “Allow running skill scripts without approval” checked on the "
@@ -324,8 +400,33 @@ msgstr ""
 "настроек «Навыки» установлен флажок «Разрешить запуск скриптов навыков без "
 "подтверждения»."
 
+msgid "Color button"
+msgstr "Кнопка цвета"
+
+msgid "Current color is %1. This button will open a color chooser dialog."
+msgstr "Текущий цвет: %1. Эта кнопка откроет диалог выбора цвета."
+
+msgid "Current color is %1."
+msgstr "Текущий цвет: %1."
+
 msgid "Tool Request: %1"
 msgstr "Запрос инструмента: %1"
+
+msgid "Validating command against its justification…"
+msgstr "Проверка команды на соответствие обоснованию…"
+
+msgid " (by %1)"
+msgstr " (от %1)"
+
+msgid " confidence %1"
+msgstr " уверенность %1"
+
+#, javascript-format
+msgid "Validated: matches justification%1%2"
+msgstr "Проверено: соответствует обоснованию%1%2"
+
+msgid "Command does not match its justification."
+msgstr "Команда не соответствует своему обоснованию."
 
 msgid "Justification: %1"
 msgstr "Обоснование: %1"
@@ -552,20 +653,145 @@ msgstr "Показать Настройки"
 msgid "Show Pin"
 msgstr "Показать закрепление"
 
-msgid "Speech-to-text is not configured"
-msgstr "Распознавание речи не настроено"
+msgid "Loaded %1 skill"
+msgstr "Загружен %1 навык"
 
-msgid "Unknown STT backend: %1"
-msgstr "Неизвестный бэкенд STT: %1"
+msgid "Yes"
+msgstr "Да"
 
-msgid "Whisper CLI runner is not available"
-msgstr "Модуль запуска Whisper CLI недоступен"
+msgid "No"
+msgstr "Нет"
 
-msgid "Could not build Whisper command"
-msgstr "Не удалось сформировать команду Whisper"
+msgid "Uncertain"
+msgstr "Неуверенно"
 
-msgid "STT backend does not support model listing"
-msgstr "Бэкенд STT не поддерживает получение списка моделей"
+msgid "Voice message"
+msgstr "Голосовое сообщение"
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Web Search"
+msgstr "Поиск в интернете"
+
+msgid "compacted"
+msgstr "сжато"
+
+msgid ""
+"This message has been summarized into the compacted context. Citations "
+"active."
+msgstr "Это сообщение было обобщено в сжатый контекст. Цитирование активно."
+
+msgid ""
+"Mathtext rendering fell back to Unicode replacement (matplotlib not "
+"installed or error occurred)"
+msgstr ""
+"Рендеринг Mathtext переключен на замену Unicode (matplotlib не установлен "
+"или произошла ошибка)"
+
+msgid "Thinking"
+msgstr "Размышляю…"
+
+msgid "Searched for: %1"
+msgstr "Искал: %1"
+
+msgid "Show %1 results"
+msgstr "Показать %1 результатов"
+
+msgid "Save & Retry"
+msgstr "Сохранить и повторить"
+
+msgid "Copy to clipboard"
+msgstr "Копировать в буфер обмена"
+
+msgid "Edit message"
+msgstr "Изменить сообщение"
+
+msgid "Edit response"
+msgstr "Изменить ответ"
+
+msgid "Retry from here"
+msgstr "Повторить отсюда"
+
+msgid "Regenerate response"
+msgstr "Сгенерировать ответ заново"
+
+msgid "Share output with assistant"
+msgstr "Поделиться выводом с ассистентом"
+
+msgid "The model loaded this skill's instructions into context before acting."
+msgstr ""
+"Модель загрузила инструкции этого навыка в контекст перед выполнением "
+"действий."
+
+msgid "Stop command"
+msgstr "Остановить команду"
+
+msgid "Open terminal attached to this session"
+msgstr "Открыть терминал, подключенный к этой сессии"
+
+msgid "Collapse result"
+msgstr "Свернуть результат"
+
+msgid "Copy output"
+msgstr "Скопировать вывод"
+
+msgid ""
+"No custom tools configured. Add a custom tool to expose your own commands to "
+"the LLM."
+msgstr ""
+"Пользовательские инструменты не настроены. Добавьте пользовательский "
+"инструмент, чтобы предоставить LLM доступ к вашим командам."
+
+msgid "Add Custom Tool"
+msgstr "Добавить пользовательский инструмент"
+
+msgid "Echoes back the message provided."
+msgstr "Возвращает предоставленное сообщение."
+
+msgid "Tool name (e.g. systemctl_service)"
+msgstr "Название инструмента (например, systemctl_service)"
+
+msgid "Description (instructs the LLM what this tool does)"
+msgstr "Описание (инструктирует LLM о том, что делает этот инструмент)"
+
+msgid "Command template (e.g. systemctl {action} {service})"
+msgstr "Шаблон команды (например, systemctl {action} {service})"
+
+msgid "Require Superuser (runs with pkexec)"
+msgstr "Требуется суперпользователь (запускается с pkexec)"
+
+msgid "Auto-run tool (no confirmation dialog)"
+msgstr "Автозапуск инструмента (без диалога подтверждения)"
+
+msgid "Collapse results"
+msgstr "Сворачивать результаты"
+
+msgid ""
+"Show finished results as a small pill; click the pill to view the full "
+"output."
+msgstr ""
+"Показывать готовые результаты в виде компактной плашки; нажмите на неё, "
+"чтобы просмотреть полный вывод."
+
+msgid "Update Tool"
+msgstr "Обновить инструмент"
+
+msgid "Save Tool"
+msgstr "Сохранить инструмент"
+
+msgid "A tool named \"%1\" already exists."
+msgstr "Инструмент с именем \"%1\" уже существует."
+
+msgid ""
+"Custom tools allow you to expose your own commands to the LLM. Use "
+"placeholders like {variable} in the Command Template to define parameters "
+"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
+msgstr ""
+"Пользовательские инструменты позволяют предоставить LLM доступ к вашим "
+"командам. Используйте заполнители вроде {variable} в шаблоне команды для "
+"определения параметров, которые LLM может заполнить. Значения, "
+"предоставленные LLM, автоматически экранируются для оболочки."
 
 msgid "Speech to Text"
 msgstr "Распознавание речи"
@@ -735,9 +961,6 @@ msgstr "Перевести"
 msgid "Device:"
 msgstr "Устройство:"
 
-msgid "Default"
-msgstr "По умолчанию"
-
 msgid "FP16:"
 msgstr "FP16:"
 
@@ -776,136 +999,20 @@ msgstr "Необязательно, например ru или en (пусто = 
 msgid "Max recording (seconds):"
 msgstr "Макс. время записи (секунды):"
 
-msgid ""
-"No custom tools configured. Add a custom tool to expose your own commands to "
-"the LLM."
-msgstr ""
-"Пользовательские инструменты не настроены. Добавьте пользовательский "
-"инструмент, чтобы предоставить LLM доступ к вашим командам."
+msgid "Speech-to-text is not configured"
+msgstr "Распознавание речи не настроено"
 
-msgid "Add Custom Tool"
-msgstr "Добавить пользовательский инструмент"
+msgid "Unknown STT backend: %1"
+msgstr "Неизвестный бэкенд STT: %1"
 
-msgid "Echoes back the message provided."
-msgstr "Возвращает предоставленное сообщение."
+msgid "Whisper CLI runner is not available"
+msgstr "Модуль запуска Whisper CLI недоступен"
 
-msgid "Tool name (e.g. systemctl_service)"
-msgstr "Название инструмента (например, systemctl_service)"
+msgid "Could not build Whisper command"
+msgstr "Не удалось сформировать команду Whisper"
 
-msgid "Description (instructs the LLM what this tool does)"
-msgstr "Описание (инструктирует LLM о том, что делает этот инструмент)"
-
-msgid "Command template (e.g. systemctl {action} {service})"
-msgstr "Шаблон команды (например, systemctl {action} {service})"
-
-msgid "Require Superuser (runs with pkexec)"
-msgstr "Требуется суперпользователь (запускается с pkexec)"
-
-msgid "Auto-run tool (no confirmation dialog)"
-msgstr "Автозапуск инструмента (без диалога подтверждения)"
-
-msgid "Collapse results"
-msgstr "Сворачивать результаты"
-
-msgid ""
-"Show finished results as a small pill; click the pill to view the full "
-"output."
-msgstr ""
-"Показывать готовые результаты в виде компактной плашки; нажмите на неё, "
-"чтобы просмотреть полный вывод."
-
-msgid "Update Tool"
-msgstr "Обновить инструмент"
-
-msgid "Save Tool"
-msgstr "Сохранить инструмент"
-
-msgid "A tool named \"%1\" already exists."
-msgstr "Инструмент с именем \"%1\" уже существует."
-
-msgid ""
-"Custom tools allow you to expose your own commands to the LLM. Use "
-"placeholders like {variable} in the Command Template to define parameters "
-"the LLM can fill. Values provided by the LLM are automatically shell-escaped."
-msgstr ""
-"Пользовательские инструменты позволяют предоставить LLM доступ к вашим "
-"командам. Используйте заполнители вроде {variable} в шаблоне команды для "
-"определения параметров, которые LLM может заполнить. Значения, "
-"предоставленные LLM, автоматически экранируются для оболочки."
-
-msgid "Loaded %1 skill"
-msgstr "Загружен %1 навык"
-
-msgid "Voice message"
-msgstr "Голосовое сообщение"
-
-msgid "Error"
-msgstr "Ошибка"
-
-msgid "Web Search"
-msgstr "Поиск в интернете"
-
-msgid "compacted"
-msgstr "сжато"
-
-msgid ""
-"This message has been summarized into the compacted context. Citations "
-"active."
-msgstr "Это сообщение было обобщено в сжатый контекст. Цитирование активно."
-
-msgid ""
-"Mathtext rendering fell back to Unicode replacement (matplotlib not "
-"installed or error occurred)"
-msgstr ""
-"Рендеринг Mathtext переключен на замену Unicode (matplotlib не установлен "
-"или произошла ошибка)"
-
-msgid "Thinking"
-msgstr "Размышляю…"
-
-msgid "Searched for: %1"
-msgstr "Искал: %1"
-
-msgid "Show %1 results"
-msgstr "Показать %1 результатов"
-
-msgid "Save & Retry"
-msgstr "Сохранить и повторить"
-
-msgid "Copy to clipboard"
-msgstr "Копировать в буфер обмена"
-
-msgid "Edit message"
-msgstr "Изменить сообщение"
-
-msgid "Edit response"
-msgstr "Изменить ответ"
-
-msgid "Retry from here"
-msgstr "Повторить отсюда"
-
-msgid "Regenerate response"
-msgstr "Сгенерировать ответ заново"
-
-msgid "Share output with assistant"
-msgstr "Поделиться выводом с ассистентом"
-
-msgid "The model loaded this skill's instructions into context before acting."
-msgstr ""
-"Модель загрузила инструкции этого навыка в контекст перед выполнением "
-"действий."
-
-msgid "Stop command"
-msgstr "Остановить команду"
-
-msgid "Open terminal attached to this session"
-msgstr "Открыть терминал, подключенный к этой сессии"
-
-msgid "Collapse result"
-msgstr "Свернуть результат"
-
-msgid "Copy output"
-msgstr "Скопировать вывод"
+msgid "STT backend does not support model listing"
+msgstr "Бэкенд STT не поддерживает получение списка моделей"
 
 msgid "Enable skills"
 msgstr "Включить навыки"
@@ -1099,6 +1206,36 @@ msgstr "Сбросить на шаблон по умолчанию"
 
 msgid "Preview:"
 msgstr "Предпросмотр:"
+
+msgid "(Active Chat Profile)"
+msgstr "(Активный профиль чата)"
+
+msgid "Unnamed Profile"
+msgstr "Безымянный профиль"
+
+msgid "Active Chat Profile"
+msgstr "Активный профиль чата"
+
+msgid "Active Chat Profile (Fallback)"
+msgstr "Активный профиль чата (резервный)"
+
+msgid "Selected profile does not have an endpoint URL or model configured."
+msgstr "В выбранном профиле не настроен URL конечной точки или модель."
+
+msgid "Testing command validation with '%1'…"
+msgstr "Проверка валидации команд с '%1'…"
+
+msgid "Validation test failed: %1"
+msgstr "Тест проверки не пройден: %1"
+
+msgid "Validator rejected the sample command: %1"
+msgstr "Валидатор отклонил образец команды: %1"
+
+msgid "n/a"
+msgstr "н/д"
+
+msgid "Validator accepted the sample command (confidence %1)."
+msgstr "Валидатор принял образец команды (уверенность %1)."
 
 msgid "General Tool Settings"
 msgstr "Общие настройки инструментов"
@@ -1312,6 +1449,15 @@ msgstr ""
 "Восстановить полный дословный текст и результаты работы инструментов ранее "
 "сжатых сообщений, указав начальный и конечный ID сообщений из цитируемого "
 "диапазона сообщений."
+
+msgid ""
+"Your justification is verified against the command before it runs, and the "
+"command is checked for shell syntax errors; commands that fail either check "
+"are rejected."
+msgstr ""
+"Ваше обоснование проверяется на соответствие команде перед её запуском, а "
+"команда проверяется на синтаксические ошибки shell; команды, не прошедшие "
+"любую из проверок, отклоняются."
 
 msgid "Approve the pending tool request"
 msgstr "Одобрить ожидающий запрос инструмента"
@@ -1548,21 +1694,6 @@ msgstr "Перетащите файлы сюда для прикрепления
 msgid "Context Compaction"
 msgstr "Сжатие контекста"
 
-msgid "(Active Chat Profile)"
-msgstr "(Активный профиль чата)"
-
-msgid "Unnamed Profile"
-msgstr "Безымянный профиль"
-
-msgid "Active Chat Profile"
-msgstr "Активный профиль чата"
-
-msgid "Active Chat Profile (Fallback)"
-msgstr "Активный профиль чата (резервный)"
-
-msgid "Selected profile does not have an endpoint URL or model configured."
-msgstr "В выбранном профиле не настроен URL конечной точки или модель."
-
 msgid "Testing compaction call using '%1'…"
 msgstr "Проверка вызова сжатия с использованием '%1'…"
 
@@ -1593,9 +1724,6 @@ msgstr "Профиль сжатия"
 
 msgid "Model Profile:"
 msgstr "Профиль модели:"
-
-msgid "None"
-msgstr "Нет"
 
 msgid ""
 "Provider: %1  |  Model: %2\n"
@@ -1665,9 +1793,6 @@ msgstr "Образец стенограммы беседы:"
 msgid "Reset Sample"
 msgstr "Сбросить образец"
 
-msgid "Testing…"
-msgstr "Проверка…"
-
 msgid "Test Compaction Connection"
 msgstr "Проверить соединение для сжатия"
 
@@ -1703,6 +1828,16 @@ msgstr "Переименовать"
 
 msgid "Adapter:"
 msgstr "Адаптер:"
+
+msgid ""
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
+msgstr ""
+"Профили Decisions оценивают каждое сообщение один раз и отвечают вердиктом и "
+"уверенностью. У них нет памяти диалога, системного промпта и инструментов. "
+"Их также можно выбрать в качестве валидатора команд в настройках "
+"инструментов."
 
 msgid "Platform:"
 msgstr "Платформа:"
@@ -1960,6 +2095,10 @@ msgstr "Доступные навыки (включено: %1):"
 msgid "Enable or disable individual skills in Settings → Skills."
 msgstr "Включайте или отключайте отдельные навыки в меню «Настройки → Навыки»."
 
+msgid "Command validation is still in progress; try again in a moment."
+msgstr ""
+"Проверка команды всё ещё выполняется; повторите попытку через мгновение."
+
 msgid "No tool request pending to approve."
 msgstr "Нет ожидающих запросов инструментов для одобрения."
 
@@ -2045,6 +2184,19 @@ msgstr "Неизвестная задача: **%1**. Доступны: %2"
 msgid "The user declined to run this command."
 msgstr "Пользователь отказался от выполнения этой команды."
 
+msgid "No message to evaluate."
+msgstr "Нет сообщения для оценки."
+
+msgid "Evaluating…"
+msgstr "Оценка…"
+
+msgid "Decision request failed: %1"
+msgstr "Запрос решения не выполнен: %1"
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr "Уверенность %1%"
+
 msgid "PlasmaLLM: Tool Call"
 msgstr "PlasmaLLM: Вызов инструмента"
 
@@ -2053,6 +2205,27 @@ msgstr "Запрошенный инструмент: %1"
 
 msgid "PlasmaLLM"
 msgstr "PlasmaLLM"
+
+msgid "Validation timed out."
+msgstr "Время проверки истекло."
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr "В профиле валидатора не настроены эндпоинт или модель."
+
+msgid "Empty validator response."
+msgstr "Пустой ответ валидатора."
+
+msgid "empty validator response"
+msgstr "пустой ответ валидатора"
+
+msgid "Could not validate: %1"
+msgstr "Не удалось проверить: %1"
+
+msgid "the command does not match its stated justification"
+msgstr "команда не соответствует заявленному обоснованию"
+
+msgid "Blocked by command validator: %1"
+msgstr "Заблокировано валидатором команд: %1"
 
 msgid "Unknown tool %1"
 msgstr "Неизвестный инструмент %1"
@@ -2327,9 +2500,6 @@ msgstr "Пользовательские инструменты"
 #~ msgstr ""
 #~ "⚠️ ОПАСНО: Оба параметра включены — LLM может выполнять команды и видеть "
 #~ "их вывод, включая агентный режим. Используйте только с надёжными LLM."
-
-#~ msgid "Backend:"
-#~ msgstr "Бэкенд:"
 
 #~ msgid "Session name:"
 #~ msgstr "Имя сессии:"
