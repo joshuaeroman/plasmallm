@@ -21,6 +21,7 @@ import "toolManager.js" as ToolManager
 import "driverManager.js" as DriverManager
 import "stt.js" as Stt
 import "contextCompactor.js" as ContextCompactor
+import "commandValidator.js" as CommandValidator
 import "legacyChatLoader.js" as LegacyChatLoader
 import "skills.js" as Skills
 import "memory.js" as Memory
@@ -139,6 +140,12 @@ PlasmoidItem {
     property bool hasUnreadResponse: false
     property var activeRequest: null
     property int streamingMessageIndex: -1
+    // Command validation: the tool call currently awaiting a verdict, a
+    // generation counter that invalidates stale async callbacks, and the
+    // fallback timeout timer.
+    property string validatingCallId: ""
+    property int _validationSeq: 0
+    property var _validationTimer: null
     property var sysInfo: ({})
     property int sysInfoPending: 0
     property bool systemPromptReady: false
@@ -177,6 +184,11 @@ PlasmoidItem {
             stdout: ""
             stderr: ""
             exitCode: 0
+            validationState: ""
+            validationReason: ""
+            validationModel: ""
+            validationConfidence: ""
+            decisionJson: ""
         }
         Component.onCompleted: clear()
     }
@@ -323,12 +335,13 @@ PlasmoidItem {
     }
 
     /**
-     * Resolves endpoint, apiKey, and model for the configured compaction profile.
+     * Resolves endpoint, apiKey, model, and adapter params for a profile id.
+     * `profileId` may be "active" (or empty) for the active chat profile.
+     * Shared by context compaction and command validation.
      */
-    function loadCompactorConfig(callback) {
-        var profileId = Plasmoid.configuration.compactionProfileId || "active";
-        if (profileId === "active" || !profileId) {
-            callback({
+    function loadProfileConnection(profileId, callback) {
+        function activeConnection() {
+            return {
                 endpoint: Plasmoid.configuration.apiEndpoint,
                 apiKey: root.apiKey || "",
                 model: Plasmoid.configuration.modelName,
@@ -340,7 +353,11 @@ PlasmoidItem {
                 geminiVertexAuthType: Plasmoid.configuration.geminiVertexAuthType,
                 usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
                 providerName: Plasmoid.configuration.providerName
-            });
+            };
+        }
+
+        if (profileId === "active" || !profileId) {
+            callback(activeConnection());
             return;
         }
 
@@ -354,19 +371,7 @@ PlasmoidItem {
         }
 
         if (!targetProf) {
-            callback({
-                endpoint: Plasmoid.configuration.apiEndpoint,
-                apiKey: root.apiKey || "",
-                model: Plasmoid.configuration.modelName,
-                apiType: root.effectiveApiType,
-                geminiApiVariant: Plasmoid.configuration.geminiApiVariant,
-                geminiAuthMethod: Plasmoid.configuration.geminiAuthMethod,
-                geminiProjectId: Plasmoid.configuration.geminiProjectId,
-                geminiLocation: Plasmoid.configuration.geminiLocation,
-                geminiVertexAuthType: Plasmoid.configuration.geminiVertexAuthType,
-                usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,
-                providerName: Plasmoid.configuration.providerName
-            });
+            callback(activeConnection());
             return;
         }
 
@@ -406,6 +411,13 @@ PlasmoidItem {
                 root.walletAvailable = true;
             done((res && res.key) || fallbackKeyForSlot(slot) || "");
         });
+    }
+
+    /**
+     * Resolves endpoint, apiKey, and model for the configured compaction profile.
+     */
+    function loadCompactorConfig(callback) {
+        loadProfileConnection(Plasmoid.configuration.compactionProfileId || "active", callback);
     }
 
     /**
@@ -512,6 +524,9 @@ PlasmoidItem {
     function forceCompaction(recompactAll) {
         if (isCompacting || isLoading || chatMessages.count <= 1)
             return;
+        // Decisions profiles cannot produce summaries.
+        if (Api.getCapabilities(root.effectiveApiType).chatMode === "decisions")
+            return;
 
         var keepTurns = Plasmoid.configuration.compactionKeepRecentTurns || 4;
         var startIndex = 1;
@@ -609,6 +624,8 @@ PlasmoidItem {
      */
     function triggerBackgroundCompactionIfNeeded() {
         if (!Plasmoid.configuration.compactionEnabled || isCompacting || isLoading)
+            return;
+        if (Api.getCapabilities(root.effectiveApiType).chatMode === "decisions")
             return;
 
         var mode = Plasmoid.configuration.compactionTriggerMode || "chars";
@@ -1066,7 +1083,12 @@ PlasmoidItem {
             toolArgs: "",
             stdout: "",
             stderr: "",
-            exitCode: 0
+            exitCode: 0,
+            validationState: "",
+            validationReason: "",
+            validationModel: "",
+            validationConfidence: "",
+            decisionJson: ""
         };
         if (extraProps) {
             for (var p in extraProps) {
@@ -1207,6 +1229,7 @@ PlasmoidItem {
         }
 
         root.pendingToolCalls = [];
+        root.invalidateCommandValidation();
         autoShareSuppressed = false;
         toolCallDepth = 0;
 
@@ -1583,6 +1606,7 @@ PlasmoidItem {
             }),
             useCommandTool: Plasmoid.configuration.useCommandTool,
             autoRunCommands: Plasmoid.configuration.autoRunCommands,
+            commandValidatorEnabled: Plasmoid.configuration.commandValidatorEnabled,
             toolsReadFileEnabled: Plasmoid.configuration.toolsReadFileEnabled,
             toolsReadFileAutoRun: Plasmoid.configuration.toolsReadFileAutoRun,
             toolsWriteFileEnabled: Plasmoid.configuration.toolsWriteFileEnabled,
@@ -1813,6 +1837,7 @@ PlasmoidItem {
         sessionAutoMode = false;
         sessionFullAutoMode = false;
         root.pendingToolCalls = [];
+        root.invalidateCommandValidation();
         root.activeSkills = [];
         root.activeCompaction = {
             summary: "",
@@ -1978,7 +2003,8 @@ PlasmoidItem {
                     exitCode: d.exitCode !== undefined ? d.exitCode : 0,
                     outputScheme: d.outputScheme || "",
                     tool_call_id: d.tool_call_id || "",
-                    callId: d.callId || ""
+                    callId: d.callId || "",
+                    decisionJson: d.decisionJson || ""
                 }));
             } catch (e) {
                 console.warn("PlasmaLLM saveChatJsonl error on display msg " + j + ": " + e);
@@ -2147,7 +2173,8 @@ PlasmoidItem {
                         exitCode: data.exitCode !== undefined ? data.exitCode : 0,
                         outputScheme: data.outputScheme || "",
                         tool_call_id: data.tool_call_id || "",
-                        callId: data.callId || ""
+                        callId: data.callId || "",
+                        decisionJson: data.decisionJson || ""
                     });
                 }
             } catch(e) {
@@ -2599,6 +2626,10 @@ PlasmoidItem {
         if (lower === "/approve") {
             if (root.pendingToolCalls.length > 0 && root.pendingToolCalls[0].type === "tool") {
                 var toolToApprove = root.pendingToolCalls[0];
+                if (root.validatingCallId === toolToApprove.id) {
+                    root.appendDisplayMessage("assistant", i18n("Command validation is still in progress; try again in a moment."), { shared: false });
+                    return true;
+                }
                 // Find and remove the tool_pending card from displayMessages
                 for (var i = displayMessages.count - 1; i >= 0; i--) {
                     var msg = displayMessages.get(i);
@@ -2616,6 +2647,8 @@ PlasmoidItem {
         if (lower === "/deny") {
             if (root.pendingToolCalls.length > 0 && root.pendingToolCalls[0].type === "tool") {
                 var toolToDeny = root.pendingToolCalls[0];
+                if (root.validatingCallId === toolToDeny.id)
+                    root.invalidateCommandValidation();
                 // Find and remove the tool_pending card from displayMessages
                 for (var j = displayMessages.count - 1; j >= 0; j--) {
                     var msgJ = displayMessages.get(j);
@@ -2835,6 +2868,8 @@ PlasmoidItem {
                     });
                 }
                 root.pendingToolCalls = [];
+                // Any in-flight validation belongs to the discarded queue.
+                root.invalidateCommandValidation();
             }
 
             // Add user message to both models with turn correlation
@@ -2878,7 +2913,111 @@ PlasmoidItem {
         return true;
     }
 
+    /**
+     * Single-shot decisions evaluation for decisions profiles. The last user
+     * message is sent as `state`; the typed answer is rendered as a normal
+     * assistant bubble. No system prompt, tools, or conversation memory.
+     */
+    function sendDecisionChat() {
+        var state = "";
+        for (var i = chatMessages.count - 1; i >= 0; i--) {
+            var m = chatMessages.get(i);
+            if (m.role === "user") {
+                state = m.content || "";
+                break;
+            }
+        }
+        if (!state) {
+            root.appendDisplayMessage("error", i18n("No message to evaluate."), { shared: false });
+            isLoading = false;
+            return;
+        }
+
+        isLoading = true;
+        root.hasUnreadResponse = false;
+        var displayIndex = root.appendDisplayMessage("assistant", i18n("Evaluating…"), { shared: false });
+
+        // No `.xhr` property: cancelRequest() calls .abort() on handles that
+        // don't expose one, which keeps the aborted-flag check authoritative.
+        var decisionXhr = null;
+        var handleRef = { aborted: false };
+        handleRef.abort = function() {
+            handleRef.aborted = true;
+            if (displayIndex >= 0 && displayIndex < displayMessages.count)
+                displayMessages.remove(displayIndex);
+            if (decisionXhr && typeof decisionXhr.abort === "function")
+                decisionXhr.abort();
+        };
+        root.activeRequest = handleRef;
+
+        decisionXhr = Api.sendDecisionChat(root.effectiveApiType, {
+            endpoint: Plasmoid.configuration.apiEndpoint,
+            apiKey: root.apiKey || "",
+            model: Plasmoid.configuration.modelName,
+            state: state
+        }, function(err, verdict) {
+            if (handleRef.aborted) return;
+            root.activeRequest = null;
+            isLoading = false;
+
+            if (displayIndex >= 0 && displayIndex < displayMessages.count)
+                displayMessages.remove(displayIndex);
+
+            if (err) {
+                root.appendDisplayMessage("error", i18n("Decision request failed: %1", err), { shared: false });
+                return;
+            }
+
+            var label = verdict.choice === "yes" ? i18n("Yes")
+                      : verdict.choice === "no" ? i18n("No")
+                      : i18n("Uncertain");
+            var parts = ["**" + label + "**"];
+            if (verdict.confidence !== null)
+                parts[0] += " — " + i18n("%1% confidence", Math.round(verdict.confidence * 100));
+
+            // Fixed order to match the verdict bar: yes | uncertain | no.
+            var probs = verdict.probabilities || {};
+            var probOrder = ["yes", "uncertain", "no"];
+            var probLines = [];
+            for (var pi = 0; pi < probOrder.length; pi++) {
+                var pkey = probOrder[pi];
+                if (probs.hasOwnProperty(pkey))
+                    probLines.push(pkey + " " + Number(probs[pkey]).toFixed(2));
+            }
+            if (probLines.length > 0)
+                parts.push(probLines.join(" · "));
+            var text = parts.join("\n\n");
+
+            var astMsgId = nextMsgId("c");
+            chatMessages.append({
+                msgId: astMsgId,
+                turnId: "",
+                role: "assistant",
+                content: text,
+                timestamp_api: Api.localISODateTime()
+            });
+            root.appendDisplayMessage("assistant", text, {
+                shared: true,
+                apiMsgId: astMsgId,
+                decisionJson: JSON.stringify({
+                    choice: verdict.choice,
+                    confidence: verdict.confidence,
+                    probabilities: probs
+                })
+            });
+            root.hasUnreadResponse = true;
+            saveChat();
+        });
+    }
+
     function sendToLLM() {
+        // Decisions profiles evaluate a single message instead of chatting.
+        var activeCaps = Api.getCapabilities(root.effectiveApiType) || {};
+        if (activeCaps.chatMode === "decisions") {
+            sendDecisionChat();
+            return;
+        }
+
         // Exa has a single fixed endpoint + model. If the user switched adapters
         // and Apply raced model auto-select, backfill so chat still works.
         if (Plasmoid.configuration.apiType === "exa") {
@@ -3308,6 +3447,7 @@ PlasmoidItem {
         streamPollTimer.streamHandle = null;
         isLoading = false;
         autoShareSuppressed = true;
+        root.invalidateCommandValidation();
         root.pendingToolCalls = [];
         // Remove the streaming placeholder if it's still empty
         if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
@@ -3330,14 +3470,219 @@ PlasmoidItem {
         streamingMessageIndex = -1;
     }
 
+    function shouldValidateToolCall(call, toolsConfig) {
+        if (!Plasmoid.configuration.commandValidatorEnabled)
+            return false;
+        if (!call || call.name !== "run_command")
+            return false;
+        return !!(call.args && String(call.args.command || "").length > 0);
+    }
+
+    function stopValidationTimer() {
+        if (root._validationTimer) {
+            root._validationTimer.stop();
+            root._validationTimer.destroy();
+            root._validationTimer = null;
+        }
+    }
+
+    /**
+     * Cancels any in-flight command validation and removes its card. Call
+     * whenever the pending tool queue is discarded so a late verdict cannot
+     * act on a stale call.
+     */
+    function invalidateCommandValidation() {
+        root._validationSeq++;
+        root.stopValidationTimer();
+        if (root.validatingCallId) {
+            var callId = root.validatingCallId;
+            for (var i = displayMessages.count - 1; i >= 0; i--) {
+                var m = displayMessages.get(i);
+                if (m.role === "tool_pending" && m.tool_call_id === callId)
+                    displayMessages.remove(i);
+            }
+            root.validatingCallId = "";
+        }
+    }
+
+    function findToolPendingIndex(callId) {
+        for (var i = displayMessages.count - 1; i >= 0; i--) {
+            var m = displayMessages.get(i);
+            if (m.role === "tool_pending" && m.tool_call_id === callId)
+                return i;
+        }
+        return -1;
+    }
+
+    function updateValidationCard(index, callId, state, reason, model, confidence) {
+        if (index < 0 || index >= displayMessages.count
+            || displayMessages.get(index).tool_call_id !== callId) {
+            index = root.findToolPendingIndex(callId);
+        }
+        if (index < 0) return;
+        displayMessages.setProperty(index, "validationState", state || "");
+        displayMessages.setProperty(index, "validationReason", reason || "");
+        displayMessages.setProperty(index, "validationModel", model || "");
+        displayMessages.setProperty(index, "validationConfidence",
+            (confidence === undefined || confidence === null || confidence === "") ? "" : String(confidence));
+    }
+
+    /**
+     * Starts validating a run_command call against its justification. Shows
+     * the approval card in a "running" state so the user sees the pause;
+     * auto-run commands are only executed once the verdict passes.
+     */
+    function beginCommandValidation(call) {
+        var seq = ++root._validationSeq;
+        root.validatingCallId = call.id;
+        root.stopValidationTimer();
+
+        var displayIndex = root.appendDisplayMessage("tool_pending", call.name, {
+            turnId: call.turnId || "",
+            tool_call_id: call.id,
+            toolArgs: JSON.stringify(call.args),
+            shared: false,
+            validationState: "running"
+        });
+
+        root._validationTimer = Qt.createQmlObject("import QtQml 2.0; Timer { interval: 20000; repeat: false; }", root);
+        root._validationTimer.triggered.connect(function() {
+            finishCommandValidation(seq, call, displayIndex, { error: i18n("Validation timed out.") });
+        });
+        root._validationTimer.start();
+
+        loadProfileConnection(Plasmoid.configuration.commandValidatorProfileId || "active", function(conn) {
+            if (seq !== root._validationSeq)
+                return;
+            if (!conn || !String(conn.endpoint || "").length || !String(conn.model || "").length) {
+                finishCommandValidation(seq, call, displayIndex, { error: i18n("The validator profile has no endpoint or model configured.") });
+                return;
+            }
+            var profile = {
+                endpoint: conn.endpoint,
+                modelName: conn.model,
+                apiKey: conn.apiKey || "",
+                backend: Plasmoid.configuration.commandValidatorBackend || "auto"
+            };
+            CommandValidator.validate({
+                profile: profile,
+                command: call.args.command,
+                justification: call.args.justification || "",
+                threshold: Number(Plasmoid.configuration.commandValidatorThreshold),
+                transport: {
+                    chat: function(messages, cb) {
+                        root.sendValidationChat(conn, messages, seq, cb);
+                    }
+                }
+            }, function(result) {
+                finishCommandValidation(seq, call, displayIndex, result || { error: i18n("Empty validator response.") });
+            });
+        });
+    }
+
+    function sendValidationChat(conn, messages, seq, callback) {
+        try {
+            Api.sendStreaming(Api.resolvedApiType(conn.apiType, conn.geminiApiVariant, conn.geminiAuthMethod, conn.geminiVertexAuthType), {
+                endpoint: conn.endpoint,
+                apiKey: conn.apiKey,
+                sessionId: root.chatSessionId,
+                model: conn.model,
+                messages: messages,
+                temperature: 0,
+                maxTokens: 512,
+                geminiApiVariant: Api.clampGeminiApiVariant(conn.geminiApiVariant, conn.geminiAuthMethod, conn.geminiVertexAuthType),
+                geminiAuthMethod: conn.geminiAuthMethod,
+                geminiProjectId: conn.geminiProjectId,
+                geminiLocation: conn.geminiLocation,
+                geminiVertexAuthType: conn.geminiVertexAuthType,
+                usesResponsesAPI: conn.usesResponsesAPI,
+                providerName: conn.providerName,
+                onChunk: function() {},
+                onThinkingChunk: function() {},
+                onComplete: function(fullText, error) {
+                    if (seq !== root._validationSeq)
+                        return;
+                    if (error)
+                        callback(String(error), null);
+                    else
+                        callback(null, String(fullText || ""));
+                }
+            });
+        } catch (e) {
+            callback("Validator invocation error: " + e, null);
+        }
+    }
+
+    function finishCommandValidation(seq, call, displayIndex, result) {
+        if (seq !== root._validationSeq)
+            return;
+        root._validationSeq++;
+        root.stopValidationTimer();
+        root.validatingCallId = "";
+
+        function removeCard() {
+            if (displayIndex >= 0 && displayIndex < displayMessages.count
+                && displayMessages.get(displayIndex).tool_call_id === call.id)
+                displayMessages.remove(displayIndex);
+        }
+
+        var queued = root.pendingToolCalls.length > 0 && root.pendingToolCalls[0].id === call.id;
+        if (!queued) {
+            // The call was denied (or otherwise handled) while the verdict was
+            // in flight. processNextToolCall was blocked by validatingCallId
+            // at that point, so resume the queue now.
+            removeCard();
+            root.processNextToolCall();
+            return;
+        }
+
+        if (!result || result.error) {
+            // Fail closed: a command that could not be validated is never
+            // auto-run; the user reviews it via the approval card instead.
+            var errText = (result && result.error) ? result.error : i18n("empty validator response");
+            root.updateValidationCard(displayIndex, call.id, "error", i18n("Could not validate: %1", errText), "", "");
+            return;
+        }
+
+        if (result.match !== true) {
+            // Strict mode: reject the call and tell the model why.
+            var reason = (result.reason && result.reason.length > 0)
+                ? result.reason
+                : i18n("the command does not match its stated justification");
+            removeCard();
+            root.handleToolOutput(null, "", i18n("Blocked by command validator: %1", reason), 1, {
+                name: call.name,
+                callId: call.id,
+                turnId: call.turnId || ""
+            });
+            return;
+        }
+
+        // Passed: fall back to the normal approval or auto-run flow.
+        var toolsConfig = getToolsConfig();
+        if (ToolManager.isAutoRun(call.name, toolsConfig, call.args)) {
+            removeCard();
+            root.executeTool(call.name, call.args, call.id, call.turnId);
+        } else {
+            root.updateValidationCard(displayIndex, call.id, "passed", "", (result && result.model) || "", result ? result.confidence : "");
+        }
+    }
+
     function processNextToolCall() {
         if (pendingToolCalls.length === 0) {
             sendToLLM();
             return;
         }
+        // A validation is already in flight; finishing it resumes the queue.
+        if (root.validatingCallId !== "")
+            return;
 
         var next = pendingToolCalls[0];
         var toolsConfig = getToolsConfig();
+        if (shouldValidateToolCall(next, toolsConfig)) {
+            beginCommandValidation(next);
+            return;
+        }
         if (ToolManager.isAutoRun(next.name, toolsConfig, next.args)) {
             executeTool(next.name, next.args, next.id, next.turnId);
         } else {
@@ -3835,6 +4180,7 @@ PlasmoidItem {
         function onEnableToolsChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onAutoRunCommandsChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onUseCommandToolChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onCommandValidatorEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onToolsReadFileEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onToolsReadFileAutoRunChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onToolsWriteFileEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }

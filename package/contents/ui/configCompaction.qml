@@ -77,6 +77,9 @@ BaseConfigPage {
         var list = [{ id: "active", name: i18n("(Active Chat Profile)") }];
         for (var i = 0; i < profilesList.length; i++) {
             var p = profilesList[i];
+            // Decisions profiles cannot generate summaries.
+            if (p.apiType === "decisions")
+                continue;
             var label = p.name || (p.providerName ? p.providerName + " (" + (p.modelName || "") + ")" : i18n("Unnamed Profile"));
             list.push({ id: p.id, name: label, profile: p });
         }
@@ -102,7 +105,8 @@ BaseConfigPage {
             };
         }
         for (var i = 0; i < profilesList.length; i++) {
-            if (profilesList[i].id === targetId)
+            // Decisions profiles cannot generate summaries; fall back to active.
+            if (profilesList[i].id === targetId && profilesList[i].apiType !== "decisions")
                 return profilesList[i];
         }
         return {

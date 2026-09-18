@@ -953,6 +953,13 @@ BaseConfigPage {
             visible: cfg_enableTools && usingExaChat
         }
 
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            type: Kirigami.MessageType.Information
+            text: i18n("Decisions profiles evaluate each message once and reply with a verdict and confidence. They have no conversation memory, system prompt, or tools. They can also be selected as the Command Validator in Tools settings.")
+            visible: caps.chatMode === "decisions"
+        }
+
         // --- Gemini Specific Settings ---
         QQC2.ComboBox {
             id: geminiAuthCombo
@@ -1231,6 +1238,7 @@ BaseConfigPage {
             Kirigami.FormData.label: i18n("Temperature: %1%", Math.round(temperatureSlider.value))
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
+            visible: caps.chatMode !== "decisions"
 
             QQC2.Slider {
                 id: temperatureSlider
@@ -1263,6 +1271,7 @@ BaseConfigPage {
         QQC2.SpinBox {
             id: maxTokensSpinBox
             Kirigami.FormData.label: i18n("Max Tokens:")
+            visible: caps.chatMode !== "decisions"
             from: 64
             to: 32768
             stepSize: 64

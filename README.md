@@ -111,9 +111,9 @@ make install-dev
 
 Right-click the widget and select **Configure PlasmaLLM...**:
 
-- **General**: Set your provider, model, and API keys.
+- **General**: Set your provider, model, and API keys. The **Decisions (TypeSafe / Jev)** adapter (TypeSafe direct or OpenRouter) is for decision models: instead of chatting, each message is evaluated once and answered with a verdict and confidence (Yes / No / Uncertain). Decisions profiles have no conversation memory, system prompt, or tools.
 - **Appearance**: Configure fonts, bubble styles, and interface behavior.
-- **Tools**: Enable/disable specific tools and configure the filesystem whitelist for sandboxed operations. Finished tool results collapse to a small pill by default (per-tool toggle); click to expand.
+- **Tools**: Enable/disable specific tools and configure the filesystem whitelist for sandboxed operations. Finished tool results collapse to a small pill by default (per-tool toggle); click to expand. The `run_command` tool can optionally verify each command with a second model profile before it runs (Auto-detect, Jev/TypeSafe structured decisions, or a JSON verdict from any chat profile): the command must match its LLM-supplied justification and be well-written shell (no incomplete constructs or syntax errors). Mismatched or malformed commands are denied automatically; validation errors fall back to asking for approval. Selecting a Decisions profile as the validator is the recommended setup.
 - **Tasks**: Manage custom script tools and shell command templates.
 - **Skills**: Discover and toggle Agent Skills (`SKILL.md` folders or `<name>.md` files) loaded on demand. PlasmaLLM ships a bundled `create-skill` helper; add your own under `~/.local/share/plasmallm/skills/` or extra directories in Settings. Skills may include `.sh` scripts run via `run_skill_script`; enable “Allow running skill scripts without approval” per skill in Settings. Use `/skills` in chat to list what is available.
 

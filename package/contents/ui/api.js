@@ -327,7 +327,8 @@ function getAdapterChoices() {
         { id: "anthropic", name: _tr(null, "Anthropic") },
         { id: "gemini",    name: _tr(null, "Google Gemini") },
         { id: "opencode",  name: _tr(null, "OpenCode") },
-        { id: "exa",       name: _tr(null, "Exa") }
+        { id: "exa",       name: _tr(null, "Exa") },
+        { id: "decisions", name: _tr(null, "Decisions (TypeSafe / Jev)") }
     ];
 }
 
@@ -370,6 +371,17 @@ function buildContentArray(apiType, text, attachments, usesResponsesAPI, extra) 
 
 function sendStreaming(apiType, opts) {
     return Adapters.getAdapter(apiType).sendStreaming(opts);
+}
+
+// Single-shot decisions evaluation (TypeSafe / Jev). Returns an abortable
+// XMLHttpRequest when the adapter supports it, otherwise null.
+function sendDecisionChat(apiType, opts, callback) {
+    var ad = Adapters.getAdapter(apiType);
+    if (typeof ad.sendDecisionChat !== "function") {
+        if (callback) callback("Selected adapter does not support decisions", null);
+        return null;
+    }
+    return ad.sendDecisionChat(opts, callback);
 }
 
 // GREEK LETTERS AND MATH SYMBOLS FOR LATEX CHARACTER REPLACEMENT

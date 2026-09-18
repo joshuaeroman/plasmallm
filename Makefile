@@ -19,6 +19,8 @@ test:
 	node tests/wallet_core.mjs
 	node tests/gemini_thinking.mjs
 	node tests/skills.mjs
+	node tests/command_validation.mjs
+	node tests/decisions_adapter.mjs
 	node tests/memory.mjs
 	node tests/path_sandbox.mjs
 	node tests/opencode_route.mjs

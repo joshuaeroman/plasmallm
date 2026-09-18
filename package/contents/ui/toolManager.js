@@ -393,6 +393,40 @@ function isAutoRun(toolId, config, args) {
     return false;
 }
 
+/**
+ * Returns a deep-enough clone of the run_command metadata whose schema tells
+ * the model its justification is verified by the command validator. Cloning
+ * keeps the shared registry object used by the settings UI pristine.
+ */
+function _withValidatorNotice(meta) {
+    var clone = {};
+    for (var k in meta) {
+        if (meta.hasOwnProperty(k)) clone[k] = meta[k];
+    }
+
+    var params = { type: "object", properties: {}, required: [] };
+    if (meta.parameters) {
+        if (meta.parameters.type) params.type = meta.parameters.type;
+        if (meta.parameters.required) params.required = meta.parameters.required.slice();
+        var props = meta.parameters.properties || {};
+        for (var p in props) {
+            if (!props.hasOwnProperty(p)) continue;
+            var propClone = {};
+            for (var pk in props[p]) {
+                if (props[p].hasOwnProperty(pk)) propClone[pk] = props[p][pk];
+            }
+            params.properties[p] = propClone;
+        }
+    }
+    if (params.properties.justification) {
+        params.properties.justification.description = (params.properties.justification.description || "") +
+            " Verified by a validator model before execution; commands whose effects do not match it are rejected.";
+    }
+    clone.parameters = params;
+    clone.description = (clone.description || "") + " Justifications are verified before execution.";
+    return clone;
+}
+
 function getEnabledToolsMetadata(config) {
     var metadata = [];
     var enabled = getEnabledTools(config);
@@ -413,6 +447,12 @@ function getEnabledToolsMetadata(config) {
                     Skills.filterEnabledSkills(config.loadedSkills || [], config.skillsDisabledList)
                 );
                 meta = clone;
+            }
+            // Tell the model its justification is verified whenever command
+            // validation is active. Deep-clone so the shared registry object
+            // (and the settings UI reading from it) stays untouched.
+            if (config && config.commandValidatorEnabled && id === "run_command") {
+                meta = _withValidatorNotice(meta);
             }
             metadata.push(meta);
         }
@@ -518,6 +558,13 @@ function buildSystemPromptSection(config, i18nFn) {
         }
 
         var instruction = getToolInstruction(id, config, i18nFn);
+        // Stated after the (possibly user-overridden) instructions so an
+        // override cannot accidentally hide how validation behaves.
+        if (id === "run_command" && config && config.commandValidatorEnabled) {
+            instruction += " " + (loc
+                ? _tr(i18nFn, config, "Your justification is verified against the command before it runs, and the command is checked for shell syntax errors; commands that fail either check are rejected.")
+                : "Your justification is verified against the command before it runs, and the command is checked for shell syntax errors; commands that fail either check are rejected.");
+        }
         section += "- " + tool.name + " (" + status + "): " + instruction + details + "\n";
     }
 
@@ -655,7 +702,8 @@ function _toolDescriptionsCatalog() {
         i18n("Show a system notification."),
         i18n("Open a URL in the default application (e.g., web browser)."),
         i18n("Perform a web search to find current information, news, or specific facts."),
-        i18n("Restore the full verbatim text and tool outputs of previously compacted messages by specifying the start and end message IDs from a cited message range.")
+        i18n("Restore the full verbatim text and tool outputs of previously compacted messages by specifying the start and end message IDs from a cited message range."),
+        i18n("Your justification is verified against the command before it runs, and the command is checked for shell syntax errors; commands that fail either check are rejected.")
     ];
 }
 

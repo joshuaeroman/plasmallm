@@ -327,6 +327,14 @@ SimpleKCM {
     property bool cfg_sttMigratedFromProfileDefault
     property bool cfg_useCommandTool
     property bool cfg_useCommandToolDefault
+    property bool cfg_commandValidatorEnabled
+    property bool cfg_commandValidatorEnabledDefault
+    property string cfg_commandValidatorProfileId
+    property string cfg_commandValidatorProfileIdDefault
+    property string cfg_commandValidatorBackend
+    property string cfg_commandValidatorBackendDefault
+    property double cfg_commandValidatorThreshold
+    property double cfg_commandValidatorThresholdDefault
     property bool cfg_pin
     property bool cfg_pinDefault
     property string cfg_tasks
