@@ -3005,7 +3005,10 @@ PlasmoidItem {
                     probabilities: probs
                 })
             });
-            root.hasUnreadResponse = true;
+            if (!root.expanded) {
+                root.hasUnreadResponse = true;
+                Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
+            }
             saveChat();
         });
     }
