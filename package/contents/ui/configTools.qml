@@ -14,6 +14,10 @@ import org.kde.plasma.plasma5support as P5Support
 import "api.js" as Api
 import "toolManager.js" as ToolManager
 import "driverManager.js" as DriverManager
+import "profiles.js" as Profiles
+import "wallet.js" as Wallet
+import "walletCore.js" as WalletCore
+import "commandValidator.js" as CommandValidator
 
 BaseConfigPage {
     id: configPage
@@ -43,6 +47,143 @@ BaseConfigPage {
     property bool driverDetected: false
 
     property alias execSource: execSource
+
+    // ---- Command validation -------------------------------------------------
+    property var profilesList: []
+    property bool validatorTestInProgress: false
+    property string validatorTestStatusMessage: ""
+    property int validatorTestStatusType: Kirigami.MessageType.Information
+
+    onCfg_profilesChanged: profilesList = Profiles.ensureDefault(configPage, i18n("Default"))
+
+    readonly property var validatorProfileChoices: {
+        var list = [{ id: "active", name: i18n("(Active Chat Profile)") }];
+        for (var i = 0; i < profilesList.length; i++) {
+            var p = profilesList[i];
+            var label = p.name || (p.providerName ? p.providerName + " (" + (p.modelName || "") + ")" : i18n("Unnamed Profile"));
+            list.push({ id: p.id, name: label, profile: p });
+        }
+        return list;
+    }
+
+    function activeValidatorProfileData(fallbackLabel) {
+        return {
+            id: "active",
+            name: fallbackLabel,
+            providerName: cfg_providerName || "Default",
+            modelName: cfg_modelName || "",
+            apiEndpoint: cfg_apiEndpoint || "",
+            apiType: cfg_apiType || "openai",
+            geminiApiVariant: cfg_geminiApiVariant || "",
+            geminiAuthMethod: cfg_geminiAuthMethod || "",
+            geminiProjectId: cfg_geminiProjectId || "",
+            geminiLocation: cfg_geminiLocation || "",
+            geminiVertexAuthType: cfg_geminiVertexAuthType || "",
+            usesResponsesAPI: !!cfg_usesResponsesAPI
+        };
+    }
+
+    readonly property var selectedValidatorProfile: {
+        var targetId = cfg_commandValidatorProfileId || "active";
+        if (targetId === "active" || !targetId)
+            return activeValidatorProfileData(i18n("Active Chat Profile"));
+        for (var i = 0; i < profilesList.length; i++) {
+            if (profilesList[i].id === targetId)
+                return profilesList[i];
+        }
+        return activeValidatorProfileData(i18n("Active Chat Profile (Fallback)"));
+    }
+
+    function validatorFallbackMap() {
+        return WalletCore.parseFallbackMap(cfg_apiKeysFallback);
+    }
+
+    function loadValidatorProfileKey(profile, callback) {
+        var pid = (!profile || profile.id === "active") ? cfg_activeProfileId : profile.id;
+        var apiType = (!profile || profile.id === "active") ? cfg_apiType : (profile.apiType || "openai");
+        var providerName = (!profile || profile.id === "active") ? cfg_providerName : (profile.providerName || "");
+        var endpoint = (!profile || profile.id === "active") ? cfg_apiEndpoint : (profile.apiEndpoint || "");
+        var geminiAuth = (!profile || profile.id === "active") ? cfg_geminiAuthMethod : (profile.geminiAuthMethod || "");
+        var slot = Api.currentKeySlot(pid, apiType, providerName, endpoint, geminiAuth);
+        var extras = Api.legacyKeySlots(pid, apiType, providerName, endpoint, geminiAuth);
+        var cfgKey = (!profile || profile.id === "active") ? (cfg_apiKey || "") : "";
+        Wallet.readKey(DBus, slot, extras, validatorFallbackMap(), cfgKey, function(res) {
+            // readKey already walks extras + fallbackMap + cfgKey.
+            callback((res && res.key) || "");
+        });
+    }
+
+    function testCommandValidator() {
+        var prof = selectedValidatorProfile;
+        var ep = (prof.apiEndpoint || "").trim();
+        var model = (prof.modelName || "").trim();
+
+        if (!ep || !model) {
+            validatorTestStatusMessage = i18n("Selected profile does not have an endpoint URL or model configured.");
+            validatorTestStatusType = Kirigami.MessageType.Error;
+            return;
+        }
+
+        validatorTestInProgress = true;
+        validatorTestStatusMessage = i18n("Testing command validation with '%1'…", prof.name || prof.modelName);
+        validatorTestStatusType = Kirigami.MessageType.Information;
+
+        loadValidatorProfileKey(prof, function(key) {
+            CommandValidator.validate({
+                profile: {
+                    endpoint: ep,
+                    modelName: model,
+                    apiKey: key || "",
+                    backend: cfg_commandValidatorBackend || "auto"
+                },
+                command: "rm -rf ~/.cache/plasmallm",
+                justification: "Remove the PlasmaLLM cache directory to reclaim disk space.",
+                threshold: Number(cfg_commandValidatorThreshold),
+                transport: {
+                    chat: function(messages, cb) {
+                        try {
+                            Api.sendStreaming(Api.resolvedApiType(prof.apiType || "openai", prof.geminiApiVariant, prof.geminiAuthMethod, prof.geminiVertexAuthType), {
+                                endpoint: ep,
+                                apiKey: key || "",
+                                model: model,
+                                messages: messages,
+                                temperature: 0,
+                                maxTokens: 512,
+                                geminiApiVariant: Api.clampGeminiApiVariant(prof.geminiApiVariant, prof.geminiAuthMethod, prof.geminiVertexAuthType),
+                                geminiAuthMethod: prof.geminiAuthMethod,
+                                geminiProjectId: prof.geminiProjectId,
+                                geminiLocation: prof.geminiLocation,
+                                geminiVertexAuthType: prof.geminiVertexAuthType,
+                                usesResponsesAPI: prof.usesResponsesAPI,
+                                providerName: prof.providerName,
+                                onChunk: function() {},
+                                onThinkingChunk: function() {},
+                                onComplete: function(fullText, error) {
+                                    if (error) cb(String(error), null);
+                                    else cb(null, String(fullText || ""));
+                                }
+                            });
+                        } catch (e) {
+                            cb("Validator invocation error: " + e, null);
+                        }
+                    }
+                }
+            }, function(result) {
+                validatorTestInProgress = false;
+                if (result && result.error) {
+                    validatorTestStatusMessage = i18n("Validation test failed: %1", result.error);
+                    validatorTestStatusType = Kirigami.MessageType.Error;
+                } else if (result && result.match === false) {
+                    validatorTestStatusMessage = i18n("Validator rejected the sample command: %1", result.reason);
+                    validatorTestStatusType = Kirigami.MessageType.Warning;
+                } else {
+                    validatorTestStatusMessage = i18n("Validator accepted the sample command (confidence %1).",
+                        result && result.confidence !== undefined ? result.confidence : i18n("n/a"));
+                    validatorTestStatusType = Kirigami.MessageType.Positive;
+                }
+            });
+        });
+    }
 
     property var whitelistPaths: []
 
@@ -169,6 +310,7 @@ BaseConfigPage {
         execSource.connectSource("command -v tmux");
         execSource.connectSource("command -v screen");
         configPage.parseWhitelist();
+        profilesList = Profiles.ensureDefault(configPage, i18n("Default"));
     }
 
     Kirigami.FormLayout {

@@ -43,6 +43,12 @@ Kirigami.AbstractCard {
     property string toolView: ""
     property string toolIcon: ""
     property string toolTitle: ""
+    property string validationState: ""
+    property string validationReason: ""
+    property string validationModel: ""
+    property string validationConfidence: ""
+    // JSON payload for decisions verdicts: {choice, confidence, probabilities}
+    property string decisionJson: ""
     onToolDataJsonChanged: toolExpanded = false
     property bool toolExpanded: false
     property bool thinkingExpanded: false
@@ -253,6 +259,36 @@ Kirigami.AbstractCard {
         var c = isUser ? root.userColor : root.assistantColor;
         var luminance = (0.299 * c.r + 0.587 * c.g + 0.114 * c.b);
         return luminance < 0.5 ? "#eff0f1" : "#232629";
+    }
+
+    // Decisions verdict (TypeSafe / Jev single-shot answers).
+    readonly property var decisionData: {
+        if (!decisionJson || decisionJson.length === 0) return null;
+        try {
+            var d = JSON.parse(decisionJson);
+            if (!d || !d.choice) return null;
+            return d;
+        } catch (e) { return null; }
+    }
+    readonly property string decisionVerdict: decisionData ? String(decisionData.choice).toLowerCase() : ""
+    readonly property color decisionColor: decisionVerdict === "yes" ? Kirigami.Theme.positiveTextColor
+                                           : decisionVerdict === "no" ? Kirigami.Theme.negativeTextColor
+                                           : Kirigami.Theme.neutralTextColor
+    readonly property string decisionIcon: decisionVerdict === "yes" ? "dialog-ok-apply"
+                                           : decisionVerdict === "no" ? "dialog-cancel"
+                                           : "dialog-question"
+    readonly property string decisionLabel: decisionVerdict === "yes" ? i18n("Yes")
+                                             : decisionVerdict === "no" ? i18n("No")
+                                             : i18n("Uncertain")
+    readonly property var decisionProbabilities: {
+        if (!decisionData || !decisionData.probabilities) return null;
+        var p = decisionData.probabilities;
+        var yes = Number(p.yes || 0);
+        var no = Number(p.no || 0);
+        var unc = Number(p.uncertain || 0);
+        var total = yes + no + unc;
+        if (!(total > 0)) return null;
+        return { yes: yes / total, no: no / total, uncertain: unc / total };
     }
 
     readonly property real itemSpacing: Math.min(Kirigami.Units.smallSpacing, Plasmoid.configuration.chatSpacing)
@@ -567,6 +603,74 @@ Kirigami.AbstractCard {
                     }
                 }
 
+                // Decisions verdict graphic (Yes / No / Uncertain)
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    visible: messageItem.decisionData !== null
+                    spacing: Kirigami.Units.smallSpacing
+
+                    RowLayout {
+                        Layout.fillWidth: true
+                        spacing: Kirigami.Units.smallSpacing
+
+                        Kirigami.Icon {
+                            source: messageItem.decisionIcon
+                            color: messageItem.decisionColor
+                            Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                            Layout.preferredHeight: Kirigami.Units.iconSizes.small
+                            Layout.alignment: Qt.AlignVCenter
+                        }
+
+                        PlasmaComponents.Label {
+                            text: messageItem.decisionLabel
+                            font.bold: true
+                            color: messageItem.decisionColor
+                            Layout.alignment: Qt.AlignVCenter
+                        }
+                    }
+
+                    // Stacked probability bar: yes | uncertain | no
+                    Rectangle {
+                        id: decisionBar
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: Kirigami.Units.gridUnit * 0.6
+                        radius: height / 2
+                        clip: true
+                        color: Qt.rgba(0.5, 0.5, 0.5, 0.25)
+
+                        readonly property real pYes: messageItem.decisionProbabilities
+                            ? messageItem.decisionProbabilities.yes
+                            : (messageItem.decisionVerdict === "yes" ? 1 : 0)
+                        readonly property real pUncertain: messageItem.decisionProbabilities
+                            ? messageItem.decisionProbabilities.uncertain
+                            : (messageItem.decisionVerdict === "uncertain" ? 1 : 0)
+
+                        Row {
+                            id: decisionBarRow
+                            anchors.fill: parent
+
+                            Rectangle {
+                                width: decisionBar.width * decisionBar.pYes
+                                height: decisionBarRow.height
+                                color: Kirigami.Theme.positiveTextColor
+                            }
+                            Rectangle {
+                                width: decisionBar.width * decisionBar.pUncertain
+                                height: decisionBarRow.height
+                                color: Kirigami.Theme.neutralTextColor
+                                opacity: 0.65
+                            }
+                            Rectangle {
+                                width: Math.max(0, decisionBar.width
+                                    - decisionBar.width * decisionBar.pYes
+                                    - decisionBar.width * decisionBar.pUncertain)
+                                height: decisionBarRow.height
+                                color: Kirigami.Theme.negativeTextColor
+                            }
+                        }
+                    }
+                }
+
                 // Text Content
                 Kirigami.SelectableLabel {
                     Layout.fillWidth: true
@@ -868,6 +972,10 @@ Kirigami.AbstractCard {
                 tool_call_id: messageItem.tool_call_id
                 toolArgsJson: messageItem.toolArgs
                 appConfig: messageItem.appConfig
+                validationState: messageItem.validationState
+                validationReason: messageItem.validationReason
+                validationModel: messageItem.validationModel
+                validationConfidence: messageItem.validationConfidence
                 onApproved: function(name, args, callId) {
                     messageItem.toolApproved(name, args, callId);
                 }

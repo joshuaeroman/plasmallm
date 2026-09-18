@@ -1092,6 +1092,11 @@ PlasmaExtras.Representation {
                     exitCode: model.exitCode !== undefined ? model.exitCode : 0
                     toolSummary: model.toolSummary !== undefined ? model.toolSummary : ""
                     toolDataJson: model.toolDataJson !== undefined ? model.toolDataJson : ""
+                    validationState: model.validationState !== undefined ? model.validationState : ""
+                    validationReason: model.validationReason !== undefined ? model.validationReason : ""
+                    validationModel: model.validationModel !== undefined ? model.validationModel : ""
+                    validationConfidence: model.validationConfidence !== undefined ? model.validationConfidence : ""
+                    decisionJson: model.decisionJson !== undefined ? model.decisionJson : ""
                     toolView: model.toolView !== undefined ? model.toolView : ""
                     toolIcon: model.toolIcon !== undefined ? model.toolIcon : ""
                     toolTitle: model.toolTitle !== undefined ? model.toolTitle : ""
