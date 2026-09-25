@@ -24,6 +24,8 @@ test:
 	node tests/memory.mjs
 	node tests/path_sandbox.mjs
 	node tests/opencode_route.mjs
+	node tests/openrouter_attribution.mjs
+	node tests/cfg_props.mjs
 	node tests/utils.mjs
 
 # Translations

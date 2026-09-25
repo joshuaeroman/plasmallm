@@ -4,6 +4,7 @@
 */
 
 .import "../toolManager.js" as ToolManager
+.import "../utils.js" as Utils
 
 // Chat Completions strategy for the OpenAI-compatible adapter.
 // Dispatched by openai.js when the active provider does not use the
@@ -55,11 +56,14 @@ function setHeaders(xhr, apiKey, endpoint, opts) {
         var aff = "";
         if (pn.indexOf("fireworks") !== -1 || ep.indexOf("fireworks.ai") !== -1)
             aff = "x-session-affinity";
-        else if (pn.indexOf("openrouter") !== -1 || ep.indexOf("openrouter.ai") !== -1)
+        else if (Utils.isOpenRouterProvider(opts.providerName, endpoint))
             aff = "x-session-id";
         if (aff)
             xhr.setRequestHeader(aff, opts.sessionId);
     }
+    // OpenRouter app attribution (single helper in utils.js; see there for
+    // the explicit-true opt-out rule).
+    Utils.applyOpenRouterAttribution(xhr, opts, endpoint);
     // Generic extra-headers path: callers (e.g. the OpenCode gateway) add
     // request headers via opts.extraHeaders = { "Name": value }.
     if (opts && opts.extraHeaders) {

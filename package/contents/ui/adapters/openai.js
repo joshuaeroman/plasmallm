@@ -71,14 +71,18 @@ var presets = [
     { name: "AITunnel (RU)",                 url: "https://api.aitunnel.ru/v1" }
 ];
 
-function fetchModels(endpoint, apiKey, usesResponsesAPI, callback) {
+function fetchModels(endpoint, apiKey, usesResponsesAPI, opts, callback) {
+    if (typeof opts === "function") {
+        callback = opts;
+        opts = null;
+    }
     if (typeof usesResponsesAPI === "function") {
         callback = usesResponsesAPI;
         usesResponsesAPI = false;
     }
     return usesResponsesAPI
-        ? Responses.fetchModels(endpoint, apiKey, callback)
-        : Chat.fetchModels(endpoint, apiKey, callback);
+        ? Responses.fetchModels(endpoint, apiKey, opts, callback)
+        : Chat.fetchModels(endpoint, apiKey, opts, callback);
 }
 
 function buildTools(options) {

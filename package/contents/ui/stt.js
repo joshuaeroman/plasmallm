@@ -151,11 +151,13 @@ function transcribe(opts) {
 
     adapter.transcribe({
         endpoint: conn.endpoint,
+        providerName: conn.providerName,
         apiKey: opts.apiKey || "",
         model: conn.model,
         audioBase64: opts.audioBase64,
         format: format,
         language: conn.language,
+        attribution: opts.attribution,
         callback: callback
     });
 }

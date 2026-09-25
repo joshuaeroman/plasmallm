@@ -196,6 +196,7 @@ BaseConfigPage {
                 geminiVertexAuthType: prof.geminiVertexAuthType,
                 usesResponsesAPI: prof.usesResponsesAPI,
                 providerName: prof.providerName,
+                attribution: cfg_openrouterAttribution,
                 transcript: transcriptToSend,
                 instructions: cfg_compactionInstructions || defaultInstructions
             }, function(err, summary) {

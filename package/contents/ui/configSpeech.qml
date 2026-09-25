@@ -16,6 +16,7 @@ import "api.js" as Api
 import "wallet.js" as Wallet
 import "walletCore.js" as WalletCore
 import "stt.js" as Stt
+import "utils.js" as Utils
 import "profiles.js" as Profiles
 
 BaseConfigPage {
@@ -41,6 +42,10 @@ BaseConfigPage {
     readonly property var sttPresets: Stt.providerPresets()
     readonly property var sttBackends: Stt.backendChoices()
     readonly property bool isCliBackend: (cfg_sttBackend || "") === "whisper_cli"
+    // OpenRouter attribution applies to STT only through the HTTP
+    // transcriptions adapter; whisper_cli is local and never attributes.
+    readonly property bool sttOpenRouterSelected: (cfg_sttBackend || "openai_transcriptions") === "openai_transcriptions" &&
+        Utils.isOpenRouterProvider(cfg_sttProviderName, cfg_sttApiEndpoint)
 
     P5Support.DataSource {
         id: whisperCacheCheck
@@ -748,6 +753,33 @@ BaseConfigPage {
                 if (!_initialized) return;
                 cfg_sttCliFp16 = checked;
             }
+        }
+
+        // Shares cfg_openrouterAttribution with the General tab: OpenRouter
+        // STT transcriptions carry the same app-attribution headers as chat.
+        QQC2.CheckBox {
+            id: sttAttributionCheck
+            visible: sttOpenRouterSelected
+            Kirigami.FormData.label: i18n("OpenRouter:")
+            text: i18n("Enable OpenRouter attribution")
+            checked: cfg_openrouterAttribution
+            onCheckedChanged: {
+                if (!_initialized) return;
+                cfg_openrouterAttribution = checked;
+            }
+            QQC2.ToolTip.text: i18n("OpenRouter usage is credited to PlasmaLLM in its public app rankings while requests include only the app name and URL. Uncheck to stop sending these headers.")
+            QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
+        }
+
+        QQC2.Label {
+            visible: sttOpenRouterSelected
+            Layout.fillWidth: true
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
+            text: i18n("OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access their API. Nothing about your conversations is shared.")
+            wrapMode: Text.WordWrap
+            opacity: 0.7
+            font: Kirigami.Theme.smallFont
         }
 
         QQC2.SpinBox {

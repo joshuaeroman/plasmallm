@@ -7,6 +7,8 @@
 // using JSON body with base64 input_audio (OpenRouter STT shape; also works
 // with other gateways that accept the same wire format).
 
+.import "../utils.js" as Utils
+
 var id = "openai_transcriptions";
 var displayName = "OpenAI-compatible transcriptions";
 var transport = "http";
@@ -21,22 +23,19 @@ function isConfigured(conn) {
     return true;
 }
 
-function setHeaders(xhr, apiKey) {
+// OpenRouter app attribution (see applyOpenRouterAttribution in utils.js for
+// the explicit-true opt-out rule). Model listing calls setHeaders without
+// opts and stays unattributed.
+function setHeaders(xhr, apiKey, endpoint, opts) {
     xhr.setRequestHeader("Content-Type", "application/json");
     if (apiKey && apiKey.length > 0) {
         xhr.setRequestHeader("Authorization", "Bearer " + apiKey);
     }
+    Utils.applyOpenRouterAttribution(xhr, opts, endpoint);
 }
 
 function hostOf(endpoint) {
-    if (!endpoint || typeof endpoint !== "string") return "";
-    var m = endpoint.match(/^https?:\/\/([^\/:?#]+)/i);
-    return m ? m[1].toLowerCase() : "";
-}
-
-function isOpenRouter(endpoint) {
-    var h = hostOf(endpoint);
-    return h === "openrouter.ai" || h.indexOf("openrouter.ai") !== -1;
+    return Utils.hostOf(endpoint);
 }
 
 function isOpenAiHost(endpoint) {
@@ -168,7 +167,7 @@ function transcribe(opts) {
     var url = endpoint + "/audio/transcriptions";
     xhr.open("POST", url);
     xhr.timeout = 90000;
-    setHeaders(xhr, opts.apiKey);
+    setHeaders(xhr, opts.apiKey, endpoint, opts);
 
     var body = {
         model: opts.model,
