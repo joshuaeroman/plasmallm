@@ -600,6 +600,7 @@ PlasmoidItem {
                 geminiVertexAuthType: compConfig.geminiVertexAuthType,
                 usesResponsesAPI: compConfig.usesResponsesAPI,
                 providerName: compConfig.providerName,
+                attribution: Plasmoid.configuration.openrouterAttribution,
                 transcript: transcript,
                 previousSummary: prevSummary,
                 instructions: Plasmoid.configuration.compactionInstructions
@@ -800,6 +801,7 @@ PlasmoidItem {
                 audioBase64: audioBase64,
                 format: format || "wav",
                 filePath: filePath,
+                attribution: Plasmoid.configuration.openrouterAttribution,
                 callback: function(sttErr, result) {
                     if (gen !== root._sttGen) {
                         enqueueVoiceCleanup(filePath);
@@ -836,6 +838,7 @@ PlasmoidItem {
             config: Plasmoid.configuration,
             filePath: filePath,
             format: format || "wav",
+            attribution: Plasmoid.configuration.openrouterAttribution,
             runCommand: function(cmd, cb) {
                 if (gen !== root._sttGen) {
                     cb(i18n("Transcription canceled"), null);
@@ -2954,7 +2957,8 @@ PlasmoidItem {
             endpoint: Plasmoid.configuration.apiEndpoint,
             apiKey: root.apiKey || "",
             model: Plasmoid.configuration.modelName,
-            state: state
+            state: state,
+            attribution: Plasmoid.configuration.openrouterAttribution
         }, function(err, verdict) {
             if (handleRef.aborted) return;
             root.activeRequest = null;
@@ -3250,6 +3254,7 @@ PlasmoidItem {
                 geminiProjectId: Plasmoid.configuration.geminiProjectId,
                 geminiLocation: Plasmoid.configuration.geminiLocation,
                 providerName: Plasmoid.configuration.providerName,
+                attribution: Plasmoid.configuration.openrouterAttribution,
                 tools: tools,
                 onChunk: function(delta, accumulated) {
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
@@ -3572,6 +3577,7 @@ PlasmoidItem {
                 command: call.args.command,
                 justification: call.args.justification || "",
                 threshold: Number(Plasmoid.configuration.commandValidatorThreshold),
+                attribution: Plasmoid.configuration.openrouterAttribution,
                 transport: {
                     chat: function(messages, cb) {
                         root.sendValidationChat(conn, messages, seq, cb);
@@ -3600,6 +3606,7 @@ PlasmoidItem {
                 geminiVertexAuthType: conn.geminiVertexAuthType,
                 usesResponsesAPI: conn.usesResponsesAPI,
                 providerName: conn.providerName,
+                attribution: Plasmoid.configuration.openrouterAttribution,
                 onChunk: function() {},
                 onThinkingChunk: function() {},
                 onComplete: function(fullText, error) {

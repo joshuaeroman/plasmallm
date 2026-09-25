@@ -33,10 +33,24 @@ function i18n() {
 }
 
 // Pure validator helpers first, so the adapter can delegate to them.
+// commandValidator imports utils.js; strip the `.import` line and wire the
+// real utils.js helpers into the sandbox (same pattern as the adapter load).
 const validatorSandbox = { console };
 vm.createContext(validatorSandbox);
 vm.runInContext(
-    fs.readFileSync(path.join(__dirname, "../package/contents/ui/commandValidator.js"), "utf8"),
+    fs.readFileSync(path.join(__dirname, "../package/contents/ui/utils.js"), "utf8"),
+    validatorSandbox
+);
+validatorSandbox.Utils = {
+    hostOf: validatorSandbox.hostOf,
+    isOpenRouterHost: validatorSandbox.isOpenRouterHost,
+    isOpenRouterEndpoint: validatorSandbox.isOpenRouterEndpoint,
+    isOpenRouterProvider: validatorSandbox.isOpenRouterProvider,
+    applyOpenRouterAttribution: validatorSandbox.applyOpenRouterAttribution
+};
+vm.runInContext(
+    fs.readFileSync(path.join(__dirname, "../package/contents/ui/commandValidator.js"), "utf8")
+        .replace(/^\.import .*$/gm, ""),
     validatorSandbox
 );
 const V = validatorSandbox;
@@ -58,6 +72,19 @@ const sandbox = {
         httpErrorMessage: V.httpErrorMessage,
         postJson: null
     }
+};
+// decisions.js also imports utils.js (stripped above); wire the real helpers.
+vm.createContext(sandbox);
+vm.runInContext(
+    fs.readFileSync(path.join(__dirname, "../package/contents/ui/utils.js"), "utf8"),
+    sandbox
+);
+sandbox.Utils = {
+    hostOf: sandbox.hostOf,
+    isOpenRouterHost: sandbox.isOpenRouterHost,
+    isOpenRouterEndpoint: sandbox.isOpenRouterEndpoint,
+    isOpenRouterProvider: sandbox.isOpenRouterProvider,
+    applyOpenRouterAttribution: sandbox.applyOpenRouterAttribution
 };
 
 let responder = null;
@@ -81,7 +108,6 @@ sandbox.XMLHttpRequest = function () {
 sandbox.XMLHttpRequest.instances = [];
 sandbox.XMLHttpRequest.DONE = 4;
 
-vm.createContext(sandbox);
 vm.runInContext(src, sandbox);
 const D = sandbox;
 
@@ -103,6 +129,7 @@ eq(D.presets.length, 2, "two presets");
 eq(D.buildTools({}), [], "no tools");
 
 // --- fetchModels ------------------------------------------------------------
+const REFERRER_DECISIONS = "https://github.com/joshuaeroman/plasmallm";
 function fetchOnce(endpoint, key, body, status) {
     let out = null;
     responder = respondJson(body, status);
@@ -141,6 +168,33 @@ function fetchOnce(endpoint, key, body, status) {
     eq(r.out.models, ["jev-latest"], "fallback list on empty response");
 }
 
+// --- fetchModels attribution -------------------------------------------------
+// Strict rule: attribution sends only with an explicit true on OpenRouter.
+function fetchOnceOpts(endpoint, key, opts, body, status) {
+    let out = null;
+    responder = respondJson(body, status);
+    D.fetchModels(endpoint, key, opts, function (err, models) {
+        out = { err: err, models: models };
+    });
+    return { out: out, xhr: sandbox.XMLHttpRequest.instances.pop() };
+}
+{
+    const r = fetchOnceOpts("https://openrouter.ai/api/v1", "k", { attribution: true },
+        { data: [{ id: "~typesafe/jev-latest" }] });
+    eq(r.xhr.requestHeaders["HTTP-Referer"], REFERRER_DECISIONS, "decisions fetchModels: referer sent");
+    eq(r.xhr.requestHeaders["X-OpenRouter-Title"], "PlasmaLLM", "decisions fetchModels: title sent");
+}
+{
+    const r = fetchOnceOpts("https://openrouter.ai/api/v1", "k", {},
+        { data: [{ id: "~typesafe/jev-latest" }] });
+    ok(!("HTTP-Referer" in r.xhr.requestHeaders), "decisions fetchModels: missing key stays off");
+}
+{
+    const r = fetchOnceOpts("https://api.typesafe.ai/v1", "k", { attribution: true },
+        { models: [{ name: "jev-latest" }] });
+    ok(!("HTTP-Referer" in r.xhr.requestHeaders), "decisions fetchModels: no attribution on TypeSafe");
+}
+
 // --- chat decision request ---------------------------------------------------
 {
     const req = D.buildChatDecision("Is the sky blue?");
@@ -152,9 +206,12 @@ function fetchOnce(endpoint, key, body, status) {
 
 // --- sendDecisionChat --------------------------------------------------------
 const postCalls = [];
-sandbox.Validator.postJson = function (url, key, payload, callback) {
+// postJson signature: (url, key, payload, optsOrCallback, callback) —
+// sendDecisionChat now passes an opts object before the callback.
+function postJsonStub(url, key, payload, optsOrCallback, callback) {
+    const cb = typeof optsOrCallback === "function" ? optsOrCallback : callback;
     postCalls.push({ url: url, key: key, payload: payload });
-    callback(null, {
+    cb(null, {
         model: "typesafe/jev-1.13-20260917",
         answers: {
             answer: {
@@ -166,6 +223,7 @@ sandbox.Validator.postJson = function (url, key, payload, callback) {
         }
     });
 };
+sandbox.Validator.postJson = postJsonStub;
 {
     let out = null;
     D.sendDecisionChat({ endpoint: "https://openrouter.ai/api/v1", apiKey: "k", model: "~typesafe/jev-latest", state: "Is the sky blue?" }, function (err, v) {
@@ -188,8 +246,8 @@ sandbox.Validator.postJson = function (url, key, payload, callback) {
     eq(out.err, null, "typesafe no error");
 }
 {
-    sandbox.Validator.postJson = function (url, key, payload, callback) {
-        callback(null, { answers: {} });
+    sandbox.Validator.postJson = function (url, key, payload, optsOrCallback, callback) {
+        (typeof optsOrCallback === "function" ? optsOrCallback : callback)(null, { answers: {} });
     };
     let errText = null;
     D.sendDecisionChat({ endpoint: "https://api.typesafe.ai/v1", apiKey: "k", model: "jev-latest", state: "x" }, function (err) {

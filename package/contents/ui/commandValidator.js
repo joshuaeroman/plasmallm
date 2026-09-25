@@ -3,8 +3,9 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-// Pure command-validation helpers (no QML / imports). QML imports this via
-// main.qml / configTools.qml; Node tests load it with vm.runInContext.
+// Pure command-validation helpers. Imports utils.js for URL-host parsing and
+// OpenRouter matching; QML imports this via main.qml / configTools.qml; Node
+// tests load it with vm.runInContext (stripping `.import` lines).
 //
 // Validates that a run_command call does what its LLM-supplied justification
 // says it does. Two backends are supported:
@@ -17,6 +18,8 @@
 // The chat transport must be injected by the caller (it goes through the
 // adapter layer in api.js). The decisions transport defaults to a plain
 // XMLHttpRequest POST, which exists only in the QML runtime.
+
+.import "utils.js" as Utils
 
 // Jev is conservative when asked to affirm "the command matches" (legitimate
 // commands score ~0.4-0.6), but sharply separated when asked to affirm the
@@ -33,8 +36,7 @@ var DECISIONS_SYNTAX_INSTRUCTIONS =
     "The command contains an incomplete construct or syntax error, such as an if without fi, a loop without done, an unclosed quote, bracket, or parenthesis.";
 
 function hostOf(endpoint) {
-    var m = String(endpoint || "").match(/^https?:\/\/([^\/:?#]+)/i);
-    return m ? m[1].toLowerCase() : "";
+    return Utils.hostOf(endpoint);
 }
 
 function isTypeSafeModel(modelName) {
@@ -54,7 +56,7 @@ function backendFor(profile) {
     var host = hostOf(profile.endpoint);
     if (host === "api.typesafe.ai")
         return "decisions";
-    if ((host === "openrouter.ai" || host === "www.openrouter.ai") && isTypeSafeModel(profile.modelName))
+    if (Utils.isOpenRouterHost(host) && isTypeSafeModel(profile.modelName))
         return "decisions";
     return "chat";
 }
@@ -80,7 +82,7 @@ function decisionsUrl(endpoint) {
     var host = hostOf(base);
     if (host === "api.typesafe.ai")
         return base + "/systemone";
-    if (host === "openrouter.ai" || host === "www.openrouter.ai")
+    if (Utils.isOpenRouterHost(host))
         return "https://openrouter.ai/api/alpha/decisions";
     return base + "/systemone";
 }
@@ -234,15 +236,24 @@ function evaluateDecisionsResponse(json, threshold, fallbackModel) {
  * Default decisions transport: plain JSON POST with Bearer auth. Returns the
  * XMLHttpRequest so callers can abort an in-flight request; on failure the
  * callback receives (errorMessage, null).
+ *
+ * Accepts an optional opts object before the callback (legacy 4-arg form
+ * still works): postJson(url, key, payload, { attribution: bool }, callback).
  */
-function postJson(url, apiKey, payload, callback) {
+function postJson(url, apiKey, payload, callbackOrOpts, callback) {
+    var opts = callbackOrOpts;
+    if (typeof opts === "function") {
+        callback = opts;
+        opts = null;
+    }
     try {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", url);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.setRequestHeader("Authorization", "Bearer " + (apiKey || ""));
-        xhr.setRequestHeader("HTTP-Referer", "https://github.com/joshuaeroman/plasmallm");
-        xhr.setRequestHeader("X-OpenRouter-Title", "PlasmaLLM");
+        // OpenRouter app attribution (see applyOpenRouterAttribution in
+        // utils.js for the explicit-true opt-out rule).
+        Utils.applyOpenRouterAttribution(xhr, opts, url);
         xhr.timeout = 20000;
         xhr.ontimeout = function() {
             callback("validator request timed out", null);
@@ -310,16 +321,19 @@ function validate(opts, callback) {
 
     try {
         if (backend === "decisions") {
-            var decisionsFn = (opts.transport && typeof opts.transport.decisions === "function")
-                ? opts.transport.decisions
-                : postJson;
-            decisionsFn(decisionsUrl(profile.endpoint), profile.apiKey || "", buildDecisionsRequest(requestOpts), function(err, json) {
+            var decisionsUrlValue = decisionsUrl(profile.endpoint);
+            function onDecisionsResponse(err, json) {
                 if (err) {
                     finish({ error: String(err) });
                     return;
                 }
                 finish(evaluateDecisionsResponse(json, threshold, decisionsModel(profile)));
-            });
+            }
+            if (opts.transport && typeof opts.transport.decisions === "function") {
+                opts.transport.decisions(decisionsUrlValue, profile.apiKey || "", buildDecisionsRequest(requestOpts), onDecisionsResponse);
+            } else {
+                postJson(decisionsUrlValue, profile.apiKey || "", buildDecisionsRequest(requestOpts), { attribution: opts.attribution }, onDecisionsResponse);
+            }
         } else {
             if (!opts.transport || typeof opts.transport.chat !== "function") {
                 finish({ error: "chat validator transport unavailable" });

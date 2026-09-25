@@ -88,7 +88,17 @@ function fetchModels(endpoint, apiKey, opts, callback) {
         callback = opts;
         opts = null;
     }
-    return Chat.fetchModels(endpoint, apiKey, { extraHeaders: sessionHeaders(opts) }, callback);
+    // Forward the caller's opts (attribution, providerName, ...) alongside
+    // the gateway session headers rather than dropping them.
+    var fwd = {};
+    if (opts) {
+        for (var k in opts) {
+            if (opts.hasOwnProperty(k))
+                fwd[k] = opts[k];
+        }
+    }
+    fwd.extraHeaders = sessionHeaders(opts);
+    return Chat.fetchModels(endpoint, apiKey, fwd, callback);
 }
 
 function buildTools(options) {

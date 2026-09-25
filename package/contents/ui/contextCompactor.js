@@ -201,6 +201,7 @@ function compactHistory(opts, callback) {
             geminiVertexAuthType: opts.geminiVertexAuthType,
             usesResponsesAPI: opts.usesResponsesAPI,
             providerName: opts.providerName,
+            attribution: opts.attribution,
             onChunk: function(chunk) {},
             onThinkingChunk: function(chunk) {},
             onComplete: function(fullText, error, toolCalls, assistantMsg) {

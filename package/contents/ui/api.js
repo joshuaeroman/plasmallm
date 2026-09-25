@@ -346,7 +346,7 @@ function fetchModels(apiType, endpoint, apiKey, usesResponsesAPI, opts, callback
     var ad = Adapters.getAdapter(apiType);
     // openai's fetchModels takes the extra flag; other adapters ignore it.
     if (apiType === "openai") {
-        return ad.fetchModels(endpoint, apiKey, !!usesResponsesAPI, callback);
+        return ad.fetchModels(endpoint, apiKey, !!usesResponsesAPI, opts, callback);
     }
     return ad.fetchModels(endpoint, apiKey, opts, callback);
 }

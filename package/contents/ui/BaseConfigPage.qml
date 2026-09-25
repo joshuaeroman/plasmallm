@@ -131,6 +131,8 @@ SimpleKCM {
     property bool cfg_showNotificationsMinimizedDefault
     property bool cfg_usesResponsesAPI
     property bool cfg_usesResponsesAPIDefault
+    property bool cfg_openrouterAttribution
+    property bool cfg_openrouterAttributionDefault
     property string cfg_geminiApiVariant
     property string cfg_geminiApiVariantDefault
     property string cfg_geminiAuthMethod

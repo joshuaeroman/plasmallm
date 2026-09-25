@@ -139,6 +139,7 @@ BaseConfigPage {
                 command: "rm -rf ~/.cache/plasmallm",
                 justification: "Remove the PlasmaLLM cache directory to reclaim disk space.",
                 threshold: Number(cfg_commandValidatorThreshold),
+                attribution: cfg_openrouterAttribution,
                 transport: {
                     chat: function(messages, cb) {
                         try {
@@ -156,6 +157,7 @@ BaseConfigPage {
                                 geminiVertexAuthType: prof.geminiVertexAuthType,
                                 usesResponsesAPI: prof.usesResponsesAPI,
                                 providerName: prof.providerName,
+                                attribution: cfg_openrouterAttribution,
                                 onChunk: function() {},
                                 onThinkingChunk: function() {},
                                 onComplete: function(fullText, error) {

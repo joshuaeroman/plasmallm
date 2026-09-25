@@ -5,13 +5,29 @@ import vm from "vm";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const utilsSrc = fs.readFileSync(
+    path.join(__dirname, "../package/contents/ui/utils.js"),
+    "utf8"
+);
+// commandValidator now imports utils.js; strip the `.import` line and wire
+// the real utils.js helpers into the sandbox (decisions_adapter.mjs pattern).
 const src = fs.readFileSync(
     path.join(__dirname, "../package/contents/ui/commandValidator.js"),
     "utf8"
-);
+).replace(/^\.import .*$/gm, "");
 const sandbox = { console };
 vm.createContext(sandbox);
+vm.runInContext(utilsSrc, sandbox);
+sandbox.Utils = {
+    hostOf: sandbox.hostOf,
+    isOpenRouterHost: sandbox.isOpenRouterHost,
+    isOpenRouterEndpoint: sandbox.isOpenRouterEndpoint,
+    isOpenRouterProvider: sandbox.isOpenRouterProvider,
+    applyOpenRouterAttribution: sandbox.applyOpenRouterAttribution
+};
 vm.runInContext(src, sandbox);
+
+const V = sandbox;
 
 let failed = 0;
 function eq(actual, expected, msg) {
@@ -28,8 +44,6 @@ function ok(cond, msg) {
         console.error("FAIL", msg);
     }
 }
-
-const V = sandbox;
 
 // --- backend detection ------------------------------------------------------
 eq(V.backendFor({ endpoint: "https://api.typesafe.ai/v1", modelName: "jev-latest" }), "decisions", "typesafe direct");

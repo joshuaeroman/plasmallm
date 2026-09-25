@@ -4,6 +4,7 @@
 */
 
 .import "../toolManager.js" as ToolManager
+.import "../utils.js" as Utils
 
 // Responses API strategy for the OpenAI-compatible adapter.
 // Dispatched by openai.js when the active provider speaks /v1/responses
@@ -56,11 +57,14 @@ function setHeaders(xhr, apiKey, endpoint, opts) {
         var aff = "";
         if (pn.indexOf("fireworks") !== -1 || ep.indexOf("fireworks.ai") !== -1)
             aff = "x-session-affinity";
-        else if (pn.indexOf("openrouter") !== -1 || ep.indexOf("openrouter.ai") !== -1)
+        else if (Utils.isOpenRouterProvider(opts.providerName, endpoint))
             aff = "x-session-id";
         if (aff)
             xhr.setRequestHeader(aff, opts.sessionId);
     }
+    // OpenRouter app attribution (single helper in utils.js; see there for
+    // the explicit-true opt-out rule).
+    Utils.applyOpenRouterAttribution(xhr, opts, endpoint);
     // Generic extra-headers path: callers (e.g. the OpenCode gateway) add
     // request headers via opts.extraHeaders = { "Name": value }.
     if (opts && opts.extraHeaders) {
@@ -80,7 +84,11 @@ function isExaEndpoint(endpoint) {
     return host === "api.exa.ai" || host === "exa.ai" || host.length > 7 && host.slice(-7) === ".exa.ai";
 }
 
-function fetchModels(endpoint, apiKey, callback) {
+function fetchModels(endpoint, apiKey, opts, callback) {
+    if (typeof opts === "function") {
+        callback = opts;
+        opts = null;
+    }
     if (isExaEndpoint(endpoint)) {
         var exaModels = ["exa-agent"];
         if (callback) callback(null, exaModels, 200);
@@ -92,7 +100,7 @@ function fetchModels(endpoint, apiKey, callback) {
 
     xhr.open("GET", url);
     xhr.timeout = 30000;
-    setHeaders(xhr, apiKey, endpoint);
+    setHeaders(xhr, apiKey, endpoint, opts);
 
     xhr.ontimeout = function() {
         callback(i18n("Request timed out after 30 seconds"), null);

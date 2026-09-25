@@ -15,6 +15,7 @@ import "api.js" as Api
 import "wallet.js" as Wallet
 import "walletCore.js" as WalletCore
 import "profiles.js" as Profiles
+import "utils.js" as Utils
 
 BaseConfigPage {
     id: configPage
@@ -372,7 +373,9 @@ BaseConfigPage {
             geminiAuthMethod: cfg_geminiAuthMethod,
             geminiVertexAuthType: cfg_geminiVertexAuthType,
             geminiProjectId: cfg_geminiProjectId,
-            geminiLocation: cfg_geminiLocation
+            geminiLocation: cfg_geminiLocation,
+            providerName: cfg_providerName,
+            attribution: cfg_openrouterAttribution
         };
         var endpointForFetch = endpointText;
 
@@ -469,6 +472,13 @@ BaseConfigPage {
         return host === "api.exa.ai" || host === "exa.ai" || (host.length > 7 && host.slice(-7) === ".exa.ai");
     }
 
+    // Provider/endpoint pointed at OpenRouter for an adapter that actually
+    // sends attribution (openai chat/responses, decisions postJson). The
+    // gemini/anthropic/exa adapters never attribute, so the checkbox stays
+    // hidden there even if an endpoint matches.
+    readonly property bool isOpenRouterSelected: (cfg_apiType === "openai" || cfg_apiType === "decisions") &&
+        Utils.isOpenRouterProvider(cfg_providerName, cfg_apiEndpoint)
+
     // Out-of-band cfg changes (KCM reload, other pages): coalesce into one reconcile.
     // Intentional multi-field paths use begin/endConfigTxn and skip these.
     onCfg_apiTypeChanged: { if (!inConfigTxn && _initialized) scheduleFallbackReconcile(); }
@@ -540,28 +550,35 @@ BaseConfigPage {
     }
 
     // Push cfg_* model-parameter values back into controls whose QML bindings
-    // may have been broken by prior user interaction.
+    // may have been broken by prior user interaction. A throw here must never
+    // abort reconcileConfig (key load happens after this) or leak an open
+    // config transaction in applyProfileSelection.
     function syncModelParamControls() {
-        if (adapterCombo && adapterChoices) {
-            for (var ai = 0; ai < adapterChoices.length; ai++) {
-                if (adapterChoices[ai].id === cfg_apiType) {
-                    adapterCombo.currentIndex = ai;
-                    break;
+        try {
+            if (adapterCombo && adapterChoices) {
+                for (var ai = 0; ai < adapterChoices.length; ai++) {
+                    if (adapterChoices[ai].id === cfg_apiType) {
+                        adapterCombo.currentIndex = ai;
+                        break;
+                    }
                 }
             }
+            if (temperatureSlider) temperatureSlider.value = cfg_temperature;
+            if (maxTokensSpinBox) maxTokensSpinBox.value = cfg_maxTokens;
+            if (thinkingBudgetSpinBox) thinkingBudgetSpinBox.value = cfg_thinkingBudget;
+            if (reasoningEffortCombo) {
+                var efforts = reasoningEffortCombo.efforts || ["off", "low", "medium", "high"];
+                reasoningEffortCombo.currentIndex = Math.max(0, efforts.indexOf(cfg_reasoningEffort));
+            }
+            if (usesResponsesAPICheckBox) usesResponsesAPICheckBox.checked = cfg_usesResponsesAPI;
+            if (openrouterAttributionCheckBox) openrouterAttributionCheckBox.checked = cfg_openrouterAttribution;
+            if (showThoughtsCheckBox) showThoughtsCheckBox.checked = cfg_showThoughts;
+            if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
+            syncEndpointPresetIndex();
+            syncModelComboIndex();
+        } catch (e) {
+            console.warn("PlasmaLLM: settings page sync failed (continuing):", e);
         }
-        if (temperatureSlider) temperatureSlider.value = cfg_temperature;
-        if (maxTokensSpinBox) maxTokensSpinBox.value = cfg_maxTokens;
-        if (thinkingBudgetSpinBox) thinkingBudgetSpinBox.value = cfg_thinkingBudget;
-        if (reasoningEffortCombo) {
-            var efforts = reasoningEffortCombo.efforts || ["off", "low", "medium", "high"];
-            reasoningEffortCombo.currentIndex = Math.max(0, efforts.indexOf(cfg_reasoningEffort));
-        }
-        if (usesResponsesAPICheckBox) usesResponsesAPICheckBox.checked = cfg_usesResponsesAPI;
-        if (showThoughtsCheckBox) showThoughtsCheckBox.checked = cfg_showThoughts;
-        if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
-        syncEndpointPresetIndex();
-        syncModelComboIndex();
     }
 
     // Pure writes for adapter defaults — no wallet/models/capture (caller is in a txn).
@@ -1363,7 +1380,31 @@ BaseConfigPage {
             QQC2.ToolTip.visible: hovered
         }
 
+        QQC2.CheckBox {
+            id: openrouterAttributionCheckBox
+            text: i18n("Enable OpenRouter attribution")
+            visible: isOpenRouterSelected
+            checked: cfg_openrouterAttribution
+            onCheckedChanged: {
+                if (!_initialized) return;
+                cfg_openrouterAttribution = checked;
+            }
 
+            QQC2.ToolTip.text: i18n("OpenRouter usage is credited to PlasmaLLM in its public app rankings while requests include only the app name and URL. Uncheck to stop sending these headers.")
+            QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
+        }
+
+        QQC2.Label {
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
+            text: i18n("OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access their API. Nothing about your conversations is shared.")
+            visible: isOpenRouterSelected
+            wrapMode: Text.WordWrap
+            opacity: 0.7
+            font: Kirigami.Theme.smallFont
+        }
 
         Kirigami.Separator {
             Kirigami.FormData.isSection: true

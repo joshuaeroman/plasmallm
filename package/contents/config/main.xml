@@ -60,6 +60,10 @@
       <label>Route OpenAI-compatible requests through /v1/responses instead of /v1/chat/completions</label>
       <default>false</default>
     </entry>
+    <entry name="openrouterAttribution" type="Bool">
+      <label>Send app-attribution headers (app name and URL only) with OpenRouter requests so usage is credited to PlasmaLLM</label>
+      <default>true</default>
+    </entry>
     <entry name="geminiApiVariant" type="String">
       <label>Gemini API variant: legacy, interactions</label>
       <default>legacy</default>

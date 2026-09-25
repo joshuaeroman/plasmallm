@@ -11,6 +11,7 @@
 // the validator sends its own question set to the same endpoint.
 
 .import "../commandValidator.js" as Validator
+.import "../utils.js" as Utils
 
 var id = "decisions";
 var displayName = "Decisions (TypeSafe / Jev)";
@@ -58,12 +59,15 @@ function parseOpenRouterModels(json) {
     return out;
 }
 
-function _getModels(url, apiKey, callback) {
+function _getModels(url, apiKey, attribution, callback) {
     try {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.timeout = 30000;
         xhr.setRequestHeader("Authorization", "Bearer " + (apiKey || ""));
+        // OpenRouter app attribution (see applyOpenRouterAttribution in
+        // utils.js for the explicit-true opt-out rule).
+        Utils.applyOpenRouterAttribution(xhr, { attribution: attribution }, url);
         xhr.ontimeout = function() {
             callback("Request timed out after 30 seconds", null);
         };
@@ -100,6 +104,7 @@ function fetchModels(endpoint, apiKey, opts, callback) {
     }
     var ep = String(endpoint || "").replace(/\/+$/, "");
     var host = hostOf(ep);
+    var attribution = opts && opts.attribution;
     if (!callback) callback = function() {};
 
     function fallback() {
@@ -108,22 +113,22 @@ function fetchModels(endpoint, apiKey, opts, callback) {
 
     // TypeSafe direct: GET /v1/models → { models: [{name, ...}] }
     if (host === "api.typesafe.ai") {
-        _getModels(ep + "/models", apiKey, function(err, models) {
+        _getModels(ep + "/models", apiKey, attribution, function(err, models) {
             if (err) fallback();
             else callback(null, models, 200);
         });
         return;
     }
     // OpenRouter hides decisions models from the default list; ask for them.
-    if (host === "openrouter.ai" || host === "www.openrouter.ai") {
-        _getModels(ep + "/models?output_modalities=decisions", apiKey, function(err, models) {
+    if (Utils.isOpenRouterHost(host)) {
+        _getModels(ep + "/models?output_modalities=decisions", apiKey, attribution, function(err, models) {
             if (err) fallback();
             else callback(null, models, 200);
         });
         return;
     }
     // Custom endpoint: try the standard models shapes.
-    _getModels(ep + "/models", apiKey, function(err, models) {
+    _getModels(ep + "/models", apiKey, attribution, function(err, models) {
         if (err) fallback();
         else callback(null, models, 200);
     });
@@ -176,7 +181,7 @@ function sendDecisionChat(opts, callback) {
         if (callback) callback("Decisions endpoint is not configured", null);
         return null;
     }
-    return Validator.postJson(url, opts.apiKey || "", payload, function(err, json) {
+    return Validator.postJson(url, opts.apiKey || "", payload, { attribution: opts.attribution }, function(err, json) {
         if (err) {
             if (callback) callback(String(err), null);
             return;
