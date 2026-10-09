@@ -106,25 +106,39 @@ make install-dev
 ```
 
 ### Standalone App
-PlasmaLLM can also run as a normal application window instead of a panel widget. It still uses the KDE Plasma 6 libraries, and additionally needs the distro's PySide6 package (`python3-pyside6` on Fedora).
+PlasmaLLM can also run as a normal application window instead of a panel widget. It still uses the KDE Plasma 6 libraries, and additionally needs the distro's PySide6 package (`python3-pyside6` on Fedora). A pip-installed PySide6 will not work, because it bundles its own Qt, which cannot load KDE's QML plugins.
 
+From source:
 ```bash
 make standalone            # build into build/standalone and create PlasmaLLM-standalone-<version>.tar.gz
 make install-standalone    # install to ~/.local (override with PREFIX=...); adds an app menu entry
 plasmallm                  # or launch "PlasmaLLM" from the app menu
 ```
 
+`make standalone-no-i18n` skips the translation refresh, and `make run-standalone` builds and runs it from the build directory.
+
+From a release tarball:
+```bash
+tar -xzf PlasmaLLM-standalone-<version>.tar.gz
+cp -r plasmallm-<version>/. ~/.local/      # or run plasmallm-<version>/bin/plasmallm in place
+```
+
+On first launch, settings are imported from an existing PlasmaLLM widget (or later with `plasmallm --import-plasma-config`). After that, the app keeps its own settings in `~/.config/plasmallmrc`. Chat history and KDE Wallet keys are shared with the widget. `plasmallm --configure` opens the settings window on start.
+
+To uninstall, run `make remove-standalone` (with the same `PREFIX` used to install). Settings in `~/.config/plasmallmrc` and window sizes in `~/.local/state/plasmallmstaterc` are kept.
+
 #### Flatpak
-The standalone app can also be built as a Flatpak bundle. This needs `flatpak-builder` and the Flathub remote; the KDE 6.11 SDK and PySide base app are installed per-user on first build.
+The standalone app can also be built as a Flatpak bundle. The build needs `flatpak-builder` and Flathub added to your *per-user* Flatpak installation, because dependencies (the KDE 6.11 SDK and runtime and the PySide base app, a few GB) are installed per-user on the first build:
 
 ```bash
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 make flatpak               # creates PlasmaLLM-<version>.flatpak
 make install-flatpak       # or: flatpak install --user PlasmaLLM-<version>.flatpak
 ```
 
-The Flatpak is not meaningfully sandboxed. PlasmaLLM's commands (the run-command tool, system info, TTS/STT tools, saving chats) run on the host through `flatpak-spawn --host`, and the app has access to your home directory and `/tmp` so it shares files with those commands and with the widget.
+To uninstall: `flatpak uninstall --user com.joshuaroman.plasmallm`.
 
-`make standalone-no-i18n` skips the translation refresh, and `make run-standalone` builds and runs it from the build directory. On first launch, settings are imported from an existing PlasmaLLM widget (or later with `plasmallm --import-plasma-config`). After that, the app keeps its own settings in `~/.config/plasmallmrc`. Chat history and KDE Wallet keys are shared with the widget.
+The Flatpak is not meaningfully sandboxed. PlasmaLLM's commands (the run-command tool, system info, TTS/STT tools, saving chats) run on the host through `flatpak-spawn --host`. The app can access your home directory and `/tmp`, so it shares files with those commands and with the widget. It uses your normal `~/.config` and `~/.local/share`, not `~/.var/app`.
 
 ---
 
