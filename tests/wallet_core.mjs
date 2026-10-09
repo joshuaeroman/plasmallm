@@ -139,6 +139,13 @@ const agentLegs = C.legacyKeySlots("p_default", "gemini", "Google Gemini",
 ok(agentLegs.indexOf(geminiV2) !== -1, "agentplatform legacy includes aistudio v2 sibling");
 ok(agentLegs.indexOf(agent) === -1, "legacy list excludes primary agentplatform slot");
 
+// TTS key slots
+const ttsSlot = C.ttsKeySlot("OpenRouter", "https://openrouter.ai/api/v1");
+eq(ttsSlot, "v2|tts|OpenRouter", "v2 TTS OpenRouter slot");
+const ttsCustomSlot = C.ttsKeySlot("", "https://example.com/v1");
+eq(ttsCustomSlot, "v2|tts|%5Bhttps%3A%2F%2Fexample.com%2Fv1%5D", "v2 TTS custom endpoint slot");
+eq(C.ttsLegacyKeySlots("OpenRouter", "https://openrouter.ai/api/v1"), ["v1/tts/OpenRouter"], "TTS legacy key slots");
+
 if (failed) {
     console.error(failed + " failure(s)");
     process.exit(1);

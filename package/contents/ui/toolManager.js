@@ -44,6 +44,7 @@ function toolIconName(toolName) {
         case "notify": return "notifications";
         case "open_url": return "internet-services";
         case "edit_memory": return "document-edit";
+        case "set_tts_style": return "audio-volume-high";
     }
     return "services";
 }
@@ -67,6 +68,8 @@ function resultLabel(toolName, args, home) {
         label += ": " + args.target;
     } else if (toolName === "skill" && args.name) {
         label += ": " + args.name;
+    } else if (toolName === "set_tts_style") {
+        label = args.style ? (args.style + " (" + (args.scope || "turn") + ")") : ("default (" + (args.scope || "turn") + ")");
     }
     return label;
 }
@@ -334,6 +337,7 @@ function getEnabledTools(config) {
     if (config.toolsNotifyEnabled) enabled.push("notify");
     if (config.toolsOpenUrlEnabled) enabled.push("open_url");
     if (config.toolsEditMemoryEnabled) enabled.push("edit_memory");
+    if (config.ttsEnabled && config.ttsAllowAgentStyleControl) enabled.push("set_tts_style");
     if (config.compactionEnabled) {
         enabled.push("restore_context");
         enabled.push("recall_attachment");
@@ -368,6 +372,7 @@ function isAutoRun(toolId, config, args) {
         case "web_search": return true;
         case "restore_context": return true;
         case "recall_attachment": return true;
+        case "set_tts_style": return true;
         case "skill": return config.toolsSkillAutoRun !== undefined ? config.toolsSkillAutoRun : true;
         case "run_skill_script":
             return Skills.isSkillScriptAutoRun(args && (args.skill || args.name), config.skillsScriptsAutoRun);

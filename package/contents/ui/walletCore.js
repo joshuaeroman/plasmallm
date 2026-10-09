@@ -292,6 +292,18 @@ function sttLegacyKeySlots(providerName, endpoint) {
     return uniqueSlots([v1SttKeySlot(providerName, endpoint)]);
 }
 
+function v1TtsKeySlot(providerName, endpoint) {
+    return "v1/tts/" + slotProviderPartRaw(providerName, endpoint);
+}
+
+function ttsKeySlot(providerName, endpoint) {
+    return "v2|tts|" + enc(slotProviderPartRaw(providerName, endpoint));
+}
+
+function ttsLegacyKeySlots(providerName, endpoint) {
+    return uniqueSlots([v1TtsKeySlot(providerName, endpoint)]);
+}
+
 function legacyProviderKeySlot(apiType, providerName, endpoint, geminiAuthMethod) {
     var t = apiType || "openai";
     if (t === "gemini_interactions")
@@ -528,6 +540,12 @@ function buildMigrationCopies(opts) {
         addPair(pairs,
             v1SttKeySlot(opts.sttProviderName, opts.sttApiEndpoint),
             sttKeySlot(opts.sttProviderName, opts.sttApiEndpoint));
+    }
+
+    if (opts.ttsProviderName || opts.ttsApiEndpoint) {
+        addPair(pairs,
+            v1TtsKeySlot(opts.ttsProviderName, opts.ttsApiEndpoint),
+            ttsKeySlot(opts.ttsProviderName, opts.ttsApiEndpoint));
     }
 
     if (profiles.length > 0) {

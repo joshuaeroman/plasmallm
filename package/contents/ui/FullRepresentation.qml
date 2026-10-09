@@ -1081,8 +1081,9 @@ PlasmaExtras.Representation {
                     timestamp: model.timestamp !== undefined ? model.timestamp : ""
                     attachmentsStr: model.attachmentsStr !== undefined ? model.attachmentsStr : ""
                     fromVoice: !!model.fromVoice
+                    ttsStyleHint: model.ttsStyleHint !== undefined ? model.ttsStyleHint : ""
                     isCompacted: fullRep.compactCutoffDisplayIndex >= 0 && index < fullRep.compactCutoffDisplayIndex
-                    isAwaitingResponse: index === root.streamingMessageIndex && root.isLoading
+                    isAwaitingResponse: (index === root.streamingMessageIndex && root.isLoading) || (root.pendingTtsOutput !== null && (index === root.pendingTtsOutput.msgIndex || (model.turnId !== undefined && model.turnId !== "" && model.turnId === root.pendingTtsOutput.turnId)))
                     outputScheme: model.outputScheme !== undefined ? model.outputScheme : ""
                     tool_call_id: model.tool_call_id !== undefined ? model.tool_call_id : ""
                     toolArgs: model.toolArgs !== undefined ? model.toolArgs : ""
@@ -1884,6 +1885,17 @@ PlasmaExtras.Representation {
                 enabled: root.isLoading
                 onClicked: root.cancelRequest()
                 PlasmaComponents.ToolTip.text: i18n("Cancel LLM request")
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+            }
+
+            PlasmaComponents.Button {
+                text: i18n("Stop")
+                icon.name: "media-playback-stop"
+                visible: !root.isLoading && (typeof root !== "undefined" && root.isSpeaking)
+                enabled: visible
+                onClicked: root.stopSpeech()
+                PlasmaComponents.ToolTip.text: i18n("Stop reading aloud")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
             }
