@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=PlasmaLLM
+GenericName=AI Assistant
+Comment=Chat interface to LLM endpoints
+Exec=plasmallm
+Icon=dialog-messages
+Terminal=false
+Categories=Utility;Qt;KDE;
+Keywords=AI;LLM;chat;assistant;
+StartupWMClass=plasmallm

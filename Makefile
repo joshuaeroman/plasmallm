@@ -11,7 +11,12 @@ PO_FILES := $(wildcard $(LOCALE_DIR)/*.po)
 MO_FILES := $(patsubst $(LOCALE_DIR)/%.po,$(LOCALE_DIR)/%/LC_MESSAGES/$(DOMAIN).mo,$(PO_FILES))
 SRC_FILES := $(shell find $(PACKAGE_DIR)/contents/ui $(PACKAGE_DIR)/contents/config -type f -name '*.qml' -o -name '*.js')
 
-.PHONY: all package package-no-i18n do-package translations install install-dev remove clean check-translations test
+STANDALONE_DIR := build/standalone
+STANDALONE_DATA := $(STANDALONE_DIR)/share/plasmallm
+PREFIX ?= $(HOME)/.local
+
+.PHONY: all package package-no-i18n do-package translations install install-dev remove clean check-translations test \
+	standalone standalone-no-i18n do-standalone install-standalone remove-standalone run-standalone
 
 all: package
 
@@ -100,6 +105,54 @@ do-package:
 	cd $(PACKAGE_DIR) && zip -r "../$$OUTPUT" . --exclude "contents/locale/*.po" --exclude "contents/locale/*.pot"; \
 	echo "Created $$OUTPUT"
 
+# Standalone app: the plasmoid in its own window (needs KDE Plasma 6 libraries
+# and the distro's python3-pyside6). Builds an install tree in $(STANDALONE_DIR)
+# plus a relocatable PlasmaLLM-standalone-<version>.tar.gz of it.
+standalone: translations do-standalone
+
+standalone-no-i18n: do-standalone
+
+do-standalone:
+	@VERSION=$$($(GET_VERSION)); \
+	echo "Building standalone PlasmaLLM $$VERSION in $(STANDALONE_DIR)..."; \
+	rm -rf $(STANDALONE_DIR); \
+	mkdir -p $(STANDALONE_DIR)/bin $(STANDALONE_DATA) $(STANDALONE_DIR)/share/applications; \
+	install -m 755 standalone/plasmallm.py $(STANDALONE_DIR)/bin/plasmallm; \
+	cp -r standalone/qml $(STANDALONE_DATA)/qml; \
+	cp -r $(PACKAGE_DIR) $(STANDALONE_DATA)/package; \
+	rm -rf $(STANDALONE_DATA)/package/contents/locale; \
+	for mo in $(LOCALE_DIR)/*/LC_MESSAGES/$(DOMAIN).mo; do \
+		[ -f "$$mo" ] || continue; \
+		lang=$$(basename $$(dirname $$(dirname $$mo))); \
+		mkdir -p $(STANDALONE_DIR)/share/locale/$$lang/LC_MESSAGES; \
+		cp $$mo $(STANDALONE_DIR)/share/locale/$$lang/LC_MESSAGES/; \
+	done; \
+	install -m 644 standalone/$(WIDGET_ID).desktop $(STANDALONE_DIR)/share/applications/; \
+	find $(STANDALONE_DIR) -name __pycache__ -prune -exec rm -rf {} +; \
+	/usr/bin/python3 -s -m py_compile standalone/plasmallm.py; \
+	OUTPUT="PlasmaLLM-standalone-$${VERSION}.tar.gz"; \
+	tar -czf "$$OUTPUT" -C $(STANDALONE_DIR) --transform "s,^\.,plasmallm-$${VERSION}," .; \
+	echo "Created $$OUTPUT (run $(STANDALONE_DIR)/bin/plasmallm, or: make install-standalone)"
+
+install-standalone:
+	@[ -x $(STANDALONE_DIR)/bin/plasmallm ] || { echo "Run 'make standalone' first." >&2; exit 1; }
+	@echo "Installing standalone PlasmaLLM into $(PREFIX)..."
+	@rm -rf $(PREFIX)/share/plasmallm
+	@mkdir -p $(PREFIX)/bin $(PREFIX)/share/applications
+	@cp -r $(STANDALONE_DIR)/share/. $(PREFIX)/share/
+	@install -m 755 $(STANDALONE_DIR)/bin/plasmallm $(PREFIX)/bin/plasmallm
+	@sed -i 's|^Exec=plasmallm|Exec=$(PREFIX)/bin/plasmallm|' $(PREFIX)/share/applications/$(WIDGET_ID).desktop
+	@echo "Installed. Launch PlasmaLLM from the app menu or run $(PREFIX)/bin/plasmallm"
+
+remove-standalone:
+	@echo "Removing standalone PlasmaLLM from $(PREFIX)..."
+	@rm -rf $(PREFIX)/share/plasmallm
+	@rm -f $(PREFIX)/bin/plasmallm $(PREFIX)/share/applications/$(WIDGET_ID).desktop
+	@rm -f $(PREFIX)/share/locale/*/LC_MESSAGES/$(DOMAIN).mo
+
+run-standalone: standalone-no-i18n
+	$(STANDALONE_DIR)/bin/plasmallm
+
 # Install
 install:
 	@echo "Installing PlasmaLLM..."
@@ -122,5 +175,6 @@ remove:
 
 clean:
 	@echo "Cleaning up..."
-	@rm -f PlasmaLLM-*.plasmoid
+	@rm -f PlasmaLLM-*.plasmoid PlasmaLLM-standalone-*.tar.gz
+	@rm -rf $(STANDALONE_DIR)
 	@rm -rf $(LOCALE_DIR)/*/LC_MESSAGES/$(DOMAIN).mo
