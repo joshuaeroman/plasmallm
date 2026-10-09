@@ -27,6 +27,7 @@ test:
 	node tests/openrouter_attribution.mjs
 	node tests/cfg_props.mjs
 	node tests/utils.mjs
+	node tests/tts.mjs
 
 # Translations
 translations: check-translations $(MO_FILES)

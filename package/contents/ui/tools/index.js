@@ -22,6 +22,7 @@
 .import "Skill.js" as Skill
 .import "RunSkillScript.js" as RunSkillScript
 .import "EditMemory.js" as EditMemory
+.import "SetTtsStyle.js" as SetTtsStyle
 
 .import "driver/StartSession.js" as StartSession
 .import "driver/DesktopGetState.js" as DesktopGetState
@@ -51,6 +52,7 @@ var tools = [
     { module: SetClipboard, configUI: "tools/SetClipboardConfig.qml" },
     { module: Notify, configUI: "tools/NotifyConfig.qml" },
     { module: EditMemory, configUI: "tools/EditMemoryConfig.qml" },
+    { module: SetTtsStyle, configUI: "" },
     { module: OpenUrl, configUI: "tools/OpenUrlConfig.qml" },
     { module: StartSession, configUI: "" },
     { module: DesktopGetState, configUI: "" },

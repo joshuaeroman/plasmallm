@@ -18,6 +18,11 @@ ConfigModel {
         source: "configSpeech.qml"
     }
     ConfigCategory {
+        name: i18n("Text to Speech")
+        icon: "audio-volume-high"
+        source: "configTts.qml"
+    }
+    ConfigCategory {
         name: i18n("Context Compaction")
         icon: "archive-insert"
         source: "configCompaction.qml"

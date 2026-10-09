@@ -20,6 +20,7 @@ import "profiles.js" as Profiles
 import "toolManager.js" as ToolManager
 import "driverManager.js" as DriverManager
 import "stt.js" as Stt
+import "tts.js" as Tts
 import "contextCompactor.js" as ContextCompactor
 import "commandValidator.js" as CommandValidator
 import "legacyChatLoader.js" as LegacyChatLoader
@@ -80,6 +81,23 @@ PlasmoidItem {
     }
     readonly property bool voiceInputBusy: isRecording || isTranscribing
     readonly property string sttMicMode: Plasmoid.configuration.sttMicMode || "auto"
+
+    // --- Text-to-speech ---
+    property bool isSpeaking: false
+    property int speakingMessageIndex: -1
+    property string ttsStatusText: ""
+    property int _ttsGen: 0
+    property bool _lastPromptWasVoice: false
+    property string sessionTtsStyleHint: ""
+    property string turnTtsStyleHint: ""
+    readonly property bool ttsEnabled: !!Plasmoid.configuration.ttsEnabled
+    readonly property bool ttsAvailable: {
+        var _en = Plasmoid.configuration.ttsEnabled;
+        var _be = Plasmoid.configuration.ttsBackend;
+        var _ep = Plasmoid.configuration.ttsApiEndpoint;
+        var _m = Plasmoid.configuration.ttsModelName;
+        return Tts.isTtsConfigured(Plasmoid.configuration);
+    }
     // One-time post-migration banner (not a chat message — clearChat dismisses it).
     property bool showApiKeyMigrationNotice: false
     readonly property string apiKeyMigrationNoticeText: i18n(
@@ -171,6 +189,7 @@ PlasmoidItem {
             thinking: ""
             attachmentsStr: ""
             fromVoice: false
+            ttsStyleHint: ""
             toolSummary: ""
             toolDataJson: ""
             toolView: ""
@@ -332,6 +351,219 @@ PlasmoidItem {
                 callback(null, (res && res.key) || fallbackKeyForSlot(slot) || "");
             }
         );
+    }
+
+    /**
+     * Load API key for the dedicated TTS connection (Text to Speech page).
+     */
+    function loadTtsApiKey(callback) {
+        if (!Tts.isTtsConfigured(Plasmoid.configuration)) {
+            callback(i18n("Text-to-speech is not configured"), "");
+            return;
+        }
+        var conn = Tts.getTtsConnection(Plasmoid.configuration);
+        if (conn.backend === "spd_say" || conn.backend === "custom_cli") {
+            callback(null, "");
+            return;
+        }
+        var provider = Plasmoid.configuration.ttsProviderName || "";
+        var endpoint = Plasmoid.configuration.ttsApiEndpoint || "";
+        var slot = Api.ttsKeySlot(provider, endpoint);
+        Wallet.readKey(DBus, slot, Api.ttsLegacyKeySlots(provider, endpoint),
+            fallbackMap(), "",
+            function(res) {
+                if (res && res.available)
+                    root.walletAvailable = true;
+                var key = (res && res.key) || fallbackKeyForSlot(slot) || "";
+                if (!key || key.length === 0) {
+                    // Check if key is available in STT slot for same provider
+                    var sttSlot = Api.sttKeySlot(provider, endpoint);
+                    key = fallbackKeyForSlot(sttSlot) || "";
+                }
+                callback(null, key);
+            }
+        );
+    }
+
+    property var pendingTtsOutput: null
+
+    function flushPendingTtsOutput() {
+        if (!pendingTtsOutput)
+            return;
+        var p = pendingTtsOutput;
+        pendingTtsOutput = null;
+        var idx = p.msgIndex;
+        if (idx >= 0 && idx < displayMessages.count) {
+            var m = displayMessages.get(idx);
+            if (m && p.turnId && m.turnId !== p.turnId) {
+                for (var i = displayMessages.count - 1; i >= 0; i--) {
+                    if (displayMessages.get(i).turnId === p.turnId) {
+                        idx = i;
+                        break;
+                    }
+                }
+            }
+        }
+        if (idx >= 0 && idx < displayMessages.count) {
+            if (p.apiMsgId) {
+                displayMessages.setProperty(idx, "apiMsgId", p.apiMsgId);
+            }
+            root.updateDisplayMessage(idx, null, p.fullText);
+            responseReady(idx);
+            root.chatContentChanged();
+        }
+        if (p.notifyText && !root.expanded) {
+            root.showNotification(i18n("PlasmaLLM"), p.notifyText);
+        }
+    }
+
+    function effectiveTtsStyleHint() {
+        if (turnTtsStyleHint && turnTtsStyleHint.length > 0)
+            return turnTtsStyleHint;
+        if (sessionTtsStyleHint && sessionTtsStyleHint.length > 0)
+            return sessionTtsStyleHint;
+        return Plasmoid.configuration.ttsStyleHint || "";
+    }
+
+    function setTtsStyle(style, scope) {
+        scope = String(scope || "turn").toLowerCase();
+        style = String(style || "").trim();
+        if (style.toLowerCase() === "none" || style.toLowerCase() === "normal" || style.toLowerCase() === "default") {
+            style = "";
+        }
+        if (scope === "persistent") {
+            Plasmoid.configuration.ttsStyleHint = style;
+            root.turnTtsStyleHint = "";
+            root.sessionTtsStyleHint = "";
+        } else if (scope === "session") {
+            root.sessionTtsStyleHint = style;
+            root.turnTtsStyleHint = "";
+        } else {
+            root.turnTtsStyleHint = style;
+        }
+        return {
+            style: style,
+            scope: scope
+        };
+    }
+
+    /**
+     * Synthesize and read a message aloud using the configured TTS backend.
+     */
+    function speakMessage(content, messageIndex, onReady, overrideStyleHint) {
+        var readyCb = (typeof onReady === "function") ? onReady : null;
+        if (!ttsAvailable) {
+            if (readyCb) readyCb();
+            root.flushPendingTtsOutput();
+            showSttNotice(i18n("Text-to-speech is not configured. Open Text to Speech settings."));
+            return;
+        }
+
+        // Only interrupt active speech playback if audio is actually playing
+        if (root.isSpeaking) {
+            var stopCmd = Tts.buildStopCommand(Plasmoid.configuration.ttsBackend);
+            if (stopCmd && stopCmd.length) {
+                ttsExec.connectSource(stopCmd);
+            }
+            root.isSpeaking = false;
+            root.speakingMessageIndex = -1;
+            root.ttsStatusText = "";
+        }
+
+        var myGen = ++_ttsGen;
+        isSpeaking = true;
+        speakingMessageIndex = (messageIndex !== undefined && messageIndex >= 0) ? messageIndex : -1;
+        ttsStatusText = i18n("Speaking…");
+
+        var styleHintToUse = (overrideStyleHint !== undefined && overrideStyleHint !== null) ? String(overrideStyleHint) : "";
+        if (!styleHintToUse && messageIndex !== undefined && messageIndex >= 0 && messageIndex < displayMessages.count) {
+            styleHintToUse = displayMessages.get(messageIndex).ttsStyleHint || "";
+        }
+        if (!styleHintToUse) {
+            styleHintToUse = root.effectiveTtsStyleHint();
+        }
+
+        loadTtsApiKey(function(err, apiKey) {
+            if (myGen !== root._ttsGen) {
+                if (readyCb) readyCb();
+                return;
+            }
+            if (err) {
+                isSpeaking = false;
+                speakingMessageIndex = -1;
+                ttsStatusText = "";
+                root.turnTtsStyleHint = "";
+                if (readyCb) readyCb();
+                root.flushPendingTtsOutput();
+                showSttNotice(err);
+                return;
+            }
+            var effectiveConfig = {
+                ttsEnabled: Plasmoid.configuration.ttsEnabled,
+                ttsAutoRead: Plasmoid.configuration.ttsAutoRead,
+                ttsAutoReadOnlyVoicePrompted: Plasmoid.configuration.ttsAutoReadOnlyVoicePrompted,
+                ttsWaitUntilReady: Plasmoid.configuration.ttsWaitUntilReady,
+                ttsStyleHint: styleHintToUse,
+                ttsBackend: Plasmoid.configuration.ttsBackend,
+                ttsProviderName: Plasmoid.configuration.ttsProviderName,
+                ttsApiEndpoint: Plasmoid.configuration.ttsApiEndpoint,
+                ttsModelName: Plasmoid.configuration.ttsModelName,
+                ttsVoice: Plasmoid.configuration.ttsVoice,
+                ttsResponseFormat: Plasmoid.configuration.ttsResponseFormat,
+                ttsRate: Plasmoid.configuration.ttsRate,
+                ttsPitch: Plasmoid.configuration.ttsPitch,
+                ttsLanguage: Plasmoid.configuration.ttsLanguage,
+                ttsCliBinary: Plasmoid.configuration.ttsCliBinary,
+                ttsCliTemplate: Plasmoid.configuration.ttsCliTemplate,
+                ttsCliExtraArgs: Plasmoid.configuration.ttsCliExtraArgs
+            };
+            Tts.speak({
+                config: effectiveConfig,
+                text: content,
+                apiKey: apiKey,
+                onReady: readyCb,
+                isCancelled: function() {
+                    return myGen !== root._ttsGen;
+                },
+                runCommand: function(cmd, cb, cmdReady) {
+                    pendingTtsRuns[cmd] = {
+                        cb: cb,
+                        onReady: cmdReady || readyCb,
+                        gen: myGen,
+                        readyCalled: false
+                    };
+                    ttsExec.connectSource(cmd);
+                },
+                callback: function(speakErr, res) {
+                    if (myGen !== root._ttsGen) return;
+                    isSpeaking = false;
+                    speakingMessageIndex = -1;
+                    ttsStatusText = "";
+                    root.turnTtsStyleHint = "";
+                    if (readyCb) readyCb();
+                    if (speakErr) {
+                        root.flushPendingTtsOutput();
+                        showSttNotice(speakErr);
+                    }
+                }
+            });
+        });
+    }
+
+    /**
+     * Stop any active speech playback immediately.
+     */
+    function stopSpeech() {
+        ++_ttsGen;
+        flushPendingTtsOutput();
+        root.turnTtsStyleHint = "";
+        isSpeaking = false;
+        speakingMessageIndex = -1;
+        ttsStatusText = "";
+        var stopCmd = Tts.buildStopCommand(Plasmoid.configuration.ttsBackend);
+        if (stopCmd && stopCmd.length) {
+            ttsExec.connectSource(stopCmd);
+        }
     }
 
     /**
@@ -898,6 +1130,44 @@ PlasmoidItem {
         }
     }
 
+    property var pendingTtsRuns: ({})
+
+    P5Support.DataSource {
+        id: ttsExec
+        engine: "executable"
+        connectedSources: []
+        onNewData: function(source, data) {
+            var pending = pendingTtsRuns[source];
+            if (pending && !pending.readyCalled) {
+                var stdout = data["stdout"] || "";
+                if (stdout.indexOf("TTS_READY") !== -1) {
+                    pending.readyCalled = true;
+                    if (typeof pending.onReady === "function") {
+                        pending.onReady();
+                    }
+                }
+            }
+            var exitCode = data["exit code"];
+            if (exitCode === undefined)
+                return;
+            delete pendingTtsRuns[source];
+            disconnectSource(source);
+            if (!pending)
+                return;
+            if (!pending.readyCalled && typeof pending.onReady === "function") {
+                pending.readyCalled = true;
+                pending.onReady();
+            }
+            if (typeof pending.cb === "function") {
+                pending.cb(null, {
+                    stdout: data.stdout || "",
+                    stderr: data.stderr || "",
+                    exitCode: exitCode
+                });
+            }
+        }
+    }
+
     P5Support.DataSource {
         id: sttFileReader
         engine: "executable"
@@ -1074,6 +1344,7 @@ PlasmoidItem {
             thinking: "",
             attachmentsStr: "",
             fromVoice: false,
+            ttsStyleHint: "",
             toolSummary: "",
             toolDataJson: "",
             toolView: "",
@@ -1650,7 +1921,9 @@ PlasmoidItem {
             userHome: sysInfo.userHome || "",
             loadedSkills: root.loadedSkills,
             activeSkills: root.activeSkills,
-            memoryPhrases: root.memoryPhrases
+            memoryPhrases: root.memoryPhrases,
+            ttsEnabled: root.ttsAvailable,
+            ttsAllowAgentStyleControl: !!Plasmoid.configuration.ttsAllowAgentStyleControl
         };
     }
 
@@ -1664,18 +1937,34 @@ PlasmoidItem {
         if (systemPromptReady) initSystemPrompt();
     }
 
+    function getSystemPromptOptions(overrides) {
+        overrides = overrides || {};
+        var opts = {
+            i18n: i18n,
+            sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime,
+            autoRunCommands: Plasmoid.configuration.autoRunCommands,
+            autoMode: root.isAutoMode,
+            commandToolEnabled: Plasmoid.configuration.useCommandTool,
+            sessionMultiplexer: root.sessionChipText(),
+            localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
+            toolsConfig: getToolsConfig(),
+            ttsEnabled: root.ttsAvailable,
+            ttsAutoRead: !!Plasmoid.configuration.ttsAutoRead,
+            ttsAutoReadOnlyVoicePrompted: !!Plasmoid.configuration.ttsAutoReadOnlyVoicePrompted,
+            ttsWaitUntilReady: !!Plasmoid.configuration.ttsWaitUntilReady,
+            ttsStyleHint: root.effectiveTtsStyleHint()
+        };
+        for (var k in overrides) {
+            if (overrides.hasOwnProperty(k)) {
+                opts[k] = overrides[k];
+            }
+        }
+        return opts;
+    }
+
     function initSystemPrompt() {
         try {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, {
-                i18n: i18n,
-                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime,
-                autoRunCommands: Plasmoid.configuration.autoRunCommands,
-                autoMode: root.isAutoMode,
-                commandToolEnabled: Plasmoid.configuration.useCommandTool,
-                sessionMultiplexer: root.sessionChipText(),
-                localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
-                toolsConfig: getToolsConfig()
-            });
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, getSystemPromptOptions());
             Plasmoid.configuration.gatheredSysInfo = JSON.stringify(sysInfo);
             if (systemPromptReady) {
                 chatMessages.setProperty(0, "content", prompt);
@@ -1820,6 +2109,10 @@ PlasmoidItem {
     }
 
     function clearChat() {
+        pendingTtsOutput = null;
+        sessionTtsStyleHint = "";
+        turnTtsStyleHint = "";
+        stopSpeech();
         if (activeRequest) {
             if (activeRequest.xhr) activeRequest.xhr.abort();
             else activeRequest.abort();
@@ -1849,15 +2142,7 @@ PlasmoidItem {
         };
         root.isCompacting = false;
         if (systemPromptReady) {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
-                i18n: i18n,
-                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
-                autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-                autoMode: false, 
-                commandToolEnabled: Plasmoid.configuration.useCommandTool, 
-                localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
-                toolsConfig: getToolsConfig() 
-            });
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, getSystemPromptOptions({ autoMode: false }));
             chatMessages.append({ msgId: "msg_sys_0", turnId: "turn_0", role: "system", content: prompt });
         }
     }
@@ -1962,6 +2247,7 @@ PlasmoidItem {
                     tool_calls_json: m.tool_calls_json || "",
                     tool_call_id: m.tool_call_id || "",
                     thinking_blocks_json: m.thinking_blocks_json || "",
+                    tts_style_hint: m.tts_style_hint || "",
                     attachments_json: attachJson,
                     timestamp_api: m.timestamp_api || ""
                 }));
@@ -1994,6 +2280,7 @@ PlasmoidItem {
                     timestamp: d.timestamp || "",
                     attachmentsStr: displayAttachmentsStr,
                     fromVoice: !!d.fromVoice,
+                    ttsStyleHint: d.ttsStyleHint || "",
                     toolTitle: d.toolTitle || "",
                     toolIcon: d.toolIcon || "",
                     toolSummary: d.toolSummary || "",
@@ -2164,6 +2451,7 @@ PlasmoidItem {
                         timestamp: data.timestamp || "",
                         attachmentsStr: restoredAttachmentsStr,
                         fromVoice: !!data.fromVoice,
+                        ttsStyleHint: data.ttsStyleHint || "",
                         toolTitle: data.toolTitle || "",
                         toolIcon: data.toolIcon || "",
                         toolSummary: data.toolSummary || "",
@@ -2414,16 +2702,7 @@ PlasmoidItem {
         
         // Rebuild system prompt
         if (systemPromptReady) {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
-                i18n: i18n,
-                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
-                autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-                autoMode: root.isAutoMode, 
-                commandToolEnabled: Plasmoid.configuration.useCommandTool,
-                sessionMultiplexer: root.sessionChipText(),
-                localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
-                toolsConfig: getToolsConfig()
-            });
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, getSystemPromptOptions());
             chatMessages.setProperty(0, "content", prompt);
         }
     }
@@ -2619,6 +2898,7 @@ PlasmoidItem {
         if (!attachments) attachments = [];
         if (!options) options = {};
         var fromVoice = !!options.fromVoice;
+        root._lastPromptWasVoice = fromVoice;
 
         // Slash commands
         var lower = text.toLowerCase().trim();
@@ -2694,16 +2974,7 @@ PlasmoidItem {
             root.appendDisplayMessage("assistant", msg, { shared: false });
             
             if (systemPromptReady) {
-                var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
-                    i18n: i18n,
-                    sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
-                    autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-                    autoMode: root.isAutoMode, 
-                    commandToolEnabled: Plasmoid.configuration.useCommandTool,
-                    sessionMultiplexer: root.sessionChipText(),
-                    localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
-                    toolsConfig: getToolsConfig()
-                });
+                var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, getSystemPromptOptions());
                 chatMessages.setProperty(0, "content", autoPrompt);
             }
             return true;
@@ -2831,16 +3102,7 @@ PlasmoidItem {
                     sessionAutoMode = true;
                     taskAutoMode = true;
                     if (systemPromptReady) {
-                        var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, { 
-                            i18n: i18n,
-                            sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
-                            autoRunCommands: Plasmoid.configuration.autoRunCommands, 
-                            autoMode: root.isAutoMode, 
-                            commandToolEnabled: Plasmoid.configuration.useCommandTool,
-                            sessionMultiplexer: root.sessionChipText(),
-                            localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
-                            toolsConfig: getToolsConfig()
-                        });
+                        var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, getSystemPromptOptions());
                         chatMessages.setProperty(0, "content", autoPrompt);
                     }
                 }
@@ -3000,20 +3262,48 @@ PlasmoidItem {
                 content: text,
                 timestamp_api: Api.localISODateTime()
             });
-            root.appendDisplayMessage("assistant", text, {
+            var allowDecSpeech = root.ttsAvailable && Plasmoid.configuration.ttsAutoRead && text && text.length > 0;
+            if (allowDecSpeech && Plasmoid.configuration.ttsAutoReadOnlyVoicePrompted && !root._lastPromptWasVoice) {
+                allowDecSpeech = false;
+            }
+            var waitDecTts = allowDecSpeech && Plasmoid.configuration.ttsWaitUntilReady;
+            var dispText = waitDecTts ? "" : text;
+            var decStyle = root.effectiveTtsStyleHint();
+            var dispIdx = root.appendDisplayMessage("assistant", dispText, {
                 shared: true,
                 apiMsgId: astMsgId,
+                ttsStyleHint: decStyle,
                 decisionJson: JSON.stringify({
                     choice: verdict.choice,
                     confidence: verdict.confidence,
                     probabilities: probs
                 })
             });
+
+            if (waitDecTts) {
+                root.pendingTtsOutput = {
+                    msgIndex: dispIdx,
+                    turnId: "",
+                    fullText: text,
+                    apiMsgId: astMsgId,
+                    ttsStyleHint: decStyle,
+                    notifyText: (!root.expanded) ? text : ""
+                };
+            }
+
             if (!root.expanded) {
                 root.hasUnreadResponse = true;
                 Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
+                if (!root.pendingTtsOutput) {
+                    root.showNotification(i18n("PlasmaLLM"), text);
+                }
             }
             saveChat();
+            if (allowDecSpeech) {
+                root.speakMessage(text, dispIdx, function() {
+                    root.flushPendingTtsOutput();
+                }, decStyle);
+            }
         });
     }
 
@@ -3102,16 +3392,7 @@ PlasmoidItem {
 
         // Refresh system prompt
         if (systemPromptReady) {
-            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, {
-                i18n: i18n,
-                sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
-                autoRunCommands: Plasmoid.configuration.autoRunCommands,
-                autoMode: root.isAutoMode,
-                commandToolEnabled: Plasmoid.configuration.useCommandTool,
-                sessionMultiplexer: root.sessionChipText(),
-                localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
-                toolsConfig: getToolsConfig()
-            });
+            var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, getSystemPromptOptions());
             chatMessages.setProperty(0, "content", prompt);
         }
         // Find current turn ID from last user message
@@ -3121,6 +3402,11 @@ PlasmoidItem {
                 currentTurnId = displayMessages.get(ti).turnId;
                 break;
             }
+        }
+        if (toolCallDepth === 0) {
+            flushPendingTtsOutput();
+            stopSpeech();
+            root.turnTtsStyleHint = "";
         }
         // Add a placeholder assistant message for streaming
         streamingMessageIndex = root.appendDisplayMessage("assistant", "", { turnId: currentTurnId });
@@ -3257,7 +3543,11 @@ PlasmoidItem {
                 attribution: Plasmoid.configuration.openrouterAttribution,
                 tools: tools,
                 onChunk: function(delta, accumulated) {
-                    if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
+                    var suppressText = root.ttsAvailable && Plasmoid.configuration.ttsAutoRead && Plasmoid.configuration.ttsWaitUntilReady;
+                    if (suppressText && Plasmoid.configuration.ttsAutoReadOnlyVoicePrompted && !root._lastPromptWasVoice) {
+                        suppressText = false;
+                    }
+                    if (!suppressText && streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                         displayMessages.setProperty(streamingMessageIndex, "content", accumulated);
                         root.chatContentChanged();
                     }
@@ -3378,6 +3668,7 @@ PlasmoidItem {
                     streamingMessageIndex = -1;
                     root.appendDisplayMessage("error", "Error: " + error, { turnId: currentTurnId });
                 } else {
+                    var effectiveStyle = root.effectiveTtsStyleHint();
                     var regularThinkingJson = (assistantMsg && assistantMsg.thinkingBlocks && assistantMsg.thinkingBlocks.length > 0)
                         ? JSON.stringify(assistantMsg.thinkingBlocks) : "";
                     var astMsgId = nextMsgId("c");
@@ -3386,28 +3677,54 @@ PlasmoidItem {
                         turnId: currentTurnId,
                         role: "assistant", 
                         content: fullText, 
+                        tts_style_hint: effectiveStyle,
                         thinking_blocks_json: regularThinkingJson,
                         timestamp_api: Api.localISODateTime(),
                     });
                     
+                    var allowStreamSpeech = root.ttsAvailable && Plasmoid.configuration.ttsAutoRead && fullText && fullText.length > 0;
+                    if (allowStreamSpeech && Plasmoid.configuration.ttsAutoReadOnlyVoicePrompted && !root._lastPromptWasVoice) {
+                        allowStreamSpeech = false;
+                    }
+                    var waitStreamTts = allowStreamSpeech && Plasmoid.configuration.ttsWaitUntilReady;
+
                     if (streamingMessageIndex >= 0 && streamingMessageIndex < displayMessages.count) {
                         displayMessages.setProperty(streamingMessageIndex, "apiMsgId", astMsgId);
+                        displayMessages.setProperty(streamingMessageIndex, "ttsStyleHint", effectiveStyle);
                         if (fullText.length === 0 && (!assistantMsg || !assistantMsg.thinkingBlocks || assistantMsg.thinkingBlocks.length === 0)) {
                             // If the response is completely empty (no text, no thinking), remove the placeholder
                             displayMessages.remove(streamingMessageIndex);
+                        } else if (waitStreamTts) {
+                            root.pendingTtsOutput = {
+                                msgIndex: streamingMessageIndex,
+                                turnId: currentTurnId,
+                                fullText: fullText,
+                                apiMsgId: astMsgId,
+                                ttsStyleHint: effectiveStyle,
+                                notifyText: (!root.expanded) ? fullText : ""
+                            };
                         } else {
-                            root.updateDisplayMessage(streamingMessageIndex, null, fullText);
+                            root.updateDisplayMessage(streamingMessageIndex, null, fullText, { ttsStyleHint: effectiveStyle });
                             responseReady(streamingMessageIndex);
                         }
                     }
+                    var msgIdxForSpeak = streamingMessageIndex;
                     streamingMessageIndex = -1;
                     saveChat();
                     triggerBackgroundCompactionIfNeeded();
 
+                    if (allowStreamSpeech) {
+                        root.speakMessage(fullText, msgIdxForSpeak, function() {
+                            root.flushPendingTtsOutput();
+                        }, effectiveStyle);
+                    }
+
                     if (!root.expanded) {
                         root.hasUnreadResponse = true;
                         Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
-                        root.showNotification(i18n("PlasmaLLM"), fullText);
+                        if (!root.pendingTtsOutput) {
+                            root.showNotification(i18n("PlasmaLLM"), fullText);
+                        }
                     }
 
                     if (taskAutoMode) {
@@ -3446,6 +3763,7 @@ PlasmoidItem {
     }
 
     function cancelRequest() {
+        stopSpeech();
         if (activeRequest) {
             if (activeRequest.xhr) activeRequest.xhr.abort();
             else activeRequest.abort();
@@ -3807,6 +4125,12 @@ PlasmoidItem {
                 console.error("PlasmaLLM: Tool error:", name, msg);
                 handleToolOutput(null, "", msg, 1, { name: name, callId: callId, displayIndex: displayIndex, args: args, turnId: turnId });
             },
+            setTtsStyle: function(style, scope) {
+                return root.setTtsStyle(style, scope);
+            },
+            getTtsStyle: function() {
+                return root.effectiveTtsStyleHint();
+            },
             onDone: function(stdout, stderr, exitCode, attachmentsJson) {
                 handleToolOutput(null, stdout, stderr, exitCode, { name: name, callId: callId, displayIndex: displayIndex, args: args, turnId: turnId }, attachmentsJson);
             }
@@ -4166,16 +4490,7 @@ PlasmoidItem {
                         console.log("[PlasmaLLM] " + msg);
                     }
                     if (systemPromptReady) {
-                        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, {
-                            i18n: i18n,
-                            sysInfoDateTime: Plasmoid.configuration.sysInfoDateTime, 
-                            autoRunCommands: Plasmoid.configuration.autoRunCommands,
-                            autoMode: root.isAutoMode,
-                            commandToolEnabled: Plasmoid.configuration.useCommandTool,
-                            sessionMultiplexer: root.sessionChipText(),
-                            localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
-                            toolsConfig: getToolsConfig()
-                        });
+                        var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, getSystemPromptOptions());
                         chatMessages.setProperty(0, "content", prompt);
                     }
                 }
@@ -4223,6 +4538,10 @@ PlasmoidItem {
         function onToolsHttpMaxBytesChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onToolsInstructionsChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onLocalizeSystemPromptChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onTtsEnabledChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onTtsStyleHintChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onTtsAutoReadChanged() { if (systemPromptReady) initSystemPrompt(); }
+        function onTtsAutoReadOnlyVoicePromptedChanged() { if (systemPromptReady) initSystemPrompt(); }
         function onApiKeyChanged() {
             // Legacy single-slot config field; only meaningful before migration.
             if (Plasmoid.configuration.apiKey) root.apiKey = Plasmoid.configuration.apiKey;

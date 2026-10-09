@@ -174,7 +174,8 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
 {{skills}}
 {{memories}}
 {{tools}}
-{{driving_instructions}}</default>
+{{driving_instructions}}
+{{text_to_speech}}</default>
     </entry>
     <entry name="systemPromptMigrated" type="Bool">
       <label>Internal: legacy customSystemPrompt folded into the editable systemPrompt template</label>
@@ -482,6 +483,86 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
     <entry name="sttMigratedFromProfile" type="Bool">
       <label>Internal: once migrated sttProfileId into dedicated STT fields</label>
       <default>false</default>
+    </entry>
+    <entry name="ttsEnabled" type="Bool">
+      <label>Enable text-to-speech</label>
+      <default>false</default>
+    </entry>
+    <entry name="ttsAutoRead" type="Bool">
+      <label>Automatically read new assistant responses aloud</label>
+      <default>false</default>
+    </entry>
+    <entry name="ttsAutoReadOnlyVoicePrompted" type="Bool">
+      <label>Only auto-read when prompted with voice (STT)</label>
+      <default>false</default>
+    </entry>
+    <entry name="ttsWaitUntilReady" type="Bool">
+      <label>Don't output text until TTS is ready</label>
+      <default>false</default>
+    </entry>
+    <entry name="ttsStyleHint" type="String">
+      <label>Speech style, emotion, or tone hint (e.g. &lt;sarcastic&gt;, [whispering], or SSML)</label>
+      <default></default>
+    </entry>
+    <entry name="ttsAllowAgentStyleControl" type="Bool">
+      <label>Allow agent to set speech tone and style</label>
+      <default>false</default>
+    </entry>
+    <entry name="ttsBackend" type="String">
+      <label>TTS backend adapter id (spd_say, openai_speech, custom_cli)</label>
+      <default>spd_say</default>
+    </entry>
+    <entry name="ttsProviderName" type="String">
+      <label>TTS provider preset name (OpenRouter, OpenAI, Custom)</label>
+      <default>OpenRouter</default>
+    </entry>
+    <entry name="ttsApiEndpoint" type="String">
+      <label>TTS API base URL (OpenAI-compatible speech endpoint)</label>
+      <default>https://openrouter.ai/api/v1</default>
+    </entry>
+    <entry name="ttsModelName" type="String">
+      <label>TTS model id (e.g. google/gemini-3.8-flash-lite-tts, tts-1)</label>
+      <default>google/gemini-3.8-flash-lite-tts</default>
+    </entry>
+    <entry name="ttsVoice" type="String">
+      <label>Voice identifier for TTS</label>
+      <default>Zephyr</default>
+    </entry>
+    <entry name="ttsResponseFormat" type="String">
+      <label>Audio response format (pcm, mp3)</label>
+      <default>pcm</default>
+    </entry>
+    <entry name="ttsRate" type="Int">
+      <label>Speech rate (-100 to 100 for spd-say, or percentage/speed)</label>
+      <default>0</default>
+      <min>-100</min>
+      <max>100</max>
+    </entry>
+    <entry name="ttsPitch" type="Int">
+      <label>Speech pitch (-100 to 100 for spd-say)</label>
+      <default>0</default>
+      <min>-100</min>
+      <max>100</max>
+    </entry>
+    <entry name="ttsLanguage" type="String">
+      <label>Optional ISO language hint for TTS</label>
+      <default></default>
+    </entry>
+    <entry name="ttsCliBinary" type="String">
+      <label>CLI binary or command prefix for local TTS</label>
+      <default>spd-say</default>
+    </entry>
+    <entry name="ttsCliTemplate" type="String">
+      <label>CLI command template with {text}, {voice}, {rate} tokens</label>
+      <default></default>
+    </entry>
+    <entry name="ttsCliExtraArgs" type="String">
+      <label>Extra arguments for local TTS command</label>
+      <default></default>
+    </entry>
+    <entry name="ttsAvailableModels" type="String">
+      <label>Cached TTS model list JSON array</label>
+      <default></default>
     </entry>
     <entry name="useCommandTool" type="Bool">
       <label>Use tool calling for command execution</label>

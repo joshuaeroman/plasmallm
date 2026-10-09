@@ -327,6 +327,45 @@ SimpleKCM {
     property string cfg_sttAvailableModelsDefault
     property bool cfg_sttMigratedFromProfile
     property bool cfg_sttMigratedFromProfileDefault
+
+    property bool cfg_ttsEnabled
+    property bool cfg_ttsEnabledDefault
+    property bool cfg_ttsAutoRead
+    property bool cfg_ttsAutoReadDefault
+    property bool cfg_ttsAutoReadOnlyVoicePrompted
+    property bool cfg_ttsAutoReadOnlyVoicePromptedDefault
+    property bool cfg_ttsWaitUntilReady
+    property bool cfg_ttsWaitUntilReadyDefault
+    property string cfg_ttsStyleHint
+    property string cfg_ttsStyleHintDefault
+    property bool cfg_ttsAllowAgentStyleControl
+    property bool cfg_ttsAllowAgentStyleControlDefault
+    property string cfg_ttsBackend
+    property string cfg_ttsBackendDefault
+    property string cfg_ttsProviderName
+    property string cfg_ttsProviderNameDefault
+    property string cfg_ttsApiEndpoint
+    property string cfg_ttsApiEndpointDefault
+    property string cfg_ttsModelName
+    property string cfg_ttsModelNameDefault
+    property string cfg_ttsVoice
+    property string cfg_ttsVoiceDefault
+    property string cfg_ttsResponseFormat
+    property string cfg_ttsResponseFormatDefault
+    property int cfg_ttsRate
+    property int cfg_ttsRateDefault
+    property int cfg_ttsPitch
+    property int cfg_ttsPitchDefault
+    property string cfg_ttsLanguage
+    property string cfg_ttsLanguageDefault
+    property string cfg_ttsCliBinary
+    property string cfg_ttsCliBinaryDefault
+    property string cfg_ttsCliTemplate
+    property string cfg_ttsCliTemplateDefault
+    property string cfg_ttsCliExtraArgs
+    property string cfg_ttsCliExtraArgsDefault
+    property string cfg_ttsAvailableModels
+    property string cfg_ttsAvailableModelsDefault
     property bool cfg_useCommandTool
     property bool cfg_useCommandToolDefault
     property bool cfg_commandValidatorEnabled

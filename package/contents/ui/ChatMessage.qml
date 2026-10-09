@@ -30,6 +30,7 @@ Kirigami.AbstractCard {
     property string attachmentsStr: ""
     readonly property var attachmentPaths: attachmentsStr.length > 0 ? attachmentsStr.split("\n") : []
     property bool fromVoice: false
+    property string ttsStyleHint: ""
     property bool isCompacted: false
     property string tool_call_id: ""
     property string toolArgs: ""
@@ -874,6 +875,29 @@ Kirigami.AbstractCard {
                         PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                         PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                         onClicked: messageItem.shareRequested(messageItem.messageIndex)
+                    }
+
+                    PlasmaComponents.ToolButton {
+                        id: ttsButton
+                        visible: !messageItem.isUser && !messageItem.isCommandOutput && (typeof root !== "undefined" && root.ttsEnabled)
+                        icon.name: (typeof root !== "undefined" && root.isSpeaking && root.speakingMessageIndex === messageItem.messageIndex)
+                            ? "media-playback-stop"
+                            : "audio-volume-high"
+                        display: PlasmaComponents.ToolButton.IconOnly
+                        PlasmaComponents.ToolTip.text: (typeof root !== "undefined" && root.isSpeaking && root.speakingMessageIndex === messageItem.messageIndex)
+                            ? i18n("Stop reading")
+                            : i18n("Read aloud")
+                        PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                        PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+                        onClicked: {
+                            if (typeof root !== "undefined") {
+                                if (root.isSpeaking && root.speakingMessageIndex === messageItem.messageIndex) {
+                                    root.stopSpeech();
+                                } else {
+                                    root.speakMessage(messageItem.content, messageItem.messageIndex, null, messageItem.ttsStyleHint);
+                                }
+                            }
+                        }
                     }
                 }
             }

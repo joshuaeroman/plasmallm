@@ -67,7 +67,8 @@ function loadV1(lines, chatMessages, displayMessages, fileReader, pendingFileRea
                     exitCode: data.exitCode !== undefined ? data.exitCode : 0,
                     outputScheme: data.outputScheme || "",
                     tool_call_id: data.tool_call_id || "",
-                    callId: data.callId || ""
+                    callId: data.callId || "",
+                    ttsStyleHint: data.ttsStyleHint || ""
                 });
             }
         } catch(e) {

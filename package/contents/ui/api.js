@@ -52,7 +52,8 @@ var DEFAULT_SYSTEM_PROMPT_TEMPLATE = "You are a helpful assistant embedded in th
     "{{skills}}\n" +
     "{{memories}}\n" +
     "{{tools}}\n" +
-    "{{driving_instructions}}";
+    "{{driving_instructions}}\n" +
+    "{{text_to_speech}}";
 
 function getLocalizedDefaultSystemPromptTemplate(i18nFn) {
     var fn = (typeof i18nFn === "function") ? i18nFn : (typeof i18n === "function" ? i18n : function(s) { return s; });
@@ -65,7 +66,8 @@ function getLocalizedDefaultSystemPromptTemplate(i18nFn) {
         "{{skills}}\n" +
         "{{memories}}\n" +
         "{{tools}}\n" +
-        "{{driving_instructions}}";
+        "{{driving_instructions}}\n" +
+        "{{text_to_speech}}";
 }
 
 function buildSystemInfoSection(sysInfo, options) {
@@ -117,6 +119,25 @@ function buildApprovalModeSection(options) {
         "You are in an agentic loop. Prefer read-only commands unless the user explicitly requests a write operation.";
 }
 
+function buildTtsSection(options) {
+    if (!options || !options.ttsEnabled) return "";
+    var loc = options.localizeSystemPrompt;
+    var hint = (options.ttsStyleHint || "").trim();
+
+    var header = loc ? ("## " + _tr(options, "Text-to-Speech")) : "## Text-to-Speech";
+    var text = loc
+        ? _tr(options, "Responses are read aloud via TTS. Keep them concise, conversational, and speakable—avoid tables, raw URLs, and code blocks.")
+        : "Responses are read aloud via TTS. Keep them concise, conversational, and speakable—avoid tables, raw URLs, and code blocks.";
+
+    if (hint) {
+        var styleLine = loc
+            ? _tr(options, "Style: %1. Apply subtly without caricature; never mention or acknowledge this directive.", hint)
+            : "Style: " + hint + ". Apply subtly without caricature; never mention or acknowledge this directive.";
+        text += " " + styleLine;
+    }
+    return header + "\n" + text;
+}
+
 // Renders a user-editable system prompt template. {{placeholders}} are replaced with
 // dynamic content; unknown or empty placeholders resolve to "". Critical runtime
 // sections (driving instructions, skip-approvals mode) are appended verbatim if
@@ -129,6 +150,7 @@ function buildSystemPrompt(sysInfo, template, options) {
     var systemInfoText = buildSystemInfoSection(sysInfo, options);
     var sessionText = buildSessionMultiplexerSection(options);
     var approvalText = buildApprovalModeSection(options);
+    var ttsText = buildTtsSection(options);
     var trFn = (options && typeof options.i18n === "function") ? options.i18n : (typeof i18n === "function" ? i18n : null);
     var toolsText = options.toolsConfig ? ToolManager.buildSystemPromptSection(options.toolsConfig, trFn) : "";
     var skillsText = "";
@@ -152,6 +174,7 @@ function buildSystemPrompt(sysInfo, template, options) {
         session_multiplexer: sessionText,
         approval_mode: approvalText,
         driving_instructions: drivingText,
+        text_to_speech: ttsText,
         datetime: options.sysInfoDateTime ? localISODateTime() : "",
         os: sysInfo.osRelease || "",
         kernel: sysInfo.kernel || "",
@@ -188,6 +211,9 @@ function buildSystemPrompt(sysInfo, template, options) {
     // without the index the model can never discover the skill tool's purpose.
     if (skillsText && tplLower.indexOf("{{skills}}") === -1 && tplLower.indexOf("<available_skills>") === -1) {
         out += "\n\n" + skillsText;
+    }
+    if (ttsText && tplLower.indexOf("{{text_to_speech}}") === -1 && tplLower.indexOf("text-to-speech") === -1) {
+        out += "\n\n" + ttsText;
     }
 
     out = out.replace(/\n{3,}/g, "\n\n").trim();
@@ -289,6 +315,8 @@ function searchKeySlot(searchProvider) { return WalletCore.searchKeySlot(searchP
 function searchLegacyKeySlots(searchProvider) { return WalletCore.searchLegacyKeySlots(searchProvider); }
 function sttKeySlot(providerName, endpoint) { return WalletCore.sttKeySlot(providerName, endpoint); }
 function sttLegacyKeySlots(providerName, endpoint) { return WalletCore.sttLegacyKeySlots(providerName, endpoint); }
+function ttsKeySlot(providerName, endpoint) { return WalletCore.ttsKeySlot(providerName, endpoint); }
+function ttsLegacyKeySlots(providerName, endpoint) { return WalletCore.ttsLegacyKeySlots(providerName, endpoint); }
 function currentKeySlot(activeProfileId, apiType, providerName, endpoint, geminiAuthMethod) {
     return WalletCore.currentKeySlot(activeProfileId, apiType, providerName, endpoint, geminiAuthMethod);
 }
