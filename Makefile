@@ -20,7 +20,7 @@ FLATPAK_BUILDER ?= flatpak-builder
 
 .PHONY: all package package-no-i18n do-package translations install install-dev remove clean check-translations test \
 	standalone standalone-no-i18n do-standalone install-standalone remove-standalone run-standalone \
-	flatpak install-flatpak
+	flatpak install-flatpak release release-no-i18n
 
 all: package
 
@@ -176,6 +176,19 @@ flatpak:
 install-flatpak:
 	@VERSION=$$($(GET_VERSION)); \
 	flatpak install --user -y "PlasmaLLM-$${VERSION}.flatpak"
+
+# All release artifacts: the .plasmoid, the standalone tarball and the Flatpak
+# bundle. Runs in sequence so the version entered for the .plasmoid is the one
+# the other two pick up from metadata.json.
+release: translations
+	@$(MAKE) --no-print-directory do-package
+	@$(MAKE) --no-print-directory do-standalone
+	@$(MAKE) --no-print-directory flatpak
+
+release-no-i18n:
+	@$(MAKE) --no-print-directory do-package
+	@$(MAKE) --no-print-directory do-standalone
+	@$(MAKE) --no-print-directory flatpak
 
 # Install
 install:
