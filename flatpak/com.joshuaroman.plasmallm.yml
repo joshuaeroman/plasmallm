@@ -1,0 +1,110 @@
+# Flatpak build of the standalone PlasmaLLM app (see standalone/).
+# Build with `make flatpak`.
+app-id: com.joshuaroman.plasmallm
+runtime: org.kde.Platform
+runtime-version: '6.11'
+sdk: org.kde.Sdk
+base: io.qt.PySide.BaseApp
+base-version: '6.11'
+command: plasmallm
+
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --socket=pulseaudio
+  # Qt Multimedia records the microphone through PipeWire.
+  - --filesystem=xdg-run/pipewire-0
+  - --device=dri
+  # PlasmaLLM is a system assistant: its commands (the run-command tool,
+  # system info, tmux/screen, TTS/STT CLIs, saving chats) run on the host.
+  - --talk-name=org.freedesktop.Flatpak
+  # Files are shared with those host commands (and with the panel widget),
+  # e.g. ~/.local/share/plasmallm and temporary files in /tmp.
+  - --filesystem=home
+  - --filesystem=/tmp
+  # API keys in KDE Wallet; LaTeX renderer and Desktop Driver services.
+  - --talk-name=org.kde.kwalletd6
+  - --talk-name=com.joshuaroman.plasmallm.*
+
+build-options:
+  env:
+    BASEAPP_REMOVE_WEBENGINE: '1'
+    BASEAPP_DISABLE_NUMPY: '1'
+
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
+
+cleanup:
+  - /include
+  - /lib/cmake
+  - /share/cmake
+  - /lib/pkgconfig
+  - /lib/libclang*
+  - /mkspecs
+  - /share/plasma-wayland-protocols
+  - '*.a'
+
+modules:
+  # Build-time dependency of libplasma.
+  - name: plasma-wayland-protocols
+    buildsystem: cmake-ninja
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/plasma-wayland-protocols/plasma-wayland-protocols-1.23.0.tar.xz
+        sha256: 16c5ad917bde2ed795942dacba76654819ddc6a1566842325ef34e0b553ef138
+
+  - name: plasma-activities
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/plasma/6.7.5/plasma-activities-6.7.5.tar.xz
+        sha256: d93f31b6f33733ad3803098f4f622e55e3ef52cb5cd97e621a7b803e6f0e3f7c
+
+  # org.kde.plasma.core / components / extras, which the plasmoid's QML uses.
+  - name: libplasma
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/plasma/6.7.5/libplasma-6.7.5.tar.xz
+        sha256: 27b28823254aa489c094c40a314ce1575fd7906eeb521e636bb8fd2dc2981f2f
+
+  # Only the org.kde.plasma.workspace.dbus QML module from plasma-workspace.
+  - name: plasma-workspace-dbus
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/plasma/6.7.5/plasma-workspace-6.7.5.tar.xz
+        sha256: 94ab21e2243b7876f65c315f1e545081c6437f5bd0a041ca4fb6c2533ae874c9
+      - type: file
+        path: plasma-workspace-dbus/CMakeLists.txt
+        dest-filename: CMakeLists-dbus.txt
+      - type: shell
+        commands:
+          - mv CMakeLists-dbus.txt CMakeLists.txt
+
+  - name: plasmallm
+    buildsystem: simple
+    build-commands:
+      - make standalone-no-i18n
+      - make install-standalone PREFIX=${FLATPAK_DEST}
+      # Exported apps need an icon named after the app ID; reuse the widget's
+      # Breeze "dialog-messages" icon from the SDK.
+      - install -Dm644 /usr/share/icons/breeze/actions/32/dialog-messages.svg
+        ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - desktop-file-edit --set-icon=${FLATPAK_ID} ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+    sources:
+      - type: dir
+        path: ..
+        skip:
+          - .git
+          - .flatpak-builder
+          - build
+          - reference

@@ -114,6 +114,16 @@ make install-standalone    # install to ~/.local (override with PREFIX=...); add
 plasmallm                  # or launch "PlasmaLLM" from the app menu
 ```
 
+#### Flatpak
+The standalone app can also be built as a Flatpak bundle. This needs `flatpak-builder` and the Flathub remote; the KDE 6.11 SDK and PySide base app are installed per-user on first build.
+
+```bash
+make flatpak               # creates PlasmaLLM-<version>.flatpak
+make install-flatpak       # or: flatpak install --user PlasmaLLM-<version>.flatpak
+```
+
+The Flatpak is not meaningfully sandboxed. PlasmaLLM's commands (the run-command tool, system info, TTS/STT tools, saving chats) run on the host through `flatpak-spawn --host`, and the app has access to your home directory and `/tmp` so it shares files with those commands and with the widget.
+
 `make standalone-no-i18n` skips the translation refresh, and `make run-standalone` builds and runs it from the build directory. On first launch, settings are imported from an existing PlasmaLLM widget (or later with `plasmallm --import-plasma-config`). After that, the app keeps its own settings in `~/.config/plasmallmrc`. Chat history and KDE Wallet keys are shared with the widget.
 
 ---

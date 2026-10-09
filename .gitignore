@@ -11,3 +11,4 @@ __pycache__/
 AGENTS.md
 build/
 PlasmaLLM-standalone-*.tar.gz
+PlasmaLLM-*.flatpak
