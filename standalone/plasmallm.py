@@ -13,6 +13,8 @@
 #     org.kde.plasma.core installs; catalogs come from <prefix>/share/locale
 #   - org.kde.plasma.plasmoid / org.kde.plasma.configuration: QML shim modules
 #     in share/plasmallm/qml that take precedence over the system ones
+#   - org.kde.plasma.plasma5support: a shim whose "executable" DataSource runs
+#     commands through CommandRunner, on the host when running as a Flatpak
 # Everything else (Kirigami, Plasma components, Plasma5Support, workspace DBus)
 # is the real KDE runtime, so KDE Plasma 6 libraries must be installed.
 #
@@ -30,7 +32,7 @@ import tempfile
 import warnings
 import xml.etree.ElementTree as ET
 
-from PySide6.QtCore import QCoreApplication, QObject, Property, QTimer, QUrl, Slot
+from PySide6.QtCore import QCoreApplication, QObject, QProcess, Property, QTimer, QUrl, Signal, Slot
 from PySide6.QtGui import QColor, QIcon
 from PySide6.QtQml import QQmlApplicationEngine, QQmlComponent, QQmlEngine, QQmlPropertyMap
 from PySide6.QtQuickControls2 import QQuickStyle
@@ -315,16 +317,126 @@ class Configuration:
 
 
 # --------------------------------------------------------------------------
+# Flatpak
+# --------------------------------------------------------------------------
+
+FLATPAK_INFO = "/.flatpak-info"
+
+
+def in_flatpak():
+    return os.path.exists(FLATPAK_INFO)
+
+
+def flatpak_app_path():
+    """Host path of the sandbox's /app, from the [Instance] app-path key."""
+    return read_kconfig(FLATPAK_INFO).get("Instance", {}).get("app-path", "")
+
+
+def use_host_xdg_dirs():
+    """Point XDG data/config/state dirs at the host's instead of ~/.var/app.
+
+    Commands run on the host and compute paths like
+    ${XDG_DATA_HOME:-$HOME/.local/share}/plasmallm; QML reads and writes the
+    same files directly, so both sides must agree on where they are.
+    """
+    home = os.path.expanduser("~")
+    for var, default in (("XDG_DATA_HOME", ".local/share"),
+                         ("XDG_CONFIG_HOME", ".config"),
+                         ("XDG_STATE_HOME", ".local/state")):
+        os.environ[var] = os.environ.get("HOST_" + var) or os.path.join(home, default)
+
+
+# --------------------------------------------------------------------------
+# Commands for the Plasma5Support "executable" engine shim
+# --------------------------------------------------------------------------
+
+class CommandRunner(QObject):
+    """Runs `sh -c <command>` like Plasma5Support's executable engine.
+
+    Each DataSource is an owner; a (owner, command) pair runs at most once at a
+    time, and stop() kills it, as disconnecting a source does in Plasma.
+    Inside a Flatpak, commands run on the host via flatpak-spawn, and paths
+    under the bundled data dir are translated between sandbox and host.
+    """
+
+    finished = Signal(str, str, "QVariantMap")  # owner, command, data
+
+    def __init__(self, path_map=None):
+        super().__init__()
+        self._procs = {}
+        self._next_owner = 0
+        self._path_map = path_map  # (sandbox_prefix, host_prefix) or None
+
+    @Slot(result=str)
+    def newOwner(self):
+        self._next_owner += 1
+        return str(self._next_owner)
+
+    def _to_host(self, text):
+        return text.replace(self._path_map[0], self._path_map[1]) if self._path_map else text
+
+    def _from_host(self, text):
+        return text.replace(self._path_map[1], self._path_map[0]) if self._path_map else text
+
+    @Slot(str, str)
+    def start(self, owner, command):
+        key = (owner, command)
+        if key in self._procs:
+            return
+        proc = QProcess(self)
+        if in_flatpak():
+            program, args = "flatpak-spawn", ["--host", "--watch-bus", "/bin/sh", "-c", self._to_host(command)]
+        else:
+            program, args = "/bin/sh", ["-c", command]
+        proc.finished.connect(lambda code, status: self._finished(key, proc, code, status))
+        proc.errorOccurred.connect(lambda error: self._failed(key, proc, error))
+        self._procs[key] = proc
+        proc.start(program, args)
+
+    def _finished(self, key, proc, code, status):
+        if self._procs.get(key) is not proc:
+            return
+        del self._procs[key]
+        data = {
+            "exit code": code,
+            "exit status": 0 if status == QProcess.ExitStatus.NormalExit else 1,
+            "stdout": self._from_host(bytes(proc.readAllStandardOutput()).decode("utf-8", "replace")),
+            "stderr": self._from_host(bytes(proc.readAllStandardError()).decode("utf-8", "replace")),
+        }
+        proc.deleteLater()
+        self.finished.emit(key[0], key[1], data)
+
+    def _failed(self, key, proc, error):
+        if error == QProcess.ProcessError.FailedToStart:
+            self._finished(key, proc, 127, QProcess.ExitStatus.CrashExit)
+
+    @Slot(str, str)
+    def stop(self, owner, command):
+        proc = self._procs.pop((owner, command), None)
+        if proc is None:
+            return
+        # SIGTERM first: flatpak-spawn forwards it to the host process.
+        proc.finished.connect(proc.deleteLater)
+        proc.terminate()
+        QTimer.singleShot(2000, proc, proc.kill)
+
+
+# --------------------------------------------------------------------------
 # Host object, exposed to QML as the StandaloneHost context property
 # --------------------------------------------------------------------------
 
 class Host(QObject):
-    def __init__(self, config, package_dir, version, show_config_on_start):
+    def __init__(self, config, package_dir, version, show_config_on_start, runner):
         super().__init__()
+        self._runner = runner
         self._config = config
         self._package_dir = package_dir
         self._version = version
         self._show_config_on_start = show_config_on_start
+
+    @Property(QObject, constant=True)
+    def commandRunner(self):
+        return self._runner
 
     @Property(QObject, constant=True)
     def configuration(self):
@@ -392,6 +504,12 @@ def main():
     opts, qt_args = parser.parse_known_args()
 
     data_dir = find_data_dir()
+    path_map = None
+    if in_flatpak():
+        use_host_xdg_dirs()
+        app_path = flatpak_app_path()
+        if app_path:
+            path_map = (data_dir, app_path + data_dir[len("/app"):]) if data_dir.startswith("/app/") else None
     package_dir = os.path.join(data_dir, "package")
     qml_dir = os.path.join(data_dir, "qml")
 
@@ -429,7 +547,8 @@ def main():
 
     engine = QQmlApplicationEngine()
     engine.addImportPath(qml_dir)  # shims shadow org.kde.plasma.plasmoid/configuration
-    host = Host(config, package_dir, version, opts.configure)
+    runner = CommandRunner(path_map)
+    host = Host(config, package_dir, version, opts.configure, runner)
     # A context property rather than qmlRegisterSingletonInstance: registering
     # a PySide type breaks resolution of some KDE QML types (e.g. qqc2-desktop-style's ScrollBar).
     QQmlEngine.setObjectOwnership(host, QQmlEngine.CppOwnership)

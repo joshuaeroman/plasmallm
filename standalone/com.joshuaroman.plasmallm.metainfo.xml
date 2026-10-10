@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-FileCopyrightText: 2026 Joshua Roman -->
+<component type="desktop-application">
+  <id>com.joshuaroman.plasmallm</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0-or-later</project_license>
+  <name>PlasmaLLM</name>
+  <summary>System-aware AI assistant for KDE Plasma</summary>
+  <description>
+    <p>
+      PlasmaLLM is a chat interface to LLM endpoints (Ollama, LM Studio, OpenAI,
+      Anthropic Claude, Google Gemini and any OpenAI-compatible API) that can gather
+      system information, search the web and run shell commands with your approval.
+    </p>
+    <p>
+      This is the standalone window version of the PlasmaLLM Plasma widget.
+    </p>
+  </description>
+  <launchable type="desktop-id">com.joshuaroman.plasmallm.desktop</launchable>
+  <developer id="com.joshuaroman">
+    <name>Joshua Roman</name>
+  </developer>
+  <url type="homepage">https://github.com/joshuaeroman/plasmallm</url>
+  <url type="bugtracker">https://github.com/joshuaeroman/plasmallm/issues</url>
+  <content_rating type="oars-1.1"/>
+</component>

@@ -14,9 +14,13 @@ SRC_FILES := $(shell find $(PACKAGE_DIR)/contents/ui $(PACKAGE_DIR)/contents/con
 STANDALONE_DIR := build/standalone
 STANDALONE_DATA := $(STANDALONE_DIR)/share/plasmallm
 PREFIX ?= $(HOME)/.local
+FLATPAK_DIR := build/flatpak
+FLATPAK_MANIFEST := flatpak/$(WIDGET_ID).yml
+FLATPAK_BUILDER ?= flatpak-builder
 
 .PHONY: all package package-no-i18n do-package translations install install-dev remove clean check-translations test \
-	standalone standalone-no-i18n do-standalone install-standalone remove-standalone run-standalone
+	standalone standalone-no-i18n do-standalone install-standalone remove-standalone run-standalone \
+	flatpak install-flatpak release release-no-i18n
 
 all: package
 
@@ -118,7 +122,7 @@ do-standalone:
 	@VERSION=$$($(GET_VERSION)); \
 	echo "Building standalone PlasmaLLM $$VERSION in $(STANDALONE_DIR)..."; \
 	rm -rf $(STANDALONE_DIR); \
-	mkdir -p $(STANDALONE_DIR)/bin $(STANDALONE_DATA) $(STANDALONE_DIR)/share/applications; \
+	mkdir -p $(STANDALONE_DIR)/bin $(STANDALONE_DATA) $(STANDALONE_DIR)/share/applications $(STANDALONE_DIR)/share/metainfo; \
 	install -m 755 standalone/plasmallm.py $(STANDALONE_DIR)/bin/plasmallm; \
 	cp -r standalone/qml $(STANDALONE_DATA)/qml; \
 	cp -r $(PACKAGE_DIR) $(STANDALONE_DATA)/package; \
@@ -130,6 +134,7 @@ do-standalone:
 		cp $$mo $(STANDALONE_DIR)/share/locale/$$lang/LC_MESSAGES/; \
 	done; \
 	install -m 644 standalone/$(WIDGET_ID).desktop $(STANDALONE_DIR)/share/applications/; \
+	install -m 644 standalone/$(WIDGET_ID).metainfo.xml $(STANDALONE_DIR)/share/metainfo/; \
 	find $(STANDALONE_DIR) -name __pycache__ -prune -exec rm -rf {} +; \
 	/usr/bin/python3 -s -m py_compile standalone/plasmallm.py; \
 	OUTPUT="PlasmaLLM-standalone-$${VERSION}.tar.gz"; \
@@ -150,10 +155,40 @@ remove-standalone:
 	@echo "Removing standalone PlasmaLLM from $(PREFIX)..."
 	@rm -rf $(PREFIX)/share/plasmallm
 	@rm -f $(PREFIX)/bin/plasmallm $(PREFIX)/share/applications/$(WIDGET_ID).desktop
+	@rm -f $(PREFIX)/share/metainfo/$(WIDGET_ID).metainfo.xml
 	@rm -f $(PREFIX)/share/locale/*/LC_MESSAGES/$(DOMAIN).mo
 
 run-standalone: standalone-no-i18n
 	$(STANDALONE_DIR)/bin/plasmallm
+
+# Flatpak of the standalone app, as a single-file PlasmaLLM-<version>.flatpak
+# bundle. Needs flatpak-builder and the flathub remote (dependencies such as
+# org.kde.Sdk//6.11 and io.qt.PySide.BaseApp//6.11 are installed per-user).
+flatpak:
+	@VERSION=$$($(GET_VERSION)); \
+	$(FLATPAK_BUILDER) --user --install-deps-from=flathub --force-clean --ccache \
+		--state-dir=$(FLATPAK_DIR)/state --repo=$(FLATPAK_DIR)/repo \
+		$(FLATPAK_DIR)/app $(FLATPAK_MANIFEST) && \
+	flatpak build-bundle --runtime-repo=https://dl.flathub.org/repo/flathub.flatpakrepo \
+		$(FLATPAK_DIR)/repo "PlasmaLLM-$${VERSION}.flatpak" $(WIDGET_ID) && \
+	echo "Created PlasmaLLM-$${VERSION}.flatpak (install with: make install-flatpak)"
+
+install-flatpak:
+	@VERSION=$$($(GET_VERSION)); \
+	flatpak install --user -y "PlasmaLLM-$${VERSION}.flatpak"
+
+# All release artifacts: the .plasmoid, the standalone tarball and the Flatpak
+# bundle. Runs in sequence so the version entered for the .plasmoid is the one
+# the other two pick up from metadata.json.
+release: translations
+	@$(MAKE) --no-print-directory do-package
+	@$(MAKE) --no-print-directory do-standalone
+	@$(MAKE) --no-print-directory flatpak
+
+release-no-i18n:
+	@$(MAKE) --no-print-directory do-package
+	@$(MAKE) --no-print-directory do-standalone
+	@$(MAKE) --no-print-directory flatpak
 
 # Install
 install:
@@ -177,6 +212,6 @@ remove:
 
 clean:
 	@echo "Cleaning up..."
-	@rm -f PlasmaLLM-*.plasmoid PlasmaLLM-standalone-*.tar.gz
-	@rm -rf $(STANDALONE_DIR)
+	@rm -f PlasmaLLM-*.plasmoid PlasmaLLM-standalone-*.tar.gz PlasmaLLM-*.flatpak
+	@rm -rf $(STANDALONE_DIR) $(FLATPAK_DIR)
 	@rm -rf $(LOCALE_DIR)/*/LC_MESSAGES/$(DOMAIN).mo
