@@ -105,6 +105,17 @@ For development (symlinks the package directory):
 make install-dev
 ```
 
+### Standalone App
+PlasmaLLM can also run as a normal application window instead of a panel widget. It still uses the KDE Plasma 6 libraries, and additionally needs the distro's PySide6 package (`python3-pyside6` on Fedora).
+
+```bash
+make standalone            # build into build/standalone and create PlasmaLLM-standalone-<version>.tar.gz
+make install-standalone    # install to ~/.local (override with PREFIX=...); adds an app menu entry
+plasmallm                  # or launch "PlasmaLLM" from the app menu
+```
+
+`make standalone-no-i18n` skips the translation refresh, and `make run-standalone` builds and runs it from the build directory. On first launch, settings are imported from an existing PlasmaLLM widget (or later with `plasmallm --import-plasma-config`). After that, the app keeps its own settings in `~/.config/plasmallmrc`. Chat history and KDE Wallet keys are shared with the widget.
+
 ---
 
 ## Configuration
