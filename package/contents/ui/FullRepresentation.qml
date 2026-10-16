@@ -316,6 +316,7 @@ PlasmaExtras.Representation {
         && Utils.historyLayoutFor(Plasmoid.configuration.chatHistoryLayout || "auto",
                                   width, minHistorySidebarWidth, minChatWidth) === "sidebar"
     readonly property bool historySidebarShown: historySidebarActive && !historySidebarCollapsed
+    readonly property bool showChatSummaries: (Plasmoid.configuration.chatSummaryMode || "off") !== "off"
     // Grows with the view but never takes the chat below its minimum.
     readonly property real historySidebarWidth: Math.max(minHistorySidebarWidth,
         Math.min(Kirigami.Units.gridUnit * 18, width * 0.28, width - minChatWidth))
@@ -564,7 +565,8 @@ PlasmaExtras.Representation {
                     onObjectAdded: function(index, object) { historyMenu.insertItem(index + 2, object); }
                     onObjectRemoved: function(index, object) { historyMenu.removeItem(object); }
                     delegate: QQC2.MenuItem {
-                        text: (model.dateTime || model.name || "") + (model.preview ? ": " + model.preview : "")
+                        readonly property string label: (fullRep.showChatSummaries && model.title) || model.preview || ""
+                        text: (model.dateTime || model.name || "") + (label ? ": " + label : "")
                         onTriggered: {
                             root.loadChatJsonl(model.file);
                         }
@@ -996,6 +998,7 @@ PlasmaExtras.Representation {
             width: fullRep.historySidebarWidth
             visible: fullRep.historySidebarShown
             showNewChat: Plasmoid.configuration.showIconClear
+            showSummaries: fullRep.showChatSummaries
 
             onNewChatRequested: {
                 root.clearChat();

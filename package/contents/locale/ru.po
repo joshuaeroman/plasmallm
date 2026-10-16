@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 18:51-0400\n"
+"POT-Creation-Date: 2026-10-16 19:33-0400\n"
 "PO-Revision-Date: 2026-05-04 00:00+0300\n"
 "Last-Translator: Matvel007\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1320,248 +1320,6 @@ msgstr "Проверить соединение для сжатия"
 msgid "Model Summary Response:"
 msgstr "Ответ модели со сводкой:"
 
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Не удалось получить токен gcloud (выход %1): %2"
-
-msgid "New Profile"
-msgstr "Новый профиль"
-
-msgid "%1 (Copy)"
-msgstr "%1 (Копия)"
-
-msgid "Profile:"
-msgstr "Профиль:"
-
-msgid "Rename Profile"
-msgstr "Переименовать профиль"
-
-msgid "Duplicate Profile"
-msgstr "Дублировать профиль"
-
-msgid "Delete Profile"
-msgstr "Удалить профиль"
-
-msgid "Profile Name"
-msgstr "Название профиля"
-
-msgid "Rename"
-msgstr "Переименовать"
-
-msgid "Adapter:"
-msgstr "Адаптер:"
-
-msgid "Exa does not support tool use"
-msgstr "Exa не поддерживает использование инструментов"
-
-msgid ""
-"Decisions profiles evaluate each message once and reply with a verdict and "
-"confidence. They have no conversation memory, system prompt, or tools. They "
-"can also be selected as the Command Validator in Tools settings."
-msgstr ""
-"Профили Decisions оценивают каждое сообщение один раз и отвечают вердиктом и "
-"уверенностью. У них нет памяти диалога, системного промпта и инструментов. "
-"Их также можно выбрать в качестве валидатора команд в настройках "
-"инструментов."
-
-msgid "Platform:"
-msgstr "Платформа:"
-
-msgid "Google AI Studio"
-msgstr "Google AI Studio"
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr "Google Cloud Agent Platform (Vertex AI)"
-
-msgid "Authentication:"
-msgstr "Аутентификация:"
-
-msgid "API Key (Express Mode)"
-msgstr "Ключ API (Экспресс-режим)"
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr "Google Cloud CLI (gcloud)"
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLI не найден. Пожалуйста, установите его для использования этого "
-"метода аутентификации."
-
-msgid "API Variant:"
-msgstr "Вариант API:"
-
-msgid "Legacy (generateContent)"
-msgstr "Устаревший (generateContent)"
-
-msgid "Interactions API (Stateful)"
-msgstr "API Interactions (с состоянием)"
-
-msgid "Project ID:"
-msgstr "ID проекта:"
-
-msgid "Location:"
-msgstr "Расположение:"
-
-msgid "Provider:"
-msgstr "Провайдер:"
-
-msgid "API Key:"
-msgstr "API-ключ:"
-
-msgid "Paste short-lived access token"
-msgstr "Вставить временный токен доступа"
-
-msgid "Paste OpenCode API key"
-msgstr "Вставить API-ключ OpenCode"
-
-msgid "Optional - for OpenAI, etc."
-msgstr "Опционально — для OpenAI и др."
-
-msgid "Stored in KDE Wallet"
-msgstr "Хранится в KDE Wallet"
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Wallet недоступен — ключ сохранён в файле конфигурации"
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "Температура: %1%"
-
-msgid "Precise"
-msgstr "Точный"
-
-msgid "Creative"
-msgstr "Креативный"
-
-msgid "Max Tokens:"
-msgstr "Макс. токенов:"
-
-msgid "Thinking:"
-msgstr "Размышление:"
-
-msgid "Off"
-msgstr "Выкл"
-
-msgid "Low"
-msgstr "Низкий"
-
-msgid "Medium"
-msgstr "Средний"
-
-msgid "High"
-msgstr "Высокий"
-
-msgid "Thinking budget:"
-msgstr "Бюджет размышления:"
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr "Показывать размышления в чате (сворачиваемые)"
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-"При включении рассуждения модели показываются над каждым ответом в "
-"сворачиваемом заголовке. Отправка подписанных размышлений в API всё равно "
-"происходит независимо от этой настройки."
-
-msgid "Use Responses API"
-msgstr "Использовать Responses API"
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-"Необходимо для отображения рассуждений на OpenAI / Poe / OpenRouter / Azure "
-"(отправляет POST на /v1/responses вместо /v1/chat/completions). "
-"Устанавливается автоматически при выборе пресета."
-
-msgid "Enable OpenRouter attribution"
-msgstr "Включить атрибуцию OpenRouter"
-
-msgid ""
-"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
-"requests include only the app name and URL. Uncheck to stop sending these "
-"headers."
-msgstr ""
-"Использование OpenRouter засчитывается PlasmaLLM в публичных рейтингах "
-"приложений; запросы содержат только название приложения и URL. Снимите "
-"флажок, чтобы перестать отправлять эти заголовки."
-
-msgid ""
-"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
-"their API. Nothing about your conversations is shared."
-msgstr ""
-"Атрибуция OpenRouter позволяет OpenRouter видеть, что вы использовали "
-"PlasmaLLM для доступа к их API. Содержимое ваших разговоров не передаётся."
-
-msgid "Attachments:"
-msgstr "Вложения:"
-
-msgid "Resize image attachments"
-msgstr "Изменять размер изображений во вложениях"
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-"Изменяет размер больших изображений во вложениях до 800x600 перед отправкой, "
-"уменьшая размер загрузки и количество токенов контекста."
-
-msgid "Chat History:"
-msgstr "История чата:"
-
-msgid "Auto-save chat history"
-msgstr "Автосохранение истории чата"
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr "Сохраняет в ~/.local/share/plasmallm/chats/"
-
-msgid "Notifications:"
-msgstr "Уведомления:"
-
-msgid "Show notifications when minimized"
-msgstr "Показывать уведомления при сворачивании"
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-"Показывать системные уведомления о входящих сообщениях и вызовах "
-"инструментов, когда окно чата свернуто или закрыто."
-
-msgid "Save format:"
-msgstr "Формат сохранения:"
-
-msgid "Plain text (.txt)"
-msgstr "Обычный текст (.txt)"
-
-msgid "Structured (.jsonl)"
-msgstr "Структурированный (.jsonl)"
-
-msgid "Open the folder where chat histories are saved"
-msgstr "Открыть папку, в которой сохраняется история чатов"
-
-msgid "Auto-clear:"
-msgstr "Автоочистка:"
-
-msgid "Disabled"
-msgstr "Отключено"
-
-msgid "Instant (always clear when panel opens)"
-msgstr "Мгновенно (всегда очищать при открытии панели)"
-
-msgid "After"
-msgstr "Через"
-
-msgid "seconds"
-msgstr "секунд"
-
-msgid "minutes"
-msgstr "минут"
-
 msgid "Speech to Text"
 msgstr "Распознавание речи"
 
@@ -1665,6 +1423,9 @@ msgstr "Транскрибатор"
 msgid "STT backend:"
 msgstr "Бэкенд STT:"
 
+msgid "Provider:"
+msgstr "Провайдер:"
+
 msgid "Endpoint:"
 msgstr "Эндпоинт:"
 
@@ -1711,6 +1472,25 @@ msgstr "Использовать --fp16 True (GPU)"
 
 msgid "OpenRouter:"
 msgstr "OpenRouter:"
+
+msgid "Enable OpenRouter attribution"
+msgstr "Включить атрибуцию OpenRouter"
+
+msgid ""
+"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
+"requests include only the app name and URL. Uncheck to stop sending these "
+"headers."
+msgstr ""
+"Использование OpenRouter засчитывается PlasmaLLM в публичных рейтингах "
+"приложений; запросы содержат только название приложения и URL. Снимите "
+"флажок, чтобы перестать отправлять эти заголовки."
+
+msgid ""
+"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
+"their API. Nothing about your conversations is shared."
+msgstr ""
+"Атрибуция OpenRouter позволяет OpenRouter видеть, что вы использовали "
+"PlasmaLLM для доступа к их API. Содержимое ваших разговоров не передаётся."
 
 msgid "Threads:"
 msgstr "Потоки:"
@@ -1767,6 +1547,9 @@ msgstr "Включить инструменты"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "Главный переключатель для всех функций вызова инструментов."
+
+msgid "Exa does not support tool use"
+msgstr "Exa не поддерживает использование инструментов"
 
 msgid "Desktop Automation:"
 msgstr "Автоматизация рабочего стола:"
@@ -1881,6 +1664,18 @@ msgstr "Бэкенд STT не поддерживает получение спи
 
 msgid "New chat"
 msgstr "Новый чат"
+
+msgid "Today"
+msgstr "Сегодня"
+
+msgid "Yesterday"
+msgstr "Вчера"
+
+msgid "Previous 7 days"
+msgstr "Последние 7 дней"
+
+msgid "Older"
+msgstr "Ранее"
 
 msgid "No recent chats"
 msgstr "Нет недавних чатов"
@@ -2479,6 +2274,254 @@ msgstr "Сеанс управления активен (уже авторизо�
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Сеанс управления успешно авторизован. Включен авторежим."
+
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr "Не удалось получить токен gcloud (выход %1): %2"
+
+msgid "New Profile"
+msgstr "Новый профиль"
+
+msgid "%1 (Copy)"
+msgstr "%1 (Копия)"
+
+msgid "Profile:"
+msgstr "Профиль:"
+
+msgid "Rename Profile"
+msgstr "Переименовать профиль"
+
+msgid "Duplicate Profile"
+msgstr "Дублировать профиль"
+
+msgid "Delete Profile"
+msgstr "Удалить профиль"
+
+msgid "Profile Name"
+msgstr "Название профиля"
+
+msgid "Rename"
+msgstr "Переименовать"
+
+msgid "Adapter:"
+msgstr "Адаптер:"
+
+msgid ""
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
+msgstr ""
+"Профили Decisions оценивают каждое сообщение один раз и отвечают вердиктом и "
+"уверенностью. У них нет памяти диалога, системного промпта и инструментов. "
+"Их также можно выбрать в качестве валидатора команд в настройках "
+"инструментов."
+
+msgid "Platform:"
+msgstr "Платформа:"
+
+msgid "Google AI Studio"
+msgstr "Google AI Studio"
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr "Google Cloud Agent Platform (Vertex AI)"
+
+msgid "Authentication:"
+msgstr "Аутентификация:"
+
+msgid "API Key (Express Mode)"
+msgstr "Ключ API (Экспресс-режим)"
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr "Google Cloud CLI (gcloud)"
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLI не найден. Пожалуйста, установите его для использования этого "
+"метода аутентификации."
+
+msgid "API Variant:"
+msgstr "Вариант API:"
+
+msgid "Legacy (generateContent)"
+msgstr "Устаревший (generateContent)"
+
+msgid "Interactions API (Stateful)"
+msgstr "API Interactions (с состоянием)"
+
+msgid "Project ID:"
+msgstr "ID проекта:"
+
+msgid "Location:"
+msgstr "Расположение:"
+
+msgid "API Key:"
+msgstr "API-ключ:"
+
+msgid "Paste short-lived access token"
+msgstr "Вставить временный токен доступа"
+
+msgid "Paste OpenCode API key"
+msgstr "Вставить API-ключ OpenCode"
+
+msgid "Optional - for OpenAI, etc."
+msgstr "Опционально — для OpenAI и др."
+
+msgid "Stored in KDE Wallet"
+msgstr "Хранится в KDE Wallet"
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr "KDE Wallet недоступен — ключ сохранён в файле конфигурации"
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "Температура: %1%"
+
+msgid "Precise"
+msgstr "Точный"
+
+msgid "Creative"
+msgstr "Креативный"
+
+msgid "Max Tokens:"
+msgstr "Макс. токенов:"
+
+msgid "Thinking:"
+msgstr "Размышление:"
+
+msgid "Off"
+msgstr "Выкл"
+
+msgid "Low"
+msgstr "Низкий"
+
+msgid "Medium"
+msgstr "Средний"
+
+msgid "High"
+msgstr "Высокий"
+
+msgid "Thinking budget:"
+msgstr "Бюджет размышления:"
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr "Показывать размышления в чате (сворачиваемые)"
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"При включении рассуждения модели показываются над каждым ответом в "
+"сворачиваемом заголовке. Отправка подписанных размышлений в API всё равно "
+"происходит независимо от этой настройки."
+
+msgid "Use Responses API"
+msgstr "Использовать Responses API"
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"Необходимо для отображения рассуждений на OpenAI / Poe / OpenRouter / Azure "
+"(отправляет POST на /v1/responses вместо /v1/chat/completions). "
+"Устанавливается автоматически при выборе пресета."
+
+msgid "Attachments:"
+msgstr "Вложения:"
+
+msgid "Resize image attachments"
+msgstr "Изменять размер изображений во вложениях"
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+"Изменяет размер больших изображений во вложениях до 800x600 перед отправкой, "
+"уменьшая размер загрузки и количество токенов контекста."
+
+msgid "Chat History:"
+msgstr "История чата:"
+
+msgid "Auto-save chat history"
+msgstr "Автосохранение истории чата"
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr "Сохраняет в ~/.local/share/plasmallm/chats/"
+
+msgid "Notifications:"
+msgstr "Уведомления:"
+
+msgid "Show notifications when minimized"
+msgstr "Показывать уведомления при сворачивании"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+"Показывать системные уведомления о входящих сообщениях и вызовах "
+"инструментов, когда окно чата свернуто или закрыто."
+
+msgid "Save format:"
+msgstr "Формат сохранения:"
+
+msgid "Plain text (.txt)"
+msgstr "Обычный текст (.txt)"
+
+msgid "Structured (.jsonl)"
+msgstr "Структурированный (.jsonl)"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "Открыть папку, в которой сохраняется история чатов"
+
+msgid "Summarize chats:"
+msgstr "Резюмировать чаты:"
+
+msgid "First message only"
+msgstr "Только первое сообщение"
+
+msgid "Re-summarize as the chat grows"
+msgstr "Обновлять резюме по мере роста чата"
+
+msgid "Re-summarize every:"
+msgstr "Обновлять резюме каждые:"
+
+msgid "user message (every message)"
+msgstr "сообщение пользователя (каждое сообщение)"
+
+msgid "user messages"
+msgstr "сообщений пользователя"
+
+msgid "Summary profile:"
+msgstr "Профиль для резюме:"
+
+msgid ""
+"Sends the first message and the start of recent ones to the chosen profile "
+"to title chats in history."
+msgstr ""
+"Отправляет первое сообщение и начало последних сообщений выбранному профилю, "
+"чтобы дать чатам названия в истории."
+
+msgid "Needs auto-saved history in the Structured (.jsonl) format."
+msgstr "Требуется автосохранение истории в структурированном формате (.jsonl)."
+
+msgid "Auto-clear:"
+msgstr "Автоочистка:"
+
+msgid "Disabled"
+msgstr "Отключено"
+
+msgid "Instant (always clear when panel opens)"
+msgstr "Мгновенно (всегда очищать при открытии панели)"
+
+msgid "After"
+msgstr "Через"
+
+msgid "seconds"
+msgstr "секунд"
+
+msgid "minutes"
+msgstr "минут"
 
 msgid "General"
 msgstr "Основные"

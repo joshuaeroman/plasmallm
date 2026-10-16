@@ -216,6 +216,13 @@ PlasmoidItem {
         id: historyFilesModel
     }
 
+    // Day groups and relative times in chat history depend on today's date,
+    // so relabel at each local midnight (the applet can run for days).
+    Timer {
+        id: historyMidnightTimer
+        onTriggered: refreshHistoryGroups()
+    }
+
     property int _turnCounter: 0
     property int _msgCounter: 0
 
@@ -271,6 +278,10 @@ PlasmoidItem {
         lastCompactedTimestamp: ""
     })
     property bool isCompacting: false
+    // Short model-written summary of the current chat, shown as its title in
+    // chat history and saved in the jsonl meta line.
+    property string chatTitle: ""
+    property bool isSummarizingChat: false
     property bool walletAvailable: false
     property int _walletRetryAttempt: 0
     property bool _walletLoadHydrate: false
@@ -888,6 +899,90 @@ PlasmoidItem {
         if (shouldTrigger) {
             forceCompaction(false);
         }
+    }
+
+    /**
+     * Background chat summary used as the chat's title in history. Runs on
+     * the configured summary profile (like compaction) and only when chats
+     * are saved as jsonl, since the title lives in the jsonl meta line.
+     */
+    function summarizeChatIfNeeded() {
+        if (isSummarizingChat || !Plasmoid.configuration.saveChatHistory
+                || Plasmoid.configuration.chatSaveFormat !== "jsonl")
+            return;
+
+        var userTexts = [];
+        for (var i = 0; i < displayMessages.count; i++) {
+            var d = displayMessages.get(i);
+            if (d.role === "user") userTexts.push(d.content || "");
+        }
+        if (!Utils.shouldSummarizeChat(Plasmoid.configuration.chatSummaryMode || "off",
+                userTexts.length, Plasmoid.configuration.chatSummaryInterval, root.chatTitle.length > 0))
+            return;
+        // Attachment-only messages leave nothing to summarize.
+        if (userTexts.join("").trim().length === 0)
+            return;
+
+        var prompt = Utils.buildChatSummaryPrompt(userTexts);
+        var sessionId = root.chatSessionId;
+        isSummarizingChat = true;
+
+        loadProfileConnection(Plasmoid.configuration.chatSummaryProfileId || "active", function(conn) {
+            var apiType = conn ? Api.resolvedApiType(conn.apiType, conn.geminiApiVariant,
+                                                     conn.geminiAuthMethod, conn.geminiVertexAuthType) : "";
+            // Decisions profiles cannot produce free text.
+            if (!conn || !conn.endpoint || !conn.model
+                    || Api.getCapabilities(apiType).chatMode === "decisions") {
+                isSummarizingChat = false;
+                return;
+            }
+
+            try {
+                Api.sendStreaming(apiType, {
+                    endpoint: conn.endpoint,
+                    apiKey: conn.apiKey,
+                    sessionId: sessionId,
+                    model: conn.model,
+                    messages: [
+                        { role: "system", content: Utils.CHAT_SUMMARY_INSTRUCTION },
+                        { role: "user", content: prompt }
+                    ],
+                    temperature: 0.2,
+                    maxTokens: 512,
+                    geminiApiVariant: Api.clampGeminiApiVariant(conn.geminiApiVariant,
+                                                                conn.geminiAuthMethod, conn.geminiVertexAuthType),
+                    geminiAuthMethod: conn.geminiAuthMethod,
+                    geminiProjectId: conn.geminiProjectId,
+                    geminiLocation: conn.geminiLocation,
+                    geminiVertexAuthType: conn.geminiVertexAuthType,
+                    usesResponsesAPI: conn.usesResponsesAPI,
+                    providerName: conn.providerName,
+                    attribution: Plasmoid.configuration.openrouterAttribution,
+                    onChunk: function(chunk) {},
+                    onThinkingChunk: function(chunk) {},
+                    onComplete: function(fullText, error) {
+                        isSummarizingChat = false;
+                        if (error) {
+                            console.warn("PlasmaLLM: Chat summary error:", error);
+                            return;
+                        }
+                        // The chat was cleared or another one loaded meanwhile.
+                        if (root.chatSessionId !== sessionId)
+                            return;
+                        var title = Utils.cleanChatSummary(fullText);
+                        if (!title)
+                            return;
+                        root.chatTitle = title;
+                        // Before the first save there is no file yet; that save includes the title.
+                        if (currentChatFile !== "")
+                            saveChat();
+                    }
+                });
+            } catch (e) {
+                isSummarizingChat = false;
+                console.warn("PlasmaLLM: Chat summary invocation error:", e.toString());
+            }
+        });
     }
 
     function setVoiceLatched(latched) {
@@ -1727,6 +1822,7 @@ PlasmoidItem {
                             var filePath = parts[0];
                             var mtime = parseInt(parts[1]) || 0;
                             var preview = Utils.cleanHistoryPreview(parts[2]);
+                            var title = Utils.cleanHistoryPreview(parts[3]);
                             
                             var name = filePath.split("/").pop();
                             var dtStr = name;
@@ -1739,10 +1835,14 @@ PlasmoidItem {
                                 name: name, 
                                 dateTime: dtStr, 
                                 mtime: mtime,
-                                preview: preview
+                                preview: preview,
+                                title: title,
+                                group: "",
+                                when: ""
                             });
                         }
                     }
+                    refreshHistoryGroups();
                 }
                 disconnectSource(source);
             } else if (pendingHistoryLoads[source] !== undefined) {
@@ -2146,6 +2246,7 @@ PlasmoidItem {
             lastCompactedTimestamp: ""
         };
         root.isCompacting = false;
+        root.chatTitle = "";
         if (systemPromptReady) {
             var prompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, getSystemPromptOptions({ autoMode: false }));
             chatMessages.append({ msgId: "msg_sys_0", turnId: "turn_0", role: "system", content: prompt });
@@ -2210,7 +2311,8 @@ PlasmoidItem {
             created: new Date().toISOString(),
             provider: Plasmoid.configuration.providerName || "",
             model: Plasmoid.configuration.modelName || "",
-            sessionId: root.chatSessionId
+            sessionId: root.chatSessionId,
+            title: root.chatTitle
         }));
 
         // Compaction state
@@ -2315,13 +2417,15 @@ PlasmoidItem {
         var chatsDir = dataHome + "/plasmallm/chats";
         
         // Pure shell command to list top 10 chats with mtime and a basic preview from the first user message.
-        // Format: filePath <TAB> mtime <TAB> previewText (still JSON-escaped; see Utils.cleanHistoryPreview)
+        // Format: filePath <TAB> mtime <TAB> previewText <TAB> title (both still JSON-escaped;
+        // see Utils.cleanHistoryPreview). The title lives in the meta line, which comes first.
         var cmd = "mkdir -p \"" + chatsDir + "\" && " +
                   "for f in \"" + chatsDir + "/\"*.jsonl; do " +
                   "  [ -e \"$f\" ] || continue; " +
                   "  mtime=$(stat -c %Y \"$f\"); " +
                   "  preview=$(grep -m 1 '\"role\":\"user\"' \"$f\" | sed -E 's/.*\"content\":\"(([^\"\\\\]|\\\\.)*)\".*/\\1/' | head -c 100); " +
-                  "  printf \"%s\\t%s\\t%s\\n\" \"$f\" \"$mtime\" \"$preview\"; " +
+                  "  title=$(head -n 1 \"$f\" | sed -nE 's/.*\"title\":\"(([^\"\\\\]|\\\\.)*)\".*/\\1/p' | head -c 100); " +
+                  "  printf \"%s\\t%s\\t%s\\t%s\\n\" \"$f\" \"$mtime\" \"$preview\" \"$title\"; " +
                   "done | sort -t$'\\t' -k2,2rn | head -n 10";
         
         lastHistoryFetchSource = cmd;
@@ -2342,6 +2446,7 @@ PlasmoidItem {
                 if (i !== 0) historyFilesModel.move(i, 0, 1);
                 historyFilesModel.setProperty(0, "dateTime", dtStr);
                 historyFilesModel.setProperty(0, "mtime", mtime);
+                historyFilesModel.setProperty(0, "title", root.chatTitle);
                 found = true;
                 break;
             }
@@ -2359,12 +2464,44 @@ PlasmoidItem {
                 name: fileName,
                 dateTime: dtStr,
                 mtime: mtime,
-                preview: preview
+                preview: preview,
+                title: root.chatTitle,
+                group: "",
+                when: ""
             });
             if (historyFilesModel.count > 10) {
                 historyFilesModel.remove(10, historyFilesModel.count - 10);
             }
         }
+        refreshHistoryGroups();
+    }
+
+    /**
+     * Sets each history row's day group (section in the sidebar) and short
+     * relative time: the time for today and yesterday, the weekday for the
+     * previous week, the date before that.
+     */
+    function refreshHistoryGroups() {
+        var now = new Date();
+        for (var i = 0; i < historyFilesModel.count; i++) {
+            var mtime = historyFilesModel.get(i).mtime || 0;
+            var group = Utils.historyDayGroup(mtime, now);
+            var when = "";
+            if (mtime > 0) {
+                var d = new Date(mtime * 1000);
+                if (group === "today" || group === "yesterday")
+                    when = d.toLocaleTimeString(Qt.locale(), Locale.ShortFormat);
+                else if (group === "week")
+                    when = d.toLocaleDateString(Qt.locale(), "dddd");
+                else
+                    when = d.toLocaleDateString(Qt.locale(), Locale.ShortFormat);
+            }
+            historyFilesModel.setProperty(i, "group", group);
+            historyFilesModel.setProperty(i, "when", when);
+        }
+        var nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+        historyMidnightTimer.interval = nextMidnight.getTime() - now.getTime() + 1000;
+        historyMidnightTimer.restart();
     }
 
     function handleHistoryLoad(content, filePath) {
@@ -2379,6 +2516,7 @@ PlasmoidItem {
             try { meta = JSON.parse(lines[0]); } catch(e) {}
         }
         var version = (meta && meta.version) ? meta.version : 1;
+        root.chatTitle = (meta && typeof meta.title === "string") ? meta.title : "";
 
         // Resume the saved conversation's session identity (x-opencode-session).
         // Legacy v1 files (and txt saves) keep the fresh id clearChat() minted.
@@ -3172,6 +3310,7 @@ PlasmoidItem {
                 attachmentsStr: displayPaths.filter(function(p) { return !!p; }).join("\n"),
                 fromVoice: fromVoice
             });
+            summarizeChatIfNeeded();
 
             autoShareSuppressed = false;
             toolCallDepth = 0;

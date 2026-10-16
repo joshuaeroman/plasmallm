@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 18:51-0400\n"
+"POT-Creation-Date: 2026-10-16 19:33-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -1310,247 +1310,6 @@ msgstr "Test komprimeringsforbindelse"
 msgid "Model Summary Response:"
 msgstr "Modellsammendragssvar:"
 
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Klarte ikke hente gcloud-token (avslutningskode %1): %2"
-
-msgid "New Profile"
-msgstr "Ny profil"
-
-msgid "%1 (Copy)"
-msgstr "%1 (Kopi)"
-
-msgid "Profile:"
-msgstr "Profil:"
-
-msgid "Rename Profile"
-msgstr "Gi nytt navn til profil"
-
-msgid "Duplicate Profile"
-msgstr "Dupliser profil"
-
-msgid "Delete Profile"
-msgstr "Slett profil"
-
-msgid "Profile Name"
-msgstr "Profilnavn"
-
-msgid "Rename"
-msgstr "Gi nytt navn"
-
-msgid "Adapter:"
-msgstr "Adapter:"
-
-msgid "Exa does not support tool use"
-msgstr "Exa støtter ikke bruk av verktøy"
-
-msgid ""
-"Decisions profiles evaluate each message once and reply with a verdict and "
-"confidence. They have no conversation memory, system prompt, or tools. They "
-"can also be selected as the Command Validator in Tools settings."
-msgstr ""
-"Decisions-profiler vurderer hver melding én gang og svarer med en dom og "
-"konfidens. De har ingen samtalehukommelse, systemledetekst eller verktøy. De "
-"kan også velges som kommandovalidator i verktøyinnstillingene."
-
-msgid "Platform:"
-msgstr "Plattform:"
-
-msgid "Google AI Studio"
-msgstr "Google AI Studio"
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr "Google Cloud Agent Platform (Vertex AI)"
-
-msgid "Authentication:"
-msgstr "Autentisering:"
-
-msgid "API Key (Express Mode)"
-msgstr "API-nøkkel (ekspressmodus)"
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr "Google Cloud CLI (gcloud)"
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLI ikke funnet. Installer det for å bruke denne "
-"autentiseringsmetoden."
-
-msgid "API Variant:"
-msgstr "API-variant:"
-
-msgid "Legacy (generateContent)"
-msgstr "Eldre (generateContent)"
-
-msgid "Interactions API (Stateful)"
-msgstr "Interactions-API (tilstandsbasert)"
-
-msgid "Project ID:"
-msgstr "Prosjekt-ID:"
-
-msgid "Location:"
-msgstr "Plassering:"
-
-msgid "Provider:"
-msgstr "Leverandør:"
-
-msgid "API Key:"
-msgstr "API-nøkkel:"
-
-msgid "Paste short-lived access token"
-msgstr "Lim inn kortvarig tilgangstoken"
-
-msgid "Paste OpenCode API key"
-msgstr "Lim inn OpenCode API-nøkkel"
-
-msgid "Optional - for OpenAI, etc."
-msgstr "Valgfritt - for OpenAI, osv."
-
-msgid "Stored in KDE Wallet"
-msgstr "Lagret i KDE Wallet"
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Wallet utilgjengelig — nøkkel lagret i konfigurasjonsfil"
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "Temperatur: %1%"
-
-msgid "Precise"
-msgstr "Presist"
-
-msgid "Creative"
-msgstr "Kreativt"
-
-msgid "Max Tokens:"
-msgstr "Maksimale tokens:"
-
-msgid "Thinking:"
-msgstr "Tenkning:"
-
-msgid "Off"
-msgstr "Av"
-
-msgid "Low"
-msgstr "Lav"
-
-msgid "Medium"
-msgstr "Middels"
-
-msgid "High"
-msgstr "Høy"
-
-msgid "Thinking budget:"
-msgstr "Tenkningsbudsjett:"
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr "Vis tanker i chatten (sammenleggbar)"
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-"Når aktivert, vises modellens resonnering over hvert svar med en "
-"sammenleggbar overskrift. Utveksling av signerte tanker til API-et skjer "
-"uavhengig av denne innstillingen."
-
-msgid "Use Responses API"
-msgstr "Bruk Responses API"
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-"Nødvendig for å vise resonnerende innhold på OpenAI / Poe / OpenRouter / "
-"Azure (POST til /v1/responses i stedet for /v1/chat/completions). Settes "
-"automatisk ved valg av forhåndsinnstilling."
-
-msgid "Enable OpenRouter attribution"
-msgstr "Aktiver OpenRouter-attribusjon"
-
-msgid ""
-"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
-"requests include only the app name and URL. Uncheck to stop sending these "
-"headers."
-msgstr ""
-"OpenRouter-bruk krediteres PlasmaLLM på OpenRouters offentlige appranking, "
-"og forespørsler inkluderer bare appnavn og URL. Fjern merket for å slutte å "
-"sende disse headerne."
-
-msgid ""
-"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
-"their API. Nothing about your conversations is shared."
-msgstr ""
-"OpenRouter-attribusjon lar OpenRouter se at du brukte PlasmaLLM for å få "
-"tilgang til API-et. Ingenting om samtalene dine deles."
-
-msgid "Attachments:"
-msgstr "Vedlegg:"
-
-msgid "Resize image attachments"
-msgstr "Endre størrelse på bildevedlegg"
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-"Endrer størrelse på store bildevedlegg til å passe innenfor 800x600 før "
-"sending, noe som reduserer opplastingsstørrelse og konteksttokener."
-
-msgid "Chat History:"
-msgstr "Chathistorikk:"
-
-msgid "Auto-save chat history"
-msgstr "Lagre chathistorikk automatisk"
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr "Lagrer til ~/.local/share/plasmallm/chats/"
-
-msgid "Notifications:"
-msgstr "Varslinger:"
-
-msgid "Show notifications when minimized"
-msgstr "Vis varsler når minimert"
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-"Vis systemvarsler for innkommende meldinger og verktøykall når chat-vinduet "
-"er minimert eller lukket."
-
-msgid "Save format:"
-msgstr "Lagringsformat:"
-
-msgid "Plain text (.txt)"
-msgstr "Ren tekst (.txt)"
-
-msgid "Structured (.jsonl)"
-msgstr "Strukturert (.jsonl)"
-
-msgid "Open the folder where chat histories are saved"
-msgstr "Åpne mappen der chatloggene lagres"
-
-msgid "Auto-clear:"
-msgstr "Automatisk sletting:"
-
-msgid "Disabled"
-msgstr "Deaktivert"
-
-msgid "Instant (always clear when panel opens)"
-msgstr "Øyeblikkelig (alltid slett når panel åpnes)"
-
-msgid "After"
-msgstr "Etter"
-
-msgid "seconds"
-msgstr "sekunder"
-
-msgid "minutes"
-msgstr "minutter"
-
 msgid "Speech to Text"
 msgstr "Tale til tekst"
 
@@ -1655,6 +1414,9 @@ msgstr "Transkriberer"
 msgid "STT backend:"
 msgstr "STT-motor:"
 
+msgid "Provider:"
+msgstr "Leverandør:"
+
 msgid "Endpoint:"
 msgstr "Endepunkt:"
 
@@ -1701,6 +1463,25 @@ msgstr "Bruk --fp16 True (GPU)"
 
 msgid "OpenRouter:"
 msgstr "OpenRouter:"
+
+msgid "Enable OpenRouter attribution"
+msgstr "Aktiver OpenRouter-attribusjon"
+
+msgid ""
+"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
+"requests include only the app name and URL. Uncheck to stop sending these "
+"headers."
+msgstr ""
+"OpenRouter-bruk krediteres PlasmaLLM på OpenRouters offentlige appranking, "
+"og forespørsler inkluderer bare appnavn og URL. Fjern merket for å slutte å "
+"sende disse headerne."
+
+msgid ""
+"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
+"their API. Nothing about your conversations is shared."
+msgstr ""
+"OpenRouter-attribusjon lar OpenRouter se at du brukte PlasmaLLM for å få "
+"tilgang til API-et. Ingenting om samtalene dine deles."
 
 msgid "Threads:"
 msgstr "Tråder:"
@@ -1755,6 +1536,9 @@ msgstr "Aktiver verktøy"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "Hovedbryter for all verktøykallfunksjonalitet."
+
+msgid "Exa does not support tool use"
+msgstr "Exa støtter ikke bruk av verktøy"
 
 msgid "Desktop Automation:"
 msgstr "Skrivebordsautomatisering:"
@@ -1865,6 +1649,18 @@ msgstr "STT-motoren støtter ikke listing av modeller"
 
 msgid "New chat"
 msgstr "Ny chat"
+
+msgid "Today"
+msgstr "I dag"
+
+msgid "Yesterday"
+msgstr "I går"
+
+msgid "Previous 7 days"
+msgstr "Siste 7 dager"
+
+msgid "Older"
+msgstr "Eldre"
 
 msgid "No recent chats"
 msgstr "Ingen nylige chatter"
@@ -2464,6 +2260,253 @@ msgstr "Styringsøkt aktiv (allerede autorisert). Automodus aktivert."
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Styringsøkt autorisert. Automodus aktivert."
+
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr "Klarte ikke hente gcloud-token (avslutningskode %1): %2"
+
+msgid "New Profile"
+msgstr "Ny profil"
+
+msgid "%1 (Copy)"
+msgstr "%1 (Kopi)"
+
+msgid "Profile:"
+msgstr "Profil:"
+
+msgid "Rename Profile"
+msgstr "Gi nytt navn til profil"
+
+msgid "Duplicate Profile"
+msgstr "Dupliser profil"
+
+msgid "Delete Profile"
+msgstr "Slett profil"
+
+msgid "Profile Name"
+msgstr "Profilnavn"
+
+msgid "Rename"
+msgstr "Gi nytt navn"
+
+msgid "Adapter:"
+msgstr "Adapter:"
+
+msgid ""
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
+msgstr ""
+"Decisions-profiler vurderer hver melding én gang og svarer med en dom og "
+"konfidens. De har ingen samtalehukommelse, systemledetekst eller verktøy. De "
+"kan også velges som kommandovalidator i verktøyinnstillingene."
+
+msgid "Platform:"
+msgstr "Plattform:"
+
+msgid "Google AI Studio"
+msgstr "Google AI Studio"
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr "Google Cloud Agent Platform (Vertex AI)"
+
+msgid "Authentication:"
+msgstr "Autentisering:"
+
+msgid "API Key (Express Mode)"
+msgstr "API-nøkkel (ekspressmodus)"
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr "Google Cloud CLI (gcloud)"
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLI ikke funnet. Installer det for å bruke denne "
+"autentiseringsmetoden."
+
+msgid "API Variant:"
+msgstr "API-variant:"
+
+msgid "Legacy (generateContent)"
+msgstr "Eldre (generateContent)"
+
+msgid "Interactions API (Stateful)"
+msgstr "Interactions-API (tilstandsbasert)"
+
+msgid "Project ID:"
+msgstr "Prosjekt-ID:"
+
+msgid "Location:"
+msgstr "Plassering:"
+
+msgid "API Key:"
+msgstr "API-nøkkel:"
+
+msgid "Paste short-lived access token"
+msgstr "Lim inn kortvarig tilgangstoken"
+
+msgid "Paste OpenCode API key"
+msgstr "Lim inn OpenCode API-nøkkel"
+
+msgid "Optional - for OpenAI, etc."
+msgstr "Valgfritt - for OpenAI, osv."
+
+msgid "Stored in KDE Wallet"
+msgstr "Lagret i KDE Wallet"
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr "KDE Wallet utilgjengelig — nøkkel lagret i konfigurasjonsfil"
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "Temperatur: %1%"
+
+msgid "Precise"
+msgstr "Presist"
+
+msgid "Creative"
+msgstr "Kreativt"
+
+msgid "Max Tokens:"
+msgstr "Maksimale tokens:"
+
+msgid "Thinking:"
+msgstr "Tenkning:"
+
+msgid "Off"
+msgstr "Av"
+
+msgid "Low"
+msgstr "Lav"
+
+msgid "Medium"
+msgstr "Middels"
+
+msgid "High"
+msgstr "Høy"
+
+msgid "Thinking budget:"
+msgstr "Tenkningsbudsjett:"
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr "Vis tanker i chatten (sammenleggbar)"
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"Når aktivert, vises modellens resonnering over hvert svar med en "
+"sammenleggbar overskrift. Utveksling av signerte tanker til API-et skjer "
+"uavhengig av denne innstillingen."
+
+msgid "Use Responses API"
+msgstr "Bruk Responses API"
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"Nødvendig for å vise resonnerende innhold på OpenAI / Poe / OpenRouter / "
+"Azure (POST til /v1/responses i stedet for /v1/chat/completions). Settes "
+"automatisk ved valg av forhåndsinnstilling."
+
+msgid "Attachments:"
+msgstr "Vedlegg:"
+
+msgid "Resize image attachments"
+msgstr "Endre størrelse på bildevedlegg"
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+"Endrer størrelse på store bildevedlegg til å passe innenfor 800x600 før "
+"sending, noe som reduserer opplastingsstørrelse og konteksttokener."
+
+msgid "Chat History:"
+msgstr "Chathistorikk:"
+
+msgid "Auto-save chat history"
+msgstr "Lagre chathistorikk automatisk"
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr "Lagrer til ~/.local/share/plasmallm/chats/"
+
+msgid "Notifications:"
+msgstr "Varslinger:"
+
+msgid "Show notifications when minimized"
+msgstr "Vis varsler når minimert"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+"Vis systemvarsler for innkommende meldinger og verktøykall når chat-vinduet "
+"er minimert eller lukket."
+
+msgid "Save format:"
+msgstr "Lagringsformat:"
+
+msgid "Plain text (.txt)"
+msgstr "Ren tekst (.txt)"
+
+msgid "Structured (.jsonl)"
+msgstr "Strukturert (.jsonl)"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "Åpne mappen der chatloggene lagres"
+
+msgid "Summarize chats:"
+msgstr "Oppsummer chatter:"
+
+msgid "First message only"
+msgstr "Bare første melding"
+
+msgid "Re-summarize as the chat grows"
+msgstr "Oppsummer på nytt etter hvert som chatten vokser"
+
+msgid "Re-summarize every:"
+msgstr "Oppsummer på nytt hver:"
+
+msgid "user message (every message)"
+msgstr "brukermelding (hver melding)"
+
+msgid "user messages"
+msgstr "brukermeldinger"
+
+msgid "Summary profile:"
+msgstr "Profil for oppsummering:"
+
+msgid ""
+"Sends the first message and the start of recent ones to the chosen profile "
+"to title chats in history."
+msgstr ""
+"Sender den første meldingen og starten av de siste til den valgte profilen "
+"for å gi chatter en tittel i historikken."
+
+msgid "Needs auto-saved history in the Structured (.jsonl) format."
+msgstr "Krever automatisk lagret historikk i strukturert format (.jsonl)."
+
+msgid "Auto-clear:"
+msgstr "Automatisk sletting:"
+
+msgid "Disabled"
+msgstr "Deaktivert"
+
+msgid "Instant (always clear when panel opens)"
+msgstr "Øyeblikkelig (alltid slett når panel åpnes)"
+
+msgid "After"
+msgstr "Etter"
+
+msgid "seconds"
+msgstr "sekunder"
+
+msgid "minutes"
+msgstr "minutter"
 
 msgid "General"
 msgstr "Generelt"

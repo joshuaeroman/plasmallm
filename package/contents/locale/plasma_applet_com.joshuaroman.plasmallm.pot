@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 18:51-0400\n"
+"POT-Creation-Date: 2026-10-16 19:33-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1167,227 +1167,6 @@ msgstr ""
 msgid "Model Summary Response:"
 msgstr ""
 
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr ""
-
-msgid "New Profile"
-msgstr ""
-
-msgid "%1 (Copy)"
-msgstr ""
-
-msgid "Profile:"
-msgstr ""
-
-msgid "Rename Profile"
-msgstr ""
-
-msgid "Duplicate Profile"
-msgstr ""
-
-msgid "Delete Profile"
-msgstr ""
-
-msgid "Profile Name"
-msgstr ""
-
-msgid "Rename"
-msgstr ""
-
-msgid "Adapter:"
-msgstr ""
-
-msgid "Exa does not support tool use"
-msgstr ""
-
-msgid ""
-"Decisions profiles evaluate each message once and reply with a verdict and "
-"confidence. They have no conversation memory, system prompt, or tools. They "
-"can also be selected as the Command Validator in Tools settings."
-msgstr ""
-
-msgid "Platform:"
-msgstr ""
-
-msgid "Google AI Studio"
-msgstr ""
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr ""
-
-msgid "Authentication:"
-msgstr ""
-
-msgid "API Key (Express Mode)"
-msgstr ""
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr ""
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-
-msgid "API Variant:"
-msgstr ""
-
-msgid "Legacy (generateContent)"
-msgstr ""
-
-msgid "Interactions API (Stateful)"
-msgstr ""
-
-msgid "Project ID:"
-msgstr ""
-
-msgid "Location:"
-msgstr ""
-
-msgid "Provider:"
-msgstr ""
-
-msgid "API Key:"
-msgstr ""
-
-msgid "Paste short-lived access token"
-msgstr ""
-
-msgid "Paste OpenCode API key"
-msgstr ""
-
-msgid "Optional - for OpenAI, etc."
-msgstr ""
-
-msgid "Stored in KDE Wallet"
-msgstr ""
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr ""
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr ""
-
-msgid "Precise"
-msgstr ""
-
-msgid "Creative"
-msgstr ""
-
-msgid "Max Tokens:"
-msgstr ""
-
-msgid "Thinking:"
-msgstr ""
-
-msgid "Off"
-msgstr ""
-
-msgid "Low"
-msgstr ""
-
-msgid "Medium"
-msgstr ""
-
-msgid "High"
-msgstr ""
-
-msgid "Thinking budget:"
-msgstr ""
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr ""
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-
-msgid "Use Responses API"
-msgstr ""
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-
-msgid "Enable OpenRouter attribution"
-msgstr ""
-
-msgid ""
-"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
-"requests include only the app name and URL. Uncheck to stop sending these "
-"headers."
-msgstr ""
-
-msgid ""
-"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
-"their API. Nothing about your conversations is shared."
-msgstr ""
-
-msgid "Attachments:"
-msgstr ""
-
-msgid "Resize image attachments"
-msgstr ""
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-
-msgid "Chat History:"
-msgstr ""
-
-msgid "Auto-save chat history"
-msgstr ""
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr ""
-
-msgid "Notifications:"
-msgstr ""
-
-msgid "Show notifications when minimized"
-msgstr ""
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-
-msgid "Save format:"
-msgstr ""
-
-msgid "Plain text (.txt)"
-msgstr ""
-
-msgid "Structured (.jsonl)"
-msgstr ""
-
-msgid "Open the folder where chat histories are saved"
-msgstr ""
-
-msgid "Auto-clear:"
-msgstr ""
-
-msgid "Disabled"
-msgstr ""
-
-msgid "Instant (always clear when panel opens)"
-msgstr ""
-
-msgid "After"
-msgstr ""
-
-msgid "seconds"
-msgstr ""
-
-msgid "minutes"
-msgstr ""
-
 msgid "Speech to Text"
 msgstr ""
 
@@ -1478,6 +1257,9 @@ msgstr ""
 msgid "STT backend:"
 msgstr ""
 
+msgid "Provider:"
+msgstr ""
+
 msgid "Endpoint:"
 msgstr ""
 
@@ -1519,6 +1301,20 @@ msgid "Use --fp16 True (GPU)"
 msgstr ""
 
 msgid "OpenRouter:"
+msgstr ""
+
+msgid "Enable OpenRouter attribution"
+msgstr ""
+
+msgid ""
+"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
+"requests include only the app name and URL. Uncheck to stop sending these "
+"headers."
+msgstr ""
+
+msgid ""
+"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
+"their API. Nothing about your conversations is shared."
 msgstr ""
 
 msgid "Threads:"
@@ -1573,6 +1369,9 @@ msgid "Enable Tools"
 msgstr ""
 
 msgid "Master switch for all tool-calling functionality."
+msgstr ""
+
+msgid "Exa does not support tool use"
 msgstr ""
 
 msgid "Desktop Automation:"
@@ -1673,6 +1472,18 @@ msgid "STT backend does not support model listing"
 msgstr ""
 
 msgid "New chat"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Yesterday"
+msgstr ""
+
+msgid "Previous 7 days"
+msgstr ""
+
+msgid "Older"
 msgstr ""
 
 msgid "No recent chats"
@@ -2240,6 +2051,236 @@ msgid "Drive session active (already authorized). Auto mode enabled."
 msgstr ""
 
 msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr ""
+
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr ""
+
+msgid "New Profile"
+msgstr ""
+
+msgid "%1 (Copy)"
+msgstr ""
+
+msgid "Profile:"
+msgstr ""
+
+msgid "Rename Profile"
+msgstr ""
+
+msgid "Duplicate Profile"
+msgstr ""
+
+msgid "Delete Profile"
+msgstr ""
+
+msgid "Profile Name"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Adapter:"
+msgstr ""
+
+msgid ""
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
+msgstr ""
+
+msgid "Platform:"
+msgstr ""
+
+msgid "Google AI Studio"
+msgstr ""
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr ""
+
+msgid "Authentication:"
+msgstr ""
+
+msgid "API Key (Express Mode)"
+msgstr ""
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr ""
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+
+msgid "API Variant:"
+msgstr ""
+
+msgid "Legacy (generateContent)"
+msgstr ""
+
+msgid "Interactions API (Stateful)"
+msgstr ""
+
+msgid "Project ID:"
+msgstr ""
+
+msgid "Location:"
+msgstr ""
+
+msgid "API Key:"
+msgstr ""
+
+msgid "Paste short-lived access token"
+msgstr ""
+
+msgid "Paste OpenCode API key"
+msgstr ""
+
+msgid "Optional - for OpenAI, etc."
+msgstr ""
+
+msgid "Stored in KDE Wallet"
+msgstr ""
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr ""
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr ""
+
+msgid "Precise"
+msgstr ""
+
+msgid "Creative"
+msgstr ""
+
+msgid "Max Tokens:"
+msgstr ""
+
+msgid "Thinking:"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "Low"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "High"
+msgstr ""
+
+msgid "Thinking budget:"
+msgstr ""
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr ""
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+
+msgid "Use Responses API"
+msgstr ""
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+
+msgid "Attachments:"
+msgstr ""
+
+msgid "Resize image attachments"
+msgstr ""
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+
+msgid "Chat History:"
+msgstr ""
+
+msgid "Auto-save chat history"
+msgstr ""
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr ""
+
+msgid "Notifications:"
+msgstr ""
+
+msgid "Show notifications when minimized"
+msgstr ""
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+
+msgid "Save format:"
+msgstr ""
+
+msgid "Plain text (.txt)"
+msgstr ""
+
+msgid "Structured (.jsonl)"
+msgstr ""
+
+msgid "Open the folder where chat histories are saved"
+msgstr ""
+
+msgid "Summarize chats:"
+msgstr ""
+
+msgid "First message only"
+msgstr ""
+
+msgid "Re-summarize as the chat grows"
+msgstr ""
+
+msgid "Re-summarize every:"
+msgstr ""
+
+msgid "user message (every message)"
+msgstr ""
+
+msgid "user messages"
+msgstr ""
+
+msgid "Summary profile:"
+msgstr ""
+
+msgid ""
+"Sends the first message and the start of recent ones to the chosen profile "
+"to title chats in history."
+msgstr ""
+
+msgid "Needs auto-saved history in the Structured (.jsonl) format."
+msgstr ""
+
+msgid "Auto-clear:"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Instant (always clear when panel opens)"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+msgid "minutes"
 msgstr ""
 
 msgid "General"

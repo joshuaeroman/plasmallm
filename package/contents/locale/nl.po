@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 18:51-0400\n"
+"POT-Creation-Date: 2026-10-16 19:33-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Dutch\n"
@@ -1324,249 +1324,6 @@ msgstr "Compressieverbinding testen"
 msgid "Model Summary Response:"
 msgstr "Samenvattingsantwoord van model:"
 
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Kan gcloud-token niet ophalen (afsluiting %1): %2"
-
-msgid "New Profile"
-msgstr "Nieuw profiel"
-
-msgid "%1 (Copy)"
-msgstr "%1 (Kopie)"
-
-msgid "Profile:"
-msgstr "Profiel:"
-
-msgid "Rename Profile"
-msgstr "Profiel hernoemen"
-
-msgid "Duplicate Profile"
-msgstr "Profiel dupliceren"
-
-msgid "Delete Profile"
-msgstr "Profiel verwijderen"
-
-msgid "Profile Name"
-msgstr "Profielnaam"
-
-msgid "Rename"
-msgstr "Hernoemen"
-
-msgid "Adapter:"
-msgstr "Adapter:"
-
-msgid "Exa does not support tool use"
-msgstr "Exa ondersteunt geen toolgebruik"
-
-msgid ""
-"Decisions profiles evaluate each message once and reply with a verdict and "
-"confidence. They have no conversation memory, system prompt, or tools. They "
-"can also be selected as the Command Validator in Tools settings."
-msgstr ""
-"Decisions-profielen evalueren elk bericht één keer en antwoorden met een "
-"uitspraak en zekerheid. Ze hebben geen gespreksgeheugen, systeemprompt of "
-"hulpmiddelen. Ze kunnen ook worden geselecteerd als opdrachtvalidator in de "
-"Hulpmiddelen-instellingen."
-
-msgid "Platform:"
-msgstr "Platform:"
-
-msgid "Google AI Studio"
-msgstr "Google AI Studio"
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr "Google Cloud Agent Platform (Vertex AI)"
-
-msgid "Authentication:"
-msgstr "Authenticatie:"
-
-msgid "API Key (Express Mode)"
-msgstr "API-sleutel (Express-modus)"
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr "Google Cloud CLI (gcloud)"
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLI niet gevonden. Installeer het om deze authenticatiemethode te "
-"gebruiken."
-
-msgid "API Variant:"
-msgstr "API-variant:"
-
-msgid "Legacy (generateContent)"
-msgstr "Verouderd (generateContent)"
-
-msgid "Interactions API (Stateful)"
-msgstr "Interacties API (Stateful)"
-
-msgid "Project ID:"
-msgstr "Project-ID:"
-
-msgid "Location:"
-msgstr "Locatie:"
-
-msgid "Provider:"
-msgstr "Aanbieder:"
-
-msgid "API Key:"
-msgstr "API-sleutel:"
-
-msgid "Paste short-lived access token"
-msgstr "Tijdelijk toegangstoken plakken"
-
-msgid "Paste OpenCode API key"
-msgstr "OpenCode-API-sleutel plakken"
-
-msgid "Optional - for OpenAI, etc."
-msgstr "Optioneel – voor OpenAI, enz."
-
-msgid "Stored in KDE Wallet"
-msgstr "Opgeslagen in KDE Wallet"
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr ""
-"KDE Wallet niet beschikbaar — sleutel opgeslagen in configuratiebestand"
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "Temperatuur: %1%"
-
-msgid "Precise"
-msgstr "Precies"
-
-msgid "Creative"
-msgstr "Creatief"
-
-msgid "Max Tokens:"
-msgstr "Max. tokens:"
-
-msgid "Thinking:"
-msgstr "Nadenken:"
-
-msgid "Off"
-msgstr "Uit"
-
-msgid "Low"
-msgstr "Laag"
-
-msgid "Medium"
-msgstr "Gemiddeld"
-
-msgid "High"
-msgstr "Hoog"
-
-msgid "Thinking budget:"
-msgstr "Denkbudget:"
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr "Gedachten in chat tonen (inklapbaar)"
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-"Wanneer ingeschakeld wordt het redeneerproces van het model boven elk "
-"antwoord getoond met een inklapbare kop. De uitwisseling van ondertekende "
-"gedachten met de API vindt plaats ongeacht deze instelling."
-
-msgid "Use Responses API"
-msgstr "Responses API gebruiken"
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-"Vereist om redeneercontent weer te geven op OpenAI / Poe / OpenRouter / "
-"Azure (POST naar /v1/responses in plaats van /v1/chat/completions). "
-"Automatisch ingesteld bij het kiezen van een preset."
-
-msgid "Enable OpenRouter attribution"
-msgstr "OpenRouter-vermelding inschakelen"
-
-msgid ""
-"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
-"requests include only the app name and URL. Uncheck to stop sending these "
-"headers."
-msgstr ""
-"OpenRouter-gebruik wordt in de openbare app-ranglijsten aan PlasmaLLM "
-"toegeschreven; verzoeken bevatten alleen de appnaam en URL. Schakel uit om "
-"deze headers niet meer te verzenden."
-
-msgid ""
-"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
-"their API. Nothing about your conversations is shared."
-msgstr ""
-"OpenRouter-vermelding laat OpenRouter zien dat je PlasmaLLM hebt gebruikt om "
-"hun API te benaderen. Niets over je gesprekken wordt gedeeld."
-
-msgid "Attachments:"
-msgstr "Bijlagen:"
-
-msgid "Resize image attachments"
-msgstr "Afbeeldingsbijlagen verkleinen"
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-"Verkleint grote afbeeldingsbijlagen tot maximaal 800x600 vóór het verzenden, "
-"waardoor de uploadgrootte en het aantal contexttokens worden verminderd."
-
-msgid "Chat History:"
-msgstr "Chatgeschiedenis:"
-
-msgid "Auto-save chat history"
-msgstr "Chatgeschiedenis automatisch opslaan"
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr "Slaat op in ~/.local/share/plasmallm/chats/"
-
-msgid "Notifications:"
-msgstr "Meldingen:"
-
-msgid "Show notifications when minimized"
-msgstr "Meldingen weergeven wanneer geminimaliseerd"
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-"Systeemmeldingen weergeven voor binnenkomende berichten en tool-aanroepen "
-"wanneer het chatvenster geminimaliseerd of gesloten is."
-
-msgid "Save format:"
-msgstr "Opslagformaat:"
-
-msgid "Plain text (.txt)"
-msgstr "Platte tekst (.txt)"
-
-msgid "Structured (.jsonl)"
-msgstr "Gestructureerd (.jsonl)"
-
-msgid "Open the folder where chat histories are saved"
-msgstr "Open de map waarin chatgeschiedenis wordt opgeslagen"
-
-msgid "Auto-clear:"
-msgstr "Automatisch wissen:"
-
-msgid "Disabled"
-msgstr "Uitgeschakeld"
-
-msgid "Instant (always clear when panel opens)"
-msgstr "Onmiddellijk (altijd wissen bij openen paneel)"
-
-msgid "After"
-msgstr "Na"
-
-msgid "seconds"
-msgstr "seconden"
-
-msgid "minutes"
-msgstr "minuten"
-
 msgid "Speech to Text"
 msgstr "Spraak naar tekst"
 
@@ -1671,6 +1428,9 @@ msgstr "Transcribeerder"
 msgid "STT backend:"
 msgstr "STT-backend:"
 
+msgid "Provider:"
+msgstr "Aanbieder:"
+
 msgid "Endpoint:"
 msgstr "Eindpunt:"
 
@@ -1717,6 +1477,25 @@ msgstr "Gebruik --fp16 True (GPU)"
 
 msgid "OpenRouter:"
 msgstr "OpenRouter:"
+
+msgid "Enable OpenRouter attribution"
+msgstr "OpenRouter-vermelding inschakelen"
+
+msgid ""
+"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
+"requests include only the app name and URL. Uncheck to stop sending these "
+"headers."
+msgstr ""
+"OpenRouter-gebruik wordt in de openbare app-ranglijsten aan PlasmaLLM "
+"toegeschreven; verzoeken bevatten alleen de appnaam en URL. Schakel uit om "
+"deze headers niet meer te verzenden."
+
+msgid ""
+"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
+"their API. Nothing about your conversations is shared."
+msgstr ""
+"OpenRouter-vermelding laat OpenRouter zien dat je PlasmaLLM hebt gebruikt om "
+"hun API te benaderen. Niets over je gesprekken wordt gedeeld."
 
 msgid "Threads:"
 msgstr "Threads:"
@@ -1772,6 +1551,9 @@ msgstr "Tools inschakelen"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "Hoofdschakelaar voor alle tool-aanroepfunctionaliteit."
+
+msgid "Exa does not support tool use"
+msgstr "Exa ondersteunt geen toolgebruik"
 
 msgid "Desktop Automation:"
 msgstr "Bureaubladautomatisering:"
@@ -1886,6 +1668,18 @@ msgstr "STT-backend ondersteunt het weergeven van modellen niet"
 
 msgid "New chat"
 msgstr "Nieuwe chat"
+
+msgid "Today"
+msgstr "Vandaag"
+
+msgid "Yesterday"
+msgstr "Gisteren"
+
+msgid "Previous 7 days"
+msgstr "Afgelopen 7 dagen"
+
+msgid "Older"
+msgstr "Ouder"
 
 msgid "No recent chats"
 msgstr "Geen recente chats"
@@ -2487,6 +2281,257 @@ msgstr ""
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr ""
 "Besturingssessie succesvol geautoriseerd. Automatische modus ingeschakeld."
+
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr "Kan gcloud-token niet ophalen (afsluiting %1): %2"
+
+msgid "New Profile"
+msgstr "Nieuw profiel"
+
+msgid "%1 (Copy)"
+msgstr "%1 (Kopie)"
+
+msgid "Profile:"
+msgstr "Profiel:"
+
+msgid "Rename Profile"
+msgstr "Profiel hernoemen"
+
+msgid "Duplicate Profile"
+msgstr "Profiel dupliceren"
+
+msgid "Delete Profile"
+msgstr "Profiel verwijderen"
+
+msgid "Profile Name"
+msgstr "Profielnaam"
+
+msgid "Rename"
+msgstr "Hernoemen"
+
+msgid "Adapter:"
+msgstr "Adapter:"
+
+msgid ""
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
+msgstr ""
+"Decisions-profielen evalueren elk bericht één keer en antwoorden met een "
+"uitspraak en zekerheid. Ze hebben geen gespreksgeheugen, systeemprompt of "
+"hulpmiddelen. Ze kunnen ook worden geselecteerd als opdrachtvalidator in de "
+"Hulpmiddelen-instellingen."
+
+msgid "Platform:"
+msgstr "Platform:"
+
+msgid "Google AI Studio"
+msgstr "Google AI Studio"
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr "Google Cloud Agent Platform (Vertex AI)"
+
+msgid "Authentication:"
+msgstr "Authenticatie:"
+
+msgid "API Key (Express Mode)"
+msgstr "API-sleutel (Express-modus)"
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr "Google Cloud CLI (gcloud)"
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLI niet gevonden. Installeer het om deze authenticatiemethode te "
+"gebruiken."
+
+msgid "API Variant:"
+msgstr "API-variant:"
+
+msgid "Legacy (generateContent)"
+msgstr "Verouderd (generateContent)"
+
+msgid "Interactions API (Stateful)"
+msgstr "Interacties API (Stateful)"
+
+msgid "Project ID:"
+msgstr "Project-ID:"
+
+msgid "Location:"
+msgstr "Locatie:"
+
+msgid "API Key:"
+msgstr "API-sleutel:"
+
+msgid "Paste short-lived access token"
+msgstr "Tijdelijk toegangstoken plakken"
+
+msgid "Paste OpenCode API key"
+msgstr "OpenCode-API-sleutel plakken"
+
+msgid "Optional - for OpenAI, etc."
+msgstr "Optioneel – voor OpenAI, enz."
+
+msgid "Stored in KDE Wallet"
+msgstr "Opgeslagen in KDE Wallet"
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr ""
+"KDE Wallet niet beschikbaar — sleutel opgeslagen in configuratiebestand"
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "Temperatuur: %1%"
+
+msgid "Precise"
+msgstr "Precies"
+
+msgid "Creative"
+msgstr "Creatief"
+
+msgid "Max Tokens:"
+msgstr "Max. tokens:"
+
+msgid "Thinking:"
+msgstr "Nadenken:"
+
+msgid "Off"
+msgstr "Uit"
+
+msgid "Low"
+msgstr "Laag"
+
+msgid "Medium"
+msgstr "Gemiddeld"
+
+msgid "High"
+msgstr "Hoog"
+
+msgid "Thinking budget:"
+msgstr "Denkbudget:"
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr "Gedachten in chat tonen (inklapbaar)"
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"Wanneer ingeschakeld wordt het redeneerproces van het model boven elk "
+"antwoord getoond met een inklapbare kop. De uitwisseling van ondertekende "
+"gedachten met de API vindt plaats ongeacht deze instelling."
+
+msgid "Use Responses API"
+msgstr "Responses API gebruiken"
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"Vereist om redeneercontent weer te geven op OpenAI / Poe / OpenRouter / "
+"Azure (POST naar /v1/responses in plaats van /v1/chat/completions). "
+"Automatisch ingesteld bij het kiezen van een preset."
+
+msgid "Attachments:"
+msgstr "Bijlagen:"
+
+msgid "Resize image attachments"
+msgstr "Afbeeldingsbijlagen verkleinen"
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+"Verkleint grote afbeeldingsbijlagen tot maximaal 800x600 vóór het verzenden, "
+"waardoor de uploadgrootte en het aantal contexttokens worden verminderd."
+
+msgid "Chat History:"
+msgstr "Chatgeschiedenis:"
+
+msgid "Auto-save chat history"
+msgstr "Chatgeschiedenis automatisch opslaan"
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr "Slaat op in ~/.local/share/plasmallm/chats/"
+
+msgid "Notifications:"
+msgstr "Meldingen:"
+
+msgid "Show notifications when minimized"
+msgstr "Meldingen weergeven wanneer geminimaliseerd"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+"Systeemmeldingen weergeven voor binnenkomende berichten en tool-aanroepen "
+"wanneer het chatvenster geminimaliseerd of gesloten is."
+
+msgid "Save format:"
+msgstr "Opslagformaat:"
+
+msgid "Plain text (.txt)"
+msgstr "Platte tekst (.txt)"
+
+msgid "Structured (.jsonl)"
+msgstr "Gestructureerd (.jsonl)"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "Open de map waarin chatgeschiedenis wordt opgeslagen"
+
+msgid "Summarize chats:"
+msgstr "Chats samenvatten:"
+
+msgid "First message only"
+msgstr "Alleen eerste bericht"
+
+msgid "Re-summarize as the chat grows"
+msgstr "Opnieuw samenvatten naarmate de chat groeit"
+
+msgid "Re-summarize every:"
+msgstr "Opnieuw samenvatten na elke:"
+
+msgid "user message (every message)"
+msgstr "gebruikersbericht (elk bericht)"
+
+msgid "user messages"
+msgstr "gebruikersberichten"
+
+msgid "Summary profile:"
+msgstr "Profiel voor samenvattingen:"
+
+msgid ""
+"Sends the first message and the start of recent ones to the chosen profile "
+"to title chats in history."
+msgstr ""
+"Stuurt het eerste bericht en het begin van recente berichten naar het "
+"gekozen profiel om chats in de geschiedenis een titel te geven."
+
+msgid "Needs auto-saved history in the Structured (.jsonl) format."
+msgstr ""
+"Vereist automatisch opgeslagen geschiedenis in het gestructureerde formaat "
+"(.jsonl)."
+
+msgid "Auto-clear:"
+msgstr "Automatisch wissen:"
+
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+msgid "Instant (always clear when panel opens)"
+msgstr "Onmiddellijk (altijd wissen bij openen paneel)"
+
+msgid "After"
+msgstr "Na"
+
+msgid "seconds"
+msgstr "seconden"
+
+msgid "minutes"
+msgstr "minuten"
 
 msgid "General"
 msgstr "Algemeen"

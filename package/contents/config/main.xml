@@ -205,6 +205,18 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
       <label>Chat save format</label>
       <default>jsonl</default>
     </entry>
+    <entry name="chatSummaryMode" type="String">
+      <label>Summarize chats for history titles: off (show the start of the first message), initial (first message only), or every (after every chatSummaryInterval user messages)</label>
+      <default>off</default>
+    </entry>
+    <entry name="chatSummaryInterval" type="Int">
+      <label>Re-summarize a chat after this many user messages</label>
+      <default>1</default>
+    </entry>
+    <entry name="chatSummaryProfileId" type="String">
+      <label>Profile used to summarize chats ("active" for the active chat profile)</label>
+      <default>active</default>
+    </entry>
     <entry name="autoShareCommandOutput" type="Bool">
       <label>Auto-share command output with LLM</label>
       <default>false</default>
