@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-09 18:29-0400\n"
+"POT-Creation-Date: 2026-10-16 18:51-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -470,111 +470,6 @@ msgstr ""
 msgid "Fetching…"
 msgstr ""
 
-msgid "Profile Header:"
-msgstr ""
-
-msgid "Show provider and model in profile header"
-msgstr ""
-
-msgid "Chat Spacing: %1px"
-msgstr ""
-
-msgid "Compact"
-msgstr ""
-
-msgid "Spacious"
-msgstr ""
-
-msgid "Chat Labels:"
-msgstr ""
-
-msgid "User label:"
-msgstr ""
-
-msgid "You"
-msgstr ""
-
-msgid "Assistant label:"
-msgstr ""
-
-msgid "Assistant"
-msgstr ""
-
-msgid "Use model name as assistant label"
-msgstr ""
-
-msgid "Chat Colors:"
-msgstr ""
-
-msgid "Use custom user color"
-msgstr ""
-
-msgid "Use custom assistant color"
-msgstr ""
-
-msgid "UI Font:"
-msgstr ""
-
-msgid "Use custom UI font"
-msgstr ""
-
-msgid "Code Font:"
-msgstr ""
-
-msgid "Use custom code font"
-msgstr ""
-
-msgid "Thoughts Font:"
-msgstr ""
-
-msgid "Use custom thoughts font"
-msgstr ""
-
-msgid "LaTeX Rendering:"
-msgstr ""
-
-msgid "Leave as TeX"
-msgstr ""
-
-msgid "Replace with Unicode (Default)"
-msgstr ""
-
-msgid "Mathtext"
-msgstr ""
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr ""
-
-msgid "Header Icons:"
-msgstr ""
-
-msgid "Profile Header"
-msgstr ""
-
-msgid "Always show Tasks"
-msgstr ""
-
-msgid "Always show Auto Toggle"
-msgstr ""
-
-msgid "Show History"
-msgstr ""
-
-msgid "Show Copy conversation"
-msgstr ""
-
-msgid "Show Context compaction summary"
-msgstr ""
-
-msgid "Show Clear chat"
-msgstr ""
-
-msgid "Show Settings"
-msgstr ""
-
-msgid "Show Pin"
-msgstr ""
-
 msgid "Stop command"
 msgstr ""
 
@@ -844,10 +739,16 @@ msgstr ""
 msgid "Voice message"
 msgstr ""
 
+msgid "You"
+msgstr ""
+
 msgid "Error"
 msgstr ""
 
 msgid "Web Search"
+msgstr ""
+
+msgid "Assistant"
 msgstr ""
 
 msgid "compacted"
@@ -900,235 +801,6 @@ msgid "Read aloud"
 msgstr ""
 
 msgid "The model loaded this skill's instructions into context before acting."
-msgstr ""
-
-msgid "Approve the pending tool request"
-msgstr ""
-
-msgid "Toggle skip approvals for this session"
-msgstr ""
-
-msgid "Clear the chat"
-msgstr ""
-
-msgid "Close the panel"
-msgstr ""
-
-msgid "Copy conversation to clipboard"
-msgstr ""
-
-msgid "Deny the pending tool request"
-msgstr ""
-
-msgid "Open chat history folder"
-msgstr ""
-
-msgid "Show or switch model (/model <name>)"
-msgstr ""
-
-msgid "Switch profile (/profile <name>)"
-msgstr ""
-
-msgid "Save chat to file"
-msgstr ""
-
-msgid "Open settings"
-msgstr ""
-
-msgid "List discovered skills and their status"
-msgstr ""
-
-msgid "Run a saved task (/task <name>)"
-msgstr ""
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr ""
-
-msgid "Toggle Full Auto Mode"
-msgstr ""
-
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-
-msgid "Drive Desktop"
-msgstr ""
-
-msgid "Stop Driving Desktop (disconnect)"
-msgstr ""
-
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr ""
-
-msgid "Run a task"
-msgstr ""
-
-msgid "Chat History"
-msgstr ""
-
-msgid "Loading..."
-msgstr ""
-
-msgid "No recent chats"
-msgstr ""
-
-msgid "Open history folder..."
-msgstr ""
-
-msgid "Clear all history..."
-msgstr ""
-
-msgid "Clear All History"
-msgstr ""
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-
-msgid "Clear All"
-msgstr ""
-
-msgid "Retry from this message?"
-msgstr ""
-
-msgid ""
-"This will remove %1 message(s) after this point and generate a new response."
-msgstr ""
-
-msgid "Retry"
-msgstr ""
-
-msgid "Compacted Context Summary"
-msgstr ""
-
-#, javascript-format
-msgid "Compacted up to %1%2 • Citations active"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "No compaction summary available."
-msgstr ""
-
-msgid "Copy"
-msgstr ""
-
-msgid "Compacting…"
-msgstr ""
-
-msgid "Re-compact"
-msgstr ""
-
-msgid "Incrementally compact new uncompacted conversation turns."
-msgstr ""
-
-msgid "Recompact All"
-msgstr ""
-
-msgid ""
-"Re-summarize the entire conversation from turn 1 from scratch, creating a "
-"fresh, unified compaction."
-msgstr ""
-
-msgid "Copy conversation"
-msgstr ""
-
-msgid "Command"
-msgstr ""
-
-msgid "View compacted context summary"
-msgstr ""
-
-msgid "Compacting context in background…"
-msgstr ""
-
-msgid "Clear chat"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Don't keep open"
-msgstr ""
-
-msgid "Keep open"
-msgstr ""
-
-msgid "Dismiss"
-msgstr ""
-
-msgid "The user denied this tool call."
-msgstr ""
-
-msgid "Send a message to start chatting"
-msgstr ""
-
-msgid "Attach File"
-msgstr ""
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr ""
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-
-msgid "All files (*)"
-msgstr ""
-
-msgid "Message input"
-msgstr ""
-
-msgid "Type a message…"
-msgstr ""
-
-msgid "Initializing…"
-msgstr ""
-
-msgid "Attach file or image"
-msgstr ""
-
-msgid "Transcribing…"
-msgstr ""
-
-msgid "Preparing…"
-msgstr ""
-
-msgid "Wait for the current reply"
-msgstr ""
-
-msgid "Click to stop and send"
-msgstr ""
-
-msgid "Release to send"
-msgstr ""
-
-msgid "Click to start"
-msgstr ""
-
-msgid "Hold to talk"
-msgstr ""
-
-msgid "Click to toggle, hold to talk"
-msgstr ""
-
-msgid "Send"
-msgstr ""
-
-msgid "Stop"
-msgstr ""
-
-msgid "Cancel LLM request"
-msgstr ""
-
-msgid "Stop reading aloud"
-msgstr ""
-
-msgid "Drop files here to attach"
 msgstr ""
 
 msgid "Text to Speech"
@@ -1779,6 +1451,9 @@ msgstr ""
 msgid "Auto"
 msgstr ""
 
+msgid "Hold to talk"
+msgstr ""
+
 msgid "Toggle"
 msgstr ""
 
@@ -1982,15 +1657,375 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
+msgid "Speech-to-text is not configured"
+msgstr ""
+
+msgid "Unknown STT backend: %1"
+msgstr ""
+
+msgid "Whisper CLI runner is not available"
+msgstr ""
+
+msgid "Could not build Whisper command"
+msgstr ""
+
+msgid "STT backend does not support model listing"
+msgstr ""
+
+msgid "New chat"
+msgstr ""
+
+msgid "No recent chats"
+msgstr ""
+
+msgid "Open history folder..."
+msgstr ""
+
+msgid "Clear all history..."
+msgstr ""
+
+msgid "Approve the pending tool request"
+msgstr ""
+
+msgid "Toggle skip approvals for this session"
+msgstr ""
+
+msgid "Clear the chat"
+msgstr ""
+
+msgid "Close the panel"
+msgstr ""
+
+msgid "Copy conversation to clipboard"
+msgstr ""
+
+msgid "Deny the pending tool request"
+msgstr ""
+
+msgid "Open chat history folder"
+msgstr ""
+
+msgid "Show or switch model (/model <name>)"
+msgstr ""
+
+msgid "Start a new chat"
+msgstr ""
+
+msgid "Switch profile (/profile <name>)"
+msgstr ""
+
+msgid "Save chat to file"
+msgstr ""
+
+msgid "Open settings"
+msgstr ""
+
+msgid "List discovered skills and their status"
+msgstr ""
+
+msgid "Run a saved task (/task <name>)"
+msgstr ""
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr ""
+
+msgid "Show sidebar"
+msgstr ""
+
+msgid "Hide sidebar"
+msgstr ""
+
+msgid "Toggle Full Auto Mode"
+msgstr ""
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+
+msgid "Drive Desktop"
+msgstr ""
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr ""
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr ""
+
+msgid "Run a task"
+msgstr ""
+
+msgid "Chat History"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Clear All History"
+msgstr ""
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+
+msgid "Clear All"
+msgstr ""
+
+msgid "Retry from this message?"
+msgstr ""
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Compacted Context Summary"
+msgstr ""
+
+#, javascript-format
+msgid "Compacted up to %1%2 • Citations active"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "No compaction summary available."
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Compacting…"
+msgstr ""
+
+msgid "Re-compact"
+msgstr ""
+
+msgid "Incrementally compact new uncompacted conversation turns."
+msgstr ""
+
+msgid "Recompact All"
+msgstr ""
+
+msgid ""
+"Re-summarize the entire conversation from turn 1 from scratch, creating a "
+"fresh, unified compaction."
+msgstr ""
+
+msgid "Copy conversation"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+msgid "View compacted context summary"
+msgstr ""
+
+msgid "Compacting context in background…"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Don't keep open"
+msgstr ""
+
+msgid "Keep open"
+msgstr ""
+
+msgid "Dismiss"
+msgstr ""
+
+msgid "The user denied this tool call."
+msgstr ""
+
+msgid "Send a message to start chatting"
+msgstr ""
+
+msgid "Attach File"
+msgstr ""
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr ""
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+
+msgid "All files (*)"
+msgstr ""
+
+msgid "Message input"
+msgstr ""
+
+msgid "Type a message…"
+msgstr ""
+
+msgid "Initializing…"
+msgstr ""
+
+msgid "Attach file or image"
+msgstr ""
+
+msgid "Transcribing…"
+msgstr ""
+
+msgid "Preparing…"
+msgstr ""
+
+msgid "Wait for the current reply"
+msgstr ""
+
+msgid "Click to stop and send"
+msgstr ""
+
+msgid "Release to send"
+msgstr ""
+
+msgid "Click to start"
+msgstr ""
+
+msgid "Click to toggle, hold to talk"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Cancel LLM request"
+msgstr ""
+
+msgid "Stop reading aloud"
+msgstr ""
+
+msgid "Drop files here to attach"
+msgstr ""
+
+msgid "Profile Header:"
+msgstr ""
+
+msgid "Show provider and model in profile header"
+msgstr ""
+
+msgid "Chat Spacing: %1px"
+msgstr ""
+
+msgid "Compact"
+msgstr ""
+
+msgid "Spacious"
+msgstr ""
+
+msgid "Chat Labels:"
+msgstr ""
+
+msgid "User label:"
+msgstr ""
+
+msgid "Assistant label:"
+msgstr ""
+
+msgid "Use model name as assistant label"
+msgstr ""
+
+msgid "Chat Colors:"
+msgstr ""
+
+msgid "Use custom user color"
+msgstr ""
+
+msgid "Use custom assistant color"
+msgstr ""
+
+msgid "UI Font:"
+msgstr ""
+
+msgid "Use custom UI font"
+msgstr ""
+
+msgid "Code Font:"
+msgstr ""
+
+msgid "Use custom code font"
+msgstr ""
+
+msgid "Thoughts Font:"
+msgstr ""
+
+msgid "Use custom thoughts font"
+msgstr ""
+
+msgid "LaTeX Rendering:"
+msgstr ""
+
+msgid "Leave as TeX"
+msgstr ""
+
+msgid "Replace with Unicode (Default)"
+msgstr ""
+
+msgid "Mathtext"
+msgstr ""
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr ""
+
+msgid "Header Icons:"
+msgstr ""
+
+msgid "Profile Header"
+msgstr ""
+
+msgid "Always show Tasks"
+msgstr ""
+
+msgid "Always show Auto Toggle"
+msgstr ""
+
+msgid "Show History"
+msgstr ""
+
+msgid "History placement:"
+msgstr ""
+
+msgid "Header button"
+msgstr ""
+
+msgid "Sidebar"
+msgstr ""
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+
+msgid "Show Copy conversation"
+msgstr ""
+
+msgid "Show Context compaction summary"
+msgstr ""
+
+msgid "Show New chat"
+msgstr ""
+
+msgid "Show Settings"
+msgstr ""
+
+msgid "Show Pin"
+msgstr ""
+
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
 msgstr ""
 
 msgid "Failed to stop driving: %1"
-msgstr ""
-
-msgid "Speech-to-text is not configured"
 msgstr ""
 
 msgid "Text-to-speech is not configured"
@@ -2205,18 +2240,6 @@ msgid "Drive session active (already authorized). Auto mode enabled."
 msgstr ""
 
 msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr ""
-
-msgid "Unknown STT backend: %1"
-msgstr ""
-
-msgid "Whisper CLI runner is not available"
-msgstr ""
-
-msgid "Could not build Whisper command"
-msgstr ""
-
-msgid "STT backend does not support model listing"
 msgstr ""
 
 msgid "General"

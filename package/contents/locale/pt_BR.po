@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-09 18:29-0400\n"
+"POT-Creation-Date: 2026-10-16 18:51-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -525,111 +525,6 @@ msgstr "Usar \"%1\""
 msgid "Fetching…"
 msgstr "Buscando…"
 
-msgid "Profile Header:"
-msgstr "Cabeçalho de perfil:"
-
-msgid "Show provider and model in profile header"
-msgstr "Mostrar provedor e modelo no cabeçalho de perfil"
-
-msgid "Chat Spacing: %1px"
-msgstr "Espaçamento do chat: %1px"
-
-msgid "Compact"
-msgstr "Compacto"
-
-msgid "Spacious"
-msgstr "Espaçoso"
-
-msgid "Chat Labels:"
-msgstr "Rótulos do chat:"
-
-msgid "User label:"
-msgstr "Rótulo do usuário:"
-
-msgid "You"
-msgstr "Você"
-
-msgid "Assistant label:"
-msgstr "Rótulo do assistente:"
-
-msgid "Assistant"
-msgstr "Assistente"
-
-msgid "Use model name as assistant label"
-msgstr "Usar o nome do modelo como rótulo do assistente"
-
-msgid "Chat Colors:"
-msgstr "Cores do chat:"
-
-msgid "Use custom user color"
-msgstr "Usar cor de usuário personalizada"
-
-msgid "Use custom assistant color"
-msgstr "Usar cor de assistente personalizada"
-
-msgid "UI Font:"
-msgstr "Fonte da interface:"
-
-msgid "Use custom UI font"
-msgstr "Usar fonte de interface personalizada"
-
-msgid "Code Font:"
-msgstr "Fonte de código:"
-
-msgid "Use custom code font"
-msgstr "Usar fonte de código personalizada"
-
-msgid "Thoughts Font:"
-msgstr "Fonte de pensamentos:"
-
-msgid "Use custom thoughts font"
-msgstr "Usar fonte de pensamentos personalizada"
-
-msgid "LaTeX Rendering:"
-msgstr "Renderização do LaTeX:"
-
-msgid "Leave as TeX"
-msgstr "Deixar como TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Substituir por Unicode (padrão)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib ausente)"
-
-msgid "Header Icons:"
-msgstr "Ícones do cabeçalho:"
-
-msgid "Profile Header"
-msgstr "Cabeçalho de perfil"
-
-msgid "Always show Tasks"
-msgstr "Sempre mostrar Tarefas"
-
-msgid "Always show Auto Toggle"
-msgstr "Sempre mostrar o botão Auto"
-
-msgid "Show History"
-msgstr "Mostrar histórico"
-
-msgid "Show Copy conversation"
-msgstr "Mostrar Copiar conversa"
-
-msgid "Show Context compaction summary"
-msgstr "Mostrar resumo da compactação de contexto"
-
-msgid "Show Clear chat"
-msgstr "Mostrar Limpar chat"
-
-msgid "Show Settings"
-msgstr "Mostrar Configurações"
-
-msgid "Show Pin"
-msgstr "Mostrar fixar"
-
 msgid "Stop command"
 msgstr "Parar comando"
 
@@ -936,11 +831,17 @@ msgstr "Incerto"
 msgid "Voice message"
 msgstr "Mensagem de voz"
 
+msgid "You"
+msgstr "Você"
+
 msgid "Error"
 msgstr "Erro"
 
 msgid "Web Search"
 msgstr "Busca na Web"
+
+msgid "Assistant"
+msgstr "Assistente"
 
 msgid "compacted"
 msgstr "compactado"
@@ -997,244 +898,6 @@ msgid "The model loaded this skill's instructions into context before acting."
 msgstr ""
 "O modelo carregou as instruções desta habilidade no contexto antes de agir."
 
-msgid "Approve the pending tool request"
-msgstr "Aprovar a solicitação de ferramenta pendente"
-
-msgid "Toggle skip approvals for this session"
-msgstr "Alternar pular aprovações para esta sessão"
-
-msgid "Clear the chat"
-msgstr "Limpar o chat"
-
-msgid "Close the panel"
-msgstr "Fechar o painel"
-
-msgid "Copy conversation to clipboard"
-msgstr "Copiar conversa para a área de transferência"
-
-msgid "Deny the pending tool request"
-msgstr "Negar a solicitação de ferramenta pendente"
-
-msgid "Open chat history folder"
-msgstr "Abrir pasta de histórico de chat"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "Mostrar ou trocar modelo (/model <name>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "Mudar perfil (/profile <nome>)"
-
-msgid "Save chat to file"
-msgstr "Salvar chat em arquivo"
-
-msgid "Open settings"
-msgstr "Abrir configurações"
-
-msgid "List discovered skills and their status"
-msgstr "Listar habilidades descobertas e seu status"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "Executar uma tarefa salva (/task <name>)"
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr "Alternar o modo Drive Desktop (inicia o handshake e o modo automático)"
-
-msgid "Toggle Full Auto Mode"
-msgstr "Alternar modo totalmente automático"
-
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-"Alternar modo totalmente automático: Quando habilitado, todas as ferramentas "
-"são executadas automaticamente para esta sessão."
-
-msgid "Drive Desktop"
-msgstr "Drive Desktop"
-
-msgid "Stop Driving Desktop (disconnect)"
-msgstr "Parar de controlar a área de trabalho (desconectar)"
-
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr "Drive Desktop (inicia o handshake e habilita o modo automático)"
-
-msgid "Run a task"
-msgstr "Executar uma tarefa"
-
-msgid "Chat History"
-msgstr "Histórico de Chat"
-
-msgid "Loading..."
-msgstr "Carregando..."
-
-msgid "No recent chats"
-msgstr "Sem chats recentes"
-
-msgid "Open history folder..."
-msgstr "Abrir pasta de histórico..."
-
-msgid "Clear all history..."
-msgstr "Limpar todo o histórico..."
-
-msgid "Clear All History"
-msgstr "Limpar Todo o Histórico"
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-"Tem certeza de que deseja excluir todos os arquivos de histórico de chat? "
-"Esta ação não pode ser desfeita."
-
-msgid "Clear All"
-msgstr "Limpar Tudo"
-
-msgid "Retry from this message?"
-msgstr "Tentar novamente a partir desta mensagem?"
-
-msgid ""
-"This will remove %1 message(s) after this point and generate a new response."
-msgstr ""
-"Isso removerá %1 mensagem(ns) após este ponto e gerará uma nova resposta."
-
-msgid "Retry"
-msgstr "Tentar novamente"
-
-msgid "Compacted Context Summary"
-msgstr "Resumo do contexto compactado"
-
-#, javascript-format
-msgid "Compacted up to %1%2 • Citations active"
-msgstr "Compactado até %1%2 • Citações ativas"
-
-msgid "Close"
-msgstr "Fechar"
-
-msgid "No compaction summary available."
-msgstr "Nenhum resumo de compactação disponível."
-
-msgid "Copy"
-msgstr "Copiar"
-
-msgid "Compacting…"
-msgstr "Compactando…"
-
-msgid "Re-compact"
-msgstr "Recompactar"
-
-msgid "Incrementally compact new uncompacted conversation turns."
-msgstr "Compactar incrementalmente novos turnos de conversa não compactados."
-
-msgid "Recompact All"
-msgstr "Recompactar tudo"
-
-msgid ""
-"Re-summarize the entire conversation from turn 1 from scratch, creating a "
-"fresh, unified compaction."
-msgstr ""
-"Resumir novamente toda a conversa a partir do turno 1 do zero, criando uma "
-"compactação nova e unificada."
-
-msgid "Copy conversation"
-msgstr "Copiar conversa"
-
-msgid "Command"
-msgstr "Comando"
-
-msgid "View compacted context summary"
-msgstr "Exibir resumo do contexto compactado"
-
-msgid "Compacting context in background…"
-msgstr "Compactando contexto em segundo plano…"
-
-msgid "Clear chat"
-msgstr "Limpar chat"
-
-msgid "Settings"
-msgstr "Configurações"
-
-msgid "Don't keep open"
-msgstr "Não manter aberto"
-
-msgid "Keep open"
-msgstr "Manter aberto"
-
-msgid "Dismiss"
-msgstr "Dispensar"
-
-msgid "The user denied this tool call."
-msgstr "O usuário negou esta chamada de ferramenta."
-
-msgid "Send a message to start chatting"
-msgstr "Envie uma mensagem para começar a conversar"
-
-msgid "Attach File"
-msgstr "Anexar arquivo"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Imagens (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-"Arquivos de texto (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
-"*.conf *.sh *.py *.js *.ts *.qml)"
-
-msgid "All files (*)"
-msgstr "Todos os arquivos (*)"
-
-msgid "Message input"
-msgstr "Entrada de mensagem"
-
-msgid "Type a message…"
-msgstr "Digite uma mensagem…"
-
-msgid "Initializing…"
-msgstr "Inicializando…"
-
-msgid "Attach file or image"
-msgstr "Anexar arquivo ou imagem"
-
-msgid "Transcribing…"
-msgstr "Transcrevendo…"
-
-msgid "Preparing…"
-msgstr "Preparando…"
-
-msgid "Wait for the current reply"
-msgstr "Aguarde a resposta atual"
-
-msgid "Click to stop and send"
-msgstr "Clique para parar e enviar"
-
-msgid "Release to send"
-msgstr "Solte para enviar"
-
-msgid "Click to start"
-msgstr "Clique para iniciar"
-
-msgid "Hold to talk"
-msgstr "Segure para falar"
-
-msgid "Click to toggle, hold to talk"
-msgstr "Clique para alternar, segure para falar"
-
-msgid "Send"
-msgstr "Enviar"
-
-msgid "Stop"
-msgstr "Parar"
-
-msgid "Cancel LLM request"
-msgstr "Cancelar solicitação ao LLM"
-
-msgid "Stop reading aloud"
-msgstr "Parar leitura em voz alta"
-
-msgid "Drop files here to attach"
-msgstr "Solte os arquivos aqui para anexar"
-
 msgid "Text to Speech"
 msgstr "Texto para fala"
 
@@ -1283,7 +946,9 @@ msgstr "Ativar saída de texto para fala"
 msgid ""
 "Enables speech synthesis. Messages can be read aloud using the speaker "
 "button on chat responses."
-msgstr "Ativa a síntese de voz. As mensagens podem ser lidas em voz alta com o botão de alto-falante nas respostas do chat."
+msgstr ""
+"Ativa a síntese de voz. As mensagens podem ser lidas em voz alta com o botão "
+"de alto-falante nas respostas do chat."
 
 msgid "Auto-read:"
 msgstr "Leitura automática:"
@@ -1297,7 +962,10 @@ msgstr "Ler automaticamente apenas quando solicitado por voz (STT)"
 msgid ""
 "When 'Only when prompted with voice' is checked, typed prompts won't trigger "
 "audio playback, but voice-dictated questions will speak the answer back."
-msgstr "Quando 'Somente quando solicitado por voz' está marcado, os prompts digitados não acionam a reprodução de áudio, mas as perguntas ditadas por voz terão a resposta falada."
+msgstr ""
+"Quando 'Somente quando solicitado por voz' está marcado, os prompts "
+"digitados não acionam a reprodução de áudio, mas as perguntas ditadas por "
+"voz terão a resposta falada."
 
 msgid "Don't output text until TTS is ready"
 msgstr "Não exibir texto até que o TTS esteja pronto"
@@ -1305,7 +973,9 @@ msgstr "Não exibir texto até que o TTS esteja pronto"
 msgid ""
 "Hides response text while generating and preparing audio, displaying the "
 "response only when speech is ready to play."
-msgstr "Oculta o texto da resposta enquanto ela é gerada e o áudio é preparado, exibindo-o somente quando a fala estiver pronta para reprodução."
+msgstr ""
+"Oculta o texto da resposta enquanto ela é gerada e o áudio é preparado, "
+"exibindo-o somente quando a fala estiver pronta para reprodução."
 
 msgid "Style / tone hint:"
 msgstr "Dica de estilo / tom:"
@@ -1317,7 +987,10 @@ msgid ""
 "Speech hint or tone directive (supported by Gemini and modern TTS "
 "endpoints). You can use tags like <sarcastic> or placeholders like [tone: "
 "sarcastic] {text}."
-msgstr "Dica ou diretiva de tom para a fala (compatível com Gemini e endpoints modernos de TTS). Você pode usar tags como <sarcastic> ou marcadores como [tone: sarcastic] {text}."
+msgstr ""
+"Dica ou diretiva de tom para a fala (compatível com Gemini e endpoints "
+"modernos de TTS). Você pode usar tags como <sarcastic> ou marcadores como "
+"[tone: sarcastic] {text}."
 
 msgid "Allow agent to set their own tone/style"
 msgstr "Permitir que o agente defina seu próprio tom/estilo"
@@ -1325,7 +998,10 @@ msgstr "Permitir que o agente defina seu próprio tom/estilo"
 msgid ""
 "Exposes a tool allowing the assistant to dynamically adjust its speech style "
 "or emotion based on conversation context or user requests."
-msgstr "Expõe uma ferramenta que permite ao assistente ajustar dinamicamente seu estilo de fala ou emoção com base no contexto da conversa ou em pedidos do usuário."
+msgstr ""
+"Expõe uma ferramenta que permite ao assistente ajustar dinamicamente seu "
+"estilo de fala ou emoção com base no contexto da conversa ou em pedidos do "
+"usuário."
 
 msgid "Synthesizer"
 msgstr "Sintetizador"
@@ -1384,7 +1060,9 @@ msgstr "Formato de áudio:"
 msgid ""
 "Note: Gemini TTS requires 'pcm'. PlasmaLLM automatically converts the raw "
 "24kHz stream into playable WAV audio."
-msgstr "Observação: o Gemini TTS requer 'pcm'. O PlasmaLLM converte automaticamente o fluxo bruto de 24 kHz em áudio WAV reproduzível."
+msgstr ""
+"Observação: o Gemini TTS requer 'pcm'. O PlasmaLLM converte automaticamente "
+"o fluxo bruto de 24 kHz em áudio WAV reproduzível."
 
 msgid "Command / binary:"
 msgstr "Comando / binário:"
@@ -1401,7 +1079,9 @@ msgstr "ex.: echo {text} | piper --model en.onnx --output_raw | pw-play -"
 msgid ""
 "Placeholders: {text} (quoted text), {voice} (voice identifier), {rate} "
 "(speech rate). If omitted, text is appended."
-msgstr "Marcadores: {text} (texto entre aspas), {voice} (identificador da voz), {rate} (velocidade da fala). Se omitido, o texto é anexado ao final."
+msgstr ""
+"Marcadores: {text} (texto entre aspas), {voice} (identificador da voz), "
+"{rate} (velocidade da fala). Se omitido, o texto é anexado ao final."
 
 msgid "Test:"
 msgstr "Teste:"
@@ -1810,12 +1490,18 @@ msgid ""
 "OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
 "requests include only the app name and URL. Uncheck to stop sending these "
 "headers."
-msgstr "O uso do OpenRouter é creditado ao PlasmaLLM nos rankings públicos de apps, e as requisições incluem apenas o nome e a URL do app. Desmarque para parar de enviar esses cabeçalhos."
+msgstr ""
+"O uso do OpenRouter é creditado ao PlasmaLLM nos rankings públicos de apps, "
+"e as requisições incluem apenas o nome e a URL do app. Desmarque para parar "
+"de enviar esses cabeçalhos."
 
 msgid ""
 "OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
 "their API. Nothing about your conversations is shared."
-msgstr "A atribuição do OpenRouter permite que o OpenRouter saiba que você usou o PlasmaLLM para acessar a API dele. Nenhuma das suas conversas é compartilhada."
+msgstr ""
+"A atribuição do OpenRouter permite que o OpenRouter saiba que você usou o "
+"PlasmaLLM para acessar a API dele. Nenhuma das suas conversas é "
+"compartilhada."
 
 msgid "Attachments:"
 msgstr "Anexos:"
@@ -1950,6 +1636,9 @@ msgstr "Botão do microfone:"
 
 msgid "Auto"
 msgstr "Automático"
+
+msgid "Hold to talk"
+msgstr "Segure para falar"
 
 msgid "Toggle"
 msgstr "Alternar"
@@ -2180,6 +1869,380 @@ msgstr "Instruções do prompt:"
 msgid "Reset"
 msgstr "Redefinir"
 
+msgid "Speech-to-text is not configured"
+msgstr "Voz para texto não está configurado"
+
+msgid "Unknown STT backend: %1"
+msgstr "Backend STT desconhecido: %1"
+
+msgid "Whisper CLI runner is not available"
+msgstr "O executor da CLI do Whisper não está disponível"
+
+msgid "Could not build Whisper command"
+msgstr "Não foi possível construir o comando Whisper"
+
+msgid "STT backend does not support model listing"
+msgstr "O backend STT não suporta listagem de modelos"
+
+msgid "New chat"
+msgstr "Novo chat"
+
+msgid "No recent chats"
+msgstr "Sem chats recentes"
+
+msgid "Open history folder..."
+msgstr "Abrir pasta de histórico..."
+
+msgid "Clear all history..."
+msgstr "Limpar todo o histórico..."
+
+msgid "Approve the pending tool request"
+msgstr "Aprovar a solicitação de ferramenta pendente"
+
+msgid "Toggle skip approvals for this session"
+msgstr "Alternar pular aprovações para esta sessão"
+
+msgid "Clear the chat"
+msgstr "Limpar o chat"
+
+msgid "Close the panel"
+msgstr "Fechar o painel"
+
+msgid "Copy conversation to clipboard"
+msgstr "Copiar conversa para a área de transferência"
+
+msgid "Deny the pending tool request"
+msgstr "Negar a solicitação de ferramenta pendente"
+
+msgid "Open chat history folder"
+msgstr "Abrir pasta de histórico de chat"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "Mostrar ou trocar modelo (/model <name>)"
+
+msgid "Start a new chat"
+msgstr "Iniciar um novo chat"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "Mudar perfil (/profile <nome>)"
+
+msgid "Save chat to file"
+msgstr "Salvar chat em arquivo"
+
+msgid "Open settings"
+msgstr "Abrir configurações"
+
+msgid "List discovered skills and their status"
+msgstr "Listar habilidades descobertas e seu status"
+
+msgid "Run a saved task (/task <name>)"
+msgstr "Executar uma tarefa salva (/task <name>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr "Alternar o modo Drive Desktop (inicia o handshake e o modo automático)"
+
+msgid "Show sidebar"
+msgstr "Mostrar barra lateral"
+
+msgid "Hide sidebar"
+msgstr "Ocultar barra lateral"
+
+msgid "Toggle Full Auto Mode"
+msgstr "Alternar modo totalmente automático"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Alternar modo totalmente automático: Quando habilitado, todas as ferramentas "
+"são executadas automaticamente para esta sessão."
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "Parar de controlar a área de trabalho (desconectar)"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop (inicia o handshake e habilita o modo automático)"
+
+msgid "Run a task"
+msgstr "Executar uma tarefa"
+
+msgid "Chat History"
+msgstr "Histórico de Chat"
+
+msgid "Loading..."
+msgstr "Carregando..."
+
+msgid "Clear All History"
+msgstr "Limpar Todo o Histórico"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Tem certeza de que deseja excluir todos os arquivos de histórico de chat? "
+"Esta ação não pode ser desfeita."
+
+msgid "Clear All"
+msgstr "Limpar Tudo"
+
+msgid "Retry from this message?"
+msgstr "Tentar novamente a partir desta mensagem?"
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+"Isso removerá %1 mensagem(ns) após este ponto e gerará uma nova resposta."
+
+msgid "Retry"
+msgstr "Tentar novamente"
+
+msgid "Compacted Context Summary"
+msgstr "Resumo do contexto compactado"
+
+#, javascript-format
+msgid "Compacted up to %1%2 • Citations active"
+msgstr "Compactado até %1%2 • Citações ativas"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "No compaction summary available."
+msgstr "Nenhum resumo de compactação disponível."
+
+msgid "Copy"
+msgstr "Copiar"
+
+msgid "Compacting…"
+msgstr "Compactando…"
+
+msgid "Re-compact"
+msgstr "Recompactar"
+
+msgid "Incrementally compact new uncompacted conversation turns."
+msgstr "Compactar incrementalmente novos turnos de conversa não compactados."
+
+msgid "Recompact All"
+msgstr "Recompactar tudo"
+
+msgid ""
+"Re-summarize the entire conversation from turn 1 from scratch, creating a "
+"fresh, unified compaction."
+msgstr ""
+"Resumir novamente toda a conversa a partir do turno 1 do zero, criando uma "
+"compactação nova e unificada."
+
+msgid "Copy conversation"
+msgstr "Copiar conversa"
+
+msgid "Command"
+msgstr "Comando"
+
+msgid "View compacted context summary"
+msgstr "Exibir resumo do contexto compactado"
+
+msgid "Compacting context in background…"
+msgstr "Compactando contexto em segundo plano…"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "Don't keep open"
+msgstr "Não manter aberto"
+
+msgid "Keep open"
+msgstr "Manter aberto"
+
+msgid "Dismiss"
+msgstr "Dispensar"
+
+msgid "The user denied this tool call."
+msgstr "O usuário negou esta chamada de ferramenta."
+
+msgid "Send a message to start chatting"
+msgstr "Envie uma mensagem para começar a conversar"
+
+msgid "Attach File"
+msgstr "Anexar arquivo"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Imagens (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Arquivos de texto (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
+"*.conf *.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "Todos os arquivos (*)"
+
+msgid "Message input"
+msgstr "Entrada de mensagem"
+
+msgid "Type a message…"
+msgstr "Digite uma mensagem…"
+
+msgid "Initializing…"
+msgstr "Inicializando…"
+
+msgid "Attach file or image"
+msgstr "Anexar arquivo ou imagem"
+
+msgid "Transcribing…"
+msgstr "Transcrevendo…"
+
+msgid "Preparing…"
+msgstr "Preparando…"
+
+msgid "Wait for the current reply"
+msgstr "Aguarde a resposta atual"
+
+msgid "Click to stop and send"
+msgstr "Clique para parar e enviar"
+
+msgid "Release to send"
+msgstr "Solte para enviar"
+
+msgid "Click to start"
+msgstr "Clique para iniciar"
+
+msgid "Click to toggle, hold to talk"
+msgstr "Clique para alternar, segure para falar"
+
+msgid "Send"
+msgstr "Enviar"
+
+msgid "Stop"
+msgstr "Parar"
+
+msgid "Cancel LLM request"
+msgstr "Cancelar solicitação ao LLM"
+
+msgid "Stop reading aloud"
+msgstr "Parar leitura em voz alta"
+
+msgid "Drop files here to attach"
+msgstr "Solte os arquivos aqui para anexar"
+
+msgid "Profile Header:"
+msgstr "Cabeçalho de perfil:"
+
+msgid "Show provider and model in profile header"
+msgstr "Mostrar provedor e modelo no cabeçalho de perfil"
+
+msgid "Chat Spacing: %1px"
+msgstr "Espaçamento do chat: %1px"
+
+msgid "Compact"
+msgstr "Compacto"
+
+msgid "Spacious"
+msgstr "Espaçoso"
+
+msgid "Chat Labels:"
+msgstr "Rótulos do chat:"
+
+msgid "User label:"
+msgstr "Rótulo do usuário:"
+
+msgid "Assistant label:"
+msgstr "Rótulo do assistente:"
+
+msgid "Use model name as assistant label"
+msgstr "Usar o nome do modelo como rótulo do assistente"
+
+msgid "Chat Colors:"
+msgstr "Cores do chat:"
+
+msgid "Use custom user color"
+msgstr "Usar cor de usuário personalizada"
+
+msgid "Use custom assistant color"
+msgstr "Usar cor de assistente personalizada"
+
+msgid "UI Font:"
+msgstr "Fonte da interface:"
+
+msgid "Use custom UI font"
+msgstr "Usar fonte de interface personalizada"
+
+msgid "Code Font:"
+msgstr "Fonte de código:"
+
+msgid "Use custom code font"
+msgstr "Usar fonte de código personalizada"
+
+msgid "Thoughts Font:"
+msgstr "Fonte de pensamentos:"
+
+msgid "Use custom thoughts font"
+msgstr "Usar fonte de pensamentos personalizada"
+
+msgid "LaTeX Rendering:"
+msgstr "Renderização do LaTeX:"
+
+msgid "Leave as TeX"
+msgstr "Deixar como TeX"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Substituir por Unicode (padrão)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib ausente)"
+
+msgid "Header Icons:"
+msgstr "Ícones do cabeçalho:"
+
+msgid "Profile Header"
+msgstr "Cabeçalho de perfil"
+
+msgid "Always show Tasks"
+msgstr "Sempre mostrar Tarefas"
+
+msgid "Always show Auto Toggle"
+msgstr "Sempre mostrar o botão Auto"
+
+msgid "Show History"
+msgstr "Mostrar histórico"
+
+msgid "History placement:"
+msgstr "Posição do histórico:"
+
+msgid "Header button"
+msgstr "Botão no cabeçalho"
+
+msgid "Sidebar"
+msgstr "Barra lateral"
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+"Automático mostra a barra lateral quando ela cabe ao lado do chat. Barra "
+"lateral sempre a mostra e aumenta o tamanho mínimo para caber ambos."
+
+msgid "Show Copy conversation"
+msgstr "Mostrar Copiar conversa"
+
+msgid "Show Context compaction summary"
+msgstr "Mostrar resumo da compactação de contexto"
+
+msgid "Show New chat"
+msgstr "Mostrar Novo chat"
+
+msgid "Show Settings"
+msgstr "Mostrar Configurações"
+
+msgid "Show Pin"
+msgstr "Mostrar fixar"
+
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
@@ -2190,9 +2253,6 @@ msgstr ""
 msgid "Failed to stop driving: %1"
 msgstr "Falha ao parar de controlar: %1"
 
-msgid "Speech-to-text is not configured"
-msgstr "Voz para texto não está configurado"
-
 msgid "Text-to-speech is not configured"
 msgstr "Texto para fala não está configurado"
 
@@ -2200,7 +2260,9 @@ msgid "PlasmaLLM"
 msgstr "PlasmaLLM"
 
 msgid "Text-to-speech is not configured. Open Text to Speech settings."
-msgstr "Texto para fala não está configurado. Abra as configurações de texto para fala."
+msgstr ""
+"Texto para fala não está configurado. Abra as configurações de texto para "
+"fala."
 
 msgid "Speaking…"
 msgstr "Falando…"
@@ -2428,18 +2490,6 @@ msgstr "Sessão de controle ativa (já autorizada). Modo automático habilitado.
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Sessão de controle autorizada com sucesso. Modo automático habilitado."
 
-msgid "Unknown STT backend: %1"
-msgstr "Backend STT desconhecido: %1"
-
-msgid "Whisper CLI runner is not available"
-msgstr "O executor da CLI do Whisper não está disponível"
-
-msgid "Could not build Whisper command"
-msgstr "Não foi possível construir o comando Whisper"
-
-msgid "STT backend does not support model listing"
-msgstr "O backend STT não suporta listagem de modelos"
-
 msgid "General"
 msgstr "Geral"
 
@@ -2460,6 +2510,12 @@ msgstr "Ferramentas"
 
 msgid "Custom Tools"
 msgstr "Ferramentas personalizadas"
+
+#~ msgid "Clear chat"
+#~ msgstr "Limpar chat"
+
+#~ msgid "Show Clear chat"
+#~ msgstr "Mostrar Limpar chat"
 
 #~ msgid ""
 #~ "Skills are reusable instruction sets the model loads on demand via the "

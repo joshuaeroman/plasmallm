@@ -9,6 +9,7 @@
 import QtCore
 import QtQuick
 import QtQuick.Controls as QQC2
+import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
@@ -20,8 +21,11 @@ QQC2.ApplicationWindow {
     visible: true
     width: Kirigami.Units.gridUnit * 28
     height: Kirigami.Units.gridUnit * 32
-    minimumWidth: Kirigami.Units.gridUnit * 20
+    // Follow the representation's minimum (it grows when the history sidebar
+    // is forced on), and widen the window if it is now below it.
+    minimumWidth: applet.item?.fullRepresentationItem?.Layout.minimumWidth ?? Kirigami.Units.gridUnit * 20
     minimumHeight: Kirigami.Units.gridUnit * 24
+    onMinimumWidthChanged: if (width < minimumWidth) width = minimumWidth
 
     // The applet behaves as "expanded" (popup open) while the user is looking
     // at it; it uses this to decide on notifications and unread markers.

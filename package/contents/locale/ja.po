@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-09 18:29-0400\n"
+"POT-Creation-Date: 2026-10-16 18:51-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Japanese\n"
@@ -518,111 +518,6 @@ msgstr "\"%1\" を使用"
 msgid "Fetching…"
 msgstr "取得中…"
 
-msgid "Profile Header:"
-msgstr "プロファイルヘッダー:"
-
-msgid "Show provider and model in profile header"
-msgstr "プロファイルヘッダーにプロバイダーとモデルを表示"
-
-msgid "Chat Spacing: %1px"
-msgstr "チャット間隔: %1px"
-
-msgid "Compact"
-msgstr "コンパクト"
-
-msgid "Spacious"
-msgstr "ゆったり"
-
-msgid "Chat Labels:"
-msgstr "チャットのラベル:"
-
-msgid "User label:"
-msgstr "ユーザーのラベル:"
-
-msgid "You"
-msgstr "あなた"
-
-msgid "Assistant label:"
-msgstr "アシスタントのラベル:"
-
-msgid "Assistant"
-msgstr "アシスタント"
-
-msgid "Use model name as assistant label"
-msgstr "モデル名をアシスタントのラベルとして使用する"
-
-msgid "Chat Colors:"
-msgstr "チャットの色:"
-
-msgid "Use custom user color"
-msgstr "ユーザーの色をカスタマイズする"
-
-msgid "Use custom assistant color"
-msgstr "アシスタントの色をカスタマイズする"
-
-msgid "UI Font:"
-msgstr "UIフォント："
-
-msgid "Use custom UI font"
-msgstr "カスタムUIフォントを使用"
-
-msgid "Code Font:"
-msgstr "コードフォント："
-
-msgid "Use custom code font"
-msgstr "カスタムコードフォントを使用"
-
-msgid "Thoughts Font:"
-msgstr "思考フォント："
-
-msgid "Use custom thoughts font"
-msgstr "カスタム思考フォントを使用"
-
-msgid "LaTeX Rendering:"
-msgstr "LaTeX レンダリング:"
-
-msgid "Leave as TeX"
-msgstr "TeX のまま残す"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Unicode で置換 (デフォルト)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib が見つかりません)"
-
-msgid "Header Icons:"
-msgstr "ヘッダーアイコン:"
-
-msgid "Profile Header"
-msgstr "プロファイルヘッダー"
-
-msgid "Always show Tasks"
-msgstr "タスクを常に表示"
-
-msgid "Always show Auto Toggle"
-msgstr "自動切り替えを常に表示"
-
-msgid "Show History"
-msgstr "履歴を表示"
-
-msgid "Show Copy conversation"
-msgstr "会話のコピーを表示"
-
-msgid "Show Context compaction summary"
-msgstr "コンテキスト圧縮の要約を表示"
-
-msgid "Show Clear chat"
-msgstr "チャットのクリアを表示"
-
-msgid "Show Settings"
-msgstr "設定を表示"
-
-msgid "Show Pin"
-msgstr "ピンを表示"
-
 msgid "Stop command"
 msgstr "コマンドを停止"
 
@@ -922,11 +817,17 @@ msgstr "不明"
 msgid "Voice message"
 msgstr "音声メッセージ"
 
+msgid "You"
+msgstr "あなた"
+
 msgid "Error"
 msgstr "エラー"
 
 msgid "Web Search"
 msgstr "ウェブ検索..."
+
+msgid "Assistant"
+msgstr "アシスタント"
 
 msgid "compacted"
 msgstr "圧縮済み"
@@ -984,243 +885,6 @@ msgid "The model loaded this skill's instructions into context before acting."
 msgstr ""
 "モデルは動作を実行する前に、このスキルの指示をコンテキストに読み込みました。"
 
-msgid "Approve the pending tool request"
-msgstr "保留中のツールリクエストを承認"
-
-msgid "Toggle skip approvals for this session"
-msgstr "このセッションの承認スキップを切り替え"
-
-msgid "Clear the chat"
-msgstr "チャットをクリア"
-
-msgid "Close the panel"
-msgstr "パネルを閉じる"
-
-msgid "Copy conversation to clipboard"
-msgstr "会話をクリップボードにコピー"
-
-msgid "Deny the pending tool request"
-msgstr "保留中のツールリクエストを拒否"
-
-msgid "Open chat history folder"
-msgstr "チャット履歴フォルダーを開く"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "モデルを表示または切り替え (/model <name>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "プロファイルを切り替え (/profile <名前>)"
-
-msgid "Save chat to file"
-msgstr "チャットをファイルに保存"
-
-msgid "Open settings"
-msgstr "設定を開く"
-
-msgid "List discovered skills and their status"
-msgstr "検出されたスキルとそのステータスを一覧表示"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "保存したタスクを実行 (/task <name>)"
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr "Drive Desktopモードを切り替える（ハンドシェイクと自動モードを開始）"
-
-msgid "Toggle Full Auto Mode"
-msgstr "完全自動モードの切り替え"
-
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-"完全自動モードの切り替え：有効にすると、このセッションのすべてのツールが自動"
-"的に実行されます。"
-
-msgid "Drive Desktop"
-msgstr "Drive Desktop"
-
-msgid "Stop Driving Desktop (disconnect)"
-msgstr "デスクトップの操作を停止する（切断）"
-
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr "Drive Desktop（ハンドシェイクを開始し、自動モードを有効化）"
-
-msgid "Run a task"
-msgstr "タスクを実行"
-
-msgid "Chat History"
-msgstr "チャット履歴"
-
-msgid "Loading..."
-msgstr "読み込み中..."
-
-msgid "No recent chats"
-msgstr "最近のチャットはありません"
-
-msgid "Open history folder..."
-msgstr "履歴フォルダーを開く..."
-
-msgid "Clear all history..."
-msgstr "すべての履歴を消去..."
-
-msgid "Clear All History"
-msgstr "すべての履歴を消去"
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-"すべてのチャット履歴ファイルを削除してもよろしいですか？この操作は取り消せま"
-"せん。"
-
-msgid "Clear All"
-msgstr "すべて消去"
-
-msgid "Retry from this message?"
-msgstr "このメッセージから再試行しますか？"
-
-msgid ""
-"This will remove %1 message(s) after this point and generate a new response."
-msgstr ""
-"これにより、この後の%1件のメッセージが削除され、新しい応答が生成されます。"
-
-msgid "Retry"
-msgstr "再試行"
-
-msgid "Compacted Context Summary"
-msgstr "圧縮されたコンテキストの要約"
-
-#, javascript-format
-msgid "Compacted up to %1%2 • Citations active"
-msgstr "%1%2 まで圧縮済み • 引用は有効"
-
-msgid "Close"
-msgstr "閉じる"
-
-msgid "No compaction summary available."
-msgstr "利用可能な圧縮要約はありません。"
-
-msgid "Copy"
-msgstr "コピー"
-
-msgid "Compacting…"
-msgstr "圧縮中…"
-
-msgid "Re-compact"
-msgstr "再圧縮"
-
-msgid "Incrementally compact new uncompacted conversation turns."
-msgstr "未圧縮の新しい会話ターンを段階的に圧縮します。"
-
-msgid "Recompact All"
-msgstr "すべて再圧縮"
-
-msgid ""
-"Re-summarize the entire conversation from turn 1 from scratch, creating a "
-"fresh, unified compaction."
-msgstr ""
-"第1ターンから会話全体を最初から要約し直し、新しく統一された圧縮を作成します。"
-
-msgid "Copy conversation"
-msgstr "会話をコピー"
-
-msgid "Command"
-msgstr "コマンド"
-
-msgid "View compacted context summary"
-msgstr "圧縮されたコンテキストの要約を表示"
-
-msgid "Compacting context in background…"
-msgstr "バックグラウンドでコンテキストを圧縮中…"
-
-msgid "Clear chat"
-msgstr "チャットをクリア"
-
-msgid "Settings"
-msgstr "設定"
-
-msgid "Don't keep open"
-msgstr "開いたままにしない"
-
-msgid "Keep open"
-msgstr "開いたままにする"
-
-msgid "Dismiss"
-msgstr "閉じる"
-
-msgid "The user denied this tool call."
-msgstr "ユーザーがこのツール呼び出しを拒否しました。"
-
-msgid "Send a message to start chatting"
-msgstr "メッセージを送信してチャットを開始"
-
-msgid "Attach File"
-msgstr "ファイルを添付"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "画像 (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-"テキストファイル (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
-"*.conf *.sh *.py *.js *.ts *.qml)"
-
-msgid "All files (*)"
-msgstr "すべてのファイル (*)"
-
-msgid "Message input"
-msgstr "メッセージ入力"
-
-msgid "Type a message…"
-msgstr "メッセージを入力…"
-
-msgid "Initializing…"
-msgstr "初期化中…"
-
-msgid "Attach file or image"
-msgstr "ファイルまたは画像を添付"
-
-msgid "Transcribing…"
-msgstr "文字起こし中…"
-
-msgid "Preparing…"
-msgstr "準備中…"
-
-msgid "Wait for the current reply"
-msgstr "現在の応答を待機中"
-
-msgid "Click to stop and send"
-msgstr "クリックして停止し送信"
-
-msgid "Release to send"
-msgstr "離して送信"
-
-msgid "Click to start"
-msgstr "クリックして開始"
-
-msgid "Hold to talk"
-msgstr "長押しして話す"
-
-msgid "Click to toggle, hold to talk"
-msgstr "クリックで切り替え、長押しで話す"
-
-msgid "Send"
-msgstr "送信"
-
-msgid "Stop"
-msgstr "停止"
-
-msgid "Cancel LLM request"
-msgstr "LLMリクエストをキャンセル"
-
-msgid "Stop reading aloud"
-msgstr "読み上げを停止"
-
-msgid "Drop files here to attach"
-msgstr "ここにファイルをドロップして添付します"
-
 msgid "Text to Speech"
 msgstr "音声読み上げ"
 
@@ -1269,7 +933,9 @@ msgstr "テキスト読み上げ出力を有効にする"
 msgid ""
 "Enables speech synthesis. Messages can be read aloud using the speaker "
 "button on chat responses."
-msgstr "音声合成を有効にします。チャットの応答にあるスピーカーボタンで、メッセージを読み上げることができます。"
+msgstr ""
+"音声合成を有効にします。チャットの応答にあるスピーカーボタンで、メッセージを"
+"読み上げることができます。"
 
 msgid "Auto-read:"
 msgstr "自動読み上げ："
@@ -1283,7 +949,9 @@ msgstr "音声で話しかけた場合のみ自動読み上げ（STT）"
 msgid ""
 "When 'Only when prompted with voice' is checked, typed prompts won't trigger "
 "audio playback, but voice-dictated questions will speak the answer back."
-msgstr "「音声で話しかけた場合のみ」にチェックを入れると、キーボードで入力したプロンプトでは音声再生は行われませんが、音声で入力した質問には回答を読み上げます。"
+msgstr ""
+"「音声で話しかけた場合のみ」にチェックを入れると、キーボードで入力したプロン"
+"プトでは音声再生は行われませんが、音声で入力した質問には回答を読み上げます。"
 
 msgid "Don't output text until TTS is ready"
 msgstr "TTS の準備ができるまでテキストを出力しない"
@@ -1291,7 +959,9 @@ msgstr "TTS の準備ができるまでテキストを出力しない"
 msgid ""
 "Hides response text while generating and preparing audio, displaying the "
 "response only when speech is ready to play."
-msgstr "生成と音声の準備中は応答テキストを非表示にし、再生の準備ができたときにのみ表示します。"
+msgstr ""
+"生成と音声の準備中は応答テキストを非表示にし、再生の準備ができたときにのみ表"
+"示します。"
 
 msgid "Style / tone hint:"
 msgstr "スタイル / トーンのヒント："
@@ -1303,7 +973,10 @@ msgid ""
 "Speech hint or tone directive (supported by Gemini and modern TTS "
 "endpoints). You can use tags like <sarcastic> or placeholders like [tone: "
 "sarcastic] {text}."
-msgstr "音声のヒントまたはトーン指示（Gemini や最新の TTS エンドポイントで対応）。<sarcastic> のようなタグや [tone: sarcastic] {text} のようなプレースホルダーを使用できます。"
+msgstr ""
+"音声のヒントまたはトーン指示（Gemini や最新の TTS エンドポイントで対応）。"
+"<sarcastic> のようなタグや [tone: sarcastic] {text} のようなプレースホルダー"
+"を使用できます。"
 
 msgid "Allow agent to set their own tone/style"
 msgstr "エージェントが自身のトーン/スタイルを設定できるようにする"
@@ -1311,7 +984,9 @@ msgstr "エージェントが自身のトーン/スタイルを設定できる�
 msgid ""
 "Exposes a tool allowing the assistant to dynamically adjust its speech style "
 "or emotion based on conversation context or user requests."
-msgstr "会話の文脈やユーザーの要求に応じて、アシスタントが話し方や感情を動的に調整できるツールを提供します。"
+msgstr ""
+"会話の文脈やユーザーの要求に応じて、アシスタントが話し方や感情を動的に調整で"
+"きるツールを提供します。"
 
 msgid "Synthesizer"
 msgstr "シンセサイザー"
@@ -1370,7 +1045,9 @@ msgstr "音声フォーマット："
 msgid ""
 "Note: Gemini TTS requires 'pcm'. PlasmaLLM automatically converts the raw "
 "24kHz stream into playable WAV audio."
-msgstr "注: Gemini TTS には 'pcm' が必要です。PlasmaLLM は 24kHz の生ストリームを再生可能な WAV 音声に自動変換します。"
+msgstr ""
+"注: Gemini TTS には 'pcm' が必要です。PlasmaLLM は 24kHz の生ストリームを再生"
+"可能な WAV 音声に自動変換します。"
 
 msgid "Command / binary:"
 msgstr "コマンド / バイナリ："
@@ -1387,7 +1064,9 @@ msgstr "例: echo {text} | piper --model en.onnx --output_raw | pw-play -"
 msgid ""
 "Placeholders: {text} (quoted text), {voice} (voice identifier), {rate} "
 "(speech rate). If omitted, text is appended."
-msgstr "プレースホルダー: {text}（引用されたテキスト）、{voice}（音声ID）、{rate}（話す速度）。省略した場合はテキストが末尾に追加されます。"
+msgstr ""
+"プレースホルダー: {text}（引用されたテキスト）、{voice}（音声ID）、{rate}（話"
+"す速度）。省略した場合はテキストが末尾に追加されます。"
 
 msgid "Test:"
 msgstr "テスト:"
@@ -1788,12 +1467,17 @@ msgid ""
 "OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
 "requests include only the app name and URL. Uncheck to stop sending these "
 "headers."
-msgstr "OpenRouter の利用は、公開されているアプリのランキングで PlasmaLLM に帰属されます。リクエストにはアプリ名と URL のみが含まれます。送信を停止するにはチェックを外してください。"
+msgstr ""
+"OpenRouter の利用は、公開されているアプリのランキングで PlasmaLLM に帰属され"
+"ます。リクエストにはアプリ名と URL のみが含まれます。送信を停止するにはチェッ"
+"クを外してください。"
 
 msgid ""
 "OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
 "their API. Nothing about your conversations is shared."
-msgstr "OpenRouter の帰属表示により、PlasmaLLM を使って API にアクセスしたことが OpenRouter に伝わります。会話内容が共有されることはありません。"
+msgstr ""
+"OpenRouter の帰属表示により、PlasmaLLM を使って API にアクセスしたことが "
+"OpenRouter に伝わります。会話内容が共有されることはありません。"
 
 msgid "Attachments:"
 msgstr "添付ファイル:"
@@ -1932,6 +1616,9 @@ msgstr "マイクボタン:"
 
 msgid "Auto"
 msgstr "自動"
+
+msgid "Hold to talk"
+msgstr "長押しして話す"
 
 msgid "Toggle"
 msgstr "切り替え"
@@ -2159,6 +1846,379 @@ msgstr "プロンプトの指示:"
 msgid "Reset"
 msgstr "リセット"
 
+msgid "Speech-to-text is not configured"
+msgstr "音声認識が設定されていません"
+
+msgid "Unknown STT backend: %1"
+msgstr "不明なSTTバックエンド: %1"
+
+msgid "Whisper CLI runner is not available"
+msgstr "Whisper CLI ランナーは利用できません"
+
+msgid "Could not build Whisper command"
+msgstr "Whisper コマンドを作成できませんでした"
+
+msgid "STT backend does not support model listing"
+msgstr "STTバックエンドはモデル一覧の取得をサポートしていません"
+
+msgid "New chat"
+msgstr "新しいチャット"
+
+msgid "No recent chats"
+msgstr "最近のチャットはありません"
+
+msgid "Open history folder..."
+msgstr "履歴フォルダーを開く..."
+
+msgid "Clear all history..."
+msgstr "すべての履歴を消去..."
+
+msgid "Approve the pending tool request"
+msgstr "保留中のツールリクエストを承認"
+
+msgid "Toggle skip approvals for this session"
+msgstr "このセッションの承認スキップを切り替え"
+
+msgid "Clear the chat"
+msgstr "チャットをクリア"
+
+msgid "Close the panel"
+msgstr "パネルを閉じる"
+
+msgid "Copy conversation to clipboard"
+msgstr "会話をクリップボードにコピー"
+
+msgid "Deny the pending tool request"
+msgstr "保留中のツールリクエストを拒否"
+
+msgid "Open chat history folder"
+msgstr "チャット履歴フォルダーを開く"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "モデルを表示または切り替え (/model <name>)"
+
+msgid "Start a new chat"
+msgstr "新しいチャットを開始"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "プロファイルを切り替え (/profile <名前>)"
+
+msgid "Save chat to file"
+msgstr "チャットをファイルに保存"
+
+msgid "Open settings"
+msgstr "設定を開く"
+
+msgid "List discovered skills and their status"
+msgstr "検出されたスキルとそのステータスを一覧表示"
+
+msgid "Run a saved task (/task <name>)"
+msgstr "保存したタスクを実行 (/task <name>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr "Drive Desktopモードを切り替える（ハンドシェイクと自動モードを開始）"
+
+msgid "Show sidebar"
+msgstr "サイドバーを表示"
+
+msgid "Hide sidebar"
+msgstr "サイドバーを隠す"
+
+msgid "Toggle Full Auto Mode"
+msgstr "完全自動モードの切り替え"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"完全自動モードの切り替え：有効にすると、このセッションのすべてのツールが自動"
+"的に実行されます。"
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "デスクトップの操作を停止する（切断）"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop（ハンドシェイクを開始し、自動モードを有効化）"
+
+msgid "Run a task"
+msgstr "タスクを実行"
+
+msgid "Chat History"
+msgstr "チャット履歴"
+
+msgid "Loading..."
+msgstr "読み込み中..."
+
+msgid "Clear All History"
+msgstr "すべての履歴を消去"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"すべてのチャット履歴ファイルを削除してもよろしいですか？この操作は取り消せま"
+"せん。"
+
+msgid "Clear All"
+msgstr "すべて消去"
+
+msgid "Retry from this message?"
+msgstr "このメッセージから再試行しますか？"
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+"これにより、この後の%1件のメッセージが削除され、新しい応答が生成されます。"
+
+msgid "Retry"
+msgstr "再試行"
+
+msgid "Compacted Context Summary"
+msgstr "圧縮されたコンテキストの要約"
+
+#, javascript-format
+msgid "Compacted up to %1%2 • Citations active"
+msgstr "%1%2 まで圧縮済み • 引用は有効"
+
+msgid "Close"
+msgstr "閉じる"
+
+msgid "No compaction summary available."
+msgstr "利用可能な圧縮要約はありません。"
+
+msgid "Copy"
+msgstr "コピー"
+
+msgid "Compacting…"
+msgstr "圧縮中…"
+
+msgid "Re-compact"
+msgstr "再圧縮"
+
+msgid "Incrementally compact new uncompacted conversation turns."
+msgstr "未圧縮の新しい会話ターンを段階的に圧縮します。"
+
+msgid "Recompact All"
+msgstr "すべて再圧縮"
+
+msgid ""
+"Re-summarize the entire conversation from turn 1 from scratch, creating a "
+"fresh, unified compaction."
+msgstr ""
+"第1ターンから会話全体を最初から要約し直し、新しく統一された圧縮を作成します。"
+
+msgid "Copy conversation"
+msgstr "会話をコピー"
+
+msgid "Command"
+msgstr "コマンド"
+
+msgid "View compacted context summary"
+msgstr "圧縮されたコンテキストの要約を表示"
+
+msgid "Compacting context in background…"
+msgstr "バックグラウンドでコンテキストを圧縮中…"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Don't keep open"
+msgstr "開いたままにしない"
+
+msgid "Keep open"
+msgstr "開いたままにする"
+
+msgid "Dismiss"
+msgstr "閉じる"
+
+msgid "The user denied this tool call."
+msgstr "ユーザーがこのツール呼び出しを拒否しました。"
+
+msgid "Send a message to start chatting"
+msgstr "メッセージを送信してチャットを開始"
+
+msgid "Attach File"
+msgstr "ファイルを添付"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "画像 (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"テキストファイル (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
+"*.conf *.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "すべてのファイル (*)"
+
+msgid "Message input"
+msgstr "メッセージ入力"
+
+msgid "Type a message…"
+msgstr "メッセージを入力…"
+
+msgid "Initializing…"
+msgstr "初期化中…"
+
+msgid "Attach file or image"
+msgstr "ファイルまたは画像を添付"
+
+msgid "Transcribing…"
+msgstr "文字起こし中…"
+
+msgid "Preparing…"
+msgstr "準備中…"
+
+msgid "Wait for the current reply"
+msgstr "現在の応答を待機中"
+
+msgid "Click to stop and send"
+msgstr "クリックして停止し送信"
+
+msgid "Release to send"
+msgstr "離して送信"
+
+msgid "Click to start"
+msgstr "クリックして開始"
+
+msgid "Click to toggle, hold to talk"
+msgstr "クリックで切り替え、長押しで話す"
+
+msgid "Send"
+msgstr "送信"
+
+msgid "Stop"
+msgstr "停止"
+
+msgid "Cancel LLM request"
+msgstr "LLMリクエストをキャンセル"
+
+msgid "Stop reading aloud"
+msgstr "読み上げを停止"
+
+msgid "Drop files here to attach"
+msgstr "ここにファイルをドロップして添付します"
+
+msgid "Profile Header:"
+msgstr "プロファイルヘッダー:"
+
+msgid "Show provider and model in profile header"
+msgstr "プロファイルヘッダーにプロバイダーとモデルを表示"
+
+msgid "Chat Spacing: %1px"
+msgstr "チャット間隔: %1px"
+
+msgid "Compact"
+msgstr "コンパクト"
+
+msgid "Spacious"
+msgstr "ゆったり"
+
+msgid "Chat Labels:"
+msgstr "チャットのラベル:"
+
+msgid "User label:"
+msgstr "ユーザーのラベル:"
+
+msgid "Assistant label:"
+msgstr "アシスタントのラベル:"
+
+msgid "Use model name as assistant label"
+msgstr "モデル名をアシスタントのラベルとして使用する"
+
+msgid "Chat Colors:"
+msgstr "チャットの色:"
+
+msgid "Use custom user color"
+msgstr "ユーザーの色をカスタマイズする"
+
+msgid "Use custom assistant color"
+msgstr "アシスタントの色をカスタマイズする"
+
+msgid "UI Font:"
+msgstr "UIフォント："
+
+msgid "Use custom UI font"
+msgstr "カスタムUIフォントを使用"
+
+msgid "Code Font:"
+msgstr "コードフォント："
+
+msgid "Use custom code font"
+msgstr "カスタムコードフォントを使用"
+
+msgid "Thoughts Font:"
+msgstr "思考フォント："
+
+msgid "Use custom thoughts font"
+msgstr "カスタム思考フォントを使用"
+
+msgid "LaTeX Rendering:"
+msgstr "LaTeX レンダリング:"
+
+msgid "Leave as TeX"
+msgstr "TeX のまま残す"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Unicode で置換 (デフォルト)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib が見つかりません)"
+
+msgid "Header Icons:"
+msgstr "ヘッダーアイコン:"
+
+msgid "Profile Header"
+msgstr "プロファイルヘッダー"
+
+msgid "Always show Tasks"
+msgstr "タスクを常に表示"
+
+msgid "Always show Auto Toggle"
+msgstr "自動切り替えを常に表示"
+
+msgid "Show History"
+msgstr "履歴を表示"
+
+msgid "History placement:"
+msgstr "履歴の配置:"
+
+msgid "Header button"
+msgstr "ヘッダーのボタン"
+
+msgid "Sidebar"
+msgstr "サイドバー"
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+"自動: チャットの横に収まる場合にサイドバーを表示します。サイドバー: 常に表示"
+"し、両方が収まるように最小サイズを広げます。"
+
+msgid "Show Copy conversation"
+msgstr "会話のコピーを表示"
+
+msgid "Show Context compaction summary"
+msgstr "コンテキスト圧縮の要約を表示"
+
+msgid "Show New chat"
+msgstr "新しいチャットを表示"
+
+msgid "Show Settings"
+msgstr "設定を表示"
+
+msgid "Show Pin"
+msgstr "ピンを表示"
+
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
@@ -2169,9 +2229,6 @@ msgstr ""
 msgid "Failed to stop driving: %1"
 msgstr "操作の停止に失敗しました: %1"
 
-msgid "Speech-to-text is not configured"
-msgstr "音声認識が設定されていません"
-
 msgid "Text-to-speech is not configured"
 msgstr "テキスト読み上げが設定されていません"
 
@@ -2179,7 +2236,9 @@ msgid "PlasmaLLM"
 msgstr "PlasmaLLM"
 
 msgid "Text-to-speech is not configured. Open Text to Speech settings."
-msgstr "テキスト読み上げが設定されていません。テキスト読み上げの設定を開いてください。"
+msgstr ""
+"テキスト読み上げが設定されていません。テキスト読み上げの設定を開いてくださ"
+"い。"
 
 msgid "Speaking…"
 msgstr "読み上げ中…"
@@ -2403,18 +2462,6 @@ msgstr "操作セッションはアクティブです（認証済み）。自動
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "操作セッションの認証に成功しました。自動モードが有効です。"
 
-msgid "Unknown STT backend: %1"
-msgstr "不明なSTTバックエンド: %1"
-
-msgid "Whisper CLI runner is not available"
-msgstr "Whisper CLI ランナーは利用できません"
-
-msgid "Could not build Whisper command"
-msgstr "Whisper コマンドを作成できませんでした"
-
-msgid "STT backend does not support model listing"
-msgstr "STTバックエンドはモデル一覧の取得をサポートしていません"
-
 msgid "General"
 msgstr "一般"
 
@@ -2435,6 +2482,12 @@ msgstr "ツール..."
 
 msgid "Custom Tools"
 msgstr "カスタムツール"
+
+#~ msgid "Clear chat"
+#~ msgstr "チャットをクリア"
+
+#~ msgid "Show Clear chat"
+#~ msgstr "チャットのクリアを表示"
 
 #~ msgid ""
 #~ "Skills are reusable instruction sets the model loads on demand via the "

@@ -432,6 +432,38 @@ BaseConfigPage {
             }
         }
 
+        QQC2.ComboBox {
+            id: historyLayoutCombo
+            Kirigami.FormData.label: i18n("History placement:")
+            enabled: cfg_showIconHistory
+            model: [
+                i18n("Auto"),
+                i18n("Header button"),
+                i18n("Sidebar")
+            ]
+            readonly property var layoutIds: ["auto", "button", "sidebar"]
+            currentIndex: {
+                var i = layoutIds.indexOf(cfg_chatHistoryLayout || "auto");
+                return i >= 0 ? i : 0;
+            }
+            onActivated: function(index) {
+                if (_initialized) {
+                    cfg_chatHistoryLayout = layoutIds[index] || "auto";
+                    rootItem.triggerCapture();
+                }
+            }
+        }
+
+        QQC2.Label {
+            Layout.fillWidth: true
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 22
+            wrapMode: Text.WordWrap
+            font: Kirigami.Theme.smallFont
+            opacity: 0.7
+            visible: cfg_showIconHistory
+            text: i18n("Auto shows the sidebar when it fits beside the chat. Sidebar always shows it and widens the minimum size to fit both.")
+        }
+
         QQC2.CheckBox {
             text: i18n("Show Copy conversation")
             checked: cfg_showIconCopy
@@ -455,7 +487,7 @@ BaseConfigPage {
         }
 
         QQC2.CheckBox {
-            text: i18n("Show Clear chat")
+            text: i18n("Show New chat")
             checked: cfg_showIconClear
             onCheckedChanged: {
                 if (_initialized) {

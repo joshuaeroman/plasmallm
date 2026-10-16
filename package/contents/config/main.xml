@@ -668,6 +668,14 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
       <label>Show History icon in header</label>
       <default>true</default>
     </entry>
+    <entry name="chatHistoryLayout" type="String">
+      <label>Chat history placement: auto, button, or sidebar</label>
+      <default>auto</default>
+    </entry>
+    <entry name="historySidebarCollapsed" type="Bool">
+      <label>History sidebar hidden with the header toggle</label>
+      <default>false</default>
+    </entry>
     <entry name="showIconCopy" type="Bool">
       <label>Show Copy icon in header</label>
       <default>false</default>
@@ -677,7 +685,7 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
       <default>true</default>
     </entry>
     <entry name="showIconClear" type="Bool">
-      <label>Show Clear icon in header</label>
+      <label>Show New chat button (header, or sidebar when shown)</label>
       <default>true</default>
     </entry>
     <entry name="showIconSettings" type="Bool">

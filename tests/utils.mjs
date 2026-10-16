@@ -45,6 +45,24 @@ for (let i = 0; i < 2000; i++) {
 }
 ok(allUnique, "2000 ids well-formed and unique");
 
+// historyLayoutFor: forced modes, auto shows the sidebar only when both fit.
+ok(U.historyLayoutFor("sidebar", 100, 250, 360) === "sidebar", "forced sidebar ignores size");
+ok(U.historyLayoutFor("button", 2000, 250, 360) === "button", "forced button ignores size");
+ok(U.historyLayoutFor("bogus", 2000, 250, 360) === "button", "unknown mode keeps button");
+ok(U.historyLayoutFor("auto", 610, 250, 360) === "sidebar", "exact fit shows sidebar");
+ok(U.historyLayoutFor("auto", 609, 250, 360) === "button", "one pixel short keeps button");
+ok(U.historyLayoutFor("auto", 0, 250, 360) === "button", "zero width keeps button");
+
+// cleanHistoryPreview: decodes escapes, drops a dangling backslash.
+ok(U.cleanHistoryPreview("hello") === "hello", "plain text unchanged");
+ok(U.cleanHistoryPreview("line one\\nline two") === "line one line two", "\\n becomes a space");
+ok(U.cleanHistoryPreview("say \\") === "say", "dangling backslash from \\\" dropped");
+ok(U.cleanHistoryPreview("C:\\\\dir") === "C:\\dir", "escaped backslash kept");
+ok(U.cleanHistoryPreview("a\\\\nb") === "a\\nb", "escaped backslash before n is not a newline");
+ok(U.cleanHistoryPreview("caf\\u00e9") === "caf\u00e9", "unicode escape decoded");
+ok(U.cleanHistoryPreview("  \\t x  \\r\\n ") === "x", "whitespace collapsed and trimmed");
+ok(U.cleanHistoryPreview(undefined) === "", "undefined is empty");
+
 if (failed > 0) {
     console.error(failed + " test(s) failed");
     process.exit(1);

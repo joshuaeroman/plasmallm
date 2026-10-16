@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-09 18:29-0400\n"
+"POT-Creation-Date: 2026-10-16 18:51-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -517,111 +517,6 @@ msgstr "Bruk \"%1\""
 msgid "Fetching…"
 msgstr "Henter…"
 
-msgid "Profile Header:"
-msgstr "Profiloverskrift:"
-
-msgid "Show provider and model in profile header"
-msgstr "Vis leverandør og modell i profiloverskrift"
-
-msgid "Chat Spacing: %1px"
-msgstr "Chatavstand: %1px"
-
-msgid "Compact"
-msgstr "Kompakt"
-
-msgid "Spacious"
-msgstr "Romslig"
-
-msgid "Chat Labels:"
-msgstr "Chat-etiketter:"
-
-msgid "User label:"
-msgstr "Brukeretikett:"
-
-msgid "You"
-msgstr "Du"
-
-msgid "Assistant label:"
-msgstr "Assistentetikett:"
-
-msgid "Assistant"
-msgstr "Assistent"
-
-msgid "Use model name as assistant label"
-msgstr "Bruk modellnavn som assistentetikett"
-
-msgid "Chat Colors:"
-msgstr "Chat-farger:"
-
-msgid "Use custom user color"
-msgstr "Bruk tilpasset brukerfarge"
-
-msgid "Use custom assistant color"
-msgstr "Bruk tilpasset assistentfarge"
-
-msgid "UI Font:"
-msgstr "Grensesnittskrift:"
-
-msgid "Use custom UI font"
-msgstr "Bruk egendefinert grensesnittskrift"
-
-msgid "Code Font:"
-msgstr "Kodeskrift:"
-
-msgid "Use custom code font"
-msgstr "Bruk egendefinert kodeskrift"
-
-msgid "Thoughts Font:"
-msgstr "Tankeskrift:"
-
-msgid "Use custom thoughts font"
-msgstr "Bruk egendefinert tankeskrift"
-
-msgid "LaTeX Rendering:"
-msgstr "LaTeX-rendering:"
-
-msgid "Leave as TeX"
-msgstr "Behold som TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Erstatt med Unicode (standard)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib mangler)"
-
-msgid "Header Icons:"
-msgstr "Overskriftsikoner:"
-
-msgid "Profile Header"
-msgstr "Profiloverskrift"
-
-msgid "Always show Tasks"
-msgstr "Vis alltid Oppgaver"
-
-msgid "Always show Auto Toggle"
-msgstr "Vis alltid Auto-veksler"
-
-msgid "Show History"
-msgstr "Vis historikk"
-
-msgid "Show Copy conversation"
-msgstr "Vis Kopier samtale"
-
-msgid "Show Context compaction summary"
-msgstr "Vis sammendrag for kontekstkomprimering"
-
-msgid "Show Clear chat"
-msgstr "Vis Tøm chat"
-
-msgid "Show Settings"
-msgstr "Vis Innstillinger"
-
-msgid "Show Pin"
-msgstr "Vis festikonet"
-
 msgid "Stop command"
 msgstr "Stopp kommando"
 
@@ -926,11 +821,17 @@ msgstr "Usikker"
 msgid "Voice message"
 msgstr "Talemelding"
 
+msgid "You"
+msgstr "Du"
+
 msgid "Error"
 msgstr "Feil"
 
 msgid "Web Search"
 msgstr "Nettsøk"
+
+msgid "Assistant"
+msgstr "Assistent"
 
 msgid "compacted"
 msgstr "komprimert"
@@ -989,244 +890,6 @@ msgstr ""
 "Modellen lastet inn instruksjonene for denne ferdigheten i konteksten før "
 "den handlet."
 
-msgid "Approve the pending tool request"
-msgstr "Godkjenn ventende verktøyforespørsel"
-
-msgid "Toggle skip approvals for this session"
-msgstr "Slå av/på hopp over godkjenninger for denne økten"
-
-msgid "Clear the chat"
-msgstr "Tøm chatten"
-
-msgid "Close the panel"
-msgstr "Lukk panelet"
-
-msgid "Copy conversation to clipboard"
-msgstr "Kopier samtale til utklippstavle"
-
-msgid "Deny the pending tool request"
-msgstr "Avslå ventende verktøyforespørsel"
-
-msgid "Open chat history folder"
-msgstr "Åpne chathistorikk-mappe"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "Vis eller bytt modell (/model <name>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "Bytt profil (/profile <navn>)"
-
-msgid "Save chat to file"
-msgstr "Lagre chat til fil"
-
-msgid "Open settings"
-msgstr "Åpne innstillinger"
-
-msgid "List discovered skills and their status"
-msgstr "List opp oppdagede ferdigheter og deres status"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "Kjør en lagret oppgave (/task <name>)"
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr "Veksle Drive Desktop-modus (starter håndtrykk og automodus)"
-
-msgid "Toggle Full Auto Mode"
-msgstr "Slå av/på fullautomatisk modus"
-
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-"Slå av/på fullautomatisk modus: Når aktivert, kjøres alle verktøy automatisk "
-"for denne økten."
-
-msgid "Drive Desktop"
-msgstr "Drive Desktop"
-
-msgid "Stop Driving Desktop (disconnect)"
-msgstr "Stopp styring av skrivebord (koble fra)"
-
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr "Drive Desktop (starter håndtrykk og aktiverer automodus)"
-
-msgid "Run a task"
-msgstr "Kjør en oppgave"
-
-msgid "Chat History"
-msgstr "Chat-historikk"
-
-msgid "Loading..."
-msgstr "Laster..."
-
-msgid "No recent chats"
-msgstr "Ingen nylige chatter"
-
-msgid "Open history folder..."
-msgstr "Åpne historikkmappe..."
-
-msgid "Clear all history..."
-msgstr "Tøm all historikk..."
-
-msgid "Clear All History"
-msgstr "Tøm all historikk"
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-"Er du sikker på at du vil slette alle chat-historikkfiler? Denne handlingen "
-"kan ikke angres."
-
-msgid "Clear All"
-msgstr "Tøm alle"
-
-msgid "Retry from this message?"
-msgstr "Prøv igjen fra denne meldingen?"
-
-msgid ""
-"This will remove %1 message(s) after this point and generate a new response."
-msgstr ""
-"Dette vil fjerne %1 melding(er) etter dette punktet og generere et nytt svar."
-
-msgid "Retry"
-msgstr "Prøv igjen"
-
-msgid "Compacted Context Summary"
-msgstr "Sammendrag av komprimert kontekst"
-
-#, javascript-format
-msgid "Compacted up to %1%2 • Citations active"
-msgstr "Komprimert opptil %1%2 • Sitater aktive"
-
-msgid "Close"
-msgstr "Lukk"
-
-msgid "No compaction summary available."
-msgstr "Intet komprimeringssammendrag tilgjengelig."
-
-msgid "Copy"
-msgstr "Kopier"
-
-msgid "Compacting…"
-msgstr "Komprimerer…"
-
-msgid "Re-compact"
-msgstr "Komprimer på nytt"
-
-msgid "Incrementally compact new uncompacted conversation turns."
-msgstr "Komprimer nye ukomprimerte samtalerunder trinnvis."
-
-msgid "Recompact All"
-msgstr "Komprimer alt på nytt"
-
-msgid ""
-"Re-summarize the entire conversation from turn 1 from scratch, creating a "
-"fresh, unified compaction."
-msgstr ""
-"Oppsummer hele samtalen på nytt fra tur 1 fra bunnen av, og opprett en ny, "
-"enhetlig komprimering."
-
-msgid "Copy conversation"
-msgstr "Kopier samtale"
-
-msgid "Command"
-msgstr "Kommando"
-
-msgid "View compacted context summary"
-msgstr "Vis sammendrag av komprimert kontekst"
-
-msgid "Compacting context in background…"
-msgstr "Komprimerer kontekst i bakgrunnen…"
-
-msgid "Clear chat"
-msgstr "Tøm chat"
-
-msgid "Settings"
-msgstr "Innstillinger"
-
-msgid "Don't keep open"
-msgstr "Ikke hold åpent"
-
-msgid "Keep open"
-msgstr "Hold åpent"
-
-msgid "Dismiss"
-msgstr "Lukk"
-
-msgid "The user denied this tool call."
-msgstr "Brukeren avslo dette verktøykallet."
-
-msgid "Send a message to start chatting"
-msgstr "Send en melding for å begynne å chatte"
-
-msgid "Attach File"
-msgstr "Legg til fil"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Bilder (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-"Tekstfiler (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-
-msgid "All files (*)"
-msgstr "Alle filer (*)"
-
-msgid "Message input"
-msgstr "Meldingsinput"
-
-msgid "Type a message…"
-msgstr "Skriv en melding…"
-
-msgid "Initializing…"
-msgstr "Initialiserer…"
-
-msgid "Attach file or image"
-msgstr "Legg til fil eller bilde"
-
-msgid "Transcribing…"
-msgstr "Transkriberer…"
-
-msgid "Preparing…"
-msgstr "Forbereder…"
-
-msgid "Wait for the current reply"
-msgstr "Vent på gjeldende svar"
-
-msgid "Click to stop and send"
-msgstr "Klikk for å stoppe og sende"
-
-msgid "Release to send"
-msgstr "Slipp for å sende"
-
-msgid "Click to start"
-msgstr "Klikk for å starte"
-
-msgid "Hold to talk"
-msgstr "Hold for å snakke"
-
-msgid "Click to toggle, hold to talk"
-msgstr "Klikk for å veksle, hold for å snakke"
-
-msgid "Send"
-msgstr "Send"
-
-msgid "Stop"
-msgstr "Stopp"
-
-msgid "Cancel LLM request"
-msgstr "Avbryt LLM-forespørsel"
-
-msgid "Stop reading aloud"
-msgstr "Stopp opplesing"
-
-msgid "Drop files here to attach"
-msgstr "Slipp filer her for å legge ved"
-
 msgid "Text to Speech"
 msgstr "Talesyntese"
 
@@ -1275,7 +938,9 @@ msgstr "Aktiver talesyntese"
 msgid ""
 "Enables speech synthesis. Messages can be read aloud using the speaker "
 "button on chat responses."
-msgstr "Aktiverer talesyntese. Meldinger kan leses opp med høyttalerknappen på chatsvar."
+msgstr ""
+"Aktiverer talesyntese. Meldinger kan leses opp med høyttalerknappen på "
+"chatsvar."
 
 msgid "Auto-read:"
 msgstr "Automatisk opplesing:"
@@ -1289,7 +954,9 @@ msgstr "Les opp automatisk bare når det er spurt med stemme (STT)"
 msgid ""
 "When 'Only when prompted with voice' is checked, typed prompts won't trigger "
 "audio playback, but voice-dictated questions will speak the answer back."
-msgstr "Når «Bare når det er spurt med stemme» er avkrysset, utløser skrevne spørsmål ikke avspilling, men stemmediktert spørsmål får svaret opplest."
+msgstr ""
+"Når «Bare når det er spurt med stemme» er avkrysset, utløser skrevne "
+"spørsmål ikke avspilling, men stemmediktert spørsmål får svaret opplest."
 
 msgid "Don't output text until TTS is ready"
 msgstr "Ikke vis tekst før TTS er klar"
@@ -1297,7 +964,9 @@ msgstr "Ikke vis tekst før TTS er klar"
 msgid ""
 "Hides response text while generating and preparing audio, displaying the "
 "response only when speech is ready to play."
-msgstr "Skjuler svarteksten mens den genereres og lyden forberedes, og viser den først når talen er klar til avspilling."
+msgstr ""
+"Skjuler svarteksten mens den genereres og lyden forberedes, og viser den "
+"først når talen er klar til avspilling."
 
 msgid "Style / tone hint:"
 msgstr "Stil-/tonehint:"
@@ -1309,7 +978,10 @@ msgid ""
 "Speech hint or tone directive (supported by Gemini and modern TTS "
 "endpoints). You can use tags like <sarcastic> or placeholders like [tone: "
 "sarcastic] {text}."
-msgstr "Hint eller toneangivelse for tale (støttet av Gemini og moderne TTS-endepunkter). Du kan bruke koder som <sarcastic> eller plassholdere som [tone: sarcastic] {text}."
+msgstr ""
+"Hint eller toneangivelse for tale (støttet av Gemini og moderne TTS-"
+"endepunkter). Du kan bruke koder som <sarcastic> eller plassholdere som "
+"[tone: sarcastic] {text}."
 
 msgid "Allow agent to set their own tone/style"
 msgstr "La agenten velge sin egen tone/stil"
@@ -1317,7 +989,9 @@ msgstr "La agenten velge sin egen tone/stil"
 msgid ""
 "Exposes a tool allowing the assistant to dynamically adjust its speech style "
 "or emotion based on conversation context or user requests."
-msgstr "Gir et verktøy som lar assistenten dynamisk justere talestil eller følelse basert på samtalekonteksten eller brukerens ønsker."
+msgstr ""
+"Gir et verktøy som lar assistenten dynamisk justere talestil eller følelse "
+"basert på samtalekonteksten eller brukerens ønsker."
 
 msgid "Synthesizer"
 msgstr "Syntesizer"
@@ -1376,7 +1050,9 @@ msgstr "Lydformat:"
 msgid ""
 "Note: Gemini TTS requires 'pcm'. PlasmaLLM automatically converts the raw "
 "24kHz stream into playable WAV audio."
-msgstr "Merk: Gemini TTS krever «pcm». PlasmaLLM konverterer automatisk den rå 24 kHz-strømmen til avspillbar WAV-lyd."
+msgstr ""
+"Merk: Gemini TTS krever «pcm». PlasmaLLM konverterer automatisk den rå 24 "
+"kHz-strømmen til avspillbar WAV-lyd."
 
 msgid "Command / binary:"
 msgstr "Kommando / binærfil:"
@@ -1393,7 +1069,9 @@ msgstr "f.eks. echo {text} | piper --model en.onnx --output_raw | pw-play -"
 msgid ""
 "Placeholders: {text} (quoted text), {voice} (voice identifier), {rate} "
 "(speech rate). If omitted, text is appended."
-msgstr "Plassholdere: {text} (sitert tekst), {voice} (stemmeidentifikator), {rate} (talehastighet). Hvis utelatt, legges teksten til på slutten."
+msgstr ""
+"Plassholdere: {text} (sitert tekst), {voice} (stemmeidentifikator), {rate} "
+"(talehastighet). Hvis utelatt, legges teksten til på slutten."
 
 msgid "Test:"
 msgstr "Test:"
@@ -1796,12 +1474,17 @@ msgid ""
 "OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
 "requests include only the app name and URL. Uncheck to stop sending these "
 "headers."
-msgstr "OpenRouter-bruk krediteres PlasmaLLM på OpenRouters offentlige appranking, og forespørsler inkluderer bare appnavn og URL. Fjern merket for å slutte å sende disse headerne."
+msgstr ""
+"OpenRouter-bruk krediteres PlasmaLLM på OpenRouters offentlige appranking, "
+"og forespørsler inkluderer bare appnavn og URL. Fjern merket for å slutte å "
+"sende disse headerne."
 
 msgid ""
 "OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
 "their API. Nothing about your conversations is shared."
-msgstr "OpenRouter-attribusjon lar OpenRouter se at du brukte PlasmaLLM for å få tilgang til API-et. Ingenting om samtalene dine deles."
+msgstr ""
+"OpenRouter-attribusjon lar OpenRouter se at du brukte PlasmaLLM for å få "
+"tilgang til API-et. Ingenting om samtalene dine deles."
 
 msgid "Attachments:"
 msgstr "Vedlegg:"
@@ -1938,6 +1621,9 @@ msgstr "Mikrofonknapp:"
 
 msgid "Auto"
 msgstr "Auto"
+
+msgid "Hold to talk"
+msgstr "Hold for å snakke"
 
 msgid "Toggle"
 msgstr "Veksle"
@@ -2162,6 +1848,380 @@ msgstr "Instruksjoner for prompt:"
 msgid "Reset"
 msgstr "Tilbakestill"
 
+msgid "Speech-to-text is not configured"
+msgstr "Tale-til-tekst er ikke konfigurert"
+
+msgid "Unknown STT backend: %1"
+msgstr "Ukjent STT-motor: %1"
+
+msgid "Whisper CLI runner is not available"
+msgstr "Whisper-CLI-kjører er ikke tilgjengelig"
+
+msgid "Could not build Whisper command"
+msgstr "Kunne ikke bygge Whisper-kommando"
+
+msgid "STT backend does not support model listing"
+msgstr "STT-motoren støtter ikke listing av modeller"
+
+msgid "New chat"
+msgstr "Ny chat"
+
+msgid "No recent chats"
+msgstr "Ingen nylige chatter"
+
+msgid "Open history folder..."
+msgstr "Åpne historikkmappe..."
+
+msgid "Clear all history..."
+msgstr "Tøm all historikk..."
+
+msgid "Approve the pending tool request"
+msgstr "Godkjenn ventende verktøyforespørsel"
+
+msgid "Toggle skip approvals for this session"
+msgstr "Slå av/på hopp over godkjenninger for denne økten"
+
+msgid "Clear the chat"
+msgstr "Tøm chatten"
+
+msgid "Close the panel"
+msgstr "Lukk panelet"
+
+msgid "Copy conversation to clipboard"
+msgstr "Kopier samtale til utklippstavle"
+
+msgid "Deny the pending tool request"
+msgstr "Avslå ventende verktøyforespørsel"
+
+msgid "Open chat history folder"
+msgstr "Åpne chathistorikk-mappe"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "Vis eller bytt modell (/model <name>)"
+
+msgid "Start a new chat"
+msgstr "Start en ny chat"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "Bytt profil (/profile <navn>)"
+
+msgid "Save chat to file"
+msgstr "Lagre chat til fil"
+
+msgid "Open settings"
+msgstr "Åpne innstillinger"
+
+msgid "List discovered skills and their status"
+msgstr "List opp oppdagede ferdigheter og deres status"
+
+msgid "Run a saved task (/task <name>)"
+msgstr "Kjør en lagret oppgave (/task <name>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr "Veksle Drive Desktop-modus (starter håndtrykk og automodus)"
+
+msgid "Show sidebar"
+msgstr "Vis sidepanel"
+
+msgid "Hide sidebar"
+msgstr "Skjul sidepanel"
+
+msgid "Toggle Full Auto Mode"
+msgstr "Slå av/på fullautomatisk modus"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Slå av/på fullautomatisk modus: Når aktivert, kjøres alle verktøy automatisk "
+"for denne økten."
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "Stopp styring av skrivebord (koble fra)"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop (starter håndtrykk og aktiverer automodus)"
+
+msgid "Run a task"
+msgstr "Kjør en oppgave"
+
+msgid "Chat History"
+msgstr "Chat-historikk"
+
+msgid "Loading..."
+msgstr "Laster..."
+
+msgid "Clear All History"
+msgstr "Tøm all historikk"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Er du sikker på at du vil slette alle chat-historikkfiler? Denne handlingen "
+"kan ikke angres."
+
+msgid "Clear All"
+msgstr "Tøm alle"
+
+msgid "Retry from this message?"
+msgstr "Prøv igjen fra denne meldingen?"
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+"Dette vil fjerne %1 melding(er) etter dette punktet og generere et nytt svar."
+
+msgid "Retry"
+msgstr "Prøv igjen"
+
+msgid "Compacted Context Summary"
+msgstr "Sammendrag av komprimert kontekst"
+
+#, javascript-format
+msgid "Compacted up to %1%2 • Citations active"
+msgstr "Komprimert opptil %1%2 • Sitater aktive"
+
+msgid "Close"
+msgstr "Lukk"
+
+msgid "No compaction summary available."
+msgstr "Intet komprimeringssammendrag tilgjengelig."
+
+msgid "Copy"
+msgstr "Kopier"
+
+msgid "Compacting…"
+msgstr "Komprimerer…"
+
+msgid "Re-compact"
+msgstr "Komprimer på nytt"
+
+msgid "Incrementally compact new uncompacted conversation turns."
+msgstr "Komprimer nye ukomprimerte samtalerunder trinnvis."
+
+msgid "Recompact All"
+msgstr "Komprimer alt på nytt"
+
+msgid ""
+"Re-summarize the entire conversation from turn 1 from scratch, creating a "
+"fresh, unified compaction."
+msgstr ""
+"Oppsummer hele samtalen på nytt fra tur 1 fra bunnen av, og opprett en ny, "
+"enhetlig komprimering."
+
+msgid "Copy conversation"
+msgstr "Kopier samtale"
+
+msgid "Command"
+msgstr "Kommando"
+
+msgid "View compacted context summary"
+msgstr "Vis sammendrag av komprimert kontekst"
+
+msgid "Compacting context in background…"
+msgstr "Komprimerer kontekst i bakgrunnen…"
+
+msgid "Settings"
+msgstr "Innstillinger"
+
+msgid "Don't keep open"
+msgstr "Ikke hold åpent"
+
+msgid "Keep open"
+msgstr "Hold åpent"
+
+msgid "Dismiss"
+msgstr "Lukk"
+
+msgid "The user denied this tool call."
+msgstr "Brukeren avslo dette verktøykallet."
+
+msgid "Send a message to start chatting"
+msgstr "Send en melding for å begynne å chatte"
+
+msgid "Attach File"
+msgstr "Legg til fil"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Bilder (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Tekstfiler (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "Alle filer (*)"
+
+msgid "Message input"
+msgstr "Meldingsinput"
+
+msgid "Type a message…"
+msgstr "Skriv en melding…"
+
+msgid "Initializing…"
+msgstr "Initialiserer…"
+
+msgid "Attach file or image"
+msgstr "Legg til fil eller bilde"
+
+msgid "Transcribing…"
+msgstr "Transkriberer…"
+
+msgid "Preparing…"
+msgstr "Forbereder…"
+
+msgid "Wait for the current reply"
+msgstr "Vent på gjeldende svar"
+
+msgid "Click to stop and send"
+msgstr "Klikk for å stoppe og sende"
+
+msgid "Release to send"
+msgstr "Slipp for å sende"
+
+msgid "Click to start"
+msgstr "Klikk for å starte"
+
+msgid "Click to toggle, hold to talk"
+msgstr "Klikk for å veksle, hold for å snakke"
+
+msgid "Send"
+msgstr "Send"
+
+msgid "Stop"
+msgstr "Stopp"
+
+msgid "Cancel LLM request"
+msgstr "Avbryt LLM-forespørsel"
+
+msgid "Stop reading aloud"
+msgstr "Stopp opplesing"
+
+msgid "Drop files here to attach"
+msgstr "Slipp filer her for å legge ved"
+
+msgid "Profile Header:"
+msgstr "Profiloverskrift:"
+
+msgid "Show provider and model in profile header"
+msgstr "Vis leverandør og modell i profiloverskrift"
+
+msgid "Chat Spacing: %1px"
+msgstr "Chatavstand: %1px"
+
+msgid "Compact"
+msgstr "Kompakt"
+
+msgid "Spacious"
+msgstr "Romslig"
+
+msgid "Chat Labels:"
+msgstr "Chat-etiketter:"
+
+msgid "User label:"
+msgstr "Brukeretikett:"
+
+msgid "Assistant label:"
+msgstr "Assistentetikett:"
+
+msgid "Use model name as assistant label"
+msgstr "Bruk modellnavn som assistentetikett"
+
+msgid "Chat Colors:"
+msgstr "Chat-farger:"
+
+msgid "Use custom user color"
+msgstr "Bruk tilpasset brukerfarge"
+
+msgid "Use custom assistant color"
+msgstr "Bruk tilpasset assistentfarge"
+
+msgid "UI Font:"
+msgstr "Grensesnittskrift:"
+
+msgid "Use custom UI font"
+msgstr "Bruk egendefinert grensesnittskrift"
+
+msgid "Code Font:"
+msgstr "Kodeskrift:"
+
+msgid "Use custom code font"
+msgstr "Bruk egendefinert kodeskrift"
+
+msgid "Thoughts Font:"
+msgstr "Tankeskrift:"
+
+msgid "Use custom thoughts font"
+msgstr "Bruk egendefinert tankeskrift"
+
+msgid "LaTeX Rendering:"
+msgstr "LaTeX-rendering:"
+
+msgid "Leave as TeX"
+msgstr "Behold som TeX"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Erstatt med Unicode (standard)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib mangler)"
+
+msgid "Header Icons:"
+msgstr "Overskriftsikoner:"
+
+msgid "Profile Header"
+msgstr "Profiloverskrift"
+
+msgid "Always show Tasks"
+msgstr "Vis alltid Oppgaver"
+
+msgid "Always show Auto Toggle"
+msgstr "Vis alltid Auto-veksler"
+
+msgid "Show History"
+msgstr "Vis historikk"
+
+msgid "History placement:"
+msgstr "Plassering av historikk:"
+
+msgid "Header button"
+msgstr "Knapp i toppfeltet"
+
+msgid "Sidebar"
+msgstr "Sidepanel"
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+"Auto viser sidepanelet når det får plass ved siden av chatten. Sidepanel "
+"viser det alltid og øker minstestørrelsen så begge får plass."
+
+msgid "Show Copy conversation"
+msgstr "Vis Kopier samtale"
+
+msgid "Show Context compaction summary"
+msgstr "Vis sammendrag for kontekstkomprimering"
+
+msgid "Show New chat"
+msgstr "Vis Ny chat"
+
+msgid "Show Settings"
+msgstr "Vis Innstillinger"
+
+msgid "Show Pin"
+msgstr "Vis festikonet"
+
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
@@ -2171,9 +2231,6 @@ msgstr ""
 
 msgid "Failed to stop driving: %1"
 msgstr "Klarte ikke å stoppe styring: %1"
-
-msgid "Speech-to-text is not configured"
-msgstr "Tale-til-tekst er ikke konfigurert"
 
 msgid "Text-to-speech is not configured"
 msgstr "Talesyntese er ikke konfigurert"
@@ -2408,18 +2465,6 @@ msgstr "Styringsøkt aktiv (allerede autorisert). Automodus aktivert."
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Styringsøkt autorisert. Automodus aktivert."
 
-msgid "Unknown STT backend: %1"
-msgstr "Ukjent STT-motor: %1"
-
-msgid "Whisper CLI runner is not available"
-msgstr "Whisper-CLI-kjører er ikke tilgjengelig"
-
-msgid "Could not build Whisper command"
-msgstr "Kunne ikke bygge Whisper-kommando"
-
-msgid "STT backend does not support model listing"
-msgstr "STT-motoren støtter ikke listing av modeller"
-
 msgid "General"
 msgstr "Generelt"
 
@@ -2440,6 +2485,12 @@ msgstr "Verktøy"
 
 msgid "Custom Tools"
 msgstr "Egendefinerte verktøy"
+
+#~ msgid "Clear chat"
+#~ msgstr "Tøm chat"
+
+#~ msgid "Show Clear chat"
+#~ msgstr "Vis Tøm chat"
 
 #~ msgid ""
 #~ "Skills are reusable instruction sets the model loads on demand via the "
