@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-09 18:29-0400\n"
+"POT-Creation-Date: 2026-10-16 18:51-0400\n"
 "PO-Revision-Date: 2026-04-07 00:00+0000\n"
 "Last-Translator: Claude <noreply@anthropic.com>\n"
 "Language-Team: Turkish\n"
@@ -525,111 +525,6 @@ msgstr "Use \"%1\""
 msgid "Fetching…"
 msgstr "Alınıyor…"
 
-msgid "Profile Header:"
-msgstr "Profil Başlığı:"
-
-msgid "Show provider and model in profile header"
-msgstr "Profil başlığında sağlayıcı ve modeli göster"
-
-msgid "Chat Spacing: %1px"
-msgstr "Sohbet Aralığı: %1px"
-
-msgid "Compact"
-msgstr "Kompakt"
-
-msgid "Spacious"
-msgstr "Geniş"
-
-msgid "Chat Labels:"
-msgstr "Sohbet Etiketleri:"
-
-msgid "User label:"
-msgstr "Kullanıcı etiketi:"
-
-msgid "You"
-msgstr "Siz"
-
-msgid "Assistant label:"
-msgstr "Asistan etiketi:"
-
-msgid "Assistant"
-msgstr "Asistan"
-
-msgid "Use model name as assistant label"
-msgstr "Asistan etiketi olarak model adını kullan"
-
-msgid "Chat Colors:"
-msgstr "Sohbet Renkleri:"
-
-msgid "Use custom user color"
-msgstr "Özel kullanıcı rengi kullan"
-
-msgid "Use custom assistant color"
-msgstr "Özel asistan rengi kullan"
-
-msgid "UI Font:"
-msgstr "Arayüz Yazı Tipi:"
-
-msgid "Use custom UI font"
-msgstr "Özel arayüz yazı tipi kullan"
-
-msgid "Code Font:"
-msgstr "Kod Yazı Tipi:"
-
-msgid "Use custom code font"
-msgstr "Özel kod yazı tipi kullan"
-
-msgid "Thoughts Font:"
-msgstr "Düşünce Yazı Tipi:"
-
-msgid "Use custom thoughts font"
-msgstr "Özel düşünce yazı tipi kullan"
-
-msgid "LaTeX Rendering:"
-msgstr "LaTeX Oluşturma:"
-
-msgid "Leave as TeX"
-msgstr "TeX olarak bırak"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Unicode ile değiştir (Varsayılan)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib eksik)"
-
-msgid "Header Icons:"
-msgstr "Başlık Simgeleri:"
-
-msgid "Profile Header"
-msgstr "Profil Başlığı"
-
-msgid "Always show Tasks"
-msgstr "Görevleri her zaman göster"
-
-msgid "Always show Auto Toggle"
-msgstr "Otomatik geçişi her zaman göster"
-
-msgid "Show History"
-msgstr "Geçmişi göster"
-
-msgid "Show Copy conversation"
-msgstr "Konuşmayı kopyalamayı göster"
-
-msgid "Show Context compaction summary"
-msgstr "Bağlam sıkıştırma özetini göster"
-
-msgid "Show Clear chat"
-msgstr "Sohbeti temizlemeyi göster"
-
-msgid "Show Settings"
-msgstr "Ayarları göster"
-
-msgid "Show Pin"
-msgstr "Sabitlemeyi göster"
-
 msgid "Stop command"
 msgstr "Komutu durdur"
 
@@ -932,11 +827,17 @@ msgstr "Belirsiz"
 msgid "Voice message"
 msgstr "Sesli mesaj"
 
+msgid "You"
+msgstr "Siz"
+
 msgid "Error"
 msgstr "Hata"
 
 msgid "Web Search"
 msgstr "Web Araması"
+
+msgid "Assistant"
+msgstr "Asistan"
 
 msgid "compacted"
 msgstr "sıkıştırıldı"
@@ -992,245 +893,6 @@ msgstr "Sesli oku"
 msgid "The model loaded this skill's instructions into context before acting."
 msgstr "Model, işlem yapmadan önce bu becerinin yönergelerini bağlama yükledi."
 
-msgid "Approve the pending tool request"
-msgstr "Bekleyen araç isteğini onayla"
-
-msgid "Toggle skip approvals for this session"
-msgstr "Bu oturum için onayları atlamayı aç/kapat"
-
-msgid "Clear the chat"
-msgstr "Sohbeti temizle"
-
-msgid "Close the panel"
-msgstr "Paneli kapat"
-
-msgid "Copy conversation to clipboard"
-msgstr "Konuşmayı panoya kopyala"
-
-msgid "Deny the pending tool request"
-msgstr "Bekleyen araç isteğini reddet"
-
-msgid "Open chat history folder"
-msgstr "Sohbet geçmişi klasörünü aç"
-
-msgid "Show or switch model (/model <name>)"
-msgstr "Modeli göster veya değiştir (/model <ad>)"
-
-msgid "Switch profile (/profile <name>)"
-msgstr "Profil değiştir (/profile <ad>)"
-
-msgid "Save chat to file"
-msgstr "Sohbeti dosyaya kaydet"
-
-msgid "Open settings"
-msgstr "Ayarları aç"
-
-msgid "List discovered skills and their status"
-msgstr "Keşfedilen becerileri ve durumlarını listele"
-
-msgid "Run a saved task (/task <name>)"
-msgstr "Kaydedilmiş bir görevi çalıştır (/task <ad>)"
-
-msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
-msgstr "Drive Desktop modunu değiştir (el sıkışmayı ve otomatik modu başlatır)"
-
-msgid "Toggle Full Auto Mode"
-msgstr "Tam otomatik modu aç/kapat"
-
-msgid ""
-"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
-"session."
-msgstr ""
-"Tam otomatik modu aç/kapat: Etkinleştirildiğinde, bu oturum için tüm araçlar "
-"otomatik olarak çalışır."
-
-msgid "Drive Desktop"
-msgstr "Drive Desktop"
-
-msgid "Stop Driving Desktop (disconnect)"
-msgstr "Masaüstünü Yönetmeyi Durdur (bağlantıyı kes)"
-
-msgid "Drive Desktop (starts handshake and enables auto mode)"
-msgstr "Drive Desktop (el sıkışmayı başlatır ve otomatik modu etkinleştirir)"
-
-msgid "Run a task"
-msgstr "Bir görev çalıştır"
-
-msgid "Chat History"
-msgstr "Sohbet Geçmişi"
-
-msgid "Loading..."
-msgstr "Yükleniyor..."
-
-msgid "No recent chats"
-msgstr "Son sohbet yok"
-
-msgid "Open history folder..."
-msgstr "Geçmiş klasörünü aç..."
-
-msgid "Clear all history..."
-msgstr "Tüm geçmişi temizle..."
-
-msgid "Clear All History"
-msgstr "Tüm Geçmişi Temizle"
-
-msgid ""
-"Are you sure you want to delete all chat history files? This action cannot "
-"be undone."
-msgstr ""
-"Tüm sohbet geçmişi dosyalarını silmek istediğinizden emin misiniz? Bu işlem "
-"geri alınamaz."
-
-msgid "Clear All"
-msgstr "Tümünü Temizle"
-
-msgid "Retry from this message?"
-msgstr "Bu iletiden yeniden denensin mi?"
-
-msgid ""
-"This will remove %1 message(s) after this point and generate a new response."
-msgstr ""
-"Bu, bu noktadan sonraki %1 iletiyi kaldıracak ve yeni bir yanıt "
-"oluşturacaktır."
-
-msgid "Retry"
-msgstr "Yeniden dene"
-
-msgid "Compacted Context Summary"
-msgstr "Sıkıştırılmış Bağlam Özeti"
-
-#, javascript-format
-msgid "Compacted up to %1%2 • Citations active"
-msgstr "%1%2 öğesine kadar sıkıştırıldı • Alıntılar etkin"
-
-msgid "Close"
-msgstr "Kapat"
-
-msgid "No compaction summary available."
-msgstr "Sıkıştırma özeti mevcut değil."
-
-msgid "Copy"
-msgstr "Kopyala"
-
-msgid "Compacting…"
-msgstr "Sıkıştırılıyor…"
-
-msgid "Re-compact"
-msgstr "Yeniden Sıkıştır"
-
-msgid "Incrementally compact new uncompacted conversation turns."
-msgstr "Sıkıştırılmamış yeni konuşma turlarını artımlı olarak sıkıştırın."
-
-msgid "Recompact All"
-msgstr "Tümünü Yeniden Sıkıştır"
-
-msgid ""
-"Re-summarize the entire conversation from turn 1 from scratch, creating a "
-"fresh, unified compaction."
-msgstr ""
-"1. turdan itibaren tüm konuşmayı sıfırdan yeniden özetleyerek yeni ve "
-"birleşik bir sıkıştırma oluşturun."
-
-msgid "Copy conversation"
-msgstr "Konuşmayı kopyala"
-
-msgid "Command"
-msgstr "Komut"
-
-msgid "View compacted context summary"
-msgstr "Sıkıştırılmış bağlam özetini görüntüle"
-
-msgid "Compacting context in background…"
-msgstr "Bağlam arka planda sıkıştırılıyor…"
-
-msgid "Clear chat"
-msgstr "Sohbeti temizle"
-
-msgid "Settings"
-msgstr "Ayarlar"
-
-msgid "Don't keep open"
-msgstr "Açık tutma"
-
-msgid "Keep open"
-msgstr "Açık tut"
-
-msgid "Dismiss"
-msgstr "Yoksay"
-
-msgid "The user denied this tool call."
-msgstr "Kullanıcı bu araç çağrısını reddetti."
-
-msgid "Send a message to start chatting"
-msgstr "Sohbet başlatmak için bir mesaj gönderin"
-
-msgid "Attach File"
-msgstr "Dosya Ekle"
-
-msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-msgstr "Görseller (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
-
-msgid ""
-"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
-"*.sh *.py *.js *.ts *.qml)"
-msgstr ""
-"Metin dosyaları (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
-"*.conf *.sh *.py *.js *.ts *.qml)"
-
-msgid "All files (*)"
-msgstr "Tüm dosyalar (*)"
-
-msgid "Message input"
-msgstr "Mesaj girişi"
-
-msgid "Type a message…"
-msgstr "Bir mesaj yazın…"
-
-msgid "Initializing…"
-msgstr "Başlatılıyor…"
-
-msgid "Attach file or image"
-msgstr "Dosya veya görsel ekle"
-
-msgid "Transcribing…"
-msgstr "Dönüştürülüyor…"
-
-msgid "Preparing…"
-msgstr "Hazırlanıyor…"
-
-msgid "Wait for the current reply"
-msgstr "Mevcut yanıtı bekleyin"
-
-msgid "Click to stop and send"
-msgstr "Durdurmak ve göndermek için tıklayın"
-
-msgid "Release to send"
-msgstr "Göndermek için bırakın"
-
-msgid "Click to start"
-msgstr "Başlatmak için tıklayın"
-
-msgid "Hold to talk"
-msgstr "Konuşmak için basılı tutun"
-
-msgid "Click to toggle, hold to talk"
-msgstr "Açıp kapatmak için tıklayın, konuşmak için basılı tutun"
-
-msgid "Send"
-msgstr "Gönder"
-
-msgid "Stop"
-msgstr "Durdur"
-
-msgid "Cancel LLM request"
-msgstr "LLM isteğini iptal et"
-
-msgid "Stop reading aloud"
-msgstr "Sesli okumayı durdur"
-
-msgid "Drop files here to attach"
-msgstr "Eklemek için dosyaları buraya bırakın"
-
 msgid "Text to Speech"
 msgstr "Metinden Sese"
 
@@ -1279,7 +941,9 @@ msgstr "Metinden seslendirme çıktısını etkinleştir"
 msgid ""
 "Enables speech synthesis. Messages can be read aloud using the speaker "
 "button on chat responses."
-msgstr "Konuşma sentezini etkinleştirir. Mesajlar, sohbet yanıtlarındaki hoparlör düğmesiyle sesli olarak okunabilir."
+msgstr ""
+"Konuşma sentezini etkinleştirir. Mesajlar, sohbet yanıtlarındaki hoparlör "
+"düğmesiyle sesli olarak okunabilir."
 
 msgid "Auto-read:"
 msgstr "Otomatik okuma:"
@@ -1293,7 +957,9 @@ msgstr "Yalnızca sesle istendiğinde otomatik oku (STT)"
 msgid ""
 "When 'Only when prompted with voice' is checked, typed prompts won't trigger "
 "audio playback, but voice-dictated questions will speak the answer back."
-msgstr "'Yalnızca sesle istendiğinde' seçeneği işaretliyse, yazılan istemler ses çalmayı tetiklemez; ancak sesle dikte edilen sorulara yanıt sesli okunur."
+msgstr ""
+"'Yalnızca sesle istendiğinde' seçeneği işaretliyse, yazılan istemler ses "
+"çalmayı tetiklemez; ancak sesle dikte edilen sorulara yanıt sesli okunur."
 
 msgid "Don't output text until TTS is ready"
 msgstr "TTS hazır olana kadar metin çıktısı verme"
@@ -1301,7 +967,9 @@ msgstr "TTS hazır olana kadar metin çıktısı verme"
 msgid ""
 "Hides response text while generating and preparing audio, displaying the "
 "response only when speech is ready to play."
-msgstr "Yanıt metnini, oluşturma ve ses hazırlama sırasında gizler; yalnızca konuşma oynatılmaya hazır olduğunda gösterir."
+msgstr ""
+"Yanıt metnini, oluşturma ve ses hazırlama sırasında gizler; yalnızca konuşma "
+"oynatılmaya hazır olduğunda gösterir."
 
 msgid "Style / tone hint:"
 msgstr "Stil / ton ipucu:"
@@ -1313,7 +981,10 @@ msgid ""
 "Speech hint or tone directive (supported by Gemini and modern TTS "
 "endpoints). You can use tags like <sarcastic> or placeholders like [tone: "
 "sarcastic] {text}."
-msgstr "Konuşma için ipucu veya ton yönergesi (Gemini ve güncel TTS uç noktaları tarafından desteklenir). <sarcastic> gibi etiketler ya da [tone: sarcastic] {text} gibi yer tutucular kullanabilirsiniz."
+msgstr ""
+"Konuşma için ipucu veya ton yönergesi (Gemini ve güncel TTS uç noktaları "
+"tarafından desteklenir). <sarcastic> gibi etiketler ya da [tone: sarcastic] "
+"{text} gibi yer tutucular kullanabilirsiniz."
 
 msgid "Allow agent to set their own tone/style"
 msgstr "Asistanın kendi tonunu/stilini belirlemesine izin ver"
@@ -1321,7 +992,9 @@ msgstr "Asistanın kendi tonunu/stilini belirlemesine izin ver"
 msgid ""
 "Exposes a tool allowing the assistant to dynamically adjust its speech style "
 "or emotion based on conversation context or user requests."
-msgstr "Asistanın, konuşma bağlamına veya kullanıcının isteklerine göre konuşma stilini ya da duygusunu dinamik olarak ayarlamasını sağlayan bir araç sunar."
+msgstr ""
+"Asistanın, konuşma bağlamına veya kullanıcının isteklerine göre konuşma "
+"stilini ya da duygusunu dinamik olarak ayarlamasını sağlayan bir araç sunar."
 
 msgid "Synthesizer"
 msgstr "Sentezleyici"
@@ -1380,7 +1053,9 @@ msgstr "Ses biçimi:"
 msgid ""
 "Note: Gemini TTS requires 'pcm'. PlasmaLLM automatically converts the raw "
 "24kHz stream into playable WAV audio."
-msgstr "Not: Gemini TTS 'pcm' gerektirir. PlasmaLLM, ham 24 kHz akışını otomatik olarak oynatılabilir WAV sesine dönüştürür."
+msgstr ""
+"Not: Gemini TTS 'pcm' gerektirir. PlasmaLLM, ham 24 kHz akışını otomatik "
+"olarak oynatılabilir WAV sesine dönüştürür."
 
 msgid "Command / binary:"
 msgstr "Komut / ikili dosya:"
@@ -1397,7 +1072,9 @@ msgstr "ör. echo {text} | piper --model en.onnx --output_raw | pw-play -"
 msgid ""
 "Placeholders: {text} (quoted text), {voice} (voice identifier), {rate} "
 "(speech rate). If omitted, text is appended."
-msgstr "Yer tutucular: {text} (tırnak içindeki metin), {voice} (ses tanımlayıcısı), {rate} (konuşma hızı). Atlanırsa metin sona eklenir."
+msgstr ""
+"Yer tutucular: {text} (tırnak içindeki metin), {voice} (ses tanımlayıcısı), "
+"{rate} (konuşma hızı). Atlanırsa metin sona eklenir."
 
 msgid "Test:"
 msgstr "Test:"
@@ -1801,12 +1478,17 @@ msgid ""
 "OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
 "requests include only the app name and URL. Uncheck to stop sending these "
 "headers."
-msgstr "OpenRouter kullanımı, herkese açık uygulama sıralamalarında PlasmaLLM'e atfedilir; istekler yalnızca uygulama adını ve URL'sini içerir. Bu üstbilgilerin gönderilmesini durdurmak için işareti kaldırın."
+msgstr ""
+"OpenRouter kullanımı, herkese açık uygulama sıralamalarında PlasmaLLM'e "
+"atfedilir; istekler yalnızca uygulama adını ve URL'sini içerir. Bu "
+"üstbilgilerin gönderilmesini durdurmak için işareti kaldırın."
 
 msgid ""
 "OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
 "their API. Nothing about your conversations is shared."
-msgstr "OpenRouter atfı, OpenRouter'ın API'lerine erişmek için PlasmaLLM'i kullandığınızı görmesini sağlar. Konuşmalarınızdan hiçbir şey paylaşılmaz."
+msgstr ""
+"OpenRouter atfı, OpenRouter'ın API'lerine erişmek için PlasmaLLM'i "
+"kullandığınızı görmesini sağlar. Konuşmalarınızdan hiçbir şey paylaşılmaz."
 
 msgid "Attachments:"
 msgstr "Ekler:"
@@ -1944,6 +1626,9 @@ msgstr "Mikrofon düğmesi:"
 
 msgid "Auto"
 msgstr "Otomatik"
+
+msgid "Hold to talk"
+msgstr "Konuşmak için basılı tutun"
 
 msgid "Toggle"
 msgstr "Aç/Kapat"
@@ -2173,6 +1858,381 @@ msgstr "İstem Yönergeleri:"
 msgid "Reset"
 msgstr "Sıfırla"
 
+msgid "Speech-to-text is not configured"
+msgstr "Konuşmayı metne dönüştürme yapılandırılmadı"
+
+msgid "Unknown STT backend: %1"
+msgstr "Bilinmeyen STT arka ucu: %1"
+
+msgid "Whisper CLI runner is not available"
+msgstr "Whisper CLI çalıştırıcısı kullanılamıyor"
+
+msgid "Could not build Whisper command"
+msgstr "Whisper komutu oluşturulamadı"
+
+msgid "STT backend does not support model listing"
+msgstr "STT arka ucu model listelemeyi desteklemiyor"
+
+msgid "New chat"
+msgstr "Yeni sohbet"
+
+msgid "No recent chats"
+msgstr "Son sohbet yok"
+
+msgid "Open history folder..."
+msgstr "Geçmiş klasörünü aç..."
+
+msgid "Clear all history..."
+msgstr "Tüm geçmişi temizle..."
+
+msgid "Approve the pending tool request"
+msgstr "Bekleyen araç isteğini onayla"
+
+msgid "Toggle skip approvals for this session"
+msgstr "Bu oturum için onayları atlamayı aç/kapat"
+
+msgid "Clear the chat"
+msgstr "Sohbeti temizle"
+
+msgid "Close the panel"
+msgstr "Paneli kapat"
+
+msgid "Copy conversation to clipboard"
+msgstr "Konuşmayı panoya kopyala"
+
+msgid "Deny the pending tool request"
+msgstr "Bekleyen araç isteğini reddet"
+
+msgid "Open chat history folder"
+msgstr "Sohbet geçmişi klasörünü aç"
+
+msgid "Show or switch model (/model <name>)"
+msgstr "Modeli göster veya değiştir (/model <ad>)"
+
+msgid "Start a new chat"
+msgstr "Yeni bir sohbet başlat"
+
+msgid "Switch profile (/profile <name>)"
+msgstr "Profil değiştir (/profile <ad>)"
+
+msgid "Save chat to file"
+msgstr "Sohbeti dosyaya kaydet"
+
+msgid "Open settings"
+msgstr "Ayarları aç"
+
+msgid "List discovered skills and their status"
+msgstr "Keşfedilen becerileri ve durumlarını listele"
+
+msgid "Run a saved task (/task <name>)"
+msgstr "Kaydedilmiş bir görevi çalıştır (/task <ad>)"
+
+msgid "Toggle Drive Desktop mode (starts handshake and auto mode)"
+msgstr "Drive Desktop modunu değiştir (el sıkışmayı ve otomatik modu başlatır)"
+
+msgid "Show sidebar"
+msgstr "Kenar çubuğunu göster"
+
+msgid "Hide sidebar"
+msgstr "Kenar çubuğunu gizle"
+
+msgid "Toggle Full Auto Mode"
+msgstr "Tam otomatik modu aç/kapat"
+
+msgid ""
+"Toggle Full Auto Mode: When enabled, all tools run automatically for this "
+"session."
+msgstr ""
+"Tam otomatik modu aç/kapat: Etkinleştirildiğinde, bu oturum için tüm araçlar "
+"otomatik olarak çalışır."
+
+msgid "Drive Desktop"
+msgstr "Drive Desktop"
+
+msgid "Stop Driving Desktop (disconnect)"
+msgstr "Masaüstünü Yönetmeyi Durdur (bağlantıyı kes)"
+
+msgid "Drive Desktop (starts handshake and enables auto mode)"
+msgstr "Drive Desktop (el sıkışmayı başlatır ve otomatik modu etkinleştirir)"
+
+msgid "Run a task"
+msgstr "Bir görev çalıştır"
+
+msgid "Chat History"
+msgstr "Sohbet Geçmişi"
+
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+msgid "Clear All History"
+msgstr "Tüm Geçmişi Temizle"
+
+msgid ""
+"Are you sure you want to delete all chat history files? This action cannot "
+"be undone."
+msgstr ""
+"Tüm sohbet geçmişi dosyalarını silmek istediğinizden emin misiniz? Bu işlem "
+"geri alınamaz."
+
+msgid "Clear All"
+msgstr "Tümünü Temizle"
+
+msgid "Retry from this message?"
+msgstr "Bu iletiden yeniden denensin mi?"
+
+msgid ""
+"This will remove %1 message(s) after this point and generate a new response."
+msgstr ""
+"Bu, bu noktadan sonraki %1 iletiyi kaldıracak ve yeni bir yanıt "
+"oluşturacaktır."
+
+msgid "Retry"
+msgstr "Yeniden dene"
+
+msgid "Compacted Context Summary"
+msgstr "Sıkıştırılmış Bağlam Özeti"
+
+#, javascript-format
+msgid "Compacted up to %1%2 • Citations active"
+msgstr "%1%2 öğesine kadar sıkıştırıldı • Alıntılar etkin"
+
+msgid "Close"
+msgstr "Kapat"
+
+msgid "No compaction summary available."
+msgstr "Sıkıştırma özeti mevcut değil."
+
+msgid "Copy"
+msgstr "Kopyala"
+
+msgid "Compacting…"
+msgstr "Sıkıştırılıyor…"
+
+msgid "Re-compact"
+msgstr "Yeniden Sıkıştır"
+
+msgid "Incrementally compact new uncompacted conversation turns."
+msgstr "Sıkıştırılmamış yeni konuşma turlarını artımlı olarak sıkıştırın."
+
+msgid "Recompact All"
+msgstr "Tümünü Yeniden Sıkıştır"
+
+msgid ""
+"Re-summarize the entire conversation from turn 1 from scratch, creating a "
+"fresh, unified compaction."
+msgstr ""
+"1. turdan itibaren tüm konuşmayı sıfırdan yeniden özetleyerek yeni ve "
+"birleşik bir sıkıştırma oluşturun."
+
+msgid "Copy conversation"
+msgstr "Konuşmayı kopyala"
+
+msgid "Command"
+msgstr "Komut"
+
+msgid "View compacted context summary"
+msgstr "Sıkıştırılmış bağlam özetini görüntüle"
+
+msgid "Compacting context in background…"
+msgstr "Bağlam arka planda sıkıştırılıyor…"
+
+msgid "Settings"
+msgstr "Ayarlar"
+
+msgid "Don't keep open"
+msgstr "Açık tutma"
+
+msgid "Keep open"
+msgstr "Açık tut"
+
+msgid "Dismiss"
+msgstr "Yoksay"
+
+msgid "The user denied this tool call."
+msgstr "Kullanıcı bu araç çağrısını reddetti."
+
+msgid "Send a message to start chatting"
+msgstr "Sohbet başlatmak için bir mesaj gönderin"
+
+msgid "Attach File"
+msgstr "Dosya Ekle"
+
+msgid "Images (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+msgstr "Görseller (*.png *.jpg *.jpeg *.gif *.webp *.bmp *.svg)"
+
+msgid ""
+"Text files (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini *.conf "
+"*.sh *.py *.js *.ts *.qml)"
+msgstr ""
+"Metin dosyaları (*.txt *.md *.json *.csv *.log *.xml *.yaml *.yml *.ini "
+"*.conf *.sh *.py *.js *.ts *.qml)"
+
+msgid "All files (*)"
+msgstr "Tüm dosyalar (*)"
+
+msgid "Message input"
+msgstr "Mesaj girişi"
+
+msgid "Type a message…"
+msgstr "Bir mesaj yazın…"
+
+msgid "Initializing…"
+msgstr "Başlatılıyor…"
+
+msgid "Attach file or image"
+msgstr "Dosya veya görsel ekle"
+
+msgid "Transcribing…"
+msgstr "Dönüştürülüyor…"
+
+msgid "Preparing…"
+msgstr "Hazırlanıyor…"
+
+msgid "Wait for the current reply"
+msgstr "Mevcut yanıtı bekleyin"
+
+msgid "Click to stop and send"
+msgstr "Durdurmak ve göndermek için tıklayın"
+
+msgid "Release to send"
+msgstr "Göndermek için bırakın"
+
+msgid "Click to start"
+msgstr "Başlatmak için tıklayın"
+
+msgid "Click to toggle, hold to talk"
+msgstr "Açıp kapatmak için tıklayın, konuşmak için basılı tutun"
+
+msgid "Send"
+msgstr "Gönder"
+
+msgid "Stop"
+msgstr "Durdur"
+
+msgid "Cancel LLM request"
+msgstr "LLM isteğini iptal et"
+
+msgid "Stop reading aloud"
+msgstr "Sesli okumayı durdur"
+
+msgid "Drop files here to attach"
+msgstr "Eklemek için dosyaları buraya bırakın"
+
+msgid "Profile Header:"
+msgstr "Profil Başlığı:"
+
+msgid "Show provider and model in profile header"
+msgstr "Profil başlığında sağlayıcı ve modeli göster"
+
+msgid "Chat Spacing: %1px"
+msgstr "Sohbet Aralığı: %1px"
+
+msgid "Compact"
+msgstr "Kompakt"
+
+msgid "Spacious"
+msgstr "Geniş"
+
+msgid "Chat Labels:"
+msgstr "Sohbet Etiketleri:"
+
+msgid "User label:"
+msgstr "Kullanıcı etiketi:"
+
+msgid "Assistant label:"
+msgstr "Asistan etiketi:"
+
+msgid "Use model name as assistant label"
+msgstr "Asistan etiketi olarak model adını kullan"
+
+msgid "Chat Colors:"
+msgstr "Sohbet Renkleri:"
+
+msgid "Use custom user color"
+msgstr "Özel kullanıcı rengi kullan"
+
+msgid "Use custom assistant color"
+msgstr "Özel asistan rengi kullan"
+
+msgid "UI Font:"
+msgstr "Arayüz Yazı Tipi:"
+
+msgid "Use custom UI font"
+msgstr "Özel arayüz yazı tipi kullan"
+
+msgid "Code Font:"
+msgstr "Kod Yazı Tipi:"
+
+msgid "Use custom code font"
+msgstr "Özel kod yazı tipi kullan"
+
+msgid "Thoughts Font:"
+msgstr "Düşünce Yazı Tipi:"
+
+msgid "Use custom thoughts font"
+msgstr "Özel düşünce yazı tipi kullan"
+
+msgid "LaTeX Rendering:"
+msgstr "LaTeX Oluşturma:"
+
+msgid "Leave as TeX"
+msgstr "TeX olarak bırak"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Unicode ile değiştir (Varsayılan)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib eksik)"
+
+msgid "Header Icons:"
+msgstr "Başlık Simgeleri:"
+
+msgid "Profile Header"
+msgstr "Profil Başlığı"
+
+msgid "Always show Tasks"
+msgstr "Görevleri her zaman göster"
+
+msgid "Always show Auto Toggle"
+msgstr "Otomatik geçişi her zaman göster"
+
+msgid "Show History"
+msgstr "Geçmişi göster"
+
+msgid "History placement:"
+msgstr "Geçmiş konumu:"
+
+msgid "Header button"
+msgstr "Başlık düğmesi"
+
+msgid "Sidebar"
+msgstr "Kenar çubuğu"
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+"Otomatik, kenar çubuğunu sohbetin yanına sığdığında gösterir. Kenar çubuğu "
+"onu her zaman gösterir ve ikisinin de sığması için en küçük boyutu büyütür."
+
+msgid "Show Copy conversation"
+msgstr "Konuşmayı kopyalamayı göster"
+
+msgid "Show Context compaction summary"
+msgstr "Bağlam sıkıştırma özetini göster"
+
+msgid "Show New chat"
+msgstr "Yeni sohbeti göster"
+
+msgid "Show Settings"
+msgstr "Ayarları göster"
+
+msgid "Show Pin"
+msgstr "Sabitlemeyi göster"
+
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
 "or does not work, you can recover your old key from KWalletManager."
@@ -2182,9 +2242,6 @@ msgstr ""
 
 msgid "Failed to stop driving: %1"
 msgstr "Yönetimi durdurma başarısız oldu: %1"
-
-msgid "Speech-to-text is not configured"
-msgstr "Konuşmayı metne dönüştürme yapılandırılmadı"
 
 msgid "Text-to-speech is not configured"
 msgstr "Metinden seslendirme yapılandırılmamış"
@@ -2418,18 +2475,6 @@ msgstr "Yönetim oturumu aktif (zaten yetkilendirilmiş). Otomatik mod etkin."
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Yönetim oturumu başarıyla yetkilendirildi. Otomatik mod etkin."
 
-msgid "Unknown STT backend: %1"
-msgstr "Bilinmeyen STT arka ucu: %1"
-
-msgid "Whisper CLI runner is not available"
-msgstr "Whisper CLI çalıştırıcısı kullanılamıyor"
-
-msgid "Could not build Whisper command"
-msgstr "Whisper komutu oluşturulamadı"
-
-msgid "STT backend does not support model listing"
-msgstr "STT arka ucu model listelemeyi desteklemiyor"
-
 msgid "General"
 msgstr "Genel"
 
@@ -2450,6 +2495,12 @@ msgstr "Araçlar"
 
 msgid "Custom Tools"
 msgstr "Özel Araçlar"
+
+#~ msgid "Clear chat"
+#~ msgstr "Sohbeti temizle"
+
+#~ msgid "Show Clear chat"
+#~ msgstr "Sohbeti temizlemeyi göster"
 
 #~ msgid ""
 #~ "Skills are reusable instruction sets the model loads on demand via the "

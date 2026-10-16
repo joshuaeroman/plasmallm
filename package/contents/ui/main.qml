@@ -1726,7 +1726,7 @@ PlasmoidItem {
                             var parts = lines[i].split("\t");
                             var filePath = parts[0];
                             var mtime = parseInt(parts[1]) || 0;
-                            var preview = parts[2] || "";
+                            var preview = Utils.cleanHistoryPreview(parts[2]);
                             
                             var name = filePath.split("/").pop();
                             var dtStr = name;
@@ -2315,12 +2315,12 @@ PlasmoidItem {
         var chatsDir = dataHome + "/plasmallm/chats";
         
         // Pure shell command to list top 10 chats with mtime and a basic preview from the first user message.
-        // Format: filePath <TAB> mtime <TAB> previewText
+        // Format: filePath <TAB> mtime <TAB> previewText (still JSON-escaped; see Utils.cleanHistoryPreview)
         var cmd = "mkdir -p \"" + chatsDir + "\" && " +
                   "for f in \"" + chatsDir + "/\"*.jsonl; do " +
                   "  [ -e \"$f\" ] || continue; " +
                   "  mtime=$(stat -c %Y \"$f\"); " +
-                  "  preview=$(grep -m 1 '\"role\":\"user\"' \"$f\" | sed -E 's/.*\"content\":\"([^\"]*)\".*/\\1/' | head -c 100); " +
+                  "  preview=$(grep -m 1 '\"role\":\"user\"' \"$f\" | sed -E 's/.*\"content\":\"(([^\"\\\\]|\\\\.)*)\".*/\\1/' | head -c 100); " +
                   "  printf \"%s\\t%s\\t%s\\n\" \"$f\" \"$mtime\" \"$preview\"; " +
                   "done | sort -t$'\\t' -k2,2rn | head -n 10";
         
@@ -2333,10 +2333,15 @@ PlasmoidItem {
         if (!Plasmoid.configuration.saveChatHistory) return;
         var dataHome = sysInfo.xdgDataHome || "${XDG_DATA_HOME:-$HOME/.local/share}";
         var filePath = dataHome + "/plasmallm/chats/" + fileName;
+        var now = new Date();
+        var dtStr = now.toLocaleString(Qt.locale(), Locale.ShortFormat);
+        var mtime = Math.floor(now.getTime() / 1000);
         var found = false;
         for (var i = 0; i < historyFilesModel.count; i++) {
             if (historyFilesModel.get(i).name === fileName) {
                 if (i !== 0) historyFilesModel.move(i, 0, 1);
+                historyFilesModel.setProperty(0, "dateTime", dtStr);
+                historyFilesModel.setProperty(0, "mtime", mtime);
                 found = true;
                 break;
             }
@@ -2345,15 +2350,15 @@ PlasmoidItem {
             var preview = "";
             for (var j = 0; j < displayMessages.count; j++) {
                 if (displayMessages.get(j).role === "user") {
-                    preview = displayMessages.get(j).content.substring(0, 100);
+                    preview = displayMessages.get(j).content.substring(0, 100).replace(/\s+/g, " ").trim();
                     break;
                 }
             }
-            var d = new Date();
             historyFilesModel.insert(0, {
                 file: filePath,
                 name: fileName,
-                dateTime: d.toLocaleString(Qt.locale(), Locale.ShortFormat),
+                dateTime: dtStr,
+                mtime: mtime,
                 preview: preview
             });
             if (historyFilesModel.count > 10) {
@@ -2951,7 +2956,7 @@ PlasmoidItem {
             }
             return true;
         }
-        if (lower === "/clear") {
+        if (lower === "/clear" || lower === "/new") {
             clearChat();
             return true;
         }

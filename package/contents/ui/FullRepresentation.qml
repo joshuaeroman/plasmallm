@@ -17,6 +17,7 @@ import org.kde.draganddrop as DragDrop
 
 import "profiles.js" as Profiles
 import "driverManager.js" as DriverManager
+import "utils.js" as Utils
 
 PlasmaExtras.Representation {
     id: fullRep
@@ -259,6 +260,7 @@ PlasmaExtras.Representation {
             { cmd: "/deny",     desc: i18n("Deny the pending tool request") },
             { cmd: "/history",  desc: i18n("Open chat history folder") },
             { cmd: "/model",    desc: i18n("Show or switch model (/model <name>)") },
+            { cmd: "/new",      desc: i18n("Start a new chat") },
             { cmd: "/profile",  desc: i18n("Switch profile (/profile <name>)") },
             { cmd: "/save",     desc: i18n("Save chat to file") },
             { cmd: "/settings", desc: i18n("Open settings") },
@@ -295,14 +297,45 @@ PlasmaExtras.Representation {
         return -1;
     }
 
-    Layout.minimumWidth: Kirigami.Units.gridUnit * 20
+    Layout.minimumWidth: minChatWidth + (historySidebarForced && !historySidebarCollapsed ? minHistorySidebarWidth : 0)
     Layout.minimumHeight: Kirigami.Units.gridUnit * 24
     Layout.preferredWidth: Kirigami.Units.gridUnit * 28
     Layout.preferredHeight: Kirigami.Units.gridUnit * 32
+
+    // History sidebar vs header button. Auto shows the sidebar when both
+    // minimum widths fit; a forced sidebar raises the minimum width instead.
+    readonly property real minChatWidth: Kirigami.Units.gridUnit * 20
+    readonly property real minHistorySidebarWidth: 250
+    readonly property bool historyListAvailable: Plasmoid.configuration.showIconHistory
+        && Plasmoid.configuration.saveChatHistory
+        && Plasmoid.configuration.chatSaveFormat === "jsonl"
+    readonly property bool historySidebarForced: historyListAvailable
+        && Plasmoid.configuration.chatHistoryLayout === "sidebar"
+    readonly property bool historySidebarCollapsed: Plasmoid.configuration.historySidebarCollapsed
+    readonly property bool historySidebarActive: historyListAvailable
+        && Utils.historyLayoutFor(Plasmoid.configuration.chatHistoryLayout || "auto",
+                                  width, minHistorySidebarWidth, minChatWidth) === "sidebar"
+    readonly property bool historySidebarShown: historySidebarActive && !historySidebarCollapsed
+    // Grows with the view but never takes the chat below its minimum.
+    readonly property real historySidebarWidth: Math.max(minHistorySidebarWidth,
+        Math.min(Kirigami.Units.gridUnit * 18, width * 0.28, width - minChatWidth))
     
     header: PlasmaExtras.BasicPlasmoidHeading {
         contentItem: RowLayout {
             spacing: Kirigami.Units.smallSpacing
+
+            PlasmaComponents.ToolButton {
+                id: historySidebarToggle
+                visible: fullRep.historySidebarActive
+                icon.name: fullRep.historySidebarCollapsed ? "sidebar-expand-left" : "sidebar-collapse-left"
+                display: QQC2.AbstractButton.IconOnly
+                text: fullRep.historySidebarCollapsed ? i18n("Show sidebar") : i18n("Hide sidebar")
+                Accessible.name: text
+                PlasmaComponents.ToolTip.text: text
+                PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents.ToolTip.visible: hovered
+                onClicked: Plasmoid.configuration.historySidebarCollapsed = !fullRep.historySidebarCollapsed
+            }
 
             PlasmaComponents.ToolButton {
                 id: profileToolButton
@@ -469,6 +502,7 @@ PlasmaExtras.Representation {
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered && !historyMenu.opened && PlasmaComponents.ToolTip.text !== ""
                 visible: Plasmoid.configuration.showIconHistory && Plasmoid.configuration.saveChatHistory
+                    && !fullRep.historySidebarShown
                 checkable: true
                 checked: historyMenu.opened
 
@@ -889,10 +923,10 @@ PlasmaExtras.Representation {
             }
 
             PlasmaComponents.ToolButton {
-                icon.name: "edit-clear-history"
-                visible: Plasmoid.configuration.showIconClear
-                Accessible.name: i18n("Clear chat")
-                PlasmaComponents.ToolTip.text: i18n("Clear chat")
+                icon.name: "list-add"
+                visible: Plasmoid.configuration.showIconClear && !fullRep.historySidebarShown
+                Accessible.name: i18n("New chat")
+                PlasmaComponents.ToolTip.text: i18n("New chat")
                 PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
                 onClicked: { root.clearChat(); inputField.forceActiveFocus(); }
@@ -954,8 +988,38 @@ PlasmaExtras.Representation {
     contentItem: Item {
         id: representationContent
 
+        ChatHistorySidebar {
+            id: historySidebar
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: fullRep.historySidebarWidth
+            visible: fullRep.historySidebarShown
+            showNewChat: Plasmoid.configuration.showIconClear
+
+            onNewChatRequested: {
+                root.clearChat();
+                inputField.forceActiveFocus();
+            }
+            onChatChosen: function(file) {
+                root.loadChatJsonl(file);
+                inputField.forceActiveFocus();
+            }
+            onOpenFolderRequested: root.openChatsFolder()
+            onClearAllRequested: clearHistorySheet.open()
+        }
+
+        Kirigami.Separator {
+            id: historySidebarSeparator
+            anchors.left: historySidebar.right
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            visible: historySidebar.visible
+        }
+
         ColumnLayout {
             anchors.fill: parent
+            anchors.leftMargin: historySidebar.visible ? historySidebar.width + historySidebarSeparator.width : 0
             spacing: Plasmoid.configuration.chatSpacing
 
             Kirigami.InlineMessage {

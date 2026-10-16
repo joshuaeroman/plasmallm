@@ -54,3 +54,28 @@ function applyOpenRouterAttribution(xhr, opts, endpoint) {
         xhr.setRequestHeader("X-OpenRouter-Title", "PlasmaLLM");
     }
 }
+
+// Chat history placement: "sidebar" or "button". "auto" picks the sidebar
+// when the view fits both a minimum-width sidebar and a minimum-width chat;
+// unknown modes keep the header button.
+function historyLayoutFor(mode, width, minSidebarWidth, minChatWidth) {
+    if (mode === "sidebar") return "sidebar";
+    if (mode !== "auto") return "button";
+    return (width >= minSidebarWidth + minChatWidth) ? "sidebar" : "button";
+}
+
+// One-line snippet from a raw JSON string fragment, as the history list's
+// shell extraction yields it: escapes are still encoded and the text stops
+// at the first quote, so an escaped \" leaves a dangling backslash.
+function cleanHistoryPreview(raw) {
+    var s = String(raw || "");
+    var tail = s.match(/\\+$/);
+    if (tail && tail[0].length % 2 === 1) s = s.slice(0, -1);
+    s = s.replace(/\\(u[0-9a-fA-F]{4}|.)/g, function(m, e) {
+        if (e.length === 5) return String.fromCharCode(parseInt(e.slice(1), 16));
+        return (e === "n" || e === "r" || e === "t") ? " " : e;
+    });
+    // head -c can split a multibyte character at the cut.
+    s = s.replace(/\uFFFD+$/, "");
+    return s.replace(/\s+/g, " ").trim();
+}
