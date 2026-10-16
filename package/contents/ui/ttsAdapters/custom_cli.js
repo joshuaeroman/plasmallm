@@ -87,7 +87,7 @@ function buildCommand(opts) {
  * @returns {string}
  */
 function buildStopCommand() {
-    return "pkill -f '/tmp/plasmallm_tts' 2>/dev/null; spd-say -S 2>/dev/null";
+    return "pkill -f '/tmp/plasmallm_tts' 2>/dev/null; spd-say -C 2>/dev/null";
 }
 
 function parseResult(stdout, stderr, exitCode) {

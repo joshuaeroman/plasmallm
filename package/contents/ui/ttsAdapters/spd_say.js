@@ -97,10 +97,13 @@ function buildCommand(opts) {
 
 /**
  * Build the command to stop speech playback immediately.
+ * Uses cancel (-C) rather than stop (-S): speech-dispatcher 0.12 aborts on
+ * STOP ALL when it has not spoken anything since starting, and -S exits 0
+ * even then. Cancel also drops any queued text.
  * @returns {string}
  */
 function buildStopCommand() {
-    return "spd-say -S 2>/dev/null || spd-say -C 2>/dev/null";
+    return "spd-say -C 2>/dev/null";
 }
 
 function parseResult(stdout, stderr, exitCode) {

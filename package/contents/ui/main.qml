@@ -554,12 +554,17 @@ PlasmoidItem {
      * Stop any active speech playback immediately.
      */
     function stopSpeech() {
+        var wasSpeaking = isSpeaking;
         ++_ttsGen;
         flushPendingTtsOutput();
         root.turnTtsStyleHint = "";
         isSpeaking = false;
         speakingMessageIndex = -1;
         ttsStatusText = "";
+        // Called on every send/clear/cancel; don't run (and socket-activate) the
+        // TTS backend when TTS isn't in use.
+        if (!ttsAvailable && !wasSpeaking)
+            return;
         var stopCmd = Tts.buildStopCommand(Plasmoid.configuration.ttsBackend);
         if (stopCmd && stopCmd.length) {
             ttsExec.connectSource(stopCmd);
