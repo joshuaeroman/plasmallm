@@ -139,7 +139,9 @@ ok(spdCmd.includes("echo TTS_READY"), "spd-say emits ready signal");
 
 // spd-say stop
 const spdStop = SpdSay.buildStopCommand();
-ok(spdStop.includes("spd-say -S"), "spd-say stop command");
+ok(spdStop.includes("spd-say -C"), "spd-say stop command cancels");
+ok(!spdStop.includes("spd-say -S"), "spd-say stop command avoids STOP ALL");
+ok(!CustomCli.buildStopCommand().includes("spd-say -S"), "custom_cli stop command avoids STOP ALL");
 
 // openai_speech
 const endpointCmd = OpenaiSpeech.buildCommand({
