@@ -395,6 +395,12 @@ SimpleKCM {
     property bool cfg_showIconAutoDefault
     property bool cfg_showIconHistory
     property bool cfg_showIconHistoryDefault
+    property string cfg_chatSummaryMode
+    property string cfg_chatSummaryModeDefault
+    property int cfg_chatSummaryInterval
+    property int cfg_chatSummaryIntervalDefault
+    property string cfg_chatSummaryProfileId
+    property string cfg_chatSummaryProfileIdDefault
     property string cfg_chatHistoryLayout
     property string cfg_chatHistoryLayoutDefault
     property bool cfg_historySidebarCollapsed

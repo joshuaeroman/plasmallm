@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 18:51-0400\n"
+"POT-Creation-Date: 2026-10-16 19:33-0400\n"
 "PO-Revision-Date: 2026-04-07 00:00+0000\n"
 "Last-Translator: Claude <noreply@anthropic.com>\n"
 "Language-Team: Turkish\n"
@@ -1314,248 +1314,6 @@ msgstr "Sıkıştırma Bağlantısını Test Et"
 msgid "Model Summary Response:"
 msgstr "Model Özet Yanıtı:"
 
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "gcloud token alınamadı (çıkış %1): %2"
-
-msgid "New Profile"
-msgstr "Yeni Profil"
-
-msgid "%1 (Copy)"
-msgstr "%1 (Kopya)"
-
-msgid "Profile:"
-msgstr "Profil:"
-
-msgid "Rename Profile"
-msgstr "Profili yeniden adlandır"
-
-msgid "Duplicate Profile"
-msgstr "Profili çoğalt"
-
-msgid "Delete Profile"
-msgstr "Profili sil"
-
-msgid "Profile Name"
-msgstr "Profil Adı"
-
-msgid "Rename"
-msgstr "Yeniden adlandır"
-
-msgid "Adapter:"
-msgstr "Adaptör:"
-
-msgid "Exa does not support tool use"
-msgstr "Exa araç kullanımını desteklemiyor"
-
-msgid ""
-"Decisions profiles evaluate each message once and reply with a verdict and "
-"confidence. They have no conversation memory, system prompt, or tools. They "
-"can also be selected as the Command Validator in Tools settings."
-msgstr ""
-"Decisions profilleri her mesajı bir kez değerlendirir ve bir karar ile güven "
-"değeriyle yanıtlar. Konuşma belleği, sistem istemi veya araçları yoktur. "
-"Araçlar ayarlarında Komut Doğrulayıcı olarak da seçilebilirler."
-
-msgid "Platform:"
-msgstr "Platform:"
-
-msgid "Google AI Studio"
-msgstr "Google AI Studio"
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr "Google Cloud Agent Platform (Vertex AI)"
-
-msgid "Authentication:"
-msgstr "Kimlik Doğrulama:"
-
-msgid "API Key (Express Mode)"
-msgstr "API Anahtarı (Ekspres Mod)"
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr "Google Cloud CLI (gcloud)"
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLI bulunamadı. Bu kimlik doğrulama yöntemini kullanmak için lütfen "
-"yükleyin."
-
-msgid "API Variant:"
-msgstr "API Varyantı:"
-
-msgid "Legacy (generateContent)"
-msgstr "Eski (generateContent)"
-
-msgid "Interactions API (Stateful)"
-msgstr "Interactions API (Durumlu)"
-
-msgid "Project ID:"
-msgstr "Proje Kimliği:"
-
-msgid "Location:"
-msgstr "Konum:"
-
-msgid "Provider:"
-msgstr "Sağlayıcı:"
-
-msgid "API Key:"
-msgstr "API Anahtarı:"
-
-msgid "Paste short-lived access token"
-msgstr "Kısa ömürlü erişim belirtecini yapıştır"
-
-msgid "Paste OpenCode API key"
-msgstr "OpenCode API anahtarını yapıştır"
-
-msgid "Optional - for OpenAI, etc."
-msgstr "İsteğe bağlı - OpenAI vb. için."
-
-msgid "Stored in KDE Wallet"
-msgstr "KDE Cüzdanında Saklandı"
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Cüzdanı kullanılamıyor — anahtar yapılandırma dosyasında saklandı"
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "Sıcaklık: %1%"
-
-msgid "Precise"
-msgstr "Kesin"
-
-msgid "Creative"
-msgstr "Yaratıcı"
-
-msgid "Max Tokens:"
-msgstr "Maks. Token:"
-
-msgid "Thinking:"
-msgstr "Düşünme:"
-
-msgid "Off"
-msgstr "Kapalı"
-
-msgid "Low"
-msgstr "Düşük"
-
-msgid "Medium"
-msgstr "Orta"
-
-msgid "High"
-msgstr "Yüksek"
-
-msgid "Thinking budget:"
-msgstr "Düşünme bütçesi:"
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr "Düşünceleri sohbette göster (daraltılabilir)"
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-"Etkinleştirildiğinde, modelin akıl yürütmesi her yanıtın üzerinde "
-"daraltılabilir bir başlıkla gösterilir. İmzalı düşüncelerin API'ye gidiş-"
-"dönüşü bu ayardan bağımsız olarak gerçekleşir."
-
-msgid "Use Responses API"
-msgstr "Responses API kullan"
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-"OpenAI / Poe / OpenRouter / Azure'da akıl yürütme içeriğini göstermek için "
-"gereklidir (/v1/chat/completions yerine /v1/responses'a POST gönderir). "
-"Hazır ayar seçildiğinde otomatik olarak ayarlanır."
-
-msgid "Enable OpenRouter attribution"
-msgstr "OpenRouter atfını etkinleştir"
-
-msgid ""
-"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
-"requests include only the app name and URL. Uncheck to stop sending these "
-"headers."
-msgstr ""
-"OpenRouter kullanımı, herkese açık uygulama sıralamalarında PlasmaLLM'e "
-"atfedilir; istekler yalnızca uygulama adını ve URL'sini içerir. Bu "
-"üstbilgilerin gönderilmesini durdurmak için işareti kaldırın."
-
-msgid ""
-"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
-"their API. Nothing about your conversations is shared."
-msgstr ""
-"OpenRouter atfı, OpenRouter'ın API'lerine erişmek için PlasmaLLM'i "
-"kullandığınızı görmesini sağlar. Konuşmalarınızdan hiçbir şey paylaşılmaz."
-
-msgid "Attachments:"
-msgstr "Ekler:"
-
-msgid "Resize image attachments"
-msgstr "Görsel eklerini yeniden boyutlandır"
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-"Büyük görsel eklerini göndermeden önce 800x600 boyutuna sığacak şekilde "
-"yeniden boyutlandırarak yükleme boyutunu ve bağlam belirteçlerini (token) "
-"azaltır."
-
-msgid "Chat History:"
-msgstr "Sohbet Geçmişi:"
-
-msgid "Auto-save chat history"
-msgstr "Sohbet geçmişini otomatik kaydet"
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr "~/.local/share/plasmallm/chats/ konumuna kaydeder"
-
-msgid "Notifications:"
-msgstr "Bildirimler:"
-
-msgid "Show notifications when minimized"
-msgstr "Küçültüldüğünde bildirimleri göster"
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-"Sohbet penceresi küçültüldüğünde veya kapatıldığında gelen mesajlar ve araç "
-"çağrıları için sistem bildirimleri göster."
-
-msgid "Save format:"
-msgstr "Kaydetme biçimi:"
-
-msgid "Plain text (.txt)"
-msgstr "Düz metin (.txt)"
-
-msgid "Structured (.jsonl)"
-msgstr "Yapılandırılmış (.jsonl)"
-
-msgid "Open the folder where chat histories are saved"
-msgstr "Sohbet geçmişlerinin kaydedildiği klasörü aç"
-
-msgid "Auto-clear:"
-msgstr "Otomatik temizle:"
-
-msgid "Disabled"
-msgstr "Devre dışı"
-
-msgid "Instant (always clear when panel opens)"
-msgstr "Anında (panel açıldığında her zaman temizle)"
-
-msgid "After"
-msgstr "Sonra"
-
-msgid "seconds"
-msgstr "saniye"
-
-msgid "minutes"
-msgstr "dakika"
-
 msgid "Speech to Text"
 msgstr "Konuşmayı Metne Dönüştürme"
 
@@ -1661,6 +1419,9 @@ msgstr "Dönüştürücü"
 msgid "STT backend:"
 msgstr "STT arka ucu:"
 
+msgid "Provider:"
+msgstr "Sağlayıcı:"
+
 msgid "Endpoint:"
 msgstr "Uç Noktası:"
 
@@ -1707,6 +1468,25 @@ msgstr "--fp16 True kullan (GPU)"
 
 msgid "OpenRouter:"
 msgstr "OpenRouter:"
+
+msgid "Enable OpenRouter attribution"
+msgstr "OpenRouter atfını etkinleştir"
+
+msgid ""
+"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
+"requests include only the app name and URL. Uncheck to stop sending these "
+"headers."
+msgstr ""
+"OpenRouter kullanımı, herkese açık uygulama sıralamalarında PlasmaLLM'e "
+"atfedilir; istekler yalnızca uygulama adını ve URL'sini içerir. Bu "
+"üstbilgilerin gönderilmesini durdurmak için işareti kaldırın."
+
+msgid ""
+"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
+"their API. Nothing about your conversations is shared."
+msgstr ""
+"OpenRouter atfı, OpenRouter'ın API'lerine erişmek için PlasmaLLM'i "
+"kullandığınızı görmesini sağlar. Konuşmalarınızdan hiçbir şey paylaşılmaz."
 
 msgid "Threads:"
 msgstr "İş Parçacıkları:"
@@ -1763,6 +1543,9 @@ msgstr "Araçları etkinleştir"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "Tüm araç çağrı işlevleri için ana anahtar."
+
+msgid "Exa does not support tool use"
+msgstr "Exa araç kullanımını desteklemiyor"
 
 msgid "Desktop Automation:"
 msgstr "Masaüstü Otomasyonu:"
@@ -1875,6 +1658,18 @@ msgstr "STT arka ucu model listelemeyi desteklemiyor"
 
 msgid "New chat"
 msgstr "Yeni sohbet"
+
+msgid "Today"
+msgstr "Bugün"
+
+msgid "Yesterday"
+msgstr "Dün"
+
+msgid "Previous 7 days"
+msgstr "Son 7 gün"
+
+msgid "Older"
+msgstr "Daha eski"
 
 msgid "No recent chats"
 msgstr "Son sohbet yok"
@@ -2474,6 +2269,255 @@ msgstr "Yönetim oturumu aktif (zaten yetkilendirilmiş). Otomatik mod etkin."
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Yönetim oturumu başarıyla yetkilendirildi. Otomatik mod etkin."
+
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr "gcloud token alınamadı (çıkış %1): %2"
+
+msgid "New Profile"
+msgstr "Yeni Profil"
+
+msgid "%1 (Copy)"
+msgstr "%1 (Kopya)"
+
+msgid "Profile:"
+msgstr "Profil:"
+
+msgid "Rename Profile"
+msgstr "Profili yeniden adlandır"
+
+msgid "Duplicate Profile"
+msgstr "Profili çoğalt"
+
+msgid "Delete Profile"
+msgstr "Profili sil"
+
+msgid "Profile Name"
+msgstr "Profil Adı"
+
+msgid "Rename"
+msgstr "Yeniden adlandır"
+
+msgid "Adapter:"
+msgstr "Adaptör:"
+
+msgid ""
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
+msgstr ""
+"Decisions profilleri her mesajı bir kez değerlendirir ve bir karar ile güven "
+"değeriyle yanıtlar. Konuşma belleği, sistem istemi veya araçları yoktur. "
+"Araçlar ayarlarında Komut Doğrulayıcı olarak da seçilebilirler."
+
+msgid "Platform:"
+msgstr "Platform:"
+
+msgid "Google AI Studio"
+msgstr "Google AI Studio"
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr "Google Cloud Agent Platform (Vertex AI)"
+
+msgid "Authentication:"
+msgstr "Kimlik Doğrulama:"
+
+msgid "API Key (Express Mode)"
+msgstr "API Anahtarı (Ekspres Mod)"
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr "Google Cloud CLI (gcloud)"
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLI bulunamadı. Bu kimlik doğrulama yöntemini kullanmak için lütfen "
+"yükleyin."
+
+msgid "API Variant:"
+msgstr "API Varyantı:"
+
+msgid "Legacy (generateContent)"
+msgstr "Eski (generateContent)"
+
+msgid "Interactions API (Stateful)"
+msgstr "Interactions API (Durumlu)"
+
+msgid "Project ID:"
+msgstr "Proje Kimliği:"
+
+msgid "Location:"
+msgstr "Konum:"
+
+msgid "API Key:"
+msgstr "API Anahtarı:"
+
+msgid "Paste short-lived access token"
+msgstr "Kısa ömürlü erişim belirtecini yapıştır"
+
+msgid "Paste OpenCode API key"
+msgstr "OpenCode API anahtarını yapıştır"
+
+msgid "Optional - for OpenAI, etc."
+msgstr "İsteğe bağlı - OpenAI vb. için."
+
+msgid "Stored in KDE Wallet"
+msgstr "KDE Cüzdanında Saklandı"
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr "KDE Cüzdanı kullanılamıyor — anahtar yapılandırma dosyasında saklandı"
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "Sıcaklık: %1%"
+
+msgid "Precise"
+msgstr "Kesin"
+
+msgid "Creative"
+msgstr "Yaratıcı"
+
+msgid "Max Tokens:"
+msgstr "Maks. Token:"
+
+msgid "Thinking:"
+msgstr "Düşünme:"
+
+msgid "Off"
+msgstr "Kapalı"
+
+msgid "Low"
+msgstr "Düşük"
+
+msgid "Medium"
+msgstr "Orta"
+
+msgid "High"
+msgstr "Yüksek"
+
+msgid "Thinking budget:"
+msgstr "Düşünme bütçesi:"
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr "Düşünceleri sohbette göster (daraltılabilir)"
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"Etkinleştirildiğinde, modelin akıl yürütmesi her yanıtın üzerinde "
+"daraltılabilir bir başlıkla gösterilir. İmzalı düşüncelerin API'ye gidiş-"
+"dönüşü bu ayardan bağımsız olarak gerçekleşir."
+
+msgid "Use Responses API"
+msgstr "Responses API kullan"
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"OpenAI / Poe / OpenRouter / Azure'da akıl yürütme içeriğini göstermek için "
+"gereklidir (/v1/chat/completions yerine /v1/responses'a POST gönderir). "
+"Hazır ayar seçildiğinde otomatik olarak ayarlanır."
+
+msgid "Attachments:"
+msgstr "Ekler:"
+
+msgid "Resize image attachments"
+msgstr "Görsel eklerini yeniden boyutlandır"
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+"Büyük görsel eklerini göndermeden önce 800x600 boyutuna sığacak şekilde "
+"yeniden boyutlandırarak yükleme boyutunu ve bağlam belirteçlerini (token) "
+"azaltır."
+
+msgid "Chat History:"
+msgstr "Sohbet Geçmişi:"
+
+msgid "Auto-save chat history"
+msgstr "Sohbet geçmişini otomatik kaydet"
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr "~/.local/share/plasmallm/chats/ konumuna kaydeder"
+
+msgid "Notifications:"
+msgstr "Bildirimler:"
+
+msgid "Show notifications when minimized"
+msgstr "Küçültüldüğünde bildirimleri göster"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+"Sohbet penceresi küçültüldüğünde veya kapatıldığında gelen mesajlar ve araç "
+"çağrıları için sistem bildirimleri göster."
+
+msgid "Save format:"
+msgstr "Kaydetme biçimi:"
+
+msgid "Plain text (.txt)"
+msgstr "Düz metin (.txt)"
+
+msgid "Structured (.jsonl)"
+msgstr "Yapılandırılmış (.jsonl)"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "Sohbet geçmişlerinin kaydedildiği klasörü aç"
+
+msgid "Summarize chats:"
+msgstr "Sohbetleri özetle:"
+
+msgid "First message only"
+msgstr "Yalnızca ilk mesaj"
+
+msgid "Re-summarize as the chat grows"
+msgstr "Sohbet büyüdükçe yeniden özetle"
+
+msgid "Re-summarize every:"
+msgstr "Yeniden özetleme aralığı:"
+
+msgid "user message (every message)"
+msgstr "kullanıcı mesajı (her mesajda)"
+
+msgid "user messages"
+msgstr "kullanıcı mesajı"
+
+msgid "Summary profile:"
+msgstr "Özet profili:"
+
+msgid ""
+"Sends the first message and the start of recent ones to the chosen profile "
+"to title chats in history."
+msgstr ""
+"Geçmişteki sohbetlere başlık vermek için ilk mesajı ve son mesajların "
+"başlangıcını seçilen profile gönderir."
+
+msgid "Needs auto-saved history in the Structured (.jsonl) format."
+msgstr ""
+"Yapılandırılmış biçimde (.jsonl) otomatik kaydedilen geçmiş gerektirir."
+
+msgid "Auto-clear:"
+msgstr "Otomatik temizle:"
+
+msgid "Disabled"
+msgstr "Devre dışı"
+
+msgid "Instant (always clear when panel opens)"
+msgstr "Anında (panel açıldığında her zaman temizle)"
+
+msgid "After"
+msgstr "Sonra"
+
+msgid "seconds"
+msgstr "saniye"
+
+msgid "minutes"
+msgstr "dakika"
 
 msgid "General"
 msgstr "Genel"

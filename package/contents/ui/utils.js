@@ -79,3 +79,67 @@ function cleanHistoryPreview(raw) {
     s = s.replace(/\uFFFD+$/, "");
     return s.replace(/\s+/g, " ").trim();
 }
+
+// Chat summarizer (titles shown in chat history). mode is "off", "initial"
+// (summarize the first message only) or "every" (again after every
+// `interval` user messages). A chat without a title is always summarized,
+// so a failed or never-run summary is retried on the next message.
+function shouldSummarizeChat(mode, userCount, interval, hasTitle) {
+    if (mode !== "initial" && mode !== "every") return false;
+    if (userCount < 1) return false;
+    if (!hasTitle) return true;
+    if (mode !== "every") return false;
+    var n = Math.max(1, Math.floor(interval) || 1);
+    return (userCount - 1) % n === 0;
+}
+
+var CHAT_SUMMARY_INSTRUCTION = "Summarize this conversation as a title in 5 words or less. Reply with only the title, without quotes or trailing punctuation.";
+
+// User message for the summarizer: the first prompt (capped) plus the first
+// 50 characters of up to three of the most recent later messages.
+function buildChatSummaryPrompt(userTexts) {
+    var texts = (userTexts || []).map(function(t) {
+        return String(t || "").replace(/\s+/g, " ").trim();
+    });
+    if (texts.length === 0) return "";
+    var initial = texts[0];
+    if (initial.length > 2000) initial = initial.substring(0, 2000) + "…";
+    var out = "First user message:\n" + initial;
+    var recent = texts.slice(1).slice(-3);
+    if (recent.length > 0) {
+        out += "\n\nMost recent user messages (truncated):\n" + recent.map(function(t) {
+            return "- " + t.substring(0, 50);
+        }).join("\n");
+    }
+    return out + "\n\n" + CHAT_SUMMARY_INSTRUCTION;
+}
+
+// First meaningful line of the model's reply, without markdown, quotes,
+// a "Title:"/"Summary:" label or trailing punctuation.
+function cleanChatSummary(raw) {
+    var lines = String(raw || "").split("\n");
+    var s = "";
+    for (var i = 0; i < lines.length; i++) {
+        s = lines[i].replace(/[*_`#>]+/g, " ").replace(/\s+/g, " ").trim();
+        if (s) break;
+    }
+    s = s.replace(/^(title|summary)\s*:\s*/i, "");
+    s = s.replace(/^["'“”‘’]+|["'“”‘’]+$/g, "").trim();
+    s = s.replace(/[.!?;:,]+$/, "").trim();
+    if (s.length > 80) s = s.substring(0, 80).trim() + "…";
+    return s;
+}
+
+// Chat history day group for a file mtime (seconds), by local calendar day:
+// "today", "yesterday", "week" (the five days before that) or "older".
+function historyDayGroup(mtimeSec, now) {
+    if (!(mtimeSec > 0)) return "older";
+    var t = mtimeSec * 1000;
+    function dayStart(daysAgo) {
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate() - daysAgo).getTime();
+    }
+    if (t >= dayStart(0)) return "today";
+    if (t >= dayStart(1)) return "yesterday";
+    if (t >= dayStart(6)) return "week";
+    return "older";
+}

@@ -18,6 +18,8 @@ ColumnLayout {
     spacing: 0
 
     property bool showNewChat: true
+    // Off, saved summaries stay in the files but rows show the first prompt.
+    property bool showSummaries: true
 
     signal newChatRequested()
     signal chatChosen(string file)
@@ -53,35 +55,62 @@ ColumnLayout {
                 topMargin: Kirigami.Units.smallSpacing
                 bottomMargin: Kirigami.Units.smallSpacing
 
+                // Rows arrive newest first, so each day group is contiguous.
+                section.property: "group"
+                section.criteria: ViewSection.FullString
+                section.delegate: PlasmaComponents.Label {
+                    required property string section
+                    width: ListView.view.width
+                    topPadding: Kirigami.Units.largeSpacing
+                    leftPadding: Kirigami.Units.largeSpacing
+                    rightPadding: Kirigami.Units.largeSpacing
+                    font: Kirigami.Theme.smallFont
+                    opacity: 0.7
+                    elide: Text.ElideRight
+                    text: {
+                        switch (section) {
+                        case "today": return i18n("Today");
+                        case "yesterday": return i18n("Yesterday");
+                        case "week": return i18n("Previous 7 days");
+                        default: return i18n("Older");
+                        }
+                    }
+                }
+
                 delegate: PlasmaComponents.ItemDelegate {
                     id: entry
                     width: ListView.view.width
                     padding: Kirigami.Units.largeSpacing
                     highlighted: model.name === root.currentChatFile
-                    Accessible.name: (model.dateTime || "") + (model.preview ? ": " + model.preview : "")
+                    // Summary title when there is one, else the first prompt.
+                    readonly property string shownTitle: sidebar.showSummaries ? (model.title || "") : ""
+                    readonly property string label: shownTitle || model.preview || ""
+                    Accessible.name: label + (model.dateTime ? ", " + model.dateTime : "")
 
+                    // With a title, the tooltip shows the first prompt it summarizes.
                     PlasmaComponents.ToolTip.text: model.preview || ""
                     PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
-                    PlasmaComponents.ToolTip.visible: hovered && previewLabel.truncated
+                    PlasmaComponents.ToolTip.visible: hovered && PlasmaComponents.ToolTip.text !== ""
+                        && (!!shownTitle || previewLabel.truncated)
 
                     contentItem: ColumnLayout {
                         spacing: Kirigami.Units.smallSpacing
 
                         PlasmaComponents.Label {
+                            id: previewLabel
                             Layout.fillWidth: true
-                            text: model.dateTime || model.name || ""
-                            font: Kirigami.Theme.smallFont
-                            opacity: 0.7
+                            visible: text.length > 0
+                            text: entry.label
+                            wrapMode: Text.Wrap
+                            maximumLineCount: 2
                             elide: Text.ElideRight
                         }
 
                         PlasmaComponents.Label {
-                            id: previewLabel
                             Layout.fillWidth: true
-                            visible: text.length > 0
-                            text: model.preview || ""
-                            wrapMode: Text.Wrap
-                            maximumLineCount: 2
+                            text: model.when || model.dateTime || model.name || ""
+                            font: Kirigami.Theme.smallFont
+                            opacity: 0.7
                             elide: Text.ElideRight
                         }
                     }

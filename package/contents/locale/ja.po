@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 18:51-0400\n"
+"POT-Creation-Date: 2026-10-16 19:33-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Japanese\n"
@@ -1304,246 +1304,6 @@ msgstr "圧縮接続をテスト"
 msgid "Model Summary Response:"
 msgstr "モデル要約応答:"
 
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "gcloudトークンを取得できませんでした（終了コード %1）：%2"
-
-msgid "New Profile"
-msgstr "新しいプロファイル"
-
-msgid "%1 (Copy)"
-msgstr "%1 (コピー)"
-
-msgid "Profile:"
-msgstr "プロファイル:"
-
-msgid "Rename Profile"
-msgstr "プロファイルの名前変更"
-
-msgid "Duplicate Profile"
-msgstr "プロファイルの複製"
-
-msgid "Delete Profile"
-msgstr "プロファイルの削除"
-
-msgid "Profile Name"
-msgstr "プロファイル名"
-
-msgid "Rename"
-msgstr "名前変更"
-
-msgid "Adapter:"
-msgstr "アダプター:"
-
-msgid "Exa does not support tool use"
-msgstr "Exaはツールの使用をサポートしていません"
-
-msgid ""
-"Decisions profiles evaluate each message once and reply with a verdict and "
-"confidence. They have no conversation memory, system prompt, or tools. They "
-"can also be selected as the Command Validator in Tools settings."
-msgstr ""
-"Decisionsプロファイルは各メッセージを一度だけ評価し、判定と信頼度を返します。"
-"会話メモリ、システムプロンプト、ツールはありません。ツール設定でコマンドバリ"
-"データーとして選択することもできます。"
-
-msgid "Platform:"
-msgstr "プラットフォーム:"
-
-msgid "Google AI Studio"
-msgstr "Google AI Studio"
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr "Google Cloud Agent Platform (Vertex AI)"
-
-msgid "Authentication:"
-msgstr "認証:"
-
-msgid "API Key (Express Mode)"
-msgstr "APIキー（エクスプレスモード）"
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr "Google Cloud CLI (gcloud)"
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLIが見つかりません。この認証方法を使用するにはインストールしてくださ"
-"い。"
-
-msgid "API Variant:"
-msgstr "APIバリアント:"
-
-msgid "Legacy (generateContent)"
-msgstr "レガシー（generateContent）"
-
-msgid "Interactions API (Stateful)"
-msgstr "Interactions API（ステートフル）"
-
-msgid "Project ID:"
-msgstr "プロジェクトID:"
-
-msgid "Location:"
-msgstr "場所:"
-
-msgid "Provider:"
-msgstr "プロバイダー:"
-
-msgid "API Key:"
-msgstr "APIキー:"
-
-msgid "Paste short-lived access token"
-msgstr "短命アクセストークンを貼り付け"
-
-msgid "Paste OpenCode API key"
-msgstr "OpenCode APIキーを貼り付け"
-
-msgid "Optional - for OpenAI, etc."
-msgstr "オプション – OpenAIなど用"
-
-msgid "Stored in KDE Wallet"
-msgstr "KDE Walletに保存済み"
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Walletが利用不可 — キーは設定ファイルに保存されました"
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "温度: %1%"
-
-msgid "Precise"
-msgstr "正確"
-
-msgid "Creative"
-msgstr "創造的"
-
-msgid "Max Tokens:"
-msgstr "最大トークン数:"
-
-msgid "Thinking:"
-msgstr "思考:"
-
-msgid "Off"
-msgstr "オフ"
-
-msgid "Low"
-msgstr "低"
-
-msgid "Medium"
-msgstr "中"
-
-msgid "High"
-msgstr "高"
-
-msgid "Thinking budget:"
-msgstr "思考バジェット:"
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr "チャットに思考を表示（折りたたみ可能）"
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-"有効にすると、モデルの推論が各返答の上に折りたたみ可能なヘッダーで表示されま"
-"す。署名された思考のAPIへの往復は、この設定に関係なく行われます。"
-
-msgid "Use Responses API"
-msgstr "Responses APIを使用"
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-"OpenAI / Poe / OpenRouter / Azureで推論コンテンツを表示するために必要です（/"
-"v1/chat/completionsの代わりに/v1/responsesにPOSTします）。プリセット選択時に"
-"自動設定されます。"
-
-msgid "Enable OpenRouter attribution"
-msgstr "OpenRouter の帰属表示を有効にする"
-
-msgid ""
-"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
-"requests include only the app name and URL. Uncheck to stop sending these "
-"headers."
-msgstr ""
-"OpenRouter の利用は、公開されているアプリのランキングで PlasmaLLM に帰属され"
-"ます。リクエストにはアプリ名と URL のみが含まれます。送信を停止するにはチェッ"
-"クを外してください。"
-
-msgid ""
-"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
-"their API. Nothing about your conversations is shared."
-msgstr ""
-"OpenRouter の帰属表示により、PlasmaLLM を使って API にアクセスしたことが "
-"OpenRouter に伝わります。会話内容が共有されることはありません。"
-
-msgid "Attachments:"
-msgstr "添付ファイル:"
-
-msgid "Resize image attachments"
-msgstr "画像添付ファイルのサイズ変更"
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-"送信前に大きな画像添付ファイルを800x600以内に収まるように縮小し、アップロード"
-"サイズとコンテキストトークン数を削減します。"
-
-msgid "Chat History:"
-msgstr "チャット履歴:"
-
-msgid "Auto-save chat history"
-msgstr "チャット履歴を自動保存"
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr "~/.local/share/plasmallm/chats/ に保存"
-
-msgid "Notifications:"
-msgstr "通知:"
-
-msgid "Show notifications when minimized"
-msgstr "最小化時に通知を表示する"
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-"チャットウィンドウが最小化または閉じられているときに、受信メッセージとツール"
-"呼び出しのシステム通知を表示します。"
-
-msgid "Save format:"
-msgstr "保存形式:"
-
-msgid "Plain text (.txt)"
-msgstr "プレーンテキスト (.txt)"
-
-msgid "Structured (.jsonl)"
-msgstr "構造化 (.jsonl)"
-
-msgid "Open the folder where chat histories are saved"
-msgstr "チャット履歴が保存されているフォルダーを開きます"
-
-msgid "Auto-clear:"
-msgstr "自動クリア:"
-
-msgid "Disabled"
-msgstr "無効"
-
-msgid "Instant (always clear when panel opens)"
-msgstr "即時（パネルを開くたびにクリア）"
-
-msgid "After"
-msgstr "後"
-
-msgid "seconds"
-msgstr "秒"
-
-msgid "minutes"
-msgstr "分"
-
 msgid "Speech to Text"
 msgstr "音声認識 (STT)"
 
@@ -1650,6 +1410,9 @@ msgstr "文字起こし"
 msgid "STT backend:"
 msgstr "STTバックエンド:"
 
+msgid "Provider:"
+msgstr "プロバイダー:"
+
 msgid "Endpoint:"
 msgstr "エンドポイント:"
 
@@ -1696,6 +1459,25 @@ msgstr "--fp16 True を使用 (GPU)"
 
 msgid "OpenRouter:"
 msgstr "OpenRouter："
+
+msgid "Enable OpenRouter attribution"
+msgstr "OpenRouter の帰属表示を有効にする"
+
+msgid ""
+"OpenRouter usage is credited to PlasmaLLM in its public app rankings while "
+"requests include only the app name and URL. Uncheck to stop sending these "
+"headers."
+msgstr ""
+"OpenRouter の利用は、公開されているアプリのランキングで PlasmaLLM に帰属され"
+"ます。リクエストにはアプリ名と URL のみが含まれます。送信を停止するにはチェッ"
+"クを外してください。"
+
+msgid ""
+"OpenRouter attribution lets OpenRouter see that you used PlasmaLLM to access "
+"their API. Nothing about your conversations is shared."
+msgstr ""
+"OpenRouter の帰属表示により、PlasmaLLM を使って API にアクセスしたことが "
+"OpenRouter に伝わります。会話内容が共有されることはありません。"
 
 msgid "Threads:"
 msgstr "スレッド数:"
@@ -1752,6 +1534,9 @@ msgstr "ツールを有効にする"
 
 msgid "Master switch for all tool-calling functionality."
 msgstr "すべてのツール呼び出し機能のマスタースイッチ。"
+
+msgid "Exa does not support tool use"
+msgstr "Exaはツールの使用をサポートしていません"
 
 msgid "Desktop Automation:"
 msgstr "デスクトップ自動化:"
@@ -1863,6 +1648,18 @@ msgstr "STTバックエンドはモデル一覧の取得をサポートしてい
 
 msgid "New chat"
 msgstr "新しいチャット"
+
+msgid "Today"
+msgstr "今日"
+
+msgid "Yesterday"
+msgstr "昨日"
+
+msgid "Previous 7 days"
+msgstr "過去 7 日間"
+
+msgid "Older"
+msgstr "それ以前"
 
 msgid "No recent chats"
 msgstr "最近のチャットはありません"
@@ -2461,6 +2258,252 @@ msgstr "操作セッションはアクティブです（認証済み）。自動
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "操作セッションの認証に成功しました。自動モードが有効です。"
+
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr "gcloudトークンを取得できませんでした（終了コード %1）：%2"
+
+msgid "New Profile"
+msgstr "新しいプロファイル"
+
+msgid "%1 (Copy)"
+msgstr "%1 (コピー)"
+
+msgid "Profile:"
+msgstr "プロファイル:"
+
+msgid "Rename Profile"
+msgstr "プロファイルの名前変更"
+
+msgid "Duplicate Profile"
+msgstr "プロファイルの複製"
+
+msgid "Delete Profile"
+msgstr "プロファイルの削除"
+
+msgid "Profile Name"
+msgstr "プロファイル名"
+
+msgid "Rename"
+msgstr "名前変更"
+
+msgid "Adapter:"
+msgstr "アダプター:"
+
+msgid ""
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
+msgstr ""
+"Decisionsプロファイルは各メッセージを一度だけ評価し、判定と信頼度を返します。"
+"会話メモリ、システムプロンプト、ツールはありません。ツール設定でコマンドバリ"
+"データーとして選択することもできます。"
+
+msgid "Platform:"
+msgstr "プラットフォーム:"
+
+msgid "Google AI Studio"
+msgstr "Google AI Studio"
+
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr "Google Cloud Agent Platform (Vertex AI)"
+
+msgid "Authentication:"
+msgstr "認証:"
+
+msgid "API Key (Express Mode)"
+msgstr "APIキー（エクスプレスモード）"
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr "Google Cloud CLI (gcloud)"
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLIが見つかりません。この認証方法を使用するにはインストールしてくださ"
+"い。"
+
+msgid "API Variant:"
+msgstr "APIバリアント:"
+
+msgid "Legacy (generateContent)"
+msgstr "レガシー（generateContent）"
+
+msgid "Interactions API (Stateful)"
+msgstr "Interactions API（ステートフル）"
+
+msgid "Project ID:"
+msgstr "プロジェクトID:"
+
+msgid "Location:"
+msgstr "場所:"
+
+msgid "API Key:"
+msgstr "APIキー:"
+
+msgid "Paste short-lived access token"
+msgstr "短命アクセストークンを貼り付け"
+
+msgid "Paste OpenCode API key"
+msgstr "OpenCode APIキーを貼り付け"
+
+msgid "Optional - for OpenAI, etc."
+msgstr "オプション – OpenAIなど用"
+
+msgid "Stored in KDE Wallet"
+msgstr "KDE Walletに保存済み"
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr "KDE Walletが利用不可 — キーは設定ファイルに保存されました"
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "温度: %1%"
+
+msgid "Precise"
+msgstr "正確"
+
+msgid "Creative"
+msgstr "創造的"
+
+msgid "Max Tokens:"
+msgstr "最大トークン数:"
+
+msgid "Thinking:"
+msgstr "思考:"
+
+msgid "Off"
+msgstr "オフ"
+
+msgid "Low"
+msgstr "低"
+
+msgid "Medium"
+msgstr "中"
+
+msgid "High"
+msgstr "高"
+
+msgid "Thinking budget:"
+msgstr "思考バジェット:"
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr "チャットに思考を表示（折りたたみ可能）"
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"有効にすると、モデルの推論が各返答の上に折りたたみ可能なヘッダーで表示されま"
+"す。署名された思考のAPIへの往復は、この設定に関係なく行われます。"
+
+msgid "Use Responses API"
+msgstr "Responses APIを使用"
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"OpenAI / Poe / OpenRouter / Azureで推論コンテンツを表示するために必要です（/"
+"v1/chat/completionsの代わりに/v1/responsesにPOSTします）。プリセット選択時に"
+"自動設定されます。"
+
+msgid "Attachments:"
+msgstr "添付ファイル:"
+
+msgid "Resize image attachments"
+msgstr "画像添付ファイルのサイズ変更"
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+"送信前に大きな画像添付ファイルを800x600以内に収まるように縮小し、アップロード"
+"サイズとコンテキストトークン数を削減します。"
+
+msgid "Chat History:"
+msgstr "チャット履歴:"
+
+msgid "Auto-save chat history"
+msgstr "チャット履歴を自動保存"
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr "~/.local/share/plasmallm/chats/ に保存"
+
+msgid "Notifications:"
+msgstr "通知:"
+
+msgid "Show notifications when minimized"
+msgstr "最小化時に通知を表示する"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+"チャットウィンドウが最小化または閉じられているときに、受信メッセージとツール"
+"呼び出しのシステム通知を表示します。"
+
+msgid "Save format:"
+msgstr "保存形式:"
+
+msgid "Plain text (.txt)"
+msgstr "プレーンテキスト (.txt)"
+
+msgid "Structured (.jsonl)"
+msgstr "構造化 (.jsonl)"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "チャット履歴が保存されているフォルダーを開きます"
+
+msgid "Summarize chats:"
+msgstr "チャットを要約:"
+
+msgid "First message only"
+msgstr "最初のメッセージのみ"
+
+msgid "Re-summarize as the chat grows"
+msgstr "チャットの進行に合わせて再要約"
+
+msgid "Re-summarize every:"
+msgstr "再要約の間隔:"
+
+msgid "user message (every message)"
+msgstr "件のユーザーメッセージ (毎回)"
+
+msgid "user messages"
+msgstr "件のユーザーメッセージ"
+
+msgid "Summary profile:"
+msgstr "要約に使うプロファイル:"
+
+msgid ""
+"Sends the first message and the start of recent ones to the chosen profile "
+"to title chats in history."
+msgstr ""
+"最初のメッセージと最近のメッセージの冒頭を選択したプロファイルに送り、履歴の"
+"チャットにタイトルを付けます。"
+
+msgid "Needs auto-saved history in the Structured (.jsonl) format."
+msgstr "構造化形式 (.jsonl) での履歴の自動保存が必要です。"
+
+msgid "Auto-clear:"
+msgstr "自動クリア:"
+
+msgid "Disabled"
+msgstr "無効"
+
+msgid "Instant (always clear when panel opens)"
+msgstr "即時（パネルを開くたびにクリア）"
+
+msgid "After"
+msgstr "後"
+
+msgid "seconds"
+msgstr "秒"
+
+msgid "minutes"
+msgstr "分"
 
 msgid "General"
 msgstr "一般"

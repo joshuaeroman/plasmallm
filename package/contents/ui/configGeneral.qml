@@ -1493,6 +1493,90 @@ BaseConfigPage {
             Layout.maximumWidth: Kirigami.Units.gridUnit * 24
         }
 
+        QQC2.ComboBox {
+            id: chatSummaryModeCombo
+            Kirigami.FormData.label: i18n("Summarize chats:")
+            Layout.fillWidth: true
+            // Titles are stored in the jsonl meta line, so txt history has nowhere to keep them.
+            enabled: cfg_saveChatHistory && cfg_chatSaveFormat === "jsonl"
+            model: [
+                i18n("Off"),
+                i18n("First message only"),
+                i18n("Re-summarize as the chat grows")
+            ]
+            readonly property var modeIds: ["off", "initial", "every"]
+            currentIndex: {
+                var i = modeIds.indexOf(cfg_chatSummaryMode || "off");
+                return i >= 0 ? i : 0;
+            }
+            onActivated: function(index) {
+                if (_initialized) cfg_chatSummaryMode = modeIds[index] || "off";
+            }
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18n("Re-summarize every:")
+            visible: cfg_chatSummaryMode === "every"
+            enabled: chatSummaryModeCombo.enabled
+            spacing: Kirigami.Units.smallSpacing
+
+            QQC2.SpinBox {
+                id: chatSummaryIntervalSpin
+                from: 1
+                to: 50
+                value: cfg_chatSummaryInterval || 1
+                editable: true
+                onValueModified: if (_initialized) cfg_chatSummaryInterval = value
+            }
+
+            QQC2.Label {
+                text: chatSummaryIntervalSpin.value === 1 ? i18n("user message (every message)") : i18n("user messages")
+                color: Kirigami.Theme.disabledTextColor
+            }
+        }
+
+        QQC2.ComboBox {
+            id: chatSummaryProfileCombo
+            Kirigami.FormData.label: i18n("Summary profile:")
+            Layout.fillWidth: true
+            visible: cfg_chatSummaryMode !== "off"
+            enabled: chatSummaryModeCombo.enabled
+            textRole: "name"
+            model: {
+                var list = [{ id: "active", name: i18n("(Active Chat Profile)") }];
+                for (var i = 0; i < configPage.profilesList.length; i++) {
+                    var p = configPage.profilesList[i];
+                    // Decisions profiles cannot produce free text.
+                    if (p.apiType === "decisions")
+                        continue;
+                    list.push({ id: p.id, name: p.name || i18n("Unnamed Profile") });
+                }
+                return list;
+            }
+            currentIndex: {
+                var target = cfg_chatSummaryProfileId || "active";
+                for (var i = 0; i < model.length; i++) {
+                    if (model[i].id === target) return i;
+                }
+                return 0;
+            }
+            onActivated: function(index) {
+                if (_initialized) cfg_chatSummaryProfileId = model[index].id;
+            }
+        }
+
+        QQC2.Label {
+            text: chatSummaryModeCombo.enabled
+                ? i18n("Sends the first message and the start of recent ones to the chosen profile to title chats in history.")
+                : i18n("Needs auto-saved history in the Structured (.jsonl) format.")
+            font: Kirigami.Theme.smallFont
+            color: Kirigami.Theme.disabledTextColor
+            wrapMode: Text.Wrap
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 24
+        }
+
         QQC2.ButtonGroup { id: autoClearGroup }
 
         ColumnLayout {
