@@ -70,26 +70,14 @@ ColumnLayout {
     QQC2.Button {
         id: resetSessionButton
         text: i18n("Reset Session")
+        icon.name: "media-playback-stop"
+        icon.color: Kirigami.Theme.negativeTextColor
         visible: useSessionMultiplexerCheckBox.checked
         onClicked: {
             var be = cfg_sessionMultiplexer === "screen" ? "screen" : "tmux";
             var sess = (cfg_sessionName || "").replace(/[^A-Za-z0-9_-]/g, "") || "plasmallm";
             var cmd = be === "tmux" ? "tmux kill-session -t '" + sess + "'" : "screen -S '" + sess + "' -X quit";
             configPage.execSource.connectSource(cmd);
-        }
-
-        contentItem: RowLayout {
-            spacing: Kirigami.Units.smallSpacing
-            Kirigami.Icon {
-                source: "media-playback-stop"
-                implicitWidth: Kirigami.Units.iconSizes.small
-                implicitHeight: Kirigami.Units.iconSizes.small
-                color: Kirigami.Theme.negativeTextColor
-            }
-            QQC2.Label {
-                text: resetSessionButton.text
-                color: Kirigami.Theme.negativeTextColor
-            }
         }
 
         QQC2.ToolTip.text: i18n("Kill persistent session (stops all processes and resets shell state)")
