@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 19:33-0400\n"
+"POT-Creation-Date: 2026-10-16 19:43-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -1647,6 +1647,121 @@ msgstr "Kunne ikke bygge Whisper-kommando"
 msgid "STT backend does not support model listing"
 msgstr "STT-motoren støtter ikke listing av modeller"
 
+msgid "Profile Header:"
+msgstr "Profiloverskrift:"
+
+msgid "Show provider and model in profile header"
+msgstr "Vis leverandør og modell i profiloverskrift"
+
+msgid "Chat Spacing: %1px"
+msgstr "Chatavstand: %1px"
+
+msgid "Compact"
+msgstr "Kompakt"
+
+msgid "Spacious"
+msgstr "Romslig"
+
+msgid "Chat Labels:"
+msgstr "Chat-etiketter:"
+
+msgid "User label:"
+msgstr "Brukeretikett:"
+
+msgid "Assistant label:"
+msgstr "Assistentetikett:"
+
+msgid "Use model name as assistant label"
+msgstr "Bruk modellnavn som assistentetikett"
+
+msgid "Chat Colors:"
+msgstr "Chat-farger:"
+
+msgid "Use custom user color"
+msgstr "Bruk tilpasset brukerfarge"
+
+msgid "Use custom assistant color"
+msgstr "Bruk tilpasset assistentfarge"
+
+msgid "UI Font:"
+msgstr "Grensesnittskrift:"
+
+msgid "Use custom UI font"
+msgstr "Bruk egendefinert grensesnittskrift"
+
+msgid "Code Font:"
+msgstr "Kodeskrift:"
+
+msgid "Use custom code font"
+msgstr "Bruk egendefinert kodeskrift"
+
+msgid "Thoughts Font:"
+msgstr "Tankeskrift:"
+
+msgid "Use custom thoughts font"
+msgstr "Bruk egendefinert tankeskrift"
+
+msgid "LaTeX Rendering:"
+msgstr "LaTeX-rendering:"
+
+msgid "Leave as TeX"
+msgstr "Behold som TeX"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Erstatt med Unicode (standard)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib mangler)"
+
+msgid "Header Icons:"
+msgstr "Overskriftsikoner:"
+
+msgid "Profile Header"
+msgstr "Profiloverskrift"
+
+msgid "Always show Tasks"
+msgstr "Vis alltid Oppgaver"
+
+msgid "Always show Auto Toggle"
+msgstr "Vis alltid Auto-veksler"
+
+msgid "Show History"
+msgstr "Vis historikk"
+
+msgid "History placement:"
+msgstr "Plassering av historikk:"
+
+msgid "Header button"
+msgstr "Knapp i toppfeltet"
+
+msgid "Sidebar"
+msgstr "Sidepanel"
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+"Auto viser sidepanelet når det får plass ved siden av chatten. Sidepanel "
+"viser det alltid og øker minstestørrelsen så begge får plass."
+
+msgid "Show Copy conversation"
+msgstr "Vis Kopier samtale"
+
+msgid "Show Context compaction summary"
+msgstr "Vis sammendrag for kontekstkomprimering"
+
+msgid "Show New chat"
+msgstr "Vis Ny chat"
+
+msgid "Show Settings"
+msgstr "Vis Innstillinger"
+
+msgid "Show Pin"
+msgstr "Vis festikonet"
+
 msgid "New chat"
 msgstr "Ny chat"
 
@@ -1903,364 +2018,6 @@ msgstr "Stopp opplesing"
 msgid "Drop files here to attach"
 msgstr "Slipp filer her for å legge ved"
 
-msgid "Profile Header:"
-msgstr "Profiloverskrift:"
-
-msgid "Show provider and model in profile header"
-msgstr "Vis leverandør og modell i profiloverskrift"
-
-msgid "Chat Spacing: %1px"
-msgstr "Chatavstand: %1px"
-
-msgid "Compact"
-msgstr "Kompakt"
-
-msgid "Spacious"
-msgstr "Romslig"
-
-msgid "Chat Labels:"
-msgstr "Chat-etiketter:"
-
-msgid "User label:"
-msgstr "Brukeretikett:"
-
-msgid "Assistant label:"
-msgstr "Assistentetikett:"
-
-msgid "Use model name as assistant label"
-msgstr "Bruk modellnavn som assistentetikett"
-
-msgid "Chat Colors:"
-msgstr "Chat-farger:"
-
-msgid "Use custom user color"
-msgstr "Bruk tilpasset brukerfarge"
-
-msgid "Use custom assistant color"
-msgstr "Bruk tilpasset assistentfarge"
-
-msgid "UI Font:"
-msgstr "Grensesnittskrift:"
-
-msgid "Use custom UI font"
-msgstr "Bruk egendefinert grensesnittskrift"
-
-msgid "Code Font:"
-msgstr "Kodeskrift:"
-
-msgid "Use custom code font"
-msgstr "Bruk egendefinert kodeskrift"
-
-msgid "Thoughts Font:"
-msgstr "Tankeskrift:"
-
-msgid "Use custom thoughts font"
-msgstr "Bruk egendefinert tankeskrift"
-
-msgid "LaTeX Rendering:"
-msgstr "LaTeX-rendering:"
-
-msgid "Leave as TeX"
-msgstr "Behold som TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Erstatt med Unicode (standard)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib mangler)"
-
-msgid "Header Icons:"
-msgstr "Overskriftsikoner:"
-
-msgid "Profile Header"
-msgstr "Profiloverskrift"
-
-msgid "Always show Tasks"
-msgstr "Vis alltid Oppgaver"
-
-msgid "Always show Auto Toggle"
-msgstr "Vis alltid Auto-veksler"
-
-msgid "Show History"
-msgstr "Vis historikk"
-
-msgid "History placement:"
-msgstr "Plassering av historikk:"
-
-msgid "Header button"
-msgstr "Knapp i toppfeltet"
-
-msgid "Sidebar"
-msgstr "Sidepanel"
-
-msgid ""
-"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
-"and widens the minimum size to fit both."
-msgstr ""
-"Auto viser sidepanelet når det får plass ved siden av chatten. Sidepanel "
-"viser det alltid og øker minstestørrelsen så begge får plass."
-
-msgid "Show Copy conversation"
-msgstr "Vis Kopier samtale"
-
-msgid "Show Context compaction summary"
-msgstr "Vis sammendrag for kontekstkomprimering"
-
-msgid "Show New chat"
-msgstr "Vis Ny chat"
-
-msgid "Show Settings"
-msgstr "Vis Innstillinger"
-
-msgid "Show Pin"
-msgstr "Vis festikonet"
-
-msgid ""
-"Internal scheme for API keys has been migrated. If your key is now missing "
-"or does not work, you can recover your old key from KWalletManager."
-msgstr ""
-"Internt skjema for API-nøkler er migrert. Hvis nøkkelen din nå mangler eller "
-"ikke fungerer, kan du gjenopprette den gamle nøkkelen fra KWalletManager."
-
-msgid "Failed to stop driving: %1"
-msgstr "Klarte ikke å stoppe styring: %1"
-
-msgid "Text-to-speech is not configured"
-msgstr "Talesyntese er ikke konfigurert"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Text-to-speech is not configured. Open Text to Speech settings."
-msgstr "Talesyntese er ikke konfigurert. Åpne innstillingene for talesyntese."
-
-msgid "Speaking…"
-msgstr "Snakker…"
-
-msgid "Still preparing system context…"
-msgstr "Forbereder fortsatt systemkontekst…"
-
-msgid "Voice input is not configured. Open Speech to Text settings."
-msgstr ""
-"Taleinndata er ikke konfigurert. Åpne innstillingene for Tale til tekst."
-
-msgid "Recording too short — hold a bit longer, then toggle again to stop."
-msgstr ""
-"Opptaket er for kort – hold litt lenger, og trykk deretter igjen for å "
-"stoppe."
-
-msgid "Recording produced no audio file."
-msgstr "Opptaket produserte ingen lydfil."
-
-msgid "Recording was empty or could not be read."
-msgstr "Opptaket var tomt eller kunne ikke leses."
-
-msgid "No speech detected."
-msgstr "Ingen tale oppdaget."
-
-msgid "Could not send transcribed message."
-msgstr "Kunne ikke sende transkribert melding."
-
-msgid "Transcription canceled"
-msgstr "Transkripsjon avbrutt"
-
-msgid "Recording too short or silent — try again."
-msgstr "Opptaket var for kort eller stille – prøv igjen."
-
-msgid "Failed to read recorded audio."
-msgstr "Kunne ikke lese innspilt lyd."
-
-msgid "Failed to finalize recording"
-msgstr "Kunne ikke fullføre opptaket"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"Klarte ikke hente gcloud-token (avslutningskode %1): %2. Kontroller at "
-"gcloud er installert og autentisert."
-
-msgid ""
-"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
-"plasmallm/skills/ (configure extra directories in Settings → Skills)."
-msgstr ""
-"Ingen ferdigheter funnet. Slipp mapper som inneholder en SKILL.md i ~/.local/"
-"share/plasmallm/skills/ (konfigurer ekstra mapper i Innstillinger → "
-"Ferdigheter)."
-
-msgid "invalid:"
-msgstr "ugyldig:"
-
-msgid "disabled"
-msgstr "deaktivert"
-
-msgid "loaded"
-msgstr "lastet inn"
-
-msgid "Available skills (%1 enabled):"
-msgstr "Tilgjengelige ferdigheter (%1 aktivert):"
-
-msgid "Enable or disable individual skills in Settings → Skills."
-msgstr ""
-"Aktiver eller deaktiver individuelle ferdigheter i Innstillinger → "
-"Ferdigheter."
-
-msgid "Command validation is still in progress; try again in a moment."
-msgstr "Kommandovalideringen pågår fortsatt; prøv igjen om et øyeblikk."
-
-msgid "No tool request pending to approve."
-msgstr "Ingen verktøyforespørsel venter på godkjenning."
-
-msgid "No tool request pending to deny."
-msgstr "Ingen verktøyforespørsel venter på avslag."
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"Modus for å hoppe over godkjenninger er aktivert for denne økten. Alle "
-"aktiverte verktøy vil kjøre automatisk og omgå innstillingene for 'Spør før "
-"kjøring'."
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr ""
-"Modus for å hoppe over godkjenninger er deaktivert. Verktøy vil gå tilbake "
-"til dine konfigurerte innstillinger for 'Spør før kjøring'."
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr ""
-"Skrivebordsautomatisering er deaktivert i innstillingene. Aktiver det først "
-"for å styre skrivebordet."
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "plasmallm-desktop-driver er ikke oppdaget eller kjører ikke."
-
-msgid "Current profile: **%1**"
-msgstr "Gjeldende profil: **%1**"
-
-msgid "Available profiles:"
-msgstr "Tilgjengelige profiler:"
-
-msgid "active"
-msgstr "aktiv"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "Skriv `/profile <navn>` for å bytte."
-
-msgid "Switched to profile: **%1**"
-msgstr "Byttet til profil: **%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "Ukjent profil: **%1**"
-
-msgid "none"
-msgstr "ingen"
-
-msgid "Current model: **%1**"
-msgstr "Gjeldende modell: **%1**"
-
-msgid "Available models:"
-msgstr "Tilgjengelige modeller:"
-
-msgid "Type `/model <name>` to switch."
-msgstr "Skriv `/model <name>` for å bytte."
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "Ingen modeller bufret. Bruk **Hent modeller** i innstillinger."
-
-msgid "Switched to model: **%1**"
-msgstr "Byttet til modell: **%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "Ingen oppgaver konfigurert. Legg til oppgaver i Innstillinger."
-
-msgid "(auto)"
-msgstr "(automatisk)"
-
-msgid "Available tasks:"
-msgstr "Tilgjengelige oppgaver:"
-
-msgid "Type `/task <name>` to run."
-msgstr "Skriv `/task <name>` for å kjøre."
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "Ukjent oppgave: **%1**. Tilgjengelig: %2"
-
-msgid "The user declined to run this command."
-msgstr "Brukeren avslo å kjøre denne kommandoen."
-
-msgid "No message to evaluate."
-msgstr "Ingen melding å vurdere."
-
-msgid "Evaluating…"
-msgstr "Vurderer…"
-
-msgid "Decision request failed: %1"
-msgstr "Beslutningsforespørsel mislyktes: %1"
-
-#, javascript-format
-msgid "%1% confidence"
-msgstr "konfidens: %1%"
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM: Verktøykall"
-
-msgid "Requested tool: %1"
-msgstr "Forespurt verktøy: %1"
-
-msgid "Validation timed out."
-msgstr "Valideringen ble tidsavbrutt."
-
-msgid "The validator profile has no endpoint or model configured."
-msgstr "Validatorprofilen har ingen endepunkt eller modell konfigurert."
-
-msgid "Empty validator response."
-msgstr "Tomt validatorsvar."
-
-msgid "empty validator response"
-msgstr "tomt validatorsvar"
-
-msgid "Could not validate: %1"
-msgstr "Kunne ikke validere: %1"
-
-msgid "the command does not match its stated justification"
-msgstr "kommandoen samsvarer ikke med den oppgitte begrunnelsen"
-
-msgid "Blocked by command validator: %1"
-msgstr "Blokkert av kommandovalidatoren: %1"
-
-msgid "Unknown tool %1"
-msgstr "Ukjent verktøy %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "Feil: sti '%1' utenfor hviteliste"
-
-msgid "Executing %1…"
-msgstr "Kjører %1…"
-
-msgid ""
-"Loaded '%1' skill — its full instructions were added to this conversation's "
-"context."
-msgstr ""
-"Ferdigheten '%1' er lastet inn — dens fullstendige instruksjoner ble lagt "
-"til i denne samtalens kontekst."
-
-msgid "Failed to start drive session: %1"
-msgstr "Klarte ikke å starte styringsøkt: %1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr "Styringsøkt aktiv (allerede autorisert). Automodus aktivert."
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr "Styringsøkt autorisert. Automodus aktivert."
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Klarte ikke hente gcloud-token (avslutningskode %1): %2"
 
@@ -2507,6 +2264,249 @@ msgstr "sekunder"
 
 msgid "minutes"
 msgstr "minutter"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"Internt skjema for API-nøkler er migrert. Hvis nøkkelen din nå mangler eller "
+"ikke fungerer, kan du gjenopprette den gamle nøkkelen fra KWalletManager."
+
+msgid "Failed to stop driving: %1"
+msgstr "Klarte ikke å stoppe styring: %1"
+
+msgid "Text-to-speech is not configured"
+msgstr "Talesyntese er ikke konfigurert"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Text-to-speech is not configured. Open Text to Speech settings."
+msgstr "Talesyntese er ikke konfigurert. Åpne innstillingene for talesyntese."
+
+msgid "Speaking…"
+msgstr "Snakker…"
+
+msgid "Still preparing system context…"
+msgstr "Forbereder fortsatt systemkontekst…"
+
+msgid "Voice input is not configured. Open Speech to Text settings."
+msgstr ""
+"Taleinndata er ikke konfigurert. Åpne innstillingene for Tale til tekst."
+
+msgid "Recording too short — hold a bit longer, then toggle again to stop."
+msgstr ""
+"Opptaket er for kort – hold litt lenger, og trykk deretter igjen for å "
+"stoppe."
+
+msgid "Recording produced no audio file."
+msgstr "Opptaket produserte ingen lydfil."
+
+msgid "Recording was empty or could not be read."
+msgstr "Opptaket var tomt eller kunne ikke leses."
+
+msgid "No speech detected."
+msgstr "Ingen tale oppdaget."
+
+msgid "Could not send transcribed message."
+msgstr "Kunne ikke sende transkribert melding."
+
+msgid "Transcription canceled"
+msgstr "Transkripsjon avbrutt"
+
+msgid "Recording too short or silent — try again."
+msgstr "Opptaket var for kort eller stille – prøv igjen."
+
+msgid "Failed to read recorded audio."
+msgstr "Kunne ikke lese innspilt lyd."
+
+msgid "Failed to finalize recording"
+msgstr "Kunne ikke fullføre opptaket"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"Klarte ikke hente gcloud-token (avslutningskode %1): %2. Kontroller at "
+"gcloud er installert og autentisert."
+
+msgid ""
+"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
+"plasmallm/skills/ (configure extra directories in Settings → Skills)."
+msgstr ""
+"Ingen ferdigheter funnet. Slipp mapper som inneholder en SKILL.md i ~/.local/"
+"share/plasmallm/skills/ (konfigurer ekstra mapper i Innstillinger → "
+"Ferdigheter)."
+
+msgid "invalid:"
+msgstr "ugyldig:"
+
+msgid "disabled"
+msgstr "deaktivert"
+
+msgid "loaded"
+msgstr "lastet inn"
+
+msgid "Available skills (%1 enabled):"
+msgstr "Tilgjengelige ferdigheter (%1 aktivert):"
+
+msgid "Enable or disable individual skills in Settings → Skills."
+msgstr ""
+"Aktiver eller deaktiver individuelle ferdigheter i Innstillinger → "
+"Ferdigheter."
+
+msgid "Command validation is still in progress; try again in a moment."
+msgstr "Kommandovalideringen pågår fortsatt; prøv igjen om et øyeblikk."
+
+msgid "No tool request pending to approve."
+msgstr "Ingen verktøyforespørsel venter på godkjenning."
+
+msgid "No tool request pending to deny."
+msgstr "Ingen verktøyforespørsel venter på avslag."
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"Modus for å hoppe over godkjenninger er aktivert for denne økten. Alle "
+"aktiverte verktøy vil kjøre automatisk og omgå innstillingene for 'Spør før "
+"kjøring'."
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+"Modus for å hoppe over godkjenninger er deaktivert. Verktøy vil gå tilbake "
+"til dine konfigurerte innstillinger for 'Spør før kjøring'."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+"Skrivebordsautomatisering er deaktivert i innstillingene. Aktiver det først "
+"for å styre skrivebordet."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver er ikke oppdaget eller kjører ikke."
+
+msgid "Current profile: **%1**"
+msgstr "Gjeldende profil: **%1**"
+
+msgid "Available profiles:"
+msgstr "Tilgjengelige profiler:"
+
+msgid "active"
+msgstr "aktiv"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "Skriv `/profile <navn>` for å bytte."
+
+msgid "Switched to profile: **%1**"
+msgstr "Byttet til profil: **%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "Ukjent profil: **%1**"
+
+msgid "none"
+msgstr "ingen"
+
+msgid "Current model: **%1**"
+msgstr "Gjeldende modell: **%1**"
+
+msgid "Available models:"
+msgstr "Tilgjengelige modeller:"
+
+msgid "Type `/model <name>` to switch."
+msgstr "Skriv `/model <name>` for å bytte."
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr "Ingen modeller bufret. Bruk **Hent modeller** i innstillinger."
+
+msgid "Switched to model: **%1**"
+msgstr "Byttet til modell: **%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "Ingen oppgaver konfigurert. Legg til oppgaver i Innstillinger."
+
+msgid "(auto)"
+msgstr "(automatisk)"
+
+msgid "Available tasks:"
+msgstr "Tilgjengelige oppgaver:"
+
+msgid "Type `/task <name>` to run."
+msgstr "Skriv `/task <name>` for å kjøre."
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Ukjent oppgave: **%1**. Tilgjengelig: %2"
+
+msgid "The user declined to run this command."
+msgstr "Brukeren avslo å kjøre denne kommandoen."
+
+msgid "No message to evaluate."
+msgstr "Ingen melding å vurdere."
+
+msgid "Evaluating…"
+msgstr "Vurderer…"
+
+msgid "Decision request failed: %1"
+msgstr "Beslutningsforespørsel mislyktes: %1"
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr "konfidens: %1%"
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Verktøykall"
+
+msgid "Requested tool: %1"
+msgstr "Forespurt verktøy: %1"
+
+msgid "Validation timed out."
+msgstr "Valideringen ble tidsavbrutt."
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr "Validatorprofilen har ingen endepunkt eller modell konfigurert."
+
+msgid "Empty validator response."
+msgstr "Tomt validatorsvar."
+
+msgid "empty validator response"
+msgstr "tomt validatorsvar"
+
+msgid "Could not validate: %1"
+msgstr "Kunne ikke validere: %1"
+
+msgid "the command does not match its stated justification"
+msgstr "kommandoen samsvarer ikke med den oppgitte begrunnelsen"
+
+msgid "Blocked by command validator: %1"
+msgstr "Blokkert av kommandovalidatoren: %1"
+
+msgid "Unknown tool %1"
+msgstr "Ukjent verktøy %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "Feil: sti '%1' utenfor hviteliste"
+
+msgid "Executing %1…"
+msgstr "Kjører %1…"
+
+msgid ""
+"Loaded '%1' skill — its full instructions were added to this conversation's "
+"context."
+msgstr ""
+"Ferdigheten '%1' er lastet inn — dens fullstendige instruksjoner ble lagt "
+"til i denne samtalens kontekst."
+
+msgid "Failed to start drive session: %1"
+msgstr "Klarte ikke å starte styringsøkt: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "Styringsøkt aktiv (allerede autorisert). Automodus aktivert."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "Styringsøkt autorisert. Automodus aktivert."
 
 msgid "General"
 msgstr "Generelt"

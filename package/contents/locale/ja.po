@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 19:33-0400\n"
+"POT-Creation-Date: 2026-10-16 19:43-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Japanese\n"
@@ -1646,6 +1646,121 @@ msgstr "Whisper コマンドを作成できませんでした"
 msgid "STT backend does not support model listing"
 msgstr "STTバックエンドはモデル一覧の取得をサポートしていません"
 
+msgid "Profile Header:"
+msgstr "プロファイルヘッダー:"
+
+msgid "Show provider and model in profile header"
+msgstr "プロファイルヘッダーにプロバイダーとモデルを表示"
+
+msgid "Chat Spacing: %1px"
+msgstr "チャット間隔: %1px"
+
+msgid "Compact"
+msgstr "コンパクト"
+
+msgid "Spacious"
+msgstr "ゆったり"
+
+msgid "Chat Labels:"
+msgstr "チャットのラベル:"
+
+msgid "User label:"
+msgstr "ユーザーのラベル:"
+
+msgid "Assistant label:"
+msgstr "アシスタントのラベル:"
+
+msgid "Use model name as assistant label"
+msgstr "モデル名をアシスタントのラベルとして使用する"
+
+msgid "Chat Colors:"
+msgstr "チャットの色:"
+
+msgid "Use custom user color"
+msgstr "ユーザーの色をカスタマイズする"
+
+msgid "Use custom assistant color"
+msgstr "アシスタントの色をカスタマイズする"
+
+msgid "UI Font:"
+msgstr "UIフォント："
+
+msgid "Use custom UI font"
+msgstr "カスタムUIフォントを使用"
+
+msgid "Code Font:"
+msgstr "コードフォント："
+
+msgid "Use custom code font"
+msgstr "カスタムコードフォントを使用"
+
+msgid "Thoughts Font:"
+msgstr "思考フォント："
+
+msgid "Use custom thoughts font"
+msgstr "カスタム思考フォントを使用"
+
+msgid "LaTeX Rendering:"
+msgstr "LaTeX レンダリング:"
+
+msgid "Leave as TeX"
+msgstr "TeX のまま残す"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Unicode で置換 (デフォルト)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib が見つかりません)"
+
+msgid "Header Icons:"
+msgstr "ヘッダーアイコン:"
+
+msgid "Profile Header"
+msgstr "プロファイルヘッダー"
+
+msgid "Always show Tasks"
+msgstr "タスクを常に表示"
+
+msgid "Always show Auto Toggle"
+msgstr "自動切り替えを常に表示"
+
+msgid "Show History"
+msgstr "履歴を表示"
+
+msgid "History placement:"
+msgstr "履歴の配置:"
+
+msgid "Header button"
+msgstr "ヘッダーのボタン"
+
+msgid "Sidebar"
+msgstr "サイドバー"
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+"自動: チャットの横に収まる場合にサイドバーを表示します。サイドバー: 常に表示"
+"し、両方が収まるように最小サイズを広げます。"
+
+msgid "Show Copy conversation"
+msgstr "会話のコピーを表示"
+
+msgid "Show Context compaction summary"
+msgstr "コンテキスト圧縮の要約を表示"
+
+msgid "Show New chat"
+msgstr "新しいチャットを表示"
+
+msgid "Show Settings"
+msgstr "設定を表示"
+
+msgid "Show Pin"
+msgstr "ピンを表示"
+
 msgid "New chat"
 msgstr "新しいチャット"
 
@@ -1901,364 +2016,6 @@ msgstr "読み上げを停止"
 msgid "Drop files here to attach"
 msgstr "ここにファイルをドロップして添付します"
 
-msgid "Profile Header:"
-msgstr "プロファイルヘッダー:"
-
-msgid "Show provider and model in profile header"
-msgstr "プロファイルヘッダーにプロバイダーとモデルを表示"
-
-msgid "Chat Spacing: %1px"
-msgstr "チャット間隔: %1px"
-
-msgid "Compact"
-msgstr "コンパクト"
-
-msgid "Spacious"
-msgstr "ゆったり"
-
-msgid "Chat Labels:"
-msgstr "チャットのラベル:"
-
-msgid "User label:"
-msgstr "ユーザーのラベル:"
-
-msgid "Assistant label:"
-msgstr "アシスタントのラベル:"
-
-msgid "Use model name as assistant label"
-msgstr "モデル名をアシスタントのラベルとして使用する"
-
-msgid "Chat Colors:"
-msgstr "チャットの色:"
-
-msgid "Use custom user color"
-msgstr "ユーザーの色をカスタマイズする"
-
-msgid "Use custom assistant color"
-msgstr "アシスタントの色をカスタマイズする"
-
-msgid "UI Font:"
-msgstr "UIフォント："
-
-msgid "Use custom UI font"
-msgstr "カスタムUIフォントを使用"
-
-msgid "Code Font:"
-msgstr "コードフォント："
-
-msgid "Use custom code font"
-msgstr "カスタムコードフォントを使用"
-
-msgid "Thoughts Font:"
-msgstr "思考フォント："
-
-msgid "Use custom thoughts font"
-msgstr "カスタム思考フォントを使用"
-
-msgid "LaTeX Rendering:"
-msgstr "LaTeX レンダリング:"
-
-msgid "Leave as TeX"
-msgstr "TeX のまま残す"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Unicode で置換 (デフォルト)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib が見つかりません)"
-
-msgid "Header Icons:"
-msgstr "ヘッダーアイコン:"
-
-msgid "Profile Header"
-msgstr "プロファイルヘッダー"
-
-msgid "Always show Tasks"
-msgstr "タスクを常に表示"
-
-msgid "Always show Auto Toggle"
-msgstr "自動切り替えを常に表示"
-
-msgid "Show History"
-msgstr "履歴を表示"
-
-msgid "History placement:"
-msgstr "履歴の配置:"
-
-msgid "Header button"
-msgstr "ヘッダーのボタン"
-
-msgid "Sidebar"
-msgstr "サイドバー"
-
-msgid ""
-"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
-"and widens the minimum size to fit both."
-msgstr ""
-"自動: チャットの横に収まる場合にサイドバーを表示します。サイドバー: 常に表示"
-"し、両方が収まるように最小サイズを広げます。"
-
-msgid "Show Copy conversation"
-msgstr "会話のコピーを表示"
-
-msgid "Show Context compaction summary"
-msgstr "コンテキスト圧縮の要約を表示"
-
-msgid "Show New chat"
-msgstr "新しいチャットを表示"
-
-msgid "Show Settings"
-msgstr "設定を表示"
-
-msgid "Show Pin"
-msgstr "ピンを表示"
-
-msgid ""
-"Internal scheme for API keys has been migrated. If your key is now missing "
-"or does not work, you can recover your old key from KWalletManager."
-msgstr ""
-"APIキーの内部スキームが移行されました。キーが見つからない、または動作しない場"
-"合は、KWalletManagerから古いキーを復元できます。"
-
-msgid "Failed to stop driving: %1"
-msgstr "操作の停止に失敗しました: %1"
-
-msgid "Text-to-speech is not configured"
-msgstr "テキスト読み上げが設定されていません"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Text-to-speech is not configured. Open Text to Speech settings."
-msgstr ""
-"テキスト読み上げが設定されていません。テキスト読み上げの設定を開いてくださ"
-"い。"
-
-msgid "Speaking…"
-msgstr "読み上げ中…"
-
-msgid "Still preparing system context…"
-msgstr "システムコンテキストを準備中…"
-
-msgid "Voice input is not configured. Open Speech to Text settings."
-msgstr "音声入力が設定されていません。「音声認識」設定を開いてください。"
-
-msgid "Recording too short — hold a bit longer, then toggle again to stop."
-msgstr ""
-"録音時間が短すぎます — もう少し長く押してから、再度切り替えて停止してくださ"
-"い。"
-
-msgid "Recording produced no audio file."
-msgstr "録音音声ファイルが生成されませんでした。"
-
-msgid "Recording was empty or could not be read."
-msgstr "録音が空であるか、読み取れませんでした。"
-
-msgid "No speech detected."
-msgstr "音声が検出されませんでした。"
-
-msgid "Could not send transcribed message."
-msgstr "文字起こしされたメッセージを送信できませんでした。"
-
-msgid "Transcription canceled"
-msgstr "文字起こしがキャンセルされました"
-
-msgid "Recording too short or silent — try again."
-msgstr "録音が短すぎるか無音です — もう一度お試しください。"
-
-msgid "Failed to read recorded audio."
-msgstr "録音された音声の読み取りに失敗しました。"
-
-msgid "Failed to finalize recording"
-msgstr "録音の完了に失敗しました"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"gcloudトークンを取得できませんでした（終了コード %1）：%2。gcloudがインストー"
-"ルされ、認証されていることを確認してください。"
-
-msgid ""
-"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
-"plasmallm/skills/ (configure extra directories in Settings → Skills)."
-msgstr ""
-"スキルが見つかりません。SKILL.md を含むフォルダーを ~/.local/share/plasmallm/"
-"skills/ に配置してください (追加のディレクトリは「設定 → スキル」で設定)。"
-
-msgid "invalid:"
-msgstr "無効:"
-
-msgid "disabled"
-msgstr "無効"
-
-msgid "loaded"
-msgstr "読み込み済み"
-
-msgid "Available skills (%1 enabled):"
-msgstr "利用可能なスキル (%1 件有効):"
-
-msgid "Enable or disable individual skills in Settings → Skills."
-msgstr "「設定 → スキル」で個々のスキルを有効または無効にします。"
-
-msgid "Command validation is still in progress; try again in a moment."
-msgstr "コマンド検証はまだ進行中です。しばらくしてからもう一度お試しください。"
-
-msgid "No tool request pending to approve."
-msgstr "承認待ちのツールリクエストはありません。"
-
-msgid "No tool request pending to deny."
-msgstr "拒否待ちのツールリクエストはありません。"
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"このセッションの承認スキップモードが有効になっています。有効なすべてのツール"
-"が自動的に実行され、「実行前に確認」の設定をバイパスします。"
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr ""
-"承認スキップモードが無効になりました。ツールは設定した「実行前に確認」の設定"
-"に戻ります。"
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr ""
-"設定でデスクトップ自動化がデシブルされています。デスクトップを操作するには、"
-"まずそれを有効にしてください。"
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "plasmallm-desktop-driverが検出されないか、実行されていません。"
-
-msgid "Current profile: **%1**"
-msgstr "現在のプロファイル: **%1**"
-
-msgid "Available profiles:"
-msgstr "利用可能なプロファイル："
-
-msgid "active"
-msgstr "アクティブ"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "切り替えるには `/profile <名前>` と入力してください。"
-
-msgid "Switched to profile: **%1**"
-msgstr "プロファイルを切り替えました: **%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "不明なプロファイル: **%1**"
-
-msgid "none"
-msgstr "なし"
-
-msgid "Current model: **%1**"
-msgstr "現在のモデル: **%1**"
-
-msgid "Available models:"
-msgstr "利用可能なモデル:"
-
-msgid "Type `/model <name>` to switch."
-msgstr "`/model <name>` と入力して切り替え。"
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr ""
-"キャッシュされたモデルがありません。設定の**モデルを取得**を使用してくださ"
-"い。"
-
-msgid "Switched to model: **%1**"
-msgstr "モデルを切り替えました: **%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "タスクが設定されていません。設定でタスクを追加してください。"
-
-msgid "(auto)"
-msgstr "（自動）"
-
-msgid "Available tasks:"
-msgstr "利用可能なタスク:"
-
-msgid "Type `/task <name>` to run."
-msgstr "`/task <name>` と入力して実行。"
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "不明なタスク: **%1**。利用可能: %2"
-
-msgid "The user declined to run this command."
-msgstr "ユーザーはこのコマンドの実行を拒否しました。"
-
-msgid "No message to evaluate."
-msgstr "評価するメッセージがありません。"
-
-msgid "Evaluating…"
-msgstr "評価中…"
-
-msgid "Decision request failed: %1"
-msgstr "決定リクエストに失敗しました: %1"
-
-#, javascript-format
-msgid "%1% confidence"
-msgstr "信頼度 %1%"
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM: ツール呼び出し"
-
-msgid "Requested tool: %1"
-msgstr "要求されたツール: %1"
-
-msgid "Validation timed out."
-msgstr "検証がタイムアウトしました。"
-
-msgid "The validator profile has no endpoint or model configured."
-msgstr ""
-"バリデーターのプロファイルにエンドポイントまたはモデルが設定されていません。"
-
-msgid "Empty validator response."
-msgstr "バリデーターの応答が空です。"
-
-msgid "empty validator response"
-msgstr "バリデーターの応答が空です"
-
-msgid "Could not validate: %1"
-msgstr "検証できませんでした: %1"
-
-msgid "the command does not match its stated justification"
-msgstr "コマンドが表明された理由と一致しません"
-
-msgid "Blocked by command validator: %1"
-msgstr "コマンドバリデーターによってブロックされました: %1"
-
-msgid "Unknown tool %1"
-msgstr "不明なツール %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "エラー：パス '%1' はホワイトリスト外です"
-
-msgid "Executing %1…"
-msgstr "%1 を実行中…"
-
-msgid ""
-"Loaded '%1' skill — its full instructions were added to this conversation's "
-"context."
-msgstr ""
-"'%1' スキルを読み込みました — 完全な指示がこの会話のコンテキストに追加されま"
-"した。"
-
-msgid "Failed to start drive session: %1"
-msgstr "操作セッションの開始に失敗しました: %1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr "操作セッションはアクティブです（認証済み）。自動モードが有効です。"
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr "操作セッションの認証に成功しました。自動モードが有効です。"
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "gcloudトークンを取得できませんでした（終了コード %1）：%2"
 
@@ -2504,6 +2261,249 @@ msgstr "秒"
 
 msgid "minutes"
 msgstr "分"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"APIキーの内部スキームが移行されました。キーが見つからない、または動作しない場"
+"合は、KWalletManagerから古いキーを復元できます。"
+
+msgid "Failed to stop driving: %1"
+msgstr "操作の停止に失敗しました: %1"
+
+msgid "Text-to-speech is not configured"
+msgstr "テキスト読み上げが設定されていません"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Text-to-speech is not configured. Open Text to Speech settings."
+msgstr ""
+"テキスト読み上げが設定されていません。テキスト読み上げの設定を開いてくださ"
+"い。"
+
+msgid "Speaking…"
+msgstr "読み上げ中…"
+
+msgid "Still preparing system context…"
+msgstr "システムコンテキストを準備中…"
+
+msgid "Voice input is not configured. Open Speech to Text settings."
+msgstr "音声入力が設定されていません。「音声認識」設定を開いてください。"
+
+msgid "Recording too short — hold a bit longer, then toggle again to stop."
+msgstr ""
+"録音時間が短すぎます — もう少し長く押してから、再度切り替えて停止してくださ"
+"い。"
+
+msgid "Recording produced no audio file."
+msgstr "録音音声ファイルが生成されませんでした。"
+
+msgid "Recording was empty or could not be read."
+msgstr "録音が空であるか、読み取れませんでした。"
+
+msgid "No speech detected."
+msgstr "音声が検出されませんでした。"
+
+msgid "Could not send transcribed message."
+msgstr "文字起こしされたメッセージを送信できませんでした。"
+
+msgid "Transcription canceled"
+msgstr "文字起こしがキャンセルされました"
+
+msgid "Recording too short or silent — try again."
+msgstr "録音が短すぎるか無音です — もう一度お試しください。"
+
+msgid "Failed to read recorded audio."
+msgstr "録音された音声の読み取りに失敗しました。"
+
+msgid "Failed to finalize recording"
+msgstr "録音の完了に失敗しました"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"gcloudトークンを取得できませんでした（終了コード %1）：%2。gcloudがインストー"
+"ルされ、認証されていることを確認してください。"
+
+msgid ""
+"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
+"plasmallm/skills/ (configure extra directories in Settings → Skills)."
+msgstr ""
+"スキルが見つかりません。SKILL.md を含むフォルダーを ~/.local/share/plasmallm/"
+"skills/ に配置してください (追加のディレクトリは「設定 → スキル」で設定)。"
+
+msgid "invalid:"
+msgstr "無効:"
+
+msgid "disabled"
+msgstr "無効"
+
+msgid "loaded"
+msgstr "読み込み済み"
+
+msgid "Available skills (%1 enabled):"
+msgstr "利用可能なスキル (%1 件有効):"
+
+msgid "Enable or disable individual skills in Settings → Skills."
+msgstr "「設定 → スキル」で個々のスキルを有効または無効にします。"
+
+msgid "Command validation is still in progress; try again in a moment."
+msgstr "コマンド検証はまだ進行中です。しばらくしてからもう一度お試しください。"
+
+msgid "No tool request pending to approve."
+msgstr "承認待ちのツールリクエストはありません。"
+
+msgid "No tool request pending to deny."
+msgstr "拒否待ちのツールリクエストはありません。"
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"このセッションの承認スキップモードが有効になっています。有効なすべてのツール"
+"が自動的に実行され、「実行前に確認」の設定をバイパスします。"
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+"承認スキップモードが無効になりました。ツールは設定した「実行前に確認」の設定"
+"に戻ります。"
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+"設定でデスクトップ自動化がデシブルされています。デスクトップを操作するには、"
+"まずそれを有効にしてください。"
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driverが検出されないか、実行されていません。"
+
+msgid "Current profile: **%1**"
+msgstr "現在のプロファイル: **%1**"
+
+msgid "Available profiles:"
+msgstr "利用可能なプロファイル："
+
+msgid "active"
+msgstr "アクティブ"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "切り替えるには `/profile <名前>` と入力してください。"
+
+msgid "Switched to profile: **%1**"
+msgstr "プロファイルを切り替えました: **%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "不明なプロファイル: **%1**"
+
+msgid "none"
+msgstr "なし"
+
+msgid "Current model: **%1**"
+msgstr "現在のモデル: **%1**"
+
+msgid "Available models:"
+msgstr "利用可能なモデル:"
+
+msgid "Type `/model <name>` to switch."
+msgstr "`/model <name>` と入力して切り替え。"
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr ""
+"キャッシュされたモデルがありません。設定の**モデルを取得**を使用してくださ"
+"い。"
+
+msgid "Switched to model: **%1**"
+msgstr "モデルを切り替えました: **%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "タスクが設定されていません。設定でタスクを追加してください。"
+
+msgid "(auto)"
+msgstr "（自動）"
+
+msgid "Available tasks:"
+msgstr "利用可能なタスク:"
+
+msgid "Type `/task <name>` to run."
+msgstr "`/task <name>` と入力して実行。"
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "不明なタスク: **%1**。利用可能: %2"
+
+msgid "The user declined to run this command."
+msgstr "ユーザーはこのコマンドの実行を拒否しました。"
+
+msgid "No message to evaluate."
+msgstr "評価するメッセージがありません。"
+
+msgid "Evaluating…"
+msgstr "評価中…"
+
+msgid "Decision request failed: %1"
+msgstr "決定リクエストに失敗しました: %1"
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr "信頼度 %1%"
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: ツール呼び出し"
+
+msgid "Requested tool: %1"
+msgstr "要求されたツール: %1"
+
+msgid "Validation timed out."
+msgstr "検証がタイムアウトしました。"
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr ""
+"バリデーターのプロファイルにエンドポイントまたはモデルが設定されていません。"
+
+msgid "Empty validator response."
+msgstr "バリデーターの応答が空です。"
+
+msgid "empty validator response"
+msgstr "バリデーターの応答が空です"
+
+msgid "Could not validate: %1"
+msgstr "検証できませんでした: %1"
+
+msgid "the command does not match its stated justification"
+msgstr "コマンドが表明された理由と一致しません"
+
+msgid "Blocked by command validator: %1"
+msgstr "コマンドバリデーターによってブロックされました: %1"
+
+msgid "Unknown tool %1"
+msgstr "不明なツール %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "エラー：パス '%1' はホワイトリスト外です"
+
+msgid "Executing %1…"
+msgstr "%1 を実行中…"
+
+msgid ""
+"Loaded '%1' skill — its full instructions were added to this conversation's "
+"context."
+msgstr ""
+"'%1' スキルを読み込みました — 完全な指示がこの会話のコンテキストに追加されま"
+"した。"
+
+msgid "Failed to start drive session: %1"
+msgstr "操作セッションの開始に失敗しました: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "操作セッションはアクティブです（認証済み）。自動モードが有効です。"
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "操作セッションの認証に成功しました。自動モードが有効です。"
 
 msgid "General"
 msgstr "一般"

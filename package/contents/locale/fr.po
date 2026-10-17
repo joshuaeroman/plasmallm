@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 19:33-0400\n"
+"POT-Creation-Date: 2026-10-16 19:43-0400\n"
 "PO-Revision-Date: 2026-04-07 22:00+0200\n"
 "Last-Translator: Gemini CLI (machine translation)\n"
 "Language-Team: French\n"
@@ -1686,6 +1686,122 @@ msgstr "Impossible de construire la commande Whisper"
 msgid "STT backend does not support model listing"
 msgstr "Le moteur STT ne prend pas en charge la liste des modèles"
 
+msgid "Profile Header:"
+msgstr "En-tête de profil :"
+
+msgid "Show provider and model in profile header"
+msgstr "Afficher le fournisseur et le modèle dans l'en-tête de profil"
+
+msgid "Chat Spacing: %1px"
+msgstr "Espacement de la conversation : %1px"
+
+msgid "Compact"
+msgstr "Compact"
+
+msgid "Spacious"
+msgstr "Spacieux"
+
+msgid "Chat Labels:"
+msgstr "Étiquettes de la conversation :"
+
+msgid "User label:"
+msgstr "Étiquette de l'utilisateur :"
+
+msgid "Assistant label:"
+msgstr "Étiquette de l'assistant :"
+
+msgid "Use model name as assistant label"
+msgstr "Utiliser le nom du modèle comme étiquette de l'assistant"
+
+msgid "Chat Colors:"
+msgstr "Couleurs de la conversation :"
+
+msgid "Use custom user color"
+msgstr "Utiliser une couleur d'utilisateur personnalisée"
+
+msgid "Use custom assistant color"
+msgstr "Utiliser une couleur d'assistant personnalisée"
+
+msgid "UI Font:"
+msgstr "Police d'interface :"
+
+msgid "Use custom UI font"
+msgstr "Utiliser une police d'interface personnalisée"
+
+msgid "Code Font:"
+msgstr "Police de code :"
+
+msgid "Use custom code font"
+msgstr "Utiliser une police de code personnalisée"
+
+msgid "Thoughts Font:"
+msgstr "Police de réflexions :"
+
+msgid "Use custom thoughts font"
+msgstr "Utiliser une police de réflexions personnalisée"
+
+msgid "LaTeX Rendering:"
+msgstr "Rendu LaTeX :"
+
+msgid "Leave as TeX"
+msgstr "Laisser en TeX"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Remplacer par Unicode (par défaut)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib manquant)"
+
+msgid "Header Icons:"
+msgstr "Icônes d'en-tête :"
+
+msgid "Profile Header"
+msgstr "En-tête de profil"
+
+msgid "Always show Tasks"
+msgstr "Toujours afficher les Tâches"
+
+msgid "Always show Auto Toggle"
+msgstr "Toujours afficher le bouton Auto"
+
+msgid "Show History"
+msgstr "Afficher l'historique"
+
+msgid "History placement:"
+msgstr "Emplacement de l'historique :"
+
+msgid "Header button"
+msgstr "Bouton dans l'en-tête"
+
+msgid "Sidebar"
+msgstr "Barre latérale"
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+"Auto affiche la barre latérale lorsqu'elle tient à côté de la conversation. "
+"Barre latérale l'affiche toujours et élargit la taille minimale pour "
+"contenir les deux."
+
+msgid "Show Copy conversation"
+msgstr "Afficher Copier la conversation"
+
+msgid "Show Context compaction summary"
+msgstr "Afficher le résumé du compactage de contexte"
+
+msgid "Show New chat"
+msgstr "Afficher Nouvelle conversation"
+
+msgid "Show Settings"
+msgstr "Afficher les Paramètres"
+
+msgid "Show Pin"
+msgstr "Afficher l'épingle"
+
 msgid "New chat"
 msgstr "Nouvelle conversation"
 
@@ -1948,121 +2064,256 @@ msgstr "Arrêter la lecture à voix haute"
 msgid "Drop files here to attach"
 msgstr "Déposer des fichiers ici pour les joindre"
 
-msgid "Profile Header:"
-msgstr "En-tête de profil :"
+msgid "Failed to fetch gcloud token (exit %1): %2"
+msgstr "Impossible de récupérer le jeton gcloud (sortie %1) : %2"
 
-msgid "Show provider and model in profile header"
-msgstr "Afficher le fournisseur et le modèle dans l'en-tête de profil"
+msgid "New Profile"
+msgstr "Nouveau profil"
 
-msgid "Chat Spacing: %1px"
-msgstr "Espacement de la conversation : %1px"
+msgid "%1 (Copy)"
+msgstr "%1 (Copie)"
 
-msgid "Compact"
-msgstr "Compact"
+msgid "Profile:"
+msgstr "Profil :"
 
-msgid "Spacious"
-msgstr "Spacieux"
+msgid "Rename Profile"
+msgstr "Renommer le profil"
 
-msgid "Chat Labels:"
-msgstr "Étiquettes de la conversation :"
+msgid "Duplicate Profile"
+msgstr "Dupliquer le profil"
 
-msgid "User label:"
-msgstr "Étiquette de l'utilisateur :"
+msgid "Delete Profile"
+msgstr "Supprimer le profil"
 
-msgid "Assistant label:"
-msgstr "Étiquette de l'assistant :"
+msgid "Profile Name"
+msgstr "Nom du profil"
 
-msgid "Use model name as assistant label"
-msgstr "Utiliser le nom du modèle comme étiquette de l'assistant"
+msgid "Rename"
+msgstr "Renommer"
 
-msgid "Chat Colors:"
-msgstr "Couleurs de la conversation :"
-
-msgid "Use custom user color"
-msgstr "Utiliser une couleur d'utilisateur personnalisée"
-
-msgid "Use custom assistant color"
-msgstr "Utiliser une couleur d'assistant personnalisée"
-
-msgid "UI Font:"
-msgstr "Police d'interface :"
-
-msgid "Use custom UI font"
-msgstr "Utiliser une police d'interface personnalisée"
-
-msgid "Code Font:"
-msgstr "Police de code :"
-
-msgid "Use custom code font"
-msgstr "Utiliser une police de code personnalisée"
-
-msgid "Thoughts Font:"
-msgstr "Police de réflexions :"
-
-msgid "Use custom thoughts font"
-msgstr "Utiliser une police de réflexions personnalisée"
-
-msgid "LaTeX Rendering:"
-msgstr "Rendu LaTeX :"
-
-msgid "Leave as TeX"
-msgstr "Laisser en TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Remplacer par Unicode (par défaut)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib manquant)"
-
-msgid "Header Icons:"
-msgstr "Icônes d'en-tête :"
-
-msgid "Profile Header"
-msgstr "En-tête de profil"
-
-msgid "Always show Tasks"
-msgstr "Toujours afficher les Tâches"
-
-msgid "Always show Auto Toggle"
-msgstr "Toujours afficher le bouton Auto"
-
-msgid "Show History"
-msgstr "Afficher l'historique"
-
-msgid "History placement:"
-msgstr "Emplacement de l'historique :"
-
-msgid "Header button"
-msgstr "Bouton dans l'en-tête"
-
-msgid "Sidebar"
-msgstr "Barre latérale"
+msgid "Adapter:"
+msgstr "Adaptateur :"
 
 msgid ""
-"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
-"and widens the minimum size to fit both."
+"Decisions profiles evaluate each message once and reply with a verdict and "
+"confidence. They have no conversation memory, system prompt, or tools. They "
+"can also be selected as the Command Validator in Tools settings."
 msgstr ""
-"Auto affiche la barre latérale lorsqu'elle tient à côté de la conversation. "
-"Barre latérale l'affiche toujours et élargit la taille minimale pour "
-"contenir les deux."
+"Les profils Decisions évaluent chaque message une fois et répondent par un "
+"verdict et une confiance. Ils n'ont pas de mémoire de conversation, d'invite "
+"système ni d'outils. Ils peuvent aussi être sélectionnés comme validateur de "
+"commandes dans les paramètres Outils."
 
-msgid "Show Copy conversation"
-msgstr "Afficher Copier la conversation"
+msgid "Platform:"
+msgstr "Plateforme :"
 
-msgid "Show Context compaction summary"
-msgstr "Afficher le résumé du compactage de contexte"
+msgid "Google AI Studio"
+msgstr "Google AI Studio"
 
-msgid "Show New chat"
-msgstr "Afficher Nouvelle conversation"
+msgid "Google Cloud Agent Platform (Vertex AI)"
+msgstr "Google Cloud Agent Platform (Vertex AI)"
 
-msgid "Show Settings"
-msgstr "Afficher les Paramètres"
+msgid "Authentication:"
+msgstr "Authentification :"
 
-msgid "Show Pin"
-msgstr "Afficher l'épingle"
+msgid "API Key (Express Mode)"
+msgstr "Clé API (Mode Express)"
+
+msgid "Google Cloud CLI (gcloud)"
+msgstr "Google Cloud CLI (gcloud)"
+
+msgid ""
+"gcloud CLI not found. Please install it to use this authentication method."
+msgstr ""
+"gcloud CLI introuvable. Veuillez l'installer pour utiliser cette méthode "
+"d'authentification."
+
+msgid "API Variant:"
+msgstr "Variante API :"
+
+msgid "Legacy (generateContent)"
+msgstr "Hérité (generateContent)"
+
+msgid "Interactions API (Stateful)"
+msgstr "API Interactions (avec état)"
+
+msgid "Project ID:"
+msgstr "ID du projet :"
+
+msgid "Location:"
+msgstr "Emplacement :"
+
+msgid "API Key:"
+msgstr "Clé API :"
+
+msgid "Paste short-lived access token"
+msgstr "Coller le jeton d'accès à durée limitée"
+
+msgid "Paste OpenCode API key"
+msgstr "Coller la clé API OpenCode"
+
+msgid "Optional - for OpenAI, etc."
+msgstr "Optionnel — pour OpenAI, etc."
+
+msgid "Stored in KDE Wallet"
+msgstr "Stockée dans KDE Wallet"
+
+msgid "KDE Wallet unavailable — key stored in config file"
+msgstr "KDE Wallet indisponible — clé stockée dans le fichier de configuration"
+
+#, javascript-format
+msgid "Temperature: %1%"
+msgstr "Température : %1%"
+
+msgid "Precise"
+msgstr "Précis"
+
+msgid "Creative"
+msgstr "Créatif"
+
+msgid "Max Tokens:"
+msgstr "Jetons max. :"
+
+msgid "Thinking:"
+msgstr "Réflexion :"
+
+msgid "Off"
+msgstr "Désactivé"
+
+msgid "Low"
+msgstr "Faible"
+
+msgid "Medium"
+msgstr "Moyen"
+
+msgid "High"
+msgstr "Élevé"
+
+msgid "Thinking budget:"
+msgstr "Budget de réflexion :"
+
+msgid "Show thoughts in chat (collapsible)"
+msgstr "Afficher les réflexions dans le chat (repliable)"
+
+msgid ""
+"When enabled, the model's reasoning is shown above each reply with a "
+"collapsible header. Round-trip of signed thoughts to the API still happens "
+"regardless of this setting."
+msgstr ""
+"Lorsqu'activé, le raisonnement du modèle est affiché au-dessus de chaque "
+"réponse avec un en-tête repliable. L'aller-retour des pensées signées vers "
+"l'API se produit indépendamment de ce paramètre."
+
+msgid "Use Responses API"
+msgstr "Utiliser l'API Responses"
+
+msgid ""
+"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
+"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
+"picking a preset."
+msgstr ""
+"Requis pour afficher le contenu de raisonnement sur OpenAI / Poe / "
+"OpenRouter / Azure (POST vers /v1/responses au lieu de /v1/chat/"
+"completions). Défini automatiquement lors du choix d'un préréglage."
+
+msgid "Attachments:"
+msgstr "Pièces jointes :"
+
+msgid "Resize image attachments"
+msgstr "Redimensionner les images jointes"
+
+msgid ""
+"Resizes large image attachments to fit within 800x600 before sending, "
+"reducing upload size and context tokens."
+msgstr ""
+"Redimensionne les images jointes de grande taille pour qu'elles s'adaptent à "
+"800x600 avant l'envoi, réduisant ainsi la taille du téléchargement et les "
+"jetons de contexte."
+
+msgid "Chat History:"
+msgstr "Historique des conversations :"
+
+msgid "Auto-save chat history"
+msgstr "Enregistrer automatiquement l'historique des conversations"
+
+msgid "Saves to ~/.local/share/plasmallm/chats/"
+msgstr "Enregistre dans ~/.local/share/plasmallm/chats/"
+
+msgid "Notifications:"
+msgstr "Notifications :"
+
+msgid "Show notifications when minimized"
+msgstr "Afficher les notifications lorsqu'elle est réduite"
+
+msgid ""
+"Show system notifications for incoming messages and tool calls when the chat "
+"window is minimized or closed."
+msgstr ""
+"Afficher des notifications système pour les messages entrants et les appels "
+"d'outils lorsque la fenêtre de chat est réduite ou fermée."
+
+msgid "Save format:"
+msgstr "Format d'enregistrement :"
+
+msgid "Plain text (.txt)"
+msgstr "Texte brut (.txt)"
+
+msgid "Structured (.jsonl)"
+msgstr "Structuré (.jsonl)"
+
+msgid "Open the folder where chat histories are saved"
+msgstr "Ouvrir le dossier où sont enregistrés les historiques de chat"
+
+msgid "Summarize chats:"
+msgstr "Résumer les conversations :"
+
+msgid "First message only"
+msgstr "Premier message uniquement"
+
+msgid "Re-summarize as the chat grows"
+msgstr "Résumer à nouveau au fil de la conversation"
+
+msgid "Re-summarize every:"
+msgstr "Résumer à nouveau tous les :"
+
+msgid "user message (every message)"
+msgstr "message de l'utilisateur (chaque message)"
+
+msgid "user messages"
+msgstr "messages de l'utilisateur"
+
+msgid "Summary profile:"
+msgstr "Profil de résumé :"
+
+msgid ""
+"Sends the first message and the start of recent ones to the chosen profile "
+"to title chats in history."
+msgstr ""
+"Envoie le premier message et le début des messages récents au profil choisi "
+"pour titrer les conversations dans l'historique."
+
+msgid "Needs auto-saved history in the Structured (.jsonl) format."
+msgstr ""
+"Nécessite un historique enregistré automatiquement au format structuré "
+"(.jsonl)."
+
+msgid "Auto-clear:"
+msgstr "Effacement automatique :"
+
+msgid "Disabled"
+msgstr "Désactivé"
+
+msgid "Instant (always clear when panel opens)"
+msgstr "Instantané (toujours effacer à l'ouverture du panneau)"
+
+msgid "After"
+msgstr "Après"
+
+msgid "seconds"
+msgstr "secondes"
+
+msgid "minutes"
+msgstr "minutes"
 
 msgid ""
 "Internal scheme for API keys has been migrated. If your key is now missing "
@@ -2316,257 +2567,6 @@ msgstr "Session de contrôle active (déjà autorisée). Mode automatique activ�
 
 msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr "Session de contrôle autorisée avec succès. Mode automatique activé."
-
-msgid "Failed to fetch gcloud token (exit %1): %2"
-msgstr "Impossible de récupérer le jeton gcloud (sortie %1) : %2"
-
-msgid "New Profile"
-msgstr "Nouveau profil"
-
-msgid "%1 (Copy)"
-msgstr "%1 (Copie)"
-
-msgid "Profile:"
-msgstr "Profil :"
-
-msgid "Rename Profile"
-msgstr "Renommer le profil"
-
-msgid "Duplicate Profile"
-msgstr "Dupliquer le profil"
-
-msgid "Delete Profile"
-msgstr "Supprimer le profil"
-
-msgid "Profile Name"
-msgstr "Nom du profil"
-
-msgid "Rename"
-msgstr "Renommer"
-
-msgid "Adapter:"
-msgstr "Adaptateur :"
-
-msgid ""
-"Decisions profiles evaluate each message once and reply with a verdict and "
-"confidence. They have no conversation memory, system prompt, or tools. They "
-"can also be selected as the Command Validator in Tools settings."
-msgstr ""
-"Les profils Decisions évaluent chaque message une fois et répondent par un "
-"verdict et une confiance. Ils n'ont pas de mémoire de conversation, d'invite "
-"système ni d'outils. Ils peuvent aussi être sélectionnés comme validateur de "
-"commandes dans les paramètres Outils."
-
-msgid "Platform:"
-msgstr "Plateforme :"
-
-msgid "Google AI Studio"
-msgstr "Google AI Studio"
-
-msgid "Google Cloud Agent Platform (Vertex AI)"
-msgstr "Google Cloud Agent Platform (Vertex AI)"
-
-msgid "Authentication:"
-msgstr "Authentification :"
-
-msgid "API Key (Express Mode)"
-msgstr "Clé API (Mode Express)"
-
-msgid "Google Cloud CLI (gcloud)"
-msgstr "Google Cloud CLI (gcloud)"
-
-msgid ""
-"gcloud CLI not found. Please install it to use this authentication method."
-msgstr ""
-"gcloud CLI introuvable. Veuillez l'installer pour utiliser cette méthode "
-"d'authentification."
-
-msgid "API Variant:"
-msgstr "Variante API :"
-
-msgid "Legacy (generateContent)"
-msgstr "Hérité (generateContent)"
-
-msgid "Interactions API (Stateful)"
-msgstr "API Interactions (avec état)"
-
-msgid "Project ID:"
-msgstr "ID du projet :"
-
-msgid "Location:"
-msgstr "Emplacement :"
-
-msgid "API Key:"
-msgstr "Clé API :"
-
-msgid "Paste short-lived access token"
-msgstr "Coller le jeton d'accès à durée limitée"
-
-msgid "Paste OpenCode API key"
-msgstr "Coller la clé API OpenCode"
-
-msgid "Optional - for OpenAI, etc."
-msgstr "Optionnel — pour OpenAI, etc."
-
-msgid "Stored in KDE Wallet"
-msgstr "Stockée dans KDE Wallet"
-
-msgid "KDE Wallet unavailable — key stored in config file"
-msgstr "KDE Wallet indisponible — clé stockée dans le fichier de configuration"
-
-#, javascript-format
-msgid "Temperature: %1%"
-msgstr "Température : %1%"
-
-msgid "Precise"
-msgstr "Précis"
-
-msgid "Creative"
-msgstr "Créatif"
-
-msgid "Max Tokens:"
-msgstr "Jetons max. :"
-
-msgid "Thinking:"
-msgstr "Réflexion :"
-
-msgid "Off"
-msgstr "Désactivé"
-
-msgid "Low"
-msgstr "Faible"
-
-msgid "Medium"
-msgstr "Moyen"
-
-msgid "High"
-msgstr "Élevé"
-
-msgid "Thinking budget:"
-msgstr "Budget de réflexion :"
-
-msgid "Show thoughts in chat (collapsible)"
-msgstr "Afficher les réflexions dans le chat (repliable)"
-
-msgid ""
-"When enabled, the model's reasoning is shown above each reply with a "
-"collapsible header. Round-trip of signed thoughts to the API still happens "
-"regardless of this setting."
-msgstr ""
-"Lorsqu'activé, le raisonnement du modèle est affiché au-dessus de chaque "
-"réponse avec un en-tête repliable. L'aller-retour des pensées signées vers "
-"l'API se produit indépendamment de ce paramètre."
-
-msgid "Use Responses API"
-msgstr "Utiliser l'API Responses"
-
-msgid ""
-"Required to surface reasoning content on OpenAI / Poe / OpenRouter / Azure "
-"(POSTs to /v1/responses instead of /v1/chat/completions). Auto-set when "
-"picking a preset."
-msgstr ""
-"Requis pour afficher le contenu de raisonnement sur OpenAI / Poe / "
-"OpenRouter / Azure (POST vers /v1/responses au lieu de /v1/chat/"
-"completions). Défini automatiquement lors du choix d'un préréglage."
-
-msgid "Attachments:"
-msgstr "Pièces jointes :"
-
-msgid "Resize image attachments"
-msgstr "Redimensionner les images jointes"
-
-msgid ""
-"Resizes large image attachments to fit within 800x600 before sending, "
-"reducing upload size and context tokens."
-msgstr ""
-"Redimensionne les images jointes de grande taille pour qu'elles s'adaptent à "
-"800x600 avant l'envoi, réduisant ainsi la taille du téléchargement et les "
-"jetons de contexte."
-
-msgid "Chat History:"
-msgstr "Historique des conversations :"
-
-msgid "Auto-save chat history"
-msgstr "Enregistrer automatiquement l'historique des conversations"
-
-msgid "Saves to ~/.local/share/plasmallm/chats/"
-msgstr "Enregistre dans ~/.local/share/plasmallm/chats/"
-
-msgid "Notifications:"
-msgstr "Notifications :"
-
-msgid "Show notifications when minimized"
-msgstr "Afficher les notifications lorsqu'elle est réduite"
-
-msgid ""
-"Show system notifications for incoming messages and tool calls when the chat "
-"window is minimized or closed."
-msgstr ""
-"Afficher des notifications système pour les messages entrants et les appels "
-"d'outils lorsque la fenêtre de chat est réduite ou fermée."
-
-msgid "Save format:"
-msgstr "Format d'enregistrement :"
-
-msgid "Plain text (.txt)"
-msgstr "Texte brut (.txt)"
-
-msgid "Structured (.jsonl)"
-msgstr "Structuré (.jsonl)"
-
-msgid "Open the folder where chat histories are saved"
-msgstr "Ouvrir le dossier où sont enregistrés les historiques de chat"
-
-msgid "Summarize chats:"
-msgstr "Résumer les conversations :"
-
-msgid "First message only"
-msgstr "Premier message uniquement"
-
-msgid "Re-summarize as the chat grows"
-msgstr "Résumer à nouveau au fil de la conversation"
-
-msgid "Re-summarize every:"
-msgstr "Résumer à nouveau tous les :"
-
-msgid "user message (every message)"
-msgstr "message de l'utilisateur (chaque message)"
-
-msgid "user messages"
-msgstr "messages de l'utilisateur"
-
-msgid "Summary profile:"
-msgstr "Profil de résumé :"
-
-msgid ""
-"Sends the first message and the start of recent ones to the chosen profile "
-"to title chats in history."
-msgstr ""
-"Envoie le premier message et le début des messages récents au profil choisi "
-"pour titrer les conversations dans l'historique."
-
-msgid "Needs auto-saved history in the Structured (.jsonl) format."
-msgstr ""
-"Nécessite un historique enregistré automatiquement au format structuré "
-"(.jsonl)."
-
-msgid "Auto-clear:"
-msgstr "Effacement automatique :"
-
-msgid "Disabled"
-msgstr "Désactivé"
-
-msgid "Instant (always clear when panel opens)"
-msgstr "Instantané (toujours effacer à l'ouverture du panneau)"
-
-msgid "After"
-msgstr "Après"
-
-msgid "seconds"
-msgstr "secondes"
-
-msgid "minutes"
-msgstr "minutes"
 
 msgid "General"
 msgstr "Général"

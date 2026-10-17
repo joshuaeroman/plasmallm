@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 19:33-0400\n"
+"POT-Creation-Date: 2026-10-16 19:43-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1471,6 +1471,119 @@ msgstr ""
 msgid "STT backend does not support model listing"
 msgstr ""
 
+msgid "Profile Header:"
+msgstr ""
+
+msgid "Show provider and model in profile header"
+msgstr ""
+
+msgid "Chat Spacing: %1px"
+msgstr ""
+
+msgid "Compact"
+msgstr ""
+
+msgid "Spacious"
+msgstr ""
+
+msgid "Chat Labels:"
+msgstr ""
+
+msgid "User label:"
+msgstr ""
+
+msgid "Assistant label:"
+msgstr ""
+
+msgid "Use model name as assistant label"
+msgstr ""
+
+msgid "Chat Colors:"
+msgstr ""
+
+msgid "Use custom user color"
+msgstr ""
+
+msgid "Use custom assistant color"
+msgstr ""
+
+msgid "UI Font:"
+msgstr ""
+
+msgid "Use custom UI font"
+msgstr ""
+
+msgid "Code Font:"
+msgstr ""
+
+msgid "Use custom code font"
+msgstr ""
+
+msgid "Thoughts Font:"
+msgstr ""
+
+msgid "Use custom thoughts font"
+msgstr ""
+
+msgid "LaTeX Rendering:"
+msgstr ""
+
+msgid "Leave as TeX"
+msgstr ""
+
+msgid "Replace with Unicode (Default)"
+msgstr ""
+
+msgid "Mathtext"
+msgstr ""
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr ""
+
+msgid "Header Icons:"
+msgstr ""
+
+msgid "Profile Header"
+msgstr ""
+
+msgid "Always show Tasks"
+msgstr ""
+
+msgid "Always show Auto Toggle"
+msgstr ""
+
+msgid "Show History"
+msgstr ""
+
+msgid "History placement:"
+msgstr ""
+
+msgid "Header button"
+msgstr ""
+
+msgid "Sidebar"
+msgstr ""
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+
+msgid "Show Copy conversation"
+msgstr ""
+
+msgid "Show Context compaction summary"
+msgstr ""
+
+msgid "Show New chat"
+msgstr ""
+
+msgid "Show Settings"
+msgstr ""
+
+msgid "Show Pin"
+msgstr ""
+
 msgid "New chat"
 msgstr ""
 
@@ -1718,341 +1831,6 @@ msgstr ""
 msgid "Drop files here to attach"
 msgstr ""
 
-msgid "Profile Header:"
-msgstr ""
-
-msgid "Show provider and model in profile header"
-msgstr ""
-
-msgid "Chat Spacing: %1px"
-msgstr ""
-
-msgid "Compact"
-msgstr ""
-
-msgid "Spacious"
-msgstr ""
-
-msgid "Chat Labels:"
-msgstr ""
-
-msgid "User label:"
-msgstr ""
-
-msgid "Assistant label:"
-msgstr ""
-
-msgid "Use model name as assistant label"
-msgstr ""
-
-msgid "Chat Colors:"
-msgstr ""
-
-msgid "Use custom user color"
-msgstr ""
-
-msgid "Use custom assistant color"
-msgstr ""
-
-msgid "UI Font:"
-msgstr ""
-
-msgid "Use custom UI font"
-msgstr ""
-
-msgid "Code Font:"
-msgstr ""
-
-msgid "Use custom code font"
-msgstr ""
-
-msgid "Thoughts Font:"
-msgstr ""
-
-msgid "Use custom thoughts font"
-msgstr ""
-
-msgid "LaTeX Rendering:"
-msgstr ""
-
-msgid "Leave as TeX"
-msgstr ""
-
-msgid "Replace with Unicode (Default)"
-msgstr ""
-
-msgid "Mathtext"
-msgstr ""
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr ""
-
-msgid "Header Icons:"
-msgstr ""
-
-msgid "Profile Header"
-msgstr ""
-
-msgid "Always show Tasks"
-msgstr ""
-
-msgid "Always show Auto Toggle"
-msgstr ""
-
-msgid "Show History"
-msgstr ""
-
-msgid "History placement:"
-msgstr ""
-
-msgid "Header button"
-msgstr ""
-
-msgid "Sidebar"
-msgstr ""
-
-msgid ""
-"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
-"and widens the minimum size to fit both."
-msgstr ""
-
-msgid "Show Copy conversation"
-msgstr ""
-
-msgid "Show Context compaction summary"
-msgstr ""
-
-msgid "Show New chat"
-msgstr ""
-
-msgid "Show Settings"
-msgstr ""
-
-msgid "Show Pin"
-msgstr ""
-
-msgid ""
-"Internal scheme for API keys has been migrated. If your key is now missing "
-"or does not work, you can recover your old key from KWalletManager."
-msgstr ""
-
-msgid "Failed to stop driving: %1"
-msgstr ""
-
-msgid "Text-to-speech is not configured"
-msgstr ""
-
-msgid "PlasmaLLM"
-msgstr ""
-
-msgid "Text-to-speech is not configured. Open Text to Speech settings."
-msgstr ""
-
-msgid "Speaking…"
-msgstr ""
-
-msgid "Still preparing system context…"
-msgstr ""
-
-msgid "Voice input is not configured. Open Speech to Text settings."
-msgstr ""
-
-msgid "Recording too short — hold a bit longer, then toggle again to stop."
-msgstr ""
-
-msgid "Recording produced no audio file."
-msgstr ""
-
-msgid "Recording was empty or could not be read."
-msgstr ""
-
-msgid "No speech detected."
-msgstr ""
-
-msgid "Could not send transcribed message."
-msgstr ""
-
-msgid "Transcription canceled"
-msgstr ""
-
-msgid "Recording too short or silent — try again."
-msgstr ""
-
-msgid "Failed to read recorded audio."
-msgstr ""
-
-msgid "Failed to finalize recording"
-msgstr ""
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-
-msgid ""
-"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
-"plasmallm/skills/ (configure extra directories in Settings → Skills)."
-msgstr ""
-
-msgid "invalid:"
-msgstr ""
-
-msgid "disabled"
-msgstr ""
-
-msgid "loaded"
-msgstr ""
-
-msgid "Available skills (%1 enabled):"
-msgstr ""
-
-msgid "Enable or disable individual skills in Settings → Skills."
-msgstr ""
-
-msgid "Command validation is still in progress; try again in a moment."
-msgstr ""
-
-msgid "No tool request pending to approve."
-msgstr ""
-
-msgid "No tool request pending to deny."
-msgstr ""
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr ""
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr ""
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr ""
-
-msgid "Current profile: **%1**"
-msgstr ""
-
-msgid "Available profiles:"
-msgstr ""
-
-msgid "active"
-msgstr ""
-
-msgid "Type `/profile <name>` to switch."
-msgstr ""
-
-msgid "Switched to profile: **%1**"
-msgstr ""
-
-msgid "Unknown profile: **%1**"
-msgstr ""
-
-msgid "none"
-msgstr ""
-
-msgid "Current model: **%1**"
-msgstr ""
-
-msgid "Available models:"
-msgstr ""
-
-msgid "Type `/model <name>` to switch."
-msgstr ""
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr ""
-
-msgid "Switched to model: **%1**"
-msgstr ""
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr ""
-
-msgid "(auto)"
-msgstr ""
-
-msgid "Available tasks:"
-msgstr ""
-
-msgid "Type `/task <name>` to run."
-msgstr ""
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr ""
-
-msgid "The user declined to run this command."
-msgstr ""
-
-msgid "No message to evaluate."
-msgstr ""
-
-msgid "Evaluating…"
-msgstr ""
-
-msgid "Decision request failed: %1"
-msgstr ""
-
-#, javascript-format
-msgid "%1% confidence"
-msgstr ""
-
-msgid "PlasmaLLM: Tool Call"
-msgstr ""
-
-msgid "Requested tool: %1"
-msgstr ""
-
-msgid "Validation timed out."
-msgstr ""
-
-msgid "The validator profile has no endpoint or model configured."
-msgstr ""
-
-msgid "Empty validator response."
-msgstr ""
-
-msgid "empty validator response"
-msgstr ""
-
-msgid "Could not validate: %1"
-msgstr ""
-
-msgid "the command does not match its stated justification"
-msgstr ""
-
-msgid "Blocked by command validator: %1"
-msgstr ""
-
-msgid "Unknown tool %1"
-msgstr ""
-
-msgid "Error: path '%1' outside whitelist"
-msgstr ""
-
-msgid "Executing %1…"
-msgstr ""
-
-msgid ""
-"Loaded '%1' skill — its full instructions were added to this conversation's "
-"context."
-msgstr ""
-
-msgid "Failed to start drive session: %1"
-msgstr ""
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr ""
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr ""
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr ""
 
@@ -2281,6 +2059,228 @@ msgid "seconds"
 msgstr ""
 
 msgid "minutes"
+msgstr ""
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+
+msgid "Failed to stop driving: %1"
+msgstr ""
+
+msgid "Text-to-speech is not configured"
+msgstr ""
+
+msgid "PlasmaLLM"
+msgstr ""
+
+msgid "Text-to-speech is not configured. Open Text to Speech settings."
+msgstr ""
+
+msgid "Speaking…"
+msgstr ""
+
+msgid "Still preparing system context…"
+msgstr ""
+
+msgid "Voice input is not configured. Open Speech to Text settings."
+msgstr ""
+
+msgid "Recording too short — hold a bit longer, then toggle again to stop."
+msgstr ""
+
+msgid "Recording produced no audio file."
+msgstr ""
+
+msgid "Recording was empty or could not be read."
+msgstr ""
+
+msgid "No speech detected."
+msgstr ""
+
+msgid "Could not send transcribed message."
+msgstr ""
+
+msgid "Transcription canceled"
+msgstr ""
+
+msgid "Recording too short or silent — try again."
+msgstr ""
+
+msgid "Failed to read recorded audio."
+msgstr ""
+
+msgid "Failed to finalize recording"
+msgstr ""
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+
+msgid ""
+"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
+"plasmallm/skills/ (configure extra directories in Settings → Skills)."
+msgstr ""
+
+msgid "invalid:"
+msgstr ""
+
+msgid "disabled"
+msgstr ""
+
+msgid "loaded"
+msgstr ""
+
+msgid "Available skills (%1 enabled):"
+msgstr ""
+
+msgid "Enable or disable individual skills in Settings → Skills."
+msgstr ""
+
+msgid "Command validation is still in progress; try again in a moment."
+msgstr ""
+
+msgid "No tool request pending to approve."
+msgstr ""
+
+msgid "No tool request pending to deny."
+msgstr ""
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr ""
+
+msgid "Current profile: **%1**"
+msgstr ""
+
+msgid "Available profiles:"
+msgstr ""
+
+msgid "active"
+msgstr ""
+
+msgid "Type `/profile <name>` to switch."
+msgstr ""
+
+msgid "Switched to profile: **%1**"
+msgstr ""
+
+msgid "Unknown profile: **%1**"
+msgstr ""
+
+msgid "none"
+msgstr ""
+
+msgid "Current model: **%1**"
+msgstr ""
+
+msgid "Available models:"
+msgstr ""
+
+msgid "Type `/model <name>` to switch."
+msgstr ""
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr ""
+
+msgid "Switched to model: **%1**"
+msgstr ""
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr ""
+
+msgid "(auto)"
+msgstr ""
+
+msgid "Available tasks:"
+msgstr ""
+
+msgid "Type `/task <name>` to run."
+msgstr ""
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr ""
+
+msgid "The user declined to run this command."
+msgstr ""
+
+msgid "No message to evaluate."
+msgstr ""
+
+msgid "Evaluating…"
+msgstr ""
+
+msgid "Decision request failed: %1"
+msgstr ""
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr ""
+
+msgid "PlasmaLLM: Tool Call"
+msgstr ""
+
+msgid "Requested tool: %1"
+msgstr ""
+
+msgid "Validation timed out."
+msgstr ""
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr ""
+
+msgid "Empty validator response."
+msgstr ""
+
+msgid "empty validator response"
+msgstr ""
+
+msgid "Could not validate: %1"
+msgstr ""
+
+msgid "the command does not match its stated justification"
+msgstr ""
+
+msgid "Blocked by command validator: %1"
+msgstr ""
+
+msgid "Unknown tool %1"
+msgstr ""
+
+msgid "Error: path '%1' outside whitelist"
+msgstr ""
+
+msgid "Executing %1…"
+msgstr ""
+
+msgid ""
+"Loaded '%1' skill — its full instructions were added to this conversation's "
+"context."
+msgstr ""
+
+msgid "Failed to start drive session: %1"
+msgstr ""
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr ""
+
+msgid "Drive session authorized successfully. Auto mode enabled."
 msgstr ""
 
 msgid "General"

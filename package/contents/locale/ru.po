@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 19:33-0400\n"
+"POT-Creation-Date: 2026-10-16 19:43-0400\n"
 "PO-Revision-Date: 2026-05-04 00:00+0300\n"
 "Last-Translator: Matvel007\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1662,6 +1662,122 @@ msgstr "Не удалось сформировать команду Whisper"
 msgid "STT backend does not support model listing"
 msgstr "Бэкенд STT не поддерживает получение списка моделей"
 
+msgid "Profile Header:"
+msgstr "Заголовок профиля:"
+
+msgid "Show provider and model in profile header"
+msgstr "Показывать провайдера и модель в заголовке профиля"
+
+msgid "Chat Spacing: %1px"
+msgstr "Отступы чата: %1px"
+
+msgid "Compact"
+msgstr "Компактный"
+
+msgid "Spacious"
+msgstr "Просторный"
+
+msgid "Chat Labels:"
+msgstr "Ярлыки чата:"
+
+msgid "User label:"
+msgstr "Ярлык пользователя:"
+
+msgid "Assistant label:"
+msgstr "Ярлык помощника:"
+
+msgid "Use model name as assistant label"
+msgstr "Использовать имя модели в качестве ярлыка помощника"
+
+msgid "Chat Colors:"
+msgstr "Цвета чата:"
+
+msgid "Use custom user color"
+msgstr "Использовать пользовательский цвет"
+
+msgid "Use custom assistant color"
+msgstr "Использовать цвет помощника"
+
+msgid "UI Font:"
+msgstr "Шрифт интерфейса:"
+
+msgid "Use custom UI font"
+msgstr "Использовать пользовательский шрифт интерфейса"
+
+msgid "Code Font:"
+msgstr "Шрифт кода:"
+
+msgid "Use custom code font"
+msgstr "Использовать пользовательский шрифт кода"
+
+msgid "Thoughts Font:"
+msgstr "Шрифт размышлений:"
+
+msgid "Use custom thoughts font"
+msgstr "Использовать пользовательский шрифт размышлений"
+
+msgid "LaTeX Rendering:"
+msgstr "Рендеринг LaTeX:"
+
+msgid "Leave as TeX"
+msgstr "Оставить как TeX"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Заменить на Unicode (по умолчанию)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (отсутствует python3-matplotlib)"
+
+msgid "Header Icons:"
+msgstr "Иконки заголовка:"
+
+msgid "Profile Header"
+msgstr "Заголовок профиля"
+
+msgid "Always show Tasks"
+msgstr "Всегда показывать Задачи"
+
+msgid "Always show Auto Toggle"
+msgstr "Всегда показывать переключатель Авто"
+
+msgid "Show History"
+msgstr "Показать историю"
+
+msgid "History placement:"
+msgstr "Расположение истории:"
+
+msgid "Header button"
+msgstr "Кнопка в заголовке"
+
+msgid "Sidebar"
+msgstr "Боковая панель"
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+"«Авто» показывает боковую панель, если она помещается рядом с чатом. "
+"«Боковая панель» показывает её всегда и увеличивает минимальный размер, "
+"чтобы поместилось и то, и другое."
+
+msgid "Show Copy conversation"
+msgstr "Показать Копировать разговор"
+
+msgid "Show Context compaction summary"
+msgstr "Показать сводку сжатия контекста"
+
+msgid "Show New chat"
+msgstr "Показать Новый чат"
+
+msgid "Show Settings"
+msgstr "Показать Настройки"
+
+msgid "Show Pin"
+msgstr "Показать закрепление"
+
 msgid "New chat"
 msgstr "Новый чат"
 
@@ -1918,363 +2034,6 @@ msgstr "Остановить чтение вслух"
 msgid "Drop files here to attach"
 msgstr "Перетащите файлы сюда для прикрепления"
 
-msgid "Profile Header:"
-msgstr "Заголовок профиля:"
-
-msgid "Show provider and model in profile header"
-msgstr "Показывать провайдера и модель в заголовке профиля"
-
-msgid "Chat Spacing: %1px"
-msgstr "Отступы чата: %1px"
-
-msgid "Compact"
-msgstr "Компактный"
-
-msgid "Spacious"
-msgstr "Просторный"
-
-msgid "Chat Labels:"
-msgstr "Ярлыки чата:"
-
-msgid "User label:"
-msgstr "Ярлык пользователя:"
-
-msgid "Assistant label:"
-msgstr "Ярлык помощника:"
-
-msgid "Use model name as assistant label"
-msgstr "Использовать имя модели в качестве ярлыка помощника"
-
-msgid "Chat Colors:"
-msgstr "Цвета чата:"
-
-msgid "Use custom user color"
-msgstr "Использовать пользовательский цвет"
-
-msgid "Use custom assistant color"
-msgstr "Использовать цвет помощника"
-
-msgid "UI Font:"
-msgstr "Шрифт интерфейса:"
-
-msgid "Use custom UI font"
-msgstr "Использовать пользовательский шрифт интерфейса"
-
-msgid "Code Font:"
-msgstr "Шрифт кода:"
-
-msgid "Use custom code font"
-msgstr "Использовать пользовательский шрифт кода"
-
-msgid "Thoughts Font:"
-msgstr "Шрифт размышлений:"
-
-msgid "Use custom thoughts font"
-msgstr "Использовать пользовательский шрифт размышлений"
-
-msgid "LaTeX Rendering:"
-msgstr "Рендеринг LaTeX:"
-
-msgid "Leave as TeX"
-msgstr "Оставить как TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Заменить на Unicode (по умолчанию)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (отсутствует python3-matplotlib)"
-
-msgid "Header Icons:"
-msgstr "Иконки заголовка:"
-
-msgid "Profile Header"
-msgstr "Заголовок профиля"
-
-msgid "Always show Tasks"
-msgstr "Всегда показывать Задачи"
-
-msgid "Always show Auto Toggle"
-msgstr "Всегда показывать переключатель Авто"
-
-msgid "Show History"
-msgstr "Показать историю"
-
-msgid "History placement:"
-msgstr "Расположение истории:"
-
-msgid "Header button"
-msgstr "Кнопка в заголовке"
-
-msgid "Sidebar"
-msgstr "Боковая панель"
-
-msgid ""
-"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
-"and widens the minimum size to fit both."
-msgstr ""
-"«Авто» показывает боковую панель, если она помещается рядом с чатом. "
-"«Боковая панель» показывает её всегда и увеличивает минимальный размер, "
-"чтобы поместилось и то, и другое."
-
-msgid "Show Copy conversation"
-msgstr "Показать Копировать разговор"
-
-msgid "Show Context compaction summary"
-msgstr "Показать сводку сжатия контекста"
-
-msgid "Show New chat"
-msgstr "Показать Новый чат"
-
-msgid "Show Settings"
-msgstr "Показать Настройки"
-
-msgid "Show Pin"
-msgstr "Показать закрепление"
-
-msgid ""
-"Internal scheme for API keys has been migrated. If your key is now missing "
-"or does not work, you can recover your old key from KWalletManager."
-msgstr ""
-"Внутренняя схема для API-ключей была перенесена. Если ваш ключ сейчас "
-"отсутствует или не работает, вы можете восстановить старый ключ из "
-"KWalletManager."
-
-msgid "Failed to stop driving: %1"
-msgstr "Не удалось остановить управление: %1"
-
-msgid "Text-to-speech is not configured"
-msgstr "Синтез речи не настроен"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Text-to-speech is not configured. Open Text to Speech settings."
-msgstr "Синтез речи не настроен. Откройте настройки синтеза речи."
-
-msgid "Speaking…"
-msgstr "Воспроизведение…"
-
-msgid "Still preparing system context…"
-msgstr "Подготовка системного контекста…"
-
-msgid "Voice input is not configured. Open Speech to Text settings."
-msgstr "Голосовой ввод не настроен. Откройте настройки распознавания речи."
-
-msgid "Recording too short — hold a bit longer, then toggle again to stop."
-msgstr ""
-"Запись слишком короткая — удерживайте немного дольше, затем снова "
-"переключите для остановки."
-
-msgid "Recording produced no audio file."
-msgstr "Запись не создала аудиофайл."
-
-msgid "Recording was empty or could not be read."
-msgstr "Запись пуста или не может быть прочитана."
-
-msgid "No speech detected."
-msgstr "Речь не обнаружена."
-
-msgid "Could not send transcribed message."
-msgstr "Не удалось отправить распознанное сообщение."
-
-msgid "Transcription canceled"
-msgstr "Распознавание отменено"
-
-msgid "Recording too short or silent — try again."
-msgstr "Запись слишком короткая или тихая — попробуйте снова."
-
-msgid "Failed to read recorded audio."
-msgstr "Не удалось прочитать записанное аудио."
-
-msgid "Failed to finalize recording"
-msgstr "Не удалось завершить запись"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"Не удалось получить токен gcloud (выход %1): %2. Убедитесь, что gcloud "
-"установлен и аутентифицирован."
-
-msgid ""
-"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
-"plasmallm/skills/ (configure extra directories in Settings → Skills)."
-msgstr ""
-"Навыки не найдены. Поместите папки с файлом SKILL.md в ~/.local/share/"
-"plasmallm/skills/ (дополнительные каталоги настраиваются в меню «Настройки → "
-"Навыки»)."
-
-msgid "invalid:"
-msgstr "недействительно:"
-
-msgid "disabled"
-msgstr "отключено"
-
-msgid "loaded"
-msgstr "загружено"
-
-msgid "Available skills (%1 enabled):"
-msgstr "Доступные навыки (включено: %1):"
-
-msgid "Enable or disable individual skills in Settings → Skills."
-msgstr "Включайте или отключайте отдельные навыки в меню «Настройки → Навыки»."
-
-msgid "Command validation is still in progress; try again in a moment."
-msgstr ""
-"Проверка команды всё ещё выполняется; повторите попытку через мгновение."
-
-msgid "No tool request pending to approve."
-msgstr "Нет ожидающих запросов инструментов для одобрения."
-
-msgid "No tool request pending to deny."
-msgstr "Нет ожидающих запросов инструментов для отклонения."
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"Режим пропуска подтверждений включён для этого сеанса. Все включённые "
-"инструменты будут запускаться автоматически, обходя настройки 'Спрашивать "
-"перед запуском'."
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr ""
-"Режим пропуска подтверждений отключён. Инструменты вернутся к настроенным "
-"параметрам 'Спрашивать перед запуском'."
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr ""
-"Автоматизация рабочего стола отключена в настройках. Сначала включите ее, "
-"чтобы управлять рабочим столом."
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "plasmallm-desktop-driver не обнаружен или не запущен."
-
-msgid "Current profile: **%1**"
-msgstr "Текущий профиль: **%1**"
-
-msgid "Available profiles:"
-msgstr "Доступные профили:"
-
-msgid "active"
-msgstr "активный"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "Введите `/profile <имя>` для переключения."
-
-msgid "Switched to profile: **%1**"
-msgstr "Переключено на профиль: **%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "Неизвестный профиль: **%1**"
-
-msgid "none"
-msgstr "нет"
-
-msgid "Current model: **%1**"
-msgstr "Текущая модель: **%1**"
-
-msgid "Available models:"
-msgstr "Доступные модели:"
-
-msgid "Type `/model <name>` to switch."
-msgstr "Введите `/model <name>` для переключения."
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "Нет кэшированных моделей. Используйте **Fetch Models** в настройках."
-
-msgid "Switched to model: **%1**"
-msgstr "Переключено на модель: **%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "Нет настроенных задач. Добавьте задачи в настройках."
-
-msgid "(auto)"
-msgstr "(авто)"
-
-msgid "Available tasks:"
-msgstr "Доступные задачи:"
-
-msgid "Type `/task <name>` to run."
-msgstr "Введите `/task <name>` для запуска."
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "Неизвестная задача: **%1**. Доступны: %2"
-
-msgid "The user declined to run this command."
-msgstr "Пользователь отказался от выполнения этой команды."
-
-msgid "No message to evaluate."
-msgstr "Нет сообщения для оценки."
-
-msgid "Evaluating…"
-msgstr "Оценка…"
-
-msgid "Decision request failed: %1"
-msgstr "Запрос решения не выполнен: %1"
-
-#, javascript-format
-msgid "%1% confidence"
-msgstr "Уверенность %1%"
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM: Вызов инструмента"
-
-msgid "Requested tool: %1"
-msgstr "Запрошенный инструмент: %1"
-
-msgid "Validation timed out."
-msgstr "Время проверки истекло."
-
-msgid "The validator profile has no endpoint or model configured."
-msgstr "В профиле валидатора не настроены эндпоинт или модель."
-
-msgid "Empty validator response."
-msgstr "Пустой ответ валидатора."
-
-msgid "empty validator response"
-msgstr "пустой ответ валидатора"
-
-msgid "Could not validate: %1"
-msgstr "Не удалось проверить: %1"
-
-msgid "the command does not match its stated justification"
-msgstr "команда не соответствует заявленному обоснованию"
-
-msgid "Blocked by command validator: %1"
-msgstr "Заблокировано валидатором команд: %1"
-
-msgid "Unknown tool %1"
-msgstr "Неизвестный инструмент %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "Ошибка: путь '%1' за пределами белого списка"
-
-msgid "Executing %1…"
-msgstr "Выполнение %1…"
-
-msgid ""
-"Loaded '%1' skill — its full instructions were added to this conversation's "
-"context."
-msgstr ""
-"Загружен навык '%1' — его полные инструкции добавлены в контекст этой беседы."
-
-msgid "Failed to start drive session: %1"
-msgstr "Не удалось запустить сеанс управления: %1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr "Сеанс управления активен (уже авторизован). Включен авторежим."
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr "Сеанс управления успешно авторизован. Включен авторежим."
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "Не удалось получить токен gcloud (выход %1): %2"
 
@@ -2522,6 +2281,247 @@ msgstr "секунд"
 
 msgid "minutes"
 msgstr "минут"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"Внутренняя схема для API-ключей была перенесена. Если ваш ключ сейчас "
+"отсутствует или не работает, вы можете восстановить старый ключ из "
+"KWalletManager."
+
+msgid "Failed to stop driving: %1"
+msgstr "Не удалось остановить управление: %1"
+
+msgid "Text-to-speech is not configured"
+msgstr "Синтез речи не настроен"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Text-to-speech is not configured. Open Text to Speech settings."
+msgstr "Синтез речи не настроен. Откройте настройки синтеза речи."
+
+msgid "Speaking…"
+msgstr "Воспроизведение…"
+
+msgid "Still preparing system context…"
+msgstr "Подготовка системного контекста…"
+
+msgid "Voice input is not configured. Open Speech to Text settings."
+msgstr "Голосовой ввод не настроен. Откройте настройки распознавания речи."
+
+msgid "Recording too short — hold a bit longer, then toggle again to stop."
+msgstr ""
+"Запись слишком короткая — удерживайте немного дольше, затем снова "
+"переключите для остановки."
+
+msgid "Recording produced no audio file."
+msgstr "Запись не создала аудиофайл."
+
+msgid "Recording was empty or could not be read."
+msgstr "Запись пуста или не может быть прочитана."
+
+msgid "No speech detected."
+msgstr "Речь не обнаружена."
+
+msgid "Could not send transcribed message."
+msgstr "Не удалось отправить распознанное сообщение."
+
+msgid "Transcription canceled"
+msgstr "Распознавание отменено"
+
+msgid "Recording too short or silent — try again."
+msgstr "Запись слишком короткая или тихая — попробуйте снова."
+
+msgid "Failed to read recorded audio."
+msgstr "Не удалось прочитать записанное аудио."
+
+msgid "Failed to finalize recording"
+msgstr "Не удалось завершить запись"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"Не удалось получить токен gcloud (выход %1): %2. Убедитесь, что gcloud "
+"установлен и аутентифицирован."
+
+msgid ""
+"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
+"plasmallm/skills/ (configure extra directories in Settings → Skills)."
+msgstr ""
+"Навыки не найдены. Поместите папки с файлом SKILL.md в ~/.local/share/"
+"plasmallm/skills/ (дополнительные каталоги настраиваются в меню «Настройки → "
+"Навыки»)."
+
+msgid "invalid:"
+msgstr "недействительно:"
+
+msgid "disabled"
+msgstr "отключено"
+
+msgid "loaded"
+msgstr "загружено"
+
+msgid "Available skills (%1 enabled):"
+msgstr "Доступные навыки (включено: %1):"
+
+msgid "Enable or disable individual skills in Settings → Skills."
+msgstr "Включайте или отключайте отдельные навыки в меню «Настройки → Навыки»."
+
+msgid "Command validation is still in progress; try again in a moment."
+msgstr ""
+"Проверка команды всё ещё выполняется; повторите попытку через мгновение."
+
+msgid "No tool request pending to approve."
+msgstr "Нет ожидающих запросов инструментов для одобрения."
+
+msgid "No tool request pending to deny."
+msgstr "Нет ожидающих запросов инструментов для отклонения."
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"Режим пропуска подтверждений включён для этого сеанса. Все включённые "
+"инструменты будут запускаться автоматически, обходя настройки 'Спрашивать "
+"перед запуском'."
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+"Режим пропуска подтверждений отключён. Инструменты вернутся к настроенным "
+"параметрам 'Спрашивать перед запуском'."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+"Автоматизация рабочего стола отключена в настройках. Сначала включите ее, "
+"чтобы управлять рабочим столом."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver не обнаружен или не запущен."
+
+msgid "Current profile: **%1**"
+msgstr "Текущий профиль: **%1**"
+
+msgid "Available profiles:"
+msgstr "Доступные профили:"
+
+msgid "active"
+msgstr "активный"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "Введите `/profile <имя>` для переключения."
+
+msgid "Switched to profile: **%1**"
+msgstr "Переключено на профиль: **%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "Неизвестный профиль: **%1**"
+
+msgid "none"
+msgstr "нет"
+
+msgid "Current model: **%1**"
+msgstr "Текущая модель: **%1**"
+
+msgid "Available models:"
+msgstr "Доступные модели:"
+
+msgid "Type `/model <name>` to switch."
+msgstr "Введите `/model <name>` для переключения."
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr "Нет кэшированных моделей. Используйте **Fetch Models** в настройках."
+
+msgid "Switched to model: **%1**"
+msgstr "Переключено на модель: **%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "Нет настроенных задач. Добавьте задачи в настройках."
+
+msgid "(auto)"
+msgstr "(авто)"
+
+msgid "Available tasks:"
+msgstr "Доступные задачи:"
+
+msgid "Type `/task <name>` to run."
+msgstr "Введите `/task <name>` для запуска."
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Неизвестная задача: **%1**. Доступны: %2"
+
+msgid "The user declined to run this command."
+msgstr "Пользователь отказался от выполнения этой команды."
+
+msgid "No message to evaluate."
+msgstr "Нет сообщения для оценки."
+
+msgid "Evaluating…"
+msgstr "Оценка…"
+
+msgid "Decision request failed: %1"
+msgstr "Запрос решения не выполнен: %1"
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr "Уверенность %1%"
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Вызов инструмента"
+
+msgid "Requested tool: %1"
+msgstr "Запрошенный инструмент: %1"
+
+msgid "Validation timed out."
+msgstr "Время проверки истекло."
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr "В профиле валидатора не настроены эндпоинт или модель."
+
+msgid "Empty validator response."
+msgstr "Пустой ответ валидатора."
+
+msgid "empty validator response"
+msgstr "пустой ответ валидатора"
+
+msgid "Could not validate: %1"
+msgstr "Не удалось проверить: %1"
+
+msgid "the command does not match its stated justification"
+msgstr "команда не соответствует заявленному обоснованию"
+
+msgid "Blocked by command validator: %1"
+msgstr "Заблокировано валидатором команд: %1"
+
+msgid "Unknown tool %1"
+msgstr "Неизвестный инструмент %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "Ошибка: путь '%1' за пределами белого списка"
+
+msgid "Executing %1…"
+msgstr "Выполнение %1…"
+
+msgid ""
+"Loaded '%1' skill — its full instructions were added to this conversation's "
+"context."
+msgstr ""
+"Загружен навык '%1' — его полные инструкции добавлены в контекст этой беседы."
+
+msgid "Failed to start drive session: %1"
+msgstr "Не удалось запустить сеанс управления: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "Сеанс управления активен (уже авторизован). Включен авторежим."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "Сеанс управления успешно авторизован. Включен авторежим."
 
 msgid "General"
 msgstr "Основные"
