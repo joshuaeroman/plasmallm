@@ -141,6 +141,34 @@ eq(chat.url, "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-a
     "AI Studio URL unchanged");
 eq(requests.length, 0, "no stray requests");
 
+// --- fetchModels (express key): models.dev candidates, verified ---
+const MODELS_DEV = JSON.stringify({ "google-vertex": { models: {
+    "gemini-3.8-flash": {}, "gemini-4-argon": {}, "gemini-retired-1": {},
+    "gemini-3.1-flash-image": {}, "gemini-2.5-flash-tts": {}
+} } });
+function fetchModels(apiKey) {
+    const out = {};
+    Gemini.fetchModels(AP, apiKey, { geminiAuthMethod: "agentplatform", geminiVertexAuthType: "apikey" },
+        function(err, models) { out.err = err; out.models = models; });
+    return out;
+}
+let fm = fetchModels("AQ.key");
+requests.shift().respond(200, MODELS_DEV);
+eq(requests.map(function(r) { return r.url.split("/models/")[1]; }),
+    ["gemini-3.8-flash:countTokens", "gemini-4-argon:countTokens", "gemini-retired-1:countTokens"],
+    "probes only chat candidates (image/TTS filtered first)");
+ok(requests.every(function(r) { return r.url.indexOf("/v1/projects/42/") !== -1; }), "probes use cached project");
+requests[0].respond(200, "{}");
+requests[1].respond(200, "{}");
+requests[2].respond(404, NOT_FOUND);
+requests.length = 0;
+eq(fm, { err: null, models: ["gemini-3.8-flash", "gemini-4-argon"] }, "unreachable models dropped");
+
+fm = fetchModels("AQ.key");
+requests.shift().respond(200, MODELS_DEV);
+while (requests.length) requests.shift().respond(0, "");
+eq(fm.models, ["gemini-3.8-flash", "gemini-4-argon", "gemini-retired-1"], "all probes failing keeps the unverified list");
+
 if (failed) {
     console.error(failed + " failure(s)");
     process.exit(1);

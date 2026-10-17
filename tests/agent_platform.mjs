@@ -121,6 +121,35 @@ h.abort();
 ok(req.aborted, "abort() aborts the lookup request");
 eq(got, "unset", "cancelled lookup never calls back");
 
+// --- verifyModels ---
+let verified = null;
+A.verifyModels(AP, "AQ.one", "global", ["a", "b", "c"], function(list) { verified = list; });
+eq(requests.length, 3, "one countTokens per candidate (project already cached)");
+ok(requests.every(function(r) { return r.url.indexOf("/v1/projects/387126880676/locations/global/") !== -1; }),
+    "candidates probed on the project URL");
+// Answer out of order; result keeps candidate order.
+requests[2].respond(200, "{}");
+requests[0].respond(200, "{}");
+eq(verified, null, "waits for every probe");
+requests[1].respond(404, notFound);
+requests.length = 0;
+eq(verified, ["a", "c"], "keeps reachable models in original order");
+
+verified = null;
+A.verifyModels(AP, "AQ.fresh", "global", ["x"], function(list) { verified = list; });
+eq(requests.length, 1, "uncached key looks up the project first");
+requests.shift().respond(404, notFound.replace("387126880676", "777"));
+eq(requests.length, 1, "then probes");
+ok(requests[0].url.indexOf("/v1/projects/777/") !== -1, "probe uses the looked-up project");
+requests[0].ontimeout();
+requests.length = 0;
+eq(verified, [], "timed-out probe counts as unreachable");
+
+verified = null;
+A.verifyModels(AP, "AQ.one", "global", [], function(list) { verified = list; });
+eq(verified, [], "empty candidate list calls back immediately");
+eq(requests.length, 0, "no requests for empty list");
+
 if (failed) {
     console.error(failed + " failure(s)");
     process.exit(1);

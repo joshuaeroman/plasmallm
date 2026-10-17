@@ -93,3 +93,52 @@ function discoverProject(baseUrl, apiKey, callback) {
         }
     };
 }
+
+// Express keys can't call ListModels, so model lists come from models.dev
+// unverified. countTokens is free and 404s for models the key can't reach,
+// so check every candidate in parallel and call back with the ones that
+// answered (in the original order). Uses the key's project when it can be
+// found, like chat requests do.
+function verifyModels(baseUrl, apiKey, location, ids, callback) {
+    if (!ids || ids.length === 0) {
+        callback([]);
+        return;
+    }
+    function probeAll(projectId) {
+        var reachable = [];
+        var pending = ids.length;
+        function settle(index, ok) {
+            reachable[index] = ok;
+            pending--;
+            if (pending === 0) {
+                callback(ids.filter(function(id, i) { return reachable[i]; }));
+            }
+        }
+        for (var i = 0; i < ids.length; i++) {
+            (function(index) {
+                var xhr = new XMLHttpRequest();
+                var settled = false;
+                function done() {
+                    if (settled) return;
+                    settled = true;
+                    settle(index, xhr.status === 200);
+                }
+                xhr.open("POST", modelUrl(baseUrl, projectId, location, ids[index], "countTokens"));
+                xhr.timeout = 15000;
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader("x-goog-api-key", apiKey);
+                xhr.ontimeout = done;
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) done();
+                };
+                xhr.send(COUNT_TOKENS_BODY);
+            })(i);
+        }
+    }
+    var cached = cachedProject(apiKey);
+    if (cached) {
+        probeAll(cached);
+    } else {
+        discoverProject(baseUrl, apiKey, probeAll);
+    }
+}

@@ -175,7 +175,18 @@ function fetchModels(endpoint, apiKey, opts, callback) {
             return;
         }
 
-        // For Express Mode (API key) or missing project ID, query models.dev directly
+        // Express Mode (API key): models.dev, keeping only models the key can
+        // reach. If none check out (e.g. offline), show the unverified list.
+        if (AgentPlatform.usesExpressKey(opts, apiKey, baseUrl)) {
+            fetchModelsDev("google-vertex", geminiFilter, STATIC_VERTEX_GEMINI_MODELS, function(err, ids, status) {
+                AgentPlatform.verifyModels(baseUrl, apiKey, location, ids, function(reachable) {
+                    callback(null, reachable.length > 0 ? reachable : ids, status);
+                });
+            });
+            return;
+        }
+
+        // Missing project ID (or custom endpoint): query models.dev directly
         fetchModelsDev("google-vertex", geminiFilter, STATIC_VERTEX_GEMINI_MODELS, callback);
         return;
     }
