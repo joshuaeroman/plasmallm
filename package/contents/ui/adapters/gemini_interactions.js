@@ -4,6 +4,7 @@
 */
 
 .import "../toolManager.js" as ToolManager
+.import "agentPlatform.js" as AgentPlatform
 
 // Google Gemini Interactions API adapter (POST /v1beta/interactions?alt=sse).
 // Stateful implementation using server-side interaction storage.
@@ -112,7 +113,7 @@ function fetchModels(endpoint, apiKey, opts, callback) {
 
     var geminiFilter = function(m) {
         var lower = m.toLowerCase();
-        return lower.indexOf("gemini") !== -1 && lower.indexOf("-tts") === -1 && lower.indexOf("embedding") === -1;
+        return lower.indexOf("gemini") !== -1 && AgentPlatform.isChatModel(m);
     };
 
     if (isAgentPlatform) {
@@ -142,7 +143,7 @@ function fetchModels(endpoint, apiKey, opts, callback) {
                                 else if (name.indexOf("publishers/google/models/") !== -1) {
                                     name = name.split("/").pop();
                                 }
-                                if (name.toLowerCase().indexOf("gemini") !== -1) {
+                                if (name.toLowerCase().indexOf("gemini") !== -1 && AgentPlatform.isChatModel(name)) {
                                     models.push(name);
                                 }
                             }
@@ -190,11 +191,21 @@ function fetchModels(endpoint, apiKey, opts, callback) {
                         var name = m.name || "";
                         if (name.indexOf("models/") === 0) name = name.substring(7);
                         var methods = m.supportedGenerationMethods || [];
-                        if (methods.indexOf("generateContent") !== -1) {
+                        if (methods.indexOf("generateContent") !== -1 && AgentPlatform.isChatModel(name)) {
                             models.push(name);
                         }
                     }
-                    callback(null, models, xhr.status);
+                    // Drop listed models this key can't call; keep the full
+                    // list if none check out (e.g. a proxy without countTokens).
+                    // OAuth tokens skip the check (probes send an API key header).
+                    if (!apiKey || apiKey.indexOf("ya29.") === 0 || models.length === 0) {
+                        callback(null, models, xhr.status);
+                        return;
+                    }
+                    var listStatus = xhr.status;
+                    AgentPlatform.verifyStudioModels(baseUrl, apiKey, models, function(usable) {
+                        callback(null, usable.length > 0 ? usable : models, listStatus);
+                    });
                 } catch (e) {
                     callback(i18n("Failed to parse models: %1", e.message), null, xhr.status);
                 }

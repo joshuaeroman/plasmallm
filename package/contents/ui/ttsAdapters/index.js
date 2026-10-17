@@ -8,11 +8,13 @@
 
 .import "spd_say.js" as SpdSay
 .import "openai_speech.js" as OpenaiSpeech
+.import "gemini_tts.js" as GeminiTts
 .import "custom_cli.js" as CustomCli
 
 var backends = {
     "spd_say": SpdSay,
     "openai_speech": OpenaiSpeech,
+    "gemini_tts": GeminiTts,
     "custom_cli": CustomCli
 };
 
@@ -25,6 +27,7 @@ function list() {
     return [
         { id: SpdSay.id, name: SpdSay.displayName },
         { id: OpenaiSpeech.id, name: OpenaiSpeech.displayName },
+        { id: GeminiTts.id, name: GeminiTts.displayName },
         { id: CustomCli.id, name: CustomCli.displayName }
     ];
 }

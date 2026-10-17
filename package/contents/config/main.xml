@@ -521,7 +521,7 @@ General-purpose assistant. Keep responses short (~1 paragraph) unless more detai
       <default>false</default>
     </entry>
     <entry name="ttsBackend" type="String">
-      <label>TTS backend adapter id (spd_say, openai_speech, custom_cli)</label>
+      <label>TTS backend adapter id (spd_say, openai_speech, gemini_tts, custom_cli)</label>
       <default>spd_say</default>
     </entry>
     <entry name="ttsProviderName" type="String">

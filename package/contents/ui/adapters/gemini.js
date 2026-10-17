@@ -4,6 +4,7 @@
 */
 
 .import "../toolManager.js" as ToolManager
+.import "agentPlatform.js" as AgentPlatform
 .import "geminiThinking.js" as GeminiThinking
 
 // Native Google Gemini adapter (POST /v1beta/models/{model}:streamGenerateContent
@@ -124,7 +125,7 @@ function fetchModels(endpoint, apiKey, opts, callback) {
 
     var geminiFilter = function(m) {
         var lower = m.toLowerCase();
-        return lower.indexOf("gemini") !== -1 && lower.indexOf("-tts") === -1 && lower.indexOf("embedding") === -1;
+        return lower.indexOf("gemini") !== -1 && AgentPlatform.isChatModel(m);
     };
 
     if (isAgentPlatform) {
@@ -154,7 +155,7 @@ function fetchModels(endpoint, apiKey, opts, callback) {
                                 else if (name.indexOf("publishers/google/models/") !== -1) {
                                     name = name.split("/").pop();
                                 }
-                                if (name.toLowerCase().indexOf("gemini") !== -1) {
+                                if (name.toLowerCase().indexOf("gemini") !== -1 && AgentPlatform.isChatModel(name)) {
                                     models.push(name);
                                 }
                             }
@@ -174,7 +175,18 @@ function fetchModels(endpoint, apiKey, opts, callback) {
             return;
         }
 
-        // For Express Mode (API key) or missing project ID, query models.dev directly
+        // Express Mode (API key): models.dev, keeping only models the key can
+        // reach. If none check out (e.g. offline), show the unverified list.
+        if (AgentPlatform.usesExpressKey(opts, apiKey, baseUrl)) {
+            fetchModelsDev("google-vertex", geminiFilter, STATIC_VERTEX_GEMINI_MODELS, function(err, ids, status) {
+                AgentPlatform.verifyModels(baseUrl, apiKey, location, ids, function(reachable) {
+                    callback(null, reachable.length > 0 ? reachable : ids, status);
+                });
+            });
+            return;
+        }
+
+        // Missing project ID (or custom endpoint): query models.dev directly
         fetchModelsDev("google-vertex", geminiFilter, STATIC_VERTEX_GEMINI_MODELS, callback);
         return;
     }
@@ -202,11 +214,21 @@ function fetchModels(endpoint, apiKey, opts, callback) {
                         var name = m.name || "";
                         if (name.indexOf("models/") === 0) name = name.substring(7);
                         var methods = m.supportedGenerationMethods || [];
-                        if (methods.indexOf("generateContent") !== -1) {
+                        if (methods.indexOf("generateContent") !== -1 && AgentPlatform.isChatModel(name)) {
                             models.push(name);
                         }
                     }
-                    callback(null, models, xhr.status);
+                    // Drop listed models this key can't call; keep the full
+                    // list if none check out (e.g. a proxy without countTokens).
+                    // OAuth tokens skip the check (probes send an API key header).
+                    if (!apiKey || apiKey.indexOf("ya29.") === 0 || models.length === 0) {
+                        callback(null, models, xhr.status);
+                        return;
+                    }
+                    var listStatus = xhr.status;
+                    AgentPlatform.verifyStudioModels(baseUrl, apiKey, models, function(usable) {
+                        callback(null, usable.length > 0 ? usable : models, listStatus);
+                    });
                 } catch (e) {
                     callback(i18n("Failed to parse models: %1", e.message), null, xhr.status);
                 }
@@ -508,6 +530,8 @@ function sendStreaming(opts) {
     var xhr = new XMLHttpRequest();
     var url;
     var baseUrl = endpoint.replace(/\/+$/, "");
+    var location = "global";
+    var findProject = false;
 
     if (opts && opts.opencodeAuth) {
         // OpenCode Zen: POST {base}/models/{id}:streamGenerateContent?alt=sse
@@ -517,33 +541,25 @@ function sendStreaming(opts) {
               ":streamGenerateContent?alt=sse";
     } else if (opts && opts.geminiAuthMethod === "agentplatform") {
         var projectId = (opts.geminiProjectId ? opts.geminiProjectId.trim() : "");
-        var location = opts.geminiLocation || "global";
+        location = opts.geminiLocation || "global";
         
         // Automatically prefix location if it's not global and not already prefixed.
         if (location !== "global" && baseUrl.indexOf("://aiplatform.googleapis.com") !== -1) {
             baseUrl = baseUrl.replace("://", "://" + location + "-");
         }
 
-        if (projectId.length > 0) {
-            url = baseUrl +
-                  "/v1/projects/" + encodeURIComponent(projectId) +
-                  "/locations/" + encodeURIComponent(location) +
-                  "/publishers/google/models/" + encodeURIComponent(model) +
-                  ":streamGenerateContent?alt=sse";
-        } else {
-            url = baseUrl +
-                  "/v1/publishers/google/models/" + encodeURIComponent(model) +
-                  ":streamGenerateContent?alt=sse";
+        // Express-mode keys: use the key's project so models outside the
+        // express route's region resolve (looked up once per key below).
+        if (AgentPlatform.usesExpressKey(opts, apiKey, baseUrl)) {
+            projectId = AgentPlatform.cachedProject(apiKey);
+            findProject = projectId.length === 0;
         }
+        url = AgentPlatform.modelUrl(baseUrl, projectId, location, model, "streamGenerateContent?alt=sse");
     } else {
         url = baseUrl +
               "/v1beta/models/" + encodeURIComponent(model) +
               ":streamGenerateContent?alt=sse";
     }
-
-    xhr.open("POST", url);
-    xhr.timeout = 120000;
-    setHeaders(xhr, apiKey, opts);
 
     var pollTimer = null;
     var lastParseIndex = 0;
@@ -718,7 +734,6 @@ function sendStreaming(opts) {
     }
 
     var payload = JSON.stringify(body, null, 2);
-    xhr.send(payload);
 
     var handle = {
         xhr: xhr,
@@ -729,5 +744,25 @@ function sendStreaming(opts) {
             handle.pollTimer = timer;
         }
     };
+
+    function openAndSend(requestUrl) {
+        xhr.open("POST", requestUrl);
+        xhr.timeout = 120000;
+        setHeaders(xhr, apiKey, opts);
+        handle.xhr = xhr;
+        xhr.send(payload);
+    }
+
+    if (findProject) {
+        // Cancelling now aborts the lookup; the chat request never starts.
+        // Without a project the express URL is used, as before.
+        handle.xhr = AgentPlatform.discoverProject(baseUrl, apiKey, function(project) {
+            openAndSend(project
+                ? AgentPlatform.modelUrl(baseUrl, project, location, model, "streamGenerateContent?alt=sse")
+                : url);
+        });
+    } else {
+        openAndSend(url);
+    }
     return handle;
 }

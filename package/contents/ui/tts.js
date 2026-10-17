@@ -76,7 +76,10 @@ function knownOpenAiVoices() {
     return KNOWN_OPENAI_VOICES.slice();
 }
 
-function providerPresets() {
+function providerPresets(backendId) {
+    var adapter = backendId ? TtsAdapters.get(backendId) : null;
+    if (adapter && adapter.id === backendId && adapter.presets)
+        return adapter.presets.slice();
     return [
         {
             name: "OpenRouter",
@@ -106,7 +109,10 @@ function backendChoices() {
     return TtsAdapters.list();
 }
 
-function defaultKnownModels() {
+function defaultKnownModels(backendId) {
+    var adapter = backendId ? TtsAdapters.get(backendId) : null;
+    if (adapter && adapter.id === backendId && typeof adapter.defaultKnownModels === "function")
+        return adapter.defaultKnownModels();
     return [
         "google/gemini-3.8-flash-lite-tts",
         "openai/tts-1",
@@ -242,6 +248,21 @@ function applyStyleHint(cleanedText, styleHint) {
 }
 
 /**
+ * The style hint as a natural-language delivery direction (e.g. "warm and
+ * unhurried"), or "" when applyStyleHint already turns it into markup.
+ * Backends that take spoken directions (Gemini TTS) use this.
+ *
+ * @param {string} styleHint
+ * @returns {string}
+ */
+function naturalStyleDirection(styleHint) {
+    var hint = String(styleHint || "").trim();
+    if (!hint.length)
+        return "";
+    return applyStyleHint("x", hint) === "x" ? hint : "";
+}
+
+/**
  * Full preparation pipeline: cleans text and applies style hint.
  *
  * @param {string} rawText
@@ -324,6 +345,7 @@ function speak(opts) {
             apiKey: opts.apiKey || "",
             model: conn.model,
             voice: conn.voice,
+            styleDirection: naturalStyleDirection(conn.styleHint),
             responseFormat: conn.responseFormat,
             rate: conn.rate,
             pitch: conn.pitch,
