@@ -1,5 +1,7 @@
 # PlasmaLLM
 
+<img width="913" height="770" alt="image" src="https://github.com/user-attachments/assets/acfcbfc2-64f7-40bf-95fd-6fcdbc22c324" />
+
 PlasmaLLM is a system-aware AI assistant widget for the KDE Plasma 6 desktop. It provides a native interface to various LLM endpoints, integrating system information gathering, web search, and shell command execution directly into your desktop workflow.
 
 ![License: GPL-2.0-or-later](https://img.shields.io/badge/License-GPL--2.0--or--later-blue.svg)
@@ -83,6 +85,8 @@ Then, for either backend:
 ### From the KDE Store
 You can install PlasmaLLM directly from the Plasma widget explorer:
 **Add Widgets** → **Get New Widgets** → **Download New Plasma Widgets** → Search for "PlasmaLLM".
+
+Or from the web: [KDE Store](https://store.kde.org/p/2348409/)
 
 ### From GitHub Releases
 Download the latest `.plasmoid` file from the [Releases](https://github.com/joshuaeroman/plasmallm/releases) page:
