@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 19:33-0400\n"
+"POT-Creation-Date: 2026-10-16 19:43-0400\n"
 "PO-Revision-Date: 2026-04-07 21:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Spanish\n"
@@ -1683,6 +1683,121 @@ msgstr "No se pudo compilar el comando de Whisper"
 msgid "STT backend does not support model listing"
 msgstr "El backend STT no admite el listado de modelos"
 
+msgid "Profile Header:"
+msgstr "Encabezado de perfil:"
+
+msgid "Show provider and model in profile header"
+msgstr "Mostrar proveedor y modelo en el encabezado de perfil"
+
+msgid "Chat Spacing: %1px"
+msgstr "Espaciado del chat: %1px"
+
+msgid "Compact"
+msgstr "Compacto"
+
+msgid "Spacious"
+msgstr "Espacioso"
+
+msgid "Chat Labels:"
+msgstr "Etiquetas de chat:"
+
+msgid "User label:"
+msgstr "Etiqueta de usuario:"
+
+msgid "Assistant label:"
+msgstr "Etiqueta de asistente:"
+
+msgid "Use model name as assistant label"
+msgstr "Usar el nombre del modelo como etiqueta del asistente"
+
+msgid "Chat Colors:"
+msgstr "Colores del chat:"
+
+msgid "Use custom user color"
+msgstr "Usar color de usuario personalizado"
+
+msgid "Use custom assistant color"
+msgstr "Usar color de asistente personalizado"
+
+msgid "UI Font:"
+msgstr "Fuente de interfaz:"
+
+msgid "Use custom UI font"
+msgstr "Usar fuente de interfaz personalizada"
+
+msgid "Code Font:"
+msgstr "Fuente de código:"
+
+msgid "Use custom code font"
+msgstr "Usar fuente de código personalizada"
+
+msgid "Thoughts Font:"
+msgstr "Fuente de pensamientos:"
+
+msgid "Use custom thoughts font"
+msgstr "Usar fuente de pensamientos personalizada"
+
+msgid "LaTeX Rendering:"
+msgstr "Renderizado de LaTeX:"
+
+msgid "Leave as TeX"
+msgstr "Dejar como TeX"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Reemplazar con Unicode (Predeterminado)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (falta python3-matplotlib)"
+
+msgid "Header Icons:"
+msgstr "Iconos de encabezado:"
+
+msgid "Profile Header"
+msgstr "Encabezado de perfil"
+
+msgid "Always show Tasks"
+msgstr "Mostrar siempre Tareas"
+
+msgid "Always show Auto Toggle"
+msgstr "Mostrar siempre el interruptor automático"
+
+msgid "Show History"
+msgstr "Mostrar historial"
+
+msgid "History placement:"
+msgstr "Ubicación del historial:"
+
+msgid "Header button"
+msgstr "Botón en el encabezado"
+
+msgid "Sidebar"
+msgstr "Barra lateral"
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+"Automático muestra la barra lateral cuando cabe junto al chat. Barra lateral "
+"la muestra siempre y amplía el tamaño mínimo para que quepan ambos."
+
+msgid "Show Copy conversation"
+msgstr "Mostrar copiar conversación"
+
+msgid "Show Context compaction summary"
+msgstr "Mostrar resumen de compactación de contexto"
+
+msgid "Show New chat"
+msgstr "Mostrar nuevo chat"
+
+msgid "Show Settings"
+msgstr "Mostrar configuración"
+
+msgid "Show Pin"
+msgstr "Mostrar anclaje"
+
 msgid "New chat"
 msgstr "Nuevo chat"
 
@@ -1945,367 +2060,6 @@ msgstr "Dejar de leer en voz alta"
 msgid "Drop files here to attach"
 msgstr "Arrastre y suelte archivos aquí para adjuntarlos"
 
-msgid "Profile Header:"
-msgstr "Encabezado de perfil:"
-
-msgid "Show provider and model in profile header"
-msgstr "Mostrar proveedor y modelo en el encabezado de perfil"
-
-msgid "Chat Spacing: %1px"
-msgstr "Espaciado del chat: %1px"
-
-msgid "Compact"
-msgstr "Compacto"
-
-msgid "Spacious"
-msgstr "Espacioso"
-
-msgid "Chat Labels:"
-msgstr "Etiquetas de chat:"
-
-msgid "User label:"
-msgstr "Etiqueta de usuario:"
-
-msgid "Assistant label:"
-msgstr "Etiqueta de asistente:"
-
-msgid "Use model name as assistant label"
-msgstr "Usar el nombre del modelo como etiqueta del asistente"
-
-msgid "Chat Colors:"
-msgstr "Colores del chat:"
-
-msgid "Use custom user color"
-msgstr "Usar color de usuario personalizado"
-
-msgid "Use custom assistant color"
-msgstr "Usar color de asistente personalizado"
-
-msgid "UI Font:"
-msgstr "Fuente de interfaz:"
-
-msgid "Use custom UI font"
-msgstr "Usar fuente de interfaz personalizada"
-
-msgid "Code Font:"
-msgstr "Fuente de código:"
-
-msgid "Use custom code font"
-msgstr "Usar fuente de código personalizada"
-
-msgid "Thoughts Font:"
-msgstr "Fuente de pensamientos:"
-
-msgid "Use custom thoughts font"
-msgstr "Usar fuente de pensamientos personalizada"
-
-msgid "LaTeX Rendering:"
-msgstr "Renderizado de LaTeX:"
-
-msgid "Leave as TeX"
-msgstr "Dejar como TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Reemplazar con Unicode (Predeterminado)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (falta python3-matplotlib)"
-
-msgid "Header Icons:"
-msgstr "Iconos de encabezado:"
-
-msgid "Profile Header"
-msgstr "Encabezado de perfil"
-
-msgid "Always show Tasks"
-msgstr "Mostrar siempre Tareas"
-
-msgid "Always show Auto Toggle"
-msgstr "Mostrar siempre el interruptor automático"
-
-msgid "Show History"
-msgstr "Mostrar historial"
-
-msgid "History placement:"
-msgstr "Ubicación del historial:"
-
-msgid "Header button"
-msgstr "Botón en el encabezado"
-
-msgid "Sidebar"
-msgstr "Barra lateral"
-
-msgid ""
-"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
-"and widens the minimum size to fit both."
-msgstr ""
-"Automático muestra la barra lateral cuando cabe junto al chat. Barra lateral "
-"la muestra siempre y amplía el tamaño mínimo para que quepan ambos."
-
-msgid "Show Copy conversation"
-msgstr "Mostrar copiar conversación"
-
-msgid "Show Context compaction summary"
-msgstr "Mostrar resumen de compactación de contexto"
-
-msgid "Show New chat"
-msgstr "Mostrar nuevo chat"
-
-msgid "Show Settings"
-msgstr "Mostrar configuración"
-
-msgid "Show Pin"
-msgstr "Mostrar anclaje"
-
-msgid ""
-"Internal scheme for API keys has been migrated. If your key is now missing "
-"or does not work, you can recover your old key from KWalletManager."
-msgstr ""
-"El esquema interno de claves de API se ha migrado. Si su clave falta o no "
-"funciona, puede recuperar su clave anterior desde KWalletManager."
-
-msgid "Failed to stop driving: %1"
-msgstr "Error al detener el control: %1"
-
-msgid "Text-to-speech is not configured"
-msgstr "El texto a voz no está configurado"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Text-to-speech is not configured. Open Text to Speech settings."
-msgstr ""
-"El texto a voz no está configurado. Abra la configuración de texto a voz."
-
-msgid "Speaking…"
-msgstr "Hablando…"
-
-msgid "Still preparing system context…"
-msgstr "Aún preparando el contexto del sistema…"
-
-msgid "Voice input is not configured. Open Speech to Text settings."
-msgstr ""
-"La entrada de voz no está configurada. Abra la configuración de Voz a texto."
-
-msgid "Recording too short — hold a bit longer, then toggle again to stop."
-msgstr ""
-"Grabación demasiado corta — mantenga presionado un poco más y luego vuelva a "
-"alternar para detener."
-
-msgid "Recording produced no audio file."
-msgstr "La grabación no produjo ningún archivo de audio."
-
-msgid "Recording was empty or could not be read."
-msgstr "La grabación estaba vacía o no se pudo leer."
-
-msgid "No speech detected."
-msgstr "No se detectó voz."
-
-msgid "Could not send transcribed message."
-msgstr "No se pudo enviar el mensaje transcrito."
-
-msgid "Transcription canceled"
-msgstr "Transcripción cancelada"
-
-msgid "Recording too short or silent — try again."
-msgstr "Grabación demasiado corta o silenciosa — inténtelo de nuevo."
-
-msgid "Failed to read recorded audio."
-msgstr "No se pudo leer el audio grabado."
-
-msgid "Failed to finalize recording"
-msgstr "No se pudo finalizar la grabación"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"No se pudo obtener el token de gcloud (salida %1): %2. Asegúrese de que "
-"gcloud esté instalado y autenticado."
-
-msgid ""
-"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
-"plasmallm/skills/ (configure extra directories in Settings → Skills)."
-msgstr ""
-"No se encontraron habilidades. Coloque carpetas que contengan un archivo "
-"SKILL.md en ~/.local/share/plasmallm/skills/ (configure directorios "
-"adicionales en Configuración → Habilidades)."
-
-msgid "invalid:"
-msgstr "no válido:"
-
-msgid "disabled"
-msgstr "deshabilitado"
-
-msgid "loaded"
-msgstr "cargado"
-
-msgid "Available skills (%1 enabled):"
-msgstr "Habilidades disponibles (%1 habilitadas):"
-
-msgid "Enable or disable individual skills in Settings → Skills."
-msgstr ""
-"Habilite o deshabilite habilidades individuales en Configuración → "
-"Habilidades."
-
-msgid "Command validation is still in progress; try again in a moment."
-msgstr ""
-"La validación del comando aún está en curso; inténtelo de nuevo en un "
-"momento."
-
-msgid "No tool request pending to approve."
-msgstr "No hay solicitud de herramienta pendiente para aprobar."
-
-msgid "No tool request pending to deny."
-msgstr "No hay solicitud de herramienta pendiente para denegar."
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"Modo de omisión de aprobaciones habilitado para esta sesión. Todas las "
-"herramientas habilitadas se ejecutarán automáticamente, sin tener en cuenta "
-"la configuración 'Preguntar antes de ejecutar'."
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr ""
-"Modo de omisión de aprobaciones deshabilitado. Las herramientas revertirán a "
-"su configuración de 'Preguntar antes de ejecutar'."
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr ""
-"La automatización de escritorio está desactivada en la configuración. "
-"Habilítela primero para controlar el escritorio."
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "plasmallm-desktop-driver no está detectado o no se está ejecutando."
-
-msgid "Current profile: **%1**"
-msgstr "Perfil actual: **%1**"
-
-msgid "Available profiles:"
-msgstr "Perfiles disponibles:"
-
-msgid "active"
-msgstr "activo"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "Escriba `/profile <nombre>` para cambiar."
-
-msgid "Switched to profile: **%1**"
-msgstr "Cambiado al perfil: **%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "Perfil desconocido: **%1**"
-
-msgid "none"
-msgstr "ninguno"
-
-msgid "Current model: **%1**"
-msgstr "Modelo actual: **%1**"
-
-msgid "Available models:"
-msgstr "Modelos disponibles:"
-
-msgid "Type `/model <name>` to switch."
-msgstr "Escriba `/model <name>` para cambiar."
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "No hay modelos en caché. Use **Obtener modelos** en configuración."
-
-msgid "Switched to model: **%1**"
-msgstr "Cambiado al modelo: **%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "No hay tareas configuradas. Agregue tareas en Configuración."
-
-msgid "(auto)"
-msgstr "(automático)"
-
-msgid "Available tasks:"
-msgstr "Tareas disponibles:"
-
-msgid "Type `/task <name>` to run."
-msgstr "Escriba `/task <name>` para ejecutar."
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "Tarea desconocida: **%1**. Disponibles: %2"
-
-msgid "The user declined to run this command."
-msgstr "El usuario rechazó ejecutar este comando."
-
-msgid "No message to evaluate."
-msgstr "No hay ningún mensaje que evaluar."
-
-msgid "Evaluating…"
-msgstr "Evaluando…"
-
-msgid "Decision request failed: %1"
-msgstr "Error en la solicitud de decisión: %1"
-
-#, javascript-format
-msgid "%1% confidence"
-msgstr "%1% de confianza"
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM: Llamada de herramienta"
-
-msgid "Requested tool: %1"
-msgstr "Herramienta solicitada: %1"
-
-msgid "Validation timed out."
-msgstr "Se agotó el tiempo de validación."
-
-msgid "The validator profile has no endpoint or model configured."
-msgstr "El perfil del validador no tiene endpoint ni modelo configurados."
-
-msgid "Empty validator response."
-msgstr "Respuesta del validador vacía."
-
-msgid "empty validator response"
-msgstr "respuesta del validador vacía"
-
-msgid "Could not validate: %1"
-msgstr "No se pudo validar: %1"
-
-msgid "the command does not match its stated justification"
-msgstr "el comando no coincide con su justificación declarada"
-
-msgid "Blocked by command validator: %1"
-msgstr "Bloqueado por el validador de comandos: %1"
-
-msgid "Unknown tool %1"
-msgstr "Herramienta desconocida %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "Error: la ruta '%1' está fuera de la lista de permitidos"
-
-msgid "Executing %1…"
-msgstr "Ejecutando %1…"
-
-msgid ""
-"Loaded '%1' skill — its full instructions were added to this conversation's "
-"context."
-msgstr ""
-"Habilidad '%1' cargada — sus instrucciones completas se agregaron al "
-"contexto de esta conversación."
-
-msgid "Failed to start drive session: %1"
-msgstr "Error al iniciar la sesión de control: %1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr "Sesión de control activa (ya autorizada). Modo automático habilitado."
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr "Sesión de control autorizada con éxito. Modo automático habilitado."
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "No se pudo obtener el token de gcloud (salida %1): %2"
 
@@ -2556,6 +2310,252 @@ msgstr "segundos"
 
 msgid "minutes"
 msgstr "minutos"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"El esquema interno de claves de API se ha migrado. Si su clave falta o no "
+"funciona, puede recuperar su clave anterior desde KWalletManager."
+
+msgid "Failed to stop driving: %1"
+msgstr "Error al detener el control: %1"
+
+msgid "Text-to-speech is not configured"
+msgstr "El texto a voz no está configurado"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Text-to-speech is not configured. Open Text to Speech settings."
+msgstr ""
+"El texto a voz no está configurado. Abra la configuración de texto a voz."
+
+msgid "Speaking…"
+msgstr "Hablando…"
+
+msgid "Still preparing system context…"
+msgstr "Aún preparando el contexto del sistema…"
+
+msgid "Voice input is not configured. Open Speech to Text settings."
+msgstr ""
+"La entrada de voz no está configurada. Abra la configuración de Voz a texto."
+
+msgid "Recording too short — hold a bit longer, then toggle again to stop."
+msgstr ""
+"Grabación demasiado corta — mantenga presionado un poco más y luego vuelva a "
+"alternar para detener."
+
+msgid "Recording produced no audio file."
+msgstr "La grabación no produjo ningún archivo de audio."
+
+msgid "Recording was empty or could not be read."
+msgstr "La grabación estaba vacía o no se pudo leer."
+
+msgid "No speech detected."
+msgstr "No se detectó voz."
+
+msgid "Could not send transcribed message."
+msgstr "No se pudo enviar el mensaje transcrito."
+
+msgid "Transcription canceled"
+msgstr "Transcripción cancelada"
+
+msgid "Recording too short or silent — try again."
+msgstr "Grabación demasiado corta o silenciosa — inténtelo de nuevo."
+
+msgid "Failed to read recorded audio."
+msgstr "No se pudo leer el audio grabado."
+
+msgid "Failed to finalize recording"
+msgstr "No se pudo finalizar la grabación"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"No se pudo obtener el token de gcloud (salida %1): %2. Asegúrese de que "
+"gcloud esté instalado y autenticado."
+
+msgid ""
+"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
+"plasmallm/skills/ (configure extra directories in Settings → Skills)."
+msgstr ""
+"No se encontraron habilidades. Coloque carpetas que contengan un archivo "
+"SKILL.md en ~/.local/share/plasmallm/skills/ (configure directorios "
+"adicionales en Configuración → Habilidades)."
+
+msgid "invalid:"
+msgstr "no válido:"
+
+msgid "disabled"
+msgstr "deshabilitado"
+
+msgid "loaded"
+msgstr "cargado"
+
+msgid "Available skills (%1 enabled):"
+msgstr "Habilidades disponibles (%1 habilitadas):"
+
+msgid "Enable or disable individual skills in Settings → Skills."
+msgstr ""
+"Habilite o deshabilite habilidades individuales en Configuración → "
+"Habilidades."
+
+msgid "Command validation is still in progress; try again in a moment."
+msgstr ""
+"La validación del comando aún está en curso; inténtelo de nuevo en un "
+"momento."
+
+msgid "No tool request pending to approve."
+msgstr "No hay solicitud de herramienta pendiente para aprobar."
+
+msgid "No tool request pending to deny."
+msgstr "No hay solicitud de herramienta pendiente para denegar."
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"Modo de omisión de aprobaciones habilitado para esta sesión. Todas las "
+"herramientas habilitadas se ejecutarán automáticamente, sin tener en cuenta "
+"la configuración 'Preguntar antes de ejecutar'."
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+"Modo de omisión de aprobaciones deshabilitado. Las herramientas revertirán a "
+"su configuración de 'Preguntar antes de ejecutar'."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+"La automatización de escritorio está desactivada en la configuración. "
+"Habilítela primero para controlar el escritorio."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver no está detectado o no se está ejecutando."
+
+msgid "Current profile: **%1**"
+msgstr "Perfil actual: **%1**"
+
+msgid "Available profiles:"
+msgstr "Perfiles disponibles:"
+
+msgid "active"
+msgstr "activo"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "Escriba `/profile <nombre>` para cambiar."
+
+msgid "Switched to profile: **%1**"
+msgstr "Cambiado al perfil: **%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "Perfil desconocido: **%1**"
+
+msgid "none"
+msgstr "ninguno"
+
+msgid "Current model: **%1**"
+msgstr "Modelo actual: **%1**"
+
+msgid "Available models:"
+msgstr "Modelos disponibles:"
+
+msgid "Type `/model <name>` to switch."
+msgstr "Escriba `/model <name>` para cambiar."
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr "No hay modelos en caché. Use **Obtener modelos** en configuración."
+
+msgid "Switched to model: **%1**"
+msgstr "Cambiado al modelo: **%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "No hay tareas configuradas. Agregue tareas en Configuración."
+
+msgid "(auto)"
+msgstr "(automático)"
+
+msgid "Available tasks:"
+msgstr "Tareas disponibles:"
+
+msgid "Type `/task <name>` to run."
+msgstr "Escriba `/task <name>` para ejecutar."
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Tarea desconocida: **%1**. Disponibles: %2"
+
+msgid "The user declined to run this command."
+msgstr "El usuario rechazó ejecutar este comando."
+
+msgid "No message to evaluate."
+msgstr "No hay ningún mensaje que evaluar."
+
+msgid "Evaluating…"
+msgstr "Evaluando…"
+
+msgid "Decision request failed: %1"
+msgstr "Error en la solicitud de decisión: %1"
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr "%1% de confianza"
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Llamada de herramienta"
+
+msgid "Requested tool: %1"
+msgstr "Herramienta solicitada: %1"
+
+msgid "Validation timed out."
+msgstr "Se agotó el tiempo de validación."
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr "El perfil del validador no tiene endpoint ni modelo configurados."
+
+msgid "Empty validator response."
+msgstr "Respuesta del validador vacía."
+
+msgid "empty validator response"
+msgstr "respuesta del validador vacía"
+
+msgid "Could not validate: %1"
+msgstr "No se pudo validar: %1"
+
+msgid "the command does not match its stated justification"
+msgstr "el comando no coincide con su justificación declarada"
+
+msgid "Blocked by command validator: %1"
+msgstr "Bloqueado por el validador de comandos: %1"
+
+msgid "Unknown tool %1"
+msgstr "Herramienta desconocida %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "Error: la ruta '%1' está fuera de la lista de permitidos"
+
+msgid "Executing %1…"
+msgstr "Ejecutando %1…"
+
+msgid ""
+"Loaded '%1' skill — its full instructions were added to this conversation's "
+"context."
+msgstr ""
+"Habilidad '%1' cargada — sus instrucciones completas se agregaron al "
+"contexto de esta conversación."
+
+msgid "Failed to start drive session: %1"
+msgstr "Error al iniciar la sesión de control: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "Sesión de control activa (ya autorizada). Modo automático habilitado."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "Sesión de control autorizada con éxito. Modo automático habilitado."
 
 msgid "General"
 msgstr "General"

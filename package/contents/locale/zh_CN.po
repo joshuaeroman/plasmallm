@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 19:33-0400\n"
+"POT-Creation-Date: 2026-10-16 19:43-0400\n"
 "PO-Revision-Date: 2026-04-28 12:00-0400\n"
 "Last-Translator: Claude (machine translation)\n"
 "Language-Team: Chinese (Simplified)\n"
@@ -1560,6 +1560,121 @@ msgstr "无法构建 Whisper 命令"
 msgid "STT backend does not support model listing"
 msgstr "STT 后端不支持列出模型"
 
+msgid "Profile Header:"
+msgstr "配置文件标头："
+
+msgid "Show provider and model in profile header"
+msgstr "在配置文件标头中显示提供商和模型"
+
+msgid "Chat Spacing: %1px"
+msgstr "聊天间距：%1px"
+
+msgid "Compact"
+msgstr "紧凑"
+
+msgid "Spacious"
+msgstr "宽敞"
+
+msgid "Chat Labels:"
+msgstr "聊天标签："
+
+msgid "User label:"
+msgstr "用户标签："
+
+msgid "Assistant label:"
+msgstr "助手标签："
+
+msgid "Use model name as assistant label"
+msgstr "使用模型名称作为助手标签"
+
+msgid "Chat Colors:"
+msgstr "聊天颜色："
+
+msgid "Use custom user color"
+msgstr "使用自定义用户颜色"
+
+msgid "Use custom assistant color"
+msgstr "使用自定义助手颜色"
+
+msgid "UI Font:"
+msgstr "界面字体："
+
+msgid "Use custom UI font"
+msgstr "使用自定义界面字体"
+
+msgid "Code Font:"
+msgstr "代码字体："
+
+msgid "Use custom code font"
+msgstr "使用自定义代码字体"
+
+msgid "Thoughts Font:"
+msgstr "思维字体："
+
+msgid "Use custom thoughts font"
+msgstr "使用自定义思维字体"
+
+msgid "LaTeX Rendering:"
+msgstr "LaTeX 渲染："
+
+msgid "Leave as TeX"
+msgstr "保留为 TeX"
+
+msgid "Replace with Unicode (Default)"
+msgstr "替换为 Unicode（默认）"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext（缺少 python3-matplotlib）"
+
+msgid "Header Icons:"
+msgstr "标头图标："
+
+msgid "Profile Header"
+msgstr "配置文件标头"
+
+msgid "Always show Tasks"
+msgstr "始终显示任务"
+
+msgid "Always show Auto Toggle"
+msgstr "始终显示自动切换"
+
+msgid "Show History"
+msgstr "显示历史记录"
+
+msgid "History placement:"
+msgstr "历史记录位置："
+
+msgid "Header button"
+msgstr "标题栏按钮"
+
+msgid "Sidebar"
+msgstr "侧边栏"
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+"自动：侧边栏能放在聊天旁边时显示。侧边栏：始终显示，并增大最小尺寸以容纳两"
+"者。"
+
+msgid "Show Copy conversation"
+msgstr "显示复制对话"
+
+msgid "Show Context compaction summary"
+msgstr "显示上下文压缩摘要"
+
+msgid "Show New chat"
+msgstr "显示新建聊天"
+
+msgid "Show Settings"
+msgstr "显示设置"
+
+msgid "Show Pin"
+msgstr "显示固定"
+
 msgid "New chat"
 msgstr "新建聊天"
 
@@ -1809,350 +1924,6 @@ msgstr "停止朗读"
 msgid "Drop files here to attach"
 msgstr "将文件拖放到此处以添加附件"
 
-msgid "Profile Header:"
-msgstr "配置文件标头："
-
-msgid "Show provider and model in profile header"
-msgstr "在配置文件标头中显示提供商和模型"
-
-msgid "Chat Spacing: %1px"
-msgstr "聊天间距：%1px"
-
-msgid "Compact"
-msgstr "紧凑"
-
-msgid "Spacious"
-msgstr "宽敞"
-
-msgid "Chat Labels:"
-msgstr "聊天标签："
-
-msgid "User label:"
-msgstr "用户标签："
-
-msgid "Assistant label:"
-msgstr "助手标签："
-
-msgid "Use model name as assistant label"
-msgstr "使用模型名称作为助手标签"
-
-msgid "Chat Colors:"
-msgstr "聊天颜色："
-
-msgid "Use custom user color"
-msgstr "使用自定义用户颜色"
-
-msgid "Use custom assistant color"
-msgstr "使用自定义助手颜色"
-
-msgid "UI Font:"
-msgstr "界面字体："
-
-msgid "Use custom UI font"
-msgstr "使用自定义界面字体"
-
-msgid "Code Font:"
-msgstr "代码字体："
-
-msgid "Use custom code font"
-msgstr "使用自定义代码字体"
-
-msgid "Thoughts Font:"
-msgstr "思维字体："
-
-msgid "Use custom thoughts font"
-msgstr "使用自定义思维字体"
-
-msgid "LaTeX Rendering:"
-msgstr "LaTeX 渲染："
-
-msgid "Leave as TeX"
-msgstr "保留为 TeX"
-
-msgid "Replace with Unicode (Default)"
-msgstr "替换为 Unicode（默认）"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext（缺少 python3-matplotlib）"
-
-msgid "Header Icons:"
-msgstr "标头图标："
-
-msgid "Profile Header"
-msgstr "配置文件标头"
-
-msgid "Always show Tasks"
-msgstr "始终显示任务"
-
-msgid "Always show Auto Toggle"
-msgstr "始终显示自动切换"
-
-msgid "Show History"
-msgstr "显示历史记录"
-
-msgid "History placement:"
-msgstr "历史记录位置："
-
-msgid "Header button"
-msgstr "标题栏按钮"
-
-msgid "Sidebar"
-msgstr "侧边栏"
-
-msgid ""
-"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
-"and widens the minimum size to fit both."
-msgstr ""
-"自动：侧边栏能放在聊天旁边时显示。侧边栏：始终显示，并增大最小尺寸以容纳两"
-"者。"
-
-msgid "Show Copy conversation"
-msgstr "显示复制对话"
-
-msgid "Show Context compaction summary"
-msgstr "显示上下文压缩摘要"
-
-msgid "Show New chat"
-msgstr "显示新建聊天"
-
-msgid "Show Settings"
-msgstr "显示设置"
-
-msgid "Show Pin"
-msgstr "显示固定"
-
-msgid ""
-"Internal scheme for API keys has been migrated. If your key is now missing "
-"or does not work, you can recover your old key from KWalletManager."
-msgstr ""
-"API 密钥的内部存储方案已迁移。如果您的密钥现已丢失或无法使用，可以从 "
-"KWalletManager 中恢复旧密钥。"
-
-msgid "Failed to stop driving: %1"
-msgstr "无法停止控制：%1"
-
-msgid "Text-to-speech is not configured"
-msgstr "未配置文字转语音"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Text-to-speech is not configured. Open Text to Speech settings."
-msgstr "未配置文字转语音。请打开文字转语音设置。"
-
-msgid "Speaking…"
-msgstr "正在朗读…"
-
-msgid "Still preparing system context…"
-msgstr "仍在准备系统上下文…"
-
-msgid "Voice input is not configured. Open Speech to Text settings."
-msgstr "未配置语音输入。请打开语音转文字设置。"
-
-msgid "Recording too short — hold a bit longer, then toggle again to stop."
-msgstr "录音时间过短 — 请按住稍长一些，然后再次切换以停止。"
-
-msgid "Recording produced no audio file."
-msgstr "录音未生成音频文件。"
-
-msgid "Recording was empty or could not be read."
-msgstr "录音为空或无法读取。"
-
-msgid "No speech detected."
-msgstr "未检测到语音。"
-
-msgid "Could not send transcribed message."
-msgstr "无法发送转录消息。"
-
-msgid "Transcription canceled"
-msgstr "转录已取消"
-
-msgid "Recording too short or silent — try again."
-msgstr "录音过短或静音 — 请重试。"
-
-msgid "Failed to read recorded audio."
-msgstr "读取录制的音频失败。"
-
-msgid "Failed to finalize recording"
-msgstr "完成录音失败"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"无法获取 gcloud 令牌（退出 %1）：%2。请确保 gcloud 已安装并已通过身份验证。"
-
-msgid ""
-"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
-"plasmallm/skills/ (configure extra directories in Settings → Skills)."
-msgstr ""
-"未找到技能。将包含 SKILL.md 的文件夹放入 ~/.local/share/plasmallm/skills/（在"
-"“设置 → 技能”中配置额外目录）。"
-
-msgid "invalid:"
-msgstr "无效："
-
-msgid "disabled"
-msgstr "已禁用"
-
-msgid "loaded"
-msgstr "已加载"
-
-msgid "Available skills (%1 enabled):"
-msgstr "可用技能（已启用 %1 个）："
-
-msgid "Enable or disable individual skills in Settings → Skills."
-msgstr "在“设置 → 技能”中启用或禁用个别技能。"
-
-msgid "Command validation is still in progress; try again in a moment."
-msgstr "命令验证仍在进行中；请稍后重试。"
-
-msgid "No tool request pending to approve."
-msgstr "没有待批准的工具请求。"
-
-msgid "No tool request pending to deny."
-msgstr "没有待拒绝的工具请求。"
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"此会话已启用跳过审批模式。所有已启用的工具将自动运行，绕过「运行前询问」设"
-"置。"
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr "跳过审批模式已禁用。工具将恢复为您配置的「运行前询问」设置。"
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr "设置中已禁用桌面自动化。请先启用它以操作桌面。"
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "未检测到 plasmallm-desktop-driver 或该程序未运行。"
-
-msgid "Current profile: **%1**"
-msgstr "当前配置文件：**%1**"
-
-msgid "Available profiles:"
-msgstr "可用配置文件："
-
-msgid "active"
-msgstr "活跃"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "输入 `/profile <名称>` 进行切换。"
-
-msgid "Switched to profile: **%1**"
-msgstr "已切换到配置文件：**%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "未知配置文件：**%1**"
-
-msgid "none"
-msgstr "无"
-
-msgid "Current model: **%1**"
-msgstr "当前模型：**%1**"
-
-msgid "Available models:"
-msgstr "可用模型："
-
-msgid "Type `/model <name>` to switch."
-msgstr "输入 `/model <name>` 进行切换。"
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr "没有缓存的模型。请在设置中使用**获取模型**。"
-
-msgid "Switched to model: **%1**"
-msgstr "已切换到模型：**%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "未配置任务。请在设置中添加任务。"
-
-msgid "(auto)"
-msgstr "（自动）"
-
-msgid "Available tasks:"
-msgstr "可用任务："
-
-msgid "Type `/task <name>` to run."
-msgstr "输入 `/task <name>` 运行。"
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "未知任务：**%1**。可用：%2"
-
-msgid "The user declined to run this command."
-msgstr "用户拒绝运行此命令。"
-
-msgid "No message to evaluate."
-msgstr "没有可评估的消息。"
-
-msgid "Evaluating…"
-msgstr "正在评估…"
-
-msgid "Decision request failed: %1"
-msgstr "决策请求失败：%1"
-
-#, javascript-format
-msgid "%1% confidence"
-msgstr "%1% 置信度"
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM：工具调用"
-
-msgid "Requested tool: %1"
-msgstr "请求的工具：%1"
-
-msgid "Validation timed out."
-msgstr "验证超时。"
-
-msgid "The validator profile has no endpoint or model configured."
-msgstr "验证器配置文件未配置端点或模型。"
-
-msgid "Empty validator response."
-msgstr "验证器响应为空。"
-
-msgid "empty validator response"
-msgstr "验证器响应为空"
-
-msgid "Could not validate: %1"
-msgstr "无法验证：%1"
-
-msgid "the command does not match its stated justification"
-msgstr "命令与其声明的理由不匹配"
-
-msgid "Blocked by command validator: %1"
-msgstr "已被命令验证器阻止：%1"
-
-msgid "Unknown tool %1"
-msgstr "未知工具 %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "错误：路径 '%1' 不在白名单内"
-
-msgid "Executing %1…"
-msgstr "正在执行 %1…"
-
-msgid ""
-"Loaded '%1' skill — its full instructions were added to this conversation's "
-"context."
-msgstr "已加载 '%1' 技能 — 其完整指令已添加到此对话的上下文中。"
-
-msgid "Failed to start drive session: %1"
-msgstr "无法启动控制会话：%1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr "控制会话处于活动状态（已授权）。自动模式已启用。"
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr "控制会话授权成功。自动模式已启用。"
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "无法获取 gcloud 令牌（退出 %1）：%2"
 
@@ -2390,6 +2161,235 @@ msgstr "秒"
 
 msgid "minutes"
 msgstr "分钟"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"API 密钥的内部存储方案已迁移。如果您的密钥现已丢失或无法使用，可以从 "
+"KWalletManager 中恢复旧密钥。"
+
+msgid "Failed to stop driving: %1"
+msgstr "无法停止控制：%1"
+
+msgid "Text-to-speech is not configured"
+msgstr "未配置文字转语音"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Text-to-speech is not configured. Open Text to Speech settings."
+msgstr "未配置文字转语音。请打开文字转语音设置。"
+
+msgid "Speaking…"
+msgstr "正在朗读…"
+
+msgid "Still preparing system context…"
+msgstr "仍在准备系统上下文…"
+
+msgid "Voice input is not configured. Open Speech to Text settings."
+msgstr "未配置语音输入。请打开语音转文字设置。"
+
+msgid "Recording too short — hold a bit longer, then toggle again to stop."
+msgstr "录音时间过短 — 请按住稍长一些，然后再次切换以停止。"
+
+msgid "Recording produced no audio file."
+msgstr "录音未生成音频文件。"
+
+msgid "Recording was empty or could not be read."
+msgstr "录音为空或无法读取。"
+
+msgid "No speech detected."
+msgstr "未检测到语音。"
+
+msgid "Could not send transcribed message."
+msgstr "无法发送转录消息。"
+
+msgid "Transcription canceled"
+msgstr "转录已取消"
+
+msgid "Recording too short or silent — try again."
+msgstr "录音过短或静音 — 请重试。"
+
+msgid "Failed to read recorded audio."
+msgstr "读取录制的音频失败。"
+
+msgid "Failed to finalize recording"
+msgstr "完成录音失败"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"无法获取 gcloud 令牌（退出 %1）：%2。请确保 gcloud 已安装并已通过身份验证。"
+
+msgid ""
+"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
+"plasmallm/skills/ (configure extra directories in Settings → Skills)."
+msgstr ""
+"未找到技能。将包含 SKILL.md 的文件夹放入 ~/.local/share/plasmallm/skills/（在"
+"“设置 → 技能”中配置额外目录）。"
+
+msgid "invalid:"
+msgstr "无效："
+
+msgid "disabled"
+msgstr "已禁用"
+
+msgid "loaded"
+msgstr "已加载"
+
+msgid "Available skills (%1 enabled):"
+msgstr "可用技能（已启用 %1 个）："
+
+msgid "Enable or disable individual skills in Settings → Skills."
+msgstr "在“设置 → 技能”中启用或禁用个别技能。"
+
+msgid "Command validation is still in progress; try again in a moment."
+msgstr "命令验证仍在进行中；请稍后重试。"
+
+msgid "No tool request pending to approve."
+msgstr "没有待批准的工具请求。"
+
+msgid "No tool request pending to deny."
+msgstr "没有待拒绝的工具请求。"
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"此会话已启用跳过审批模式。所有已启用的工具将自动运行，绕过「运行前询问」设"
+"置。"
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr "跳过审批模式已禁用。工具将恢复为您配置的「运行前询问」设置。"
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr "设置中已禁用桌面自动化。请先启用它以操作桌面。"
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "未检测到 plasmallm-desktop-driver 或该程序未运行。"
+
+msgid "Current profile: **%1**"
+msgstr "当前配置文件：**%1**"
+
+msgid "Available profiles:"
+msgstr "可用配置文件："
+
+msgid "active"
+msgstr "活跃"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "输入 `/profile <名称>` 进行切换。"
+
+msgid "Switched to profile: **%1**"
+msgstr "已切换到配置文件：**%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "未知配置文件：**%1**"
+
+msgid "none"
+msgstr "无"
+
+msgid "Current model: **%1**"
+msgstr "当前模型：**%1**"
+
+msgid "Available models:"
+msgstr "可用模型："
+
+msgid "Type `/model <name>` to switch."
+msgstr "输入 `/model <name>` 进行切换。"
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr "没有缓存的模型。请在设置中使用**获取模型**。"
+
+msgid "Switched to model: **%1**"
+msgstr "已切换到模型：**%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "未配置任务。请在设置中添加任务。"
+
+msgid "(auto)"
+msgstr "（自动）"
+
+msgid "Available tasks:"
+msgstr "可用任务："
+
+msgid "Type `/task <name>` to run."
+msgstr "输入 `/task <name>` 运行。"
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "未知任务：**%1**。可用：%2"
+
+msgid "The user declined to run this command."
+msgstr "用户拒绝运行此命令。"
+
+msgid "No message to evaluate."
+msgstr "没有可评估的消息。"
+
+msgid "Evaluating…"
+msgstr "正在评估…"
+
+msgid "Decision request failed: %1"
+msgstr "决策请求失败：%1"
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr "%1% 置信度"
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM：工具调用"
+
+msgid "Requested tool: %1"
+msgstr "请求的工具：%1"
+
+msgid "Validation timed out."
+msgstr "验证超时。"
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr "验证器配置文件未配置端点或模型。"
+
+msgid "Empty validator response."
+msgstr "验证器响应为空。"
+
+msgid "empty validator response"
+msgstr "验证器响应为空"
+
+msgid "Could not validate: %1"
+msgstr "无法验证：%1"
+
+msgid "the command does not match its stated justification"
+msgstr "命令与其声明的理由不匹配"
+
+msgid "Blocked by command validator: %1"
+msgstr "已被命令验证器阻止：%1"
+
+msgid "Unknown tool %1"
+msgstr "未知工具 %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "错误：路径 '%1' 不在白名单内"
+
+msgid "Executing %1…"
+msgstr "正在执行 %1…"
+
+msgid ""
+"Loaded '%1' skill — its full instructions were added to this conversation's "
+"context."
+msgstr "已加载 '%1' 技能 — 其完整指令已添加到此对话的上下文中。"
+
+msgid "Failed to start drive session: %1"
+msgstr "无法启动控制会话：%1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "控制会话处于活动状态（已授权）。自动模式已启用。"
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "控制会话授权成功。自动模式已启用。"
 
 msgid "General"
 msgstr "常规"

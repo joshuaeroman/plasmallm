@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PlasmaLLM\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-16 19:33-0400\n"
+"POT-Creation-Date: 2026-10-16 19:43-0400\n"
 "PO-Revision-Date: 2026-04-07 00:00+0000\n"
 "Last-Translator: Claude <noreply@anthropic.com>\n"
 "Language-Team: Turkish\n"
@@ -1656,6 +1656,121 @@ msgstr "Whisper komutu oluşturulamadı"
 msgid "STT backend does not support model listing"
 msgstr "STT arka ucu model listelemeyi desteklemiyor"
 
+msgid "Profile Header:"
+msgstr "Profil Başlığı:"
+
+msgid "Show provider and model in profile header"
+msgstr "Profil başlığında sağlayıcı ve modeli göster"
+
+msgid "Chat Spacing: %1px"
+msgstr "Sohbet Aralığı: %1px"
+
+msgid "Compact"
+msgstr "Kompakt"
+
+msgid "Spacious"
+msgstr "Geniş"
+
+msgid "Chat Labels:"
+msgstr "Sohbet Etiketleri:"
+
+msgid "User label:"
+msgstr "Kullanıcı etiketi:"
+
+msgid "Assistant label:"
+msgstr "Asistan etiketi:"
+
+msgid "Use model name as assistant label"
+msgstr "Asistan etiketi olarak model adını kullan"
+
+msgid "Chat Colors:"
+msgstr "Sohbet Renkleri:"
+
+msgid "Use custom user color"
+msgstr "Özel kullanıcı rengi kullan"
+
+msgid "Use custom assistant color"
+msgstr "Özel asistan rengi kullan"
+
+msgid "UI Font:"
+msgstr "Arayüz Yazı Tipi:"
+
+msgid "Use custom UI font"
+msgstr "Özel arayüz yazı tipi kullan"
+
+msgid "Code Font:"
+msgstr "Kod Yazı Tipi:"
+
+msgid "Use custom code font"
+msgstr "Özel kod yazı tipi kullan"
+
+msgid "Thoughts Font:"
+msgstr "Düşünce Yazı Tipi:"
+
+msgid "Use custom thoughts font"
+msgstr "Özel düşünce yazı tipi kullan"
+
+msgid "LaTeX Rendering:"
+msgstr "LaTeX Oluşturma:"
+
+msgid "Leave as TeX"
+msgstr "TeX olarak bırak"
+
+msgid "Replace with Unicode (Default)"
+msgstr "Unicode ile değiştir (Varsayılan)"
+
+msgid "Mathtext"
+msgstr "Mathtext"
+
+msgid "Mathtext (python3-matplotlib missing)"
+msgstr "Mathtext (python3-matplotlib eksik)"
+
+msgid "Header Icons:"
+msgstr "Başlık Simgeleri:"
+
+msgid "Profile Header"
+msgstr "Profil Başlığı"
+
+msgid "Always show Tasks"
+msgstr "Görevleri her zaman göster"
+
+msgid "Always show Auto Toggle"
+msgstr "Otomatik geçişi her zaman göster"
+
+msgid "Show History"
+msgstr "Geçmişi göster"
+
+msgid "History placement:"
+msgstr "Geçmiş konumu:"
+
+msgid "Header button"
+msgstr "Başlık düğmesi"
+
+msgid "Sidebar"
+msgstr "Kenar çubuğu"
+
+msgid ""
+"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
+"and widens the minimum size to fit both."
+msgstr ""
+"Otomatik, kenar çubuğunu sohbetin yanına sığdığında gösterir. Kenar çubuğu "
+"onu her zaman gösterir ve ikisinin de sığması için en küçük boyutu büyütür."
+
+msgid "Show Copy conversation"
+msgstr "Konuşmayı kopyalamayı göster"
+
+msgid "Show Context compaction summary"
+msgstr "Bağlam sıkıştırma özetini göster"
+
+msgid "Show New chat"
+msgstr "Yeni sohbeti göster"
+
+msgid "Show Settings"
+msgstr "Ayarları göster"
+
+msgid "Show Pin"
+msgstr "Sabitlemeyi göster"
+
 msgid "New chat"
 msgstr "Yeni sohbet"
 
@@ -1913,363 +2028,6 @@ msgstr "Sesli okumayı durdur"
 msgid "Drop files here to attach"
 msgstr "Eklemek için dosyaları buraya bırakın"
 
-msgid "Profile Header:"
-msgstr "Profil Başlığı:"
-
-msgid "Show provider and model in profile header"
-msgstr "Profil başlığında sağlayıcı ve modeli göster"
-
-msgid "Chat Spacing: %1px"
-msgstr "Sohbet Aralığı: %1px"
-
-msgid "Compact"
-msgstr "Kompakt"
-
-msgid "Spacious"
-msgstr "Geniş"
-
-msgid "Chat Labels:"
-msgstr "Sohbet Etiketleri:"
-
-msgid "User label:"
-msgstr "Kullanıcı etiketi:"
-
-msgid "Assistant label:"
-msgstr "Asistan etiketi:"
-
-msgid "Use model name as assistant label"
-msgstr "Asistan etiketi olarak model adını kullan"
-
-msgid "Chat Colors:"
-msgstr "Sohbet Renkleri:"
-
-msgid "Use custom user color"
-msgstr "Özel kullanıcı rengi kullan"
-
-msgid "Use custom assistant color"
-msgstr "Özel asistan rengi kullan"
-
-msgid "UI Font:"
-msgstr "Arayüz Yazı Tipi:"
-
-msgid "Use custom UI font"
-msgstr "Özel arayüz yazı tipi kullan"
-
-msgid "Code Font:"
-msgstr "Kod Yazı Tipi:"
-
-msgid "Use custom code font"
-msgstr "Özel kod yazı tipi kullan"
-
-msgid "Thoughts Font:"
-msgstr "Düşünce Yazı Tipi:"
-
-msgid "Use custom thoughts font"
-msgstr "Özel düşünce yazı tipi kullan"
-
-msgid "LaTeX Rendering:"
-msgstr "LaTeX Oluşturma:"
-
-msgid "Leave as TeX"
-msgstr "TeX olarak bırak"
-
-msgid "Replace with Unicode (Default)"
-msgstr "Unicode ile değiştir (Varsayılan)"
-
-msgid "Mathtext"
-msgstr "Mathtext"
-
-msgid "Mathtext (python3-matplotlib missing)"
-msgstr "Mathtext (python3-matplotlib eksik)"
-
-msgid "Header Icons:"
-msgstr "Başlık Simgeleri:"
-
-msgid "Profile Header"
-msgstr "Profil Başlığı"
-
-msgid "Always show Tasks"
-msgstr "Görevleri her zaman göster"
-
-msgid "Always show Auto Toggle"
-msgstr "Otomatik geçişi her zaman göster"
-
-msgid "Show History"
-msgstr "Geçmişi göster"
-
-msgid "History placement:"
-msgstr "Geçmiş konumu:"
-
-msgid "Header button"
-msgstr "Başlık düğmesi"
-
-msgid "Sidebar"
-msgstr "Kenar çubuğu"
-
-msgid ""
-"Auto shows the sidebar when it fits beside the chat. Sidebar always shows it "
-"and widens the minimum size to fit both."
-msgstr ""
-"Otomatik, kenar çubuğunu sohbetin yanına sığdığında gösterir. Kenar çubuğu "
-"onu her zaman gösterir ve ikisinin de sığması için en küçük boyutu büyütür."
-
-msgid "Show Copy conversation"
-msgstr "Konuşmayı kopyalamayı göster"
-
-msgid "Show Context compaction summary"
-msgstr "Bağlam sıkıştırma özetini göster"
-
-msgid "Show New chat"
-msgstr "Yeni sohbeti göster"
-
-msgid "Show Settings"
-msgstr "Ayarları göster"
-
-msgid "Show Pin"
-msgstr "Sabitlemeyi göster"
-
-msgid ""
-"Internal scheme for API keys has been migrated. If your key is now missing "
-"or does not work, you can recover your old key from KWalletManager."
-msgstr ""
-"API anahtarları için dahili şema taşındı. Anahtarınız artık eksikse veya "
-"çalışmıyorsa, eski anahtarınızı KWalletManager'dan kurtarabilirsiniz."
-
-msgid "Failed to stop driving: %1"
-msgstr "Yönetimi durdurma başarısız oldu: %1"
-
-msgid "Text-to-speech is not configured"
-msgstr "Metinden seslendirme yapılandırılmamış"
-
-msgid "PlasmaLLM"
-msgstr "PlasmaLLM"
-
-msgid "Text-to-speech is not configured. Open Text to Speech settings."
-msgstr "Metinden seslendirme yapılandırılmamış. Metinden Sese ayarlarını açın."
-
-msgid "Speaking…"
-msgstr "Konuşuluyor…"
-
-msgid "Still preparing system context…"
-msgstr "Sistem bağlamı hâlâ hazırlanıyor…"
-
-msgid "Voice input is not configured. Open Speech to Text settings."
-msgstr ""
-"Ses girişi yapılandırılmadı. Konuşmayı Metne Dönüştürme ayarlarını açın."
-
-msgid "Recording too short — hold a bit longer, then toggle again to stop."
-msgstr ""
-"Kayıt çok kısa — biraz daha uzun basılı tutun, ardından durdurmak için "
-"tekrar tıklayın."
-
-msgid "Recording produced no audio file."
-msgstr "Kayıt ses dosyası oluşturmadı."
-
-msgid "Recording was empty or could not be read."
-msgstr "Kayıt boştu veya okunamadı."
-
-msgid "No speech detected."
-msgstr "Konuşma algılanmadı."
-
-msgid "Could not send transcribed message."
-msgstr "Dönüştürülen mesaj gönderilemedi."
-
-msgid "Transcription canceled"
-msgstr "Dönüştürme iptal edildi"
-
-msgid "Recording too short or silent — try again."
-msgstr "Kayıt çok kısa veya sessiz — tekrar deneyin."
-
-msgid "Failed to read recorded audio."
-msgstr "Kaydedilen ses okunamadı."
-
-msgid "Failed to finalize recording"
-msgstr "Kayıt sonlandırılamadı"
-
-msgid ""
-"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
-"installed and authenticated."
-msgstr ""
-"gcloud token alınamadı (çıkış %1): %2. Lütfen gcloud'un kurulu ve kimlik "
-"doğrulaması yapılmış olduğundan emin olun."
-
-msgid ""
-"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
-"plasmallm/skills/ (configure extra directories in Settings → Skills)."
-msgstr ""
-"Beceri bulunamadı. SKILL.md içeren klasörleri ~/.local/share/plasmallm/"
-"skills/ dizinine bırakın (ek dizinleri Ayarlar → Beceriler bölümünden "
-"yapılandırın)."
-
-msgid "invalid:"
-msgstr "geçersiz:"
-
-msgid "disabled"
-msgstr "devre dışı"
-
-msgid "loaded"
-msgstr "yüklendi"
-
-msgid "Available skills (%1 enabled):"
-msgstr "Kullanılabilir beceriler (%1 etkin):"
-
-msgid "Enable or disable individual skills in Settings → Skills."
-msgstr ""
-"Ayarlar → Beceriler bölümünden tek tek becerileri etkinleştirin veya devre "
-"dışı bırakın."
-
-msgid "Command validation is still in progress; try again in a moment."
-msgstr "Komut doğrulaması hâlâ sürüyor; birazdan tekrar deneyin."
-
-msgid "No tool request pending to approve."
-msgstr "Onaylanacak bekleyen araç isteği yok."
-
-msgid "No tool request pending to deny."
-msgstr "Reddedilecek bekleyen araç isteği yok."
-
-msgid ""
-"Skip approvals mode enabled for this session. All enabled tools will run "
-"automatically, bypassing 'Ask before running' settings."
-msgstr ""
-"Bu oturum için onayları atlama modu etkinleştirildi. Tüm etkin araçlar, "
-"'Çalıştırmadan önce sor' ayarlarını atlayarak otomatik olarak çalışacak."
-
-msgid ""
-"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
-"before running' settings."
-msgstr ""
-"Onayları atlama modu devre dışı bırakıldı. Araçlar yapılandırılmış "
-"'Çalıştırmadan önce sor' ayarlarına geri dönecek."
-
-msgid ""
-"Desktop automation is disabled in settings. Enable it first to drive the "
-"desktop."
-msgstr ""
-"Ayarlarda masaüstü otomasyonu devre dışı bırakıldı. Masaüstünü yönetmek için "
-"önce onu etkinleştirin."
-
-msgid "plasmallm-desktop-driver is not detected or running."
-msgstr "plasmallm-desktop-driver algılanmadı veya çalışmıyor."
-
-msgid "Current profile: **%1**"
-msgstr "Geçerli profil: **%1**"
-
-msgid "Available profiles:"
-msgstr "Mevcut profiller:"
-
-msgid "active"
-msgstr "etkin"
-
-msgid "Type `/profile <name>` to switch."
-msgstr "Geçiş yapmak için `/profile <ad>` yazın."
-
-msgid "Switched to profile: **%1**"
-msgstr "Profile geçildi: **%1**"
-
-msgid "Unknown profile: **%1**"
-msgstr "Bilinmeyen profil: **%1**"
-
-msgid "none"
-msgstr "yok"
-
-msgid "Current model: **%1**"
-msgstr "Mevcut model: **%1**"
-
-msgid "Available models:"
-msgstr "Mevcut modeller:"
-
-msgid "Type `/model <name>` to switch."
-msgstr "Geçiş yapmak için `/model <ad>` yazın."
-
-msgid "No models cached. Use **Fetch Models** in settings."
-msgstr ""
-"Önbellekte model yok. Ayarlarda **Modelleri Getir** seçeneğini kullanın."
-
-msgid "Switched to model: **%1**"
-msgstr "Modele geçildi: **%1**"
-
-msgid "No tasks configured. Add tasks in Settings."
-msgstr "Görev yapılandırılmadı. Ayarlar'da görev ekleyin."
-
-msgid "(auto)"
-msgstr "(otomatik)"
-
-msgid "Available tasks:"
-msgstr "Mevcut görevler:"
-
-msgid "Type `/task <name>` to run."
-msgstr "Çalıştırmak için `/task <ad>` yazın."
-
-msgid "Unknown task: **%1**. Available: %2"
-msgstr "Bilinmeyen görev: **%1**. Mevcut: %2"
-
-msgid "The user declined to run this command."
-msgstr "Kullanıcı bu komutu çalıştırmayı reddetti."
-
-msgid "No message to evaluate."
-msgstr "Değerlendirilecek mesaj yok."
-
-msgid "Evaluating…"
-msgstr "Değerlendiriliyor…"
-
-msgid "Decision request failed: %1"
-msgstr "Karar isteği başarısız: %1"
-
-#, javascript-format
-msgid "%1% confidence"
-msgstr "%1% güven"
-
-msgid "PlasmaLLM: Tool Call"
-msgstr "PlasmaLLM: Araç Çağrısı"
-
-msgid "Requested tool: %1"
-msgstr "İstenen araç: %1"
-
-msgid "Validation timed out."
-msgstr "Doğrulama zaman aşımına uğradı."
-
-msgid "The validator profile has no endpoint or model configured."
-msgstr "Doğrulayıcı profilinde uç nokta veya model yapılandırılmamış."
-
-msgid "Empty validator response."
-msgstr "Doğrulayıcı yanıtı boş."
-
-msgid "empty validator response"
-msgstr "doğrulayıcı yanıtı boş"
-
-msgid "Could not validate: %1"
-msgstr "Doğrulanamadı: %1"
-
-msgid "the command does not match its stated justification"
-msgstr "komut, belirtilen gerekçesiyle eşleşmiyor"
-
-msgid "Blocked by command validator: %1"
-msgstr "Komut doğrulayıcı tarafından engellendi: %1"
-
-msgid "Unknown tool %1"
-msgstr "Bilinmeyen araç %1"
-
-msgid "Error: path '%1' outside whitelist"
-msgstr "Hata: '%1' yolu beyaz liste dışında"
-
-msgid "Executing %1…"
-msgstr "%1 çalıştırılıyor…"
-
-msgid ""
-"Loaded '%1' skill — its full instructions were added to this conversation's "
-"context."
-msgstr ""
-"'%1' becerisi yüklendi — tam yönergeleri bu konuşmanın bağlamına eklendi."
-
-msgid "Failed to start drive session: %1"
-msgstr "Yönetim oturumu başlatılamadı: %1"
-
-msgid "Drive session active (already authorized). Auto mode enabled."
-msgstr "Yönetim oturumu aktif (zaten yetkilendirilmiş). Otomatik mod etkin."
-
-msgid "Drive session authorized successfully. Auto mode enabled."
-msgstr "Yönetim oturumu başarıyla yetkilendirildi. Otomatik mod etkin."
-
 msgid "Failed to fetch gcloud token (exit %1): %2"
 msgstr "gcloud token alınamadı (çıkış %1): %2"
 
@@ -2518,6 +2276,248 @@ msgstr "saniye"
 
 msgid "minutes"
 msgstr "dakika"
+
+msgid ""
+"Internal scheme for API keys has been migrated. If your key is now missing "
+"or does not work, you can recover your old key from KWalletManager."
+msgstr ""
+"API anahtarları için dahili şema taşındı. Anahtarınız artık eksikse veya "
+"çalışmıyorsa, eski anahtarınızı KWalletManager'dan kurtarabilirsiniz."
+
+msgid "Failed to stop driving: %1"
+msgstr "Yönetimi durdurma başarısız oldu: %1"
+
+msgid "Text-to-speech is not configured"
+msgstr "Metinden seslendirme yapılandırılmamış"
+
+msgid "PlasmaLLM"
+msgstr "PlasmaLLM"
+
+msgid "Text-to-speech is not configured. Open Text to Speech settings."
+msgstr "Metinden seslendirme yapılandırılmamış. Metinden Sese ayarlarını açın."
+
+msgid "Speaking…"
+msgstr "Konuşuluyor…"
+
+msgid "Still preparing system context…"
+msgstr "Sistem bağlamı hâlâ hazırlanıyor…"
+
+msgid "Voice input is not configured. Open Speech to Text settings."
+msgstr ""
+"Ses girişi yapılandırılmadı. Konuşmayı Metne Dönüştürme ayarlarını açın."
+
+msgid "Recording too short — hold a bit longer, then toggle again to stop."
+msgstr ""
+"Kayıt çok kısa — biraz daha uzun basılı tutun, ardından durdurmak için "
+"tekrar tıklayın."
+
+msgid "Recording produced no audio file."
+msgstr "Kayıt ses dosyası oluşturmadı."
+
+msgid "Recording was empty or could not be read."
+msgstr "Kayıt boştu veya okunamadı."
+
+msgid "No speech detected."
+msgstr "Konuşma algılanmadı."
+
+msgid "Could not send transcribed message."
+msgstr "Dönüştürülen mesaj gönderilemedi."
+
+msgid "Transcription canceled"
+msgstr "Dönüştürme iptal edildi"
+
+msgid "Recording too short or silent — try again."
+msgstr "Kayıt çok kısa veya sessiz — tekrar deneyin."
+
+msgid "Failed to read recorded audio."
+msgstr "Kaydedilen ses okunamadı."
+
+msgid "Failed to finalize recording"
+msgstr "Kayıt sonlandırılamadı"
+
+msgid ""
+"Failed to fetch gcloud token (exit %1): %2. Please ensure gcloud is "
+"installed and authenticated."
+msgstr ""
+"gcloud token alınamadı (çıkış %1): %2. Lütfen gcloud'un kurulu ve kimlik "
+"doğrulaması yapılmış olduğundan emin olun."
+
+msgid ""
+"No skills found. Drop folders containing a SKILL.md into ~/.local/share/"
+"plasmallm/skills/ (configure extra directories in Settings → Skills)."
+msgstr ""
+"Beceri bulunamadı. SKILL.md içeren klasörleri ~/.local/share/plasmallm/"
+"skills/ dizinine bırakın (ek dizinleri Ayarlar → Beceriler bölümünden "
+"yapılandırın)."
+
+msgid "invalid:"
+msgstr "geçersiz:"
+
+msgid "disabled"
+msgstr "devre dışı"
+
+msgid "loaded"
+msgstr "yüklendi"
+
+msgid "Available skills (%1 enabled):"
+msgstr "Kullanılabilir beceriler (%1 etkin):"
+
+msgid "Enable or disable individual skills in Settings → Skills."
+msgstr ""
+"Ayarlar → Beceriler bölümünden tek tek becerileri etkinleştirin veya devre "
+"dışı bırakın."
+
+msgid "Command validation is still in progress; try again in a moment."
+msgstr "Komut doğrulaması hâlâ sürüyor; birazdan tekrar deneyin."
+
+msgid "No tool request pending to approve."
+msgstr "Onaylanacak bekleyen araç isteği yok."
+
+msgid "No tool request pending to deny."
+msgstr "Reddedilecek bekleyen araç isteği yok."
+
+msgid ""
+"Skip approvals mode enabled for this session. All enabled tools will run "
+"automatically, bypassing 'Ask before running' settings."
+msgstr ""
+"Bu oturum için onayları atlama modu etkinleştirildi. Tüm etkin araçlar, "
+"'Çalıştırmadan önce sor' ayarlarını atlayarak otomatik olarak çalışacak."
+
+msgid ""
+"Skip approvals mode disabled. Tools will revert to your configured 'Ask "
+"before running' settings."
+msgstr ""
+"Onayları atlama modu devre dışı bırakıldı. Araçlar yapılandırılmış "
+"'Çalıştırmadan önce sor' ayarlarına geri dönecek."
+
+msgid ""
+"Desktop automation is disabled in settings. Enable it first to drive the "
+"desktop."
+msgstr ""
+"Ayarlarda masaüstü otomasyonu devre dışı bırakıldı. Masaüstünü yönetmek için "
+"önce onu etkinleştirin."
+
+msgid "plasmallm-desktop-driver is not detected or running."
+msgstr "plasmallm-desktop-driver algılanmadı veya çalışmıyor."
+
+msgid "Current profile: **%1**"
+msgstr "Geçerli profil: **%1**"
+
+msgid "Available profiles:"
+msgstr "Mevcut profiller:"
+
+msgid "active"
+msgstr "etkin"
+
+msgid "Type `/profile <name>` to switch."
+msgstr "Geçiş yapmak için `/profile <ad>` yazın."
+
+msgid "Switched to profile: **%1**"
+msgstr "Profile geçildi: **%1**"
+
+msgid "Unknown profile: **%1**"
+msgstr "Bilinmeyen profil: **%1**"
+
+msgid "none"
+msgstr "yok"
+
+msgid "Current model: **%1**"
+msgstr "Mevcut model: **%1**"
+
+msgid "Available models:"
+msgstr "Mevcut modeller:"
+
+msgid "Type `/model <name>` to switch."
+msgstr "Geçiş yapmak için `/model <ad>` yazın."
+
+msgid "No models cached. Use **Fetch Models** in settings."
+msgstr ""
+"Önbellekte model yok. Ayarlarda **Modelleri Getir** seçeneğini kullanın."
+
+msgid "Switched to model: **%1**"
+msgstr "Modele geçildi: **%1**"
+
+msgid "No tasks configured. Add tasks in Settings."
+msgstr "Görev yapılandırılmadı. Ayarlar'da görev ekleyin."
+
+msgid "(auto)"
+msgstr "(otomatik)"
+
+msgid "Available tasks:"
+msgstr "Mevcut görevler:"
+
+msgid "Type `/task <name>` to run."
+msgstr "Çalıştırmak için `/task <ad>` yazın."
+
+msgid "Unknown task: **%1**. Available: %2"
+msgstr "Bilinmeyen görev: **%1**. Mevcut: %2"
+
+msgid "The user declined to run this command."
+msgstr "Kullanıcı bu komutu çalıştırmayı reddetti."
+
+msgid "No message to evaluate."
+msgstr "Değerlendirilecek mesaj yok."
+
+msgid "Evaluating…"
+msgstr "Değerlendiriliyor…"
+
+msgid "Decision request failed: %1"
+msgstr "Karar isteği başarısız: %1"
+
+#, javascript-format
+msgid "%1% confidence"
+msgstr "%1% güven"
+
+msgid "PlasmaLLM: Tool Call"
+msgstr "PlasmaLLM: Araç Çağrısı"
+
+msgid "Requested tool: %1"
+msgstr "İstenen araç: %1"
+
+msgid "Validation timed out."
+msgstr "Doğrulama zaman aşımına uğradı."
+
+msgid "The validator profile has no endpoint or model configured."
+msgstr "Doğrulayıcı profilinde uç nokta veya model yapılandırılmamış."
+
+msgid "Empty validator response."
+msgstr "Doğrulayıcı yanıtı boş."
+
+msgid "empty validator response"
+msgstr "doğrulayıcı yanıtı boş"
+
+msgid "Could not validate: %1"
+msgstr "Doğrulanamadı: %1"
+
+msgid "the command does not match its stated justification"
+msgstr "komut, belirtilen gerekçesiyle eşleşmiyor"
+
+msgid "Blocked by command validator: %1"
+msgstr "Komut doğrulayıcı tarafından engellendi: %1"
+
+msgid "Unknown tool %1"
+msgstr "Bilinmeyen araç %1"
+
+msgid "Error: path '%1' outside whitelist"
+msgstr "Hata: '%1' yolu beyaz liste dışında"
+
+msgid "Executing %1…"
+msgstr "%1 çalıştırılıyor…"
+
+msgid ""
+"Loaded '%1' skill — its full instructions were added to this conversation's "
+"context."
+msgstr ""
+"'%1' becerisi yüklendi — tam yönergeleri bu konuşmanın bağlamına eklendi."
+
+msgid "Failed to start drive session: %1"
+msgstr "Yönetim oturumu başlatılamadı: %1"
+
+msgid "Drive session active (already authorized). Auto mode enabled."
+msgstr "Yönetim oturumu aktif (zaten yetkilendirilmiş). Otomatik mod etkin."
+
+msgid "Drive session authorized successfully. Auto mode enabled."
+msgstr "Yönetim oturumu başarıyla yetkilendirildi. Otomatik mod etkin."
 
 msgid "General"
 msgstr "Genel"
