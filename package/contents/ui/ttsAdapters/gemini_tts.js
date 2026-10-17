@@ -245,9 +245,9 @@ function mergeWithDefaults(found) {
 }
 
 /**
- * Fetch TTS models. AI Studio lists them directly. Agent Platform express
- * keys can't list models, so models.dev candidates are checked with
- * countTokens and only the reachable ones are kept.
+ * Fetch TTS models. AI Studio lists them directly; Agent Platform express
+ * keys can't list models, so candidates come from models.dev. Either way
+ * each one is checked with countTokens and unusable ones are dropped.
  *
  * @param {string} endpoint
  * @param {string} apiKey
@@ -307,8 +307,18 @@ function fetchModels(endpoint, apiKey, callback) {
             callback(null, defaults);
             return;
         }
-        if (!isAgentPlatform(base) || !key.length) {
-            callback(null, isAgentPlatform(base) ? mergeWithDefaults(found) : (found.length ? found : defaults));
+        if (!isAgentPlatform(base)) {
+            if (!found.length || !key.length || key.indexOf("ya29.") === 0) {
+                callback(null, found.length ? found : defaults);
+                return;
+            }
+            AgentPlatform.verifyStudioModels(base, key, found, function(usable) {
+                callback(null, usable.length > 0 ? usable : found);
+            });
+            return;
+        }
+        if (!key.length) {
+            callback(null, mergeWithDefaults(found));
             return;
         }
         AgentPlatform.verifyModels(base, key, "global", mergeWithDefaults(found), function(reachable) {

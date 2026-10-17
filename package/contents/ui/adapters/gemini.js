@@ -218,7 +218,17 @@ function fetchModels(endpoint, apiKey, opts, callback) {
                             models.push(name);
                         }
                     }
-                    callback(null, models, xhr.status);
+                    // Drop listed models this key can't call; keep the full
+                    // list if none check out (e.g. a proxy without countTokens).
+                    // OAuth tokens skip the check (probes send an API key header).
+                    if (!apiKey || apiKey.indexOf("ya29.") === 0 || models.length === 0) {
+                        callback(null, models, xhr.status);
+                        return;
+                    }
+                    var listStatus = xhr.status;
+                    AgentPlatform.verifyStudioModels(baseUrl, apiKey, models, function(usable) {
+                        callback(null, usable.length > 0 ? usable : models, listStatus);
+                    });
                 } catch (e) {
                     callback(i18n("Failed to parse models: %1", e.message), null, xhr.status);
                 }

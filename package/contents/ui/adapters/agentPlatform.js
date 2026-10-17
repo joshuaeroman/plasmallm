@@ -94,46 +94,59 @@ function discoverProject(baseUrl, apiKey, callback) {
     };
 }
 
+// Calls back with the ids whose countTokens probe (POST urlFor(id)) didn't
+// return 404, in their original order. countTokens is free; Google answers
+// 404 for models a key can't use (retired, allowlisted, or "no longer
+// available to new users"). Only a 404 drops a model, so rate limits or
+// timeouts while probing many models at once don't hide usable ones.
+function probeModels(ids, urlFor, apiKey, callback) {
+    if (!ids || ids.length === 0) {
+        callback([]);
+        return;
+    }
+    var reachable = [];
+    var pending = ids.length;
+    function settle(index, ok) {
+        reachable[index] = ok;
+        pending--;
+        if (pending === 0) {
+            callback(ids.filter(function(id, i) { return reachable[i]; }));
+        }
+    }
+    for (var i = 0; i < ids.length; i++) {
+        (function(index) {
+            var xhr = new XMLHttpRequest();
+            var settled = false;
+            function done() {
+                if (settled) return;
+                settled = true;
+                settle(index, xhr.status !== 404);
+            }
+            xhr.open("POST", urlFor(ids[index]));
+            xhr.timeout = 15000;
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("x-goog-api-key", apiKey);
+            xhr.ontimeout = done;
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) done();
+            };
+            xhr.send(COUNT_TOKENS_BODY);
+        })(i);
+    }
+}
+
 // Express keys can't call ListModels, so model lists come from models.dev
-// unverified. countTokens is free and 404s for models the key can't reach,
-// so check every candidate in parallel and call back with the ones that
-// answered (in the original order). Uses the key's project when it can be
-// found, like chat requests do.
+// unverified. Probe each candidate on the key's project URL (like chat
+// requests) and keep the ones the key can use.
 function verifyModels(baseUrl, apiKey, location, ids, callback) {
     if (!ids || ids.length === 0) {
         callback([]);
         return;
     }
     function probeAll(projectId) {
-        var reachable = [];
-        var pending = ids.length;
-        function settle(index, ok) {
-            reachable[index] = ok;
-            pending--;
-            if (pending === 0) {
-                callback(ids.filter(function(id, i) { return reachable[i]; }));
-            }
-        }
-        for (var i = 0; i < ids.length; i++) {
-            (function(index) {
-                var xhr = new XMLHttpRequest();
-                var settled = false;
-                function done() {
-                    if (settled) return;
-                    settled = true;
-                    settle(index, xhr.status === 200);
-                }
-                xhr.open("POST", modelUrl(baseUrl, projectId, location, ids[index], "countTokens"));
-                xhr.timeout = 15000;
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.setRequestHeader("x-goog-api-key", apiKey);
-                xhr.ontimeout = done;
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === XMLHttpRequest.DONE) done();
-                };
-                xhr.send(COUNT_TOKENS_BODY);
-            })(i);
-        }
+        probeModels(ids, function(id) {
+            return modelUrl(baseUrl, projectId, location, id, "countTokens");
+        }, apiKey, callback);
     }
     var cached = cachedProject(apiKey);
     if (cached) {
@@ -141,4 +154,12 @@ function verifyModels(baseUrl, apiKey, location, ids, callback) {
     } else {
         discoverProject(baseUrl, apiKey, probeAll);
     }
+}
+
+// AI Studio's ListModels includes models a key can't call (e.g. ones "no
+// longer available to new users"); probe them the same way.
+function verifyStudioModels(baseUrl, apiKey, ids, callback) {
+    probeModels(ids, function(id) {
+        return baseUrl + "/v1beta/models/" + encodeURIComponent(id) + ":countTokens";
+    }, apiKey, callback);
 }

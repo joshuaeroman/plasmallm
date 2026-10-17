@@ -122,8 +122,14 @@ G.fetchModels(STUDIO, "AIza", function(err, models) { got = models; });
 let req = requests.shift();
 eq(req.url, STUDIO + "/v1beta/models?pageSize=1000", "AI Studio list URL");
 eq(req.headers["x-goog-api-key"], "AIza", "AI Studio key header");
-req.respond(200, { models: [{ name: "models/gemini-2.5-flash-preview-tts" }, { name: "models/gemini-2.5-flash" }] });
-eq(got, ["gemini-2.5-flash-preview-tts"], "AI Studio: TTS models only");
+req.respond(200, { models: [{ name: "models/gemini-2.5-flash-preview-tts" }, { name: "models/gemini-old-tts" }, { name: "models/gemini-2.5-flash" }] });
+eq(requests.map(function(x) { return x.url; }), [
+    STUDIO + "/v1beta/models/gemini-2.5-flash-preview-tts:countTokens",
+    STUDIO + "/v1beta/models/gemini-old-tts:countTokens"
+], "AI Studio: TTS models probed");
+requests.shift().respond(200, "{}");
+requests.shift().respond(404, "{}");
+eq(got, ["gemini-2.5-flash-preview-tts"], "AI Studio: usable TTS models only");
 
 // --- fetchModels: Agent Platform verifies models.dev candidates ---
 got = null;

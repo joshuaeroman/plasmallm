@@ -169,6 +169,39 @@ requests.shift().respond(200, MODELS_DEV);
 while (requests.length) requests.shift().respond(0, "");
 eq(fm.models, ["gemini-3.8-flash", "gemini-4-argon", "gemini-retired-1"], "all probes failing keeps the unverified list");
 
+// --- fetchModels (AI Studio): listed chat models, verified ---
+const STUDIO = "https://generativelanguage.googleapis.com";
+const STUDIO_LIST = { models: [
+    { name: "models/gemini-3.5-flash-lite", supportedGenerationMethods: ["generateContent", "countTokens"] },
+    { name: "models/gemini-2.5-flash-lite", supportedGenerationMethods: ["generateContent", "countTokens"] },
+    { name: "models/gemini-2.5-flash-image", supportedGenerationMethods: ["generateContent"] },
+    { name: "models/gemini-embedding-001", supportedGenerationMethods: ["embedContent"] }
+] };
+function fetchStudio(apiKey) {
+    const out = {};
+    Gemini.fetchModels(STUDIO, apiKey, { geminiAuthMethod: "aistudio" },
+        function(err, models) { out.err = err; out.models = models; });
+    return out;
+}
+fm = fetchStudio("AQ.studio");
+requests.shift().respond(200, JSON.stringify(STUDIO_LIST));
+eq(requests.map(function(r) { return r.url.split("/models/")[1]; }),
+    ["gemini-3.5-flash-lite:countTokens", "gemini-2.5-flash-lite:countTokens"], "AI Studio probes listed chat models");
+requests[0].respond(200, "{}");
+requests[1].respond(404, '{"error":{"code":404,"message":"no longer available to new users"}}');
+requests.length = 0;
+eq(fm, { err: null, models: ["gemini-3.5-flash-lite"] }, "AI Studio drops models the key can't call");
+
+fm = fetchStudio("AQ.studio");
+requests.shift().respond(200, JSON.stringify(STUDIO_LIST));
+while (requests.length) requests.shift().respond(404, "{}");
+eq(fm.models, ["gemini-3.5-flash-lite", "gemini-2.5-flash-lite"], "AI Studio: nothing checks out keeps the listed models");
+
+fm = fetchStudio("ya29.tok");
+requests.shift().respond(200, JSON.stringify(STUDIO_LIST));
+eq(requests.length, 0, "OAuth token skips the check");
+eq(fm.models, ["gemini-3.5-flash-lite", "gemini-2.5-flash-lite"], "OAuth token: listed models as-is");
+
 if (failed) {
     console.error(failed + " failure(s)");
     process.exit(1);

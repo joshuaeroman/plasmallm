@@ -143,7 +143,29 @@ eq(requests.length, 1, "then probes");
 ok(requests[0].url.indexOf("/v1/projects/777/") !== -1, "probe uses the looked-up project");
 requests[0].ontimeout();
 requests.length = 0;
-eq(verified, [], "timed-out probe counts as unreachable");
+eq(verified, ["x"], "timed-out probe keeps the model (only 404 drops)");
+
+verified = null;
+A.verifyModels(AP, "AQ.one", "global", ["ok", "limited", "gone"], function(list) { verified = list; });
+requests[0].respond(200, "{}");
+requests[1].respond(429, '{"error":{"code":429}}');
+requests[2].respond(404, notFound);
+requests.length = 0;
+eq(verified, ["ok", "limited"], "rate-limited probe keeps the model");
+
+// --- verifyStudioModels ---
+const STUDIO = "https://generativelanguage.googleapis.com";
+verified = null;
+A.verifyStudioModels(STUDIO, "AQ.studio", ["gemini-3.5-flash-lite", "gemini-2.5-flash-lite"], function(list) { verified = list; });
+eq(requests.map(function(r) { return r.url; }), [
+    STUDIO + "/v1beta/models/gemini-3.5-flash-lite:countTokens",
+    STUDIO + "/v1beta/models/gemini-2.5-flash-lite:countTokens"
+], "AI Studio countTokens URLs, no project lookup");
+eq(requests[0].headers["x-goog-api-key"], "AQ.studio", "AI Studio probe key header");
+requests[0].respond(200, "{}");
+requests[1].respond(404, '{"error":{"code":404,"message":"This model models/gemini-2.5-flash-lite is no longer available to new users."}}');
+requests.length = 0;
+eq(verified, ["gemini-3.5-flash-lite"], "model unavailable to new users dropped");
 
 verified = null;
 A.verifyModels(AP, "AQ.one", "global", [], function(list) { verified = list; });
