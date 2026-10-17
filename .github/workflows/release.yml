@@ -1,0 +1,155 @@
+#    SPDX-FileCopyrightText: 2026 Joshua Roman
+#    SPDX-License-Identifier: GPL-2.0-or-later
+#
+# Release pipeline. Runs only when the "Version" in package/metadata.json
+# changes (or when this workflow itself changes, to try it out):
+#   - on the version bump PR: tests, the blocking translation check, and
+#     builds of the .plasmoid, standalone tarball and Flatpak bundle
+#   - on the version bump landing on master: the same, then a draft GitHub
+#     Release tagged with the version and carrying all three files
+
+name: Release
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - package/metadata.json
+      - .github/workflows/release.yml
+  push:
+    branches: [master]
+    paths:
+      - package/metadata.json
+      - .github/workflows/release.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.detect.outputs.version }}
+      bumped: ${{ steps.detect.outputs.bumped }}
+      run: ${{ steps.detect.outputs.run }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Detect version bump
+        id: detect
+        env:
+          BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          get_version() { grep '"Version"' | cut -d'"' -f4; }
+          version=$(get_version < package/metadata.json)
+          if git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            previous=$(git show "$BASE:package/metadata.json" | get_version)
+            workflow_changed=$(git diff --name-only "$BASE" HEAD -- .github/workflows/release.yml)
+          else
+            previous=""
+            workflow_changed=""
+          fi
+          bumped=false
+          [ -n "$version" ] && [ "$version" != "$previous" ] && bumped=true
+          run=$bumped
+          [ -n "$workflow_changed" ] && run=true
+          echo "Version: ${previous:-?} -> $version (bumped: $bumped, run: $run)"
+          {
+            echo "version=$version"
+            echo "bumped=$bumped"
+            echo "run=$run"
+          } >> "$GITHUB_OUTPUT"
+
+  check:
+    needs: version
+    if: needs.version.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Install gettext
+        run: sudo apt-get update && sudo apt-get install -y gettext
+
+      - name: Run tests
+        run: make test
+
+      - name: Check translations
+        run: make check-translations
+
+  build:
+    needs: [version, check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install gettext
+        run: sudo apt-get update && sudo apt-get install -y gettext
+
+      - name: Compile translations
+        run: make translations
+
+      # do-package prompts for a new version; with no input it keeps the one
+      # in metadata.json.
+      - name: Build .plasmoid
+        run: make do-package < /dev/null
+
+      - name: Build standalone tarball
+        run: make do-standalone
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: packages
+          path: |
+            PlasmaLLM-${{ needs.version.outputs.version }}.plasmoid
+            PlasmaLLM-standalone-${{ needs.version.outputs.version }}.tar.gz
+          if-no-files-found: error
+
+  flatpak:
+    needs: [version, check]
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.11
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.8
+        with:
+          manifest-path: flatpak/com.joshuaroman.plasmallm.yml
+          bundle: PlasmaLLM-${{ needs.version.outputs.version }}.flatpak
+          artifact-name: flatpak
+
+  release:
+    needs: [version, build, flatpak]
+    if: github.event_name == 'push' && needs.version.outputs.bumped == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Create draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.version.outputs.version }}
+        run: |
+          if gh release view "$VERSION" -R "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            echo "Release $VERSION already exists; not creating another."
+            exit 0
+          fi
+          ls -l dist
+          gh release create "$VERSION" dist/* -R "$GITHUB_REPOSITORY" \
+            --draft --title "$VERSION" --target "$GITHUB_SHA" --generate-notes
