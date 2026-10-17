@@ -509,6 +509,8 @@ function sendStreaming(opts) {
     var xhr = new XMLHttpRequest();
     var url;
     var baseUrl = endpoint.replace(/\/+$/, "");
+    var location = "global";
+    var findProject = false;
 
     if (opts && opts.opencodeAuth) {
         // OpenCode Zen: POST {base}/models/{id}:streamGenerateContent?alt=sse
@@ -518,33 +520,25 @@ function sendStreaming(opts) {
               ":streamGenerateContent?alt=sse";
     } else if (opts && opts.geminiAuthMethod === "agentplatform") {
         var projectId = (opts.geminiProjectId ? opts.geminiProjectId.trim() : "");
-        var location = opts.geminiLocation || "global";
+        location = opts.geminiLocation || "global";
         
         // Automatically prefix location if it's not global and not already prefixed.
         if (location !== "global" && baseUrl.indexOf("://aiplatform.googleapis.com") !== -1) {
             baseUrl = baseUrl.replace("://", "://" + location + "-");
         }
 
-        if (projectId.length > 0) {
-            url = baseUrl +
-                  "/v1/projects/" + encodeURIComponent(projectId) +
-                  "/locations/" + encodeURIComponent(location) +
-                  "/publishers/google/models/" + encodeURIComponent(model) +
-                  ":streamGenerateContent?alt=sse";
-        } else {
-            url = baseUrl +
-                  "/v1/publishers/google/models/" + encodeURIComponent(model) +
-                  ":streamGenerateContent?alt=sse";
+        // Express-mode keys: use the key's project so models outside the
+        // express route's region resolve (looked up once per key below).
+        if (AgentPlatform.usesExpressKey(opts, apiKey, baseUrl)) {
+            projectId = AgentPlatform.cachedProject(apiKey);
+            findProject = projectId.length === 0;
         }
+        url = AgentPlatform.modelUrl(baseUrl, projectId, location, model, "streamGenerateContent?alt=sse");
     } else {
         url = baseUrl +
               "/v1beta/models/" + encodeURIComponent(model) +
               ":streamGenerateContent?alt=sse";
     }
-
-    xhr.open("POST", url);
-    xhr.timeout = 120000;
-    setHeaders(xhr, apiKey, opts);
 
     var pollTimer = null;
     var lastParseIndex = 0;
@@ -719,7 +713,6 @@ function sendStreaming(opts) {
     }
 
     var payload = JSON.stringify(body, null, 2);
-    xhr.send(payload);
 
     var handle = {
         xhr: xhr,
@@ -730,5 +723,25 @@ function sendStreaming(opts) {
             handle.pollTimer = timer;
         }
     };
+
+    function openAndSend(requestUrl) {
+        xhr.open("POST", requestUrl);
+        xhr.timeout = 120000;
+        setHeaders(xhr, apiKey, opts);
+        handle.xhr = xhr;
+        xhr.send(payload);
+    }
+
+    if (findProject) {
+        // Cancelling now aborts the lookup; the chat request never starts.
+        // Without a project the express URL is used, as before.
+        handle.xhr = AgentPlatform.discoverProject(baseUrl, apiKey, function(project) {
+            openAndSend(project
+                ? AgentPlatform.modelUrl(baseUrl, project, location, model, "streamGenerateContent?alt=sse")
+                : url);
+        });
+    } else {
+        openAndSend(url);
+    }
     return handle;
 }
