@@ -22,11 +22,14 @@ function loadModule(relPath, extraScope = {}) {
 const SpdSay = loadModule("../package/contents/ui/ttsAdapters/spd_say.js");
 const OpenaiSpeech = loadModule("../package/contents/ui/ttsAdapters/openai_speech.js");
 const CustomCli = loadModule("../package/contents/ui/ttsAdapters/custom_cli.js");
+const AgentPlatform = loadModule("../package/contents/ui/adapters/agentPlatform.js");
+const GeminiTts = loadModule("../package/contents/ui/ttsAdapters/gemini_tts.js", { AgentPlatform });
 
 const TtsAdapters = {
     backends: {
         "spd_say": SpdSay,
         "openai_speech": OpenaiSpeech,
+        "gemini_tts": GeminiTts,
         "custom_cli": CustomCli
     },
     get: function(id) {
@@ -36,6 +39,7 @@ const TtsAdapters = {
         return [
             { id: SpdSay.id, name: SpdSay.displayName },
             { id: OpenaiSpeech.id, name: OpenaiSpeech.displayName },
+            { id: GeminiTts.id, name: GeminiTts.displayName },
             { id: CustomCli.id, name: CustomCli.displayName }
         ];
     }
@@ -259,6 +263,37 @@ Tts.speak({
 ok(twoPhaseCommands.length === 2, "two distinct commands were executed in sequence");
 ok(twoPhaseReadyFired, "onReady fired as soon as audio returned from endpoint");
 ok(twoPhaseCompleteFired, "two-phase execution completed");
+
+// Gemini TTS backend: presets, default models, spoken style directions
+eq(Tts.providerPresets("gemini_tts").map(p => p.name), ["Google Agent Platform", "Google AI Studio"], "gemini_tts presets");
+eq(Tts.providerPresets("openai_speech").map(p => p.name), ["OpenRouter", "OpenAI", "Custom"], "openai_speech presets unchanged");
+eq(Tts.providerPresets().map(p => p.name), ["OpenRouter", "OpenAI", "Custom"], "no backend: default presets");
+eq(Tts.defaultKnownModels("gemini_tts")[0], "gemini-3.8-flash-lite-tts", "gemini_tts default models");
+eq(Tts.defaultKnownModels("openai_speech")[0], "google/gemini-3.8-flash-lite-tts", "openai_speech default models unchanged");
+ok(Tts.backendChoices().some(b => b.id === "gemini_tts"), "gemini_tts listed as a backend");
+eq(Tts.naturalStyleDirection("warm and unhurried"), "warm and unhurried", "natural-language hint is a direction");
+eq(Tts.naturalStyleDirection("<sarcastic>"), "", "tag hint is markup, not a direction");
+eq(Tts.naturalStyleDirection("[whispering]"), "", "bracket hint is markup, not a direction");
+eq(Tts.naturalStyleDirection("sarcastic"), "", "single word becomes a tag, not a direction");
+eq(Tts.naturalStyleDirection("<speak>{text}</speak>"), "", "placeholder template is markup");
+eq(Tts.naturalStyleDirection("  "), "", "blank hint");
+
+let geminiSynth = "";
+Tts.speak({
+    config: {
+        ttsEnabled: true, ttsBackend: "gemini_tts", ttsApiEndpoint: "https://aiplatform.googleapis.com",
+        ttsModelName: "gemini-3.8-flash-lite-tts", ttsVoice: "Kore", ttsStyleHint: "like a pirate"
+    },
+    text: "Ahoy there.",
+    apiKey: "AQ.key",
+    runCommand: function(cmd, cb) {
+        if (!geminiSynth) geminiSynth = cmd;
+        cb(null, { stdout: "TTS_READY", stderr: "", exitCode: 0 });
+    },
+    callback: function() {}
+});
+ok(geminiSynth.indexOf("Delivery: like a pirate") !== -1, "speak passes natural style hint to Gemini TTS as a direction");
+ok(geminiSynth.indexOf("prebuiltVoiceConfig") !== -1, "speak passes configured voice");
 
 // 5. fetchModels Tests
 // Mock XMLHttpRequest for OpenaiSpeech.fetchModels

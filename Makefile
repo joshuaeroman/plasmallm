@@ -39,6 +39,7 @@ test:
 	node tests/cfg_props.mjs
 	node tests/utils.mjs
 	node tests/tts.mjs
+	node tests/gemini_tts.mjs
 
 # Translations
 translations: check-translations $(MO_FILES)

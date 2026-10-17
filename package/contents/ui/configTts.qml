@@ -34,10 +34,11 @@ BaseConfigPage {
     property bool testInProgress: false
     property string testStatusText: ""
 
-    readonly property var ttsPresets: Tts.providerPresets()
+    readonly property var ttsPresets: Tts.providerPresets(cfg_ttsBackend)
     readonly property var ttsBackends: Tts.backendChoices()
     readonly property bool isSpdBackend: (cfg_ttsBackend || "spd_say") === "spd_say"
-    readonly property bool isEndpointBackend: (cfg_ttsBackend || "") === "openai_speech"
+    readonly property bool isGeminiBackend: (cfg_ttsBackend || "") === "gemini_tts"
+    readonly property bool isEndpointBackend: (cfg_ttsBackend || "") === "openai_speech" || isGeminiBackend
     readonly property bool isCustomBackend: (cfg_ttsBackend || "") === "custom_cli"
 
     P5Support.DataSource {
@@ -240,7 +241,7 @@ BaseConfigPage {
             } catch (e) {}
         }
         if (!availableModels || availableModels.length === 0) {
-            availableModels = Tts.defaultKnownModels();
+            availableModels = Tts.defaultKnownModels(cfg_ttsBackend);
         }
         syncModelCombo();
     }
@@ -312,16 +313,26 @@ BaseConfigPage {
     function applyBackend(index) {
         if (index < 0 || index >= ttsBackends.length) return;
         cfg_ttsBackend = ttsBackends[index].id;
-        if (cfg_ttsBackend === "openai_speech") {
-            loadWalletKey();
-            syncProviderCombo();
-            syncVoiceCombo();
+        if (!isEndpointBackend)
+            return;
+        // Endpoints, models and voices don't carry over between the
+        // OpenAI-style and Gemini backends: if the current provider isn't one
+        // of this backend's presets, start from its first preset.
+        var names = Tts.providerPresets(cfg_ttsBackend).map(function(p) { return p.name; });
+        if (names.indexOf(cfg_ttsProviderName || "") === -1) {
+            cfg_ttsAvailableModels = "";
+            loadModelCache();
+            applyProviderPreset(0);
+            return;
         }
+        loadWalletKey();
+        syncProviderCombo();
+        syncVoiceCombo();
     }
 
     function syncVoiceCombo() {
         if (!voiceCombo) return;
-        var isGemini = (cfg_ttsModelName || "").indexOf("gemini") >= 0;
+        var isGemini = isGeminiBackend || (cfg_ttsModelName || "").indexOf("gemini") >= 0;
         var list = isGemini ? Tts.knownGeminiVoices() : Tts.knownOpenAiVoices();
         voiceCombo.model = list;
         var cur = cfg_ttsVoice || (isGemini ? "Zephyr" : "alloy");
@@ -720,7 +731,7 @@ BaseConfigPage {
 
         QQC2.ComboBox {
             id: formatCombo
-            visible: isEndpointBackend
+            visible: isEndpointBackend && !isGeminiBackend
             Kirigami.FormData.label: i18n("Audio format:")
             Layout.fillWidth: true
             Layout.preferredWidth: 0
@@ -734,7 +745,7 @@ BaseConfigPage {
         }
 
         QQC2.Label {
-            visible: isEndpointBackend && (cfg_ttsModelName || "").indexOf("gemini") >= 0
+            visible: isEndpointBackend && !isGeminiBackend && (cfg_ttsModelName || "").indexOf("gemini") >= 0
             Layout.fillWidth: true
             Layout.maximumWidth: Kirigami.Units.gridUnit * 28
             wrapMode: Text.WordWrap
