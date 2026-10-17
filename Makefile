@@ -27,6 +27,7 @@ all: package
 test:
 	node tests/wallet_core.mjs
 	node tests/gemini_thinking.mjs
+	node tests/agent_platform.mjs
 	node tests/skills.mjs
 	node tests/command_validation.mjs
 	node tests/decisions_adapter.mjs

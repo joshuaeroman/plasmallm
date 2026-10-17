@@ -4,6 +4,7 @@
 */
 
 .import "../toolManager.js" as ToolManager
+.import "agentPlatform.js" as AgentPlatform
 .import "geminiThinking.js" as GeminiThinking
 
 // Native Google Gemini adapter (POST /v1beta/models/{model}:streamGenerateContent
@@ -124,7 +125,7 @@ function fetchModels(endpoint, apiKey, opts, callback) {
 
     var geminiFilter = function(m) {
         var lower = m.toLowerCase();
-        return lower.indexOf("gemini") !== -1 && lower.indexOf("-tts") === -1 && lower.indexOf("embedding") === -1;
+        return lower.indexOf("gemini") !== -1 && AgentPlatform.isChatModel(m);
     };
 
     if (isAgentPlatform) {
@@ -154,7 +155,7 @@ function fetchModels(endpoint, apiKey, opts, callback) {
                                 else if (name.indexOf("publishers/google/models/") !== -1) {
                                     name = name.split("/").pop();
                                 }
-                                if (name.toLowerCase().indexOf("gemini") !== -1) {
+                                if (name.toLowerCase().indexOf("gemini") !== -1 && AgentPlatform.isChatModel(name)) {
                                     models.push(name);
                                 }
                             }
@@ -202,7 +203,7 @@ function fetchModels(endpoint, apiKey, opts, callback) {
                         var name = m.name || "";
                         if (name.indexOf("models/") === 0) name = name.substring(7);
                         var methods = m.supportedGenerationMethods || [];
-                        if (methods.indexOf("generateContent") !== -1) {
+                        if (methods.indexOf("generateContent") !== -1 && AgentPlatform.isChatModel(name)) {
                             models.push(name);
                         }
                     }
