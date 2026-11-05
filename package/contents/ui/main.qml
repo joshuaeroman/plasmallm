@@ -3115,8 +3115,8 @@ PlasmoidItem {
             return true;
         }
         if (lower === "/auto") {
-            sessionAutoMode = !sessionAutoMode;
-            var msg = sessionAutoMode 
+            sessionFullAutoMode = !sessionFullAutoMode;
+            var msg = sessionFullAutoMode
                 ? i18n("Skip approvals mode enabled for this session. All enabled tools will run automatically, bypassing 'Ask before running' settings.") 
                 : i18n("Skip approvals mode disabled. Tools will revert to your configured 'Ask before running' settings.");
             root.appendDisplayMessage("assistant", msg, { shared: false });
@@ -3246,8 +3246,8 @@ PlasmoidItem {
                     populateInputRequested(foundTask.prompt);
                     return false;
                 }
-                if (foundTask.auto && !sessionAutoMode) {
-                    sessionAutoMode = true;
+                if (foundTask.auto && !sessionFullAutoMode) {
+                    sessionFullAutoMode = true;
                     taskAutoMode = true;
                     if (systemPromptReady) {
                         var autoPrompt = Api.buildSystemPrompt(sysInfo, Plasmoid.configuration.systemPrompt, getSystemPromptOptions());
@@ -3877,7 +3877,6 @@ PlasmoidItem {
                     }
 
                     if (taskAutoMode) {
-                        sessionAutoMode = false;
                         sessionFullAutoMode = false;
                         taskAutoMode = false;
                     }
@@ -4524,9 +4523,9 @@ PlasmoidItem {
                 "term=${TERMINAL:-$(kreadconfig6 --file kdeglobals --group General --key TerminalApplication 2>/dev/null)}; " +
                 "term=${term:-konsole}; ";
             if (be === "tmux") {
-                attachCmd = termScript + "\"$term\" -e tmux new-session -A -s '" + sess + "'";
+                attachCmd = termScript + "\"$term\" -e tmux new-session -A -s \"" + sess + "\" bash";
             } else {
-                attachCmd = termScript + "\"$term\" -e screen -xRR '" + sess + "'";
+                attachCmd = termScript + "\"$term\" -e screen -xRR \"" + sess + "\"";
             }
             var termCmdEnabled = "bash -c '" + attachCmd + "'";
             terminalCommands.push(termCmdEnabled);
@@ -4582,7 +4581,7 @@ PlasmoidItem {
                 var sess = (Plasmoid.configuration.sessionName || "").replace(/[^A-Za-z0-9_-]/g, "") || "plasmallm";
                 var stopCmd = "";
                 if (be === "tmux") {
-                    stopCmd = "tmux send-keys -t '" + sess + "':0 C-c \"printf '\\n__PLM_DONE_" + marker + "_130\\n'\" ENTER";
+                    stopCmd = "tmux send-keys -t '" + sess + ":' C-c \"printf '\\n__PLM_DONE_" + marker + "_130\\n'\" ENTER";
                 } else {
                     stopCmd = "screen -S '" + sess + "' -p 0 -X eval \"stuff \\003\" \"stuff \\\"printf '\\\\n__PLM_DONE_" + marker + "_130\\\\n'\\\\015\\\"\"";
                 }
