@@ -68,10 +68,19 @@ rm -rf "$FIFO_DIR"
 printf '\\033[1;36m────────────────────────────────────────\\033[0m\\n'
 printf '__PLM_DONE_${marker}_%d\\n' "$EXIT_CODE"
 ${heredocDelim}
-tmux has-session -t "\${SESSION}" 2>/dev/null || tmux new-session -d -s "\${SESSION}" -x 200 -y 50
-tmux send-keys -t "\${SESSION}":0 ". '\${CMD_FILE}' '\${OUT}'; rm -f '\${CMD_FILE}'" ENTER
-while ! tmux capture-pane -t "\${SESSION}":0 -p -S -200 | grep -q "__PLM_DONE_${marker}_"; do sleep 0.1; done
-EXIT=\$(tmux capture-pane -t "\${SESSION}":0 -p -S -200 | grep -o "__PLM_DONE_${marker}_[0-9]*" | tail -1 | awk -F_ '{print \$NF}')
+if tmux has-session -t "\${SESSION}" 2>/dev/null; then
+    PANE_SHELL=\$(tmux display-message -p -t "\${SESSION}:" '#{pane_current_command}' 2>/dev/null)
+else
+    tmux new-session -d -s "\${SESSION}" -x 200 -y 50 bash
+    PANE_SHELL=bash
+fi
+case "\${PANE_SHELL}" in
+    bash|zsh|ksh|dash|sh) PCMD=". '\${CMD_FILE}' '\${OUT}'; rm -f '\${CMD_FILE}'" ;;
+    *) PCMD="bash '\${CMD_FILE}' '\${OUT}'; rm -f '\${CMD_FILE}'" ;;
+esac
+tmux send-keys -t "\${SESSION}:" "\${PCMD}" ENTER
+while ! tmux capture-pane -t "\${SESSION}:" -p -S -200 | grep -q "__PLM_DONE_${marker}_"; do sleep 0.1; done
+EXIT=\$(tmux capture-pane -t "\${SESSION}:" -p -S -200 | grep -o "__PLM_DONE_${marker}_[0-9]*" | tail -1 | awk -F_ '{print \$NF}')
 cat "\${OUT}"; rm -f "\${OUT}"; rm -f "\${CMD_FILE}"; exit "\${EXIT}"
         `.trim();
     } else {
