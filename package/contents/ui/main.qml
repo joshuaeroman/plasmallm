@@ -4523,7 +4523,7 @@ PlasmoidItem {
                 "term=${TERMINAL:-$(kreadconfig6 --file kdeglobals --group General --key TerminalApplication 2>/dev/null)}; " +
                 "term=${term:-konsole}; ";
             if (be === "tmux") {
-                attachCmd = termScript + "\"$term\" -e tmux new-session -A -s \"" + sess + "\" bash";
+                attachCmd = termScript + "\"$term\" -e tmux new-session -A -s \"" + sess + "\"";
             } else {
                 attachCmd = termScript + "\"$term\" -e screen -xRR \"" + sess + "\"";
             }
