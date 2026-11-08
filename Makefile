@@ -35,6 +35,7 @@ test:
 	node tests/server_agent_capability.mjs
 	node tests/skills.mjs
 	node tests/command_validation.mjs
+	node tests/latex_masking.mjs
 	node tests/decisions_adapter.mjs
 	node tests/memory.mjs
 	node tests/path_sandbox.mjs

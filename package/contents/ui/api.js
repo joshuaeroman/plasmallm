@@ -820,6 +820,16 @@ function replaceLatexSymbols(text) {
         return "__ESCAPED_" + p1.charCodeAt(0) + "__";
     });
 
+    // Mask fenced blocks and inline code spans before looking for math: a `$`
+    // inside a shell snippet is literal text, not a formula delimiter.
+    var codeSpans = [];
+    function maskCode(match) {
+        codeSpans.push(match);
+        return "\u0000PLMCODE" + (codeSpans.length - 1) + "\u0000";
+    }
+    text = text.replace(/(```|~~~)[\s\S]*?\1/g, maskCode);
+    text = text.replace(/`[^`\n]*`/g, maskCode);
+
     // Parse block math: $$ formula $$ or \[ formula \]
     var blockRegex1 = /\$\$([\s\S]*?)\$\$/g;
     text = text.replace(blockRegex1, function(match, p1) {
@@ -840,7 +850,7 @@ function replaceLatexSymbols(text) {
     });
 
     // Parse inline math: $ formula $ or \( formula \)
-    var inlineRegex1 = /\$([^\s\$](?:[^\$]*?[^\s\$])?)\$/g;
+    var inlineRegex1 = /\$([^\s\$\n](?:[^\$\n]*?[^\s\$\n])?)\$/g;
     text = text.replace(inlineRegex1, function(match, p1) {
         if (p1.indexOf("\\frac") !== -1 || p1.indexOf("\\sqrt") !== -1) {
             var box = parseLatexToBox(p1);
@@ -858,7 +868,10 @@ function replaceLatexSymbols(text) {
         return " `" + replaceSymbolsInFormulaFlat(p1) + "` ";
     });
 
-    // Restore escaped characters
+    // Restore code spans untouched, then escaped characters.
+    text = text.replace(/\u0000PLMCODE(\d+)\u0000/g, function(match, p1) {
+        return codeSpans[parseInt(p1, 10)];
+    });
     text = text.replace(/__ESCAPED_DOLLAR__/g, "$");
     text = text.replace(/__ESCAPED_(\d+)__/g, function(match, p1) {
         return String.fromCharCode(parseInt(p1, 10));
