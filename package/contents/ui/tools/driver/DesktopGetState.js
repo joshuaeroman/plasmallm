@@ -6,7 +6,7 @@
 .pragma library
 .import "../../driverManager.js" as DriverManager
 
-var name = "DesktopGetState";
+var name = "plm_DesktopGetState";
 var displayName = "Desktop Get State";
 var description = "Captures the visual screenshot and extracts the active window lists and interactive accessibility tree coordinates (0-1000 scale). Caches current window positions and active operating context.";
 var parameters = {

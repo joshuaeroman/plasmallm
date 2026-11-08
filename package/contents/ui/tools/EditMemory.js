@@ -3,7 +3,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-// Built-in "edit_memory" tool: add, update, or remove entries in persistent
+// Built-in "plm_edit_memory" tool: add, update, or remove entries in persistent
 // memory in a single call. Entries live in the widget's KConfig
 // ("memoryPhrases", JSON array) and are rendered into the system prompt's
 // {{memories}} section on every rebuild (see memory.js), so they persist
@@ -15,7 +15,7 @@
 
 .import "../memory.js" as Memory
 
-var name = "edit_memory";
+var name = "plm_edit_memory";
 var displayName = "Edit Memory";
 var description = "Add, update, or remove an entry in persistent memory; entries appear in your system prompt in every future conversation. Never save anything transient or sensitive.";
 var parameters = {

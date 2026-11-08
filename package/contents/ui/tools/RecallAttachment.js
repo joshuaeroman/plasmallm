@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "recall_attachment";
+var name = "plm_recall_attachment";
 var displayName = "Recall Attachment";
 var description = "Retrieve the full content of a file previously attached in the conversation by specifying the filename (e.g. 'data.json') or message index (e.g. '19').";
 var parameters = {

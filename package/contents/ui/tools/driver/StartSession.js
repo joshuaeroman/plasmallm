@@ -6,9 +6,9 @@
 .pragma library
 .import "../../driverManager.js" as DriverManager
 
-var name = "StartSession";
+var name = "plm_StartSession";
 var displayName = "Start Session";
-var description = "Start a desktop automation session. This handshake is required before using any other desktop automation tools. It prompts the user for permission. Once started, you can use DesktopGetState, DesktopClick, DesktopInput, DesktopMoveMouse, DesktopScroll, DesktopWindowControl, and DesktopReadSelection tools.";
+var description = "Start a desktop automation session. This handshake is required before using any other desktop automation tools. It prompts the user for permission. Once started, you can use plm_DesktopGetState, plm_DesktopClick, plm_DesktopInput, plm_DesktopMoveMouse, plm_DesktopScroll, plm_DesktopWindowControl, and plm_DesktopReadSelection tools.";
 var parameters = {
     type: "object",
     properties: {
@@ -49,7 +49,7 @@ function execute(args, context) {
         DriverManager.executeCommand("get_desktop_state", params, function(err, result) {
             if (err) {
                 var fallbackUserMsg = baseMsg + "\n\n*Session started successfully" + authStatus + ", but screenshot failed.*";
-                var fallbackLlmMsg = baseMsg + "\n\n*Session started successfully" + authStatus + ", but capturing initial screenshot failed. You may need to call DesktopGetState manually.*";
+                var fallbackLlmMsg = baseMsg + "\n\n*Session started successfully" + authStatus + ", but capturing initial screenshot failed. You may need to call plm_DesktopGetState manually.*";
                 if (context.replaceDisplayMessage) {
                     context.replaceDisplayMessage("tool_running_rich", fallbackUserMsg, "tool_result_rich", {
                         toolSummary: "Session Active",
@@ -68,7 +68,7 @@ function execute(args, context) {
                 }
                 
                 var userMsg = baseMsg + "\n\n*Session started successfully" + authStatus + ".*";
-                var llmMsg = baseMsg + "\n\n*Session started successfully" + authStatus + ". You are now authorized to drive the desktop. An initial screenshot is attached. Please analyze the image and use DesktopGetState to query interactive element trees and see window information as needed.*";
+                var llmMsg = baseMsg + "\n\n*Session started successfully" + authStatus + ". You are now authorized to drive the desktop. An initial screenshot is attached. Please analyze the image and use plm_DesktopGetState to query interactive element trees and see window information as needed.*";
                 
                 if (context.replaceDisplayMessage) {
                     context.replaceDisplayMessage("tool_running_rich", userMsg, "tool_result_rich", {

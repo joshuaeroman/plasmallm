@@ -148,6 +148,34 @@ function buildTools(options) {
     return tools;
 }
 
+// Names this request advertised to the server. A streamed call outside this
+// set came from the server side of a gateway (or was hallucinated) and cannot
+// run locally; reporting it would make the host re-execute it and re-post a
+// tool-last transcript that strict gateways reject.
+function advertisedToolNames(tools) {
+    var names = {};
+    if (Array.isArray(tools)) {
+        for (var i = 0; i < tools.length; i++) {
+            var tool = tools[i];
+            var name = tool && (tool.name || (tool["function"] && tool["function"].name));
+            if (name) names[name] = true;
+        }
+    }
+    return names;
+}
+
+function filterAdvertisedToolCalls(calls, tools) {
+    var known = advertisedToolNames(tools);
+    var out = [];
+    if (!Array.isArray(calls)) return out;
+    for (var i = 0; i < calls.length; i++) {
+        var call = calls[i];
+        var name = call && call["function"] && call["function"].name;
+        if (name && known[name]) out.push(call);
+    }
+    return out;
+}
+
 function buildContentArray(text, attachments) {
     if (!attachments || attachments.length === 0) return text;
     var parts = [];
@@ -360,9 +388,15 @@ function sendStreaming(opts) {
         }
 
         if (accumulatedToolCalls.length > 0) {
+            var pendingToolCalls = filterAdvertisedToolCalls(accumulatedToolCalls, tools);
+            if (pendingToolCalls.length === 0) {
+                if (accumulatedCitations.length > 0) formatCitations();
+                onComplete(accumulatedText, null, null, null);
+                return;
+            }
             if (accumulatedCitations.length > 0) formatCitations();
-            var assistantMsg = { role: "assistant", content: accumulatedText || null, tool_calls: accumulatedToolCalls };
-            onComplete(accumulatedText, null, accumulatedToolCalls, assistantMsg);
+            var assistantMsg = { role: "assistant", content: accumulatedText || null, tool_calls: pendingToolCalls };
+            onComplete(accumulatedText, null, pendingToolCalls, assistantMsg);
             return;
         }
 
@@ -384,15 +418,18 @@ function sendStreaming(opts) {
                 if (msg.citations && Array.isArray(msg.citations)) {
                     pushCitations(msg.citations);
                 }
-                if (msg.tool_calls && msg.tool_calls.length > 0) {
+                var fallbackCalls = filterAdvertisedToolCalls(msg.tool_calls, tools);
+                if (fallbackCalls.length > 0) {
                     if (typeof msg.content === "string" && msg.content.length > 0) {
                         accumulatedText = msg.content;
                     }
                     if (accumulatedCitations.length > 0) formatCitations();
                     if (accumulatedText.length > 0) {
-                        msg = { role: msg.role || "assistant", content: accumulatedText, tool_calls: msg.tool_calls };
+                        msg = { role: msg.role || "assistant", content: accumulatedText, tool_calls: fallbackCalls };
+                    } else {
+                        msg = { role: msg.role || "assistant", content: null, tool_calls: fallbackCalls };
                     }
-                    onComplete(accumulatedText, null, msg.tool_calls, msg);
+                    onComplete(accumulatedText, null, fallbackCalls, msg);
                 } else if (typeof msg.content === "string") {
                     accumulatedText = msg.content;
                     if (accumulatedCitations.length > 0) formatCitations();

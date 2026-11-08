@@ -229,7 +229,7 @@ Kirigami.AbstractCard {
     // FYI-only pill for successful skill loads — the body went into system
     // context, not something the user needs to read.
     readonly property bool isSkillLoadedChip: isToolResult && !isToolRunning
-        && toolName === "skill" && exitCode === 0
+        && ToolManager.bareToolName(toolName) === "skill" && exitCode === 0
 
     // Successful plain tool results start collapsed as a small pill when the
     // per-tool preference says so; click to expand, chevron to re-collapse.
@@ -954,7 +954,7 @@ Kirigami.AbstractCard {
                     spacing: Kirigami.Units.smallSpacing
 
                     Kirigami.Icon {
-                        source: ToolManager.toolIconName(messageItem.isSkillLoadedChip ? "skill" : messageItem.toolName)
+                        source: ToolManager.toolIconName(messageItem.isSkillLoadedChip ? "plm_skill" : messageItem.toolName)
                         Layout.preferredWidth: Kirigami.Units.iconSizes.small
                         Layout.preferredHeight: Kirigami.Units.iconSizes.small
                     }

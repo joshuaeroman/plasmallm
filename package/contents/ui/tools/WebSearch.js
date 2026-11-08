@@ -6,7 +6,7 @@
 .pragma library
 .import "../search_adapters/index.js" as SearchAdapters
 
-var name = "web_search";
+var name = "plm_web_search";
 var displayName = "Web Search";
 var icon = "browser-search";
 var description = "Perform a web search to find current information, news, or specific facts.";

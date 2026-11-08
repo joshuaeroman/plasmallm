@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "set_clipboard";
+var name = "plm_set_clipboard";
 var description = "Set the content of the system clipboard.";
 var parameters = {
     type: "object",

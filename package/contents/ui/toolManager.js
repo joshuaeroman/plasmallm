@@ -11,47 +11,90 @@
 
 var TOOLS = {};
 
+// Wire namespace for the widget's own tools. Every name advertised to a model
+// starts with this prefix, so a tool call that lacks it must have come from the
+// server side of a gateway and is never executed locally.
+var TOOL_PREFIX = "plm_";
+
+function wireToolName(name) {
+    if (!name) return "";
+    return name.indexOf(TOOL_PREFIX) === 0 ? name : TOOL_PREFIX + name;
+}
+
+function bareToolName(name) {
+    if (!name) return "";
+    return name.indexOf(TOOL_PREFIX) === 0 ? name.substring(TOOL_PREFIX.length) : name;
+}
+
+/**
+ * Rewrites the `function.name` of every call in an OpenAI `tool_calls` JSON
+ * array into the wire namespace. History files written before the namespace
+ * existed store bare names; resuming such a chat must re-post names the model
+ * actually has available.
+ */
+function normalizeToolCallsJson(json) {
+    if (!json || typeof json !== "string") return json || "";
+    try {
+        var calls = JSON.parse(json);
+        if (!Array.isArray(calls)) return json;
+        var changed = false;
+        for (var i = 0; i < calls.length; i++) {
+            var fn = calls[i] && calls[i]["function"];
+            if (fn && fn.name) {
+                var wire = wireToolName(fn.name);
+                if (wire !== fn.name) {
+                    fn.name = wire;
+                    changed = true;
+                }
+            }
+        }
+        return changed ? JSON.stringify(calls) : json;
+    } catch (e) {
+        return json;
+    }
+}
+
 // Tools whose results stay expanded by default (rich formatted output or
 // image payloads). An explicit entry in toolsCollapseResults overrides this.
 var DEFAULT_EXPANDED_TOOLS = [
-    "web_search",
-    "StartSession",
-    "DesktopGetState",
-    "DesktopSetOperatingContext",
-    "DesktopResetContext",
-    "DesktopScroll",
-    "DesktopClick",
-    "DesktopInput",
-    "DesktopMoveMouse",
-    "DesktopWindowControl",
-    "DesktopReadSelection"
+    "plm_web_search",
+    "plm_StartSession",
+    "plm_DesktopGetState",
+    "plm_DesktopSetOperatingContext",
+    "plm_DesktopResetContext",
+    "plm_DesktopScroll",
+    "plm_DesktopClick",
+    "plm_DesktopInput",
+    "plm_DesktopMoveMouse",
+    "plm_DesktopWindowControl",
+    "plm_DesktopReadSelection"
 ];
 
 function toolIconName(toolName) {
-    switch (toolName) {
-        case "run_command": return "utilities-terminal";
-        case "web_search": return "browser-search";
-        case "read_file": return "document-open";
-        case "write_file": return "document-save";
-        case "list_dir": return "folder-open";
-        case "skill": return "applications-education";
-        case "run_skill_script": return "application-x-executable";
-        case "http_get": return "download";
-        case "http_request": return "network-wired";
-        case "search_files": return "system-search";
-        case "get_clipboard": return "edit-paste";
-        case "set_clipboard": return "edit-copy";
-        case "notify": return "notifications";
-        case "open_url": return "internet-services";
-        case "edit_memory": return "document-edit";
-        case "set_tts_style": return "audio-volume-high";
+    switch (wireToolName(toolName)) {
+        case "plm_run_command": return "utilities-terminal";
+        case "plm_web_search": return "browser-search";
+        case "plm_read_file": return "document-open";
+        case "plm_write_file": return "document-save";
+        case "plm_list_dir": return "folder-open";
+        case "plm_skill": return "applications-education";
+        case "plm_run_skill_script": return "application-x-executable";
+        case "plm_http_get": return "download";
+        case "plm_http_request": return "network-wired";
+        case "plm_search_files": return "system-search";
+        case "plm_get_clipboard": return "edit-paste";
+        case "plm_set_clipboard": return "edit-copy";
+        case "plm_notify": return "notifications";
+        case "plm_open_url": return "internet-services";
+        case "plm_edit_memory": return "document-edit";
+        case "plm_set_tts_style": return "audio-volume-high";
     }
     return "services";
 }
 
 /** One-line descriptor for a finished tool result (icon label / collapsed pill). */
 function resultLabel(toolName, args, home) {
-    var label = toolName || "";
+    var label = bareToolName(toolName);
     args = args || {};
     home = home || "$HOME";
     if (args.path) {
@@ -66,9 +109,9 @@ function resultLabel(toolName, args, home) {
         label += ": " + args.text;
     } else if (args.target) {
         label += ": " + args.target;
-    } else if (toolName === "skill" && args.name) {
+    } else if (toolName === "plm_skill" && args.name) {
         label += ": " + args.name;
-    } else if (toolName === "set_tts_style") {
+    } else if (toolName === "plm_set_tts_style") {
         label = args.style ? (args.style + " (" + (args.scope || "turn") + ")") : ("default (" + (args.scope || "turn") + ")");
     }
     return label;
@@ -94,13 +137,16 @@ function parseCollapseMap(mapJson) {
 function shouldCollapseResult(toolName, collapseMapJson, customToolsJson) {
     if (!toolName) return false;
     var map = parseCollapseMap(collapseMapJson);
+    // Entries saved before the plm_ namespace was introduced use the bare name.
+    var legacy = bareToolName(toolName);
+    if (legacy !== toolName && map.hasOwnProperty(legacy)) return !!map[legacy];
     if (map.hasOwnProperty(toolName)) return !!map[toolName];
     if (customToolsJson) {
         try {
             var customs = typeof customToolsJson === "string" ? JSON.parse(customToolsJson) : customToolsJson;
             if (Array.isArray(customs)) {
                 for (var i = 0; i < customs.length; i++) {
-                    if (customs[i] && customs[i].name === toolName && customs[i].collapseResult !== undefined) {
+                    if (customs[i] && wireToolName(customs[i].name) === toolName && customs[i].collapseResult !== undefined) {
                         return !!customs[i].collapseResult;
                     }
                 }
@@ -122,7 +168,7 @@ function setToolCollapsed(mapJson, toolName, collapsed) {
 
 function formatToolDisplayName(name) {
     if (!name) return "";
-    var words = name.split('_');
+    var words = bareToolName(name).split('_');
     for (var i = 0; i < words.length; i++) {
         var w = words[i];
         if (w === "http") w = "HTTP";
@@ -219,7 +265,7 @@ function buildCustomScriptTool(scriptDef) {
     }
 
     return {
-        name: scriptDef.name,
+        name: wireToolName(scriptDef.name),
         displayName: scriptDef.name,
         description: scriptDef.description,
         parameters: schema,
@@ -235,7 +281,7 @@ function buildCustomScriptTool(scriptDef) {
             if (scriptDef.requireSuperuser) {
                 cmd = "pkexec " + cmd;
             }
-            context.exec(cmd, scriptDef.name, args);
+            context.exec(cmd, wireToolName(scriptDef.name), args);
         }
     };
 }
@@ -246,7 +292,7 @@ function getTool(name, config) {
     if (config) {
         var custom = getCustomTools(config);
         for (var i = 0; i < custom.length; i++) {
-            if (custom[i].name === name) {
+            if (wireToolName(custom[i].name) === name) {
                 return buildCustomScriptTool(custom[i]);
             }
         }
@@ -259,7 +305,7 @@ function isTool(name, config) {
     if (config) {
         var custom = getCustomTools(config);
         for (var i = 0; i < custom.length; i++) {
-            if (custom[i].name === name) {
+            if (wireToolName(custom[i].name) === name) {
                 return true;
             }
         }
@@ -273,7 +319,7 @@ function getToolMetadata(name, config) {
     if (config) {
         var custom = getCustomTools(config);
         for (var i = 0; i < custom.length; i++) {
-            if (custom[i].name === name) {
+            if (wireToolName(custom[i].name) === name) {
                 var built = buildCustomScriptTool(custom[i]);
                 return {
                     name: built.name,
@@ -301,17 +347,17 @@ function getEnabledTools(config) {
     if (config.enableDesktopAutomation && DriverManager.isSessionActive) {
         var activeTools = [];
         if (config.useCommandTool) {
-            activeTools.push("run_command");
+            activeTools.push("plm_run_command");
         }
-        activeTools.push("DesktopGetState");
-        activeTools.push("DesktopSetOperatingContext");
-        activeTools.push("DesktopResetContext");
-        activeTools.push("DesktopScroll");
-        activeTools.push("DesktopClick");
-        activeTools.push("DesktopInput");
-        activeTools.push("DesktopMoveMouse");
-        activeTools.push("DesktopWindowControl");
-        activeTools.push("DesktopReadSelection");
+        activeTools.push("plm_DesktopGetState");
+        activeTools.push("plm_DesktopSetOperatingContext");
+        activeTools.push("plm_DesktopResetContext");
+        activeTools.push("plm_DesktopScroll");
+        activeTools.push("plm_DesktopClick");
+        activeTools.push("plm_DesktopInput");
+        activeTools.push("plm_DesktopMoveMouse");
+        activeTools.push("plm_DesktopWindowControl");
+        activeTools.push("plm_DesktopReadSelection");
         return activeTools;
     }
 
@@ -319,32 +365,32 @@ function getEnabledTools(config) {
 
     var custom = getCustomTools(config);
     for (var i = 0; i < custom.length; i++) {
-        enabled.push(custom[i].name);
+        enabled.push(wireToolName(custom[i].name));
     }
 
-    if (config.useCommandTool) enabled.push("run_command");
-    if (config.enableWebSearch && config.searchConfigured) enabled.push("web_search");
-    if (config.skillsEnabled && config.toolsSkillEnabled) enabled.push("skill");
-    if (config.skillsEnabled && config.toolsRunSkillScriptEnabled) enabled.push("run_skill_script");
-    if (config.toolsReadFileEnabled) enabled.push("read_file");
-    if (config.toolsWriteFileEnabled) enabled.push("write_file");
-    if (config.toolsListDirEnabled) enabled.push("list_dir");
-    if (config.toolsHttpGetEnabled) enabled.push("http_get");
-    if (config.toolsHttpRequestEnabled) enabled.push("http_request");
-    if (config.toolsSearchFilesEnabled) enabled.push("search_files");
-    if (config.toolsGetClipboardEnabled) enabled.push("get_clipboard");
-    if (config.toolsSetClipboardEnabled) enabled.push("set_clipboard");
-    if (config.toolsNotifyEnabled) enabled.push("notify");
-    if (config.toolsOpenUrlEnabled) enabled.push("open_url");
-    if (config.toolsEditMemoryEnabled) enabled.push("edit_memory");
-    if (config.ttsEnabled && config.ttsAllowAgentStyleControl) enabled.push("set_tts_style");
+    if (config.useCommandTool) enabled.push("plm_run_command");
+    if (config.enableWebSearch && config.searchConfigured) enabled.push("plm_web_search");
+    if (config.skillsEnabled && config.toolsSkillEnabled) enabled.push("plm_skill");
+    if (config.skillsEnabled && config.toolsRunSkillScriptEnabled) enabled.push("plm_run_skill_script");
+    if (config.toolsReadFileEnabled) enabled.push("plm_read_file");
+    if (config.toolsWriteFileEnabled) enabled.push("plm_write_file");
+    if (config.toolsListDirEnabled) enabled.push("plm_list_dir");
+    if (config.toolsHttpGetEnabled) enabled.push("plm_http_get");
+    if (config.toolsHttpRequestEnabled) enabled.push("plm_http_request");
+    if (config.toolsSearchFilesEnabled) enabled.push("plm_search_files");
+    if (config.toolsGetClipboardEnabled) enabled.push("plm_get_clipboard");
+    if (config.toolsSetClipboardEnabled) enabled.push("plm_set_clipboard");
+    if (config.toolsNotifyEnabled) enabled.push("plm_notify");
+    if (config.toolsOpenUrlEnabled) enabled.push("plm_open_url");
+    if (config.toolsEditMemoryEnabled) enabled.push("plm_edit_memory");
+    if (config.ttsEnabled && config.ttsAllowAgentStyleControl) enabled.push("plm_set_tts_style");
     if (config.compactionEnabled) {
-        enabled.push("restore_context");
-        enabled.push("recall_attachment");
+        enabled.push("plm_restore_context");
+        enabled.push("plm_recall_attachment");
     }
 
     if (config.enableDesktopAutomation) {
-        enabled.push("StartSession");
+        enabled.push("plm_StartSession");
     }
     
     return enabled;
@@ -355,43 +401,43 @@ function isAutoRun(toolId, config, args) {
         return true;
     }
     if (config && config.sessionAutoMode) {
-        if (toolId === "DesktopGetState" ||
-            toolId === "DesktopSetOperatingContext" ||
-            toolId === "DesktopResetContext" ||
-            toolId === "DesktopScroll" ||
-            toolId === "DesktopClick" ||
-            toolId === "DesktopInput" ||
-            toolId === "DesktopMoveMouse" ||
-            toolId === "DesktopWindowControl" ||
-            toolId === "DesktopReadSelection" ||
-            toolId === "StartSession") {
+        if (toolId === "plm_DesktopGetState" ||
+            toolId === "plm_DesktopSetOperatingContext" ||
+            toolId === "plm_DesktopResetContext" ||
+            toolId === "plm_DesktopScroll" ||
+            toolId === "plm_DesktopClick" ||
+            toolId === "plm_DesktopInput" ||
+            toolId === "plm_DesktopMoveMouse" ||
+            toolId === "plm_DesktopWindowControl" ||
+            toolId === "plm_DesktopReadSelection" ||
+            toolId === "plm_StartSession") {
             return true;
         }
     }
     switch (toolId) {
-        case "web_search": return true;
-        case "restore_context": return true;
-        case "recall_attachment": return true;
-        case "set_tts_style": return true;
-        case "skill": return config.toolsSkillAutoRun !== undefined ? config.toolsSkillAutoRun : true;
-        case "run_skill_script":
+        case "plm_web_search": return true;
+        case "plm_restore_context": return true;
+        case "plm_recall_attachment": return true;
+        case "plm_set_tts_style": return true;
+        case "plm_skill": return config.toolsSkillAutoRun !== undefined ? config.toolsSkillAutoRun : true;
+        case "plm_run_skill_script":
             return Skills.isSkillScriptAutoRun(args && (args.skill || args.name), config.skillsScriptsAutoRun);
-        case "run_command": return config.autoRunCommands;
-        case "read_file": return config.toolsReadFileAutoRun;
-        case "write_file": return config.toolsWriteFileAutoRun;
-        case "list_dir": return config.toolsListDirAutoRun;
-        case "http_get": return config.toolsHttpGetAutoRun;
-        case "http_request": return config.toolsHttpRequestAutoRun;
-        case "search_files": return config.toolsSearchFilesAutoRun;
-        case "get_clipboard": return config.toolsGetClipboardAutoRun;
-        case "set_clipboard": return config.toolsSetClipboardAutoRun;
-        case "notify": return config.toolsNotifyAutoRun;
-        case "open_url": return config.toolsOpenUrlAutoRun;
-        case "edit_memory": return config.toolsEditMemoryAutoRun;
+        case "plm_run_command": return config.autoRunCommands;
+        case "plm_read_file": return config.toolsReadFileAutoRun;
+        case "plm_write_file": return config.toolsWriteFileAutoRun;
+        case "plm_list_dir": return config.toolsListDirAutoRun;
+        case "plm_http_get": return config.toolsHttpGetAutoRun;
+        case "plm_http_request": return config.toolsHttpRequestAutoRun;
+        case "plm_search_files": return config.toolsSearchFilesAutoRun;
+        case "plm_get_clipboard": return config.toolsGetClipboardAutoRun;
+        case "plm_set_clipboard": return config.toolsSetClipboardAutoRun;
+        case "plm_notify": return config.toolsNotifyAutoRun;
+        case "plm_open_url": return config.toolsOpenUrlAutoRun;
+        case "plm_edit_memory": return config.toolsEditMemoryAutoRun;
     }
     var custom = getCustomTools(config);
     for (var i = 0; i < custom.length; i++) {
-        if (custom[i].name === toolId) {
+        if (wireToolName(custom[i].name) === toolId) {
             return custom[i].autoRun === true;
         }
     }
@@ -399,7 +445,7 @@ function isAutoRun(toolId, config, args) {
 }
 
 /**
- * Returns a deep-enough clone of the run_command metadata whose schema tells
+ * Returns a deep-enough clone of the plm_run_command metadata whose schema tells
  * the model its justification is verified by the command validator. Cloning
  * keeps the shared registry object used by the settings UI pristine.
  */
@@ -442,7 +488,7 @@ function getEnabledToolsMetadata(config) {
             // Advertise available skills inside the skill tool's schema
             // description so models see the list at tool-selection time. Clone first — meta may be the shared registry object, and
             // mutating it would leak XML into the settings UI and prompt text.
-            if (config && config.skillsEnabled && id === "skill") {
+            if (config && config.skillsEnabled && id === "plm_skill") {
                 var clone = {};
                 for (var k in meta) {
                     if (meta.hasOwnProperty(k)) clone[k] = meta[k];
@@ -456,7 +502,7 @@ function getEnabledToolsMetadata(config) {
             // Tell the model its justification is verified whenever command
             // validation is active. Deep-clone so the shared registry object
             // (and the settings UI reading from it) stays untouched.
-            if (config && config.commandValidatorEnabled && id === "run_command") {
+            if (config && config.commandValidatorEnabled && id === "plm_run_command") {
                 meta = _withValidatorNotice(meta);
             }
             metadata.push(meta);
@@ -489,8 +535,11 @@ function getToolInstruction(name, config, i18nFn) {
     if (config && config.toolsInstructions) {
         try {
             var map = typeof config.toolsInstructions === "string" ? JSON.parse(config.toolsInstructions) : config.toolsInstructions;
-            if (map && map[name] && typeof map[name] === "string" && map[name].trim().length > 0) {
-                return map[name].trim();
+            // Overrides saved before the plm_ namespace was introduced are keyed
+            // by the bare name; keep honouring them.
+            var key = (map && map[name]) ? name : bareToolName(name);
+            if (map && map[key] && typeof map[key] === "string" && map[key].trim().length > 0) {
+                return map[key].trim();
             }
         } catch(e) {}
     }
@@ -549,15 +598,15 @@ function buildSystemPromptSection(config, i18nFn) {
             var whitelistStr = whitelist.join(", ");
             details = loc ? _tr(i18nFn, config, ". Access restricted to: %1", whitelistStr) : (". Access restricted to: " + whitelistStr);
         }
-        if (id === "read_file") {
+        if (id === "plm_read_file") {
             var readMax = config.toolsReadMaxBytes || 204800;
             details += loc ? _tr(i18nFn, config, ". Max %1 bytes", readMax) : (". Max " + readMax + " bytes");
         }
-        if (id === "write_file") {
+        if (id === "plm_write_file") {
             var writeMax = config.toolsWriteMaxBytes || 1048576;
             details += loc ? _tr(i18nFn, config, ". Max %1 bytes", writeMax) : (". Max " + writeMax + " bytes");
         }
-        if (id === "http_get" || id === "http_request") {
+        if (id === "plm_http_get" || id === "plm_http_request") {
             var httpMax = config.toolsHttpMaxBytes || 524288;
             details += loc ? _tr(i18nFn, config, ". Max %1 bytes response", httpMax) : (". Max " + httpMax + " bytes response");
         }
@@ -565,7 +614,7 @@ function buildSystemPromptSection(config, i18nFn) {
         var instruction = getToolInstruction(id, config, i18nFn);
         // Stated after the (possibly user-overridden) instructions so an
         // override cannot accidentally hide how validation behaves.
-        if (id === "run_command" && config && config.commandValidatorEnabled) {
+        if (id === "plm_run_command" && config && config.commandValidatorEnabled) {
             instruction += " " + (loc
                 ? _tr(i18nFn, config, "Your justification is verified against the command before it runs, and the command is checked for shell syntax errors; commands that fail either check are rejected.")
                 : "Your justification is verified against the command before it runs, and the command is checked for shell syntax errors; commands that fail either check are rejected.");
@@ -695,7 +744,7 @@ function isPathAllowed(path, whitelistStr, paths) {
 // Catalog strings for xgettext extraction of built-in tool descriptions.
 function _toolDescriptionsCatalog() {
     return [
-        i18n("Execute a shell command on the user's system and return its output. Guidelines:\n- Use `pkexec` instead of `sudo` for any command requiring superuser privileges.\n- Chain steps with `&&`.\n- Commands run non-interactively. Never use commands that wait for user input (like `read`).\n- Use `kdialog` if you need to prompt the user for input or show a message box (e.g., `kdialog --inputbox \"Prompt\"`).\n- NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission.\n- When permission is needed, ask the user in plain text first.\n- For auto-run tools: Be conservative and prefer read-only commands. If an action is potentially disruptive, describe it in plain text and wait for explicit user approval before calling the tool.\n- You MUST prefer other, more specific tools (like read_file, write_file, search_files, etc.) if they can accomplish the task. Only use this tool if no other tool is suitable."),
+        i18n("Execute a shell command on the user's system and return its output. Guidelines:\n- Use `pkexec` instead of `sudo` for any command requiring superuser privileges.\n- Chain steps with `&&`.\n- Commands run non-interactively. Never use commands that wait for user input (like `read`).\n- Use `kdialog` if you need to prompt the user for input or show a message box (e.g., `kdialog --inputbox \"Prompt\"`).\n- NEVER install packages, modify system configuration, reboot, or take any action that alters the system or disrupts the user without explicit permission.\n- When permission is needed, ask the user in plain text first.\n- For auto-run tools: Be conservative and prefer read-only commands. If an action is potentially disruptive, describe it in plain text and wait for explicit user approval before calling the tool.\n- You MUST prefer other, more specific tools (like plm_read_file, plm_write_file, plm_search_files, etc.) if they can accomplish the task. Only use this tool if no other tool is suitable."),
         i18n("Read the contents of a file at the specified path. Access is restricted to allowed directories."),
         i18n("Write content to a file at the specified path. Access is restricted to allowed directories."),
         i18n("List the contents of a directory. Access is restricted to allowed directories."),

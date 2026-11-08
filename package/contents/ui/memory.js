@@ -10,7 +10,7 @@
 // JSON array string (config key "memoryPhrases"). The phrases are rendered
 // into the system prompt's {{memories}} section on every rebuild, so context
 // compaction and message capping can never drop them mid-session. Entries are
-// managed via the edit_memory tool and matched by the 1-based number shown in
+// managed via the plm_edit_memory tool and matched by the 1-based number shown in
 // that rendered list or by text.
 
 var MAX_PHRASES = 100;
@@ -160,12 +160,16 @@ function updatePhrase(list, target, text) {
 }
 
 // Renders the {{memories}} system-prompt section; "" when there are no phrases.
-function renderSection(list) {
+function renderSection(list, includeToolHint) {
     var items = parseStored(list);
     if (items.length === 0) return "";
+    var intro = "Long-term notes the user asked you to remember across conversations.";
+    if (includeToolHint !== false) {
+        intro += " Add, update, or remove entries with the `plm_edit_memory` tool, citing an entry's number or text.";
+    }
     var lines = [
         "## Persistent Memory",
-        "Long-term notes the user asked you to remember across conversations. Add, update, or remove entries with the `edit_memory` tool, citing an entry's number or text.",
+        intro,
         ""
     ];
     for (var i = 0; i < items.length; i++) {

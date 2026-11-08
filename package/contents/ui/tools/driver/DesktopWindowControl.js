@@ -6,7 +6,7 @@
 .pragma library
 .import "../../driverManager.js" as DriverManager
 
-var name = "DesktopWindowControl";
+var name = "plm_DesktopWindowControl";
 var displayName = "Desktop Window Control";
 var description = "Performs window management actions (focusing/restoring, minimizing, maximizing, closing, or moving/resizing) on a window by its UUID.";
 var parameters = {

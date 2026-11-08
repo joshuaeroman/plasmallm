@@ -92,7 +92,7 @@ Rectangle {
             }
 
             PlasmaComponents.ToolButton {
-                visible: toolBlock.isRunning && toolBlock.toolName === "run_command"
+                visible: toolBlock.isRunning && toolBlock.toolName === "plm_run_command"
                 icon.name: "process-stop"
                 onClicked: toolBlock.stopRequested(args.command || "")
                 PlasmaComponents.ToolTip.text: i18n("Stop command")
@@ -101,7 +101,7 @@ Rectangle {
             }
 
             Kirigami.Chip {
-                visible: sessionMode && sessionLabel !== "" && toolBlock.toolName === "run_command"
+                visible: sessionMode && sessionLabel !== "" && toolBlock.toolName === "plm_run_command"
                 text: sessionLabel
                 icon.name: "utilities-terminal"
                 closable: false

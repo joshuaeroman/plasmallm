@@ -208,7 +208,7 @@ ok(!S.isValidSkillName("has_underscore"), "underscore rejected");
     const messages = [
         { role: "system", content: "sys" },
         { role: "user", content: "check the weather" },
-        { role: "assistant", content: "", tool_calls: [{ id: "call_1", "function": { name: "skill", arguments: "{\"name\":\"weather\"}" } }] },
+        { role: "assistant", content: "", tool_calls: [{ id: "call_1", "function": { name: "plm_skill", arguments: "{\"name\":\"weather\"}" } }] },
         { role: "tool", tool_call_id: "call_1", content: "WEATHER BODY (long)" },
         { role: "assistant", content: "It is sunny." }
     ];
@@ -227,14 +227,14 @@ ok(!S.isValidSkillName("has_underscore"), "underscore rejected");
 
     // Object-form arguments and non-skill tools are handled.
     const objArgs = [
-        { role: "assistant", tool_calls: [{ id: "c2", "function": { name: "skill", arguments: { name: "weather" } } }] },
+        { role: "assistant", tool_calls: [{ id: "c2", "function": { name: "plm_skill", arguments: { name: "weather" } } }] },
         { role: "tool", tool_call_id: "c2", content: "BODY" }
     ];
     eq(S.stubDeliveredSkillResults(objArgs, ["weather"])[1].content.indexOf("[[plasmallm-skill-stub]]") === 0, true,
         "object-form arguments stubbed");
 
     const mixedTools = [
-        { role: "assistant", tool_calls: [{ id: "c3", "function": { name: "run_command", arguments: "{}" } }] },
+        { role: "assistant", tool_calls: [{ id: "c3", "function": { name: "plm_run_command", arguments: "{}" } }] },
         { role: "tool", tool_call_id: "c3", content: "ls output" }
     ];
     ok(S.stubDeliveredSkillResults(mixedTools, ["weather"]) === mixedTools, "non-skill calls untouched");
@@ -345,9 +345,9 @@ ok(!S.isValidSkillName("has_underscore"), "underscore rejected");
     ok(shipped.valid, "shipped create-skill parses as valid: " + shipped.error);
     eq(shipped.name, "create-skill", "shipped name");
     ok(shipped.description.length > 0, "shipped description present");
-    ok(shipped.body.indexOf("write_file") !== -1, "shipped body instructs write_file");
+    ok(shipped.body.indexOf("plm_write_file") !== -1, "shipped body instructs plm_write_file");
     ok(shipped.body.indexOf("as-is") !== -1, "shipped body tells the model not to expand tilde");
-    ok(shipped.body.indexOf("run_skill_script") !== -1, "shipped body prefers run_skill_script for CLI skills");
+    ok(shipped.body.indexOf("plm_run_skill_script") !== -1, "shipped body prefers plm_run_skill_script for CLI skills");
     ok(shipped.body.indexOf("args") !== -1, "shipped body requires documenting script args");
 }
 

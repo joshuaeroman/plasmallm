@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "http_request";
+var name = "plm_http_request";
 var description = "Perform an HTTP request (POST, PUT, etc.) to a URL.";
 var parameters = {
     type: "object",

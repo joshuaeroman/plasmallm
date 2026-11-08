@@ -149,7 +149,7 @@ msgid "Saved phrases:"
 msgstr ""
 
 msgid ""
-"Nothing remembered yet. The assistant can save phrases with its edit_memory "
+"Nothing remembered yet. The assistant can save phrases with its plm_edit_memory "
 "tool, or add them below."
 msgstr ""
 
@@ -994,8 +994,8 @@ msgid ""
 "- For auto-run tools: Be conservative and prefer read-only commands. If an "
 "action is potentially disruptive, describe it in plain text and wait for "
 "explicit user approval before calling the tool.\n"
-"- You MUST prefer other, more specific tools (like read_file, write_file, "
-"search_files, etc.) if they can accomplish the task. Only use this tool if "
+"- You MUST prefer other, more specific tools (like plm_read_file, plm_write_file, "
+"plm_search_files, etc.) if they can accomplish the task. Only use this tool if "
 "no other tool is suitable."
 msgstr ""
 
@@ -1396,7 +1396,7 @@ msgstr ""
 
 msgid ""
 "Whitelist applies to file-system tools (read, write, list, search). Note: "
-"'run_command' is not restricted by this list."
+"'plm_run_command' is not restricted by this list."
 msgstr ""
 
 msgid "Max read size:"

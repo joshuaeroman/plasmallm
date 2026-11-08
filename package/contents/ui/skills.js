@@ -17,7 +17,7 @@
 //
 // Discovery scans one or more root directories for <name>/SKILL.md files.
 // Enabled skills are advertised to the model as an <available_skills> index;
-// the model loads full instructions by calling the built-in "skill" tool.
+// the model loads full instructions by calling the built-in "plm_skill" tool.
 // Once loaded in a session ("active"), bodies are re-injected in full into
 // every system prompt rebuild so context compaction and message capping can
 // never drop them.
@@ -188,7 +188,7 @@ function normalizeScriptArgs(raw) {
 }
 
 /**
- * Resolves a run_skill_script call to a bash command, or { error }.
+ * Resolves a plm_run_skill_script call to a bash command, or { error }.
  * Prefers scripts/<name>.sh, then <name>.sh next to SKILL.md.
  */
 function resolveSkillScript(args, skills, config) {
@@ -332,8 +332,8 @@ function buildSystemPromptSection(skills, disabledJson, activeNames) {
 
     var out = "\n## Skills\n\n";
     if (enabled.length > 0) {
-        out += "If a task matches an available skill, load it with the `skill` tool before using any other tools. " +
-            "The list of available skills is included in the `skill` tool's description.\n";
+        out += "If a task matches an available skill, load it with the `plm_skill` tool before using any other tools. " +
+            "The list of available skills is included in the `plm_skill` tool's description.\n";
     }
     if (active.length > 0) {
         out += "\n### Loaded Skill Instructions\n\n" +
@@ -387,7 +387,7 @@ function stubDeliveredSkillResults(messages, activeNames) {
         for (var c = 0; c < calls.length; c++) {
             var call = calls[c];
             var fn = call && call["function"] ? call["function"] : null;
-            if (!fn || fn.name !== "skill") continue;
+            if (!fn || String(fn.name || "").replace(/^plm_/, "") !== "skill") continue;
             var skillName = _extractArgName(fn.arguments);
             if (!skillName || !lookup[skillName]) continue;
             for (var t = i + 1; t < out.length; t++) {

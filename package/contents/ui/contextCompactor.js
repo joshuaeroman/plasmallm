@@ -168,7 +168,7 @@ function compactHistory(opts, callback) {
     var transcript = opts.transcript || "";
     var previousSummary = opts.previousSummary || "";
     var instructions = opts.instructions || (
-        "Summarize this conversation. Be very concise and use shorthand and abbreviations when possible. No prose. Retain important specifics when brief. For larger specifics like logs, use of restore_context/recall_attachment tool will work instead. Cite every item with a msgId or msgId range, e.g. [1], [3-6], [2,7-10]\n\n" +
+        "Summarize this conversation. Be very concise and use shorthand and abbreviations when possible. No prose. Retain important specifics when brief. For larger specifics like logs, use of plm_restore_context/plm_recall_attachment tool will work instead. Cite every item with a msgId or msgId range, e.g. [1], [3-6], [2,7-10]\n\n" +
         "When a previous compaction exists, use it as a starting point. Be conservative about removing things; update and merge new information rather than discarding established context unless subsequent messages prove it entirely out of scope. Always persist all attached files across compaction cycles.\n\n" +
         "Structure:\n# Key Topics\n<...>\n# User Goals\n<...>\n# Agent Goals\n<...>\n# Decisions\n<...>\n# Current Status\n<...>\n# Attachments\n- example.txt - brief description of its contents [msgId]"
     );

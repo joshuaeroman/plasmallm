@@ -69,7 +69,7 @@ ColumnLayout {
 
     QQC2.Label {
         visible: phrases.length === 0
-        text: i18n("Nothing remembered yet. The assistant can save phrases with its edit_memory tool, or add them below.")
+        text: i18n("Nothing remembered yet. The assistant can save phrases with its plm_edit_memory tool, or add them below.")
         font: Kirigami.Theme.smallFont
         color: Kirigami.Theme.disabledTextColor
         wrapMode: Text.Wrap

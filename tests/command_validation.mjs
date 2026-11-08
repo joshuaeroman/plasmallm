@@ -81,7 +81,7 @@ eq(V.decisionsModel({ endpoint: "https://openrouter.ai/api/v1", modelName: "~typ
         command: "rm -rf ~/tmp/x",
         justification: "Clean up temporary files"
     });
-    eq(req.state.tool, "run_command", "state tool");
+    eq(req.state.tool, "plm_run_command", "state tool");
     eq(req.state.command, "rm -rf ~/tmp/x", "state command");
     eq(req.state.justification, "Clean up temporary files", "state justification");
     eq(req.questions.justification_mismatch.type, "noul", "mismatch question type");
