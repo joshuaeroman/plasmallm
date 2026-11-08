@@ -572,6 +572,7 @@ BaseConfigPage {
             }
             if (usesResponsesAPICheckBox) usesResponsesAPICheckBox.checked = cfg_usesResponsesAPI;
             if (openrouterAttributionCheckBox) openrouterAttributionCheckBox.checked = cfg_openrouterAttribution;
+            if (reasoningModelOptionsCheckBox) reasoningModelOptionsCheckBox.checked = cfg_reasoningModelOptions;
             if (showThoughtsCheckBox) showThoughtsCheckBox.checked = cfg_showThoughts;
             if (apiEndpointField) apiEndpointField.text = cfg_apiEndpoint;
             syncEndpointPresetIndex();
