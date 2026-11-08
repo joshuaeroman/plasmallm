@@ -57,7 +57,8 @@ function systemPromptTemplateDefault() {
 
 const PROFILE_FIELDS = [
     "apiType", "apiEndpoint", "providerName", "modelName", "usesResponsesAPI",
-    "temperature", "maxTokens", "reasoningEffort", "thinkingBudget", "showThoughts",
+    "temperature", "maxTokens", "reasoningEffort", "reasoningModelOptions",
+    "thinkingBudget", "showThoughts",
     "geminiApiVariant", "geminiAuthMethod", "geminiVertexAuthType", "geminiProjectId",
     "geminiLocation", "openaiLastProvider", "openaiLastEndpoint",
     "enableNativeGoogleSearch", "enableNativeCodeExecution",
@@ -97,6 +98,7 @@ const PROFILE_DEFAULTS = {
     temperature: 70,
     maxTokens: 2048,
     reasoningEffort: "off",
+    reasoningModelOptions: false,
     thinkingBudget: 4096,
     showThoughts: true,
     geminiApiVariant: "legacy",

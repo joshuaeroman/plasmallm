@@ -85,8 +85,25 @@ function sse(delta) {
         "data: [DONE]\n\n";
 }
 
+// Reasoning placement. Gateways that decode per-request options read
+// model_options; everything else keeps the top-level field.
+let result = send({ reasoningEffort: "high" });
+let rbody = JSON.parse(requests.shift().body);
+eq(rbody.reasoning_effort, "high", "default: top-level reasoning_effort");
+ok(!("model_options" in rbody), "default: no model_options");
+
+result = send({ reasoningEffort: "high", reasoningModelOptions: true });
+rbody = JSON.parse(requests.shift().body);
+eq(rbody.model_options, { reasoning_effort: "high" }, "model_options carries the effort");
+ok(!("reasoning_effort" in rbody), "no top-level reasoning_effort with model_options on");
+
+result = send({ reasoningEffort: "off", reasoningModelOptions: true });
+rbody = JSON.parse(requests.shift().body);
+ok(!("reasoning_effort" in rbody) && !("model_options" in rbody),
+    "off sends no reasoning fields");
+
 // A call the model addressed to an advertised tool is reported to the host.
-let result = send();
+result = send();
 requests.shift().respond(200, sse({
     tool_calls: [{ index: 0, id: "call_client", type: "function",
         "function": { name: "plm_read_file", arguments: "{}" } }]

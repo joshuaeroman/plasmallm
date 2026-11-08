@@ -3707,6 +3707,7 @@ PlasmoidItem {
                 temperature: Plasmoid.configuration.temperature,
                 maxTokens: Plasmoid.configuration.maxTokens,
                 reasoningEffort: Plasmoid.configuration.reasoningEffort,
+                reasoningModelOptions: Plasmoid.configuration.reasoningModelOptions,
                 thinkingBudget: Plasmoid.configuration.thinkingBudget,
                 showThoughts: Plasmoid.configuration.showThoughts,
                 usesResponsesAPI: Plasmoid.configuration.usesResponsesAPI,

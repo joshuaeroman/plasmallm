@@ -30,7 +30,7 @@ var capabilities = {
     reasoningEffort: true,
     thinkingBudget: false,
     fetchModels: true,
-    reasoningHelp: "Reasoning effort (low / medium / high) gates extended thinking. To see thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; chat-completions providers (DeepSeek, Qwen) surface reasoning via reasoning_content."
+    reasoningHelp: "Reasoning effort (low / medium / high) gates extended thinking. To see thoughts on OpenAI / Poe / OpenRouter / Azure, enable Use Responses API; chat-completions providers (DeepSeek, Qwen) surface reasoning via reasoning_content. Gateways that decode model_options (Hermes Agent) need \"Send reasoning via model_options\"."
 };
 
 // Provider presets shown in the settings UI. usesResponsesAPI:true marks

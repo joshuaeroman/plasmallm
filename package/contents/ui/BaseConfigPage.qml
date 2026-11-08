@@ -123,6 +123,8 @@ SimpleKCM {
     property int cfg_maxTokensDefault
     property string cfg_reasoningEffort
     property string cfg_reasoningEffortDefault
+    property bool cfg_reasoningModelOptions
+    property bool cfg_reasoningModelOptionsDefault
     property int cfg_thinkingBudget
     property int cfg_thinkingBudgetDefault
     property bool cfg_showThoughts
