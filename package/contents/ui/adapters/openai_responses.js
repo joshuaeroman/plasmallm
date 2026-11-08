@@ -197,12 +197,13 @@ function translateMessages(neutralMessages) {
         var m = neutralMessages[i];
 
         if (m.role === "system") {
+            // The Responses API takes the system prompt as `instructions`;
+            // a system item inside `input` is history, not a prompt, and
+            // Anthropic-routed gateways keep only the last one.
             if (typeof m.content === "string" && m.content.length > 0) {
-                input.push({
-                    type: "message",
-                    role: "system",
-                    content: [{ type: "input_text", text: m.content }]
-                });
+                instructions = instructions.length > 0
+                    ? instructions + "\n\n" + m.content
+                    : m.content;
             }
             continue;
         }

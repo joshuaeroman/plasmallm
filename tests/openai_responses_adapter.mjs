@@ -91,10 +91,42 @@ function send(extra) {
     return { handle, result };
 }
 
+// The system prompt belongs in `instructions`; an input system item is
+// history to Responses gateways and shadows their own prompt on Anthropic.
+let { result } = send({
+    messages: [
+        { role: "system", content: "You are a careful assistant." },
+        { role: "user", content: "hi" }
+    ]
+});
+let body = JSON.parse(requests.shift().body);
+eq(body.instructions, "You are a careful assistant.", "system prompt sent as instructions");
+eq(body.input.filter(function(item) { return item.role === "system"; }).length, 0,
+    "no system item in input");
+eq(body.input.length, 1, "only the user turn is input");
+eq(body.input[0].role, "user", "user turn preserved");
+
+// Prompt-less requests omit instructions entirely.
+({ result } = send());
+body = JSON.parse(requests.shift().body);
+ok(!("instructions" in body), "no instructions without a system message");
+
+// Several system messages concatenate in order.
+({ result } = send({
+    messages: [
+        { role: "system", content: "First." },
+        { role: "system", content: "" },
+        { role: "system", content: "Second." },
+        { role: "user", content: "hi" }
+    ]
+}));
+body = JSON.parse(requests.shift().body);
+eq(body.instructions, "First.\n\nSecond.", "system messages joined with a blank line");
+
 // Gateway executes its own tool server-side and streams both the call and its
 // output. The call must not be reported to the host, otherwise the follow-up
 // request ends in a tool item and strict gateways reject it.
-let { result } = send();
+({ result } = send());
 requests.shift().respond(200, sse([
     { type: "response.output_item.added", item: {
         type: "function_call", id: "fc_1", call_id: "call_srv", name: "browser_exec", arguments: "{}" } },
