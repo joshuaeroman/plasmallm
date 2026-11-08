@@ -525,7 +525,13 @@ function sendStreaming(opts) {
         stream: true
     };
     if (opts.reasoningEffort && opts.reasoningEffort !== "off") {
-        body.reasoning_effort = opts.reasoningEffort;
+        if (opts.reasoningModelOptions) {
+            // Some gateways (Hermes Agent) decode per-request options from
+            // model_options and ignore the top-level reasoning_effort.
+            body.model_options = { reasoning_effort: opts.reasoningEffort };
+        } else {
+            body.reasoning_effort = opts.reasoningEffort;
+        }
     }
     if (tools && tools.length > 0) {
         body.tools = tools;

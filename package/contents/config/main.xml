@@ -46,6 +46,10 @@
       <label>Reasoning effort: off, low, medium, high</label>
       <default>off</default>
     </entry>
+    <entry name="reasoningModelOptions" type="Bool">
+      <label>Send reasoning via model_options (for gateways such as Hermes Agent that ignore top-level reasoning_effort)</label>
+      <default>false</default>
+    </entry>
     <entry name="thinkingBudget" type="Int">
       <label>Thinking token budget (Anthropic/Gemini)</label>
       <default>4096</default>

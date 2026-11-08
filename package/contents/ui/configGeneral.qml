@@ -1316,6 +1316,25 @@ BaseConfigPage {
             }
         }
 
+        QQC2.CheckBox {
+            id: reasoningModelOptionsCheckBox
+            text: i18n("Send reasoning via model_options")
+            // Only the chat-completions strategy reads this option; the
+            // Responses adapter uses its own reasoning object.
+            visible: effectiveApiType === "openai" && !cfg_usesResponsesAPI
+            enabled: cfg_reasoningEffort !== "off"
+            checked: cfg_reasoningModelOptions
+            onCheckedChanged: {
+                if (!_initialized) return;
+                cfg_reasoningModelOptions = checked;
+                rootItem.triggerCapture();
+            }
+
+            QQC2.ToolTip.text: i18n("Some gateways (for example Hermes Agent) read reasoning from model_options instead of the top-level reasoning_effort field. Enable only for endpoints that expect it; other APIs may reject the unknown field.")
+            QQC2.ToolTip.delay: 500
+            QQC2.ToolTip.visible: hovered
+        }
+
         QQC2.SpinBox {
             id: thinkingBudgetSpinBox
             Kirigami.FormData.label: i18n("Thinking budget:")
