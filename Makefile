@@ -29,6 +29,10 @@ test:
 	node tests/gemini_thinking.mjs
 	node tests/agent_platform.mjs
 	node tests/gemini_adapter.mjs
+	node tests/openai_responses_adapter.mjs
+	node tests/openai_chat_adapter.mjs
+	node tests/tool_names.mjs
+	node tests/server_agent_capability.mjs
 	node tests/skills.mjs
 	node tests/command_validation.mjs
 	node tests/decisions_adapter.mjs

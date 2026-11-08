@@ -6,7 +6,7 @@
 .pragma library
 .import "../../driverManager.js" as DriverManager
 
-var name = "DesktopResetContext";
+var name = "plm_DesktopResetContext";
 var displayName = "Desktop Reset Context";
 var description = "Clears active window focus restrictions and returns back to the global full-screen mode. Returns a new visual and semantic global state in a single call.";
 var parameters = {

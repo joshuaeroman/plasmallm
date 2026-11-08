@@ -6,7 +6,7 @@
 .pragma library
 .import "../../driverManager.js" as DriverManager
 
-var name = "DesktopScroll";
+var name = "plm_DesktopScroll";
 var displayName = "Desktop Scroll";
 var description = "Simulates mouse wheel scrolling in a given direction at specific coordinates (relative to the active operating context window, if set).";
 var parameters = {

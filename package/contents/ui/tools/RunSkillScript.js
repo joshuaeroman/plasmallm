@@ -5,10 +5,10 @@
 
 .pragma library
 
-var name = "run_skill_script";
+var name = "plm_run_skill_script";
 var displayName = "Run Skill Script";
 var description = "Run a .sh file that belongs to an available skill (scripts/<name>.sh or <name>.sh next to SKILL.md). " +
-    "Pass the skill name, script basename, and an args array. Do not use run_command for that work. " +
+    "Pass the skill name, script basename, and an args array. Do not use plm_run_command for that work. " +
     "The script's working directory is the user's home. " +
     "The user may enable auto-run for that skill in Settings → Skills.";
 var parameters = {

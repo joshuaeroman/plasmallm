@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "open_url";
+var name = "plm_open_url";
 var description = "Open a URL in the default application (e.g., web browser).";
 var parameters = {
     type: "object",

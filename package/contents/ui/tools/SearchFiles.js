@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "search_files";
+var name = "plm_search_files";
 var description = "Search for a pattern within files in a directory (recursive).";
 var parameters = {
     type: "object",

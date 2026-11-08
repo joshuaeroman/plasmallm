@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "write_file";
+var name = "plm_write_file";
 var description = "Write content to a file at the specified path. Access is restricted to allowed directories.";
 var parameters = {
     type: "object",

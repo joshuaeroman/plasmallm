@@ -149,6 +149,22 @@ function buildTools(options) {
     return tools;
 }
 
+// Names this request advertised to the server. A streamed call outside this
+// set was executed server-side by a gateway (or hallucinated) and cannot be run
+// locally: re-posting it as a tool result is what makes strict gateways reject
+// the follow-up with "No user message found in input".
+function advertisedToolNames(tools) {
+    var names = {};
+    if (Array.isArray(tools)) {
+        for (var i = 0; i < tools.length; i++) {
+            var tool = tools[i];
+            var name = tool && (tool.name || (tool["function"] && tool["function"].name));
+            if (name) names[name] = true;
+        }
+    }
+    return names;
+}
+
 // buildContentArray: returns Responses input parts with input_text / input_image
 // types, or a string when no attachments. translateMessages also accepts string.
 function buildContentArray(text, attachments) {
@@ -407,6 +423,10 @@ function sendStreaming(opts) {
     // OpenAI tool_call shape main.qml dispatches on.
     var toolCallsByItemId = {};
     var accumulatedToolCalls = [];
+    // call_ids the server already answered with a function_call_output item.
+    // Those calls ran server-side; reporting them to the host would make it
+    // re-execute them and re-post a tool-last transcript.
+    var answeredCallIds = {};
     // Reasoning blocks captured from item_done events keyed by reasoning id.
     // Order preserved via thinkingBlockOrder.
     var thinkingBlocks = [];
@@ -450,7 +470,9 @@ function sendStreaming(opts) {
             }
             if (tok.item_added) {
                 var ia = tok.item_added;
-                if (ia.type === "reasoning") {
+                if (ia.type === "function_call_output" && ia.call_id) {
+                    answeredCallIds[ia.call_id] = true;
+                } else if (ia.type === "reasoning") {
                     currentReasoningId = ia.id || "";
                 } else if (ia.type === "function_call") {
                     var startArgs = ia.arguments || "";
@@ -476,7 +498,9 @@ function sendStreaming(opts) {
             }
             if (tok.item_done) {
                 var idn = tok.item_done;
-                if (idn.type === "reasoning") {
+                if (idn.type === "function_call_output" && idn.call_id) {
+                    answeredCallIds[idn.call_id] = true;
+                } else if (idn.type === "reasoning") {
                     // Finalize a reasoning block. Capture id, summary, and
                     // encrypted_content (when include:["reasoning.encrypted_content"]
                     // was set) so the caller can round-trip them.
@@ -551,13 +575,29 @@ function sendStreaming(opts) {
             console.error("PlasmaLLM OpenAI Responses Adapter: onComplete with error:", error);
             onComplete(accumulatedText, error, null, null);
         } else if (accumulatedToolCalls.length > 0) {
-            var assistantMsg = {
+            var known = advertisedToolNames(tools);
+            var pendingToolCalls = [];
+            for (var p = 0; p < accumulatedToolCalls.length; p++) {
+                var pending = accumulatedToolCalls[p];
+                if (answeredCallIds[pending.id]) continue;
+                if (!known[pending["function"].name]) continue;
+                pendingToolCalls.push(pending);
+            }
+            if (pendingToolCalls.length > 0) {
+                var assistantMsg = {
+                    role: "assistant",
+                    content: accumulatedText || null,
+                    tool_calls: pendingToolCalls,
+                    thinkingBlocks: thinkingBlocks
+                };
+                onComplete(accumulatedText, null, pendingToolCalls, assistantMsg);
+                return;
+            }
+            onComplete(accumulatedText, null, null, {
                 role: "assistant",
-                content: accumulatedText || null,
-                tool_calls: accumulatedToolCalls,
+                content: accumulatedText,
                 thinkingBlocks: thinkingBlocks
-            };
-            onComplete(accumulatedText, null, accumulatedToolCalls, assistantMsg);
+            });
         } else if (accumulatedText.length > 0 || thinkingBlocks.length > 0) {
             onComplete(accumulatedText, null, null, {
                 role: "assistant",
@@ -571,10 +611,15 @@ function sendStreaming(opts) {
                 var text = "";
                 var calls = [];
                 var thinks = [];
+                // call_ids answered by a function_call_output item in the same
+                // (non-streamed) response.
+                var answered = {};
                 if (response.output && response.output.length) {
                     for (var i = 0; i < response.output.length; i++) {
                         var item = response.output[i];
-                        if (item.type === "message" && item.content) {
+                        if (item.type === "function_call_output" && item.call_id) {
+                            answered[item.call_id] = true;
+                        } else if (item.type === "message" && item.content) {
                             for (var ci = 0; ci < item.content.length; ci++) {
                                 var c = item.content[ci];
                                 if (c.type === "output_text" && typeof c.text === "string") text += c.text;
@@ -598,9 +643,16 @@ function sendStreaming(opts) {
                         }
                     }
                 }
-                if (calls.length > 0) {
-                    onComplete(text, null, calls, {
-                        role: "assistant", content: text || null, tool_calls: calls, thinkingBlocks: thinks
+                var fallbackKnown = advertisedToolNames(tools);
+                var pendingCalls = [];
+                for (var pc = 0; pc < calls.length; pc++) {
+                    if (answered[calls[pc].id]) continue;
+                    if (!fallbackKnown[calls[pc]["function"].name]) continue;
+                    pendingCalls.push(calls[pc]);
+                }
+                if (pendingCalls.length > 0) {
+                    onComplete(text, null, pendingCalls, {
+                        role: "assistant", content: text || null, tool_calls: pendingCalls, thinkingBlocks: thinks
                     });
                 } else if (text.length > 0 || thinks.length > 0) {
                     onComplete(text, null, null, {

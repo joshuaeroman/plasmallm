@@ -6,9 +6,9 @@
 .pragma library
 .import "../../driverManager.js" as DriverManager
 
-var name = "DesktopInput";
+var name = "plm_DesktopInput";
 var displayName = "Desktop Input";
-var description = "Type text, press keyboard shortcuts, or use the fill_text macro. Coordinates are relative to the active operating context window (if set via DesktopSetOperatingContext), or absolute screen coordinates otherwise.";
+var description = "Type text, press keyboard shortcuts, or use the fill_text macro. Coordinates are relative to the active operating context window (if set via plm_DesktopSetOperatingContext), or absolute screen coordinates otherwise.";
 var parameters = {
     type: "object",
     properties: {

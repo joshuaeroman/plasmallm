@@ -400,7 +400,7 @@ ok(!promptNoTts.includes("## Text-to-Speech"), "TTS section omitted when ttsEnab
 
 // 7. SetTtsStyle Tool Tests
 const SetTtsStyle = loadModule("../package/contents/ui/tools/SetTtsStyle.js");
-eq(SetTtsStyle.name, "set_tts_style", "tool name is set_tts_style");
+eq(SetTtsStyle.name, "plm_set_tts_style", "tool name is plm_set_tts_style");
 ok(SetTtsStyle.parameters.properties.style, "style parameter defined");
 ok(SetTtsStyle.parameters.properties.scope, "scope parameter defined");
 eq(SetTtsStyle.sideEffect, true, "sideEffect is true");
@@ -462,7 +462,7 @@ ok(gatingError.includes("disabled"), "error reported when style control disabled
 // 8. ToolManager integration tests
 const ToolManager = loadModule("../package/contents/ui/toolManager.js", {
     ToolRegistry: {
-        getTool: (n) => n === "set_tts_style" ? SetTtsStyle : null,
+        getTool: (n) => n === "plm_set_tts_style" ? SetTtsStyle : null,
         getToolConfigUI: () => "",
         getAllTools: () => [SetTtsStyle]
     },
@@ -477,25 +477,25 @@ const disabledTools1 = ToolManager.getEnabledTools({
     ttsEnabled: false,
     ttsAllowAgentStyleControl: true
 });
-ok(disabledTools1.indexOf("set_tts_style") === -1, "set_tts_style disabled when ttsEnabled: false");
+ok(disabledTools1.indexOf("plm_set_tts_style") === -1, "plm_set_tts_style disabled when ttsEnabled: false");
 
 const disabledTools2 = ToolManager.getEnabledTools({
     enableTools: true,
     ttsEnabled: true,
     ttsAllowAgentStyleControl: false
 });
-ok(disabledTools2.indexOf("set_tts_style") === -1, "set_tts_style disabled when ttsAllowAgentStyleControl: false");
+ok(disabledTools2.indexOf("plm_set_tts_style") === -1, "plm_set_tts_style disabled when ttsAllowAgentStyleControl: false");
 
 const enabledTools = ToolManager.getEnabledTools({
     enableTools: true,
     ttsEnabled: true,
     ttsAllowAgentStyleControl: true
 });
-ok(enabledTools.indexOf("set_tts_style") >= 0, "set_tts_style enabled when both flags true");
+ok(enabledTools.indexOf("plm_set_tts_style") >= 0, "plm_set_tts_style enabled when both flags true");
 
-ok(ToolManager.isAutoRun("set_tts_style", {}), "set_tts_style auto-runs without user modal");
-eq(ToolManager.toolIconName("set_tts_style"), "audio-volume-high", "set_tts_style uses audio icon");
-ok(ToolManager.resultLabel("set_tts_style", { style: "<sarcastic>", scope: "turn" }).includes("<sarcastic>"), "resultLabel formats tone pill");
+ok(ToolManager.isAutoRun("plm_set_tts_style", {}), "plm_set_tts_style auto-runs without user modal");
+eq(ToolManager.toolIconName("plm_set_tts_style"), "audio-volume-high", "plm_set_tts_style uses audio icon");
+ok(ToolManager.resultLabel("plm_set_tts_style", { style: "<sarcastic>", scope: "turn" }).includes("<sarcastic>"), "resultLabel formats tone pill");
 
 // 9. Message-level Style Hint & Turn Lifecycle Tests
 function resolveStyleHint(overrideStyle, msgIndex, displayMsgs, effectiveHint) {
@@ -543,7 +543,7 @@ function handleTurnStart(depth, newStyle) {
 handleTurnStart(0, "");
 eq(turnTtsStyleHint, "", "turn style initially empty");
 
-// Model invokes set_tts_style in Turn 1
+// Model invokes plm_set_tts_style in Turn 1
 handleTurnStart(1, "<sarcastic>");
 eq(turnTtsStyleHint, "<sarcastic>", "turn style set by tool");
 

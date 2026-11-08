@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "http_get";
+var name = "plm_http_get";
 var description = "Perform an HTTP GET request to a URL and return the response content.";
 var parameters = {
     type: "object",

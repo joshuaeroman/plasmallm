@@ -269,7 +269,11 @@ BaseConfigPage {
         if (!blob) return "";
         try {
             var map = typeof blob === "string" ? JSON.parse(blob) : blob;
-            return (map && map[toolName]) ? String(map[toolName]) : "";
+            if (!map) return "";
+            // Overrides saved before the plm_ namespace was introduced are keyed
+            // by the bare name; keep honouring them.
+            var key = map[toolName] ? toolName : ToolManager.bareToolName(toolName);
+            return map[key] ? String(map[key]) : "";
         } catch(e) {
             return "";
         }
@@ -299,6 +303,7 @@ BaseConfigPage {
             map[toolName] = text.trim();
         } else {
             delete map[toolName];
+            delete map[ToolManager.bareToolName(toolName)];
         }
         var newBlob = JSON.stringify(map);
         if (cfg_toolsInstructions !== newBlob) {
@@ -450,7 +455,7 @@ BaseConfigPage {
 
             QQC2.Label {
                 Layout.fillWidth: true
-                text: i18n("Whitelist applies to file-system tools (read, write, list, search). Note: 'run_command' is not restricted by this list.")
+                text: i18n("Whitelist applies to file-system tools (read, write, list, search). Note: 'plm_run_command' is not restricted by this list.")
                 font: Kirigami.Theme.smallFont
                 color: Kirigami.Theme.disabledTextColor
                 wrapMode: Text.Wrap
@@ -653,7 +658,7 @@ BaseConfigPage {
                             Layout.fillWidth: true
 
                             QQC2.CheckBox {
-                                visible: card.toolName !== "skill"
+                                visible: card.toolName !== "plm_skill"
                                 text: i18n("Collapse results")
                                 checked: ToolManager.shouldCollapseResult(card.toolName, cfg_toolsCollapseResults, cfg_customTools)
                                 onToggled: {
@@ -720,21 +725,21 @@ BaseConfigPage {
             }
 
             ToolCard {
-                toolName: "run_command"
+                toolName: "plm_run_command"
                 isToolEnabled: cfg_useCommandTool
                 onToggled: checked => { if (_initialized) { cfg_useCommandTool = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/RunCommandConfig.qml"
             }
 
             ToolCard {
-                toolName: "web_search"
+                toolName: "plm_web_search"
                 isToolEnabled: cfg_enableWebSearch
                 onToggled: checked => { if (_initialized) { cfg_enableWebSearch = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/WebSearchConfig.qml"
             }
 
             ToolCard {
-                toolName: "read_file"
+                toolName: "plm_read_file"
                 isToolEnabled: cfg_toolsReadFileEnabled
                 onToggled: checked => { 
                     if (_initialized) {
@@ -746,21 +751,21 @@ BaseConfigPage {
             }
 
             ToolCard {
-                toolName: "write_file"
+                toolName: "plm_write_file"
                 isToolEnabled: cfg_toolsWriteFileEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsWriteFileEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/WriteFileConfig.qml"
             }
 
             ToolCard {
-                toolName: "list_dir"
+                toolName: "plm_list_dir"
                 isToolEnabled: cfg_toolsListDirEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsListDirEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/ListDirConfig.qml"
             }
 
             ToolCard {
-                toolName: "search_files"
+                toolName: "plm_search_files"
                 isToolEnabled: cfg_toolsSearchFilesEnabled
                 onToggled: checked => { 
                     if (_initialized) {
@@ -772,28 +777,28 @@ BaseConfigPage {
             }
 
             ToolCard {
-                toolName: "http_get"
+                toolName: "plm_http_get"
                 isToolEnabled: cfg_toolsHttpGetEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsHttpGetEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/HttpGetConfig.qml"
             }
 
             ToolCard {
-                toolName: "http_request"
+                toolName: "plm_http_request"
                 isToolEnabled: cfg_toolsHttpRequestEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsHttpRequestEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/HttpRequestConfig.qml"
             }
 
             ToolCard {
-                toolName: "get_clipboard"
+                toolName: "plm_get_clipboard"
                 isToolEnabled: cfg_toolsGetClipboardEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsGetClipboardEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/GetClipboardConfig.qml"
             }
 
             ToolCard {
-                toolName: "set_clipboard"
+                toolName: "plm_set_clipboard"
                 isToolEnabled: cfg_toolsSetClipboardEnabled
                 onToggled: checked => { 
                     if (_initialized) {
@@ -805,35 +810,35 @@ BaseConfigPage {
             }
 
             ToolCard {
-                toolName: "notify"
+                toolName: "plm_notify"
                 isToolEnabled: cfg_toolsNotifyEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsNotifyEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/NotifyConfig.qml"
             }
 
             ToolCard {
-                toolName: "open_url"
+                toolName: "plm_open_url"
                 isToolEnabled: cfg_toolsOpenUrlEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsOpenUrlEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/OpenUrlConfig.qml"
             }
 
             ToolCard {
-                toolName: "skill"
+                toolName: "plm_skill"
                 isToolEnabled: cfg_toolsSkillEnabled && cfg_skillsEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsSkillEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/SkillConfig.qml"
             }
 
             ToolCard {
-                toolName: "run_skill_script"
+                toolName: "plm_run_skill_script"
                 isToolEnabled: cfg_toolsRunSkillScriptEnabled && cfg_skillsEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsRunSkillScriptEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/RunSkillScriptConfig.qml"
             }
 
             ToolCard {
-                toolName: "edit_memory"
+                toolName: "plm_edit_memory"
                 isToolEnabled: cfg_toolsEditMemoryEnabled
                 onToggled: checked => { if (_initialized) { cfg_toolsEditMemoryEnabled = checked; rootItem.triggerCapture(); } }
                 configSource: "tools/EditMemoryConfig.qml"

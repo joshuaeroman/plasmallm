@@ -43,7 +43,7 @@ Kirigami.Card {
 
     readonly property string displayName: {
         var meta = ToolManager.getToolMetadata(toolName, appConfig);
-        return meta && meta.displayName ? meta.displayName : toolName;
+        return meta && meta.displayName ? meta.displayName : ToolManager.bareToolName(toolName);
     }
 
     banner.title: i18n("Tool Request: %1", displayName)

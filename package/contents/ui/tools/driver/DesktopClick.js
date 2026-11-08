@@ -6,9 +6,9 @@
 .pragma library
 .import "../../driverManager.js" as DriverManager
 
-var name = "DesktopClick";
+var name = "plm_DesktopClick";
 var displayName = "Desktop Click";
-var description = "Emulate a mouse click or drag on the desktop. Optional coordinates can be supplied. Clicks and drags are relative to the active operating context window (if set via DesktopSetOperatingContext), or absolute screen coordinates otherwise.";
+var description = "Emulate a mouse click or drag on the desktop. Optional coordinates can be supplied. Clicks and drags are relative to the active operating context window (if set via plm_DesktopSetOperatingContext), or absolute screen coordinates otherwise.";
 var parameters = {
     type: "object",
     properties: {

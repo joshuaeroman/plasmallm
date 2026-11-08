@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "read_file";
+var name = "plm_read_file";
 var description = "Read the contents of a file at the specified path. Access is restricted to allowed directories.";
 var parameters = {
     type: "object",

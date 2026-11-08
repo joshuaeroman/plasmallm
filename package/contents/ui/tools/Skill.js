@@ -5,13 +5,13 @@
 
 .pragma library
 
-// Built-in "skill" tool: loads the full instructions of an available skill.
+// Built-in "plm_skill" tool: loads the full instructions of an available skill.
 // The model discovers skills via the <available_skills> index rendered into
 // the {{skills}} system prompt section (see skills.js) and calls this tool
 // with the skill's name. Bodies come from the in-memory skill cache built by
 // main.qml's directory scan, so no shell or filesystem access is needed.
 
-var name = "skill";
+var name = "plm_skill";
 var description = "Load the full instructions of an available skill by name. " +
     "Check this tool BEFORE using other tools when a task matches an available skill. " +
     "Only use names listed in <available_skills>.";

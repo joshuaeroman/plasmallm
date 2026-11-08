@@ -1635,7 +1635,7 @@ PlasmoidItem {
     property var pendingSkillScanCommands: ({})
     property int lastSkillsScanMs: 0
 
-    // Persistent memory: short phrases saved via the edit_memory tool (or the
+    // Persistent memory: short phrases saved via the plm_edit_memory tool (or the
     // settings editor) that are injected into every system prompt rebuild.
     // Backing store is the "memoryPhrases" KConfig key (JSON array string);
     // see memory.js for parsing, matching, and rendering rules.
@@ -1699,7 +1699,7 @@ PlasmoidItem {
     function isCommandRunning(rawCmd, sourceId) {
         for (var k in activeToolCalls) {
             var info = activeToolCalls[k];
-            if (info.name === "run_command" && info.args && info.args._rawCommand === rawCmd) {
+            if (info.name === "plm_run_command" && info.args && info.args._rawCommand === rawCmd) {
                 return true;
             }
         }
@@ -2053,6 +2053,7 @@ PlasmoidItem {
             sessionMultiplexer: root.sessionChipText(),
             localizeSystemPrompt: Plasmoid.configuration.localizeSystemPrompt,
             toolsConfig: getToolsConfig(),
+            serverAgentEndpoint: Api.isServerAgentEndpoint(root.effectiveApiType, Plasmoid.configuration.apiEndpoint, Plasmoid.configuration.providerName),
             ttsEnabled: root.ttsAvailable,
             ttsAutoRead: !!Plasmoid.configuration.ttsAutoRead,
             ttsAutoReadOnlyVoicePrompted: !!Plasmoid.configuration.ttsAutoReadOnlyVoicePrompted,
@@ -2307,7 +2308,9 @@ PlasmoidItem {
         // Meta line
         lines.push(JSON.stringify({
             _type: "meta",
-            version: 2,
+            // v1 = unversioned legacy, v2 = display-message records,
+            // v3 = tool names stored in the plm_ wire namespace.
+            version: 3,
             created: new Date().toISOString(),
             provider: Plasmoid.configuration.providerName || "",
             model: Plasmoid.configuration.modelName || "",
@@ -2504,6 +2507,27 @@ PlasmoidItem {
         historyMidnightTimer.restart();
     }
 
+    /**
+     * History files written before the plm_ tool namespace stored bare tool
+     * names. Rewrite them into the wire namespace on load so a resumed chat
+     * re-posts names the model actually has available, and so icons/skill
+     * chips keep matching historical messages. Idempotent.
+     */
+    function migrateToolNamesToWire() {
+        for (var i = 0; i < chatMessages.count; i++) {
+            var json = chatMessages.get(i).tool_calls_json;
+            if (!json || json.length === 0) continue;
+            var normalized = ToolManager.normalizeToolCallsJson(json);
+            if (normalized !== json) chatMessages.setProperty(i, "tool_calls_json", normalized);
+        }
+        for (var j = 0; j < displayMessages.count; j++) {
+            var name = displayMessages.get(j).toolName;
+            if (name && name.indexOf("plm_") !== 0) {
+                displayMessages.setProperty(j, "toolName", ToolManager.wireToolName(name));
+            }
+        }
+    }
+
     function handleHistoryLoad(content, filePath) {
         var lines = content.split("\n");
         clearChat();
@@ -2527,6 +2551,7 @@ PlasmoidItem {
 
         if (version === 1) {
             LegacyChatLoader.loadV1(lines, chatMessages, displayMessages, fileReader, pendingFileReads, root.appendDisplayMessage);
+            migrateToolNamesToWire();
             return;
         }
 
@@ -2620,6 +2645,9 @@ PlasmoidItem {
                 console.warn("Error parsing JSONL line: " + e);
             }
         }
+
+        // v2 files stored bare tool names; v3 stores the plm_ wire namespace.
+        if (version < 3) migrateToolNamesToWire();
     }
 
     function loadChatJsonl(filePath) {
@@ -3571,13 +3599,14 @@ PlasmoidItem {
 
         // If context compaction is active, inject the compact summary
         var startChatIdx = 1;
+        var advertiseTools = !Api.isServerAgentEndpoint(root.effectiveApiType, Plasmoid.configuration.apiEndpoint, Plasmoid.configuration.providerName);
         if (Plasmoid.configuration.compactionEnabled && root.activeCompaction && root.activeCompaction.summary && root.activeCompaction.summary.length > 0) {
             messages.push({
                 role: "system",
                 content: "## Compacted Conversation History\n" +
                          "Earlier turns in this conversation have been compacted into this summary:\n\n" +
                          root.activeCompaction.summary +
-                         "\n\n---\n*Context Restoration: If you need the exact verbatim content or tool outputs from any cited message range above (e.g. `[1 to 4]`), call the `restore_context` tool. If you need the complete contents of an attached file, call the `recall_attachment` tool.*"
+                         (advertiseTools ? "\n\n---\n*Context Restoration: If you need the exact verbatim content or tool outputs from any cited message range above (e.g. `[1 to 4]`), call the `plm_restore_context` tool. If you need the complete contents of an attached file, call the `plm_recall_attachment` tool.*" : "")
             });
 
             if (root.activeCompaction.compactedUpToMsgId) {
@@ -3663,6 +3692,7 @@ PlasmoidItem {
             providerName: Plasmoid.configuration.providerName,
             nativeGoogleSearchEnabled: Plasmoid.configuration.enableNativeGoogleSearch,
             nativeCodeExecutionEnabled: Plasmoid.configuration.enableNativeCodeExecution,
+            apiKey: root.apiKey,
             toolsConfig: getToolsConfig()
         });
 
@@ -3739,7 +3769,7 @@ PlasmoidItem {
                         for (var i = 0; i < toolCalls.length; i++) {
                             var tcName = toolCalls[i]["function"] && toolCalls[i]["function"].name;
                             if (tcName) {
-                                toolNames.push(tcName);
+                                toolNames.push(ToolManager.bareToolName(tcName));
                             }
                         }
                         root.showNotification(i18n("PlasmaLLM: Tool Call"), i18n("Requested tool: %1", toolNames.join(", ")));
@@ -3947,7 +3977,7 @@ PlasmoidItem {
     function shouldValidateToolCall(call, toolsConfig) {
         if (!Plasmoid.configuration.commandValidatorEnabled)
             return false;
-        if (!call || call.name !== "run_command")
+        if (!call || call.name !== "plm_run_command")
             return false;
         return !!(call.args && String(call.args.command || "").length > 0);
     }
@@ -4002,7 +4032,7 @@ PlasmoidItem {
     }
 
     /**
-     * Starts validating a run_command call against its justification. Shows
+     * Starts validating a plm_run_command call against its justification. Shows
      * the approval card in a "running" state so the user sees the pause;
      * auto-run commands are only executed once the verdict passes.
      */
@@ -4206,7 +4236,7 @@ PlasmoidItem {
         var metadata = ToolManager.getToolMetadata(name, toolsConfig);
         var scheme = metadata && metadata.outputScheme ? metadata.outputScheme : "";
         if (!tool.uiHidden && (tool.sideEffect || !isAuto)) {
-             displayIndex = root.appendDisplayMessage("tool_running", i18n("Executing %1…", name), {
+             displayIndex = root.appendDisplayMessage("tool_running", i18n("Executing %1…", ToolManager.bareToolName(name)), {
                 turnId: turnId || "",
                 toolName: name,
                 toolArgs: JSON.stringify(args),
@@ -4341,7 +4371,8 @@ PlasmoidItem {
         }
         header += "]";
 
-        if (name.indexOf("Desktop") === 0 && name !== "DesktopGetState" && name !== "DesktopResetContext") {
+        var bareName = ToolManager.bareToolName(name);
+        if (bareName.indexOf("Desktop") === 0 && bareName !== "DesktopGetState" && bareName !== "DesktopResetContext") {
             var contextSummary = "\n\n---\n[Desktop Driver State Monitor]\n";
             var activeContext = DriverManager.getActiveContext();
             var wins = DriverManager.getOpenWindows();
@@ -4386,7 +4417,7 @@ PlasmoidItem {
         // characters into the transcript window is pure noise.
         var displayContent = result;
         var displayStdout = stdout || "";
-        if (name === "skill" && exitCode === 0) {
+        if (name === "plm_skill" && exitCode === 0) {
             displayStdout = i18n("Loaded '%1' skill — its full instructions were added to this conversation's context.", args.name || "");
             displayContent = "[" + name + "] " + displayStdout;
         }
@@ -4460,13 +4491,13 @@ PlasmoidItem {
         // full into every system prompt rebuild, so context compaction and
         // message capping can never drop it mid-session. Rebuild the prompt
         // immediately so the follow-up request already carries the body.
-        if (name === "skill" && exitCode === 0 && args.name && root.activeSkills.indexOf(args.name) === -1) {
+        if (name === "plm_skill" && exitCode === 0 && args.name && root.activeSkills.indexOf(args.name) === -1) {
             root.activeSkills.push(args.name);
             initSystemPrompt();
         }
 
         // Auto-refresh skills when a file is written into any skills root
-        if (name === "write_file" && exitCode === 0 && args.path) {
+        if (name === "plm_write_file" && exitCode === 0 && args.path) {
             var homePaths = {
                 home: sysInfo.userHome || "$HOME",
                 homeEnv: sysInfo.homeEnv || ""
@@ -4574,7 +4605,7 @@ PlasmoidItem {
     function stopCommandByText(rawCmd, sourceId) {
         for (var k in activeToolCalls) {
             var info = activeToolCalls[k];
-            if (info.name === "run_command" && info.args && info.args._rawCommand === rawCmd) {
+            if (info.name === "plm_run_command" && info.args && info.args._rawCommand === rawCmd) {
                 var marker = info.args._marker;
                 if (!marker) continue;
                 var be = Plasmoid.configuration.sessionMultiplexer === "screen" ? "screen" : "tmux";

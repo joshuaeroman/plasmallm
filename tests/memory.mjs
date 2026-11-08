@@ -129,7 +129,7 @@ eq(M.renderSection("not json"), "", "renderSection: junk -> empty string");
 r = M.renderSection(["likes pizza", "uses neovim"]);
 ok(r.indexOf("## Persistent Memory") === 0, "renderSection: header first line");
 ok(r.indexOf("1. likes pizza") !== -1 && r.indexOf("2. uses neovim") !== -1, "renderSection: numbered entries");
-ok(r.indexOf("edit_memory") !== -1, "renderSection: mentions edit_memory tool");
+ok(r.indexOf("plm_edit_memory") !== -1, "renderSection: mentions plm_edit_memory tool");
 eq(M.renderSection('["a"]'), M.renderSection(["a"]), "renderSection: accepts raw storage string");
 
 // --- updatePhrase -----------------------------------------------------------------

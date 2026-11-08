@@ -6,7 +6,7 @@
 .pragma library
 .import "../../driverManager.js" as DriverManager
 
-var name = "DesktopReadSelection";
+var name = "plm_DesktopReadSelection";
 var displayName = "Desktop Read Selection";
 var description = "Automatically copies any text currently selected (highlighted) on the screen and reads it back to the context. Saves one round trip by executing copy + clipboard-read in a single step.";
 var parameters = {

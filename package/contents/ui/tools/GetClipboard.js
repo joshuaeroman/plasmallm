@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "get_clipboard";
+var name = "plm_get_clipboard";
 var description = "Get the current content of the system clipboard.";
 var parameters = { type: "object", properties: {
         justification: { type: "string", description: "A brief 1 sentence justification for why you are trying to run this command." }

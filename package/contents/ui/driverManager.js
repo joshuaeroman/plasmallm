@@ -170,7 +170,7 @@ function executeCommand(method, params, callback) {
         return;
     }
     if (!isSessionActive || token === "") {
-        if (callback) callback({error: "No active desktop automation session. Call StartSession first."});
+        if (callback) callback({error: "No active desktop automation session. Call plm_StartSession first."});
         return;
     }
 
@@ -310,25 +310,25 @@ Interact with the user's desktop (0-1000 coordinate scale).
    - \`(0, 0)\` is the Top-Left corner.
    - \`(1000, 1000)\` is the Bottom-Right corner.
    - \`(500, 500)\` is the Exact Center.
-2. **Operating Context**: After calling \`DesktopSetOperatingContext\`, coordinates (0-1000) shift entirely relative to the target window:
+2. **Operating Context**: After calling \`plm_DesktopSetOperatingContext\`, coordinates (0-1000) shift entirely relative to the target window:
    - \`nx=0\` is Left edge, \`nx=500\` is Center, \`nx=1000\` is Right edge.
    - \`ny=0\` is Top edge, \`ny=500\` is Center, \`ny=1000\` is Bottom edge.
 3. **Requirement**: You MUST always specify both \`nx\` and \`ny\` coordinates for mouse actions. Do not omit them, and do not use any other coordinate keys.
 
 ### WORKSPACE OBSERVATION & CONTEXT
-- **Get Desktop State**: Call \`DesktopGetState\` to retrieve a visual screenshot and the simplified textual accessibility tree of interactive elements (buttons, inputs, links, tabs).
-- **Set Operating Context**: If you are focused on a single application window (e.g. driving a web browser or text editor), you MUST call \`DesktopSetOperatingContext(uuid=...)\`. This:
+- **Get Desktop State**: Call \`plm_DesktopGetState\` to retrieve a visual screenshot and the simplified textual accessibility tree of interactive elements (buttons, inputs, links, tabs).
+- **Set Operating Context**: If you are focused on a single application window (e.g. driving a web browser or text editor), you MUST call \`plm_DesktopSetOperatingContext(uuid=...)\`. This:
   1. Filters subsequent accessibility tree nodes to just that window.
   2. Crops visual screenshot feedback to just that window.
   3. Maps all coordinates relative to the window's geometry. Clicks and movements will automatically adapt if the window is resized or relocated by the user.
-- **Global Context**: Call \`DesktopResetContext\` to clear the window focus boundaries and return to the global full-screen mode.
+- **Global Context**: Call \`plm_DesktopResetContext\` to clear the window focus boundaries and return to the global full-screen mode.
 
 ### WINDOWS & SCROLLING CONTROL
-- **Window Management**: Call \`DesktopWindowControl(uuid=..., action=...)\` to focus/restore, minimize, maximize, close, or resize/reposition windows.
-- **Scrolling**: Call \`DesktopScroll(direction=...)\` to scroll pages or scrollable areas. Provide coordinates \`nx\` and \`ny\` to hover over the target scroll container first.
+- **Window Management**: Call \`plm_DesktopWindowControl(uuid=..., action=...)\` to focus/restore, minimize, maximize, close, or resize/reposition windows.
+- **Scrolling**: Call \`plm_DesktopScroll(direction=...)\` to scroll pages or scrollable areas. Provide coordinates \`nx\` and \`ny\` to hover over the target scroll container first.
 
 ### RETRIEVING TEXT SELECTION
-- **Read selection**: To inspect highlighted text on the screen, call \`DesktopReadSelection\` which executes a copy keystroke sequence and reads the clipboard buffer back in a single turn.
+- **Read selection**: To inspect highlighted text on the screen, call \`plm_DesktopReadSelection\` which executes a copy keystroke sequence and reads the clipboard buffer back in a single turn.
 
 ### VISUAL REASONING & OBSERVE MANDATE
 In your response/thoughts before calling any tool, explicitly write:
@@ -340,8 +340,8 @@ In your response/thoughts before calling any tool, explicitly write:
 
 ### INPUT SAFETY
 - **No key appending**: Use 'fill_text' / 'type' for literal text only. Do not add '\\n' or '<enter>'.
-- **Submission**: Type text first, then call \`DesktopInput\` with \`action="press", key="enter"\`.
-- **Keyboard shortcuts**: \`DesktopInput(action="press", key="...")\` does not require moving the mouse first.
+- **Submission**: Type text first, then call \`plm_DesktopInput\` with \`action="press", key="enter"\`.
+- **Keyboard shortcuts**: \`plm_DesktopInput(action="press", key="...")\` does not require moving the mouse first.
 
 ### ESCAPE HATCH (CANCEL ACTION)
 If you realize while generating your arguments that you chose the wrong coordinates, include the exact string \`__CANCEL__\` anywhere in your text to safely abort the action.

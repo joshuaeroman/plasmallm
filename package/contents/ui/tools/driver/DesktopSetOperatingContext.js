@@ -6,7 +6,7 @@
 .pragma library
 .import "../../driverManager.js" as DriverManager
 
-var name = "DesktopSetOperatingContext";
+var name = "plm_DesktopSetOperatingContext";
 var displayName = "Desktop Set Operating Context";
 var description = "Sets the operational context to a specific application window. Clicks, movement, and screenshots will be restricted to and scaled relative to this window's geometry.";
 var parameters = {

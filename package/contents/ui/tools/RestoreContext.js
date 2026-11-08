@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "restore_context";
+var name = "plm_restore_context";
 var displayName = "Restore Context";
 var description = "Restore the full verbatim text and tool outputs of previously compacted messages by specifying the start and end message IDs from a cited message range.";
 var parameters = {

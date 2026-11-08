@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "notify";
+var name = "plm_notify";
 var description = "Show a system notification.";
 var parameters = {
     type: "object",

@@ -6,7 +6,7 @@ PlasmaLLM features a robust, modular tool-calling system (known as "Tools") that
 
 Each tool in PlasmaLLM is a standalone JavaScript module located in `package/contents/ui/tools/`. Tools are registered in `index.js` and follow a standard interface:
 
-- **`name`**: The unique identifier for the tool (e.g., `run_command`).
+- **`name`**: The unique identifier for the tool (e.g., `plm_run_command`). Tools in this directory are advertised under the `plm_` namespace, which the widget owns on the wire: a streamed tool call the host did not advertise is treated as executed server-side by a gateway and never runs locally. Keep the prefix on new tools. (Desktop-automation tools under `driver/` keep their CamelCase names after the prefix and are only advertised during a local driver session.)
 - **`displayName`**: A human-readable name shown in the UI.
 - **`description`**: A detailed description used by the LLM to understand when and how to use the tool.
 - **`parameters`**: A JSON Schema defining the arguments the tool accepts.
@@ -16,6 +16,16 @@ Each tool in PlasmaLLM is a standalone JavaScript module located in `package/con
 - **`uiHidden`**: Boolean. If true, the tool suppresses the default "Executing..." and "Result" UI blocks. The tool is responsible for providing its own UI feedback if necessary (e.g., via `context.addDisplayMessage`). **Important:** If your tool manually dispatches a custom rich UI card (e.g., role `tool_result_rich`), you *must* set `uiHidden = true` in the module definition; otherwise, the main engine will render its empty default `ToolResultBlock` alongside your custom UI.
 - **`execute(args, context)`**: The function called when the LLM invokes the tool.
 
+### Server-agent endpoints
+
+Some OpenAI-compatible endpoints are full agents rather than model proxies: they accept a request's `tools` array but execute their own toolset server-side (Hermes-style gateways). `api.js` detects this when the model list is fetched — `Api.fetchModels()` issues `GET <endpoint>/capabilities` alongside `<endpoint>/models` — and caches the answer per endpoint for the session (`runtime.mode === "server_agent"`, or `tool_execution === "server"` with `split_runtime === false`). Once known, the widget:
+
+- sends an empty `tools` array, so a server-executed `function_call` is never mistaken for a client tool call;
+- omits the `## Tools` and `## Skills` prompt sections, plus the memory tool hint, because those tools cannot be called;
+- keeps the conversation and user memories intact.
+
+Chat turns never probe: they only read the cache, so there is no network round-trip on the send path. An endpoint is advertised normally until its model list is fetched; open Settings → General (which fetches models) after pointing a profile at a new endpoint to prime it. 404/405 on `/capabilities` marks the endpoint as a plain completions API (never probed again). 401/403 or a network error stays unknown and is retried on the next fetch.
+
 ---
 
 ## The Security Model
@@ -23,16 +33,16 @@ Each tool in PlasmaLLM is a standalone JavaScript module located in `package/con
 ### 1. Enabling vs. Auto-run
 For every tool, you can configure two independent settings:
 - **Enabled:** The tool's schema is shared with the LLM. If it requests the tool, the widget will handle it.
-- **Auto-run:** If checked, the tool executes immediately. If *not* checked, the widget displays an **Approval Card**, and the tool only runs after you click "Approve". Note that `web_search` is currently hardcoded to auto-run for a seamless search experience.
+- **Auto-run:** If checked, the tool executes immediately. If *not* checked, the widget displays an **Approval Card**, and the tool only runs after you click "Approve". Note that `plm_web_search` is currently hardcoded to auto-run for a seamless search experience.
 
 ### 2. Path Sandboxing
-Tools marked as `sandboxed` (like `read_file`, `write_file`, `list_dir`, and `search_files`) are restricted to a **Path Whitelist** configured in settings.
+Tools marked as `sandboxed` (like `plm_read_file`, `plm_write_file`, `plm_list_dir`, and `plm_search_files`) are restricted to a **Path Whitelist** configured in settings.
 - **Validation:** Attempts to access paths outside the whitelist are blocked locally before execution.
 - **Expansion:** `~` and `$HOME` are expanded to your actual home directory for execution.
 - **Privacy (Redaction):** Before results are sent back to the LLM, all instances of your absolute home path are replaced with `~` to prevent leaking your username.
 
 ### 3. Justification
-Most system-interacting tools (including `run_command` and all Custom Script Tools) require a `justification` parameter. The LLM must provide a one-sentence explanation of *why* it is running the command, which is displayed on the Approval Card.
+Most system-interacting tools (including `plm_run_command` and all Custom Script Tools) require a `justification` parameter. The LLM must provide a one-sentence explanation of *why* it is running the command, which is displayed on the Approval Card.
 
 ### 4. Size Limits
 Global safety limits are enforced to prevent context window overflow:
@@ -61,47 +71,47 @@ PlasmaLLM automatically parses your `Command Template`, identifies the parameter
 ## Tool Reference
 
 ### Filesystem Tools
-- **`read_file`**: Read file content. (Sandboxed, Max Read Limit)
-- **`write_file`**: Create or overwrite a file. (Sandboxed, Side-effect, Max Write Limit)
-- **`list_dir`**: List directory contents. (Sandboxed)
-- **`search_files`**: Recursive regex search via `grep`. (Sandboxed)
+- **`plm_read_file`**: Read file content. (Sandboxed, Max Read Limit)
+- **`plm_write_file`**: Create or overwrite a file. (Sandboxed, Side-effect, Max Write Limit)
+- **`plm_list_dir`**: List directory contents. (Sandboxed)
+- **`plm_search_files`**: Recursive regex search via `grep`. (Sandboxed)
 
 ### Network Tools
-- **`web_search`**: Perform a web search (DuckDuckGo, SearXNG, or Ollama) to find current facts. This tool uses `uiHidden` to provide rich Markdown results instead of a console block.
-- **`http_get`**: Fetch a URL's body. (Max HTTP Limit)
-- **`http_request`**: Perform POST, PUT, etc. (Side-effect, Max HTTP Limit)
+- **`plm_web_search`**: Perform a web search (DuckDuckGo, SearXNG, or Ollama) to find current facts. This tool uses `uiHidden` to provide rich Markdown results instead of a console block.
+- **`plm_http_get`**: Fetch a URL's body. (Max HTTP Limit)
+- **`plm_http_request`**: Perform POST, PUT, etc. (Side-effect, Max HTTP Limit)
 
 ### Desktop & System Tools
-- **`run_command`**: Execute any shell command. This is the most powerful tool and should be used with caution. It supports **Session Multiplexing** (via `tmux` or `screen`) if enabled in settings.
-- **`skill`**: Load the full instructions of an available skill by name. Skills are discovered from bundled files shipped with the widget, `~/.local/share/plasmallm/skills/` as `<name>/SKILL.md` folders or self-contained `<name>.md` files, and optional extra directories; an `<available_skills>` index is embedded in this tool's schema description so the model checks it before reaching for other tools, and calls it to load a skill's body on demand. Bodies already loaded this session are re-injected in full into every prompt rebuild, so context compaction never drops them. (Auto-run by default; manage skills in Settings → Skills.)
-- **`run_skill_script`**: Run a `.sh` file that lives in an enabled skill folder (`scripts/<name>.sh` or next to `SKILL.md`). Arguments are passed as a quoted argv array — not an arbitrary shell string. The working directory is the user's home. Approval is required unless that skill has “Allow running skill scripts without approval” checked in Settings → Skills.
-- **`edit_memory`**: Manage persistent memory in one call — `operation` is one of `add`, `update`, or `remove`. Entries are short phrases (max 100 chars, 100 entries) identified by their number in the rendered `## Persistent Memory` list or by matching text. They are stored in the widget's config and rendered into the system prompt on every rebuild, so they survive restarts and compaction. Duplicates are ignored case-insensitively; never store secrets. (Side-effect; approval card by default; manage saved phrases in Settings → Tools → Edit Memory.)
-- **`get_clipboard` / `set_clipboard`**: Interact with the system clipboard.
-- **`notify`**: Send a system notification via `notify-send`.
-- **`open_url`**: Open a URL or file in the default application via `xdg-open`.
+- **`plm_run_command`**: Execute any shell command. This is the most powerful tool and should be used with caution. It supports **Session Multiplexing** (via `tmux` or `screen`) if enabled in settings.
+- **`plm_skill`**: Load the full instructions of an available skill by name. Skills are discovered from bundled files shipped with the widget, `~/.local/share/plasmallm/skills/` as `<name>/SKILL.md` folders or self-contained `<name>.md` files, and optional extra directories; an `<available_skills>` index is embedded in this tool's schema description so the model checks it before reaching for other tools, and calls it to load a skill's body on demand. Bodies already loaded this session are re-injected in full into every prompt rebuild, so context compaction never drops them. (Auto-run by default; manage skills in Settings → Skills.)
+- **`plm_run_skill_script`**: Run a `.sh` file that lives in an enabled skill folder (`scripts/<name>.sh` or next to `SKILL.md`). Arguments are passed as a quoted argv array — not an arbitrary shell string. The working directory is the user's home. Approval is required unless that skill has “Allow running skill scripts without approval” checked in Settings → Skills.
+- **`plm_edit_memory`**: Manage persistent memory in one call — `operation` is one of `add`, `update`, or `remove`. Entries are short phrases (max 100 chars, 100 entries) identified by their number in the rendered `## Persistent Memory` list or by matching text. They are stored in the widget's config and rendered into the system prompt on every rebuild, so they survive restarts and compaction. Duplicates are ignored case-insensitively; never store secrets. (Side-effect; approval card by default; manage saved phrases in Settings → Tools → Edit Memory.)
+- **`plm_get_clipboard` / `plm_set_clipboard`**: Interact with the system clipboard.
+- **`plm_notify`**: Send a system notification via `notify-send`.
+- **`plm_open_url`**: Open a URL or file in the default application via `xdg-open`.
 
 ### Desktop Automation Tools
-- **`StartSession`**: Initializes a Remote Desktop Wayland session and authorization token exchange.
-- **`DesktopGetState`**: Unified tool that retrieves the current visual screenshot (optionally cropped to operating context) and the active window list + interactive accessibility element tree.
-- **`DesktopSetOperatingContext`**: Binds the LLM's operational context to a specific window UUID, converting coordinates to be window-relative and isolating observation/screenshots.
-- **`DesktopResetContext`**: Clears window-specific boundaries and returns the global full-screen state in a single call.
-- **`DesktopScroll`**: Simulator for mouse wheel scrolling (up, down, left, right) relative to the active operating context.
-- **`DesktopClick` / `DesktopInput` / `DesktopMoveMouse`**: Mouse interaction and text entry tools that automatically adapt coordinates when operating inside an active context window.
-- **`DesktopWindowControl`**: Single tool to minimize, maximize, restore, close, or resize/reposition windows using UUIDs.
-- **`DesktopReadSelection`**: Triggers a copy keypress sequence and returns the selected text from the clipboard in a single turn.
+- **`plm_StartSession`**: Initializes a Remote Desktop Wayland session and authorization token exchange.
+- **`plm_DesktopGetState`**: Unified tool that retrieves the current visual screenshot (optionally cropped to operating context) and the active window list + interactive accessibility element tree.
+- **`plm_DesktopSetOperatingContext`**: Binds the LLM's operational context to a specific window UUID, converting coordinates to be window-relative and isolating observation/screenshots.
+- **`plm_DesktopResetContext`**: Clears window-specific boundaries and returns the global full-screen state in a single call.
+- **`plm_DesktopScroll`**: Simulator for mouse wheel scrolling (up, down, left, right) relative to the active operating context.
+- **`plm_DesktopClick` / `plm_DesktopInput` / `plm_DesktopMoveMouse`**: Mouse interaction and text entry tools that automatically adapt coordinates when operating inside an active context window.
+- **`plm_DesktopWindowControl`**: Single tool to minimize, maximize, restore, close, or resize/reposition windows using UUIDs.
+- **`plm_DesktopReadSelection`**: Triggers a copy keypress sequence and returns the selected text from the clipboard in a single turn.
 
 ---
 
 ## Visual Styling (Output Schemes)
 
 Tools can specify how their results look in the chat:
-- **`"console style"`**: Monospace font, terminal-like black background. Used for `run_command`.
-- **`"web_search_results"`**: Rich Markdown formatting with icons and links. Used for `web_search`.
+- **`"console style"`**: Monospace font, terminal-like black background. Used for `plm_run_command`.
+- **`"web_search_results"`**: Rich Markdown formatting with icons and links. Used for `plm_web_search`.
 - **`"tool result"` (Default)**: Standard chat bubble.
 
 ## Collapsed Results
 
-Successful plain tool results render as a small pill ("http_get: https://…"); clicking it expands the full output card, and a chevron button collapses it again. Preferences live in **Settings → Tools → Collapse results** per tool (default: collapsed; `web_search` and desktop-driver tools default expanded; errors always expand) and as a `collapseResult` field on each custom script tool. Skill loads always show as a tiny "Loaded x skill" pill since the body goes into system context rather than the chat window.
+Successful plain tool results render as a small pill ("plm_http_get: https://…"); clicking it expands the full output card, and a chevron button collapses it again. Preferences live in **Settings → Tools → Collapse results** per tool (default: collapsed; `plm_web_search` and desktop-driver tools default expanded; errors always expand) and as a `collapseResult` field on each custom script tool. Skill loads always show as a tiny "Loaded x skill" pill since the body goes into system context rather than the chat window.
 
 ---
 
@@ -111,8 +121,8 @@ To add a built-in tool, create a new file in `package/contents/ui/tools/` and re
 - **`config`**: Access to widget configuration.
 - **`i18n`**: Function for translating strings.
 - **`getSecret(key)`**: Securely retrieve sensitive keys (e.g., `"searxngApiKey"`, `"ollamaSearchApiKey"`, `"exaApiKey"`).
-- **`getSkills()`**: The parsed skill records currently discovered on disk (used by the `skill` tool).
-- **`getMemory()` / `setMemory(list)`**: Read and write the persistent memory phrase list used by the `edit_memory` tool. `setMemory` persists to config and triggers a system prompt rebuild.
+- **`getSkills()`**: The parsed skill records currently discovered on disk (used by the `plm_skill` tool).
+- **`getMemory()` / `setMemory(list)`**: Read and write the persistent memory phrase list used by the `plm_edit_memory` tool. `setMemory` persists to config and triggers a system prompt rebuild.
 - **`addDisplayMessage(content, role)`**: Manually push a message to the UI. Useful when `uiHidden` is enabled.
 - **`replaceDisplayMessage(oldRole, newContent, newRole)`**: Find the last message with `oldRole` and update its content and role in place. Useful for replacing a "Loading..." indicator with actual results.
 - **`exec(command, name, args)`**: Run a shell command.

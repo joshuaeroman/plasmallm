@@ -6,9 +6,9 @@
 .pragma library
 .import "../../driverManager.js" as DriverManager
 
-var name = "DesktopMoveMouse";
+var name = "plm_DesktopMoveMouse";
 var displayName = "Desktop Move Mouse";
-var description = "Move the mouse pointer. Coordinates are relative to the active operating context window (if set via DesktopSetOperatingContext), or absolute screen coordinates otherwise.";
+var description = "Move the mouse pointer. Coordinates are relative to the active operating context window (if set via plm_DesktopSetOperatingContext), or absolute screen coordinates otherwise.";
 var parameters = {
     type: "object",
     properties: {
@@ -77,7 +77,7 @@ function execute(args, context) {
             context.onDone("", err, 1);
         } else {
             var userMsg = baseMsg + "\n\n*Action executed.*";
-            var llmMsg = baseMsg + "\n\n*Action executed. A confirmation crop image is attached — does the pointer target the correct control? NOTE: Your mouse pointer is currently positioned exactly in the middle of this image. If it aligns perfectly, proceed to call DesktopClick with NO coordinates to click the exact center of this image.*\n\n> [!TIP]\n> You can click/type directly, or call DesktopMoveMouse to verify pointer alignment. If you get lost and need to see the full screen again, use the DesktopGetState tool.";
+            var llmMsg = baseMsg + "\n\n*Action executed. A confirmation crop image is attached — does the pointer target the correct control? NOTE: Your mouse pointer is currently positioned exactly in the middle of this image. If it aligns perfectly, proceed to call plm_DesktopClick with NO coordinates to click the exact center of this image.*\n\n> [!TIP]\n> You can click/type directly, or call plm_DesktopMoveMouse to verify pointer alignment. If you get lost and need to see the full screen again, use the plm_DesktopGetState tool.";
             DriverManager.lastDesktopMoveTime = Date.now();
             var images = (result && Array.isArray(result.images)) ? result.images : [];
             var atts = [];

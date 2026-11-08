@@ -5,7 +5,7 @@
 
 .pragma library
 
-var name = "list_dir";
+var name = "plm_list_dir";
 var description = "List the contents of a directory. Access is restricted to allowed directories.";
 var parameters = {
     type: "object",

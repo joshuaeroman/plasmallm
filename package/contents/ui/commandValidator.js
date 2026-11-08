@@ -7,7 +7,7 @@
 // OpenRouter matching; QML imports this via main.qml / configTools.qml; Node
 // tests load it with vm.runInContext (stripping `.import` lines).
 //
-// Validates that a run_command call does what its LLM-supplied justification
+// Validates that a plm_run_command call does what its LLM-supplied justification
 // says it does. Two backends are supported:
 //   - "decisions": structured System One API (Jev / TypeSafe). Used directly
 //     against api.typesafe.ai, or through OpenRouter's alpha decisions route
@@ -99,7 +99,7 @@ function decisionsModel(profile) {
 function buildState(opts) {
     opts = opts || {};
     return {
-        tool: "run_command",
+        tool: "plm_run_command",
         command: String(opts.command || ""),
         justification: String(opts.justification || "")
     };
