@@ -247,12 +247,23 @@ import base64
 
 def process_text(text, color_hex, cache_dir, font_size):
     text = text.replace(r'\$', '__ESCAPED_DOLLAR__')
+
+    # Mask fenced blocks and inline code spans before looking for math: a `$`
+    # inside a shell snippet is literal text, not a formula delimiter.
+    code_spans = []
+
+    def _mask_code(match):
+        code_spans.append(match.group(0))
+        return '\x00PLMCODE' + str(len(code_spans) - 1) + '\x00'
+
+    text = re.sub(r'(```|~~~)[\s\S]*?\1', _mask_code, text)
+    text = re.sub(r'`[^`\n]*`', _mask_code, text)
     
     math_pattern = re.compile(
         r'(\$\$(.*?)\$\$)|'
         r'(\\\[(.*?)\\\])|'
         r'(\\\((.*?)\\\))|'
-        r'((?<!\\)\$([^\s\$](?:[^\$]*?[^\s\$])?)(?<!\\)\$)',
+        r'((?<!\\)\$([^\s\$\n](?:[^\$\n]*?[^\s\$\n])?)(?<!\\)\$)',
         re.DOTALL
     )
     
@@ -286,7 +297,9 @@ def process_text(text, color_hex, cache_dir, font_size):
         pos = match.end()
         
     result.append(text[pos:])
-    return "".join(result).replace('__ESCAPED_DOLLAR__', '$')
+    out = "".join(result)
+    out = re.sub(r'\x00PLMCODE(\d+)\x00', lambda m: code_spans[int(m.group(1))], out)
+    return out.replace('__ESCAPED_DOLLAR__', '$')
 
 def main():
     cache_dir = os.path.expanduser("~/.cache/plasmallm/latex")
